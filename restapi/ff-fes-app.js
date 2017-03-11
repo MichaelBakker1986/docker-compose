@@ -1,5 +1,5 @@
-var tracer = require('ff-log');
-tracer.log('Startup')
+var log = require('ff-log');
+log.log('Startup ff-restapi')
 var restify = require('restify');
 var apiimpl = require('./apiimpl');
 var DBConn = require('./DBConnector')
@@ -9,11 +9,11 @@ function respond(req, res, next) {
 
     Respond[req.params.function](req.params.data, req.params.value)
         .then(function (records) {
-            tracer.log('promise succes')
+            log.log('promise succes')
             res.send(records)
         }).catch(function (err) {
         res.send('Program error');
-        tracer.error('Output error', err)
+        log.error('Output error', err)
     });
     next();
 }
@@ -24,11 +24,12 @@ var server = restify.createServer({
             res.setHeader('Content-Type', 'application/json');
             return cb(null, JSON.stringify(body, null, 2));
         }
-    }
+    },
+    name: 'ff-api'
 });
 server.get('/:function/:data', respond);
 server.get('/:function/:data/:value', respond);
 
 server.listen(9000, function () {
-    tracer.log('%s listening at %s', server.name, server.url);
+    log.log('Server startup [' + server.name + ']');
 });
