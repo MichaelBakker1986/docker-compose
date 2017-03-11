@@ -3,6 +3,7 @@ var fileParser = require('./fileParser.js');
 var finFormula = require('../FinFormula/FinFormula.js');
 var Stack = require('stack-adt');
 var visitor = require('../clientscorecard/JSVisitor.js');
+var log = require('ff-log');
 /*
  datatype: true,
  frequency: true,
@@ -48,8 +49,7 @@ var visitor = require('../clientscorecard/JSVisitor.js');
 
 //has to be Unit Tested very intensive
 //FIN,FFL formula language to JavaScript language
-function parseRegex(contents)
-{
+function parseRegex(contents) {
     //first place some properties from variables on different lines
 
     //var data = contents.replace(/^(model \s*)([\w]*)\s*(uses)?\s*([\w]*)\s*\{/mi).replace("$1$2\n{\n  inherit:$4;");
@@ -74,7 +74,7 @@ function parseRegex(contents)
 
     //remove tabs,remove line-breaks, replace " with '
     data = data.replace(/\t/gm, '').replace(/^\s*root\s*$/gmi, ' Root ;').replace(/([^;])[\r?\n]+/gm, '$1').replace(/\r?\n|\r/gm, ';').replace(/\s\s+/gm, ' ').replace(/\"(.*)'(.*)\"/gm, '"$1 $2"')
-        //
+    //
         .replace(/"/gm, '\'');
 
     //in ffl some variables are just prepended with &, for some reason i don't understand
@@ -132,9 +132,8 @@ var deparsers = [
 //create a native javascript object
 //Find parent-child relations
 //Add all properties to its parent
-function genericFflFileToGenericJson(contents)
-{
-    console.time('fflParse')
+function genericFflFileToGenericJson(contents) {
+    // log.time('fflParse')
     var stack = new Stack();
 
     var data = parseRegex(contents);
@@ -147,11 +146,9 @@ function genericFflFileToGenericJson(contents)
     };
     stack.push(currentScope);
     var lastname = '';
-    for (var currentPos = 0; currentPos < data.length; currentPos++)
-    {
+    for (var currentPos = 0; currentPos < data.length; currentPos++) {
         var currChar = data.charAt(currentPos);
-        switch (currChar)
-        {
+        switch (currChar) {
             case  '{':
                 var newScope = {
                     _start: currentPos,
@@ -200,15 +197,12 @@ function genericFflFileToGenericJson(contents)
 
     var allProperties = {};
     //iterate entire stack
-    visitor.travelOne(stack.peek(), null, function (keyArg, node)
-    {
+    visitor.travelOne(stack.peek(), null, function (keyArg, node) {
         //only interest in the ._data part, the rest are empty lines etc... brackets
-        if (node._data !== undefined)
-        {
+        if (node._data !== undefined) {
             //split the line with semi cols, this holds an element of every key-value pair
             var props = node._data.trim().split(';');
-            for (var i = 0; i < props.length; i++)
-            {
+            for (var i = 0; i < props.length; i++) {
                 var obj = props[i];
                 //split it by ':'  so we have a key:value pair
                 var split = obj.split(':');
@@ -217,29 +211,23 @@ function genericFflFileToGenericJson(contents)
                 var firstWord = split[0].trim();
                 var foundPropertyName = firstWord;
                 //again, empty places, it were brackets, that we skip here
-                if (split[1] == undefined)
-                {
+                if (split[1] == undefined) {
                     continue;
                 }
                 var foundValue = split[1].trim();
-                if (firstWord.startsWith('choices'))
-                {
+                if (firstWord.startsWith('choices')) {
                     node[firstWord] = finFormula.finChoice(obj.substring(obj.indexOf(':') + 1, obj.length));
                 }
-                else if (split.length == 2)
-                {
+                else if (split.length == 2) {
                     var secondPart = split[1].trim();
-                    if (firstWord === 'title')
-                    {
+                    if (firstWord === 'title') {
                         secondPart = "'" + secondPart.replace(/["']*/gm, "") + "'";// secondPart.replace(/'/gm, "\\'");
                         node[firstWord] = finFormula.parseFormula(secondPart);
                     }
-                    else if (formulaType[firstWord] !== undefined)
-                    {
+                    else if (formulaType[firstWord] !== undefined) {
                         node[firstWord] = finFormula.parseFormula(secondPart);
                     }
-                    else
-                    {
+                    else {
                         node[firstWord] = secondPart;
                     }
 
@@ -247,11 +235,10 @@ function genericFflFileToGenericJson(contents)
             }
         }
     });
-    console.timeEnd('fflParse')
+    //log.timeEnd('fflParse')
     return stack.peek();
 }
-function deparseRegex(input)
-{
+function deparseRegex(input) {
     return fileParser.deparseRegex(deparsers, input)
 }
 module.exports = {

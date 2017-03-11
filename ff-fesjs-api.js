@@ -1,7 +1,7 @@
-var parser = require('./ff-fesjs-api/src/archive/ffl/fflparser.js');//just let it inject into the GenericModelFile
-require('./ff-fesjs-api/src/archive/exchange_modules/presentation/presentation.js');//just let it inject into the GenericModelFile
-
-var WorkBook = require('./ff-fesjs-api/src/archive/fesjs/JSWorkBook.js');
+var parser = require('./ff-fes/src/archive/ffl/fflparser.js');//just let it inject into the GenericModelFile
+require('./ff-fes/src/archive/exchange_modules/presentation/presentation.js');//just let it inject into the GenericModelFile
+var logger = require('ff-log')
+var WorkBook = require('./ff-fes/src/archive/fesjs/JSWorkBook.js');
 var wb = new WorkBook();
 var init = function (data) {
     wb.doImport(data, 'ffl');
@@ -9,7 +9,7 @@ var init = function (data) {
     validate.fixAll();
     if (wb.validate().valid) {
         //valid
-        console.info('initialized');
+        logger.log('initialized');
     } else {
         throw Error('unable to initialize')
     }

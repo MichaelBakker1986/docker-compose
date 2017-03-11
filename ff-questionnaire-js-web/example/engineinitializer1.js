@@ -1,4 +1,5 @@
 var formulabootstrap = require('./formula-bootstrap.js')
+var logger = require('tracer').console();
 // Helper function..... to Objectify a variable
 function object(o)
 {
@@ -34,7 +35,7 @@ var FunctionMap = {
     apiset: function (variable, y, x, z, value)
     {
         // calculate the hash, hexdecimal hash for now
-        console.info('api set ' + variable + ' y;' + y.hash + ' x;' + x.hash + ' z;' + z.hash + ' value=' + value);
+        logger.info('api set ' + variable + ' y;' + y.hash + ' x;' + x.hash + ' z;' + z.hash + ' value=' + value);
         var hash = y.hash + x.hash + z.hash;
 
         var formulaIndex = variable.formula[fprops['value']][x.f];

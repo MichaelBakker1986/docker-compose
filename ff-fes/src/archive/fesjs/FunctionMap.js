@@ -1,3 +1,4 @@
+var log = require('ff-log')
 /**
  * The map that contains all model-functions and values
  */
@@ -49,7 +50,9 @@ function init(formulaParser, formulas, disableFormulaCache)
         {
             newFormula.parsed = undefined;//explicitly reset parsed. (The formula-bootstrap) will skip parsed formulas.
         }
-        var modelFunction = Function('f, x, y, z, v', 'return ' + formulaParser(newFormula)).bind(global);
+        var javaScriptfunction = formulaParser(newFormula);
+        log.log(newFormula.name + " : " + javaScriptfunction)
+        var modelFunction = Function('f, x, y, z, v', 'return ' + javaScriptfunction).bind(global);
         global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id);
     });
 };
@@ -73,6 +76,7 @@ var formulaDecorators = {
         //v = enteredValues
         return function (f, x, y, z, v)
         {
+            //console.info('calling formula ;' + formulaName)
             var hash = x.hash + y + z;
             //check if user entered a value
             if (v[f][hash] === undefined)

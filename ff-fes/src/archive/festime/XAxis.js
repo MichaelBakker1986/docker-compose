@@ -24,6 +24,7 @@
 //Document can only refer to itsself
 //can easy be refactored for better performance
 var importData = require('./CustomImport.json');
+var tracer = require('ff-log');
 var headers = {
     title: {
         title: 'title'
@@ -44,10 +45,9 @@ var headers = {
         title: 'document'
     }
 }
-function CalculationDocument(data)
-{
+function CalculationDocument(data) {
     var data = data || importData;
-    console.time('initialize_xAxis');
+    // console.time('initialize_xAxis');
     this.tContext = data;
     var formulasets = data.formulasets;
     var formulasetsCount = data.formulasets.length;
@@ -66,10 +66,8 @@ function CalculationDocument(data)
     var currentperiod = periods[0];
     var aggregationformulaset = formulasets[formulasets.length - 1];
     currentperiod.formulaset = formulasets[currentperiod.formulasetId];
-    for (var i = 0; i < data.layout.idx; i++)
-    {
-        if (i >= currentperiod.idx)
-        {
+    for (var i = 0; i < data.layout.idx; i++) {
+        if (i >= currentperiod.idx) {
             currentperiod = periods[currentperiod.formulasetId + 1];
             // assign the formulaset, it was stored as reference
             currentperiod.formulaset = formulasets[currentperiod.formulasetId];
@@ -99,8 +97,7 @@ function CalculationDocument(data)
     // find out all viewtypes in the document
     var layout = data.layout;
 
-    while (layout != undefined)
-    {
+    while (layout != undefined) {
         viewmodes[layout.name] = {
             //these will be reduced to fixednumber and columns, they all share the same algorithms
             doc: [[{hash: 0, f: 0, header: headers.title}, {
@@ -136,16 +133,13 @@ function CalculationDocument(data)
         layout = layout.children[0];
     }
     // tricky recursion here, just debug it.. too many to explain
-    function nestRecursive(parent, object, offset, func)
-    {
-        object.forEach(function (child)
-        {
+    function nestRecursive(parent, object, offset, func) {
+        object.forEach(function (child) {
             child.parent = parent;
             var tempincrease = child.size;
             var no = 0;
             child.parent.sibling = [];
-            while (tempincrease <= (parent.size - 1))
-            {
+            while (tempincrease <= (parent.size - 1)) {
                 child.idx = (offset + tempincrease);
                 child.no = no;
                 tempincrease += child.size;
@@ -157,17 +151,13 @@ function CalculationDocument(data)
         func(parent);
     }
 
-    function extractBaseChildren(child, array)
-    {
-        child.sibling.forEach(function (innerchild)
-        {
+    function extractBaseChildren(child, array) {
+        child.sibling.forEach(function (innerchild) {
             var foundChild = templateindexed[innerchild];
-            if (foundChild.sibling == undefined)
-            {
+            if (foundChild.sibling == undefined) {
                 array.push(innerchild);
             }
-            else
-            {
+            else {
                 extractBaseChildren(foundChild, array);
             }
         });
@@ -177,8 +167,7 @@ function CalculationDocument(data)
     // make new column objects
     // be aware the values from child in here are temporally from transitive nature. U cannot keep references since
     // they will change in future. Presumably to the last one...
-    nestRecursive(data.layout, data.layout.children, 0, function (child)
-    {
+    nestRecursive(data.layout, data.layout.children, 0, function (child) {
         // console.info(child.no);
         // actual element
         var newElement = {
@@ -188,8 +177,7 @@ function CalculationDocument(data)
         };
         // find out all parents and top
         var parent = child.parent;
-        while (parent != undefined)
-        {
+        while (parent != undefined) {
             // register aggregation type
             // register all types to the new columnIndex object
             var previdx = child.idx - parent.size;
@@ -203,14 +191,12 @@ function CalculationDocument(data)
             parent = parent.parent;
         }
         // could be top, of so, we don't need this information
-        if (child.parent != undefined)
-        {
+        if (child.parent != undefined) {
             newElement.agg = child.parent.idx;
             newElement.period = formulasetLookup[child.idx];
         }
         // could be aggregated, we want to know what siblings it had
-        if (child.sibling != undefined)
-        {
+        if (child.sibling != undefined) {
             newElement.sibling = child.sibling.slice();
             var children = newElement.sibling;
             var tarr = [];
@@ -218,12 +204,10 @@ function CalculationDocument(data)
             extractBaseChildren(child, tarr);
             newElement.allchildren = tarr;
         }
-        else
-        {
+        else {
             // this is smallest we get
             var period = formulasetLookup[child.idx];
-            if (period.first == undefined)
-            {
+            if (period.first == undefined) {
                 period.first = child.idx;
             }
             formulasetLookup[child.idx].last = child.idx;
@@ -233,8 +217,7 @@ function CalculationDocument(data)
         templateindexed[newElement.hash] = newElement;
     });
     // convert template column index into real index
-    function calculateIndex(timelineId, columnId)
-    {
+    function calculateIndex(timelineId, columnId) {
         var columnId = (columnId * columnMultiplier);
         // add offset,0 for the titleValue, 1 for dummy cache,we starting from 1 so +1
         columnId++;
@@ -245,27 +228,22 @@ function CalculationDocument(data)
 
     // convert meta data in real column object..
     // don't make references. The values are re-used over timelines
-    for (vmode in this.viewmodes)
-    {
+    for (vmode in this.viewmodes) {
         // this loop will be used for all viewmodes when wisely declared.
-        for (var tId = 0; tId < timelineSize; tId++)
-        {
+        for (var tId = 0; tId < timelineSize; tId++) {
             // create new array for the timeline
             this.viewmodes[vmode].columns[tId] = [];
         }
     }
     // creat all real objects for all timeslines first, we use the indexes created to lookup the elements while
     // loooking for references
-    for (var tId = 0; tId < timelineSize; tId++)
-    {
-        for (vmode in this.viewmodes)
-        {
+    for (var tId = 0; tId < timelineSize; tId++) {
+        for (vmode in this.viewmodes) {
             // times multiplier
             // jsut for quick reference place the array in here;
             var currentviewmode = viewmodes[vmode];
             var currentviewmodecolumns = currentviewmode.cols;
-            for (var cId = 0; cId < currentviewmodecolumns.length; cId++)
-            {
+            for (var cId = 0; cId < currentviewmodecolumns.length; cId++) {
                 var columnEntries = currentviewmode.columns;
                 var columnEntriesForTimeline = currentviewmode.columns[tId];
                 var metadata = currentviewmode.cols[cId];
@@ -292,15 +270,13 @@ function CalculationDocument(data)
         // but not about information about those children, since they are not determined yet, they exist, but the
         // references are not u can however obtain information about the children from the template. And ofc there
         // should not be a need to ask these kind of information
-        for (vmode in this.viewmodes)
-        {
+        for (vmode in this.viewmodes) {
             // times multiplier
             // jsut for quick reference place the array in here;
             var currentviewmode = viewmodes[vmode];
             var currentviewmodecolumns = currentviewmode.cols;
             var columnslength = currentviewmodecolumns.length;
-            for (var cId = 0; cId < columnslength; cId++)
-            {
+            for (var cId = 0; cId < columnslength; cId++) {
                 // here all references are made
                 // bky,doc,period,formula,aggregation, top, children.. all
                 var columnEntries = currentviewmode.columns;
@@ -311,28 +287,24 @@ function CalculationDocument(data)
                 entree.next = (cId == (columnslength - 1)) ? dummyColumn : columnEntriesForTimeline[cId + 1];
                 var metadata = currentviewmode.cols[cId];
                 entree.formula = metadata.period;
-                if (metadata.agg != undefined)
-                {
+                if (metadata.agg != undefined) {
                     var aggColumnId = calculateIndex(tId, metadata.agg);
                     entree.agg = indexed[aggColumnId];
                 }
-                if (metadata.sibling != undefined)
-                {
+                if (metadata.sibling != undefined) {
                     entree.f = aggregationformulaset.formulasetId;
                     entree.header = {
                         title: 'timelineAgg'
                     };
                     entree.aggcols = [];
-                    metadata.sibling.forEach(function (childid)
-                    {
+                    metadata.sibling.forEach(function (childid) {
                         var childColId = calculateIndex(tId, childid);
                         entree.aggcols.push(indexed[childColId]);
                     });
                     entree.firstchild = indexed[calculateIndex(tId, metadata.allchildren[0])];
                     entree.lastchild = indexed[calculateIndex(tId, metadata.allchildren[metadata.allchildren.length - 1])];
                 }
-                else
-                {
+                else {
                     entree.f = formulasetLookup[metadata.hash].formulasetId;
                 }
                 // this will allow document values per timeline, if referring to timeline[0] there will only be one
@@ -340,8 +312,7 @@ function CalculationDocument(data)
                 entree.doc = columnEntriesForTimeline[0];// there only is one and one only, always correct behavior
                 // entree.period = (cId == 0) ? columnEntriesForTimeline[0] : columnEntriesForTimeline[1];// detail
                 // should refer to corresponding period add all period information
-                if (metadata.period != undefined)
-                {
+                if (metadata.period != undefined) {
                     // now it will be able to aggregate
                     // can't do firstchild in this type.
                     entree.period = columnEntriesForTimeline[metadata.period.hash];
@@ -350,8 +321,7 @@ function CalculationDocument(data)
                     };
                     entree.firstinperiod = indexed[calculateIndex(tId, metadata.period.first)];
                     entree.lastinperiod = indexed[calculateIndex(tId, metadata.period.last)];
-                    for (var pi = 0; pi < periods.length; pi++)
-                    {
+                    for (var pi = 0; pi < periods.length; pi++) {
                         var period = periods[pi];
                         var tFirst = indexed[calculateIndex(tId, period.first)];
                         var formulaname = period.formulaset.name;
@@ -371,10 +341,8 @@ function CalculationDocument(data)
                 entree.texceedtsy = metadata.hash > entree.tsy;// should be infirstbkyr
                 // add all information about aggregation types;bkyr,all are available if not top..
                 // there is no need yet to give aggregated columns information about bookyear etc.. yet
-                if (metadata.sibling == undefined)
-                {
-                    for (var aggi = 0; aggi < metadata.parenttypes.length; aggi++)
-                    {
+                if (metadata.sibling == undefined) {
+                    for (var aggi = 0; aggi < metadata.parenttypes.length; aggi++) {
                         var agg = metadata.parenttypes[aggi];
                         var aggtype = agg.type;
                         var template = templateindexed[agg.idx];
@@ -408,8 +376,8 @@ function CalculationDocument(data)
     }
     this.indexed = indexed;
     templateindexed = undefined;
-    console.info('Created Xaxis for ' + data.time.columnSize + ' columns on ' + timelineSize + ' timelines ');
-    console.timeEnd('initialize_xAxis');
+    tracer.log('Created Xaxis for ' + data.time.columnSize + ' columns on ' + timelineSize + ' timelines ');
+    //console.timeEnd('initialize_xAxis');
     return viewmodes;
 }
 // NodeJS support..
@@ -421,10 +389,3 @@ function CalculationDocument(data)
 // tricks here.. but possible from here only prevbkyear, might consider removing *[agg*], only keep the *[top*]
 // currently we have max7 year 10timelines
 module.exports = CalculationDocument;
-
-var test = new CalculationDocument();
-var vals = {};
-console.info(JSON.stringify(test.all, function (key, val)
-{
-    vals[key] = val;
-}, 2))

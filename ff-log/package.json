@@ -1,0 +1,17 @@
+{
+  "name": "ff-log",
+  "version": "1.0.7",
+  "description": "logger",
+  "main": "ff-log.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ff-log"
+  ],
+  "author": "michael.bakker <npm.michael.bakker@gmail.com> (http://ff-log-example.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "tracer": "^0.8.7"
+  }
+}

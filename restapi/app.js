@@ -1,3 +1,5 @@
+var tracer = require('ff-log');
+tracer.log('Startup')
 var restify = require('restify');
 var apiimpl = require('./apiimpl');
 var DBConn = require('./DBConnector')
@@ -7,11 +9,11 @@ function respond(req, res, next) {
 
     Respond[req.params.function](req.params.data, req.params.value)
         .then(function (records) {
-            console.info('promise succes')
+            tracer.log('promise succes')
             res.send(records)
         }).catch(function (err) {
         res.send('Program error');
-        console.error('Output error', err)
+        tracer.error('Output error', err)
     });
     next();
 }
@@ -28,5 +30,5 @@ server.get('/:function/:data', respond);
 server.get('/:function/:data/:value', respond);
 
 server.listen(9000, function () {
-    console.log('%s listening at %s', server.name, server.url);
+    tracer.log('%s listening at %s', server.name, server.url);
 });

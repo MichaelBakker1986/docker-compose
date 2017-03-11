@@ -5,7 +5,7 @@ var apiimpl = function (DBConnarg) {
 }
 var fesjsApi = require('../ff-fesjs-api.js');
 var fs = require('fs');
-var data = fs.readFileSync('./resources/AABPRICING.ffl', 'utf8');
+var data = fs.readFileSync('./resources/KSP.ffl', 'utf8');
 fesjsApi.init(data);
 
 apiimpl.prototype.value = function (data, value) {
