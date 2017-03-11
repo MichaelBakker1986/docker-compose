@@ -376,7 +376,7 @@ function CalculationDocument(data) {
     }
     this.indexed = indexed;
     templateindexed = undefined;
-    tracer.log('Created Xaxis for ' + data.time.columnSize + ' columns on ' + timelineSize + ' timelines ');
+    tracer.debug('Created Xaxis for ' + data.time.columnSize + ' columns on ' + timelineSize + ' timelines ');
     //console.timeEnd('initialize_xAxis');
     return viewmodes;
 }

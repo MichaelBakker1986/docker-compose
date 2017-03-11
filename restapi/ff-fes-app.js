@@ -1,23 +1,29 @@
+process.loglevel = 'debug'
 var log = require('ff-log');
-log.log('Startup ff-restapi')
+log.info('Startup ff-restapi')
 var restify = require('restify');
 var apiimpl = require('./apiimpl');
 var DBConn = require('./DBConnector')
+var Promise = require('promise')
 var Respond = new apiimpl(DBConn);
+/**
+ * server:port to -> @apiimpl  Generic pass-through REST-api
+ */
 
 function respond(req, res, next) {
-
-    Respond[req.params.function](req.params.data, req.params.value)
-        .then(function (records) {
-            log.log('promise succes')
-            res.send(records)
-        }).catch(function (err) {
+    //handle request Async by default, create Promise, result when done.
+    new Promise(function (success, err) {
+        return Respond[req.params.function](req.params.data, req.params.value)
+    }).then(function (answer) {
+        log.log('promise succes')
+        res.send(records)
+    }).catch(function (err) {
         res.send('Program error');
         log.error('Output error', err)
     });
+    //not part of the Async pattern
     next();
 }
-
 var server = restify.createServer({
     formatters: {
         'application/json': function (req, res, body, cb) {
@@ -25,11 +31,11 @@ var server = restify.createServer({
             return cb(null, JSON.stringify(body, null, 2));
         }
     },
-    name: 'ff-api'
+    name: 'ff-restapi'
 });
 server.get('/:function/:data', respond);
 server.get('/:function/:data/:value', respond);
 
 server.listen(9000, function () {
-    log.log('Server startup [' + server.name + ']');
+    log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
 });

@@ -60,7 +60,7 @@
  WithStatement: 'WithStatement'
  */
 //better use a Set() to check if an item exists, its quicker
-var logger = require('tracer').console({level: process.loglevel || 'info'});
+var logger = require('ff-log');
 var assert = require('assert');
 var AST = require('./AST.js');
 var esprima = require('esprima')
