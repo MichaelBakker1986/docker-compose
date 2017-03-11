@@ -1,0 +1,9 @@
+;
+; ToetsAutomatischFiat.fib
+;
+-1:"Maak uw keuze"
+5:"Het betreft geen starter"
+10:"Datum ligt in de toekomst"
+15:"Klant komt niet in aanmerking voor krediet"
+20:"Klant komt in aanmerking voor automatisch kredietfiat"
+25:"Ga na of de klant aan de basisvoorwaarden voldoet. Ga door naar stap 2"

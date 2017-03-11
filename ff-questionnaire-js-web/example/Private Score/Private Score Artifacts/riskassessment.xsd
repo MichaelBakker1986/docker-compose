@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.fortis.nl/schema/creditriskwebservices/riskassessment" 
+xmlns:tns="http://www.fortis.nl/schema/creditriskwebservices/riskassessment" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="commonrating.xsd"/>
+	<xs:include schemaLocation="counterpartyrating.xsd"/>
+	<xs:include schemaLocation="overridecounterpartyrating.xsd"/>
+	<xs:include schemaLocation="facilityrating.xsd"/>
+	<xs:include schemaLocation="overridefacilityrating.xsd"/>
+	<xs:include schemaLocation="sustainabilityriskrating.xsd"/>
+	<xs:include schemaLocation="modelquestionnaire.xsd"/>
+</xs:schema>

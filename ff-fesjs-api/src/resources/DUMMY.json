@@ -1,0 +1,27 @@
+{
+  "modelCode": "DUMMY",
+  "modelQuestionnaire": {
+    "components": {
+      "component": [
+        {
+          "type": "SectionType",
+          "label": {
+            "text": [
+              {
+                "value": "DUMMY MODEL",
+                "language": "en"
+              }
+            ]
+          },
+          "id": "C1"
+        }
+      ]
+    },
+    "constraints": {
+      "constraint": []
+    },
+    "rules": {
+      "rule": []
+    }
+  }
+}

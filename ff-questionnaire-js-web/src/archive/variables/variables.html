@@ -1,0 +1,42 @@
+<div class="container-fluid" ng-controller="mdtTable" layout-margin>
+    <div class="spacer"></div>
+    <mdt-table virtual-repeat="true">
+        <mdt-row ng-repeat="row in rows">
+            <mdt-cell>{{row.rowId}}</mdt-cell>
+        </mdt-row>
+    </mdt-table>
+    <div class="row">
+        <div class="col-md-6">
+            <pre>{{schema | json}}</pre>
+            <json-editor schema="schema" startval="{ rowId: 12 }"></json-editor>
+        </div>
+        <div class="col-md-6">
+            <pre>{{variableSchema | json}}</pre>
+            <json-editor schema="variableSchema" startval="{ rowId: 12 }"></json-editor>
+        </div>
+    </div>
+
+    <!--
+
+        <table class="row-border hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>displayAs</th>
+                <th>title</th>
+            </tr>
+            </thead>
+            <tbody>
+            <md-virtual-repeat-container id="vertical-container">
+                <tr md-virtual-repeat="row in rows" md-on-demand class="repeated-item" flex>
+                    <td>{{ row.rowId }}</td>
+                    <td>{{ row.displayAs }}</td>
+                    <td>{{ row.title }}</td>
+                </tr>
+            </md-virtual-repeat-container>
+            </tbody>
+        </table>
+    -->
+
+
+</div>

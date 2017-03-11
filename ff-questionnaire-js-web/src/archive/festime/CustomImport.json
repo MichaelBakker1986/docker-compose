@@ -1,0 +1,175 @@
+{
+  "formulasets": [
+    {
+      "formulasetId": 0,
+      "name": "title"
+    },
+    {
+      "formulasetId": 1,
+      "name": "sector"
+    },
+    {
+      "formulasetId": 2,
+      "name": "user"
+    },
+    {
+      "formulasetId": 3,
+      "name": "trend"
+    },
+    {
+      "formulasetId": 4,
+      "name": "notrend"
+    },
+    {
+      "formulasetId": 5,
+      "name": "aggregation"
+    }
+  ],
+  "layout": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "name": "detl",
+                    "size": 1
+                  }
+                ],
+                "name": "qurt",
+                "size": 4
+              }
+            ],
+            "name": "half",
+            "size": 9
+          }
+        ],
+        "name": "bkyr",
+        "size": 19
+      }
+    ],
+    "children_for_thirteenperiodlayout": [
+      {
+        "children": [
+          {
+            "children": [],
+            "name": "detl",
+            "size": 1
+          }
+        ],
+        "name": "bkyr",
+        "size": 13
+      }
+    ],
+    "idx": 20,
+    "name": "all",
+    "no": 0,
+    "period": [
+      {
+        "formulasetId": 0,
+        "hash": 0,
+        "idx": 2
+      },
+      {
+        "formulasetId": 1,
+        "hash": 1,
+        "idx": 3
+      },
+      {
+        "formulasetId": 2,
+        "hash": 2,
+        "idx": 4
+      },
+      {
+        "formulasetId": 3,
+        "hash": 3,
+        "idx": 20
+      }
+    ],
+    "size": 20
+  },
+  "navalue": 1e-10,
+  "nestedTupleMultiplier": "undefined",
+  "time": {
+    "columnMultiplier": 1,
+    "columnSize": 20,
+    "columns": [
+      {
+        "index": 0,
+        "name": "jan/p1"
+      },
+      {
+        "index": 1,
+        "name": "fes/p2"
+      },
+      {
+        "index": 2,
+        "name": "mar/p3"
+      }
+    ],
+    "periodMultiplier": 1,
+    "periodSize": 2,
+    "timelineMultiplier": 256,
+    "timelineSize": 1,
+    "timelines": [
+      {
+        "index": 0,
+        "name": "ExpertOptie-level5"
+      }
+    ]
+  },
+  "tupleMultiplier": 32768,
+  "values": {
+    "OnroerendGoed": {
+      "instances": [
+        [],
+        []
+      ]
+    },
+    "Q_AIRPLANE": {
+      "instances": [
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    "Q_AIRPLANE_SEAT": {
+      "instances": [
+        [],
+        [
+          [],
+          []
+        ],
+        [],
+        [
+          []
+        ]
+      ]
+    },
+    "Q_AIRPLANE_SEAT_REST": {
+      "instances": [
+        [
+          []
+        ],
+        [
+          [
+            [],
+            []
+          ],
+          []
+        ],
+        [],
+        [
+          [
+            [],
+            []
+          ]
+        ]
+      ]
+    }
+  }
+}

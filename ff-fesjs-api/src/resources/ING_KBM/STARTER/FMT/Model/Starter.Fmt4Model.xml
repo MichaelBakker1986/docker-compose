@@ -1,0 +1,4430 @@
+<FmtMappingModel>
+  <Head>
+    <CodeList>Starter</CodeList>
+    <CodeListVersion>2.4</CodeListVersion>
+    <Description>Vragenlijst Starter</Description>
+    <CodeTrimmingWhenSource>false</CodeTrimmingWhenSource>
+    <MultiLevelDataWhenSource>false</MultiLevelDataWhenSource>
+    <DCSignedValues>false</DCSignedValues>
+    <ImportToUnmappedSources>Ignore</ImportToUnmappedSources>
+    <ImportToLockedTargets>Warning</ImportToLockedTargets>
+    <ImportToUnknownTargets>Warning</ImportToUnknownTargets>
+    <Creator>FINAN</Creator>
+    <CreatorVersion>3.2.55.1</CreatorVersion>
+    <BuildDate>2016-05-09</BuildDate>
+    <BuildUser>r.vanaalderen</BuildUser>
+    <Notes></Notes>
+  </Head>
+  <Accounts>
+    <Account>
+      <Code>Root</Code>
+      <Description>Presentation model</Description>
+      <Level>0</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>RootSub1</Code>
+      <Description>General variables for webclient</Description>
+      <Level>1</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_LAYOUTNR</Code>
+      <Description>Layout</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_EXCHANGE_RATES</Code>
+      <Description>Exchange Rates</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Column</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_LAYOUT</Code>
+      <Description>Layout name</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_FLATINPUT</Code>
+      <Description>Is flat input used? (1=yes)</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_PROJECTION_PROFILE</Code>
+      <Description>Projection Profile</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_COLUMN_ORDER</Code>
+      <Description>Column order</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_COLUMN_VISIBLE</Code>
+      <Description>Column visible</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Column</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_STARTDATEPERIOD</Code>
+      <Description>Start Date Period</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Column</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_ENDDATEPERIOD</Code>
+      <Description>End Date Period</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Column</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_BASECURRENCYPERIOD</Code>
+      <Description>Base Currency Period</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Column</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_VIEWCURRENCYPERIOD</Code>
+      <Description>View Currency Period</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Column</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_COLUMNTYPE</Code>
+      <Description>Column Type</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Column</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>RootSub2</Code>
+      <Description>General variables for FPS database</Description>
+      <Level>1</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Naam</Code>
+      <Description>NAME</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Relatienummer</Code>
+      <Description>CUSTOMERNUMBER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_KVKnr</Code>
+      <Description>CHAMBEROFCOMMERCENUMBER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Rechtsvorm_nr</Code>
+      <Description>LEGALSTATUSCODE</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Rechtsvorm_omschr</Code>
+      <Description>LEGALSTATUSDESCRIPTION</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_BIK_CODE</Code>
+      <Description>SECTOROFINDUSTRYCODE</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_BIK_Omschr</Code>
+      <Description>SECTOROFINDUSTRYDESCRIPTION</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_GridId</Code>
+      <Description>GRIDID</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Accountmanager</Code>
+      <Description>ACCOUNTMANAGER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Kantoor</Code>
+      <Description>OFFICENUMBER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Straat</Code>
+      <Description>STREET</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Housenumber</Code>
+      <Description>HOUSENUMBER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Postcode</Code>
+      <Description>ZIPCODE</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Woonplaats</Code>
+      <Description>CITY</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Provincie</Code>
+      <Description>STATEORPROVINCE</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Land</Code>
+      <Description>COUNTRY</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_BvDID</Code>
+      <Description>Bureau van Dijk ID</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Telefoon</Code>
+      <Description>Telefoonnummer</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Emailadres</Code>
+      <Description>Emailadres</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_FINAN_USER_ROLES</Code>
+      <Description>FPS_FINAN_USER_ROLES</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_FINAN_USER</Code>
+      <Description>FPS_FINAN_USER</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_ROOT</Code>
+      <Description>Vragenlijst Starter (v2.4)</Description>
+      <Level>1</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01</Code>
+      <Description>Contact gegevens</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01_WARNING</Code>
+      <Description>Warning voor map 1</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01_INFO</Code>
+      <Description>Info bij stap 1</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01_VALIDATION</Code>
+      <Description>Validatie stap 1</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01Sub4</Code>
+      <Description>Vragen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Naam</Code>
+      <Description>Naam</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Relatienummer</Code>
+      <Description>Relatienummer</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_KVKnr</Code>
+      <Description>KvK-nummer</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_GridId</Code>
+      <Description>GRID ID</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>OprichtingsdatumKvK</Code>
+      <Description>Oprichtingsdatum bij KvK</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>GevraagdKredietbedrag</Code>
+      <Description>Gevraagd kredietbedrag</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BatchRatingKeuze</Code>
+      <Description>Batch-rating</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BatchReferentieLimiet</Code>
+      <Description>Batch-referentielimiet</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsAutomatischFiatTxT</Code>
+      <Description>Resultaat</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01Sub5</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsAutomatischFiatPunten</Code>
+      <Description></Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>NormGevraagdKredietbedrag</Code>
+      <Description>Norm gevraagd kredietbedrag</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsBatchReferentieLimiet</Code>
+      <Description>ToetsBatchReferentieLimiet</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsAutomatischFiat</Code>
+      <Description>Resultaat</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BatchRating</Code>
+      <Description>Batch-rating</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map02</Code>
+      <Description>Basis voorwaarden</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map02_WARNING</Code>
+      <Description>Warning voor map 2</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map02_INFO</Code>
+      <Description>Info bij stap 2</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map02_VALIDATION</Code>
+      <Description>Validatie stap 2</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map02Sub4</Code>
+      <Description>Vragen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Rechtsvorm</Code>
+      <Description>Wat is de rechtsvorm van de onderneming?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>LooptijdLangerDan10Jaar</Code>
+      <Description>Is de looptijd van het kredietproduct langer dan 10 jaar?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>GevestigdInNederland</Code>
+      <Description>Is de onderneming gevestigd in Nederland?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BrancheInBusinessRule31</Code>
+      <Description>Staat de branche vermeld op business rule 31?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>INGisHuisbankier</Code>
+      <Description>Is er commitment tot huisbankierschap (voeding loopt volledig bij ING of klant heeft de belofte daartoe gedaan en lopen eventuele bestaande financieringen bij ING)?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>AantalOverstandenLaatsteHalfJaar</Code>
+      <Description>Wat is het aantal overstanden op de betaalrekening de afgelopen 6 maanden?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BedrijfsrisicosVerzekerd</Code>
+      <Description>Is de onderneming adequaat verzekerd tegen relevante bedrijfsrisico's?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VermeldeCalamiteiten</Code>
+      <Description>Staan er calamiteiten vermeld bij de onderneming</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map02Sub5</Code>
+      <Description>Extra voorwaarden</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>PersoonlijkeBorgBestuurderNodig</Code>
+      <Description>Moet er een persoonlijke borg gesteld worden door de bestuurder(s)?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>PersoonlijkeBorgBestuurderBereidheid</Code>
+      <Description>Is de bestuurder bereid om de persoonlijke borg te stellen?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsControleBasisvoorwaarden</Code>
+      <Description>Akkoord basisvoorwaarden en knock-outs?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>AanvullendeCijfersVragen</Code>
+      <Description>Resultaat</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map02Sub6</Code>
+      <Description>Hulpvariabelen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>LooptijdLangerDan10Jaar</Code>
+      <Description>LooptijdLangerDan10Jaar</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>NietGevestigdInNederland</Code>
+      <Description>NietGevestigdInNederland</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BrancheInBusinessRule31</Code>
+      <Description>Staat de branche vermeld op business rule 31?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>INGgeenHuisbankier</Code>
+      <Description>INGgeenHuisbankier</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TeVeelOverstanden</Code>
+      <Description>TeVeelOverstanden</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BedrijfsrisicosNietVerzekerd</Code>
+      <Description>BedrijfsrisicosNietVerzekerd</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VermeldeCalamiteitenAanwezig</Code>
+      <Description>VermeldeCalamiteitenAanwezig</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsControleBasisvoorwaardenTotaal</Code>
+      <Description>ToetsControleBasisvoorwaardenTotaal</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsControleBasisHulp</Code>
+      <Description>Akkoord basisvoorwaarden en knock-outs?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>RechtsvormBV</Code>
+      <Description>RechtsvormBV</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map03</Code>
+      <Description>Bestuurder(s)</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map03_WARNING</Code>
+      <Description>Warning voor map 3</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map03_INFO</Code>
+      <Description>Info bij stap 3</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map03_VALIDATION</Code>
+      <Description>Validatie stap 3</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map03Sub4</Code>
+      <Description>Vragen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>AantalWerknemersFTE</Code>
+      <Description>Aantal werknemers (full-time)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>AantalBestuurdersFTE</Code>
+      <Description>Aantal bestuurders (full-time)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map03Sub5</Code>
+      <Description>Bestuurder 1</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders01</Code>
+      <Description>Naam</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders01Gebdatum</Code>
+      <Description>Geboortedatum</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders01ErvaringInBranche</Code>
+      <Description>Arbeidsverleden in de branche (in jaren)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders01Opleiding</Code>
+      <Description>Beschikt over relevante vooropleiding en vakdiploma's?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map03Sub6</Code>
+      <Description>Bestuurder 2</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders02</Code>
+      <Description>Naam</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders02Gebdatum</Code>
+      <Description>Geboortedatum</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders02ErvaringInBranche</Code>
+      <Description>Arbeidsverleden in de branche (in jaren)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders02Opleiding</Code>
+      <Description>Beschikt over relevante vooropleiding en vakdiploma's?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map03Sub7</Code>
+      <Description>Bestuurder 3</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders03</Code>
+      <Description>Naam</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders03Gebdatum</Code>
+      <Description>Geboortedatum</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders03ErvaringInBranche</Code>
+      <Description>Arbeidsverleden in de branche (in jaren)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Bestuurders03Opleiding</Code>
+      <Description>Beschikt over relevante vooropleiding en vakdiploma's?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map03Sub8</Code>
+      <Description>Overige</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>OndernemingProffesioneelBegeleid</Code>
+      <Description>Wordt de onderneming begeleid door een professional?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>HoofdredenStartOnderneming</Code>
+      <Description>Hoofdreden voor het starten van de onderneming</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map03Sub9</Code>
+      <Description>Hulpvariabelen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>LeeftijdJongsteBestuurder</Code>
+      <Description>LeeftijdJongsteBestuurder</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsBestuurders01Gebdatum</Code>
+      <Description>ToetsBestuurders01Gebdatum</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsBestuurders02Gebdatum</Code>
+      <Description>ToetsBestuurders02Gebdatum</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsBestuurders03Gebdatum</Code>
+      <Description>ToetsBestuurders03Gebdatum</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ErvaringMinstErvarenBestuurder</Code>
+      <Description>Arbeidsverleden in de branche (in jaren) - Totaal</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>OpleidingBestuurders</Code>
+      <Description>Beschikt over relevante vooropleiding en vakdiploma's?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP05</Code>
+      <Description>Kenmerken onderneming</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map05_WARNING</Code>
+      <Description>Warning voor map 5</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map05_INFO</Code>
+      <Description>Info bij stap 5</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map05_VALIDATION</Code>
+      <Description>Validatie stap 5</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP05Sub4</Code>
+      <Description>Vragen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>OndernemingAantalOrganisaties</Code>
+      <Description>Hoeveel organisaties zitten er in de juridische structuur?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BrancheSector</Code>
+      <Description>In welke branche is de onderneming werkzaam?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VoortzettingBestaandeActiviteiten</Code>
+      <Description>Is er sprake van een voortzetting van bestaande bedrijfsactiviteiten?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP04</Code>
+      <Description>Kredietvraag</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map04_WARNING</Code>
+      <Description>Warning voor map 4</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map04_INFO</Code>
+      <Description>Info bij stap 4</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map04_VALIDATION</Code>
+      <Description>Validatie stap 4</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP04Sub4</Code>
+      <Description>Vragen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Investeringsbehoefte</Code>
+      <Description>(Huidige) investeringsbehoefte</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>GestortRisicodragendVermogen</Code>
+      <Description>Het bedrag dat als risicodragend vermogen in de onderneming wordt gestort</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BenuttingLiqMiddelen</Code>
+      <Description>Aanwending van bestaande liquide middelen</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>EigenVermogenVoorKredietverlening</Code>
+      <Description>Het eigen vermogen op de balans van de onderneming (dus voor kredietverlening en voor stortingen u.h.v. deze aanvraag)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BalansTotaalNaKredietverlening</Code>
+      <Description>Balanstotaal - na kredietverlening</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsRisicodragendVermogen</Code>
+      <Description>Toets risicodragend vermogen versus norm</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>InvesteringImmaterieelActivaNaKrediet</Code>
+      <Description>Investering in immateriële activa - na kredietverlening</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>InvesteringMaterieelActivaNaKrediet</Code>
+      <Description>Investering in materiële activa - na kredietverlening</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>GewenstProduct</Code>
+      <Description>Gewenst product</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ProductSluitAanBijInvestering</Code>
+      <Description>Kredietproduct sluit aan bij investeringsdoel</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP04Sub5</Code>
+      <Description>Hulpvariabelen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>NormRisicoVermogenMatVastAkt</Code>
+      <Description>Norm risicodragend vermogen bij investering materiële activa</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP06</Code>
+      <Description>Financiën onderneming</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map06_WARNING</Code>
+      <Description>Warning voor map 6</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map06_INFO</Code>
+      <Description>Info bij stap 6</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map06_VALIDATION</Code>
+      <Description>Validatie stap 6</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP06Sub4</Code>
+      <Description>Vragen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>BedrijfsadmUitbesteed</Code>
+      <Description>Wordt de bedrijfsadministratie uitbesteed?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ReedsOmzetGegenereerd</Code>
+      <Description>Heeft de onderneming al geaccepteerde offertes en/of goederen verkocht?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TussentijdseCijfersAanwezig</Code>
+      <Description>Beschikt de onderneming over tussentijdse cijfers?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VerwachtResultaatNaBelJaar1</Code>
+      <Description>Verwachting winst na belasting, jaar 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VerwachtResultaatNaBelJaar2</Code>
+      <Description>Verwachting winst na belasting, jaar 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VerwachtResultaatNaBelJaar3</Code>
+      <Description>Verwachting winst na belasting, jaar 3</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ResultaatNaBelJaar1</Code>
+      <Description>Gerealiseerde winst na belasting, jaar 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ResultaatNaBelJaar2</Code>
+      <Description>Gerealiseerde winst na belasting, jaar 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VerwachtNettoOmzetJaar1</Code>
+      <Description>Verwachting netto-omzet, jaar 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VerwachtNettoOmzetJaar2</Code>
+      <Description>Verwachting netto-omzet, jaar 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VerwachtNettoOmzetJaar3</Code>
+      <Description>Verwachting netto-omzet, jaar 3</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VerwachtAfschrijvingenJaar1</Code>
+      <Description>Verwachting afschrijvingen, jaar 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VerwachtAfschrijvingenJaar2</Code>
+      <Description>Verwachting afschrijvingen, jaar 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>VerwachtAfschrijvingenJaar3</Code>
+      <Description>Verwachting afschrijvingen, jaar 3</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>SolvabiliteitBalansJaar1</Code>
+      <Description>Gerealiseerde balansverhouding (eigen vermogen/totaal vermogen), jaar 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>SolvabiliteitBalansJaar2</Code>
+      <Description>Gerealiseerde balansverhouding (eigen vermogen/totaal vermogen), jaar 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FinancieleExpert</Code>
+      <Description>Wordt het ondernemersplan door een financieel expert ondersteund?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP06Sub5</Code>
+      <Description>Hulpvariabelen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsOprichtingsdatumKvK</Code>
+      <Description>Toets ouderdom onderneming</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESULT</Code>
+      <Description>Resultaat</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>RESULT</Code>
+      <Description>Resultaat</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESULT</Code>
+      <Description>Resultaat</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS</Code>
+      <Description>Status</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_FINAL_ON</Code>
+      <Description>Definitief gemaakt op:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_FINAL_BY</Code>
+      <Description>Definitief gemaakt door:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_FINAL_BY_NAME</Code>
+      <Description>Definitief gemaakt door:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_STARTED_ON</Code>
+      <Description>Aangemaakt op:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_STARTED_BY</Code>
+      <Description>Aangemaakt door:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_STARTED_BY_NAME</Code>
+      <Description>Aangemaakt door:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_MODIFIED_ON</Code>
+      <Description>Laatst bewerkt op:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ModelVersion</Code>
+      <Description>Modelversie</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ModelType</Code>
+      <Description>Modeltype</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>MatrixVersion</Code>
+      <Description>Parametersversie</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_PREVIOUS_BUTTON_VISIBLE</Code>
+      <Description>Previous</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_NEXT_BUTTON_VISIBLE</Code>
+      <Description>Next</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_CONCEPT_REPORT_VISIBLE</Code>
+      <Description>Concept rapportage</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_FINAL_REPORT_VISIBLE</Code>
+      <Description>Download rapport</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAKE_FINAL_VISIBLE</Code>
+      <Description>Definitief maken</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsenEnNormen</Code>
+      <Description>Toetsen en normen</Description>
+      <Level>1</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESULT</Code>
+      <Description>Results</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>AkkoordVragenlijst</Code>
+      <Description>Akkoord vragenlijst?</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Ratingwaarde</Code>
+      <Description>Ratingwaarde</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ToetsenEnNormenSub2</Code>
+      <Description>Gerealiseerde winst verplicht?</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ResultaatNaBelJaar1Akkoord</Code>
+      <Description>Gerealiseerde winst na belasting, jaar 1 compleet?</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ResultaatNaBelJaar2Akkoord</Code>
+      <Description>Gerealiseerde winst na belasting, jaar 2 compleet?</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>SolvabiliteitBalansJaar1Akkoord</Code>
+      <Description>Gerealiseerde balansverhouding jaar 1 compleet?</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>SolvabiliteitBalansJaar2Akkoord</Code>
+      <Description>Gerealiseerde balansverhouding jaar 2 compleet?</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ManueelProces</Code>
+      <Description>Manueel proces</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ManueelProces01</Code>
+      <Description>GevraagdKredietbedrag &gt; NormGevraagdKredietbedrag</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ManueelProces02</Code>
+      <Description>OndernemingAantalOrganisaties &gt; 1</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ManueelProces03</Code>
+      <Description>Jaar 1 Verw. result &gt; Ger. result</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ManueelProces04</Code>
+      <Description>Jaar 2 Verw. result &gt; Ger. resul</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ManueelProces05</Code>
+      <Description>Jaar 1 solv. &lt;10%</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ManueelProces06</Code>
+      <Description>Jaar 2 solv. &lt;10%</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ManueelProces07</Code>
+      <Description>FinancieleExpert is geen RA/AA/NOAB</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ManueelProcesTotaal</Code>
+      <Description>Manueel Proces (totaal)</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>EindScore</Code>
+      <Description>Totaal punten</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten01</Code>
+      <Description>Aantal medewerkers</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>NormAantalMedewerkers</Code>
+      <Description>Norm aantal medewerkers</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Basispunten</Code>
+      <Description>Basisfactor</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor01A</Code>
+      <Description>Factor bij aantal medewerkers &gt; norm</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor01B</Code>
+      <Description>Factor bij aantal medewerkers &lt; norm</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten01</Code>
+      <Description>Punten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten02</Code>
+      <Description>Wordt de onderneming begeleid door een professional?</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor02A</Code>
+      <Description>factor Nee</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor02B</Code>
+      <Description>factor &lt;&gt; Nee</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten02</Code>
+      <Description>Punten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten08</Code>
+      <Description>Leeftijd Jongste Bestuurder</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor08A</Code>
+      <Description>factor 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor08B</Code>
+      <Description>factor 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor08C</Code>
+      <Description>factor 3</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>OndergrensLeeftijd01</Code>
+      <Description>OndergrensLeeftijd01</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>OndergrensLeeftijd02</Code>
+      <Description>OndergrensLeeftijd02</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten08</Code>
+      <Description>Punten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten09</Code>
+      <Description>Ervaring Minst Ervaren Bestuurder</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor09A</Code>
+      <Description>factor 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor09B</Code>
+      <Description>factor 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor09C</Code>
+      <Description>factor 3</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten09</Code>
+      <Description>Punten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten10</Code>
+      <Description>Opleiding Bestuurders</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor10A</Code>
+      <Description>factor 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor10B</Code>
+      <Description>factor 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten10</Code>
+      <Description>Punten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten03</Code>
+      <Description>Branche Sector</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor03A</Code>
+      <Description>factor 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor03B</Code>
+      <Description>factor 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten03</Code>
+      <Description>Punten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten04</Code>
+      <Description>Voortzetting Bestaande Activiteiten</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor04A</Code>
+      <Description>factor 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor04B</Code>
+      <Description>factor 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten04</Code>
+      <Description>Punten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten05</Code>
+      <Description>Bedrijfs adm Uitbesteed</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor05A</Code>
+      <Description>factor 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor05B</Code>
+      <Description>factor 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten05</Code>
+      <Description>Punten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten06</Code>
+      <Description>Reeds Omzet Gegenereerd</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor06A</Code>
+      <Description>factor 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor06B</Code>
+      <Description>factor 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten06</Code>
+      <Description>Punten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten07</Code>
+      <Description>Tussentijdse Cijfers Aanwezig</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor07A</Code>
+      <Description>factor 1</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Factor07B</Code>
+      <Description>factor 2</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>TotaalPunten07</Code>
+      <Description>Punten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>EindScore</Code>
+      <Description>Totaal punten</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>OndergrensPunten</Code>
+      <Description>Ondergrens punten</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_GLOBAL</Code>
+      <Description>Knock-out(s)?</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_01</Code>
+      <Description>Winstgevendheid versus ondernemersvergoeding</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_01A</Code>
+      <Description>Verwachting winst na belasting, jaar 3 &lt; 0      (BV)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_01B</Code>
+      <Description>Verwachting winst na belasting, jaar 3 &lt; 30000  (VoF -M/V)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_01C</Code>
+      <Description>Verwachting winst na belasting, jaar 3 &lt; (#Best. x Norm)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_01D</Code>
+      <Description>Normbedrag per bestuurder</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_02</Code>
+      <Description>Reden van aanvraag is akkoord</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_03</Code>
+      <Description>Investeringsdoel sluit aan</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_04</Code>
+      <Description>Aantal organisaties zitten in de juridische structuur  is OK</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_05</Code>
+      <Description>Winstgevendheid</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_05A</Code>
+      <Description>(Verlies jaar 1) &gt; (Winst jaar 2 en winst jaar 3)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_05Verlies1</Code>
+      <Description>Verlies van jaar 1 (winst=0)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_05VerwWinst2</Code>
+      <Description>Winst van jaar 2 (verlies=0)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_05VerwWinst3</Code>
+      <Description>Winst van jaar 3 (verlies=0)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_05B</Code>
+      <Description>Jaar 2 of Jaar 3 verlies?</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_06</Code>
+      <Description>Omzet vs kredietbedrag</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_07</Code>
+      <Description>Krediet versus Cash Flow</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_07A</Code>
+      <Description>Toets BV</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_07B</Code>
+      <Description>Toets M/V bedrijf</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_07C</Code>
+      <Description>Toets overige rechtsvormen</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_08</Code>
+      <Description>Ondersteuning financieel expert</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_09</Code>
+      <Description>Bestuurlijke ervaring</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_10</Code>
+      <Description>Volledigheid klantprofiel</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_GLOBALTXT</Code>
+      <Description>Knock-out tekst</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES</Code>
+      <Description>Restricties</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_01</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_02</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_03</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_04</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_05</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_06</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_07</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_08</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_09</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_10</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_11</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_12</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_13</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIES_14</Code>
+      <Description></Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESTRICTIESTXT</Code>
+      <Description>Restricties tekst</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Document</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ValCheck</Code>
+      <Description></Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Column</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+  </Accounts>
+</FmtMappingModel>

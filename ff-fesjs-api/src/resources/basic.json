@@ -1,0 +1,20 @@
+{
+  "viewType": "GROUP",
+  "modelName": "BudgetModel",
+  "variableName": "root",
+  "children": [
+    {
+      "viewType": "CONTAINER",
+      "name": "Balans",
+      "description": "balance",
+      "meta": {
+        "test": "12"
+      }
+    },
+    {
+      "viewType": "CONTAINER",
+      "name": "BalanceTwo",
+      "description": "balance"
+    }
+  ]
+}

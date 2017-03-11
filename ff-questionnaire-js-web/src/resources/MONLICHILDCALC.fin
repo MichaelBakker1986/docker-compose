@@ -1,0 +1,58 @@
+MONLI Cost of child raising                                                                                                                                                                                          
+                                                                                                                                                                                                                        
+.ModelVersion          0.01
+.FINANversion          3.2                                                                                                                                                                                              
+                                                                                                                                                                                                                        
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="hist",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=ThisYear,Years=2,MaxTsY=1,TsY=1,TsY2=1,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear) 
+                                                                                                                                                                                                                        
+.Sheet   1,Title="COSTOFCHILDRAISING",Range=[FirstTinPeriod(MainPeriod)..LastTinPeriod(MainPeriod)],Period=MainPeriod                                                                                                               
+                                                                                                                                                                                                                        
+                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+.Variables                                                                                                                                                                                                              
+PP       X     0               Costs of child raising v#CompactModelVersion#                                         \root
+                                                                                                                                                                                                                        
+.Variables                                                                                                                                                                                                              
+{&&TryInclude IncFesVars.fin}                                                                                                                                                                                           
+{&&TryInclude IncFpsVars.fin}                                                                                                                                                                                                                                                                                                                         
+.Variables                                                                                                                                
+PP      1N C 1 1               Costs of child raising (v#CompactModelVersion#)                                       \Q_ROOT 
+C This module enables you to gain insight in the costs involved for raising a child                                                                                                                                                     
+.Formulas NoTrend
+Q_ROOT                         = "dasdsa"
+
+.Choices
+Q_ROOT                         = "0:Complete|1:Incomplete"                                                                                
+.Variables
+PX      1N C   2               "$>Basic Information<$"                                                               \Q_MAP02
+PX      1X     3               "$>Parental situation<$"                                                              \ParentSituation
+PX      1X     4               "$>[b]Income[/b]<$"                                                                   \IncomeSection
+PI    2 1N     4               "$>Gross Income Parent 1<$"                                                           \IncomeParent01
+PI    2 1N     4               "$>Gross Income Parent 2<$"                                                           \IncomeParent02
+PI    1 1N     4               "$>Working hours (weekly) of least working Parent<$"                                  \WorkingHoursWeeklyOfLeastWorkingParent
+PI       X     4         T     "$>Child<$"                                                                           \Child; abstract
+PI    0 1N C   4               "$>Gender<$"                                                                          \ChildGender
+PI    1 1N     4               "$>Nr. of days childcare per week<$"                                                  \NrOfDaysChildcareWeek
+PP    1 1N     4               "$>Nr. of days childcare per month<$"                                                 \NrOfDaysChildcareMonth
+PI    1 1N     4               "$>Nr. of days out-of-school care per week<$                                          \NrOfDaysCOutOfSchoolCareWeek
+PP    1 1N     4               "$>Nr. of days out-of-school care per month<$"                                                  \NrOfDaysOutOfSchoolCareMonth
+PI    1 1N     4               "$>Hourly fee childcare<$                                                             \HourlyFeeChildCare
+PI    1 1N     4               "$>Hourly fee out-of-school care<$                                                    \HourlyFeeOutOfSchoolCare
+PI    1 1N     4               "$>Parental contribution primary education<$                                          \ParentalContributionPrimaryEducation
+PX      1X     3               "$>Fiscal parameters<$"                                                               \FiscalParameters
+PP      1X     4               "$>Childcare Contribution"<$&":"                                                      \ChildcareContribution
+PI    1 1N     4               "$>Maximum nr of hours of childcare allowance per month<$                                                           \MaximumNrOfHoursOfChildcareAllowancePerMonth
+PI    1 1N     4               "$>Multiplier daycare<$                                                               \MultiplierDaycare
+
+
+.Choices
+ChildGender                    = "0:Boy|1:Girl"
+
+
+.Hints
+WorkingHoursWeeklyOfLeastWorkingParent     = "$>Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed<$" 
+
+.Formulas NoTrend
+NrOfDaysChildcareMonth         = OnER(10,5*NrOfDaysChildcareWeek*4,NA)
+NrOfDaysOutOfSchoolCareMonth   = OnER(4*NrOfDaysCOutOfSchoolCareWeek*4,NA)
+MaximumNrOfHoursOfChildcareAllowancePerMonth = 230

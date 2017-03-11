@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--FINAN Data file created by j.nijboer with FINAN version 03.02.034.000 on 10-04-2012 12:27-->
+<finanData>
+  <header>
+    <companyName>Philips NV</companyName>
+    <documentDescription>Gouden dossier op jaarbasis</documentDescription>
+    <documentCode>Gouden dossier op jaarbasis</documentCode>
+    <codeList>V05</codeList>
+    <codeListVersion>2.0.16</codeListVersion>
+    <buildDate>2012-04-10</buildDate>
+    <buildUser>j.nijboer</buildUser>
+    <creator>FINAN</creator>
+    <creatorVersion>3.2.34</creatorVersion>
+  </header>
+  <timeLines>
+    <timeLine id="MainPeriod_SP1">
+      <title>H</title>
+      <formulaSet>NoTrend</formulaSet>
+      <columns>
+        <column id="1">
+          <title>2013</title>
+          <startDate>2013-01-01</startDate>
+          <endDate>2013-12-31</endDate>
+          <currency>EUR</currency>
+          <scale>1</scale>
+        </column>
+        <column id="2">
+          <title>2014</title>
+          <startDate>2014-01-01</startDate>
+          <endDate>2014-12-31</endDate>
+          <currency>EUR</currency>
+          <scale>1</scale>
+        </column>
+      </columns>
+    </timeLine>
+  </timeLines>
+  <accounts>
+    <account id="SectorTitle">
+      <cells>
+        <cell columnId="1" isEntered="true">Productie van elektriciteit, transmissie en distributie van elektriciteit en aardgas</cell>
+      </cells>
+    </account>
+    <account id="SectorCode">
+      <cells>
+        <cell columnId="1" isEntered="true">351</cell>
+      </cells>
+    </account>
+    <account id="Rechtsvorm">
+      <cells>
+        <cell columnId="1" isEntered="true">1</cell>
+      </cells>
+    </account>
+    <account id="MaterialsInventory">
+      <cells>
+        <cell columnId="1" isEntered="true">110000</cell>
+        <cell columnId="2" isEntered="true">140000</cell>
+      </cells>
+    </account>
+    <account id="WorkInProgress">
+      <cells>
+        <cell columnId="1" isEntered="true">100000</cell>
+        <cell columnId="2" isEntered="true">120000</cell>
+      </cells>
+    </account>
+    <account id="InventoryFinishedProducts">
+      <cells>
+        <cell columnId="1" isEntered="true">20000</cell>
+        <cell columnId="2" isEntered="true">21000</cell>
+      </cells>
+    </account>
+    <account id="TradeReceivables">
+      <cells>
+        <cell columnId="1" isEntered="true">20000</cell>
+        <cell columnId="2" isEntered="true">70000</cell>
+      </cells>
+    </account>
+    <account id="OtherAccountsReceivable">
+      <cells>
+        <cell columnId="1" isEntered="true">10000</cell>
+        <cell columnId="2" isEntered="true">9000</cell>
+      </cells>
+    </account>
+    <account id="MarketableSecurities">
+      <cells>
+        <cell columnId="1" isEntered="true">25000</cell>
+        <cell columnId="2" isEntered="true">82500</cell>
+      </cells>
+    </account>
+    <account id="SharedCapitalPreferenceShares">
+      <cells>
+        <cell columnId="1" isEntered="true">2500000</cell>
+        <cell columnId="2" isEntered="true">2500000</cell>
+      </cells>
+    </account>
+    <account id="SharedCapitalOrdinaryShares">
+      <cells>
+        <cell columnId="1" isEntered="true">950000</cell>
+        <cell columnId="2" isEntered="true">990000</cell>
+      </cells>
+    </account>
+    <account id="SharePremium">
+      <cells>
+        <cell columnId="1" isEntered="true">1000000</cell>
+        <cell columnId="2" isEntered="true">1000000</cell>
+      </cells>
+    </account>
+    <account id="ReservedProfit">
+      <cells>
+        <cell columnId="1" isEntered="true">200000</cell>
+        <cell columnId="2" isEntered="true">260000</cell>
+      </cells>
+    </account>
+    <account id="RevaluationReserve">
+      <cells>
+        <cell columnId="1" isEntered="true">350000</cell>
+        <cell columnId="2" isEntered="true">350000</cell>
+      </cells>
+    </account>
+    <account id="OtherProvisions">
+      <cells>
+        <cell columnId="1" isEntered="true">149800</cell>
+        <cell columnId="2" isEntered="true">60090</cell>
+      </cells>
+    </account>
+    <account id="OverdraftCurrentAccount">
+      <cells>
+        <cell columnId="1" isEntered="true">1000000</cell>
+        <cell columnId="2" isEntered="true">1000000</cell>
+      </cells>
+    </account>
+    <account id="TaxOnProfitsPayable">
+      <cells>
+        <cell columnId="1" isEntered="true">100000</cell>
+        <cell columnId="2" isEntered="true">220000</cell>
+      </cells>
+    </account>
+    <account id="ChangeInWorkInProgress">
+      <cells>
+        <cell columnId="1" isEntered="true">15000</cell>
+        <cell columnId="2" isEntered="true">20000</cell>
+      </cells>
+    </account>
+    <account id="PurchaseDiscountsAndBonuses">
+      <cells>
+        <cell columnId="1" isEntered="true">-100</cell>
+      </cells>
+    </account>
+    <account id="OtherProductionExpenses">
+      <cells>
+        <cell columnId="1" isEntered="true">400000</cell>
+        <cell columnId="2" isEntered="true">420000</cell>
+      </cells>
+    </account>
+    <account id="OtherFurnitureAndFixtureExpenses">
+      <cells>
+        <cell columnId="1" isEntered="true">10000</cell>
+        <cell columnId="2" isEntered="true">25000</cell>
+      </cells>
+    </account>
+    <account id="OtherOfficeExpenses">
+      <cells>
+        <cell columnId="1" isEntered="true">50000</cell>
+        <cell columnId="2" isEntered="true">75000</cell>
+      </cells>
+    </account>
+    <account id="OtherTransportationExpenses">
+      <cells>
+        <cell columnId="1" isEntered="true">50000</cell>
+        <cell columnId="2" isEntered="true">75000</cell>
+      </cells>
+    </account>
+    <account id="OtherSellingExpenses">
+      <cells>
+        <cell columnId="1" isEntered="true">10000</cell>
+        <cell columnId="2" isEntered="true">10000</cell>
+      </cells>
+    </account>
+    <account id="OtherMonitoringAndControlExpenses">
+      <cells>
+        <cell columnId="1" isEntered="true">10000</cell>
+        <cell columnId="2" isEntered="true">10000</cell>
+      </cells>
+    </account>
+    <account id="OtherOtherOperatingExpenses">
+      <cells>
+        <cell columnId="1" isEntered="true">5000</cell>
+        <cell columnId="2" isEntered="true">5000</cell>
+      </cells>
+    </account>
+    <account id="OtherExtraordinaryExpenses">
+      <cells>
+        <cell columnId="1" isEntered="true">-25000</cell>
+        <cell columnId="2" isEntered="true">-37500</cell>
+      </cells>
+    </account>
+    <account id="TaxProfitOther">
+      <cells>
+        <cell columnId="1" isEntered="true">100000</cell>
+        <cell columnId="2" isEntered="true">86000</cell>
+      </cells>
+    </account>
+    <account id="StructuralProfitPaidOutToClaimants">
+      <cells>
+        <cell columnId="1" isEntered="true">85000</cell>
+        <cell columnId="2" isEntered="true">106122</cell>
+      </cells>
+    </account>
+    <account id="ChangesInEquityApproved">
+      <cells>
+        <cell columnId="1" isEntered="true"></cell>
+        <cell columnId="2" isEntered="true">1</cell>
+      </cells>
+    </account>
+    <account id="VATRateMixed1">
+      <cells>
+        <cell columnId="1" isEntered="true">0.05</cell>
+      </cells>
+    </account>
+    <account id="VATRateMixed2">
+      <cells>
+        <cell columnId="1" isEntered="true">0.17</cell>
+      </cells>
+    </account>
+    <account id="VATRateMixed3">
+      <cells>
+        <cell columnId="1" isEntered="true">0.0382</cell>
+      </cells>
+    </account>
+    <account id="EnergyProductionExpensesVATRate">
+      <cells>
+        <cell columnId="1" isEntered="true">11</cell>
+      </cells>
+    </account>
+    <account id="CarTransportationExpensesVATRate">
+      <cells>
+        <cell columnId="1" isEntered="true">0</cell>
+      </cells>
+    </account>
+    <account id="Goodwill_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Goodwill 1</cell>
+      </cells>
+    </account>
+    <account id="Goodwill_tpDepreciation_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">10000</cell>
+        <cell columnId="2" isEntered="true">10000</cell>
+      </cells>
+    </account>
+    <account id="Goodwill_tpBookValue_ti001">
+      <description>Goodwill_ti001</description>
+      <cells>
+        <cell columnId="1" isEntered="true">100000</cell>
+        <cell columnId="2" isEntered="true">90000</cell>
+      </cells>
+    </account>
+    <account id="PatentsTrademarksAndOtherRights_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Patent 1</cell>
+      </cells>
+    </account>
+    <account id="PatentsTrademarksAndOtherRights_tpDepreciation_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">5000</cell>
+        <cell columnId="2" isEntered="true">5000</cell>
+      </cells>
+    </account>
+    <account id="PatentsTrademarksAndOtherRights_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">25000</cell>
+        <cell columnId="2" isEntered="true">20000</cell>
+      </cells>
+    </account>
+    <account id="OtherIntangibleFixedAssets_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Overig 1</cell>
+      </cells>
+    </account>
+    <account id="OtherIntangibleFixedAssets_tpDepreciation_ti001">
+      <cells>
+        <cell columnId="2" isEntered="true">2500</cell>
+      </cells>
+    </account>
+    <account id="OtherIntangibleFixedAssets_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">50000</cell>
+        <cell columnId="2" isEntered="true">47500</cell>
+      </cells>
+    </account>
+    <account id="LandAndBuildings_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Gebouw 1</cell>
+      </cells>
+    </account>
+    <account id="LandAndBuildings_tpDepreciation_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">50000</cell>
+        <cell columnId="2" isEntered="true">50000</cell>
+      </cells>
+    </account>
+    <account id="LandAndBuildings_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">5000000</cell>
+        <cell columnId="2" isEntered="true">4900000</cell>
+      </cells>
+    </account>
+    <account id="PlantAndEquipment_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Machines en installaties 1</cell>
+      </cells>
+    </account>
+    <account id="PlantAndEquipment_tpDepreciation_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">40000</cell>
+        <cell columnId="2" isEntered="true">40000</cell>
+      </cells>
+    </account>
+    <account id="PlantAndEquipment_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">400000</cell>
+        <cell columnId="2" isEntered="true">400000</cell>
+      </cells>
+    </account>
+    <account id="PlantAndEquipment_tpReinvestmentsForecast_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">50</cell>
+      </cells>
+    </account>
+    <account id="FurnitureAndFixtures_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Kleine inventaris 1</cell>
+      </cells>
+    </account>
+    <account id="FurnitureAndFixtures_tpDepreciation_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">10000</cell>
+        <cell columnId="2" isEntered="true">10000</cell>
+      </cells>
+    </account>
+    <account id="FurnitureAndFixtures_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">100000</cell>
+        <cell columnId="2" isEntered="true">100000</cell>
+      </cells>
+    </account>
+    <account id="FurnitureAndFixtures_tpBookValue_ti002">
+      <cells>
+        <cell columnId="1" isEntered="true">100</cell>
+        <cell columnId="2" isEntered="true">90</cell>
+      </cells>
+    </account>
+    <account id="TransportationEquipment_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Voertuigen 1</cell>
+      </cells>
+    </account>
+    <account id="TransportationEquipment_tpDepreciation_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">50000</cell>
+        <cell columnId="2" isEntered="true">50000</cell>
+      </cells>
+    </account>
+    <account id="TransportationEquipment_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">300000</cell>
+        <cell columnId="2" isEntered="true">300000</cell>
+      </cells>
+    </account>
+    <account id="OtherMaterialFixedAssets_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Overige materiële vaste activa 1</cell>
+      </cells>
+    </account>
+    <account id="OtherMaterialFixedAssets_tpDepreciation_ti001">
+      <cells>
+        <cell columnId="2" isEntered="true">10000</cell>
+      </cells>
+    </account>
+    <account id="OtherMaterialFixedAssets_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">50000</cell>
+        <cell columnId="2" isEntered="true">40000</cell>
+      </cells>
+    </account>
+    <account id="InvestmentInSubsidiaries_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Deelneming 1</cell>
+      </cells>
+    </account>
+    <account id="InvestmentInSubsidiaries_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">250000</cell>
+        <cell columnId="2" isEntered="true">300000</cell>
+      </cells>
+    </account>
+    <account id="LoansToSubsidiaries_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">U.G. deelnemingen 1</cell>
+      </cells>
+    </account>
+    <account id="LoansToSubsidiaries_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">50000</cell>
+        <cell columnId="2" isEntered="true">45000</cell>
+      </cells>
+    </account>
+    <account id="LoansToAffiliatedCompanies_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">U.G. gelieerde partijen 1</cell>
+      </cells>
+    </account>
+    <account id="LoansToAffiliatedCompanies_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">80000</cell>
+        <cell columnId="2" isEntered="true">90000</cell>
+      </cells>
+    </account>
+    <account id="OtherSecurities_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Overige effecten 1</cell>
+      </cells>
+    </account>
+    <account id="OtherSecurities_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">20000</cell>
+        <cell columnId="2" isEntered="true">25000</cell>
+      </cells>
+    </account>
+    <account id="OtherFinancialFixedAssets_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Overige financiële vaste activa 1</cell>
+      </cells>
+    </account>
+    <account id="OtherFinancialFixedAssets_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">50000</cell>
+        <cell columnId="2" isEntered="true">60000</cell>
+      </cells>
+    </account>
+    <account id="SubordinatedDebt_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Achtergesteld1</cell>
+      </cells>
+    </account>
+    <account id="SubordinatedDebt_tpBankName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">TESTBANK</cell>
+      </cells>
+    </account>
+    <account id="SubordinatedDebt_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">500000</cell>
+        <cell columnId="2" isEntered="true">480000</cell>
+      </cells>
+    </account>
+    <account id="SubordinatedDebt_tpInterestExpenses_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">40000</cell>
+        <cell columnId="2" isEntered="true">40000</cell>
+      </cells>
+    </account>
+    <account id="LongTermDebt_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Lening 1</cell>
+      </cells>
+    </account>
+    <account id="LongTermDebt_tpBankName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">TESTBank</cell>
+      </cells>
+    </account>
+    <account id="LongTermDebt_tpBookValue_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">1000000</cell>
+        <cell columnId="2" isEntered="true">990000</cell>
+      </cells>
+    </account>
+    <account id="LongTermDebt_tpShortTermPart_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">10000</cell>
+        <cell columnId="2" isEntered="true">10000</cell>
+      </cells>
+    </account>
+    <account id="LongTermDebt_tpInterestExpenses_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">50000</cell>
+        <cell columnId="2" isEntered="true">50000</cell>
+      </cells>
+    </account>
+    <account id="LongTermDebt_tpRepayment_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">10000</cell>
+      </cells>
+    </account>
+    <account id="Product_tpSales_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">2400000</cell>
+        <cell columnId="2" isEntered="true">2900000</cell>
+      </cells>
+    </account>
+    <account id="Product_tpCost_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">1200000</cell>
+        <cell columnId="2" isEntered="true">1470000</cell>
+      </cells>
+    </account>
+    <account id="Product_tpInventory_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">750000</cell>
+        <cell columnId="2" isEntered="true">750000</cell>
+      </cells>
+    </account>
+    <account id="Product_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Omzetgroep 1</cell>
+      </cells>
+    </account>
+    <account id="Product_tpSales_ti002">
+      <cells>
+        <cell columnId="1" isEntered="true">1750000</cell>
+        <cell columnId="2" isEntered="true">1890121.9512194</cell>
+      </cells>
+    </account>
+    <account id="Product_tpCost_ti002">
+      <cells>
+        <cell columnId="1" isEntered="true">1200000</cell>
+        <cell columnId="2" isEntered="true">1378000</cell>
+      </cells>
+    </account>
+    <account id="Product_tpInventory_ti002">
+      <cells>
+        <cell columnId="1" isEntered="true">250000</cell>
+        <cell columnId="2" isEntered="true">250000</cell>
+      </cells>
+    </account>
+    <account id="Product_tpVATRateChoice_ti002">
+      <cells>
+        <cell columnId="1" isEntered="true">1</cell>
+      </cells>
+    </account>
+    <account id="Product_tpName_ti002">
+      <cells>
+        <cell columnId="1" isEntered="true">Omzetgroep 2</cell>
+      </cells>
+    </account>
+    <account id="Department_tpName_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">Personeel1</cell>
+      </cells>
+    </account>
+    <account id="Department_tpNumberOfEmployees_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">10</cell>
+        <cell columnId="2" isEntered="true">10</cell>
+      </cells>
+    </account>
+    <account id="Department_tpWages_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="Department_tpSocialSecurities_ti001">
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">2000</cell>
+      </cells>
+    </account>
+    <account id="Department_tpName_ti002">
+      <cells>
+        <cell columnId="1" isEntered="true">Personeel 2</cell>
+      </cells>
+    </account>
+    <account id="Department_tpNumberOfEmployees_ti002">
+      <cells>
+        <cell columnId="1" isEntered="true">2</cell>
+        <cell columnId="2" isEntered="true">3</cell>
+      </cells>
+    </account>
+    <account id="Department_tpWages_ti002">
+      <cells>
+        <cell columnId="1" isEntered="true">100000</cell>
+        <cell columnId="2" isEntered="true">110000</cell>
+      </cells>
+    </account>
+  </accounts>
+</finanData>

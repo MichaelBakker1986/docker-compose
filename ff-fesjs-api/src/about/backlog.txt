@@ -1,0 +1,65 @@
+deparse choices, works now with JSON.parse, can be way quicker
+Charts work on variable name, so cyclic dependencies are shown when refering to other properties
+Static properties can never be cyclic. They should be filtered out. (make new dependency type) deps/refs/
+
+includes
+.title dus, percentage spul (SectionType) number input (alles is nu dus string input) validatie misschien als het simpel is....
+tuple identificeren en + laten zien
+Aantal ingevulde verplichte velden (6) worden niet geupdate of zo
+Navigatie aan the variable lookup koppellen bovenin
+hoofdnode bovenin laten zien?
+scrolltop
+
+properties in formbuilder, locked / copy
+make [0] and [1] work. title
+Properties are provided from either the database for a specific data format, or from giving imports
+Add dependency tree, while throwing elements away
+Make autocomplete on variableNames, generic on top of page
+process changes in Ace, and PropertyEditor
+debug functionality in Ace
+never load too many items on screen, just cut it off @ 200 rows. more is not interesting at all
+add numeral
+search & save to right mini buttons
+we can preoptimize very easy, since ffl's are also generatedm their outcome is low level.producing false&&verycomplemethod(x)
+
+parsers should not themselve add formula's, this making it complex
+  - the JSWorkBook should do this while importing
+
+parser tests are very simular, they all use integration test to validate the GenericModel
+TODO: make a GenericParserTest
+Code is written the rootNode always to be 'root', bad practise. also details of root node is lost in exports
+too many CSS,js external resources, use a bundle
+
+-- some setValue are called by the UI trying to refresh the pages, they result as NULL values in the expors
+
+Lazy loading formula's/see preview in old version
+V05 now taking 450ms to load, value,hint,visible,locked 12ms to json, 310to genericmodel
+FIN
+  - Function Gap
+create FinanXML import
+
+create Excel export/import
+  - for model and values
+
+FFL all properties
+  - parsed value is translated back
+  - ] should be } somewhere in the ffl
+  - indenting for properties not the same as children
+  - export tuple, variable modifiers=/-/+
+  - add header and footer
+  - formula: undefined.
+  - removing all " and \ from fin, also the ones that mean something
+
+  + free casing of variable fixing. there are some casesensitive mistakes in ffl
+
+FinanXML support (out/in), Out First;
+There is no indication for resource intensive actions,  (busy indicator Cg-Busy)
+
+highchart
+xls support
+webservice page
+Alerts
+Frequency switch
+FormulaSets
+Tuples
+Tijdlijnen

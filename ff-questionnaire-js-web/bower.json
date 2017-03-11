@@ -1,0 +1,68 @@
+{
+  "repo": "",
+  "name": "quest-js",
+  "version": "0.0.1",
+  "license": "MIT",
+  "ignore": [
+    "examples",
+    "demo",
+    "build",
+    "guide",
+    "node_modules",
+    "source",
+    "tasks",
+    "tests",
+    "gulpfile.js",
+    "karma.conf.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "d3": "^3.5.8",
+    "angular": "1.2.x || 1.3.x || 1.4.x",
+    "highcharts": "~4.1.9",
+    "bootstrap-css": "~3.2.0",
+    "angular-busy": "^4.1.3",
+    "angular-json-editor": "~0.2.1",
+    "angular-ui-tree": "~2.17.0",
+    "datatables.net": "~1.10.12",
+    "datatables.net-scroller": "~1.4.2",
+    "datatables.net-scroller-dt": "~1.4.2",
+    "mdDataTable": "~1.6.6",
+    "angular-route": "~1.5.8"
+  },
+  "devDependencies": {
+    "angular-bootstrap": "~0.13.4",
+    "angular-mocks": "1.2.x || 1.3.x",
+    "angularfire": "~0.8.2",
+    "jasmine-jquery": "2.1.1",
+    "jquery": "~2.1.1",
+    "angular-ui-tree": "^2.15.0",
+    "datatables": "~1.10.4",
+    "datatables-plugins": "~1.0.1",
+    "flot": "~0.8.3",
+    "font-awesome": "~4.2.0",
+    "holderjs": "~2.4.1",
+    "metisMenu": "~1.1.3",
+    "morrisjs": "~0.5.1",
+    "datatables-responsive": "~1.0.3",
+    "bootstrap-social": "~4.8.0",
+    "flot.tooltip": "~0.8.4",
+    "npm": "3.7.5",
+    "bootstrap": "~3.3.7",
+    "ace-builds": "~1.2.4",
+    "angular-datatables": "^2.2.0",
+    "jquery-ui": "^1.12.1",
+    "d3": "^4.7.1"
+  },
+  "authors": [
+    "Michael Bakker <michael.bakker1986@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "node",
+    "yui"
+  ],
+  "homepage": "",
+  "private": true
+}

@@ -1,0 +1,20 @@
+1:1. Omzet is 0 of ontbrekend
+2:2. Gemiddelde daling vd omzet in de afgelopen 3 maanden is groter dan 50%
+3:3. Omzet is tov 12 maanden geleden meer dan 40% gedaald
+4:4. Klant genereert onvoldoende omzet voor RC-limiet
+5:5. Limietgebruik > 70% en stijging van > 10% tov voorgaande maand
+6:6. Limietgebruik > 85%
+7:7. Limiet is te hoog t.o.v. referentielimiet
+8:8. Limiet is groter dan 100.000 euro
+9:9. Huidige overstand duurt langer dan 5 dagen
+10:10. Huidige overstand bedraagt meer dan 250 euro
+11:11. Som van aantal overstanden de afgelopen 6 maanden is groter dan 2
+12:12. Som van overstanden de afgelopen 6 maanden is groter dan 750 euro
+13:13. Vervallen rating KW15 of rating is downgraded naar WR17 of rating ontbreekt nu
+14:14. Rating SBF/SME is t.o.v. 1 resp  6 maanden geleden 4 pnt resp 3 notches gestegen
+15:15. Grillig ratingverloop (meer dan 2 keer in de afgelopen 6 maanden rating >= 15)
+16:16. Klant staat op Business Rule 31 (specifieke branche)
+17:17. Klant is starter
+18:18. Klant heeft referentielimiet van 1 euro
+19:19. Klant is uitgeschreven bij KVK
+20:20. KOS-revisiedatum vervalt binnen 90 dagen

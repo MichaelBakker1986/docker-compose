@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="1.4" date="24-04-2014" author="Topicus Finan" title="ING-ScoreCard" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+
+<properties>
+	<ReportName><data src="fesModel"><variables var="Root" function="getTitle"/></data></ReportName>
+	<RelatieNummer><data src="fesModel"><columns number="1" /><variables var="FPS_VAR_KVKnr" /><presentation showSingleValueVariablesOnce="false" /></data></RelatieNummer>
+	<RelatieNummerTitel>KvK nummer</RelatieNummerTitel>
+	<MedewerkerVKO><data src="document" var="./document/properties/currentUser_Fullname/text()"/></MedewerkerVKO>
+	<MedewerkerVKOTitel>Medewerker</MedewerkerVKOTitel>
+	<CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy"/></data></CreationDate>
+	<CreationDateTitel>Datum</CreationDateTitel>
+	<CompanyName><data src="fesModel"><columns number="1" /><variables depth="1" var="FPS_VAR_Naam"/></data></CompanyName>
+	<ReportScaleDefault>1</ReportScaleDefault>
+  <Relevant_Q_Map01><data src="fesModel"><columns number="1" /><variables depth="1" var="Relevant_Q_Map01"/></data></Relevant_Q_Map01>
+  <Relevant_Q_Map02><data src="fesModel"><columns number="1" /><variables depth="1" var="Relevant_Q_Map02"/></data></Relevant_Q_Map02>
+  <Relevant_Q_Map03><data src="fesModel"><columns number="1" /><variables depth="1" var="Relevant_Q_Map03"/></data></Relevant_Q_Map03>
+  <Relevant_Q_Map04><data src="fesModel"><columns number="1" /><variables depth="1" var="Relevant_Q_Map04"/></data></Relevant_Q_Map04>
+  <Relevant_Q_Map05><data src="fesModel"><columns number="1" /><variables depth="1" var="Relevant_Q_Map05"/></data></Relevant_Q_Map05>
+  <Relevant_Q_Map06><data src="fesModel"><columns number="1" /><variables depth="1" var="Relevant_Q_Map06"/></data></Relevant_Q_Map06>
+  <Relevant_Q_Map07><data src="fesModel"><columns number="1" /><variables depth="1" var="Relevant_Q_Map07"/></data></Relevant_Q_Map07>
+  <Relevant_Q_Map08><data src="fesModel"><columns number="1" /><variables depth="1" var="Relevant_Q_Map08"/></data></Relevant_Q_Map08>
+  <Relevant_Q_Map09><data src="fesModel"><columns number="1" /><variables depth="1" var="Relevant_Q_Map09"/></data></Relevant_Q_Map09>
+  </properties>
+
+<!-- =========toc=============================================================== -->
+<newpage name="frontpage">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+
+<!-- =========toc=============================================================== -->
+<newpage name="toc">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<section class="section">Inhoudsopgave</section>
+<tableofcontents class="toc">
+  <tocdepth>1</tocdepth>
+</tableofcontents>
+
+<p> </p>
+
+<!--Status information-->
+	<section class="section"><data src="fesModel"><variables var="Q_STATUS" function="getTitle"/></data></section>
+	<table class="datatable">
+		<data src="fes">
+			<columns number="1" order="asc" />
+			<!--<columns number="3" order="asc"/>-->
+			<variables depth="0" var="Q_STATUS"/>
+			<variables depth="0" var="Q_STATUS_FINAL_ON"/>
+			<variables depth="0" var="Q_STATUS_FINAL_BY"/>
+			<variables depth="0" var="Q_STATUS_FINAL_BY_NAME"/>
+			<variables depth="0" var="Q_STATUS_STARTED_ON"/>
+			<variables depth="0" var="ModelVersion"/>
+			<variables depth="0" var="MatrixVersion"/>
+			<presentation showHeaderRow="false">
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level-1">remove</overrideStyle>
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1">remove</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========data============================================================= -->
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map01" function="getTitle"/></data></section>
+
+	<table class="datatable" visible="./document/properties/Relevant_Q_Map01/text()='Ja'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="3" var="Q_Map01" varTo="LinkNaarMeerInformatie" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="true" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+	<table class="datatable" visible="./document/properties/Relevant_Q_Map01/text()='Ja'">
+		<tr class="header">
+			<td><data src="fesModel"><variables var="Q_Map01_Paragraaf02" function="getTitle"/></data></td>
+			<td></td>
+		</tr>
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="3" var="Q_Map01" varFrom="Q_Map01_Paragraaf02" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="true" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<p> </p>
+<!-- =========data============================================================= -->
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map02" function="getTitle"/></data></section>
+
+	<table class="datatable3cols" visible="./document/properties/Relevant_Q_Map02/text()='Ja'">
+		<tr class="title4column">
+		  <td><data src="fesModel"><variables var="Q_Map02" function="getTitle"/></data></td>
+		  <td></td>
+		  <td></td>
+		  <td></td>
+		</tr>
+		<tr class="subtotal">
+			<td>Maand</td>
+			<td>Omzet</td>
+			<td>Limietgebruik</td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet0MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet0MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT1" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet1MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet1MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT2" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet2MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet2MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT3" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet3MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet3MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT4" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet4MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet4MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT5" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet5MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet5MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT6" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet6MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet6MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT7" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet7MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet7MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT8" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet8MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet8MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT9" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet9MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet9MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT10" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet10MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet10MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT11" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet11MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet11MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT12" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet12MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet12MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT13" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet13MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet13MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT14" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet14MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet14MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT15" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet15MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet15MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT16" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet16MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet16MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT17" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet17MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet17MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT18" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet18MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet18MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT19" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet19MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet19MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT20" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet20MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet20MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT21" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet21MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet21MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT22" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet22MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet22MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="MaandT23" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Omzet23MndGeleden" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Limiet23MndGeleden" /><presentation scale="1"/></data></td>
+			<td></td>
+		</tr>		
+	</table>
+
+	<!-- =========data============================================================= -->
+	<table class="datatable" visible="./document/properties/Relevant_Q_Map02/text()='Ja' and ./document/properties/RevisieModel/text()='2'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="2" var="Q_Map02" varFrom="Q_Map02_Paragraaf1New" varTo="AanvullendeGegevens" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="true" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+  <table class="datatable" visible="./document/properties/Relevant_Q_Map02/text()='Ja' and ./document/properties/RevisieModel/text()='2'">
+ 		<tr class="header">
+		  <td><data src="fesModel"><variables var="Q_Map02_Paragraaf2New" function="getTitle"/></data></td>
+		  <td></td>
+		</tr>
+	</table>
+
+	<table class="datatable" visible="./document/properties/Relevant_Q_Map02/text()='Ja' and ./document/properties/RevisieModel/text()='2'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="2" var="Q_Map02" varFrom="Q_Map02_Paragraaf2New" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="true" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+	<!-- =========data============================================================= STAP 2 OUD -->
+	<table class="datatable" visible="./document/properties/Relevant_Q_Map02/text()='Ja' and ./document/properties/RevisieModel/text()='1'">
+			<data src="fes">
+			<columns number="1" order="asc"/>
+			<variables depth="3" var="Q_Map02" recursiveSkip="false"/>
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false"
+				 showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========data============================================================= -->
+<newpage name="normal" visible="./document/properties/Relevant_Q_Map03/text()='Ja'">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section" visible="./document/properties/Relevant_Q_Map03/text()='Ja'"><data src="fesModel"><variables var="Q_Map03" function="getTitle"/></data></section>
+
+		<table class="datatable" visible="./document/properties/Relevant_Q_Map03/text()='Ja'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="3" var="Q_Map03" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+<!-- =========data============================================================= -->
+<newpage name="normal" visible="./document/properties/Relevant_Q_Map04/text()='Ja'">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section" visible="./document/properties/Relevant_Q_Map04/text()='Ja'"><data src="fesModel"><variables var="Q_Map04" function="getTitle"/></data></section>
+
+
+	<table class="datatable" visible="./document/properties/Relevant_Q_Map04/text()='Ja'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="3" var="Q_Map04" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+<!-- =========data============================================================= -->
+<newpage name="normal" visible="./document/properties/Relevant_Q_Map05/text()='Ja'">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section" visible="./document/properties/Relevant_Q_Map05/text()='Ja'"><data src="fesModel"><variables var="Q_Map05" function="getTitle"/></data></section>
+
+		<table class="datatable" visible="./document/properties/Relevant_Q_Map05/text()='Ja'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="3" var="Q_Map05" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+<!-- =========data============================================================= -->
+<newpage name="normal" visible="./document/properties/Relevant_Q_Map06/text()='Ja'">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section" visible="./document/properties/Relevant_Q_Map06/text()='Ja'"><data src="fesModel"><variables var="Q_Map06" function="getTitle"/></data></section>
+
+		<table class="datatable" visible="./document/properties/Relevant_Q_Map06/text()='Ja'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="3" var="Q_Map06" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+<!-- =========data============================================================= -->
+<newpage name="normal" visible="./document/properties/Relevant_Q_Map07/text()='Ja'">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section" visible="./document/properties/Relevant_Q_Map07/text()='Ja'"><data src="fesModel"><variables var="Q_Map07" function="getTitle"/></data></section>
+
+	<table class="datatable"  visible="./document/properties/Relevant_Q_Map07/text()='Ja'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="3" var="Q_Map07" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+<!-- =========data============================================================= -->
+<newpage name="normal" visible="./document/properties/Relevant_Q_Map08/text()='Ja'">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section" visible="./document/properties/Relevant_Q_Map08/text()='Ja'"><data src="fesModel"><variables var="Q_Map08" function="getTitle"/></data></section>
+
+	<table class="datatable" visible="./document/properties/Relevant_Q_Map08/text()='Ja'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="3" var="Q_Map08" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+<!-- =========data============================================================= -->
+<newpage name="normal" visible="./document/properties/Relevant_Q_Map09/text()='Ja'">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section" visible="./document/properties/Relevant_Q_Map09/text()='Ja'"><data src="fesModel"><variables var="Q_Map09" function="getTitle"/></data></section>
+
+	<table class="datatable" visible="./document/properties/Relevant_Q_Map09/text()='Ja'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="3" var="Q_Map09" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level0empty">remove</overrideStyle>
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========End============================================================= -->
+</document>

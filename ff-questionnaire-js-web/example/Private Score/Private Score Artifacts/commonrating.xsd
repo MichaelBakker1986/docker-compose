@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://www.fortis.nl/schema/creditriskwebservices/riskassessment" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.fortis.nl/schema/creditriskwebservices/riskassessment" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:complexType name="CompanyInfoType">
+    <xs:annotation>
+      <xs:documentation>Contains all the counter party information for a specific CounterParty model</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="CompanyReference" type="NonBlankString">
+        <xs:annotation>
+          <xs:documentation>The external reference of the counter party.</xs:documentation>
+          <xs:documentation>The type of external reference depends on the client system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CompanyReferenceType" type="CompanyReferenceTypeEnumeration">
+        <xs:annotation>
+          <xs:documentation>The type of the external reference for counter party.</xs:documentation>
+          <xs:documentation>The type of external reference depends on the client system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CounterpartyInfoType">
+    <xs:annotation>
+      <xs:documentation>Contains all the counter party information for a specific CounterParty model</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="CounterpartyIdentifier" type="NonBlankString">
+        <xs:annotation>
+          <xs:documentation>The external reference of the counter party.</xs:documentation>
+          <xs:documentation>The type of external reference depends on the client system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CounterpartyIdentifierType" type="CompanyReferenceTypeEnumeration">
+        <xs:annotation>
+          <xs:documentation>The type of the external reference for counter party.</xs:documentation>
+          <xs:documentation>The type of external reference depends on the client system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CurrencyType">
+    <xs:sequence>
+      <xs:element name="CurrencyCode" type="CurrencyIsoCodeType" default="EUR">
+        <xs:annotation>
+          <xs:documentation>The currency to be used in all allocation calculations.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CurrencyRate" type="CurrencyRateType" default="1.0">
+        <xs:annotation>
+          <xs:documentation>The currency rate to be used in converting collateral and guarantee to the above currency before calculations.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CreditAgreementUpdateRequestType">
+    <xs:sequence>
+      <xs:element name="ExternalUserID" type="NonBlankString">
+        <xs:annotation>
+          <xs:documentation>The user who triggered the request. Must be a FAIR user in external-user-id format.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="System" type="NonBlankString">
+        <xs:annotation>
+          <xs:documentation>The system that issues the request, e.g. 'RAPID'.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="CurrencyIsoCodeType">
+    <xs:annotation>
+      <xs:documentation>Three-character alphabetic string in uppercase to hold an ISO code for currencies.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{3,3}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CurrencyRateType">
+    <xs:annotation>
+      <xs:documentation>The exchange rate of a currency against EUR.</xs:documentation>
+      <xs:documentation>We may change this into xs:decimal instead of xs:double, if the experimental xs:decimal for AmountType is successful.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:double">
+      <xs:minExclusive value="0.0" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FractionType">
+    <xs:annotation>
+      <xs:documentation>Fractions need not always be between 0 and 100, but in modelling they usually are.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:double">
+      <xs:minInclusive value="0.0" />
+      <xs:maxInclusive value="1.0" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="NonNegativeNumberType">
+    <xs:annotation>
+      <xs:documentation>Used for numbers that are 0 or higher.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:double">
+      <xs:minInclusive value="0.0" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AmountType">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute name="currency" type="CurrencyIsoCodeType" use="required" />
+        <xs:attribute name="currencyRate" type="CurrencyRateType" use="required">
+          <xs:annotation>
+            <xs:documentation>The exchange rate of the currency against EUR.</xs:documentation>
+            <xs:documentation>May be omitted when currency is EUR.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="ErrorType">
+    <xs:sequence>
+      <xs:element name="ErrorCode" type="NonBlankString" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Error code of the Technical/Functional Error occurred.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ErrorDescription" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Error description of the Technical/Functional Error occurred.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GenericResultType">
+    <xs:sequence>
+      <xs:element name="ResultCode" type="NonBlankString" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Error code of the Technical/Functional Error occurred.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ResultDescription" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Error description of the Technical/Functional Error occurred.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FaultType">
+    <xs:sequence>
+      <xs:element name="Code">
+        <xs:annotation>
+          <xs:documentation>The code of the error that occurred on the server.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="NotAuthorizedException" />
+            <xs:enumeration value="UnexpectedException" />
+            <xs:enumeration value="RatingException">
+              <xs:annotation>
+                <xs:documentation>RatingException is for cases where functional errors cause the complete request to fail.</xs:documentation>
+                <xs:documentation>This will not happen when the SOAP request is in fact a bundle of independent functional request items,</xs:documentation>
+                <xs:documentation>which is the case for e.g. CreateFacilityEadLgdCalculatedIterationRequest.</xs:documentation>
+                <xs:documentation>In those cases, each functional request item has its own (optional) functional error code.</xs:documentation>
+              </xs:annotation>
+            </xs:enumeration>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ErrorCode" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>An error code of any Exception which is not the UnexpectedException.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExceptionName" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>If the error was an UnexpectedException, then this element contains the name of the exception.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExceptionStackTrace" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>If the error was an UnexpectedException, then this element contains the stack trace of the exception.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="NonBlankString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:pattern value=".*[^\s].*" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- The below element can well be coded fancy using the union operation in XSDs. -->
+  <!-- This solution only had to be chosen as RAPID (external system ) doesn't support union operation (Lotus Notes 8.5.3) -->
+
+  <xs:simpleType name="UCRTypeEnumeration">
+    <xs:annotation>
+      <xs:documentation>The enumeration type for all UCRs registered in FAIR</xs:documentation>
+      <xs:documentation>A simple union of CalcUCRTypeEnumeration and SpecialUCRTypeEnumeration</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0" />
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2+" />
+      <xs:enumeration value="2" />
+      <xs:enumeration value="2-" />
+      <xs:enumeration value="3+" />
+      <xs:enumeration value="3" />
+      <xs:enumeration value="3-" />
+      <xs:enumeration value="4+" />
+      <xs:enumeration value="4" />
+      <xs:enumeration value="4-" />
+      <xs:enumeration value="5+" />
+      <xs:enumeration value="5" />
+      <xs:enumeration value="5-" />
+      <xs:enumeration value="6+" />
+      <xs:enumeration value="6" />
+      <xs:enumeration value="7" />
+      <xs:enumeration value="8" />
+      <xs:enumeration value="X" />
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <xs:simpleType name="ProposalTypeEnumeration">
+    <xs:annotation>
+      <xs:documentation>The enumeration type for all UCRs registered in FAIR</xs:documentation>
+      <xs:documentation>A simple union of CalcUCRTypeEnumeration and SpecialUCRTypeEnumeration</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CREDITPROPOSAL" />
+
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+
+  <xs:simpleType name="CompanyReferenceTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RAPIDINTID" />
+      <xs:enumeration value="LBCDBID" />
+      <xs:enumeration value="HREKNR" />
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+  <xs:complexType name="ValueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="ValueTypeEnumeration" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="ValueTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="text" />
+      <xs:enumeration value="decimal" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="NameValuePairType">
+    <xs:sequence>
+      <xs:element name="Value" type="ValueType" nillable="true" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:NMTOKEN" use="required" />
+  </xs:complexType>
+
+  <xs:simpleType name="IterationTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CALCULATED" />
+      <xs:enumeration value="EXPERT" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PolicyLayerIdentificationEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="StandAloneRating" />
+      <xs:enumeration value="CountryRisk" />
+      <xs:enumeration value="GroupSupport" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="GSRIIterationTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CALCULATED" />
+      <xs:enumeration value="EXPERT" />
+      <xs:enumeration value="ADVICE" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="StageEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PROPOSAL" />
+      <xs:enumeration value="APPROVAL" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="UserTypeEnumeration">
+    <xs:annotation>
+      <xs:documentation>External user type categories.</xs:documentation>
+      <!-- External types, not internal, with a simple mapping from internal to external -->
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ACCOUNT_MANAGER" />
+      <xs:enumeration value="CREDIT_ANALYST" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ProcessStatusEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ACTUAL" />
+      <xs:enumeration value="CANCELED" />
+      <xs:enumeration value="HISTORICAL" />
+      <xs:enumeration value="OPEN" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RatingTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OPEN" />
+      <xs:enumeration value="ACTUAL" />
+      <xs:enumeration value="HISTORICAL" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CounterpartyRatingTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MOST_RECENT_DRAFT" />
+      <xs:enumeration value="ACTUAL" />
+      <xs:enumeration value="HISTORICALLY_APPROVED" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AnswerTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="N" />
+      <xs:enumeration value="A" />
+      <xs:enumeration value="S" />
+      <xs:enumeration value="M" />
+      <xs:enumeration value="D" />
+      <xs:enumeration value="P" />
+      <xs:enumeration value="B" />
+      <xs:enumeration value="L" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="MonthTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Jan" />
+      <xs:enumeration value="Feb" />
+      <xs:enumeration value="Mar" />
+      <xs:enumeration value="Apr" />
+      <xs:enumeration value="May" />
+      <xs:enumeration value="Jun" />
+      <xs:enumeration value="Jul" />
+      <xs:enumeration value="Aug" />
+      <xs:enumeration value="Sep" />
+      <xs:enumeration value="Oct" />
+      <xs:enumeration value="Nov" />
+      <xs:enumeration value="Dec" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CategoryVariantTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Consolidated" />
+      <xs:enumeration value="Unconsolidated" />
+      <xs:enumeration value="Combined" />
+      <xs:enumeration value="Unspecified" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RiskManagementApproachEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PL" />
+      <xs:enumeration value="NPL" />
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+  <xs:simpleType name="VersionType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{3}\.[0-9]{3}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="FacilityReferenceType">
+    <xs:annotation>
+      <xs:documentation>Base type for requests that update the facility.</xs:documentation>
+      <xs:documentation>The search criteria for the facility is a facility ID (GFID).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ReferenceType" type="NonBlankString">
+        <xs:annotation>
+          <xs:documentation>The external reference of the facility, i.e. the facility reference used by the client system.</xs:documentation>
+          <xs:documentation>The type of external reference depends on the client system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ReferenceValue" type="NonBlankString">
+        <xs:annotation>
+          <xs:documentation>For RAPID, it is the AAC/Alpha/FacilityNumber of the facility, if available.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ActionType">
+    <xs:sequence>
+      <xs:element name="UserId" type="xs:string" minOccurs="0" />
+      <xs:element name="UserType" type="UserTypeEnumeration" minOccurs="0" />
+      <xs:element name="DateTime" type="xs:dateTime" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RatingModelsResultType">
+    <xs:sequence>
+      <xs:element name="RatingModel" type="RatingModelType" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Model info returned for the search criteria.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RatingModelType">
+    <xs:annotation>
+      <xs:documentation>Model info returned for the search criteria.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ModelCode" type="xs:string" />
+      <xs:element name="ModelName" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="preferred" type="xs:boolean" />
+  </xs:complexType>
+
+  <xs:complexType name="IndexAttributeType">
+    <xs:sequence>
+      <xs:element name="IndexValue" type="xs:string" />
+      <xs:element name="Code" type="xs:string" />
+      <xs:element name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="LanguageTypeEnumeration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EN" />
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

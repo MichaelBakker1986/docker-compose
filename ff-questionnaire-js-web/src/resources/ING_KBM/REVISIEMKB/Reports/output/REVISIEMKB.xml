@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document author="Topicus Finan" date="30-04-2014" title="ING-ScoreCard"
+   version="1.6" xmlns:fbl="http://www.topicus.nl/z/fbltotaal/2015/2/"
+   xmlns:fes="http://www.finan.nl/extension/2015/01/fes"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd">
+   <properties>
+      <ReportVersion>v 1.6</ReportVersion>
+      <ModelVersion>09.00.001.000</ModelVersion>
+      <ParameterVersion>None</ParameterVersion>
+      <ReportName>Revisieverslag MKB</ReportName>
+      <RelatieNummer>2</RelatieNummer>
+      <RelatieNummerTitel>CLP nummer</RelatieNummerTitel>
+      <KFRNummer>90000002</KFRNummer>
+      <KFRNummerTitel>KFC nummer</KFRNummerTitel>
+      <MedewerkerVKO/>
+      <MedewerkerVKOTitel>Medewerker</MedewerkerVKOTitel>
+      <CreationDate>23 juni 2016</CreationDate>
+      <CreationDateTitel>Datum</CreationDateTitel>
+      <CompanyName>aalderen, Ronald van Test</CompanyName>
+      <ReportScaleDefault>1</ReportScaleDefault>
+      <Relevant_Q_Map01>1</Relevant_Q_Map01>
+      <Relevant_Q_Map02>1</Relevant_Q_Map02>
+      <Relevant_Q_Map03A>1</Relevant_Q_Map03A>
+      <Relevant_Q_Map03B>1</Relevant_Q_Map03B>
+      <Relevant_Q_Map03C>1</Relevant_Q_Map03C>
+      <Relevant_Q_Map04>1</Relevant_Q_Map04>
+      <Relevant_Q_Map05>0</Relevant_Q_Map05>
+      <Relevant_Q_Map06>0</Relevant_Q_Map06>
+      <Relevant_Q_Map07>1</Relevant_Q_Map07>
+      <Relevant_Q_Map08>0</Relevant_Q_Map08>
+      <Relevant_Q_Map09>1</Relevant_Q_Map09>
+      <identifier>1234567890</identifier>
+   </properties>
+   <newpage
+         name="frontpage">
+      <p id="watermark"
+      visible="./document/properties/isFinalReport/text()=0"/>
+   </newpage>
+   <newpage
+         name="normal">
+      <p id="watermark"
+      visible="./document/properties/isFinalReport/text()=0"/>
+   </newpage>
+   <section
+      class="section">Klantgegevens</section>
+   <p>De velden gemarkeerd met ** zijn gebaseerd op EWS data van 01-11-2013</p>
+   <table
+         class="datatable">
+      <tr
+         class="empty">
+         <td/>
+      </tr>
+      <tr
+         class="remove">
+         <td>Klantgegevens:</td>
+         <td/>
+      </tr>
+      <tr
+         class="level1">
+         <td>Warning voor map 1</td>
+         <td/>
+      </tr>
+      <tr
+         class="level1">
+         <td>Info bij stap 1</td>
+         <td>De velden gemarkeerd met ** zijn gebaseerd op EWS data van 01-11-2013</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Validatie stap 1</td>
+         <td>Nog niet alle 12 verplichte vragen in deze stap zijn ingevuld.</td>
+      </tr>
+      <tr
+         class="empty">
+         <td/>
+      </tr>
+      <tr
+         class="header">
+         <td>Klantgegevens:</td>
+         <td/>
+      </tr>
+      <tr
+         class="level2">
+         <td>Naam</td>
+         <td>aalderen, Ronald van Test</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Relatienummer</td>
+         <td>2</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>KvK-nummer</td>
+         <td>90000002</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>GRID ID</td>
+         <td>36567838</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Oprichtingsdatum bij KvK **</td>
+         <td>01 januari 2002</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Klant bij ING sinds **</td>
+         <td>27 september 2004</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>LOO</td>
+         <td>10</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>KFC-nummer **</td>
+         <td>90000002</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Tweede KFC-nummer</td>
+         <td>1</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>KFC-Belang **</td>
+         <td>300.000</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Is er sprake van ING Leasebelang?</td>
+         <td/>
+      </tr>
+      <tr
+         class="level2">
+         <td>Zijn er belangen bij overige ING onderdelen?</td>
+         <td/>
+      </tr>
+      <tr
+         class="level2">
+         <td>Is er sprake van een FM limiet?</td>
+         <td/>
+      </tr>
+      <tr
+         class="level2">
+         <td>Betreft het een CVOG financiering?</td>
+         <td/>
+      </tr>
+      <tr
+         class="level2">
+         <td>SBF (Ja/Nee)</td>
+         <td>Ja</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Blijkt uit de KvK dat er sprake is van faillissement of surseance ?</td>
+         <td>Nee</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Blijkt uit de KvK dat er sprake is van een gewijzigde rechtsvorm?</td>
+         <td>Nee</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Referentielimiet **</td>
+         <td>1</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Branche **</td>
+         <td>Furniture Stores</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Rechtsvorm **</td>
+         <td>BV</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Vestigingsplaats</td>
+         <td>HUIZEN</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Link naar meer informatie</td>
+         <td>...</td>
+      </tr>
+      <tr
+         class="empty">
+         <td/>
+      </tr>
+      <tr
+         class="header">
+         <td>Aard bedrijf:</td>
+         <td/>
+      </tr>
+      <tr
+         class="level2">
+         <td>Beschrijf hier kort de structuur en of er wijzigingen zijn in het organogram sinds het vorige fiat</td>
+         <td>...Dit is een faketekst. Alles wat hier staat is slechts om een indruk te geven van het grafische effect van tekst op deze plek. Wat u hier leest is een voorbeeldtekst. Deze wordt later vervangen door de uiteindelijke tekst, die nu nog niet bekend is. De faketekst is dus een tekst die eigenlijk nergens over gaat. Het grappige is, dat mensen deze toch vaak lezen. Zelfs als men weet dat het om een faketekst gaat, lezen ze toch door.</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Korte beschrijving van het bedrijf en activiteiten</td>
+         <td>...Dit is een faketekst. Alles wat hier staat is slechts om een indruk te geven van het grafische effect van tekst op deze plek. Wat u hier leest is een voorbeeldtekst. Deze wordt later vervangen door de uiteindelijke tekst, die nu nog niet bekend is. De faketekst is dus een tekst die eigenlijk nergens over gaat. Het grappige is, dat mensen deze toch vaak lezen. Zelfs als men weet dat het om een faketekst gaat, lezen ze toch door.</td>
+      </tr>
+      <tr
+         class="empty">
+         <td/>
+      </tr>
+      <tr
+         class="header">
+         <td>Vaststellen type revisie:</td>
+         <td/>
+      </tr>
+      <tr
+         class="level2">
+         <td>Kan de revisie op basis van jouw beoordeling verkort worden afgewerkt?</td>
+         <td>Nee</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Toelichting</td>
+         <td>...</td>
+      </tr>
+      <tr
+         class="empty">
+         <td/>
+      </tr>
+      <tr
+         class="header">
+         <td>Leeftijd van management:</td>
+         <td/>
+      </tr>
+      <tr
+         class="level2">
+         <td>Naam manager 1</td>
+         <td>qwertyu</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Geboortedatum manager 1</td>
+         <td>01 januari 2016</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Leeftijd manager 1</td>
+         <td>0</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Naam manager 2</td>
+         <td>qewrtyu</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Geboortedatum manager 2</td>
+         <td>01 januari 2016</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Leeftijd manager 2</td>
+         <td>0</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Naam manager 3</td>
+         <td>qwertyu</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Geboortedatum manager 3</td>
+         <td>08 januari 2016</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Leeftijd manager 3</td>
+         <td>0</td>
+      </tr>
+      <tr
+         class="empty">
+         <td/>
+      </tr>
+      <tr
+         class="header">
+         <td>Medekredietnemers:</td>
+         <td/>
+      </tr>
+      <tr
+         class="level2">
+         <td>Relatienummer relatie 1</td>
+         <td>123456789</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Naam relatie 1</td>
+         <td>asdfghj</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Relatienummer relatie 2</td>
+         <td>123465</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Naam relatie 2</td>
+         <td>asdsgsdf</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Relatienummer relatie 3</td>
+         <td>...</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Naam relatie 3</td>
+         <td>...</td>
+      </tr>
+      <data
+            src="fes">
+         <columns number="1"
+               order="asc">
+            <highlight operator="Entered"
+            textcolor="#003d7d"/>
+         </columns>
+         <variables
+            depth="3" recursiveSkip="false"
+            var="Q_Map01"/>
+         <presentation
+            filterEmptyRows="false"
+            scale="/*/*/document/properties/ReportScaleDefault/text()"
+            showHeaderRow="false" showInvisibleVariables="false"
+            showMemoFieldsOnNewLine="true"
+               showSingleValueVariablesOnce="true">
+            <overrideStyle
+               old="level1empty">header</overrideStyle>
+            <overrideStyle
+               old="level0empty">remove</overrideStyle>
+            <overrideStyle
+               old="level1single">remove</overrideStyle>
+            <overrideStyle
+               old="level2single">level1</overrideStyle>
+            <overrideStyle
+      old="level3single">level2</overrideStyle>
+         </presentation>
+      </data>
+   </table>
+   <p/>
+   <newpage
+         name="normal">
+      <p id="watermark"
+      visible="./document/properties/isFinalReport/text()=0"/>
+   </newpage>
+   <section
+      class="section">Klant Performance</section>
+   <p>De velden gemarkeerd met ** zijn gebaseerd op EWS data van 01-11-2013</p>
+   <table
+         class="table7cols">
+      <tr
+         class="header0">
+         <td/>
+         <td>Rekening omzet</td>
+         <td>Limiet gebruik</td>
+      </tr>
+      <tr
+         class="header1">
+         <td/>
+         <td>Huidig jr</td>
+         <td>Vorig jr</td>
+         <td/>
+         <td>Huidig jr</td>
+         <td>Vorig jr</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>November 2013</td>
+         <td>10.356</td>
+         <td>12</td>
+         <td/>
+         <td>84 %</td>
+         <td>50 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Oktober 2013</td>
+         <td>16.527</td>
+         <td>13</td>
+         <td/>
+         <td>69 %</td>
+         <td>1.300 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>September 2013</td>
+         <td>34.356</td>
+         <td>14</td>
+         <td/>
+         <td>78 %</td>
+         <td>1.400 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Augustus 2013</td>
+         <td>21.455</td>
+         <td>15</td>
+         <td/>
+         <td>93 %</td>
+         <td>1.500 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Juli 2013</td>
+         <td>17.056</td>
+         <td>16</td>
+         <td/>
+         <td>98 %</td>
+         <td>1.600 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Juni 2013</td>
+         <td>12.237</td>
+         <td>17</td>
+         <td/>
+         <td>97 %</td>
+         <td>1.700 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Mei 2013</td>
+         <td>26.353</td>
+         <td>18</td>
+         <td/>
+         <td>95 %</td>
+         <td>1.800 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>April 2013</td>
+         <td>26.935</td>
+         <td>19</td>
+         <td/>
+         <td>92 %</td>
+         <td>1.900 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Maart 2013</td>
+         <td>17.783</td>
+         <td>20</td>
+         <td/>
+         <td>92 %</td>
+         <td>2.000 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Februari 2013</td>
+         <td>20.787</td>
+         <td>21</td>
+         <td/>
+         <td>95 %</td>
+         <td>2.100 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Januari 2013</td>
+         <td>9.149</td>
+         <td>22</td>
+         <td/>
+         <td>96 %</td>
+         <td>2.200 %</td>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>December 2012</td>
+         <td>19.244</td>
+         <td>23</td>
+         <td/>
+         <td>96 %</td>
+         <td>2.300 %</td>
+         <td/>
+      </tr>
+      <tr
+      class="normal">
+         <td> </td>
+         <td/>
+         <td/>
+         <td/>
+         <td/>
+         <td/>
+         <td/>
+      </tr>
+   </table>
+   <table
+         class="datatable">
+      <tr
+         class="level1">
+         <td>Datum van de gegevens</td>
+         <td>01 november 2013</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Totale omzet afgelopen 12 maanden **</td>
+         <td>232.237</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Gemiddelde omzet afgelopen 12 maanden **</td>
+         <td>19.353</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Totale omzet afgelopen 13-24 maanden **</td>
+         <td>210</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Gemiddelde omzet afgelopen 13-24 maanden **</td>
+         <td>18</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Huidige overstand</td>
+         <td>100</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Duur huidige overstand</td>
+         <td>1</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Totale overstand afgelopen half jaar **</td>
+         <td>0</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Is ING de enige bancair financier en enige bank voor betalingsverkeer?</td>
+         <td>Ja</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Is er volgens jou voldoende omzet over de ING rekening om het krediet te rechtvaardigen?</td>
+         <td>Ja</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Toelichting</td>
+         <td>Dit is een faketekst. Alles wat hier staat is slechts om een indruk te geven van het grafische effect van tekst op deze plek. Wat u hier leest is een voorbeeldtekst. Deze wordt later vervangen door de uiteindelijke tekst, die nu nog niet bekend is. De faketekst is dus een tekst die eigenlijk nergens over gaat. Het grappige is, dat mensen deze toch vaak lezen. Zelfs als men weet dat het om een faketekst gaat, lezen ze toch door.</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Actuele rating</td>
+         <td>SH14.1</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Rating 12 maanden geleden **</td>
+         <td>SH14,1</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>KOS-revisiedatum **</td>
+         <td>01 januari 2016</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Dekkingswaarde **</td>
+         <td>104.030</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Dekkingspercentage **</td>
+         <td>35 %</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Waarde BSK</td>
+         <td>1</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Toelichting op zekerheid</td>
+         <td>Dit is een faketekst. Alles wat hier staat is slechts om een indruk te geven van het grafische effect van tekst op deze plek. Wat u hier leest is een voorbeeldtekst. Deze wordt later vervangen door de uiteindelijke tekst, die nu nog niet bekend is. De faketekst is dus een tekst die eigenlijk nergens over gaat. Het grappige is, dat mensen deze toch vaak lezen. Zelfs als men weet dat het om een faketekst gaat, lezen ze toch door.</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Sluit het dekkingspercentage aan op het huidige risicoprofiel van de klant?</td>
+         <td>Nee</td>
+      </tr>
+      <tr
+         class="level1">
+         <td>Toelichting</td>
+         <td>Dit is een faketekst. Alles wat hier staat is slechts om een indruk te geven van het grafische effect van tekst op deze plek. Wat u hier leest is een voorbeeldtekst. Deze wordt later vervangen door de uiteindelijke tekst, die nu nog niet bekend is. De faketekst is dus een tekst die eigenlijk nergens over gaat. Het grappige is, dat mensen deze toch vaak lezen. Zelfs als men weet dat het om een faketekst gaat, lezen ze toch door.</td>
+      </tr>
+      <data
+            src="fes">
+         <columns number="1"
+               order="asc">
+            <highlight operator="Entered"
+            textcolor="#003d7d"/>
+         </columns>
+         <variables
+            depth="2" recursiveSkip="false" var="Q_Map02_Paragraaf1New"
+            varFrom="DatumEWS"/>
+         <presentation
+            filterEmptyRows="false"
+            scale="/*/*/document/properties/ReportScaleDefault/text()"
+            showHeaderRow="false" showInvisibleVariables="false"
+            showMemoFieldsOnNewLine="true"
+               showSingleValueVariablesOnce="true">
+            <overrideStyle
+               old="level1empty">header</overrideStyle>
+            <overrideStyle
+               old="level0empty">remove</overrideStyle>
+            <overrideStyle
+               old="level1single">level1</overrideStyle>
+            <overrideStyle
+               old="level2single">level2</overrideStyle>
+            <overrideStyle
+      old="level3single">remove</overrideStyle>
+         </presentation>
+      </data>
+   </table>
+   <table
+         class="datatable">
+      <tr
+         class="empty">
+         <td/>
+      </tr>
+      <tr
+         class="header">
+         <td>EWS-signalering:</td>
+         <td/>
+      </tr>
+      <tr
+         class="level2">
+         <td>EWS-risicocategorie **</td>
+         <td>rood</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>PD-score **</td>
+         <td>..</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Net exposure **</td>
+         <td>345.000</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Omzet was afgelopen 2 maanden 0</td>
+         <td>Ja</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Toelichting</td>
+         <td>...</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>5, Limietgebruik &gt; 70% en stijging van &gt; 10% tov voorgaande maand</td>
+         <td>Ja</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Toelichting</td>
+         <td>...</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>20, KOS-revisiedatum vervalt binnen 32 dagen</td>
+         <td>Ja</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Toelichting</td>
+         <td>...</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Gemiddelde omzet van de afgelopen 3 maanden / Gemiddelde omzet van dezelfde periode vorig jaar **</td>
+         <td>0,12</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Limietgebruik afgelopen maand **</td>
+         <td>87 %</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Gemiddeld aantal dagen in overstand van afgelopen 3 maanden / Gemiddeld aantal dagen in overstand van 4 en 5 maanden geleden **</td>
+         <td>2,34</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Ratinggetal **</td>
+         <td>14</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Zie je naast de EWS-signalen nog andere risicosignalen?</td>
+         <td>Nee</td>
+      </tr>
+      <tr
+         class="level2">
+         <td>Toelichting</td>
+         <td>Dit is een faketekst. Alles wat hier staat is slechts om een indruk te geven van het grafische effect van tekst op deze plek. Wat u hier leest is een voorbeeldtekst. Deze wordt later vervangen door de uiteindelijke tekst, die nu nog niet bekend is. De faketekst is dus een tekst die eigenlijk nergens over gaat. Het grappige is, dat mensen deze toch vaak lezen. Zelfs als men weet dat het om een faketekst gaat, lezen ze toch door.</td>
+      </tr>
+      <data
+            src="fes">
+         <columns number="1"
+               order="asc">
+            <highlight operator="Entered"
+            textcolor="#003d7d"/>
+         </columns>
+         <variables
+            depth="2" recursiveSkip="false" var="Q_Map02"
+            varFrom="Q_Map02_Paragraaf2New"/>
+         <presentation
+            filterEmptyRows="false"
+            scale="/*/*/document/properties/ReportScaleDefault/text()"
+            showHeaderRow="false" showInvisibleVariables="false"
+            showMemoFieldsOnNewLine="true"
+               showSingleValueVariablesOnce="true">
+            <overrideStyle
+               old="level1empty">header</overrideStyle>
+            <overrideStyle
+               old="level0empty">remove</overrideStyle>
+            <overrideStyle
+               old="level1single">remove</overrideStyle>
+            <overrideStyle
+               old="level2single">level1</overrideStyle>
+            <overrideStyle
+      old="level3single">level2</overrideStyle>
+         </presentation>
+      </data>
+   </table>
+   <newpage
+         name="normal">
+      <p id="watermark"
+      visible="./document/properties/isFinalReport/text()=0"/>
+   </newpage>
+   <section
+      class="section">Algemene analyse</section>
+   <newpage
+         name="normal">
+      <p id="watermark"
+      visible="./document/properties/isFinalReport/text()=0"/>
+   </newpage>
+   <section
+      class="section">Toekomst-perspectief</section>
+   <newpage
+         name="normal">
+      <p id="watermark"
+      visible="./document/properties/isFinalReport/text()=0"/>
+   </newpage>
+   <section
+      class="section">Financiële positie</section>
+   <newpage
+         name="normal">
+      <p id="watermark"
+      visible="./document/properties/isFinalReport/text()=0"/>
+   </newpage>
+   <section
+      class="section">Cashflow en ratio's</section>
+   <newpage
+         name="normal">
+      <p id="watermark"
+      visible="./document/properties/isFinalReport/text()=0"/>
+   </newpage>
+   <section
+      class="section">Geadviseerde revisieactie</section>
+   <newpage
+         name="normal">
+      <p id="watermark"
+      visible="./document/properties/isFinalReport/text()=0"/>
+   </newpage>
+   <section
+      class="section">Conclusie en aanbevelingen</section>
+   <newpage
+         name="normal">
+      <p id="watermark"
+      visible="./document/properties/isFinalReport/text()=0"/>
+   </newpage>
+   <section
+      class="section">Zekerheden</section>
+   <table
+         class="headertable">
+      <tr
+         class="header">
+         <td>Type</td>
+         <td>Maatschap</td>
+         <td>Dekkingswaarde</td>
+         <td>EUR 0</td>
+      </tr>
+      <tr
+         class="normal">
+         <td>Status</td>
+         <td>V</td>
+         <td>Waarde</td>
+         <td>EUR 0</td>
+      </tr>
+      <tr
+         class="lefttwocols">
+         <td>Beschrijving</td>
+         <td>BV een</td>
+      </tr>
+      <tr
+         class="middlethreecols_subtitle">
+         <td>Partijen</td>
+         <td>Relatienaam</td>
+         <td>Relatienummer</td>
+      </tr>
+      <tr
+         class="middlethreecols">
+         <td>Maat</td>
+         <td>Adler International CV</td>
+         <td>RAPC103188</td>
+      </tr>
+      <tr
+         class="middlethreecols">
+         <td>Gemachtigde</td>
+         <td>Adler International CV</td>
+         <td>RAPC103188</td>
+      </tr>
+      <tr
+         class="middlethreecols">
+         <td>Maatschap</td>
+         <td>BV een</td>
+         <td>RAPC103348</td>
+      </tr>
+      <tr
+         class="middlethreecols">
+         <td>Maat</td>
+         <td>BV de Haas</td>
+         <td>RAPC103210</td>
+      </tr>
+      <tr
+      class="empty">
+         <td> </td>
+      </tr>
+   </table>
+   <section
+      class="section">Bepalingen</section>
+   <table
+         class="headertable">
+      <tr
+         class="header">
+         <td>Type</td>
+         <td>Zekerheidgerelateerd</td>
+         <td>Status</td>
+         <td>N</td>
+      </tr>
+      <tr
+         class="lefttwocols">
+         <td>Soort</td>
+         <td>Niet essentieel</td>
+      </tr>
+      <tr
+         class="lefttwocols">
+         <td>Tekst</td>
+         <td>Gemaakt met QTP</td>
+      </tr>
+      <tr
+         class="lefttwocols">
+         <td>Toelichting</td>
+         <td>Gegenereerd met QTP</td>
+      </tr>
+      <tr
+      class="empty">
+         <td> </td>
+      </tr>
+   </table>
+   <section
+      class="section">Overeenkomsten</section>
+   <table
+         class="headertable">
+      <tr
+         class="header">
+         <td>Code</td>
+         <td>BSK4N</td>
+         <td>Kredietbedrag</td>
+         <td>EUR 40.000,00</td>
+      </tr>
+      <tr
+         class="normal">
+         <td>Commercial name</td>
+         <td>Borgstellingskrediet</td>
+         <td>Renteherzieningsdatum</td>
+         <td>01 juni 2013</td>
+      </tr>
+      <tr
+         class="subtitle">
+         <td>Rekeningnummers</td>
+         <td/>
+         <td/>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Rekeningnummer</td>
+         <td>0661458873</td>
+         <td>Soort rekening</td>
+         <td>PR</td>
+      </tr>
+      <tr
+         class="middlethreecols">
+         <td/>
+         <td/>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Rekeningnummer</td>
+         <td>0005711455</td>
+         <td>Soort rekening</td>
+         <td>WV</td>
+      </tr>
+      <tr
+         class="middlethreecols">
+         <td/>
+         <td/>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Rekeningnummer</td>
+         <td>0005711455</td>
+         <td>Soort rekening</td>
+         <td>WA</td>
+      </tr>
+      <tr
+         class="middlethreecols">
+         <td/>
+         <td/>
+         <td/>
+      </tr>
+      <tr
+         class="subtitle">
+         <td>Aflossingen</td>
+         <td/>
+         <td/>
+         <td/>
+      </tr>
+      <tr
+         class="normal">
+         <td>Aflossingswijze</td>
+         <td>Reguliere aflossing</td>
+         <td>Ingangsdatum aflossing</td>
+         <td>10 december 2012</td>
+      </tr>
+      <tr
+         class="normal">
+         <td>Grenslimiet</td>
+         <td>...0</td>
+         <td>Einddatum aflossing</td>
+         <td>..</td>
+      </tr>
+      <tr
+         class="normal">
+         <td>Aflossingsbedrag</td>
+         <td>EUR2.000,00</td>
+         <td>Aflossingsfrequentie</td>
+         <td>3MONTHS</td>
+      </tr>
+      <tr
+         class="middlethreecols">
+         <td/>
+         <td/>
+         <td/>
+      </tr>
+      <tr class="empty">
+         <td> </td>
+      </tr>
+   </table>
+</document>

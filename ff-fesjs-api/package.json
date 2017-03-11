@@ -1,0 +1,35 @@
+{
+  "name": "ff-fesjs-api",
+  "version": "0.0.1",
+  "description": "ff-fesjs-api",
+  "devDependencies": {
+    "d3": "^3.5.17",
+    "epilogue": "^0.6.5",
+    "esmangle": "^1.0.1",
+    "excel-formula": "^1.3.2",
+    "express": "^4.13.4",
+    "grunt": "^0.4.5",
+    "jsdom": "^8.1.0",
+    "json-stringify": "^1.0.0",
+    "jsonml-stringify": "^1.0.1",
+    "load-grunt-tasks": "^3.5.0",
+    "sequelize": "^3.19.3",
+    "tracer": "^0.8.7"
+  },
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "d3": "^3.5.8",
+    "escodegen": "^1.8.0",
+    "esprima": "^2.7.2",
+    "grun": "^0.2.0",
+    "grunt": "^0.4.5",
+    "grunt-json": "^0.1.5",
+    "moment": "^2.10.6",
+    "stack-adt": "^0.2.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Bakker",
+  "license": "MIT"
+}

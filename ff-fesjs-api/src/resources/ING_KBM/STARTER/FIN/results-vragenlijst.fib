@@ -1,0 +1,9 @@
+;
+; Results
+;
+
+10: "Vragenlijst is definitief gemaakt, maar nog niet alle vragen zijn gevuld."  ; "Zie bovenstaande opmerking voor het juist invullen"
+15: "Klant komt niet in aanmerking voor krediet."
+20: "Vragenlijst is definitief gemaakt, maar nog niet alle vragen zijn gevuld."
+25: "Klant moet ook manueel proces doorlopen."
+30: "Het resultaat uit de scorecard is positief."

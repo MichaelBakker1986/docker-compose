@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main"/>
+	<classpathentry excluding="main/" kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=triodos-web&amp;ivyXmlPath=ivy.xml&amp;confs=compile%2Cprovided&amp;acceptedTypes=jar%2Cbundle%2Cejb%2Cmaven-plugin%2Cwar&amp;alphaOrder=false&amp;resolveInWorkspace=true&amp;retrievedClasspath=false&amp;resolveBeforeLaunch=false&amp;useExtendedResolveId=false"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>

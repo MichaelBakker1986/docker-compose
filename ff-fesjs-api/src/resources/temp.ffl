@@ -1,0 +1,4934 @@
+import FinanMath.*;
+import BaseModel.*;
+
+model FAM  uses BaseModel
+{
+	version: "00.00.001.042";
+	root
+	{
+		variable RootSub1
+		{
+			datatype: none;
+			data_options: unscalable;
+			title: "General variables for webclient";
+			top_blanklines: 1;
+			visible: 0;
+			options_title: locked, invisible;
+			options_notrend: locked, invisible;
+			options_trend: locked, invisible;
+      variable FES_LAYOUTNR
+			{
+				datatype: number;
+				frequency: document;
+				formula:FES_EXCHANGE_RATES+FES_LAYOUT;
+				data_options: unscalable;
+				title: "Layout";
+				displaytype: select;
+				choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
+				top_blanklines: 1;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable FES_EXCHANGE_RATES
+			{
+				datatype: string;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "Exchange Rates";
+				top_separator: 1;
+				bottom_separator: 1;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_LAYOUT
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Layout name";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_FLATINPUT
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				title: "Is flat input used? (1=yes)";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_PROJECTION_PROFILE
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				title: "Projection Profile";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_COLUMN_ORDER
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				title: "Column order";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_COLUMN_VISIBLE
+			{
+				datatype: number;
+				aggregation: balance;
+				formula: 1;
+				data_options: unscalable;
+				title: "Column visible";
+				fixed_decimals: 0;
+				top_separator: 1;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_STARTDATEPERIOD
+			{
+				datatype: number;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "Start Date Period";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_ENDDATEPERIOD
+			{
+				datatype: number;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "End Date Period";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_BASECURRENCYPERIOD
+			{
+				datatype: number;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "Base Currency Period";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_VIEWCURRENCYPERIOD
+			{
+				datatype: number;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "View Currency Period";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_COLUMNTYPE
+			{
+				datatype: number;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "Column Type";
+				displaytype: select;
+				choices: "0:History|1:Projection";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+		}
+		variable RootSub2
+		{
+			datatype: none;
+			data_options: unscalable;
+			title: "General variables for FPS database";
+			visible: 0;
+			options_title: locked, invisible;
+			options_notrend: locked, invisible;
+			options_trend: locked, invisible;
+			variable FPS_VAR_Naam
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "NAME";
+				top_blanklines: 1;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Relatienummer
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "CUSTOMERNUMBER";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_KVKnr
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "CHAMBEROFCOMMERCENUMBER";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Rechtsvorm_nr
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "LEGALSTATUSCODE";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Rechtsvorm_omschr
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "LEGALSTATUSDESCRIPTION";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_BIK_CODE
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "SECTOROFINDUSTRYCODE";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_BIK_Omschr
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "SECTOROFINDUSTRYDESCRIPTION";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_GridId
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "GRIDID";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Accountmanager
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "ACCOUNTMANAGER";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Kantoor
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "OFFICENUMBER";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Straat
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "STREET";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Housenumber
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "HOUSENUMBER";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Postcode
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "ZIPCODE";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Woonplaats
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "CITY";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Provincie
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "STATEORPROVINCE";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Land
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "COUNTRY";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_BvDID
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Bureau van Dijk ID";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Telefoon
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Telefoonnummer";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Emailadres
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Emailadres";
+				visible: 1;
+				options_title: locked;
+				variable FPS_FINAN_USER_ROLES
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "FPS_FINAN_USER_ROLES";
+					top_blanklines: 1;
+					visible: 1;
+					options_title: locked;
+				}
+				variable FPS_FINAN_USER
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "FPS_FINAN_USER";
+					visible: 1;
+					options_title: locked;
+				}
+			}
+		}
+
+		variable Q_ROOT
+		{
+			datatype: number;
+			frequency: document;
+			formula: 1;
+			data_options: unscalable;
+			title: "FAM";
+			displaytype: select;
+			choices: "0:Incomplete.|1:Complete.";
+			hint: "Vul onderstaande vragen in.";
+			top_blanklines: 1;
+			locked: On;
+			visible: 1;
+			options_title: locked;
+			options_notrend: locked;
+			options_trend: locked;
+			variable Q_Group01
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Q_Group01";
+				displaytype: select;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable Q_Map01
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Type request";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map01_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 1";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable TypeRequest
+				{
+					datatype: number;
+					frequency: document;
+					title: "Type request";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable FacilityTarget
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map07));
+						data_options: unscalable;
+						title: "Financing target(s)";
+						displaytype: select;
+						choices: "1:Inventory and machines|2:Stock|3:Transport equipment|4:Real estate|5:Corporate takeover|6:Research and development|7:Growth and expansion|8:Debtors|9:Refinancing|10:Other";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FacilityTotalInvestment
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						title: "Total investment";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FacilityOwnResources
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						title: "Financing part using own resources";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FacilityDetailsLimit
+					{
+						datatype: number;
+						frequency: document;
+						formula: FacilityTotalInvestment-FacilityOwnResources;
+						inputRequired: True;
+						title: "Financing need";
+						displaytype: currency;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FacilityDetailsDuration
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (FacilityDetailsDuration));
+						data_options: unscalable;
+						title: "Specify your desired tenor in months";
+						fixed_decimals: 0;
+						visible: If(FacilityTarget==8,0,1);
+						options_title: locked;
+					}
+				}
+			}
+			variable Q_Map02
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Type organisation";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				hint: "In dit onderdeel van de financieringsaanvraag geeft u inzicht in de onderneming. U gaat hierbij in op de aard van de onderneming, de missie en strategie, de producten en diensten die zij levert en welke markten er worden bediend. Daarnaast geeft u inzicht in de organisatiestructuur, kansen, bedreigingen en sterke en zwakke punten van de onderneming.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map02_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 2";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable OrganisationType
+				{
+					datatype: number;
+					frequency: document;
+					title: "Type organisation";
+					displaytype: currency;
+					hint: "Please fill in the general information of the organisation which is applying for funding.";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationCOCNumber
+					{
+						datatype: string;
+						frequency: document;
+						formula: EvaluateAsString(FPS_VAR_KVKnr);
+						inputRequired: True;
+						data_options: unscalable;
+						title: "COC number";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationStarting
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Starting organisation?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationFoundationDate
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Date of founding";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationSector
+					{
+						datatype: string;
+						frequency: document;
+						formula:1;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Sector of industry/SBI code";
+						hint: "sbi_placeholder";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationSecondarySector
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						title: "Secondary sector of industry/SBI code";
+						hint: "sbi_placeholder";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationFTELastYear
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Number of FTE (last year)";
+						fixed_decimals: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationFoundatationLaw
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Founded under Dutch law?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationRevenueNetherlands
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "A minimum of 50% operational revenue realised in the Netherlands?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationMarketB2B
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Business to Business market?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationMarketB2C
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Business to Consumer market?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationDelivery
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Products and/or services will be paid after delivery";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+			}
+			variable Q_Map03
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Financial";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				hint: "In dit onderdeel van de financieringsaanvraag geeft u inzicht in de onderneming. U gaat hierbij in op de aard van de onderneming, de missie en strategie, de producten en diensten die zij levert en welke markten er worden bediend. Daarnaast geeft u inzicht in de organisatiestructuur, kansen, bedreigingen en sterke en zwakke punten van de onderneming.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map03_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 2";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Financials
+				{
+					datatype: number;
+					frequency: document;
+					title: "Financial";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable FinancialsTurnoverLastYear
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Turnover in the last financial year";
+						displaytype: currency;
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FinancialsEbitLastYear
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "EBIT in the last financial year";
+						displaytype: currency;
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FinancialsAccountsReceivablesTotal
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Total count of accounts receivables";
+						displaytype: currency;
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FinancialsAccountsReceivablesNumber
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Total number of accounts recivables";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FinancialsAccountsReceivablesAverage
+					{
+						datatype: number;
+						frequency: document;
+						formula: OnER(FinancialsAccountsReceivablesTotal / FinancialsAccountsReceivablesNumber, NA);
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Average of accounts receivables (per debtor)";
+						displaytype: currency;
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FinancialsForeignDebtors
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Share of foreign debtors";
+						displaytype: percentage;
+						fixed_decimals: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FinancialsAvarageValueInvoice
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Average value per invoice";
+						displaytype: currency;
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FinancialsMaximumAdvances
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Maximum advances of invoices in percentages";
+						displaytype: percentage;
+						fixed_decimals: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FinancialsMaximumAdvancesDays
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Maximum advances in days";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable FinancialsPositiveCashFlow
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Was there a positive cash flow the last two years?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+					variable FinancialsExistingPledgeRecourse
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Is there an existing pledge with recourse?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+					variable FinancialsIntercompanyTransactions
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Are there intercompany transactions?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+			}
+			variable Q_Map04
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Funding options";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				hint: "In dit onderdeel van de financieringsaanvraag geeft u inzicht in de onderneming. U gaat hierbij in op de aard van de onderneming, de missie en strategie, de producten en diensten die zij levert en welke markten er worden bediend. Daarnaast geeft u inzicht in de organisatiestructuur, kansen, bedreigingen en sterke en zwakke punten van de onderneming.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map04_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 2";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable ProductTypeTitel
+				{
+					datatype: number;
+					frequency: document;
+					title: "Product type";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable ProductType
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: True;
+						data_options: unscalable;
+						title: "Product type";
+						displaytype: select;
+						choices: "1:Multiple|2:Lening|3:RC|4:Lease|5:Factoring|6:Vastgoed Eigen gebruik|7:Commercieel vastgoed|8:Residentieel vastgoed";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+			}
+			variable Q_Group02
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				title: "Product request";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable Q_Map05
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "General data";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				hint: "In this stage of the financing application you will give information about yourself, and for which company financing is requested.";
+				locked: On;
+				visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","Algemene Gegevens",ProductType));
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map05_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 1";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable ClientDetails
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "Details applicant";
+					displaytype: currency;
+					hint: "Please fill in the details of the applicant.";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable ClientInitials
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Initials";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientLastName
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Last name";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientFunction
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Function";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientGender
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Gender";
+						displaytype: select;
+						choices: "0:Male|1:Female";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientDateOfBirth
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Date of birth";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientNationality
+					{
+						datatype: number;
+						frequency: document;
+						formula: 528.0;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Nationality";
+						displaytype: select;
+						choices: "4:Afghanistan|8:Albanië|10:Antarctica|12:Algerije|16:Amerikaans-Samoa|20:Andorra|24:Angola|28:Antigua en Barbuda|31:Azerbeidzjan|32:Argentinië|36:Australië|40:Oostenrijk|44:Bahamas|48:Bahrein|50:Bangladesh|51:Armenië|52:Barbados|56:België|60:Bermuda|64:Bhutan|68:Bolivia|70:Bosnië en Herzegovina|72:Botswana|74:Bouveteiland|76:Brazilië|84:Belize|86:Brits Indische Oceaanterritorium|90:Salomonseilanden|92:Britse Maagdeneilanden|96:Brunei|100:Bulgarije|104:Myanmar|108:Burundi|112:Wit-Rusland|116:Cambodja|120:Kameroen|124:Canada|132:Kaapverdië|136:Kaaimaneilanden|140:Centraal-Afrikaanse Republiek|144:Sri Lanka|148:Tsjaad|152:Chili|156:China|158:Taiwan|162:Christmaseiland|166:Cocoseilanden|170:Colombia|174:Comoren|175:Mayotte|178:Congo-Brazzaville|180:Congo-Kinshasa|184:Cookeilanden|188:Costa Rica|191:Kroatië|192:Cuba|196:Cyprus|203:Tsjechië|204:Benin|208:Denemarken|212:Dominica|214:Dominicaanse Republiek|218:Ecuador|222:El Salvador|226:Equatoriaal-Guinea|231:Ethiopië|232:Eritrea|233:Estland|234:Faeröer|238:Falklandeilanden|239:Zuid-Georgia en de Zuidelijke Sandwicheilanden|242:Fiji|246:Finland|248:Åland|250:Frankrijk|254:Frans-Guyana|258:Frans-Polynesië|260:Franse Zuidelijke en Antarctische Gebieden|262:Djibouti|266:Gabon|268:Georgië|270:Gambia|275:Palestina|276:Duitsland|288:Ghana|292:Gibraltar|296:Kiribati|300:Griekenland|304:Groenland|308:Grenada|312:Guadeloupe|316:Guam|320:Guatemala|324:Guinee|328:Guyana|332:Haïti|334:Heard en MacDonaldeilanden|336:Vaticaanstad|340:Honduras|344:Hongkong|348:Hongarije|352:IJsland|356:India|360:Indonesië|364:Iran|368:Irak|372:Ierland|376:Israël|380:Italië|384:Ivoorkust|388:Jamaica|392:Japan|398:Kazachstan|400:Jordanië|404:Kenia|408:Noord-Korea|410:Zuid-Korea|414:Koeweit|417:Kirgizië|418:Laos|422:Libanon|426:Lesotho|428:Letland|430:Liberia|434:Libië|438:Liechtenstein|440:Litouwen|442:Luxemburg|446:Macau|450:Madagaskar|454:Malawi|458:Maleisië|462:Maldiven|466:Mali|470:Malta|474:Martinique|478:Mauritanië|480:Mauritius|484:Mexico|492:Monaco|496:Mongolië|498:Moldavië|499:Montenegro|500:Montserrat|504:Marokko|508:Mozambique|512:Oman|516:Namibië|520:Nauru|524:Nepal|528:Nederland|531:Curaçao|533:Aruba|534:Sint Maarten|535:Bonaire, Sint Eustatius en Saba|540:Nieuw-Caledonië|548:Vanuatu|554:Nieuw-Zeeland|558:Nicaragua|562:Niger|566:Nigeria|570:Niue|574:Norfolk|578:Noorwegen|580:Noordelijke Marianen|581:Kleine Pacifische eilanden van de Verenigde Staten|583:Micronesia|584:Marshalleilanden|585:Palau|586:Pakistan|591:Panama|598:Papoea-Nieuw-Guinea|600:Paraguay|604:Peru|608:Filipijnen|612:Pitcairneilanden|616:Polen|620:Portugal|624:Guinee-Bissau|626:Oost-Timor|630:Puerto Rico|634:Qatar|638:Réunion|642:Roemenië|643:Rusland|646:Rwanda|652:Saint-Barthélemy|654:Sint-Helena, Ascension en Tristan da Cunha|659:Saint Kitts en Nevis|660:Anguilla|662:Saint Lucia|663:Sint-Maarten|666:Saint-Pierre en Miquelon|670:Saint Vincent en de Grenadines|674:San Marino|678:Sao Tomé en Principe|682:Saoedi-Arabië|686:Senegal|688:Servië|690:Seychellen|694:Sierra Leone|702:Singapore|703:Slowakije|704:Vietnam|705:Slovenië|706:Somalië|710:Zuid-Afrika|716:Zimbabwe|724:Spanje|728:Zuid-Soedan|729:Soedan|732:Westelijke Sahara|740:Suriname|744:Spitsbergen en Jan Mayen|748:Swaziland|752:Zweden|756:Zwitserland|760:Syrië|762:Tadzjikistan|764:Thailand|768:Togo|772:Tokelau|776:Tonga|780:Trinidad en Tobago|784:Verenigde Arabische Emiraten|788:Tunesië|792:Turkije|795:Turkmenistan|796:Turks- en Caicoseilanden|798:Tuvalu|800:Oeganda|804:Oekraïne|807:Macedonië|818:Egypte|826:Verenigd Koninkrijk|831:Guernsey|832:Jersey|833:Man|834:Tanzania|840:Verenigde Staten|850:Amerikaanse Maagdeneilanden|854:Burkina Faso|858:Uruguay|860:Oezbekistan|862:Venezuela|876:Wallis en Futuna|882:Samoa|887:Jemen|894:Zambia";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientStreet
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Street name";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientHouseNumber
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Housenumber";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientHouseNumberAddition
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						title: "Housenumber addition";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientZipCode
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Zip code";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientCity
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "City";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientCountry
+					{
+						datatype: number;
+						frequency: document;
+						formula: 528.0;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Country";
+						displaytype: select;
+						choices: "4:Afghanistan|8:Albanië|10:Antarctica|12:Algerije|16:Amerikaans-Samoa|20:Andorra|24:Angola|28:Antigua en Barbuda|31:Azerbeidzjan|32:Argentinië|36:Australië|40:Oostenrijk|44:Bahamas|48:Bahrein|50:Bangladesh|51:Armenië|52:Barbados|56:België|60:Bermuda|64:Bhutan|68:Bolivia|70:Bosnië en Herzegovina|72:Botswana|74:Bouveteiland|76:Brazilië|84:Belize|86:Brits Indische Oceaanterritorium|90:Salomonseilanden|92:Britse Maagdeneilanden|96:Brunei|100:Bulgarije|104:Myanmar|108:Burundi|112:Wit-Rusland|116:Cambodja|120:Kameroen|124:Canada|132:Kaapverdië|136:Kaaimaneilanden|140:Centraal-Afrikaanse Republiek|144:Sri Lanka|148:Tsjaad|152:Chili|156:China|158:Taiwan|162:Christmaseiland|166:Cocoseilanden|170:Colombia|174:Comoren|175:Mayotte|178:Congo-Brazzaville|180:Congo-Kinshasa|184:Cookeilanden|188:Costa Rica|191:Kroatië|192:Cuba|196:Cyprus|203:Tsjechië|204:Benin|208:Denemarken|212:Dominica|214:Dominicaanse Republiek|218:Ecuador|222:El Salvador|226:Equatoriaal-Guinea|231:Ethiopië|232:Eritrea|233:Estland|234:Faeröer|238:Falklandeilanden|239:Zuid-Georgia en de Zuidelijke Sandwicheilanden|242:Fiji|246:Finland|248:Åland|250:Frankrijk|254:Frans-Guyana|258:Frans-Polynesië|260:Franse Zuidelijke en Antarctische Gebieden|262:Djibouti|266:Gabon|268:Georgië|270:Gambia|275:Palestina|276:Duitsland|288:Ghana|292:Gibraltar|296:Kiribati|300:Griekenland|304:Groenland|308:Grenada|312:Guadeloupe|316:Guam|320:Guatemala|324:Guinee|328:Guyana|332:Haïti|334:Heard en MacDonaldeilanden|336:Vaticaanstad|340:Honduras|344:Hongkong|348:Hongarije|352:IJsland|356:India|360:Indonesië|364:Iran|368:Irak|372:Ierland|376:Israël|380:Italië|384:Ivoorkust|388:Jamaica|392:Japan|398:Kazachstan|400:Jordanië|404:Kenia|408:Noord-Korea|410:Zuid-Korea|414:Koeweit|417:Kirgizië|418:Laos|422:Libanon|426:Lesotho|428:Letland|430:Liberia|434:Libië|438:Liechtenstein|440:Litouwen|442:Luxemburg|446:Macau|450:Madagaskar|454:Malawi|458:Maleisië|462:Maldiven|466:Mali|470:Malta|474:Martinique|478:Mauritanië|480:Mauritius|484:Mexico|492:Monaco|496:Mongolië|498:Moldavië|499:Montenegro|500:Montserrat|504:Marokko|508:Mozambique|512:Oman|516:Namibië|520:Nauru|524:Nepal|528:Nederland|531:Curaçao|533:Aruba|534:Sint Maarten|535:Bonaire, Sint Eustatius en Saba|540:Nieuw-Caledonië|548:Vanuatu|554:Nieuw-Zeeland|558:Nicaragua|562:Niger|566:Nigeria|570:Niue|574:Norfolk|578:Noorwegen|580:Noordelijke Marianen|581:Kleine Pacifische eilanden van de Verenigde Staten|583:Micronesia|584:Marshalleilanden|585:Palau|586:Pakistan|591:Panama|598:Papoea-Nieuw-Guinea|600:Paraguay|604:Peru|608:Filipijnen|612:Pitcairneilanden|616:Polen|620:Portugal|624:Guinee-Bissau|626:Oost-Timor|630:Puerto Rico|634:Qatar|638:Réunion|642:Roemenië|643:Rusland|646:Rwanda|652:Saint-Barthélemy|654:Sint-Helena, Ascension en Tristan da Cunha|659:Saint Kitts en Nevis|660:Anguilla|662:Saint Lucia|663:Sint-Maarten|666:Saint-Pierre en Miquelon|670:Saint Vincent en de Grenadines|674:San Marino|678:Sao Tomé en Principe|682:Saoedi-Arabië|686:Senegal|688:Servië|690:Seychellen|694:Sierra Leone|702:Singapore|703:Slowakije|704:Vietnam|705:Slovenië|706:Somalië|710:Zuid-Afrika|716:Zimbabwe|724:Spanje|728:Zuid-Soedan|729:Soedan|732:Westelijke Sahara|740:Suriname|744:Spitsbergen en Jan Mayen|748:Swaziland|752:Zweden|756:Zwitserland|760:Syrië|762:Tadzjikistan|764:Thailand|768:Togo|772:Tokelau|776:Tonga|780:Trinidad en Tobago|784:Verenigde Arabische Emiraten|788:Tunesië|792:Turkije|795:Turkmenistan|796:Turks- en Caicoseilanden|798:Tuvalu|800:Oeganda|804:Oekraïne|807:Macedonië|818:Egypte|826:Verenigd Koninkrijk|831:Guernsey|832:Jersey|833:Man|834:Tanzania|840:Verenigde Staten|850:Amerikaanse Maagdeneilanden|854:Burkina Faso|858:Uruguay|860:Oezbekistan|862:Venezuela|876:Wallis en Futuna|882:Samoa|887:Jemen|894:Zambia";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientPhoneNumber
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Phone number";
+						visible: 1;
+						options_title: locked;
+					}
+					variable ClientEmailAddress
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Email address";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationDetails
+				{
+					datatype: number;
+					frequency: document;
+					title: "Details of the organisation";
+					displaytype: currency;
+					hint: "Please fill in the general information of the organisation which is applying for funding.";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationName
+					{
+						datatype: string;
+						frequency: document;
+						formula: EvaluateAsString(FPS_VAR_Naam);
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Name organisation";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationLegalForm
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Legal form";
+						displaytype: select;
+						choices: "choices|legal|form";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationDetailsSub3 refers to OrganisationCOCNumber
+					{
+						title: "COC number";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationCOCStatus
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "COC status";
+						displaytype: select;
+						choices: "0:Inactive|1:Active";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationBankruptcy
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Involved with bankruptcy?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationDetailsSub6 refers to OrganisationFoundationDate
+					{
+						title: "Date of founding";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationDetailsSub7 refers to OrganisationSector
+					{
+						title: "Sector of industry/SBI code";
+						hint: "sbi_placeholder";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable OrganisationStreet
+					{
+						datatype: string;
+						frequency: document;
+						formula: EvaluateAsString(FPS_VAR_Straat);
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Street name";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationHouseNumber
+					{
+						datatype: string;
+						frequency: document;
+						formula: EvaluateAsString(FPS_VAR_Housenumber);
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Housenumber";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationHouseNumberAddition
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						title: "Housenumber addition";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationZipCode
+					{
+						datatype: string;
+						frequency: document;
+						formula: EvaluateAsString(FPS_VAR_Postcode);
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Zip code";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationCity
+					{
+						datatype: string;
+						frequency: document;
+						formula: EvaluateAsString(FPS_VAR_Woonplaats);
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "City";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationCountry
+					{
+						datatype: number;
+						frequency: document;
+						formula: 528.0;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Country";
+						displaytype: select;
+						choices: "4:Afghanistan|8:Albanië|10:Antarctica|12:Algerije|16:Amerikaans-Samoa|20:Andorra|24:Angola|28:Antigua en Barbuda|31:Azerbeidzjan|32:Argentinië|36:Australië|40:Oostenrijk|44:Bahamas|48:Bahrein|50:Bangladesh|51:Armenië|52:Barbados|56:België|60:Bermuda|64:Bhutan|68:Bolivia|70:Bosnië en Herzegovina|72:Botswana|74:Bouveteiland|76:Brazilië|84:Belize|86:Brits Indische Oceaanterritorium|90:Salomonseilanden|92:Britse Maagdeneilanden|96:Brunei|100:Bulgarije|104:Myanmar|108:Burundi|112:Wit-Rusland|116:Cambodja|120:Kameroen|124:Canada|132:Kaapverdië|136:Kaaimaneilanden|140:Centraal-Afrikaanse Republiek|144:Sri Lanka|148:Tsjaad|152:Chili|156:China|158:Taiwan|162:Christmaseiland|166:Cocoseilanden|170:Colombia|174:Comoren|175:Mayotte|178:Congo-Brazzaville|180:Congo-Kinshasa|184:Cookeilanden|188:Costa Rica|191:Kroatië|192:Cuba|196:Cyprus|203:Tsjechië|204:Benin|208:Denemarken|212:Dominica|214:Dominicaanse Republiek|218:Ecuador|222:El Salvador|226:Equatoriaal-Guinea|231:Ethiopië|232:Eritrea|233:Estland|234:Faeröer|238:Falklandeilanden|239:Zuid-Georgia en de Zuidelijke Sandwicheilanden|242:Fiji|246:Finland|248:Åland|250:Frankrijk|254:Frans-Guyana|258:Frans-Polynesië|260:Franse Zuidelijke en Antarctische Gebieden|262:Djibouti|266:Gabon|268:Georgië|270:Gambia|275:Palestina|276:Duitsland|288:Ghana|292:Gibraltar|296:Kiribati|300:Griekenland|304:Groenland|308:Grenada|312:Guadeloupe|316:Guam|320:Guatemala|324:Guinee|328:Guyana|332:Haïti|334:Heard en MacDonaldeilanden|336:Vaticaanstad|340:Honduras|344:Hongkong|348:Hongarije|352:IJsland|356:India|360:Indonesië|364:Iran|368:Irak|372:Ierland|376:Israël|380:Italië|384:Ivoorkust|388:Jamaica|392:Japan|398:Kazachstan|400:Jordanië|404:Kenia|408:Noord-Korea|410:Zuid-Korea|414:Koeweit|417:Kirgizië|418:Laos|422:Libanon|426:Lesotho|428:Letland|430:Liberia|434:Libië|438:Liechtenstein|440:Litouwen|442:Luxemburg|446:Macau|450:Madagaskar|454:Malawi|458:Maleisië|462:Maldiven|466:Mali|470:Malta|474:Martinique|478:Mauritanië|480:Mauritius|484:Mexico|492:Monaco|496:Mongolië|498:Moldavië|499:Montenegro|500:Montserrat|504:Marokko|508:Mozambique|512:Oman|516:Namibië|520:Nauru|524:Nepal|528:Nederland|531:Curaçao|533:Aruba|534:Sint Maarten|535:Bonaire, Sint Eustatius en Saba|540:Nieuw-Caledonië|548:Vanuatu|554:Nieuw-Zeeland|558:Nicaragua|562:Niger|566:Nigeria|570:Niue|574:Norfolk|578:Noorwegen|580:Noordelijke Marianen|581:Kleine Pacifische eilanden van de Verenigde Staten|583:Micronesia|584:Marshalleilanden|585:Palau|586:Pakistan|591:Panama|598:Papoea-Nieuw-Guinea|600:Paraguay|604:Peru|608:Filipijnen|612:Pitcairneilanden|616:Polen|620:Portugal|624:Guinee-Bissau|626:Oost-Timor|630:Puerto Rico|634:Qatar|638:Réunion|642:Roemenië|643:Rusland|646:Rwanda|652:Saint-Barthélemy|654:Sint-Helena, Ascension en Tristan da Cunha|659:Saint Kitts en Nevis|660:Anguilla|662:Saint Lucia|663:Sint-Maarten|666:Saint-Pierre en Miquelon|670:Saint Vincent en de Grenadines|674:San Marino|678:Sao Tomé en Principe|682:Saoedi-Arabië|686:Senegal|688:Servië|690:Seychellen|694:Sierra Leone|702:Singapore|703:Slowakije|704:Vietnam|705:Slovenië|706:Somalië|710:Zuid-Afrika|716:Zimbabwe|724:Spanje|728:Zuid-Soedan|729:Soedan|732:Westelijke Sahara|740:Suriname|744:Spitsbergen en Jan Mayen|748:Swaziland|752:Zweden|756:Zwitserland|760:Syrië|762:Tadzjikistan|764:Thailand|768:Togo|772:Tokelau|776:Tonga|780:Trinidad en Tobago|784:Verenigde Arabische Emiraten|788:Tunesië|792:Turkije|795:Turkmenistan|796:Turks- en Caicoseilanden|798:Tuvalu|800:Oeganda|804:Oekraïne|807:Macedonië|818:Egypte|826:Verenigd Koninkrijk|831:Guernsey|832:Jersey|833:Man|834:Tanzania|840:Verenigde Staten|850:Amerikaanse Maagdeneilanden|854:Burkina Faso|858:Uruguay|860:Oezbekistan|862:Venezuela|876:Wallis en Futuna|882:Samoa|887:Jemen|894:Zambia";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationPhoneNumber
+					{
+						datatype: string;
+						frequency: document;
+						formula: EvaluateAsString(FPS_VAR_Telefoon);
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Phone number";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationEmailAddress
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Email address";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationWebsite
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Website";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable IntermediaryDetails
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "Details intermediary";
+					displaytype: currency;
+					hint: "Please fill in the details of the intermediary.";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable IntermediaryInitials
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Initials";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable IntermediaryName
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Last name";
+						visible: 1;
+						options_title: locked;
+					}
+					variable IntermediaryFunction
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Function";
+						visible: 1;
+						options_title: locked;
+					}
+					variable IntermediaryTitle
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						title: "Title";
+						visible: 1;
+						options_title: locked;
+					}
+					variable IntermediaryNameOrganisation
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Name organisation";
+						visible: 1;
+						options_title: locked;
+					}
+					variable IntermediaryCity
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "City";
+						visible: 1;
+						options_title: locked;
+					}
+					variable IntermediaryPhoneNumber
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Phone number";
+						visible: 1;
+						options_title: locked;
+					}
+					variable IntermediaryEmailAddress
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map05));
+						data_options: unscalable;
+						title: "Email address";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+			}
+			variable Q_Map06
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Profile of the organisation";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				hint: "In this stage of the financing application you will give insight of the organisation. You will focus on the nature of the undertaking business, the mission, vision, strategy, the products and services of the organisation and which markets the organisation serves. You will also give insights of the organisational structure, opportunities, threats, strengths and weaknesses of the organisation.";
+				locked: On;
+				visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","Profiel van de onderneming",ProductType));
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map06_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 06";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map06_INFO
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "$>Info bij stap 06<$";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map06_VALIDATION
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "$>Validatie stap 06<$";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Organisation
+				{
+					datatype: number;
+					frequency: document;
+					title: "The organisation";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationMissionVisionStrategy
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Mission, vision and strategy";
+						displaytype: memo;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationHistory
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "History";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationProductsAndServices
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "Products and/or Services";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationProductsServices
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Which products and/or services does the organisation deliver?";
+						displaytype: memo;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationRevenueModel
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the revenue model";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationUniqueness
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "What is the uniqueness of the products and/or services?";
+						displaytype: select;
+						choices: "0:High|1:Average|2:Low";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationUniquenessDescription
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the uniqueness";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationMarketPosition
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "Market position";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationMarketOperation
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "In which market does the organisation operate?";
+						displaytype: memo;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationNewMarket
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Does the organisation serve a new market?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationMarketDevelopment
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the expected market development";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationCompetition
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "Competition";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationCompetitivePositioning
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "How strong is the competitive positioning?";
+						displaytype: select;
+						choices: "0:Strong|1:Average|2:Weak";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationCompetitivePositioningDescription
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the competitive positioning";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationSesitivity
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "Sensitivity";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationEconomicFluctuations
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Is the organisation sensitive to economic fluctuations?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationEconomicFluctuationsDescription
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the sensitivity to economic fluctuations";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationSuppliersCustomers
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "Suppliers and customers";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationSuppliers
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "How dependent is the organisation from their suppliers?";
+						displaytype: select;
+						choices: "0:Dependent|1:Reasonable|2:Barely|3:Not dependent";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationSuppliersDescription
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the dependency of suppliers";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationCustomers
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "How dependent is the organisation from their customers?";
+						displaytype: select;
+						choices: "0:Dependent|1:Reasonable|2:Barely|3:Not dependent";
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationCustomersDescription
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the dependency of customers";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationSWOT
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "SWOT Analyse";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationStrengths
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Strengths";
+						displaytype: memo;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationWeaknesses
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Weaknesses";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationOpportunities
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Opportunities";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationThreats
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Threats";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationRiskProfile
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "Risk profile";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationRiskProfileDescription
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the organisations risk profile";
+						displaytype: memo;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationStructure
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "Organisation structure";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationLegalStructure
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the legal structure";
+						displaytype: memo;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationStakeholders
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the stakeholders";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationEmployees
+				{
+					datatype: number;
+					frequency: document;
+					data_options: unscalable, saveCalculatedValue;
+					title: "Employees";
+					fixed_decimals: 0;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationFTE
+					{
+						datatype: number;
+						frequency: document;
+						formula: OrganisationFTELastYear;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "How many FTE employees does the organisation have?";
+						fixed_decimals: 1;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable OrganisationAgeStructure
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the age structure of the employees";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationEducationLevel
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the level of education of the employees";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationManagement
+				{
+					datatype: number;
+					frequency: document;
+					data_options: saveCalculatedValue;
+					title: "Management";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationManagementComposition
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the composition of the management";
+						displaytype: memo;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationManagementQuality
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the quality of the management";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+					variable OrganisationManagementSupport
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description how the management is supported";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable OrganisationBoardMembers
+				{
+					datatype: number;
+					frequency: document;
+					title: "Board member(s)";
+					displaytype: currency;
+					hint: "Please give a description of the member(s) of the board";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					tuple OrganisationBoardMember
+					{
+						title: "Board member";
+						options_title: locked;
+						variable OrganisationBoardMemberInitials
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map06));
+							data_options: unscalable;
+							title: "Initials";
+							top_blanklines: 1;
+							options_title: locked;
+						}
+						variable OrganisationBoardMemberName
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map06));
+							data_options: unscalable;
+							title: "Name";
+							options_title: locked;
+						}
+						variable OrganisationBoardMemberDateOfBirth
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map06));
+							data_options: unscalable;
+							title: "Date of birth";
+							displaytype: date;
+							choices: "dd/MM/yyyy";
+							options_title: locked;
+						}
+						variable OrganisationBoardMemberFunction
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map06));
+							data_options: unscalable;
+							title: "Function";
+							options_title: locked;
+						}
+						variable OrganisationBoardMemberYearsOfService
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map06));
+							data_options: unscalable;
+							title: "Number of years of service";
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+						variable OrganisationBoardMemberEducation
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map06));
+							data_options: unscalable;
+							title: "Education";
+							displaytype: memo;
+							options_title: locked;
+						}
+						variable OrganisationBoardMemberTrackRecord
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map06));
+							data_options: unscalable;
+							title: "Track record";
+							displaytype: memo;
+							options_title: locked;
+						}
+					}
+				}
+				variable OrganisationSustainability
+				{
+					datatype: number;
+					frequency: document;
+					title: "Sustainability";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable OrganisationSustainabilityDescription
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map06));
+						data_options: unscalable;
+						title: "Please give a description of the sustainability in the organisation";
+						displaytype: memo;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map06_Hulpvariabelen
+				{
+					datatype: number;
+					frequency: document;
+					title: "$>Eigenschappen van de stap<$";
+					displaytype: currency;
+					locked: On;
+					visible: False;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map06_REQUIREDVARS
+					{
+						datatype: number;
+						frequency: document;
+						formula:1;
+						data_options: unscalable;
+						title: "$>Aantal verplichte velden<$";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: False;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map06_ENTEREDREQUIREDVARS
+					{
+						datatype: number;
+						frequency: document;
+						formula:1;
+						data_options: unscalable;
+						title: "$>Aantal ingevulde verplichte velden<$";
+						fixed_decimals: 0;
+						locked: On;
+						visible: False;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_Map07
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Financing need";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				hint: "Om de financieringsbehoefte in kaart te brengen maakt u eerst een prognose, vervolgens selecteert u een prognoseproject dat u mee wilt nemen in deze financieringsaanvraag. De gegevens worden automatisch overgenomen.";
+				locked: On;
+				visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","Financieringsbehoefte",ProductType));
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map07_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 3";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable FacilityNeed
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Financing need";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable FacilityNeedSub1 refers to FacilityTotalInvestment
+					{
+						title: "Total investment";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FacilityNeedSub2 refers to FacilityOwnResources
+					{
+						title: "Financing part using own resources";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FacilityNeedSub3 refers to FacilityDetailsLimit
+					{
+						title: "Financing need";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FacilityNeedSub4 refers to ProductType
+					{
+						title: "Product";
+						displaytype: select;
+						choices: "1:Multiple|2:Lening|3:RC|4:Lease|5:Factoring|6:Vastgoed Eigen gebruik|7:Commercieel vastgoed|8:Residentieel vastgoed";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FacilityDetailsStartDate
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map07));
+						data_options: unscalable;
+						title: "Select a start date";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						visible: 1;
+						options_title: locked;
+					}
+					variable FacilityNeedSub6 refers to FacilityDetailsDuration
+					{
+						title: "Specify your desired tenor in months";
+						fixed_decimals: 0;
+						locked: On;
+						visible: If(FacilityTarget==8,0,1);
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FacilityDetailsEndDate
+					{
+						datatype: number;
+						frequency: document;
+						formula: AddMonth(FacilityDetailsStartDate,FacilityDetailsDuration);
+						data_options: unscalable;
+						title: "Product tenor ends at";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable CapitalPartners
+					{
+						formula: 1;
+					}
+				}
+			}
+			variable Q_Map08
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Financial position";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				hint: "In dit onderdeel van de financieringsaanvraag geeft u inzicht in de onderneming. U gaat hierbij in op de aard van de onderneming, de missie en strategie, de producten en diensten die zij levert en welke markten er worden bediend. Daarnaast geeft u inzicht in de organisatiestructuur, kansen, bedreigingen en sterke en zwakke punten van de onderneming.";
+				locked: On;
+				visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","Financiele positie",ProductType));
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map08_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 8";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable BalanceSheetAssets refers to TotalAssets
+				{
+					title: EvaluateAsString(FirstUC("balance sheet")&" -"&FirstUC(" assets"));
+					top_separator: 1;
+					top_blanklines: 1;
+					visible: 1;
+					link: TotalAssets;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable +IntangibleFixedAssets
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: TotalGoodwill + TotalPatentsTrademarksAndOtherRights + TotalOtherIntangibleFixedAssets;
+						title: EvaluateAsString(FirstUC("immaterial fixed assets"));
+						displaytype: currency;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pTotalGoodwill refers to TotalGoodwill
+						{
+							title: EvaluateAsString(FirstUC("goodwill"));
+							top_blanklines: 1;
+							visible: 1;
+							link: TotalGoodwill;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTotalPatentsTrademarksAndOtherRights refers to TotalPatentsTrademarksAndOtherRights
+						{
+							title: EvaluateAsString(FirstUC("patents, trademarks and other rights"));
+							visible: 1;
+							link: TotalPatentsTrademarksAndOtherRights;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTotalOtherIntangibleFixedAssets refers to TotalOtherIntangibleFixedAssets
+						{
+							title: EvaluateAsString(FirstUC("other")&" "&"immaterial fixed assets");
+							visible: 1;
+							link: TotalOtherIntangibleFixedAssets;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable +IntangibleFixedAssetsSub4 refers to IntangibleFixedAssets
+						{
+							title: EvaluateAsString(FirstUC("immaterial fixed assets"));
+							top_separator: 1;
+							visible: 1;
+							link: IntangibleFixedAssetsSub4;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable +MaterialFixedAssets
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: TotalLandAndBuildings + TotalPlantAndEquipment + TotalFurnitureAndFixtures + TotalTransportationEquipment + TotalOtherMaterialFixedAssets;
+						title: EvaluateAsString(FirstUC("material fixed assets"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pTotalLandAndBuildings refers to TotalLandAndBuildings
+						{
+							title: EvaluateAsString(FirstUC("land and buildings"));
+							top_blanklines: 1;
+							visible: 1;
+							link: TotalLandAndBuildings;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTotalPlantAndEquipment refers to TotalPlantAndEquipment
+						{
+							title: EvaluateAsString(FirstUC("plant and equipment"));
+							visible: 1;
+							link: TotalPlantAndEquipment;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTotalFurnitureAndFixtures refers to TotalFurnitureAndFixtures
+						{
+							title: EvaluateAsString(FirstUC("furniture and fixtures"));
+							visible: 1;
+							link: TotalFurnitureAndFixtures;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTotalTransportationEquipment refers to TotalTransportationEquipment
+						{
+							title: EvaluateAsString(FirstUC("transportation equipment"));
+							visible: 1;
+							link: TotalTransportationEquipment;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTotalOtherMaterialFixedAssets refers to TotalOtherMaterialFixedAssets
+						{
+							title: EvaluateAsString(FirstUC("other")&" "&"material fixed assets");
+							visible: 1;
+							link: TotalOtherMaterialFixedAssets;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable +MaterialFixedAssetsSub6 refers to MaterialFixedAssets
+						{
+							title: EvaluateAsString(FirstUC("material fixed assets"));
+							top_separator: 1;
+							visible: 1;
+							link: MaterialFixedAssetsSub6;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable +FinancialFixedAssets
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: TotalInvestmentInSubsidiaries + TotalLoansToSubsidiaries + TotalLoansToAffiliatedCompanies + TotalOtherSecurities +TotalOtherFinancialFixedAssets;
+						title: EvaluateAsString(FirstUC("financial fixed assets"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pTotalInvestmentInSubsidiaries refers to TotalInvestmentInSubsidiaries
+						{
+							title: EvaluateAsString(FirstUC("investments in subsidiaries"));
+							top_blanklines: 1;
+							visible: 1;
+							link: TotalInvestmentInSubsidiaries;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTotalLoansToSubsidiaries refers to TotalLoansToSubsidiaries
+						{
+							title: EvaluateAsString(FirstUC("loans to subsidiaries"));
+							visible: 1;
+							link: TotalLoansToSubsidiaries;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTotalLoansToAffiliatedCompanies refers to TotalLoansToAffiliatedCompanies
+						{
+							title: EvaluateAsString(FirstUC("loans to affiliated companies"));
+							visible: 1;
+							link: TotalLoansToAffiliatedCompanies;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTotalOtherSecurities refers to TotalOtherSecurities
+						{
+							title: EvaluateAsString(FirstUC("other")&" "&"securities");
+							visible: 1;
+							link: TotalOtherSecurities;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTotalOtherFinancialFixedAssets refers to TotalOtherFinancialFixedAssets
+						{
+							title: EvaluateAsString(FirstUC("other")&" "&"financial fixed assets");
+							visible: 1;
+							link: TotalOtherFinancialFixedAssets;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable +FinancialFixedAssetsSub6 refers to FinancialFixedAssets
+						{
+							title: EvaluateAsString(FirstUC("financial fixed assets"));
+							top_separator: 1;
+							visible: 1;
+							link: FinancialFixedAssetsSub6;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable +Inventories
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ProjectsInProgress + MerchandiseInventory - ProvisionObsoleteInventories + MaterialsInventory + WorkInProgress - CorrectionWorkInProgress +InventoryFinishedProducts;
+						title: EvaluateAsString(FirstUC("inventories"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pProjectsInProgress refers to ProjectsInProgress
+						{
+							title: EvaluateAsString(FirstUC("projects in progress"));
+							top_blanklines: 1;
+							visible: 1;
+							link: ProjectsInProgress;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pMerchandiseInventory refers to MerchandiseInventory
+						{
+							title: EvaluateAsString(FirstUC("merchandise inventory"));
+							visible: 1;
+							link: MerchandiseInventory;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pProvisionObsoleteInventories refers to ProvisionObsoleteInventories
+						{
+							title: EvaluateAsString(FirstUC("provision obsolete inventories"));
+							visible: 1;
+							link: ProvisionObsoleteInventories;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pMaterialsInventory refers to MaterialsInventory
+						{
+							title: EvaluateAsString(FirstUC("materials inventory"));
+							visible: 1;
+							link: MaterialsInventory;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pWorkInProgress refers to WorkInProgress
+						{
+							title: EvaluateAsString(FirstUC("work in progress"));
+							visible: 1;
+							link: WorkInProgress;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pCorrectionWorkInProgress refers to CorrectionWorkInProgress
+						{
+							title: EvaluateAsString(FirstUC("correction work in progress"));
+							visible: 1;
+							link: CorrectionWorkInProgress;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pInventoryFinishedProducts refers to InventoryFinishedProducts
+						{
+							title: EvaluateAsString(FirstUC("finished products inventory"));
+							visible: 1;
+							link: InventoryFinishedProducts;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable +InventoriesSub8 refers to Inventories
+						{
+							title: EvaluateAsString(FirstUC("inventories"));
+							top_separator: 1;
+							visible: 1;
+							link: InventoriesSub8;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable +Receivables
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: TradeReceivablesTotal - ProvisionDoubtfulAccountsReceivable + OtherAccountsReceivable + ReceivablesGroupCompanies +ReceivablesAffiliatedCompanies + TaxOnProfitsReceivable + VATReceivable + OtherReceivables + CostOfSalesAdvancePayments + AdvancePaymentsExpenses +DivestmentReceivables + ProductSalesAccruedTotalAssets + OtherTransitionalAssets;
+						title: EvaluateAsString(FirstUC("receivables"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pTradeReceivablesTotal refers to TradeReceivablesTotal
+						{
+							title: EvaluateAsString(FirstUC("trade receivables"));
+							top_blanklines: 1;
+							visible: 1;
+							link: TradeReceivablesTotal;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pProvisionDoubtfulAccountsReceivable refers to ProvisionDoubtfulAccountsReceivable
+						{
+							title: EvaluateAsString(FirstUC("provision doubtful account receivable"));
+							visible: 1;
+							link: ProvisionDoubtfulAccountsReceivable;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOtherAccountsReceivable refers to OtherAccountsReceivable
+						{
+							title: EvaluateAsString(FirstUC("other"&" "&"accounts receivable"));
+							visible: 1;
+							link: OtherAccountsReceivable;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pReceivablesGroupCompanies refers to ReceivablesGroupCompanies
+						{
+							title: EvaluateAsString(FirstUC("receivables group companies"));
+							visible: 1;
+							link: ReceivablesGroupCompanies;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pReceivablesAffiliatedCompanies refers to ReceivablesAffiliatedCompanies
+						{
+							title: EvaluateAsString(FirstUC("receivables affiliated companies"));
+							visible: 1;
+							link: ReceivablesAffiliatedCompanies;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTaxOnProfitsReceivable refers to TaxOnProfitsReceivable
+						{
+							title: EvaluateAsString(FirstUC("tax on profits receivable"));
+							visible: 1;
+							link: TaxOnProfitsReceivable;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pVATReceivable refers to VATReceivable
+						{
+							title: EvaluateAsString(FirstUC("VAT Receivable"));
+							visible: 1;
+							link: VATReceivable;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOtherReceivables refers to OtherReceivables
+						{
+							title: EvaluateAsString(FirstUC("other")&" "&"receivables");
+							visible: 1;
+							link: OtherReceivables;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pCostOfSalesAdvancePayments refers to CostOfSalesAdvancePayments
+						{
+							title: EvaluateAsString(FirstUC("cost of sales advance payments"));
+							visible: 1;
+							link: CostOfSalesAdvancePayments;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pAdvancePaymentsExpenses refers to AdvancePaymentsExpenses
+						{
+							title: EvaluateAsString(FirstUC("expenses advance payments"));
+							visible: 1;
+							link: AdvancePaymentsExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pDivestmentReceivables refers to DivestmentReceivables
+						{
+							title: EvaluateAsString(FirstUC("divestments receivables"));
+							visible: 1;
+							link: DivestmentReceivables;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pProductSalesAccruedTotalAssets refers to ProductSalesAccruedTotalAssets
+						{
+							title: EvaluateAsString(FirstUC("accrued product sales"));
+							visible: 1;
+							link: ProductSalesAccruedTotalAssets;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOtherTransitionalAssets refers to OtherTransitionalAssets
+						{
+							title: EvaluateAsString(FirstUC("other")&" "&"transitional assets");
+							visible: 1;
+							link: OtherTransitionalAssets;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable +ReceivablesSub13 refers to Receivables
+						{
+							title: EvaluateAsString(FirstUC("receivables"));
+							top_separator: 1;
+							visible: 1;
+							link: ReceivablesSub13;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable +CashAndEquivalents
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: MarketableSecurities + ExcessCash + OperationalCashTotal;
+						title: EvaluateAsString(FirstUC("cash and equivalents"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pMarketableSecurities refers to MarketableSecurities
+						{
+							title: EvaluateAsString(FirstUC("marketable securities"));
+							top_blanklines: 1;
+							visible: 1;
+							link: MarketableSecurities;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable p2ExcessCash refers to ExcessCash
+						{
+							title: EvaluateAsString(FirstUC("excess cash"));
+							visible: 1;
+							link: ExcessCash;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOperationalCashTotal refers to OperationalCashTotal
+						{
+							title: EvaluateAsString(FirstUC("operational cash"));
+							visible: 1;
+							link: OperationalCashTotal;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable +CashAndEquivalentsSub4 refers to CashAndEquivalents
+						{
+							title: EvaluateAsString(FirstUC("cash and equivalents"));
+							top_separator: 1;
+							visible: 1;
+							link: CashAndEquivalentsSub4;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable =TotalAssets
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: IntangibleFixedAssets+MaterialFixedAssets+FinancialFixedAssets+Inventories+Receivables+CashAndEquivalents;
+						title: EvaluateAsString(FirstUC("total assets"));
+						displaytype: currency;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable BalanceSheetEquityAndLiabilities refers to TotalEquityAndLiabilities
+				{
+					title: EvaluateAsString(FirstUC("balance sheet")&" - "&FirstUC("equity and liabilities"));
+					bottom_separator: 1;
+					top_blanklines: 1;
+					visible: 1;
+					link: TotalEquityAndLiabilities;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable +NetWorth
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: CapitalPartners + CapitalPartnersUndistributedProfit + SharedCapital + SharePremium + StatutoryReserve + ReservedProfit + RevaluationReserve +OtherReserve + CurrentYearResult + MinorityInterests;
+						title: EvaluateAsString(FirstUC("net worth"));
+						displaytype: currency;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pCapitalPartners refers to CapitalPartners
+						{
+							title: EvaluateAsString(FirstUC("capital partners"));
+							top_blanklines: 1;
+							visible: 1;
+							link: CapitalPartners;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pCapitalPartnersUndistributedProfit refers to CapitalPartnersUndistributedProfit
+						{
+							title: EvaluateAsString(FirstUC("undistributed profit"));
+							visible: 1;
+							link: CapitalPartnersUndistributedProfit;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable SharedCapital
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: SharedCapitalPreferenceShares + SharedCapitalOrdinaryShares - TreasuryShares;
+							title: EvaluateAsString(FirstUC("shared capital"));
+							displaytype: currency;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+							variable pSharedCapitalPreferenceShares refers to SharedCapitalPreferenceShares
+							{
+								title: EvaluateAsString(FirstUC("preference shares"));
+								top_blanklines: 1;
+								visible: 1;
+								link: SharedCapitalPreferenceShares;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable pSharedCapitalOrdinaryShares refers to SharedCapitalOrdinaryShares
+							{
+								title: EvaluateAsString(FirstUC("ordinary shares"));
+								visible: 1;
+								link: SharedCapitalOrdinaryShares;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable pTreasuryShares refers to TreasuryShares
+							{
+								title: EvaluateAsString(FirstUC("treasury shares"));
+								visible: 1;
+								link: TreasuryShares;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable SharedCapitalSub4 refers to SharedCapital
+							{
+								title: EvaluateAsString(FirstUC("shared capital"));
+								top_separator: 1;
+								visible: 1;
+								link: SharedCapitalSub4;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+						variable pSharePremium refers to SharePremium
+						{
+							title: EvaluateAsString(FirstUC("share premium"));
+							visible: 1;
+							link: SharePremium;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pStatutoryReserve refers to StatutoryReserve
+						{
+							title: EvaluateAsString(FirstUC("statutory reserve"));
+							visible: 1;
+							link: StatutoryReserve;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pReservedProfit refers to ReservedProfit
+						{
+							title: EvaluateAsString(FirstUC("reserved profit"));
+							visible: 1;
+							link: ReservedProfit;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pRevaluationReserve refers to RevaluationReserve
+						{
+							title: EvaluateAsString(FirstUC("revaluation reserve"));
+							visible: 1;
+							link: RevaluationReserve;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOtherReserve refers to OtherReserve
+						{
+							title: EvaluateAsString(FirstUC("other")&" "&"reserve");
+							visible: 1;
+							link: OtherReserve;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pCurrentYearResult refers to CurrentYearResult
+						{
+							title: EvaluateAsString(FirstUC("result of the current year"));
+							visible: 1;
+							link: CurrentYearResult;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pMinorityInterests refers to MinorityInterests
+						{
+							title: EvaluateAsString(FirstUC("minority interests"));
+							visible: 1;
+							link: MinorityInterests;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable +NetWorthSub10 refers to NetWorth
+						{
+							title: EvaluateAsString(FirstUC("net worth"));
+							top_separator: 1;
+							visible: 1;
+							link: NetWorthSub10;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable +Provisions
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: PensionProvisions + StandingRight + OtherProvisions + DeferredTaxes + ProvisionForReorganisation;
+						title: EvaluateAsString(FirstUC("provisions"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pPensionProvisions refers to PensionProvisions
+						{
+							title: EvaluateAsString(FirstUC("pension provisions"));
+							top_blanklines: 1;
+							visible: 1;
+							link: PensionProvisions;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pStandingRight refers to StandingRight
+						{
+							title: EvaluateAsString(FirstUC("standing right"));
+							visible: 1;
+							link: StandingRight;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOtherProvisions refers to OtherProvisions
+						{
+							title: EvaluateAsString(FirstUC("other"&" "&"provisions"));
+							visible: 1;
+							link: OtherProvisions;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pDeferredTaxes refers to DeferredTaxes
+						{
+							title: EvaluateAsString(FirstUC("deferred taxes"));
+							visible: 1;
+							link: DeferredTaxes;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pProvisionForReorganisation refers to ProvisionForReorganisation
+						{
+							title: EvaluateAsString(FirstUC("reorganisation provisions"));
+							visible: 1;
+							link: ProvisionForReorganisation;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable +ProvisionsSub6 refers to Provisions
+						{
+							title: EvaluateAsString(FirstUC("provisions"));
+							top_separator: 1;
+							visible: 1;
+							link: ProvisionsSub6;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable +NonCurrentLiabilities
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: SubordinatedDebts + LongTermDebts + LongTermDebtsOther + LongTermDebtsOtherCat2 + LongTermDebtsOtherCat3 + LongTermDebtsOtherCat4 + LongTermDebtsAnnuity;
+						title: EvaluateAsString(FirstUC("non current liabilities"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pSubordinatedDebts refers to SubordinatedDebts
+						{
+							title: EvaluateAsString(FirstUC("subordinated debts"));
+							top_blanklines: 1;
+							visible: 1;
+							link: SubordinatedDebts;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pLongTermDebts refers to LongTermDebts
+						{
+							title: EvaluateAsString(FirstUC("long term debts"));
+							visible: 1;
+							link: LongTermDebts;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pLongTermDebtsOther refers to LongTermDebtsOther
+						{
+							title: EvaluateAsString(FirstUC("other long term debts"));
+							visible: 1;
+							link: LongTermDebtsOther;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pLongTermDebtsOther2 refers to LongTermDebtsOtherCat2
+						{
+							title: EvaluateAsString(FirstUC("other long term debts")&" "&"category"&" 2");
+							visible: 1;
+							link: LongTermDebtsOtherCat2;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pLongTermDebtsOther3 refers to LongTermDebtsOtherCat3
+						{
+							title: EvaluateAsString(FirstUC("other long term debts")&" "&"category"&" 3");
+							visible: 1;
+							link: LongTermDebtsOtherCat3;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pLongTermDebtsOther4 refers to LongTermDebtsOtherCat4
+						{
+							title: EvaluateAsString(FirstUC("other long term debts")&" "&"category"&" 4");
+							visible: 1;
+							link: LongTermDebtsOtherCat4;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pLongTermDebtsAnnuity refers to LongTermDebtsAnnuity
+						{
+							title: EvaluateAsString(FirstUC("other long term debts annuity"));
+							visible: 1;
+							link: LongTermDebtsAnnuity;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable +NonCurrentLiabilitiesSub5 refers to NonCurrentLiabilities
+						{
+							title: EvaluateAsString(FirstUC("non current liabilities"));
+							top_separator: 1;
+							visible: 1;
+							link: NonCurrentLiabilitiesSub5;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable CurrentLiabilities
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: STPartOfLTDebts + OverdraftCurrentAccount + OtherShortTermDebt + TradePayablesTotal + AccountsPayableExpenses + AccountsPayableInvestments +DividendPayable + CurrentAccountGroupCompanies + CurrentAccountAffiliatedCompanies + ReceivedPrePaymentsTotal + TaxesAndSocialSecurityCharges +PensionExpensesPayable + InterestAndRepaymentsPayable + TransitionalLiabilities;
+						title: EvaluateAsString(FirstUC("current liabilities"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pSTPartOfLTDebts refers to STPartOfLTDebts
+						{
+							title: EvaluateAsString(FirstUC("short term part of long term debts"));
+							top_blanklines: 1;
+							visible: 1;
+							link: STPartOfLTDebts;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOverdraftCurrentAccount refers to OverdraftCurrentAccount
+						{
+							title: EvaluateAsString(FirstUC("overdraft current account"));
+							visible: 1;
+							link: OverdraftCurrentAccount;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOtherShortTermDebt refers to OtherShortTermDebt
+						{
+							title: EvaluateAsString(FirstUC("other")&" "&"short term debt");
+							visible: 1;
+							link: OtherShortTermDebt;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTradePayablesTotal refers to TradePayablesTotal
+						{
+							title: EvaluateAsString(FirstUC("trade payables"));
+							visible: 1;
+							link: TradePayablesTotal;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pAccountsPayableExpenses refers to AccountsPayableExpenses
+						{
+							title: EvaluateAsString(FirstUC("expenses payables"));
+							visible: 1;
+							link: AccountsPayableExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pAccountsPayableInvestments refers to AccountsPayableInvestments
+						{
+							title: EvaluateAsString(FirstUC("investments payables"));
+							visible: 1;
+							link: AccountsPayableInvestments;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pDividendPayable refers to DividendPayable
+						{
+							title: EvaluateAsString(FirstUC("dividend payable"));
+							visible: 1;
+							link: DividendPayable;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pCurrentAccountGroupCompanies refers to CurrentAccountGroupCompanies
+						{
+							title: EvaluateAsString(FirstUC("current account group companies"));
+							visible: 1;
+							link: CurrentAccountGroupCompanies;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pCurrentAccountAffiliatedCompanies refers to CurrentAccountAffiliatedCompanies
+						{
+							title: EvaluateAsString(FirstUC("current account affiliated companies"));
+							visible: 1;
+							link: CurrentAccountAffiliatedCompanies;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pReceivedPrePaymentsTotal refers to ReceivedPrePaymentsTotal
+						{
+							title: EvaluateAsString(FirstUC("received prepayments"));
+							visible: 1;
+							link: ReceivedPrePaymentsTotal;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTaxesAndSocialSecurityCharges refers to TaxesAndSocialSecurityCharges
+						{
+							title: EvaluateAsString(FirstUC("taxes and social security charges"));
+							visible: 1;
+							link: TaxesAndSocialSecurityCharges;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pPensionExpensesPayable refers to PensionExpensesPayable
+						{
+							title: EvaluateAsString(FirstUC("pension expenses payable"));
+							visible: 1;
+							link: PensionExpensesPayable;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pInterestAndRepaymentsPayable refers to InterestAndRepaymentsPayable
+						{
+							title: EvaluateAsString(FirstUC("interest and repayments payable"));
+							visible: 1;
+							link: InterestAndRepaymentsPayable;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTransitionalLiabilities refers to TransitionalLiabilities
+						{
+							title: EvaluateAsString(FirstUC("transitional liabilities"));
+							visible: 1;
+							link: TransitionalLiabilities;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable CurrentLiabilitiesSub14 refers to CurrentLiabilities
+						{
+							title: EvaluateAsString(FirstUC("current liabilities"));
+							top_separator: 1;
+							visible: 1;
+							link: CurrentLiabilitiesSub14;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable +PCapitalShortfall refers to CapitalShortfall
+					{
+						title: EvaluateAsString(FirstUC("capital shortfall"));
+						visible: 1;
+						link: CapitalShortfall;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable =TotalEquityAndLiabilities
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: NetWorth+Provisions+NonCurrentLiabilities+CurrentLiabilities+CapitalShortfall;
+						title: EvaluateAsString(FirstUC("total equity and liabilities"));
+						displaytype: currency;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable BalanceSheetDescription
+				{
+					datatype: string;
+					frequency: document;
+					inputRequired: (Visible (Q_Map08));
+					data_options: unscalable;
+					title: EvaluateAsString(FirstUC("description"));
+					displaytype: memo;
+					top_blanklines: 1;
+					visible: 1;
+					options_title: locked;
+				}
+				variable IncomeStatement refers to ProfitAfterTax
+				{
+					title: EvaluateAsString(FirstUC("profit and loss account"));
+					top_separator: 1;
+					top_blanklines: 1;
+					visible: 1;
+					link: ProfitAfterTax;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable +pNetSales refers to NetSales
+					{
+						title: EvaluateAsString(FirstUC("net sales"));
+						top_blanklines: 1;
+						visible: 1;
+						link: NetSales;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable +pChangeInInventories refers to ChangeInInventories
+					{
+						title: EvaluateAsString(FirstUC("change in inventories"));
+						visible: 1;
+						link: ChangeInInventories;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable -CostOfSales
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: TradeCostOfSales + CostOfMaterials - PurchaseDiscountsAndBonuses + CarriageAndForwardingCharges + OtherCostOfSales + ContractedOutPurchase;
+						title: EvaluateAsString(FirstUC("cost of sales"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pTradeCostOfSales refers to TradeCostOfSales
+						{
+							title: EvaluateAsString(FirstUC("trade cost of sales"));
+							top_blanklines: 1;
+							visible: 1;
+							link: TradeCostOfSales;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pCostOfMaterials refers to CostOfMaterials
+						{
+							title: EvaluateAsString(FirstUC("cost of materials"));
+							visible: 1;
+							link: CostOfMaterials;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pPurchaseDiscountsAndBonuses refers to PurchaseDiscountsAndBonuses
+						{
+							title: EvaluateAsString(FirstUC("purchase discounts and bonuses"));
+							visible: 1;
+							link: PurchaseDiscountsAndBonuses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pCarriageAndForwardingCharges refers to CarriageAndForwardingCharges
+						{
+							title: EvaluateAsString(FirstUC("carriage and forwarding charges"));
+							visible: 1;
+							link: CarriageAndForwardingCharges;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOtherCostOfSales refers to OtherCostOfSales
+						{
+							title: EvaluateAsString(FirstUC("other cost of sales"));
+							visible: 1;
+							link: OtherCostOfSales;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pContractedOutPurchase refers to ContractedOutPurchase
+						{
+							title: EvaluateAsString(FirstUC("contracted out purchase"));
+							visible: 1;
+							link: ContractedOutPurchase;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable -CostOfSalesSub7 refers to CostOfSales
+						{
+							title: EvaluateAsString(FirstUC("cost of sales"));
+							top_separator: 1;
+							visible: 1;
+							link: CostOfSalesSub7;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable +pOtherOperatingIncome refers to OtherOperatingIncome
+					{
+						title: EvaluateAsString(FirstUC("other operating income"));
+						visible: 1;
+						link: OtherOperatingIncome;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable -OperatingExpenses
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: ContractedOut + PersonnelExpenses + ProductionExpenses + FurnitureAndFixtureExpenses + OfficeExpenses + TransportationExpenses +SellingExpenses + MonitoringAndControlExpenses + OtherOperatingExpenses;
+						title: EvaluateAsString(FirstUC("operating expenses"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pContractedOut refers to ContractedOut
+						{
+							title: EvaluateAsString(FirstUC("contracted out"));
+							top_blanklines: 1;
+							visible: 1;
+							link: ContractedOut;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pPersonnelExpenses refers to PersonnelExpenses
+						{
+							title: EvaluateAsString(FirstUC("personnel expenses"));
+							visible: 1;
+							link: PersonnelExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pProductionExpenses refers to ProductionExpenses
+						{
+							title: EvaluateAsString(FirstUC("production expenses"));
+							visible: 1;
+							link: ProductionExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pFurnitureAndFixtureExpenses refers to FurnitureAndFixtureExpenses
+						{
+							title: EvaluateAsString(FirstUC("furniture and fixture expenses"));
+							visible: 1;
+							link: FurnitureAndFixtureExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOfficeExpenses refers to OfficeExpenses
+						{
+							title: EvaluateAsString(FirstUC("office expenses"));
+							visible: 1;
+							link: OfficeExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTransportationExpenses refers to TransportationExpenses
+						{
+							title: EvaluateAsString(FirstUC("transportation expenses"));
+							visible: 1;
+							link: TransportationExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pSellingExpenses refers to SellingExpenses
+						{
+							title: EvaluateAsString(FirstUC("selling expenses"));
+							visible: 1;
+							link: SellingExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pMonitoringAndControlExpenses refers to MonitoringAndControlExpenses
+						{
+							title: EvaluateAsString(FirstUC("monitoring and control expenses"));
+							visible: 1;
+							link: MonitoringAndControlExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pOtherOperatingExpenses refers to OtherOperatingExpenses
+						{
+							title: EvaluateAsString(FirstUC("other operating expenses"));
+							visible: 1;
+							link: OtherOperatingExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable -OperatingExpensesSub10 refers to OperatingExpenses
+						{
+							title: EvaluateAsString(FirstUC("operating expenses"));
+							top_separator: 1;
+							visible: 1;
+							link: OperatingExpensesSub10;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable -DepreciationOfAssets
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: DepreciationOfIntangibleFixedAssets + DepreciationOfMaterialFixedAssets;
+						title: EvaluateAsString(FirstUC("depreciation of assets"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pDepreciationOfIntangibleFixedAssets refers to DepreciationOfIntangibleFixedAssets
+						{
+							title: EvaluateAsString(FirstUC("depreciation of")&" "&"immaterial fixed assets");
+							top_blanklines: 1;
+							visible: 1;
+							link: DepreciationOfIntangibleFixedAssets;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable DepreciationOfMaterialFixedAssets
+						{
+							datatype: number;
+							aggregation: flow;
+							formula: DepreciationOfLandAndBuildings + DepreciationOfPlantAndEquipment + DepreciationOfFurnitureAndFixtures + DepreciationOfTransportationEquipment+ DepreciationOfOtherMaterialFixedAssets;
+							title: EvaluateAsString(FirstUC("depreciation of")&" "&"material fixed assets");
+							displaytype: currency;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+							variable pDepreciationOfLandAndBuildings refers to DepreciationOfLandAndBuildings
+							{
+								title: EvaluateAsString(FirstUC("depreciation of")&" "&"land and buildings");
+								top_blanklines: 1;
+								visible: 1;
+								link: DepreciationOfLandAndBuildings;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable pDepreciationOfPlantAndEquipment refers to DepreciationOfPlantAndEquipment
+							{
+								title: EvaluateAsString(FirstUC("depreciation of")&" "&"plant and equipment");
+								visible: 1;
+								link: DepreciationOfPlantAndEquipment;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable pDepreciationOfFurnitureAndFixtures refers to DepreciationOfFurnitureAndFixtures
+							{
+								title: EvaluateAsString(FirstUC("depreciation of")&" "&"furniture and fixtures");
+								visible: 1;
+								link: DepreciationOfFurnitureAndFixtures;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable pDepreciationOfTransportationEquipment refers to DepreciationOfTransportationEquipment
+							{
+								title: EvaluateAsString(FirstUC("depreciation of")&" "&"transportation equipment");
+								visible: 1;
+								link: DepreciationOfTransportationEquipment;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable pDepreciationOfOtherMaterialFixedAssets refers to DepreciationOfOtherMaterialFixedAssets
+							{
+								title: EvaluateAsString(FirstUC("depreciation of")&" "&"other"&" "&"material fixed assets");
+								visible: 1;
+								link: DepreciationOfOtherMaterialFixedAssets;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable DepreciationOfMaterialFixedAssetsSub6 refers to DepreciationOfMaterialFixedAssets
+							{
+								title: EvaluateAsString(FirstUC("depreciation of")&" "&"material fixed assets");
+								top_separator: 1;
+								visible: 1;
+								link: DepreciationOfMaterialFixedAssetsSub6;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+						variable -DepreciationOfAssetsSub3 refers to DepreciationOfAssets
+						{
+							title: EvaluateAsString(FirstUC("depreciation of assets"));
+							top_separator: 1;
+							visible: 1;
+							link: DepreciationOfAssetsSub3;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable =OperatingIncome
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: NetSales+ChangeInInventories-CostOfSales+OtherOperatingIncome-OperatingExpenses-DepreciationOfAssets;
+						title: EvaluateAsString(FirstUC("operating income"));
+						displaytype: currency;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FinancialResult
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: FinancialIncome - FinancialExpenses;
+						title: EvaluateAsString(FirstUC("financial result"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pFinancialIncome refers to FinancialIncome
+						{
+							title: EvaluateAsString(FirstUC("financial income"));
+							top_blanklines: 1;
+							visible: 1;
+							link: FinancialIncome;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pFinancialExpenses refers to FinancialExpenses
+						{
+							title: EvaluateAsString(FirstUC("financial expenses"));
+							visible: 1;
+							link: FinancialExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable FinancialResultSub3 refers to FinancialResult
+						{
+							title: EvaluateAsString(FirstUC("financial result"));
+							top_separator: 1;
+							visible: 1;
+							link: FinancialResultSub3;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable OrdinaryProfitBeforeTaxes
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: FinancialResult + OperatingIncome;
+						title: EvaluateAsString(FirstUC("ordinary profit before taxes"));
+						displaytype: currency;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable ExtraordinaryIncomeAndExpenses
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: ExtraordinaryIncome - ExtraordinaryExpenses;
+						title: EvaluateAsString(FirstUC("extraordinary income and expenses"));
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable pExtraordinaryIncome refers to ExtraordinaryIncome
+						{
+							title: EvaluateAsString(FirstUC("extraordinary income"));
+							top_blanklines: 1;
+							visible: 1;
+							link: ExtraordinaryIncome;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pExtraordinaryExpenses refers to ExtraordinaryExpenses
+						{
+							title: EvaluateAsString(FirstUC("extraordinary expenses"));
+							visible: 1;
+							link: ExtraordinaryExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable ExtraordinaryIncomeAndExpensesSub3 refers to ExtraordinaryIncomeAndExpenses
+						{
+							title: EvaluateAsString(FirstUC("extraordinary income and expenses"));
+							top_separator: 1;
+							visible: 1;
+							link: ExtraordinaryIncomeAndExpensesSub3;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable pTaxesOnExtraordinaryIncomeAndExpenses refers to TaxesOnExtraordinaryIncomeAndExpenses
+						{
+							title: EvaluateAsString(FirstUC("taxes on extraordinary income and expenses"));
+							top_blanklines: 1;
+							visible: 1;
+							link: TaxesOnExtraordinaryIncomeAndExpenses;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+					variable pTaxOnProfits refers to TaxOnProfits
+					{
+						title: EvaluateAsString(FirstUC("tax on profits"));
+						visible: 1;
+						link: TaxOnProfits;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable pShareResultFromSubsidiaries refers to ShareResultFromSubsidiaries
+					{
+						title: EvaluateAsString(FirstUC("share result from subsidiaries"));
+						visible: 1;
+						link: ShareResultFromSubsidiaries;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable pShareResultMinorityInterest refers to ShareResultMinorityInterest
+					{
+						title: EvaluateAsString(FirstUC("share result minority interest"));
+						visible: 1;
+						link: ShareResultMinorityInterest;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable ProfitAfterTax
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: OrdinaryProfitBeforeTaxes + ExtraordinaryIncomeAndExpenses - pTaxOnProfits + pShareResultFromSubsidiaries - pShareResultMinorityInterest;
+						title: EvaluateAsString(FirstUC("profit after tax"));
+						displaytype: currency;
+						top_separator: 1;
+						bottom_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable IncomeStatementDescription
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map08));
+						data_options: unscalable;
+						title: EvaluateAsString(FirstUC("description"));
+						displaytype: memo;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+			}
+			variable Q_Map09
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Collaterals";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				locked: On;
+				visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","Zekerheden",ProductType));
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map09_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 10";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map09_INFO
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "$>Info bij stap 10<$";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map09_VALIDATION
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "$>Validatie stap 10<$";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Collaterals
+				{
+					datatype: number;
+					frequency: document;
+					title: "Collaterals";
+					displaytype: currency;
+					hint: "In deze stap van de kredietaanvraag geeft u inzicht in de zekerheden die u inbrengt. Voor de financier is dit van belang omdat de zekerheden een deel van het risico reduceren.";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					tuple NewCollateral
+					{
+						title: "New collateral";
+						options_title: locked;
+						variable CollateralDescription
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Description";
+							top_blanklines: 1;
+							options_title: locked;
+						}
+						variable CoverDefinitionReferenceCode
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							afterinput: Execute((SetValue(PriorRegistration, NA, true)));
+							title: "Select a collateral";
+							displaytype: select;
+							choices: "0:Guarantee|1:Registry property|2:Non registry property";
+							options_title: locked;
+						}
+						variable CollateralObjectDefinitionReferenceCode
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "Specify the collateral type";
+							displaytype: select;
+							choices: "0:Family house|1:Family house with garage|2:Flat / Apartment|3:Flat / Apartment with garage|4:Store-house|5:House with commercial space|6:Shop|7:Office|8:Holiday Home|9:Farm|10:Business collateral|11:Agricultural land / plot|12:Garage|13:Building site|14:Houseboat|15:Ship|16:Airplane|99:Other";
+							options_title: locked;
+						}
+						variable CountryType
+						{
+							datatype: number;
+							frequency: document;
+							formula: 528.0;
+							data_options: unscalable;
+							title: "Country";
+							displaytype: select;
+							choices: "4:Afghanistan|8:Albanië|10:Antarctica|12:Algerije|16:Amerikaans-Samoa|20:Andorra|24:Angola|28:Antigua en Barbuda|31:Azerbeidzjan|32:Argentinië|36:Australië|40:Oostenrijk|44:Bahamas|48:Bahrein|50:Bangladesh|51:Armenië|52:Barbados|56:België|60:Bermuda|64:Bhutan|68:Bolivia|70:Bosnië en Herzegovina|72:Botswana|74:Bouveteiland|76:Brazilië|84:Belize|86:Brits Indische Oceaanterritorium|90:Salomonseilanden|92:Britse Maagdeneilanden|96:Brunei|100:Bulgarije|104:Myanmar|108:Burundi|112:Wit-Rusland|116:Cambodja|120:Kameroen|124:Canada|132:Kaapverdië|136:Kaaimaneilanden|140:Centraal-Afrikaanse Republiek|144:Sri Lanka|148:Tsjaad|152:Chili|156:China|158:Taiwan|162:Christmaseiland|166:Cocoseilanden|170:Colombia|174:Comoren|175:Mayotte|178:Congo-Brazzaville|180:Congo-Kinshasa|184:Cookeilanden|188:Costa Rica|191:Kroatië|192:Cuba|196:Cyprus|203:Tsjechië|204:Benin|208:Denemarken|212:Dominica|214:Dominicaanse Republiek|218:Ecuador|222:El Salvador|226:Equatoriaal-Guinea|231:Ethiopië|232:Eritrea|233:Estland|234:Faeröer|238:Falklandeilanden|239:Zuid-Georgia en de Zuidelijke Sandwicheilanden|242:Fiji|246:Finland|248:Åland|250:Frankrijk|254:Frans-Guyana|258:Frans-Polynesië|260:Franse Zuidelijke en Antarctische Gebieden|262:Djibouti|266:Gabon|268:Georgië|270:Gambia|275:Palestina|276:Duitsland|288:Ghana|292:Gibraltar|296:Kiribati|300:Griekenland|304:Groenland|308:Grenada|312:Guadeloupe|316:Guam|320:Guatemala|324:Guinee|328:Guyana|332:Haïti|334:Heard en MacDonaldeilanden|336:Vaticaanstad|340:Honduras|344:Hongkong|348:Hongarije|352:IJsland|356:India|360:Indonesië|364:Iran|368:Irak|372:Ierland|376:Israël|380:Italië|384:Ivoorkust|388:Jamaica|392:Japan|398:Kazachstan|400:Jordanië|404:Kenia|408:Noord-Korea|410:Zuid-Korea|414:Koeweit|417:Kirgizië|418:Laos|422:Libanon|426:Lesotho|428:Letland|430:Liberia|434:Libië|438:Liechtenstein|440:Litouwen|442:Luxemburg|446:Macau|450:Madagaskar|454:Malawi|458:Maleisië|462:Maldiven|466:Mali|470:Malta|474:Martinique|478:Mauritanië|480:Mauritius|484:Mexico|492:Monaco|496:Mongolië|498:Moldavië|499:Montenegro|500:Montserrat|504:Marokko|508:Mozambique|512:Oman|516:Namibië|520:Nauru|524:Nepal|528:Nederland|531:Curaçao|533:Aruba|534:Sint Maarten|535:Bonaire, Sint Eustatius en Saba|540:Nieuw-Caledonië|548:Vanuatu|554:Nieuw-Zeeland|558:Nicaragua|562:Niger|566:Nigeria|570:Niue|574:Norfolk|578:Noorwegen|580:Noordelijke Marianen|581:Kleine Pacifische eilanden van de Verenigde Staten|583:Micronesia|584:Marshalleilanden|585:Palau|586:Pakistan|591:Panama|598:Papoea-Nieuw-Guinea|600:Paraguay|604:Peru|608:Filipijnen|612:Pitcairneilanden|616:Polen|620:Portugal|624:Guinee-Bissau|626:Oost-Timor|630:Puerto Rico|634:Qatar|638:Réunion|642:Roemenië|643:Rusland|646:Rwanda|652:Saint-Barthélemy|654:Sint-Helena, Ascension en Tristan da Cunha|659:Saint Kitts en Nevis|660:Anguilla|662:Saint Lucia|663:Sint-Maarten|666:Saint-Pierre en Miquelon|670:Saint Vincent en de Grenadines|674:San Marino|678:Sao Tomé en Principe|682:Saoedi-Arabië|686:Senegal|688:Servië|690:Seychellen|694:Sierra Leone|702:Singapore|703:Slowakije|704:Vietnam|705:Slovenië|706:Somalië|710:Zuid-Afrika|716:Zimbabwe|724:Spanje|728:Zuid-Soedan|729:Soedan|732:Westelijke Sahara|740:Suriname|744:Spitsbergen en Jan Mayen|748:Swaziland|752:Zweden|756:Zwitserland|760:Syrië|762:Tadzjikistan|764:Thailand|768:Togo|772:Tokelau|776:Tonga|780:Trinidad en Tobago|784:Verenigde Arabische Emiraten|788:Tunesië|792:Turkije|795:Turkmenistan|796:Turks- en Caicoseilanden|798:Tuvalu|800:Oeganda|804:Oekraïne|807:Macedonië|818:Egypte|826:Verenigd Koninkrijk|831:Guernsey|832:Jersey|833:Man|834:Tanzania|840:Verenigde Staten|850:Amerikaanse Maagdeneilanden|854:Burkina Faso|858:Uruguay|860:Oezbekistan|862:Venezuela|876:Wallis en Futuna|882:Samoa|887:Jemen|894:Zambia";
+							options_title: locked;
+						}
+						variable CountryCode
+						{
+							datatype: string;
+							frequency: document;
+							formula: EvaluateAsString(Case(CountryType, [0:"Other"|528:"NL"]));
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "CountryCode";
+							options_title: locked;
+						}
+						variable City
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "City";
+							options_title: locked;
+						}
+						variable StreetName
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Street name";
+							options_title: locked;
+						}
+						variable HouseNumber
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Housenumber";
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+						variable HouseNumberAddition
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "Housenumber addition";
+							options_title: locked;
+						}
+						tuple LandRegistry
+						{
+							title: "LandRegistry";
+							options_title: locked;
+							variable Municipality
+							{
+								datatype: string;
+								frequency: document;
+								inputRequired: (Visible (Q_Map09));
+								data_options: unscalable;
+								title: "Municipality";
+								top_blanklines: 1;
+								options_title: locked;
+							}
+							variable Section
+							{
+								datatype: string;
+								frequency: document;
+								inputRequired: (Visible (Q_Map09));
+								data_options: unscalable;
+								title: "Section";
+								options_title: locked;
+							}
+							variable PartNumber
+							{
+								datatype: string;
+								frequency: document;
+								inputRequired: (Visible (Q_Map09));
+								data_options: unscalable;
+								title: "Part number";
+								options_title: locked;
+							}
+							variable Size
+							{
+								datatype: number;
+								frequency: document;
+								inputRequired: (Visible (Q_Map09));
+								data_options: unscalable;
+								title: "Size";
+								fixed_decimals: 0;
+								options_title: locked;
+							}
+							variable Unit
+							{
+								datatype: number;
+								frequency: document;
+								formula: 0;
+								data_options: unscalable;
+								title: "Unit";
+								displaytype: select;
+								choices: "0:m2|1:ha";
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+						variable CollateralProvider
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Collateral provider";
+							options_title: locked;
+						}
+						variable MarketValue
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Market value";
+							displaytype: currency;
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+						variable SourceMarketValue
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Source market value";
+							hint: "Source market value hint";
+							options_title: locked;
+						}
+						variable Valuer
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Valuer";
+							options_title: locked;
+						}
+						variable ValuerReferenceNumber
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Valuer reference number";
+							options_title: locked;
+						}
+						variable GuaranteeValue
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Guarantee value";
+							displaytype: currency;
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+						variable ConstructionDate
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Construction date";
+							displaytype: date;
+							choices: "dd/MM/yyyy";
+							options_title: locked;
+						}
+						variable RegistrationAmount
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							title: "Registration amount";
+							displaytype: currency;
+							options_title: locked;
+						}
+						variable PriorRegistration
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "This object is already used as collateral for another loan?";
+							displaytype: select;
+							choices: "0:No|1:Yes";
+							options_title: locked;
+						}
+						variable Rank
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							data_options: unscalable;
+							title: "Rank of subscription";
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+						variable Discount
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map09));
+							title: "Discount (The value which cannot be used of the object)";
+							displaytype: currency;
+							options_title: locked;
+						}
+						variable Calculation
+						{
+							datatype: number;
+							frequency: document;
+							formula: If(RegistrationAmount + Discount > MarketValue ,1,0);
+							data_options: unscalable;
+							title: "Calculation";
+							displaytype: select;
+							choices: "0:Good|1:Not good.";
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+				}
+				variable Q_Map09_Hulpvariabelen
+				{
+					datatype: number;
+					frequency: document;
+					title: "$>Eigenschappen van de stap<$";
+					displaytype: currency;
+					locked: On;
+					visible: False;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map09_REQUIREDVARS
+					{
+						datatype: number;
+						frequency: document;
+						formula:1;
+						data_options: unscalable;
+						title: "$>Aantal verplichte velden<$";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: False;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map09_ENTEREDREQUIREDVARS
+					{
+						datatype: number;
+						frequency: document;
+						formula:1;
+						data_options: unscalable;
+						title: "$>Aantal ingevulde verplichte velden<$";
+						fixed_decimals: 0;
+						locked: On;
+						visible: False;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map09_TotalCalculation
+					{
+						datatype: number;
+						frequency: document;
+						formula: TupleSum(Calculation)>0;
+						data_options: unscalable;
+						title: "$>Optellingen<$";
+						fixed_decimals: 0;
+						locked: On;
+						visible: False;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_Map10
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Specification accounts receivables";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				locked: On;
+				visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","Specificatie debiteuren",ProductType));
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map10_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 10";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable FinancialPositionAccountsReceivables
+				{
+					datatype: number;
+					frequency: document;
+					title: "Specification accounts receivables";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable FinancialPositionAccountsReceivablesSub1 refers to FinancialsAccountsReceivablesTotal
+					{
+						title: "Total count of accounts receivables";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FinancialPositionAccountsReceivablesSub2 refers to FinancialsAccountsReceivablesNumber
+					{
+						title: "Total number of accounts recivables";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FinancialPositionAccountsReceivablesSub3 refers to FinancialsAccountsReceivablesAverage
+					{
+						title: "Average of accounts receivables (per debtor)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FinancialPositionAccountsReceivablesInsured
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map10));
+						data_options: unscalable;
+						title: "Are the accounts receivables insured?";
+						displaytype: select;
+						choices: "0:No|1:Yes";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable FinancialPositionAccountsReceivablesBiggestDebtors
+				{
+					datatype: number;
+					frequency: document;
+					title: "Accounts reveivable of the biggest debtors";
+					displaytype: currency;
+					hint: "Please fill in the 10 biggest debtors and the amount.";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					tuple FinancialPositionAccountsReceivablesDebtor
+					{
+						title: "Debtor";
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable FinancialPositionAccountsReceivablesDebtorName
+						{
+							datatype: string;
+							frequency: document;
+							inputRequired: (Visible (Q_Map10));
+							data_options: unscalable;
+							title: "Name debtor";
+							top_blanklines: 1;
+							options_title: locked;
+						}
+						variable FinancialPositionAccountsReceivablesDebtorAmount
+						{
+							datatype: number;
+							frequency: document;
+							inputRequired: (Visible (Q_Map10));
+							data_options: unscalable;
+							title: "Amount";
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+					}
+				}
+			}
+			variable Q_Map11
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Specification Lease";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				locked: On;
+				visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","Specificatie asset",ProductType));
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map11_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 11";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable SpecificationLease
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Specification Lease object";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable SpecificationLeaseObject
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map11));
+						data_options: unscalable;
+						title: "Lease object";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationLeaseObjectDescription
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map11));
+						data_options: unscalable;
+						title: "Description of the lease object";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationLeaseObjectMarketability
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map11));
+						data_options: unscalable;
+						title: "Marketability of lease object";
+						displaytype: select;
+						choices: "0:Low|1:Average|2:High";
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationLeaseObjectDuration
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map11));
+						data_options: unscalable;
+						title: "Duration in months";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationLeaseObjectDepreciation
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map11));
+						title: "Depreciation object per month";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationLeaseObjectFinalInstalment
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map11));
+						title: "Final instalment";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationLeaseObjectDeposit
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map11));
+						title: "Deposit";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+			}
+			variable Q_Map12
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Specification commercial real estate";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				locked: On;
+				visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","Specificatie verhuurd vastgoed",ProductType));
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map12_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 12";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable SpecificationRealEstate
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Specification property";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable SpecificationRealEstateExistingNew
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map12));
+						data_options: unscalable;
+						title: "Existing or new property?";
+						displaytype: select;
+						choices: "0:New|1:Existing";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationRealEstatetDescription
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (Q_Map12));
+						data_options: unscalable;
+						title: "Description of the property";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationRealEstateMarketability
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map12));
+						data_options: unscalable;
+						title: "Marketability of the property";
+						displaytype: select;
+						choices: "0:Low|1:Average|2:High";
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationRealEstateWOZValue
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map12));
+						title: "WOZ value of the property";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationRealEstateRentalIncome
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map12));
+						title: "Amount of the rental income per year";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationRealEstateRentalContracts
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map12));
+						title: "Number of rental contracts";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SpecificationRealEstateMaintenanceCosts
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible (Q_Map12));
+						title: "Amount of maintenance costs per year";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+			}
+			variable Q_Map13
+			{
+				datatype: number;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Documents";
+				displaytype: select;
+				choices: "0:Incomplete.|1:Complete.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map13_WARNING
+				{
+					datatype: string;
+					frequency: document;
+					formula:1;
+					data_options: unscalable;
+					title: "Warning for folder 11";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable FileUpload_Paragraph01
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Documents";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable DOC_COC
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_COC));
+						data_options: unscalable;
+						title: "COC";
+						top_blanklines: 1;
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_COC",ProductType));
+						options_title: locked;
+					}
+					variable DOC_OrgChart
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_OrgChart));
+						data_options: unscalable;
+						title: "OrgChart";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_OrgChart",ProductType));
+						options_title: locked;
+					}
+					variable DOC_Signatures
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_Signatures));
+						data_options: unscalable;
+						title: "Signatures";
+						hint: "http://www.fyndoo.com/signatures Download template on www.fyndoo.com/signatures";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_Signatures",ProductType));
+						options_title: locked;
+					}
+					variable DOC_Passport
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_Passport));
+						data_options: unscalable;
+						title: "Passport";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_Passport",ProductType));
+						options_title: locked;
+					}
+					variable DOC_ShareRegister
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_ShareRegister));
+						data_options: unscalable;
+						title: "ShareRegister";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_ShareRegister",ProductType));
+						options_title: locked;
+					}
+					variable DOC_AnnualStatement
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_AnnualStatement));
+						data_options: unscalable;
+						title: "AnnualStatement";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_AnnualStatement",ProductType));
+						options_title: locked;
+					}
+					variable DOC_MemorandumOfAssociation
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_MemorandumOfAssociation));
+						data_options: unscalable;
+						title: "MemorandumOfAssociation";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_MemorandumOfAssociation",ProductType));
+						options_title: locked;
+					}
+					variable DOC_GeneralTermsAndConditions
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_GeneralTermsAndConditions));
+						data_options: unscalable;
+						title: "GeneralTermsAndConditions";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_GeneralTermsAndConditions",ProductType));
+						options_title: locked;
+					}
+					variable DOC_BankAccounts
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_BankAccounts));
+						data_options: unscalable;
+						title: "BankAccounts";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_BankAccounts",ProductType));
+						options_title: locked;
+					}
+					variable DOC_UBODeclaration
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_UBODeclaration));
+						data_options: unscalable;
+						title: "UBODeclaration";
+						hint: "http://www.fyndoo.com/UBODeclaration Download template on www.fyndoo.com/UBODeclaration";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_UBODeclaration",ProductType));
+						options_title: locked;
+					}
+					variable DOC_AdditionalCertification
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_AdditionalCertification));
+						data_options: unscalable;
+						title: "AdditionalCertification";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_AdditionalCertification",ProductType));
+						options_title: locked;
+					}
+					variable DOC_CertificateOfGoodConduct
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_CertificateOfGoodConduct));
+						data_options: unscalable;
+						title: "CertificateOfGoodConduct";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_CertificateOfGoodConduct",ProductType));
+						options_title: locked;
+					}
+					variable DOC_GAccount
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_GAccount));
+						data_options: unscalable;
+						title: "GAccount";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_GAccount",ProductType));
+						options_title: locked;
+					}
+					variable DOC_InvoiceExample
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_InvoiceExample));
+						data_options: unscalable;
+						title: "InvoiceExample";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_InvoiceExample",ProductType));
+						options_title: locked;
+					}
+					variable DOC_Logo
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_Logo));
+						data_options: unscalable;
+						title: "Logo";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_Logo",ProductType));
+						options_title: locked;
+					}
+					variable DOC_RealEstatePurchaseAgreement
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_RealEstatePurchaseAgreement));
+						data_options: unscalable;
+						title: "RealEstatePurchaseAgreement";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_RealEstatePurchaseAgreement",ProductType));
+						options_title: locked;
+					}
+					variable DOC_RealEstateRentalAgreement
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Visible (DOC_RealEstateRentalAgreement));
+						data_options: unscalable;
+						title: "RealEstateRentalAgreement";
+						visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_RealEstateRentalAgreement",ProductType));
+						options_title: locked;
+					}
+				}
+			}
+			variable Q_RESULT
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Send and download";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable SummarySend
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Send credit application";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_RESULTSub1 refers to Q_RESULT
+				{
+					title: "U bent klaar met het opstellen van uw financieringsaanvraag. U kunt de rapportage nu downloaden.";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					link: Q_RESULTSub1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+			}
+			variable Q_STATUS
+			{
+				datatype: number;
+				frequency: document;
+				formula: 0.0;
+				data_options: unscalable;
+				title: "Status";
+				displaytype: select;
+				choices: "0:Active|1:Final";
+				top_blanklines: 1;
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_NEXT_BUTTON_VISIBLE
+			{
+				datatype: number;
+				frequency: document;
+				formula: 2.0;
+				title: "Next";
+				displaytype: currency;
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_PREVIOUS_BUTTON_VISIBLE
+			{
+				datatype: number;
+				frequency: document;
+				formula: 2.0;
+				title: "Previous";
+				displaytype: currency;
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_CONCEPT_REPORT_VISIBLE
+			{
+				datatype: number;
+				frequency: document;
+				formula: 1.0;
+				title: "Concept";
+				displaytype: currency;
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_FINAL_REPORT_VISIBLE
+			{
+				datatype: number;
+				frequency: document;
+				formula: 1.0;
+				title: "Final";
+				displaytype: currency;
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_MAKE_FINAL_VISIBLE
+			{
+				datatype: number;
+				frequency: document;
+				formula: Q_Map01 + Q_Map02 + Q_Map03 + Q_Map04 + Q_Map05 + Q_Map06 + Q_Map07 + Q_Map08 + Q_Map09 + Q_Map10 + Q_Map11 + Q_Map12 + Q_Map13;
+				title: "Make final";
+				displaytype: currency;
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_FINAL_ON
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				title: "Final:";
+				displaytype: date;
+				choices: "dd/MM/yyyy";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_FINAL_BY
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Final by:";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_STARTED_ON
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				title: "Created:";
+				displaytype: date;
+				choices: "dd/MM/yyyy";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_STARTED_BY
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Created by:";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_MODIFIED_ON
+			{
+				datatype: number;
+				frequency: document;
+				formula: Now;
+				data_options: unscalable, saveCalculatedValue;
+				title: "Last modified";
+				displaytype: date;
+				choices: "dd/MM/yyyy";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_ModelVersion
+			{
+				datatype: string;
+				frequency: document;
+				formula: 1;
+				data_options: unscalable, saveCalculatedValue;
+				title: "Modelversion:";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable Q_ModelType
+			{
+				datatype: string;
+				frequency: document;
+				formula: "FAM";
+				data_options: unscalable, saveCalculatedValue;
+				title: "Modeltype:";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable Q_MatrixVersion
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable, saveCalculatedValue;
+				title: "Parameters version:";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable Hulpvariabelen
+			{
+				datatype: none;
+				frequency: document;
+				data_options: unscalable;
+				title: "Overige berekeningen";
+				top_blanklines: 1;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_WARNING_GLOBAL
+			{
+				datatype: string;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Knockout(s)?";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable scKnockoutsCombi
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Knockouts text";
+				displaytype: memo;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable scRestricties
+			{
+				datatype: string;
+				frequency: document;
+				formula:1;
+				data_options: unscalable;
+				title: "Restricties";
+				displaytype: memo;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable scRestrictiesCombi
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Restricties text";
+				displaytype: memo;
+				top_blanklines: 1;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+		}
+	}
+}

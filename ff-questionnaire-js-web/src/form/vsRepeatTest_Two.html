@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>FesJS</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/dist/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD8fwAA/H8AAPxjAAD/4wAA/+MAAMY/AADGPwAAxjEAAP/xAAD/8QAA4x8AAOMfAADjHwAA//8AAP//AAA="
+          rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="/bower_components/angular-busy/dist/angular-busy.css">
+    <style>
+        body, html, #wrapper, #page-wrapper, #container-fluid {
+            min-height: 100% !important;
+            height: 100% !important;
+        }
+
+        .navbar.navbar-static-top {
+            position: fixed;
+            top: 0px;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .form-control {
+            text-align: right;
+        }
+
+        .repeater-container {
+            height: 454px;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .enclosing-ng-repeat .repeater-container {
+            height: 216px;
+        }
+
+        .enclosing-ng-repeat .repeater-container:first-child {
+            margin-bottom: 20px;
+        }
+
+        th {
+            width: 10%;
+        }
+
+        table input {
+            width: 100%;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+        }
+
+        .container-fluid {
+            height: 100%;
+            min-height: 100%;
+        }
+    </style>
+    <!-- jQuery -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+
+    <!-- Metis Menu Plugin JavaScript -->
+
+    <!-- Custom Theme JavaScript -->
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-busy/dist/angular-busy.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-vs-repeat/src/angular-vs-repeat.js"></script>
+    <script>
+        var APP = angular.module('app', ['vs-repeat']);
+        APP.controller('appController', ['$timeout', '$scope', '$http', '$location', function ($timeout, $scope, $http, $location)
+        {
+            var uiElements = [{
+                rowId: 'DUMMY_A_value',
+                index: 0
+            }];
+            $scope.getValue = function (val)
+            {
+                if (uiElements[val.index])
+                {
+                    return uiElements[val.index].rowId;
+                }
+                return val.val;
+            }
+            $scope.changeValue = function (val)
+            {
+                console.info('can be expensive')
+            }
+            $scope.vs_collection = []
+            for (var i = 0; i < 1000; i++)
+            {
+                $scope.vs_collection.push({val: '' + i, index: i});
+            }
+            $scope.columns = [1, 2, 3, 4, 5, 6, 7]
+        }]);
+    </script>
+</head>
+
+<body ng-app="app" cg-busy="myPromise" ng-controller="appController" style="height:100%; min-height:100%">
+
+<div id="wrapper">
+
+    <!-- /.navbar-header -->
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="navbar-header">
+            <a class="navbar-brand">FesJS v1.0</a>
+        </div>
+        <nav class="collapse navbar-collapse" role="navigation">
+        </nav>
+    </div>
+    <!-- /.navbar-top-links -->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0;">
+
+        <div class="navbar-default sidebar" role="navigation" style="position: fixed; z-index: 1">
+            <div class="sidebar-nav navbar-collapse">
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="page-wrapper" class="expanded">
+        <div class="container-fluid">
+            <div class="repeater-container">
+                <table style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>a</th>
+                        <th ng-repeat="col in columns">{{col}}</th>
+                    </tr>
+                    </thead>
+                    <tbody vs-repeat vs-scroll-parent=".repeater-container">
+                    <tr ng-repeat="item in vs_collection">
+                        <td>{{item.val}}</td>
+                        <td ng-repeat="col in columns">
+                            <input ng-bind="getValue(item)" ng-change="changeValue(item)" ng-model="item.val" ng-model-options="{  getterSetter: true, updateOn: 'blur' }"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?ext=Chrome&amp;extver=2.1.0"></' + 'script>')</script>
+</body>
+</html>

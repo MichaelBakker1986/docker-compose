@@ -1,0 +1,36 @@
+<div ng-switch="row.displayAs">
+
+    <div ng-if="!!row.hidetitle" class="col-md-6">
+        <span class="question {{row.displayAs}}">{{row.title}}</span>
+    </div>
+    <div  class="second col-md-6 input-group">
+        <span ng-switch-when="AmountAnswerType" class="input-group-addon"><i class="fa fa-eur"></i></span>
+        <span ng-switch-when="StringAnserType" class="input-group-addon"><i class="fa fa-comment" aria-hidden="true"></i></span>
+        <select class="form-control" ng-repeat="column in columns" ng-switch-when="ListAnswerType" ng-bind-attrs="{ inputValid: InputValid(row),disabled : row.locked }" ng-model="row.value" ng-change="exportValue(row.rowId,row,'value',row.value)">
+            <option ng-a ng-repeat="option in row.choices" value="{{option.name}}">{{option.value}}</option>
+        </select>
+
+        <div class="form-control" ng-switch-when="RadioAnswerType">
+            <label ng-a ng-repeat="option in row.choices" ng-bind-attrs="{ inputValid: InputValid(row),disabled : row.locked }" ng-click="exportValue(rowId ,row,'value',row.value)">
+                {{option.value}}
+                <input type="radio" ng-model="row.value" name="{{row.rowId}}" value="{{option.name}}"/>
+            </label>
+        </div>
+        <hc-chart ng-switch-when="chart" options="row.value">Placeholder for generic chart</hc-chart>
+        <input class="form-control" ng-switch-when="BooleanAnswerType" type="checkbox" ng-bind-attrs="{ inputValid: InputValid(row),disabled : row.locked }" ng-model="row.value" ng-change="exportValue(row.rowId,row,'value',row.value)" ng-model-options="{ getterSetter: true, updateOn: 'blur' }"/>
+        <textarea class="form-control" ng-switch-when="MemoAnswerType" ng-bind-attrs="{ inputValid: InputValid(row),disabled : row.locked }" ng-model="row.value" ng-change="exportValue(row.rowId,row,'value',row.value)" ng-model-options="{ getterSetter: true, updateOn: 'blur' }"></textarea>
+        <input class="form-control" ng-switch-when="DateAnswerType" type="date" ng-bind-attrs="{ inputValid: InputValid(row) }" ng-model="row.value" ng-change="exportValue(row.rowId,row,'value',row.value)" ng-model-options="{ getterSetter: true, updateOn: 'blur' }"/>
+        <input ng-switch-when="TextAnswerType" type="text" disabled="disabled" class="form-control" class="TextAnswerType" ng-bind-attrs="{ value : row.value }"/>
+        <span ng-switch-when="undefined">&nbsp</span>
+        <span ng-switch-when="SectionType">&nbsp</span>
+        <input class="form-control" ng-repeat="column in columns" ng-switch-when="AmountAnswerType" ng-bind-attrs="{ inputValid: InputValid(row),disabled : row.locked }" ng-model="row.value" ng-change="exportValue(row.rowId, row,'value',row.value)" ng-model-options="{ getterSetter: true, updateOn: 'blur' }"/>
+        <button ng-switch-when="ActionType" class="form-control" ng-click="exportValue(rowId,row,'value',row.value)">OK</button>
+        <input class="form-control" type="text" data-original-title="Tooltip on bottom" data-toggle="tooltip" data-placement="bottom" title="Test" ng-repeat="column in columns" ng-switch-default ng-bind-attrs="{ inputValid: InputValid(row),disabled : row.locked }" ng-model="row.value" ng-change="exportValue(row.rowId, row,'value',row.value)" ng-model-options="{ getterSetter: true, updateOn: 'blur' }"/>
+
+        <span ng-if="!InputValid(row)" class="text-danger">{{row.validateInput}}</span>
+        <span ng-if="row.validation" class="text-danger">{{row.validation}}</span>
+        <span class="input-group-addon" ng-if="row.displayAs == 'PercentageAnswerType'">%</span>
+        <span class="input-group-addon" ng-if="row.displayAs !== 'SectionType' && row.required"><i class="fa fa-asterisk"></i></span>
+        <span ng-if="row.tuple" class="input-group-addon" ng-click="row.duplicate()"><i class=" fa fa-plus"></i></span>
+    </div>
+</div>

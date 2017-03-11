@@ -1,0 +1,66 @@
+.Variable ModelVersion                           ,SaveCalculatedValues
+.Variable ModelType                              ,SaveCalculatedValues
+.Variable MatrixVersion                          ,SaveCalculatedValues
+.Variable Q_STATUS                               ,SaveCalculatedValues
+.Variable Q_STATUS_MODIFIED_ON                   ,SaveCalculatedValues
+.Variable EindScore                              ,SaveCalculatedValues
+
+;
+;  Devolgende variabelen zijn calculated gemaakt omdat dit keuzeschakelaars zijn met een formule!
+.Variable Q_ROOT                                 , SaveCalculatedValues
+.Variable ToetsAutomatischFiat                   , SaveCalculatedValues
+.Variable Rechtsvorm                             , SaveCalculatedValues
+.Variable LooptijdLangerDan10Jaar                , SaveCalculatedValues
+.Variable GevestigdInNederland                   , SaveCalculatedValues
+.Variable BrancheInBusinessRule31                , SaveCalculatedValues
+.Variable INGisHuisbankier                       , SaveCalculatedValues
+.Variable AantalOverstandenLaatsteHalfJaar       , SaveCalculatedValues
+.Variable BedrijfsrisicosVerzekerd               , SaveCalculatedValues
+.Variable VermeldeCalamiteiten                   , SaveCalculatedValues
+.Variable PersoonlijkeBorgBestuurderBereidheid   , SaveCalculatedValues
+.Variable ToetsControleBasisvoorwaarden          , SaveCalculatedValues
+.Variable AanvullendeCijfersVragen               , SaveCalculatedValues
+.Variable RechtsvormBV                           , SaveCalculatedValues
+.Variable NietGevestigdInNederland               , SaveCalculatedValues
+.Variable INGgeenHuisbankier                     , SaveCalculatedValues
+.Variable TeVeelOverstanden                      , SaveCalculatedValues
+.Variable BedrijfsrisicosNietVerzekerd           , SaveCalculatedValues
+.Variable VermeldeCalamiteitenAanwezig           , SaveCalculatedValues
+.Variable Bestuurders01ErvaringInBranche         , SaveCalculatedValues
+.Variable Bestuurders01Opleiding                 , SaveCalculatedValues
+.Variable Bestuurders02ErvaringInBranche         , SaveCalculatedValues
+.Variable Bestuurders02Opleiding                 , SaveCalculatedValues
+.Variable Bestuurders03ErvaringInBranche         , SaveCalculatedValues
+.Variable Bestuurders03Opleiding                 , SaveCalculatedValues
+.Variable OndernemingProffesioneelBegeleid       , SaveCalculatedValues
+.Variable HoofdredenStartOnderneming             , SaveCalculatedValues
+.Variable ErvaringMinstErvarenBestuurder         , SaveCalculatedValues
+.Variable OpleidingBestuurders                   , SaveCalculatedValues
+.Variable ToetsRisicodragendVermogen             , SaveCalculatedValues
+.Variable ProductSluitAanBijInvestering          , SaveCalculatedValues
+.Variable GewenstProduct                         , SaveCalculatedValues
+.Variable BrancheSector                          , SaveCalculatedValues
+.Variable VoortzettingBestaandeActiviteiten      , SaveCalculatedValues
+.Variable BedrijfsadmUitbesteed                  , SaveCalculatedValues
+.Variable ReedsOmzetGegenereerd                  , SaveCalculatedValues
+.Variable TussentijdseCijfersAanwezig            , SaveCalculatedValues
+.Variable FinancieleExpert                       , SaveCalculatedValues
+.Variable PersoonlijkeBorgBestuurderNodig        , SaveCalculatedValues
+.Variable ToetsControleBasisvoorwaardenTotaal    , SaveCalculatedValues
+.Variable LeeftijdJongsteBestuurder              , SaveCalculatedValues
+.Variable ToetsBestuurders01Gebdatum             , SaveCalculatedValues
+.Variable ToetsBestuurders02Gebdatum             , SaveCalculatedValues
+.Variable ToetsBestuurders03Gebdatum             , SaveCalculatedValues
+.Variable NormRisicoVermogenMatVastAkt           , SaveCalculatedValues
+
+.Variable TotaalPunten01                         , SaveCalculatedValues
+.Variable TotaalPunten02                         , SaveCalculatedValues
+.Variable TotaalPunten08                         , SaveCalculatedValues
+.Variable TotaalPunten09                         , SaveCalculatedValues
+.Variable TotaalPunten10                         , SaveCalculatedValues
+.Variable TotaalPunten03                         , SaveCalculatedValues
+.Variable TotaalPunten04                         , SaveCalculatedValues
+.Variable TotaalPunten05                         , SaveCalculatedValues
+.Variable TotaalPunten06                         , SaveCalculatedValues
+.Variable TotaalPunten07                         , SaveCalculatedValues
+.Variable BatchRatingKeuze                       , SaveCalculatedValues

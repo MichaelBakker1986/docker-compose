@@ -1,0 +1,712 @@
+{&&Language=English}
+;==========================================================================================================================================
+Vragenlijst Starter
+
+.ModelVersion          2.04
+.FINANversion          3.2
+
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="hist",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=ThisYear,Years=2,MaxTsY=1,TsY=1,TsY2=1,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear)
+
+.Sheet   1,Title="Vragenlijst Starter",Range=[FirstTinPeriod(MainPeriod)..LastTinPeriod(MainPeriod)],Period=MainPeriod
+
+.Variables
+PP       X     0               $>Vragenlijst Starters<$                                            \Root
+
+.Variables
+{&&TryInclude IncFesVars.fin}
+{&&TryInclude IncFpsVars.fin}
+
+;-------------------------------------------------------------------------------------------------- Scorecard
+.Variables
+PP      1N C 1 1               Vragenlijst Starter (v#CompactModelVersion#)                        \Q_ROOT
+
+.Formulas NoTrend
+; Dossier is volledig wanneer alle vragen gevuld zijn
+;    of
+; Wanneer er een knockout actief is dan mag dossier ook definitief worden gemaakt.@TODO
+
+Q_ROOT                         = If( ((Q_Map01[1]=1) And (Q_Map02[1]=1) And (Q_MAP03[1]=1) And (Q_Map04[1]=1) And (Q_Map05[1]=1) And (Q_Map06[1]=1)) Or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0)
+
+
+;------------------------------ Map 1
+.Variables
+PP      1N C   2               Contact gegevens                                                    \Q_Map01
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 1<$                                              \Q_Map01_WARNING
+PP      1A     3               $>Info bij stap 1<$                                                 \Q_Map01_INFO
+PP      1A     3               $>Validatie stap 1<$                                                \Q_Map01_VALIDATION
+
+PP      1N     3               Vragen
+PP      1A     4               Naam                                                                \NaamAanvrager=FPS_VAR_Naam
+C Conform inschrijving KvK.
+PI      1A     4               Relatienummer		                                                   \Relatienummer=FPS_VAR_Relatienummer
+C Niet verplicht, leeg laten indien niet bekend.
+PP      1A     4               KvK-nummer                                                          \KvKnummer=FPS_VAR_KVKnr
+C Verplicht
+PI      1A     4               GRID ID		                                                         \GRIDID=FPS_VAR_GridId
+C Niet verplicht, leeg laten indien niet bekend.
+PI    2 1N D   4               Oprichtingsdatum bij KvK		                                         \OprichtingsdatumKvK
+PI    0 1N     4               Gevraagd kredietbedrag		                                           \GevraagdKredietbedrag                             ;tussen 0 en 500000
+C Som van het gevraagde krediet (inclusief eventueel al lopend krediet)
+PI    1 1N C   4               Batch-rating		                                                     \BatchRatingKeuze                                  ;tussen 0 en 20
+C Zoals bijvoorbeeld 15,2. Leeg laten indien niet beschikbaar.
+PI    0 1N     4               Batch-referentielimiet		                                           \BatchReferentieLimiet                             ;tussen 0 en 500000
+C Leeg laten indien niet beschikbaar
+PP      1A     4               Resultaat                                                           \ToetsAutomatischFiatTxT
+
+; Hulpvariabelen
+XX       X     3
+PP    0 1N     4                                                                                   \ToetsAutomatischFiatPunten
+PP    0 1N     4               Norm gevraagd kredietbedrag		                                     \NormGevraagdKredietbedrag
+PP    0 1N     4               ToetsBatchReferentieLimiet                                          \ToetsBatchReferentieLimiet
+PP      1N C   4               Resultaat                                                           \ToetsAutomatischFiat
+PP    1 1N     4               Batch-rating		                                                     \BatchRating                                       ;tussen 0 en 20
+
+.Formulas NoTrend              ; Controle op volledigheid
+Q_Map01_WARNING                = &If(Q_Map01[1]=0,"Nog niet alle vragen in stap 1 zijn ingevuld.","")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map01                        = If( (Not DataEntered(OprichtingsdatumKvK)) Or (Not DataEntered(GevraagdKredietbedrag)) , 0 ,1)
+ToetsAutomatischFiatTxT        = &Case(ToetsAutomatischFiat[1],[#$ToetsAutomatischFiat#])                                                             ; dit ivm keuzevars die niet updaten
+BatchRating                    = OnER(BatchRatingKeuze/10,NA)
+
+.Choices
+BatchRatingKeuze               = file "Starter-BatchRating.fib"
+
+
+;------------------------------ Map 2
+.Variables
+PP      1N C   2               Basis voorwaarden                                                   \Q_Map02
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 2<$                                              \Q_Map02_WARNING
+PP      1A     3               $>Info bij stap 2<$                                                 \Q_Map02_INFO
+PP      1A     3               $>Validatie stap 2<$                                                \Q_Map02_VALIDATION
+
+PP      1N     3               Vragen
+
+PI      1N C   4               Wat is de rechtsvorm van de onderneming?	                           \Rechtsvorm
+PI      1N C   4               Is de looptijd van het kredietproduct langer dan 10 jaar?           \LooptijdLangerDan10Jaar
+;;PI      1N C   4               Is de onderneming ingeschreven bij de Kamer van Koophandel?         \KvKinschrijving
+PI      1N C   4               Is de onderneming gevestigd in Nederland?                           \GevestigdInNederland
+PI      1N C   4               Staat de branche vermeld op business rule 31?                       \BrancheInBusinessRule31
+C Deze kun je vinden in het Risk Rater rapport bij het veld Naics code restricted list
+PI      1N C   4               Is er commitment tot huisbankierschap (voeding loopt volledig bij ING of klant heeft de belofte daartoe gedaan en lopen eventuele bestaande financieringen bij ING)?\INGisHuisbankier
+PI      1N C   4               Wat is het aantal overstanden op de betaalrekening de afgelopen 6 maanden?\AantalOverstandenLaatsteHalfJaar
+C Aantal overstanden de afgelopen 6 maanden (voor zover beschikbaar).
+PI      1N C   4               Is de onderneming adequaat verzekerd tegen relevante bedrijfsrisico's?\BedrijfsrisicosVerzekerd
+C Welke verzekeringen hierbij belangrijk zijn is afhankelijk van de situatie. De starter is niet verplicht de gewenste verzekeringen bij ING af te sluiten.
+PI      1N C   4               Staan er calamiteiten vermeld bij de onderneming                    \VermeldeCalamiteiten
+C Op basis van Graydon-gegevens.
+
+;---------
+PP      1N     3               Extra voorwaarden
+PP      1A     4               Moet er een persoonlijke borg gesteld worden door de bestuurder(s)? \PersoonlijkeBorgBestuurderNodig
+PI      1N C   4               Is de bestuurder bereid om de persoonlijke borg te stellen?         \PersoonlijkeBorgBestuurderBereidheid
+C Voor 25% van het kredietbedrag.
+PP      1A     4               Akkoord basisvoorwaarden en knock-outs?                             \ToetsControleBasisvoorwaarden
+PP      1N C   4               Resultaat                                                           \AanvullendeCijfersVragen
+
+XX       X   1 3               Hulpvariabelen
+PP      1N C 1 4               LooptijdLangerDan10Jaar                                             \=LooptijdLangerDan10Jaar -> LooptijdLangerDan10Jaar
+;;PP      1N C   4               GeenKvKinschrijving                                                 \GeenKvKinschrijving
+PP      1N C   4               NietGevestigdInNederland                                            \NietGevestigdInNederland
+PP      1N C   4               =BrancheInBusinessRule31                                            \=BrancheInBusinessRule31
+PP      1N C   4               INGgeenHuisbankier                                                  \INGgeenHuisbankier
+PP      1N C   4               TeVeelOverstanden                                                   \TeVeelOverstanden
+PP      1N C   4               BedrijfsrisicosNietVerzekerd                                        \BedrijfsrisicosNietVerzekerd
+PP      1N C   4               VermeldeCalamiteitenAanwezig                                        \VermeldeCalamiteitenAanwezig
+PP    0=1N    -4               ToetsControleBasisvoorwaardenTotaal                                 \ToetsControleBasisvoorwaardenTotaal
+PP      1N   1 4               Akkoord basisvoorwaarden en knock-outs?                             \ToetsControleBasisHulp
+C 15=Klant komt niet in aanmerking voor krediet 60=Ga door naar stap 3 55=Vul alle vragen in.
+PP      1N C 1 4               RechtsvormBV                                                        \RechtsvormBV -> Rechtsvorm
+
+.Variable AanvullendeCijfersVragen, Visible=(Self>0)
+.Variable ToetsControleBasisvoorwaarden, Locked=1
+.Variable AanvullendeCijfersVragen, Locked=1
+.Variable PersoonlijkeBorgBestuurderNodig, Locked=1
+
+
+.Formulas NoTrend              ; Controle op volledigheid
+Q_Map02_WARNING                = &If(Q_Map02[1]=0,"Nog niet alle vragen in stap 2 zijn ingevuld.","")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map02                        = If( (Rechtsvorm[1]<0) Or (LooptijdLangerDan10Jaar[1]<0) Or (GevestigdInNederland[1]<0) Or (BrancheInBusinessRule31[1]<0) Or (INGisHuisbankier[1]<0) Or (AantalOverstandenLaatsteHalfJaar[1]<0) Or (BedrijfsrisicosVerzekerd[1]<0) Or (VermeldeCalamiteiten[1]<0) Or (PersoonlijkeBorgBestuurderBereidheid[1]<0) , 0 ,1)
+
+;------------------------------ Map 3
+.Variables
+PP      1N C   2               Bestuurder(s)                                                       \Q_Map03
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 3<$                                              \Q_Map03_WARNING
+PP      1A     3               $>Info bij stap 3<$                                                 \Q_Map03_INFO
+PP      1A     3               $>Validatie stap 3<$                                                \Q_Map03_VALIDATION
+
+PP      1N     3               Vragen
+PI    1 1N     4               Aantal werknemers (full-time)	                                     \AantalWerknemersFTE                               ;tussen 0,5 en 50
+C Exclusief bestuurders
+PI    1 1N     4               Aantal bestuurders (full-time)		                                   \AantalBestuurdersFTE                              ;tussen 0,5 en 10
+C Bestuurders zijn eigenaren, vennoten, maten, directeuren van een BV (excl. aandeelhouders en stille vennoten)
+
+PP      1N     3               Bestuurder 1
+PI      1A     4               Naam             		                                               \Bestuurders01
+C Bij meer dan 3 bestuurders hierna de gegevens van de 3 bestuurders met de belangrijkste inbreng invullen.
+PI    2 1N D   4               Geboortedatum		                                                   \Bestuurders01Gebdatum
+PI      1N C   4               Arbeidsverleden in de branche (in jaren)		                         \Bestuurders01ErvaringInBranche
+PI      1N C   4               Beschikt over relevante vooropleiding en vakdiploma's?              \Bestuurders01Opleiding
+
+PP      1N     3               Bestuurder 2
+PI      1A     4               Naam               	                                               \Bestuurders02
+PI    2 1N D   4               Geboortedatum		                                                   \Bestuurders02Gebdatum
+PI      1N C   4               Arbeidsverleden in de branche (in jaren)		                         \Bestuurders02ErvaringInBranche
+PI      1N C   4               Beschikt over relevante vooropleiding en vakdiploma's?              \Bestuurders02Opleiding
+
+PP      1N     3               Bestuurder 3
+PI      1A     4               Naam             		                                               \Bestuurders03
+PI    2 1N D   4               Geboortedatum		                                                   \Bestuurders03Gebdatum
+PI      1N C   4               Arbeidsverleden in de branche (in jaren)		                         \Bestuurders03ErvaringInBranche
+PI      1N C   4               Beschikt over relevante vooropleiding en vakdiploma's?              \Bestuurders03Opleiding
+
+PP      1N     3               Overige
+PI      1N C   4               Wordt de onderneming begeleid door een professional?                \OndernemingProffesioneelBegeleid
+C Onder professional wordt verstaan een ervaren branchegenoot of iemand die beroepsmatig starters begeleidt.
+PI      1N C   4               Hoofdreden voor het starten van de onderneming		                   \HoofdredenStartOnderneming
+C Bepaal de hoofdreden o.b.v. je oordeel naar aanleiding van klantcontact.
+
+XX       X   1 3               Hulpvariabelen
+PP    0 1N     4               LeeftijdJongsteBestuurder                                           \LeeftijdJongsteBestuurder
+PP    0 1N     4               ToetsBestuurders01Gebdatum                                          \ToetsBestuurders01Gebdatum -> Bestuurders01Gebdatum
+PP    0 1N     4               ToetsBestuurders02Gebdatum                                          \ToetsBestuurders02Gebdatum -> Bestuurders02Gebdatum
+PP    0 1N     4               ToetsBestuurders03Gebdatum                                          \ToetsBestuurders03Gebdatum -> Bestuurders03Gebdatum
+PP      1N C   4               Arbeidsverleden in de branche (in jaren) - Totaal                   \ErvaringMinstErvarenBestuurder
+PP      1N C   4               Beschikt over relevante vooropleiding en vakdiploma's?              \OpleidingBestuurders
+
+.Formulas NoTrend              ; Controle op volledigheid
+Q_MAP03_WARNING                = &If(Q_MAP03[1]=0,"Nog niet alle vragen in stap 3 zijn ingevuld.","")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP03                        = If( (Not DataEntered(AantalWerknemersFTE)) Or (Not DataEntered(AantalBestuurdersFTE)) Or (Not DataEntered(Bestuurders01)) Or (Not DataEntered(Bestuurders01Gebdatum)) Or (Bestuurders01ErvaringInBranche[1]<0) Or (Bestuurders01Opleiding[1]<0) Or (OndernemingProffesioneelBegeleid[1]<0) Or (HoofdredenStartOnderneming[1]<0)  , 0 ,1)
+
+;------------------------------ Map 5
+.Variables
+PP      1N C   2               Kenmerken onderneming                                               \Q_MAP05
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 5<$                                              \Q_Map05_WARNING
+PP      1A     3               $>Info bij stap 5<$                                                 \Q_Map05_INFO
+PP      1A     3               $>Validatie stap 5<$                                                \Q_Map05_VALIDATION
+
+PP      1N     3               Vragen
+PI    0 1N     4               Hoeveel organisaties zitten er in de juridische structuur?          \OndernemingAantalOrganisaties     ; minimaal 1
+C Aantal rechtsvormen in de juridische structuur, waarin de kredietaanvrager zich bevindt.
+PI      1N C   4               In welke branche is de onderneming werkzaam?		                     \BrancheSector
+PI      1N C   4               Is er sprake van een voortzetting van bestaande bedrijfsactiviteiten?\VoortzettingBestaandeActiviteiten
+C indien verhoging bestaand krediet, kies nvt.
+
+.Formulas NoTrend              ; Controle op volledigheid
+Q_MAP05_WARNING                = &If(Q_MAP05[1]=0,"Nog niet alle vragen in stap 4 zijn ingevuld.","")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP05                        = If( ( (OndernemingAantalOrganisaties<0) And RechtsvormBV ) Or (BrancheSector[1]<0) Or (VoortzettingBestaandeActiviteiten[1]<0) , 0 ,1)
+
+;------------------------------ Map 4
+.Variables
+PP      1N C   2               Kredietvraag                                                        \Q_MAP04
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 4<$                                              \Q_Map04_WARNING
+PP      1A     3               $>Info bij stap 4<$                                                 \Q_Map04_INFO
+PP      1A     3               $>Validatie stap 4<$                                                \Q_Map04_VALIDATION
+
+PP      1N     3               Vragen
+PI    0 1N     4               (Huidige) investeringsbehoefte		                                   \Investeringsbehoefte                             ;tussen 0 en 1.000.000
+C Investering die de starter op het moment van de kredietaanvraag wil doen (in materiële of immateriële activa).
+PI    0 1N     4               Het bedrag dat als risicodragend vermogen in de onderneming wordt gestort\GestortRisicodragendVermogen                ;tussen 0 en 1.000.000
+C Extra eigen inbreng (of van derden mits risicodragend en niet in de vorm van een lening).\r\nVerplicht veld, indien nvt vul in "0".
+PI    0 1N     4               Aanwending van bestaande liquide middelen		                       \BenuttingLiqMiddelen                             ;tussen 0 en 1.000.000
+C Aanwenden van bestaande liquide middelen (of ruimte op bestaande RC faciliteit), voor de huidige investeringsbehoefte.\r\nVerplicht veld, indien nvt vul in "0".
+PI    0 1N     4               Het eigen vermogen op de balans van de onderneming (dus voor kredietverlening en voor stortingen u.h.v. deze aanvraag)\EigenVermogenVoorKredietverlening ;tussen 0 en 1.000.000
+C Opgebouwd eigen vermogen in reeds bestaande onderneming. Indien eigen vermogen negatief, aanvraag afwijzen of naar manueel proces.\r\nVerplicht veld, indien nvt vul in "0".
+PI    0 1N     4               Balanstotaal - na kredietverlening		                               \BalansTotaalNaKredietverlening                    ;tussen 0 en 1.000.000
+PP      1A     4               Toets risicodragend vermogen versus norm	                           \ToetsRisicodragendVermogen
+C Hierbij wordt het eigen vermogen gecorrigeerd voor aanloopverlies en investering in immateriële activa.\r\n\r\nDit veld wordt berekend nadat de volgende gegevens zijn ingevuld:\r\n-Het bedrag dat als risicodragend vermogen in de onderneming wordt gestort\r\n-Het eigen vermogen op de balans van de onderneming (dus voor kredietverlening en voor stortingen u.h.v. deze aanvraag)\r\n-Verwachting winst na belasting, jaar 1\r\n-Investering in immateriële activa - na kredietverlening\r\n-Investering in materiële activa - na kredietverlening
+PI    0 1N     4               Investering in immateriële activa - na kredietverlening	           \InvesteringImmaterieelActivaNaKrediet             ;tussen 0 en 1.000.000
+C Liquide middelen hoeven niet als investering (materieel/immaterieel) ingevuld te worden.
+PI    0 1N     4               Investering in materiële activa - na kredietverlening	             \InvesteringMaterieelActivaNaKrediet               ;tussen 0 en 1.000.000
+C Liquide middelen hoeven niet als investering (materieel/immaterieel) ingevuld te worden.
+PI      1N C   4               Gewenst product		                                                 \GewenstProduct
+PI      1N C   4               Kredietproduct sluit aan bij investeringsdoel		                   \ProductSluitAanBijInvestering
+
+
+XX       X   1 3               Hulpvariabelen
+PP    0 1N     4               Norm risicodragend vermogen bij investering materiële activa        \NormRisicoVermogenMatVastAkt
+
+.Formulas NoTrend              ; Controle op volledigheid
+Q_MAP04_WARNING                = &If(Q_MAP04[1]=0,"Nog niet alle vragen in stap 5 zijn ingevuld.","")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP04                        = If( (Not DataEntered(Investeringsbehoefte)) Or (Not DataEntered(GestortRisicodragendVermogen)) Or (Not DataEntered(BenuttingLiqMiddelen)) Or (Not DataEntered(EigenVermogenVoorKredietverlening)) Or (Not DataEntered(BalansTotaalNaKredietverlening)) Or (Not DataEntered(InvesteringImmaterieelActivaNaKrediet)) Or (Not DataEntered(InvesteringMaterieelActivaNaKrediet)) Or (ProductSluitAanBijInvestering[1]<0) Or (GewenstProduct[1]<0)  , 0 ,1)
+
+
+;------------------------------ Map 6
+.Variables
+PP      1N C   2               Financiën onderneming                                               \Q_MAP06
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 6<$                                              \Q_Map06_WARNING
+PP      1A     3               $>Info bij stap 6<$                                                 \Q_Map06_INFO
+PP      1A     3               $>Validatie stap 6<$                                                \Q_Map06_VALIDATION
+
+PP      1N     3               Vragen
+PI      1N C   4               Wordt de bedrijfsadministratie uitbesteed?		                       \BedrijfsadmUitbesteed
+PI      1N C   4               Heeft de onderneming al geaccepteerde offertes en/of goederen verkocht?\ReedsOmzetGegenereerd
+PI      1N C   4               Beschikt de onderneming over tussentijdse cijfers?		               \TussentijdseCijfersAanwezig
+C Bij ondernemingen die langer dan 6 maanden bestaan. Indien de onderneming korter dan 6 maanden bestaat vul in 'NVT'.
+PI    0 1N     4               Verwachting winst na belasting, jaar 1		                           \VerwachtResultaatNaBelJaar1       ; +/- 50.000.000 euro
+C Op basis van een realistisch scenario (in euro's), eerste kalenderjaar
+PI    0 1N     4               Verwachting winst na belasting, jaar 2		                           \VerwachtResultaatNaBelJaar2       ;  +/- 50.000.000 euro
+C Op basis van een realistisch scenario (in euro's), tweede kalenderjaar
+PI    0 1N     4               Verwachting winst na belasting, jaar 3		                           \VerwachtResultaatNaBelJaar3       ; +/- 50.000.000 euro
+C Op basis van een realistisch scenario (in euro's), derde kalenderjaar
+PI    0 1N     4               Gerealiseerde winst na belasting, jaar 1		                         \ResultaatNaBelJaar1               ; +/- 50.000.000 euro
+C Alleen invullen indien onderneming meer dan 18 maanden bestaat.
+PI    0 1N     4               Gerealiseerde winst na belasting, jaar 2		                         \ResultaatNaBelJaar2               ; +/- 50.000.000 euro
+C Alleen invullen indien onderneming meer dan 30 maanden bestaat.
+PI    0 1N     4               Verwachting netto-omzet, jaar 1		                                 \VerwachtNettoOmzetJaar1           ; +/- 50.000.000 euro
+C Op basis van een realistisch scenario (in euro's), eerste kalenderjaar
+PI    0 1N     4               Verwachting netto-omzet, jaar 2		                                 \VerwachtNettoOmzetJaar2           ; +/- 50.000.000 euro
+C Op basis van een realistisch scenario (in euro's), tweede kalenderjaar
+PI    0 1N     4               Verwachting netto-omzet, jaar 3		                                 \VerwachtNettoOmzetJaar3           ; +/- 50.000.000 euro
+C Op basis van een realistisch scenario (in euro's), derde kalenderjaar
+PI    0 1N     4               Verwachting afschrijvingen, jaar 1		                               \VerwachtAfschrijvingenJaar1       ; +/- 50.000.000 euro
+C Op basis van een realistisch scenario (in euro's), eerste kalenderjaar
+PI    0 1N     4               Verwachting afschrijvingen, jaar 2		                               \VerwachtAfschrijvingenJaar2       ; +/- 50.000.000 euro
+C Op basis van een realistisch scenario (in euro's), tweede kalenderjaar
+PI    0 1N     4               Verwachting afschrijvingen, jaar 3		                               \VerwachtAfschrijvingenJaar3       ; +/- 50.000.000 euro
+C Op basis van een realistisch scenario (in euro's), derde kalenderjaar
+PI    0 1N %   4               Gerealiseerde balansverhouding (eigen vermogen/totaal vermogen), jaar 1\SolvabiliteitBalansJaar1       ; tussen -1 en +1
+C Invullen indien onderneming meer dan 18 maanden bestaat
+PI    0 1N %   4               Gerealiseerde balansverhouding (eigen vermogen/totaal vermogen), jaar 2\SolvabiliteitBalansJaar2       ; tussen -1 en +1
+C Invullen indien onderneming meer dan 30 maanden bestaat
+PI      1N C   4               Wordt het ondernemersplan door een financieel expert ondersteund?   \FinancieleExpert
+C Moet blijken uit meegestuurd ondernemersplan
+
+XX       X   1 3               Hulpvariabelen
+PP    0 1N     4               Toets ouderdom onderneming                                          \ToetsOprichtingsdatumKvK          ;ook al zo'n toetsing bij AanvullendeCijfersVragen
+
+.Formulas NoTrend              ; Controle op volledigheid
+Q_MAP06_WARNING                = &If(Q_MAP06[1]=0,"Nog niet alle vragen in stap 6 zijn ingevuld.","")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP06                        = If( (BedrijfsadmUitbesteed[1]<0) Or (ReedsOmzetGegenereerd[1]<0) Or (TussentijdseCijfersAanwezig[1]<0) Or (Not DataEntered(VerwachtResultaatNaBelJaar1)) Or (Not DataEntered(VerwachtResultaatNaBelJaar2)) Or (Not DataEntered(VerwachtResultaatNaBelJaar3)) Or (Not ResultaatNaBelJaar1Akkoord) Or (Not ResultaatNaBelJaar2Akkoord) Or (Not DataEntered(VerwachtNettoOmzetJaar1)) Or (Not DataEntered(VerwachtNettoOmzetJaar2)) Or (Not DataEntered(VerwachtNettoOmzetJaar3)) Or (Not DataEntered(VerwachtAfschrijvingenJaar1)) Or (Not DataEntered(VerwachtAfschrijvingenJaar2)) Or (Not DataEntered(VerwachtAfschrijvingenJaar3)) Or (Not SolvabiliteitBalansJaar1Akkoord ) Or (Not SolvabiliteitBalansJaar2Akkoord) Or (FinancieleExpert[1]<0)  , 0 ,1)
+
+;------------------------------ Result
+.Variables
+PP      1A   1 2               Resultaat                                                           \Q_RESULT
+PP      1A     3               Resultaat                                                           \RESULT
+PP      1A     4               =Q_RESULT                                                           \=Q_RESULT
+
+.Formulas NoTrend
+Q_RESULT                       = &If(Q_ROOT[1]=0,&"Nog niet alle vragen zijn ingevuld.\r\n",&Case(AkkoordVragenlijst,[#$results-vragenlijst#]))&"\r\n\r\n"&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+.ReadFile results-vragenlijst  = "results-vragenlijst.fib"
+
+
+;-------------------------------------------------------------------------------------------------- STATUS
+.Variables
+
+PI      1N C 1 2               "Status"                                                            \Q_STATUS
+PI      1N D   2               "Definitief gemaakt op:"                                            \Q_STATUS_FINAL_ON
+PI      1A     2               "Definitief gemaakt door:"                                          \Q_STATUS_FINAL_BY
+PI      1A     2               "Definitief gemaakt door:"                                          \Q_STATUS_FINAL_BY_NAME
+PI      1N D   2               "Aangemaakt op:"                                                    \Q_STATUS_STARTED_ON
+PI      1A     2               "Aangemaakt door:"                                                  \Q_STATUS_STARTED_BY
+PI      1A     2               "Aangemaakt door:"                                                  \Q_STATUS_STARTED_BY_NAME
+PI      1N D   2  +            "Laatst bewerkt op:"                                                \Q_STATUS_MODIFIED_ON
+PP      1A     2  +            "Modelversie"                                                       \ModelVersion
+PP      1A     2  +            "Modeltype"                                                         \ModelType
+PP      1A     2  +            "Parametersversie"                                                  \MatrixVersion
+
+PI      1N C   2               "Previous"                                                            \Q_PREVIOUS_BUTTON_VISIBLE
+PI      1N C   2               "Next"                                                                \Q_NEXT_BUTTON_VISIBLE
+PI      1N C   2               "Concept rapportage"                                                  \Q_CONCEPT_REPORT_VISIBLE
+PI      1N C   2               "Download rapport"                                                    \Q_FINAL_REPORT_VISIBLE
+PI      1N C   2               "Definitief maken"                                                    \Q_MAKE_FINAL_VISIBLE
+
+
+
+.Choices
+Q_PREVIOUS_BUTTON_VISIBLE      = "0:Nooit|2:Altijd"
+Q_NEXT_BUTTON_VISIBLE          = "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd"
+Q_CONCEPT_REPORT_VISIBLE       = "0:Nee|1:Ja"
+Q_FINAL_REPORT_VISIBLE         = "0:Nee|1:Ja"
+Q_MAKE_FINAL_VISIBLE           = "0:Nee|1:Ja"
+
+.Formulas NoTrend
+Q_PREVIOUS_BUTTON_VISIBLE      = 2
+Q_NEXT_BUTTON_VISIBLE          = 2
+Q_CONCEPT_REPORT_VISIBLE       = 1
+Q_FINAL_REPORT_VISIBLE         = 1
+Q_MAKE_FINAL_VISIBLE           = 1
+
+.Choices
+Q_STATUS                       = "0:Actief|1:Defintief"
+Q_ROOT                         = "0:Onvolledig|1:Volledig"
+
+.Formulas NoTrend
+ModelVersion                   = "#ModelVersion#"                                                                           ; EJS: mooier is (maar kan niet in webversie): &SysVar("ModelVersion")
+MatrixVersion                  = "None"
+Q_STATUS                       = 0
+Q_STATUS_MODIFIED_ON           = Now
+ModelType                      = "STARTER"
+
+;--------------------------------------------------------------------------------------------------  Hulpvariabelen
+.Variables
+
+P       1A   1 1               Toetsen en normen                                                   \ToetsenEnNormen
+
+PP      1A     2               $>Results<$                                                         \=Q_RESULT
+PP      1N C   3               Akkoord vragenlijst?                                                \AkkoordVragenlijst
+PP    0 1N     3               Ratingwaarde                                                        \Ratingwaarde
+
+;; PP    0 1N     2               ToetsVolledigheid02                                                 \ToetsVolledigheid02
+;; PP    0 1N     3               ToetsAantalWerknemersFTE                                            \ToetsAantalWerknemersFTE
+;; PP    0 1N     3               ToetsBestuurders01                                                  \ToetsBestuurders01
+;; PP    0 1N     3               ToetsOndernemingProffesioneelBegeleid                               \ToetsOndernemingProffesioneelBegeleid
+;; PP    0 1N     3               ToetsInvesteringsbehoefte                                           \ToetsInvesteringsbehoefte
+;; PP    0 1N     3               ToetsOndernemingAantalOrganisaties                                  \ToetsOndernemingAantalOrganisaties
+;; PP    0 1N     3               BedrijfsadmUitbesteed                                               \ToetsBedrijfsadmUitbesteed
+;; PP    0 1N     3               VerwachtAfschrijvingenJaar2                                         \ToetsVerwachtAfschrijvingenJaar2
+;; PP    0=1N    -3               ToetsVolledigheid01                                                 \ToetsVolledigheid01
+
+.Variables
+PP    0 1N     2               Gerealiseerde winst verplicht?                                      \
+PP    0 1N     3               Gerealiseerde winst na belasting, jaar 1 compleet?                  \ResultaatNaBelJaar1Akkoord -> ResultaatNaBelJaar1
+PP    0 1N     3               Gerealiseerde winst na belasting, jaar 2 compleet?                  \ResultaatNaBelJaar2Akkoord -> ResultaatNaBelJaar2
+PP    0 1N     3               Gerealiseerde balansverhouding jaar 1 compleet?                     \SolvabiliteitBalansJaar1Akkoord -> SolvabiliteitBalansJaar1
+PP    0 1N     3               Gerealiseerde balansverhouding jaar 2 compleet?                     \SolvabiliteitBalansJaar2Akkoord -> SolvabiliteitBalansJaar2
+
+.Formulas NoTrend
+ResultaatNaBelJaar1Akkoord     = If( (OnNA(Q_STATUS_FINAL_ON[1],Now) - OprichtingsdatumKvK[1]) > (1*365)+183, If( (DataEntered(ResultaatNaBelJaar1)     ) And (ResultaatNaBelJaar1[1]<>0     ) ,1,0) ,1)
+ResultaatNaBelJaar2Akkoord     = If( (OnNA(Q_STATUS_FINAL_ON[1],Now) - OprichtingsdatumKvK[1]) > (2*365)+183, If( (DataEntered(ResultaatNaBelJaar2)     ) And (ResultaatNaBelJaar2[1]<>0     ) ,1,0) ,1)
+SolvabiliteitBalansJaar1Akkoord= If( (OnNA(Q_STATUS_FINAL_ON[1],Now) - OprichtingsdatumKvK[1]) > (1*365)+183, If( (DataEntered(SolvabiliteitBalansJaar1)) And (SolvabiliteitBalansJaar1[1]<>0) ,1,0) ,1)
+SolvabiliteitBalansJaar2Akkoord= If( (OnNA(Q_STATUS_FINAL_ON[1],Now) - OprichtingsdatumKvK[1]) > (2*365)+183, If( (DataEntered(SolvabiliteitBalansJaar2)) And (SolvabiliteitBalansJaar2[1]<>0) ,1,0) ,1)
+
+.Variables
+PP      1A     2               Manueel proces                                                      \ManueelProces
+PP      1N     3               GevraagdKredietbedrag > NormGevraagdKredietbedrag                   \ManueelProces01
+PP      1N     3               OndernemingAantalOrganisaties > 1                                   \ManueelProces02
+PP      1N     3               Jaar 1 Verw. result > Ger. result                                   \ManueelProces03
+PP      1N     3               Jaar 2 Verw. result > Ger. resul                                    \ManueelProces04
+PP      1N     3               Jaar 1 solv. <10%                                                   \ManueelProces05
+PP      1N     3               Jaar 2 solv. <10%                                                   \ManueelProces06
+PP      1N     3               FinancieleExpert is geen RA/AA/NOAB                                 \ManueelProces07
+PP    0=1N    -3               Manueel Proces (totaal)                                             \ManueelProcesTotaal
+
+PP    1 1N     2               Totaal punten                                                       \EindScore
+
+PP    1 1N     3               Aantal medewerkers                                                  \TotaalPunten01 -> AantalWerknemersFTE
+PP    1 1N     4               Norm aantal medewerkers                                             \NormAantalMedewerkers
+PP    1 1N     4               Basisfactor                                                         \Basispunten
+PP    1 1N     4               Factor bij aantal medewerkers > norm                                \Factor01A
+PP    1 1N     4               Factor bij aantal medewerkers < norm                                \Factor01B
+PP    1 1N     4               Punten                                                              \=TotaalPunten01
+
+PP    1 1N     3               Wordt de onderneming begeleid door een professional?                \TotaalPunten02 -> OndernemingProffesioneelBegeleid
+PP    1 1N     4               factor Nee                                                          \Factor02A
+PP    1 1N     4               factor <> Nee                                                       \Factor02B
+PP    1 1N     4               Punten                                                              \=TotaalPunten02
+
+PP    1 1N     3               Leeftijd Jongste Bestuurder                                         \TotaalPunten08 -> LeeftijdJongsteBestuurder
+PP    1 1N     4               factor 1                                                            \Factor08A
+PP    1 1N     4               factor 2                                                            \Factor08B
+PP    1 1N     4               factor 3                                                            \Factor08C
+PP    1 1N     4               OndergrensLeeftijd01                                                \OndergrensLeeftijd01
+PP    1 1N     4               OndergrensLeeftijd02                                                \OndergrensLeeftijd02
+PP    1 1N     4               Punten                                                              \=TotaalPunten08
+
+PP    1 1N     3               Ervaring Minst Ervaren Bestuurder                                   \TotaalPunten09 -> ErvaringMinstErvarenBestuurder
+PP    1 1N     4               factor 1                                                            \Factor09A
+PP    1 1N     4               factor 2                                                            \Factor09B
+PP    1 1N     4               factor 3                                                            \Factor09C
+PP    1 1N     4               Punten                                                              \=TotaalPunten09
+
+PP    1 1N     3               Opleiding Bestuurders                                               \TotaalPunten10 -> OpleidingBestuurders
+PP    1 1N     4               factor 1                                                            \Factor10A
+PP    1 1N     4               factor 2                                                            \Factor10B
+PP    1 1N     4               Punten                                                              \=TotaalPunten10
+
+PP    1 1N     3               Branche Sector                                                      \TotaalPunten03 -> BrancheSector
+PP    1 1N     4               factor 1                                                            \Factor03A
+PP    1 1N     4               factor 2                                                            \Factor03B
+PP    1 1N     4               Punten                                                              \=TotaalPunten03
+
+PP    1 1N     3               Voortzetting Bestaande Activiteiten                                 \TotaalPunten04 -> VoortzettingBestaandeActiviteiten
+PP    1 1N     4               factor 1                                                            \Factor04A
+PP    1 1N     4               factor 2                                                            \Factor04B
+PP    1 1N     4               Punten                                                              \=TotaalPunten04
+
+PP    1 1N     3               Bedrijfs adm Uitbesteed                                             \TotaalPunten05 -> BedrijfsadmUitbesteed
+PP    1 1N     4               factor 1                                                            \Factor05A
+PP    1 1N     4               factor 2                                                            \Factor05B
+PP    1 1N     4               Punten                                                              \=TotaalPunten05
+
+PP    1 1N     3               Reeds Omzet Gegenereerd                                             \TotaalPunten06 -> ReedsOmzetGegenereerd
+PP    1 1N     4               factor 1                                                            \Factor06A
+PP    1 1N     4               factor 2                                                            \Factor06B
+PP    1 1N     4               Punten                                                              \=TotaalPunten06
+
+PP    1 1N     3               Tussentijdse Cijfers Aanwezig                                       \TotaalPunten07 -> TussentijdseCijfersAanwezig
+PP    1 1N     4               factor 1                                                            \Factor07A
+PP    1 1N     4               factor 2                                                            \Factor07B
+PP    1 1N     4               Punten                                                              \=TotaalPunten07
+
+
+PP    1=1N    -3               Totaal punten                                                       \=EindScore
+PP    1 1N   1 3               Ondergrens punten                                                   \OndergrensPunten
+;PP      1A     2               Knock-out (s)                                                       \TekstKnockOuts
+
+.Formulas NoTrend
+PersoonlijkeBorgBestuurderNodig                  = &If(RechtsvormBV[1],"Ja","Nee")
+LeeftijdJongsteBestuurder                        = Min(ToetsBestuurders01Gebdatum,Min(ToetsBestuurders02Gebdatum,ToetsBestuurders03Gebdatum))
+ErvaringMinstErvarenBestuurder                   = Min(OnNA(Bestuurders01ErvaringInBranche,99),Min(OnNA(Bestuurders02ErvaringInBranche,99),OnNA(Bestuurders03ErvaringInBranche,99)))
+OpleidingBestuurders                             = If(Bestuurders01Opleiding=0,0,If(Bestuurders02Opleiding=0,0,If(Bestuurders03Opleiding=0,0,1)))
+ToetsBestuurders01Gebdatum                       = If(Bestuurders01Gebdatum=NA,999,RoundUp(( OnNA(Q_STATUS_FINAL_ON[1],Now) -Bestuurders01Gebdatum+1)/365,0)-1) ; Leeftijd in jaren, via truuk om een RoundDown te maken (deze functie zit niet in Finan).
+ToetsBestuurders02Gebdatum                       = If(Bestuurders02Gebdatum=NA,999,RoundUp(( OnNA(Q_STATUS_FINAL_ON[1],Now) -Bestuurders02Gebdatum+1)/365,0)-1) ; De af te ronden waarde wordt met 1/365 opgehoogd, zodat een exact compleet jaar (365 dagen) toch naar boven
+ToetsBestuurders03Gebdatum                       = If(Bestuurders03Gebdatum=NA,999,RoundUp(( OnNA(Q_STATUS_FINAL_ON[1],Now) -Bestuurders03Gebdatum+1)/365,0)-1) ; wordt afgerond (365 dgn wordt dan 2 jaar). Vervolgens wordt er van deze uitkomst een afgehaald (2-1=1 jaar).
+NormRisicoVermogenMatVastAkt                     = If(Rechtsvorm=25,0.35,0.25)
+ToetsRisicodragendVermogen                       = &If( DataEntered(GestortRisicodragendVermogen,1) And DataEntered(EigenVermogenVoorKredietverlening,1) And DataEntered(VerwachtResultaatNaBelJaar1,1) And DataEntered(InvesteringImmaterieelActivaNaKrediet,1) And DataEntered(InvesteringMaterieelActivaNaKrediet,1) , &If((GestortRisicodragendVermogen+EigenVermogenVoorKredietverlening)<(IF(VerwachtResultaatNaBelJaar1<0,-VerwachtResultaatNaBelJaar1,0)+((InvesteringImmaterieelActivaNaKrediet+(InvesteringMaterieelActivaNaKrediet*NormRisicoVermogenMatVastAkt)))),"Onvoldoende","voldoende"),"")
+ToetsAutomatischFiat                             = If(OprichtingsdatumKvK=NA,NA,If(OprichtingsdatumKvK> OnNA(Q_STATUS_FINAL_ON[1],Now) ,10,If(( OnNA(Q_STATUS_FINAL_ON[1],Now)  -OprichtingsdatumKvK)/365>3,5, If((ToetsBatchReferentieLimiet)=0,20,25))))
+ToetsBatchReferentieLimiet                       = If(BatchReferentieLimiet=NA,1,IF(BatchReferentieLimiet>=GevraagdKredietbedrag,0,1))
+ToetsAutomatischFiatPunten                       = If(ToetsAutomatischFiat<>5,90,99)
+AanvullendeCijfersVragen                         = If(ToetsAutomatischFiat<=0,NA,If((( OnNA(Q_STATUS_FINAL_ON[1],Now) -OprichtingsdatumKvK)/30)>18,1,NA))
+ToetsControleBasisHulp                           = If(ToetsAutomatischFiat=15,15,If(ToetsControleBasisvoorwaardenTotaal>0,15,If((RechtsvormBV+(PersoonlijkeBorgBestuurderBereidheid=0)+(PersoonlijkeBorgBestuurderBereidheid=10))=2,15,If(Q_MAP02[1]=0,55,60))))
+ToetsControleBasisvoorwaarden                    = &If(ToetsControleBasisHulp[1]=15,&"Klant komt niet in aanmerking voor krediet",&If(ToetsControleBasisHulp[1]=60,&"Ga door naar stap 3","Vul alle vragen in."))
+RechtsvormBV                                     = If(Rechtsvorm=25,1,0)
+;;GeenKvKinschrijving                              = If(KvKinschrijving=0,1,0)
+NietGevestigdInNederland                         = If(GevestigdInNederland=0,1,0)
+INGgeenHuisbankier                               = If(INGisHuisbankier=0,1,0)
+TeVeelOverstanden                                = If(AantalOverstandenLaatsteHalfJaar=3,1,0)
+BedrijfsrisicosNietVerzekerd                     = If(BedrijfsrisicosVerzekerd=0,1,0)
+VermeldeCalamiteitenAanwezig                     = If(VermeldeCalamiteiten=1,1,0)
+;; ToetsAantalWerknemersFTE                         = (Not DataEntered(AantalWerknemersFTE))+(Not DataEntered(AantalBestuurdersFTE))
+;; ToetsBestuurders01                               = (Not DataEntered(Bestuurders01))+(Not DataEntered(Bestuurders01Gebdatum))+(Not DataEntered(Bestuurders01ErvaringInBranche))+(Not DataEntered(Bestuurders01Opleiding))
+;; ToetsOndernemingProffesioneelBegeleid            = (Not DataEntered(OndernemingProffesioneelBegeleid))+(Not DataEntered(HoofdredenStartOnderneming))
+;; ToetsInvesteringsbehoefte                        = (Not DataEntered(Investeringsbehoefte))+(Not DataEntered(GestortRisicodragendVermogen))+(Not DataEntered(BenuttingLiqMiddelen))+(Not DataEntered(EigenVermogenVoorKredietverlening))+(Not DataEntered(BalansTotaalNaKredietverlening))+(Not DataEntered(InvesteringImmaterieelActivaNaKrediet))+(Not DataEntered(InvesteringMaterieelActivaNaKrediet))+(Not DataEntered(ProductSluitAanBijInvestering))+(Not DataEntered(GewenstProduct))
+;; ToetsOndernemingAantalOrganisaties               = (Not DataEntered(OndernemingAantalOrganisaties))+(Not DataEntered(BrancheSector))+(Not DataEntered(VoortzettingBestaandeActiviteiten))
+;; ToetsBedrijfsadmUitbesteed                       = (Not DataEntered(BedrijfsadmUitbesteed))+(Not DataEntered(ReedsOmzetGegenereerd))+(Not DataEntered(TussentijdseCijfersAanwezig))+(Not ResultaatNaBelJaar1Akkoord)+(Not DataEntered(VerwachtResultaatNaBelJaar2))+(Not DataEntered(VerwachtResultaatNaBelJaar3))+(Not ResultaatNaBelJaar1Akkoord)+(Not ResultaatNaBelJaar2Akkoord)
+;; ToetsVerwachtAfschrijvingenJaar2                 = (Not DataEntered(VerwachtAfschrijvingenJaar2))+(Not SolvabiliteitBalansJaar1Akkoord )+(Not DataEntered(VerwachtNettoOmzetJaar3))+(Not DataEntered(VerwachtAfschrijvingenJaar2))+(Not SolvabiliteitBalansJaar1Akkoord)+(Not SolvabiliteitBalansJaar2Akkoord)+(Not DataEntered(FinancieleExpert))
+;; ToetsVolledigheid02                              = ToetsVolledigheid01-5
+
+ManueelProces01                                 = If(GevraagdKredietbedrag>NormGevraagdKredietbedrag,1,NA) ;I13=25
+ManueelProces02                                 = If(OndernemingAantalOrganisaties>1,1,NA)
+ManueelProces03                                 = If(AanvullendeCijfersVragen=NA,NA,If(VerwachtResultaatNaBelJaar1>ResultaatNaBelJaar1,1,NA))
+ManueelProces04                                 = If(AanvullendeCijfersVragen=NA,NA,If(VerwachtResultaatNaBelJaar2>ResultaatNaBelJaar2,1,NA))
+ManueelProces05                                 = If(AanvullendeCijfersVragen=NA,NA,IF(SolvabiliteitBalansJaar1<0.1,1,NA))
+ManueelProces06                                 = If(AanvullendeCijfersVragen=NA,NA,IF(SolvabiliteitBalansJaar2<0.1,1,NA))
+ManueelProces07                                 = If(FinancieleExpert=3,1,NA)
+ManueelProces                                   = &If(ManueelProcesTotaal>=1,"Klant moet ook manueel proces doorlopen","")
+
+
+
+TotaalPunten01                                   = If( DataEntered(AantalWerknemersFTE), If(AantalWerknemersFTE>NormAantalMedewerkers,Factor01A*Basispunten,Factor01B*Basispunten) ,NA)
+NormAantalMedewerkers                            = 5
+Basispunten                                      = 11
+Factor01A                                        = 2
+Factor01B                                        = 1
+TotaalPunten02                                   = If( DataEntered(OndernemingProffesioneelBegeleid), If(OndernemingProffesioneelBegeleid=0,Factor02A*Basispunten,Factor02B*Basispunten) ,NA)
+Factor02A                                        = 1.5
+Factor02B                                        = 1
+TotaalPunten03                                   = If( DataEntered(BrancheSector), Case(BrancheSector,[05:Factor03A*Basispunten|10:Factor03A*Basispunten|15:Factor03A*Basispunten|20:Factor03A*Basispunten|25:Factor03A*Basispunten|Factor03B *Basispunten]) ,NA)
+Factor03A                                        = 1.5
+Factor03B                                        = 1
+TotaalPunten04                                   = If( DataEntered(VoortzettingBestaandeActiviteiten), If(VoortzettingBestaandeActiviteiten=0,Factor04A*Basispunten,Factor04B*Basispunten) ,NA)
+Factor04A                                        = 1.5
+Factor04B                                        = 1
+TotaalPunten05                                   = If( DataEntered(BedrijfsadmUitbesteed), If(BedrijfsadmUitbesteed=1,Factor05B*Basispunten,Factor05A*Basispunten) ,NA)
+Factor05A                                        = 2
+Factor05B                                        = 1
+TotaalPunten06                                   = If(ToetsOprichtingsdatumKvK=1,0,If(ReedsOmzetGegenereerd=1,Factor06B*Basispunten,If(ReedsOmzetGegenereerd=5,Factor06B*Basispunten,Factor06A*Basispunten)))
+ToetsOprichtingsdatumKvK                         = If((( OnNA(Q_STATUS_FINAL_ON[1],Now) -OprichtingsdatumKvK)/30)>6,1,0)
+Factor06A                                        = 2
+Factor06B                                        = 1
+TotaalPunten07                                   = If( DataEntered(TussentijdseCijfersAanwezig),  If(ToetsOprichtingsdatumKvK=0,0,If(TussentijdseCijfersAanwezig=0,Factor07A*Basispunten,Factor07B*Basispunten)) ,NA)
+Factor07A                                        = 2
+Factor07B                                        = 1
+TotaalPunten08                                   = If( DataEntered(Bestuurders01Gebdatum), If(LeeftijdJongsteBestuurder<=OndergrensLeeftijd01,Factor08A*Basispunten,If(LeeftijdJongsteBestuurder>OndergrensLeeftijd02,Basispunten*Factor08C,Basispunten*Factor08B)) ,NA)
+Factor08A                                        = 2
+Factor08B                                        = 1.5
+Factor08C                                        = 1
+OndergrensLeeftijd01                             = 25
+OndergrensLeeftijd02                             = 35
+TotaalPunten09                                   = If( DataEntered(Bestuurders01ErvaringInBranche), If(ErvaringMinstErvarenBestuurder=1,Factor09A*Basispunten,If(ErvaringMinstErvarenBestuurder=4,Factor09B*Basispunten,Factor09C*Basispunten)) ,NA)
+Factor09A                                        = 2
+Factor09B                                        = 1.5
+Factor09C                                        = 1
+TotaalPunten10                                   = If( DataEntered(Bestuurders01Opleiding), If(OpleidingBestuurders=1,Factor10B*Basispunten,Factor10A*Basispunten) ,NA)
+Factor10A                                        = 2
+Factor10B                                        = 1
+NormGevraagdKredietbedrag                        = 50000
+OnderGrensPunten                                 = 125
+AkkoordVragenlijst                               = If(ToetsControleBasisHulp=15,15,If( (Length(&Q_RESTRICTIESTXT[1])>0)  , 10 ,If( (Length(&Q_WARNING_GLOBALTXT[1])>0) ,15,If(EindScore>OndergrensPunten,15,If(ManueelProcesTotaal>=1,25,30)))))
+Ratingwaarde                                     = If(AkkoordVragenlijst=30,15,NA)
+
+;------------------------------
+.Choices
+
+Q_Map06                                          = Q_ROOT
+Q_Map05                                          = Q_ROOT
+Q_Map04                                          = Q_ROOT
+Q_Map03                                          = Q_ROOT
+Q_Map02                                          = Q_ROOT
+Q_Map01                                          = Q_ROOT
+
+
+.ReadFile ToetsAutomatischFiat                   = "ToetsAutomatischFiat.fib"
+
+AanvullendeCijfersVragen                         = "0:Nee|1:Aanvullend cijfers over eerste 12 maanden opvragen"
+;ToetsRisicodragendVermogen                       = "-1:..|1:Voldoende|0:Onvoldoende"
+ErvaringMinstErvarenBestuurder                   = "1:0-1 jaar|4:>1 jaar - 4 jaar|5:>4 jaar"
+OpleidingBestuurders                             = "1:Ja|0:Nee"
+ToetsAutomatischFiat                             = "#$ToetsAutomatischFiat#"
+RechtsvormBV                                     = "1:Ja|0:Nee"
+;;GeenKvKinschrijving                              = "1:Ja|0:Nee"
+NietGevestigdInNederland                         = "1:Ja|0:Nee"
+INGgeenHuisbankier                               = "1:Ja|0:Nee"
+TeVeelOverstanden                                = "1:Ja|0:Nee"
+BedrijfsrisicosNietVerzekerd                     = "1:Ja|0:Nee"
+VermeldeCalamiteitenAanwezig                     = "1:Ja|0:Nee"
+Rechtsvorm                                       = "5:Eenmanszaak|10:VOF|15:Maatschap|20:CV|25:BV|30:Vereniging|35:Stichting|40:Buitenlandse rechtsvorm|45:Man/vrouw VOF|50:Overig"
+LooptijdLangerDan10Jaar                          = "1:Ja|0:Nee"
+;;KvKinschrijving                                  = "1:Ja|0:Nee"
+GevestigdInNederland                             = "1:Ja|0:Nee"
+BrancheInBusinessRule31                          = "1:Ja|0:Nee"
+INGisHuisbankier                                 = "1:Ja|0:Nee"
+AantalOverstandenLaatsteHalfJaar                 = "10:N.v.t.|1:0|2:1-2|3:>2"
+BedrijfsrisicosVerzekerd                         = "1:Ja|0:Nee"
+VermeldeCalamiteiten                             = "1:Ja|0:Nee|10:N.v.t."
+PersoonlijkeBorgBestuurderBereidheid             = "1:Ja|0:Nee|10:N.v.t."
+Bestuurders01ErvaringInBranche                   = "1:0-1 jaar|4:>1 jaar - 4 jaar|5:>4 jaar"
+Bestuurders02ErvaringInBranche                   = "1:0-1 jaar|4:>1 jaar - 4 jaar|5:>4 jaar"
+Bestuurders03ErvaringInBranche                   = "1:0-1 jaar|4:>1 jaar - 4 jaar|5:>4 jaar"
+Bestuurders01Opleiding                           = "1:Ja|0:Nee"
+Bestuurders02Opleiding                           = "1:Ja|0:Nee"
+Bestuurders03Opleiding                           = "1:Ja|0:Nee"
+OndernemingProffesioneelBegeleid                 = "1:Ja|0:Nee"
+HoofdredenStartOnderneming                       = "1:gedwongen werkloosheid|2:ontevreden over baan in loondienst|3:dreigende werkloosheid|4:gunstige economische conjunctuur|5:beschikbaarheid eigen financiële middelen|6:vanzelf ingegroeid|7:ontdekking gat in de markt|8:meer geld verdienen dan in loondienst|9:combinatie gezin en arbeid|10:eigen baas zijn|11:verrichten specifieke werkzaamheden|12:uitdaging|13:uit nood door privéomstandigheden"
+ProductSluitAanBijInvestering                    = "1:Ja|0:Nee"
+GewenstProduct                                   = "10:Rekening courant|11:Lening|12:Combinatie van rekening courant en lening"
+BrancheSector                                    = "05:Horeca|10:Tussenhandel|15:Transport|20:Detailhandel, exclusief horeca|25:Groothandel|30:Openbare nutsbedrijven|35:Bouw|40:Openbare diensten|41:Industrie|45:Verhuur|50:Landbouw, bosbouw en visserij|50:Zakelijke diensten|55:Delfstoffen|60:Medici"
+VoortzettingBestaandeActiviteiten                = "1:Ja|0:Nee|10:N.v.t."
+BedrijfsadmUitbesteed                            = "1:Ja|0:Nee"
+ReedsOmzetGegenereerd                            = "1:Ja|0:Nee|5:Dit is in deze branche ongebruikelijk"
+TussentijdseCijfersAanwezig                      = "1:Ja|0:Nee|10:N.v.t."
+FinancieleExpert                                 = "1:Ja|5: Ja, maar is niet aangesloten bij NOAB of is geen RA/AA|3:Nee"
+AkkoordVragenlijst                               = file "results-vragenlijst.fib"
+
+
+.Formulas NoTrend
+PersoonlijkeBorgBestuurderBereidheid             = If(RechtsvormBV[1]=1,NA,10)
+
+;------------------------------ Knock-out
+.Variables
+PP      1M     2               Knock-out(s)?                                                       \Q_WARNING_GLOBAL
+PP      1A     3               Winstgevendheid versus ondernemersvergoeding                        \Q_WARNING_01
+PP    0 1N     4               Verwachting winst na belasting, jaar 3 < 0      (BV)                \Q_WARNING_01A
+PP    0 1N     4               Verwachting winst na belasting, jaar 3 < 30000  (VoF -M/V)          \Q_WARNING_01B
+PP    0 1N     4               Verwachting winst na belasting, jaar 3 < (#Best. x Norm)            \Q_WARNING_01C
+PP    0 1N     4               Normbedrag per bestuurder                                           \Q_WARNING_01D
+
+PP      1A     3               Reden van aanvraag is akkoord                                       \Q_WARNING_02
+
+PP      1A     3               Investeringsdoel sluit aan                                          \Q_WARNING_03
+
+PP      1A     3               Aantal organisaties zitten in de juridische structuur  is OK        \Q_WARNING_04
+
+PP      1A     3               Winstgevendheid                                                     \Q_WARNING_05
+PP    0 1N     4               (Verlies jaar 1) > (Winst jaar 2 en winst jaar 3)                   \Q_WARNING_05A
+PP    0 1N     5               Verlies van jaar 1 (winst=0)                                        \Q_WARNING_05Verlies1
+PP    0 1N     5               Winst van jaar 2 (verlies=0)                                        \Q_WARNING_05VerwWinst2
+PP    0 1N     5               Winst van jaar 3 (verlies=0)                                        \Q_WARNING_05VerwWinst3
+PP    0 1N     4               Jaar 2 of Jaar 3 verlies?                                           \Q_WARNING_05B
+
+PP      1A     3               Omzet vs kredietbedrag                                              \Q_WARNING_06
+
+PP      1A     3               Krediet versus Cash Flow                                            \Q_WARNING_07
+PP    0 1N     4               Toets BV                                                            \Q_WARNING_07A
+PP    0 1N     4               Toets M/V bedrijf                                                   \Q_WARNING_07B
+PP    0 1N     4               Toets overige rechtsvormen                                          \Q_WARNING_07C
+PP      1A     3               Ondersteuning financieel expert                                     \Q_WARNING_08
+
+PP      1A     3               Bestuurlijke ervaring                                               \Q_WARNING_09
+
+PP      1A   1 3               Volledigheid klantprofiel                                           \Q_WARNING_10
+PP      1M     3               Knock-out tekst                                                     \Q_WARNING_GLOBALTXT
+
+.Formulas NoTrend
+
+Q_WARNING_01                   = &If(Case(Rechtsvorm,[25:Q_WARNING_01A|45:Q_WARNING_01B|Q_WARNING_01C])=1,&If(RechtsvormBV,&"- Rentabiliteit is onvoldoende",&"- Winst onvoldoende voor normatieve bestedingen per bestuurder"),"") ;G43
+Q_WARNING_01A                  = If(DataEntered(VerwachtResultaatNaBelJaar3,1) , If(VerwachtResultaatNaBelJaar3<0,1,0)                                      ,0)
+Q_WARNING_01B                  = If(DataEntered(VerwachtResultaatNaBelJaar3,1) , If(VerwachtResultaatNaBelJaar3<Q_WARNING_01D,1,0)                          ,0)
+Q_WARNING_01C                  = If(DataEntered(VerwachtResultaatNaBelJaar3,1) , If((AantalBestuurdersFTE*Q_WARNING_01D)>VerwachtResultaatNaBelJaar3,1,0)   ,0)
+Q_WARNING_01D                  = 30000
+Q_WARNING_02                   = &If(Case(HoofdredenStartOnderneming,[13:1|3:1|1:1|2:1|0])=1,"- Hoofdreden is uit nood geboren","")                ;G65
+Q_WARNING_03                   = &If(ProductSluitAanBijInvestering=0,"- Kredietproduct sluit niet aan bij investeringsdoel","")                    ;G76
+Q_WARNING_04                   = &If(OndernemingAantalOrganisaties>2,"- Structuur kan niet bediend worden","")                                     ;G80
+Q_WARNING_05                   = &If((Q_WARNING_05A+Q_WARNING_05B)>0,"- Tegenvallende cijfers","")                                                 ;G89
+Q_WARNING_05A                  = If( (DataEntered(VerwachtResultaatNaBelJaar1,1)) And (DataEntered(VerwachtResultaatNaBelJaar2,1)) And (DataEntered(VerwachtResultaatNaBelJaar3,1)) ,  If(Q_WARNING_05Verlies1 > (Q_WARNING_05VerwWinst2+Q_WARNING_05VerwWinst3),1,0),0)                                    ;if(-verliesJaar1>WinstJaar1+VerwachtWinstJaar2) =I88
+Q_WARNING_05Verlies1           = Abs(Min(VerwachtResultaatNaBelJaar1,0))
+Q_WARNING_05VerwWinst2         = If(If(VerwachtResultaatNaBelJaar2<0,1,0)=0,VerwachtResultaatNaBelJaar2,0)
+Q_WARNING_05VerwWinst3         = If(If(VerwachtResultaatNaBelJaar3<0,1,0)=0,VerwachtResultaatNaBelJaar3,0)
+Q_WARNING_05B                  = If( (OnNA(VerwachtResultaatNaBelJaar2,0)<0) Or (OnNA(VerwachtResultaatNaBelJaar3,0)<0),1,0)                                       ;verlies in jaar 2 of 3 I90
+Q_WARNING_06                   = &If((GewenstProduct[1]=10) And ((VerwachtNettoOmzetJaar2*0.9/3) < GevraagdKredietbedrag)  ,"- Aanvraag voldoet niet aan omzetcriterium","")               ;G94
+Q_WARNING_07                   = &If( Case(Rechtsvorm,[25:Q_WARNING_07A|45:Q_WARNING_07B|Q_WARNING_07C])=1,"- Aanvraag voldoet niet aan normatieve aflossingen","");G96
+Q_WARNING_07A                  = If( (DataEntered(VerwachtResultaatNaBelJaar2,1)) And (DataEntered(GevraagdKredietbedrag,1)) And (DataEntered(VerwachtAfschrijvingenJaar2,1)), If((GevraagdKredietbedrag/7.5)>(VerwachtResultaatNaBelJaar2-0*Q_WARNING_01D+VerwachtAfschrijvingenJaar2),1,0), NA)
+Q_WARNING_07B                  = If( (DataEntered(VerwachtResultaatNaBelJaar2,1)) And (DataEntered(GevraagdKredietbedrag,1)) And (DataEntered(VerwachtAfschrijvingenJaar2,1)), If((GevraagdKredietbedrag/7.5)>(VerwachtResultaatNaBelJaar2-1*Q_WARNING_01D+VerwachtAfschrijvingenJaar2),1,0), NA)
+Q_WARNING_07C                  = If( (DataEntered(VerwachtResultaatNaBelJaar2,1)) And (DataEntered(GevraagdKredietbedrag,1)) And (DataEntered(VerwachtAfschrijvingenJaar2,1)), If((GevraagdKredietbedrag/7.5)>(VerwachtResultaatNaBelJaar2-AantalBestuurdersFTE*Q_WARNING_01D+VerwachtAfschrijvingenJaar2),1,0), NA)
+Q_WARNING_08                   = &If(FinancieleExpert=3,"- Ondernemersplan wordt niet ondersteund","")                                             ;G100
+Q_WARNING_09                   = &If( (ErvaringMinstErvarenBestuurder=1) And (OpleidingBestuurders=0) , "- Tekort aan kennis & kunde","")          ;G62
+Q_WARNING_10                   = &If( (Q_STATUS[1]=1)  And (EindScore > OnderGrensPunten),"- Risicoprofiel aanvrager is te hoog","")                                          ;AF106
+
+Q_WARNING_GLOBALTXT            = &If(Length(&Q_WARNING_01[1])>0,&"\r\n"&Q_WARNING_01[1],"")&If(Length(&Q_WARNING_02[1])>0,&"\r\n"&Q_WARNING_02[1],"")&If(Length(&Q_WARNING_03[1])>0,&"\r\n"&Q_WARNING_03[1],"")&If(Length(&Q_WARNING_04[1])>0,&"\r\n"&Q_WARNING_04[1],"")&If(Length(&Q_WARNING_05[1])>0,&"\r\n"&Q_WARNING_05[1],"")&If(Length(&Q_WARNING_06[1])>0,&"\r\n"&Q_WARNING_06[1],"")&If(Length(&Q_WARNING_07[1])>0,&"\r\n"&Q_WARNING_07[1],"")&If(Length(&Q_WARNING_08[1])>0,&"\r\n"&Q_WARNING_08[1],"")&If(Length(&Q_WARNING_09[1])>0,&"\r\n"&Q_WARNING_09[1],"")&If(Length(&Q_WARNING_10[1])>0,&"\r\n"&Q_WARNING_10[1],"")
+Q_WARNING_GLOBAL               = &If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"\r\nEr zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT ,&"")
+
+;------------------------------ Knock-out
+.Variables
+PP      1M     2               $>Restricties<$                                                     \Q_RESTRICTIES
+PP      1A     3                                                                                   \Q_RESTRICTIES_01
+PP      1A     3                                                                                   \Q_RESTRICTIES_02
+PP      1A     3                                                                                   \Q_RESTRICTIES_03
+PP      1A     3                                                                                   \Q_RESTRICTIES_04
+PP      1A     3                                                                                   \Q_RESTRICTIES_05
+PP      1A     3                                                                                   \Q_RESTRICTIES_06
+PP      1A     3                                                                                   \Q_RESTRICTIES_07
+PP      1A     3                                                                                   \Q_RESTRICTIES_08
+PP      1A     3                                                                                   \Q_RESTRICTIES_09
+PP      1A     3                                                                                   \Q_RESTRICTIES_10
+PP      1A     3                                                                                   \Q_RESTRICTIES_11
+PP      1A     3                                                                                   \Q_RESTRICTIES_12
+PP      1A     3                                                                                   \Q_RESTRICTIES_13
+PP      1A     3                                                                                   \Q_RESTRICTIES_14
+PP      1M   1 3               Restricties tekst                                                   \Q_RESTRICTIESTXT
+
+.Formulas NoTrend
+;;Q_RESTRICTIES_01               = &If( DataEntered(Investeringsbehoefte,1) And DataEntered(GevraagdKredietbedrag,1) And (Investeringsbehoefte-GestortRisicodragendVermogen-BenuttingLiqMiddelen<>GevraagdKredietbedrag),"- Gevraagd krediet komt niet overeen met investeringsbehoefte (excl eigen inbreng - extra inbreng risicodragend vermogen en eigen inbreng - in contanten).",&"")
+Q_RESTRICTIES_02               = &If((Not DataEntered(BatchRating,1)) Or ((BatchRating[1]>=0) And (BatchRating[1]<= 20)),&"","- Batch-rating moet tussen 0 en 20 liggen.")
+Q_RESTRICTIES_03               = &If((Not DataEntered(BatchReferentieLimiet,1)) Or ((BatchReferentieLimiet[1]>=0) And (BatchReferentieLimiet[1]<= 500000)),&"","- Batch-referentielimiet moet tussen 0 en 500.000 liggen.")
+Q_RESTRICTIES_04               = &If((Not DataEntered(Investeringsbehoefte,1)) Or ((Investeringsbehoefte[1]>=0) And (Investeringsbehoefte[1]<= 1000000)),&"","- (Huidige) Investeringsbehoefte moet tussen 0 en 1.000.000 liggen.")
+Q_RESTRICTIES_05               = &If((Not DataEntered(GestortRisicodragendVermogen,1)) Or ((GestortRisicodragendVermogen[1]>=0) And (GestortRisicodragendVermogen[1]<= 1000000)),&"","- Gestort risicodragend vermogen moet tussen 0 en 1.000.000 liggen.")
+Q_RESTRICTIES_06               = &If((Not DataEntered(BenuttingLiqMiddelen,1)) Or ((BenuttingLiqMiddelen[1]>=0) And (BenuttingLiqMiddelen[1]<= 1000000)),&"","- Aanwending van bestaande liquide middelen moet tussen 0 en 1.000.000 liggen.")
+Q_RESTRICTIES_07               = &If((Not DataEntered(EigenVermogenVoorKredietverlening,1)) Or ((EigenVermogenVoorKredietverlening[1]>=0) And (EigenVermogenVoorKredietverlening[1]<= 1000000)),&"","- Eigen vermogen (voor kredietverlening) moet tussen 0 en 1.000.000 liggen.")
+Q_RESTRICTIES_08               = &If((Not DataEntered(BalansTotaalNaKredietverlening,1)) Or ((BalansTotaalNaKredietverlening[1]>=0) And (BalansTotaalNaKredietverlening[1]<= 1000000)),&"","- Balanstotaal (na kredietverlening) moet tussen 0 en 1.000.000 liggen.")
+Q_RESTRICTIES_09               = &If((Not DataEntered(InvesteringImmaterieelActivaNaKrediet,1)) Or ((InvesteringImmaterieelActivaNaKrediet[1]>=0) And (InvesteringImmaterieelActivaNaKrediet[1]<= 1000000)),&"","- Investering in immateriële activa moet tussen 0 en 1.000.000 liggen.")
+Q_RESTRICTIES_10               = &If((Not DataEntered(InvesteringMaterieelActivaNaKrediet,1)) Or ((InvesteringMaterieelActivaNaKrediet[1]>=0) And (InvesteringMaterieelActivaNaKrediet[1]<= 1000000)),&"","- Investering in materiële activa moet tussen 0 en 1.000.000 liggen.")
+Q_RESTRICTIES_11               = &If((Not DataEntered(SolvabiliteitBalansJaar1,1)) Or ((SolvabiliteitBalansJaar1[1]>=-1) And (SolvabiliteitBalansJaar1[1]<= 1)),&"","- Balansverhouding (jaar 1) moet tussen -100% en 100 liggen.")
+Q_RESTRICTIES_12               = &If((Not DataEntered(SolvabiliteitBalansJaar2,1)) Or ((SolvabiliteitBalansJaar2[1]>=-1) And (SolvabiliteitBalansJaar2[1]<= 1)),&"","- Balansverhouding (jaar 2) moet tussen -100% en 100 liggen.")
+Q_RESTRICTIES_13               = &If( ((TussentijdseCijfersAanwezig=10) And ( OnNA(Q_STATUS_FINAL_ON[1],Now) - OprichtingsdatumKvK[1] > 183) ),"- Alleen indien de onderneming jonger is dan 6 maand, mag de optie 'N.v.t' gekozen worden bij tussentijdse cijfers beschikbaar.",&"")
+Q_RESTRICTIES_14               = &If((Not DataEntered(GevraagdKredietbedrag,1)) Or ((GevraagdKredietbedrag[1]>=0) And (GevraagdKredietbedrag[1]<= 500000)),&"","- Gevraagd kredietbedrag moet tussen 0 en 500.000 liggen.")
+Q_RESTRICTIESTXT               = &If(Length(&Q_RESTRICTIES_01[1])>0,&"\r\n"&Q_RESTRICTIES_01[1],"")&If(Length(&Q_RESTRICTIES_02[1])>0,&"\r\n"&Q_RESTRICTIES_02[1],"")&If(Length(&Q_RESTRICTIES_03[1])>0,&"\r\n"&Q_RESTRICTIES_03[1],"")&If(Length(&Q_RESTRICTIES_04[1])>0,&"\r\n"&Q_RESTRICTIES_04[1],"")&If(Length(&Q_RESTRICTIES_05[1])>0,&"\r\n"&Q_RESTRICTIES_05[1],"")&If(Length(&Q_RESTRICTIES_06[1])>0,&"\r\n"&Q_RESTRICTIES_06[1],"")&If(Length(&Q_RESTRICTIES_07[1])>0,&"\r\n"&Q_RESTRICTIES_07[1],"")&If(Length(&Q_RESTRICTIES_08[1])>0,&"\r\n"&Q_RESTRICTIES_08[1],"")&If(Length(&Q_RESTRICTIES_09[1])>0,&"\r\n"&Q_RESTRICTIES_09[1],"")&If(Length(&Q_RESTRICTIES_10[1])>0,&"\r\n"&Q_RESTRICTIES_10[1],"")&If(Length(&Q_RESTRICTIES_11[1])>0,&"\r\n"&Q_RESTRICTIES_11[1],"")&If(Length(&Q_RESTRICTIES_12[1])>0,&"\r\n"&Q_RESTRICTIES_12[1],"")&If(Length(&Q_RESTRICTIES_13[1])>0,&"\r\n"&Q_RESTRICTIES_13[1],"")&If(Length(&Q_RESTRICTIES_14[1])>0,&"\r\n"&Q_RESTRICTIES_14[1],"")
+Q_RESTRICTIES                  = &If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"\r\nDe volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT ,&"")
+
+.StatusVar[NoTrend]     EindScore
+.StatusVar2[NoTrend]    Q_ROOT
+
+;--------------------------------------------------------------------------------------------------  ValCheck
+.Variables
+PPPP    VN     2                                                                                   \ValCheck
+
+.Quit

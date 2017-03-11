@@ -1,0 +1,25 @@
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default col-sm-10">
+                <div class="form-group">
+                    <label for="path">path:</label>
+                    <input id="path" class="form-control" ng-model="path" ng-change="content = modelFile[path];" ng-model-options="{ updateOn: 'blur' }"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default col-sm-10">
+                <div class="form-group">
+                    <label for="filter">path:</label>
+                    <input id="filter" class="form-control" ng-model="plain_filter"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10 panel panel-default" ng-repeat="(key,value) in content | filter:{name: plain_filter}">
+                <pre class="code">{{ value | json }}</pre>
+            </div>
+        </div>
+    </div>
+</div>

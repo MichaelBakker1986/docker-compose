@@ -1,0 +1,25 @@
+Gap
+
+  To use it for model building.
+1)bottomseperator
+1)topseperator
+//------ Finish until here today
+
+3)tuple,add yAxis.js. Pass it through the UI get and set functions
+3)interpretation of -/+ and = modifiers prepending to variable names
+1)references with link property
+2)converter for number and date
+2)json to ffl parser (simular to ffl to json parser aka bracketparser)
+2)Matrix lookup, xlsx.js thrid part lib
+1)function FirstUC now just passes through its string parameter
+2)function AddMonth use formula.js, module date-time (all excel date and time function)
+1)Scorecard view recursive template, header account has no sub-accounts ,Navigator
+1)Change display type in formbuilder
+
+  To use it for user throughput
+2)frequencies, add xAxis.js. Pass it through the UI get and set functions
+3)options_title: locked, invisible;,options_notrend: locked, invisible;,options_trend: locked, invisible; properties per FormulaSet
+2)option logic in the engine looking for the most top value from a given point, add zAxis.js pass it through the UI get and set
+1)data_options: unscalable;
+3)aggregation functions, balance, flow
+1)afterinput: Execute((SetValue(PriorRegistration, NA, true)));

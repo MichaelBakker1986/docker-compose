@@ -1,0 +1,6 @@
+ff-questionnaire-js-web/bower_components/
+ff-questionnaire-js-web/node_modules/
+ff-questionnaire-js-web/.idea/
+**/bower_components/
+**/node_modules/
+**/.idea/

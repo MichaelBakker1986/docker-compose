@@ -1,0 +1,9 @@
+			variable + PDepreciationOfAssets refers to DepreciationOfAssets
+			{
+				datatype : number;
+				aggregation : flow;
+				title : "DepreciationOfAssets";
+				displaytype : currency;
+				visible : 1.0;
+				options_title : locked;
+			}
