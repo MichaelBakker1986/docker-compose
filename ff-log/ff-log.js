@@ -1,7 +1,8 @@
 var tracer = require('tracer');
+var format = "HH.MM.ssl";
 var console = tracer.console({
     format: "{{timestamp}} ({{file}}:{{line}}) \t- {{message}}",
-    dateformat: "HHMM.ssl"
+    dateformat: format
 });
 module.exports = console;
 exports = console;

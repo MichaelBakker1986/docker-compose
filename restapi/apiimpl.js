@@ -3,7 +3,7 @@ var DBConn;
 var apiimpl = function (DBConnarg) {
     DBConn = DBConnarg;
 }
-var fesjsApi = require('../ff-fesjs-api.js');
+var fesjsApi = require('ff-fes');
 var fs = require('fs');
 var data = fs.readFileSync('./resources/KSP.ffl', 'utf8');
 fesjsApi.init(data);
