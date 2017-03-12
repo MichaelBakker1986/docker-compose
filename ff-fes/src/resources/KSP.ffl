@@ -1081,7 +1081,7 @@ model KSP uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: OnER(Min(Round( ,0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
+            formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierDaycare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
             displaytype: currency;
             title: "Max. nr of compensated hours childcare ";
             top_blanklines: 1;

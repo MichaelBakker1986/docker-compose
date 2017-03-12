@@ -1,8 +1,4 @@
 {
-  "MAX": {
-    "args": "v1,v2",
-    "body": "{ return Math.max(v1, v2);}"
-  },
   "Length": {
     "args": "v1",
     "body": "{ if (v1 === undefined){return 0;} return v1.length;}"
@@ -22,18 +18,6 @@
   "If": {
     "args": "o,v1,v2",
     "body": "{ if (o) { return v1; } else { return v2; }}"
-  },
-  "Max": {
-    "args": "v1,v2",
-    "body": "{ return Math.max(v1, v2);}"
-  },
-  "Min": {
-    "args": "v1,v2",
-    "body": "{ return Math.min(v1, v2);}"
-  },
-  "Abs": {
-    "args": "v",
-    "body": "{ return Math.abs(v);}"
   },
   "OnNA": {
     "args": "v,onnav",
@@ -141,7 +125,7 @@
   },
   "Pos": {
     "args": "one,two",
-    "body": "{ return 1 }"
+    "body": "{ return one.indexOf(two) }"
   },
   "Count": {
     "args": "elements",

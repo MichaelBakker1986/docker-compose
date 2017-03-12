@@ -43,7 +43,7 @@ JSWorkBook.prototype.doImport = function (data, parserType)
         return;
     }
     var solution = GenericModelFile.findParser(parserType).parse(data);
-    log.log('Update model [' + solution.getName() + ']');
+    log.debug('Update model [' + solution.getName() + ']');
     var formulas;
     //very very ugly IF-else. ABNModel directly inject functions in the GenericModel, they should be gathered in a Solution first
     if (parserType !== 'ABN')

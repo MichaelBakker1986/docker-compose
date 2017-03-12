@@ -1,6 +1,6 @@
 {
   "name": "ff-fes",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "ff-fes",
   "devDependencies": {
     "d3": "^3.5.17",
@@ -8,7 +8,7 @@
     "esmangle": "^1.0.1",
     "excel-formula": "^1.3.2",
     "express": "^4.13.4",
-    "ff-log": "^1.0.4",
+    "ff-log": "^1.0.0",
     "grunt": "^0.4.5",
     "jsdom": "^8.1.0",
     "json-stringify": "^1.0.0",

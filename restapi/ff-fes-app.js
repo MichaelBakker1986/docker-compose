@@ -13,10 +13,14 @@ var Respond = new apiimpl(DBConn);
 function respond(req, res, next) {
     //handle request Async by default, create Promise, result when done.
     new Promise(function (success, err) {
-        return Respond[req.params.function](req.params.data, req.params.value)
+        try {
+            success(Respond[req.params.function](req.params.data, req.params.value));
+        } catch (err) {
+            err(err);
+        }
     }).then(function (answer) {
-        log.log('promise succes')
-        res.send(records)
+        log.info('promise succes')
+        res.send(answer)
     }).catch(function (err) {
         res.send('Program error');
         log.error('Output error', err)
@@ -36,6 +40,6 @@ var server = restify.createServer({
 server.get('/:function/:data', respond);
 server.get('/:function/:data/:value', respond);
 
-server.listen(9000, function () {
+server.listen(9001, function () {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
 });

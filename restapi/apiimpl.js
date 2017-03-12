@@ -1,4 +1,5 @@
 var Promise = require('promise')
+var log = require('ff-log')
 var DBConn;
 var apiimpl = function (DBConnarg) {
     DBConn = DBConnarg;
@@ -8,11 +9,7 @@ var fs = require('fs');
 var data = fs.readFileSync('./resources/KSP.ffl', 'utf8');
 fesjsApi.init(data);
 
-apiimpl.prototype.value = function (data, value) {
-    return new Promise(function (success, err) {
-        success(fesjsApi.value(data, value));
-    })
-}
+apiimpl.prototype.value = fesjsApi.value;
 apiimpl.prototype.loadModel = function (data) {
     return new Promise(function (success, err) {
         DBConn('SELECT * FROM fes_values').then(function (result) {
@@ -22,7 +19,7 @@ apiimpl.prototype.loadModel = function (data) {
                 data: result.data
             })
         }).catch(function (err) {
-            console.error("ERROR", err);
+            log.error("ERROR", err);
         })
     })
 }
@@ -37,7 +34,7 @@ apiimpl.prototype.getFFl = function (data) {
                 data: bufferBase64
             })
         }).catch(function (err) {
-            console.error("ERROR", err);
+            info.error("ERROR", err);
         });
     })
 }

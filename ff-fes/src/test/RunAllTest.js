@@ -3,7 +3,7 @@
 //By design all imports should be put into the same stack, they transparently can inter exchange
 //UnloadSolution could be a response
 process.alltest = true;
-process.loglevel = 'info'
+process.loglevel = 'debug'
 console.time('performance')
 var tests = [
     './createFunctionTest.js',

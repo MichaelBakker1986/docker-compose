@@ -6,8 +6,7 @@ var log = require('ff-log')
 var FunctionMap = {};
 //some api functions
 //dont use this method, use JSWorkBook instead.
-function apiGet(formula, x, y, z, v)
-{
+function apiGet(formula, x, y, z, v) {
     // console.info('API call for formula: ' + formula.name);
     //temp fix fallback for ID, index is the Virtual ID, not persisted in the database
     //should be checked outside this function call
@@ -16,22 +15,18 @@ function apiGet(formula, x, y, z, v)
 }
 //public
 //v = entered values
-function apiSet(formula, x, y, z, value, v)
-{
+function apiSet(formula, x, y, z, value, v) {
     var id = formula.id === undefined ? formula.index : formula.id;
-    if (v[id] !== undefined)
-    {
+    if (v[id] !== undefined) {
         var hash = x.hash + y + z;
         var newValue = value;
-        if (value === '' || value === null)
-        {
+        if (value === '' || value === null) {
             newValue = undefined;
         }
         v[id][hash] = newValue;
     }
-    else
-    {
-        console.info(id + ' does not exist');
+    else {
+        console.debug(id + ' does not exist');
     }
 }
 
@@ -39,19 +34,16 @@ function apiSet(formula, x, y, z, value, v)
 //disableFormulaCache means it will remove the parsed member from given formula's
 //caches are within the given formula's
 //public
-function init(formulaParser, formulas, disableFormulaCache)
-{
-    formulas.forEach(function (newFormula)
-    {
+function init(formulaParser, formulas, disableFormulaCache) {
+    formulas.forEach(function (newFormula) {
         var id = newFormula.id === undefined ? newFormula.index : newFormula.id;
         //technical depth, we only want to this when user explicitly entered it or something. They have these Objects!
         //we can do it there, for now we just have this parameter.
-        if (disableFormulaCache)
-        {
+        if (disableFormulaCache) {
             newFormula.parsed = undefined;//explicitly reset parsed. (The formula-bootstrap) will skip parsed formulas.
         }
         var javaScriptfunction = formulaParser(newFormula);
-        log.log(newFormula.name + " : " + javaScriptfunction)
+        log.debug("Added function %s : %s : %s", newFormula.name, newFormula.type, javaScriptfunction)
         var modelFunction = Function('f, x, y, z, v', 'return ' + javaScriptfunction).bind(global);
         global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id);
     });
@@ -62,25 +54,21 @@ function init(formulaParser, formulas, disableFormulaCache)
 // the ApiGet. we don't need the CacheLocked and the NoCacheUnlocked they are just for further optimalizations.
 var formulaDecorators = {
     //nothing to to, just return the inner function
-    noCacheLocked: function (innerFunction, formulaName)
-    {
+    noCacheLocked: function (innerFunction, formulaName) {
         return innerFunction;
     },
     //Unlocked formula's can be user entered.
     //Encapsulates that part.
-    noCacheUnlocked: function (innerFunction, formulaName)
-    {
+    noCacheUnlocked: function (innerFunction, formulaName) {
         //add a user value cache
         //f = formulaId
         //y,x,z dimensions Tuple,Column,Layer
         //v = enteredValues
-        return function (f, x, y, z, v)
-        {
+        return function (f, x, y, z, v) {
             //console.info('calling formula ;' + formulaName)
             var hash = x.hash + y + z;
             //check if user entered a value
-            if (v[f][hash] === undefined)
-            {
+            if (v[f][hash] === undefined) {
                 //return function value;
                 return innerFunction(f, x, y, z, v);
             }
@@ -90,16 +78,12 @@ var formulaDecorators = {
     }
     //will need more types e.g. cacheLocked and cacheUnlocked.
 }
-function moveFormula(oldFormula, newFormula)
-{
-    if (oldFormula.index !== newFormula.id)
-    {
-        if (FunctionMap['a' + newFormula.id])
-        {
+function moveFormula(oldFormula, newFormula) {
+    if (oldFormula.index !== newFormula.id) {
+        if (FunctionMap['a' + newFormula.id]) {
             console.warn('Formula already taken[' + newFormula.id + ']');
         }
-        else
-        {
+        else {
             FunctionMap['a' + newFormula.id] = newFormula;
             FunctionMap['a' + oldFormula.index] = null;
         }

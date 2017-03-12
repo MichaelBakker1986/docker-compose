@@ -9,7 +9,7 @@ var init = function (data) {
     validate.fixAll();
     if (wb.validate().valid) {
         //valid
-        logger.log('Initialized model [' + wb.getRootNode().solutionName + ']');
+        logger.debug('Initialized model [' + wb.getRootNode().solutionName + ']');
     } else {
         throw Error('unable to initialize')
     }
