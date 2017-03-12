@@ -259,7 +259,7 @@ function parseFormula(formula) {
         }
     }
     catch (e) {
-        logger.error('unable to parse [' + formula + '] returning it as String value');
+        logger.error('unable to parse [' + formula + '] returning it as String value', e);
         formulaReturn = AST.STRING(formula);
     }
     return formulaReturn;

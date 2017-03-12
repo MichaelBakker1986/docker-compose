@@ -435,6 +435,8 @@ simplified.TupleSum = simplified.TSUM;
 simplified.IF = simplified.If;
 simplified.MAX = simplified.Max;
 simplified.MIN = simplified.Min;
+simplified.min = simplified.Min;
+simplified.max = simplified.Max;
 simplified.ABS = simplified.Abs;
 var defaultValues = {
     required: false,

@@ -7,6 +7,7 @@ process.loglevel = 'debug'
 console.time('performance')
 var tests = [
     './createFunctionTest.js',
+    './MathTest.js',
     './brackParsingTest.js',
     './fflexportTest.js',//.FFL Language
     './fflImportTest.js',//.FFL Language

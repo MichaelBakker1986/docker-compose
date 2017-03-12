@@ -12,6 +12,7 @@ var Respond = new apiimpl(DBConn);
 
 function respond(req, res, next) {
     //handle request Async by default, create Promise, result when done.
+    log.info('Call [%s][%s][%s]', req.params.function, req.params.data, req.params.value)
     new Promise(function (success, err) {
         try {
             success(Respond[req.params.function](req.params.data, req.params.value));
@@ -19,11 +20,11 @@ function respond(req, res, next) {
             err(err);
         }
     }).then(function (answer) {
-        log.info('promise succes')
+        log.info('End call succes[%s][%s][%s]', req.params.function, req.params.data, req.params.value)
         res.send(answer)
     }).catch(function (err) {
-        res.send('Program error');
-        log.error('Output error', err)
+        res.send('Program error.');
+        og.info('End call fail [%s][%s][%s]', req.params.function, req.params.data, req.params.value)
     });
     //not part of the Async pattern
     next();

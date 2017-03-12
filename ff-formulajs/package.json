@@ -1,0 +1,14 @@
+{
+  "name": "ff-formulajs",
+  "version": "1.0.3",
+  "main": "ff-formulajs.js",
+  "description": "binding between ff-fes and formulajs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "michael.bakker1986@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "formulajs": "^1.0.8"
+  }
+}

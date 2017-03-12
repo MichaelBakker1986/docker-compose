@@ -5,8 +5,8 @@ var WorkBook = require('../archive/fesjs/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');
 var logger = require('ff-log');
 var wb = new WorkBook();
-//var kspModel = JUNIT.getFile('KSP.ffl');
-//wb.doImport(kspModel, 'ffl');
+var kspModel = JUNIT.getFile('KSP.ffl');
+wb.doImport(kspModel, 'ffl');
 
 /**
  * test If function
@@ -82,6 +82,6 @@ assert.equal(wb.get('DATAAVAILABLE'), true);
 
 /**
  - Use function [Count]
- - Use function [MatrixLookup]
  - Use function [SelectDescendants]
+ - Use function [MatrixLookup], seperate project - use js-xlsx https://github.com/SheetJS/js-xlsx
  */

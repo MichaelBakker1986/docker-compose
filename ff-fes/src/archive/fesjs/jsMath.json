@@ -95,17 +95,9 @@
     "args": "value,ammount",
     "body": "{ return 1 }"
   },
-  "MatrixLookup": {
-    "args": "one,two,three,four",
-    "body": "{ return 1 }"
-  },
   "Visible": {
     "args": "variableOrValue",
     "body": "{ return 1 }"
-  },
-  "DataAvailable": {
-    "args": "one",
-    "body": "{ return one }"
   },
   "InputRequired": {
     "args": "variableOrValue",
@@ -381,10 +373,6 @@
   },
   "DateToDay": {
     "args": "one",
-    "body": "return 1"
-  },
-  "Matrixlookup": {
-    "args": "one,two,three,four",
     "body": "return 1"
   },
   "CumNormal": {

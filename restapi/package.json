@@ -15,10 +15,12 @@
     "mysql": "^2.13.0",
     "promise": "^7.1.1",
     "restify": "^4.3.0",
+    "ff-fes": "^1.0.1",
     "serve-favicon": "~2.3.2"
   },
   "devDependencies": {
-    "ff-fes": "0.0.4",
+    "ff-fes": "^1.0.1",
+    "ff-fes-xlsx": "^1.0.0",
     "ff-log": "^1.0.0",
     "tracer": "^0.8.7"
   }

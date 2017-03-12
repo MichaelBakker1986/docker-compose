@@ -4,7 +4,12 @@ var DBConn;
 var apiimpl = function (DBConnarg) {
     DBConn = DBConnarg;
 }
-var fesjsApi = require('ff-fes');
+var fesjsApi = require('../ff-fes/ff-fes');
+//add excel functions, PPMT, IGG etc...
+fesjsApi.addFunctions(require('ff-formulajs').formulajs);
+//add excel-lookup, MatrixLookup
+fesjsApi.addFunctions(require('ff-fes-xlsx').xlsxLookup);
+
 var fs = require('fs');
 var data = fs.readFileSync('./resources/KSP.ffl', 'utf8');
 fesjsApi.init(data);

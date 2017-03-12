@@ -14,9 +14,17 @@ var init = function (data) {
         throw Error('unable to initialize')
     }
 }
+var addFunctions = function (plugin) {
+    var functions = [];
+    for (functionName in plugin.entries) {
+        functions.push(functionName)
+        global[functionName] = plugin.entries[functionName]
+    }
+    logger.info('Added fes-plugin [%s] functions [%s]', plugin.name, functions)
+}
 var value = function (rowId, value) {
     if (value !== undefined) {
-        wb.set(rowId, value, 'value', 1)
+        wb.set(rowId, value)
         return getEntry(rowId)
     } else {
         var values = [];
@@ -41,9 +49,11 @@ function getEntry(rowId) {
 }
 module.exports = {
     init: init,
-    value: value
+    value: value,
+    addFunctions: addFunctions
 }
 exports = {
     init: init,
-    value: value
+    value: value,
+    addFunctions: addFunctions
 }
