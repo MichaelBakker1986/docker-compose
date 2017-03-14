@@ -1,9 +1,9 @@
-var visitor = require('../../fesjs/JSVisitor.js');
-var GenericModelFile = require('../../fesjs/GenericModelFile.js');
-var uimodel = require('../../fesjs/uimodel.js');
-var AST = require('../../fesjs/AST.js');
-var Solution = require('../../fesjs/Solution.js');
-var finformula = require('../ffl/FinFormula.js');
+var visitor = require('../../fesjs/JSVisitor');
+var GenericModelFile = require('../../fesjs/GenericModelFile');
+var uimodel = require('../../fesjs/uimodel');
+var AST = require('../../fesjs/AST');
+var Solution = require('../../fesjs/Solution');
+var finformula = require('../ffl/FinFormula');
 var keys = ['description', 'viewType', 'col9umnHeader', 'searchBar'];
 var esprima = require('esprima');
 var parser = {

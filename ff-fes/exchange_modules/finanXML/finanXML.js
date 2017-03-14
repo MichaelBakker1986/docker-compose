@@ -1,7 +1,7 @@
-var visitor = require('../../fesjs/JSVisitor.js');
-var GenericModelFile = require('../../fesjs/GenericModelFile.js');
-var uimodel = require('../../fesjs/uimodel.js');
-var Solution = require('../../fesjs/Solution.js');
+var visitor = require('../../fesjs/JSVisitor');
+var GenericModelFile = require('../../fesjs/GenericModelFile');
+var uimodel = require('../../fesjs/uimodel');
+var Solution = require('../../fesjs/Solution');
 var Stringify = require("jsonml-stringify/stringify")
 var stringify = Stringify([
     require("jsonml-stringify/plugins/loose")

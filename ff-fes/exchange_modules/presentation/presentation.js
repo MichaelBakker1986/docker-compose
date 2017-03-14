@@ -14,14 +14,14 @@
  while creating new TreeNodes, an converter will be added if found to the Node.
  when updating the Node, the converter is called.
  */
-var uimodel = require('../../fesjs/uimodel.js')
+var uimodel = require('../../fesjs/uimodel')
 var Node = require('./Node.js')
 var Tree = require('./Tree.js')
-var Solution = require('../../fesjs/Solution.js');
-var GenericModelFile = require('../../fesjs/GenericModelFile.js');
-var FunctionMap = require('../../fesjs/FunctionMap.js');
-var bootstrap = require('../../fesjs/formula-bootstrap.js');
-var AST = require('../../fesjs/AST.js');
+var Solution = require('../../fesjs/Solution');
+var GenericModelFile = require('../../fesjs/GenericModelFile');
+var FunctionMap = require('../../fesjs/FunctionMap');
+var bootstrap = require('../../fesjs/formula-bootstrap');
+var AST = require('../../fesjs/AST');
 var converters = GenericModelFile.converters;
 Node.prototype.delete = function ()
 {
