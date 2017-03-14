@@ -23,7 +23,7 @@
 //Document will refer to first Period, else [forecast] or [history] has to be supplied
 //Document can only refer to itsself
 //can easy be refactored for better performance
-var importData = require('./CustomImport.json');
+var importData = require('./../../resources/CustomImport.json');
 var tracer = require('ff-log');
 var headers = {
     title: {
