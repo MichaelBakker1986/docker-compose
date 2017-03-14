@@ -3,7 +3,7 @@ var JUNIT = require('./JUNIT.js')
 var xml = JUNIT.getFile('/KAM/FMT/Master/KAM.Fmt4Model.xml')
 var GenericModelFile = require('../archive/fesjs/GenericModelFile.js');
 var AST = require('../archive/fesjs/AST.js');
-var uimodel = require('../archive/clientscorecard/uimodel.js');
+var uimodel = require('../archive/fesjs/uimodel.js');
 var parser = {
     name: 'FMT4Mapping',
     headername: '.finance FMT4ImportMapping',

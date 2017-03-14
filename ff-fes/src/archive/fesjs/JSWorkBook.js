@@ -1,4 +1,4 @@
-var UIModel = require('../clientscorecard/uimodel.js');
+var UIModel = require('./uimodel.js');
 var FunctionMap = require('../fesjs/FunctionMap.js');
 var GenericModelFile = require('../fesjs/GenericModelFile.js');
 var values = GenericModelFile.docValues;

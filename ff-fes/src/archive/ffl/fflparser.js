@@ -1,9 +1,9 @@
-var visitor = require('../clientscorecard/JSVisitor.js');
+var visitor = require('../fesjs/JSVisitor.js');
 var GenericModelFile = require('../fesjs/GenericModelFile.js');
 var AST = require('../fesjs/AST.js');
-var uimodel = require('../clientscorecard/uimodel.js');
+var uimodel = require('../fesjs/uimodel.js');
 var bracketparser = require('./bracketparser.js');
-var finformula = require('../FinFormula/FinFormula.js');
+var finformula = require('./FinFormula.js');
 var esprima = require('esprima');
 var logger = require('ff-log');
 

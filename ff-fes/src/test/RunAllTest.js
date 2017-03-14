@@ -27,6 +27,7 @@ for (var i = 0; i < tests.length; i++)
     }
     catch (e)
     {
+        console.error(tests[i]);
         console.log(e.stack);
         console.error(e);
     }

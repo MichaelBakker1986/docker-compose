@@ -4,7 +4,7 @@
  Just calling getAllValues() internally to export
  */
 var GenericModelFile = require('../../fesjs/GenericModelFile.js');
-var UIModel = require('../../clientscorecard/uimodel.js');
+var UIModel = require('../../fesjs/uimodel.js');
 var jsonValues = {
     name: 'jsonvalues',
     extension: 'json',

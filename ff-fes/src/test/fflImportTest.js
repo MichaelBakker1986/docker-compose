@@ -3,7 +3,7 @@ require('../archive/exchange_modules/screendefinition/screendefparser.js');//jus
 var WorkBook = require('../archive/fesjs/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');
 var GenericModelFile = require('../archive/fesjs/GenericModelFile.js');
-var UIModel = require('../archive/clientscorecard/uimodel.js');
+var UIModel = require('../archive/fesjs/uimodel.js');
 var bootstrap = require('../archive/fesjs/formula-bootstrap.js');
 var assert = require('assert');
 var esprima = require('esprima');

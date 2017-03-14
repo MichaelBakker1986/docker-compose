@@ -5,7 +5,7 @@
 //This File should be merged with Node.js,SolutionService.js and not be needed, keep this in mind.
 //introduces a strange level of complexity in the code.
 //rows
-var Solution = require('../fesjs/Solution');
+var Solution = require('./Solution');
 var indexByRow = {};
 var UIModel = {
     NEW_root_value: {

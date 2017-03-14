@@ -1,8 +1,8 @@
 var assert = require('assert');
 var fileParser = require('./fileParser.js');
-var finFormula = require('../FinFormula/FinFormula.js');
+var finFormula = require('./FinFormula.js');
 var Stack = require('stack-adt');
-var visitor = require('../clientscorecard/JSVisitor.js');
+var visitor = require('../fesjs/JSVisitor.js');
 var log = require('ff-log');
 /*
  datatype: true,

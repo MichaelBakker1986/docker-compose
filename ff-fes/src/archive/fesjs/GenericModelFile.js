@@ -25,7 +25,7 @@ var jsMath = require('./jsMath.json')
 var escodegen = require('escodegen')
 var esprima = require('esprima')
 var assert = require('assert')
-var time = require('../festime/XAxis.js')
+var time = require('./XAxis.js')
 var detailColumns = new time().detl.columns;
 //for now now just years.. keep it simple
 var contextState = detailColumns[0][0];
@@ -45,7 +45,7 @@ var converters = {
  }
  */
 var parsers = {};
-var UIModel = require('../clientscorecard/uimodel.js');
+var UIModel = require('./uimodel.js');
 var bootstrap = require('../fesjs/formula-bootstrap.js');
 var FunctionMap = require('../fesjs/FunctionMap.js');
 var docValues = [];
@@ -355,7 +355,12 @@ function setValue(row, value, col, x) {
     var xas = x || contextState;
     var localFormula = getFormula(row, col || 'value');
     logger.info('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
-    FunctionMap.apiSet(localFormula, xas, 0, 0, value, docValues);
+    try {
+        FunctionMap.apiSet(localFormula, xas, 0, 0, value, docValues);
+    }catch(ee){
+        logger.error('error',ee)
+    }
+
 }
 function generateDependencyMatrix(exists) {
     var data = {

@@ -14,7 +14,7 @@
  while creating new TreeNodes, an converter will be added if found to the Node.
  when updating the Node, the converter is called.
  */
-var uimodel = require('../../clientscorecard/uimodel.js')
+var uimodel = require('../../fesjs/uimodel.js')
 var Node = require('./Node.js')
 var Tree = require('./Tree.js')
 var Solution = require('../../fesjs/Solution.js');
