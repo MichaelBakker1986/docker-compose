@@ -1,6 +1,6 @@
 {
   "name": "ff-formulajs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "ff-formulajs.js",
   "description": "binding between ff-fes and formulajs",
   "scripts": {

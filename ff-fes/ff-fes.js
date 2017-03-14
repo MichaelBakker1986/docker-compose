@@ -37,12 +37,13 @@ var value = function (rowId, value) {
 var properties = ['value', 'title', 'locked', 'visible', 'required'];
 function getEntry(rowId) {
     var data = [];
-    for (var x = 0; x < 6; x++) {
+    for (var x = 0; x < 2; x++) {
         data[x] = {};
         for (var i = 0; i < properties.length; i++) {
             var type = properties[i];
             data[x][type] = wb.get(rowId, type, x);
             data[x].column = x;
+            data[x].row = rowId;
         }
     }
     return data;

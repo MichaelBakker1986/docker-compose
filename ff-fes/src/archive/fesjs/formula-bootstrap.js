@@ -183,6 +183,10 @@ var simplified = {
     Min: function (formulaInfo, node) {
         node.callee.name = 'Math.min'
     },
+    //we will need this one later to determine + or &&
+    EvaluateAsString: function (formulaInfo, node) {
+        node.callee.name = 'String'
+    },
     Max: function (formulaInfo, node) {
         node.callee.name = 'Math.max'
     },
@@ -312,9 +316,6 @@ var simplified = {
          "type": "Identifier",
          "name": "x"
          });*/
-    },
-    //we will need this one later to determine + or &&
-    EvaluateAsString: function (formulaInfo, node) {
     },
     Visible: function (formulaInfo, node) {
         node.type = "MemberExpression";
@@ -631,7 +632,7 @@ function buildFormula(formulaInfo, parent, node) {
     // Simplified is only Top down
     // its only lookAhead
     if (node.type === 'CallExpression') {
-        logger.debug('Use function [' + node.callee.name + "]")
+        logger.trace('Use function [' + node.callee.name + "]")
         if (simplified[node.callee.name] !== undefined) {
             simplified[node.callee.name](formulaInfo, node);
         } else {

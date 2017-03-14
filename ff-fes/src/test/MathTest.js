@@ -5,8 +5,8 @@ var WorkBook = require('../archive/fesjs/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');
 var logger = require('ff-log');
 var wb = new WorkBook();
-var kspModel = JUNIT.getFile('KSP.ffl');
-wb.doImport(kspModel, 'ffl');
+//var kspModel = JUNIT.getFile('KSP.ffl');
+//wb.doImport(kspModel, 'ffl');
 
 /**
  * test If function
@@ -79,6 +79,8 @@ wb.createFormula("DataAvailable(abc12)", 'DATAAVAILABLE')
 assert.equal(wb.get('DATAAVAILABLE'), false);
 wb.set('abc12', 'anyValue');
 assert.equal(wb.get('DATAAVAILABLE'), true);
+
+wb.createFormula('SelectDescendants(Q_MAP01,Q_MAP01_HULPVARIABELEN),InputRequired(X))','SELECTDECENDANTS')
 
 /**
  - Use function [Count]

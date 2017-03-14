@@ -111,10 +111,6 @@
     "args": "one",
     "body": "{ return 1 }"
   },
-  "SelectDescendants": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
   "Pos": {
     "args": "one,two",
     "body": "{ return one.indexOf(two) }"

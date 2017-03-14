@@ -43,7 +43,7 @@ function init(formulaParser, formulas, disableFormulaCache) {
             newFormula.parsed = undefined;//explicitly reset parsed. (The formula-bootstrap) will skip parsed formulas.
         }
         var javaScriptfunction = formulaParser(newFormula);
-        log.debug("Added function %s : %s : %s", newFormula.name, newFormula.type, javaScriptfunction)
+        log.debug("Added function %s\n\t\t\t\t\t\t\t\t\t  %s : %s : [%s]",newFormula.original, newFormula.name, newFormula.type, javaScriptfunction)
         var modelFunction = Function('f, x, y, z, v', 'return ' + javaScriptfunction).bind(global);
         global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id);
     });

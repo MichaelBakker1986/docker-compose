@@ -5,10 +5,8 @@ var uimodel = require('../clientscorecard/uimodel.js');
 var bracketparser = require('./bracketparser.js');
 var finformula = require('../FinFormula/FinFormula.js');
 var esprima = require('esprima');
-var Solution = require('../fesjs/Solution.js');
 var logger = require('ff-log');
 
-//P
 //DisplayAs require a Date object, need to add Converter for DisplayTypes.
 //@formatter:off
 /*variable FES_LAYOUTNR

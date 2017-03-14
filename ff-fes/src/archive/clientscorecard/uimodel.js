@@ -1,14 +1,11 @@
 //this class can hold multiple Solutions, but there can only be one current Solution (State)
 //its getting a bit ugly, with teh currentSolution.name
 //Clean up, move functions like bulkinsert to workbook or Solution
-//TODO: rename to SolutionService
 //TODO: Its possible to create recursive structures, avoid this from happening.
 //This File should be merged with Node.js,SolutionService.js and not be needed, keep this in mind.
 //introduces a strange level of complexity in the code.
 //rows
 var indexByRow = {};
-var logger = require('tracer').console({level: process.loglevel || 'debug'})
-var Solution = require('../fesjs/Solution.js');
 var UIModel = {
     NEW_root_value: {
         rowId: 'root'

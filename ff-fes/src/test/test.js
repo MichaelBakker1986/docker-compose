@@ -6,7 +6,7 @@ var esmangle = require('esmangle');
 var assert = require('assert');
 var util = require('util');
 
-
+var xts = String('')
 var x = [{"word": "we", "freq": 29, "score": 300, "flags": "bc", "syllables": "1"},
     {"word": "e", "freq": 24, "score": 300, "flags": "c", "syllables": "1"},
     {"word": "ie", "freq": 24, "score": 300, "flags": "", "syllables": "1"}].map(function (ea)

@@ -18,7 +18,8 @@ function finFormulaGeneric(buf)
     buf = buf.replace(/^\s*&/gm, '');
 
     //AND &
-    buf = buf.replace(/&| And /gmi, '&&');// convert & to &&
+    buf = buf.replace(/&/gmi, '+');// convert & to &&
+    buf = buf.replace(/ And /gmi, '&&');// convert & to &&
     buf = buf.replace(/\)\s*and\s*\(/gmi, '&&');// convert )  and ( => &&
 
     //OR |

@@ -6,7 +6,7 @@ var apiimpl = function (DBConnarg) {
 }
 var fesjsApi = require('../ff-fes/ff-fes');
 //add excel functions, PPMT, IGG etc...
-fesjsApi.addFunctions(require('ff-formulajs').formulajs);
+fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 fesjsApi.addFunctions(require('ff-fes-xlsx').xlsxLookup);
 
