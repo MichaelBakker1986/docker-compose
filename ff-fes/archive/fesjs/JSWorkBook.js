@@ -1,9 +1,9 @@
 var UIModel = require('./uimodel.js');
-var FunctionMap = require('../fesjs/FunctionMap.js');
-var GenericModelFile = require('../fesjs/GenericModelFile.js');
+var FunctionMap = require('./FunctionMap.js');
+var GenericModelFile = require('./GenericModelFile.js');
 var values = GenericModelFile.docValues;
-var bootstrap = require('../fesjs/formula-bootstrap.js');
-var AST = require('../fesjs/AST.js');
+var bootstrap = require('./formula-bootstrap.js');
+var AST = require('./AST.js');
 var esprima = require('esprima');
 var log = require('ff-log')
 

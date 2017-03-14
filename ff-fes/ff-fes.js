@@ -1,7 +1,7 @@
-var parser = require('./src/archive/ffl/fflparser.js');//just let it inject into the GenericModelFile
-require('./src/archive/exchange_modules/presentation/presentation.js');//just let it inject into the GenericModelFile
+var parser = require('./archive/ffl/fflparser.js');//just let it inject into the GenericModelFile
+require('./archive/exchange_modules/presentation/presentation.js');//just let it inject into the GenericModelFile
 var logger = require('ff-log')
-var WorkBook = require('./src/archive/fesjs/JSWorkBook.js');
+var WorkBook = require('./archive/fesjs/JSWorkBook.js');
 var wb = new WorkBook();
 var init = function (data) {
     wb.doImport(data, 'ffl');

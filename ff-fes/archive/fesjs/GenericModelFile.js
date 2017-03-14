@@ -46,8 +46,8 @@ var converters = {
  */
 var parsers = {};
 var UIModel = require('./uimodel.js');
-var bootstrap = require('../fesjs/formula-bootstrap.js');
-var FunctionMap = require('../fesjs/FunctionMap.js');
+var bootstrap = require('./formula-bootstrap.js');
+var FunctionMap = require('./FunctionMap.js');
 var docValues = [];
 /*
  Class Formula
