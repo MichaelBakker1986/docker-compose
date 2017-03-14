@@ -2,10 +2,8 @@ var visitor = require('../../fesjs/JSVisitor');
 var GenericModelFile = require('../../fesjs/GenericModelFile');
 var uimodel = require('../../fesjs/uimodel');
 var AST = require('../../fesjs/AST');
-var Solution = require('../../fesjs/Solution');
 var finformula = require('../ffl/FinFormula');
 var keys = ['description', 'viewType', 'col9umnHeader', 'searchBar'];
-var esprima = require('esprima');
 var parser = {
     name: 'screendefinition',
     headername: '.finance Screendefinition',
