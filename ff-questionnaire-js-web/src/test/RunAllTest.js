@@ -6,16 +6,11 @@ process.alltest = true;
 process.loglevel = 'info'
 console.time('performance')
 var tests = [
-    './createFunctionTest.js',
-    './brackParsingTest.js',
-    './fflexportTest.js',//.FFL Language
-    './fflImportTest.js',//.FFL Language
     './ABN_RISKIntegrationTest.js',
     './ABN_RISKIntegrationTest.js',
     './ABNExportTest.js',
     './finanXMLTest.js',//FinanXML
     './rptXmlExportTest.js',
-    //'./rptXmlExportTest.js,',//RTP,XML report template
     './screendefinitionTest.js',//.screen definition
     './finImportTest.js',//.fin Language
     './uimodelTest.js',//internal logic test, uimodel.js is somewhat unstable, since developed mainly for UI
