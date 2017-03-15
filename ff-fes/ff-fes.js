@@ -27,23 +27,25 @@ var addFunctions = function (plugin) {
  * rowId - VariableName
  * @Optional value - new value
  */
-var value = function (context, rowId, value) {
+var value = function (context, rowId, columncontext, value) {
     wb.updateValueMap(context.values)
     if (value !== undefined) {
-        wb.statelessSetValue(context, rowId, value)
-        return getEntry(context, rowId)
+        wb.statelessSetValue(context, rowId, value, 'value', columncontext)
+        return getEntry(context, rowId, columncontext)
     } else {
         var values = [];
         wb.visit(wb.getNode(rowId), function (node) {
-            values.push(getEntry(context, node.rowId))
+            values.push(getEntry(context, node.rowId, columncontext))
         });
         return values;
     }
 }
 var properties = ['value', 'title', 'locked', 'visible', 'required'];
-function getEntry(context, rowId) {
+function getEntry(context, rowId, columncontext) {
     var data = [];
-    for (var x = 0; x < 2; x++) {
+    var start = columncontext;
+    var end = columncontext == 0 ? columncontext + 3 : columncontext;
+    for (var x = start; x <= end; x++) {
         data[x] = {};
         for (var i = 0; i < properties.length; i++) {
             var type = properties[i];

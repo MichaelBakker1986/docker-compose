@@ -14,9 +14,9 @@ var fs = require('fs');
 var data = fs.readFileSync('./resources/KSP.ffl', 'utf8');
 fesjsApi.init(data);
 
-apiimpl.prototype.value = function (contextKey, variable, value) {
+apiimpl.prototype.value = function (contextKey, variable, columncontext, value) {
     var context = DBConn.getContext(contextKey);
-    var result = fesjsApi.value(context, variable, value);
+    var result = fesjsApi.value(context, variable, columncontext, value);
     return result;
 }
 apiimpl.prototype.loadModel = function (contextKey) {

@@ -9,23 +9,27 @@ var Respond = new apiimpl(DBConn);
 
 /**
  * server:port to -> @apiimpl  Generic pass-through REST-api
+ * Generic error handling
+ * Generic request logging
+ * Generic async pattern
  */
 function respond(req, res, next) {
     //handle request Async by default, create Promise, result when done.
-    log.info('Call context:[%s] function[%s] variable[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.value)
+    log.info('Call context:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value)
     new Promise(function (success, fail) {
         try {
             //resolve context key to stored values
-            success(Respond[req.params.function](req.params.context, req.params.variable, req.params.value));
+            var columncontext = req.params.columncontext || "0";
+            success(Respond[req.params.function](req.params.context, req.params.variable, parseInt(columncontext), req.params.value));
         } catch (err) {
             fail(err);
         }
     }).then(function (answer) {
-        log.info('End call succes context:[%s] function[%s] variable[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.value)
+        log.info('End call succes context:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value)
         res.send(answer)
     }).catch(function (err) {
         res.send('Program error.');
-        log.error('Call context fail:[%s] function[%s] variable[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.value)
+        log.error('Call context fail:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value)
         log.error("trace", err);
     });
     //not part of the Async pattern
@@ -40,8 +44,17 @@ var server = restify.createServer({
     },
     name: 'ff-restapi'
 });
+/**
+ * UserName/value/MaxNrCompensatedHoursOutofSchoolCare/101
+ * @:context       - (any context to identify the process  username/processid/requestId
+ * @:function      - (value to get and set values)
+ * @:variable      - (account e.g. CREDIT / DEBIT / Q_ROOT)
+ * @:columncontext - (index in a range for corresponding request)
+ * @:value         - (new user value)
+ */
 server.get('/:context/:function/:variable', respond);
 server.get('/:context/:function/:variable/:value', respond);
+server.get('/:context/:function/:variable/:columncontext/:value', respond);
 
 server.listen(9001, function () {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);

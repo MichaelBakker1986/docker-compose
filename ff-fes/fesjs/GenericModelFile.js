@@ -347,7 +347,8 @@ function statelessGetValue(context, row, col, x) {
         }
     }
     else {
-        returnValue = FunctionMap.apiGet(localFormula, x || contextState, 0, 0, context.values);
+        var xas = x ? detailColumns[0][x] : contextState;
+        returnValue = FunctionMap.apiGet(localFormula, xas || contextState, 0, 0, context.values);
     }
     return returnValue;
 }
@@ -355,7 +356,7 @@ function getValue(row, col, x) {
     return statelessGetValue({values: docValues}, row, col, x);
 }
 function statelessSetValue(context, row, value, col, x) {
-    var xas = x || contextState;
+    var xas = x ? detailColumns[0][x] : contextState;
     var localFormula = getFormula(row, col || 'value');
     logger.info('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
     try {
