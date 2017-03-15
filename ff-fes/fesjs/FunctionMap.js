@@ -80,12 +80,12 @@ var formulaDecorators = {
 }
 function moveFormula(oldFormula, newFormula) {
     if (oldFormula.index !== newFormula.id) {
-        if (FunctionMap['a' + newFormula.id]) {
+        if (global['a' + newFormula.id]) {
             console.warn('Formula already taken[' + newFormula.id + ']');
         }
         else {
-            FunctionMap['a' + newFormula.id] = newFormula;
-            FunctionMap['a' + oldFormula.index] = null;
+            global['a' + newFormula.id] = newFormula;
+            global['a' + oldFormula.index] = null;
         }
     }
 };

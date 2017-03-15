@@ -8,7 +8,7 @@ var fesjsApi = require('../ff-fes/ff-fes');
 //add excel functions, PPMT, IGG etc...
 fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
-fesjsApi.addFunctions(require('ff-fes-xlsx').xlsxLookup);
+fesjsApi.addFunctions(require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup);
 
 var fs = require('fs');
 var data = fs.readFileSync('./resources/KSP.ffl', 'utf8');
@@ -18,6 +18,13 @@ apiimpl.prototype.value = function (contextKey, variable, columncontext, value) 
     var context = DBConn.getContext(contextKey);
     var result = fesjsApi.value(context, variable, columncontext, value);
     return result;
+}
+apiimpl.prototype.context = function (contextKey, variable, columncontext, value) {
+    var context = DBConn.getContext(contextKey);
+    if (variable) {
+        context[variable] = value
+    }
+    return context;
 }
 apiimpl.prototype.loadModel = function (contextKey) {
     return new Promise(function (success, err) {

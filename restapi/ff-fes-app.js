@@ -53,6 +53,7 @@ var server = restify.createServer({
  * @:value         - (new user value)
  */
 server.get('/:context/:function/:variable', respond);
+server.get('/:context/:function', respond);
 server.get('/:context/:function/:variable/:value', respond);
 server.get('/:context/:function/:variable/:columncontext/:value', respond);
 

@@ -411,6 +411,10 @@
     "args": "one",
     "body": "return 1"
   },
+  "GoalSeek": {
+    "args": "one",
+    "body": "return 1"
+  },
   "MutCalc": 1,
   "CalculatedInBaseCurrency": 1,
   "PeriodinT": 1,

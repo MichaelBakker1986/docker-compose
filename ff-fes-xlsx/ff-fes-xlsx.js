@@ -1,7 +1,6 @@
 //TODO: find out if this is the best xlsx tool to find the tables..
 var XLSX = require('xlsx')
-var workbook = XLSX.readFile('ScorecardKSP.xls');
-
+var workbook = XLSX.readFile('./resources/ScorecardKSP.xls');
 var entries = {
     'MatrixLookup': function (xlsfileName, tableName, row, col) {
 

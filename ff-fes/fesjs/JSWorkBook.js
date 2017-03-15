@@ -222,6 +222,8 @@ JSWorkBook.prototype.validate = validate;
 JSWorkBook.prototype.createFormula = GenericModelFile.createFormula
 JSWorkBook.prototype.getFormula = GenericModelFile.getFormula;
 JSWorkBook.prototype.produceSolution = GenericModelFile.produceSolution;
+JSWorkBook.prototype.properties = GenericModelFile.properties;
+
 module.exports = JSWorkBook;
 //we expose this to the global.
 if (typeof window !== 'undefined')

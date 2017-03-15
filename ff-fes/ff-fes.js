@@ -41,6 +41,7 @@ var value = function (context, rowId, columncontext, value) {
     }
 }
 var properties = ['value', 'title', 'locked', 'visible', 'required'];
+var props = wb.properties;
 function getEntry(context, rowId, columncontext) {
     var data = [];
     var start = columncontext;
