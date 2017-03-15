@@ -208,7 +208,10 @@ JSWorkBook.prototype.getNode = function (name)
 }
 //some functions we directly pass trough
 JSWorkBook.prototype.get = GenericModelFile.getValue;
+JSWorkBook.prototype.statelessGetValue = GenericModelFile.statelessGetValue;
+JSWorkBook.prototype.updateValueMap = GenericModelFile.updateValueMap;
 JSWorkBook.prototype.set = GenericModelFile.setValue;
+JSWorkBook.prototype.statelessSetValue = GenericModelFile.statelessSetValue;
 //fix missing variables
 JSWorkBook.prototype.fixAll = fixAll
 //should return the solution instead. So its deprecated

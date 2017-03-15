@@ -14,13 +14,17 @@ var fs = require('fs');
 var data = fs.readFileSync('./resources/KSP.ffl', 'utf8');
 fesjsApi.init(data);
 
-apiimpl.prototype.value = fesjsApi.value;
-apiimpl.prototype.loadModel = function (data) {
+apiimpl.prototype.value = function (contextKey, variable, value) {
+    var context = DBConn.getContext(contextKey);
+    var result = fesjsApi.value(context, variable, value);
+    return result;
+}
+apiimpl.prototype.loadModel = function (contextKey) {
     return new Promise(function (success, err) {
         DBConn('SELECT * FROM fes_values').then(function (result) {
             //result.entry = data;
             success({
-                entry: data,
+                entry: contextKey,
                 data: result.data
             })
         }).catch(function (err) {

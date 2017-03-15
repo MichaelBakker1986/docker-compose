@@ -21,5 +21,17 @@ var dbCall = function (query) {
     });
     //    connection.end();
 }
-
-module.exports = dbCall;
+//simple database mock.
+var storedValues = {}
+var getContext = function (contextId) {
+    if (storedValues[contextId] == undefined) {
+        storedValues[contextId] = {
+            contextId: contextId,
+            values: {}
+        };
+    }
+    return storedValues[contextId];
+}
+module.exports = {
+    getContext: getContext
+};

@@ -22,26 +22,32 @@ var addFunctions = function (plugin) {
     }
     logger.info('Added fes-plugin [%s] functions [%s]', plugin.name, functions)
 }
-var value = function (rowId, value) {
+
+/**
+ * rowId - VariableName
+ * @Optional value - new value
+ */
+var value = function (context, rowId, value) {
+    wb.updateValueMap(context.values)
     if (value !== undefined) {
-        wb.set(rowId, value)
-        return getEntry(rowId)
+        wb.statelessSetValue(context, rowId, value)
+        return getEntry(context, rowId)
     } else {
         var values = [];
         wb.visit(wb.getNode(rowId), function (node) {
-            values.push(getEntry(node.rowId))
+            values.push(getEntry(context, node.rowId))
         });
         return values;
     }
 }
 var properties = ['value', 'title', 'locked', 'visible', 'required'];
-function getEntry(rowId) {
+function getEntry(context, rowId) {
     var data = [];
     for (var x = 0; x < 2; x++) {
         data[x] = {};
         for (var i = 0; i < properties.length; i++) {
             var type = properties[i];
-            data[x][type] = wb.get(rowId, type, x);
+            data[x][type] = wb.statelessGetValue(context, rowId, type, x);
             data[x].column = x;
             data[x].row = rowId;
         }

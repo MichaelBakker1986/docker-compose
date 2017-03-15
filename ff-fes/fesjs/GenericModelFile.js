@@ -332,7 +332,7 @@ var propertyDefaults = {
     'validation': false
 }
 
-function getValue(row, col, x) {
+function statelessGetValue(context, row, col, x) {
     var uielem = getUI(row, col);
     var localFormula = getFormulaByUI(uielem);
     var returnValue;
@@ -347,20 +347,28 @@ function getValue(row, col, x) {
         }
     }
     else {
-        returnValue = FunctionMap.apiGet(localFormula, x || contextState, 0, 0, docValues);
+        returnValue = FunctionMap.apiGet(localFormula, x || contextState, 0, 0, context.values);
     }
     return returnValue;
 }
-function setValue(row, value, col, x) {
+function getValue(row, col, x) {
+    return statelessGetValue({values: docValues}, row, col, x);
+}
+function statelessSetValue(context, row, value, col, x) {
     var xas = x || contextState;
     var localFormula = getFormula(row, col || 'value');
     logger.info('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
     try {
-        FunctionMap.apiSet(localFormula, xas, 0, 0, value, docValues);
-    }catch(ee){
-        logger.error('error',ee)
+        updateValueMap(context.values);
+        FunctionMap.apiSet(localFormula, xas, 0, 0, value, context.values);
+    } catch (ee) {
+        logger.error('error', ee)
     }
-
+}
+function setValue(row, value, col, x) {
+    statelessSetValue({
+        values: docValues
+    }, row, value, col, x);
 }
 function generateDependencyMatrix(exists) {
     var data = {
@@ -476,6 +484,8 @@ var GenericModelFile = {
     //ValueService?
     getAllValues: getAllValues,
     getValue: getValue,
+    statelessSetValue: statelessSetValue,
+    statelessGetValue: statelessGetValue,
     setValue: setValue,
     updateValues: updateValues,
     docValues: docValues,
