@@ -13,7 +13,8 @@
     "ff-formulajs": "^1.0.1",
     "ff-log": "^1.0.12",
     "formulajs": "^1.0.8",
-    "tracer": "^0.8.7"
+    "tracer": "^0.8.7",
+    "xlsx": "^0.9.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
