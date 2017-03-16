@@ -1,0 +1,20 @@
+om het spulletje aan de praat te krijgen heb je het een en ander nodig
+- nodejs met npm
+- om iets met een database te gaan doen een mysql server
+
+de rest van je libjes zullen wel duidelijk worden bij het installen van het pakketje
+
+-nodejs installeren https://nodejs.org/en/
+;maak een mapje aan
+mkdir <dirnaam>
+cd <dirnaam>
+;haal de repo binnen vanuit stash
+git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
+cd fesjs
+;laat de pacakge manager van node 3rd parties ophalen
+npm install
+cd restapi
+;installeer de submodule appart
+npm install
+;start de app
+node ff-fes-app.js

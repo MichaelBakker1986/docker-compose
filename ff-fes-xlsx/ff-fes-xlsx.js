@@ -8,6 +8,7 @@ var entries = {
         return 1;
     }
 };
+entries.Matrixlookup = entries.MatrixLookup;
 exports.xlsxLookup = {
     name: 'xlsx-lookup',
     entries: entries
