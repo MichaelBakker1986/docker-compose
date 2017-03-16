@@ -28,7 +28,7 @@ function respond(req, res, next) {
         log.info('End call succes context:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value)
         res.send(answer)
     }).catch(function (err) {
-        res.send('Program error.');
+        res.send('Program error. [' + err.message + ']');
         log.error('Call context fail:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value)
         log.error("trace", err);
     });
@@ -61,4 +61,6 @@ server.listen(9001, function () {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT/100')
+    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT/1/200')
+    log.info('Test path: [%s]', 'http://localhost:9001/user1/context')
 });

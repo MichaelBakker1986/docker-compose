@@ -332,15 +332,17 @@ var propertyDefaults = {
     'validation': false
 }
 
+function getStatelessVariable(row, col) {
+    return UIModel.fetch(row + '_' + col);
+}
 function statelessGetValue(context, row, col, x) {
-    var uielem = getUI(row, col);
+    var uielem = UIModel.fetch(row + '_' + col);
     var localFormula = getFormulaByUI(uielem);
     var returnValue;
     if (localFormula === undefined) {
         var colType = col || 'value';
         if (col === 'value') {
             returnValue = propertyDefaults[colType];
-            //throw Error('Cant return default value for value, this is invalid');
         }
         else {
             returnValue = propertyDefaults[colType];
@@ -357,14 +359,14 @@ function getValue(row, col, x) {
 }
 function statelessSetValue(context, row, value, col, x) {
     var xas = x ? detailColumns[0][x] : contextState;
-    var localFormula = getFormula(row, col || 'value');
-    logger.info('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
-    try {
-        updateValueMap(context.values);
-        FunctionMap.apiSet(localFormula, xas, 0, 0, value, context.values);
-    } catch (ee) {
-        logger.error('error', ee)
+    var rowId = row + '_' + ( col || 'value');
+    var localFormula = getFormulaByUI(UIModel.fetch(rowId));
+    if (localFormula === undefined) {
+        //don't give away variable name here.
+        throw Error('Cannot find variable')
     }
+    logger.info('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
+    FunctionMap.apiSet(localFormula, xas, 0, 0, value, context.values);
 }
 function setValue(row, value, col, x) {
     statelessSetValue({
@@ -487,6 +489,7 @@ var GenericModelFile = {
     getValue: getValue,
     statelessSetValue: statelessSetValue,
     statelessGetValue: statelessGetValue,
+    getStatelessVariable: getStatelessVariable,
     setValue: setValue,
     updateValues: updateValues,
     docValues: docValues,

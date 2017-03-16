@@ -4,19 +4,20 @@ var DBConn;
 var apiimpl = function (DBConnarg) {
     DBConn = DBConnarg;
 }
-var fesjsApi = require('../ff-fes/ff-fes');
+var fesjsApi = require('../ff-fes/ff-fes').fesjs;
 //add excel functions, PPMT, IGG etc...
 fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 fesjsApi.addFunctions(require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup);
 
 var fs = require('fs');
-var data = fs.readFileSync('./resources/KSP.ffl', 'utf8');
+var modelName = 'KSP'
+var data = fs.readFileSync('./resources/' + modelName + '.ffl', 'utf8');
 fesjsApi.init(data);
 
 apiimpl.prototype.value = function (contextKey, variable, columncontext, value) {
     var context = DBConn.getContext(contextKey);
-    var result = fesjsApi.value(context, variable, columncontext, value);
+    var result = fesjsApi.value(context, modelName + '_' + variable, columncontext, value);
     return result;
 }
 apiimpl.prototype.context = function (contextKey, variable, columncontext, value) {

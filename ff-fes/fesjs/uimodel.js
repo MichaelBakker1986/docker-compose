@@ -129,25 +129,6 @@ function hasChild(children, name)
 }
 function addUi(row, col, item, parentId)
 {
-    /*   if (item.referenceid)
-     {
-     if (exist(item.referenceid, col))
-     {
-     var references = getUI(item.referenceid, col);
-     references.nodes = references.nodes || [];
-     //for now, if the original changes, the clone is in trouble
-     //just copy the refId from original.
-     item.ref = references.ref;
-     item.nodes = references.nodes;
-     //    var inherited = Object.create(references);
-     }
-     else
-     {
-     throw Error('cant add references before original is added');
-     }
-     }*/
-
-
     //add to map
     var ui = getUI(row, col);
 
@@ -160,10 +141,6 @@ function addUi(row, col, item, parentId)
             ui[key] = item[key];
         }
     }
-    /*    if (item.referenceid)
-     {
-     ui.nodes = item.nodes;
-     }*/
 
     //add to root if no parent
     if (parentId === undefined)

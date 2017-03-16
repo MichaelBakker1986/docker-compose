@@ -1,8 +1,7 @@
-var parser = require('./exchange_modules/ffl/fflparser.js');//just let it inject into the GenericModelFile
-require('./exchange_modules/presentation/presentation.js');//just let it inject into the GenericModelFile
+require('./exchange_modules/ffl/fflparser');//just let it inject into the GenericModelFile
+require('./exchange_modules/presentation/presentation');//just let it inject into the GenericModelFile
 var logger = require('ff-log')
-var WorkBook = require('./fesjs/JSWorkBook.js');
-var wb = new WorkBook();
+var wb = require('./fesjs/JSWorkBook').prototype;
 var init = function (data) {
     wb.doImport(data, 'ffl');
     var validate = wb.validate();
@@ -34,35 +33,27 @@ var value = function (context, rowId, columncontext, value) {
         return getEntry(context, rowId, columncontext)
     } else {
         var values = [];
-        wb.visit(wb.getNode(rowId), function (node) {
-            values.push(getEntry(context, node.rowId, columncontext))
+        wb.visit(wb.getStatelessNode(rowId), function (node) {
+            values.push(getEntry(context, node.solutionName + '_' + node.rowId, columncontext))
         });
         return values;
     }
 }
-var properties = ['value', 'title', 'locked', 'visible', 'required'];
-var props = wb.properties;
 function getEntry(context, rowId, columncontext) {
     var data = [];
     var start = columncontext;
-    var end = columncontext == 0 ? columncontext + 3 : columncontext;
+    var end = columncontext == 0 ? columncontext + 1 : columncontext;
     for (var x = start; x <= end; x++) {
         data[x] = {};
-        for (var i = 0; i < properties.length; i++) {
-            var type = properties[i];
+        for (var type in wb.properties) {
             data[x][type] = wb.statelessGetValue(context, rowId, type, x);
             data[x].column = x;
-            data[x].row = rowId;
+            data[x].variable = wb.getStatelessVariable(rowId, 'value').rowId;
         }
     }
     return data;
 }
-module.exports = {
-    init: init,
-    value: value,
-    addFunctions: addFunctions
-}
-exports = {
+exports.fesjs = {
     init: init,
     value: value,
     addFunctions: addFunctions

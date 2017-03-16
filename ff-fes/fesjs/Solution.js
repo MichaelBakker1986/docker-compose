@@ -9,17 +9,6 @@ function Solution(solutionName)
 
     this.displayTypes = {};
     this.type = solutionName;
-    /*model meta data class {
-     top_blacklines : {
-     0    : 1,
-     1    : 100
-     },
-     locked: {
-     true : 2,
-     false : 1,
-     On : 1
-     } etc...
-     }*/
     this.properties = {};
     //TODO: merge these two
     this.nodes = [];
