@@ -68,7 +68,7 @@ var parser = {
         logger.log('Added variables [' + log.variables + ']')
         return solution;
     },
-    deParse: function (rowId) {
+    deParse: function (rowId, workbook) {
         var fflSolution = uimodel.create()
         if (rowId) {
             var startuielem = uimodel.getUI(rowId, 'value')
@@ -81,7 +81,7 @@ var parser = {
             var uielem = {};
             //for now all nodes are variables
             var realObject = {}
-            var formulaProperties = fflSolution.gatherProperties(GenericModelFile.getFormula, GenericModelFile.properties, elem.rowId);
+            var formulaProperties = workbook.gatherProperties(elem.rowId);
             for (var key in formulaProperties) {
                 var formula = formulaProperties[key];
                 var finFormula;

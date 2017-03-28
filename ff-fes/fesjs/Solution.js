@@ -53,19 +53,6 @@ Solution.prototype.getName = function ()
 {
     return this.name;
 }
-Solution.prototype.gatherProperties = function (getFormula, properties, rowId)
-{
-    var formulaProperties = {};
-    for (var key in properties)
-    {
-        var formula = getFormula(rowId, key);
-        if (formula !== undefined && formula.original !== undefined && formula.original !== null && formula.original !== '')
-        {
-            formulaProperties[key] = formula.original;
-        }
-    }
-    return formulaProperties;
-}
 //should not allow duplicates.
 Solution.prototype.createNode = function (rowId, colId, formulaId, displayAs)
 {
@@ -73,7 +60,7 @@ Solution.prototype.createNode = function (rowId, colId, formulaId, displayAs)
         name: this.name + "_" + rowId + "_" + colId,
         rowId: rowId,
         colId: colId,
-        displayAs: displayAs
+        displayAs: displayAs || 'PropertyType'
     };
     if (formulaId !== undefined)
     {
@@ -154,10 +141,6 @@ Solution.prototype.addNodeToCorrespondingPlaceInHierarchie = function (parentrow
         }
         foundVariable.children.push(node);
     }
-}
-Solution.prototype.getModelMetaData = function ()
-{
-    return this.properties;
 }
 Solution.prototype.size = function ()
 {

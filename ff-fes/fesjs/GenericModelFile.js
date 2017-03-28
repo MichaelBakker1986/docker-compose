@@ -35,6 +35,8 @@ var converters = {
         return value;
     }
 };
+function FormulaService() {
+}
 /*
  Class Parser
  {
@@ -142,7 +144,7 @@ function updateValueMap(values) {
         if (formula.type === 'noCacheUnlocked') {
             var id = formula.id === undefined ? formula.index : formula.id;
             if (!values[id]) {
-                values[id] = [];
+                values[id] = {};
             }
         }
     })
@@ -224,49 +226,11 @@ function getFormulas() {
 }
 
 //private
-
 function findFormulaByIndex(index) {
     return formulas[index];
 }
-function updateValues(values, docValues) {
-    for (var i = 0; i < values.length; i++) {
-        var obj = values[i];
-        if (!docValues[obj.formulaId]) {
-            docValues[obj.formulaId] = [];
-        }
-        docValues[obj.formulaId][obj.colId] = obj.value;
-    }
-}
-//public
-function getAllValues(docValues) {
-    //we cannot just return everything here, Because for now all formula's have a user-entered value cache.
-    //Also Functions themSelves are bound to this object.
-    //So we have to strip them out here.
-    //should be part of the apiGet, to query all *_value functions. or *_validation etc.
-    var values = [];
-    for (var formulaId = 0; formulaId < docValues.length; formulaId++) {
-        var cachevalues = docValues[formulaId];
-        if (cachevalues) {
-            var formula = findFormulaByIndex(formulaId);
-            var formulaName = formula === undefined ? formulaId : formula.name;
-            for (var i = 0; i < cachevalues.length; i++) {
-                if (cachevalues[i] !== undefined) {
-                    values.push({
-                        varName: formulaName,
-                        colId: i,
-                        value: cachevalues[i],
-                        formulaId: formulaId
-                    });
-                }
-            }
-        }
-    }
-    return values;
-}
 
-function findParser(parserName) {
-    return parsers[parserName];
-}
+//public
 
 function addParser(parser) {
     parsers[parser.name] = parser;
@@ -336,11 +300,13 @@ function getStatelessVariable(row, col) {
     return UIModel.fetch(row + '_' + col);
 }
 function statelessGetValue(context, row, col, x) {
-    var uielem = UIModel.fetch(row + '_' + col);
+    var colType = col || 'value';
+
+    var uielem = UIModel.fetch(row + '_' + colType);
     var localFormula = getFormulaByUI(uielem);
     var returnValue;
     if (localFormula === undefined) {
-        var colType = col || 'value';
+
         if (col === 'value') {
             returnValue = propertyDefaults[colType];
         }
@@ -354,9 +320,6 @@ function statelessGetValue(context, row, col, x) {
     }
     return returnValue;
 }
-function getValue(row, col, x) {
-    return statelessGetValue({values: docValues}, row, col, x);
-}
 function statelessSetValue(context, row, value, col, x) {
     var xas = x ? detailColumns[0][x] : contextState;
     var rowId = row + '_' + ( col || 'value');
@@ -368,105 +331,6 @@ function statelessSetValue(context, row, value, col, x) {
     logger.info('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
     FunctionMap.apiSet(localFormula, xas, 0, 0, value, context.values);
 }
-function setValue(row, value, col, x) {
-    statelessSetValue({
-        values: docValues
-    }, row, value, col, x);
-}
-function generateDependencyMatrix(exists) {
-    var data = {
-        packageNames: [],
-        matrix: [],
-        highest: {}
-        /*matrix: [[0, 1, 1], // Main depends on A and B
-         [0, 0, 1], // A depends on B
-         [0, 0, 0]] // B doesn't depend on A or Main*/
-    };
-    var formulas = getFormulas();
-    var packages = new Set()
-    formulas.forEach(function (f) {
-        var fname = f.name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1')
-        if (exists(f.name)) {
-            var packageDeps = [];
-            // console.info(formulaName)
-            data.highest[fname] = data.highest[fname] || 0;
-            if (!packages.has(fname)) {
-                packages.add(fname);
-                data.packageNames.push(fname);
-            }
-            formulas.forEach(function (inner) {
-                var innerName = inner.name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
-                if (exists(inner.name)) {
-                    var linked = 0;
-                    for (var key in inner.deps) {
-                        var keyName = key.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1')
-                        //console.info(inner.name + ' deps: ' + key)
-                        if (keyName === fname && keyName !== innerName) {
-                            linked++;
-                        }
-                    }
-                    /*        for (var key in inner.refs)
-                     {
-                     //   console.info(inner.name + ' refs: ' + key)
-                     if (key === f.name && key !== inner.name)
-                     {
-                     linked++;
-                     }
-                     }*/
-                    packageDeps.push(linked === 0 ? 0 : 1);
-                    data.highest[fname] += linked;
-                }
-            })
-            data.matrix.push(packageDeps)
-        }
-    });
-    //filter ones without
-    return data;
-}
-function generateDependencyMatrix2(exists) {
-    var data = {
-        packageNames: [],
-        matrix: [],
-        highest: {}
-        /*matrix: [[0, 1, 1], // Main depends on A and B
-         [0, 0, 1], // A depends on B
-         [0, 0, 0]] // B doesn't depend on A or Main*/
-    };
-    var formulas = getFormulas();
-    formulas.forEach(function (f) {
-        if (exists(f.name)) {
-            var packageDeps = [];
-            // console.info(formulaName)
-            data.highest[f.name] = data.highest[f.name] || 0;
-            data.packageNames.push(f.name);
-            formulas.forEach(function (inner) {
-
-                if (exists(inner.name)) {
-                    var linked = 0;
-                    for (var key in inner.deps) {
-                        //console.info(inner.name + ' deps: ' + key)
-                        if (key === f.name && key !== inner.name) {
-                            linked++;
-                        }
-                    }
-                    /*        for (var key in inner.refs)
-                     {
-                     //   console.info(inner.name + ' refs: ' + key)
-                     if (key === f.name && key !== inner.name)
-                     {
-                     linked++;
-                     }
-                     }*/
-                    packageDeps.push(linked === 0 ? 0 : 1);
-                    data.highest[f.name] += linked;
-                }
-            })
-            data.matrix.push(packageDeps)
-        }
-    });
-    //filter ones without
-    return data;
-}
 function addConverter(converter) {
     var nodeConverter = converter;
     converter.forDisplayType.forEach(function (displayType) {
@@ -476,24 +340,20 @@ function addConverter(converter) {
 function keyLength(ob) {
     return Object.keys(ob).length;
 }
+FormulaService.prototype.addParser = addParser;
+FormulaService.prototype.getParsers = getParsers;
+FormulaService.prototype.findParser = function (parserName) {
+    return parsers[parserName];
+}
 var GenericModelFile = {
-    switchModel: switchModel,
-
-    //ParserSerice?
-    addParser: addParser,
-    getParsers: getParsers,
-    findParser: findParser,
+    addParser: FormulaService.prototype.addParser,
+    getParsers: FormulaService.prototype.getParsers,
+    findParser: FormulaService.prototype.findParser,
 
     //ValueService?
-    getAllValues: getAllValues,
-    getValue: getValue,
     statelessSetValue: statelessSetValue,
     statelessGetValue: statelessGetValue,
     getStatelessVariable: getStatelessVariable,
-    setValue: setValue,
-    updateValues: updateValues,
-    docValues: docValues,
-
     //FormulaService?
     findFormulaByIndex: findFormulaByIndex,
     bulkInsertFormula: bulkInsertFormula,
@@ -509,96 +369,12 @@ var GenericModelFile = {
         var newFormulaId = addLink(rowId, col, col === 'value' ? false : true, ast.body[0].expression);
         //integrate formula (parse it)
         FunctionMap.init(bootstrap.parseAsFormula, [findFormulaByIndex(newFormulaId)], true);
-        updateValueMap(docValues);
     },
     jsMath: jsMath,//strange part
-    variableSchema: {
-
-        title: ' ',
-        "properties": {}
-    },
     //SolutionService
     produceSolution: produceSolution,
-    generateDependencyMatrix: generateDependencyMatrix,
     //UiModelService?
     updateValueMap: updateValueMap,
-    updateModelMetaData: function (solutionMetaData) {
-        var propertiesArr = Object.keys(solutionMetaData);
-        propertiesArr.sort(function (a, b) {
-            return (
-                keyLength(solutionMetaData[a]) < keyLength(solutionMetaData[b])
-            ) ? 1 : (
-                    (
-                        keyLength(solutionMetaData[b]) < keyLength(solutionMetaData[a])
-                    ) ? -1 : 0
-                );
-        });
-        for (var pi = 0; pi < propertiesArr.length; pi++) {
-            var propertyName = propertiesArr[pi];
-
-            var schemaItem = {
-                "title": propertyName
-            }
-            var propertyKeys = Object.keys(solutionMetaData[propertyName]);
-            var type = solutionMetaData[propertyName];
-
-            propertyKeys.sort(function (a, b) {
-                return (type[a] > type[b]) ? 1 : ((type[b] > type[a]) ? -1 : 0);
-            });
-            schemaItem.default = propertyKeys[0];
-            if (propertyName === 'choices') {
-                //expect a Array of Arrays
-                var choices = []
-                var relMap = {
-                    name: {},
-                    value: {}
-                };
-                for (var i = 0; i < propertyKeys.length; i++) {
-                    var obj = propertyKeys[i];
-                    /* console.info(propertyKeys[i])*/
-                    var items = JSON.parse(propertyKeys[i]);
-                    for (var j = 0; j < items.length; j++) {
-                        var curr = items[j];
-                        choices.push(curr)
-                        var currName = "" + curr.name;
-                        relMap.name[currName] = ((relMap.name[currName] || 1) + 1);
-                        relMap.value[curr.value] = ((relMap.value[curr.value] || 1) + 1);
-                    }
-                }
-                schemaItem.type = "array";
-                schemaItem.uniqueItems = true;
-                schemaItem.format = "table";
-                schemaItem.items = {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "enum": Object.keys(relMap.name)
-                        },
-                        "value": {
-                            "type": "string",
-                            "enum": Object.keys(relMap.value)
-                        }
-                    }
-                };
-            }
-            //skip all known formula types for now
-            else if (GenericModelFile.properties[propertyName] === undefined) {
-                schemaItem.type = "string";
-                /*  if (propertyKeys.length <= 2)
-                 {
-                 1
-                 }
-                 if (propertyKeys.length > 2)*/
-                {
-                    schemaItem.enum = propertyKeys
-                }
-            }
-            if (schemaItem.type) {
-                GenericModelFile.variableSchema.properties[propertyName] = schemaItem;
-            }
-        }
-    }, /*console.info(solutionMetaData);*/
     addLink: addLink,
     //encapsulate isLocked flag
     addSimpleLink: function (solution, rowId, colId, body, displayAs) {
@@ -607,7 +383,7 @@ var GenericModelFile = {
         var formulaId = addLink(rowId, colId, colId === 'value' ? false : true, body);
         //most ugly part here, the Parsers themselves add Links, which should be done just before parsing Formula's
         //afterwards the Formula's are parsed,
-        return solution.createNode(rowId, colId, formulaId, displayAs || 'PropertyType');
+        return solution.createNode(rowId, colId, formulaId, displayAs);
     },
     findLink: function (row, col) {
         return UIModel.getUI(row, col);
@@ -638,7 +414,6 @@ var GenericModelFile = {
     setXasStart: function (year) {
         contextState = detailColumns[0][0];
     },
-    present: {},//presenationModel
     x: contextState,
     addConverter: addConverter,
     converters: converters,

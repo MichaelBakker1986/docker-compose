@@ -1,11 +1,14 @@
 require('./exchange_modules/ffl/fflparser');//just let it inject into the GenericModelFile
 require('./exchange_modules/presentation/presentation');//just let it inject into the GenericModelFile
 var logger = require('ff-log')
-var wb = require('./fesjs/JSWorkBook').prototype;
+var JSWorkBook = require('./fesjs/JSWorkBook');
+var FESContext = require('./fesjs/fescontext');
+
 var init = function (data) {
+    var wb = new JSWorkBook(new FESContext());
     wb.doImport(data, 'ffl');
     var validate = wb.validate();
-    validate.fixAll();
+    wb.fixAll();
     if (wb.validate().valid) {
         //valid
         logger.debug('Initialized model [' + wb.getRootNode().solutionName + ']');
@@ -27,28 +30,31 @@ var addFunctions = function (plugin) {
  * @Optional value - new value
  */
 var value = function (context, rowId, columncontext, value) {
+    var fesContext = new FESContext();
+    fesContext.values = context.values;
+    var wb = new JSWorkBook(fesContext)
     wb.updateValueMap(context.values)
     if (value !== undefined) {
         wb.statelessSetValue(context, rowId, value, 'value', columncontext)
-        return getEntry(context, rowId, columncontext)
+        return getEntry(wb, rowId, columncontext)
     } else {
         var values = [];
         wb.visit(wb.getStatelessNode(rowId), function (node) {
-            values.push(getEntry(context, node.solutionName + '_' + node.rowId, columncontext))
+            values.push(getEntry(wb, node.solutionName + '_' + node.rowId, columncontext))
         });
         return values;
     }
 }
-function getEntry(context, rowId, columncontext) {
+function getEntry(workbook, rowId, columncontext) {
     var data = [];
     var start = columncontext;
     var end = columncontext == 0 ? columncontext + 1 : columncontext;
     for (var x = start; x <= end; x++) {
         data[x] = {};
-        for (var type in wb.properties) {
-            data[x][type] = wb.statelessGetValue(context, rowId, type, x);
+        for (var type in workbook.properties) {
+            data[x][type] = workbook.statelessGetValue(workbook.context, rowId, type, x);
             data[x].column = x;
-            data[x].variable = wb.getStatelessVariable(rowId, 'value').rowId;
+            data[x].variable = workbook.getStatelessVariable(rowId, 'value').rowId;
         }
     }
     return data;

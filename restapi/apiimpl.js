@@ -11,7 +11,7 @@ fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 fesjsApi.addFunctions(require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup);
 
 var fs = require('fs');
-var modelName = 'KSP'
+var modelName = 'AABPRICING'
 var data = fs.readFileSync('./resources/' + modelName + '.ffl', 'utf8');
 fesjsApi.init(data);
 

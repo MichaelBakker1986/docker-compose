@@ -1,10 +1,8 @@
 var UIModel = require('./uimodel');
 var FunctionMap = require('./FunctionMap');
 var GenericModelFile = require('./GenericModelFile');
-var values = GenericModelFile.docValues;
 var bootstrap = require('./formula-bootstrap');
 var AST = require('./AST');
-var esprima = require('esprima');
 var log = require('ff-log')
 
 //user friendly stable API
@@ -18,34 +16,36 @@ var log = require('ff-log')
 // --optional property (default='value')
 // --optional context Time/FormulaSet -Matrix (default=0)
 
-function JSWorkBook() {
+function JSWorkBook(context) {
+    this.context = context;
 }
 JSWorkBook.prototype.doImport = function (data, parserType) {
     if (data === undefined) {
         console.info('no file specified')
         return;
     }
-    var solution = GenericModelFile.findParser(parserType).parse(data);
+    var solution = GenericModelFile.findParser(parserType).parse(data, this);
     log.debug('Update model [' + solution.getName() + ']');
     UIModel.bulkInsert(solution);
     //only get the formulas for Current Model
-    var    formulas = GenericModelFile.produceSolution().formulas;
-    GenericModelFile.updateModelMetaData(solution.getModelMetaData());
+    var formulas = GenericModelFile.produceSolution().formulas;
+    //GenericModelFile.updateModelMetaData(solution.getModelMetaData());
     FunctionMap.init(bootstrap.parseAsFormula, formulas, false);
-    GenericModelFile.updateValueMap(values);
+    this.updateValueMap();
 }
 //if it is possible to fix missing functions
 //fix loops in the solution. we try it
 function fixAll() {
     var attempt = 0;
-    var feedback = validate();
+    var workbook = this;
+    var feedback = workbook.validate();
     while (!feedback.valid && attempt < 20) {
         feedback.error.forEach(function (item) {
             if (item.canFix) {
                 item.fix();
             }
         });
-        feedback = validate();
+        feedback = workbook.validate();
         attempt++;
     }
     return feedback;
@@ -55,17 +55,17 @@ function fixAll() {
 //Generic problems can be resolved in the same manner
 //returns a FeedBack object
 function validate() {
-
     var validateResponse = {
         succes: [],
         error: []
     };
-
+    var context = this.context;
     var formulas = GenericModelFile.produceSolution().formulas;
-    formulas.forEach(function (elem) {
+
+    function formulaFixer(elem) {
         //TODO: use timeout, this monte carlo is blocking UI thread
         try {
-            FunctionMap.apiGet(elem, GenericModelFile.x, 0, 0, values);
+            FunctionMap.apiGet(elem, GenericModelFile.x, 0, 0, context.getValues());
             validateResponse.succes.push(elem.name);
         }
         catch (e) {
@@ -86,7 +86,7 @@ function validate() {
                             GenericModelFile.createFormula(1, variableName);
                             //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
                             FunctionMap.init(bootstrap.parseAsFormula, [elem], true);
-                            GenericModelFile.updateValueMap(values);
+                            GenericModelFile.updateValueMap(context.getValues());
                         }
                     };
                 }
@@ -114,7 +114,7 @@ function validate() {
                         elem.body = AST.STRING(elem.original);
                         //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
                         FunctionMap.init(bootstrap.parseAsFormula, [elem], false);
-                        GenericModelFile.updateValueMap(values);
+                        GenericModelFile.updateValueMap(context.getValues());
                     }
                 };
             }
@@ -131,7 +131,8 @@ function validate() {
                 validateResponse.error.push(fix);
             }
         }
-    });
+    };
+    formulas.forEach(formulaFixer);
     validateResponse.valid = validateResponse.error.length === 0 ? true : false;
     validateResponse.fixAll = fixAll;
     return validateResponse;
@@ -141,13 +142,10 @@ JSWorkBook.prototype.export = function (parserType, rowId) {
     if (parser === undefined) {
         throw Error('No such parser found:[' + parserType + ']');
     }
-    return parser.deParse(rowId);
+    return parser.deParse(rowId, this);
 }
 JSWorkBook.prototype.setXasStart = function (year) {
     GenericModelFile.setXasStart(year);
-}
-JSWorkBook.prototype.getModelMetaData = function () {
-    return GenericModelFile.variableSchema;
 }
 JSWorkBook.prototype.getNode = function (name) {
     return UIModel.fetch(UIModel.getCurrentModelName() + "_" + name + "_value");
@@ -156,22 +154,68 @@ JSWorkBook.prototype.getStatelessNode = function (name) {
     return UIModel.fetch(name + "_value");
 }
 //some functions we directly pass trough
-JSWorkBook.prototype.get = GenericModelFile.getValue;
+JSWorkBook.prototype.get = function (row, col, x) {
+    return GenericModelFile.statelessGetValue(this.context, UIModel.getCurrentModelName() + '_' + row, col, x)
+};
 JSWorkBook.prototype.statelessGetValue = GenericModelFile.statelessGetValue;
-JSWorkBook.prototype.updateValueMap = GenericModelFile.updateValueMap;
-JSWorkBook.prototype.set = GenericModelFile.setValue;
+JSWorkBook.prototype.updateValueMap = function () {
+    GenericModelFile.updateValueMap(this.context.values);
+};
+JSWorkBook.prototype.set = function (row, value, col, x) {
+    if (!this.context) {
+        throw Error();
+    }
+    return GenericModelFile.statelessSetValue(this.context, UIModel.getCurrentModelName() + '_' + row, value, col, x);
+}
 JSWorkBook.prototype.statelessSetValue = GenericModelFile.statelessSetValue;
 JSWorkBook.prototype.getStatelessVariable = GenericModelFile.getStatelessVariable;
 //fix missing variables
 JSWorkBook.prototype.fixAll = fixAll
 //should return the solution instead. So its deprecated
-JSWorkBook.prototype.getSolutionName = UIModel.getCurrentModelName;
 JSWorkBook.prototype.getRootNode = UIModel.getRootNode;
 JSWorkBook.prototype.visit = UIModel.visit;
 JSWorkBook.prototype.validate = validate;
-JSWorkBook.prototype.createFormula = GenericModelFile.createFormula
+JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId) {
+    GenericModelFile.createFormula(formulaAsString, rowId, colId);
+    this.updateValueMap();
+}
+JSWorkBook.prototype.gatherProperties = function (rowId) {
+    var formulaProperties = {};
+    for (var key in this.properties) {
+        var formula = GenericModelFile.getFormula(rowId, key);
+        if (formula !== undefined && formula.original !== undefined && formula.original !== null && formula.original !== '') {
+            formulaProperties[key] = formula.original;
+        }
+    }
+    return formulaProperties;
+}
 JSWorkBook.prototype.getFormula = GenericModelFile.getFormula;
 JSWorkBook.prototype.produceSolution = GenericModelFile.produceSolution;
 JSWorkBook.prototype.properties = GenericModelFile.properties;
-
+JSWorkBook.prototype.getAllValues = function () {
+    if (!this.context.values) {
+        throw Error();
+    }
+    //we cannot just return everything here, Because for now all formula's have a user-entered value cache.
+    //Also Functions themSelves are bound to this object.
+    //So we have to strip them out here.
+    //should be part of the apiGet, to query all *_value functions. or *_validation etc.
+    var docValues = this.context.values;
+    var values = [];
+    for (var formulaId in docValues) {
+        var cachevalues = docValues[formulaId];
+        if (cachevalues) {
+            var formula = GenericModelFile.findFormulaByIndex(formulaId);
+            var formulaName = formula === undefined ? formulaId : formula.name;
+            for (var cachedValue in cachevalues)
+                values.push({
+                    varName: formulaName,
+                    colId: cachedValue,
+                    value: cachevalues[cachedValue],
+                    formulaId: formulaId
+                });
+        }
+    }
+    return values;
+};
 module.exports = JSWorkBook;

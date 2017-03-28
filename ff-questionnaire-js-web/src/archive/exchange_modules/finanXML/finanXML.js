@@ -16,9 +16,9 @@ var parser = {
         var solution = uimodel.create('V05');
         return solution;
     },
-    deParse: function ()
+    deParse: function (workbook)
     {
-        var allValues = GenericModelFile.getAllValues(GenericModelFile.docValues);
+        var allValues = workbook.getAllValues();
         var valuesML = [];
         allValues.forEach(function (el)
         {

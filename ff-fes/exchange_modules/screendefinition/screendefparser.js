@@ -8,45 +8,37 @@ var parser = {
     name: 'screendefinition',
     headername: '.finance Screendefinition',
     //expection json as String for screen definitions
-    parse: function (json)
-    {
+    parse: function (json) {
         var data = JSON.parse(json);
         var solution = uimodel.create(data.modelName || 'V05');
 
-        visitor.travelOne(data, null, function (keyArg, node)
-        {
+        visitor.travelOne(data, null, function (keyArg, node) {
             //keyArg !== null &&  is a hack, prevents RootNode from being added;
-            if (node !== null && node !== undefined && keyArg !== null && (node.variableName || node.name) && !Array.isArray(node))
-            {
+            if (node !== null && node !== undefined && keyArg !== null && (node.variableName || node.name) && !Array.isArray(node)) {
                 var parent = node._parent;
                 var nodeName = node.variableName || node.name;
-                if (nodeName)
-                {
+                if (nodeName) {
                     addnode(solution, nodeName, node, parent ? (parent.variableName || parent.name) : undefined, undefined);
                 }
             }
         });
         return solution;
     },
-    deParse: function ()
-    {
+    deParse: function (rowId, workbook) {
         var screenSolution = uimodel.create();
 
-        uimodel.visit(undefined, function (elem)
-        {
+        uimodel.visit(undefined, function (elem) {
             //create output node
             var uielem = {
                 name: elem.rowId,
                 displaytype: elem.displayAs,
                 description: elem.title
             };
-            var formulaProperties = screenSolution.gatherProperties(GenericModelFile.getFormula, GenericModelFile.properties, elem.rowId);
-            for (var key in formulaProperties)
-            {
+            var formulaProperties = workbook.gatherProperties(elem.rowId);
+            for (var key in formulaProperties) {
                 var formula = formulaProperties[key];
                 var finFormula = finformula.javaScriptToFinGeneric(formula);
-                if (finFormula != 'undefined')
-                {
+                if (finFormula != 'undefined') {
                     uielem[key] = finFormula;
                 }
             }
@@ -59,10 +51,8 @@ var parser = {
     }
 };
 
-function addnode(solution, rowId, node, parentId, referId)
-{
-    if (solution.hasNode(rowId) || !rowId)
-    {
+function addnode(solution, rowId, node, parentId, referId) {
+    if (solution.hasNode(rowId) || !rowId) {
         throw Error()
     }
     //create formula if not exist

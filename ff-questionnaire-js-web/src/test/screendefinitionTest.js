@@ -6,6 +6,7 @@ var assert = require('assert');
 //var data = JUNIT.getFile('scorecardtemplate.json');
 var data = require('../resources/scorecardtemplate.json');
 JUNIT.print(data)
+var log = require('ff-log')
 var wb = new JSWorkBook();
 wb.doImport(JSON.stringify(data, null, 2), 'screendefinition');
 assert.ok(wb.validate().valid);
@@ -23,5 +24,5 @@ JUNIT.validateTree(expected, actual, 'children', 'children', function (expected,
     return actual.name === expected.variableName || expected.name;
 })
 JUNIT.print(screenDefexport);
-console.info('succes model [' + wb.getSolutionName() + ']');
+log.info('succes model [' + wb.getRootNode().solutionName + ']');
 JUNIT.print(wb.export('ffl'));
