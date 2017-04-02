@@ -45,7 +45,7 @@ function init(formulaParser, formulas, disableFormulaCache) {
         var javaScriptfunction = formulaParser(newFormula);
         log.debug("Added function %s\n\t\t\t\t\t\t\t\t\t  %s : %s : [%s]", newFormula.original, newFormula.name, newFormula.type, javaScriptfunction)
         var modelFunction = Function('f, x, y, z, v', 'return ' + javaScriptfunction).bind(global);
-        global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id);
+        global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
     });
 };
 //private
@@ -59,7 +59,7 @@ var formulaDecorators = {
     },
     //Unlocked formula's can be user entered.
     //Encapsulates that part.
-    noCacheUnlocked: function (innerFunction, formulaName) {
+    noCacheUnlocked: function (innerFunction, formulaName, varName) {
         //add a user value cache
         //f = formulaId
         //y,x,z dimensions Tuple,Column,Layer
@@ -69,8 +69,10 @@ var formulaDecorators = {
             var hash = x.hash + y + z;
             //check if user entered a value
             if (v[f][hash] === undefined) {
+                var valueOfFunction = innerFunction(f, x, y, z, v);
                 //return function value;
-                return innerFunction(f, x, y, z, v);
+                //console.info('called:[' + varName + '][' + valueOfFunction + ']')
+                return valueOfFunction;
             }
             //return entered value
             return v[f][hash];

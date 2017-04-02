@@ -1,3 +1,5 @@
+model Test uses BaseModel
+{
 variable TupleReferenceVariable
 {
 	title : "reference variable";
@@ -9,4 +11,5 @@ variable TupleReferenceVariable2 refers to NestedTupleProperty2
 variable ReferenceToTupleDefinition refers to TupleVariable
 {
   title : "reference to tuple test";
+}
 }

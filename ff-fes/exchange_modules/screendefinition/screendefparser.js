@@ -25,7 +25,7 @@ var parser = {
         return solution;
     },
     deParse: function (rowId, workbook) {
-        var screenSolution = uimodel.create();
+        var screenSolution = uimodel.create(workbook.modelName);
 
         uimodel.visit(undefined, function (elem) {
             //create output node
@@ -46,7 +46,7 @@ var parser = {
             screenSolution.restoreDelegateProperties(uielem, elem);
             screenSolution.addNodeToCorrespondingPlaceInHierarchie(elem.parentrowId, elem.rowId, uielem);
         });
-        screenSolution.root.modelName = uimodel.getCurrentModelName();
+        screenSolution.root.modelName = workbook.modelName;
         return screenSolution.stringify();
     }
 };

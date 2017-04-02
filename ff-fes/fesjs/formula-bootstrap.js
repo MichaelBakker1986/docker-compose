@@ -112,7 +112,7 @@ var astValues = {
 //TODO: move this method away. its the only one that should create Dependencies
 //Move it to either a DependencyManager/Service or GenericModelFile
 function addFormulaDependency(formulaInfo, name, property) {
-    var foundUiModel = findLink(name, property || 'value');
+    var foundUiModel = findLink(formulaInfo.name.split('_')[0], name, property || 'value');
     //we want do know if we can all the value straight away or we have to invoke a function for it
     //in future we want to check here if its a dynamic formula, or plain value.
     //also inherited functions are nice to play around with.
@@ -372,7 +372,8 @@ var simplified = {
     //This must be the most complex seen in a while
     SelectDescendants: function (formulaInfo, node) {
         node.type = 'ArrayExpression';
-        var foundStartUiModel = findLink(node.arguments[0].name, propertiesArr[0]);
+        var groupName = node.arguments[0].name.split('_')[0];
+        var foundStartUiModel = findLink(groupName, node.arguments[0].name, propertiesArr[0]);
         var lambda;
         //get the propertyType
         //extract lambda
@@ -389,7 +390,7 @@ var simplified = {
             node.arguments.length = 1;
         }
         else {
-            foundEndUiModel = findLink(node.arguments[1].name, propertiesArr[0]);
+            foundEndUiModel = findLink(groupName, node.arguments[1].name, propertiesArr[0]);
         }
 
         node.elements = [];
@@ -561,7 +562,9 @@ var traverseTypes = {
                         //node property.name will result in undefined.
                         //its esier to lookAhead the SequenceExpression
                         //variableName[contextReference] , e.g. Balance[prev] or Debit[doc]
-                        assert(node.property.name === propertiesArr[varproperties[node.property.name].f], "Bit strange this triple convert");
+                        if (!propertiesArr[varproperties[node.property.name]] || node.property.name !== propertiesArr[varproperties[node.property.name].f]) {
+                            throw Error(node.property.name + '!== ' + propertiesArr[varproperties[node.property.name].f] + " ,Bit strange this triple convert");
+                        }
                         node.type = 'Identifier';
                         node.name = buildFunc(orId, 0, object, '.' + node.property.name);
                         node.object = undefined;
@@ -636,7 +639,8 @@ function buildFormula(formulaInfo, parent, node) {
         if (simplified[node.callee.name] !== undefined) {
             simplified[node.callee.name](formulaInfo, node);
         } else {
-            if (global[node.callee.name] == undefined) {
+            //be aware since Simplified modifies the Max into Math.max this will be seen as the function Math.max etc..
+            if (global[node.callee.name.split('.')[0]] == undefined) {
                 throw Error('invalid call [' + node.callee.name + ']')
             }
         }

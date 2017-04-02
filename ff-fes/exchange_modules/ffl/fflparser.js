@@ -38,7 +38,7 @@ var parser = {
     name: 'ffl',
     status: 'green',
     headername: '.finance ffl',
-    parse: function (data) {
+    parse: function (data, workbook) {
         var log = {variables: []};
         //convert FFL into JSON (Generic)
         var json = bracketparser.parse(data);
@@ -65,13 +65,13 @@ var parser = {
                 }
             }
         });
-        logger.log('Added variables [' + log.variables + ']')
+        logger.debug('Added variables [' + log.variables + ']')
         return solution;
     },
     deParse: function (rowId, workbook) {
-        var fflSolution = uimodel.create()
+        var fflSolution = uimodel.create(workbook.modelName)
         if (rowId) {
-            var startuielem = uimodel.getUI(rowId, 'value')
+            var startuielem = uimodel.getUI(workbook.modelName, rowId, 'value')
         }
         uimodel.visit(startuielem, function (elem) {
             //JSON output doesn't gurantee properties to be in the same order as inserted

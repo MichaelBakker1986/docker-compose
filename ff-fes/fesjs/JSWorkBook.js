@@ -18,6 +18,7 @@ var log = require('ff-log')
 
 function JSWorkBook(context) {
     this.context = context;
+    this.modelName = 'NEW';
 }
 JSWorkBook.prototype.doImport = function (data, parserType) {
     if (data === undefined) {
@@ -25,10 +26,11 @@ JSWorkBook.prototype.doImport = function (data, parserType) {
         return;
     }
     var solution = GenericModelFile.findParser(parserType).parse(data, this);
+    this.modelName = solution.getName().toUpperCase();
     log.debug('Update model [' + solution.getName() + ']');
     UIModel.bulkInsert(solution);
     //only get the formulas for Current Model
-    var formulas = GenericModelFile.produceSolution().formulas;
+    var formulas = this.produceSolution().formulas;
     //GenericModelFile.updateModelMetaData(solution.getModelMetaData());
     FunctionMap.init(bootstrap.parseAsFormula, formulas, false);
     this.updateValueMap();
@@ -60,11 +62,13 @@ function validate() {
         error: []
     };
     var context = this.context;
+    var workbook = this;
     var formulas = GenericModelFile.produceSolution().formulas;
 
     function formulaFixer(elem) {
         //TODO: use timeout, this monte carlo is blocking UI thread
         try {
+            //workbook.statelessGetValue()
             FunctionMap.apiGet(elem, GenericModelFile.x, 0, 0, context.getValues());
             validateResponse.succes.push(elem.name);
         }
@@ -80,13 +84,19 @@ function validate() {
                         variableName: variableName,
                         fixMessage: 'Add',
                         fix: function () {
-                            console.info(elem.name + ":" + 'Fix for [' + variableName + '] in solution:' + UIModel.getCurrentModelName() + ":" + elem.original)
+                            try {
+                                log.debug(elem.name + " : " + 'Fix for [' + variableName + '] in solution: ' + workbook.modelName + " : " + elem.original + ' message:[' + e + ']')
 
-                            //TODO: just create a DUMMY formula, returning 1;
-                            GenericModelFile.createFormula(1, variableName);
-                            //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
-                            FunctionMap.init(bootstrap.parseAsFormula, [elem], true);
-                            GenericModelFile.updateValueMap(context.getValues());
+                                //TODO: just create a DUMMY formula, returning 1;
+                                // workbook.createFormula(1,variableName) This is also calling UpdateValueMap() (so its calling it two times)
+                                GenericModelFile.createFormula(1, variableName);
+                                //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
+                                FunctionMap.init(bootstrap.parseAsFormula, [elem], true);
+                                workbook.updateValueMap();
+                                //     workbook.statelessGetValue()
+                            } catch (err) {
+                                log.error('Fatal error', err);
+                            }
                         }
                     };
                 }
@@ -119,6 +129,7 @@ function validate() {
                 };
             }
             else {
+                log.warn('unable to fix problem' + e)
                 fix = {
                     canFix: false
                 }
@@ -148,16 +159,18 @@ JSWorkBook.prototype.setXasStart = function (year) {
     GenericModelFile.setXasStart(year);
 }
 JSWorkBook.prototype.getNode = function (name) {
-    return UIModel.fetch(UIModel.getCurrentModelName() + "_" + name + "_value");
+    return UIModel.fetch(this.modelName + "_" + name + "_value");
 }
 JSWorkBook.prototype.getStatelessNode = function (name) {
     return UIModel.fetch(name + "_value");
 }
 //some functions we directly pass trough
 JSWorkBook.prototype.get = function (row, col, x) {
-    return GenericModelFile.statelessGetValue(this.context, UIModel.getCurrentModelName() + '_' + row, col, x)
+    return this.statelessGetValue(this.modelName + '_' + row, col, x)
 };
-JSWorkBook.prototype.statelessGetValue = GenericModelFile.statelessGetValue;
+JSWorkBook.prototype.statelessGetValue = function (row, col, x) {
+    return GenericModelFile.statelessGetValue(this.context, row, col, x)
+};
 JSWorkBook.prototype.updateValueMap = function () {
     GenericModelFile.updateValueMap(this.context.values);
 };
@@ -165,18 +178,20 @@ JSWorkBook.prototype.set = function (row, value, col, x) {
     if (!this.context) {
         throw Error();
     }
-    return GenericModelFile.statelessSetValue(this.context, UIModel.getCurrentModelName() + '_' + row, value, col, x);
+    return GenericModelFile.statelessSetValue(this.context, this.modelName + '_' + row, value, col, x);
 }
 JSWorkBook.prototype.statelessSetValue = GenericModelFile.statelessSetValue;
 JSWorkBook.prototype.getStatelessVariable = GenericModelFile.getStatelessVariable;
 //fix missing variables
 JSWorkBook.prototype.fixAll = fixAll
 //should return the solution instead. So its deprecated
-JSWorkBook.prototype.getRootNode = UIModel.getRootNode;
+JSWorkBook.prototype.getRootNode = function () {
+    return UIModel.getRootNode(this.modelName);
+};
 JSWorkBook.prototype.visit = UIModel.visit;
 JSWorkBook.prototype.validate = validate;
 JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId) {
-    GenericModelFile.createFormula(formulaAsString, rowId, colId);
+    GenericModelFile.createFormula(this.modelName, formulaAsString, rowId, colId);
     this.updateValueMap();
 }
 JSWorkBook.prototype.gatherProperties = function (rowId) {
@@ -190,7 +205,9 @@ JSWorkBook.prototype.gatherProperties = function (rowId) {
     return formulaProperties;
 }
 JSWorkBook.prototype.getFormula = GenericModelFile.getFormula;
-JSWorkBook.prototype.produceSolution = GenericModelFile.produceSolution;
+JSWorkBook.prototype.produceSolution = function () {
+    return GenericModelFile.produceSolution(this.modelName);
+};
 JSWorkBook.prototype.properties = GenericModelFile.properties;
 JSWorkBook.prototype.getAllValues = function () {
     if (!this.context.values) {

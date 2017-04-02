@@ -22,7 +22,6 @@ var GenericModelFile = require('../../fesjs/GenericModelFile');
 var FunctionMap = require('../../fesjs/FunctionMap');
 var bootstrap = require('../../fesjs/formula-bootstrap');
 var AST = require('../../fesjs/AST');
-var converters = GenericModelFile.converters;
 Node.prototype.delete = function () {
     uimodel.remove(this.parent().rowId, this.rowId);
     this._tree.remove(this.rowId);
@@ -38,21 +37,25 @@ Node.prototype.duplicate = function () {
         appendix = '(' + UUID++ + ')';
     }
     rowId += appendix;
-
+    var wb = this._tree.workbook
+    //JUST some quickfix from here,
     uimodel.addUi(rowId, 'value', this, this.parent().rowId + '_value');
-    var solution = uimodel.create();
+    var solution = uimodel.create(wb.modelName);
     var uiNode = GenericModelFile.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
     solution.setParentName(uiNode, this.parent().rowId);
     GenericModelFile.addSimpleLink(solution, rowId, 'title', AST.STRING(this.title))
+    //JUST some quickfix from here,
     uimodel.bulkInsert(solution);
     GenericModelFile.gatherFormulas(solution);
+    //JUST some quickfix from here,
     FunctionMap.init(bootstrap.parseAsFormula, solution.formulas, false);
-    GenericModelFile.updateValueMap(GenericModelFile.docValues);
+    wb.updateValueMap();
     this.parent().update({title: true});
 }
 
 Tree.prototype.update = function (node, properties) {
-    var fetch = uimodel.fetch(uimodel.getCurrentModelName() + '_' + node.rowId + '_value')
+    var wb = this.workbook;
+    var fetch = uimodel.fetch(wb.modelName + '_' + node.rowId + '_value')
     if (fetch === undefined) {
         node.delete();
     }
@@ -131,7 +134,8 @@ Tree.prototype.update = function (node, properties) {
 
 }
 Node.prototype._update = function (properties) {
-    var fetch = uimodel.fetch(uimodel.getCurrentModelName() + '_' + this.rowId + '_value')
+    var wb = this._tree.workbook;
+    var fetch = uimodel.fetch(wb.modelName + '_' + this.rowId + '_value')
     //should also be a property given from outside...
     this.tuple = fetch.tuple;
     this.displayAs = fetch.displayAs;
@@ -139,7 +143,7 @@ Node.prototype._update = function (properties) {
     for (var property in properties) {
         var value, dirty = false;
 
-        var newValue = wb.statelessGetValue(this._tree.workbook.context, uimodel.getCurrentModelName() + "_" + this.rowId, property);
+        var newValue = wb.statelessGetValue(wb.modelName + "_" + this.rowId, property);
         //TODO: will fail for Object types, first we will meet is Date
         //we will use a object validator combined with the datatype to check it
         //
@@ -178,12 +182,12 @@ var presentationConverter = {
         throw new Error('Not yet supported');
     },
     deParse: function (rowId, workbook) {
-        //strange I have to build this, Solution Object should be able to do this.
-        var rootNode = uimodel.getRootNode();
+        var modelName = workbook.modelName;
+        var rootNode = workbook.getRootNode(modelName);
         if (rootNode !== undefined) {
             var tree = new Tree(rootNode.rowId);
             tree.workbook = workbook;
-            uimodel.visit(rootNode, function (node) {
+            workbook.visit(rootNode, function (node) {
                 //skip the rootnode, we just used it
                 if (node.rowId !== rootNode.rowId) {
                     //can only make nodes via a Tree.
@@ -244,12 +248,6 @@ var presentationConverter = {
     }
 };
 function createNode(tree, nodeId, displayAs) {
-    var node = tree.createNode(nodeId);
-    var converter = converters[displayAs];
-    if (converter) {
-        node._converter = new converter.converter(node);
-        node._converter.init();
-    }
-    return node;
+    return tree.createNode(nodeId);
 }
 GenericModelFile.addParser(presentationConverter)

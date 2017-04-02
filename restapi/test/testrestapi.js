@@ -7,8 +7,6 @@ var connection = mysql.createConnection({
     database: 'test'
 });
 connection.connect();
-
-
 var testresults = require('../../ff-fes/test/RunAllTest')
 
 function guid() {
@@ -36,10 +34,18 @@ var dbCall = function (query) {
     });
 }
 testresults.results.forEach(function (testResult) {
+    var total = "";
+    var first = true;
     testResult.forEach(function (item) {
-        dbCall("INSERT INTO test.log (uuid,info) VALUES ('" + x + "','" + item + "')").then(function (data) {
-        }).catch(function (err) {
-            console.error(err)
-        })
+        if (first) {
+            first = false;
+        } else {
+            total += ','
+        }
+        total += "('" + x + "', '" + item + "')"
+    })
+    dbCall("INSERT INTO test.log (uuid,info) VALUES " + total).then(function (data) {
+    }).catch(function (err) {
+        console.error(err)
     })
 })

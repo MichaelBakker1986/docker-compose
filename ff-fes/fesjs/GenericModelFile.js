@@ -5,7 +5,7 @@
  * Just look at it Very Generic Dynamic Service
  *
  * if has static members
- *  bootstrap,docValues
+ *  bootstrap
  *  FunctionMap
  *  formulas
  *
@@ -20,22 +20,19 @@
  * UiModelService, ParserService, ValueService, FormulaService, SolutionService
  */
 var logger = require('ff-log');
-var AST = require('./AST.js');
+var AST = require('./AST');
 var jsMath = require('./jsMath.json')
 var escodegen = require('escodegen')
 var esprima = require('esprima')
 var assert = require('assert')
-var time = require('./XAxis.js')
+var time = require('./XAxis')
 var detailColumns = new time().detl.columns;
 //for now now just years.. keep it simple
 var contextState = detailColumns[0][0];
 //converter between display type and fesjs value
-var converters = {
-    dummy: function (value) {
-        return value;
-    }
-};
 function FormulaService() {
+}
+function ParserService() {
 }
 /*
  Class Parser
@@ -47,10 +44,10 @@ function FormulaService() {
  }
  */
 var parsers = {};
-var UIModel = require('./uimodel.js');
-var bootstrap = require('./formula-bootstrap.js');
-var FunctionMap = require('./FunctionMap.js');
-var docValues = [];
+var UIModel = require('./uimodel');
+var bootstrap = require('./formula-bootstrap');
+var FunctionMap = require('./FunctionMap');
+//var FormulaService = require('./FormulaService')
 /*
  Class Formula
  {
@@ -124,8 +121,8 @@ function findFormula(uiModel) {
     var id = uiModel.formulaId === undefined ? uiModel.ref : uiModel.formulaId;
     return formulas[uiModel.ref];
 }
-function getUI(row, col) {
-    return UIModel.getUI(row, col || 'value');
+function getUI(groupName, row, col) {
+    return UIModel.getUI(groupName, row, col || 'value');
 }
 function getFormulaByUI(uielem) {
     return findFormula(uielem);
@@ -150,8 +147,8 @@ function updateValueMap(values) {
     })
 }
 //public
-function addLink(row, col, locked, body) {
-    var ui = UIModel.getUI(row, col);
+function addLink(groupName, row, col, locked, body) {
+    var ui = UIModel.getUI(groupName, row, col);
 
     //just make sure the row exists
     var formula;
@@ -207,9 +204,9 @@ function gatherFormulas(solution) {
     })
     solution.formulas = solutionFormulas.clean(null);
 }
-function produceSolution() {
+function produceSolution(nodeId) {
     var solutionFormulas = [];
-    var solution = UIModel.findAll();
+    var solution = UIModel.findAll(nodeId);
     gatherFormulas(solution);
     return solution;
 }
@@ -237,12 +234,6 @@ function addParser(parser) {
 }
 //looks a lot like JSWorkBook.doImport, only does not support the ABN way
 //this method only recieves GenericModels so we dont have to check Type
-function switchModel(solution, docValues) {
-    UIModel.bulkInsert(solution);
-    bulkInsertFormula(solution.formulas);
-    FunctionMap.init(bootstrap.parseAsFormula, solution.formulas, false);
-    updateValueMap(docValues);
-}
 function getParsers() {
     var result = [];
     for (var key in parsers) {
@@ -301,8 +292,7 @@ function getStatelessVariable(row, col) {
 }
 function statelessGetValue(context, row, col, x) {
     var colType = col || 'value';
-
-    var uielem = UIModel.fetch(row + '_' + colType);
+    var uielem = getStatelessVariable(row, colType);
     var localFormula = getFormulaByUI(uielem);
     var returnValue;
     if (localFormula === undefined) {
@@ -331,24 +321,18 @@ function statelessSetValue(context, row, value, col, x) {
     logger.info('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
     FunctionMap.apiSet(localFormula, xas, 0, 0, value, context.values);
 }
-function addConverter(converter) {
-    var nodeConverter = converter;
-    converter.forDisplayType.forEach(function (displayType) {
-        converters[displayType] = nodeConverter;
-    });
-}
 function keyLength(ob) {
     return Object.keys(ob).length;
 }
-FormulaService.prototype.addParser = addParser;
-FormulaService.prototype.getParsers = getParsers;
-FormulaService.prototype.findParser = function (parserName) {
+ParserService.prototype.addParser = addParser;
+ParserService.prototype.getParsers = getParsers;
+ParserService.prototype.findParser = function (parserName) {
     return parsers[parserName];
 }
 var GenericModelFile = {
-    addParser: FormulaService.prototype.addParser,
-    getParsers: FormulaService.prototype.getParsers,
-    findParser: FormulaService.prototype.findParser,
+    addParser: ParserService.prototype.addParser,
+    getParsers: ParserService.prototype.getParsers,
+    findParser: ParserService.prototype.findParser,
 
     //ValueService?
     statelessSetValue: statelessSetValue,
@@ -362,11 +346,11 @@ var GenericModelFile = {
     getFormula: getFormula,
     getFormulas: getFormulas,
     gatherFormulas: gatherFormulas,
-    createFormula: function createFormula(formulaAsString, rowId, colId) {
+    createFormula: function createFormula(groupName, formulaAsString, rowId, colId) {
         var col = colId || 'value';
         //create a formula for the element
         var ast = esprima.parse(formulaAsString);
-        var newFormulaId = addLink(rowId, col, col === 'value' ? false : true, ast.body[0].expression);
+        var newFormulaId = addLink(groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
         //integrate formula (parse it)
         FunctionMap.init(bootstrap.parseAsFormula, [findFormulaByIndex(newFormulaId)], true);
     },
@@ -375,18 +359,17 @@ var GenericModelFile = {
     produceSolution: produceSolution,
     //UiModelService?
     updateValueMap: updateValueMap,
-    addLink: addLink,
     //encapsulate isLocked flag
     addSimpleLink: function (solution, rowId, colId, body, displayAs) {
         //by default only value properties can be user entered
         //in simple (LOCKED = (colId !== 'value'))
-        var formulaId = addLink(rowId, colId, colId === 'value' ? false : true, body);
+        var formulaId = addLink(solution.name, rowId, colId, colId === 'value' ? false : true, body);
         //most ugly part here, the Parsers themselves add Links, which should be done just before parsing Formula's
         //afterwards the Formula's are parsed,
         return solution.createNode(rowId, colId, formulaId, displayAs);
     },
-    findLink: function (row, col) {
-        return UIModel.getUI(row, col);
+    findLink: function (groupName, row, col) {
+        return UIModel.getUI(groupName, row, col);
     },
 
     //supported properties
@@ -403,20 +386,10 @@ var GenericModelFile = {
         _testg: 9,
         _testh: 10
     },
-    settings: {
-        toggleOutput: function () {
-            GenericModelFile.oppositeoutput = GenericModelFile.settings.defaultoutput;
-            GenericModelFile.settings.defaultoutput = GenericModelFile.settings.defaultoutput === 'fin' ? 'ffl' : 'fin';
-        },
-        defaultoutput: 'ffl',
-        oppositeoutput: 'fin'
-    },
     setXasStart: function (year) {
         contextState = detailColumns[0][0];
     },
     x: contextState,
-    addConverter: addConverter,
-    converters: converters,
     updateAll: {validation: true, title: true, value: true, required: true, visible: true, locked: true, choices: true}
 };
 //for now we accept NON-Dynamic FesJSMath, nor Dynamic variable properties.

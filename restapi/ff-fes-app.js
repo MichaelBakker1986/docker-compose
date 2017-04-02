@@ -1,4 +1,4 @@
-process.loglevel = 'debug'
+process.loglevel = 'info'
 var log = require('ff-log');
 log.info('Startup ff-restapi')
 var restify = require('restify');

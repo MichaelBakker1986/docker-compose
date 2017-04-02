@@ -5,11 +5,11 @@
   },
   "OnER": {
     "args": "v,onerrv",
-    "body": "{ if (isNaN(v)) { return onerrv; } else { return v; }}"
+    "body": "{ if (isNaN(v)) { return onerrv; } return v; }"
   },
   "OnEr": {
     "args": "v,onerrv",
-    "body": "{ if (isNaN(v)) { return onerrv; } else { return v; }}"
+    "body": "{ if (isNaN(v)) { return onerrv; } return v; }"
   },
   "OnZero": {
     "args": "v,onzerov",
@@ -275,6 +275,10 @@
     "args": "one",
     "body": "{ return 1 }"
   },
+  "HSUM": {
+    "args": "one",
+    "body": "{ return 1 }"
+  },
   "VSUM": {
     "args": "one",
     "body": "{ return 1 }"
@@ -359,6 +363,10 @@
     "args": "one",
     "body": "return !one"
   },
+  "not": {
+    "args": "one",
+    "body": "return !one"
+  },
   "Str": {
     "args": "one",
     "body": "return ''+one;"
@@ -414,6 +422,38 @@
   "GoalSeek": {
     "args": "one",
     "body": "return 1"
+  },
+  "TupleInstanceIndex": {
+    "args": "",
+    "body": "return 1"
+  },
+  "OnNEG": {
+    "args": "a,b",
+    "body": "{ if (a < 0) { return a; } return b;}"
+  },
+  "OnError": {
+    "args": "a,b",
+    "body": "{ if (isNaN(a)) { return b; } return a;}"
+  },
+  "DateStr": {
+    "args": "string",
+    "body": "{ return string }"
+  },
+  "DateToYearNum": {
+    "args": "string",
+    "body": "{ return string }"
+  },
+  "VAL": {
+    "args": "string",
+    "body": "{ return string }"
+  },
+  "BeforeStr": {
+    "args": "string",
+    "body": "{ return string }"
+  },
+  "AfterStr": {
+    "args": "string",
+    "body": "{ return string }"
   },
   "MutCalc": 1,
   "CalculatedInBaseCurrency": 1,

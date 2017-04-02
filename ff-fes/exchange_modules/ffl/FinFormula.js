@@ -6,6 +6,7 @@ function finFormulaGeneric(buf)
     buf = buf.replace(/(\$p|@|#|%|\.\.)/gmi, '');
 
     buf = buf.replace(/\[1\]/gm, '');
+    buf = buf.replace(/\[LastT\]/gm, '');
     // buf = buf.replace(/\[T-1\]/gm, '');
     //-- Context dependencies
     // buf = buf.replace(/\[t-1\]|@|#/gim, ''); //[prev]   : for now, just throw it away, its .prev when using Time

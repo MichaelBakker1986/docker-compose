@@ -1,44 +1,49 @@
 var Promise = require('promise')
 var log = require('ff-log')
+var ffls = require('../ff-ssh-git/gitconnector')
 var DBConn;
 var apiimpl = function (DBConnarg) {
     DBConn = DBConnarg;
 }
 var fesjsApi = require('../ff-fes/ff-fes').fesjs;
+var ModelListener = require('../ff-ssh-git/gitconnector').ModelListener;
+var modelService = new ModelListener();
 //add excel functions, PPMT, IGG etc...
 fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 fesjsApi.addFunctions(require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup);
 
 var fs = require('fs');
-var modelName = 'AABPRICING'
-var data = fs.readFileSync('./resources/' + modelName + '.ffl', 'utf8');
-fesjsApi.init(data);
+var modelNames = []
+var modelName;// = modelNames[0]
+//register a listener before initializing the process
+modelService.onNewModel = function (model) {
+    modelNames.push(fesjsApi.init(model));
+    modelName = modelNames[0];
+}
+modelService.initializeModels();
 
+function prefixVariable(variableName) {
+    for (var i = 0; i < modelNames.length; i++) {
+        var modelPrefix = modelNames[i];
+        if (variableName.startsWith(modelPrefix + '_')) {
+            return variableName;
+        }
+    }
+    return modelNames[0] + '_' + variableName;
+}
 apiimpl.prototype.value = function (contextKey, variable, columncontext, value) {
-    var context = DBConn.getContext(contextKey);
-    var result = fesjsApi.value(context, modelName + '_' + variable, columncontext, value);
+    var context = DBConn.getUserContext(contextKey);
+    var result = fesjsApi.fesGetValue(context, prefixVariable(variable), columncontext, value);
     return result;
 }
 apiimpl.prototype.context = function (contextKey, variable, columncontext, value) {
-    var context = DBConn.getContext(contextKey);
+    var context = DBConn.getUserContext(contextKey);
+    var result = fesjsApi.fesGetValue(context, prefixVariable(variable), columncontext, value);
     if (variable) {
         context[variable] = value
     }
     return context;
-}
-apiimpl.prototype.loadModel = function (contextKey) {
-    return new Promise(function (success, err) {
-        DBConn('SELECT * FROM fes_values').then(function (result) {
-            //result.entry = data;
-            success({
-                entry: contextKey,
-                data: result.data
-            })
-        }).catch(function (err) {
-            log.error("ERROR", err);
-        })
-    })
 }
 apiimpl.prototype.getFFl = function (data) {
     return new Promise(function (success, err) {

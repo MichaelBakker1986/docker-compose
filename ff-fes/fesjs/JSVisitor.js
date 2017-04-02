@@ -159,8 +159,8 @@ function travelOne(node, keyArg, func)
                         arrayChild._parent = node;
                         arrayChild._parentKey = keyArg;
                         travelOne(arrayChild, key, func);
-                        //arrayChild._parentKey = undefined;
-                        //arrayChild._parent = undefined;
+                        arrayChild._parentKey = undefined;
+                        arrayChild._parent = undefined;
                     }
                 }
                 else
@@ -168,8 +168,8 @@ function travelOne(node, keyArg, func)
                     child._parent = node;
                     child._parentKey = keyArg;
                     travelOne(child, key, func);
-                    //child._parentKey = undefined;
-                    // child._parent = undefined;
+                    child._parentKey = undefined;
+                     child._parent = undefined;
                 }
             }
         }
