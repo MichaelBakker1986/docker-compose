@@ -17,12 +17,11 @@
  * Encapsulate abstraction with Business case
  *
  * So far this Giant is a:
- * UiModelService, ParserService, ValueService, FormulaService, SolutionService
+ * UiModelService, ParserService, ValueService,  SolutionService
  */
 var logger = require('ff-log');
 var AST = require('./AST');
 var jsMath = require('./jsMath.json')
-var escodegen = require('escodegen')
 var esprima = require('esprima')
 var assert = require('assert')
 var time = require('./XAxis')
@@ -30,8 +29,6 @@ var detailColumns = new time().detl.columns;
 //for now now just years.. keep it simple
 var contextState = detailColumns[0][0];
 //converter between display type and fesjs value
-function FormulaService() {
-}
 function ParserService() {
 }
 /*
@@ -44,10 +41,10 @@ function ParserService() {
  }
  */
 var parsers = {};
-var UIModel = require('./uimodel');
+var UIService = require('./uimodel');
 var bootstrap = require('./formula-bootstrap');
 var FunctionMap = require('./FunctionMap');
-//var FormulaService = require('./FormulaService')
+var FormulaService = require('./FormulaService')
 /*
  Class Formula
  {
@@ -63,24 +60,7 @@ var FunctionMap = require('./FunctionMap');
  type: String, Formula decorator type. e.x. If formula can be user entered, it will wrap lookup in the docValues around it
  }
  */
-var formulas = [];
-formulas[100000] = null;
 
-var cache = {};//move to formula-bootstrap.js
-Array.prototype.clean = function () {
-    var newArray = [];
-    var skipped = [];
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] !== null && this[i] !== undefined) {
-            newArray.push(this[i]);
-        }
-        else if (i > 100000) {
-            skipped.push(i);
-        }
-
-    }
-    return newArray;
-};
 /**
  * For small arrays, lets say until 1000, elements. There is no need to map by name.
  * Just iterate the shabang and test the property
@@ -99,30 +79,21 @@ if (!String.prototype.startsWith) {
         return this.substr(position, searchString.length) === searchString;
     };
 }
-String.prototype.endsWith = function (suffix) {
-    return this.indexOf(suffix, this.length - suffix.length) !== -1;
-};
-//private
-function addAssociation(index, ui, associationType) {
-    var formula = formulas[index];
-    var otherFormula = formulas[ui.ref];
-    if (otherFormula.name !== formula.name && formula.refs[otherFormula.name] === undefined) {
-        formula.formulaDependencys.push({
-            name: otherFormula.name,
-            association: associationType
-        });
-    }
-    formula[associationType][ui.name] = true;
-};
+if (!String.prototype.endsWith) {
+    String.prototype.endsWith = function (suffix) {
+        return this.indexOf(suffix, this.length - suffix.length) !== -1;
+    };
+}
+
 function findFormula(uiModel) {
     if (uiModel === undefined) {
         return undefined;
     }
     var id = uiModel.formulaId === undefined ? uiModel.ref : uiModel.formulaId;
-    return formulas[uiModel.ref];
+    return FormulaService.findFormulaByIndex(uiModel.ref);
 }
 function getUI(groupName, row, col) {
-    return UIModel.getUI(groupName, row, col || 'value');
+    return UIService.getUI(groupName, row, col || 'value');
 }
 function getFormulaByUI(uielem) {
     return findFormula(uielem);
@@ -130,68 +101,6 @@ function getFormulaByUI(uielem) {
 function getFormula(row, col) {
     return findFormula(getUI(row, col));
 };
-//public
-//when new formula's arrive, we have to update the user-entered map so we don't get NPE
-//just a quick-fix..
-function updateValueMap(values) {
-    var cleaned = formulas.clean();
-    cleaned.forEach(function (formula) {
-        //later will add values['_'+key] for the cache
-        //for unlocked add values[key] here will user entered values stay
-        if (formula.type === 'noCacheUnlocked') {
-            var id = formula.id === undefined ? formula.index : formula.id;
-            if (!values[id]) {
-                values[id] = {};
-            }
-        }
-    })
-}
-//public
-function addLink(groupName, row, col, locked, body) {
-    var ui = UIModel.getUI(groupName, row, col);
-
-    //just make sure the row exists
-    var formula;
-    if (body !== undefined) {
-        var key = escodegen.generate(AST.EXPRESSION(body));
-        //if not locked and the formula isn't already cached, we can reuse it
-        if (locked && cache[key] !== undefined) {
-            formula = cache[key];
-        }
-        else {
-            //else we have to create a new formula
-            formula = newFormula(locked, AST.EXPRESSION(body), formulas.length, ui.name);
-            cache[key] = formula;
-        }
-        ui.ref = formula.index;
-        ui.formulaName = formula.name;
-        //ui.formula = {name: formula.name};
-        //add the formula Association, so formula 1 knows C12_value uses it.
-        addAssociation(formula.index, ui, 'refs');
-    }
-    if (formula === undefined) {
-        return undefined;
-    }
-    return formula.id === undefined ? formula.index : formula.id;
-};
-//private
-//create a new Formula
-//initiate a new Object, add it to the Array
-function newFormula(locked, body, index, uiModelName) {
-    var original = AST.PROGRAM(body);
-    var formula = {
-        type: locked ? 'noCacheLocked' : 'noCacheUnlocked',//there are some types, for nor only locked and unlocked are interesting
-        refs: {},//map of references
-        formulaDependencys: [],//array of associations (deps and refs)
-        deps: {},//map of dependencies
-        body: original,//AST
-        original: original,
-        index: index,//index used in formula array
-        name: uiModelName//default formula name.
-    };
-    formulas.push(formula);
-    return formula;
-}
 //copy paste of the one below, its time to integrate Solution
 function gatherFormulas(solution) {
     var solutionFormulas = [];
@@ -204,30 +113,38 @@ function gatherFormulas(solution) {
     })
     solution.formulas = solutionFormulas.clean(null);
 }
+//public
+//when new formula's arrive, we have to update the user-entered map so we don't get NPE
+//just a quick-fix..
+function updateValueMap(values) {
+    FormulaService.visitFormulas(function (formula) {
+        //later will add values['_'+key] for the cache
+        //for unlocked add values[key] here will user entered values stay
+        if (formula.type === 'noCacheUnlocked') {
+            var id = formula.id === undefined ? formula.index : formula.id;
+            if (!values[id]) {
+                values[id] = {};
+            }
+        }
+    });
+}
+//public
+
+function addLink(groupName, row, col, locked, body) {
+    var ui = UIService.getUI(groupName, row, col);
+    return FormulaService.addFormulaLink(ui, groupName, row, col, locked, body);
+};
+//private
+
+
 function produceSolution(nodeId) {
-    var solutionFormulas = [];
-    var solution = UIModel.findAll(nodeId);
+    var solution = UIService.findAll(nodeId);
     gatherFormulas(solution);
     return solution;
 }
 //assert(formula.name);
 //assert(formula.id);
-function bulkInsertFormula(formulasArg) {
-    formulasArg.forEach(function (formula) {
-        formulas[formula.id] = formula;
-    });
-};
-//public
-function getFormulas() {
-    return formulas.clean(null);
-}
 
-//private
-function findFormulaByIndex(index) {
-    return formulas[index];
-}
-
-//public
 
 function addParser(parser) {
     parsers[parser.name] = parser;
@@ -241,14 +158,14 @@ function getParsers() {
     }
     return result;
 }
-function mergeFormulas(formulas) {
+function mergeFormulas(formulasArg) {
     //so for all refs in the formula, we will switch the formulaIndex
     var changed = [];
-    formulas.forEach(function (formula) {
+    formulasArg.forEach(function (formula) {
         //not sure where to put this logic
         //get local formula
         //var id = formula.id === undefined ? formula.index : formula.id;
-        var localFormula = findFormulaByIndex(formula.index);
+        var localFormula = FormulaService.findFormulaByIndex(formula.index);
         if (localFormula !== undefined && localFormula !== null) {
             changed.push(localFormula);
             //of course this should not live here, its just a bug fix.
@@ -262,17 +179,11 @@ function mergeFormulas(formulas) {
     FunctionMap.init(bootstrap.parseAsFormula, changed, true);
 }
 function moveFormula(old, newFormula) {
-    if (old.index !== newFormula.id) {
-        formulas[newFormula.id] = formulas[old.index];
-        formulas[newFormula.id].id = newFormula.id;
-        delete formulas[newFormula.id].index;
-        //we can make the ID final.
-        delete formulas[old.index];
-    }
+    FormulaService.moveFormula(old, newFormula);
     FunctionMap.moveFormula(old, newFormula);
     //update references
     for (var ref in old.refs) {
-        var uiModel = UIModel.fetch(ref);
+        var uiModel = UIService.fetch(ref);
         uiModel.ref = newFormula.id;
         uiModel.formulaId = newFormula.id;
     }
@@ -288,7 +199,7 @@ var propertyDefaults = {
 }
 
 function getStatelessVariable(row, col) {
-    return UIModel.fetch(row + '_' + col);
+    return UIService.fetch(row + '_' + col);
 }
 function statelessGetValue(context, row, col, x) {
     var colType = col || 'value';
@@ -313,16 +224,13 @@ function statelessGetValue(context, row, col, x) {
 function statelessSetValue(context, row, value, col, x) {
     var xas = x ? detailColumns[0][x] : contextState;
     var rowId = row + '_' + ( col || 'value');
-    var localFormula = getFormulaByUI(UIModel.fetch(rowId));
+    var localFormula = getFormulaByUI(UIService.fetch(rowId));
     if (localFormula === undefined) {
         //don't give away variable name here.
         throw Error('Cannot find variable')
     }
     logger.info('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
     FunctionMap.apiSet(localFormula, xas, 0, 0, value, context.values);
-}
-function keyLength(ob) {
-    return Object.keys(ob).length;
 }
 ParserService.prototype.addParser = addParser;
 ParserService.prototype.getParsers = getParsers;
@@ -339,12 +247,12 @@ var GenericModelFile = {
     statelessGetValue: statelessGetValue,
     getStatelessVariable: getStatelessVariable,
     //FormulaService?
-    findFormulaByIndex: findFormulaByIndex,
-    bulkInsertFormula: bulkInsertFormula,
+    findFormulaByIndex: FormulaService.findFormulaByIndex,
+    bulkInsertFormula: FormulaService.bulkInsertFormula,
     findFormula: findFormula,
     mergeFormulas: mergeFormulas,
     getFormula: getFormula,
-    getFormulas: getFormulas,
+    getFormulas: FormulaService.getFormulas,
     gatherFormulas: gatherFormulas,
     createFormula: function createFormula(groupName, formulaAsString, rowId, colId) {
         var col = colId || 'value';
@@ -352,7 +260,7 @@ var GenericModelFile = {
         var ast = esprima.parse(formulaAsString);
         var newFormulaId = addLink(groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
         //integrate formula (parse it)
-        FunctionMap.init(bootstrap.parseAsFormula, [findFormulaByIndex(newFormulaId)], true);
+        FunctionMap.init(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
     },
     jsMath: jsMath,//strange part
     //SolutionService
@@ -369,7 +277,7 @@ var GenericModelFile = {
         return solution.createNode(rowId, colId, formulaId, displayAs);
     },
     findLink: function (groupName, row, col) {
-        return UIModel.getUI(groupName, row, col);
+        return UIService.getUI(groupName, row, col);
     },
 
     //supported properties
@@ -396,6 +304,6 @@ var GenericModelFile = {
 //properties once bound ONCE, math Functions also ONCE
 bootstrap.init({
     state: GenericModelFile,
-    uicontains: UIModel.contains
+    uicontains: UIService.contains
 });
 module.exports = GenericModelFile;
