@@ -29,8 +29,6 @@ var detailColumns = new time().detl.columns;
 //for now now just years.. keep it simple
 var contextState = detailColumns[0][0];
 //converter between display type and fesjs value
-function ParserService() {
-}
 /*
  Class Parser
  {
@@ -40,11 +38,12 @@ function ParserService() {
  deParse: Function() : Export
  }
  */
-var parsers = {};
+
 var UIService = require('./uimodel');
 var bootstrap = require('./formula-bootstrap');
 var FunctionMap = require('./FunctionMap');
 var FormulaService = require('./FormulaService')
+var ParserService = require('./ParserService')
 /*
  Class Formula
  {
@@ -145,19 +144,6 @@ function produceSolution(nodeId) {
 //assert(formula.name);
 //assert(formula.id);
 
-
-function addParser(parser) {
-    parsers[parser.name] = parser;
-}
-//looks a lot like JSWorkBook.doImport, only does not support the ABN way
-//this method only recieves GenericModels so we dont have to check Type
-function getParsers() {
-    var result = [];
-    for (var key in parsers) {
-        result.push(parsers[key]);
-    }
-    return result;
-}
 function mergeFormulas(formulasArg) {
     //so for all refs in the formula, we will switch the formulaIndex
     var changed = [];
@@ -232,15 +218,11 @@ function statelessSetValue(context, row, value, col, x) {
     logger.info('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
     FunctionMap.apiSet(localFormula, xas, 0, 0, value, context.values);
 }
-ParserService.prototype.addParser = addParser;
-ParserService.prototype.getParsers = getParsers;
-ParserService.prototype.findParser = function (parserName) {
-    return parsers[parserName];
-}
+
 var GenericModelFile = {
-    addParser: ParserService.prototype.addParser,
-    getParsers: ParserService.prototype.getParsers,
-    findParser: ParserService.prototype.findParser,
+    getParsers: ParserService.getParsers,
+    findParser: ParserService.findParser,
+    addParser: ParserService.addParser,
 
     //ValueService?
     statelessSetValue: statelessSetValue,
@@ -276,10 +258,7 @@ var GenericModelFile = {
         //afterwards the Formula's are parsed,
         return solution.createNode(rowId, colId, formulaId, displayAs);
     },
-    findLink: function (groupName, row, col) {
-        return UIService.getUI(groupName, row, col);
-    },
-
+    findLink: UIService.getUI,
     //supported properties
     properties: {
         value: 0,
