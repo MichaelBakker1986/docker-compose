@@ -718,25 +718,7 @@ function parseAsFormula(formulaInfo) {
     return formulaInfo.parsed;
 }
 
-//add functions found in the jsMath to the global scope
-function initJSMath(jsMath) {
-    for (var func in jsMath) {
-        var mathfunc = jsMath[func];
-        if (global[func] === undefined) {
-            //functions
-            if (typeof mathfunc === 'object') {
-                global[func] = new Function(mathfunc.args, mathfunc.body);
-            }
-            else {
-                //variables
-                global[func] = mathfunc;
-            }
-        }
-        else {
-            log.warn('Function [' + func + '] is already defined.');
-        }
-    }
-}
+
 function init(configsFile) {
     //for now we accept no Dynamic variable.properties (visible, etc.)
     //also we acept no Dynamic FesJSMath. (static for all models;
@@ -765,7 +747,6 @@ function init(configsFile) {
     }
     //TODO: this part makes it impossible to be flexible
     //if its done in GenericModelFile it become flexible
-    initJSMath(configs.jsMath);
     return parseAsFormula;
 };
 module.exports = {

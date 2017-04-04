@@ -10,6 +10,7 @@ var ModelListener = require('../ff-ssh-git/gitconnector').ModelListener;
 var modelService = new ModelListener();
 //add excel functions, PPMT, IGG etc...
 fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
+fesjsApi.addFunctions(require('../ff-math/ff-math').mathJs);
 //add excel-lookup, MatrixLookup
 fesjsApi.addFunctions(require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup);
 
@@ -24,6 +25,9 @@ modelService.onNewModel = function (model) {
 modelService.initializeModels();
 
 function prefixVariable(variableName) {
+    if (variableName === undefined) {
+        return undefined;
+    }
     for (var i = 0; i < modelNames.length; i++) {
         var modelPrefix = modelNames[i];
         if (variableName.startsWith(modelPrefix + '_')) {

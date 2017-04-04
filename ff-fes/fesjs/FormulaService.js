@@ -4,6 +4,21 @@ var escodegen = require('escodegen')
 var formulas = [];
 formulas[100000] = null;
 var cache = {};//move to formula-bootstrap.js
+/*
+ Class Formula
+ {
+ ast: String, AST AsString
+ body: Object, AST
+ deps: Object, containing dependend elements
+ formulaDependencys: [],
+ index: Number, Temporally ID
+ name: String, name of the function
+ original: String, User entered String value of given formula
+ parsed: String, String body of the function
+ refs: Object, revered Dependencies of the Formula. These are used to reset caches from the dependent formulas when this value changes
+ type: String, Formula decorator type. e.x. If formula can be user entered, it will wrap lookup in the docValues around it
+ }
+ */
 function FormulaService() {
 }
 Array.prototype.clean = function () {

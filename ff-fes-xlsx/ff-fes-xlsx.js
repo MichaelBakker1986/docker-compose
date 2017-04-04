@@ -4,13 +4,13 @@ var Excel = require('exceljs');
 var log = require('ff-log');
 var workbook = XLSX.readFile('./resources/ScorecardKSP.xls');
 var namedRanges = workbook.Custprops.DocParts;
-log.info(namedRanges);
+log.trace(namedRanges);
 for (var sheetName in workbook.Sheets) {
     var sheet = workbook.Sheets[sheetName];
     for (var cellName in sheet) {
-        log.info(sheet[cellName].v)
+        log.trace(sheet[cellName].v)
         if (sheet[cellName].v === 'ZoekenNumeriek') {
-            log.info('test');
+            log.trace('test');
         }
     }
 }
@@ -20,7 +20,7 @@ var fileName = __dirname + '\\resources\\ScorecardKSP1.xlsx';
 workbook.xlsx.readFile(fileName)
     .then(function (wb) {
         var worksheet = wb._worksheets[1];
-        log.info(worksheet.getCell("B4"));
+        log.trace(worksheet.getCell("B4"));
         // use workbook
     }).catch(function (err) {
     log.info(err);

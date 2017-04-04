@@ -14,7 +14,7 @@ model TEST uses BaseModel
 			{
 				title : "Hint";
 				formula : 50;
-				locked: On;
+				locked: true;
 				frequency : document;
 				variable Q_MAP01_VRAAG1
        	{

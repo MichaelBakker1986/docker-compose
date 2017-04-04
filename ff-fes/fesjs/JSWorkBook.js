@@ -1,9 +1,18 @@
+/*
+ This class should have less business logic,
+ Its the state wrapper around the stateless GenericModelFile
+ Remove All dependencies besides GenericModelFile,ff-log. Even XAxis should be inside the Context Object
+ */
+
+//remove UIModel dependency
 var UIModel = require('./uimodel');
+//remove FunctionMap dependency
 var FunctionMap = require('./FunctionMap');
 var GenericModelFile = require('./GenericModelFile');
 var bootstrap = require('./formula-bootstrap');
 var AST = require('./AST');
 var log = require('ff-log')
+var time = new require('./XAxis')()
 
 //user friendly stable API
 //doImport(data,'type') : Solution          ; See Solution class for definiton
@@ -19,6 +28,7 @@ var log = require('ff-log')
 function JSWorkBook(context) {
     this.context = context;
     this.modelName = 'NEW';
+    this.xaxis = time.detl.columns[0][0]
 }
 JSWorkBook.prototype.doImport = function (data, parserType) {
     if (data === undefined) {
@@ -69,7 +79,7 @@ function validate() {
         //TODO: use timeout, this monte carlo is blocking UI thread
         try {
             //workbook.statelessGetValue()
-            FunctionMap.apiGet(elem, GenericModelFile.x, 0, 0, context.getValues());
+            FunctionMap.apiGet(elem, workbook.xaxis, 0, 0, context.getValues());
             validateResponse.succes.push(elem.name);
         }
         catch (e) {
@@ -156,7 +166,7 @@ JSWorkBook.prototype.export = function (parserType, rowId) {
     return parser.deParse(rowId, this);
 }
 JSWorkBook.prototype.setXasStart = function (year) {
-    GenericModelFile.setXasStart(year);
+    this.xaxis = time.detl.columns[0][year]
 }
 JSWorkBook.prototype.getNode = function (name) {
     return UIModel.fetch(this.modelName + "_" + name + "_value");
@@ -166,10 +176,12 @@ JSWorkBook.prototype.getStatelessNode = function (name) {
 }
 //some functions we directly pass trough
 JSWorkBook.prototype.get = function (row, col, x) {
+    var xas = x ? time.detl.columns[0][x] : this.xaxis;
     return this.statelessGetValue(this.modelName + '_' + row, col, x)
 };
 JSWorkBook.prototype.statelessGetValue = function (row, col, x) {
-    return GenericModelFile.statelessGetValue(this.context, row, col, x)
+    var xas = x ? time.detl.columns[0][x] : this.xaxis;
+    return GenericModelFile.statelessGetValue(this.context, row, col, xas)
 };
 JSWorkBook.prototype.updateValueMap = function () {
     GenericModelFile.updateValueMap(this.context.values);
@@ -178,9 +190,13 @@ JSWorkBook.prototype.set = function (row, value, col, x) {
     if (!this.context) {
         throw Error();
     }
-    return GenericModelFile.statelessSetValue(this.context, this.modelName + '_' + row, value, col, x);
+    var xas = x ? time.detl.columns[0][x] : this.xaxis;
+    return GenericModelFile.statelessSetValue(this.context, this.modelName + '_' + row, value, col, xas);
 }
-JSWorkBook.prototype.statelessSetValue = GenericModelFile.statelessSetValue;
+JSWorkBook.prototype.statelessSetValue = function (row, value, col, x) {
+    var xas = x ? time.detl.columns[0][x] : this.xaxis;
+    return GenericModelFile.statelessSetValue(this.context, row, value, col, xas);
+}
 JSWorkBook.prototype.getStatelessVariable = GenericModelFile.getStatelessVariable;
 //fix missing variables
 JSWorkBook.prototype.fixAll = fixAll

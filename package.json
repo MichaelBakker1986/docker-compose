@@ -10,9 +10,10 @@
   },
   "devDependencies": {
     "ff-fes": "^1.0.1",
+    "ff-fes-xlsx": "^1.0.2",
     "ff-formulajs": "^1.0.1",
     "ff-log": "^1.0.12",
-    "ff-fes-xlsx": "^1.0.2",
+    "ff-math": "file:ff-math",
     "formulajs": "^1.0.8",
     "tracer": "^0.8.7",
     "xlsx": "^0.9.3"

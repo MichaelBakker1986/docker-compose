@@ -4,6 +4,14 @@ function ParserService() {
 ParserService.prototype.addParser = function (parser) {
     parsers[parser.name] = parser;
 }
+/*Class Parser
+ {
+ name: String,
+ headerName: String,
+ parse: Function(Context) : Solution
+ deParse: Function() : Export
+ }
+ */
 //looks a lot like JSWorkBook.doImport, only does not support the ABN way
 //this method only recieves GenericModels so we dont have to check Type
 ParserService.prototype.getParsers = function () {

@@ -41,7 +41,7 @@ var fesGetValue = function (context, rowId, columncontext, value) {
     //prepare the workbook and context to match current appscope
     wb.updateValueMap()
     if (value !== undefined) {
-        wb.statelessSetValue(context, rowId, value, 'value', columncontext)
+        wb.statelessSetValue(rowId, value, 'value', columncontext)
         return getEntry(wb, rowId, columncontext)
     } else {
         var values = [];
