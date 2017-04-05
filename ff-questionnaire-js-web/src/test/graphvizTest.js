@@ -6,7 +6,7 @@ var WorkBook = require('../archive/fesjs/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');
 var fs = require('fs');
 
-var fflTestModels = ['AABPRICING'];// ['hierarchyTest', 'hierarchyTest'];
+var fflTestModels = ['KSP'];// ['hierarchyTest', 'hierarchyTest'];
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
 }
