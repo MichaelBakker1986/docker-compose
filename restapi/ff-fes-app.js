@@ -1,4 +1,4 @@
-process.loglevel = 'info'
+process.loglevel = 'trace'
 var log = require('ff-log');
 log.info('Startup ff-restapi')
 var restify = require('restify');
@@ -61,6 +61,8 @@ server.listen(9001, function () {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT/100')
+    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/KSP_Q_ROOT/100')
+    log.info('Test path: [%s]', 'http://localhost:9001/user2/value/Q_ROOT/110')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT/1/200')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/context')
 });

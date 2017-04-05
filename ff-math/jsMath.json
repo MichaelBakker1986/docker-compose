@@ -129,7 +129,7 @@
   },
   "ValueT": {
     "args": "one",
-    "body": "{ return 1 }"
+    "body": "{ return one.hash-1 }"
   },
   "FirstValueT": {
     "args": "one",

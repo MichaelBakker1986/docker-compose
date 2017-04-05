@@ -2,7 +2,7 @@
 var XLSX = require('xlsx')
 var Excel = require('exceljs');
 var log = require('ff-log');
-var workbook = XLSX.readFile('./resources/ScorecardKSP.xls');
+var workbook = XLSX.readFile(__dirname + '/resources/ScorecardKSP.xls');
 var namedRanges = workbook.Custprops.DocParts;
 log.trace(namedRanges);
 for (var sheetName in workbook.Sheets) {
@@ -34,7 +34,7 @@ var entries = {
     'MatrixLookup': function (xlsfileName, tableName, row, col) {
 
         //write logic to find the table in sheet etc...
-        return 1;
+        return 'matrix' + row + ":" + col;
     }
 };
 entries.Matrixlookup = entries.MatrixLookup;

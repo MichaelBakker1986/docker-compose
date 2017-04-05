@@ -5,7 +5,7 @@
  */
 
 //remove UIModel dependency
-var UIModel = require('./uimodel');
+var UIModel = require('./UIService');
 //remove FunctionMap dependency
 var FunctionMap = require('./FunctionMap');
 var GenericModelFile = require('./GenericModelFile');
@@ -30,6 +30,8 @@ function JSWorkBook(context) {
     this.modelName = 'NEW';
     this.xaxis = time.detl.columns[0][0]
 }
+
+
 JSWorkBook.prototype.doImport = function (data, parserType) {
     if (data === undefined) {
         console.info('no file specified')
@@ -42,7 +44,7 @@ JSWorkBook.prototype.doImport = function (data, parserType) {
     //only get the formulas for Current Model
     var formulas = this.produceSolution().formulas;
     //GenericModelFile.updateModelMetaData(solution.getModelMetaData());
-    FunctionMap.init(bootstrap.parseAsFormula, formulas, false);
+    FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, formulas, false);
     this.updateValueMap();
 }
 //if it is possible to fix missing functions
@@ -99,9 +101,9 @@ function validate() {
 
                                 //TODO: just create a DUMMY formula, returning 1;
                                 // workbook.createFormula(1,variableName) This is also calling UpdateValueMap() (so its calling it two times)
-                                GenericModelFile.createFormula(1, variableName);
+                                workbook.createFormula(1, variableName);
                                 //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
-                                FunctionMap.init(bootstrap.parseAsFormula, [elem], true);
+                                FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [elem], true);
                                 workbook.updateValueMap();
                                 //     workbook.statelessGetValue()
                             } catch (err) {

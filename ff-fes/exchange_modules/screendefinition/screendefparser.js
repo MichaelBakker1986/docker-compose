@@ -1,6 +1,6 @@
 var visitor = require('../../fesjs/JSVisitor');
 var GenericModelFile = require('../../fesjs/GenericModelFile');
-var uimodel = require('../../fesjs/uimodel');
+var uimodel = require('../../fesjs/UIService');
 var AST = require('../../fesjs/AST');
 var finformula = require('../ffl/FinFormula');
 var keys = ['description', 'viewType', 'col9umnHeader', 'searchBar'];

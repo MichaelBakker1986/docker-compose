@@ -94,6 +94,6 @@ function moveFormula(oldFormula, newFormula) {
 module.exports = {
     apiGet: apiGet,
     apiSet: apiSet,
-    init: init,
+    initFormulaBootstrap: init,
     moveFormula: moveFormula//bullshit function. just solves a problem what should be solved here
 }
