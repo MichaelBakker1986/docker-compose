@@ -9,6 +9,7 @@
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",
   "devDependencies": {
+    "exceljs": "^0.4.2",
     "xlsx": "^0.9.7"
   }
 }
