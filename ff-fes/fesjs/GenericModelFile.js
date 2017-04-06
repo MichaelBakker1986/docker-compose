@@ -1,6 +1,6 @@
 /**
  * Bridge between Formulas and UiModel
- * all functions should be moved to either formula-bootstrap.js or uitmodel.js,because this concept doesn't really exist
+ * all functions should be moved to either formula-bootstrap.js or uitmodel.js
  */
 var logger = require('ff-log');
 var AST = require('./AST');
@@ -9,7 +9,7 @@ var assert = require('assert')
 //for now now just years.. keep it simple
 var GenericModelFile = {}
 
-var UIService = require('./uimodel');
+var UIService = require('./UIService');
 var bootstrap = require('./formula-bootstrap');
 var FunctionMap = require('./FunctionMap');
 var FormulaService = require('./FormulaService')
@@ -19,6 +19,14 @@ var ParserService = require('./ParserService')
  * For small arrays, lets say until 1000, elements. There is no need to map by name.
  * Just iterate the shabang and test the property
  */
+Array.prototype.lookup = function (property, name) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i][property] === name) {
+            return this[i];
+        }
+    }
+    return undefined;
+}
 if (!String.prototype.startsWith) {
     String.prototype.startsWith = function (searchString, position) {
         position = position || 0;
@@ -162,7 +170,7 @@ GenericModelFile.createFormula = function (groupName, formulaAsString, rowId, co
     var ast = esprima.parse(formulaAsString);
     var newFormulaId = addLink(groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
     //integrate formula (parse it)
-    FunctionMap.init(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
+    FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
 };
 //SolutionService
 GenericModelFile.produceSolution = produceSolution;
@@ -192,18 +200,9 @@ GenericModelFile.properties = {
     _testg: 9,
     _testh: 10
 };
-GenericModelFile.updateAll = {
-    validation: true,
-    title: true,
-    value: true,
-    required: true,
-    visible: true,
-    locked: true,
-    choices: true
-}
 //for now we accept NON-Dynamic Fes7, nor Dynamic variable properties.
 //properties once bound ONCE, math Functions also ONCE
-bootstrap.init({
+bootstrap.initStateBootstrap({
     state: GenericModelFile,
     uicontains: UIService.contains
 });

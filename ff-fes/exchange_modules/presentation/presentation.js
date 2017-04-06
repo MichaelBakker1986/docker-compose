@@ -14,7 +14,7 @@
  while creating new TreeNodes, an converter will be added if found to the Node.
  when updating the Node, the converter is called.
  */
-var uimodel = require('../../fesjs/uimodel')
+var uimodel = require('../../fesjs/UIService')
 var Node = require('./Node.js')
 var Tree = require('./Tree.js')
 var Solution = require('../../fesjs/Solution');
@@ -48,7 +48,7 @@ Node.prototype.duplicate = function () {
     uimodel.bulkInsert(solution);
     GenericModelFile.gatherFormulas(solution);
     //JUST some quickfix from here,
-    FunctionMap.init(bootstrap.parseAsFormula, solution.formulas, false);
+    FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, solution.formulas, false);
     wb.updateValueMap();
     this.parent().update({title: true});
 }

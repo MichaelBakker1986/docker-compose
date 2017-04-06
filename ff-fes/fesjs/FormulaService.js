@@ -21,21 +21,6 @@ var cache = {};//move to formula-bootstrap.js
  */
 function FormulaService() {
 }
-Array.prototype.clean = function () {
-    var newArray = [];
-    var skipped = [];
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] !== null && this[i] !== undefined) {
-            newArray.push(this[i]);
-        }
-        else if (i > 100000) {
-            skipped.push(i);
-        }
-
-    }
-    return newArray;
-};
-
 //private
 FormulaService.prototype.visitFormulas = function (visitFunction) {
     for (var i = 0; i < formulas.length; i++) {

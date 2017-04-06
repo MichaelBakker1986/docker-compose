@@ -17,48 +17,7 @@
  * its way quicker.
  *Instead of testing all, we better of just testing Identifiers
  * TODO: add variable as Self reference
- * Syntax =
- AssignmentExpression: 'AssignmentExpression'
- ArrayExpression: 'ArrayExpression'
- BlockStatement: 'BlockStatement'
- BinaryExpression: 'BinaryExpression'
- BreakStatement: 'BreakStatement'
- CallExpression: 'CallExpression'
- CatchClause: 'CatchClause'
- ConditionalExpression: 'ConditionalExpression'
- ContinueStatement: 'ContinueStatement'
- DoWhileStatement: 'DoWhileStatement'
- DebuggerStatement: 'DebuggerStatement'
- EmptyStatement: 'EmptyStatement'
- ExpressionStatement: 'ExpressionStatement'
- ForStatement: 'ForStatement'
- ForInStatement: 'ForInStatement'
- FunctionDeclaration: 'FunctionDeclaration'
- FunctionExpression: 'FunctionExpression'
- Identifier: 'Identifier'
- IfStatement: 'IfStatement'
- Literal: 'Literal'
- LabeledStatement: 'LabeledStatement'
- LogicalExpression: 'LogicalExpression'
- MemberExpression: 'MemberExpression'
- NewExpression: 'NewExpression'
- ObjectExpression: 'ObjectExpression'
- Program: 'Program'
- Property: 'Property'
- ReturnStatement: 'ReturnStatement'
- SequenceExpression: 'SequenceExpression'
- SwitchStatement: 'SwitchStatement'
- SwitchCase: 'SwitchCase'
- ThisExpression: 'ThisExpression'
- ThrowStatement: 'ThrowStatement'
- TryStatement: 'TryStatement'
- UnaryExpression: 'UnaryExpression'
- UpdateExpression: 'UpdateExpression'
- VariableDeclaration: 'VariableDeclaration'
- VariableDeclarator: 'VariableDeclarator'
- WhileStatement: 'WhileStatement'
- WithStatement: 'WithStatement'
- */
+ **/
 //better use a Set() to check if an item exists, its quicker
 var logger = require('ff-log');
 var assert = require('assert');
@@ -435,6 +394,7 @@ simplified.Exists = simplified.ForAll;
 simplified.DataEntered = simplified.DataAvailable;
 simplified.TupleSum = simplified.TSUM;
 simplified.IF = simplified.If;
+simplified.if = simplified.If;
 simplified.MAX = simplified.Max;
 simplified.MIN = simplified.Min;
 simplified.min = simplified.Min;
@@ -719,7 +679,7 @@ function parseAsFormula(formulaInfo) {
 }
 
 
-function init(configsFile) {
+function initStateBootstrap(configsFile) {
     //for now we accept no Dynamic variable.properties (visible, etc.)
     //also we acept no Dynamic FesJSMath. (static for all models;
     if (initialized) {
@@ -750,6 +710,6 @@ function init(configsFile) {
     return parseAsFormula;
 };
 module.exports = {
-    init: init,
+    initStateBootstrap: initStateBootstrap,
     parseAsFormula: parseAsFormula
 };

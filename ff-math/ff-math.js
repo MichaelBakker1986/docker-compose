@@ -9,6 +9,7 @@ function initJSMath(jsMath) {
         if (global[func] === undefined) {
             //functions
             if (typeof mathfunc === 'object') {
+                logger.debug('Added function[%s] arguments[%s] body: [%s]', func, mathfunc.args, mathfunc.body)
                 global[func] = new Function(mathfunc.args, mathfunc.body);
             }
             else {

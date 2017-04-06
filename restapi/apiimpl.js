@@ -38,6 +38,8 @@ function prefixVariable(variableName) {
 }
 apiimpl.prototype.value = function (contextKey, variable, columncontext, value) {
     var context = DBConn.getUserContext(contextKey);
+    //all values are strings when entering, wen it can be parsed to a number, we will parse it.
+    var value = isNaN(value) ? value : parseFloat(value)
     var result = fesjsApi.fesGetValue(context, prefixVariable(variable), columncontext, value);
     return result;
 }
