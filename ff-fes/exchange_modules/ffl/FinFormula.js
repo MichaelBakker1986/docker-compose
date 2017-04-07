@@ -5,7 +5,7 @@ function finFormulaGeneric(buf)
     var buf = buf.replace(/:/gm, ', ');
     buf = buf.replace(/(\$p|@|#|%|\.\.)/gmi, '');
 
-    buf = buf.replace(/\[1\]/gm, '');
+    buf = buf.replace(/\[1\]/gm, '[doc]');
     buf = buf.replace(/\[LastT\]/gm, '');
     // buf = buf.replace(/\[T-1\]/gm, '');
     //-- Context dependencies
