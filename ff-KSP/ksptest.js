@@ -88,6 +88,8 @@ var testVariables = {
 }
 var testedformulas = {
     "'Restricties'": true,
+    "DEBUG==1": true,
+    "Q_MAP01": true,
     "Q_ROOT==1": true,
     "EvaluateAsString(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing'+Q_WARNING_GLOBALTXT,''))": true,
     "EvaluateAsString(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])": true,
