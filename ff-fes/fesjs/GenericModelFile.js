@@ -142,7 +142,7 @@ GenericModelFile.statelessSetValue = function (context, row, value, col, xas) {
         //don't give away variable name here.
         throw Error('Cannot find variable')
     }
-    logger.info('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
+    logger.debug('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
     FunctionMap.apiSet(localFormula, xas, 0, 0, value, context.values);
 };
 GenericModelFile.statelessGetValue = function (context, row, col, xas) {

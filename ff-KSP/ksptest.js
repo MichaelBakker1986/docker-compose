@@ -1,7 +1,10 @@
 /**
  * KSP test cases
+ * some if statements are not parsed correctly (if/If), changes are made within the KSP.ffl file
+ * formulas containing ":" are not parsed correctly, changes are made within KSP.ffl file
+ *
  */
-global.loglevel = 'debug'
+global.loglevel = 'info'
 var FormulaService = require('../ff-fes/fesjs/FormulaService')
 var WorkBook = require('../ff-fes/fesjs/JSWorkBook')
 var FESContext = require('../ff-fes/fesjs/fescontext')
@@ -90,7 +93,9 @@ var testedformulas = {
     "'Restricties'": true,
     "DEBUG==1": true,
     "Q_MAP01": true,
+    "Q_MAP06": true,
     "Q_ROOT==1": true,
+    "Q_MAP06_ENTEREDREQUIREDVARS==Q_MAP06_REQUIREDVARS": true,
     "EvaluateAsString(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing'+Q_WARNING_GLOBALTXT,''))": true,
     "EvaluateAsString(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])": true,
     "If(Q_MAP01[doc]==1||Length(Q_WARNING_GLOBALTXT[doc])>0,1,0)": true,
@@ -151,7 +156,7 @@ FormulaService.visitFormulas(function (formula) {
     if (!testVariables[variableName]) {
         if (!testedformulas[formula.original]) {
             untestedformulas++;
-            log.debug('[%s][%s][%s][%s]', variableName, formula.name, formula.original, formula.parsed)
+            log.info('[%s][%s][%s][%s]', variableName, formula.name, formula.original, formula.parsed)
         }
     }
 })
@@ -174,11 +179,6 @@ assert(wbKSP.get('DEBUG') == 0);
 wbKSP.set('Memo1', 'a_Negro_a')
 assert(wbKSP.get('DEBUG') == 1);
 assert(If(Pos('Negro', 'a_Negro_a') > 0, 1, 0) == 1);
-wbKSP.createFormula('Q_RESTRICTIES[doc]', 'TEST_ADD_FUNCTION_Q_RESTRICTIES')
-wbKSP.createFormula('Q_WARNING_GLOBAL[doc]', 'TEST_ADD_FUNCTION_Q_WARNING_GLOBAL')
-var TEST_ADD_FUNCTION_Q_RESTRICTIES = wbKSP.get('TEST_ADD_FUNCTION_Q_RESTRICTIES');
-var TEST_ADD_FUNCTION_Q_WARNING_GLOBAL = wbKSP.get('TEST_ADD_FUNCTION_Q_WARNING_GLOBAL');
-
 assert(wbKSP.get('Q_RESTRICTIES') === '');
 assert(wbKSP.get('Q_RESTRICTIES_01') === '');
 assert(wbKSP.get('Q_RESTRICTIESTXT') === '');
@@ -189,6 +189,8 @@ assert(wbKSP.get('Q_ROOT') === 1);
 assert(wbKSP.get('Q_WARNING_GLOBAL') == '');
 assert(wbKSP.get('Q_RESULT') == 'Deze vragenlijst is definitief gemaakt.[br][/br]');
 assert(wbKSP.get('Q_MAP06', 'visible') == true);
+assert(wbKSP.get('Q_MAP06') == true);
+assert(wbKSP.get('Q_MAP06_STATUS') == wbKSP.get('Q_MAP06') == true);
 var testVariable = wbKSP.get('Q_MAP06_ENTEREDREQUIREDVARS');
 var testVariable2 = wbKSP.get('Q_MAP06_REQUIREDVARS');
 
