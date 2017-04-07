@@ -22,19 +22,22 @@ wbTest.createFormula("Pos('IFRS-EU',FES_LAYOUT)", "POS_LAYOUT");
 assert(wbTest.get('POS_LAYOUT') === 0)
 wbTest.set('FES_LAYOUT', 'IFRS-TEST')
 assert(wbTest.get('POS_LAYOUT') === -1)
-wbTest.set('FES_LAYOUT', 'FRS-EU')
-assert(wbTest.get('POS_LAYOUT') === 1)
+wbTest.set('FES_LAYOUT', 'IFRS-EU')
+assert(wbTest.get('POS_LAYOUT') === 0, 'actual:' + wbTest.get('POS_LAYOUT'))
 wbTest.createFormula("If(Pos('IFRS-EU','IFRS-EU')>0,1,2)", "KSP_POSTEST");
 assert(wbTest.get('KSP_POSTEST') === 2)
 wbTest.createFormula("If(Pos('IFRS-EU',FES_LAYOUT)>0,1,2)", "KSP_POSTEST");
-wbTest.set('FES_LAYOUT', 'FRS-EU')
+wbTest.set('FES_LAYOUT', 'IIFRS-EU')
 assert(wbTest.get('KSP_POSTEST') === 1)
 wbTest.createFormula("If(Pos('IFRS-EU',FES_LAYOUT)>0,1,If(Pos('IFRS-PL',FES_LAYOUT)>0,48,If(Pos('IFRS-Intl',FES_LAYOUT)>0,2,0)))", "FES_LAYOUTNR");
 assert(wbTest.get('FES_LAYOUTNR') === 1)
-wbTest.set('FES_LAYOUT', 'FRS-PL')
+wbTest.set('FES_LAYOUT', 'IIFRS-PL')
 assert(wbTest.get('FES_LAYOUTNR') === 48)
-wbTest.set('FES_LAYOUT', 'FRS-Intl')
+wbTest.set('FES_LAYOUT', 'IIFRS-Intl')
 assert(wbTest.get('FES_LAYOUTNR') === 2)
+
+wbTest.createFormula("KSP_POSTEST[doc]", 'DOCUMENT_VALUE_TEST')
+
 
 var testVariables = {
     NEW_FES_LAYOUT: true,
@@ -82,6 +85,7 @@ var testVariables = {
 }
 var testedformulas = {
     "'Restricties'": true,
+    "If(Pos('Negro',Memo1)>0,1,0)": true,//KSP_DEBUG
     "EvaluateAsString('')": true,
     "ValueT(T)": true,
     "ValueT(T)-1": true,
@@ -139,7 +143,7 @@ FormulaService.visitFormulas(function (formula) {
     }
 })
 log.info('KSP untested formulas:[%s/%s]', untestedformulas, totalformulas)
-wbKSP.set('FES_LAYOUT', 'FRS-PL')
+wbKSP.set('FES_LAYOUT', 'IIFRS-PL')
 var layoutNR = wbKSP.get('FES_LAYOUTNR');
 var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices').filter(function (choice) {
     return parseInt(choice.name) === layoutNR;
@@ -158,6 +162,17 @@ assert(kspTestT === 1);
 assert(wbKSP.get('Furniture') == 1800);
 assert(wbKSP.get('Furniture', 'value', 4) == 0);
 var memo1 = wbKSP.get('Memo1');
-wbKSP.set('Memo1','Negro')
+assert(wbKSP.get('DEBUG') == 0);
+wbKSP.set('Memo1', 'a_Negro_a')
 var memo1 = wbKSP.get('Memo1');
+assert(wbKSP.get('DEBUG') == 1);
+var DEBUG = wbKSP.get('DEBUG');
+var posNegro = Pos('Negro', 'a_Negro_a');
+assert(If(Pos('Negro', 'a_Negro_a') > 0, 1, 0) == 1);
+//Q_RESTRICTIES_01[1] becomes Q_RESTRICTIES_01[doc]
+//EvaluateAsString(If(Length(Q_RESTRICTIES_01)>0,'[br][/br]'+Q_RESTRICTIES_01,'')
+var qrestrictiestxt = wbKSP.get('Q_RESTRICTIESTXT');
+console.info(qrestrictiestxt)
+//DEBUG==1
+
 log.info('done')

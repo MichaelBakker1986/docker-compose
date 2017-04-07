@@ -522,9 +522,6 @@ var traverseTypes = {
                         //node property.name will result in undefined.
                         //its esier to lookAhead the SequenceExpression
                         //variableName[contextReference] , e.g. Balance[prev] or Debit[doc]
-                        if (!propertiesArr[varproperties[node.property.name]] || node.property.name !== propertiesArr[varproperties[node.property.name].f]) {
-                            throw Error(node.property.name + '!== ' + propertiesArr[varproperties[node.property.name].f] + " ,Bit strange this triple convert");
-                        }
                         node.type = 'Identifier';
                         node.name = buildFunc(orId, 0, object, '.' + node.property.name);
                         node.object = undefined;
