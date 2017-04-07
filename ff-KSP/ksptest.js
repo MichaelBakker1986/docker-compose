@@ -78,11 +78,14 @@ var testVariables = {
     KSP_Q_MAP00_INTROMEMO: true,
     KSP_MultiplierOutOfSchoolCare: true,
     KSP_CombinationDiscountPercentage: true,
-    KSP_DecreasingPercentage:true
+    KSP_DecreasingPercentage: true
 }
 var testedformulas = {
     "'Restricties'": true,
     "EvaluateAsString('')": true,
+    "ValueT(T)": true,
+    "ValueT(T)-1": true,
+    "If(ValueT(T)==1,1800,0)": true,
     "'Restricties tekst'": true,
     "'Knock-out tekst'": true,
     "'Knock-out(s)'": true,
@@ -146,4 +149,15 @@ var kspqrestricties01 = wbKSP.get('Q_RESTRICTIES_01');
 assert(kspqrestricties01 == "");
 assert(wbKSP.get('CombinationDiscountPercentage') == .06159);
 assert(wbKSP.get('DecreasingPercentage') == 0.0675);
+
+var kspAge = wbKSP.get('Age');
+assert(kspAge == 0);
+assert(wbKSP.get('Age', 'value', 4) == 4);
+var kspTestT = wbKSP.get('TestT');
+assert(kspTestT === 1);
+assert(wbKSP.get('Furniture') == 1800);
+assert(wbKSP.get('Furniture', 'value', 4) == 0);
+var memo1 = wbKSP.get('Memo1');
+wbKSP.set('Memo1','Negro')
+var memo1 = wbKSP.get('Memo1');
 log.info('done')

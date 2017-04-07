@@ -129,7 +129,7 @@
   },
   "ValueT": {
     "args": "one",
-    "body": "{ return one.hash-1 }"
+    "body": "{ var retrunValue = 1; while(one.prev.hash){ retrunValue++;one=one.prev } return retrunValue }"
   },
   "FirstValueT": {
     "args": "one",
