@@ -37,7 +37,10 @@ wbTest.set('FES_LAYOUT', 'IIFRS-Intl')
 assert(wbTest.get('FES_LAYOUTNR') === 2)
 
 wbTest.createFormula("KSP_POSTEST[doc]", 'DOCUMENT_VALUE_TEST')
-
+//this value should be ignored when calling KSP_POSTEST[doc]
+var testValueBefore = wbTest.get('DOCUMENT_VALUE_TEST')
+wbTest.set('KSP_POSTEST', 100, 'value', 4)
+assert(wbTest.get('DOCUMENT_VALUE_TEST') === testValueBefore)
 
 var testVariables = {
     NEW_FES_LAYOUT: true,
@@ -85,8 +88,16 @@ var testVariables = {
 }
 var testedformulas = {
     "'Restricties'": true,
+    "Q_ROOT==1": true,
+    "EvaluateAsString(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing'+Q_WARNING_GLOBALTXT,''))": true,
+    "EvaluateAsString(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])": true,
+    "If(Q_MAP01[doc]==1||Length(Q_WARNING_GLOBALTXT[doc])>0,1,0)": true,
+    "EvaluateAsString(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))": true,
+    "EvaluateAsString(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld'+Q_RESTRICTIESTXT,''))": true,
+    "EvaluateAsString(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))": true,
     "If(Pos('Negro',Memo1)>0,1,0)": true,//KSP_DEBUG
     "EvaluateAsString('')": true,
+    "KSP_POSTEST[doc]": true,
     "ValueT(T)": true,
     "ValueT(T)-1": true,
     "If(ValueT(T)==1,1800,0)": true,
@@ -149,30 +160,34 @@ var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices').filter(function (choic
     return parseInt(choice.name) === layoutNR;
 });
 assert(layoutNRChoice[0].value === ' Polish');
-var kspqrestricties01 = wbKSP.get('Q_RESTRICTIES_01');
-assert(kspqrestricties01 == "");
+assert(wbKSP.get('Q_RESTRICTIES_01') == "");
 assert(wbKSP.get('CombinationDiscountPercentage') == .06159);
 assert(wbKSP.get('DecreasingPercentage') == 0.0675);
-
-var kspAge = wbKSP.get('Age');
-assert(kspAge == 0);
+assert(wbKSP.get('Age') == 0);
 assert(wbKSP.get('Age', 'value', 4) == 4);
-var kspTestT = wbKSP.get('TestT');
-assert(kspTestT === 1);
+assert(wbKSP.get('TestT') === 1);
 assert(wbKSP.get('Furniture') == 1800);
 assert(wbKSP.get('Furniture', 'value', 4) == 0);
-var memo1 = wbKSP.get('Memo1');
 assert(wbKSP.get('DEBUG') == 0);
 wbKSP.set('Memo1', 'a_Negro_a')
-var memo1 = wbKSP.get('Memo1');
 assert(wbKSP.get('DEBUG') == 1);
-var DEBUG = wbKSP.get('DEBUG');
-var posNegro = Pos('Negro', 'a_Negro_a');
 assert(If(Pos('Negro', 'a_Negro_a') > 0, 1, 0) == 1);
-//Q_RESTRICTIES_01[1] becomes Q_RESTRICTIES_01[doc]
-//EvaluateAsString(If(Length(Q_RESTRICTIES_01)>0,'[br][/br]'+Q_RESTRICTIES_01,'')
-var qrestrictiestxt = wbKSP.get('Q_RESTRICTIESTXT');
-console.info(qrestrictiestxt)
-//DEBUG==1
+wbKSP.createFormula('Q_RESTRICTIES[doc]', 'TEST_ADD_FUNCTION_Q_RESTRICTIES')
+wbKSP.createFormula('Q_WARNING_GLOBAL[doc]', 'TEST_ADD_FUNCTION_Q_WARNING_GLOBAL')
+var TEST_ADD_FUNCTION_Q_RESTRICTIES = wbKSP.get('TEST_ADD_FUNCTION_Q_RESTRICTIES');
+var TEST_ADD_FUNCTION_Q_WARNING_GLOBAL = wbKSP.get('TEST_ADD_FUNCTION_Q_WARNING_GLOBAL');
+
+assert(wbKSP.get('Q_RESTRICTIES') === '');
+assert(wbKSP.get('Q_RESTRICTIES_01') === '');
+assert(wbKSP.get('Q_RESTRICTIESTXT') === '');
+assert(wbKSP.get('Q_WARNING_01') === '');
+assert(wbKSP.get('Q_WARNING_GLOBALTXT') === '');
+assert(wbKSP.get('Q_MAP01') == 1);
+assert(wbKSP.get('Q_ROOT') === 1);
+assert(wbKSP.get('Q_WARNING_GLOBAL') == '');
+assert(wbKSP.get('Q_RESULT') == 'Deze vragenlijst is definitief gemaakt.[br][/br]');
+assert(wbKSP.get('Q_MAP06', 'visible') == true);
+var testVariable = wbKSP.get('Q_MAP06_ENTEREDREQUIREDVARS');
+var testVariable2 = wbKSP.get('Q_MAP06_REQUIREDVARS');
 
 log.info('done')
