@@ -153,7 +153,7 @@ GenericModelFile.statelessGetValue = function (context, row, col, xas) {
         returnValue = propertyDefaults[colType];
     }
     else {
-        returnValue = FunctionMap.apiGet(localFormula, xas || x, 0, 0, context.values);
+        returnValue = FunctionMap.apiGet(localFormula, xas, 0, 0, context.values);
     }
     return returnValue;
 }

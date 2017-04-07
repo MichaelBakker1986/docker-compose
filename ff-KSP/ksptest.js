@@ -75,91 +75,75 @@ var testVariables = {
     KSP_FPS_FINAN_USER: true,
     KSP_FPS_VAR_Emailadres: true,
     KSP_RootSub2: true,
-    KSP_Q_MAP00_WARNING: true,
-    KSP_Q_MAP00_INFO: true,
-    KSP_Q_MAP00_VALIDATION: true,
-    KSP_Q_MAP00_HINT: true,
     KSP_Q_MAP00_INTROMEMO: true,
-    KSP_Q_MAP00_INTRO: true,
-    KSP_Q_MAP00: true,
-    KSP_FES_VIEWCURRENCYPERIOD: true,
-    KSP_Q_MAP01_HINT: true,
-    KSP_IncomeSection: true,
-    KSP_IncomeParent01: true,
-    KSP_WorkingHoursWeeklyOfLeastWorkingParent: true,
-    KSP_Child: true,
-    KSP_HULPVARS: true,
-    KSP_Q_RESTRICTIES: true,
-    KSP_Q_WARNING_GLOBAL: true,
-    KSP_ModelType: true,
-    KSP_ModelVersion: true,
-    KSP_Q_STATUS_STARTED_BY_NAME: true,
-    KSP_Q_STATUS_STARTED_ON: true,
-    KSP_Q_STATUS_STARTED_BY: true,
-    KSP_Q_STATUS_FINAL_BY: true,
-    KSP_Q_STATUS_FINAL_ON: true,
-    KSP_Q_RESULTSUB1: true,
-    KSP_HourlyFeeChildCare: true,
-    KSP_ChildGender: true,
-    KSP_IncomeParent02: true,
-    CostsUnspecified: true,
-    KSP_Memo1: true,
-    KSP_Situation: true,
-    KSP_Q_MAP06_PARAGRAAF09SUB2: true,
-    KSP_Q_MAP06_PARAGRAAF09SUB3: true,
-    KSP_Q_MAP06_PARAGRAAF09SUB4: true,
-    KSP_Q_MAP06_PARAGRAAF09SUB5: true,
-    KSP_Q_MAP06_PARAGRAAF09SUB6: true,
-    KSP_Q_MAP06_PARAGRAAF09: true,
-    KSP_Q_MAP06_HULPVARIABELEN: true,
-    KSP_Q_RESTRICTIES_02: true,
-    KSP_Q_WARNING_01: true,
-    KSP_Q_FINAL_REPORT_VISIBLE: true,
-    KSP_Q_MAKE_FINAL_VISIBLE: true,
-    KSP_Q_CONCEPT_REPORT_VISIBLE: true,
-    KSP_Q_NEXT_BUTTON_VISIBLE: true,
-    KSP_Q_PREVIOUS_BUTTON_VISIBLE: true,
-    KSP_MatrixVersion: true,
-    KSP_Q_STATUS_FINAL_BY_NAME: true,
-    KSP_Q_MAP06SUB5: true,
-    KSP_ChildCareCosts: true,
-    KSP_TotalYearlyBalance: true,
-    KSP_TotalMonthlyBalanceAverage: true,
-    KSP_Q_MAP06SUB5SUB3: true,
-    KSP_TotalYearlyIncome: true,
-    KSP_CombinationDiscountOverview: true,
-    KSP_ChildcareBudgetOverview: true,
-    KSP_ChildCarePremiumOverview: true,
-    KSP_ChildBenefits: true,
-    KSP_Q_MAP06SUB5SUB2: true,
-    KSP_TotalYearlyCosts: true,
-    KSP_CostsUnspecifiedOverview: true,
-    KSP_CostsForSecondaryEducation: true,
-    KSP_CostsForPrimaryEducation: true,
-    KSP_CostsForOutOfSchoolCare: true,
-    KSP_DrivingLicense: true,
-    KSP_MobilePhone: true,
-    KSP_Transport: true,
-    KSP_Contributions: true,
-    KSP_Allowance: true,
-    KSP_Inventory: true,
-    KSP_Hairdresser: true,
-    KSP_ActualPersonalCareCosts: true,
-    KSP_ActualClothingCosts: true
+    KSP_MultiplierOutOfSchoolCare: true,
+    KSP_CombinationDiscountPercentage: true,
+    KSP_DecreasingPercentage:true
+}
+var testedformulas = {
+    "'Restricties'": true,
+    "EvaluateAsString('')": true,
+    "'Restricties tekst'": true,
+    "'Knock-out tekst'": true,
+    "'Knock-out(s)'": true,
+    "'undefined'": true,
+    undefined: true,
+    "'TEST'": true,
+    "'None'": true,
+    "'01.27.000.000'": true,
+    6.8: true,
+    80: true,
+    180: true,
+    230: true,
+    0: true,
+    1: true,
+    1.4: true,
+    .7: true,
+    2: true,
+    7.18: true,
+    6.69: true,
+    5.75: true,
+    1142: true,
+    0.06159: true,
+    .06159: true,
+    0.0675: true,
+    .0675: true,
+    1559: true,
+    4895: true,
+    1043: true,
+    1376: true,
+    20109: true,
+    2778: true
 }
 var wbKSP = new WorkBook(new FESContext());
 wbKSP.doImport(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
+var untestedformulas = 0;
+var totalformulas = 0;
 FormulaService.visitFormulas(function (formula) {
+    totalformulas++;
     var variableName = formula.name.replace(/(_value$|_title$|_choices$|_locked$|_visible$)/gmi, '');
-    //if (!testVariables[variableName]) {
-        log.debug('[%s][%s][%s][%s]', variableName, formula.name, formula.original, formula.parsed)
-    //}
+    if (formula.name.match(/_title$/gmi)) {
+        return;
+    }
+    if (formula.name.match(/_choices$/gmi)) {
+        return;
+    }
+    if (!testVariables[variableName]) {
+        if (!testedformulas[formula.original]) {
+            untestedformulas++;
+            log.debug('[%s][%s][%s][%s]', variableName, formula.name, formula.original, formula.parsed)
+        }
+    }
 })
+log.info('KSP untested formulas:[%s/%s]', untestedformulas, totalformulas)
 wbKSP.set('FES_LAYOUT', 'FRS-PL')
 var layoutNR = wbKSP.get('FES_LAYOUTNR');
 var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices').filter(function (choice) {
     return parseInt(choice.name) === layoutNR;
 });
 assert(layoutNRChoice[0].value === ' Polish');
-
+var kspqrestricties01 = wbKSP.get('Q_RESTRICTIES_01');
+assert(kspqrestricties01 == "");
+assert(wbKSP.get('CombinationDiscountPercentage') == .06159);
+assert(wbKSP.get('DecreasingPercentage') == 0.0675);
 log.info('done')

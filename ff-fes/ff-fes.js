@@ -68,5 +68,5 @@ function getEntry(workbook, rowId, columncontext) {
 exports.fesjs = {
     init: FESApi.prototype.init,
     fesGetValue: fesGetValue,
-    addFunctions: addFunctions
+    addFunctions: addFunctions,
 }

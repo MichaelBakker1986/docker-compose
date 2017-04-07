@@ -179,7 +179,7 @@ JSWorkBook.prototype.getStatelessNode = function (name) {
 //some functions we directly pass trough
 JSWorkBook.prototype.get = function (row, col, x) {
     var xas = x ? time.detl.columns[0][x] : this.xaxis;
-    return this.statelessGetValue(this.modelName + '_' + row, col, x)
+    return GenericModelFile.statelessGetValue(this.context, this.modelName + '_' + row, col, xas)
 };
 JSWorkBook.prototype.statelessGetValue = function (row, col, x) {
     var xas = x ? time.detl.columns[0][x] : this.xaxis;
