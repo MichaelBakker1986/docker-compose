@@ -544,6 +544,7 @@ model KSP uses BaseModel
           variable NrOfDaysChildcareWeek
           {
             datatype: number;
+            formula: NA;
             frequency: document;
             inputRequired: 1;
             data_options: unscalable;

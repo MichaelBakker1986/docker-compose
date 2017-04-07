@@ -140,12 +140,17 @@ var testedformulas = {
     20109: true,
     2778: true
 }
+function modelVariableName(name) {
+    return name.replace(/(^KSP_)/gmi, '').replace(/_value$/gmi, '');
+}
 var wbKSP = new WorkBook(new FESContext());
 wbKSP.doImport(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
 var untestedformulas = 0;
 var totalformulas = 0;
+var formulas = {}
 FormulaService.visitFormulas(function (formula) {
     totalformulas++;
+
     var variableName = formula.name.replace(/(_value$|_title$|_choices$|_locked$|_visible$)/gmi, '');
     if (formula.name.match(/_title$/gmi)) {
         return;
@@ -153,10 +158,13 @@ FormulaService.visitFormulas(function (formula) {
     if (formula.name.match(/_choices$/gmi)) {
         return;
     }
+    if (formula.name.match(/_value/gmi)) {
+        formulas[modelVariableName(formula.name)] = formula;
+    }
     if (!testVariables[variableName]) {
         if (!testedformulas[formula.original]) {
             untestedformulas++;
-            log.info('[%s][%s][%s][%s]', variableName, formula.name, formula.original, formula.parsed)
+            log.info('[%s][%s][%s][%s]', variableName.replace(/(^KSP_)/gmi, ''), formula.name, formula.original, formula.parsed)
         }
     }
 })
@@ -191,7 +199,19 @@ assert(wbKSP.get('Q_RESULT') == 'Deze vragenlijst is definitief gemaakt.[br][/br
 assert(wbKSP.get('Q_MAP06', 'visible') == true);
 assert(wbKSP.get('Q_MAP06') == true);
 assert(wbKSP.get('Q_MAP06_STATUS') == wbKSP.get('Q_MAP06') == true);
-var testVariable = wbKSP.get('Q_MAP06_ENTEREDREQUIREDVARS');
-var testVariable2 = wbKSP.get('Q_MAP06_REQUIREDVARS');
+
+//TODO: make recursive
+var pad = '            '
+function testVariable(variableName, level) {
+    var indent = pad.substring(0, level);
+    var result = {};
+    var formula = formulas[variableName];
+    log.info(indent + '[%s][%s]=[%s]', variableName,  wbKSP.get(variableName),formula.original)
+    for (var dependencyname in formula.deps) {
+        var modelVarName = modelVariableName(dependencyname);
+        testVariable(modelVarName, level + 1)
+    }
+}
+testVariable('TotalYearlyBalances', 1);
 
 log.info('done')
