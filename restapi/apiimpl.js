@@ -8,13 +8,6 @@ var apiimpl = function (DBConnarg) {
 var fesjsApi = require('../ff-fes/ff-fes').fesjs;
 var ModelListener = require('../ff-ssh-git/gitconnector').ModelListener;
 var modelService = new ModelListener();
-//add excel functions, PPMT, IGG etc...
-fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
-fesjsApi.addFunctions(require('../ff-math/ff-math').mathJs);
-//add excel-lookup, MatrixLookup
-fesjsApi.addFunctions(require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup);
-
-var fs = require('fs');
 var modelNames = []
 var modelName;// = modelNames[0]
 //register a listener before initializing the process
@@ -22,7 +15,15 @@ modelService.onNewModel = function (model) {
     modelNames.push(fesjsApi.init(model));
     modelName = modelNames[0];
 }
-modelService.initializeModels();
+//add excel functions, PPMT, IGG etc...
+fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
+fesjsApi.addFunctions(require('../ff-math/ff-math').mathJs);
+//add excel-lookup, MatrixLookup
+var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
+excelPlugin.initComplete.then(function () {
+    modelService.initializeModels();
+})
+fesjsApi.addFunctions(excelPlugin);
 
 function prefixVariable(variableName) {
     if (variableName === undefined) {

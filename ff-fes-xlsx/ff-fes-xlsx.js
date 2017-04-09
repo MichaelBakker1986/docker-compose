@@ -4,7 +4,7 @@ var log = require('ff-log');
 var Promise = require('promise')
 var matrix = {};
 var workbook = new Excel.Workbook();
-var fileName = __dirname + '\\resources\\ScorecardKSP12.xlsx';
+var fileName = __dirname + '\\resources\\ScorecardKSP1.xlsx';
 var succes;
 var initComplete = new Promise(function (succesArg) {
     succes = succesArg;
@@ -76,11 +76,13 @@ var entries = {
     'MatrixLookup': function (xlsfileName, tableName, row, col) {
         if (!matrix[tableName]) {
             log.warn('Defined name not found [%s]:[%s:%s]', tableName, row, col);
+        } else {
+            var table = matrix[tableName].table
+            log.debug('Matrix call [%s]:[%s:%s] tablevalue:[%s]', tableName, row, col, table[row + '_' + col]);
         }
-        var table = matrix[tableName].table
-        log.debug('Matrix call [%s]:[%s:%s] tablevalue:[%s]', tableName, row, col, table[row + '_' + col]);
+
         //write logic to find the table in sheet etc...
-        return col;
+        return NA;
     }
 };
 
