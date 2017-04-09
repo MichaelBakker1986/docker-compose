@@ -15,6 +15,7 @@
     "ff-log": "^1.0.12",
     "ff-math": "file:ff-math",
     "formulajs": "^1.0.8",
+    "promise": "^7.1.1",
     "tracer": "^0.8.7",
     "xlsx": "^0.9.3"
   },

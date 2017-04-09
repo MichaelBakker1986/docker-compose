@@ -12,7 +12,7 @@ var GenericModelFile = require('./GenericModelFile');
 var bootstrap = require('./formula-bootstrap');
 var AST = require('./AST');
 var log = require('ff-log')
-var time = new require('./XAxis')()
+var time = require('./XAxis')()
 
 //user friendly stable API
 //doImport(data,'type') : Solution          ; See Solution class for definiton

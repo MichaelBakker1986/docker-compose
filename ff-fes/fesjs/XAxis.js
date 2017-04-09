@@ -45,8 +45,8 @@ var headers = {
         title: 'document'
     }
 }
-function CalculationDocument(data) {
-    var data = data || importData;
+function CalculationDocument() {
+    var data = importData;
     // console.time('initialize_xAxis');
     this.tContext = data;
     var formulasets = data.formulasets;
