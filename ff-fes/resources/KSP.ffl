@@ -509,10 +509,31 @@ model KSP uses BaseModel
             title: "Gross Income Parent 2";
             options_title: locked;
           }
+		  variable WorkingHoursWeeklyParent01
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Working hours parent 1;
+            options_title: locked;
+          }
+		  variable WorkingHoursWeeklyParent02
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Working hours parent 2;
+            options_title: locked;
+          }
           variable WorkingHoursWeeklyOfLeastWorkingParent
           {
             datatype: number;
             frequency: document;
+			formula: Min(WorkingHoursWeeklyParent01, WorkingHoursWeeklyParent02);
             inputRequired: 1;
             data_options: unscalable;
             fixed_decimals: 1;
