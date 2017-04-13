@@ -1,11 +1,7 @@
 var mysql = require('mysql');
 var Promise = require('promise');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'ff'
-});
+var dbSettings = require('./dbSettings');
+var connection = mysql.createConnection(dbSettings);
 connection.connect();
 
 var dbCall = function (query) {
