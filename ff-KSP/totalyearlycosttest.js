@@ -23,10 +23,15 @@ excelPlugin.initComplete.then(function () {
     wbKSP.set('IncomeParent01', 25000)
     console.log(wbKSP.get('IncomeParent01'))
 
-    //zelfde response from restApi
+    //same response from restApi
     log.info(fesjsApi.fesGetValue({
         columns: 3,
         properties: {value: true, title: true},
         values: wbKSP.context.values
     }, 'KSP_IncomeParent01', 0))
+    log.info(fesjsApi.fesGetValue({
+        columns: 3,
+        properties: {value: true, title: true},
+        values: wbKSP.context.values
+    }, 'KSP_Q_FINAL_REPORT_VISIBLE', 0, "Ja"))
 });
