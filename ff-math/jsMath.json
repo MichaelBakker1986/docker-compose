@@ -132,8 +132,8 @@
     "body": "{ var retrunValue = 1; while(one.prev.hash){ retrunValue++;one=one.prev } return retrunValue }"
   },
   "FirstValueT": {
-    "args": "one",
-    "body": "{ return 1 }"
+    "args": "x,values,first,last",
+    "body": "{ return x }"
   },
   "LastValueT": {
     "args": "one",
@@ -148,34 +148,42 @@
     "body": "{ return one }"
   },
   "LastTInFormulaSet": {
-    "args": "one",
-    "body": "{ return 1 }"
+    "args": "x,x2",
+    "body": "{ return x }"
   },
   "LastTinFormulaSet": {
-    "args": "one",
-    "body": "{ return 1 }"
+    "args": "x,x2",
+    "body": "{ return x }"
   },
   "FirstTinFormulaSet": {
-    "args": "one",
-    "body": "{ return 1 }"
+    "args": "x,x2",
+    "body": "{ return x }"
   },
   "FirstTInFormulaset": {
-    "args": "one",
-    "body": "{ return 1 }"
+    "args": "x,x2",
+    "body": "{ return x }"
   },
   "FirstTInFormulaSet": {
-    "args": "one",
-    "body": "{ return 1 }"
+    "args": "x,x2",
+    "body": "{ return x }"
   },
   "FirstTinPeriod": {
-    "args": "one",
-    "body": "{ return 1 }"
+    "args": "x,x2",
+    "body": "{ return x }"
   },
   "LastTinPeriod": {
-    "args": "one",
-    "body": "{ return 1 }"
+    "args": "x,x2",
+    "body": "{ return x }"
   },
   "LastTinYear": {
+    "args": "x",
+    "body": "{ return x }"
+  },
+  "LastTInFormulaSet": {
+    "args": "x,x2",
+    "body": "{ return x }"
+  },
+  "FirstDateInT": {
     "args": "one",
     "body": "{ return 1 }"
   },
@@ -184,10 +192,6 @@
     "body": "{ return 1 }"
   },
   "LastT": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
-  "LastTInFormulaSet": {
     "args": "one",
     "body": "{ return 1 }"
   },
@@ -219,7 +223,15 @@
     "args": "one",
     "body": "{ return 1 }"
   },
+  "YearToT": {
+    "args": "one",
+    "body": "{ return 1 }"
+  },
   "PMT": {
+    "args": "one",
+    "body": "{ return 1 }"
+  },
+  "NPV2": {
     "args": "one",
     "body": "{ return 1 }"
   },
@@ -356,8 +368,8 @@
     "body": "return 1"
   },
   "DateToT": {
-    "args": "one",
-    "body": "return 1"
+    "args": "x",
+    "body": "return x"
   },
   "Not": {
     "args": "one",
@@ -400,6 +412,10 @@
     "body": "return 1"
   },
   "PPMT": {
+    "args": "one",
+    "body": "return 1"
+  },
+  "IRR": {
     "args": "one",
     "body": "return 1"
   },

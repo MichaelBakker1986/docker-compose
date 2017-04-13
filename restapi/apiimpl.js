@@ -16,8 +16,8 @@ modelService.onNewModel = function (model) {
     modelName = modelNames[0];
 }
 //add excel functions, PPMT, IGG etc...
-fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 fesjsApi.addFunctions(require('../ff-math/ff-math').mathJs);
+fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 excelPlugin.initComplete.then(function () {

@@ -1,20 +1,18 @@
 {
   "name": "ff-fes",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "description": "ff-fes",
   "devDependencies": {
     "ff-log": "^1.0.0",
     "jsdom": "^8.1.0",
     "json-stringify": "^1.0.0",
-    "jsonml-stringify": "^1.0.1",
-    "load-grunt-tasks": "^3.5.0",
-    "sequelize": "^3.19.3"
+    "jsonml-stringify": "^1.0.1"
   },
   "main": "ff-fes.js",
   "dependencies": {
+    "ff-log": "^1.0.0",
     "escodegen": "^1.8.0",
     "esprima": "^2.7.2",
-    "moment": "^2.10.6",
     "stack-adt": "^0.2.3"
   },
   "scripts": {

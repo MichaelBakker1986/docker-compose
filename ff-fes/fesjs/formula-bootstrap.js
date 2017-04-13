@@ -67,6 +67,10 @@ var astValues = {
     "type": "Identifier",
     "name": "v"
 };
+var xArgument = {
+    "type": "Identifier",
+    "name": "x"
+};
 
 //TODO: move this method away. its the only one that should create Dependencies
 //Move it to either a DependencyManager/Service or GenericModelFile
@@ -275,6 +279,18 @@ var simplified = {
          "type": "Identifier",
          "name": "x"
          });*/
+    },
+    /**
+     * Inject the x parameter into the call
+     * @param formulaInfo
+     * @param node
+     * @constructor
+     */
+    FirstValueT: function (formulaInfo, node) {
+        node.arguments.unshift(xArgument);
+    },
+    DateToT: function (formulaInfo, node) {
+        node.arguments.unshift(xArgument);
     },
     Visible: function (formulaInfo, node) {
         node.type = "MemberExpression";
@@ -603,7 +619,25 @@ function buildFormula(formulaInfo, parent, node) {
         }
     }
     else if (node.type === 'Identifier') {
+        /**
+         * TODO: modify these parameters while parsing regex, directly inject the correct parameters
+         */
         if (node.name === 'T') {
+            node.name = 'x';
+        }
+        if (node.name === 'MainPeriod') {
+            node.name = 'x';
+        }
+        if (node.name === 'MaxT') {
+            node.name = 'x';
+        }
+        if (node.name === 'Trend') {
+            node.name = 'x';
+        }
+        if (node.name === 'NoTrend') {
+            node.name = 'x';
+        }
+        if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
         else if (node.name === 't') {

@@ -40,15 +40,15 @@ function printValues(range) {
     for (var i = 0; i < namedRangeSheet.length; i++) {
         var obj1 = namedRangeSheet[i];
         if (obj1 !== undefined) {
-            log.info('[%s]row:[%s]', i, i)
+            log.trace('[%s]row:[%s]', i, i)
             for (var columnId = 0; columnId < obj1.length; columnId++) {
                 var namedRangeAdressCell = obj1[columnId];
                 if (namedRangeAdressCell !== undefined) {
                     var value = range.sheet.getCell(namedRangeAdressCell.address).value;
                     if (value !== null && value !== undefined) {
-                        log.debug('[%s]:[%s]', columnId, namedRangeAdressCell);
+                        log.trace('[%s]:[%s]', columnId, namedRangeAdressCell);
                         matrix[range.name].table[namedRangeAdressCell.row + '_' + namedRangeAdressCell.col] = value
-                        log.debug('found excel value: %s [%s:%s]=[%s]', range.name, range.sheet.name, namedRangeAdressCell.address, value)
+                        log.trace('found excel value: %s [%s:%s]=[%s]', range.name, range.sheet.name, namedRangeAdressCell.address, value)
                     }
                 }
             }

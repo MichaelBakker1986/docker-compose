@@ -28,7 +28,7 @@ var time = require('./XAxis')
 function JSWorkBook(context) {
     this.context = context;
     this.modelName = 'NEW';
-    this.xaxis = time.detl.columns[0][0]
+    this.xaxis = time.bkyr.columns[0][0]
 }
 
 
@@ -135,7 +135,7 @@ function validate() {
                         elem.parsed = undefined;
                         elem.body = AST.STRING(elem.original);
                         //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
-                        FunctionMap.init(bootstrap.parseAsFormula, [elem], false);
+                        FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [elem], false);
                         GenericModelFile.updateValueMap(context.getValues());
                     }
                 };

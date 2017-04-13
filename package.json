@@ -1,5 +1,6 @@
 {
   "name": "fesjs",
+  "private": true,
   "version": "1.0.0",
   "description": "fesjs",
   "main": "index.js",
