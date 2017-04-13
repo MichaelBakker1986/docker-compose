@@ -54,7 +54,7 @@ var fesGetValue = function (context, rowId, columncontext, value) {
 function getEntry(workbook, rowId, columncontext) {
     var data = [];
     var start = columncontext;
-    var end = columncontext == 0 ? columncontext + 1 : columncontext;
+    var end = columncontext == 0 ? columncontext + 17 : columncontext;
     for (var x = start; x <= end; x++) {
         data[x] = {};
         for (var type in workbook.properties) {
