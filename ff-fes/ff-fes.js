@@ -38,6 +38,8 @@ var fesGetValue = function (context, rowId, columncontext, value) {
     var fesContext = new FESContext();
     fesContext.values = context.values;
     var wb = new JSWorkBook(fesContext)
+    wb.columns = context.columns || 17;
+    wb.properties = context.properties || wb.properties;
     //prepare the workbook and context to match current appscope
     wb.updateValueMap()
     if (value !== undefined) {
@@ -54,7 +56,7 @@ var fesGetValue = function (context, rowId, columncontext, value) {
 function getEntry(workbook, rowId, columncontext) {
     var data = [];
     var start = columncontext;
-    var end = columncontext == 0 ? columncontext + 17 : columncontext;
+    var end = columncontext == 0 ? columncontext + workbook.columns : columncontext;
     for (var x = start; x <= end; x++) {
         data[x] = {};
         for (var type in workbook.properties) {
