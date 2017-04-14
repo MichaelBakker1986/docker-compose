@@ -1,6 +1,6 @@
-//TODO: JSWorkBook is the API, remove dependencies like GenericModelFile and UIModel they are internal
+//TODO: JSWorkBook is the API, remove dependencies like FESFacade and UIModel they are internal
 var APP = require('../app.js');
-var GenericModelFile = require('../fesjs/GenericModelFile.js');
+var FESFacade = require('../fesjs/FESFacade.js');
 var UIModel = require('./uimodel.js');
 var logger = require('tracer').console({level: 'info'});
 //requires the presentation export
@@ -8,7 +8,7 @@ require('../exchange_modules/presentation/presentation.js');
 require('../exchange_modules/jsonvalues/jsonvalues.js');
 require('../exchange_modules/pom/pomparser.js');
 require('../exchange_modules/screendefinition/screendefparser.js');
-GenericModelFile.addConverter(require('../highchartadapter/highchartadapter'));
+FESFacade.addConverter(require('../highchartadapter/highchartadapter'));
 ///^[\w]+[\s\S]+?(?=(\r|\n)[\w])
 //so this is the new interface, JSWorkBook
 var JSWorkBook = require('../fesjs/JSWorkBook.js');
@@ -59,13 +59,13 @@ function print(message)
 {
     console.info(message);
 }
-var updateAll = GenericModelFile.updateAll;
+var updateAll = FESFacade.updateAll;
 var wb = new JSWorkBook();
 
 //we use the UI export to create the views
 var present = wb.export('presentation');
 var navigator = present.navigator;
-GenericModelFile.present = present.tree;
+FESFacade.present = present.tree;
 //this this controller is called only once, its the AppController
 //pages within the Controller are called multiple times
 //this is where generic functionality should go, scope.members and scope.functions
@@ -77,20 +77,20 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
     $scope.navigator = navigator;
     $scope.additionalbuttons = APP.additionalbuttons;
     $scope.pages = APP.pages;
-    $scope.usersettings = GenericModelFile.settings;
+    $scope.usersettings = FESFacade.settings;
     //updates on the presentation are not passed through. Simple cause we fail to call update on it onces model changes.    $scope.aceOn = false;
     $scope.apiPath = 'http://' + $location.host() + ':8081/api/';
-    $scope.x = GenericModelFile.x;
+    $scope.x = FESFacade.x;
     $http.defaults.headers.post['X-Requested-With'] = "*";
     // to make better css for styling o0n multiple columns
     $scope.columns = [1];
-    var docValues = GenericModelFile.docValues;
+    var docValues = FESFacade.docValues;
     //remove member. its not UI specific
     $scope.docValues = docValues;
     $scope.rating;
     $scope.uimodelroot = {nodes: []};
     $scope.rootPath;
-    $scope.toggleDefaultOutput = GenericModelFile.settings.toggleOutput;
+    $scope.toggleDefaultOutput = FESFacade.settings.toggleOutput;
     $scope.getUI = UIModel.getUI;
     $scope.find = UIModel.find;
 
@@ -109,7 +109,7 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
     var editor;
     $timeout(function ()
     {
-        $scope.presentation = GenericModelFile.present;
+        $scope.presentation = FESFacade.present;
     })
 
 
@@ -170,7 +170,7 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
         {
             $('body').scrollTop(0)
         });
-//GenericModelFile.present
+//FESFacade.present
         navigator._current.update(updateAll);
 
     }
@@ -187,7 +187,7 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
                 $scope.rootPath = name;
                 $scope.selectedItem = name;
                 print('changing root node to : ' + name);
-                var presentation = GenericModelFile.present.getNode(name) || GenericModelFile.present.getRoot();
+                var presentation = FESFacade.present.getNode(name) || FESFacade.present.getRoot();
 
                 presentation.update(updateAll);
                 navigator.move(presentation.rowId);
@@ -241,11 +241,11 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
             $location.search('model', $scope.model);
         });
         console.time('init-model-' + dbSolution.name);
-        GenericModelFile.switchModel(dbSolution, $scope.docValues);
+        FESFacade.switchModel(dbSolution, $scope.docValues);
 
         //these scope members are root of all views in the app, unmapped is not very useful at the moment
         $scope.uimodelroot.nodes = UIModel.getRootNode().nodes;
-        GenericModelFile.present.update(updateAll);
+        FESFacade.present.update(updateAll);
         console.timeEnd('init-model-' + dbSolution.name);
         $scope.rootNodePath(UIModel.getRootNode().rowId)
     }
@@ -326,6 +326,6 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
     {
         print('setvalue called')
         wb.set(rowId, inputValue, colId);
-        GenericModelFile.present.update(updateAll);
+        FESFacade.present.update(updateAll);
     }
 }]);

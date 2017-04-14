@@ -1,5 +1,5 @@
 var assert = require('assert');
-var parser = require('../exchange_modules/ffl/fflparser');//just let it inject into the GenericModelFile
+var parser = require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
 var WorkBook = require('../fesjs/JSWorkBook');
 var JUNIT = require('./JUNIT');
 var FESContext = require('../fesjs/fescontext')

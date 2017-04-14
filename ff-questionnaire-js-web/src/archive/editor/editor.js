@@ -1,6 +1,6 @@
 var APP = require('../app.js');
 
-var GenericModelFile = require('../fesjs/GenericModelFile.js');
+var FESFacade = require('../fesjs/FESFacade');
 var JSWorkBook = require('../fesjs/JSWorkBook.js');
 var formulaBootstrap = require('../fesjs/formula-bootstrap.js');
 var FunctionMap = require('../fesjs/FunctionMap.js');
@@ -44,7 +44,7 @@ APP.filter('rowId', function ()
 });
 //consider using other names
 var displaytypes = ['ListAnswerType', 'PropertyType', 'ActionType', 'AmountAnswerType', 'MemoAnswerType', 'DateAnswerType', 'TextAnswerType', 'BooleanAnswerType', 'StringAnswerType', 'undefined'];
-//part of the genericmodelfile
+//part of the FESFacade
 var editColumns = [
     {colId: 'title', icon: 'fa-info-circle', displayText: 'title'},
     {colId: 'visible', icon: 'fa-eye', displayText: 'visible'},
@@ -80,7 +80,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
     saveFunction = function ()
     {
         console.info('save model' + $scope.apiPath + 'FORMULA/' + 1)
-        var httpPromise = $http.post($scope.apiPath + 'FORMULA/' + 1, GenericModelFile.produceSolution().formulas);
+        var httpPromise = $http.post($scope.apiPath + 'FORMULA/' + 1, FESFacade.produceSolution().formulas);
 
         $scope.myPromise = httpPromise;
         $timeout(function ()
@@ -131,8 +131,8 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
                  var obj = data[metaData.path][i];
                  for (var key in metaData.properties)
                  {
-                 var f = GenericModelFile.addLink($scope.sheet.id + aditional[i], $scope.cols[colId], true, AST.STRING(obj[key].toString()));
-                 FunctionMap.rebuild(GenericModelFile, aditional[i] + "_" + $scope.cols[colId], f);
+                 var f = FESFacade.addLink($scope.sheet.id + aditional[i], $scope.cols[colId], true, AST.STRING(obj[key].toString()));
+                 FunctionMap.rebuild(FESFacade, aditional[i] + "_" + $scope.cols[colId], f);
                  colId++
                  }
                  }*/
@@ -154,7 +154,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
                 }
                 uiCell.displayAs = uiCell.displayAs || 'PropertyType';
 
-                GenericModelFile.createFormula(formulaUI.original, row, col);
+                FESFacade.createFormula(formulaUI.original, row, col);
 
                 formulaUI.valid = true;
             }
@@ -176,7 +176,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
                 ui: uiCell,
                 row: row,
                 col: col,
-                formula: GenericModelFile.getFormula(row, col)
+                formula: FESFacade.getFormula(row, col)
             }
             if (uiCell.displayAs !== 'AmountAnswerType')
             {
@@ -193,10 +193,10 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
      */
     $scope.apiGet = function (row, col)
     {
-        var formula = GenericModelFile.getFormula(row, col);
+        var formula = FESFacade.getFormula(row, col);
         if (formula === undefined)
         {
-            GenericModelFile.addLink(row, col, true, undefined);
+            FESFacade.addLink(row, col, true, undefined);
         }
         else
         {
@@ -209,7 +209,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
      */
     $scope.apiGetSet = function (rowId, row, colId)
     {
-        var formula = GenericModelFile.getFormula(rowId, colId);
+        var formula = FESFacade.getFormula(rowId, colId);
 
         if (row.rowId === undefined || (row.rowId !== rowId))
         {

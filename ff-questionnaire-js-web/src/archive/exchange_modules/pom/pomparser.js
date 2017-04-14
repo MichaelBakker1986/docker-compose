@@ -1,4 +1,4 @@
-var GenericModelFile = require('../../fesjs/GenericModelFile.js');
+var FESFacade = require('../../fesjs/FESFacade');
 var Visitor = require('../../clientscorecard/JSVisitor.js');
 var AST = require('../../fesjs/AST.js');
 var esprima = require('esprima')
@@ -122,10 +122,10 @@ function addnode(solution, rowId, node, parentId)
     {
         console.info(rowId + " : " + node.val)
     }
-    uiNode = GenericModelFile.addSimpleLink(solution, rowId, 'value', node.val ? esprima.parse(node.val).body[0].expression : AST.UNDEFINED(), "TextAnswerType");
+    uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', node.val ? esprima.parse(node.val).body[0].expression : AST.UNDEFINED(), "TextAnswerType");
     /*  }*/
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
-    GenericModelFile.addSimpleLink(solution, rowId, 'title', AST.STRING(node.referenceid || rowId));
+    FESFacade.addSimpleLink(solution, rowId, 'title', AST.STRING(node.referenceid || rowId));
 }
-GenericModelFile.addParser(pomparser)
+FESFacade.addParser(pomparser)

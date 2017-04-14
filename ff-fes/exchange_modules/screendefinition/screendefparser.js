@@ -1,5 +1,5 @@
 var visitor = require('../../fesjs/JSVisitor');
-var GenericModelFile = require('../../fesjs/GenericModelFile');
+var FESFacade = require('../../fesjs/FESFacade');
 var uimodel = require('../../fesjs/UIService');
 var AST = require('../../fesjs/AST');
 var finformula = require('../ffl/FinFormula');
@@ -56,12 +56,12 @@ function addnode(solution, rowId, node, parentId, referId) {
         throw Error()
     }
     //create formula if not exist
-    var uiNode = GenericModelFile.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType");
+    var uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType");
     //only for the value tree a Tree structure is build, properties only part of the uiNode, not a child
     //uiNode.referId = referId;
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
     var titlestring = node.name || node.description || rowId;
-    GenericModelFile.addSimpleLink(solution, rowId, 'title', AST.STRING(titlestring));
+    FESFacade.addSimpleLink(solution, rowId, 'title', AST.STRING(titlestring));
 }
-GenericModelFile.addParser(parser);
+FESFacade.addParser(parser);

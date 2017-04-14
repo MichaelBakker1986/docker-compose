@@ -1,4 +1,4 @@
-var GenericModelFile = require('../../fesjs/GenericModelFile.js');
+var FESFacade = require('../../fesjs/FESFacade');
 var Solution = require('../../fesjs/Solution.js');
 var uimodel = require('../../clientscorecard/uimodel.js');
 var abnModelParser = require('./Components.js');
@@ -12,7 +12,7 @@ var parser = {
         var data = JSON.parse(xmlBlob);
         var modelName = data.modelCode.toUpperCase();
         var ABNSolution = uimodel.create(modelName);
-        abnModelParser.parseUIModel(ABNSolution, data.modelQuestionnaire, GenericModelFile);
+        abnModelParser.parseUIModel(ABNSolution, data.modelQuestionnaire, FESFacade);
         return ABNSolution;
     },
     deParse: function ()
@@ -20,5 +20,5 @@ var parser = {
         return uimodel.create().stringify();
     }
 }
-GenericModelFile.addParser(parser);
+FESFacade.addParser(parser);
 module.exports = parser;

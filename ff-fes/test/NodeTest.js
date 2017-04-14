@@ -5,7 +5,7 @@
 var assert = require('assert');
 var Node = require('../exchange_modules/presentation/Node');
 var Tree = require('../exchange_modules/presentation/Tree');
-require('../exchange_modules/presentation/presentation');//just let it inject into the GenericModelFile
+require('../exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 require('../exchange_modules/ffl/fflparser');
 var JSWorkBook = require('../fesjs/JSWorkBook');
 var JUNIT = require('./JUNIT');

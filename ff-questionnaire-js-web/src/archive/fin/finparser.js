@@ -1,4 +1,4 @@
-var GenericModelFile = require('../fesjs/GenericModelFile.js');
+var FESFacade = require('../fesjs/FESFacade');
 var AST = require('../fesjs/AST.js');
 var lineparser = require('./finToJson.js');
 var finformula = require('../FinFormula/FinFormula.js');
@@ -55,7 +55,7 @@ var parser = {
 
         uimodel.visit(startuielem, function (node)
         {
-            var formulaProperties = finExport.gatherProperties(GenericModelFile.getFormula, GenericModelFile.properties, node.rowId);
+            var formulaProperties = finExport.gatherProperties(FESFacade.getFormula, FESFacade.properties, node.rowId);
             // exportString += createFinVariableRow(node, formulaProperties['title'] || '');
             for (var key in formulaProperties)
             {
@@ -158,7 +158,7 @@ function createFormulaSafe(solution, formula)
             ast = AST.STRING(code);
         }
     }
-    var uiNode = GenericModelFile.addSimpleLink(solution, formula.name, formula.property, ast, formula.displayAs)
+    var uiNode = FESFacade.addSimpleLink(solution, formula.name, formula.property, ast, formula.displayAs)
     if (formula._delegate)
     {
         solution.setDelegate(uiNode, formula._delegate);
@@ -275,20 +275,20 @@ function addNode(solution, node, parentId)
     //locked and visibility
     if (node.protection === 'I')
     {
-        GenericModelFile.addSimpleLink(solution, rowId, 'locked', AST.TRUE())
+        FESFacade.addSimpleLink(solution, rowId, 'locked', AST.TRUE())
     }
     else if (node.protection === 'X' || node.protection === ' ' || node.protection === 'N')
     {
-        GenericModelFile.addSimpleLink(solution, rowId, 'visible', AST.FALSE())
+        FESFacade.addSimpleLink(solution, rowId, 'visible', AST.FALSE())
     }
     if (node.required === '+' || node.required === 'R')
     {
-        GenericModelFile.addSimpleLink(solution, rowId, 'required', AST.TRUE())
+        FESFacade.addSimpleLink(solution, rowId, 'required', AST.TRUE())
     }
 
     if (node.hint.trim().length > 0)
     {
-        GenericModelFile.addSimpleLink(solution, rowId, 'hint', AST.STRING(node.hint))
+        FESFacade.addSimpleLink(solution, rowId, 'hint', AST.STRING(node.hint))
     }
 }
-GenericModelFile.addParser(parser);
+FESFacade.addParser(parser);

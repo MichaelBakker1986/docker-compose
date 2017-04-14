@@ -17,14 +17,14 @@ var ABN = require('./ABNGenericModel.js');
 var UIModel = require('../../clientscorecard/uimodel.js');
 var components = {};
 var languages = {};
-var genericModelFile;
+var FESFacade;
 
 var ADD = AST.ADD;
 var ZEROONNAN = AST.ZEROONNAN;
 
-function parseUIModel(solution, node, GenericModelFileArg)
+function parseUIModel(solution, node, FESFacadeArg)
 {
-    genericModelFile = GenericModelFileArg;
+    FESFacade = FESFacadeArg;
     //lets add languages to the rootNode
     //node.Components.Component.languages = languages;
     //iterate the Constaints to start with, we need them before we can do something with the Components
@@ -39,8 +39,8 @@ var ComponentTypes = {}
 ComponentTypes [mapping.QuestionType] = function (component)
 {
     var componentId = component[mapping._id];
-    genericModelFile.addLink(componentId, 'value', false, "undefined");
-    genericModelFile.addLink(componentId, 'locked', true, false);
+    FESFacade.addLink(componentId, 'value', false, "undefined");
+    FESFacade.addLink(componentId, 'locked', true, false);
 }
 var ResultTypes = {
     AddType: AST.ADD,
@@ -59,23 +59,23 @@ ComponentTypes[mapping.ResultType] = function (component)
     }
     //add formula to model
     //register it to the value property, its locked.
-    genericModelFile.addLink(component[mapping._id], 'value', true, ast);
-    genericModelFile.addLink(component[mapping._id], 'locked', true, true);
+    FESFacade.addLink(component[mapping._id], 'value', true, ast);
+    FESFacade.addLink(component[mapping._id], 'locked', true, true);
 }
 ComponentTypes.undefined = function (component)
 {
     //Don't add any functions for the Undefined Types
     //Headers etc.
-    genericModelFile.addLink(component[mapping._id], 'locked', true, true);
+    FESFacade.addLink(component[mapping._id], 'locked', true, true);
 }
 ComponentTypes[mapping.SectionType] = function (component)
 {
     //Don't add any functions for the SectionType Types
-    genericModelFile.addLink(component[mapping._id], 'locked', true, true);
+    FESFacade.addLink(component[mapping._id], 'locked', true, true);
 }
 ComponentTypes[mapping.QuestionGroupType] = function (component)
 {
-    genericModelFile.addLink(component[mapping._id], 'locked', true, true);
+    FESFacade.addLink(component[mapping._id], 'locked', true, true);
 }
 //Interesting and vendor specific part goes here.
 var AnyType = {};
@@ -96,7 +96,7 @@ AnyType[mapping.MandatoryRule] = function (node)
 {
     var component = findComponent(node);
     var body = RulesParser.generate(node[mapping._refId]);
-    genericModelFile.addLink(component[mapping._id], 'required', true, body);
+    FESFacade.addLink(component[mapping._id], 'required', true, body);
 }
 AnyType[mapping.ValidationRule] = function (node)
 {
@@ -104,13 +104,13 @@ AnyType[mapping.ValidationRule] = function (node)
     // console.info('ValidationRule of component ' + scope.componentId + ' has refId ' + component._refId);
     var component = findComponent(node);
     var body = RulesParser.generate(node._refId);
-    genericModelFile.addLink(component[mapping._id], 'validation', true, body);
+    FESFacade.addLink(component[mapping._id], 'validation', true, body);
 }
 AnyType[mapping.RelevantRule] = function (node)
 {
     var component = findComponent(node);
     var body = RulesParser.generate(node[mapping._refId]);
-    genericModelFile.addLink(component[mapping._id], 'visible', true, body);
+    FESFacade.addLink(component[mapping._id], 'visible', true, body);
 }
 AnyType[mapping.DateConstraint] = function (node)
 {
@@ -125,25 +125,25 @@ AnyType[mapping.PatternConstraint] = function (node)
 AnyType[mapping.StringConstraint] = function (node)
 {
     var component = findComponent(node);
-    genericModelFile.addLink(component[mapping._id], 'validateInput', true, ConstraintParser.generate(node[mapping._refId], 'validateInput', component[mapping._id]));
+    FESFacade.addLink(component[mapping._id], 'validateInput', true, ConstraintParser.generate(node[mapping._refId], 'validateInput', component[mapping._id]));
 }
 AnyType[mapping.NumberConstraint] = function (node)
 {
     var component = findComponent(node);
-    genericModelFile.addLink(component[mapping._id], 'validateInput', true, ConstraintParser.generate(node[mapping._refId], 'validateInput', component[mapping._id]));
+    FESFacade.addLink(component[mapping._id], 'validateInput', true, ConstraintParser.generate(node[mapping._refId], 'validateInput', component[mapping._id]));
 }
 AnyType[mapping.ListConstraint] = function (node)
 {
     var component = findComponent(node);
     var componentId = component[mapping._id];
-    genericModelFile.addLink(componentId, 'choices', true, ConstraintParser.generate(node[mapping._refId], 'choices', componentId));
-    genericModelFile.addLink(componentId, 'validateInput', true, ConstraintParser.generate(node[mapping._refId], 'validateInput', componentId));
+    FESFacade.addLink(componentId, 'choices', true, ConstraintParser.generate(node[mapping._refId], 'choices', componentId));
+    FESFacade.addLink(componentId, 'validateInput', true, ConstraintParser.generate(node[mapping._refId], 'validateInput', componentId));
 }
 
 AnyType[mapping.Label] = function (node)
 {
     var component = findComponent(node);
-    genericModelFile.addLink(component[mapping._id], 'title', true, ABN.Label(node));
+    FESFacade.addLink(component[mapping._id], 'title', true, ABN.Label(node));
 }
 AnyType[mapping.Answer] = function (node)
 {

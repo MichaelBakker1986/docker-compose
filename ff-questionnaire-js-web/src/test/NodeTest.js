@@ -5,20 +5,20 @@
 var assert = require('assert');
 var Node = require('../archive/exchange_modules/presentation/Node.js');
 var Tree = require('../archive/exchange_modules/presentation/Tree.js');
-require('../archive/exchange_modules/presentation/presentation.js');//just let it inject into the GenericModelFile
+require('../archive/exchange_modules/presentation/presentation.js');//just let it inject into the FESFacade
 require('../archive/ffl/fflparser.js');
 var JSWorkBook = require('../archive/fesjs/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');
 var info = JUNIT.printPretty;
 var data = JUNIT.getFile('highcharttest.ffl');
-var GenericModelFile = require('../archive/fesjs/GenericModelFile.js');
-GenericModelFile.addConverter(require('../archive/highchartadapter/highchartadapter'));
+var FESFacade = require('../archive/fesjs/FESFacade.js');
+FESFacade.addConverter(require('../archive/highchartadapter/highchartadapter'));
 var wb = new JSWorkBook();
 var presentation = wb.export('presentation');
 wb.doImport(data, 'ffl');
 
 var uitree = presentation.tree;
-uitree.update(GenericModelFile.updateAll);
+uitree.update(FESFacade.updateAll);
 info(uitree)
 
 var root = new Node('root')

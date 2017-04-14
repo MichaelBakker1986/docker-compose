@@ -73,7 +73,7 @@ var xArgument = {
 };
 
 //TODO: move this method away. its the only one that should create Dependencies
-//Move it to either a DependencyManager/Service or GenericModelFile
+//Move it to either a DependencyManager/Service or FESFacade
 function addFormulaDependency(formulaInfo, name, property) {
     var foundUiModel = findLink(formulaInfo.name.split('_')[0], name, property || 'value');
     //we want do know if we can all the value straight away or we have to invoke a function for it
@@ -726,7 +726,7 @@ function initStateBootstrap(configsFile) {
     formulas = configs.findFormulaByIndex;
 
     //TODO: this part makes it impossible to be flexible
-    //if its done in GenericModelFile it become flexible
+    //if its done in FESFacade it become flexible
     for (var property in properties) {
         varproperties[property] = {
             f: properties[property],
@@ -737,7 +737,7 @@ function initStateBootstrap(configsFile) {
         }
     }
     //TODO: this part makes it impossible to be flexible
-    //if its done in GenericModelFile it become flexible
+    //if its done in FESFacade it become flexible
     return parseAsFormula;
 };
 module.exports = {

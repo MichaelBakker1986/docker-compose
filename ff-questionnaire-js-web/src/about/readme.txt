@@ -16,6 +16,6 @@ The regular expression are very complex and when changing it, add a unit test to
 -Node,   (kinda like a variable)
 -Tree    (wrapper around the rootnode,and functions to modify children)
 -UiModel (kinda like variables, collection of properties and pointers to functions)
--GenericModelFile (Instance Context, hold all state, converters,formulas,rows,x-axis information)
+-FESFacade (Instance Context, hold all state, converters,formulas,rows,x-axis information)
 -FormulaBootStrap (function parser ,genericmodel to javascript functions)
 -Presentation (

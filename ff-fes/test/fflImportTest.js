@@ -1,9 +1,9 @@
-require('../exchange_modules/ffl/fflparser');//just let it inject into the GenericModelFile
-require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the GenericModelFile
-require('../../ff-math/ff-math');//just let it inject into the GenericModelFile
+require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
+require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
+require('../../ff-math/ff-math');//just let it inject into the FESFacade
 var WorkBook = require('../fesjs/JSWorkBook');
 var JUNIT = require('./JUNIT');
-var GenericModelFile = require('../fesjs/GenericModelFile');
+var FESFacade = require('../fesjs/FESFacade');
 var UIModel = require('../fesjs/UIService');
 var FormulaService = require('../fesjs/FormulaService');
 var bootstrap = require('../fesjs/formula-bootstrap');
@@ -142,7 +142,7 @@ for (var i = 0; i < tests.length; i++) {
         console.error('error: ' + item.formulaName + "\r\nreason: [" + item.reason + "]");
     });
 
-    var solution = GenericModelFile.produceSolution(wb.modelName);
+    var solution = FESFacade.produceSolution(wb.modelName);
     wb.createFormula(100, 'TestVariable');
     assert.equal(wb.get('TestVariable'), 100);
 

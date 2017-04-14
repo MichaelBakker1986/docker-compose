@@ -7,8 +7,8 @@
 //-- visit it again
 //-- add node
 //-- remove node
-require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the GenericModelFile
-require('../exchange_modules/presentation/presentation');//just let it inject into the GenericModelFile
+require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
+require('../exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 var assert = require('assert');
 var JUNIT = require('./JUNIT');
 var JSWorkBook = require('../fesjs/JSWorkBook');

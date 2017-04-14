@@ -5,7 +5,7 @@ var DB = require('../archive/backend/db.js');
 var DBController = require('../archive/backend/dbcontroller.js');
 var assert = require('assert');
 var uimodel = require('../archive/clientscorecard/uimodel.js');
-var GenericModelFile = require('../archive/fesjs/GenericModelFile.js');
+var FESFacade = require('../archive/fesjs/FESFacade');
 var FunctionMap = require('../archive/fesjs/FunctionMap.js');
 var JSWorkBook = require('../archive/fesjs/JSWorkBook.js');
 var bootstrap = require('../archive/fesjs/formula-bootstrap.js');
@@ -76,13 +76,13 @@ function createFormula(value, rowId, colId)
 {
     //create a formula for the element
     var ast = esprima.parse(value);
-    var newFormulaId = GenericModelFile.addLink(rowId, colId, true, ast);
-    var newFormula = GenericModelFile.findFormulaByIndex(newFormulaId);
+    var newFormulaId = FESFacade.addLink(rowId, colId, true, ast);
+    var newFormula = FESFacade.findFormulaByIndex(newFormulaId);
     //integrate formula (parse it)
     FunctionMap.init(bootstrap.parseAsFormula, [newFormula], true);
 
     //print the 500 value
-    assert.equal(value, GenericModelFile.getValue(rowId, colId));
+    assert.equal(value, FESFacade.getValue(rowId, colId));
 };
 function addUiElement(rowId, colId)
 {
@@ -103,7 +103,7 @@ function testSolution(solutionName)
     //override first formula
     createFormula(501, 'A10', 'value');
 
-    var Solution = GenericModelFile.produceSolution();
+    var Solution = FESFacade.produceSolution();
     assert.equal(Solution.formulas.length, 1);
     assert.equal(Solution.nodes.length, 2);
 
@@ -111,7 +111,7 @@ function testSolution(solutionName)
     addUiElement('A11', 'value');
     createFormula(502, 'A11', 'value');
 
-    Solution = GenericModelFile.produceSolution();
+    Solution = FESFacade.produceSolution();
     assert.equal(Solution.formulas.length, 2);
     assert.equal(Solution.nodes.length, 3);
 }
@@ -119,16 +119,16 @@ function testSolution(solutionName)
 testSolution('TESTMODEL');
 //check refs:
 var ui = uimodel.getUI('A10', 'value');
-var formula = GenericModelFile.findFormula(ui);
+var formula = FESFacade.findFormula(ui);
 assert.equal(Object.keys(formula.refs).length, 1);
 //combine solutions, current solution is set to TESTMODEL2
 testSolution('TESTMODEL2');
 var ui = uimodel.getUI('A10', 'value');
-var formula = GenericModelFile.findFormula(ui);
+var formula = FESFacade.findFormula(ui);
 assert.equal(Object.keys(formula.refs).length, 2);
 
 //save TESTMODEL2 to database
-var currentSolution = GenericModelFile.produceSolution();
+var currentSolution = FESFacade.produceSolution();
 DB.sequelize.sync({force: true}).then(function ()
 {
     return DBController.update('FORMULA', SolutionDUMMY.formulas);
@@ -145,7 +145,7 @@ DB.sequelize.sync({force: true}).then(function ()
     return DBController.update('FORMULA', currentSolution.formulas);
 }).then(function (formulas)
 {
-    GenericModelFile.mergeFormulas(formulas);
+    FESFacade.mergeFormulas(formulas);
     assert.equal(501, wb.get('A10'));
     //now update all formula's, they have id's now, be aware in this testCase its the same object, in the client. these are two different objects
 }).then(function ()
@@ -186,15 +186,15 @@ DB.sequelize.sync({force: true}).then(function ()
 }).then(function (data)
 {
     //these three methodes are business logic.
-    GenericModelFile.bulkInsertFormula(data.formulas);
+    FESFacade.bulkInsertFormula(data.formulas);
     uimodel.bulkInsert(data);
     FunctionMap.init(bootstrap.parseAsFormula, data.formulas, true);
     //these three methodes are business logic.
 
     var rootNode = uimodel.find(uimodel.getRootNode().nodes[0]);
 
-    var localFormula = GenericModelFile.findFormula(rootNode);
-    assert.equal('DUMMY MODEL', FunctionMap.apiGet(localFormula, GenericModelFile.x, 0, 0));
+    var localFormula = FESFacade.findFormula(rootNode);
+    assert.equal('DUMMY MODEL', FunctionMap.apiGet(localFormula, FESFacade.x, 0, 0));
     console.info(localFormula);
 }).then(function ()
 {
@@ -203,17 +203,17 @@ DB.sequelize.sync({force: true}).then(function ()
     //check local formula
     assert.equal('1000', wb.get('C0'));
     //save the entire thing back to the database
-    var currentSolution = GenericModelFile.produceSolution();
+    var currentSolution = FESFacade.produceSolution();
     //first store all Formula's, not sure if going to do this on the server side or client. presumable client. to reparse the formula's
     return DBController.update('FORMULA', currentSolution.formulas);
 }).then(function (formulas)
 {
     //now merge it again and save to the
-    GenericModelFile.mergeFormulas(formulas);
+    FESFacade.mergeFormulas(formulas);
     //check local formula
     assert.equal('1000', wb.get('C0'));
     //save the entire thing back to the database
-    /*    var currentSolution = GenericModelFile.produceSolution();
+    /*    var currentSolution = FESFacade.produceSolution();
      return DBController.update('SOLUTION', {
      name: currentSolution.name,
      nodes: currentSolution.nodes

@@ -1,6 +1,6 @@
 global.loglevel = 'debug'
 var assert = require('assert')
-var parser = require('../exchange_modules/ffl/fflparser');//just let it inject into the GenericModelFile
+var parser = require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
 var WorkBook = require('../fesjs/JSWorkBook');
 var JSMATH = require('ff-math')
 var JUNIT = require('./JUNIT');

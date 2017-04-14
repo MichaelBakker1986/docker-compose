@@ -1,11 +1,10 @@
-require('./exchange_modules/ffl/fflparser');//just let it inject into the GenericModelFile
-require('./exchange_modules/presentation/presentation');//just let it inject into the GenericModelFile
+require('./exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
+require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 var log = require('ff-log')
 var JSWorkBook = require('./fesjs/JSWorkBook');
 var FESContext = require('./fesjs/fescontext');
 function FESApi() {
 }
-
 FESApi.prototype.init = function (data) {
     var wb = new JSWorkBook(new FESContext());
     wb.doImport(data, 'ffl');

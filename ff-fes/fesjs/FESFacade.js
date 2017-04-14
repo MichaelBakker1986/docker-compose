@@ -7,7 +7,7 @@ var AST = require('./AST');
 var esprima = require('esprima')
 var assert = require('assert')
 //for now now just years.. keep it simple
-var GenericModelFile = {}
+var FESFacade = {}
 
 var UIService = require('./UIService');
 var bootstrap = require('./formula-bootstrap');
@@ -132,10 +132,10 @@ function getStatelessVariable(row, col) {
     return UIService.fetch(row + '_' + col);
 }
 
-GenericModelFile.getParsers = ParserService.getParsers;
-GenericModelFile.findParser = ParserService.findParser;
-GenericModelFile.addParser = ParserService.addParser;
-GenericModelFile.statelessSetValue = function (context, row, value, col, xas) {
+FESFacade.getParsers = ParserService.getParsers;
+FESFacade.findParser = ParserService.findParser;
+FESFacade.addParser = ParserService.addParser;
+FESFacade.statelessSetValue = function (context, row, value, col, xas) {
     var rowId = row + '_' + ( col || 'value');
     var localFormula = findFormula(UIService.fetch(rowId));
     if (localFormula === undefined) {
@@ -145,7 +145,7 @@ GenericModelFile.statelessSetValue = function (context, row, value, col, xas) {
     logger.debug('Set value row:[%s] x:[%s] value:[%s]', row, xas.hash, value);
     FunctionMap.apiSet(localFormula, xas, 0, 0, value, context.values);
 };
-GenericModelFile.statelessGetValue = function (context, row, col, xas) {
+FESFacade.statelessGetValue = function (context, row, col, xas) {
     var colType = col || 'value';
     var localFormula = findFormula(getStatelessVariable(row, colType));
     var returnValue;
@@ -157,14 +157,14 @@ GenericModelFile.statelessGetValue = function (context, row, col, xas) {
     }
     return returnValue;
 }
-GenericModelFile.getStatelessVariable = getStatelessVariable;
-GenericModelFile.findFormulaByIndex = FormulaService.findFormulaByIndex;
-GenericModelFile.bulkInsertFormula = FormulaService.bulkInsertFormula;
-GenericModelFile.findFormula = findFormula;
-GenericModelFile.mergeFormulas = mergeFormulas;
-GenericModelFile.getFormula = getFormula;
-GenericModelFile.gatherFormulas = gatherFormulas;
-GenericModelFile.createFormula = function (groupName, formulaAsString, rowId, colId) {
+FESFacade.getStatelessVariable = getStatelessVariable;
+FESFacade.findFormulaByIndex = FormulaService.findFormulaByIndex;
+FESFacade.bulkInsertFormula = FormulaService.bulkInsertFormula;
+FESFacade.findFormula = findFormula;
+FESFacade.mergeFormulas = mergeFormulas;
+FESFacade.getFormula = getFormula;
+FESFacade.gatherFormulas = gatherFormulas;
+FESFacade.createFormula = function (groupName, formulaAsString, rowId, colId) {
     var col = colId || 'value';
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
@@ -173,11 +173,11 @@ GenericModelFile.createFormula = function (groupName, formulaAsString, rowId, co
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
 };
 //SolutionService
-GenericModelFile.produceSolution = produceSolution;
+FESFacade.produceSolution = produceSolution;
 //UiModelService?
-GenericModelFile.updateValueMap = updateValueMap;
+FESFacade.updateValueMap = updateValueMap;
 //encapsulate isLocked flag
-GenericModelFile.addSimpleLink = function (solution, rowId, colId, body, displayAs) {
+FESFacade.addSimpleLink = function (solution, rowId, colId, body, displayAs) {
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
     var formulaId = addLink(solution.name, rowId, colId, colId === 'value' ? false : true, body);
@@ -185,9 +185,9 @@ GenericModelFile.addSimpleLink = function (solution, rowId, colId, body, display
     //afterwards the Formula's are parsed,
     return solution.createNode(rowId, colId, formulaId, displayAs);
 };
-GenericModelFile.findLink = UIService.getUI;
+FESFacade.findLink = UIService.getUI;
 //supported properties
-GenericModelFile.properties = {
+FESFacade.properties = {
     value: 0,
     visible: 1,
     required: 2,
@@ -203,7 +203,7 @@ GenericModelFile.properties = {
 //for now we accept NON-Dynamic Fes7, nor Dynamic variable properties.
 //properties once bound ONCE, math Functions also ONCE
 bootstrap.initStateBootstrap({
-    state: GenericModelFile,
+    state: FESFacade,
     uicontains: UIService.contains
 });
-module.exports = GenericModelFile;
+module.exports = FESFacade;

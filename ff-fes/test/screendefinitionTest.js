@@ -1,7 +1,7 @@
 var JUNIT = require('./JUNIT.js');
 var log = require('ff-log')
-require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the GenericModelFile
-require('../exchange_modules/ffl/fflparser');//just let it inject into the GenericModelFile
+require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
+require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
 var JSWorkBook = require('../fesjs/JSWorkBook');
 var assert = require('assert');
 //var data = JUNIT.getFile('scorecardtemplate.json');
