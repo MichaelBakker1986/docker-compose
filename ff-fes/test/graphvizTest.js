@@ -1,23 +1,23 @@
+/**
+ * file creator, not tested every cycle.
+ * @type {ok}
+ */
 var assert = require('assert');
-var parser = require('../exchange_modules/ffl/fflparser.js');//just let it inject into the FESFacade
-require('../exchange_modules/presentation/presentation.js');//just let it inject into the FESFacade
-
+var parser = require('../exchange_modules/ffl/fflparser.js');
+require('../exchange_modules/presentation/presentation.js');
 require('../../ff-math/ff-math')
 var fesjsApi = require('../ff-fes').fesjs;
 var FESContext = require('../fesjs/fescontext');
 var FormulaService = require('../fesjs/FormulaService');
 var JUNIT = require('../test/JUNIT');
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
-//add excel-lookup, MatrixLookup
 fesjsApi.addFunctions(require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup);
-
-
+var log = require('ff-log');
 var WorkBook = require('../fesjs/JSWorkBook.js');
-
 var JUNIT = require('./JUNIT.js');
 var fs = require('fs');
 
-var fflTestModels = ['V05'];// ['hierarchyTest', 'hierarchyTest'];
+var fflTestModels = ['KSP'];
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
 }
@@ -35,14 +35,12 @@ for (var i = 0; i < fflTestModels.length; i++) {
     var allnodes = screendefExport.tree._tree.nodes;
     var solution = wb.produceSolution();
 
-
     var graphvizModelTree = '';
     var depVariableNames_with_formulas = "";
     var depVariableNames = "";
 
     for (var nodeName in allnodes) {
         var node = allnodes[nodeName];
-        //graphvizModelTree += createRow(node.rowId);
     }
 
     wb.visit(wb.getStatelessNode('V05_root'), function (child) {
@@ -51,7 +49,6 @@ for (var i = 0; i < fflTestModels.length; i++) {
     })
 
     var variableNames = new Set();
-
 
     solution.formulas.forEach(function (formula) {
         if (Object.keys(formula.deps).length > 0) {
@@ -70,34 +67,20 @@ for (var i = 0; i < fflTestModels.length; i++) {
     FormulaService.visitFormulas(function (formula) {
         formulaInfo[formula.name] = formula;
     })
-    fs.writeFile(wb.modelName + "_dependencies.json", JSON.stringify(formulaInfo, null, 2), function (err) {
+    createFile(wb, "_dependencies.json", JSON.stringify(formulaInfo, null, 2));
+    createFile(wb, "_modelTree.txt", createGraph(graphvizModelTree));
+    createFile(wb, "_dependencies.txt", createGraph(depVariableNames));
+    createFile(wb, "_dependencies_with_formulas.txt", createGraph(depVariableNames_with_formulas));
+}
+function createFile(wb, fileName, graph) {
+    var fullFileName = '../resources/' + wb.modelName + fileName;
+    fs.writeFile(fullFileName, graph, function (err) {
         if (err) {
-            return console.log(err);
+            log.log(err);
+            return
         }
-        console.log("The file was saved!" + wb.modelName + "_dependencies.json");
+        log.info("[%s] saved!", fullFileName);
     });
-    fs.writeFile(wb.modelName + "_modelTree.txt", createGraph(graphvizModelTree), function (err) {
-        if (err) {
-            return console.log(err);
-        }
-        console.log("The file was saved!");
-    });
-    fs.writeFile(wb.modelName + "_dependencies.txt", createGraph(depVariableNames), function (err) {
-        if (err) {
-            return console.log(err);
-        }
-        console.log("The file2 was saved!");
-    });
-    fs.writeFile(wb.modelName + "_dependencies_with_formulas.txt", createGraph(depVariableNames_with_formulas), function (err) {
-        if (err) {
-            return console.log(err);
-        }
-        console.log("The file2 was saved!");
-    });
-    //debugging..
-    if (!process.alltest) {
-        //console.info(fflExport);
-    }
 }
 function createRow(rowId) {
     return "\r\n" + rowId + ' [shape=record, label="' + rowId + '"];';
@@ -108,5 +91,4 @@ function createGraph(middle) {
     graphviz += "\r\n}";
     return graphviz;
 }
-
-console.info('test fflExport succeed')
+log.info('test fflExport succeed')
