@@ -1,4 +1,4 @@
-var dependencyInfo = require('./KSP_dependencies.json');
+var dependencyInfo = require('./V05_dependencies.json');
 var graph = require('ngraph.graph')();
 graph.beginUpdate();
 function modelVariableName(name) {

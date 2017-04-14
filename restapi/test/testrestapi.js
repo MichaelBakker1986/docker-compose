@@ -1,11 +1,6 @@
 var mysql = require('mysql');
 var Promise = require('promise');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'finan',
-    database: 'test'
-});
+var connection = mysql.createConnection(require('../dbSettings'));
 connection.connect();
 var testresults = require('../../ff-fes/test/RunAllTest')
 
