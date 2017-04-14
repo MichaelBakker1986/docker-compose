@@ -33,7 +33,7 @@ var variableSchema = {
         "displayAs": {
             "title": "DisplayType",
             "type": "string",
-            "enum": ['SectionType', 'ListAnswerType', 'PropertyType', 'ActionType', 'AmountAnswerType', 'MemoAnswerType', 'DateAnswerType', 'TextAnswerType', 'BooleanAnswerType', 'StringAnswerType', 'undefined'],
+            "enum": ['SectionType', 'select', 'PropertyType', 'ActionType', 'AmountAnswerType', 'MemoAnswerType', 'DateAnswerType', 'TextAnswerType', 'BooleanAnswerType', 'StringAnswerType', 'undefined'],
             "default": "TextAnswerType"
         },
         "frequency": {

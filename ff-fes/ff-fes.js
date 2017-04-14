@@ -1,3 +1,6 @@
+/**
+ * user friendly API
+ */
 require('./exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
 require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 var log = require('ff-log')
@@ -42,9 +45,10 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value) {
     //prepare the workbook and context to match current appscope
     wb.updateValueMap()
     if (value !== undefined) {
+        //choice(select) requests
         //possible ?quick-fix? to change choice values into number value
         var variable = wb.getStatelessVariable(rowId, 'value');
-        if (variable && variable.delegate && variable.delegate.displaytype === 'select') {
+        if (variable && variable.displayAs === 'select') {
             var choices = wb.statelessGetValue(rowId, 'choices');
             var choiceValue = choices.lookup('value', value);
             if (choiceValue === undefined) {
@@ -63,6 +67,13 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value) {
         return values;
     }
 }
+/**
+ * Given properties in workbook return all values for given columns
+ * @param workbook
+ * @param rowId
+ * @param columncontext
+ * @returns {Array}
+ */
 function getEntry(workbook, rowId, columncontext) {
     var data = [];
     var start = columncontext;

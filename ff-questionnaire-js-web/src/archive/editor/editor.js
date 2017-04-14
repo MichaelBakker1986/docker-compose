@@ -43,7 +43,7 @@ APP.filter('rowId', function ()
     };
 });
 //consider using other names
-var displaytypes = ['ListAnswerType', 'PropertyType', 'ActionType', 'AmountAnswerType', 'MemoAnswerType', 'DateAnswerType', 'TextAnswerType', 'BooleanAnswerType', 'StringAnswerType', 'undefined'];
+var displaytypes = ['select', 'PropertyType', 'ActionType', 'AmountAnswerType', 'MemoAnswerType', 'DateAnswerType', 'TextAnswerType', 'BooleanAnswerType', 'StringAnswerType', 'undefined'];
 //part of the FESFacade
 var editColumns = [
     {colId: 'title', icon: 'fa-info-circle', displayText: 'title'},

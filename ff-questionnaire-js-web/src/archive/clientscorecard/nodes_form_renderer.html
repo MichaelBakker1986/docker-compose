@@ -6,7 +6,7 @@
     <div  class="second col-md-6 input-group">
         <span ng-switch-when="AmountAnswerType" class="input-group-addon"><i class="fa fa-eur"></i></span>
         <span ng-switch-when="StringAnserType" class="input-group-addon"><i class="fa fa-comment" aria-hidden="true"></i></span>
-        <select class="form-control" ng-repeat="column in columns" ng-switch-when="ListAnswerType" ng-bind-attrs="{ inputValid: InputValid(row),disabled : row.locked }" ng-model="row.value" ng-change="exportValue(row.rowId,row,'value',row.value)">
+        <select class="form-control" ng-repeat="column in columns" ng-switch-when="select" ng-bind-attrs="{ inputValid: InputValid(row),disabled : row.locked }" ng-model="row.value" ng-change="exportValue(row.rowId,row,'value',row.value)">
             <option ng-a ng-repeat="option in row.choices" value="{{option.name}}">{{option.value}}</option>
         </select>
 

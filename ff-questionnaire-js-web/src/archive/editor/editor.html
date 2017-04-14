@@ -208,7 +208,7 @@
             <td readonly><span ng-bind="convert(row)"></span></td>
             <td ng-repeat="col in cols" ng-init="vals[row.rowId+col.colId] = { ui : getUI(sheet.id + row.rowId,col.colId) } ; temp = vals[row.rowId+col.colId];" ng-switch on="temp.ui.displayAs">
                 <button ng-switch-when="ActionType" ng-focus="print(temp,sheet.id + row.rowId,col.colId)" ng-click="apiGet(sheet.id + row.rowId, col.colId)">OK</button>
-                <select ng-switch-when="ListAnswerType" class="form-control" ng-model="temp.inputValue" ng-change="exportValue(sheet.id + row.rowId,temp,col.colId,temp.inputValue)" ng-init="choices = apiGet(sheet.id + row.rowId,'choices')" ng-focus="print(temp,sheet.id + row.rowId,col.colId)">
+                <select ng-switch-when="select" class="form-control" ng-model="temp.inputValue" ng-change="exportValue(sheet.id + row.rowId,temp,col.colId,temp.inputValue)" ng-init="choices = apiGet(sheet.id + row.rowId,'choices')" ng-focus="print(temp,sheet.id + row.rowId,col.colId)">
                     <option ng-repeat="option in choices" value="{{option.name}}"> {{option.value}}</option>
                 </select>
                 <input ng-switch-when="BooleanAnswerType" type="checkbox" class="form-control" ng-bind="apiGetSet(sheet.id + row.rowId, temp,col.colId)" ng-model="temp.inputValue" ng-model-options="{  getterSetter: true, updateOn: 'blur' }" ng-focus="print(temp,sheet.id + row.rowId,col.colId)"/>

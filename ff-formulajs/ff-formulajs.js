@@ -1,3 +1,6 @@
+/**
+ * bridge between formulajs and fesjs
+ */
 var logger = require('ff-log')
 var formulaJs = require('formulajs')
 var entries = {};

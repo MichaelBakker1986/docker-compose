@@ -53,7 +53,7 @@
                     "_refId": "cmnQ1ACheck"
                   },
                   "Answer": {
-                    "_xsi_type": "ListAnswerType",
+                    "_xsi_type": "select",
                     "ListConstraint": {
                       "_refId": "conListBoxA"
                     }
@@ -76,7 +76,7 @@
                     "_refId": "cmnQ1BCheck"
                   },
                   "Answer": {
-                    "_xsi_type": "ListAnswerType",
+                    "_xsi_type": "select",
                     "ListConstraint": {
                       "_refId": "conListBoxB"
                     }
@@ -139,7 +139,7 @@
                     "_refId": "cmnQ2ACheck"
                   },
                   "Answer": {
-                    "_xsi_type": "ListAnswerType",
+                    "_xsi_type": "select",
                     "ListConstraint": {
                       "_refId": "conListBoxA"
                     }
@@ -165,7 +165,7 @@
                     "_refId": "cmnQ2BCheck"
                   },
                   "Answer": {
-                    "_xsi_type": "ListAnswerType",
+                    "_xsi_type": "select",
                     "ListConstraint": {
                       "_refId": "conListBoxB"
                     }
@@ -231,7 +231,7 @@
                     "_refId": "cmnQ3ACheck"
                   },
                   "Answer": {
-                    "_xsi_type": "ListAnswerType",
+                    "_xsi_type": "select",
                     "ListConstraint": {
                       "_refId": "conListBoxA"
                     }
@@ -257,7 +257,7 @@
                     "_refId": "cmnQ3BCheck"
                   },
                   "Answer": {
-                    "_xsi_type": "ListAnswerType",
+                    "_xsi_type": "select",
                     "ListConstraint": {
                       "_refId": "conListBoxB"
                     }
@@ -323,7 +323,7 @@
                     "_refId": "cmnQ4ACheck"
                   },
                   "Answer": {
-                    "_xsi_type": "ListAnswerType",
+                    "_xsi_type": "select",
                     "ListConstraint": {
                       "_refId": "conListBoxA"
                     }
@@ -349,7 +349,7 @@
                     "_refId": "cmnQ4BCheck"
                   },
                   "Answer": {
-                    "_xsi_type": "ListAnswerType",
+                    "_xsi_type": "select",
                     "ListConstraint": {
                       "_refId": "conListBoxB"
                     }
@@ -415,7 +415,7 @@
                     "_refId": "cmnQ5ACheck"
                   },
                   "Answer": {
-                    "_xsi_type": "ListAnswerType",
+                    "_xsi_type": "select",
                     "ListConstraint": {
                       "_refId": "conListBoxA"
                     }
@@ -441,7 +441,7 @@
                     "_refId": "cmnQ5BCheck"
                   },
                   "Answer": {
-                    "_xsi_type": "ListAnswerType",
+                    "_xsi_type": "select",
                     "ListConstraint": {
                       "_refId": "conListBoxB"
                     }
@@ -552,7 +552,7 @@
                 "_refId": "manCheck"
               },
               "Answer": {
-                "_xsi_type": "ListAnswerType",
+                "_xsi_type": "select",
                 "ListConstraint": {
                   "_refId": "conListBoxC"
                 }
@@ -621,7 +621,7 @@
                 "_refId": "manCheck"
               },
               "Answer": {
-                "_xsi_type": "ListAnswerType",
+                "_xsi_type": "select",
                 "ListConstraint": {
                   "_refId": "conListBoxD"
                 }
@@ -667,7 +667,7 @@
                 "_refId": "manCheck"
               },
               "Answer": {
-                "_xsi_type": "ListAnswerType",
+                "_xsi_type": "select",
                 "ListConstraint": {
                   "_refId": "conListBoxB"
                 }
@@ -713,7 +713,7 @@
                 "_refId": "manCheck"
               },
               "Answer": {
-                "_xsi_type": "ListAnswerType",
+                "_xsi_type": "select",
                 "ListConstraint": {
                   "_refId": "conListBoxE"
                 }
@@ -736,7 +736,7 @@
                 "_refId": "manCheck"
               },
               "Answer": {
-                "_xsi_type": "ListAnswerType",
+                "_xsi_type": "select",
                 "ListConstraint": {
                   "_refId": "conListBoxB"
                 }

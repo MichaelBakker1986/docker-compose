@@ -30,7 +30,7 @@
             {
               "type": "QuestionType",
               "answer": {
-                "type": "ListAnswerType",
+                "type": "select",
                 "listConstraint": {
                   "type": "RefType",
                   "refId": "constraintA"
@@ -64,7 +64,7 @@
             {
               "type": "QuestionType",
               "answer": {
-                "type": "ListAnswerType",
+                "type": "select",
                 "listConstraint": {
                   "type": "RefType",
                   "refId": "constraintC"
@@ -98,7 +98,7 @@
             {
               "type": "QuestionType",
               "answer": {
-                "type": "ListAnswerType",
+                "type": "select",
                 "listConstraint": {
                   "type": "RefType",
                   "refId": "constraintD"
@@ -1296,7 +1296,7 @@
                 {
                   "type": "QuestionType",
                   "answer": {
-                    "type": "ListAnswerType",
+                    "type": "select",
                     "listConstraint": {
                       "type": "RefType",
                       "refId": "constraintB"
@@ -1398,7 +1398,7 @@
                 {
                   "type": "QuestionType",
                   "answer": {
-                    "type": "ListAnswerType",
+                    "type": "select",
                     "listConstraint": {
                       "type": "RefType",
                       "refId": "constraintE"
@@ -1432,7 +1432,7 @@
                 {
                   "type": "QuestionType",
                   "answer": {
-                    "type": "ListAnswerType",
+                    "type": "select",
                     "listConstraint": {
                       "type": "RefType",
                       "refId": "constraintF"

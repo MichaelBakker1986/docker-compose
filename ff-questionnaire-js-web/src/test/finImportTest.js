@@ -105,7 +105,7 @@ if (!skip)
 //TODO: move to uimodelTest
 //Make structural test here
     var node = wb.getNode('X_MAP01');
-    assert.equal(node.displayAs, 'ListAnswerType');
+    assert.equal(node.displayAs, 'select');
 
     assert.equal(wb.get('X_ROOT', 'choices').length, 2);
     var finExport = wb.export('fin');

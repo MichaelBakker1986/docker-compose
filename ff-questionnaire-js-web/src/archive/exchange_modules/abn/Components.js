@@ -177,7 +177,7 @@ var Components = {
         var parentId = parent === undefined || parent.id === undefined ? 'root_value' : parent.id + '_value';
 
         UIModel.addUi(item.rowId, 'value', item, parentId);
-        if (item.displayAs === 'ListAnswerType')
+        if (item.displayAs === 'select')
         {
             UIModel.getUI(item.rowId, 'choices').displayAs = 'PropertyType';
         }

@@ -5,7 +5,7 @@
   "children": [
     {
       "name": "Q_ROOT",
-      "displaytype": "ListAnswerType",
+      "displaytype": "select",
       "datatype": "number",
       "frequency": "document",
       "formula": "If( (Q_MAP01==1)&&(Q_MAP02==1)&&(Q_MAP03==1)&&(Q_MAP04==1)&&(Q_MAP05==1)&&(Q_MAP06==1)&&(Q_MAP07==1&&Q_MAP08==1) || (Length ( Q_WARNING_GLOBALTXT)>0) , 1, 0)",
@@ -21,7 +21,7 @@
       "children": [
         {
           "name": "Q_MAP01",
-          "displaytype": "ListAnswerType",
+          "displaytype": "select",
           "datatype": "number",
           "frequency": "document",
           "formula": "(Q_MAP01_ENTEREDREQUIREDVARS==Q_MAP01_REQUIREDVARS)",
@@ -141,7 +141,7 @@
                 },
                 {
                   "name": "Q_MAP01_Vraag04",
-                  "displaytype": "ListAnswerType",
+                  "displaytype": "select",
                   "datatype": "number",
                   "frequency": "document",
                   "data_options": "unscalable",
@@ -151,7 +151,7 @@
                 },
                 {
                   "name": "Q_MAP01_Vraag05",
-                  "displaytype": "ListAnswerType",
+                  "displaytype": "select",
                   "datatype": "number",
                   "frequency": "document",
                   "data_options": "unscalable",
@@ -209,7 +209,7 @@
         },
         {
           "name": "Q_STATUS",
-          "displaytype": "ListAnswerType",
+          "displaytype": "select",
           "datatype": "number",
           "frequency": "document",
           "formula": "0",
@@ -319,7 +319,7 @@
         },
         {
           "name": "Q_PREVIOUS_BUTTON_VISIBLE",
-          "displaytype": "ListAnswerType",
+          "displaytype": "select",
           "datatype": "number",
           "frequency": "document",
           "formula": "2",
@@ -331,7 +331,7 @@
         },
         {
           "name": "Q_NEXT_BUTTON_VISIBLE",
-          "displaytype": "ListAnswerType",
+          "displaytype": "select",
           "datatype": "number",
           "frequency": "document",
           "formula": "2",
@@ -343,7 +343,7 @@
         },
         {
           "name": "Q_CONCEPT_REPORT_VISIBLE",
-          "displaytype": "ListAnswerType",
+          "displaytype": "select",
           "datatype": "number",
           "frequency": "document",
           "formula": "1",
@@ -355,7 +355,7 @@
         },
         {
           "name": "Q_MAKE_FINAL_VISIBLE",
-          "displaytype": "ListAnswerType",
+          "displaytype": "select",
           "datatype": "number",
           "frequency": "document",
           "formula": "1",
@@ -367,7 +367,7 @@
         },
         {
           "name": "Q_FINAL_REPORT_VISIBLE",
-          "displaytype": "ListAnswerType",
+          "displaytype": "select",
           "datatype": "number",
           "frequency": "document",
           "formula": "1",

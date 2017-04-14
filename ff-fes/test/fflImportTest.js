@@ -9,7 +9,6 @@ var FormulaService = require('../fesjs/FormulaService');
 var bootstrap = require('../fesjs/formula-bootstrap');
 var assert = require('assert');
 var esprima = require('esprima');
-//process.loglevel = 'trace'
 //test basic functionality for an import
 var data = JUNIT.getFile('hierarchyTest.ffl');
 var FESContext = require('../fesjs/fescontext')

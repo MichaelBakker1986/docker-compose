@@ -1,3 +1,6 @@
+/**
+ * Bridge between excel files and FESJS
+ */
 //TODO: find out if this is the best xlsx tool to find the tables..
 var Excel = require('exceljs');
 var log = require('ff-log');

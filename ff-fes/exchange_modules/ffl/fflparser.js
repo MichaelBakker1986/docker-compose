@@ -159,7 +159,7 @@ function StartWithVariableOrTuplePredicate(node) {
 }
 var displayAsMapping = {
     default: 'StringAnswerType',
-    select: 'ListAnswerType',
+    select: 'select',
     undefined: 'StringAnswerType',
     currency: 'AmountAnswerType',
     //date: 'DateAnswerType',//requires a converter to work
@@ -168,7 +168,7 @@ var displayAsMapping = {
     memo: 'MemoAnswerType',
     //reversed
     StringAnswerType: "StringAnswerType",
-    ListAnswerType: "select",
+    select: "select",
     AmountAnswerType: "currency",
     TextAnswerType: "default",
     PercentageAnswerType: "percentage",

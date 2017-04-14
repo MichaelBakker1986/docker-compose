@@ -201,8 +201,8 @@ function createFinFormulaRow(key, variable, formula)
  'M': Memo = memoscreen. Memos per period are possible.
  */
 var displayAsMapping = {
-    C: 'ListAnswerType',
-    T: 'ListAnswerType',
+    C: 'select',
+    T: 'select',
     " ": 'StringAnswerType',
     undefined: 'TextAnswerType',
     G: 'AmountAnswerType',
