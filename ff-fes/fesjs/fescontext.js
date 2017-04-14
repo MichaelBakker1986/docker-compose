@@ -13,10 +13,4 @@ function Context() {
 Context.prototype.getValues = function () {
     return this.values;
 }
-var ctx = new Context();
-var ctx2 = new Context();
-
-console.info(ctx.applicationContext)
-console.info(ctx2.values)
-
 module.exports = Context

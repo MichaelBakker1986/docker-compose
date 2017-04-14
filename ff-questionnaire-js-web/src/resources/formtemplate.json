@@ -9,11 +9,11 @@
       "children": [
         {
           "name": "C1",
-          "displaytype": "ListAnswerType"
+          "displaytype": "select"
         },
         {
           "name": "C2",
-          "displaytype": "ListAnswerType"
+          "displaytype": "select"
         },
         {
           "name": "C3",
@@ -175,7 +175,7 @@
           "children": [
             {
               "name": "C34",
-              "displaytype": "ListAnswerType"
+              "displaytype": "select"
             },
             {
               "name": "C35",
@@ -187,11 +187,11 @@
             },
             {
               "name": "C37",
-              "displaytype": "ListAnswerType"
+              "displaytype": "select"
             },
             {
               "name": "C38",
-              "displaytype": "ListAnswerType"
+              "displaytype": "select"
             },
             {
               "name": "C39",

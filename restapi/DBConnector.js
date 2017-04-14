@@ -6,6 +6,8 @@ var connection = mysql.createConnection({
     password: '',
     database: 'ff'
 });
+var dbSettings = require('./dbSettings');
+var connection = mysql.createConnection(dbSettings);
 connection.connect();
 
 var dbCall = function (query) {

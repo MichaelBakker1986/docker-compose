@@ -1,6 +1,6 @@
-require('../archive/exchange_modules/abn/ABNParser.js');//just let it inject into the GenericModelFile
+require('../archive/exchange_modules/abn/ABNParser.js');//just let it inject into the FESFacade
 var WorkBook = require('../archive/fesjs/JSWorkBook.js');
-var GenericModelFile = require('../archive/fesjs/GenericModelFile.js');
+var FESFacade = require('../archive/fesjs/FESFacade');
 var JUNIT = require('./JUNIT.js');
 var assert = require('assert');
 var esprima = require('esprima');

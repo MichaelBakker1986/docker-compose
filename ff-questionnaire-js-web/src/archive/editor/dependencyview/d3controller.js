@@ -6,7 +6,7 @@ APP.pages.push({
     icon: 'fa-line-chart',
     path: '/src/archive/editor/dependencyview/dependencies.html'
 });
-var GenericModelFile = require('../../fesjs/GenericModelFile.js');
+var FESFacade = require('../../fesjs/FESFacade');
 function linkArc(d) {
     var dx = d.target.x - d.source.x,
         dy = d.target.y - d.source.y,
@@ -107,9 +107,9 @@ APP.controller('visual', ['$timeout', '$scope', '$http', '$location', '$window',
                 var formulas = [];
                 //get all value formula's
                 names.forEach(function (name) {
-                    var formula = GenericModelFile.getFormula(name, 'value');
+                    var formula = FESFacade.getFormula(name, 'value');
                     if (formula) {
-                        formulas.push(GenericModelFile.getFormula(name, 'value'));
+                        formulas.push(FESFacade.getFormula(name, 'value'));
                     }
                 })
                 var accociatons = {
@@ -139,7 +139,7 @@ APP.controller('visual', ['$timeout', '$scope', '$http', '$location', '$window',
                                 source: formulaName,
                                 target: accociationName,
                                 type: accociation.association === 'refs' ? "resolved" : "licensing",
-                                formula: GenericModelFile.findFormulaByIndex(accociation.refId).original
+                                formula: FESFacade.findFormulaByIndex(accociation.refId).original
                             };
                             links.push(link);
                         }
@@ -244,7 +244,7 @@ function generateDependencyMatrix2(exists) {
          [0, 0, 1], // A depends on B
          [0, 0, 0]] // B doesn't depend on A or Main*/
     };
-    var formulas = GenericModelFile.getFormulas();
+    var formulas = FESFacade.getFormulas();
     formulas.forEach(function (f) {
         if (exists(f.name)) {
             var packageDeps = [];
@@ -288,7 +288,7 @@ function generateDependencyMatrix(exists) {
          [0, 0, 1], // A depends on B
          [0, 0, 0]] // B doesn't depend on A or Main*/
     };
-    var formulas = GenericModelFile.getFormulas();
+    var formulas = FESFacade.getFormulas();
     var packages = new Set()
     formulas.forEach(function (f) {
         var fname = f.name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1')

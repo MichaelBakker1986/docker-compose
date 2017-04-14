@@ -20,7 +20,7 @@
     "C1_value": {
       "id": "C1",
       "type": "QuestionType",
-      "displayAs": "ListAnswerType",
+      "displayAs": "select",
       "mandatoryRule": true,
       "validationRule": false,
       "nodes": []
@@ -28,7 +28,7 @@
     "C2_value": {
       "id": "C2",
       "type": "QuestionType",
-      "displayAs": "ListAnswerType",
+      "displayAs": "select",
       "mandatoryRule": true,
       "validationRule": false,
       "nodes": []
@@ -374,7 +374,7 @@
     "C34_value": {
       "id": "C34",
       "type": "QuestionType",
-      "displayAs": "ListAnswerType",
+      "displayAs": "select",
       "mandatoryRule": true,
       "validationRule": false,
       "nodes": []
@@ -398,7 +398,7 @@
     "C37_value": {
       "id": "C37",
       "type": "QuestionType",
-      "displayAs": "ListAnswerType",
+      "displayAs": "select",
       "mandatoryRule": true,
       "validationRule": false,
       "nodes": []
@@ -406,7 +406,7 @@
     "C38_value": {
       "id": "C38",
       "type": "QuestionType",
-      "displayAs": "ListAnswerType",
+      "displayAs": "select",
       "mandatoryRule": true,
       "validationRule": false,
       "nodes": []

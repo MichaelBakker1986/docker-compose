@@ -1,5 +1,5 @@
 var logger = require('ff-log')
-var jsMath = require(__dirname + '/jsMath.json')
+var jsMath = require('./jsMath.json')
 var entries = {};
 
 //add functions found in the jsMath to the global scope

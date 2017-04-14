@@ -1,6 +1,6 @@
 //https://github.com/highsource/jsonix/wiki/Modules-and-Mappings
-var finXML = require('../archive/exchange_modules/finanXML/finanXML.js');//just let it inject into the GenericModelFile
-var jsonValues = require('../archive/exchange_modules/jsonvalues/jsonvalues.js');//just let it inject into the GenericModelFile
+var finXML = require('../archive/exchange_modules/finanXML/finanXML.js');//just let it inject into the FESFacade
+var jsonValues = require('../archive/exchange_modules/jsonvalues/jsonvalues.js');//just let it inject into the FESFacade
 var WorkBook = require('../archive/fesjs/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');
 var assert = require('assert');

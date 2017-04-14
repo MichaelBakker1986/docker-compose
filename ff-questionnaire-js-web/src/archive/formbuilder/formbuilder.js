@@ -1,6 +1,6 @@
 var APP = require('../app.js');
 //don't use these private classes, use JSWorkBook instead
-var GenericModelFile = require('../fesjs/GenericModelFile.js');
+var FESFacade = require('../fesjs/FESFacade');
 APP.pages.push({name: 'UI Elements', title: 'Schermpje bouwen', order: 3, icon: 'fa-wrench', path: '/src/archive/formbuilder/formbuilder.html'});
 /*APP.additionalbuttons.push({
  name: 'save',
@@ -33,7 +33,7 @@ var variableSchema = {
         "displayAs": {
             "title": "DisplayType",
             "type": "string",
-            "enum": ['SectionType', 'ListAnswerType', 'PropertyType', 'ActionType', 'AmountAnswerType', 'MemoAnswerType', 'DateAnswerType', 'TextAnswerType', 'BooleanAnswerType', 'StringAnswerType', 'undefined'],
+            "enum": ['SectionType', 'select', 'PropertyType', 'ActionType', 'AmountAnswerType', 'MemoAnswerType', 'DateAnswerType', 'TextAnswerType', 'BooleanAnswerType', 'StringAnswerType', 'undefined'],
             "default": "TextAnswerType"
         },
         "frequency": {
@@ -119,7 +119,7 @@ APP.controller('formbuilder', ['$timeout', '$scope', '$http', '$location', funct
     //rightViewTree.update({visible: true, title: true, required: true, locked: true});
     $scope.presentation = present;
     //  $scope.rightTree = rightViewTree;
-    $scope.mySchema = GenericModelFile.variableSchema;
+    $scope.mySchema = FESFacade.variableSchema;
     /*                $scope.$watch('myStartVal.' + key, function (newValue, oldValue)
      {
      logger.info('selectedItem has changed[' + $scope.myStartVal.rowId + '[' + key + ']', newValue ? newValue.rowId : null, oldValue ? oldValue.rowId : null);
@@ -187,14 +187,14 @@ APP.controller('formbuilder', ['$timeout', '$scope', '$http', '$location', funct
     };
     uiSaveFunction = function ()
     {
-        var Solution = GenericModelFile.produceSolution();
+        var Solution = FESFacade.produceSolution();
         console.info('save model' + $scope.apiPath + 'UPDATE/SOLUTION/')
         console.info(Solution)
         var httpPromise = $http.post($scope.apiPath + 'FORMULA/', Solution.formulas);
         $scope.$parent.$parent.myPromise = httpPromise;
         httpPromise.success(function (formulas)
         {
-            GenericModelFile.mergeFormulas(formulas);
+            FESFacade.mergeFormulas(formulas);
 
             workBook.doImport($scope.docValues, 'jsonvalues');
 
@@ -207,7 +207,7 @@ APP.controller('formbuilder', ['$timeout', '$scope', '$http', '$location', funct
             return $http.post($scope.apiPath + 'FORMULA/', Solution.formulas);
         }).then(function successCallback(response)
         {
-            GenericModelFile.updateValueMap($scope.docValues);
+            FESFacade.updateValueMap($scope.docValues);
             console.info(response);
         }, function errorCallback(response)
         {

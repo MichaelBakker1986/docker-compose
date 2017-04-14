@@ -18,7 +18,7 @@ var uimodel = require('../../fesjs/UIService')
 var Node = require('./Node.js')
 var Tree = require('./Tree.js')
 var Solution = require('../../fesjs/Solution');
-var GenericModelFile = require('../../fesjs/GenericModelFile');
+var FESFacade = require('../../fesjs/FESFacade');
 var FunctionMap = require('../../fesjs/FunctionMap');
 var bootstrap = require('../../fesjs/formula-bootstrap');
 var AST = require('../../fesjs/AST');
@@ -41,12 +41,12 @@ Node.prototype.duplicate = function () {
     //JUST some quickfix from here,
     uimodel.addUi(rowId, 'value', this, this.parent().rowId + '_value');
     var solution = uimodel.create(wb.modelName);
-    var uiNode = GenericModelFile.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
+    var uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
     solution.setParentName(uiNode, this.parent().rowId);
-    GenericModelFile.addSimpleLink(solution, rowId, 'title', AST.STRING(this.title))
+    FESFacade.addSimpleLink(solution, rowId, 'title', AST.STRING(this.title))
     //JUST some quickfix from here,
     uimodel.bulkInsert(solution);
-    GenericModelFile.gatherFormulas(solution);
+    FESFacade.gatherFormulas(solution);
     //JUST some quickfix from here,
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, solution.formulas, false);
     wb.updateValueMap();
@@ -250,4 +250,4 @@ var presentationConverter = {
 function createNode(tree, nodeId, displayAs) {
     return tree.createNode(nodeId);
 }
-GenericModelFile.addParser(presentationConverter)
+FESFacade.addParser(presentationConverter)

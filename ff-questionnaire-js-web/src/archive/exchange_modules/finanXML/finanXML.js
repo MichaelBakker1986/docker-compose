@@ -1,5 +1,5 @@
 var visitor = require('../../clientscorecard/JSVisitor.js');
-var GenericModelFile = require('../../fesjs/GenericModelFile.js');
+var FESFacade = require('../../fesjs/FESFacade');
 var uimodel = require('../../clientscorecard/uimodel.js');
 var Solution = require('../../fesjs/Solution.js');
 var Stringify = require("jsonml-stringify/stringify")
@@ -29,4 +29,4 @@ var parser = {
         return html;
     }
 };
-GenericModelFile.addParser(parser);
+FESFacade.addParser(parser);

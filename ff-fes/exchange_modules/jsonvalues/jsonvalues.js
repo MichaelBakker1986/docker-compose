@@ -2,7 +2,7 @@
  First, most basic export of values
  Just calling getAllValues() internally to export
  */
-var GenericModelFile = require('../../fesjs/GenericModelFile');
+var FESFacade = require('../../fesjs/FESFacade');
 var UIModel = require('../../fesjs/UIService');
 var jsonValues = {
     name: 'jsonvalues',
@@ -26,4 +26,4 @@ function updateValues(values, docValues) {
         docValues[obj.formulaId][obj.colId] = obj.value;
     }
 }
-GenericModelFile.addParser(jsonValues)
+FESFacade.addParser(jsonValues)

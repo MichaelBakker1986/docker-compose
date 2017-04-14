@@ -1,6 +1,6 @@
 var uimodel = require('../../clientscorecard/uimodel.js')
 var Solution = require('../../fesjs/Solution.js');
-var GenericModelFile = require('../../fesjs/GenericModelFile.js');
+var FESFacade = require('../../fesjs/FESFacade');
 
 var rptXmlParser = {
     name: 'rptXml',
@@ -17,4 +17,4 @@ var rptXmlParser = {
         return uimodel.create();
     }
 };
-GenericModelFile.addParser(rptXmlParser)
+FESFacade.addParser(rptXmlParser)

@@ -1,0 +1,15 @@
+{
+  "name": "ff-fes-dependency-nthree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fes-ngraph-nthree.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "michael.bakker1986@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "config.pixel": "^2.0.0",
+    "mock-browser": "^0.92.14"
+  }
+}

@@ -39,7 +39,7 @@
                 "ListConstraint": {
                   "_refId": "constraintA"
                 },
-                "_xsi_type": "ListAnswerType"
+                "_xsi_type": "select"
               },
               "MandatoryRule": {
                 "_refId": "relevantRule1"
@@ -67,7 +67,7 @@
                 "ListConstraint": {
                   "_refId": "constraintC"
                 },
-                "_xsi_type": "ListAnswerType"
+                "_xsi_type": "select"
               },
               "MandatoryRule": {
                 "_refId": "relevantRule1"
@@ -95,7 +95,7 @@
                 "ListConstraint": {
                   "_refId": "constraintD"
                 },
-                "_xsi_type": "ListAnswerType"
+                "_xsi_type": "select"
               },
               "MandatoryRule": {
                 "_refId": "relevantRule1"
@@ -1088,7 +1088,7 @@
                     "ListConstraint": {
                       "_refId": "constraintB"
                     },
-                    "_xsi_type": "ListAnswerType"
+                    "_xsi_type": "select"
                   },
                   "MandatoryRule": {
                     "_refId": "mandatoryRule1"
@@ -1172,7 +1172,7 @@
                     "ListConstraint": {
                       "_refId": "constraintE"
                     },
-                    "_xsi_type": "ListAnswerType"
+                    "_xsi_type": "select"
                   },
                   "MandatoryRule": {
                     "_refId": "relevantRule1"
@@ -1200,7 +1200,7 @@
                     "ListConstraint": {
                       "_refId": "constraintF"
                     },
-                    "_xsi_type": "ListAnswerType"
+                    "_xsi_type": "select"
                   },
                   "MandatoryRule": {
                     "_refId": "mandatoryRule1"

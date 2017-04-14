@@ -9,12 +9,12 @@
 //-- remove node
 require('../archive/exchange_modules/abn/ABNParser.js');
 require('../archive/ffl/fflparser.js');
-require('../archive/exchange_modules/screendefinition/screendefparser.js');//just let it inject into the GenericModelFile
-require('../archive/exchange_modules/presentation/presentation.js');//just let it inject into the GenericModelFile
+require('../archive/exchange_modules/screendefinition/screendefparser.js');//just let it inject into the FESFacade
+require('../archive/exchange_modules/presentation/presentation.js');//just let it inject into the FESFacade
 var assert = require('assert');
 var JUNIT = require('./JUNIT.js');
 var JSWorkBook = require('../archive/fesjs/JSWorkBook.js');
-var GenericModelFile = require('../archive/fesjs/GenericModelFile.js');
+var FESFacade = require('../archive/fesjs/FESFacade.js');
 var data = JUNIT.getFile('hierarchyTest.ffl');
 var wb = new JSWorkBook();
 var info = JUNIT.print;

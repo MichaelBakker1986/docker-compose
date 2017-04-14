@@ -1,7 +1,7 @@
 var APP = require('../app.js');
 var JSWorkBook = require('../fesjs/JSWorkBook.js');
 var UIModel = require('../clientscorecard/uimodel.js');
-var GenericModelFile = require('../fesjs/GenericModelFile.js');
+var FESFacade = require('../fesjs/FESFacade');
 var logger = require('tracer').console({level: 'info'});
 APP.pages.push(
     {
@@ -25,10 +25,10 @@ APP.additionalbuttons.push({
 APP.controller('exchange', ['$timeout', '$scope', '$http', '$location', '$window', function ($timeout, $scope, $http, $location, $window)
 {
     var wb = new JSWorkBook();
-    $scope.importTypes = GenericModelFile.getParsers();
+    $scope.importTypes = FESFacade.getParsers();
     $scope.createDownload = function (type)
     {
-        var parser = GenericModelFile.findParser(type);
+        var parser = FESFacade.findParser(type);
         var data = parser.deParse();
         if (parser.exportAsObject)
         {

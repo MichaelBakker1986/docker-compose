@@ -1,15 +1,11 @@
 /build/
 /bin/
 /target/
-/test/
+*AABPRICING*
 .DS_Store
-*.class
-*.war
-*.ear
 *.db
 rebel.xml
 Thumbs.db
 .DS_Store
-.svn
 .Spotlight-V100
 .Trashes

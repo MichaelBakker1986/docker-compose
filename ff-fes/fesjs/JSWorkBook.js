@@ -1,18 +1,18 @@
 /*
  This class should have less business logic,
- Its the state wrapper around the stateless GenericModelFile
- Remove All dependencies besides GenericModelFile,ff-log. Even XAxis should be inside the Context Object
+ Its the state wrapper around the stateless FESFacade
+ Remove All dependencies besides FESFacade,ff-log. Even XAxis should be inside the Context Object
  */
 
 //remove UIModel dependency
 var UIModel = require('./UIService');
 //remove FunctionMap dependency
 var FunctionMap = require('./FunctionMap');
-var GenericModelFile = require('./GenericModelFile');
+var FESFacade = require('./FESFacade');
 var bootstrap = require('./formula-bootstrap');
 var AST = require('./AST');
 var log = require('ff-log')
-var time = new require('./XAxis')()
+var time = require('./XAxis')
 
 //user friendly stable API
 //doImport(data,'type') : Solution          ; See Solution class for definiton
@@ -28,7 +28,7 @@ var time = new require('./XAxis')()
 function JSWorkBook(context) {
     this.context = context;
     this.modelName = 'NEW';
-    this.xaxis = time.detl.columns[0][0]
+    this.xaxis = time.bkyr.columns[0][0]
 }
 
 
@@ -37,13 +37,13 @@ JSWorkBook.prototype.doImport = function (data, parserType) {
         console.info('no file specified')
         return;
     }
-    var solution = GenericModelFile.findParser(parserType).parse(data, this);
+    var solution = FESFacade.findParser(parserType).parse(data, this);
     this.modelName = solution.getName().toUpperCase();
     log.debug('Update model [' + solution.getName() + ']');
     UIModel.bulkInsert(solution);
     //only get the formulas for Current Model
     var formulas = this.produceSolution().formulas;
-    //GenericModelFile.updateModelMetaData(solution.getModelMetaData());
+    //FESFacade.updateModelMetaData(solution.getModelMetaData());
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, formulas, false);
     this.updateValueMap();
 }
@@ -75,7 +75,7 @@ function validate() {
     };
     var context = this.context;
     var workbook = this;
-    var formulas = GenericModelFile.produceSolution().formulas;
+    var formulas = FESFacade.produceSolution().formulas;
 
     function formulaFixer(elem) {
         //TODO: use timeout, this monte carlo is blocking UI thread
@@ -135,8 +135,8 @@ function validate() {
                         elem.parsed = undefined;
                         elem.body = AST.STRING(elem.original);
                         //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
-                        FunctionMap.init(bootstrap.parseAsFormula, [elem], false);
-                        GenericModelFile.updateValueMap(context.getValues());
+                        FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [elem], false);
+                        FESFacade.updateValueMap(context.getValues());
                     }
                 };
             }
@@ -161,7 +161,7 @@ function validate() {
     return validateResponse;
 };
 JSWorkBook.prototype.export = function (parserType, rowId) {
-    var parser = GenericModelFile.findParser(parserType);
+    var parser = FESFacade.findParser(parserType);
     if (parser === undefined) {
         throw Error('No such parser found:[' + parserType + ']');
     }
@@ -179,27 +179,27 @@ JSWorkBook.prototype.getStatelessNode = function (name) {
 //some functions we directly pass trough
 JSWorkBook.prototype.get = function (row, col, x) {
     var xas = x ? time.detl.columns[0][x] : this.xaxis;
-    return GenericModelFile.statelessGetValue(this.context, this.modelName + '_' + row, col, xas)
+    return FESFacade.statelessGetValue(this.context, this.modelName + '_' + row, col, xas)
 };
 JSWorkBook.prototype.statelessGetValue = function (row, col, x) {
     var xas = x ? time.detl.columns[0][x] : this.xaxis;
-    return GenericModelFile.statelessGetValue(this.context, row, col, xas)
+    return FESFacade.statelessGetValue(this.context, row, col, xas)
 };
 JSWorkBook.prototype.updateValueMap = function () {
-    GenericModelFile.updateValueMap(this.context.values);
+    FESFacade.updateValueMap(this.context.values);
 };
 JSWorkBook.prototype.set = function (row, value, col, x) {
     if (!this.context) {
         throw Error();
     }
     var xas = x ? time.detl.columns[0][x] : this.xaxis;
-    return GenericModelFile.statelessSetValue(this.context, this.modelName + '_' + row, value, col, xas);
+    return FESFacade.statelessSetValue(this.context, this.modelName + '_' + row, value, col, xas);
 }
 JSWorkBook.prototype.statelessSetValue = function (row, value, col, x) {
     var xas = x ? time.detl.columns[0][x] : this.xaxis;
-    return GenericModelFile.statelessSetValue(this.context, row, value, col, xas);
+    return FESFacade.statelessSetValue(this.context, row, value, col, xas);
 }
-JSWorkBook.prototype.getStatelessVariable = GenericModelFile.getStatelessVariable;
+JSWorkBook.prototype.getStatelessVariable = FESFacade.getStatelessVariable;
 //fix missing variables
 JSWorkBook.prototype.fixAll = fixAll
 //should return the solution instead. So its deprecated
@@ -209,24 +209,24 @@ JSWorkBook.prototype.getRootNode = function () {
 JSWorkBook.prototype.visit = UIModel.visit;
 JSWorkBook.prototype.validate = validate;
 JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId) {
-    GenericModelFile.createFormula(this.modelName, formulaAsString, rowId, colId);
+    FESFacade.createFormula(this.modelName, formulaAsString, rowId, colId);
     this.updateValueMap();
 }
 JSWorkBook.prototype.gatherProperties = function (rowId) {
     var formulaProperties = {};
     for (var key in this.properties) {
-        var formula = GenericModelFile.getFormula(rowId, key);
+        var formula = FESFacade.getFormula(rowId, key);
         if (formula !== undefined && formula.original !== undefined && formula.original !== null && formula.original !== '') {
             formulaProperties[key] = formula.original;
         }
     }
     return formulaProperties;
 }
-JSWorkBook.prototype.getFormula = GenericModelFile.getFormula;
+JSWorkBook.prototype.getFormula = FESFacade.getFormula;
 JSWorkBook.prototype.produceSolution = function () {
-    return GenericModelFile.produceSolution(this.modelName);
+    return FESFacade.produceSolution(this.modelName);
 };
-JSWorkBook.prototype.properties = GenericModelFile.properties;
+JSWorkBook.prototype.properties = FESFacade.properties;
 JSWorkBook.prototype.getAllValues = function () {
     if (!this.context.values) {
         throw Error();
@@ -240,7 +240,7 @@ JSWorkBook.prototype.getAllValues = function () {
     for (var formulaId in docValues) {
         var cachevalues = docValues[formulaId];
         if (cachevalues) {
-            var formula = GenericModelFile.findFormulaByIndex(formulaId);
+            var formula = FESFacade.findFormulaByIndex(formulaId);
             var formulaName = formula === undefined ? formulaId : formula.name;
             for (var cachedValue in cachevalues)
                 values.push({

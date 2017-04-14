@@ -1,6 +1,6 @@
 var assert = require('assert');
-var parser = require('../archive/ffl/fflparser.js');//just let it inject into the GenericModelFile
-require('../archive/exchange_modules/presentation/presentation.js');//just let it inject into the GenericModelFile
+var parser = require('../archive/ffl/fflparser.js');//just let it inject into the FESFacade
+require('../archive/exchange_modules/presentation/presentation.js');//just let it inject into the FESFacade
 
 var WorkBook = require('../archive/fesjs/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');

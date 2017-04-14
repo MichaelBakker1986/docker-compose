@@ -4,3 +4,4 @@ ff-questionnaire-js-web/.idea/
 **/bower_components/
 **/node_modules/
 **/.idea/
+restapi/dbSettings.js

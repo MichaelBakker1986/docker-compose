@@ -45,8 +45,7 @@ var headers = {
         title: 'document'
     }
 }
-function CalculationDocument(data) {
-    var data = data || importData;
+function calculateCalculationDocument(data) {
     // console.time('initialize_xAxis');
     this.tContext = data;
     var formulasets = data.formulasets;
@@ -380,6 +379,9 @@ function CalculationDocument(data) {
     //console.timeEnd('initialize_xAxis');
     return viewmodes;
 }
+function CalculationDocument() {
+}
+CalculationDocument.prototype = calculateCalculationDocument(importData);
 // NodeJS support..
 // 25ms for 134col/5timelines
 // 199ms for 134col/40timelines
@@ -388,4 +390,4 @@ function CalculationDocument(data) {
 // columns can also be mixed in tsy. so 5x1d and then (7*12)bkyr.tsy. Allow 100year forecast., would require some nice
 // tricks here.. but possible from here only prevbkyear, might consider removing *[agg*], only keep the *[top*]
 // currently we have max7 year 10timelines
-module.exports = CalculationDocument;
+module.exports = CalculationDocument.prototype;

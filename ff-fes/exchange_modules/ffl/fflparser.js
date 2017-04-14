@@ -1,5 +1,5 @@
 var visitor = require('../../fesjs/JSVisitor');
-var GenericModelFile = require('../../fesjs/GenericModelFile');
+var FESFacade = require('../../fesjs/FESFacade');
 var AST = require('../../fesjs/AST');
 var uimodel = require('../../fesjs/UIService');
 var bracketparser = require('./bracketparser');
@@ -159,7 +159,7 @@ function StartWithVariableOrTuplePredicate(node) {
 }
 var displayAsMapping = {
     default: 'StringAnswerType',
-    select: 'ListAnswerType',
+    select: 'select',
     undefined: 'StringAnswerType',
     currency: 'AmountAnswerType',
     //date: 'DateAnswerType',//requires a converter to work
@@ -168,7 +168,7 @@ var displayAsMapping = {
     memo: 'MemoAnswerType',
     //reversed
     StringAnswerType: "StringAnswerType",
-    ListAnswerType: "select",
+    select: "select",
     AmountAnswerType: "currency",
     TextAnswerType: "default",
     PercentageAnswerType: "percentage",
@@ -228,7 +228,7 @@ function addnode(log, solution, rowId, node, parentId, referId, tuple) {
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 
-    var uiNode = GenericModelFile.addSimpleLink(solution, rowId, 'value', node.formula ? parseFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
+    var uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', node.formula ? parseFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
 
     uiNode.referId = referId;
     solution.setDelegate(uiNode, node);
@@ -245,7 +245,7 @@ function addnode(log, solution, rowId, node, parentId, referId, tuple) {
                 logger.debug('Default [' + key + '] formula, skipping. [' + node[key] + '][' + rowId + ']');
                 continue;
             }
-            GenericModelFile.addSimpleLink(solution, rowId, formulaMapping[key], parseFormula(node[key]));
+            FESFacade.addSimpleLink(solution, rowId, formulaMapping[key], parseFormula(node[key]));
         }
     }
 }
@@ -262,4 +262,4 @@ function parseFormula(formula) {
     }
     return formulaReturn;
 }
-GenericModelFile.addParser(parser);
+FESFacade.addParser(parser);

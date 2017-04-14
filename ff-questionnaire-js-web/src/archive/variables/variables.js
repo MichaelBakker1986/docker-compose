@@ -1,5 +1,5 @@
 var APP = require('../app.js');
-var GenericModelFile = require('../fesjs/GenericModelFile.js');
+var FESFacade = require('../fesjs/FESFacade');
 APP.pages.push({name: 'Variables', title: 'Variables', order: 9, icon: 'fa-cubes', path: '/src/archive/variables/variables.html'});
 APP.additionalbuttons.push({
     name: 'Variables',
@@ -15,11 +15,11 @@ var logger = require('tracer').console({level: 'info'});
 var JSWorkBook = require('../../archive/fesjs/JSWorkBook.js');
 var wb = new JSWorkBook();
 
-var updateAll = GenericModelFile.updateAll;
+var updateAll = FESFacade.updateAll;
 APP.controller('mdtTable', ['$timeout', '$scope', '$http', '$location', '$mdToast', function ($timeout, $scope, $http, $location)
 {
-    $scope.rows = GenericModelFile.present.getRowList();
-    $scope.schema = GenericModelFile.variableSchema;
+    $scope.rows = FESFacade.present.getRowList();
+    $scope.schema = FESFacade.variableSchema;
     /*var vm = this;
      vm.dtOptions = DTOptionsBuilder
      .withScroller()
@@ -38,7 +38,7 @@ APP.controller('mdtTable', ['$timeout', '$scope', '$http', '$location', '$mdToas
             "displayAs": {
                 "title": "DisplayType",
                 "type": "string",
-                "enum": ['SectionType', 'ListAnswerType', 'PropertyType', 'ActionType', 'AmountAnswerType', 'MemoAnswerType', 'DateAnswerType', 'TextAnswerType', 'BooleanAnswerType', 'StringAnswerType', 'undefined'],
+                "enum": ['SectionType', 'select', 'PropertyType', 'ActionType', 'AmountAnswerType', 'MemoAnswerType', 'DateAnswerType', 'TextAnswerType', 'BooleanAnswerType', 'StringAnswerType', 'undefined'],
                 "default": "TextAnswerType"
             },
             "frequency": {
@@ -119,7 +119,7 @@ APP.controller('mdtTable', ['$timeout', '$scope', '$http', '$location', '$mdToas
 
     $scope.$on('myCustomEvent', function (event, data)
     {
-        GenericModelFile.present.update(updateAll);
+        FESFacade.present.update(updateAll);
     });
     updateRows();
 }])

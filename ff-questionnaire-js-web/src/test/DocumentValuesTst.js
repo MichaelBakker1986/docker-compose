@@ -5,7 +5,7 @@ process.dbSchema = 'questjstest';
 
 var DB = require('../archive/backend/db.js');
 var DBController = require('../archive/backend/dbcontroller.js');
-var GenericModelFile = require('../archive/fesjs/GenericModelFile.js');
+var FESFacade = require('../archive/fesjs/FESFacade');
 var FunctionMap = require('../archive/fesjs/FunctionMap.js');
 var bootstrap = require('../archive/fesjs/formula-bootstrap.js');
 var uimodel = require('../archive/clientscorecard/uimodel.js');
@@ -16,12 +16,12 @@ DB.sequelize.sync().then(function ()
 }).then(function (data)
 {
     uimodel.bulkInsert(data);
-    GenericModelFile.bulkInsertFormula(data.formulas);
+    FESFacade.bulkInsertFormula(data.formulas);
     FunctionMap.init(bootstrap.parseAsFormula, data.formulas, false);
-    GenericModelFile.updateValueMap(docValues);
+    FESFacade.updateValueMap(docValues);
     return DBController.get('DOCUMENT', {id: 2});
 
 }).then(function (document)
 {
-    GenericModelFile.updateValues(document.values, docValues);
+    FESFacade.updateValues(document.values, docValues);
 });

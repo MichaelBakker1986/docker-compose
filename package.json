@@ -1,12 +1,15 @@
 {
   "name": "fesjs",
+  "private": true,
   "version": "1.0.0",
   "description": "fesjs",
   "main": "index.js",
   "dependencies": {
     "ff-log": "^1.0.12",
     "ff-formulajs": "^1.0.1",
-    "ff-fes": "^1.0.1"
+    "ff-fes": "^1.0.1",
+    "tracer": "^0.8.7",
+    "promise": "^7.1.1"
   },
   "devDependencies": {
     "ff-fes": "^1.0.1",
@@ -15,6 +18,7 @@
     "ff-log": "^1.0.12",
     "ff-math": "file:ff-math",
     "formulajs": "^1.0.8",
+    "promise": "^7.1.1",
     "tracer": "^0.8.7",
     "xlsx": "^0.9.3"
   },

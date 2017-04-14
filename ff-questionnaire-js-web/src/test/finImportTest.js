@@ -1,8 +1,8 @@
-require('../archive/fin/finparser.js');//just let it inject into the GenericModelFile
-require('../archive/exchange_modules/screendefinition/screendefparser.js');//just let it inject into the GenericModelFile
+require('../archive/fin/finparser.js');//just let it inject into the FESFacade
+require('../archive/exchange_modules/screendefinition/screendefparser.js');//just let it inject into the FESFacade
 var WorkBook = require('../archive/fesjs/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');
-var GenericModelFile = require('../archive/fesjs/GenericModelFile.js');
+var FESFacade = require('../archive/fesjs/FESFacade');
 var bootstrap = require('../archive/fesjs/formula-bootstrap.js');
 var uimodel = require('../archive/clientscorecard/uimodel.js');
 var assert = require('assert');
@@ -105,7 +105,7 @@ if (!skip)
 //TODO: move to uimodelTest
 //Make structural test here
     var node = wb.getNode('X_MAP01');
-    assert.equal(node.displayAs, 'ListAnswerType');
+    assert.equal(node.displayAs, 'select');
 
     assert.equal(wb.get('X_ROOT', 'choices').length, 2);
     var finExport = wb.export('fin');
@@ -119,7 +119,7 @@ if (!skip)
 }
 function lookupFormula(context, id)
 {
-    var formula = GenericModelFile.findFormulaByIndex(id)
+    var formula = FESFacade.findFormulaByIndex(id)
     if (Cyclic[context.path[context.path.length - 1]] !== formula.name)
     {
         return formula;
@@ -195,7 +195,7 @@ for (var i = 0; i < tests.length; i++)
     wb.doImport(data, 'fin');
 //    wb.printDependencies();99
     // JUNIT.print(wb.solution);
-    var formulas = GenericModelFile.getFormulas();
+    var formulas = FESFacade.getFormulas();
     var allDeps = [];
     break;
     for (var q = 0; q < formulas.length; q++)
@@ -220,7 +220,7 @@ for (var i = 0; i < tests.length; i++)
                 if (key.startsWith('id'))
                 {
                     var index = totaldeps.ids[key];
-                    var findFormulaByIndex = GenericModelFile.findFormulaByIndex(index);
+                    var findFormulaByIndex = FESFacade.findFormulaByIndex(index);
                     if (findFormulaByIndex === undefined)
                     {
                         logger.warn(key + ": Theoretical bound, probaly a default formula, But something we never seen before.");

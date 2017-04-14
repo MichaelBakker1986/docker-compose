@@ -67,9 +67,13 @@ var astValues = {
     "type": "Identifier",
     "name": "v"
 };
+var xArgument = {
+    "type": "Identifier",
+    "name": "x"
+};
 
 //TODO: move this method away. its the only one that should create Dependencies
-//Move it to either a DependencyManager/Service or GenericModelFile
+//Move it to either a DependencyManager/Service or FESFacade
 function addFormulaDependency(formulaInfo, name, property) {
     var foundUiModel = findLink(formulaInfo.name.split('_')[0], name, property || 'value');
     //we want do know if we can all the value straight away or we have to invoke a function for it
@@ -275,6 +279,18 @@ var simplified = {
          "type": "Identifier",
          "name": "x"
          });*/
+    },
+    /**
+     * Inject the x parameter into the call
+     * @param formulaInfo
+     * @param node
+     * @constructor
+     */
+    FirstValueT: function (formulaInfo, node) {
+        node.arguments.unshift(xArgument);
+    },
+    DateToT: function (formulaInfo, node) {
+        node.arguments.unshift(xArgument);
     },
     Visible: function (formulaInfo, node) {
         node.type = "MemberExpression";
@@ -522,9 +538,6 @@ var traverseTypes = {
                         //node property.name will result in undefined.
                         //its esier to lookAhead the SequenceExpression
                         //variableName[contextReference] , e.g. Balance[prev] or Debit[doc]
-                        if (!propertiesArr[varproperties[node.property.name]] || node.property.name !== propertiesArr[varproperties[node.property.name].f]) {
-                            throw Error(node.property.name + '!== ' + propertiesArr[varproperties[node.property.name].f] + " ,Bit strange this triple convert");
-                        }
                         node.type = 'Identifier';
                         node.name = buildFunc(orId, 0, object, '.' + node.property.name);
                         node.object = undefined;
@@ -606,7 +619,25 @@ function buildFormula(formulaInfo, parent, node) {
         }
     }
     else if (node.type === 'Identifier') {
+        /**
+         * TODO: modify these parameters while parsing regex, directly inject the correct parameters
+         */
         if (node.name === 'T') {
+            node.name = 'x';
+        }
+        if (node.name === 'MainPeriod') {
+            node.name = 'x';
+        }
+        if (node.name === 'MaxT') {
+            node.name = 'x';
+        }
+        if (node.name === 'Trend') {
+            node.name = 'x';
+        }
+        if (node.name === 'NoTrend') {
+            node.name = 'x';
+        }
+        if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
         else if (node.name === 't') {
@@ -695,7 +726,7 @@ function initStateBootstrap(configsFile) {
     formulas = configs.findFormulaByIndex;
 
     //TODO: this part makes it impossible to be flexible
-    //if its done in GenericModelFile it become flexible
+    //if its done in FESFacade it become flexible
     for (var property in properties) {
         varproperties[property] = {
             f: properties[property],
@@ -706,7 +737,7 @@ function initStateBootstrap(configsFile) {
         }
     }
     //TODO: this part makes it impossible to be flexible
-    //if its done in GenericModelFile it become flexible
+    //if its done in FESFacade it become flexible
     return parseAsFormula;
 };
 module.exports = {

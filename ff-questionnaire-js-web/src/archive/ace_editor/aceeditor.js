@@ -23,7 +23,7 @@
  var editor = ace.edit("editor");*/
 
 var APP = require('../app.js');
-var GenericModelFile = require('../fesjs/GenericModelFile.js');
+var FESFacade = require('../fesjs/FESFacade');
 var JSWorkBook = require('../fesjs/JSWorkBook.js');
 var wb = new JSWorkBook();
 APP.controller('code_editor', ['$timeout', '$scope', '$http', '$location', '$rootScope', function ($timeout, $scope, $http, $location)
@@ -87,8 +87,8 @@ APP.controller('code_editor', ['$timeout', '$scope', '$http', '$location', '$roo
         var present = $scope.$parent.presentation
         if (present.isLeaf())
         {
-            wb.doImport(editor.getValue(), GenericModelFile.settings.defaultoutput);
-            present.update(GenericModelFile.updateAll);
+            wb.doImport(editor.getValue(), FESFacade.settings.defaultoutput);
+            present.update(FESFacade.updateAll);
         }
         else
         {
@@ -104,7 +104,7 @@ APP.controller('code_editor', ['$timeout', '$scope', '$http', '$location', '$roo
             $('body').addClass('editor')
             if (editor)
             {
-                editor.setValue(wb.export(GenericModelFile.settings.defaultoutput, rowId));
+                editor.setValue(wb.export(FESFacade.settings.defaultoutput, rowId));
             }
         }
         else
