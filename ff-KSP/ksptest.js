@@ -222,3 +222,4 @@ excelPlugin.initComplete.then(function () {
     testVariable('TotalYearlyBalance', 1);
 })
 log.info('done')
+require('./totalyearlycosttest')
