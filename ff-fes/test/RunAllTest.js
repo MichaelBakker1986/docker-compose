@@ -8,15 +8,16 @@ var log = require('ff-log')
 var performceTestStartTime = new Date().getTime();
 console.time('performance')
 var tests = [
-    './MathTest.js',//TODO: make integration tests
-    './brackParsingTest.js',
-    './fflexportTest.js',//.FFL Language
-    './fflImportTest.js',//.FFL Language
-    './screendefinitionTest.js',//.screen definition
-    './uimodelTest.js',//internal logic test, uimodel.js is somewhat unstable, since developed mainly for UI
-    './NodeTest.js',
-    './jsonValuesTest.js',
-    './presentationTest.js'
+    './MathTest',
+    './brackParsingTest',
+    './fflexportTest',//.FFL Language
+    './fflImportTest',//.FFL Language
+    './screendefinitionTest',//.screen definition
+    './uimodelTest',//internal logic test, uimodel.js is somewhat unstable, since developed mainly for UI
+    './NodeTest',
+    './jsonValuesTest',
+    './presentationTest',
+    './apiTest'
 ];
 var testResults = [];
 var failure = [];
@@ -26,7 +27,6 @@ for (var i = 0; i < tests.length; i++) {
     var startTime = new Date().getTime();
     testResults.push([testName, startTime, 'start']);
     try {
-
         require(testName);
     }
     catch (e) {
