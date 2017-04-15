@@ -1,6 +1,5 @@
 //TODO: Its possible to create recursive structures, avoid this from happening.
 //This File should be merged with Node.js,SolutionService.js and not be needed, keep this in mind.
-var Solution = require('./Solution');
 function UIService() {
 }
 var UIModel = {
@@ -18,7 +17,7 @@ UIService.prototype.contains = function (name) {
 };
 //Don't call this method directly, business logic is within the Solution and JSWorkBook object
 //NULL is not valid, nor empty string
-UIService.prototype.createUIModel = function (modelName) {
+UIService.prototype.createRootNode = function (modelName) {
     //when calling with undefined just return a Solution with current modelName
     var newModelName = modelName.toUpperCase();
     //create a root node if not exists
@@ -35,7 +34,7 @@ UIService.prototype.createUIModel = function (modelName) {
         };
         rootNodes[newModelName] = UIModel[newRootNodeName]
     }
-    return new Solution(newModelName);
+    return rootNodes[newModelName];
 }
 //getOrCreate
 function getUI(groupName, row, col) {

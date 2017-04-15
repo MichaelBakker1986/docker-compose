@@ -1,6 +1,7 @@
 var visitor = require('../../fesjs/JSVisitor');
 var FESFacade = require('../../fesjs/FESFacade');
 var UIService = require('../../fesjs/UIService');
+var SolutionFacade = require('../../fesjs/SolutionFacade');
 var AST = require('ast-node-utils').ast;
 var finformula = require('../ffl/FinFormula');
 var keys = ['description', 'viewType', 'col9umnHeader', 'searchBar'];
@@ -8,9 +9,9 @@ var parser = {
     name: 'screendefinition',
     headername: '.finance Screendefinition',
     //expection json as String for screen definitions
-    parse: function (json) {
+    parse: function (json, workbook) {
         var data = JSON.parse(json);
-        var solution = UIService.createUIModel(data.modelName || 'V05');
+        var solution = SolutionFacade.createSolution(data.modelName || workbook.modelName);
 
         visitor.travelOne(data, null, function (keyArg, node) {
             //keyArg !== null &&  is a hack, prevents RootNode from being added;
@@ -25,7 +26,7 @@ var parser = {
         return solution;
     },
     deParse: function (rowId, workbook) {
-        var screenSolution = UIService.createUIModel(workbook.modelName);
+        var screenSolution = SolutionFacade.createSolution(workbook.modelName);
 
         UIService.visit(undefined, function (elem) {
             //create output node

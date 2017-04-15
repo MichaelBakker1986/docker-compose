@@ -17,8 +17,8 @@
 var UIService = require('../../fesjs/UIService')
 var Node = require('./Node.js')
 var Tree = require('./Tree.js')
-var Solution = require('../../fesjs/Solution');
 var FESFacade = require('../../fesjs/FESFacade');
+var SolutionFacade = require('../../fesjs/SolutionFacade');
 var FunctionMap = require('../../fesjs/FunctionMap');
 var bootstrap = require('../../fesjs/formula-bootstrap');
 var AST = require('ast-node-utils').ast;
@@ -40,7 +40,7 @@ Node.prototype.duplicate = function () {
     var wb = this._tree.workbook
     //JUST some quickfix from here,
     UIService.addUi(rowId, 'value', this, this.parent().rowId + '_value');
-    var solution = UIService.createUIModel(wb.modelName);
+    var solution = SolutionFacade.createSolution(wb.modelName);
     var uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
     solution.setParentName(uiNode, this.parent().rowId);
     FESFacade.addSimpleLink(solution, rowId, 'title', AST.STRING(this.title))

@@ -4,11 +4,11 @@ var log = require('ff-log')
 /*var graph = require('ngraph.graph')();
  graph.beginUpdate();*/
 
-var graph = graphviz.digraph("G");
+var graph = graphviz.digraph("G ");
+graph.set("rankdir", "LR");
 // Add node (ID: Hello)
 madge('../../restapi/ff-fes-app.js').then(function (res) {
     var dot = res.obj();
-    log.info(dot);
     for (var key in dot) {
         var start = graph.addNode(key)
         for (var dep in dot[key]) {
@@ -17,6 +17,5 @@ madge('../../restapi/ff-fes-app.js').then(function (res) {
     }
     log.info(graph.to_dot());
 });
-
 /*graph.endUpdate();*/
 module.exports = graph

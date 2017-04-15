@@ -1,5 +1,6 @@
 var visitor = require('../../fesjs/JSVisitor');
 var FESFacade = require('../../fesjs/FESFacade');
+var SolutionFacade = require('../../fesjs/SolutionFacade.js')
 var AST = require('ast-node-utils').ast;
 var UIService = require('../../fesjs/UIService');
 var bracketparser = require('./bracketparser');
@@ -47,7 +48,7 @@ var parser = {
         //all nodes will be given the SolutionName member as ID of its corresponding SolutionName
         var solutionName = findSolutionNameFromFFLFile(json);
         //Create a Solution that will contain these formulas
-        var solution = UIService.createUIModel(solutionName);
+        var solution = SolutionFacade.createSolution(solutionName);
         //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
         visitor.travelOne(json, null, function (keyArg, node) {
             if (keyArg === null) {
@@ -69,7 +70,7 @@ var parser = {
         return solution;
     },
     deParse: function (rowId, workbook) {
-        var fflSolution = UIService.createUIModel(workbook.modelName)
+        var fflSolution = SolutionFacade.createSolution(workbook.modelName);
         if (rowId) {
             var startuielem = UIService.getUI(workbook.modelName, rowId, 'value')
         }
