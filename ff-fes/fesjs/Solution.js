@@ -1,3 +1,7 @@
+/**
+ * Parsers/Exchange modules create Solution objects filled with generic metadata (formula's,properties concerning a variable)
+ *
+ */
 //This class also has functions for UIElemnt types.
 //No instances of UIElement are made since there will be made a lot of those. (1.000.000) easy
 //So we keep them plain.

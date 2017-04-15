@@ -1,20 +1,21 @@
 var madge = require('madge');
 graphviz = require('graphviz');
+var log = require('ff-log')
 /*var graph = require('ngraph.graph')();
  graph.beginUpdate();*/
 
 var graph = graphviz.digraph("G");
 // Add node (ID: Hello)
 madge('../../restapi/ff-fes-app.js').then(function (res) {
-    var dependencyInfo = res.obj();
-    console.log(dependencyInfo);
-    for (var key in dependencyInfo) {
+    var dot = res.obj();
+    log.info(dot);
+    for (var key in dot) {
         var start = graph.addNode(key)
-        for (var dep in dependencyInfo[key]) {
-            graph.addEdge(start, dependencyInfo[key][dep])
+        for (var dep in dot[key]) {
+            graph.addEdge(start, dot[key][dep])
         }
     }
-    console.log(graph.to_dot());
+    log.info(graph.to_dot());
 });
 
 /*graph.endUpdate();*/

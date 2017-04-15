@@ -1,13 +1,12 @@
 choices door middel van Value setten (quick fix achtig in fes-api)
 variable namen komen niet overeen met het model white/blacklist
-document values geven er meerdere terug (quick fix in de api gedaan, beter in GenericModelFile..)
-unit test maken voor specifieke geval
+(done) document values geven er meerdere terug (quick fix in de api gedaan, beter in FESApi..)
 * referenties naar document/formulaset variabellen automatisch .doc of formulasetinT
 * introduceer aggregatie (+) functies over children (number en tijdsgebaseerd)
   -- postfix formulaId met 'x.f' a100019_agg oid (er zijn meerdere aggregatie formules dus formulaId blijft a100019 om de waarde op te slaan)
   -- is nog even een hersenbreker, kan ook een generieke aggregatie formule voor komen.
 maak testen voor tijds overgangen
-introduceer jaar documenten, in de customImport.json (sneller) nadat agregratie bestaat
+(done) introduceer jaar documenten, in de customImport.json (sneller) nadat agregratie bestaat
 reduce the boiler plate in fes-api
 
 * = optional

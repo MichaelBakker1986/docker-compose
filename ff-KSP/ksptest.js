@@ -144,9 +144,11 @@ excelPlugin.initComplete.then(function () {
         20109: true,
         2778: true
     }
+
     function modelVariableName(name) {
         return name.replace(/(^KSP_)/gmi, '').replace(/_value$/gmi, '');
     }
+
     var wbKSP = new WorkBook(new FESContext());
     wbKSP.doImport(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
     var untestedformulas = 0;
@@ -203,7 +205,7 @@ excelPlugin.initComplete.then(function () {
     assert(wbKSP.get('Q_MAP06', 'visible') == true);
     assert(wbKSP.get('Q_MAP06') == true);
     assert(wbKSP.get('Q_MAP06_STATUS') == wbKSP.get('Q_MAP06') == true);
-//TODO: make recursive
+
     var pad = '            '
     function testVariable(variableName, level) {
         var indent = pad.substring(0, level);
@@ -219,7 +221,8 @@ excelPlugin.initComplete.then(function () {
             testVariable(modelVarName, level + 1)
         }
     }
+
     testVariable('TotalYearlyBalance', 1);
+    log.info('done')
+    require('./totalyearlycosttest')
 })
-log.info('done')
-require('./totalyearlycosttest')

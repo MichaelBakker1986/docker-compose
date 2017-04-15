@@ -1,6 +1,6 @@
 var visitor = require('../../fesjs/JSVisitor');
 var FESFacade = require('../../fesjs/FESFacade');
-var uimodel = require('../../fesjs/UIService');
+var UIService = require('../../fesjs/UIService');
 var AST = require('../../fesjs/AST');
 var finformula = require('../ffl/FinFormula');
 var keys = ['description', 'viewType', 'col9umnHeader', 'searchBar'];
@@ -10,7 +10,7 @@ var parser = {
     //expection json as String for screen definitions
     parse: function (json) {
         var data = JSON.parse(json);
-        var solution = uimodel.create(data.modelName || 'V05');
+        var solution = UIService.createUIModel(data.modelName || 'V05');
 
         visitor.travelOne(data, null, function (keyArg, node) {
             //keyArg !== null &&  is a hack, prevents RootNode from being added;
@@ -25,9 +25,9 @@ var parser = {
         return solution;
     },
     deParse: function (rowId, workbook) {
-        var screenSolution = uimodel.create(workbook.modelName);
+        var screenSolution = UIService.createUIModel(workbook.modelName);
 
-        uimodel.visit(undefined, function (elem) {
+        UIService.visit(undefined, function (elem) {
             //create output node
             var uielem = {
                 name: elem.rowId,

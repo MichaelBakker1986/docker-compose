@@ -56,7 +56,7 @@ function gatherFormulas(solution) {
     var solutionFormulas = [];
     solution.nodes.forEach(function (uiModel) {
         var formula = findFormula(uiModel);
-        if (formula !== undefined && formula !== null) {
+        if (formula) {
             var id = formula.id === undefined ? formula.index : formula.id;
             solutionFormulas[id] = formula;
         }
