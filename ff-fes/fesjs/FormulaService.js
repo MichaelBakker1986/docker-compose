@@ -1,5 +1,5 @@
 var logger = require('ff-log');
-var AST = require('./AST');
+var AST = require('ast-node-utils').ast;
 var assert = require('assert')
 var escodegen = require('escodegen')
 

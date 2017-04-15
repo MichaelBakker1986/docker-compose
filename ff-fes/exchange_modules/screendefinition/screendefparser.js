@@ -1,7 +1,7 @@
 var visitor = require('../../fesjs/JSVisitor');
 var FESFacade = require('../../fesjs/FESFacade');
 var UIService = require('../../fesjs/UIService');
-var AST = require('../../fesjs/AST');
+var AST = require('ast-node-utils').ast;
 var finformula = require('../ffl/FinFormula');
 var keys = ['description', 'viewType', 'col9umnHeader', 'searchBar'];
 var parser = {

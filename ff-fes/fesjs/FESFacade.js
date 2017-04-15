@@ -3,7 +3,7 @@
  * all functions should be moved to either formula-bootstrap.js or uitmodel.js
  */
 var logger = require('ff-log');
-var AST = require('./AST');
+var AST = require('ast-node-utils').ast;
 var esprima = require('esprima')
 var assert = require('assert')
 //for now now just years.. keep it simple

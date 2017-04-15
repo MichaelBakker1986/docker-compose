@@ -21,7 +21,7 @@ var Solution = require('../../fesjs/Solution');
 var FESFacade = require('../../fesjs/FESFacade');
 var FunctionMap = require('../../fesjs/FunctionMap');
 var bootstrap = require('../../fesjs/formula-bootstrap');
-var AST = require('../../fesjs/AST');
+var AST = require('ast-node-utils').ast;
 Node.prototype.delete = function () {
     UIService.remove(this.parent().rowId, this.rowId);
     this._tree.remove(this.rowId);

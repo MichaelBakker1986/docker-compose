@@ -9,9 +9,8 @@ var UIService = require('./UIService');
 //remove FunctionMap dependency
 var FunctionMap = require('./FunctionMap');
 var FESFacade = require('./FESFacade');
-
 var bootstrap = require('./formula-bootstrap');
-var AST = require('./AST');
+var AST = require('ast-node-utils').ast;
 var log = require('ff-log')
 var time = require('./XAxis')
 

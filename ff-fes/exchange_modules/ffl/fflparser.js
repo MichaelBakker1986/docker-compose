@@ -1,6 +1,6 @@
 var visitor = require('../../fesjs/JSVisitor');
 var FESFacade = require('../../fesjs/FESFacade');
-var AST = require('../../fesjs/AST');
+var AST = require('ast-node-utils').ast;
 var UIService = require('../../fesjs/UIService');
 var bracketparser = require('./bracketparser');
 var finformula = require('./FinFormula.js');
