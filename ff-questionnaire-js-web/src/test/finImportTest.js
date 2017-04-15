@@ -9,8 +9,7 @@ var assert = require('assert');
 var logger = require('tracer').console({level: global.loglevel || 'debug'})
 var skip = false;
 var info = JUNIT.print;
-if (!skip)
-{
+if (!skip) {
     var data = JUNIT.getFile('concepts.fin');
     var wb = new WorkBook();
     wb.doImport(data, 'fin');
@@ -78,24 +77,19 @@ if (!skip)
     };
 //so we can make a structure test.0
     var actual = JSON.parse(wb.export('screendefinition'));
-    JUNIT.validateTree(expectedFinTree, actual.children[0], 'children', 'children', function (expected, actual)
-    {
-        if (expected.hidden)
-        {
+    JUNIT.validateTree(expectedFinTree, actual.children[0], 'children', 'children', function (expected, actual) {
+        if (expected.hidden) {
             assert.ok(!wb.get(expected.variableName, 'visible'));
         }
-        if (expected.hint)
-        {
+        if (expected.hint) {
             var trim = wb.get(expected.variableName, 'hint').trim();
             assert.ok(trim === expected.hint);
         }
-        if (expected.title)
-        {
+        if (expected.title) {
             var trim = wb.get(expected.variableName, 'title').trim();
             assert.ok(trim === expected.title);
         }
-        if (expected.required)
-        {
+        if (expected.required) {
             var trim = wb.get(expected.variableName, 'required');
             assert.ok(trim === expected.required);
         }
@@ -117,46 +111,36 @@ if (!skip)
     var X_TEST_FORMUAL = wb.getFormula('X_TEST_FORMUAL')
     info(xmap01Verplicht)
 }
-function lookupFormula(context, id)
-{
+function lookupFormula(context, id) {
     var formula = FESFacade.findFormulaByIndex(id)
-    if (Cyclic[context.path[context.path.length - 1]] !== formula.name)
-    {
+    if (Cyclic[context.path[context.path.length - 1]] !== formula.name) {
         return formula;
     }
     return undefined;
 }
-function recursiveLookup(context, root)
-{
-    for (var i = 0; i < root.formulaDependencys.length; i++)
-    {
+function recursiveLookup(context, root) {
+    for (var i = 0; i < root.formulaDependencys.length; i++) {
         var formulaDependency = root.formulaDependencys[i];
         assert.ok(formulaDependency.name.trim().length > 10, formulaDependency.name);
 
-        if (formulaDependency.association == 'refs')
-        {
-            if (formulaDependency.refId !== undefined)
-            {
+        if (formulaDependency.association == 'refs') {
+            if (formulaDependency.refId !== undefined) {
                 context.ids['id' + formulaDependency.refId] = formulaDependency.refId;
             }
             //always available
             context.path.push(formulaDependency.name);
 
-            if (context.names[formulaDependency.name] || context.self === formulaDependency.name)
-            {
+            if (context.names[formulaDependency.name] || context.self === formulaDependency.name) {
                 throw Error('Cyclic dependency found [' + formulaDependency.name + ']');
             }
-            else if (formulaDependency.refId !== undefined)
-            {
+            else if (formulaDependency.refId !== undefined) {
                 var formula = lookupFormula(context, formulaDependency.refId);
-                if (formula !== undefined)
-                {
+                if (formula !== undefined) {
                     context.names[formulaDependency.name] = formula.original;
                     recursiveLookup(context, formula);
                 }
             }
-            if (formulaDependency.refId !== undefined)
-            {
+            if (formulaDependency.refId !== undefined) {
                 delete context.ids['id' + formulaDependency.refId];
                 //delete context.names[formulaDependency.name];
                 // delete context.ids['id' + formulaDependency.refId];
@@ -169,64 +153,52 @@ function recursiveLookup(context, root)
 
 //we going to exclude these paths
 var Cyclic =
-{
-    //start                                                        towards
-    FINANPROGNOSEMODEL_Product_tpSales_value: 'FINANPROGNOSEMODEL_Product_tpGrowth_value',
-    FINANPROGNOSEMODEL_Product_tpGrowth_value: 'FINANPROGNOSEMODEL_Product_tpSales_value',
-    FINANPROGNOSEMODEL_OperationalCash_value: 'FINANPROGNOSEMODEL_OperationalCashTotalPercentage_value',
-    FINANPROGNOSEMODEL_DividendPayableForecast_value: 'FINANPROGNOSEMODEL_DividendPayable_value',
-    FINANPROGNOSEMODEL_DividendPayable_value: 'FINANPROGNOSEMODEL_DividendPayableForecast_value',
-    FINANPROGNOSEMODEL_OperationalCashTotalPercentage_value: 'FINANPROGNOSEMODEL_OperationalCash_value',
-    FINANPROGNOSEMODEL_AuxiliarySuppliesProductionCashExpenses_value: 'FINANPROGNOSEMODEL_AuxiliarySuppliesProductionExpensesAccruedExclVAT_value'
-}
+    {
+        //start                                                        towards
+        FINANPROGNOSEMODEL_Product_tpSales_value: 'FINANPROGNOSEMODEL_Product_tpGrowth_value',
+        FINANPROGNOSEMODEL_Product_tpGrowth_value: 'FINANPROGNOSEMODEL_Product_tpSales_value',
+        FINANPROGNOSEMODEL_OperationalCash_value: 'FINANPROGNOSEMODEL_OperationalCashTotalPercentage_value',
+        FINANPROGNOSEMODEL_DividendPayableForecast_value: 'FINANPROGNOSEMODEL_DividendPayable_value',
+        FINANPROGNOSEMODEL_DividendPayable_value: 'FINANPROGNOSEMODEL_DividendPayableForecast_value',
+        FINANPROGNOSEMODEL_OperationalCashTotalPercentage_value: 'FINANPROGNOSEMODEL_OperationalCash_value',
+        FINANPROGNOSEMODEL_AuxiliarySuppliesProductionCashExpenses_value: 'FINANPROGNOSEMODEL_AuxiliarySuppliesProductionExpensesAccruedExclVAT_value'
+    }
 /*console.info9*/
 //TODO: move this technique into the Importing Module,
 //Just filter out all Cyclic Dependencies Before performing Monte Carlo
 //We its quicker and gives more detail
 
 var tests = ['V05_org.fin', 'ING_KBM/REVISIE/FIN/Revisie.FIN', 'SCORECARDTESTMODEL.fin'];//, 'V05_org', 'SCORECARDTESTMODEL'];
-for (var i = 0; i < tests.length; i++)
-{
+for (var i = 0; i < tests.length; i++) {
     var obj = tests[i];
     console.info('Testing Solution: [' + obj + ']')
     var data = JUNIT.getFile(obj);
 
     var wb = new WorkBook();
     wb.doImport(data, 'fin');
-//    wb.printDependencies();99
-    // JUNIT.print(wb.solution);
-    var formulas = FESFacade.getFormulas();
     var allDeps = [];
     break;
-    for (var q = 0; q < formulas.length; q++)
-    {
-        var outerFormula = formulas[q];
+    FESFacade.visitFormulas(function (outerFormula) {
         var totaldeps = {
             self: outerFormula.name,
             ids: {},//its changed to Object, else creating GIANT arrays
             names: [],
             path: []
         };
-        try
-        {
+        try {
             recursiveLookup(totaldeps, outerFormula);
         }
-        catch (e)
-        {
+        catch (e) {
             logger.warn(e);
             //  console.info(totaldeps)
-            for (var key in  totaldeps.ids)
-            {
-                if (key.startsWith('id'))
-                {
+            for (var key in  totaldeps.ids) {
+                if (key.startsWith('id')) {
                     var index = totaldeps.ids[key];
                     var findFormulaByIndex = FESFacade.findFormulaByIndex(index);
-                    if (findFormulaByIndex === undefined)
-                    {
+                    if (findFormulaByIndex === undefined) {
                         logger.warn(key + ": Theoretical bound, probaly a default formula, But something we never seen before.");
                     }
-                    else
-                    {
+                    else {
                         logger.info(findFormulaByIndex.name + ":" + findFormulaByIndex.parsed);
                     }
                 }
@@ -241,31 +213,13 @@ for (var i = 0; i < tests.length; i++)
             size: Object.keys(totaldeps.names).length,
             deps: Object.keys(totaldeps.names)
         })
-    }
-    //console.info(Cyclic);
-    allDeps.sort(function (a, b)
-    {
+    });
+    allDeps.sort(function (a, b) {
         return a.size > b.size ? 1 : (a.size === b.size ? 0 : -1);
     });
-    allDeps = allDeps.filter(function (obj)
-    {
+    allDeps = allDeps.filter(function (obj) {
         return obj.size > 5
     });
-    // console.info(JSON.stringify(allDeps, null, 2))
-    /*
-     if (!feedback.valid)
-     {
-     feedback = wb.fixAll();
-     }
-     feedback.error.forEach(function (item)
-     {
-     console.error('error: ' + item.formulaName + "\r\nreason: [" + item.reason + "]");
-     });*/
-
-
-//var validate = wb.validate();
-//validate.fixAll()
-    //assert.ok(wb.validate().valid);
 
 }
 console.info('Fin import success')

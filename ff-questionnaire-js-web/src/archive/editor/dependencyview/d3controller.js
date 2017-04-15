@@ -244,14 +244,13 @@ function generateDependencyMatrix2(exists) {
          [0, 0, 1], // A depends on B
          [0, 0, 0]] // B doesn't depend on A or Main*/
     };
-    var formulas = FESFacade.getFormulas();
-    formulas.forEach(function (f) {
+    FESFacade.visitFormulas(function (f) {
         if (exists(f.name)) {
             var packageDeps = [];
             // console.info(formulaName)
             data.highest[f.name] = data.highest[f.name] || 0;
             data.packageNames.push(f.name);
-            formulas.forEach(function (inner) {
+            FESFacade.visitFormulas(function (inner) {
 
                 if (exists(inner.name)) {
                     var linked = 0;
@@ -288,9 +287,8 @@ function generateDependencyMatrix(exists) {
          [0, 0, 1], // A depends on B
          [0, 0, 0]] // B doesn't depend on A or Main*/
     };
-    var formulas = FESFacade.getFormulas();
     var packages = new Set()
-    formulas.forEach(function (f) {
+    FESFacade.visitFormulas(function (f) {
         var fname = f.name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1')
         if (exists(f.name)) {
             var packageDeps = [];
@@ -300,25 +298,16 @@ function generateDependencyMatrix(exists) {
                 packages.add(fname);
                 data.packageNames.push(fname);
             }
-            formulas.forEach(function (inner) {
+            FESFacade.visitFormulas(function (inner) {
                 var innerName = inner.name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
                 if (exists(inner.name)) {
                     var linked = 0;
                     for (var key in inner.deps) {
                         var keyName = key.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1')
-                        //console.info(inner.name + ' deps: ' + key)
                         if (keyName === fname && keyName !== innerName) {
                             linked++;
                         }
                     }
-                    /*        for (var key in inner.refs)
-                     {
-                     //   console.info(inner.name + ' refs: ' + key)
-                     if (key === f.name && key !== inner.name)
-                     {
-                     linked++;
-                     }
-                     }*/
                     packageDeps.push(linked === 0 ? 0 : 1);
                     data.highest[fname] += linked;
                 }
