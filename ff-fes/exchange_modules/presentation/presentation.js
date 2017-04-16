@@ -14,7 +14,6 @@
  while creating new TreeNodes, an converter will be added if found to the Node.
  when updating the Node, the converter is called.
  */
-var UIService = require('../../fesjs/UIService')
 var Node = require('./Node.js')
 var Tree = require('./Tree.js')
 var FESFacade = require('../../fesjs/FESFacade');
@@ -23,29 +22,30 @@ var FunctionMap = require('../../fesjs/FunctionMap');
 var bootstrap = require('../../fesjs/formula-bootstrap');
 var AST = require('ast-node-utils').ast;
 Node.prototype.delete = function () {
-    UIService.remove(this.parent().rowId, this.rowId);
+    throw Error('Remove not yet implemented')
+    //UIService.remove(this.parent().rowId, this.rowId);
     this._tree.remove(this.rowId);
     this.remove();
 }
 //unique ID to avoid duplicates.
 var UUID = 0;
 Node.prototype.duplicate = function () {
+    var wb = this._tree.workbook
     //This part does not belong here, just to test behavior
     var rowId = this.rowId + '_copy';
     var appendix = '';
-    while (UIService.contains(rowId + appendix)) {
+    while (wb.getNode(rowId + appendix)) {
         appendix = '(' + UUID++ + ')';
     }
     rowId += appendix;
-    var wb = this._tree.workbook
     //JUST some quickfix from here,
-    UIService.addUi(rowId, 'value', this, this.parent().rowId + '_value');
+    SolutionFacade.addUi(rowId, 'value', this, this.parent().rowId + '_value');
     var solution = SolutionFacade.createSolution(wb.modelName);
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
     solution.setParentName(uiNode, this.parent().rowId);
     SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(this.title))
     //JUST some quickfix from here,
-    UIService.bulkInsert(solution);
+    SolutionFacade.bulkInsert(solution);
     FESFacade.gatherFormulas(solution);
     //JUST some quickfix from here,
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, solution.formulas, false);
@@ -55,7 +55,7 @@ Node.prototype.duplicate = function () {
 
 Tree.prototype.update = function (node, properties) {
     var wb = this.workbook;
-    var fetch = UIService.fetch(wb.modelName + '_' + node.rowId + '_value')
+    var fetch = wb.getNode(node.rowId)
     if (fetch === undefined) {
         node.delete();
     }
@@ -69,7 +69,7 @@ Tree.prototype.update = function (node, properties) {
     //so we know what number it is in the tree, we will never show more than 200 rows in a page.
     var count = 0;
     fetch.parentrowId = node._parent === undefined ? undefined : node._parent.rowId;
-    UIService.visit(fetch, function (subNode) {
+    wb.visit(fetch, function (subNode) {
         actualNodes[subNode.rowId] = subNode;
         var uiTreeNode = uiTreeNodes[subNode.rowId];
         if (uiTreeNode === undefined) {
@@ -135,7 +135,7 @@ Tree.prototype.update = function (node, properties) {
 }
 Node.prototype._update = function (properties) {
     var wb = this._tree.workbook;
-    var fetch = UIService.fetch(wb.modelName + '_' + this.rowId + '_value')
+    var fetch = wb.getNode(this.rowId)
     //should also be a property given from outside...
     this.tuple = fetch.tuple;
     this.displayAs = fetch.displayAs;

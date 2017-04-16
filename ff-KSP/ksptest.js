@@ -4,7 +4,7 @@
  * formulas containing ":" are not parsed correctly, changes are made within KSP.ffl file
  *
  */
-global.loglevel = 'debug'
+global.loglevel = 'info'
 var FormulaService = require('../ff-fes/fesjs/FormulaService')
 var WorkBook = require('../ff-fes/fesjs/JSWorkBook')
 var FESContext = require('../ff-fes/fesjs/fescontext')
@@ -225,4 +225,6 @@ excelPlugin.initComplete.then(function () {
     testVariable('TotalYearlyBalance', 1);
     log.info('done')
     require('./totalyearlycosttest')
+    //test core functionality
+    require('../ff-fes/test/RunAllTest')
 })

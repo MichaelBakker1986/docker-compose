@@ -18,4 +18,7 @@ SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId,
     //afterwards the Formula's are parsed,
     return solution.createNode(rowId, colId, formulaId, displayAs);
 };
+//** addUi and bulkinsert should not be exposed.
+SolutionFacade.prototype.addUi = UIService.addUi;
+SolutionFacade.prototype.bulkInsert = UIService.bulkInsert;
 module.exports = SolutionFacade.prototype;
