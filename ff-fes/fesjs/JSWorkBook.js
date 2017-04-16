@@ -166,7 +166,7 @@ JSWorkBook.prototype.export = function (parserType, rowId) {
     return parser.deParse(rowId, this);
 }
 JSWorkBook.prototype.getNode = function (name) {
-    return UIService.fetch(this.modelName + "_" + name + "_value");
+    return this.getStatelessNode(this.modelName + "_" + name);
 }
 JSWorkBook.prototype.getStatelessNode = function (name) {
     return UIService.fetch(name + "_value");
@@ -207,7 +207,7 @@ JSWorkBook.prototype.getRootNode = function () {
 JSWorkBook.prototype.visit = UIService.visit;
 JSWorkBook.prototype.validate = validate;
 JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId) {
-    FESFacade.createFormula(this.modelName, formulaAsString, rowId, colId);
+    FESFacade.createFormulaAndStructure(this.modelName, formulaAsString, rowId, colId || 'value');
     this.updateValueMap();
 }
 JSWorkBook.prototype.gatherProperties = function (rowId) {

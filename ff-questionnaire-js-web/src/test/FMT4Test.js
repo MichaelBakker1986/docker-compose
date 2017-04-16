@@ -48,11 +48,11 @@ var parser = {
 function addnode(solution, rowId, node, parentId, referId)
 {
     //create formula if not exist
-    var uiNode = SolutionFacade.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType");
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType");
     //only for the value tree a Tree structure is build, properties only part of the uiNode, not a child
     uiNode.referId = referId;
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
-    SolutionFacade.addSimpleLink(solution, rowId, 'title', AST.STRING(node.description || node.name || 'test'));
+    SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(node.description || node.name || 'test'));
 }
 parser.parse(xml)

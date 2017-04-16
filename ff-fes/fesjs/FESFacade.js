@@ -78,14 +78,6 @@ function updateValueMap(values) {
         }
     });
 }
-/**
- * Metehod also found in SolutionFacade
- */
-function addLink(groupName, row, col, locked, body) {
-    var ui = UIService.getUI(groupName, row, col);
-    return FormulaService.addModelFormula(ui, groupName, row, col, locked, body);
-};
-
 function produceSolution(nodeId) {
     var solution = UIService.findAll(nodeId);
     gatherFormulas(solution);
@@ -166,11 +158,11 @@ FESFacade.mergeFormulas = function (formulasArg) {
 };
 FESFacade.getFormula = getFormula;
 FESFacade.gatherFormulas = gatherFormulas;
-FESFacade.createFormula = function (groupName, formulaAsString, rowId, colId) {
-    var col = colId || 'value';
+FESFacade.createFormulaAndStructure = function (groupName, formulaAsString, rowId, col) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
-    var newFormulaId = addLink(groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
+    var ui = UIService.getUI(groupName, rowId, col);
+    var newFormulaId = FormulaService.addModelFormula(ui, groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
     //integrate formula (parse it)
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
 };

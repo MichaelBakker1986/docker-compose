@@ -159,7 +159,7 @@ function createFormulaSafe(solution, formula)
             ast = AST.STRING(code);
         }
     }
-    var uiNode = SolutionFacade.addSimpleLink(solution, formula.name, formula.property, ast, formula.displayAs)
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, formula.name, formula.property, ast, formula.displayAs)
     if (formula._delegate)
     {
         solution.setDelegate(uiNode, formula._delegate);
@@ -276,20 +276,20 @@ function addNode(solution, node, parentId)
     //locked and visibility
     if (node.protection === 'I')
     {
-        SolutionFacade.addSimpleLink(solution, rowId, 'locked', AST.TRUE())
+        SolutionFacade.createUIFormulaLink(solution, rowId, 'locked', AST.TRUE())
     }
     else if (node.protection === 'X' || node.protection === ' ' || node.protection === 'N')
     {
-        SolutionFacade.addSimpleLink(solution, rowId, 'visible', AST.FALSE())
+        SolutionFacade.createUIFormulaLink(solution, rowId, 'visible', AST.FALSE())
     }
     if (node.required === '+' || node.required === 'R')
     {
-        SolutionFacade.addSimpleLink(solution, rowId, 'required', AST.TRUE())
+        SolutionFacade.createUIFormulaLink(solution, rowId, 'required', AST.TRUE())
     }
 
     if (node.hint.trim().length > 0)
     {
-        SolutionFacade.addSimpleLink(solution, rowId, 'hint', AST.STRING(node.hint))
+        SolutionFacade.createUIFormulaLink(solution, rowId, 'hint', AST.STRING(node.hint))
     }
 }
 FESFacade.addParser(parser);

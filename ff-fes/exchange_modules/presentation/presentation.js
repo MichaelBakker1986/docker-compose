@@ -41,9 +41,9 @@ Node.prototype.duplicate = function () {
     //JUST some quickfix from here,
     UIService.addUi(rowId, 'value', this, this.parent().rowId + '_value');
     var solution = SolutionFacade.createSolution(wb.modelName);
-    var uiNode = SolutionFacade.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
     solution.setParentName(uiNode, this.parent().rowId);
-    SolutionFacade.addSimpleLink(solution, rowId, 'title', AST.STRING(this.title))
+    SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(this.title))
     //JUST some quickfix from here,
     UIService.bulkInsert(solution);
     FESFacade.gatherFormulas(solution);

@@ -224,7 +224,7 @@ function addnode(log, solution, rowId, node, parentId, referId, tuple) {
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 
-    var uiNode = SolutionFacade.addSimpleLink(solution, rowId, 'value', node.formula ? parseFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', node.formula ? parseFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
 
     uiNode.referId = referId;
     solution.setDelegate(uiNode, node);
@@ -241,7 +241,7 @@ function addnode(log, solution, rowId, node, parentId, referId, tuple) {
                 logger.debug('Default [' + key + '] formula, skipping. [' + node[key] + '][' + rowId + ']');
                 continue;
             }
-            SolutionFacade.addSimpleLink(solution, rowId, formulaMapping[key], parseFormula(node[key]));
+            SolutionFacade.createUIFormulaLink(solution, rowId, formulaMapping[key], parseFormula(node[key]));
         }
     }
 }
