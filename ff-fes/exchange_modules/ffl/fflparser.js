@@ -2,12 +2,10 @@ var visitor = require('../../fesjs/JSVisitor');
 var FESFacade = require('../../fesjs/FESFacade');
 var SolutionFacade = require('../../fesjs/SolutionFacade.js')
 var AST = require('ast-node-utils').ast;
-var UIService = require('../../fesjs/UIService');
 var bracketparser = require('./bracketparser');
 var finformula = require('./FinFormula.js');
 var esprima = require('esprima');
 var logger = require('ff-log');
-var Solution = require('../../fesjs/Solution')
 //DisplayAs require a Date object, need to add Converter for DisplayTypes.
 //@formatter:off
 /*variable FES_LAYOUTNR
@@ -66,15 +64,12 @@ var parser = {
                 }
             }
         });
-        logger.debug('Added variables [' + log.variables + ']')
+        logger.debug('Add variables [' + log.variables + ']')
         return solution;
     },
     deParse: function (rowId, workbook) {
         var fflSolution = SolutionFacade.createSolution(workbook.modelName);
-        if (rowId) {
-            var startuielem = UIService.getUI(workbook.modelName, rowId, 'value')
-        }
-        UIService.visit(startuielem, function (elem) {
+        workbook.visit(workbook.getNode(rowId), function (elem) {
             //JSON output doesn't gurantee properties to be in the same order as inserted
             //so little bit tricky here, wrap the node in another node
             //add to its wrapper a child type []
@@ -229,7 +224,7 @@ function addnode(log, solution, rowId, node, parentId, referId, tuple) {
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 
-    var uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', node.formula ? parseFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
+    var uiNode = SolutionFacade.addSimpleLink(solution, rowId, 'value', node.formula ? parseFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
 
     uiNode.referId = referId;
     solution.setDelegate(uiNode, node);
@@ -246,7 +241,7 @@ function addnode(log, solution, rowId, node, parentId, referId, tuple) {
                 logger.debug('Default [' + key + '] formula, skipping. [' + node[key] + '][' + rowId + ']');
                 continue;
             }
-            FESFacade.addSimpleLink(solution, rowId, formulaMapping[key], parseFormula(node[key]));
+            SolutionFacade.addSimpleLink(solution, rowId, formulaMapping[key], parseFormula(node[key]));
         }
     }
 }

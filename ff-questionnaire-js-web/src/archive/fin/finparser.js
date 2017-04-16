@@ -1,5 +1,6 @@
-var FESFacade = require('../fesjs/FESFacade');
-var AST = require('../fesjs/AST.js');
+var FESFacade = require('../../../../ff-fes/fesjs/FESFacade');
+var SolutionFacade = require('../../../../ff-fes/fesjs/SolutionFacade');
+var AST = require('ast-node-utils').ast;
 var lineparser = require('./finToJson.js');
 var finformula = require('../FinFormula/FinFormula.js');
 var uimodel = require('../clientscorecard/uimodel.js');
@@ -158,7 +159,7 @@ function createFormulaSafe(solution, formula)
             ast = AST.STRING(code);
         }
     }
-    var uiNode = FESFacade.addSimpleLink(solution, formula.name, formula.property, ast, formula.displayAs)
+    var uiNode = SolutionFacade.addSimpleLink(solution, formula.name, formula.property, ast, formula.displayAs)
     if (formula._delegate)
     {
         solution.setDelegate(uiNode, formula._delegate);
@@ -275,20 +276,20 @@ function addNode(solution, node, parentId)
     //locked and visibility
     if (node.protection === 'I')
     {
-        FESFacade.addSimpleLink(solution, rowId, 'locked', AST.TRUE())
+        SolutionFacade.addSimpleLink(solution, rowId, 'locked', AST.TRUE())
     }
     else if (node.protection === 'X' || node.protection === ' ' || node.protection === 'N')
     {
-        FESFacade.addSimpleLink(solution, rowId, 'visible', AST.FALSE())
+        SolutionFacade.addSimpleLink(solution, rowId, 'visible', AST.FALSE())
     }
     if (node.required === '+' || node.required === 'R')
     {
-        FESFacade.addSimpleLink(solution, rowId, 'required', AST.TRUE())
+        SolutionFacade.addSimpleLink(solution, rowId, 'required', AST.TRUE())
     }
 
     if (node.hint.trim().length > 0)
     {
-        FESFacade.addSimpleLink(solution, rowId, 'hint', AST.STRING(node.hint))
+        SolutionFacade.addSimpleLink(solution, rowId, 'hint', AST.STRING(node.hint))
     }
 }
 FESFacade.addParser(parser);

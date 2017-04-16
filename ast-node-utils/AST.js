@@ -1,5 +1,6 @@
 /**
  * Default AST templates
+ * alternative ast-types
  */
 function STRING(text)
 {
