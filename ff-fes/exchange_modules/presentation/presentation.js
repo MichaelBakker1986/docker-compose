@@ -16,7 +16,6 @@
  */
 var Node = require('./Node.js')
 var Tree = require('./Tree.js')
-var FESFacade = require('../../fesjs/FESFacade');
 var SolutionFacade = require('../../fesjs/SolutionFacade');
 var AST = require('ast-node-utils').ast;
 Node.prototype.delete = function () {
@@ -27,6 +26,9 @@ Node.prototype.delete = function () {
 }
 //unique ID to avoid duplicates.
 var UUID = 0;
+/*
+ * please refactor..
+ */
 Node.prototype.duplicate = function () {
     var wb = this._tree.workbook
     //This part does not belong here, just to test behavior
@@ -46,7 +48,7 @@ Node.prototype.duplicate = function () {
     SolutionFacade.bulkInsert(solution);
     SolutionFacade.gatherFormulas(solution);
     //JUST some quickfix from here,
-    FESFacade.initFormulaBootstrap(solution.formulas, false);
+    SolutionFacade.initFormulaBootstrap(solution.formulas, false);
     wb.updateValueMap();
     this.parent().update({title: true});
 }

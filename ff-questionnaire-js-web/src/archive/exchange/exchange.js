@@ -20,6 +20,7 @@ APP.additionalbuttons.push({
     }
 });
 APP.controller('exchange', ['$timeout', '$scope', '$http', '$location', '$window', function ($timeout, $scope, $http, $location, $window) {
+
     $scope.importTypes = JSWorkBook.getParsers();
     $scope.createDownload = function (type) {
         var parser = JSWorkBook.findParser(type);

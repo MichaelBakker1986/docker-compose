@@ -51,7 +51,7 @@ var parser = {
         var formulasString = {};
         if (rowId)
         {
-            var startuielem = uimodel.getUI(rowId, 'value')
+            var startuielem = uimodel.getOrCreateUI(rowId, 'value')
         }
 
         uimodel.visit(startuielem, function (node)

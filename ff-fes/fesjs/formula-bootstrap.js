@@ -710,16 +710,15 @@ function parseAsFormula(formulaInfo) {
 }
 
 
-function initStateBootstrap(configsFile) {
+function initStateBootstrap(configs) {
     //for now we accept no Dynamic variable.properties (visible, etc.)
     //also we acept no Dynamic FesJSMath. (static for all models;
     if (initialized) {
         throw Error("The bootstrap is already initialized");
     }
     initialized = true;
-    var configs = configsFile.state;
 
-    variables = configsFile.uicontains;//to distinct FesVariable from references
+    variables = configs.contains;//to distinct FesVariable from references
     properties = configs.properties;//to check if we use this property from the model language
     //we might better just always insert UIModel_value
     findLink = configs.findLink;//findOrCreate a UIModel, to do a variable lookup.  We must have knowledge from the UIModels. To find corresponding LinkID

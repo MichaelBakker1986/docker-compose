@@ -37,7 +37,7 @@ UIService.prototype.createRootNode = function (modelName) {
     return rootNodes[newModelName];
 }
 //getOrCreate
-function getUI(groupName, row, col) {
+function getOrCreate(groupName, row, col) {
 
     var rowId = groupName + '_' + row;
     var name = rowId + "_" + col;
@@ -55,7 +55,7 @@ function getUI(groupName, row, col) {
     }
     return node;
 }
-UIService.prototype.getUI = getUI;
+UIService.prototype.getOrCreateUI = getOrCreate;
 function hasChild(children, name) {
     for (var i = 0; i < children.nodes.length; i++) {
         if (children.nodes[i].name === name) {
@@ -67,7 +67,7 @@ function hasChild(children, name) {
 //add element to Solution
 function addUi(groupName, row, col, item, parentId) {
     //add to map
-    var ui = getUI(groupName, row, col);
+    var ui = getOrCreate(groupName, row, col);
 
     //inherit all properties But new allow extended Objects.
     //Only copy primitive members, and the delegate Object.
@@ -132,19 +132,19 @@ function getRootNode(modelName) {
     return rootNodes[modelName];
 }
 UIService.prototype.getRootNode = getRootNode;
-function findAll(nodeId) {
-    return {
+UIService.prototype.findAllInSolution = function (nodeId) {
+    var result = {
         name: nodeId,
-        nodes: Object.keys(UIModel).reduce(function (result, element) {
-            var uiModel = UIModel[element];
-            if (uiModel.displayAs !== undefined) {
-                result.push(uiModel);
-            }
-            return result;
-        }, [])
-    };
-}
-UIService.prototype.findAll = findAll;
+        nodes: []
+    }
+    for (var key in UIModel) {
+        var uiModel = UIModel[key];
+        if (uiModel.displayAs !== undefined && uiModel.solutionName === nodeId) {
+            result.nodes.push(uiModel);
+        }
+    }
+    return result;
+};
 //fetchByName (can return null)
 UIService.prototype.fetch = function fetch(name) {
     return UIModel[name];
@@ -155,7 +155,7 @@ UIService.prototype.fetch = function fetch(name) {
  * function is not thread safe, add parent and depth to function call instead of altering UINode
  */
 UIService.prototype.visit = function (node, func) {
-    var startingNode = node || getRootNode();
+    var startingNode = node || getRootNode('NEW');
     if (startingNode !== undefined) {
         startingNode._depth = 0;
         visitInternal(startingNode, func, 0, undefined)

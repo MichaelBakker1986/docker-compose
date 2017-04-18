@@ -73,7 +73,7 @@ Documentation.prototype.createGraph = function () {
         fs.writeFile('./' + moduleName + '.txt', toDot, function (res) {
             log.info('done')
         })
-        return result;
+        return toDot;
     }).catch(function (err) {
         log.error(err)
     });

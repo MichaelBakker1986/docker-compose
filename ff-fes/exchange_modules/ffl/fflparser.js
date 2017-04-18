@@ -76,7 +76,7 @@ var parser = {
             var uielem = {};
             //for now all nodes are variables
             var realObject = {}
-            var formulaProperties = workbook.gatherProperties(elem.rowId);
+            var formulaProperties = SolutionFacade.gatherProperties(workbook.modelName, workbook.properties, elem.rowId);
             for (var key in formulaProperties) {
                 var formula = formulaProperties[key];
                 var finFormula;

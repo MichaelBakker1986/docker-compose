@@ -17,6 +17,7 @@ var tests = [
     './NodeTest',
     './jsonValuesTest',
     './presentationTest',
+    './tupleTest',
     './apiTest'
 ];
 var testResults = [];

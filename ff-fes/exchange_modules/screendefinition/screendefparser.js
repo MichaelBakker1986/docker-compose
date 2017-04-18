@@ -34,7 +34,7 @@ var parser = {
                 displaytype: elem.displayAs,
                 description: elem.title
             };
-            var formulaProperties = workbook.gatherProperties(elem.rowId);
+            var formulaProperties = SolutionFacade.gatherProperties(workbook.modelName, workbook.properties, elem.rowId);
             for (var key in formulaProperties) {
                 var formula = formulaProperties[key];
                 var finFormula = FinFormula.javaScriptToFinGeneric(formula);
