@@ -91,7 +91,7 @@ function addUi(groupName, row, col, item, parentId) {
     }
 }
 UIService.prototype.addUi = addUi;
-//add elements to the Solution
+//add elements to
 UIService.prototype.bulkInsert = function (solution) {
     var solutionName = solution.name.toUpperCase();
     //fix for appending values, instead of overwriting them
@@ -153,14 +153,13 @@ UIService.prototype.fetch = fetch;
 /**
  * Visitor walk the tree
  * if node is null we use root node
+ * function is not thread safe, add parent and depth to function call instead of altering UINode
  */
 UIService.prototype.visit = function (node, func) {
     var startingNode = node || getRootNode();
     if (startingNode !== undefined) {
-        startingNode._index = 0;
         startingNode._depth = 0;
-        visitInternal(startingNode, func, 0)
-        startingNode._index = undefined;
+        visitInternal(startingNode, func, 0, undefined)
         startingNode._depth = undefined;
         startingNode.parentrowId = undefined;
     }
@@ -170,7 +169,7 @@ function visitInternal(node, func, depth) {
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {
             var _childNode = node.nodes[i];
-            var childNode = fetch(_childNode.name);
+            var childNode = UIModel[_childNode.name];
             childNode.parentrowId = node.rowId;
             childNode._index = i;
             childNode._depth = depth;

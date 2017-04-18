@@ -69,7 +69,7 @@ Tree.prototype.update = function (node, properties) {
     //so we know what number it is in the tree, we will never show more than 200 rows in a page.
     var count = 0;
     fetch.parentrowId = node._parent === undefined ? undefined : node._parent.rowId;
-    wb.visit(fetch, function (subNode) {
+    wb.visit(fetch, function (subNode, depth, parent) {
         actualNodes[subNode.rowId] = subNode;
         var uiTreeNode = uiTreeNodes[subNode.rowId];
         if (uiTreeNode === undefined) {
@@ -85,8 +85,7 @@ Tree.prototype.update = function (node, properties) {
         uiTreeNode.count = count++;
         uiTreeNode.tuple = subNode.tuple;
         uiTreeNode._seen = true;
-        uiTreeNode.depth = subNode._depth;
-        uiTreeNode._index = subNode._index;
+        uiTreeNode.depth = depth;
         uiTreeNode._actualParent = subNode.parentrowId;
     });
 //remainder/total / parent.childSize
