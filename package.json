@@ -5,11 +5,12 @@
   "description": "fesjs",
   "main": "index.js",
   "dependencies": {
-    "ff-log": "^1.0.12",
-    "ff-formulajs": "^1.0.1",
+    "ast-node-utils": "file:ast-node-utils",
     "ff-fes": "^1.0.1",
-    "tracer": "^0.8.7",
-    "promise": "^7.1.1"
+    "ff-formulajs": "^1.0.1",
+    "ff-log": "^1.0.12",
+    "promise": "^7.1.1",
+    "tracer": "^0.8.7"
   },
   "devDependencies": {
     "ff-fes": "^1.0.1",

@@ -75,7 +75,7 @@ assert.equal(wb.get('ONERRCALL'), 2);
 /**
  * test Pos function
  */
-wb.createFormula("Pos('abcd','cd')", 'POS')
+wb.createFormula("Pos('cd','abcd')", 'POS')
 assert.equal(wb.get('POS'), 2);
 
 /**

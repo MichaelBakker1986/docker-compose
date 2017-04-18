@@ -1,6 +1,5 @@
 //TODO: Its possible to create recursive structures, avoid this from happening.
 //This File should be merged with Node.js,SolutionService.js and not be needed, keep this in mind.
-var Solution = require('./Solution');
 function UIService() {
 }
 var UIModel = {
@@ -18,7 +17,7 @@ UIService.prototype.contains = function (name) {
 };
 //Don't call this method directly, business logic is within the Solution and JSWorkBook object
 //NULL is not valid, nor empty string
-UIService.prototype.createUIModel = function (modelName) {
+UIService.prototype.createRootNode = function (modelName) {
     //when calling with undefined just return a Solution with current modelName
     var newModelName = modelName.toUpperCase();
     //create a root node if not exists
@@ -35,7 +34,7 @@ UIService.prototype.createUIModel = function (modelName) {
         };
         rootNodes[newModelName] = UIModel[newRootNodeName]
     }
-    return new Solution(newModelName);
+    return rootNodes[newModelName];
 }
 //getOrCreate
 function getUI(groupName, row, col) {
@@ -92,7 +91,7 @@ function addUi(groupName, row, col, item, parentId) {
     }
 }
 UIService.prototype.addUi = addUi;
-//add elements to the Solution
+//add elements to
 UIService.prototype.bulkInsert = function (solution) {
     var solutionName = solution.name.toUpperCase();
     //fix for appending values, instead of overwriting them
@@ -154,14 +153,13 @@ UIService.prototype.fetch = fetch;
 /**
  * Visitor walk the tree
  * if node is null we use root node
+ * function is not thread safe, add parent and depth to function call instead of altering UINode
  */
 UIService.prototype.visit = function (node, func) {
     var startingNode = node || getRootNode();
     if (startingNode !== undefined) {
-        startingNode._index = 0;
         startingNode._depth = 0;
-        visitInternal(startingNode, func, 0)
-        startingNode._index = undefined;
+        visitInternal(startingNode, func, 0, undefined)
         startingNode._depth = undefined;
         startingNode.parentrowId = undefined;
     }
@@ -171,7 +169,7 @@ function visitInternal(node, func, depth) {
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {
             var _childNode = node.nodes[i];
-            var childNode = fetch(_childNode.name);
+            var childNode = UIModel[_childNode.name];
             childNode.parentrowId = node.rowId;
             childNode._index = i;
             childNode._depth = depth;

@@ -1,16 +1,17 @@
 var visitor = require('../../fesjs/JSVisitor');
 var FESFacade = require('../../fesjs/FESFacade');
 var UIService = require('../../fesjs/UIService');
-var AST = require('../../fesjs/AST');
+var SolutionFacade = require('../../fesjs/SolutionFacade');
+var AST = require('ast-node-utils').ast;
 var finformula = require('../ffl/FinFormula');
 var keys = ['description', 'viewType', 'col9umnHeader', 'searchBar'];
 var parser = {
     name: 'screendefinition',
     headername: '.finance Screendefinition',
     //expection json as String for screen definitions
-    parse: function (json) {
+    parse: function (json, workbook) {
         var data = JSON.parse(json);
-        var solution = UIService.createUIModel(data.modelName || 'V05');
+        var solution = SolutionFacade.createSolution(data.modelName || workbook.modelName);
 
         visitor.travelOne(data, null, function (keyArg, node) {
             //keyArg !== null &&  is a hack, prevents RootNode from being added;
@@ -25,7 +26,7 @@ var parser = {
         return solution;
     },
     deParse: function (rowId, workbook) {
-        var screenSolution = UIService.createUIModel(workbook.modelName);
+        var screenSolution = SolutionFacade.createSolution(workbook.modelName);
 
         UIService.visit(undefined, function (elem) {
             //create output node
@@ -56,12 +57,12 @@ function addnode(solution, rowId, node, parentId, referId) {
         throw Error()
     }
     //create formula if not exist
-    var uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType");
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType");
     //only for the value tree a Tree structure is build, properties only part of the uiNode, not a child
     //uiNode.referId = referId;
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
     var titlestring = node.name || node.description || rowId;
-    FESFacade.addSimpleLink(solution, rowId, 'title', AST.STRING(titlestring));
+    SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(titlestring));
 }
 FESFacade.addParser(parser);

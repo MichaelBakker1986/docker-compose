@@ -15,7 +15,7 @@ var JSWorkBook = require('../fesjs/JSWorkBook');
 var FESContext = require('../fesjs/fescontext')
 //find: find,//findByUIElement
 var wb = new JSWorkBook(new FESContext());
-
+wb.modelName = 'V05'
 var importTree = {
     "viewType": "GROUP",
     "variableName": "root",

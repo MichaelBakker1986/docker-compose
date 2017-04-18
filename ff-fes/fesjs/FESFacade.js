@@ -3,7 +3,7 @@
  * all functions should be moved to either formula-bootstrap.js or uitmodel.js
  */
 var logger = require('ff-log');
-var AST = require('./AST');
+var AST = require('ast-node-utils').ast;
 var esprima = require('esprima')
 var assert = require('assert')
 //for now now just years.. keep it simple
@@ -78,11 +78,6 @@ function updateValueMap(values) {
         }
     });
 }
-function addLink(groupName, row, col, locked, body) {
-    var ui = UIService.getUI(groupName, row, col);
-    return FormulaService.addModelFormula(ui, groupName, row, col, locked, body);
-};
-
 function produceSolution(nodeId) {
     var solution = UIService.findAll(nodeId);
     gatherFormulas(solution);
@@ -163,11 +158,11 @@ FESFacade.mergeFormulas = function (formulasArg) {
 };
 FESFacade.getFormula = getFormula;
 FESFacade.gatherFormulas = gatherFormulas;
-FESFacade.createFormula = function (groupName, formulaAsString, rowId, colId) {
-    var col = colId || 'value';
+FESFacade.createFormulaAndStructure = function (groupName, formulaAsString, rowId, col) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
-    var newFormulaId = addLink(groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
+    var ui = UIService.getUI(groupName, rowId, col);
+    var newFormulaId = FormulaService.addModelFormula(ui, groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
     //integrate formula (parse it)
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
 };
@@ -176,14 +171,6 @@ FESFacade.produceSolution = produceSolution;
 //UiModelService?
 FESFacade.updateValueMap = updateValueMap;
 //encapsulate isLocked flag
-FESFacade.addSimpleLink = function (solution, rowId, colId, body, displayAs) {
-    //by default only value properties can be user entered
-    //in simple (LOCKED = (colId !== 'value'))
-    var formulaId = addLink(solution.name, rowId, colId, colId === 'value' ? false : true, body);
-    //most ugly part here, the Parsers themselves add Links, which should be done just before parsing Formula's
-    //afterwards the Formula's are parsed,
-    return solution.createNode(rowId, colId, formulaId, displayAs);
-};
 FESFacade.findLink = UIService.getUI;
 //supported properties
 FESFacade.properties = {

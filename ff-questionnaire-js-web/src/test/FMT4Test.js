@@ -2,8 +2,9 @@ var parseString = require('xml2js').parseString;
 var JUNIT = require('./JUNIT.js')
 var xml = JUNIT.getFile('/KAM/FMT/Master/KAM.Fmt4Model.xml')
 var FESFacade = require('../archive/fesjs/FESFacade.js');
-var AST = require('../archive/fesjs/AST.js');
-var uimodel = require('../archive/clientscorecard/uimodel.js');
+var SolutionFacade = require('../archive/fesjs/SolutionFacade');
+var uimodel = require('../archive/fesjs/UIService');
+var AST = require('ast-node-utils').ast;
 var parser = {
     name: 'FMT4Mapping',
     headername: '.finance FMT4ImportMapping',
@@ -47,11 +48,11 @@ var parser = {
 function addnode(solution, rowId, node, parentId, referId)
 {
     //create formula if not exist
-    var uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType");
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType");
     //only for the value tree a Tree structure is build, properties only part of the uiNode, not a child
     uiNode.referId = referId;
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
-    FESFacade.addSimpleLink(solution, rowId, 'title', AST.STRING(node.description || node.name || 'test'));
+    SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(node.description || node.name || 'test'));
 }
 parser.parse(xml)

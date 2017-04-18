@@ -1,9 +1,9 @@
 var Promise = require('promise')
 var log = require('ff-log')
-var ffls = require('../ff-ssh-git/gitconnector')
-var DBConn;
-var apiimpl = function (DBConnarg) {
-    DBConn = DBConnarg;
+var gitconnector = require('../ff-ssh-git/gitconnector')
+var DBConnector;
+var apiimpl = function (DBConnectorArg) {
+    DBConnector = DBConnectorArg;
 }
 var fesjsApi = require('../ff-fes/ff-fes').fesjs;
 var ModelListener = require('../ff-ssh-git/gitconnector').ModelListener;
@@ -40,14 +40,14 @@ function prefixVariable(variableName) {
     return modelNames[0] + '_' + variableName;
 }
 apiimpl.prototype.value = function (contextKey, variable, columncontext, value) {
-    var context = DBConn.getUserContext(contextKey);
+    var context = DBConnector.getUserContext(contextKey);
     //all values are strings when entering, wen it can be parsed to a number, we will parse it.
     var value = isNaN(value) ? value : parseFloat(value)
     var result = fesjsApi.fesGetValue(context, prefixVariable(variable), columncontext, value);
     return result;
 }
 apiimpl.prototype.context = function (contextKey, variable, columncontext, value) {
-    var context = DBConn.getUserContext(contextKey);
+    var context = DBConnector.getUserContext(contextKey);
     var result = fesjsApi.fesGetValue(context, prefixVariable(variable), columncontext, value);
     if (variable) {
         context[variable] = value
@@ -56,7 +56,7 @@ apiimpl.prototype.context = function (contextKey, variable, columncontext, value
 }
 apiimpl.prototype.getFFl = function (data) {
     return new Promise(function (success, err) {
-        DBConn('SELECT property,content FROM k3_files where type = "ffl" order by modified limit 1').then(function (result) {
+        DBConnector('SELECT property,content FROM k3_files where type = "ffl" order by modified limit 1').then(function (result) {
             var bufferBase64 = new Buffer(result.data[0].content, 'binary').toString('utf-8');
             //result.data = undefined;
             //result.entry = bufferBase64;

@@ -21,7 +21,7 @@
 //better use a Set() to check if an item exists, its quicker
 var logger = require('ff-log');
 var assert = require('assert');
-var AST = require('./AST.js');
+var AST = require('ast-node-utils').ast;
 var esprima = require('esprima')
 var escodegen = require('escodegen')
 var XDimVariableName = 'x.';

@@ -1,4 +1,5 @@
 var FESFacade = require('../../fesjs/FESFacade');
+var SolutionFacade = require('../../fesjs/SolutionFacade');
 var Visitor = require('../../clientscorecard/JSVisitor.js');
 var AST = require('../../fesjs/AST.js');
 var esprima = require('esprima')
@@ -122,10 +123,10 @@ function addnode(solution, rowId, node, parentId)
     {
         console.info(rowId + " : " + node.val)
     }
-    uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', node.val ? esprima.parse(node.val).body[0].expression : AST.UNDEFINED(), "TextAnswerType");
+    uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', node.val ? esprima.parse(node.val).body[0].expression : AST.UNDEFINED(), "TextAnswerType");
     /*  }*/
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
-    FESFacade.addSimpleLink(solution, rowId, 'title', AST.STRING(node.referenceid || rowId));
+    SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(node.referenceid || rowId));
 }
 FESFacade.addParser(pomparser)
