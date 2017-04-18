@@ -1,8 +1,6 @@
 var APP = require('../app.js');
-var JSWorkBook = require('../fesjs/JSWorkBook.js');
-var UIModel = require('../clientscorecard/uimodel.js');
-var FESFacade = require('../fesjs/FESFacade');
-var logger = require('tracer').console({level: 'info'});
+var JSWorkBook = require('../uiWorkbook');
+var logger = require('ff-log');
 APP.pages.push(
     {
         name: 'Import',
@@ -16,92 +14,75 @@ APP.additionalbuttons.push({
     name: 'Import',
     icon: 'fa-exchange',
     page: 'Import',
-    action: function ($scope)
-    {
+    action: function ($scope) {
         sidebarShow();
         $scope.switchPage('Import')
     }
 });
-APP.controller('exchange', ['$timeout', '$scope', '$http', '$location', '$window', function ($timeout, $scope, $http, $location, $window)
-{
-    var wb = new JSWorkBook();
-    $scope.importTypes = FESFacade.getParsers();
-    $scope.createDownload = function (type)
-    {
-        var parser = FESFacade.findParser(type);
+APP.controller('exchange', ['$timeout', '$scope', '$http', '$location', '$window', function ($timeout, $scope, $http, $location, $window) {
+    $scope.importTypes = JSWorkBook.getParsers();
+    $scope.createDownload = function (type) {
+        var parser = JSWorkBook.findParser(type);
         var data = parser.deParse();
-        if (parser.exportAsObject)
-        {
+        if (parser.exportAsObject) {
             data = JSON.stringify(data, null, 2);
         }
         var blob = new Blob([data], {type: 'text/plain'});
-        console.info((parser.extension || parser.name));
-        $scope.filename = UIModel.getCurrentModelName() + '.' + (parser.extension || parser.name);
+        logger.info((parser.extension || parser.name));
+        $scope.filename = JSWorkBook.getCurrentModelName() + '.' + (parser.extension || parser.name);
         var url = $window.URL || $window.webkitURL;
         $scope.fileUrl = url.createObjectURL(blob);
-        console.info($scope.fileUrl)
+        logger.info($scope.fileUrl)
     }
-    $scope.fixError = function (importtype, error)
-    {
+    $scope.fixError = function (importtype, error) {
         error.fix();
-        var feedback = wb.validate();
+        var feedback = JSWorkBook.validate();
         //TODO: in this file, i have this block three times.. FIX IT
-        $timeout(function ()
-        {
-            if (feedback.valid)
-            {
+        $timeout(function () {
+            if (feedback.valid) {
                 $scope.switchPage('UI Elements');
             }
             importtype.importFeedback = feedback;
         });
     }
-    $scope.fixAll = function (importtype)
-    {
+    $scope.fixAll = function (importtype) {
         var feedback = importtype.importFeedback.fixAll();
         //TODO: in this file, i have this block three times.. FIX IT
-        $timeout(function ()
-        {
-            if (feedback.valid)
-            {
-                $scope.rootNodePath(UIModel.getRootNode().rowId);
+        $timeout(function () {
+            if (feedback.valid) {
+                $scope.rootNodePath(JSWorkBook.getRootNode().rowId);
                 $scope.switchPage('UI Elements');
             }
             importtype.importFeedback = feedback;
 
         });
     }
-    $scope.saveFile = function (importType, file)
-    {
+    $scope.saveFile = function (importType, file) {
         var r = new FileReader();
-        r.onload = function (e)
-        {
+        r.onload = function (e) {
             var contents = e.target.result;
 
             var ful;
-            $scope.$root.myPromise = new Promise(function (fulfill, reject)
-            {
+            $scope.$root.myPromise = new Promise(function (fulfill, reject) {
                 ful = fulfill;
             });
-            wb.doImport(contents, importType.name);
+            JSWorkBook.doImport(contents, importType.name);
             logger.info('import done.. performing monte carlo simulation')
-            var feedback = wb.validate();
+            var feedback = JSWorkBook.validate();
 
             //display Errors on page
             importType.importFeedback = feedback;
-            $timeout(function ()
-            {
-                $scope.$root.model = UIModel.getCurrentModelName();
+            $timeout(function () {
+                $scope.$root.model = JSWorkBook.getCurrentModelName();
             })
-            //  $scope.switchModel(wb.solution)
-            $scope.uimodelroot.nodes = UIModel.getRootNode().nodes;
+            //  $scope.switchModel(JSWorkBook.solution)
+            $scope.uimodelroot.nodes = JSWorkBook.getRootNode().nodes;
 
             //TODO: in this file, i have this block three times.. FIX IT
-            $timeout(function ()
-            {
-                $location.search('model', UIModel.getCurrentModelName());
-                if (feedback.valid)
-                {
-                    $scope.rootNodePath(UIModel.getRootNode().rowId);
+            $timeout(function () {
+                $location.search('model', JSWorkBook.getCurrentModelName());
+                if (feedback.valid) {
+                    $scope.rootNodePath(JSWorkBook.getRootNode().rowId);
                     $scope.switchPage('UI Elements');
                 }
             });

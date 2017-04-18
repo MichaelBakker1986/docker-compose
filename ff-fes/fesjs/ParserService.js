@@ -1,3 +1,7 @@
+/*
+ register/resolve echange modules e.g. ffl,screendefinition,presentation
+ TODO: rename into exchangeModulesSerivce
+ */
 var parsers = {};
 function ParserService() {
 }
@@ -12,8 +16,6 @@ ParserService.prototype.addParser = function (parser) {
  deParse: Function() : Export
  }
  */
-//looks a lot like JSWorkBook.doImport, only does not support the ABN way
-//this method only recieves GenericModels so we dont have to check Type
 ParserService.prototype.getParsers = function () {
     var result = [];
     for (var key in parsers) {

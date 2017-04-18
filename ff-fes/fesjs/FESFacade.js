@@ -56,7 +56,7 @@ function gatherFormulas(solution) {
     var solutionFormulas = [];
     solution.nodes.forEach(function (uiModel) {
         var formula = findFormula(uiModel);
-        if (formula !== undefined && formula !== null) {
+        if (formula) {
             var id = formula.id === undefined ? formula.index : formula.id;
             solutionFormulas[id] = formula;
         }
@@ -80,33 +80,13 @@ function updateValueMap(values) {
 }
 function addLink(groupName, row, col, locked, body) {
     var ui = UIService.getUI(groupName, row, col);
-    return FormulaService.addFormulaLink(ui, groupName, row, col, locked, body);
+    return FormulaService.addModelFormula(ui, groupName, row, col, locked, body);
 };
 
 function produceSolution(nodeId) {
     var solution = UIService.findAll(nodeId);
     gatherFormulas(solution);
     return solution;
-}
-function mergeFormulas(formulasArg) {
-    //so for all refs in the formula, we will switch the formulaIndex
-    var changed = [];
-    formulasArg.forEach(function (formula) {
-        //not sure where to put this logic
-        //get local formula
-        //var id = formula.id === undefined ? formula.index : formula.id;
-        var localFormula = FormulaService.findFormulaByIndex(formula.index);
-        if (localFormula !== undefined && localFormula !== null) {
-            changed.push(localFormula);
-            //of course this should not live here, its just a bug fix.
-            if (localFormula.index !== formula.id) {
-                //move formula
-                moveFormula(localFormula, formula);
-            }
-        }
-    });
-    //rebuild the formulas
-    FunctionMap.init(bootstrap.parseAsFormula, changed, true);
 }
 function moveFormula(old, newFormula) {
     FormulaService.moveFormula(old, newFormula);
@@ -161,7 +141,26 @@ FESFacade.getStatelessVariable = getStatelessVariable;
 FESFacade.findFormulaByIndex = FormulaService.findFormulaByIndex;
 FESFacade.bulkInsertFormula = FormulaService.bulkInsertFormula;
 FESFacade.findFormula = findFormula;
-FESFacade.mergeFormulas = mergeFormulas;
+FESFacade.mergeFormulas = function (formulasArg) {
+    //so for all refs in the formula, we will switch the formulaIndex
+    var changed = [];
+    formulasArg.forEach(function (formula) {
+        //not sure where to put this logic
+        //get local formula
+        //var id = formula.id === undefined ? formula.index : formula.id;
+        var localFormula = FormulaService.findFormulaByIndex(formula.index);
+        if (localFormula !== undefined && localFormula !== null) {
+            changed.push(localFormula);
+            //of course this should not live here, its just a bug fix.
+            if (localFormula.index !== formula.id) {
+                //move formula
+                moveFormula(localFormula, formula);
+            }
+        }
+    });
+    //rebuild the formulas
+    FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, changed, true);
+};
 FESFacade.getFormula = getFormula;
 FESFacade.gatherFormulas = gatherFormulas;
 FESFacade.createFormula = function (groupName, formulaAsString, rowId, colId) {

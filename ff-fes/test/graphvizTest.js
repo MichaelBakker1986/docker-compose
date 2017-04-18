@@ -1,5 +1,6 @@
 /**
  * file creator, not tested every cycle.
+ *
  * @type {ok}
  */
 var assert = require('assert');
@@ -17,7 +18,7 @@ var WorkBook = require('../fesjs/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');
 var fs = require('fs');
 
-var fflTestModels = ['KSP'];
+var fflTestModels = ['../../ff-KSP/resources/KSP'];
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
 }
@@ -43,7 +44,7 @@ for (var i = 0; i < fflTestModels.length; i++) {
         var node = allnodes[nodeName];
     }
 
-    wb.visit(wb.getStatelessNode('V05_root'), function (child) {
+    wb.visit(wb.getStatelessNode('KSP_root'), function (child) {
         graphvizModelTree += createRow(child.rowId);
         graphvizModelTree += "\r\n" + child.parentrowId + " -> " + child.rowId + ";"
     })

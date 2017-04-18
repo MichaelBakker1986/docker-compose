@@ -1,43 +1,35 @@
-//TODO: JSWorkBook is the API, remove dependencies like FESFacade and UIModel they are internal
 var APP = require('../app.js');
-var FESFacade = require('../fesjs/FESFacade.js');
-var UIModel = require('./uimodel.js');
-var logger = require('tracer').console({level: 'info'});
-//requires the presentation export
-require('../exchange_modules/presentation/presentation.js');
-require('../exchange_modules/jsonvalues/jsonvalues.js');
-require('../exchange_modules/pom/pomparser.js');
-require('../exchange_modules/screendefinition/screendefparser.js');
-FESFacade.addConverter(require('../highchartadapter/highchartadapter'));
-///^[\w]+[\s\S]+?(?=(\r|\n)[\w])
-//so this is the new interface, JSWorkBook
-var JSWorkBook = require('../fesjs/JSWorkBook.js');
+var logger = require('ff-log')
+var JSWorkBook = require('../uiWorkbook');
 
 APP.additionalbuttons.push({
     name: 'questionnaire',
     icon: 'fa-edit',
     page: 'Editor',
-    action: function ($scope)
-    {
+    action: function ($scope) {
         sidebarShow();
         $scope.switchPage('Questionnaire')
     }
 });
-APP.directive('hcChart', function ()
-{
+APP.directive('hcChart', function () {
     return {
         restrict: 'E',
         template: '<div></div>',
         scope: {
             options: '='
         },
-        link: function (scope, element)
-        {
+        link: function (scope, element) {
             $(element[0]).highcharts(scope.options);
         }
     };
 })
-APP.pages.push({name: 'Questionnaire', title: 'Preview', order: 1, icon: 'fa-edit', path: "/src/archive/clientscorecard/form.html"});
+APP.pages.push({
+    name: 'Questionnaire',
+    title: 'Preview',
+    order: 1,
+    icon: 'fa-edit',
+    path: "/src/archive/clientscorecard/form.html"
+});
 APP.pages.push({
     name: 'Developer',
     icon: 'fa-sitemap',
@@ -55,44 +47,40 @@ APP.pages.push({
     }]
 });
 //TODO: make debug setting
-function print(message)
-{
+function print(message) {
     console.info(message);
 }
-var updateAll = FESFacade.updateAll;
-var wb = new JSWorkBook();
 
 //we use the UI export to create the views
-var present = wb.export('presentation');
+var present = JSWorkBook.export('presentation');
 var navigator = present.navigator;
-FESFacade.present = present.tree;
+JSWorkBook.present = present.tree;
 //this this controller is called only once, its the AppController
 //pages within the Controller are called multiple times
 //this is where generic functionality should go, scope.members and scope.functions
-APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootScope', function ($timeout, $scope, $http, $location)
-{
+APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootScope', function ($timeout, $scope, $http, $location) {
     var warningtpye = ['fa-comment fa-fwt', 'fa-upload fa-fw', 'fa-tasks fa-fw', 'fa-envelope fa-fw', 'fa-twitter fa-fw']
     print('Initialized MainControl');
 
     $scope.navigator = navigator;
     $scope.additionalbuttons = APP.additionalbuttons;
     $scope.pages = APP.pages;
-    $scope.usersettings = FESFacade.settings;
+    $scope.usersettings = JSWorkBook.settings;
     //updates on the presentation are not passed through. Simple cause we fail to call update on it onces model changes.    $scope.aceOn = false;
     $scope.apiPath = 'http://' + $location.host() + ':8081/api/';
-    $scope.x = FESFacade.x;
+    $scope.x = JSWorkBook.x;
     $http.defaults.headers.post['X-Requested-With'] = "*";
     // to make better css for styling o0n multiple columns
     $scope.columns = [1];
-    var docValues = FESFacade.docValues;
+    var docValues = JSWorkBook.docValues;
     //remove member. its not UI specific
     $scope.docValues = docValues;
     $scope.rating;
     $scope.uimodelroot = {nodes: []};
     $scope.rootPath;
-    $scope.toggleDefaultOutput = FESFacade.settings.toggleOutput;
-    $scope.getUI = UIModel.getUI;
-    $scope.find = UIModel.find;
+    $scope.toggleDefaultOutput = JSWorkBook.settings.toggleOutput;
+    $scope.getUI = JSWorkBook.getUI;
+    $scope.find = JSWorkBook.find;
 
 
     $scope.alerts = {
@@ -107,14 +95,12 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
 
     var _session;
     var editor;
-    $timeout(function ()
-    {
-        $scope.presentation = FESFacade.present;
+    $timeout(function () {
+        $scope.presentation = JSWorkBook.present;
     })
 
 
-    $scope.doToggle = function (node)
-    {
+    $scope.doToggle = function (node) {
         node.selected = !node.selected;
         node._collapsed = !node._collapsed;
     };
@@ -122,15 +108,13 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
     $scope.exampleModels = [
         {
             template: true,
-            produce: function ()
-            {
+            produce: function () {
             },
             name: 'Questionnaire',
             id: 0
         },
         {
-            produce: function ()
-            {
+            produce: function () {
             },
             template: true,
             name: 'Form',
@@ -138,61 +122,49 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
         }
     ];
 
-    $http.get($scope.apiPath + 'SOLUTION').success(function (data)
-    {
+    $http.get($scope.apiPath + 'SOLUTION').success(function (data) {
         Array.prototype.push.apply($scope.models, data);
     });
 
-    for (var key in $location.search())
-    {
+    for (var key in $location.search()) {
         $scope[key] = $location.search()[key];
     }
 
-    $scope.switchPageByPage = function (page)
-    {
+    $scope.switchPageByPage = function (page) {
         $scope.page = page;
         $location.search('page', page.name);
         $scope.templatePath = '../' + page.path;
-        navigator._current.update(updateAll);
+        navigator._current.update(JSWorkBook.updateAll);
     }
-    $scope.lookupSolutions = function (text)
-    {
+    $scope.lookupSolutions = function (text) {
         return [text];
     }
     //TODO: remove copy paste
-    $scope.switchPage = function (menuItemName)
-    {
+    $scope.switchPage = function (menuItemName) {
         var target = $scope.pages.lookup('name', menuItemName);
         $scope.page = target;
         $location.search('page', target.name);
         $scope.templatePath = '../' + target.path;
-        $timeout(function ()
-        {
+        $timeout(function () {
             $('body').scrollTop(0)
         });
-//FESFacade.present
-        navigator._current.update(updateAll);
+//JSWorkBook.present
+        navigator._current.update(JSWorkBook.updateAll);
 
     }
 
-    $scope.rootNodePath = function (name)
-    {
-        if (name !== undefined)
-        {
-            var newRootNode = UIModel.find(
-                {rowId: name, colId: 'value'}
-            );
-            if (newRootNode !== undefined)
-            {
+    $scope.rootNodePath = function (name) {
+        if (name !== undefined) {
+            var newRootNode = JSWorkBook.find(name, 'value');
+            if (newRootNode !== undefined) {
                 $scope.rootPath = name;
                 $scope.selectedItem = name;
                 print('changing root node to : ' + name);
-                var presentation = FESFacade.present.getNode(name) || FESFacade.present.getRoot();
+                var presentation = JSWorkBook.present.getNode(name) || JSWorkBook.present.getRoot();
 
-                presentation.update(updateAll);
+                presentation.update(JSWorkBook.updateAll);
                 navigator.move(presentation.rowId);
-                $timeout(function ()
-                {
+                $timeout(function () {
                     $scope.uimodelroot.nodes = [newRootNode]
                     $scope.presentation = presentation;
                     $scope.$broadcast('myCustomEvent', presentation.rowId);
@@ -202,96 +174,83 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
         }
     }
     //default page
+    logger.info($scope.page)
+    logger.info($scope.pages)
+
     var pageLookup = $scope.pages.lookup('name', $scope.page || 'Solutions');
+
     $scope.page = pageLookup;
     $scope.templatePath = '../' + pageLookup.path;
 
     //load values if Identifier is given in URL
-    if ($scope.documentId)
-    {
-        $http.get($scope.apiPath + 'DOCUMENT/' + $scope.documentId).success(function (data)
-        {
-            if (data !== null && data.values !== undefined)
-            {
-                var importResult = wb.doImport(data.values, 'docvalues');
+    if ($scope.documentId) {
+        $http.get($scope.apiPath + 'DOCUMENT/' + $scope.documentId).success(function (data) {
+            if (data !== null && data.values !== undefined) {
+                var importResult = JSWorkBook.doImport(data.values, 'docvalues');
                 print('Import:' + importResult.valid ? ' success' : 'failed')
             }
         });
     }
-    if ($scope.model)
-    {
+    if ($scope.model) {
         var modelName = $scope.model.toUpperCase();
         var httpPromise = $http.get($scope.apiPath + '/SOLUTION/' + modelName);
         //Solution service always return a valid Solution Object
-        httpPromise.success(function (dbSolution)
-        {
+        httpPromise.success(function (dbSolution) {
             //we won't do anything if model is invalid
-            if (dbSolution && dbSolution.name !== undefined)
-            {
+            if (dbSolution && dbSolution.name !== undefined) {
                 $scope.switchModel(dbSolution);
             }
         });
     }
     //function is also called by Solution page
-    $scope.switchModel = function (dbSolution)
-    {
+    $scope.switchModel = function (dbSolution) {
         $scope.model = dbSolution.name.toUpperCase();
-        $timeout(function ()
-        {
+        $timeout(function () {
             $location.search('model', $scope.model);
         });
         console.time('init-model-' + dbSolution.name);
-        FESFacade.switchModel(dbSolution, $scope.docValues);
+        JSWorkBook.switchModel(dbSolution, $scope.docValues);
 
         //these scope members are root of all views in the app, unmapped is not very useful at the moment
-        $scope.uimodelroot.nodes = UIModel.getRootNode().nodes;
-        FESFacade.present.update(updateAll);
+        $scope.uimodelroot.nodes = JSWorkBook.getRootNode().nodes;
+        JSWorkBook.present.update(JSWorkBook.updateAll);
         console.timeEnd('init-model-' + dbSolution.name);
-        $scope.rootNodePath(UIModel.getRootNode().rowId)
+        $scope.rootNodePath(JSWorkBook.getRootNode().rowId)
     }
 
-    $scope.sendResponse = function ()
-    {
+    $scope.sendResponse = function () {
         var httpPromise = $http.post($scope.apiPath + '/DOCUMENT/' + $scope.documentId, {
             id: $scope.documentId,
-            values: wb.export('jsonvalues')
+            values: JSWorkBook.export('jsonvalues')
         });
         $scope.myPromise = httpPromise;
-        httpPromise.then(function (response)
-        {
+        httpPromise.then(function (response) {
             $scope.documentId = response.data.id;
             $location.search('documentId', $scope.documentId);
-        }, function (response)
-        {
+        }, function (response) {
             console.error(response)
         });
         // Temporary mock method to   test calculate button
-        $timeout(function ()
-        {
+        $timeout(function () {
             $scope.rating = ('Rating: ' + Math.floor((Math.random() * 6) + 1) + '+');
         })
     }
 
     //its not hidden in UI when there is no next
     //so also catch undefined next
-    $scope.navigate = function (type)
-    {
+    $scope.navigate = function (type) {
         navigator[type]();
-        if (navigator._current !== undefined)
-        {
+        if (navigator._current !== undefined) {
             $scope.rootNodePath(navigator._current.rowId);
             $("html, body").animate({scrollTop: "0px"});
         }
     };
-    $scope.matches = function (a, b)
-    {
+    $scope.matches = function (a, b) {
         return !!a.match(b);
     }
 
-    $scope.InputValid = function (row)
-    {
-        if (row === undefined)
-        {
+    $scope.InputValid = function (row) {
+        if (row === undefined) {
             return true;
         }
         return row.validateInput ? row.validateInput.length === 0 : true;
@@ -303,29 +262,24 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
      * Else divide the total over all children and they again will do the calculation again
      * Avoid devide by zero problems and such
      */
-    $scope.calcTotalShow = function (total, node)
-    {
-        if (node.isLeaf())
-        {
+    $scope.calcTotalShow = function (total, node) {
+        if (node.isLeaf()) {
             return total - 1;
         }
         var remainder = 0;
         var median = (total - node.nodes.length) / node.nodes.length
         return median;
     }
-    $scope.expanded = function (total, node)
-    {
-        if (node._Tcollapsed === undefined)
-        {
+    $scope.expanded = function (total, node) {
+        if (node._Tcollapsed === undefined) {
             return (total >= 1);
         }
         return !node._Tcollapsed;
     }
 
-    $scope.exportValue = function (rowId, row, colId, inputValue)
-    {
+    $scope.exportValue = function (rowId, row, colId, inputValue) {
         print('setvalue called')
-        wb.set(rowId, inputValue, colId);
-        FESFacade.present.update(updateAll);
+        JSWorkBook.set(rowId, inputValue, colId);
+        JSWorkBook.present.update(JSWorkBook.updateAll);
     }
 }]);

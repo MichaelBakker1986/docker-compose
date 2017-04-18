@@ -21,17 +21,18 @@ excelPlugin.initComplete.then(function () {
     var buf = fs.readFileSync('resources/KSP.ffl', "utf8");
     wbKSP.doImport((buf), 'ffl')
     wbKSP.set('IncomeParent01', 25000)
-    console.log(wbKSP.get('IncomeParent01'))
+    assert(wbKSP.get('IncomeParent01') === 25000)
 
     //same response from restApi
-    log.info(fesjsApi.fesGetValue({
-        columns: 3,
-        properties: {value: true, title: true},
-        values: wbKSP.context.values
-    }, 'KSP_IncomeParent01', 0))
-    log.info(fesjsApi.fesGetValue({
-        columns: 3,
-        properties: {value: true, title: true},
-        values: wbKSP.context.values
-    }, 'KSP_Q_FINAL_REPORT_VISIBLE', 0, "Ja"))
+    assert(fesjsApi.fesGetValue({
+            columns: 3,
+            properties: {value: true, title: true},
+            values: wbKSP.context.values
+        }, 'KSP_IncomeParent01', 0).value === 25000)
+
+    assert(fesjsApi.fesGetValue({
+            columns: 3,
+            properties: {value: true, title: true},
+            values: wbKSP.context.values
+        }, 'KSP_Q_FINAL_REPORT_VISIBLE', 0, "Ja").value === 1)
 });

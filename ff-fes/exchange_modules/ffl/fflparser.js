@@ -1,12 +1,12 @@
 var visitor = require('../../fesjs/JSVisitor');
 var FESFacade = require('../../fesjs/FESFacade');
 var AST = require('../../fesjs/AST');
-var uimodel = require('../../fesjs/UIService');
+var UIService = require('../../fesjs/UIService');
 var bracketparser = require('./bracketparser');
 var finformula = require('./FinFormula.js');
 var esprima = require('esprima');
 var logger = require('ff-log');
-
+var Solution = require('../../fesjs/Solution')
 //DisplayAs require a Date object, need to add Converter for DisplayTypes.
 //@formatter:off
 /*variable FES_LAYOUTNR
@@ -47,7 +47,7 @@ var parser = {
         //all nodes will be given the SolutionName member as ID of its corresponding SolutionName
         var solutionName = findSolutionNameFromFFLFile(json);
         //Create a Solution that will contain these formulas
-        var solution = uimodel.create(solutionName);
+        var solution = UIService.createUIModel(solutionName);
         //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
         visitor.travelOne(json, null, function (keyArg, node) {
             if (keyArg === null) {
@@ -69,11 +69,11 @@ var parser = {
         return solution;
     },
     deParse: function (rowId, workbook) {
-        var fflSolution = uimodel.create(workbook.modelName)
+        var fflSolution = UIService.createUIModel(workbook.modelName)
         if (rowId) {
-            var startuielem = uimodel.getUI(workbook.modelName, rowId, 'value')
+            var startuielem = UIService.getUI(workbook.modelName, rowId, 'value')
         }
-        uimodel.visit(startuielem, function (elem) {
+        UIService.visit(startuielem, function (elem) {
             //JSON output doesn't gurantee properties to be in the same order as inserted
             //so little bit tricky here, wrap the node in another node
             //add to its wrapper a child type []

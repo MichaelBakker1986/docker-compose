@@ -1,8 +1,8 @@
 //TODO: Its possible to create recursive structures, avoid this from happening.
 //This File should be merged with Node.js,SolutionService.js and not be needed, keep this in mind.
-//introduces a strange level of complexity in the code.
-//rows
 var Solution = require('./Solution');
+function UIService() {
+}
 var UIModel = {
     NEW_root_value: {
         rowId: 'root'
@@ -13,12 +13,12 @@ var rootNodes = {
 };
 var rows = new Set();
 
-function contains(name) {
+UIService.prototype.contains = function (name) {
     return rows.has(name);
-}
+};
 //Don't call this method directly, business logic is within the Solution and JSWorkBook object
 //NULL is not valid, nor empty string
-function create(modelName) {
+UIService.prototype.createUIModel = function (modelName) {
     //when calling with undefined just return a Solution with current modelName
     var newModelName = modelName.toUpperCase();
     //create a root node if not exists
@@ -37,6 +37,7 @@ function create(modelName) {
     }
     return new Solution(newModelName);
 }
+//getOrCreate
 function getUI(groupName, row, col) {
 
     var rowId = groupName + '_' + row;
@@ -55,6 +56,7 @@ function getUI(groupName, row, col) {
     }
     return node;
 }
+UIService.prototype.getUI = getUI;
 function hasChild(children, name) {
     for (var i = 0; i < children.nodes.length; i++) {
         if (children.nodes[i].name === name) {
@@ -63,6 +65,7 @@ function hasChild(children, name) {
     }
     return false;
 }
+//add element to Solution
 function addUi(groupName, row, col, item, parentId) {
     //add to map
     var ui = getUI(groupName, row, col);
@@ -88,8 +91,9 @@ function addUi(groupName, row, col, item, parentId) {
         }
     }
 }
-//Solution has a Name
-function bulkInsert(solution) {
+UIService.prototype.addUi = addUi;
+//add elements to the Solution
+UIService.prototype.bulkInsert = function (solution) {
     var solutionName = solution.name.toUpperCase();
     //fix for appending values, instead of overwriting them
     //Should be more clean
@@ -128,6 +132,7 @@ function bulkInsert(solution) {
 function getRootNode(modelName) {
     return rootNodes[modelName];
 }
+UIService.prototype.getRootNode = getRootNode;
 function findAll(nodeId) {
     return {
         name: nodeId,
@@ -140,14 +145,17 @@ function findAll(nodeId) {
         }, [])
     };
 }
+UIService.prototype.findAll = findAll;
+//fetchByName (can return null)
 function fetch(name) {
     return UIModel[name];
 }
+UIService.prototype.fetch = fetch;
 /**
  * Visitor walk the tree
  * if node is null we use root node
  */
-function visit(node, func) {
+UIService.prototype.visit = function (node, func) {
     var startingNode = node || getRootNode();
     if (startingNode !== undefined) {
         startingNode._index = 0;
@@ -174,17 +182,4 @@ function visitInternal(node, func, depth) {
         }
     }
 }
-module.exports = {
-    addUi: addUi,//add element to Solution
-    create: create,//create Solution
-    bulkInsert: bulkInsert,//add elements to the Solution
-
-    //will be encapsulated later,
-    //for now we can directly inject the UIModel
-    getRootNode: getRootNode,
-    getUI: getUI,//getOrCreate
-    fetch: fetch,//fetchByName (can return null)
-    findAll: findAll,
-    contains: contains,
-    visit: visit
-};
+module.exports = UIService.prototype;

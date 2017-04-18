@@ -64,37 +64,10 @@ module.exports = function (grunt) {
                 dist: {
                     files: {
                         'dist/editor.js': [
-                            'src/archive/clientscorecard/*.js',
-                            'src/archive/editor/*.js',
-                            'src/archive/ffl/*.js',
-                            'src/archive/pom/*.js',
                             'src/archive/ace_editor/*.js',
-                            'src/archive/abn/*.js',
-                            'src/archive/exchange/*.js',
-                            'src/archive/finanXML/*.js',
-                            'src/archive/rptXml/*.js',
-                            'src/archive/jsonvalues/*.js',
-                            'src/archive/fin/*.js',
-                            'src/archive/editor/dependencyview/*.js',
-                            'src/archive/variables/*.js',
-                            'src/archive/solution/*.js',
                             'src/archive/formbuilder/*.js',
-                            'src/archive/exchange/*.js',
-                            'src/form/*.js',
-                            'src/archive/screendefinition/*.js'
-                        ],
-                        //export for
-                        'example/fesjs.js': [
-                            'src/archive/clientscorecard/uimodel.js',
-                            'src/archive/presentation/presentation.js',
-                            'src/archive/jsonvalues/jsonvalues.js',
-                            'src/archive/ffl/*.js',
-                            'src/test/jsonXML.js',
-                            'src/archive/fesjs/*.js',
-                            'src/archive/fesjs/JSWorkBook.js',
-                            'src/archive/screendefinition/*.js',
-                            'src/archive/fin/*.js',
-                            'src/archive/finanXML/*.js'
+                            'src/archive/clientscorecard/*.js',
+                            'src/archive/exchange/*.js'
                         ]
                     }
                 },

@@ -14,7 +14,7 @@
  while creating new TreeNodes, an converter will be added if found to the Node.
  when updating the Node, the converter is called.
  */
-var uimodel = require('../../fesjs/UIService')
+var UIService = require('../../fesjs/UIService')
 var Node = require('./Node.js')
 var Tree = require('./Tree.js')
 var Solution = require('../../fesjs/Solution');
@@ -23,7 +23,7 @@ var FunctionMap = require('../../fesjs/FunctionMap');
 var bootstrap = require('../../fesjs/formula-bootstrap');
 var AST = require('../../fesjs/AST');
 Node.prototype.delete = function () {
-    uimodel.remove(this.parent().rowId, this.rowId);
+    UIService.remove(this.parent().rowId, this.rowId);
     this._tree.remove(this.rowId);
     this.remove();
 }
@@ -33,19 +33,19 @@ Node.prototype.duplicate = function () {
     //This part does not belong here, just to test behavior
     var rowId = this.rowId + '_copy';
     var appendix = '';
-    while (uimodel.contains(rowId + appendix)) {
+    while (UIService.contains(rowId + appendix)) {
         appendix = '(' + UUID++ + ')';
     }
     rowId += appendix;
     var wb = this._tree.workbook
     //JUST some quickfix from here,
-    uimodel.addUi(rowId, 'value', this, this.parent().rowId + '_value');
-    var solution = uimodel.create(wb.modelName);
+    UIService.addUi(rowId, 'value', this, this.parent().rowId + '_value');
+    var solution = UIService.createUIModel(wb.modelName);
     var uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
     solution.setParentName(uiNode, this.parent().rowId);
     FESFacade.addSimpleLink(solution, rowId, 'title', AST.STRING(this.title))
     //JUST some quickfix from here,
-    uimodel.bulkInsert(solution);
+    UIService.bulkInsert(solution);
     FESFacade.gatherFormulas(solution);
     //JUST some quickfix from here,
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, solution.formulas, false);
@@ -55,7 +55,7 @@ Node.prototype.duplicate = function () {
 
 Tree.prototype.update = function (node, properties) {
     var wb = this.workbook;
-    var fetch = uimodel.fetch(wb.modelName + '_' + node.rowId + '_value')
+    var fetch = UIService.fetch(wb.modelName + '_' + node.rowId + '_value')
     if (fetch === undefined) {
         node.delete();
     }
@@ -69,7 +69,7 @@ Tree.prototype.update = function (node, properties) {
     //so we know what number it is in the tree, we will never show more than 200 rows in a page.
     var count = 0;
     fetch.parentrowId = node._parent === undefined ? undefined : node._parent.rowId;
-    uimodel.visit(fetch, function (subNode) {
+    UIService.visit(fetch, function (subNode) {
         actualNodes[subNode.rowId] = subNode;
         var uiTreeNode = uiTreeNodes[subNode.rowId];
         if (uiTreeNode === undefined) {
@@ -135,7 +135,7 @@ Tree.prototype.update = function (node, properties) {
 }
 Node.prototype._update = function (properties) {
     var wb = this._tree.workbook;
-    var fetch = uimodel.fetch(wb.modelName + '_' + this.rowId + '_value')
+    var fetch = UIService.fetch(wb.modelName + '_' + this.rowId + '_value')
     //should also be a property given from outside...
     this.tuple = fetch.tuple;
     this.displayAs = fetch.displayAs;

@@ -3,10 +3,12 @@ var log = require('ff-log')
  * The map that contains all model-functions and values
  */
 //internal data structure
-var FunctionMap = {};
+//var fm = {};
+function fm() {
+}
 //some api functions
 //dont use this method, use JSWorkBook instead.
-function apiGet(formula, x, y, z, v) {
+fm.prototype.apiGet = function (formula, x, y, z, v) {
     // console.info('API call for formula: ' + formula.name);
     //temp fix fallback for ID, index is the Virtual ID, not persisted in the database
     //should be checked outside this function call
@@ -15,7 +17,7 @@ function apiGet(formula, x, y, z, v) {
 }
 //public
 //v = entered values
-function apiSet(formula, x, y, z, value, v) {
+fm.prototype.apiSet = function (formula, x, y, z, value, v) {
     var id = formula.id === undefined ? formula.index : formula.id;
     if (v[id] !== undefined) {
         var hash = x.hash + y + z;
@@ -34,7 +36,7 @@ function apiSet(formula, x, y, z, value, v) {
 //disableFormulaCache means it will remove the parsed member from given formula's
 //caches are within the given formula's
 //public
-function init(formulaParser, formulas, disableFormulaCache) {
+fm.prototype.initFormulaBootstrap = function (formulaParser, formulas, disableFormulaCache) {
     formulas.forEach(function (newFormula) {
         var id = newFormula.id === undefined ? newFormula.index : newFormula.id;
         //technical depth, we only want to this when user explicitly entered it or something. They have these Objects!
@@ -80,10 +82,10 @@ var formulaDecorators = {
     }
     //will need more types e.g. cacheLocked and cacheUnlocked.
 }
-function moveFormula(oldFormula, newFormula) {
+fm.prototype.moveFormula = function (oldFormula, newFormula) {
     if (oldFormula.index !== newFormula.id) {
         if (global['a' + newFormula.id]) {
-            console.warn('Formula already taken[' + newFormula.id + ']');
+            log.warn('Formula already taken[' + newFormula.id + ']');
         }
         else {
             global['a' + newFormula.id] = newFormula;
@@ -91,9 +93,4 @@ function moveFormula(oldFormula, newFormula) {
         }
     }
 };
-module.exports = {
-    apiGet: apiGet,
-    apiSet: apiSet,
-    initFormulaBootstrap: init,
-    moveFormula: moveFormula//bullshit function. just solves a problem what should be solved here
-}
+module.exports = fm.prototype;
