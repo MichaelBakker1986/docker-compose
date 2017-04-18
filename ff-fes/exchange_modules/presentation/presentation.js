@@ -18,8 +18,6 @@ var Node = require('./Node.js')
 var Tree = require('./Tree.js')
 var FESFacade = require('../../fesjs/FESFacade');
 var SolutionFacade = require('../../fesjs/SolutionFacade');
-var FunctionMap = require('../../fesjs/FunctionMap');
-var bootstrap = require('../../fesjs/formula-bootstrap');
 var AST = require('ast-node-utils').ast;
 Node.prototype.delete = function () {
     throw Error('Remove not yet implemented')
@@ -46,9 +44,9 @@ Node.prototype.duplicate = function () {
     SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(this.title))
     //JUST some quickfix from here,
     SolutionFacade.bulkInsert(solution);
-    FESFacade.gatherFormulas(solution);
+    SolutionFacade.gatherFormulas(solution);
     //JUST some quickfix from here,
-    FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, solution.formulas, false);
+    FESFacade.initFormulaBootstrap(solution.formulas, false);
     wb.updateValueMap();
     this.parent().update({title: true});
 }
@@ -249,4 +247,4 @@ var presentationConverter = {
 function createNode(tree, nodeId, displayAs) {
     return tree.createNode(nodeId);
 }
-FESFacade.addParser(presentationConverter)
+SolutionFacade.addParser(presentationConverter)

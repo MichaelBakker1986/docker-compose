@@ -13,7 +13,6 @@ var UIService = require('./UIService');
 var bootstrap = require('./formula-bootstrap');
 var FunctionMap = require('./FunctionMap');
 var FormulaService = require('./FormulaService')
-var ParserService = require('./ParserService')
 
 /**
  * For small arrays, lets say until 1000, elements. There is no need to map by name.
@@ -51,18 +50,6 @@ function getUI(groupName, row, col) {
 function getFormula(row, col) {
     return findFormula(getUI(row, col));
 };
-//copy paste of the one below, its time to integrate Solution
-function gatherFormulas(solution) {
-    var solutionFormulas = [];
-    solution.nodes.forEach(function (uiModel) {
-        var formula = findFormula(uiModel);
-        if (formula) {
-            var id = formula.id === undefined ? formula.index : formula.id;
-            solutionFormulas[id] = formula;
-        }
-    })
-    solution.formulas = solutionFormulas;
-}
 //public
 //when new formula's arrive, we have to update the user-entered map so we don't get NPE
 //just a quick-fix..
@@ -77,11 +64,6 @@ function updateValueMap(values) {
             }
         }
     });
-}
-function produceSolution(nodeId) {
-    var solution = UIService.findAll(nodeId);
-    gatherFormulas(solution);
-    return solution;
 }
 function moveFormula(old, newFormula) {
     FormulaService.moveFormula(old, newFormula);
@@ -107,9 +89,6 @@ function getStatelessVariable(row, col) {
     return UIService.fetch(row + '_' + col);
 }
 
-FESFacade.getParsers = ParserService.getParsers;
-FESFacade.findParser = ParserService.findParser;
-FESFacade.addParser = ParserService.addParser;
 FESFacade.statelessSetValue = function (context, row, value, col, xas) {
     var rowId = row + '_' + ( col || 'value');
     var localFormula = findFormula(UIService.fetch(rowId));
@@ -132,6 +111,7 @@ FESFacade.statelessGetValue = function (context, row, col, xas) {
     }
     return returnValue;
 }
+FESFacade.getRootNode = UIService.getRootNode;
 FESFacade.getStatelessVariable = getStatelessVariable;
 FESFacade.findFormulaByIndex = FormulaService.findFormulaByIndex;
 FESFacade.bulkInsertFormula = FormulaService.bulkInsertFormula;
@@ -157,7 +137,11 @@ FESFacade.mergeFormulas = function (formulasArg) {
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, changed, true);
 };
 FESFacade.getFormula = getFormula;
-FESFacade.gatherFormulas = gatherFormulas;
+FESFacade.apiGet = FunctionMap.apiGet;
+
+FESFacade.initFormulaBootstrap = function (formulas, disableCache) {
+    return FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, formulas, disableCache);
+};
 FESFacade.createFormulaAndStructure = function (groupName, formulaAsString, rowId, col) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
@@ -167,11 +151,11 @@ FESFacade.createFormulaAndStructure = function (groupName, formulaAsString, rowI
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
 };
 //SolutionService
-FESFacade.produceSolution = produceSolution;
 //UiModelService?
 FESFacade.updateValueMap = updateValueMap;
 //encapsulate isLocked flag
 FESFacade.findLink = UIService.getUI;
+FESFacade.visit = UIService.visit;
 //supported properties
 FESFacade.properties = {
     value: 0,

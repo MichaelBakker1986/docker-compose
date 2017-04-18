@@ -146,10 +146,9 @@ function findAll(nodeId) {
 }
 UIService.prototype.findAll = findAll;
 //fetchByName (can return null)
-function fetch(name) {
+UIService.prototype.fetch = function fetch(name) {
     return UIModel[name];
-}
-UIService.prototype.fetch = fetch;
+};
 /**
  * Visitor walk the tree
  * if node is null we use root node

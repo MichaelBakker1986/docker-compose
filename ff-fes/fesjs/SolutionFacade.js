@@ -4,10 +4,27 @@
 var Solution = require('./Solution')
 var UIService = require('./UIService')
 var FormulaService = require('./FormulaService')
+var ParserService = require('./ParserService')
 function SolutionFacade() {
 }
 SolutionFacade.prototype.createSolution = function (solutionName) {
     return new Solution(UIService.createRootNode(solutionName).solutionName);
+}
+SolutionFacade.prototype.gatherFormulas = function (solution) {
+    var solutionFormulas = [];
+    solution.nodes.forEach(function (uiModel) {
+        var formula = FormulaService.findFormulaByIndex(uiModel.ref);
+        if (formula) {
+            var id = formula.id === undefined ? formula.index : formula.id;
+            solutionFormulas[id] = formula;
+        }
+    })
+    solution.formulas = solutionFormulas;
+};
+SolutionFacade.prototype.produceSolution = function (nodeId) {
+    var solution = UIService.findAll(nodeId);
+    this.gatherFormulas(solution);
+    return solution;
 }
 SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId, body, displayAs) {
     //by default only value properties can be user entered
@@ -21,4 +38,7 @@ SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId,
 //** addUi and bulkinsert should not be exposed.
 SolutionFacade.prototype.addUi = UIService.addUi;
 SolutionFacade.prototype.bulkInsert = UIService.bulkInsert;
+SolutionFacade.prototype.getParsers = ParserService.getParsers;
+SolutionFacade.prototype.findParser = ParserService.findParser;
+SolutionFacade.prototype.addParser = ParserService.addParser;
 module.exports = SolutionFacade.prototype;

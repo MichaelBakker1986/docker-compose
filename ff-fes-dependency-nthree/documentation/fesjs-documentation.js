@@ -32,17 +32,22 @@ function walkAst(info, parent, node) {
         }
     }
 }
+var includemethodcalls = true;
+var moduleName = 'ff-fes';
 Documentation.prototype.createGraph = function () {
     var graph = graphviz.digraph("G ");
     graph.set("rankdir", "LR");
 // Add node (ID: Hello)
-    return madge('../../restapi/ff-fes-app.js').then(function (res) {
+    return madge('../../' + moduleName + '/ff-fes.js', {
+        excludeRegExp: ['Tree$', 'Node$', 'JSVisitor$'],
+        fileExtensions: ['js']
+    }).then(function (res) {
         var dot = res.obj();
         for (var key in dot) {
             try {
                 var start = graph.addNode(key)
                 // log.info('../../restapi/' + key + '.js', 'utf-8')
-                var source = fs.readFileSync('../../restapi/' + key + '.js', 'utf-8')
+                var source = fs.readFileSync('../../' + moduleName + '/' + key + '.js', 'utf-8')
                 var ast = esprima.parse(source)
 
                 for (var dep in dot[key]) {
@@ -52,9 +57,12 @@ Documentation.prototype.createGraph = function () {
                         servicename: path.basename(dot[key][dep], '.js'),
                         name: key
                     };
+
                     walkAst(metaData, undefined, ast)
                     var edge = graph.addEdge(start, dot[key][dep])
-                    edge.set('label', Object.keys(metaData.callees).toString().replace(/,/gmi, '\\n'));
+                    if (includemethodcalls) {
+                        edge.set('label', Object.keys(metaData.callees).toString().replace(/,/gmi, '\\n'));
+                    }
                 }
 
             } catch (err) {
@@ -62,7 +70,7 @@ Documentation.prototype.createGraph = function () {
             }
         }
         var toDot = graph.to_dot();
-        fs.writeFile('./fesapp.txt', toDot, function (res) {
+        fs.writeFile('./' + moduleName + '.txt', toDot, function (res) {
             log.info('done')
         })
         return result;
