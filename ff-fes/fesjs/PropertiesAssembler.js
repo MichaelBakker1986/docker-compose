@@ -24,7 +24,7 @@ PropertiesAssembler.prototype.createRootNode = function (modelName) {
     //create a root node if not exists
     //Better to keep a list of existing Solution instead of writing over them
     var newRootNodeName = newModelName + '_root_value';
-    if (PropertiesModel[newRootNodeName] === undefined) {
+    if (!rootNodes[newModelName]) {
         PropertiesModel[newRootNodeName] = {
             name: newRootNodeName,
             rowId: 'root',
@@ -64,7 +64,7 @@ function hasChild(children, name) {
 }
 //add element to Solution
 function addProperty(groupName, row, col, item, parentId) {
-    //add to map
+    //add to map if it not exists, else re-use the entry
     var property = getOrCreateProperty(groupName, row, col);
 
     //inherit all properties But new allow extended Objects.
@@ -93,7 +93,7 @@ PropertiesAssembler.prototype.bulkInsert = function (solution) {
     var solutionName = solution.name.toUpperCase();
     //fix for appending values, instead of overwriting them
     //Should be more clean
-    if (PropertiesModel[solutionName + '_root_value'] === undefined) {
+    if (!rootNodes[solutionName]) {
         create(solutionName);
     }
     var nodes = solution.nodes;
@@ -128,7 +128,6 @@ PropertiesAssembler.prototype.bulkInsert = function (solution) {
 function getRootNode(modelName) {
     return rootNodes[modelName];
 }
-PropertiesAssembler.prototype.getRootNode = getRootNode;
 PropertiesAssembler.prototype.findAllInSolution = function (nodeId) {
     var result = {
         name: nodeId,
@@ -164,8 +163,7 @@ function visitInternal(node, func, depth) {
     func(node);
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {
-            var _childNode = node.nodes[i];
-            var childNode = PropertiesModel[_childNode.name];
+            var childNode = PropertiesModel[node.nodes[i].name];
             childNode.parentrowId = node.rowId;
             childNode._index = i;
             childNode._depth = depth;
@@ -176,5 +174,6 @@ function visitInternal(node, func, depth) {
         }
     }
 }
+PropertiesAssembler.prototype.getRootNode = getRootNode;
 PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 module.exports = PropertiesAssembler.prototype;

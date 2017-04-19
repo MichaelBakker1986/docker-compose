@@ -150,14 +150,3 @@ for (var i = 0; i < tests.length; i++) {
 
 }
 console.info('Test fflImport success')
-/*
-
-
- var wbKSP = new JSWorkBook(new FESContext());
- //wb.doImport(data, 'ffl');
- var KSP = JUNIT.getFile('KSP.ffl');
- wbKSP.doImport(KSP, 'ffl');
-
- FormulaService.visitFormulas(function (formula) {
- console.info(formula)
- });*/

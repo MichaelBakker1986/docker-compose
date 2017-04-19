@@ -2,9 +2,12 @@ var logger = require('ff-log');
 var AST = require('ast-node-utils').ast;
 var assert = require('assert')
 var escodegen = require('escodegen')
-
+/**
+ * * FormulaId '0' is not a valid ID!
+ */
 //the array index is used to be next formulaId
 var formulas = [];
+//make 100.000 entries, we start counting here for temporally formula's
 formulas[100000] = null;
 /**
  * Todo: add formula.frequency into the cache key?
@@ -27,22 +30,25 @@ FormulaService.prototype.visitFormulas = function (visitFunction) {
         }
     }
 }
-function addAssociation(index, ui, associationType) {
+/**
+ * Looks like the function in FormulaBootStrap, combine these.
+ */
+function addAssociation(index, property, associationType) {
     var formula = formulas[index];
-    var otherFormula = formulas[ui.ref];
+    var otherFormula = formulas[property.ref];
     if (otherFormula.name !== formula.name && formula.refs[otherFormula.name] === undefined) {
         formula.formulaDependencys.push({
             name: otherFormula.name,
             association: associationType
         });
     }
-    formula[associationType][ui.name] = true;
+    formula[associationType][property.name] = true;
 }
 /**
  * called to parse modelString formula and add to current state
  * if formulaString already parsed, its returned from cache
  */
-FormulaService.prototype.addModelFormula = function (ui, groupName, row, col, locked, body) {
+FormulaService.prototype.addModelFormula = function (property, groupName, row, col, locked, body) {
     assert(body !== undefined, 'refactored, this function return undefined when body is undefined');
     var formula;
     var key = escodegen.generate(AST.EXPRESSION(body));
@@ -52,15 +58,15 @@ FormulaService.prototype.addModelFormula = function (ui, groupName, row, col, lo
     }
     else {
         //else we have to create a new formula
-        formula = newFormula(locked, AST.EXPRESSION(body), formulas.length, ui.name);
+        formula = newFormula(locked, AST.EXPRESSION(body), formulas.length, property.name);
         cache[key] = formula;
     }
-    ui.ref = formula.index;
-    ui.formulaName = formula.name;
+    property.ref = formula.index;
+    property.formulaName = formula.name;
 
     //add the formula Association, so formula 1 knows C12_value uses it.
-    addAssociation(formula.index, ui, 'refs');
-    return formula.id === undefined ? formula.index : formula.id;
+    addAssociation(formula.index, property, 'refs');
+    return formula.id || formula.index;
 }
 /*
  Class Formula
@@ -79,7 +85,7 @@ FormulaService.prototype.addModelFormula = function (ui, groupName, row, col, lo
  */
 //create a new Formula
 //initiate a new Object, add it to the Array
-function newFormula(locked, body, index, uiModelName) {
+function newFormula(locked, body, index, propertyName) {
     var original = AST.PROGRAM(body);
     var formula = {
         type: locked ? 'noCacheLocked' : 'noCacheUnlocked',//there are some types, for nor only locked and unlocked are interesting
@@ -89,7 +95,7 @@ function newFormula(locked, body, index, uiModelName) {
         body: original,//AST
         original: original,
         index: index,//index used in formula array
-        name: uiModelName//default formula name.
+        name: propertyName//default formula name.
     };
     formulas.push(formula);
     return formula;

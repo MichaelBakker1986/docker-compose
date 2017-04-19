@@ -5,7 +5,9 @@ var path = require('path')
 var walkAst = require('../../ast-node-utils').astWalk
 var fs = require('fs');
 var esprima = require('esprima');
-
+/**
+ * creation parameters
+ */
 var includemethodcalls = true;
 var moduleName = 'ff-fes';
 
@@ -21,15 +23,12 @@ madge('../../' + moduleName + '/ff-fes.js', {
             var start = graph.addNode(key)
             var source = fs.readFileSync('../../' + moduleName + '/' + key + '.js', 'utf-8')
             var ast = esprima.parse(source)
-
             for (var dep in dot[key]) {
-
                 var metaData = {
                     callees: {},
                     servicename: path.basename(dot[key][dep], '.js'),
                     name: key
                 };
-
                 walkAst(function (info, node) {
                     if (node && node.type === 'MemberExpression') {
                         if (node.object.name === info.servicename) {
@@ -38,13 +37,11 @@ madge('../../' + moduleName + '/ff-fes.js', {
                         }
                     }
                 }, metaData, undefined, ast)
-
                 var edge = graph.addEdge(start, dot[key][dep])
                 if (includemethodcalls) {
                     edge.set('label', Object.keys(metaData.callees).toString().replace(/,/gmi, '\\n'));
                 }
             }
-
         } catch (err) {
             log.warn(err)
         }

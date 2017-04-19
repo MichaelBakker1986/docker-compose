@@ -1,22 +1,24 @@
 var log = require('ff-log')
 /**
- * The map that contains all model-functions and values
+ * The map that contains parsed model-functions
+ * * FormulaId '0' is not a valid ID!
+ *
+ * x = time object
+ * y = tuple object
+ * z = timeline object
+ * value = new value
+ * v = entered values
  */
-//internal data structure
-//var fm = {};
 function fm() {
 }
-//some api functions
-//dont use this method, use JSWorkBook instead.
+//don't directly use this method, use JSWorkBook instead.
 fm.prototype.apiGet = function (formula, x, y, z, v) {
     // console.info('API call for formula: ' + formula.name);
     //temp fix fallback for ID, index is the Virtual ID, not persisted in the database
     //should be checked outside this function call
-    var id = formula.id === undefined ? formula.index : formula.id;
+    var id = formula.id || formula.index;
     return global['a' + id](id, x, y, z, v);
 }
-//public
-//v = entered values
 fm.prototype.apiSet = function (formula, x, y, z, value, v) {
     var id = formula.id === undefined ? formula.index : formula.id;
     if (v[id] !== undefined) {
@@ -38,7 +40,7 @@ fm.prototype.apiSet = function (formula, x, y, z, value, v) {
 //public
 fm.prototype.initFormulaBootstrap = function (formulaParser, formulas, disableFormulaCache) {
     formulas.forEach(function (newFormula) {
-        var id = newFormula.id === undefined ? newFormula.index : newFormula.id;
+        var id = newFormula.id || newFormula.index;
         //technical depth, we only want to this when user explicitly entered it or something. They have these Objects!
         //we can do it there, for now we just have this parameter.
         if (disableFormulaCache) {

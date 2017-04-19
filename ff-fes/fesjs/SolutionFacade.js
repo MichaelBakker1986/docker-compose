@@ -1,5 +1,6 @@
 /**
- * combines FormulaService with
+ * Solution encapsulation
+ * FormulaId '0' is not a valid ID!
  */
 var log = require('ff-log')
 var Solution = require('./Solution')
@@ -19,8 +20,7 @@ SolutionFacade.prototype.gatherFormulas = function (solution) {
     solution.nodes.forEach(function (uiModel) {
         var formula = FormulaService.findFormulaByIndex(uiModel.ref);
         if (formula) {
-            var id = formula.id === undefined ? formula.index : formula.id;
-            solutionFormulas[id] = formula;
+            solutionFormulas[formula.id || formula.index] = formula;
         }
     })
     solution.formulas = solutionFormulas;
@@ -33,21 +33,22 @@ SolutionFacade.prototype.produceSolution = function (nodeId) {
 SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId, body, displayAs) {
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
-    var ui = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
-    var formulaId = FormulaService.addModelFormula(ui, solution.name, rowId, colId, colId === 'value' ? false : true, body);
+    var property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
+    var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, colId !== 'value', body);
     //most ugly part here, the Parsers themselves add Links, which should be done just before parsing Formula's
     //afterwards the Formula's are parsed,
     return solution.createNode(rowId, colId, formulaId, displayAs);
 };
-SolutionFacade.prototype.importSolution = function (data, parserType, wb) {
+SolutionFacade.prototype.importSolution = function (data, parserType, workbook) {
     if (data === undefined) {
         log.error('No data specified')
         return;
     }
-    var solution = ParserService.findParser(parserType).parse(data, wb);
+    var solution = ParserService.findParser(parserType).parse(data, workbook);
     log.debug('Update Solution [' + solution.getName() + ']');
     PropertiesAssembler.bulkInsert(solution);
     //only get the formulas for Current Model
+    //the parser itsself should add formulas to the solution.
     var formulas = this.produceSolution(solution.getName()).formulas;
     this.initFormulaBootstrap(formulas, false);
     return solution;
@@ -64,10 +65,10 @@ SolutionFacade.prototype.initFormulaBootstrap = function (formulas, disableCache
 };
 SolutionFacade.prototype.gatherProperties = function (modelName, properties, rowId) {
     var formulaProperties = {};
-    for (var key in properties) {
-        var formula = FormulaService.findFormulaByIndex(PropertiesAssembler.getOrCreateProperty(modelName, rowId, key).ref);
+    for (var property in properties) {
+        var formula = FormulaService.findFormulaByIndex(PropertiesAssembler.getOrCreateProperty(modelName, rowId, property).ref);
         if (formula !== undefined && formula.original !== undefined && formula.original !== null && formula.original !== '') {
-            formulaProperties[key] = formula.original;
+            formulaProperties[property] = formula.original;
         }
     }
     return formulaProperties;
@@ -75,8 +76,8 @@ SolutionFacade.prototype.gatherProperties = function (modelName, properties, row
 SolutionFacade.prototype.createFormulaAndStructure = function (groupName, formulaAsString, rowId, col) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
-    var ui = PropertiesAssembler.getOrCreateProperty(groupName, rowId, col);
-    var newFormulaId = FormulaService.addModelFormula(ui, groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
+    var property = PropertiesAssembler.getOrCreateProperty(groupName, rowId, col);
+    var newFormulaId = FormulaService.addModelFormula(property, groupName, rowId, col, col !== 'value', ast.body[0].expression);
     //integrate formula (parse it)
     FunctionMap.initFormulaBootstrap(FormulaBootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
 };
@@ -105,14 +106,13 @@ function moveFormula(old, newFormula) {
     FunctionMap.moveFormula(old, newFormula);
     //update references
     for (var ref in old.refs) {
-        var uiModel = PropertiesAssembler.fetch(ref);
-        uiModel.ref = newFormula.id;
-        uiModel.formulaId = newFormula.id;
+        var property = PropertiesAssembler.fetch(ref);
+        property.ref = newFormula.id;
+        property.formulaId = newFormula.id;
     }
 }
 SolutionFacade.prototype.visitParsers = ParserService.visitParsers;
 SolutionFacade.prototype.addParser = ParserService.addParser;
-
 SolutionFacade.prototype.getOrCreateProperty = PropertiesAssembler.getOrCreateProperty;
 SolutionFacade.prototype.contains = PropertiesAssembler.contains
 SolutionFacade.prototype.properties = {

@@ -9,13 +9,10 @@ var FormulaService = require('../ff-fes/fesjs/FormulaService')
 var WorkBook = require('../ff-fes/fesjs/JSWorkBook')
 var FESContext = require('../ff-fes/fesjs/fescontext')
 var log = require('ff-log')
-
 var assert = require('assert')
 require('../ff-math/ff-math')
 var fesjsApi = require('../ff-fes/ff-fes').fesjs;
 var JUNIT = require('../ff-fes/test/JUNIT');
-
-
 fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
