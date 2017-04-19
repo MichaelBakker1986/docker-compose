@@ -3,7 +3,7 @@
  Just calling getAllValues() internally to export
  */
 var FESFacade = require('../../fesjs/FESFacade');
-var UIModel = require('../../fesjs/UIService');
+var UIModel = require('../../fesjs/PropertiesAssembler');
 var jsonValues = {
     name: 'jsonvalues',
     extension: 'json',

@@ -4,8 +4,8 @@
  Remove All dependencies besides FESFacade,ff-log. Even XAxis should be inside the Context Object
  */
 
-//remove UIService dependency
-var UIService = require('./UIService');
+//remove PropertiesAssembler dependency
+var PropertiesAssembler = require('./PropertiesAssembler');
 //remove FunctionMap dependency
 var FunctionMap = require('./FunctionMap');
 var FESFacade = require('./FESFacade');
@@ -42,7 +42,7 @@ JSWorkBook.prototype.doImport = function (data, parserType) {
     this.modelName = solution.getName().toUpperCase();
     this.modelName = solution.getName().toUpperCase();
     log.debug('Update model [' + solution.getName() + ']');
-    UIService.bulkInsert(solution);
+    PropertiesAssembler.bulkInsert(solution);
     //only get the formulas for Current Model
     var formulas = this.produceSolution().formulas;
     //FESFacade.updateModelMetaData(solution.getModelMetaData());
@@ -170,7 +170,7 @@ JSWorkBook.prototype.getNode = function (name) {
     return this.getStatelessNode(this.modelName + "_" + name);
 }
 JSWorkBook.prototype.getStatelessNode = function (name) {
-    return UIService.fetch(name + "_value");
+    return PropertiesAssembler.fetch(name + "_value");
 }
 //some functions we directly pass trough
 JSWorkBook.prototype.get = function (row, col, x) {
@@ -203,9 +203,9 @@ JSWorkBook.prototype.getStatelessVariable = FESFacade.getStatelessVariable;
 JSWorkBook.prototype.fixAll = fixAll
 //should return the solution instead. So its deprecated
 JSWorkBook.prototype.getRootNode = function () {
-    return UIService.getRootNode(this.modelName);
+    return PropertiesAssembler.getRootNode(this.modelName);
 };
-JSWorkBook.prototype.visit = UIService.visit;
+JSWorkBook.prototype.visit = PropertiesAssembler.visit;
 JSWorkBook.prototype.validate = validate;
 JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId) {
     FESFacade.createFormulaAndStructure(this.modelName, formulaAsString, rowId, colId || 'value');

@@ -1,30 +1,30 @@
 //TODO: Its possible to create recursive structures, avoid this from happening.
 //This File should be merged with Node.js,SolutionService.js and not be needed, keep this in mind.
-function UIService() {
+function PropertiesAssembler() {
 }
-var UIModel = {
+var PropertiesModel = {
     NEW_root_value: {
         rowId: 'root'
     }
 };
 var rootNodes = {
-    NEW: UIModel.NEW_root_value
+    NEW: PropertiesModel.NEW_root_value
 };
 var rows = new Set();
 
-UIService.prototype.contains = function (name) {
+PropertiesAssembler.prototype.contains = function (name) {
     return rows.has(name);
 };
 //Don't call this method directly, business logic is within the Solution and JSWorkBook object
 //NULL is not valid, nor empty string
-UIService.prototype.createRootNode = function (modelName) {
+PropertiesAssembler.prototype.createRootNode = function (modelName) {
     //when calling with undefined just return a Solution with current modelName
     var newModelName = modelName.toUpperCase();
     //create a root node if not exists
     //Better to keep a list of existing Solution instead of writing over them
     var newRootNodeName = newModelName + '_root_value';
-    if (UIModel[newRootNodeName] === undefined) {
-        UIModel[newRootNodeName] = {
+    if (PropertiesModel[newRootNodeName] === undefined) {
+        PropertiesModel[newRootNodeName] = {
             name: newRootNodeName,
             rowId: 'root',
             colId: 'value',
@@ -32,16 +32,16 @@ UIService.prototype.createRootNode = function (modelName) {
             displayAs: 'SectionAnswerType',
             nodes: []
         };
-        rootNodes[newModelName] = UIModel[newRootNodeName]
+        rootNodes[newModelName] = PropertiesModel[newRootNodeName]
     }
     return rootNodes[newModelName];
 }
 //getOrCreate
-function getUI(groupName, row, col) {
+function getProperty(groupName, row, col) {
 
     var rowId = groupName + '_' + row;
     var name = rowId + "_" + col;
-    var node = UIModel[name];
+    var node = PropertiesModel[name];
     if (node == undefined) {
         node = {
             rowId: row,
@@ -50,12 +50,12 @@ function getUI(groupName, row, col) {
             name: name,
             nodes: []
         }
-        UIModel[name] = node;
+        PropertiesModel[name] = node;
         rows.add(row);
     }
     return node;
 }
-UIService.prototype.getUI = getUI;
+PropertiesAssembler.prototype.getProperty = getProperty;
 function hasChild(children, name) {
     for (var i = 0; i < children.nodes.length; i++) {
         if (children.nodes[i].name === name) {
@@ -65,9 +65,9 @@ function hasChild(children, name) {
     return false;
 }
 //add element to Solution
-function addUi(groupName, row, col, item, parentId) {
+function addProperty(groupName, row, col, item, parentId) {
     //add to map
-    var ui = getUI(groupName, row, col);
+    var ui = getProperty(groupName, row, col);
 
     //inherit all properties But new allow extended Objects.
     //Only copy primitive members, and the delegate Object.
@@ -78,8 +78,8 @@ function addUi(groupName, row, col, item, parentId) {
     }
     //add to root if no parent
     if (parentId !== undefined) {
-        //else add to UIModel
-        var parentUiModel = UIModel[groupName + '_' + parentId];
+        //else add to PropertiesModel
+        var parentUiModel = PropertiesModel[groupName + '_' + parentId];
         if (!hasChild(parentUiModel, ui.name)) {
             parentUiModel.nodes.push({
                 name: ui.name,
@@ -90,13 +90,13 @@ function addUi(groupName, row, col, item, parentId) {
         }
     }
 }
-UIService.prototype.addUi = addUi;
+PropertiesAssembler.prototype.addProperty = addProperty;
 //add elements to
-UIService.prototype.bulkInsert = function (solution) {
+PropertiesAssembler.prototype.bulkInsert = function (solution) {
     var solutionName = solution.name.toUpperCase();
     //fix for appending values, instead of overwriting them
     //Should be more clean
-    if (UIModel[solutionName + '_root_value'] === undefined) {
+    if (PropertiesModel[solutionName + '_root_value'] === undefined) {
         create(solutionName);
     }
     var nodes = solution.nodes;
@@ -108,9 +108,9 @@ UIService.prototype.bulkInsert = function (solution) {
     while (iteration < 8) {
         for (var i = 0; i < nodes.length; i++) {
             var obj = nodes[i];
-            if (!obj.parentName || UIModel[solutionName + '_' + obj.parentName] !== undefined) {
+            if (!obj.parentName || PropertiesModel[solutionName + '_' + obj.parentName] !== undefined) {
                 obj.ref = obj.formulaId === null || obj.formulaId === undefined ? obj.ref : obj.formulaId;
-                addUi(solutionName, obj.rowId, obj.colId, obj, obj.parentName === null ? undefined : obj.parentName);
+                addProperty(solutionName, obj.rowId, obj.colId, obj, obj.parentName === null ? undefined : obj.parentName);
             }
             else {
                 leftOver.push(obj);
@@ -131,12 +131,12 @@ UIService.prototype.bulkInsert = function (solution) {
 function getRootNode(modelName) {
     return rootNodes[modelName];
 }
-UIService.prototype.getRootNode = getRootNode;
+PropertiesAssembler.prototype.getRootNode = getRootNode;
 function findAll(nodeId) {
     return {
         name: nodeId,
-        nodes: Object.keys(UIModel).reduce(function (result, element) {
-            var uiModel = UIModel[element];
+        nodes: Object.keys(PropertiesModel).reduce(function (result, element) {
+            var uiModel = PropertiesModel[element];
             if (uiModel.displayAs !== undefined) {
                 result.push(uiModel);
             }
@@ -144,18 +144,18 @@ function findAll(nodeId) {
         }, [])
     };
 }
-UIService.prototype.findAll = findAll;
+PropertiesAssembler.prototype.findAll = findAll;
 //fetchByName (can return null)
 function fetch(name) {
-    return UIModel[name];
+    return PropertiesModel[name];
 }
-UIService.prototype.fetch = fetch;
+PropertiesAssembler.prototype.fetch = fetch;
 /**
  * Visitor walk the tree
  * if node is null we use root node
  * function is not thread safe, add parent and depth to function call instead of altering UINode
  */
-UIService.prototype.visit = function (node, func) {
+PropertiesAssembler.prototype.visit = function (node, func) {
     var startingNode = node || getRootNode();
     if (startingNode !== undefined) {
         startingNode._depth = 0;
@@ -169,7 +169,7 @@ function visitInternal(node, func, depth) {
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {
             var _childNode = node.nodes[i];
-            var childNode = UIModel[_childNode.name];
+            var childNode = PropertiesModel[_childNode.name];
             childNode.parentrowId = node.rowId;
             childNode._index = i;
             childNode._depth = depth;
@@ -180,4 +180,4 @@ function visitInternal(node, func, depth) {
         }
     }
 }
-module.exports = UIService.prototype;
+module.exports = PropertiesAssembler.prototype;

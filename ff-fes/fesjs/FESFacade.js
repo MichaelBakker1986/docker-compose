@@ -9,7 +9,7 @@ var assert = require('assert')
 //for now now just years.. keep it simple
 var FESFacade = {}
 
-var UIService = require('./UIService');
+var PropertiesAssembler = require('./PropertiesAssembler');
 var bootstrap = require('./formula-bootstrap');
 var FunctionMap = require('./FunctionMap');
 var FormulaService = require('./FormulaService')
@@ -46,7 +46,7 @@ function findFormula(uiModel) {
     return FormulaService.findFormulaByIndex(uiModel.ref);
 }
 function getUI(groupName, row, col) {
-    return UIService.getUI(groupName, row, col || 'value');
+    return PropertiesAssembler.getProperty(groupName, row, col || 'value');
 }
 function getFormula(row, col) {
     return findFormula(getUI(row, col));
@@ -79,7 +79,7 @@ function updateValueMap(values) {
     });
 }
 function produceSolution(nodeId) {
-    var solution = UIService.findAll(nodeId);
+    var solution = PropertiesAssembler.findAll(nodeId);
     gatherFormulas(solution);
     return solution;
 }
@@ -88,7 +88,7 @@ function moveFormula(old, newFormula) {
     FunctionMap.moveFormula(old, newFormula);
     //update references
     for (var ref in old.refs) {
-        var uiModel = UIService.fetch(ref);
+        var uiModel = PropertiesAssembler.fetch(ref);
         uiModel.ref = newFormula.id;
         uiModel.formulaId = newFormula.id;
     }
@@ -104,7 +104,7 @@ var propertyDefaults = {
 }
 
 function getStatelessVariable(row, col) {
-    return UIService.fetch(row + '_' + col);
+    return PropertiesAssembler.fetch(row + '_' + col);
 }
 
 FESFacade.getParsers = ParserService.getParsers;
@@ -112,7 +112,7 @@ FESFacade.findParser = ParserService.findParser;
 FESFacade.addParser = ParserService.addParser;
 FESFacade.statelessSetValue = function (context, row, value, col, xas) {
     var rowId = row + '_' + ( col || 'value');
-    var localFormula = findFormula(UIService.fetch(rowId));
+    var localFormula = findFormula(PropertiesAssembler.fetch(rowId));
     if (localFormula === undefined) {
         //don't give away variable name here.
         throw Error('Cannot find variable')
@@ -161,7 +161,7 @@ FESFacade.gatherFormulas = gatherFormulas;
 FESFacade.createFormulaAndStructure = function (groupName, formulaAsString, rowId, col) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
-    var ui = UIService.getUI(groupName, rowId, col);
+    var ui = PropertiesAssembler.getProperty(groupName, rowId, col);
     var newFormulaId = FormulaService.addModelFormula(ui, groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
     //integrate formula (parse it)
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
@@ -171,7 +171,7 @@ FESFacade.produceSolution = produceSolution;
 //UiModelService?
 FESFacade.updateValueMap = updateValueMap;
 //encapsulate isLocked flag
-FESFacade.findLink = UIService.getUI;
+FESFacade.findLink = PropertiesAssembler.getProperty;
 //supported properties
 FESFacade.properties = {
     value: 0,
@@ -190,6 +190,6 @@ FESFacade.properties = {
 //properties once bound ONCE, math Functions also ONCE
 bootstrap.initStateBootstrap({
     state: FESFacade,
-    uicontains: UIService.contains
+    uicontains: PropertiesAssembler.contains
 });
 module.exports = FESFacade;

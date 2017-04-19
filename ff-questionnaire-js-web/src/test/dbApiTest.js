@@ -87,7 +87,7 @@ function createFormula(value, rowId, colId)
 function addUiElement(rowId, colId)
 {
     //create UI element
-    uimodel.addUi(rowId, colId, {
+    uimodel.addProperty(rowId, colId, {
         displayAs: 'AmountAnswerType'
     }, 'root_value');
 }
@@ -118,12 +118,12 @@ function testSolution(solutionName)
 //create Solution
 testSolution('TESTMODEL');
 //check refs:
-var ui = uimodel.getUI('A10', 'value');
+var ui = uimodel.getProperty('A10', 'value');
 var formula = FESFacade.findFormula(ui);
 assert.equal(Object.keys(formula.refs).length, 1);
 //combine solutions, current solution is set to TESTMODEL2
 testSolution('TESTMODEL2');
-var ui = uimodel.getUI('A10', 'value');
+var ui = uimodel.getProperty('A10', 'value');
 var formula = FESFacade.findFormula(ui);
 assert.equal(Object.keys(formula.refs).length, 2);
 

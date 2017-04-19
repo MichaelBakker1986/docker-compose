@@ -23,7 +23,7 @@ var bootstrap = require('../../fesjs/formula-bootstrap');
 var AST = require('ast-node-utils').ast;
 Node.prototype.delete = function () {
     throw Error('Remove not yet implemented')
-    //UIService.remove(this.parent().rowId, this.rowId);
+    //PropertiesAssembler.remove(this.parent().rowId, this.rowId);
     this._tree.remove(this.rowId);
     this.remove();
 }
@@ -39,7 +39,7 @@ Node.prototype.duplicate = function () {
     }
     rowId += appendix;
     //JUST some quickfix from here,
-    SolutionFacade.addUi(rowId, 'value', this, this.parent().rowId + '_value');
+    SolutionFacade.addProperty(rowId, 'value', this, this.parent().rowId + '_value');
     var solution = SolutionFacade.createSolution(wb.modelName);
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
     solution.setParentName(uiNode, this.parent().rowId);

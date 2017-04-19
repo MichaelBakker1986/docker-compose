@@ -437,7 +437,7 @@ var parser = {
     deParse: function (rowId, workbook) {
         var fflSolution = uimodel.create(workbook.modelName)
         if (rowId) {
-            var startuielem = uimodel.getUI(workbook.modelName, rowId, 'value')
+            var startuielem = uimodel.getProperty(workbook.modelName, rowId, 'value')
         }
         uimodel.visit(startuielem, function (elem) {
             //JSON output doesn't gurantee properties to be in the same order as inserted
@@ -932,7 +932,7 @@ Node.prototype.duplicate = function () {
     rowId += appendix;
     var wb = this._tree.workbook
     //JUST some quickfix from here,
-    uimodel.addUi(rowId, 'value', this, this.parent().rowId + '_value');
+    uimodel.addProperty(rowId, 'value', this, this.parent().rowId + '_value');
     var solution = uimodel.create(wb.modelName);
     var uiNode = FESFacade.addSimpleLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
     solution.setParentName(uiNode, this.parent().rowId);
@@ -1489,7 +1489,7 @@ function findFormula(uiModel) {
     return FormulaService.findFormulaByIndex(uiModel.ref);
 }
 function getUI(groupName, row, col) {
-    return UIService.getUI(groupName, row, col || 'value');
+    return UIService.getProperty(groupName, row, col || 'value');
 }
 function getFormula(row, col) {
     return findFormula(getUI(row, col));
@@ -1522,7 +1522,7 @@ function updateValueMap(values) {
     });
 }
 function addLink(groupName, row, col, locked, body) {
-    var ui = UIService.getUI(groupName, row, col);
+    var ui = UIService.getProperty(groupName, row, col);
     return FormulaService.addFormulaLink(ui, groupName, row, col, locked, body);
 };
 
@@ -1628,7 +1628,7 @@ FESFacade.addSimpleLink = function (solution, rowId, colId, body, displayAs) {
     //afterwards the Formula's are parsed,
     return solution.createNode(rowId, colId, formulaId, displayAs);
 };
-FESFacade.findLink = UIService.getUI;
+FESFacade.findLink = UIService.getProperty;
 //supported properties
 FESFacade.properties = {
     value: 0,
@@ -2695,14 +2695,14 @@ function visitInternal(node, func, depth) {
     }
 }
 module.exports = {
-    addUi: addUi,//add element to Solution
+    addProperty: addUi,//add element to Solution
     create: create,//create Solution
     bulkInsert: bulkInsert,//add elements to the Solution
 
     //will be encapsulated later,
     //for now we can directly inject the UIModel
     getRootNode: getRootNode,
-    getUI: getUI,//getOrCreate
+    getProperty: getUI,//getOrCreate
     fetch: fetch,//fetchByName (can return null)
     findAll: findAll,
     contains: contains,
@@ -20271,7 +20271,7 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
     $scope.uimodelroot = {nodes: []};
     $scope.rootPath;
     $scope.toggleDefaultOutput = JSWorkBook.settings.toggleOutput;
-    $scope.getUI = JSWorkBook.getUI;
+    $scope.getProperty = JSWorkBook.getProperty;
     $scope.find = JSWorkBook.find;
 
 
