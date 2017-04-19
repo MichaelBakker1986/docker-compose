@@ -33,7 +33,7 @@ madge('../../' + moduleName + '/ff-fes.js', {
                     if (node && node.type === 'MemberExpression') {
                         if (node.object.name === info.servicename) {
                             info.callees[node.property.name] = true
-                            log.info(info.name + ':' + node.object.name + '.' + node.property.name)
+                            log.info('found reference [%s:%s.%s]', info.name, node.object.name, node.property.name)
                         }
                     }
                 }, metaData, undefined, ast)

@@ -60,8 +60,9 @@ server.get('/:context/:function/:variable/:columncontext/:value', respond);
 server.listen(9001, function () {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT/100')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/KSP_Q_ROOT/100')
+    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_MAP00/0')
+    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT/Incomplete')
+    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/KSP_Q_ROOT/Complete')
     log.info('Test path: [%s]', 'http://localhost:9001/user2/value/Q_ROOT/110')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/ChildcareContribution/1/200')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/ChildcareContribution')

@@ -111,6 +111,49 @@ function moveFormula(old, newFormula) {
         property.formulaId = newFormula.id;
     }
 }
+
+//TODO: move this method away. its the only one that should create Dependencies
+//Move it to either a DependencyManager/Service or FESFacade
+SolutionFacade.prototype.addFormulaDependency = function (formulaInfo, name, property) {
+    var foundUiModel = PropertiesAssembler.getOrCreateProperty(formulaInfo.name.split('_')[0], name, property || 'value');
+    //we want do know if we can all the value straight away or we have to invoke a function for it
+    //in future we want to check here if its a dynamic formula, or plain value.
+    //also inherited functions are nice to play around with.
+    //if type is not static, we add it as dependency
+    var referenceFormulaInfo = FormulaService.findFormulaByIndex(foundUiModel.ref);
+    //ok so we going to allow default values, this could because this formula was the default.
+    //there was once an idea to create static formula types
+    //we could now reference to the index instead...
+    var refName = foundUiModel.name;
+    var refId;
+    if (referenceFormulaInfo === undefined) {
+        log.trace('failed to lookup:[' + name + '_' + property + '] but it was in the model, could be in another model. OR it just have default value formula')
+        log.trace(formulaInfo.original);
+    }
+    else {
+        refName = referenceFormulaInfo.name;
+        refId = referenceFormulaInfo.id || referenceFormulaInfo.index;
+
+        if (referenceFormulaInfo.refs[formulaInfo.name] === undefined) {
+            referenceFormulaInfo.refs[formulaInfo.name] = true;
+            referenceFormulaInfo.formulaDependencys.push({
+                name: formulaInfo.name,
+                association: 'refs',
+                refId: formulaInfo.id || formulaInfo.index
+            });
+        }
+    }
+    if (formulaInfo.deps[refName] === undefined) {
+        formulaInfo.deps[refName] = true;
+        formulaInfo.formulaDependencys.push({
+            name: refName,
+            association: 'deps',
+            refId: refId
+        });
+    }
+    return referenceFormulaInfo;
+}
+
 SolutionFacade.prototype.visitParsers = ParserService.visitParsers;
 SolutionFacade.prototype.addParser = ParserService.addParser;
 SolutionFacade.prototype.getOrCreateProperty = PropertiesAssembler.getOrCreateProperty;
