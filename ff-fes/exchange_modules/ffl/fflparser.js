@@ -1,7 +1,7 @@
 var JSVisitor = require('../../fesjs/JSVisitor');
 var SolutionFacade = require('../../fesjs/SolutionFacade.js')
 var AST = require('ast-node-utils').ast;
-var bracketparser = require('./bracketparser');
+var FflToJsonConverter = require('./FflToJsonConverter');
 var FinFormula = require('./FinFormula.js');
 var esprima = require('esprima');
 var logger = require('ff-log');
@@ -39,7 +39,7 @@ var parser = {
     parse: function (data, workbook) {
         var log = {variables: []};
         //convert FFL into JSON (Generic)
-        var json = bracketparser.parse(data);
+        var json = FflToJsonConverter.parse(data);
 
         //lookup  modelName, we need this in the process;
         //all nodes will be given the SolutionName member as ID of its corresponding SolutionName
@@ -99,7 +99,7 @@ var parser = {
             uielem['variable ' + elem.rowId] = realObject;
             fflSolution.addNode(elem.rowId, uielem);
             fflSolution.restoreDelegateProperties(realObject, elem);
-            fflSolution.setPreparser(bracketparser.deparseRegex);
+            fflSolution.setPreparser(FflToJsonConverter.deparseRegex);
             fflSolution.addNodeToCorrespondingPlaceInHierarchie(elem.parentrowId, elem.rowId, uielem);
         });
 
@@ -119,7 +119,7 @@ function stripVariableOrtuple(name, node) {
     if (!name) {
         return undefined;
     }
-    //this is just a fallback, the bracketparser sometimes fails variable + variablename refers to othervariable
+    //this is just a fallback, the FflToJsonConverter sometimes fails variable + variablename refers to othervariable
     if (name.indexOf('+') > -1) {
         //something wrong while parsing regex, trying to fix it here,
         name = name.replace(/(\+|-|\=)\s*/gm, '');

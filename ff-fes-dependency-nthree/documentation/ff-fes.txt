@@ -35,8 +35,8 @@ digraph G  {
   "fesjs/SolutionFacade" -> "fesjs/FormulaService" [ label = "findFormulaByIndex\naddModelFormula\nmoveFormula" ];
   "fesjs/SolutionFacade" -> "fesjs/FunctionMap" [ label = "initFormulaBootstrap\nmoveFormula" ];
   "fesjs/SolutionFacade" -> "fesjs/ParserService" [ label = "findParser\nvisitParsers\naddParser" ];
+  "fesjs/SolutionFacade" -> "fesjs/PropertiesAssembler" [ label = "createRootNode\nfindAllInSolution\ngetOrCreateProperty\nbulkInsert\nfetch\naddUi\ncontains" ];
   "fesjs/SolutionFacade" -> "fesjs/Solution" [ label = "" ];
-  "fesjs/SolutionFacade" -> "fesjs/PropertiesAssembler" [ label = "createRootNode\nfindAllInSolution\ngetOrCreateUI\nbulkInsert\nfetch\naddUi\ncontains" ];
   "fesjs/SolutionFacade" -> "fesjs/formula-bootstrap" [ label = "" ];
   "fesjs/XAxis" -> "resources/CustomImport" [ label = "" ];
   "ff-fes" -> "exchange_modules/ffl/fflparser" [ label = "" ];

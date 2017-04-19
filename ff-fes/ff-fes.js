@@ -81,7 +81,7 @@ function getEntry(workbook, rowId, columncontext) {
     var variable = workbook.getStatelessVariable(rowId, 'value');
     //quick-fix for document variables;
     //TODO: all warnings for calls with document frequencies and columncontext>0 is useless
-    if (variable.delegate && variable.delegate.frequency === 'document') {
+    if (variable && variable.delegate && variable.delegate.frequency === 'document') {
         end = 0;
     }
     for (var x = start; x <= end; x++) {
