@@ -2,9 +2,7 @@
  * Bridge between FormulaService,PropertiesAssembler and FunctionMap
  */
 var logger = require('ff-log');
-//for now now just years.. keep it simple
 var FESFacade = {}
-
 var PropertiesAssembler = require('./PropertiesAssembler');
 var FunctionMap = require('./FunctionMap');
 var FormulaService = require('./FormulaService')

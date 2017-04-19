@@ -88,7 +88,7 @@ function addProperty(groupName, row, col, item, parentId) {
         }
     }
 }
-//add elements tos
+//add elements from Solution into Map
 PropertiesAssembler.prototype.bulkInsert = function (solution) {
     var solutionName = solution.name.toUpperCase();
     //fix for appending values, instead of overwriting them
@@ -141,14 +141,14 @@ PropertiesAssembler.prototype.findAllInSolution = function (nodeId) {
     }
     return result;
 };
-//fetchByName (can return null)
+//fetchByName (can return undefined)
 PropertiesAssembler.prototype.fetch = function fetch(name) {
     return PropertiesModel[name];
 };
 /**
  * Visitor walk the tree
  * if node is null we use root node
- * function is not thread safe, add parent and depth to function call instead of altering UINode
+ * function is not thread safe, add parent and depth to function call instead of altering PropertyNode
  */
 PropertiesAssembler.prototype.visit = function (node, func) {
     var startingNode = node || getRootNode('NEW');

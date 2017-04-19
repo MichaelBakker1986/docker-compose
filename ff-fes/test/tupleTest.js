@@ -11,4 +11,4 @@ assert(wb.get('TupleTest') == 10)
 assert(wb.get('TupleTest', 'value', 1) == 20)
 wb.set('TupleTest', 30, 'value', 1, 1)
 assert(wb.get('TupleTest', 'value', 1) == 20)
-
+assert(wb.get('TupleTest', 'value', 1, 1) == 30)

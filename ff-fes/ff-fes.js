@@ -57,13 +57,20 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value) {
                 value = isNaN(choiceValue.name) ? choiceValue.name : parseInt(choiceValue.name);
             }
         }
-        JSWorkBook.statelessSetValue(rowId, value, 'value', columncontext, 0)
+        JSWorkBook.statelessSetValue(rowId, value, 'value', columncontext, 0, 0)
         return getEntry(JSWorkBook, rowId, columncontext)
     } else {
         var values = [];
-        JSWorkBook.visit(JSWorkBook.getStatelessNode(rowId), function (node) {
-            values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext))
-        });
+        var rootNode = JSWorkBook.getStatelessNode(rowId);
+        if (rootNode) {
+            JSWorkBook.visit(rootNode, function (node) {
+                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext))
+            });
+        } else {
+            values.push({
+                variable: rowId
+            })
+        }
         return values;
     }
 }
@@ -76,9 +83,10 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value) {
  */
 function getEntry(workbook, rowId, columncontext) {
     var data = [];
-    var start = columncontext;
-    var end = columncontext == 0 ? columncontext + workbook.columns : columncontext;
+    var start = 0;
+    var end = workbook.columns;
     var variable = workbook.getStatelessVariable(rowId, 'value');
+
     //quick-fix for document variables;
     //TODO: all warnings for calls with document frequencies and columncontext>0 is useless
     if (variable && variable.delegate && variable.delegate.frequency === 'document') {

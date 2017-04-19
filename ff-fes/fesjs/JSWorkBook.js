@@ -156,26 +156,25 @@ JSWorkBook.prototype.getStatelessNode = function (name) {
     return FESFacade.getStatelessVariable(name, "value");
 }
 JSWorkBook.prototype.getStatelessVariable = FESFacade.getStatelessVariable;
-//some functions we directly pass trough
-JSWorkBook.prototype.get = function (row, col, x, y) {
-    var xas = resolveX(this, x);
-    var yas = resolveY(this, y);
-    return FESFacade.statelessGetValue(this.context, this.modelName + '_' + row, col, xas, yas)
-};
+
 function resolveX(wb, x) {
     return x ? wb.xaxis[x] : wb.xaxis[0];
 }
 function resolveY(wb, y) {
     return wb.yaxis[y || 0];
 }
+//some functions we directly pass trough
+JSWorkBook.prototype.get = function (row, col, x, y) {
+    var xas = resolveX(this, x);
+    var yas = resolveY(this, y);
+    return FESFacade.statelessGetValue(this.context, this.modelName + '_' + row, col, xas, yas)
+};
 JSWorkBook.prototype.statelessGetValue = function (row, col, x, y) {
     var xas = resolveX(this, x);
     var yas = resolveY(this, y)
     return FESFacade.statelessGetValue(this.context, row, col, xas, yas)
 };
-JSWorkBook.prototype.updateValueMap = function () {
-    FESFacade.updateValueMap(this.context.values);
-};
+
 JSWorkBook.prototype.set = function (row, value, col, x, y) {
     var xas = resolveX(this, x);
     var yas = resolveY(this, y)
@@ -183,9 +182,12 @@ JSWorkBook.prototype.set = function (row, value, col, x, y) {
 }
 JSWorkBook.prototype.statelessSetValue = function (row, value, col, x, y) {
     var xas = resolveX(this, x);
-    var yas = resolveX(this, y);
+    var yas = resolveY(this, y);
     return FESFacade.statelessSetValue(this.context, row, value, col, xas, yas);
 }
+JSWorkBook.prototype.updateValueMap = function () {
+    FESFacade.updateValueMap(this.context.values);
+};
 JSWorkBook.prototype.fixAll = fixAll
 //should return the solution instead. So its deprecated
 JSWorkBook.prototype.getRootNode = function () {
