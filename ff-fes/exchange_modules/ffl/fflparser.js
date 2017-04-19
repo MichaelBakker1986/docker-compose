@@ -27,11 +27,6 @@ var logger = require('ff-log');
  }*/
 //@formatter:on
 
-/*var nodePropertiesMapping =
- {
- data_options: unscalable,
- options_title: locked
- }*/
 var parser = {
     name: 'ffl',
     status: 'green',

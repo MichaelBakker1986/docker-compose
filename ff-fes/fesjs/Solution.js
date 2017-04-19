@@ -10,14 +10,12 @@
 function Solution(solutionName)
 {
     this.name = solutionName;
-
     this.displayTypes = {};
     this.type = solutionName;
     this.properties = {};
     //TODO: merge these two
     this.nodes = [];
     this.uinodes = {};
-    //also this one is tricky
     this.addedRowIds = new Set();
     this.root = {};
     this.preparser = function (input)

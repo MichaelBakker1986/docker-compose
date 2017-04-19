@@ -6,9 +6,6 @@ process.alltest = true;
 process.loglevel = 'info'
 console.time('performance')
 var tests = [
-    './ABN_RISKIntegrationTest.js',
-    './ABN_RISKIntegrationTest.js',
-    './ABNExportTest.js',
     './finanXMLTest.js',//FinanXML
     './rptXmlExportTest.js',
     './screendefinitionTest.js',//.screen definition

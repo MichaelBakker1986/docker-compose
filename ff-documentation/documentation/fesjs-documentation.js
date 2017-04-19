@@ -50,7 +50,7 @@ madge('../../' + moduleName + '/ff-fes.js', {
         }
     }
     var toDot = graph.to_dot();
-    fs.writeFile('./' + moduleName + '.txt', toDot, function (res) {
+    fs.writeFile('../resources/' + moduleName + '.txt', toDot, function (res) {
         log.info('done')
     })
 }).catch(function (err) {

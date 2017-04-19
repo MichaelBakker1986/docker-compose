@@ -1,5 +1,3 @@
-//TODO: Its possible to create recursive structures, avoid this from happening.
-//This File should be merged with Node.js,SolutionService.js and not be needed, keep this in mind.
 function PropertiesAssembler() {
 }
 var PropertiesModel = {
@@ -7,6 +5,9 @@ var PropertiesModel = {
         rowId: 'root'
     }
 };
+/**
+ * Model root nodes
+ */
 var rootNodes = {
     NEW: PropertiesModel.NEW_root_value
 };
@@ -36,9 +37,7 @@ PropertiesAssembler.prototype.createRootNode = function (modelName) {
     }
     return rootNodes[newModelName];
 }
-//getOrCreateProperty
 function getOrCreateProperty(groupName, row, col) {
-
     var rowId = groupName + '_' + row;
     var name = rowId + "_" + col;
     var node = PropertiesModel[name];
@@ -55,7 +54,6 @@ function getOrCreateProperty(groupName, row, col) {
     }
     return node;
 }
-PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 function hasChild(children, name) {
     for (var i = 0; i < children.nodes.length; i++) {
         if (children.nodes[i].name === name) {
@@ -67,31 +65,30 @@ function hasChild(children, name) {
 //add element to Solution
 function addProperty(groupName, row, col, item, parentId) {
     //add to map
-    var ui = getOrCreateProperty(groupName, row, col);
+    var property = getOrCreateProperty(groupName, row, col);
 
     //inherit all properties But new allow extended Objects.
     //Only copy primitive members, and the delegate Object.
     for (key in item) {
-        if (ui[key] === undefined && (key === 'delegate' || typeof item[key] !== 'object' )) {
-            ui[key] = item[key];
+        if (property[key] === undefined && (key === 'delegate' || typeof item[key] !== 'object' )) {
+            property[key] = item[key];
         }
     }
     //add to root if no parent
     if (parentId !== undefined) {
         //else add to PropertiesModel
         var parentUiModel = PropertiesModel[groupName + '_' + parentId];
-        if (!hasChild(parentUiModel, ui.name)) {
+        if (!hasChild(parentUiModel, property.name)) {
             parentUiModel.nodes.push({
-                name: ui.name,
-                rowId: ui.rowId,
-                colId: ui.colId,
+                name: property.name,
+                rowId: property.rowId,
+                colId: property.colId,
                 identifier: groupName + '_' + parentId
             })
         }
     }
 }
-PropertiesAssembler.prototype.addProperty = addProperty;
-//add elements to
+//add elements tos
 PropertiesAssembler.prototype.bulkInsert = function (solution) {
     var solutionName = solution.name.toUpperCase();
     //fix for appending values, instead of overwriting them
@@ -138,9 +135,9 @@ PropertiesAssembler.prototype.findAllInSolution = function (nodeId) {
         nodes: []
     }
     for (var key in PropertiesModel) {
-        var uiModel = PropertiesModel[key];
-        if (uiModel.displayAs !== undefined && uiModel.solutionName === nodeId) {
-            result.nodes.push(uiModel);
+        var property = PropertiesModel[key];
+        if (property.solutionName === nodeId) {
+            result.nodes.push(property);
         }
     }
     return result;
@@ -179,4 +176,5 @@ function visitInternal(node, func, depth) {
         }
     }
 }
+PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 module.exports = PropertiesAssembler.prototype;

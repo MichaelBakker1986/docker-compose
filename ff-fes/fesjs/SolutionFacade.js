@@ -7,7 +7,7 @@ var PropertiesAssembler = require('./PropertiesAssembler')
 var FunctionMap = require('./FunctionMap')
 var FormulaService = require('./FormulaService')
 var ParserService = require('./ParserService')
-var bootstrap = require('./formula-bootstrap');
+var FormulaBootstrap = require('./FormulaBootstrap');
 var esprima = require('esprima')
 function SolutionFacade() {
 }
@@ -41,13 +41,15 @@ SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId,
 };
 SolutionFacade.prototype.importSolution = function (data, parserType, wb) {
     if (data === undefined) {
-        console.info('no file specified')
+        log.error('No data specified')
         return;
     }
     var solution = ParserService.findParser(parserType).parse(data, wb);
-
-    log.debug('Update model [' + solution.getName() + ']');
+    log.debug('Update Solution [' + solution.getName() + ']');
     PropertiesAssembler.bulkInsert(solution);
+    //only get the formulas for Current Model
+    var formulas = this.produceSolution(solution.getName()).formulas;
+    this.initFormulaBootstrap(formulas, false);
     return solution;
 }
 SolutionFacade.prototype.exportSolution = function (parserType, rowId, workbook) {
@@ -58,7 +60,7 @@ SolutionFacade.prototype.exportSolution = function (parserType, rowId, workbook)
     return parser.deParse(rowId, workbook);
 }
 SolutionFacade.prototype.initFormulaBootstrap = function (formulas, disableCache) {
-    return FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, formulas, disableCache);
+    return FunctionMap.initFormulaBootstrap(FormulaBootstrap.parseAsFormula, formulas, disableCache);
 };
 SolutionFacade.prototype.gatherProperties = function (modelName, properties, rowId) {
     var formulaProperties = {};
@@ -76,7 +78,7 @@ SolutionFacade.prototype.createFormulaAndStructure = function (groupName, formul
     var ui = PropertiesAssembler.getOrCreateProperty(groupName, rowId, col);
     var newFormulaId = FormulaService.addModelFormula(ui, groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
     //integrate formula (parse it)
-    FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
+    FunctionMap.initFormulaBootstrap(FormulaBootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
 };
 SolutionFacade.prototype.mergeFormulas = function (formulasArg) {
     //so for all refs in the formula, we will switch the formulaIndex
@@ -96,7 +98,7 @@ SolutionFacade.prototype.mergeFormulas = function (formulasArg) {
         }
     });
     //rebuild the formulas
-    FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, changed, true);
+    FunctionMap.initFormulaBootstrap(FormulaBootstrap.parseAsFormula, changed, true);
 };
 function moveFormula(old, newFormula) {
     FormulaService.moveFormula(old, newFormula);
@@ -108,13 +110,10 @@ function moveFormula(old, newFormula) {
         uiModel.formulaId = newFormula.id;
     }
 }
-//** addProperty and bulkinsert should not be exposed.
-SolutionFacade.prototype.addProperty = PropertiesAssembler.addProperty;
-SolutionFacade.prototype.bulkInsert = PropertiesAssembler.bulkInsert;
 SolutionFacade.prototype.visitParsers = ParserService.visitParsers;
 SolutionFacade.prototype.addParser = ParserService.addParser;
 
-SolutionFacade.prototype.findLink = PropertiesAssembler.getOrCreateProperty;
+SolutionFacade.prototype.getOrCreateProperty = PropertiesAssembler.getOrCreateProperty;
 SolutionFacade.prototype.contains = PropertiesAssembler.contains
 SolutionFacade.prototype.properties = {
     value: 0,
@@ -130,5 +129,5 @@ SolutionFacade.prototype.properties = {
     _testh: 10
 };
 SolutionFacade.prototype.findFormulaByIndex = FormulaService.findFormulaByIndex;
-bootstrap.initStateBootstrap(SolutionFacade.prototype);
+FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
 module.exports = SolutionFacade.prototype;

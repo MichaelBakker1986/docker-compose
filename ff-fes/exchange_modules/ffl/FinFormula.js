@@ -111,5 +111,4 @@ FinFormula.prototype.fixCasing = function (buf) {
         return $1.toUpperCase()
     })
 };
-
-module.exports = new FinFormula();
+module.exports = FinFormula.prototype;

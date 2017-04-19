@@ -3,7 +3,6 @@ var SolutionFacade = require('../../../../ff-fes/fesjs/SolutionFacade');
 var AST = require('ast-node-utils').ast;
 var lineparser = require('./finToJson.js');
 var finformula = require('../FinFormula/FinFormula.js');
-var uimodel = require('../clientscorecard/uimodel.js');
 var Solution = require('../fesjs/Solution.js');
 var assert = require('assert');
 var Stack = require('stack-adt');

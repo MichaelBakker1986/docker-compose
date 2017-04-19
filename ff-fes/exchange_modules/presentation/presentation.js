@@ -30,27 +30,28 @@ var UUID = 0;
  * please refactor..
  */
 Node.prototype.duplicate = function () {
-    var wb = this._tree.workbook
-    //This part does not belong here, just to test behavior
-    var rowId = this.rowId + '_copy';
-    var appendix = '';
-    while (wb.getNode(rowId + appendix)) {
-        appendix = '(' + UUID++ + ')';
-    }
-    rowId += appendix;
-    //JUST some quickfix from here,
-    SolutionFacade.addProperty(rowId, 'value', this, this.parent().rowId + '_value');
-    var solution = SolutionFacade.createSolution(wb.modelName);
-    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
-    solution.setParentName(uiNode, this.parent().rowId);
-    SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(this.title))
-    //JUST some quickfix from here,
-    SolutionFacade.bulkInsert(solution);
-    SolutionFacade.gatherFormulas(solution);
-    //JUST some quickfix from here,
-    SolutionFacade.initFormulaBootstrap(solution.formulas, false);
-    wb.updateValueMap();
-    this.parent().update({title: true});
+    //
+    /* var wb = this._tree.workbook
+     //This part does not belong here, just to test behavior
+     var rowId = this.rowId + '_copy';
+     var appendix = '';
+     while (wb.getNode(rowId + appendix)) {
+     appendix = '(' + UUID++ + ')';
+     }
+     rowId += appendix;
+     //JUST some quickfix from here,
+     SolutionFacade.addProperty(rowId, 'value', this, this.parent().rowId + '_value');
+     var solution = SolutionFacade.createSolution(wb.modelName);
+     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
+     solution.setParentName(uiNode, this.parent().rowId);
+     SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(this.title))
+     //JUST some quickfix from here,
+     SolutionFacade.bulkInsert(solution);
+     SolutionFacade.gatherFormulas(solution);
+     //JUST some quickfix from here,
+     SolutionFacade.initFormulaBootstrap(solution.formulas, false);
+     wb.updateValueMap();
+     this.parent().update({title: true});*/
 }
 
 Tree.prototype.update = function (node, properties) {

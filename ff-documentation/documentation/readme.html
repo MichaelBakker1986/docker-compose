@@ -16,7 +16,7 @@
 <script language="JavaScript" src="../bower_components/viz.js/viz.js"></script>
 <script>
     var client = new XMLHttpRequest();
-    client.open('GET', './ff-fes.txt');
+    client.open('GET', '../resources/ff-fes.txt');
     client.onreadystatechange = function () {
         image = Viz(client.responseText);
         document.body.innerHTML = image;

@@ -24,19 +24,15 @@ APP.additionalbuttons.push({
     name: 'Editor',
     icon: 'fa fa-table fa-fw',
     page: 'Editor',
-    action: function ($scope)
-    {
+    action: function ($scope) {
         sidebarHide();
         $scope.switchPage('Editor')
     }
 });
-APP.filter('rowId', function ()
-{
-    return function (items)
-    {
+APP.filter('rowId', function () {
+    return function (items) {
         var filtered = [];
-        for (var i = 0; i < items.length; i++)
-        {
+        for (var i = 0; i < items.length; i++) {
             var item = items[i];
             filtered.push(item);
         }
@@ -60,39 +56,31 @@ var editColumns = [
 var saveFunction;
 var rows = [];
 var wb = new JSWorkBook();
-APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function ($timeout, $scope, $http, $location)
-{
-    function updateRows()
-    {
+APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function ($timeout, $scope, $http, $location) {
+    function updateRows() {
         rows.length = 0;
         Array.prototype.push.apply(rows, $scope.presentation == undefined ? [] : $scope.presentation.getAllChildren());
-        $timeout(function ()
-        {
+        $timeout(function () {
             $scope.rows = rows;
         });
     }
 
-    $scope.$on('myCustomEvent', function (event, data)
-    {
+    $scope.$on('myCustomEvent', function (event, data) {
         updateRows();
     });
     updateRows();
 
-    saveFunction = function ()
-    {
+    saveFunction = function () {
         console.info('save model' + $scope.apiPath + 'FORMULA/' + 1)
         var httpPromise = $http.post($scope.apiPath + 'FORMULA/' + 1, SolutionFacade.produceSolution().formulas);
 
         $scope.myPromise = httpPromise;
-        $timeout(function ()
-        {
+        $timeout(function () {
             $scope.myPromise = httpPromise;
         });
-        httpPromise.then(function successCallback(response)
-        {
+        httpPromise.then(function successCallback(response) {
             console.info(response);
-        }, function errorCallback(response)
-        {
+        }, function errorCallback(response) {
             console.error(response)
         });
     }
@@ -102,25 +90,20 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
     $scope.vals = {};
     $scope.cols = editColumns;
     $scope.answertypes = displaytypes;
-    $scope.convert = function (row)
-    {
+    $scope.convert = function (row) {
         return row.rowId;
     }
     /**
      * Dynamic modify refName single formula
      */
-    $scope.updateFormula = function (row, col, formulaUI)
-    {
-        if (row === undefined || col === undefined)
-        {
+    $scope.updateFormula = function (row, col, formulaUI) {
+        if (row === undefined || col === undefined) {
             console.info(row + ":" + col);
             throw Error('Invalid params');
         }
         var refName = row + "_" + col;
-        if (validUrl(formulaUI.original))
-        {
-            $http.get(formulaUI.original).success(function (data)
-            {
+        if (validUrl(formulaUI.original)) {
+            $http.get(formulaUI.original).success(function (data) {
                 /* //want to see all cols needed, rows needed..
                  //metadata is printed..
                  var metaData = pivot(data);
@@ -140,16 +123,13 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
                 throw Error('not working anymore')
             });
         }
-        else
-        {
-            try
-            {
+        else {
+            try {
                 console.info('row: ' + row + "  col : " + col)
 
-                var uiCell = UIModel.getOrCreateProperty(row, col, true);
-                if (col === 'tuple')
-                {
-                    var tupleTuple = UIModel.getOrCreateProperty(row, 'value', true);
+                //var uiCell = UIModel.getOrCreateProperty(row, col, true);
+                if (col === 'tuple') {
+                    //var tupleTuple = UIModel.getOrCreateProperty(row, 'value', true);
                     tupleTuple.tuple = true;
                     return;
                 }
@@ -159,18 +139,15 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
 
                 formulaUI.valid = true;
             }
-            catch (e)
-            {
+            catch (e) {
                 console.error(e);
                 formulaUI.valid = false;
             }
         }
     };
-    $scope.print = function (value, row, col)
-    {
-        var uiCell = UIModel.getOrCreateProperty(row, col, true);
-        $timeout(function ()
-        {
+    $scope.print = function (value, row, col) {
+        // var uiCell = UIModel.getOrCreateProperty(row, col, true);
+        $timeout(function () {
             $scope.focussedId = row + "_" + col;
             console.info($scope.focussedId)
             $scope.SelectedComponent = {
@@ -179,8 +156,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
                 col: col,
                 formula: FESFacade.getFormula(row, col)
             }
-            if (uiCell.displayAs !== 'AmountAnswerType')
-            {
+            if (uiCell.displayAs !== 'AmountAnswerType') {
                 var $formulaInput = $('#formulaInput');
                 $formulaInput.focus();
                 $formulaInput.select();
@@ -192,15 +168,12 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
     /**
      * Properties, read-only types
      */
-    $scope.apiGet = function (row, col)
-    {
+    $scope.apiGet = function (row, col) {
         var formula = FESFacade.getFormula(row, col);
-        if (formula === undefined)
-        {
+        if (formula === undefined) {
             FESFacade.addLink(row, col, true, undefined);
         }
-        else
-        {
+        else {
             return wb.get(row, col);
         }
     };
@@ -208,40 +181,32 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
      * for other input types Support default values
      * Move this entire thing, used by editor only?
      */
-    $scope.apiGetSet = function (rowId, row, colId)
-    {
+    $scope.apiGetSet = function (rowId, row, colId) {
         var formula = FESFacade.getFormula(rowId, colId);
 
-        if (row.rowId === undefined || (row.rowId !== rowId))
-        {
+        if (row.rowId === undefined || (row.rowId !== rowId)) {
             row.rowId = rowId;
             //angular watches these members, dont set them unless needed
             var inputValue = wb.get(rowId, colId);
-            if (inputValue != row.inputValue)
-            {
+            if (inputValue != row.inputValue) {
                 row.inputValue = inputValue;
             }
             row.oldValue = row.inputValue;
         }
-        else if (row.oldValue !== row.inputValue)
-        {
+        else if (row.oldValue !== row.inputValue) {
             //!isNaN(row.inputValue)
-            if (row.inputValue !== null && row.inputValue !== undefined && row.inputValue !== '')
-            {
+            if (row.inputValue !== null && row.inputValue !== undefined && row.inputValue !== '') {
                 $scope.exportValue(rowId, row, colId, row.inputValue)
 
                 row.inputValue = wb.get(rowId, colId);
                 row.oldValue = row.inputValue;
             }
         }
-        else
-        {
-            if (formula !== undefined)
-            {
+        else {
+            if (formula !== undefined) {
                 //angular watches these members, dont set them unless needed
                 var inputValue = wb.get(rowId, colId);
-                if (inputValue != row.inputValue)
-                {
+                if (inputValue != row.inputValue) {
                     row.inputValue = inputValue;
                 }
             }

@@ -18,7 +18,8 @@
  *Instead of testing all, we better of just testing Identifiers
  * TODO: add variable as Self reference
  **/
-//better use a Set() to check if an item exists, its quicker
+function FormulaBootstrap() {
+}
 var logger = require('ff-log');
 var assert = require('assert');
 var AST = require('ast-node-utils').ast;
@@ -27,12 +28,10 @@ var escodegen = require('escodegen')
 var XDimVariableName = 'x.';
 var variables;
 var columnProperties;
-var findLink;
+var getOrCreateProperty;
 var formulas;
 var caseCount = 10;
-var initialized = false; //the parseAsFormula should never be called without init being called
 //this part is essencial to bind variables, extract support Variable types, supported Column types
-
 // these variables will be red from the given JSON asap.
 // for now we state them here..
 var properties;
@@ -75,7 +74,7 @@ var xArgument = {
 //TODO: move this method away. its the only one that should create Dependencies
 //Move it to either a DependencyManager/Service or FESFacade
 function addFormulaDependency(formulaInfo, name, property) {
-    var foundUiModel = findLink(formulaInfo.name.split('_')[0], name, property || 'value');
+    var foundUiModel = getOrCreateProperty(formulaInfo.name.split('_')[0], name, property || 'value');
     //we want do know if we can all the value straight away or we have to invoke a function for it
     //in future we want to check here if its a dynamic formula, or plain value.
     //also inherited functions are nice to play around with.
@@ -251,7 +250,7 @@ var simplified = {
             "name": "1"
         }];
     },
-    //reqruires two variables
+    //ExpandFraction requires two variables
     ExpandFraction: function (formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
@@ -282,9 +281,6 @@ var simplified = {
     },
     /**
      * Inject the x parameter into the call
-     * @param formulaInfo
-     * @param node
-     * @constructor
      */
     FirstValueT: function (formulaInfo, node) {
         node.arguments.unshift(xArgument);
@@ -348,7 +344,7 @@ var simplified = {
     SelectDescendants: function (formulaInfo, node) {
         node.type = 'ArrayExpression';
         var groupName = node.arguments[0].name.split('_')[0];
-        var foundStartUiModel = findLink(groupName, node.arguments[0].name, propertiesArr[0]);
+        var foundStartUiModel = getOrCreateProperty(groupName, node.arguments[0].name, propertiesArr[0]);
         var lambda;
         //get the propertyType
         //extract lambda
@@ -365,14 +361,12 @@ var simplified = {
             node.arguments.length = 1;
         }
         else {
-            foundEndUiModel = findLink(groupName, node.arguments[1].name, propertiesArr[0]);
+            foundEndUiModel = getOrCreateProperty(groupName, node.arguments[1].name, propertiesArr[0]);
         }
 
         node.elements = [];
+        //nodes may never be undefined
         var nodes = foundStartUiModel.nodes;
-        if (nodes === undefined) {
-            logger.debug('Log nothing..');
-        }
         //now lets create the Nested Logical Expression
         //var root = AST.OR(AST.MEMBER(AST.IDENTIFIER(nodes[0].rowId), 'value'), AST.MEMBER(AST.IDENTIFIER(nodes[1].rowId), 'value'));
         /*var ArrayExpression = {
@@ -588,12 +582,12 @@ var traverseTypes = {
                 if (orId.tempnaaam === node.object.name) {
                     //return 1 instead of a Self-reference
                     node.name = '1';
+                    log.trace('found self reference [%s]', node.object.name)
                 }
                 else {
                     //else will will what ever just get the onecol value back.
                     node.name = buildFunc(orId, 0, node.object);
                 }
-
                 delete node.object;
                 delete node.property;
                 delete node.computed;
@@ -662,9 +656,8 @@ function buildFormula(formulaInfo, parent, node) {
             }
         }
     }
-
     if (traverseTypes[node.type] === undefined) {
-        console.info('ERROR: ' + node.type);
+        logger.error('ERROR: [%s] not registered AST expression', node.type);
     }
     traverseTypes[node.type](formulaInfo, parent, node);
 }
@@ -674,7 +667,7 @@ function generate(body) {
 }
 //public function, will return the parsed string
 //its getting nasty, with supporting this many options, consider only expecting on valid type either AST or STRING only
-function parseAsFormula(formulaInfo) {
+FormulaBootstrap.prototype.parseAsFormula = function (formulaInfo) {
     if (formulaInfo.parsed === undefined || formulaInfo.parsed === null) {
         var ast;
         if (formulaInfo.body === "") {
@@ -694,38 +687,24 @@ function parseAsFormula(formulaInfo) {
         var tempnaaam = formulaInfo.name.replace('FINANPROGNOSEMODEL_', '').replace(/_value$/g, '');
         formulaInfo.tempnaaam = tempnaaam;
 
+        //check if the formula contains a self-reference
         if (new RegExp("\W" + tempnaaam + "\W", "gmi").test(formulaInfo.original)) {
-            logger.info(formulaInfo.name + " : " + formulaInfo.original);
+            logger.warn('Self reference found [%s] in [%s]', formulaInfo.name, formulaInfo.original);
         }
         buildFormula(formulaInfo, null, ast);
         var generated = generate(ast);
-        /*  if (formulaInfo.formulaDependencys.length > 0)
-         {
-         logger.debug(formulaInfo.formulaDependencys.length + ":" + formulaInfo.name + ": " + formulaInfo.original + "\n                                                                                            " + generated)
-         }*/
         formulaInfo.ast = JSON.stringify(ast);
         formulaInfo.parsed = generated;
+        formulaInfo.tempnaaam = undefined;
     }
     return formulaInfo.parsed;
 }
 
-
-function initStateBootstrap(configs) {
-    //for now we accept no Dynamic variable.properties (visible, etc.)
-    //also we acept no Dynamic FesJSMath. (static for all models;
-    if (initialized) {
-        throw Error("The bootstrap is already initialized");
-    }
-    initialized = true;
-
+FormulaBootstrap.prototype.initStateBootstrap = function (configs) {
     variables = configs.contains;//to distinct FesVariable from references
     properties = configs.properties;//to check if we use this property from the model language
-    //we might better just always insert UIModel_value
-    findLink = configs.findLink;//findOrCreate a UIModel, to do a variable lookup.  We must have knowledge from the UIModels. To find corresponding LinkID
+    getOrCreateProperty = configs.getOrCreateProperty;//getOrCreateProperty a UIModel, to do a variable lookup.  We must have knowledge from the UIModels. To find corresponding LinkID
     formulas = configs.findFormulaByIndex;
-
-    //TODO: this part makes it impossible to be flexible
-    //if its done in FESFacade it become flexible
     for (var property in properties) {
         varproperties[property] = {
             f: properties[property],
@@ -735,11 +714,5 @@ function initStateBootstrap(configs) {
             }
         }
     }
-    //TODO: this part makes it impossible to be flexible
-    //if its done in FESFacade it become flexible
-    return parseAsFormula;
 };
-module.exports = {
-    initStateBootstrap: initStateBootstrap,
-    parseAsFormula: parseAsFormula
-};
+module.exports = FormulaBootstrap.prototype;

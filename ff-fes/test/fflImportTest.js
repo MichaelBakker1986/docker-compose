@@ -1,18 +1,18 @@
 require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
 require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
 require('../../ff-math/ff-math');//just let it inject into the FESFacade
-var WorkBook = require('../fesjs/JSWorkBook');
+var JSWorkBook = require('../fesjs/JSWorkBook');
 var JUNIT = require('./JUNIT');
 var FESFacade = require('../fesjs/FESFacade');
 var PropertiesAssembler = require('../fesjs/PropertiesAssembler');
 var FormulaService = require('../fesjs/FormulaService');
-var bootstrap = require('../fesjs/formula-bootstrap');
+var FormulaBootstrap = require('../fesjs/FormulaBootstrap');
 var assert = require('assert');
 var esprima = require('esprima');
 //test basic functionality for an import
 var data = JUNIT.getFile('hierarchyTest.ffl');
 var FESContext = require('../fesjs/fescontext')
-var wb = new WorkBook(new FESContext());
+var wb = new JSWorkBook(new FESContext());
 //wb.doImport(data, 'ffl');
 var singleVariable = JUNIT.getFile('testFFLVariable.ffl');
 wb.doImport(singleVariable, 'ffl');
@@ -130,7 +130,7 @@ var tests = ['KSP'];
 for (var i = 0; i < tests.length; i++) {
     var solutionName = tests[i];
     var data = JUNIT.getFile(solutionName + '.ffl');
-    var wb = new WorkBook(new FESContext());
+    var wb = new JSWorkBook(new FESContext());
     wb.doImport(data, 'ffl');
 
     var feedback = wb.validate();
@@ -153,7 +153,7 @@ console.info('Test fflImport success')
 /*
 
 
- var wbKSP = new WorkBook(new FESContext());
+ var wbKSP = new JSWorkBook(new FESContext());
  //wb.doImport(data, 'ffl');
  var KSP = JUNIT.getFile('KSP.ffl');
  wbKSP.doImport(KSP, 'ffl');

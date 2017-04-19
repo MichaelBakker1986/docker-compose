@@ -207,6 +207,7 @@ excelPlugin.initComplete.then(function () {
     assert(wbKSP.get('Q_MAP06_STATUS') == wbKSP.get('Q_MAP06') == true);
 
     var pad = '            '
+
     function testVariable(variableName, level) {
         var indent = pad.substring(0, level);
         var result = {};
@@ -227,4 +228,6 @@ excelPlugin.initComplete.then(function () {
     require('./totalyearlycosttest')
     //test core functionality
     require('../ff-fes/test/RunAllTest')
+}).catch(function (err) {
+    log.error(err)
 })

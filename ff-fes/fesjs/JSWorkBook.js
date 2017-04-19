@@ -26,17 +26,15 @@ function JSWorkBook(context) {
     this.context = context;
     //default modelname
     this.modelName = 'NEW';
-    //default timeunit
+    //tuple axis
     this.yaxis = YAxis;
+    //time axis, we looking at bookyears at the moment
     this.xaxis = XAxis.bkyr.columns[0]
 }
 
 JSWorkBook.prototype.doImport = function (data, parserType) {
     var solution = SolutionFacade.importSolution(data, parserType, this);
-    this.modelName = solution.getName().toUpperCase();
-    //only get the formulas for Current Model
-    var formulas = SolutionFacade.produceSolution(this.modelName).formulas;
-    SolutionFacade.initFormulaBootstrap(formulas, false);
+    this.modelName = solution.getName();
     this.updateValueMap();
 }
 //if it is possible to fix missing functions
@@ -56,10 +54,13 @@ function fixAll() {
     }
     return feedback;
 };
-//validate current solution
-//Only generic models will be validated once they are imported
-//Generic problems can be resolved in the same manner
-//returns a FeedBack object
+/**
+ * validate current solution
+ *Only generic models will be validated once they are imported
+ *Generic problems can be resolved in the same manner
+ *returns a FeedBack object
+ * TODO: extract validator.
+ */
 function validate() {
     var validateResponse = {
         succes: [],
@@ -79,7 +80,6 @@ function validate() {
             var fix;
             if (e.name === 'ReferenceError') {
                 var variableName = e.message.split(' ')[0];
-
                 //it could occur same problem is found multiple times. Strip those errors
                 if (!validateResponse.error.lookup('variableName', variableName)) {
                     fix = {
@@ -113,10 +113,8 @@ function validate() {
                     canFix: true,
                     fixMessage: 'Remove formula',
                     fix: function () {
-
                         var deps = Object.keys(elem.deps);
                         var refs = Object.keys(elem.refs);
-
                         log.warn('Loop detected for [' + elem.name + '], Making string formula ' + elem.original + "\n"
                             + "DEPS[" + deps.length + "][" + deps + "]\nREFS[" + refs.length + "]:[" + refs + "]"
                         )
@@ -124,7 +122,7 @@ function validate() {
                         elem.body = AST.STRING(elem.original);
                         //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
                         SolutionFacade.initFormulaBootstrap([elem], false);
-                        FESFacade.updateValueMap(context.getValues());
+                        workbook.updateValueMap();
                     }
                 };
             }
@@ -179,9 +177,6 @@ JSWorkBook.prototype.updateValueMap = function () {
     FESFacade.updateValueMap(this.context.values);
 };
 JSWorkBook.prototype.set = function (row, value, col, x, y) {
-    if (!this.context) {
-        throw Error();
-    }
     var xas = resolveX(this, x);
     var yas = resolveY(this, y)
     return FESFacade.statelessSetValue(this.context, this.modelName + '_' + row, value, col, xas, yas);
