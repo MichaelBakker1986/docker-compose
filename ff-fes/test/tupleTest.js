@@ -1,7 +1,5 @@
-var log = require('ff-log')
 var WorkBook = require('../fesjs/JSWorkBook')
 var FESContext = require('../fesjs/fescontext')
-//create choice formula somehow..
 var wb = new WorkBook(new FESContext());
 wb.createFormula("1+1", "TupleTest");
 var assert = require('assert');
@@ -12,6 +10,5 @@ wb.set('TupleTest', 20, 'value', 1)
 assert(wb.get('TupleTest') == 10)
 assert(wb.get('TupleTest', 'value', 1) == 20)
 wb.set('TupleTest', 30, 'value', 1, 1)
-console.info(wb.get('TupleTest', 'value', 1, 1))
 assert(wb.get('TupleTest', 'value', 1) == 20)
 
