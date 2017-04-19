@@ -108,8 +108,8 @@ function moveFormula(old, newFormula) {
         uiModel.formulaId = newFormula.id;
     }
 }
-//** addUi and bulkinsert should not be exposed.
-SolutionFacade.prototype.addUi = PropertiesAssembler.addUi;
+//** addProperty and bulkinsert should not be exposed.
+SolutionFacade.prototype.addProperty = PropertiesAssembler.addProperty;
 SolutionFacade.prototype.bulkInsert = PropertiesAssembler.bulkInsert;
 SolutionFacade.prototype.visitParsers = ParserService.visitParsers;
 SolutionFacade.prototype.addParser = ParserService.addParser;

@@ -87,7 +87,7 @@ function createFormula(value, rowId, colId)
 function addUiElement(rowId, colId)
 {
     //create UI element
-    uimodel.addUi(rowId, colId, {
+    uimodel.addProperty(rowId, colId, {
         displayAs: 'AmountAnswerType'
     }, 'root_value');
 }

@@ -90,7 +90,7 @@ function addUi(groupName, row, col, item, parentId) {
         }
     }
 }
-PropertiesAssembler.prototype.addUi = addUi;
+PropertiesAssembler.prototype.addProperty = addUi;
 //add elements to
 PropertiesAssembler.prototype.bulkInsert = function (solution) {
     var solutionName = solution.name.toUpperCase();
