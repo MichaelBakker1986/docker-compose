@@ -79,7 +79,7 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
     $scope.uimodelroot = {nodes: []};
     $scope.rootPath;
     $scope.toggleDefaultOutput = JSWorkBook.settings.toggleOutput;
-    $scope.getProperty = JSWorkBook.getProperty;
+    $scope.getOrCreateProperty = JSWorkBook.getOrCreateProperty;
     $scope.find = JSWorkBook.find;
 
 

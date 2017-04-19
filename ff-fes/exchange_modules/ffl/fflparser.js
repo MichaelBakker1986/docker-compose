@@ -1,9 +1,8 @@
-var visitor = require('../../fesjs/JSVisitor');
-var FESFacade = require('../../fesjs/FESFacade');
+var JSVisitor = require('../../fesjs/JSVisitor');
 var SolutionFacade = require('../../fesjs/SolutionFacade.js')
 var AST = require('ast-node-utils').ast;
 var FflToJsonConverter = require('./FflToJsonConverter');
-var finformula = require('./FinFormula.js');
+var FinFormula = require('./FinFormula.js');
 var esprima = require('esprima');
 var logger = require('ff-log');
 //DisplayAs require a Date object, need to add Converter for DisplayTypes.
@@ -48,7 +47,7 @@ var parser = {
         //Create a Solution that will contain these formulas
         var solution = SolutionFacade.createSolution(solutionName);
         //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
-        visitor.travelOne(json, null, function (keyArg, node) {
+        JSVisitor.travelOne(json, null, function (keyArg, node) {
             if (keyArg === null) {
             }
             else {
@@ -57,7 +56,7 @@ var parser = {
 
                     var refersto = node.refer;
                     var nodeName = stripVariableOrtuple(keyArg, node);
-                    var parent = visitor.findPredicate(node, StartWithVariableOrTuplePredicate)
+                    var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
                     var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
 
                     addnode(log, solution, nodeName, node, parentId, undefined, tuple);
@@ -77,15 +76,15 @@ var parser = {
             var uielem = {};
             //for now all nodes are variables
             var realObject = {}
-            var formulaProperties = workbook.gatherProperties(elem.rowId);
+            var formulaProperties = SolutionFacade.gatherProperties(workbook.modelName, workbook.properties, elem.rowId);
             for (var key in formulaProperties) {
                 var formula = formulaProperties[key];
                 var finFormula;
                 if (key === 'choices') {
-                    finFormula = finformula.toJavascriptChoice(formula);
+                    finFormula = FinFormula.toJavascriptChoice(formula);
                 }
                 else {
-                    finFormula = finformula.javaScriptToFinGeneric(formula);
+                    finFormula = FinFormula.javaScriptToFinGeneric(formula);
                 }
                 if (finFormula != 'undefined') {
                     logger.debug('[' + finFormula + ']');
@@ -258,4 +257,4 @@ function parseFormula(formula) {
     }
     return formulaReturn;
 }
-FESFacade.addParser(parser);
+SolutionFacade.addParser(parser);

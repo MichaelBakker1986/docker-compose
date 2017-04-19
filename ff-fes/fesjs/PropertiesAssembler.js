@@ -36,8 +36,8 @@ PropertiesAssembler.prototype.createRootNode = function (modelName) {
     }
     return rootNodes[newModelName];
 }
-//getOrCreate
-function getProperty(groupName, row, col) {
+//getOrCreateProperty
+function getOrCreateProperty(groupName, row, col) {
 
     var rowId = groupName + '_' + row;
     var name = rowId + "_" + col;
@@ -55,7 +55,7 @@ function getProperty(groupName, row, col) {
     }
     return node;
 }
-PropertiesAssembler.prototype.getProperty = getProperty;
+PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 function hasChild(children, name) {
     for (var i = 0; i < children.nodes.length; i++) {
         if (children.nodes[i].name === name) {
@@ -65,9 +65,9 @@ function hasChild(children, name) {
     return false;
 }
 //add element to Solution
-function addProperty(groupName, row, col, item, parentId) {
+function addUi(groupName, row, col, item, parentId) {
     //add to map
-    var ui = getProperty(groupName, row, col);
+    var ui = getOrCreateProperty(groupName, row, col);
 
     //inherit all properties But new allow extended Objects.
     //Only copy primitive members, and the delegate Object.
@@ -90,7 +90,7 @@ function addProperty(groupName, row, col, item, parentId) {
         }
     }
 }
-PropertiesAssembler.prototype.addProperty = addProperty;
+PropertiesAssembler.prototype.addUi = addUi;
 //add elements to
 PropertiesAssembler.prototype.bulkInsert = function (solution) {
     var solutionName = solution.name.toUpperCase();
@@ -110,7 +110,7 @@ PropertiesAssembler.prototype.bulkInsert = function (solution) {
             var obj = nodes[i];
             if (!obj.parentName || PropertiesModel[solutionName + '_' + obj.parentName] !== undefined) {
                 obj.ref = obj.formulaId === null || obj.formulaId === undefined ? obj.ref : obj.formulaId;
-                addProperty(solutionName, obj.rowId, obj.colId, obj, obj.parentName === null ? undefined : obj.parentName);
+                addUi(solutionName, obj.rowId, obj.colId, obj, obj.parentName === null ? undefined : obj.parentName);
             }
             else {
                 leftOver.push(obj);
@@ -132,31 +132,30 @@ function getRootNode(modelName) {
     return rootNodes[modelName];
 }
 PropertiesAssembler.prototype.getRootNode = getRootNode;
-function findAll(nodeId) {
-    return {
+PropertiesAssembler.prototype.findAllInSolution = function (nodeId) {
+    var result = {
         name: nodeId,
-        nodes: Object.keys(PropertiesModel).reduce(function (result, element) {
-            var uiModel = PropertiesModel[element];
-            if (uiModel.displayAs !== undefined) {
-                result.push(uiModel);
-            }
-            return result;
-        }, [])
-    };
-}
-PropertiesAssembler.prototype.findAll = findAll;
+        nodes: []
+    }
+    for (var key in PropertiesModel) {
+        var uiModel = PropertiesModel[key];
+        if (uiModel.displayAs !== undefined && uiModel.solutionName === nodeId) {
+            result.nodes.push(uiModel);
+        }
+    }
+    return result;
+};
 //fetchByName (can return null)
-function fetch(name) {
+PropertiesAssembler.prototype.fetch = function fetch(name) {
     return PropertiesModel[name];
-}
-PropertiesAssembler.prototype.fetch = fetch;
+};
 /**
  * Visitor walk the tree
  * if node is null we use root node
  * function is not thread safe, add parent and depth to function call instead of altering UINode
  */
 PropertiesAssembler.prototype.visit = function (node, func) {
-    var startingNode = node || getRootNode();
+    var startingNode = node || getRootNode('NEW');
     if (startingNode !== undefined) {
         startingNode._depth = 0;
         visitInternal(startingNode, func, 0, undefined)

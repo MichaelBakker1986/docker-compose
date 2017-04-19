@@ -48,7 +48,6 @@ apiimpl.prototype.value = function (contextKey, variable, columncontext, value) 
 }
 apiimpl.prototype.context = function (contextKey, variable, columncontext, value) {
     var context = DBConnector.getUserContext(contextKey);
-    var result = fesjsApi.fesGetValue(context, prefixVariable(variable), columncontext, value);
     if (variable) {
         context[variable] = value
     }

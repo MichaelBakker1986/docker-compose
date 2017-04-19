@@ -1,6 +1,7 @@
 var APP = require('../app.js');
 
-var FESFacade = require('../fesjs/FESFacade');
+var FESFacade = require('../../../../ff-fes/fesjs/FESFacade');
+var SolutionFacade = require('../../../../ff-fes/fesjs/SolutionFacade');
 var JSWorkBook = require('../fesjs/JSWorkBook.js');
 var formulaBootstrap = require('../fesjs/formula-bootstrap.js');
 var FunctionMap = require('../fesjs/FunctionMap.js');
@@ -80,7 +81,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
     saveFunction = function ()
     {
         console.info('save model' + $scope.apiPath + 'FORMULA/' + 1)
-        var httpPromise = $http.post($scope.apiPath + 'FORMULA/' + 1, FESFacade.produceSolution().formulas);
+        var httpPromise = $http.post($scope.apiPath + 'FORMULA/' + 1, SolutionFacade.produceSolution().formulas);
 
         $scope.myPromise = httpPromise;
         $timeout(function ()
@@ -145,10 +146,10 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
             {
                 console.info('row: ' + row + "  col : " + col)
 
-                var uiCell = UIModel.getProperty(row, col, true);
+                var uiCell = UIModel.getOrCreateProperty(row, col, true);
                 if (col === 'tuple')
                 {
-                    var tupleTuple = UIModel.getProperty(row, 'value', true);
+                    var tupleTuple = UIModel.getOrCreateProperty(row, 'value', true);
                     tupleTuple.tuple = true;
                     return;
                 }
@@ -167,7 +168,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
     };
     $scope.print = function (value, row, col)
     {
-        var uiCell = UIModel.getProperty(row, col, true);
+        var uiCell = UIModel.getOrCreateProperty(row, col, true);
         $timeout(function ()
         {
             $scope.focussedId = row + "_" + col;

@@ -1,6 +1,6 @@
 var assert = require('assert');
 var fileParser = require('./fileParser');
-var finFormula = require('./FinFormula');
+var FinFormula = require('./FinFormula');
 var Stack = require('stack-adt');
 var visitor = require('../../fesjs/JSVisitor');
 var log = require('ff-log');
@@ -58,7 +58,7 @@ function parseRegex(contents) {
     //some lines end with a ',' they are concerning about the same thing.
     var data = contents.replace(/,\s*\n/gm, ',');
     data = data.replace(/\/\/.*\n?$/gm, '');
-    data = finFormula.fixCasing(data);
+    data = FinFormula.fixCasing(data);
     //==> variable x
     //==> {
     //==>  reger: z
@@ -216,16 +216,16 @@ function genericFflFileToGenericJson(contents) {
                 }
                 var foundValue = split[1].trim();
                 if (firstWord.startsWith('choices')) {
-                    node[firstWord] = finFormula.finChoice(obj.substring(obj.indexOf(':') + 1, obj.length));
+                    node[firstWord] = FinFormula.finChoice(obj.substring(obj.indexOf(':') + 1, obj.length));
                 }
                 else if (split.length == 2) {
                     var secondPart = split[1].trim();
                     if (firstWord === 'title') {
                         secondPart = "'" + secondPart.replace(/["']*/gm, "") + "'";// secondPart.replace(/'/gm, "\\'");
-                        node[firstWord] = finFormula.parseFormula(secondPart);
+                        node[firstWord] = FinFormula.parseFormula(secondPart);
                     }
                     else if (formulaType[firstWord] !== undefined) {
-                        node[firstWord] = finFormula.parseFormula(secondPart);
+                        node[firstWord] = FinFormula.parseFormula(secondPart);
                     }
                     else {
                         node[firstWord] = secondPart;
@@ -243,6 +243,6 @@ function deparseRegex(input) {
 }
 module.exports = {
     parse: genericFflFileToGenericJson,
-    parseRegex: finFormula.parseFormula,
+    parseRegex: FinFormula.parseFormula,
     deparseRegex: deparseRegex
 }

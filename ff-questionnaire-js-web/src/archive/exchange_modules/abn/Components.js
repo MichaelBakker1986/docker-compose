@@ -176,25 +176,25 @@ var Components = {
 
         var parentId = parent === undefined || parent.id === undefined ? 'root_value' : parent.id + '_value';
 
-        UIModel.addProperty(item.rowId, 'value', item, parentId);
+        UIModel.addUi(item.rowId, 'value', item, parentId);
         if (item.displayAs === 'select')
         {
-            UIModel.getProperty(item.rowId, 'choices').displayAs = 'PropertyType';
+            UIModel.getOrCreateProperty(item.rowId, 'choices').displayAs = 'PropertyType';
         }
         if (item.relevantRule)
         {
-            UIModel.getProperty(item.rowId, 'visible').displayAs = 'PropertyType';
+            UIModel.getOrCreateProperty(item.rowId, 'visible').displayAs = 'PropertyType';
         }
         if (item.mandatoryRule)
         {
-            UIModel.getProperty(item.rowId, 'required').displayAs = 'PropertyType';
+            UIModel.getOrCreateProperty(item.rowId, 'required').displayAs = 'PropertyType';
         }
         if (item.displayAs !== 'SectionType')
         {
-            UIModel.getProperty(item.rowId, 'validateInput').displayAs = 'PropertyType';
+            UIModel.getOrCreateProperty(item.rowId, 'validateInput').displayAs = 'PropertyType';
         }
-        UIModel.getProperty(item.rowId, 'locked').displayAs = 'PropertyType';
-        UIModel.getProperty(item.rowId, 'title').displayAs = 'PropertyType';
+        UIModel.getOrCreateProperty(item.rowId, 'locked').displayAs = 'PropertyType';
+        UIModel.getOrCreateProperty(item.rowId, 'title').displayAs = 'PropertyType';
     }
 }
 

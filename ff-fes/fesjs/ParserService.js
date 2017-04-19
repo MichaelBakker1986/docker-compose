@@ -16,12 +16,10 @@ ParserService.prototype.addParser = function (parser) {
  deParse: Function() : Export
  }
  */
-ParserService.prototype.getParsers = function () {
-    var result = [];
+ParserService.prototype.visitParsers = function (visitFunction) {
     for (var key in parsers) {
-        result.push(parsers[key]);
+        visitFunction(parsers[key]);
     }
-    return result;
 }
 ParserService.prototype.findParser = function (parserName) {
     return parsers[parserName];

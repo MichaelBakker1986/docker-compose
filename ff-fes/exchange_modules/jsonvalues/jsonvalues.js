@@ -2,15 +2,14 @@
  First, most basic export of values
  Just calling getAllValues() internally to export
  */
-var FESFacade = require('../../fesjs/FESFacade');
-var UIModel = require('../../fesjs/PropertiesAssembler');
+var SolutionFacade = require('../../fesjs/SolutionFacade');
 var jsonValues = {
     name: 'jsonvalues',
     extension: 'json',
     headername: 'JSON Values',
     parse: function (values, workbook) {
         updateValues(JSON.parse(values), workbook.context.values);
-        return UIModel.create();
+        return SolutionFacade.createSolution(workbook.modelName);
     },
     deParse: function (rowId, workbook) {
         return workbook.getAllValues();
@@ -26,4 +25,4 @@ function updateValues(values, docValues) {
         docValues[obj.formulaId][obj.colId] = obj.value;
     }
 }
-FESFacade.addParser(jsonValues)
+SolutionFacade.addParser(jsonValues)

@@ -20,7 +20,7 @@ fm.prototype.apiGet = function (formula, x, y, z, v) {
 fm.prototype.apiSet = function (formula, x, y, z, value, v) {
     var id = formula.id === undefined ? formula.index : formula.id;
     if (v[id] !== undefined) {
-        var hash = x.hash + y + z;
+        var hash = x.hash + y.hash + z;
         var newValue = value;
         if (value === '' || value === null) {
             newValue = undefined;
@@ -68,7 +68,7 @@ var formulaDecorators = {
         //v = enteredValues
         return function (f, x, y, z, v) {
             //console.info('calling formula ;' + formulaName)
-            var hash = x.hash + y + z;
+            var hash = x.hash + y.hash + z;
             //check if user entered a value
             if (v[f][hash] === undefined) {
                 var valueOfFunction = innerFunction(f, x, y, z, v);

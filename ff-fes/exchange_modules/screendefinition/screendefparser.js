@@ -1,9 +1,8 @@
 var visitor = require('../../fesjs/JSVisitor');
-var FESFacade = require('../../fesjs/FESFacade');
 var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
 var SolutionFacade = require('../../fesjs/SolutionFacade');
 var AST = require('ast-node-utils').ast;
-var finformula = require('../ffl/FinFormula');
+var FinFormula = require('../ffl/FinFormula');
 var keys = ['description', 'viewType', 'col9umnHeader', 'searchBar'];
 var parser = {
     name: 'screendefinition',
@@ -35,10 +34,10 @@ var parser = {
                 displaytype: elem.displayAs,
                 description: elem.title
             };
-            var formulaProperties = workbook.gatherProperties(elem.rowId);
+            var formulaProperties = SolutionFacade.gatherProperties(workbook.modelName, workbook.properties, elem.rowId);
             for (var key in formulaProperties) {
                 var formula = formulaProperties[key];
-                var finFormula = finformula.javaScriptToFinGeneric(formula);
+                var finFormula = FinFormula.javaScriptToFinGeneric(formula);
                 if (finFormula != 'undefined') {
                     uielem[key] = finFormula;
                 }
@@ -65,4 +64,4 @@ function addnode(solution, rowId, node, parentId, referId) {
     var titlestring = node.name || node.description || rowId;
     SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(titlestring));
 }
-FESFacade.addParser(parser);
+SolutionFacade.addParser(parser);

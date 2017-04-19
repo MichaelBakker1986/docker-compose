@@ -3,7 +3,7 @@ var JUNIT = require('./JUNIT.js')
 var xml = JUNIT.getFile('/KAM/FMT/Master/KAM.Fmt4Model.xml')
 var FESFacade = require('../archive/fesjs/FESFacade.js');
 var SolutionFacade = require('../archive/fesjs/SolutionFacade');
-var uimodel = require('../archive/fesjs/UIService');
+var uimodel = require('../archive/fesjs/PropertiesAssembler');
 var AST = require('ast-node-utils').ast;
 var parser = {
     name: 'FMT4Mapping',
