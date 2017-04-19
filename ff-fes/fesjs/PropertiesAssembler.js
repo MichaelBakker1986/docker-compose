@@ -65,7 +65,7 @@ function hasChild(children, name) {
     return false;
 }
 //add element to Solution
-function addUi(groupName, row, col, item, parentId) {
+function addProperty(groupName, row, col, item, parentId) {
     //add to map
     var ui = getOrCreateProperty(groupName, row, col);
 
@@ -90,7 +90,7 @@ function addUi(groupName, row, col, item, parentId) {
         }
     }
 }
-PropertiesAssembler.prototype.addProperty = addUi;
+PropertiesAssembler.prototype.addProperty = addProperty;
 //add elements to
 PropertiesAssembler.prototype.bulkInsert = function (solution) {
     var solutionName = solution.name.toUpperCase();
@@ -110,7 +110,7 @@ PropertiesAssembler.prototype.bulkInsert = function (solution) {
             var obj = nodes[i];
             if (!obj.parentName || PropertiesModel[solutionName + '_' + obj.parentName] !== undefined) {
                 obj.ref = obj.formulaId === null || obj.formulaId === undefined ? obj.ref : obj.formulaId;
-                addUi(solutionName, obj.rowId, obj.colId, obj, obj.parentName === null ? undefined : obj.parentName);
+                addProperty(solutionName, obj.rowId, obj.colId, obj, obj.parentName === null ? undefined : obj.parentName);
             }
             else {
                 leftOver.push(obj);
