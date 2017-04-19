@@ -176,7 +176,7 @@ var Components = {
 
         var parentId = parent === undefined || parent.id === undefined ? 'root_value' : parent.id + '_value';
 
-        UIModel.addUi(item.rowId, 'value', item, parentId);
+        UIModel.addProperty(item.rowId, 'value', item, parentId);
         if (item.displayAs === 'select')
         {
             UIModel.getOrCreateProperty(item.rowId, 'choices').displayAs = 'PropertyType';

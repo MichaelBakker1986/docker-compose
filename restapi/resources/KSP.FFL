@@ -565,7 +565,6 @@ model KSP uses BaseModel
           variable NrOfDaysChildcareWeek
           {
             datatype: number;
-            formula: NA;
             frequency: document;
             inputRequired: 1;
             data_options: unscalable;
@@ -864,7 +863,7 @@ model KSP uses BaseModel
           variable ChildcareContribution
           {
             datatype: none;
-            title: "Childcare Contribution"&";
+            title: "Childcare Contribution"&":";
             top_blanklines: 1;
             locked: 1;
             options_title: locked;
@@ -1668,7 +1667,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula:If(ChildGender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
+              formula: if(ChildGender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Food";
@@ -2118,7 +2117,7 @@ model KSP uses BaseModel
         data_options: unscalable;
         afterinput: (SetValue(MatrixVersion, MatrixVersion, true));
         displaytype: date;
-        title: "Definitief gemaakt op";
+        title: "Definitief gemaakt op:";
         options_title: locked;
       }
       variable Q_STATUS_FINAL_BY
@@ -2126,7 +2125,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Definitief gemaakt door (gebruikersnaam)";
+        title: "Definitief gemaakt door (gebruikersnaam):";
         options_title: locked;
       }
       variable Q_STATUS_FINAL_BY_NAME
@@ -2134,7 +2133,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Definitief gemaakt door (volledige naam)";
+        title: "Definitief gemaakt door (volledige naam):";
         options_title: locked;
       }
       variable Q_STATUS_STARTED_ON
@@ -2143,7 +2142,7 @@ model KSP uses BaseModel
         frequency: document;
         data_options: unscalable;
         displaytype: date;
-        title: "Aangemaakt op";
+        title: "Aangemaakt op:";
         options_title: locked;
       }
       variable Q_STATUS_STARTED_BY
@@ -2151,7 +2150,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Aangemaakt door (gebruikersnaam)";
+        title: "Aangemaakt door (gebruikersnaam):";
         options_title: locked;
       }
       variable Q_STATUS_STARTED_BY_NAME
@@ -2159,7 +2158,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Aangemaakt door (volledige naam)";
+        title: "Aangemaakt door (volledige naam):";
         options_title: locked;
       }
       variable ModelVersion
@@ -2264,7 +2263,7 @@ model KSP uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"[br][/br]Er zijn knockouts van toepassing"&Q_WARNING_GLOBALTXT ,&""));
+        formula: EvaluateAsString(If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"[br][/br]Er zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT ,&""));
         data_options: unscalable;
         displaytype: memo;
         title: "Knock-out(s)?";
@@ -2301,7 +2300,7 @@ model KSP uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld"&Q_RESTRICTIESTXT ,&""));
+        formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT ,&""));
         data_options: unscalable;
         displaytype: memo;
         title: "Restricties";

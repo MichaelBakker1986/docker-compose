@@ -39,7 +39,7 @@ Node.prototype.duplicate = function () {
     }
     rowId += appendix;
     //JUST some quickfix from here,
-    SolutionFacade.addUi(rowId, 'value', this, this.parent().rowId + '_value');
+    SolutionFacade.addProperty(rowId, 'value', this, this.parent().rowId + '_value');
     var solution = SolutionFacade.createSolution(wb.modelName);
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), 'AmountAnswerType');
     solution.setParentName(uiNode, this.parent().rowId);

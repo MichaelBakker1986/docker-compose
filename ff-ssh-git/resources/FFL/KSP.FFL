@@ -508,10 +508,31 @@ model KSP uses BaseModel
             title: "Gross Income Parent 2";
             options_title: locked;
           }
+          variable WorkingHoursWeeklyParent01
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Working hours parent 1;
+            options_title: locked;
+          }
+		  variable WorkingHoursWeeklyParent02
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Working hours parent 2;
+            options_title: locked;
+          }
           variable WorkingHoursWeeklyOfLeastWorkingParent
           {
             datatype: number;
             frequency: document;
+			formula: Min(WorkingHoursWeeklyParent01, WorkingHoursWeeklyParent02);
             inputRequired: 1;
             data_options: unscalable;
             fixed_decimals: 1;
@@ -1756,7 +1777,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12);
+              formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12, NA);
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Kosten BSO";
