@@ -33,7 +33,7 @@ SolutionFacade.prototype.produceSolution = function (nodeId) {
 SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId, body, displayAs) {
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
-    var ui = PropertiesAssembler.getOrCreateUI(solution.name, rowId, colId);
+    var ui = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
     var formulaId = FormulaService.addModelFormula(ui, solution.name, rowId, colId, colId === 'value' ? false : true, body);
     //most ugly part here, the Parsers themselves add Links, which should be done just before parsing Formula's
     //afterwards the Formula's are parsed,
@@ -63,7 +63,7 @@ SolutionFacade.prototype.initFormulaBootstrap = function (formulas, disableCache
 SolutionFacade.prototype.gatherProperties = function (modelName, properties, rowId) {
     var formulaProperties = {};
     for (var key in properties) {
-        var formula = FormulaService.findFormulaByIndex(PropertiesAssembler.getOrCreateUI(modelName, rowId, key).ref);
+        var formula = FormulaService.findFormulaByIndex(PropertiesAssembler.getOrCreateProperty(modelName, rowId, key).ref);
         if (formula !== undefined && formula.original !== undefined && formula.original !== null && formula.original !== '') {
             formulaProperties[key] = formula.original;
         }
@@ -73,7 +73,7 @@ SolutionFacade.prototype.gatherProperties = function (modelName, properties, row
 SolutionFacade.prototype.createFormulaAndStructure = function (groupName, formulaAsString, rowId, col) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
-    var ui = PropertiesAssembler.getOrCreateUI(groupName, rowId, col);
+    var ui = PropertiesAssembler.getOrCreateProperty(groupName, rowId, col);
     var newFormulaId = FormulaService.addModelFormula(ui, groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
     //integrate formula (parse it)
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
@@ -114,7 +114,7 @@ SolutionFacade.prototype.bulkInsert = PropertiesAssembler.bulkInsert;
 SolutionFacade.prototype.visitParsers = ParserService.visitParsers;
 SolutionFacade.prototype.addParser = ParserService.addParser;
 
-SolutionFacade.prototype.findLink = PropertiesAssembler.getOrCreateUI;
+SolutionFacade.prototype.findLink = PropertiesAssembler.getOrCreateProperty;
 SolutionFacade.prototype.contains = PropertiesAssembler.contains
 SolutionFacade.prototype.properties = {
     value: 0,

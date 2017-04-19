@@ -36,8 +36,8 @@ PropertiesAssembler.prototype.createRootNode = function (modelName) {
     }
     return rootNodes[newModelName];
 }
-//getOrCreate
-function getOrCreate(groupName, row, col) {
+//getOrCreateProperty
+function getOrCreateProperty(groupName, row, col) {
 
     var rowId = groupName + '_' + row;
     var name = rowId + "_" + col;
@@ -55,7 +55,7 @@ function getOrCreate(groupName, row, col) {
     }
     return node;
 }
-PropertiesAssembler.prototype.getOrCreateUI = getOrCreate;
+PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 function hasChild(children, name) {
     for (var i = 0; i < children.nodes.length; i++) {
         if (children.nodes[i].name === name) {
@@ -67,7 +67,7 @@ function hasChild(children, name) {
 //add element to Solution
 function addUi(groupName, row, col, item, parentId) {
     //add to map
-    var ui = getOrCreate(groupName, row, col);
+    var ui = getOrCreateProperty(groupName, row, col);
 
     //inherit all properties But new allow extended Objects.
     //Only copy primitive members, and the delegate Object.

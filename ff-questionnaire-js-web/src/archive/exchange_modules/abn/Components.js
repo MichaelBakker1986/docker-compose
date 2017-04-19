@@ -179,22 +179,22 @@ var Components = {
         UIModel.addUi(item.rowId, 'value', item, parentId);
         if (item.displayAs === 'select')
         {
-            UIModel.getOrCreateUI(item.rowId, 'choices').displayAs = 'PropertyType';
+            UIModel.getOrCreateProperty(item.rowId, 'choices').displayAs = 'PropertyType';
         }
         if (item.relevantRule)
         {
-            UIModel.getOrCreateUI(item.rowId, 'visible').displayAs = 'PropertyType';
+            UIModel.getOrCreateProperty(item.rowId, 'visible').displayAs = 'PropertyType';
         }
         if (item.mandatoryRule)
         {
-            UIModel.getOrCreateUI(item.rowId, 'required').displayAs = 'PropertyType';
+            UIModel.getOrCreateProperty(item.rowId, 'required').displayAs = 'PropertyType';
         }
         if (item.displayAs !== 'SectionType')
         {
-            UIModel.getOrCreateUI(item.rowId, 'validateInput').displayAs = 'PropertyType';
+            UIModel.getOrCreateProperty(item.rowId, 'validateInput').displayAs = 'PropertyType';
         }
-        UIModel.getOrCreateUI(item.rowId, 'locked').displayAs = 'PropertyType';
-        UIModel.getOrCreateUI(item.rowId, 'title').displayAs = 'PropertyType';
+        UIModel.getOrCreateProperty(item.rowId, 'locked').displayAs = 'PropertyType';
+        UIModel.getOrCreateProperty(item.rowId, 'title').displayAs = 'PropertyType';
     }
 }
 

@@ -146,10 +146,10 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
             {
                 console.info('row: ' + row + "  col : " + col)
 
-                var uiCell = UIModel.getOrCreateUI(row, col, true);
+                var uiCell = UIModel.getOrCreateProperty(row, col, true);
                 if (col === 'tuple')
                 {
-                    var tupleTuple = UIModel.getOrCreateUI(row, 'value', true);
+                    var tupleTuple = UIModel.getOrCreateProperty(row, 'value', true);
                     tupleTuple.tuple = true;
                     return;
                 }
@@ -168,7 +168,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
     };
     $scope.print = function (value, row, col)
     {
-        var uiCell = UIModel.getOrCreateUI(row, col, true);
+        var uiCell = UIModel.getOrCreateProperty(row, col, true);
         $timeout(function ()
         {
             $scope.focussedId = row + "_" + col;
