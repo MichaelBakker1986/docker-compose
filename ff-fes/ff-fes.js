@@ -87,7 +87,7 @@ function getEntry(workbook, rowId, columncontext) {
     for (var x = start; x <= end; x++) {
         data[x] = {};
         for (var type in workbook.properties) {
-            data[x][type] = workbook.statelessGetValue(rowId, type, x);
+            data[x][type] = workbook.statelessGetValue(rowId, type, x, 0);
             data[x].column = x;
             data[x].variable = variable.rowId;
         }

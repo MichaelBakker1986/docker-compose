@@ -42,20 +42,19 @@ function findFormula(uiModel) {
 function getStatelessVariable(row, col) {
     return UIService.fetch(row + '_' + col);
 }
-FESFacade.statelessSetValue = function (context, row, value, col, xas, y) {
+FESFacade.statelessSetValue = function (context, row, value, col, xas, yas) {
     var rowId = row + '_' + ( col || 'value');
-    var yas = y || 0;
     var localFormula = findFormula(UIService.fetch(rowId));
     if (localFormula === undefined) {
         //don't give away variable name here.
         throw Error('Cannot find variable')
     }
-    logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', row, xas.hash, yas, value);
+    logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', row, xas.hash, yas.hash, value);
     FunctionMap.apiSet(localFormula, xas, yas, 0, value, context.values);
 };
-FESFacade.statelessGetValue = function (context, row, col, xas, y) {
+
+FESFacade.statelessGetValue = function (context, row, col, xas, yas) {
     var colType = col || 'value';
-    var yas = y || 0;
     var localFormula = findFormula(getStatelessVariable(row, colType));
     var returnValue;
     if (localFormula === undefined) {

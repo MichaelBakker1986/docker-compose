@@ -9,6 +9,7 @@ var SolutionFacade = require('./SolutionFacade');
 var AST = require('ast-node-utils').ast;
 var log = require('ff-log')
 var XAxis = require('./XAxis')
+var YAxis = require('./YAxis')
 
 //user friendly stable API
 //doImport(data,'type') : Solution          ; See Solution class for definiton
@@ -26,6 +27,7 @@ function JSWorkBook(context) {
     //default modelname
     this.modelName = 'NEW';
     //default timeunit
+    this.yaxis = YAxis;
     this.xaxis = XAxis.bkyr.columns[0]
 }
 
@@ -70,7 +72,7 @@ function validate() {
     function formulaFixer(elem) {
         //TODO: use timeout, this monte carlo is blocking UI thread
         try {
-            FESFacade.apiGet(elem, resolveX(workbook, 0), 0, 0, context.getValues());
+            FESFacade.apiGet(elem, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
             validateResponse.succes.push(elem.name);
         }
         catch (e) {
@@ -159,15 +161,19 @@ JSWorkBook.prototype.getStatelessVariable = FESFacade.getStatelessVariable;
 //some functions we directly pass trough
 JSWorkBook.prototype.get = function (row, col, x, y) {
     var xas = resolveX(this, x);
-    var yas = y || 0;
+    var yas = resolveY(this, y);
     return FESFacade.statelessGetValue(this.context, this.modelName + '_' + row, col, xas, yas)
 };
 function resolveX(wb, x) {
     return x ? wb.xaxis[x] : wb.xaxis[0];
 }
-JSWorkBook.prototype.statelessGetValue = function (row, col, x) {
+function resolveY(wb, y) {
+    return wb.yaxis[y || 0];
+}
+JSWorkBook.prototype.statelessGetValue = function (row, col, x, y) {
     var xas = resolveX(this, x);
-    return FESFacade.statelessGetValue(this.context, row, col, xas)
+    var yas = resolveY(this, y)
+    return FESFacade.statelessGetValue(this.context, row, col, xas, yas)
 };
 JSWorkBook.prototype.updateValueMap = function () {
     FESFacade.updateValueMap(this.context.values);
@@ -177,11 +183,13 @@ JSWorkBook.prototype.set = function (row, value, col, x, y) {
         throw Error();
     }
     var xas = resolveX(this, x);
-    return FESFacade.statelessSetValue(this.context, this.modelName + '_' + row, value, col, xas, y);
+    var yas = resolveY(this, y)
+    return FESFacade.statelessSetValue(this.context, this.modelName + '_' + row, value, col, xas, yas);
 }
 JSWorkBook.prototype.statelessSetValue = function (row, value, col, x, y) {
     var xas = resolveX(this, x);
-    return FESFacade.statelessSetValue(this.context, row, value, col, xas, y);
+    var yas = resolveX(this, y);
+    return FESFacade.statelessSetValue(this.context, row, value, col, xas, yas);
 }
 JSWorkBook.prototype.fixAll = fixAll
 //should return the solution instead. So its deprecated

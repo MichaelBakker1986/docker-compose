@@ -311,7 +311,7 @@ var simplified = {
         }
         node.type = 'Identifier'
         // looks like being extracted as object, while has to be array
-        node.name = 'v[' + ((refFormula.id === undefined) ? refFormula.index : refFormula.id) + '][x.hash + y + z]!==undefined';
+        node.name = 'v[' + ((refFormula.id === undefined) ? refFormula.index : refFormula.id) + '][x.hash + y.hash + z]!==undefined';
         delete node.refn;
         delete node.arguments;
         delete node.callee;
