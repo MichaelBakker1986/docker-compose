@@ -12,6 +12,7 @@ digraph G  {
   "fesjs/UIService";
   "fesjs/JSWorkBook";
   "fesjs/XAxis";
+  "fesjs/YAxis";
   "fesjs/ParserService";
   "fesjs/Solution";
   "fesjs/formula-bootstrap";
@@ -30,6 +31,7 @@ digraph G  {
   "fesjs/JSWorkBook" -> "fesjs/FESFacade" [ label = "apiGet\nupdateValueMap\ngetStatelessVariable\nstatelessGetValue\nstatelessSetValue\ngetRootNode\nvisit\ngetAllValues" ];
   "fesjs/JSWorkBook" -> "fesjs/SolutionFacade" [ label = "importSolution\nproduceSolution\ninitFormulaBootstrap\nexportSolution\ncreateFormulaAndStructure\nproperties" ];
   "fesjs/JSWorkBook" -> "fesjs/XAxis" [ label = "bkyr" ];
+  "fesjs/JSWorkBook" -> "fesjs/YAxis" [ label = "" ];
   "fesjs/SolutionFacade" -> "fesjs/FormulaService" [ label = "findFormulaByIndex\naddModelFormula\nmoveFormula" ];
   "fesjs/SolutionFacade" -> "fesjs/FunctionMap" [ label = "initFormulaBootstrap\nmoveFormula" ];
   "fesjs/SolutionFacade" -> "fesjs/ParserService" [ label = "findParser\nvisitParsers\naddParser" ];

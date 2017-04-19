@@ -1,1 +1,4 @@
 TODO: extract /exchange_modules into seperate modules
+Solution object contains metadata concerning the model
+ -- ui elemnts
+ -- formulas
