@@ -4,7 +4,7 @@ require('../../ff-math/ff-math');//just let it inject into the FESFacade
 var WorkBook = require('../fesjs/JSWorkBook');
 var JUNIT = require('./JUNIT');
 var FESFacade = require('../fesjs/FESFacade');
-var UIModel = require('../fesjs/UIService');
+var PropertiesAssembler = require('../fesjs/PropertiesAssembler');
 var FormulaService = require('../fesjs/FormulaService');
 var bootstrap = require('../fesjs/formula-bootstrap');
 var assert = require('assert');

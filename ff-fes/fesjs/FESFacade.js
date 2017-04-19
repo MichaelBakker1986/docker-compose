@@ -1,11 +1,11 @@
 /**
- * Bridge between FormulaService,UIService and FunctionMap
+ * Bridge between FormulaService,PropertiesAssembler and FunctionMap
  */
 var logger = require('ff-log');
 //for now now just years.. keep it simple
 var FESFacade = {}
 
-var UIService = require('./UIService');
+var PropertiesAssembler = require('./PropertiesAssembler');
 var FunctionMap = require('./FunctionMap');
 var FormulaService = require('./FormulaService')
 /**
@@ -40,11 +40,11 @@ function findFormula(uiModel) {
 
 //public
 function getStatelessVariable(row, col) {
-    return UIService.fetch(row + '_' + col);
+    return PropertiesAssembler.fetch(row + '_' + col);
 }
 FESFacade.statelessSetValue = function (context, row, value, col, xas, yas) {
     var rowId = row + '_' + ( col || 'value');
-    var localFormula = findFormula(UIService.fetch(rowId));
+    var localFormula = findFormula(PropertiesAssembler.fetch(rowId));
     if (localFormula === undefined) {
         //don't give away variable name here.
         throw Error('Cannot find variable')
@@ -65,7 +65,7 @@ FESFacade.statelessGetValue = function (context, row, col, xas, yas) {
     }
     return returnValue;
 }
-FESFacade.getRootNode = UIService.getRootNode;
+FESFacade.getRootNode = PropertiesAssembler.getRootNode;
 FESFacade.getStatelessVariable = getStatelessVariable;
 FESFacade.apiGet = FunctionMap.apiGet;
 FESFacade.getAllValues = function (docValues) {
@@ -104,5 +104,5 @@ FESFacade.updateValueMap = function (values) {
         }
     });
 };
-FESFacade.visit = UIService.visit;
+FESFacade.visit = PropertiesAssembler.visit;
 module.exports = FESFacade;

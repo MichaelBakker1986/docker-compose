@@ -20,7 +20,7 @@ var SolutionFacade = require('../../fesjs/SolutionFacade');
 var AST = require('ast-node-utils').ast;
 Node.prototype.delete = function () {
     throw Error('Remove not yet implemented')
-    //UIService.remove(this.parent().rowId, this.rowId);
+    //PropertiesAssembler.remove(this.parent().rowId, this.rowId);
     this._tree.remove(this.rowId);
     this.remove();
 }

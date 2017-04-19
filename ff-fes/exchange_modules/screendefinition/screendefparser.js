@@ -1,5 +1,5 @@
 var visitor = require('../../fesjs/JSVisitor');
-var UIService = require('../../fesjs/UIService');
+var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
 var SolutionFacade = require('../../fesjs/SolutionFacade');
 var AST = require('ast-node-utils').ast;
 var FinFormula = require('../ffl/FinFormula');
@@ -27,7 +27,7 @@ var parser = {
     deParse: function (rowId, workbook) {
         var screenSolution = SolutionFacade.createSolution(workbook.modelName);
 
-        UIService.visit(undefined, function (elem) {
+        PropertiesAssembler.visit(undefined, function (elem) {
             //create output node
             var uielem = {
                 name: elem.rowId,

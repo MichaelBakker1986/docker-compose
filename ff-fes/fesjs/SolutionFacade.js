@@ -3,7 +3,7 @@
  */
 var log = require('ff-log')
 var Solution = require('./Solution')
-var UIService = require('./UIService')
+var PropertiesAssembler = require('./PropertiesAssembler')
 var FunctionMap = require('./FunctionMap')
 var FormulaService = require('./FormulaService')
 var ParserService = require('./ParserService')
@@ -12,7 +12,7 @@ var esprima = require('esprima')
 function SolutionFacade() {
 }
 SolutionFacade.prototype.createSolution = function (solutionName) {
-    return new Solution(UIService.createRootNode(solutionName).solutionName);
+    return new Solution(PropertiesAssembler.createRootNode(solutionName).solutionName);
 }
 SolutionFacade.prototype.gatherFormulas = function (solution) {
     var solutionFormulas = [];
@@ -26,14 +26,14 @@ SolutionFacade.prototype.gatherFormulas = function (solution) {
     solution.formulas = solutionFormulas;
 };
 SolutionFacade.prototype.produceSolution = function (nodeId) {
-    var solution = UIService.findAllInSolution(nodeId);
+    var solution = PropertiesAssembler.findAllInSolution(nodeId);
     this.gatherFormulas(solution);
     return solution;
 }
 SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId, body, displayAs) {
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
-    var ui = UIService.getOrCreateUI(solution.name, rowId, colId);
+    var ui = PropertiesAssembler.getOrCreateUI(solution.name, rowId, colId);
     var formulaId = FormulaService.addModelFormula(ui, solution.name, rowId, colId, colId === 'value' ? false : true, body);
     //most ugly part here, the Parsers themselves add Links, which should be done just before parsing Formula's
     //afterwards the Formula's are parsed,
@@ -47,7 +47,7 @@ SolutionFacade.prototype.importSolution = function (data, parserType, wb) {
     var solution = ParserService.findParser(parserType).parse(data, wb);
 
     log.debug('Update model [' + solution.getName() + ']');
-    UIService.bulkInsert(solution);
+    PropertiesAssembler.bulkInsert(solution);
     return solution;
 }
 SolutionFacade.prototype.exportSolution = function (parserType, rowId, workbook) {
@@ -63,7 +63,7 @@ SolutionFacade.prototype.initFormulaBootstrap = function (formulas, disableCache
 SolutionFacade.prototype.gatherProperties = function (modelName, properties, rowId) {
     var formulaProperties = {};
     for (var key in properties) {
-        var formula = FormulaService.findFormulaByIndex(UIService.getOrCreateUI(modelName, rowId, key).ref);
+        var formula = FormulaService.findFormulaByIndex(PropertiesAssembler.getOrCreateUI(modelName, rowId, key).ref);
         if (formula !== undefined && formula.original !== undefined && formula.original !== null && formula.original !== '') {
             formulaProperties[key] = formula.original;
         }
@@ -73,7 +73,7 @@ SolutionFacade.prototype.gatherProperties = function (modelName, properties, row
 SolutionFacade.prototype.createFormulaAndStructure = function (groupName, formulaAsString, rowId, col) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
-    var ui = UIService.getOrCreateUI(groupName, rowId, col);
+    var ui = PropertiesAssembler.getOrCreateUI(groupName, rowId, col);
     var newFormulaId = FormulaService.addModelFormula(ui, groupName, rowId, col, col === 'value' ? false : true, ast.body[0].expression);
     //integrate formula (parse it)
     FunctionMap.initFormulaBootstrap(bootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
@@ -103,19 +103,19 @@ function moveFormula(old, newFormula) {
     FunctionMap.moveFormula(old, newFormula);
     //update references
     for (var ref in old.refs) {
-        var uiModel = UIService.fetch(ref);
+        var uiModel = PropertiesAssembler.fetch(ref);
         uiModel.ref = newFormula.id;
         uiModel.formulaId = newFormula.id;
     }
 }
 //** addUi and bulkinsert should not be exposed.
-SolutionFacade.prototype.addUi = UIService.addUi;
-SolutionFacade.prototype.bulkInsert = UIService.bulkInsert;
+SolutionFacade.prototype.addUi = PropertiesAssembler.addUi;
+SolutionFacade.prototype.bulkInsert = PropertiesAssembler.bulkInsert;
 SolutionFacade.prototype.visitParsers = ParserService.visitParsers;
 SolutionFacade.prototype.addParser = ParserService.addParser;
 
-SolutionFacade.prototype.findLink = UIService.getOrCreateUI;
-SolutionFacade.prototype.contains = UIService.contains
+SolutionFacade.prototype.findLink = PropertiesAssembler.getOrCreateUI;
+SolutionFacade.prototype.contains = PropertiesAssembler.contains
 SolutionFacade.prototype.properties = {
     value: 0,
     visible: 1,
