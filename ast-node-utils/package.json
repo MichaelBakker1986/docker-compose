@@ -1,6 +1,6 @@
 {
   "name": "ast-node-utils",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "ast-node-utils",
   "main": "index.js",
   "scripts": {

@@ -2,36 +2,13 @@ var madge = require('madge');
 var graphviz = require('graphviz');
 var log = require('ff-log')
 var path = require('path')
-/*var graph = require('ngraph.graph')();
- graph.beginUpdate();*/
+var walkAst = require('../../ast-node-utils').astWalk
 var fs = require('fs');
 function Documentation() {
 }
 var esprima = require('esprima');
 var fs = require('fs');
-function walkAst(info, parent, node) {
-    if (node && node.type === 'MemberExpression') {
-        if (node.object.name === info.servicename) {
-            info.callees[node.property.name] = true
-            log.info(info.name + ':' + node.object.name + '.' + node.property.name)
-        }
-    }
-    for (var key in node) {
-        if (node[key]) {
-            var child = node[key];
-            if (typeof child === 'object') {
-                if (Array.isArray(child)) {
-                    for (var i = 0, len = child.length; i < len; i++) {
-                        walkAst(info, node, child[i]);
-                    }
-                }
-                else {
-                    walkAst(info, node, child);
-                }
-            }
-        }
-    }
-}
+
 var includemethodcalls = true;
 var moduleName = 'ff-fes';
 Documentation.prototype.createGraph = function () {
@@ -39,14 +16,13 @@ Documentation.prototype.createGraph = function () {
     graph.set("rankdir", "LR");
 // Add node (ID: Hello)
     return madge('../../' + moduleName + '/ff-fes.js', {
-        excludeRegExp: ['Tree$', 'Node$', 'JSVisitor$'],
+        excludeRegExp: ['Tree$', 'Node$', 'JSVisitor$', 'CustomImport'],
         fileExtensions: ['js']
     }).then(function (res) {
         var dot = res.obj();
         for (var key in dot) {
             try {
                 var start = graph.addNode(key)
-                // log.info('../../restapi/' + key + '.js', 'utf-8')
                 var source = fs.readFileSync('../../' + moduleName + '/' + key + '.js', 'utf-8')
                 var ast = esprima.parse(source)
 
@@ -58,7 +34,15 @@ Documentation.prototype.createGraph = function () {
                         name: key
                     };
 
-                    walkAst(metaData, undefined, ast)
+                    walkAst(function (info, node) {
+                            if (node && node.type === 'MemberExpression') {
+                                if (node.object.name === info.servicename) {
+                                    info.callees[node.property.name] = true
+                                    log.info(info.name + ':' + node.object.name + '.' + node.property.name)
+                                }
+                            }
+                        }, metaData, undefined, ast
+                    )
                     var edge = graph.addEdge(start, dot[key][dep])
                     if (includemethodcalls) {
                         edge.set('label', Object.keys(metaData.callees).toString().replace(/,/gmi, '\\n'));
@@ -78,6 +62,5 @@ Documentation.prototype.createGraph = function () {
         log.error(err)
     });
 }
-/*graph.endUpdate();*/
 Documentation.prototype.createGraph()
 module.exports = Documentation.prototype;

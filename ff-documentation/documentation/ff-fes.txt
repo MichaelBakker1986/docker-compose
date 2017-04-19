@@ -1,7 +1,7 @@
 digraph G  {
   graph [ rankdir = LR ];
+  "exchange_modules/ffl/FflToJsonConverter";
   "exchange_modules/ffl/FinFormula";
-  "exchange_modules/ffl/bracketparser";
   "exchange_modules/ffl/fileParser";
   "exchange_modules/ffl/fflparser";
   "fesjs/SolutionFacade";
@@ -16,13 +16,12 @@ digraph G  {
   "fesjs/ParserService";
   "fesjs/Solution";
   "fesjs/formula-bootstrap";
-  "resources/CustomImport";
   "fesjs/fescontext";
   "ff-fes";
-  "exchange_modules/ffl/bracketparser" -> "exchange_modules/ffl/FinFormula" [ label = "fixCasing\nfinChoice\nparseFormula" ];
-  "exchange_modules/ffl/bracketparser" -> "exchange_modules/ffl/fileParser" [ label = "deparseRegex" ];
+  "exchange_modules/ffl/FflToJsonConverter" -> "exchange_modules/ffl/FinFormula" [ label = "fixCasing\nfinChoice\nparseFormula" ];
+  "exchange_modules/ffl/FflToJsonConverter" -> "exchange_modules/ffl/fileParser" [ label = "deparseRegex" ];
+  "exchange_modules/ffl/fflparser" -> "exchange_modules/ffl/FflToJsonConverter" [ label = "parse\ndeparseRegex" ];
   "exchange_modules/ffl/fflparser" -> "exchange_modules/ffl/FinFormula" [ label = "toJavascriptChoice\njavaScriptToFinGeneric" ];
-  "exchange_modules/ffl/fflparser" -> "exchange_modules/ffl/bracketparser" [ label = "parse\ndeparseRegex" ];
   "exchange_modules/ffl/fflparser" -> "fesjs/SolutionFacade" [ label = "createSolution\ngatherProperties\ncreateUIFormulaLink\naddParser" ];
   "exchange_modules/presentation/presentation" -> "fesjs/SolutionFacade" [ label = "addUi\ncreateSolution\ncreateUIFormulaLink\nbulkInsert\ngatherFormulas\ninitFormulaBootstrap\naddParser" ];
   "fesjs/FESFacade" -> "fesjs/FormulaService" [ label = "findFormulaByIndex\nvisitFormulas" ];
@@ -38,7 +37,6 @@ digraph G  {
   "fesjs/SolutionFacade" -> "fesjs/PropertiesAssembler" [ label = "createRootNode\nfindAllInSolution\ngetOrCreateProperty\nbulkInsert\nfetch\naddUi\ncontains" ];
   "fesjs/SolutionFacade" -> "fesjs/Solution" [ label = "" ];
   "fesjs/SolutionFacade" -> "fesjs/formula-bootstrap" [ label = "" ];
-  "fesjs/XAxis" -> "resources/CustomImport" [ label = "" ];
   "ff-fes" -> "exchange_modules/ffl/fflparser" [ label = "" ];
   "ff-fes" -> "exchange_modules/presentation/presentation" [ label = "" ];
   "ff-fes" -> "fesjs/JSWorkBook" [ label = "doImport\nvalidate\nfixAll\nmodelName\ngetRootNode\ncolumns\nproperties\nupdateValueMap\ngetStatelessVariable\nstatelessGetValue\nstatelessSetValue\nvisit\ngetStatelessNode" ];
