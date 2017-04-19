@@ -1,8 +1,8 @@
 digraph G  {
   graph [ rankdir = LR ];
   "../ff-fes-xlsx/ff-fes-xlsx";
+  "../ff-fes/exchange_modules/ffl/FflToJsonConverter";
   "../ff-fes/exchange_modules/ffl/FinFormula";
-  "../ff-fes/exchange_modules/ffl/bracketparser";
   "../ff-fes/exchange_modules/ffl/fileParser";
   "../ff-fes/fesjs/JSVisitor";
   "../ff-fes/exchange_modules/ffl/fflparser";
@@ -27,14 +27,13 @@ digraph G  {
   "../ff-math/jsMath";
   "../ff-ssh-git/gitconnector";
   "DBConnector";
-  "dbSettings";
   "apiimpl";
   "ff-fes-app";
-  "../ff-fes/exchange_modules/ffl/bracketparser" -> "../ff-fes/exchange_modules/ffl/FinFormula" [ label = "" ];
-  "../ff-fes/exchange_modules/ffl/bracketparser" -> "../ff-fes/exchange_modules/ffl/fileParser" [ label = "deparseRegex" ];
-  "../ff-fes/exchange_modules/ffl/bracketparser" -> "../ff-fes/fesjs/JSVisitor" [ label = "" ];
+  "../ff-fes/exchange_modules/ffl/FflToJsonConverter" -> "../ff-fes/exchange_modules/ffl/FinFormula" [ label = "" ];
+  "../ff-fes/exchange_modules/ffl/FflToJsonConverter" -> "../ff-fes/exchange_modules/ffl/fileParser" [ label = "deparseRegex" ];
+  "../ff-fes/exchange_modules/ffl/FflToJsonConverter" -> "../ff-fes/fesjs/JSVisitor" [ label = "" ];
+  "../ff-fes/exchange_modules/ffl/fflparser" -> "../ff-fes/exchange_modules/ffl/FflToJsonConverter" [ label = "parse\ndeparseRegex" ];
   "../ff-fes/exchange_modules/ffl/fflparser" -> "../ff-fes/exchange_modules/ffl/FinFormula" [ label = "" ];
-  "../ff-fes/exchange_modules/ffl/fflparser" -> "../ff-fes/exchange_modules/ffl/bracketparser" [ label = "parse\ndeparseRegex" ];
   "../ff-fes/exchange_modules/ffl/fflparser" -> "../ff-fes/fesjs/FESFacade" [ label = "addParser" ];
   "../ff-fes/exchange_modules/ffl/fflparser" -> "../ff-fes/fesjs/JSVisitor" [ label = "" ];
   "../ff-fes/exchange_modules/ffl/fflparser" -> "../ff-fes/fesjs/SolutionFacade" [ label = "createSolution\ncreateUIFormulaLink" ];
@@ -64,7 +63,6 @@ digraph G  {
   "../ff-fes/ff-fes" -> "../ff-fes/fesjs/JSWorkBook" [ label = "" ];
   "../ff-fes/ff-fes" -> "../ff-fes/fesjs/fescontext" [ label = "" ];
   "../ff-math/ff-math" -> "../ff-math/jsMath" [ label = "func" ];
-  "DBConnector" -> "dbSettings" [ label = "" ];
   "apiimpl" -> "../ff-fes-xlsx/ff-fes-xlsx" [ label = "" ];
   "apiimpl" -> "../ff-fes/ff-fes" [ label = "" ];
   "apiimpl" -> "../ff-formulajs/ff-formulajs" [ label = "" ];

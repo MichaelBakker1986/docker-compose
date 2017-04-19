@@ -1,5 +1,5 @@
 var assert = require('assert');
-var bracketParser = require('../exchange_modules/ffl/bracketparser');
+var bracketParser = require('../exchange_modules/ffl/FflToJsonConverter');
 
 //TODO: the tests are realy strict, also with spacing.
 //Consider /\\s*/g to strip all whitespace before compare

@@ -40,6 +40,7 @@ JSWorkBook.prototype.doImport = function (data, parserType) {
     }
     var solution = FESFacade.findParser(parserType).parse(data, this);
     this.modelName = solution.getName().toUpperCase();
+    this.modelName = solution.getName().toUpperCase();
     log.debug('Update model [' + solution.getName() + ']');
     UIService.bulkInsert(solution);
     //only get the formulas for Current Model

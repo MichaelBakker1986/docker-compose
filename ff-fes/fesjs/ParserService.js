@@ -25,5 +25,5 @@ ParserService.prototype.getParsers = function () {
 }
 ParserService.prototype.findParser = function (parserName) {
     return parsers[parserName];
-}
+V}
 module.exports = ParserService.prototype;
