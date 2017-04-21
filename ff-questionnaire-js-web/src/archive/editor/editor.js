@@ -72,7 +72,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
 
     saveFunction = function () {
         console.info('save model' + $scope.apiPath + 'FORMULA/' + 1)
-        var httpPromise = $http.post($scope.apiPath + 'FORMULA/' + 1, SolutionFacade.produceSolution().formulas);
+        var httpPromise;//= $http.post($scope.apiPath + 'FORMULA/' + 1, SolutionFacade.produceSolution().formulas);
 
         $scope.myPromise = httpPromise;
         $timeout(function () {

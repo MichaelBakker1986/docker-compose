@@ -1,4 +1,4 @@
-var logger = require('ff-log');
+var log = require('ff-log');
 var AST = require('ast-node-utils').ast;
 var assert = require('assert')
 var escodegen = require('escodegen')
@@ -30,6 +30,45 @@ FormulaService.prototype.visitFormulas = function (visitFunction) {
         }
     }
 }
+FormulaService.prototype.addFormulaDependency = function (formulaInfo,referenceFormulaIndex, referenceName) {
+    //we want do know if we can all the value straight away or we have to invoke a function for it
+    //in future we want to check here if its a dynamic formula, or plain value.
+    //also inherited functions are nice to play around with.
+    //if type is not static, we add it as dependency
+    var referenceFormulaInfo = formulas[referenceFormulaIndex];
+    //ok so we going to allow default values, this could because this formula was the default.
+    //there was once an idea to create static formula types
+    //we could now reference to the index instead...
+    var refName = referenceName;
+    var refId;
+    if (referenceFormulaInfo === undefined) {
+        log.warn('failed to lookup:[' + referenceName + '] but it was in the model, could be in another model. OR it just have default value formula')
+        log.trace(formulaInfo.original);
+    }
+    else {
+        refName = referenceFormulaInfo.name;
+        refId = referenceFormulaInfo.id || referenceFormulaInfo.index;
+
+        if (referenceFormulaInfo.refs[formulaInfo.name] === undefined) {
+            referenceFormulaInfo.refs[formulaInfo.name] = true;
+            referenceFormulaInfo.formulaDependencys.push({
+                name: formulaInfo.name,
+                association: 'refs',
+                refId: formulaInfo.id || formulaInfo.index
+            });
+        }
+    }
+    if (formulaInfo.deps[refName] === undefined) {
+        formulaInfo.deps[refName] = true;
+        formulaInfo.formulaDependencys.push({
+            name: refName,
+            association: 'deps',
+            refId: refId
+        });
+    }
+    return referenceFormulaInfo;
+}
+
 /**
  * Looks like the function in FormulaBootStrap, combine these.
  */

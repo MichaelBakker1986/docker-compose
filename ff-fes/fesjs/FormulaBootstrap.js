@@ -158,7 +158,7 @@ function buildFunc(formulaInfo, fType, refer, propertyName) {
     if (referenceFormulaInfo === undefined) {
         return defaultValues[propertiesArr[fType]];
     }
-    var refId = referenceFormulaInfo.id === undefined ? referenceFormulaInfo.index : referenceFormulaInfo.id;
+    var refId = referenceFormulaInfo.id || referenceFormulaInfo.index;
     delete refer.refn;
     return "a" + refId + "('" + refId + "',x" + propertyName + ",y,z,v)";
 }

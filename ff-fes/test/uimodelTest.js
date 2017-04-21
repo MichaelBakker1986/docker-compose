@@ -11,6 +11,7 @@ require('../exchange_modules/screendefinition/screendefparser');//just let it in
 require('../exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 var assert = require('assert');
 var JUNIT = require('./JUNIT');
+var log = require('ff-log')
 var JSWorkBook = require('../fesjs/JSWorkBook');
 var FESContext = require('../fesjs/fescontext')
 //find: find,//findByUIElement
@@ -45,5 +46,5 @@ JUNIT.validateTree(importTree, uitree, 'children', 'nodes', function (expected, 
  assert.equal(rootNode.displayAs, 'SectionAnswerType');
  assert.equal(rootNode.nodes.length, 1);*/
 //JUNIT.print(JSON.stringify(uitree, null, 2))
-console.info('Test UIModel success')
+log.info('Test UIModel success')
 

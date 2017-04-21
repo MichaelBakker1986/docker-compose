@@ -165,7 +165,7 @@ APP.controller('formbuilder', ['$timeout', '$scope', '$http', '$location', funct
         }
     };
     uiSaveFunction = function () {
-        var Solution = JSWorkbook.produceSolution();
+        var Solution;// = JSWorkbook.produceSolution();
         console.info('save model' + $scope.apiPath + 'UPDATE/SOLUTION/')
         console.info(Solution)
         var httpPromise = $http.post($scope.apiPath + 'FORMULA/', Solution.formulas);

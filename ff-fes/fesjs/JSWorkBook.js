@@ -165,9 +165,7 @@ function resolveY(wb, y) {
 }
 //some functions we directly pass trough
 JSWorkBook.prototype.get = function (row, col, x, y) {
-    var xas = resolveX(this, x);
-    var yas = resolveY(this, y);
-    return FESFacade.statelessGetValue(this.context, this.modelName + '_' + row, col, xas, yas)
+    return this.statelessGetValue(this.modelName + '_' + row, col, x, y);
 };
 JSWorkBook.prototype.statelessGetValue = function (row, col, x, y) {
     var xas = resolveX(this, x);

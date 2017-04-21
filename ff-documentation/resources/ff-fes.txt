@@ -34,7 +34,7 @@ digraph G  {
   "fesjs/JSWorkBook" -> "fesjs/XAxis" [ label = "bkyr" ];
   "fesjs/JSWorkBook" -> "fesjs/YAxis" [ label = "" ];
   "fesjs/SolutionFacade" -> "fesjs/FormulaBootstrap" [ label = "parseAsFormula\ninitStateBootstrap" ];
-  "fesjs/SolutionFacade" -> "fesjs/FormulaService" [ label = "findFormulaByIndex\naddModelFormula\nmoveFormula" ];
+  "fesjs/SolutionFacade" -> "fesjs/FormulaService" [ label = "findFormulaByIndex\naddModelFormula\nmoveFormula\naddFormulaDependency" ];
   "fesjs/SolutionFacade" -> "fesjs/FunctionMap" [ label = "initFormulaBootstrap\nmoveFormula" ];
   "fesjs/SolutionFacade" -> "fesjs/ParserService" [ label = "findParser\nvisitParsers\naddParser" ];
   "fesjs/SolutionFacade" -> "fesjs/PropertiesAssembler" [ label = "createRootNode\nfindAllInSolution\ngetOrCreateProperty\nbulkInsert\nfetch\ncontains" ];
