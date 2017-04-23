@@ -12,14 +12,16 @@ function Solution(solutionName) {
     this.displayTypes = {};
     this.type = solutionName;
     this.properties = {};
-    //TODO: merge these two
     this.nodes = [];
-    this.uinodes = {};
     this.addedRowIds = new Set();
+    this.formulas = new Set();
     this.root = {};
 }
 Solution.prototype.preparser = function (input) {
     return input;
+}
+Solution.prototype.getFormulas = function (iterator) {
+    return this.formulas.forEach(iterator);
 }
 Solution.prototype.hasNode = function (rowId) {
     var has = this.addedRowIds.has(rowId);
@@ -49,15 +51,18 @@ Solution.prototype.getName = function () {
     return this.name;
 }
 //should not allow duplicates.
+//Save UI- names only
 Solution.prototype.createNode = function (rowId, colId, formulaId, displayAs) {
     var uiNode = {
         name: this.name + "_" + rowId + "_" + colId,
         rowId: rowId,
         colId: colId,
+        refId: formulaId,
         displayAs: displayAs || 'PropertyType'
     };
     if (formulaId !== undefined) {
         uiNode.ref = formulaId;
+        this.formulas.add(formulaId);
     }
     this.nodes.push(uiNode);
     return uiNode;
@@ -83,7 +88,7 @@ Solution.prototype.stringify = function () {
 }
 //add to global list of found variables
 Solution.prototype.addNode = function (rowId, node) {
-    this.uinodes[rowId] = node
+    this.nodes[rowId] = node
 }
 Solution.prototype.setPreparser = function (parser) {
     this.preparser = parser;
@@ -111,7 +116,7 @@ Solution.prototype.addNodeToCorrespondingPlaceInHierarchie = function (parentrow
     }
     else {
         //create children array if it did not exist yet.
-        var foundVariable = this.uinodes[parentrowId];
+        var foundVariable = this.nodes[parentrowId];
         if (foundVariable.children === undefined) {
             foundVariable.children = [];
         }

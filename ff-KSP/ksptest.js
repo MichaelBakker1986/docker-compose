@@ -147,7 +147,7 @@ excelPlugin.initComplete.then(function () {
     }
 
     var wbKSP = new WorkBook(new FESContext());
-    wbKSP.doImport(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
+    wbKSP.importSolution(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
     var untestedformulas = 0;
     var totalformulas = 0;
     var formulas = {}

@@ -19,8 +19,8 @@ var data = JUNIT.getFile('hierarchyTest.ffl');
 var FESContext = require('../fesjs/fescontext')
 var log = require('ff-log')
 var wb = new JSWorkBook(new FESContext());
-wb.doImport(data, 'ffl');
-wb.fixAll();
+wb.importSolution(data, 'ffl');
+wb.fixProblemsInImportedSolution();
 var presentation = wb.export('presentation');
 
 var uitree = presentation.tree;

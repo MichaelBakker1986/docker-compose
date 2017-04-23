@@ -33,24 +33,11 @@ fm.prototype.apiSet = function (formula, x, y, z, value, v) {
         log.debug('[%s] does not exist', id);
     }
 }
-
-//TODO: reparse all dependencies/references WHEN index changes!
-//disableFormulaCache means it will remove the parsed member from given formula's
-//caches are within the given formula's
-//public
-fm.prototype.initFormulaBootstrap = function (formulaParser, formulas, disableFormulaCache) {
-    formulas.forEach(function (newFormula) {
-        var id = newFormula.id || newFormula.index;
-        //technical depth, we only want to this when user explicitly entered it or something. They have these Objects!
-        //we can do it there, for now we just have this parameter.
-        if (disableFormulaCache) {
-            newFormula.parsed = undefined;//explicitly reset parsed. (The formula-bootstrap) will skip parsed formulas.
-        }
-        var javaScriptfunction = formulaParser(newFormula);
-        log.debug("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]",'a' + id, newFormula.original, newFormula.name, newFormula.type, javaScriptfunction)
-        var modelFunction = Function('f, x, y, z, v', 'return ' + javaScriptfunction).bind(global);
-        global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
-    });
+fm.prototype.initializeFormula = function (newFormula) {
+    var id = newFormula.id || newFormula.index;
+    log.debug("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
+    var modelFunction = Function('f, x, y, z, v', 'return ' + newFormula.parsed).bind(global);
+    global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 };
 //private
 //we do need this functions to be here, so the FormulaBootstrap can directly call the function on its map instead of

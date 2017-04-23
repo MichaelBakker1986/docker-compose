@@ -33,7 +33,7 @@ var importTree = {
         }
     ]
 };
-wb.doImport(JSON.stringify(importTree), 'screendefinition');
+wb.importSolution(JSON.stringify(importTree), 'screendefinition');
 var uitree = wb.export('presentation').tree;
 
 JUNIT.validateTree(importTree, uitree, 'children', 'nodes', function (expected, actual) {
@@ -42,7 +42,7 @@ JUNIT.validateTree(importTree, uitree, 'children', 'nodes', function (expected, 
 )
 
 //after structural test, test "description" is mapped to title function
-/*var rootNode = wb.getRootNode();
+/*var rootNode = wb.getRootSolutionProperty();
  assert.equal(rootNode.displayAs, 'SectionAnswerType');
  assert.equal(rootNode.nodes.length, 1);*/
 //JUNIT.print(JSON.stringify(uitree, null, 2))

@@ -62,7 +62,7 @@ var parser = {
         return solution;
     },
     deParse: function (rowId, workbook) {
-        var fflSolution = SolutionFacade.createSolution(workbook.modelName);
+        var fflSolution = SolutionFacade.createSolution(workbook.getSolutionName());
         workbook.visit(workbook.getNode(rowId), function (elem) {
             //JSON output doesn't gurantee properties to be in the same order as inserted
             //so little bit tricky here, wrap the node in another node
@@ -71,7 +71,7 @@ var parser = {
             var uielem = {};
             //for now all nodes are variables
             var realObject = {}
-            var formulaProperties = SolutionFacade.gatherFormulaProperties(workbook.modelName, workbook.properties, elem.rowId);
+            var formulaProperties = SolutionFacade.gatherFormulaProperties(workbook.getSolutionName(), workbook.properties, elem.rowId);
             for (var key in formulaProperties) {
                 var formula = formulaProperties[key];
                 var finFormula;

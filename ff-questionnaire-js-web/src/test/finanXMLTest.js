@@ -6,7 +6,7 @@ var JUNIT = require('./JUNIT.js');
 var assert = require('assert');
 var data = require('./../resources/testValues.json');
 var wb = new WorkBook();
-var feedback = wb.doImport(JSON.stringify(data), 'jsonvalues');
+var feedback = wb.importSolution(JSON.stringify(data), 'jsonvalues');
 var returnedDATA = wb.export('jsonvalues');
 JUNIT.print(returnedDATA);
 var finanXML = wb.export('finanXML');

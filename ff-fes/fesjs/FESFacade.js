@@ -36,11 +36,10 @@ function findFormula(uiModel) {
     return FormulaService.findFormulaByIndex(uiModel.ref);
 }
 
-//public
 function getStatelessVariable(row, col) {
     return PropertiesAssembler.fetch(row + '_' + col);
 }
-FESFacade.statelessSetValue = function (context, row, value, col, xas, yas) {
+FESFacade.setSolutionPropertyValue = function (context, row, value, col, xas, yas) {
     var rowId = row + '_' + ( col || 'value');
     var localFormula = findFormula(PropertiesAssembler.fetch(rowId));
     if (localFormula === undefined) {
@@ -51,7 +50,7 @@ FESFacade.statelessSetValue = function (context, row, value, col, xas, yas) {
     FunctionMap.apiSet(localFormula, xas, yas, 0, value, context.values);
 };
 
-FESFacade.statelessGetValue = function (context, row, col, xas, yas) {
+FESFacade.getSolutionProperyValue = function (context, row, col, xas, yas) {
     var colType = col || 'value';
     var localFormula = findFormula(getStatelessVariable(row, colType));
     var returnValue;
@@ -63,8 +62,8 @@ FESFacade.statelessGetValue = function (context, row, col, xas, yas) {
     }
     return returnValue;
 }
-FESFacade.getRootNode = PropertiesAssembler.getRootNode;
-FESFacade.getStatelessVariable = getStatelessVariable;
+FESFacade.getRootSolutionProperty = PropertiesAssembler.getRootSolutionProperty;
+FESFacade.getSolutionNode = getStatelessVariable;
 FESFacade.apiGet = FunctionMap.apiGet;
 FESFacade.getAllValues = function (docValues) {
     //we cannot just return everything here, Because for now all formula's have a user-entered value cache.

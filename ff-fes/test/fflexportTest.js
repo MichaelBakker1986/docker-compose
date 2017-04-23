@@ -10,9 +10,9 @@ for (var i = 0; i < fflTestModels.length; i++) {
     var data = JUNIT.getFile(fflModelName + '.ffl');
     var wb = new WorkBook(new FESContext());
 
-    wb.doImport(data, 'ffl');
+    wb.importSolution(data, 'ffl');
     var validate = wb.validate();
-    wb.fixAll();
+    wb.fixProblemsInImportedSolution();
     assert.ok(wb.validate().valid);
     var fflExport = wb.export('ffl');
     //debugging..

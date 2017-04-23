@@ -15,18 +15,6 @@ function SolutionFacade() {
 SolutionFacade.prototype.createSolution = function (solutionName) {
     return new Solution(PropertiesAssembler.createRootNode(solutionName).solutionName);
 }
-SolutionFacade.prototype.produceSolution = function (nodeId) {
-    var solution = PropertiesAssembler.findAllInSolution(nodeId);
-    var solutionFormulas = [];
-    solution.nodes.forEach(function (uiModel) {
-        var formula = FormulaService.findFormulaByIndex(uiModel.ref);
-        if (formula) {
-            solutionFormulas[formula.id || formula.index] = formula;
-        }
-    })
-    solution.formulas = solutionFormulas;
-    return solution;
-}
 
 SolutionFacade.prototype.importSolution = function (data, parserType, workbook) {
     if (data === undefined) {
@@ -36,10 +24,7 @@ SolutionFacade.prototype.importSolution = function (data, parserType, workbook) 
     var solution = ParserService.findParser(parserType).parse(data, workbook);
     log.debug('Update Solution [' + solution.getName() + ']');
     PropertiesAssembler.bulkInsert(solution);
-    //only get the formulas for Current Model
-    //the parser itsself should add formulas to the solution.
-    var formulas = this.produceSolution(solution.getName()).formulas;
-    this.initFormulaBootstrap(formulas, false);
+    initFormulaBootstrap(solution.formulas, false);
     return solution;
 }
 SolutionFacade.prototype.exportSolution = function (parserType, rowId, workbook) {
@@ -49,9 +34,19 @@ SolutionFacade.prototype.exportSolution = function (parserType, rowId, workbook)
     }
     return parser.deParse(rowId, workbook);
 }
-SolutionFacade.prototype.initFormulaBootstrap = function (formulas, disableCache) {
-    return FunctionMap.initFormulaBootstrap(FormulaBootstrap.parseAsFormula, formulas, disableCache);
+function initFormulaBootstrap(formulas, resetParsedFormula) {
+    formulas.forEach(function (formulaId) {
+        var formulaInfo = FormulaService.findFormulaByIndex(formulaId);
+        if (resetParsedFormula) {
+            formulaInfo.parsed = undefined;//explicitly reset parsed. (The formula-bootstrap) will skip parsed formulas
+        }
+        if (formulaInfo.parsed === undefined || formulaInfo.parsed === null) {
+            FormulaBootstrap.parseAsFormula(formulaInfo);
+        }
+        FunctionMap.initializeFormula(formulaInfo);
+    });
 };
+SolutionFacade.prototype.initFormulaBootstrap = initFormulaBootstrap;
 /*
  *return given properties from a formula
  */
@@ -67,14 +62,19 @@ SolutionFacade.prototype.gatherFormulaProperties = function (modelName, properti
 }
 /**
  * Called from JSWorkBook
+ * Initializes Solution if not exists
+ * Creates Formula/Property if not exists
+ * Initialize Functionmap
  */
-SolutionFacade.prototype.createFormulaAndStructure = function (groupName, formulaAsString, rowId, col) {
+SolutionFacade.prototype.createFormulaAndStructure = function (solutionName, formulaAsString, rowId, colId) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
-    var property = PropertiesAssembler.getOrCreateProperty(groupName, rowId, col);
-    var newFormulaId = FormulaService.addModelFormula(property, groupName, rowId, col, col !== 'value', ast.body[0].expression);
-    //integrate formula (parse it)
-    FunctionMap.initFormulaBootstrap(FormulaBootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
+    //create Solution if not exists.
+    var solution = this.createSolution(solutionName);
+    //integrate Property with Formula
+    this.createUIFormulaLink(solution, rowId, colId, ast.body[0].expression, undefined);
+    //integrate one formula from just created Solution
+    this.initFormulaBootstrap(solution.formulas);
 };
 /**
  * Called by parsers
@@ -84,8 +84,6 @@ SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId,
     //in simple (LOCKED = (colId !== 'value'))
     var property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
     var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, colId !== 'value', body);
-    //The Parsers themselves add Links, which should be done just before parsing Formula's
-    //afterwards the Formula's are parsed,
     return solution.createNode(rowId, colId, formulaId, displayAs);
 };
 
@@ -98,7 +96,7 @@ SolutionFacade.prototype.mergeFormulas = function (formulasArg) {
         //var id = formula.id === undefined ? formula.index : formula.id;
         var localFormula = FormulaService.findFormulaByIndex(formula.index);
         if (localFormula !== undefined && localFormula !== null) {
-            changed.push(localFormula);
+            changed.push(localFormula.id || localFormula.index);
             //of course this should not live here, its just a bug fix.
             if (localFormula.index !== formula.id) {
                 //move formula
@@ -107,7 +105,7 @@ SolutionFacade.prototype.mergeFormulas = function (formulasArg) {
         }
     });
     //rebuild the formulas
-    FunctionMap.initFormulaBootstrap(FormulaBootstrap.parseAsFormula, changed, true);
+    this.initFormulaBootstrap(changed, true);
 };
 function moveFormula(old, newFormula) {
     FormulaService.moveFormula(old, newFormula);

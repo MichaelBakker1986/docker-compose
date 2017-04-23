@@ -20,7 +20,7 @@ fesjsApi.addFunctions(excelPlugin);
 excelPlugin.initComplete.then(function () {
     log.info('excel done')
     var wb = new WorkBook(new FESContext());
-    wb.doImport(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
+    wb.importSolution(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
 }).catch(function (err) {
     log.error(err)
 })

@@ -9,7 +9,7 @@ var jsonValues = {
     headername: 'JSON Values',
     parse: function (values, workbook) {
         updateValues(JSON.parse(values), workbook.context.values);
-        return SolutionFacade.createSolution(workbook.modelName);
+        return SolutionFacade.createSolution(workbook.getSolutionName());
     },
     deParse: function (rowId, workbook) {
         return workbook.getAllValues();

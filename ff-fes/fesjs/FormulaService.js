@@ -42,7 +42,7 @@ FormulaService.prototype.addFormulaDependency = function (formulaInfo,referenceF
     var refName = referenceName;
     var refId;
     if (referenceFormulaInfo === undefined) {
-        log.warn('failed to lookup:[' + referenceName + '] but it was in the model, could be in another model. OR it just have default value formula')
+        log.trace('failed to lookup:[' + referenceName + '] but it was in the model, could be in another model. OR it just have default value formula')
         log.trace(formulaInfo.original);
     }
     else {
@@ -70,7 +70,6 @@ FormulaService.prototype.addFormulaDependency = function (formulaInfo,referenceF
 }
 
 /**
- * Looks like the function in FormulaBootStrap, combine these.
  */
 function addAssociation(index, property, associationType) {
     var formula = formulas[index];

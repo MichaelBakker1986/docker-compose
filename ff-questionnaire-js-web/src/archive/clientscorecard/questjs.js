@@ -186,7 +186,7 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
     if ($scope.documentId) {
         $http.get($scope.apiPath + 'DOCUMENT/' + $scope.documentId).success(function (data) {
             if (data !== null && data.values !== undefined) {
-                var importResult = JSWorkBook.doImport(data.values, 'docvalues');
+                var importResult = JSWorkBook.importSolution(data.values, 'docvalues');
                 print('Import:' + importResult.valid ? ' success' : 'failed')
             }
         });
@@ -212,10 +212,10 @@ APP.controller('appCtrl', ['$timeout', '$scope', '$http', '$location', '$rootSco
         JSWorkBook.switchModel(dbSolution, $scope.docValues);
 
         //these scope members are root of all views in the app, unmapped is not very useful at the moment
-        $scope.uimodelroot.nodes = JSWorkBook.getRootNode().nodes;
+        $scope.uimodelroot.nodes = JSWorkBook.getRootSolutionProperty().nodes;
         JSWorkBook.present.update(JSWorkBook.updateAll);
         console.timeEnd('init-model-' + dbSolution.name);
-        $scope.rootNodePath(JSWorkBook.getRootNode().rowId)
+        $scope.rootNodePath(JSWorkBook.getRootSolutionProperty().rowId)
     }
 
     $scope.sendResponse = function () {

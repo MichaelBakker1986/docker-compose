@@ -421,36 +421,30 @@ function generate(body) {
 //public function, will return the parsed string
 //its getting nasty, with supporting this many options, consider only expecting on valid type either AST or STRING only
 FormulaBootstrap.prototype.parseAsFormula = function (formulaInfo) {
-    if (formulaInfo.parsed === undefined || formulaInfo.parsed === null) {
-        var ast;
-        if (formulaInfo.body === "") {
-            formulaInfo.original = "";
-            return "null";
-        }
-        else if (typeof formulaInfo.body === 'object') {
-            formulaInfo.original = generate(formulaInfo.body);
-            ast = formulaInfo.body;
-        }
-        else {
-            formulaInfo.original = formulaInfo.body;
-            ast = esprima.parse(formulaInfo.body);
-        }
-        //this part is cutting off a load of self-references. Not sure if going to build caching mechanism
-        //There is soo many to learn about dependency loops.
-        var tempnaaam = formulaInfo.name.replace('FINANPROGNOSEMODEL_', '').replace(/_value$/g, '');
-        formulaInfo.tempnaaam = tempnaaam;
-
-        //check if the formula contains a self-reference
-        if (new RegExp("\W" + tempnaaam + "\W", "gmi").test(formulaInfo.original)) {
-            log.warn('Self reference found [%s] in [%s]', formulaInfo.name, formulaInfo.original);
-        }
-        buildFormula(formulaInfo, null, ast);
-        var generated = generate(ast);
-        formulaInfo.ast = JSON.stringify(ast);
-        formulaInfo.parsed = generated;
-        formulaInfo.tempnaaam = undefined;
+    assert(formulaInfo.parsed === undefined)
+    var ast;
+    if (typeof formulaInfo.body === 'object') {
+        formulaInfo.original = generate(formulaInfo.body);
+        ast = formulaInfo.body;
     }
-    return formulaInfo.parsed;
+    else {
+        formulaInfo.original = formulaInfo.body;
+        ast = esprima.parse(formulaInfo.body);
+    }
+    //this part is cutting off a load of self-references. Not sure if going to build caching mechanism
+    //There is soo many to learn about dependency loops.
+    var tempnaaam = formulaInfo.name.replace(/^KSP_/, '').replace(/_value$/g, '');
+    formulaInfo.tempnaaam = tempnaaam;
+
+    //check if the formula contains a self-reference
+    if (new RegExp("\W" + tempnaaam + "\W", "gmi").test(formulaInfo.original)) {
+        log.warn('Self reference found [%s] in [%s]', formulaInfo.name, formulaInfo.original);
+    }
+    buildFormula(formulaInfo, null, ast);
+    var generated = generate(ast);
+    formulaInfo.ast = JSON.stringify(ast);
+    formulaInfo.parsed = generated;
+    formulaInfo.tempnaaam = undefined;
 }
 FormulaBootstrap.prototype.initStateBootstrap = function (configs) {
     variables = configs.contains;//to distinct FesVariable from references
