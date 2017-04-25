@@ -40,6 +40,7 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value) {
     var fesContext = new FESContext();
     fesContext.values = context.values;
     var JSWorkBook = new WorkBook(fesContext)
+    // Workbook property for 'TupleIndex'
     JSWorkBook.columns = context.columns || 17;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
     //prepare the workbook and context to match current appscope
@@ -86,6 +87,9 @@ function getEntry(workbook, rowId, columncontext) {
     var start = 0;
     var end = workbook.columns;
     var variable = workbook.getStatelessVariable(rowId, 'value');
+
+    // 'tuple = true' property uit fflparser.js (line 227)
+    // Hier werken voor Tuples uitvragen
 
     //quick-fix for document variables;
     //TODO: all warnings for calls with document frequencies and columncontext>0 is useless
