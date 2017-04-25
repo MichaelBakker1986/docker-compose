@@ -125,7 +125,20 @@ simplified.InputRequired = function (formulaInfo, node) {
     delete node.callee;
     delete node.refn;
 }
-
+simplified.TSUM = function (formulaInfo, node) {
+    //jsut straighten TSUM and TupleSum
+    // node.callee.name = 'TupleSum';
+    /*  node.arguments = [{
+     "type": "Identifier",
+     "name": "1"
+     }];*/
+    var refId = buildModelFunc(formulaInfo, 0, node.arguments[0],'');
+    node.arguments[0].name = 'a' + refId + ",'" + refId + "',x,y,z,v"
+    /*node.arguments.push({
+     "type": "Identifier",
+     "name": "y"
+     });*/
+}
 var escodegenOptions = {
     format: {
         renumber: true,
@@ -146,21 +159,23 @@ var xArgument = {
 };
 
 /**
- * for now we will reference all formula's in the property range<br>
- * For now just support the _value formula.
- * Be aware when formula changes with the Default Formula. its not directly linked.
  * In mainWhile we learned there are two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
  */
-function buildFunc(formulaInfo, fType, refer, propertyName) {
-    propertyName = propertyName || '';
+function buildModelFunc(formulaInfo, fType, refer, propertyName) {
+
 
     var referenceFormulaInfo = addFormulaDependency(formulaInfo, refer.name, propertiesArr[fType]);
     if (referenceFormulaInfo === undefined) {
         return defaultValues[propertiesArr[fType]];
     }
-    var refId = referenceFormulaInfo.id === undefined ? referenceFormulaInfo.index : referenceFormulaInfo.id;
+    var refId = referenceFormulaInfo.id || referenceFormulaInfo.index;
     delete refer.refn;
-    return "a" + refId + "('" + refId + "',x" + propertyName + ",y,z,v)";
+    return refId;
+}
+function buildFunc(formulaInfo, fType, refer, propertyName) {
+    propertyName = propertyName || '';
+    var refId = buildModelFunc(formulaInfo, fType, refer, propertyName);
+    return 'a' + refId + "('" + refId + "',x" + propertyName + ",y,z,v)";
 }
 var varproperties = {}
 
@@ -421,36 +436,30 @@ function generate(body) {
 //public function, will return the parsed string
 //its getting nasty, with supporting this many options, consider only expecting on valid type either AST or STRING only
 FormulaBootstrap.prototype.parseAsFormula = function (formulaInfo) {
-    if (formulaInfo.parsed === undefined || formulaInfo.parsed === null) {
-        var ast;
-        if (formulaInfo.body === "") {
-            formulaInfo.original = "";
-            return "null";
-        }
-        else if (typeof formulaInfo.body === 'object') {
-            formulaInfo.original = generate(formulaInfo.body);
-            ast = formulaInfo.body;
-        }
-        else {
-            formulaInfo.original = formulaInfo.body;
-            ast = esprima.parse(formulaInfo.body);
-        }
-        //this part is cutting off a load of self-references. Not sure if going to build caching mechanism
-        //There is soo many to learn about dependency loops.
-        var tempnaaam = formulaInfo.name.replace('FINANPROGNOSEMODEL_', '').replace(/_value$/g, '');
-        formulaInfo.tempnaaam = tempnaaam;
-
-        //check if the formula contains a self-reference
-        if (new RegExp("\W" + tempnaaam + "\W", "gmi").test(formulaInfo.original)) {
-            log.warn('Self reference found [%s] in [%s]', formulaInfo.name, formulaInfo.original);
-        }
-        buildFormula(formulaInfo, null, ast);
-        var generated = generate(ast);
-        formulaInfo.ast = JSON.stringify(ast);
-        formulaInfo.parsed = generated;
-        formulaInfo.tempnaaam = undefined;
+    assert(formulaInfo.parsed === undefined)
+    var ast;
+    if (typeof formulaInfo.body === 'object') {
+        formulaInfo.original = generate(formulaInfo.body);
+        ast = formulaInfo.body;
     }
-    return formulaInfo.parsed;
+    else {
+        formulaInfo.original = formulaInfo.body;
+        ast = esprima.parse(formulaInfo.body);
+    }
+    //this part is cutting off a load of self-references. Not sure if going to build caching mechanism
+    //There is soo many to learn about dependency loops.
+    var tempnaaam = formulaInfo.name.replace(/^KSP_/, '').replace(/_value$/g, '');
+    formulaInfo.tempnaaam = tempnaaam;
+
+    //check if the formula contains a self-reference
+    if (new RegExp("\W" + tempnaaam + "\W", "gmi").test(formulaInfo.original)) {
+        log.warn('Self reference found [%s] in [%s]', formulaInfo.name, formulaInfo.original);
+    }
+    buildFormula(formulaInfo, null, ast);
+    var generated = generate(ast);
+    formulaInfo.ast = JSON.stringify(ast);
+    formulaInfo.parsed = generated;
+    formulaInfo.tempnaaam = undefined;
 }
 FormulaBootstrap.prototype.initStateBootstrap = function (configs) {
     variables = configs.contains;//to distinct FesVariable from references

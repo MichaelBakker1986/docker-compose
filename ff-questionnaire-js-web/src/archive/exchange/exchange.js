@@ -46,12 +46,12 @@ APP.controller('exchange', ['$timeout', '$scope', '$http', '$location', '$window
             importtype.importFeedback = feedback;
         });
     }
-    $scope.fixAll = function (importtype) {
-        var feedback = importtype.importFeedback.fixAll();
+    $scope.fixProblemsInImportedSolution = function (importtype) {
+        var feedback = importtype.importFeedback.fixProblemsInImportedSolution();
         //TODO: in this file, i have this block three times.. FIX IT
         $timeout(function () {
             if (feedback.valid) {
-                $scope.rootNodePath(JSWorkBook.getRootNode().rowId);
+                $scope.rootNodePath(JSWorkBook.getRootSolutionProperty().rowId);
                 $scope.switchPage('UI Elements');
             }
             importtype.importFeedback = feedback;
@@ -67,7 +67,7 @@ APP.controller('exchange', ['$timeout', '$scope', '$http', '$location', '$window
             $scope.$root.myPromise = new Promise(function (fulfill, reject) {
                 ful = fulfill;
             });
-            JSWorkBook.doImport(contents, importType.name);
+            JSWorkBook.importSolution(contents, importType.name);
             logger.info('import done.. performing monte carlo simulation')
             var feedback = JSWorkBook.validate();
 
@@ -77,13 +77,13 @@ APP.controller('exchange', ['$timeout', '$scope', '$http', '$location', '$window
                 $scope.$root.model = JSWorkBook.getCurrentModelName();
             })
             //  $scope.switchModel(JSWorkBook.solution)
-            $scope.uimodelroot.nodes = JSWorkBook.getRootNode().nodes;
+            $scope.uimodelroot.nodes = JSWorkBook.getRootSolutionProperty().nodes;
 
             //TODO: in this file, i have this block three times.. FIX IT
             $timeout(function () {
                 $location.search('model', JSWorkBook.getCurrentModelName());
                 if (feedback.valid) {
-                    $scope.rootNodePath(JSWorkBook.getRootNode().rowId);
+                    $scope.rootNodePath(JSWorkBook.getRootSolutionProperty().rowId);
                     $scope.switchPage('UI Elements');
                 }
             });

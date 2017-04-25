@@ -53,7 +53,7 @@ APP.controller('code_editor', ['$timeout', '$scope', '$http', '$location', '$roo
     $scope.saveChanges = function () {
         var present = $scope.$parent.presentation
         if (present.isLeaf()) {
-            wb.doImport(editor.getValue(), wb.settings.defaultoutput);
+            wb.importSolution(editor.getValue(), wb.settings.defaultoutput);
             present.update(FESFacade.updateAll);
         }
         else {

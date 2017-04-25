@@ -12,9 +12,9 @@ var info = JUNIT.print;
 if (!skip) {
     var data = JUNIT.getFile('concepts.fin');
     var wb = new WorkBook();
-    wb.doImport(data, 'fin');
+    wb.importSolution(data, 'fin');
     var validate = wb.validate();
-    var feedback = validate.fixAll()
+    var feedback = validate.fixProblemsInImportedSolution()
     assert.ok(wb.validate().valid);
 
 //this is how the original FIN file looks like /resources/concepts.fin
@@ -175,7 +175,7 @@ for (var i = 0; i < tests.length; i++) {
     var data = JUNIT.getFile(obj);
 
     var wb = new WorkBook();
-    wb.doImport(data, 'fin');
+    wb.importSolution(data, 'fin');
     var allDeps = [];
     break;
     FESFacade.visitFormulas(function (outerFormula) {

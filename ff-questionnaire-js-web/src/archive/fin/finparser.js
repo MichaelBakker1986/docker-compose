@@ -50,12 +50,12 @@ var parser = {
         var formulasString = {};
         if (rowId)
         {
-            var startuielem = uimodel.getOrCreateProperty(rowId, 'value')
+            var startuielem;// = uimodel.getOrCreateProperty(rowId, 'value')
         }
 
         uimodel.visit(startuielem, function (node)
         {
-            var formulaProperties = finExport.gatherProperties(FESFacade.getFormula, FESFacade.properties, node.rowId);
+            var formulaProperties = finExport.gatherFormulaProperties(FESFacade.getFormula, FESFacade.properties, node.rowId);
             // exportString += createFinVariableRow(node, formulaProperties['title'] || '');
             for (var key in formulaProperties)
             {

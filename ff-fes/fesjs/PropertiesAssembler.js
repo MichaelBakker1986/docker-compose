@@ -2,7 +2,8 @@ function PropertiesAssembler() {
 }
 var PropertiesModel = {
     NEW_root_value: {
-        rowId: 'root'
+        rowId: 'root',
+        solutionName: 'NEW'
     }
 };
 /**
@@ -90,9 +91,7 @@ function addProperty(groupName, row, col, item, parentId) {
 }
 //add elements from Solution into Map
 PropertiesAssembler.prototype.bulkInsert = function (solution) {
-    var solutionName = solution.name.toUpperCase();
-    //fix for appending values, instead of overwriting them
-    //Should be more clean
+    var solutionName = solution.getName();
     if (!rootNodes[solutionName]) {
         create(solutionName);
     }
@@ -128,18 +127,13 @@ PropertiesAssembler.prototype.bulkInsert = function (solution) {
 function getRootNode(modelName) {
     return rootNodes[modelName];
 }
-PropertiesAssembler.prototype.findAllInSolution = function (nodeId) {
-    var result = {
-        name: nodeId,
-        nodes: []
-    }
+PropertiesAssembler.prototype.findAllInSolution = function (nodeId, visit) {
     for (var key in PropertiesModel) {
         var property = PropertiesModel[key];
         if (property.solutionName === nodeId) {
-            result.nodes.push(property);
+            visit(property);
         }
     }
-    return result;
 };
 //fetchByName (can return undefined)
 PropertiesAssembler.prototype.fetch = function fetch(name) {
@@ -174,6 +168,6 @@ function visitInternal(node, func, depth) {
         }
     }
 }
-PropertiesAssembler.prototype.getRootNode = getRootNode;
+PropertiesAssembler.prototype.getRootSolutionProperty = getRootNode;
 PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 module.exports = PropertiesAssembler.prototype;

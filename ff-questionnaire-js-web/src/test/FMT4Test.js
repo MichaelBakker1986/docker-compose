@@ -39,7 +39,7 @@ var parser = {
             };
             screenSolution.addNode(elem.rowId, uielem);
             screenSolution.restoreDelegateProperties(uielem, elem);
-            screenSolution.addNodeToCorrespondingPlaceInHierarchie(elem.parentrowId, elem.rowId, uielem);
+          //  screenSolution.addNodeToCorrespondingPlaceInHierarchie(elem.parentrowId, elem.rowId, uielem);
         });
         screenSolution.root.modelName = uimodel.getCurrentModelName();
         return screenSolution.stringify();

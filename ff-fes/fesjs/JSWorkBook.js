@@ -12,7 +12,7 @@ var XAxis = require('./XAxis')
 var YAxis = require('./YAxis')
 
 //user friendly stable API
-//doImport(data,'type') : Solution          ; See Solution class for definiton
+//importSolution(data,'type') : Solution          ; See Solution class for definiton
 //export('type')        : Object            ; raw type undefined output. When calling this read the header of the parser to get more information
 //set(rowId,value <,property> <,context>)   ; value can be anything see "get" function
 // --optional property (default='value')
@@ -32,10 +32,16 @@ function JSWorkBook(context) {
     this.xaxis = XAxis.bkyr.columns[0]
 }
 
-JSWorkBook.prototype.doImport = function (data, parserType) {
+JSWorkBook.prototype.importSolution = function (data, parserType) {
     var solution = SolutionFacade.importSolution(data, parserType, this);
+    //TODO: getSolutionName() should return this.solution.getName();
+    //or Don't use JSWorkBook for solution imports at all.
+    this.solution = solution;
     this.modelName = solution.getName();
     this.updateValueMap();
+}
+JSWorkBook.prototype.getSolutionName = function () {
+    return this.modelName;
 }
 //if it is possible to fix missing functions
 //fix loops in the solution. we try it
@@ -55,26 +61,26 @@ function fixAll() {
     return feedback;
 };
 /**
- * validate current solution
- *Only generic models will be validated once they are imported
- *Generic problems can be resolved in the same manner
- *returns a FeedBack object
+ * validateImportedSolution current solution
+ * validation is done once they are imported
+ * Generic problems can be resolved in the same manner
+ * returns a FeedBack object
  * TODO: extract validator.
  */
-function validate() {
+function validateImportedSolution() {
     var validateResponse = {
         succes: [],
         error: []
     };
     var context = this.context;
     var workbook = this;
-    var formulas = SolutionFacade.produceSolution(this.modelName).formulas;
 
-    function formulaFixer(elem) {
+    function formulaFixer(elemId) {
+        var formulaInfo = SolutionFacade.findFormulaByIndex(elemId)
         //TODO: use timeout, this monte carlo is blocking UI thread
         try {
-            FESFacade.apiGet(elem, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
-            validateResponse.succes.push(elem.name);
+            FESFacade.apiGet(formulaInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+            validateResponse.succes.push(formulaInfo.name);
         }
         catch (e) {
             var fix;
@@ -88,12 +94,8 @@ function validate() {
                         fixMessage: 'Add',
                         fix: function () {
                             try {
-                                log.debug(elem.name + " : " + 'Fix for [' + variableName + '] in solution: ' + workbook.modelName + " : " + elem.original + ' message:[' + e + ']')
-                                //TODO: just create a DUMMY formula, returning 1;
+                                log.debug(formulaInfo.name + " : " + 'Fix for [' + variableName + '] in solution: ' + workbook.getSolutionName() + " : " + formulaInfo.original + ' message:[' + e + ']')
                                 workbook.createFormula(1, variableName);
-                                //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
-                                SolutionFacade.initFormulaBootstrap([elem], true);
-                                workbook.updateValueMap();
                             } catch (err) {
                                 log.error('Fatal error', err);
                             }
@@ -113,15 +115,15 @@ function validate() {
                     canFix: true,
                     fixMessage: 'Remove formula',
                     fix: function () {
-                        var deps = Object.keys(elem.deps);
-                        var refs = Object.keys(elem.refs);
-                        log.warn('Loop detected for [' + elem.name + '], Making string formula ' + elem.original + "\n"
+                        var deps = Object.keys(formulaInfo.deps);
+                        var refs = Object.keys(formulaInfo.refs);
+                        log.warn('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
                             + "DEPS[" + deps.length + "][" + deps + "]\nREFS[" + refs.length + "]:[" + refs + "]"
                         )
-                        elem.parsed = undefined;
-                        elem.body = AST.STRING(elem.original);
+                        formulaInfo.parsed = undefined;
+                        formulaInfo.body = AST.STRING(formulaInfo.original);
                         //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
-                        SolutionFacade.initFormulaBootstrap([elem], false);
+                        SolutionFacade.initFormulaBootstrap([elemId], false);
                         workbook.updateValueMap();
                     }
                 };
@@ -135,27 +137,32 @@ function validate() {
 
             //filter Exceptions not worth viewing e.g. Duplicates
             if (!fix.hide) {
-                fix.formulaName = elem.name;
+                fix.formulaName = formulaInfo.name;
                 fix.reason = e.message;
                 validateResponse.error.push(fix);
             }
         }
     };
-    formulas.forEach(formulaFixer);
+    this.visitFormulas(formulaFixer);
     validateResponse.valid = validateResponse.error.length === 0 ? true : false;
-    validateResponse.fixAll = fixAll;
+    validateResponse.fixProblemsInImportedSolution = fixAll;
     return validateResponse;
 };
+/**
+ * Visit imported Formula's
+ */
+JSWorkBook.prototype.visitFormulas = function (visitor) {
+    return this.solution.formulas.forEach;
+}
 JSWorkBook.prototype.export = function (parserType, rowId) {
     return SolutionFacade.exportSolution(parserType, rowId, this);
 }
 JSWorkBook.prototype.getNode = function (name) {
-    return this.getStatelessNode(this.modelName + "_" + name);
+    return this.getSolutionNode(this.getSolutionName() + "_" + name);
 }
-JSWorkBook.prototype.getStatelessNode = function (name) {
-    return FESFacade.getStatelessVariable(name, "value");
-}
-JSWorkBook.prototype.getStatelessVariable = FESFacade.getStatelessVariable;
+JSWorkBook.prototype.getSolutionNode = function (name) {
+    return FESFacade.getSolutionNode(name, 'value')
+};
 
 function resolveX(wb, x) {
     return x ? wb.xaxis[x] : wb.xaxis[0];
@@ -163,45 +170,38 @@ function resolveX(wb, x) {
 function resolveY(wb, y) {
     return wb.yaxis[y || 0];
 }
-//some functions we directly pass trough
 JSWorkBook.prototype.get = function (row, col, x, y) {
-    var xas = resolveX(this, x);
-    var yas = resolveY(this, y);
-    return FESFacade.statelessGetValue(this.context, this.modelName + '_' + row, col, xas, yas)
+    return this.getSolutionProperyValue(this.getSolutionName() + '_' + row, col, x, y);
 };
-JSWorkBook.prototype.statelessGetValue = function (row, col, x, y) {
+JSWorkBook.prototype.getSolutionProperyValue = function (row, col, x, y) {
     var xas = resolveX(this, x);
     var yas = resolveY(this, y)
-    return FESFacade.statelessGetValue(this.context, row, col, xas, yas)
+    return FESFacade.getSolutionProperyValue(this.context, row, col, xas, yas)
 };
 
 JSWorkBook.prototype.set = function (row, value, col, x, y) {
-    var xas = resolveX(this, x);
-    var yas = resolveY(this, y)
-    return FESFacade.statelessSetValue(this.context, this.modelName + '_' + row, value, col, xas, yas);
+    return this.setSolutionPropertyValue(this.getSolutionName() + '_' + row, value, col, x, y);
 }
-JSWorkBook.prototype.statelessSetValue = function (row, value, col, x, y) {
+JSWorkBook.prototype.setSolutionPropertyValue = function (row, value, col, x, y) {
     var xas = resolveX(this, x);
     var yas = resolveY(this, y);
-    return FESFacade.statelessSetValue(this.context, row, value, col, xas, yas);
+    return FESFacade.setSolutionPropertyValue(this.context, row, value, col, xas, yas);
 }
 JSWorkBook.prototype.updateValueMap = function () {
     FESFacade.updateValueMap(this.context.values);
 };
-JSWorkBook.prototype.fixAll = fixAll
+JSWorkBook.prototype.fixProblemsInImportedSolution = fixAll
 //should return the solution instead. So its deprecated
-JSWorkBook.prototype.getRootNode = function () {
-    return FESFacade.getRootNode(this.modelName);
+JSWorkBook.prototype.getRootSolutionProperty = function () {
+    return FESFacade.getRootSolutionProperty(this.getSolutionName());
 };
 JSWorkBook.prototype.visit = FESFacade.visit;
-JSWorkBook.prototype.validate = validate;
+JSWorkBook.prototype.validate = validateImportedSolution;
 JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId) {
-    SolutionFacade.createFormulaAndStructure(this.modelName, formulaAsString, rowId, colId || 'value');
+
+    SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value');
     this.updateValueMap();
 }
-JSWorkBook.prototype.produceSolution = function () {
-    return SolutionFacade.produceSolution(this.modelName);
-};
 JSWorkBook.prototype.properties = SolutionFacade.properties;
 JSWorkBook.prototype.getAllValues = function () {
     return FESFacade.getAllValues(this.context.values);

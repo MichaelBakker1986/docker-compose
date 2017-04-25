@@ -23,7 +23,7 @@ var updateAll = {
     locked: true,
     choices: true
 }
-wb.doImport(data, 'ffl');
+wb.importSolution(data, 'ffl');
 var presentation = wb.export('presentation');
 var uitree = presentation.tree;
 uitree.update(updateAll);

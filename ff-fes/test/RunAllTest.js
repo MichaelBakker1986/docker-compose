@@ -1,7 +1,6 @@
-//we have to add the DB tests asap, they are already failing.
-//There is no way to clear State, every doImport will contribute to static state
-//By design all imports should be put into the same stack, they transparently can inter exchange
-//UnloadSolution could be a response
+/*
+ * There is no way to clear State, every doImport will contribute to static state
+ */
 process.alltest = true;
 process.loglevel = 'info'
 var log = require('ff-log')

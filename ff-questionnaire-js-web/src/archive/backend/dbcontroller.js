@@ -392,7 +392,7 @@ function getAll(requestedEntityName, entree)
 function find(requestedEntityName)
 {
     var baseEntity = DB[requestedEntityName.toUpperCase()];
-    return baseEntity.findAllInSolution();
+    return;// baseEntity.findAllInSolution();
 }
 function getAll2(requestedEntityName, entree)
 {

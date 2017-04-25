@@ -17,10 +17,10 @@ var JSWorkBook = require('../fesjs/JSWorkBook');
 var FESFacade = require('../fesjs/FESFacade');
 var data = JUNIT.getFile('hierarchyTest.ffl');
 var FESContext = require('../fesjs/fescontext')
+var log = require('ff-log')
 var wb = new JSWorkBook(new FESContext());
-wb.doImport(data, 'ffl');
-wb.fixAll();
-var info = JUNIT.print;
+wb.importSolution(data, 'ffl');
+wb.fixProblemsInImportedSolution();
 var presentation = wb.export('presentation');
 
 var uitree = presentation.tree;
@@ -31,17 +31,17 @@ console.time('start')
 uitree.update({title: true, value: true, required: true, visible: true, locked: true, valid: true, choices: true})
 console.timeEnd('start')
 
-info(navigator)
+log.trace(navigator)
 navigator.move('Q_MAP01');
-info(navigator)
+log.trace(navigator)
 var next = navigator.next();
-info(navigator)
+log.trace(navigator)
 
 JUNIT.print(uitree)
 var node = uitree.getNode('Q_ROOT');
 uitree.update({title: true, value: true, required: true, visible: true, locked: true})
 JUNIT.print(JSON.stringify(uitree, null, 2))
-console.info('Test Presentation success')
+log.info('Test Presentation success')
 node.update({title: true})
 
 //filter for requested variables, so al already has to know which variables we want to scan
@@ -77,7 +77,7 @@ function cloneTree(obj, map) {
     return temp;
 }
 var other = cloneTree(uitree, {nodes: 'children', rowId: 'name', count: 'size'})
-JUNIT.print(other)
+log.trace(other)
 assert.ok(other.children)
 assert.ok(other.name)
 

@@ -9,7 +9,7 @@ var FESContext = require('../fesjs/fescontext');
 var wb = new WorkBook(new FESContext());
 wb.updateValueMap();
 //var kspModel = JUNIT.getFile('KSP.ffl');
-//wb.doImport(kspModel, 'ffl');
+//wb.importSolution(kspModel, 'ffl');
 
 wb.createFormula('1+1', 'A', 'A')
 assert.equal(wb.get('A', 'A'), 2);

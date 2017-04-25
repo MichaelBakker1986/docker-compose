@@ -10,7 +10,7 @@ var parser = {
     //expection json as String for screen definitions
     parse: function (json, workbook) {
         var data = JSON.parse(json);
-        var solution = SolutionFacade.createSolution(data.modelName || workbook.modelName);
+        var solution = SolutionFacade.createSolution(data.modelName || workbook.getSolutionName());
 
         visitor.travelOne(data, null, function (keyArg, node) {
             //keyArg !== null &&  is a hack, prevents RootNode from being added;
@@ -25,7 +25,7 @@ var parser = {
         return solution;
     },
     deParse: function (rowId, workbook) {
-        var screenSolution = SolutionFacade.createSolution(workbook.modelName);
+        var screenSolution = SolutionFacade.createSolution(workbook.getSolutionName());
 
         PropertiesAssembler.visit(undefined, function (elem) {
             //create output node
@@ -34,7 +34,7 @@ var parser = {
                 displaytype: elem.displayAs,
                 description: elem.title
             };
-            var formulaProperties = SolutionFacade.gatherProperties(workbook.modelName, workbook.properties, elem.rowId);
+            var formulaProperties = SolutionFacade.gatherFormulaProperties(workbook.getSolutionName(), workbook.properties, elem.rowId);
             for (var key in formulaProperties) {
                 var formula = formulaProperties[key];
                 var finFormula = FinFormula.javaScriptToFinGeneric(formula);
@@ -46,7 +46,7 @@ var parser = {
             screenSolution.restoreDelegateProperties(uielem, elem);
             screenSolution.addNodeToCorrespondingPlaceInHierarchie(elem.parentrowId, elem.rowId, uielem);
         });
-        screenSolution.root.modelName = workbook.modelName;
+        screenSolution.root.modelName = workbook.getSolutionName();
         return screenSolution.stringify();
     }
 };

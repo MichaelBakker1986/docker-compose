@@ -4,7 +4,7 @@ require('../archive/exchange_modules/rptXml/rptXmlParser.js');//let it inject
 var assert = require('assert');
 var data = JUNIT.getFile('test.json');
 var wb = new JSWorkBook();
-wb.doImport(data, 'rptXml');
+wb.importSolution(data, 'rptXml');
 assert.ok(wb.validate().valid);
 var rptXmlexport = wb.export('rptXml');
 assert.notStrictEqual(rptXmlexport, undefined);

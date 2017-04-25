@@ -20,7 +20,7 @@ var updateAll = {
 }
 var jsWorkBook = new JSWorkBook(new FESContext());
 jsWorkBook.getCurrentModelName = function () {
-    return this.modelName;
+    return this.getSolutionName();
 }
 jsWorkBook.updateAll = updateAll;
 jsWorkBook.docValues = jsWorkBook.context.values;
@@ -31,8 +31,8 @@ jsWorkBook.getParsers = function(){
     });
     return parsers;
 }
-jsWorkBook.find = jsWorkBook.getStatelessVariable
-jsWorkBook.getNode = jsWorkBook.getStatelessVariable
+jsWorkBook.find = jsWorkBook.getSolutionNode
+jsWorkBook.getNode = jsWorkBook.getSolutionNode
 jsWorkBook.settings = {
     defaultoutput: 'ffl'
 }

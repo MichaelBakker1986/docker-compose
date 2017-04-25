@@ -15,30 +15,7 @@ function SolutionFacade() {
 SolutionFacade.prototype.createSolution = function (solutionName) {
     return new Solution(PropertiesAssembler.createRootNode(solutionName).solutionName);
 }
-SolutionFacade.prototype.gatherFormulas = function (solution) {
-    var solutionFormulas = [];
-    solution.nodes.forEach(function (uiModel) {
-        var formula = FormulaService.findFormulaByIndex(uiModel.ref);
-        if (formula) {
-            solutionFormulas[formula.id || formula.index] = formula;
-        }
-    })
-    solution.formulas = solutionFormulas;
-};
-SolutionFacade.prototype.produceSolution = function (nodeId) {
-    var solution = PropertiesAssembler.findAllInSolution(nodeId);
-    this.gatherFormulas(solution);
-    return solution;
-}
-SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId, body, displayAs) {
-    //by default only value properties can be user entered
-    //in simple (LOCKED = (colId !== 'value'))
-    var property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
-    var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, colId !== 'value', body);
-    //most ugly part here, the Parsers themselves add Links, which should be done just before parsing Formula's
-    //afterwards the Formula's are parsed,
-    return solution.createNode(rowId, colId, formulaId, displayAs);
-};
+
 SolutionFacade.prototype.importSolution = function (data, parserType, workbook) {
     if (data === undefined) {
         log.error('No data specified')
@@ -47,10 +24,7 @@ SolutionFacade.prototype.importSolution = function (data, parserType, workbook) 
     var solution = ParserService.findParser(parserType).parse(data, workbook);
     log.debug('Update Solution [' + solution.getName() + ']');
     PropertiesAssembler.bulkInsert(solution);
-    //only get the formulas for Current Model
-    //the parser itsself should add formulas to the solution.
-    var formulas = this.produceSolution(solution.getName()).formulas;
-    this.initFormulaBootstrap(formulas, false);
+    initFormulaBootstrap(solution.formulas, false);
     return solution;
 }
 SolutionFacade.prototype.exportSolution = function (parserType, rowId, workbook) {
@@ -60,10 +34,23 @@ SolutionFacade.prototype.exportSolution = function (parserType, rowId, workbook)
     }
     return parser.deParse(rowId, workbook);
 }
-SolutionFacade.prototype.initFormulaBootstrap = function (formulas, disableCache) {
-    return FunctionMap.initFormulaBootstrap(FormulaBootstrap.parseAsFormula, formulas, disableCache);
+function initFormulaBootstrap(formulas, resetParsedFormula) {
+    formulas.forEach(function (formulaId) {
+        var formulaInfo = FormulaService.findFormulaByIndex(formulaId);
+        if (resetParsedFormula) {
+            formulaInfo.parsed = undefined;//explicitly reset parsed. (The formula-bootstrap) will skip parsed formulas
+        }
+        if (formulaInfo.parsed === undefined || formulaInfo.parsed === null) {
+            FormulaBootstrap.parseAsFormula(formulaInfo);
+        }
+        FunctionMap.initializeFormula(formulaInfo);
+    });
 };
-SolutionFacade.prototype.gatherProperties = function (modelName, properties, rowId) {
+SolutionFacade.prototype.initFormulaBootstrap = initFormulaBootstrap;
+/*
+ *return given properties from a formula
+ */
+SolutionFacade.prototype.gatherFormulaProperties = function (modelName, properties, rowId) {
     var formulaProperties = {};
     for (var property in properties) {
         var formula = FormulaService.findFormulaByIndex(PropertiesAssembler.getOrCreateProperty(modelName, rowId, property).ref);
@@ -73,14 +60,33 @@ SolutionFacade.prototype.gatherProperties = function (modelName, properties, row
     }
     return formulaProperties;
 }
-SolutionFacade.prototype.createFormulaAndStructure = function (groupName, formulaAsString, rowId, col) {
+/**
+ * Called from JSWorkBook
+ * Initializes Solution if not exists
+ * Creates Formula/Property if not exists
+ * Initialize Functionmap
+ */
+SolutionFacade.prototype.createFormulaAndStructure = function (solutionName, formulaAsString, rowId, colId) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
-    var property = PropertiesAssembler.getOrCreateProperty(groupName, rowId, col);
-    var newFormulaId = FormulaService.addModelFormula(property, groupName, rowId, col, col !== 'value', ast.body[0].expression);
-    //integrate formula (parse it)
-    FunctionMap.initFormulaBootstrap(FormulaBootstrap.parseAsFormula, [FormulaService.findFormulaByIndex(newFormulaId)], true);
+    //create Solution if not exists.
+    var solution = this.createSolution(solutionName);
+    //integrate Property with Formula
+    this.createUIFormulaLink(solution, rowId, colId, ast.body[0].expression, undefined);
+    //integrate one formula from just created Solution
+    this.initFormulaBootstrap(solution.formulas);
 };
+/**
+ * Called by parsers
+ */
+SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId, body, displayAs) {
+    //by default only value properties can be user entered
+    //in simple (LOCKED = (colId !== 'value'))
+    var property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
+    var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, colId !== 'value', body);
+    return solution.createNode(rowId, colId, formulaId, displayAs);
+};
+
 SolutionFacade.prototype.mergeFormulas = function (formulasArg) {
     //so for all refs in the formula, we will switch the formulaIndex
     var changed = [];
@@ -90,7 +96,7 @@ SolutionFacade.prototype.mergeFormulas = function (formulasArg) {
         //var id = formula.id === undefined ? formula.index : formula.id;
         var localFormula = FormulaService.findFormulaByIndex(formula.index);
         if (localFormula !== undefined && localFormula !== null) {
-            changed.push(localFormula);
+            changed.push(localFormula.id || localFormula.index);
             //of course this should not live here, its just a bug fix.
             if (localFormula.index !== formula.id) {
                 //move formula
@@ -99,7 +105,7 @@ SolutionFacade.prototype.mergeFormulas = function (formulasArg) {
         }
     });
     //rebuild the formulas
-    FunctionMap.initFormulaBootstrap(FormulaBootstrap.parseAsFormula, changed, true);
+    this.initFormulaBootstrap(changed, true);
 };
 function moveFormula(old, newFormula) {
     FormulaService.moveFormula(old, newFormula);
@@ -111,53 +117,15 @@ function moveFormula(old, newFormula) {
         property.formulaId = newFormula.id;
     }
 }
-
-//TODO: move this method away. its the only one that should create Dependencies
-//Move it to either a DependencyManager/Service or FESFacade
-SolutionFacade.prototype.addFormulaDependency = function (formulaInfo, name, property) {
-    var foundUiModel = PropertiesAssembler.getOrCreateProperty(formulaInfo.name.split('_')[0], name, property || 'value');
-    //we want do know if we can all the value straight away or we have to invoke a function for it
-    //in future we want to check here if its a dynamic formula, or plain value.
-    //also inherited functions are nice to play around with.
-    //if type is not static, we add it as dependency
-    var referenceFormulaInfo = FormulaService.findFormulaByIndex(foundUiModel.ref);
-    //ok so we going to allow default values, this could because this formula was the default.
-    //there was once an idea to create static formula types
-    //we could now reference to the index instead...
-    var refName = foundUiModel.name;
-    var refId;
-    if (referenceFormulaInfo === undefined) {
-        log.trace('failed to lookup:[' + name + '_' + property + '] but it was in the model, could be in another model. OR it just have default value formula')
-        log.trace(formulaInfo.original);
-    }
-    else {
-        refName = referenceFormulaInfo.name;
-        refId = referenceFormulaInfo.id || referenceFormulaInfo.index;
-
-        if (referenceFormulaInfo.refs[formulaInfo.name] === undefined) {
-            referenceFormulaInfo.refs[formulaInfo.name] = true;
-            referenceFormulaInfo.formulaDependencys.push({
-                name: formulaInfo.name,
-                association: 'refs',
-                refId: formulaInfo.id || formulaInfo.index
-            });
-        }
-    }
-    if (formulaInfo.deps[refName] === undefined) {
-        formulaInfo.deps[refName] = true;
-        formulaInfo.formulaDependencys.push({
-            name: refName,
-            association: 'deps',
-            refId: refId
-        });
-    }
-    return referenceFormulaInfo;
+SolutionFacade.prototype.addFormulaDependency = function (formulaInfo, name, propertyName) {
+    var property = PropertiesAssembler.getOrCreateProperty(formulaInfo.name.split('_')[0], name, propertyName || 'value');
+    return FormulaService.addFormulaDependency(formulaInfo, property.ref, property.name);
 }
-
 SolutionFacade.prototype.visitParsers = ParserService.visitParsers;
 SolutionFacade.prototype.addParser = ParserService.addParser;
 SolutionFacade.prototype.getOrCreateProperty = PropertiesAssembler.getOrCreateProperty;
 SolutionFacade.prototype.contains = PropertiesAssembler.contains
+//TODO: add locked flag to these properties
 SolutionFacade.prototype.properties = {
     value: 0,
     visible: 1,

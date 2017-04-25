@@ -13,9 +13,9 @@ var esprima = require('esprima');
 var data = JUNIT.getFile('hierarchyTest.ffl');
 var FESContext = require('../fesjs/fescontext')
 var wb = new JSWorkBook(new FESContext());
-//wb.doImport(data, 'ffl');
+//wb.importSolution(data, 'ffl');
 var singleVariable = JUNIT.getFile('testFFLVariable.ffl');
-wb.doImport(singleVariable, 'ffl');
+wb.importSolution(singleVariable, 'ffl');
 //@formatter:off
 /* corresponsing FFL file:
  model TEST uses BaseModel
@@ -131,17 +131,16 @@ for (var i = 0; i < tests.length; i++) {
     var solutionName = tests[i];
     var data = JUNIT.getFile(solutionName + '.ffl');
     var wb = new JSWorkBook(new FESContext());
-    wb.doImport(data, 'ffl');
+    wb.importSolution(data, 'ffl');
 
     var feedback = wb.validate();
     if (!feedback.valid) {
-        feedback = wb.fixAll();
+        feedback = wb.fixProblemsInImportedSolution();
     }
     feedback.error.forEach(function (item) {
         console.error('error: ' + item.formulaName + "\r\nreason: [" + item.reason + "]");
     });
 
-    var solution = FESFacade.produceSolution(wb.modelName);
     wb.createFormula(100, 'TestVariable');
     assert.equal(wb.get('TestVariable'), 100);
 

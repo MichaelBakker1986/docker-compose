@@ -46,7 +46,7 @@ var editColumns = [
     {colId: 'title', icon: 'fa-info-circle', displayText: 'title'},
     {colId: 'visible', icon: 'fa-eye', displayText: 'visible'},
     {colId: 'required', icon: 'fa-exclamation-circle', displayText: 'required'},
-    {colId: 'validateInput', icon: 'fa-check-circle-o', displayText: 'validate input'},
+    {colId: 'validateInput', icon: 'fa-check-circle-o', displayText: 'validateImportedSolution input'},
     {colId: 'value', icon: 'fa-edit', displayText: 'value'},
     {colId: 'locked', icon: 'fa-lock', displayText: 'locked'},
     {colId: 'validation', icon: 'fa-check-square-o', displayText: 'validation'},
@@ -72,7 +72,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
 
     saveFunction = function () {
         console.info('save model' + $scope.apiPath + 'FORMULA/' + 1)
-        var httpPromise = $http.post($scope.apiPath + 'FORMULA/' + 1, SolutionFacade.produceSolution().formulas);
+        var httpPromise;//= $http.post($scope.apiPath + 'FORMULA/' + 1, SolutionFacade.produceSolution().formulas);
 
         $scope.myPromise = httpPromise;
         $timeout(function () {

@@ -19,7 +19,7 @@ excelPlugin.initComplete.then(function () {
     var wbKSP = new WorkBook(new FESContext());
     var fs = require("fs");
     var buf = fs.readFileSync('resources/KSP.ffl', "utf8");
-    wbKSP.doImport((buf), 'ffl')
+    wbKSP.importSolution((buf), 'ffl')
     wbKSP.set('IncomeParent01', 25000)
     assert(wbKSP.get('IncomeParent01') === 25000)
 

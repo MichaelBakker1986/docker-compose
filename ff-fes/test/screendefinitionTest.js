@@ -10,7 +10,7 @@ JUNIT.print(data)
 var FESContext = require('../fesjs/fescontext')
 var wb = new JSWorkBook(new FESContext());
 
-wb.doImport(JSON.stringify(data, null, 2), 'screendefinition');
+wb.importSolution(JSON.stringify(data, null, 2), 'screendefinition');
 assert.ok(wb.validate().valid);
 var screenDefexport = wb.export('screendefinition');
 assert.notStrictEqual(screenDefexport, undefined);
@@ -25,5 +25,5 @@ JUNIT.validateTree(expected, actual, 'children', 'children', function (expected,
     return actual.name === expected.variableName || expected.name;
 })
 JUNIT.print(screenDefexport);
-log.info('succes model [' + wb.modelName + ']');
+log.info('succes model [' + wb.getSolutionName() + ']');
 JUNIT.print(wb.export('ffl'));

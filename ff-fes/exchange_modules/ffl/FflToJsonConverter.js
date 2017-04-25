@@ -46,7 +46,8 @@ var log = require('ff-log');
  If a new operator needs to be added, or one has changed. it should not be that hard.
  If u try fix a bug here, Good Luck :)
  */
-
+function FflToJsonConverter() {
+}
 //has to be Unit Tested very intensive
 //FIN,FFL formula language to JavaScript language
 function parseRegex(contents) {
@@ -132,7 +133,7 @@ var deparsers = [
 //create a native javascript object
 //Find parent-child relations
 //Add all properties to its parent
-function genericFflFileToGenericJson(contents) {
+FflToJsonConverter.prototype.parse = function (contents) {
     // log.time('fflParse')
     var stack = new Stack();
 
@@ -238,11 +239,8 @@ function genericFflFileToGenericJson(contents) {
     //log.timeEnd('fflParse')
     return stack.peek();
 }
-function deparseRegex(input) {
+FflToJsonConverter.prototype.deparseRegex = function (input) {
     return fileParser.deparseRegex(deparsers, input)
 }
-module.exports = {
-    parse: genericFflFileToGenericJson,
-    parseRegex: FinFormula.parseFormula,
-    deparseRegex: deparseRegex
-}
+FflToJsonConverter.prototype.parseRegex = FinFormula.parseFormula;
+module.exports = FflToJsonConverter.prototype;

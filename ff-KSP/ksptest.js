@@ -4,7 +4,7 @@
  * formulas containing ":" are not parsed correctly, changes are made within KSP.ffl file
  *
  */
-global.loglevel = 'info'
+global.loglevel = 'debug'
 var FormulaService = require('../ff-fes/fesjs/FormulaService')
 var WorkBook = require('../ff-fes/fesjs/JSWorkBook')
 var FESContext = require('../ff-fes/fesjs/fescontext')
@@ -147,7 +147,7 @@ excelPlugin.initComplete.then(function () {
     }
 
     var wbKSP = new WorkBook(new FESContext());
-    wbKSP.doImport(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
+    wbKSP.importSolution(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
     var untestedformulas = 0;
     var totalformulas = 0;
     var formulas = {}
@@ -222,9 +222,9 @@ excelPlugin.initComplete.then(function () {
 
     testVariable('TotalYearlyBalance', 1);
     log.info('done')
-    require('./totalyearlycosttest')
+    //require('./totalyearlycosttest')
     //test core functionality
-    require('../ff-fes/test/RunAllTest')
+    // require('../ff-fes/test/RunAllTest')
 }).catch(function (err) {
     log.error(err)
 })

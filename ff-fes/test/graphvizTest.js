@@ -10,6 +10,7 @@ require('../../ff-math/ff-math')
 var fesjsApi = require('../ff-fes').fesjs;
 var FESContext = require('../fesjs/fescontext');
 var FormulaService = require('../fesjs/FormulaService');
+var SolutionFacade = require('../fesjs/SolutionFacade');
 var JUNIT = require('../test/JUNIT');
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 fesjsApi.addFunctions(require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup);
@@ -27,14 +28,13 @@ for (var i = 0; i < fflTestModels.length; i++) {
     var data = JUNIT.getFile(fflModelName + '.ffl');
     var wb = new WorkBook(new FESContext());
 
-    wb.doImport(data, 'ffl');
+    wb.importSolution(data, 'ffl');
     var validate = wb.validate();
-    wb.fixAll();
+    wb.fixProblemsInImportedSolution();
     assert.ok(wb.validate().valid);
     var fflExport = wb.export('ffl');
     var screendefExport = wb.export('presentation');
     var allnodes = screendefExport.tree._tree.nodes;
-    var solution = wb.produceSolution();
 
     var graphvizModelTree = '';
     var depVariableNames_with_formulas = "";
@@ -44,14 +44,15 @@ for (var i = 0; i < fflTestModels.length; i++) {
         var node = allnodes[nodeName];
     }
 
-    wb.visit(wb.getStatelessNode('KSP_root'), function (child) {
+    wb.visit(wb.getSolutionNode('KSP_root'), function (child) {
         graphvizModelTree += createRow(child.rowId);
         graphvizModelTree += "\r\n" + child.parentrowId + " -> " + child.rowId + ";"
     })
 
     var variableNames = new Set();
 
-    solution.formulas.forEach(function (formula) {
+    wb.solution.formulas.forEach(function (formulaId) {
+        var formula = SolutionFacade.findFormulaByIndex(formulaId);
         if (Object.keys(formula.deps).length > 0) {
             variableNames.add(correctFileName(formula.name))
         }
@@ -74,7 +75,7 @@ for (var i = 0; i < fflTestModels.length; i++) {
     createFile(wb, "_dependencies_with_formulas.txt", createGraph(depVariableNames_with_formulas));
 }
 function createFile(wb, fileName, graph) {
-    var fullFileName = '../resources/' + wb.modelName + fileName;
+    var fullFileName = '../resources/' + wb.getSolutionName() + fileName;
     fs.writeFile(fullFileName, graph, function (err) {
         if (err) {
             log.log(err);

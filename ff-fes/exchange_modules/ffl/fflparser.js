@@ -54,7 +54,7 @@ var parser = {
                     var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
                     var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
 
-                    addnode(log, solution, nodeName, node, parentId, undefined, tuple);
+                    addnode(log, solution, nodeName, node, parentId, tuple);
                 }
             }
         });
@@ -62,7 +62,7 @@ var parser = {
         return solution;
     },
     deParse: function (rowId, workbook) {
-        var fflSolution = SolutionFacade.createSolution(workbook.modelName);
+        var fflSolution = SolutionFacade.createSolution(workbook.getSolutionName());
         workbook.visit(workbook.getNode(rowId), function (elem) {
             //JSON output doesn't gurantee properties to be in the same order as inserted
             //so little bit tricky here, wrap the node in another node
@@ -71,7 +71,7 @@ var parser = {
             var uielem = {};
             //for now all nodes are variables
             var realObject = {}
-            var formulaProperties = SolutionFacade.gatherProperties(workbook.modelName, workbook.properties, elem.rowId);
+            var formulaProperties = SolutionFacade.gatherFormulaProperties(workbook.getSolutionName(), workbook.properties, elem.rowId);
             for (var key in formulaProperties) {
                 var formula = formulaProperties[key];
                 var finFormula;
@@ -207,7 +207,7 @@ var defaultValue = {
 
 //this is where it is all about, the variable with his properties
 //we should make it more Generic so i can use it for fin language parser
-function addnode(log, solution, rowId, node, parentId, referId, tuple) {
+function addnode(log, solution, rowId, node, parentId, tuple) {
     log.variables.push(rowId);
     if (rowId === undefined || rowId.trim() === '') {
         logger.info('NULL rowId')
@@ -220,11 +220,11 @@ function addnode(log, solution, rowId, node, parentId, referId, tuple) {
 
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', node.formula ? parseFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
 
-    uiNode.referId = referId;
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
 
     if (tuple) {
+        logger.debug('Found tuple [%s]',rowId)
         uiNode.tuple = true;
     }
     for (var key in formulaMapping) {

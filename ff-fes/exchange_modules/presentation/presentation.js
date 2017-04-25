@@ -143,7 +143,7 @@ Node.prototype._update = function (properties) {
     for (var property in properties) {
         var value, dirty = false;
 
-        var newValue = wb.statelessGetValue(wb.modelName + "_" + this.rowId, property);
+        var newValue = wb.get(this.rowId, property);
         //TODO: will fail for Object types, first we will meet is Date
         //we will use a object validator combined with the datatype to check it
         //
@@ -182,8 +182,8 @@ var presentationConverter = {
         throw new Error('Not yet supported');
     },
     deParse: function (rowId, workbook) {
-        var modelName = workbook.modelName;
-        var rootNode = workbook.getRootNode(modelName);
+        var modelName = workbook.getSolutionName();
+        var rootNode = workbook.getRootSolutionProperty(modelName);
         if (rootNode !== undefined) {
             var tree = new Tree(rootNode.rowId);
             tree.workbook = workbook;
@@ -201,11 +201,11 @@ var presentationConverter = {
         }
         var exportValue = {
             tree: tree === undefined ? {
-                getNode: function () {
-                    return undefined
-                }, visit: function () {
-                }
-            } : tree.getRoot(),
+                    getNode: function () {
+                        return undefined
+                    }, visit: function () {
+                    }
+                } : tree.getRoot(),
             navigator: undefined
         };
         var navigator = {

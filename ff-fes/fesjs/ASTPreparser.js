@@ -136,19 +136,6 @@ var simplified = {
             "name": "1"
         }];
     },
-    TSUM: function (formulaInfo, node) {
-        //jsut straighten TSUM and TupleSum
-        // node.callee.name = 'TupleSum';
-        /*  node.arguments = [{
-         "type": "Identifier",
-         "name": "1"
-         }];*/
-        /*     node.arguments[0].name = 'this[' + variables[node.arguments[0].name].id + ']';
-         node.arguments.push({
-         "type": "Identifier",
-         "name": "x"
-         });*/
-    },
     /**
      * Inject the x parameter into the call
      */

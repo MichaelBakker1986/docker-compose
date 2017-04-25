@@ -10,18 +10,18 @@ function FESApi() {
 }
 FESApi.prototype.init = function (data) {
     var JSWorkBook = new WorkBook(new FESContext());
-    JSWorkBook.doImport(data, 'ffl');
+    JSWorkBook.importSolution(data, 'ffl');
     var validate = JSWorkBook.validate();
-    JSWorkBook.fixAll();
+    JSWorkBook.fixProblemsInImportedSolution();
     var validateFeedback = JSWorkBook.validate();
     if (validateFeedback.valid) {
         //valid
-        log.debug('Initialized model [' + JSWorkBook.modelName + ']');
+        log.debug('Initialized model [' + JSWorkBook.getSolutionName() + ']');
     } else {
         log.error(validateFeedback)
         throw Error('unable to initialize')
     }
-    return JSWorkBook.getRootNode().solutionName;
+    return JSWorkBook.getRootSolutionProperty().solutionName;
 }
 FESApi.prototype.addFunctions = function (plugin) {
     var functions = [];
@@ -48,9 +48,9 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value) {
     if (value !== undefined) {
         //choice(select) requests
         //possible ?quick-fix? to change choice values into number value
-        var variable = JSWorkBook.getStatelessVariable(rowId, 'value');
+        var variable = JSWorkBook.getSolutionNode(rowId, 'value');
         if (variable && variable.displayAs === 'select') {
-            var choices = JSWorkBook.statelessGetValue(rowId, 'choices');
+            var choices = JSWorkBook.getSolutionProperyValue(rowId, 'choices');
             var choiceValue = choices.lookup('value', value);
             if (choiceValue === undefined) {
                 log.warn('Could not find [%s] choice [%s] in %s. using [%s] to be value', rowId, value, JSON.stringify(choices), value)
@@ -58,11 +58,11 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value) {
                 value = isNaN(choiceValue.name) ? choiceValue.name : parseInt(choiceValue.name);
             }
         }
-        JSWorkBook.statelessSetValue(rowId, value, 'value', columncontext, 0, 0)
+        JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, 0, 0)
         return getEntry(JSWorkBook, rowId, columncontext)
     } else {
         var values = [];
-        var rootNode = JSWorkBook.getStatelessNode(rowId);
+        var rootNode = JSWorkBook.getSolutionNode(rowId);
         if (rootNode) {
             JSWorkBook.visit(rootNode, function (node) {
                 values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext))
@@ -86,7 +86,7 @@ function getEntry(workbook, rowId, columncontext) {
     var data = [];
     var start = 0;
     var end = workbook.columns;
-    var variable = workbook.getStatelessVariable(rowId, 'value');
+    var variable = workbook.getSolutionNode(rowId, 'value');
 
     // 'tuple = true' property uit fflparser.js (line 227)
     // Hier werken voor Tuples uitvragen
@@ -99,7 +99,7 @@ function getEntry(workbook, rowId, columncontext) {
     for (var x = start; x <= end; x++) {
         data[x] = {};
         for (var type in workbook.properties) {
-            data[x][type] = workbook.statelessGetValue(rowId, type, x, 0);
+            data[x][type] = workbook.getSolutionProperyValue(rowId, type, x, 0);
             data[x].column = x;
             data[x].variable = variable.rowId;
         }
