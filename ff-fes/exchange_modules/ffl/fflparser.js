@@ -54,7 +54,7 @@ var parser = {
                     var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
                     var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
 
-                    addnode(log, solution, nodeName, node, parentId,  tuple);
+                    addnode(log, solution, nodeName, node, parentId, tuple);
                 }
             }
         });
@@ -207,7 +207,7 @@ var defaultValue = {
 
 //this is where it is all about, the variable with his properties
 //we should make it more Generic so i can use it for fin language parser
-function addnode(log, solution, rowId, node, parentId,  tuple) {
+function addnode(log, solution, rowId, node, parentId, tuple) {
     log.variables.push(rowId);
     if (rowId === undefined || rowId.trim() === '') {
         logger.info('NULL rowId')
@@ -224,6 +224,7 @@ function addnode(log, solution, rowId, node, parentId,  tuple) {
     solution.setParentName(uiNode, parentId);
 
     if (tuple) {
+        logger.debug('Found tuple [%s]',rowId)
         uiNode.tuple = true;
     }
     for (var key in formulaMapping) {

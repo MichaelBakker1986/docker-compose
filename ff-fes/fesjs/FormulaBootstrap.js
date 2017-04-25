@@ -125,7 +125,20 @@ simplified.InputRequired = function (formulaInfo, node) {
     delete node.callee;
     delete node.refn;
 }
-
+simplified.TSUM = function (formulaInfo, node) {
+    //jsut straighten TSUM and TupleSum
+    // node.callee.name = 'TupleSum';
+    /*  node.arguments = [{
+     "type": "Identifier",
+     "name": "1"
+     }];*/
+    var refId = buildModelFunc(formulaInfo, 0, node.arguments[0],'');
+    node.arguments[0].name = 'a' + refId + ",'" + refId + "',x,y,z,v"
+    /*node.arguments.push({
+     "type": "Identifier",
+     "name": "y"
+     });*/
+}
 var escodegenOptions = {
     format: {
         renumber: true,
@@ -146,13 +159,10 @@ var xArgument = {
 };
 
 /**
- * for now we will reference all formula's in the property range<br>
- * For now just support the _value formula.
- * Be aware when formula changes with the Default Formula. its not directly linked.
  * In mainWhile we learned there are two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
  */
-function buildFunc(formulaInfo, fType, refer, propertyName) {
-    propertyName = propertyName || '';
+function buildModelFunc(formulaInfo, fType, refer, propertyName) {
+
 
     var referenceFormulaInfo = addFormulaDependency(formulaInfo, refer.name, propertiesArr[fType]);
     if (referenceFormulaInfo === undefined) {
@@ -160,7 +170,12 @@ function buildFunc(formulaInfo, fType, refer, propertyName) {
     }
     var refId = referenceFormulaInfo.id || referenceFormulaInfo.index;
     delete refer.refn;
-    return "a" + refId + "('" + refId + "',x" + propertyName + ",y,z,v)";
+    return refId;
+}
+function buildFunc(formulaInfo, fType, refer, propertyName) {
+    propertyName = propertyName || '';
+    var refId = buildModelFunc(formulaInfo, fType, refer, propertyName);
+    return 'a' + refId + "('" + refId + "',x" + propertyName + ",y,z,v)";
 }
 var varproperties = {}
 
