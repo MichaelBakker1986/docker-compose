@@ -86,7 +86,7 @@ var formulaDecorators = {
             var hash = x.hash + y.hash + z;
             //check if user entered a value
             if (v[f][hash] === undefined) {
-                var valueOfFunction = innerFunction(f, x, y, z, v);
+                var valueOfFunction =  innerFunction(f, x, y, z, v);
                 //return function value;
                 //console.info('called:[' + varName + '][' + valueOfFunction + ']')
                 return valueOfFunction;

@@ -111,7 +111,7 @@ simplified.SelectDescendants = function (formulaInfo, node) {
         if (foundEndUiModel !== undefined && foundEndUiModel.rowId === nodes[i].rowId) {
             break;
         }
-        node.elements.push(AST.cloneAST(lambda, 'X', nodes[i].rowId));
+        // node.elements.push(AST.cloneAST(lambda, 'X', nodes[i].rowId));
     }
     delete node.arguments;
     delete node.callee;
@@ -132,7 +132,7 @@ simplified.TSUM = function (formulaInfo, node) {
      "type": "Identifier",
      "name": "1"
      }];*/
-    var refId = buildModelFunc(formulaInfo, 0, node.arguments[0],'');
+    var refId = buildModelFunc(formulaInfo, 0, node.arguments[0], '');
     node.arguments[0].name = 'a' + refId + ",'" + refId + "',x,y,z,v"
     /*node.arguments.push({
      "type": "Identifier",
