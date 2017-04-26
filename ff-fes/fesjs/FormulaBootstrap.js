@@ -52,13 +52,13 @@ var propertiesArr = [
 simplified.DataAvailable = function (formulaInfo, node) {
     //If(DataEntered(TaxOnProfitPsayable&&TaxProfitPaymentCalc!==10),TaxOnProfitsPayable-(TaxOnProfitsCum+TaxOnProfitsAssessment-TaxOnProfitsPaidAccumulated),NA)
     var refFormula = addFormulaDependency(formulaInfo, node.arguments[0].name, 'value')
-    if (refFormula === undefined) {
+    if (refFormula.ref === undefined) {
         log.warn("Can't find a variableReference for " + generate(node)) + " " + formulaInfo.name + ":" + formulaInfo.original;
         return;
     }
     node.type = 'Identifier'
     // looks like being extracted as object, while has to be array
-    node.name = 'v[' + ((refFormula.id === undefined) ? refFormula.index : refFormula.id) + '][x.hash + y.hash + z]!==undefined';
+    node.name = 'v[' + (refFormula.ref) + '][x.hash + y.hash + z]!==undefined';
     delete node.refn;
     delete node.arguments;
     delete node.callee;
@@ -126,18 +126,10 @@ simplified.InputRequired = function (formulaInfo, node) {
     delete node.refn;
 }
 simplified.TSUM = function (formulaInfo, node) {
-    //jsut straighten TSUM and TupleSum
-    // node.callee.name = 'TupleSum';
-    /*  node.arguments = [{
-     "type": "Identifier",
-     "name": "1"
-     }];*/
-    var refId = buildModelFunc(formulaInfo, 0, node.arguments[0], '');
+    //all calls into a tuple should return a []
+    //convert TSUM(variableName) into TSUM(a123,'123',x,y,z,v)
+    var refId = buildModelFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], '').ref;
     node.arguments[0].name = 'a' + refId + ",'" + refId + "',x,y,z,v"
-    /*node.arguments.push({
-     "type": "Identifier",
-     "name": "y"
-     });*/
 }
 var escodegenOptions = {
     format: {
@@ -160,22 +152,20 @@ var xArgument = {
 
 /**
  * In mainWhile we learned there are two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
+ *
  */
-function buildModelFunc(formulaInfo, fType, refer, propertyName) {
-
-
+function buildModelFunc(formulaInfo, node, fType, refer, propertyName) {
     var referenceFormulaInfo = addFormulaDependency(formulaInfo, refer.name, propertiesArr[fType]);
-    if (referenceFormulaInfo === undefined) {
+    if (referenceFormulaInfo.ref === undefined) {
         return defaultValues[propertiesArr[fType]];
     }
-    var refId = referenceFormulaInfo.id || referenceFormulaInfo.index;
     delete refer.refn;
-    return refId;
+    return referenceFormulaInfo;
 }
-function buildFunc(formulaInfo, fType, refer, propertyName) {
+function buildFunc(formulaInfo, node, fType, refer, propertyName) {
     propertyName = propertyName || '';
-    var refId = buildModelFunc(formulaInfo, fType, refer, propertyName);
-    return 'a' + refId + "('" + refId + "',x" + propertyName + ",y,z,v)";
+    var refId = buildModelFunc(formulaInfo, node, fType, refer, propertyName);
+    node.name = 'a' + refId.ref + "('" + refId.ref + "',x" + propertyName + ",y,z,v)";
 }
 var varproperties = {}
 
@@ -191,11 +181,13 @@ var dummy = function (or, parent, node) {
 var expression = function (or, parent, node) {
     var left = node.left;
     if (left.refn) {
-        node.left.name = buildFunc(or, 0, left);
+        //node.left.name =
+        buildFunc(or, left, 0, left);
     }
     var right = node.right;
     if (right.refn) {
-        node.right.name = buildFunc(or, 0, right);
+        //node.right.name =
+        buildFunc(or, right, 0, right);
     }
 };
 //the tree, visited Depth First
@@ -218,7 +210,8 @@ var traverseTypes = {
     //Don't check the left side of an AssignmentExpression, it would lead into a102('102',x,y,z,v) = 'something'
     AssignmentExpression: function (formulaInfo, parent, node) {
         if (node.right.refn) {
-            node.right.name = buildFunc(formulaInfo, 0, node.right);
+            //node.right.name =
+            buildFunc(formulaInfo, node.right, 0, node.right);
         }
     },
     ThisExpression: dummy,
@@ -230,7 +223,9 @@ var traverseTypes = {
     ArrayExpression: function (or, parent, node) {
         node.elements.forEach(function (el) {
             if (el.refn) {
-                el.name = buildFunc(or, 0, {name: el.refn});
+                //Why is here a new Object created?
+                //el.name =
+                buildFunc(or, el, 0, {name: el.refn});
             }
         });
     },
@@ -239,20 +234,23 @@ var traverseTypes = {
     ExpressionStatement: function (orId, parent, node) {
         var expression = node.expression;
         if (expression.refn) {
-            expression.name = buildFunc(orId, 0, expression);
+            //expression.name =
+            buildFunc(orId, expression, 0, expression);
         }
     },
     UnaryExpression: function (orId, parent, node) {
         var argument = node.argument;
         if (argument.refn) {
-            argument.name = buildFunc(orId, 0, argument);
+            //argument.name =//
+            buildFunc(orId, argument, 0, argument);
         }
     },
     CallExpression: function (orId, parent, node) {
         for (var i = 0, len = node.arguments.length; i < len; i++) {
             var argument = node.arguments[i];
             if (argument.refn) {
-                argument.name = buildFunc(orId, 0, argument);
+                //argument.name =
+                buildFunc(orId, argument, 0, argument);
             }
         }
     },
@@ -261,13 +259,16 @@ var traverseTypes = {
     },
     ConditionalExpression: function (orId, parent, node) {
         if (node.test.refn) {
-            node.test.name = buildFunc(orId, 0, node.test);
+            //node.test.name =
+            buildFunc(orId, node.test, 0, node.test);
         }
         if (node.alternate.refn) {
-            node.alternate.name = buildFunc(orId, 0, node.alternate);
+            //node.alternate.name =
+            buildFunc(orId, node.alternate, 0, node.alternate);
         }
         if (node.consequent.refn) {
-            node.consequent.name = buildFunc(orId, 0, node.consequent);
+            //node.consequent.name =
+            buildFunc(orId, node.consequent, 0, node.consequent);
         }
     },
     MemberExpression: function (orId, parent, node) {
@@ -302,7 +303,8 @@ var traverseTypes = {
                         //its esier to lookAhead the SequenceExpression
                         //variableName[contextReference] , e.g. Balance[prev] or Debit[doc]
                         node.type = 'Identifier';
-                        node.name = buildFunc(orId, 0, object, '.' + node.property.name);
+                        //node.name =
+                        buildFunc(orId, node, 0, object, '.' + node.property.name);
                         node.object = undefined;
                         object.refn = undefined;
                         node.callee = undefined;
@@ -318,7 +320,8 @@ var traverseTypes = {
                     if (node.property.name === 'title') {
                     }
                     //this is very stupid to port it triple time. we will fix this later.
-                    node.name = buildFunc(orId, varproperties[node.property.name].f, node.object);
+                    //node.name =
+                    buildFunc(orId, node, varproperties[node.property.name].f, node.object);
                     delete node.property;
                     delete node.object;
                     delete node.computed;
@@ -337,7 +340,8 @@ var traverseTypes = {
                  }, varproperties.value.t, astYIndex);
                  */
                 node.type = 'Identifier';
-                node.name = buildFunc(orId, 0, node.object);
+                //node.name =
+                buildFunc(orId, node, 0, node.object);
                 delete node.arguments;
                 delete node.object;
                 delete node.property;
@@ -355,7 +359,8 @@ var traverseTypes = {
                 }
                 else {
                     //else will will what ever just get the onecol value back.
-                    node.name = buildFunc(orId, 0, node.object);
+                    //node.name =
+                    buildFunc(orId, node, 0, node.object);
                 }
                 delete node.object;
                 delete node.property;

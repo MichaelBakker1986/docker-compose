@@ -11,23 +11,19 @@ var log = require('ff-log')
  */
 TSUM = function (func, fId, x, y, z, v) {
     var current = y, returnValue = 0;
-    while (current && TINSTANCECOUNT(v, fId) >= current.index) {
+    while (current && TINSTANCECOUNT(v, fId, y) >= current.index) {
         returnValue += func(fId, x, current, z, v);
         current = current.next;
     }
     return returnValue;
 }
-TINSTANCECOUNT = function (v, fId) {
-    var array = [];
-    Object.keys(v[fId]).forEach(function (key) {
-        array.push(parseInt(key))
-    })
-    var max = array.reduce(function (a, b) {
+TINSTANCECOUNT = function (v, fId, y) {
+    var max = Object.keys(v[fId]).reduce(function (a, b) {
         return Math.max(a, b);
     });
     var maxNumber = 0;
-    while (max >= 32768) {
-        max -= 32768;
+    while (max >= y.base.next.hash) {
+        max -= y.base.next.hash;
         maxNumber++;
     }
     return maxNumber;
@@ -50,7 +46,7 @@ fm.prototype.apiSet = function (formula, x, y, z, value, v) {
         if (value === '' || value === null) {
             newValue = undefined;
             delete v[id][hash]
-        }else{
+        } else {
             v[id][hash] = newValue;
         }
 
@@ -86,7 +82,7 @@ var formulaDecorators = {
             var hash = x.hash + y.hash + z;
             //check if user entered a value
             if (v[f][hash] === undefined) {
-                var valueOfFunction =  innerFunction(f, x, y, z, v);
+                var valueOfFunction = innerFunction(f, x, y, z, v);
                 //return function value;
                 //console.info('called:[' + varName + '][' + valueOfFunction + ']')
                 return valueOfFunction;
