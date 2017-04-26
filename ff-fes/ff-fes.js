@@ -90,6 +90,7 @@ function getEntry(workbook, rowId, columncontext) {
 
     // 'tuple = true' property uit fflparser.js (line 227)
     // Hier werken voor Tuples uitvragen
+    var isTuple = variable.tuple;
 
     //quick-fix for document variables;
     //TODO: all warnings for calls with document frequencies and columncontext>0 is useless

@@ -549,19 +549,20 @@ model KSP uses BaseModel
             locked: 1;
             options_title: locked;
             options: locked;
+            variable ChildGender
+            {
+                datatype: number;
+                frequency: document;
+                inputRequired: 1;
+                data_options: unscalable;
+                displaytype: select;
+                fixed_decimals: 0;
+                title: "Gender";
+                choices: "0:Boy|1:Girl";
+                options_title: locked;
+            }
           }
-          variable ChildGender
-          {
-            datatype: number;
-            frequency: document;
-            inputRequired: 1;
-            data_options: unscalable;
-            displaytype: select;
-            fixed_decimals: 0;
-            title: "Gender";
-            choices: "0:Boy|1:Girl";
-            options_title: locked;
-          }
+
           variable NrOfDaysChildcareWeek
           {
             datatype: number;
@@ -1835,6 +1836,11 @@ model KSP uses BaseModel
               options_notrend: locked;
               options_trend: locked;
             }
+            variable TotalYearlyCostTSUM
+            {
+                formula: TSUM(TotalYearlyCosts)
+            }
+
           }
           variable Q_Map06Sub5Sub3 refers to TotalYearlyIncome
           {
