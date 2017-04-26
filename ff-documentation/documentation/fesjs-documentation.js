@@ -5,11 +5,15 @@ var path = require('path')
 var walkAst = require('../../ast-node-utils').astWalk
 var fs = require('fs');
 var esprima = require('esprima');
+var escodegen = require('escodegen');
 /**
  * creation parameters
  */
 var includemethodcalls = true;
 var moduleName = 'ff-fes';
+var z = "function testFunction(){};testFunction.prototype.importantCall= function(){ service0.call();service1.call() }"
+var parse = esprima.parse(z);
+log.info(parse)
 
 var graph = graphviz.digraph("G ");
 graph.set("rankdir", "LR");
@@ -23,6 +27,16 @@ madge('../../' + moduleName + '/ff-fes.js', {
             var start = graph.addNode(key)
             var source = fs.readFileSync('../../' + moduleName + '/' + key + '.js', 'utf-8')
             var ast = esprima.parse(source)
+            var methodMetadata = {
+                callees: {},
+                name: key
+            };
+            walkAst(function (methodMetadata, node) {
+                if (node.type === 'FunctionDeclaration') {
+                    log.info('found function: [%s]', key , node.id.name)
+                    log.info(node.body)
+                }
+            }, methodMetadata, undefined, ast);
             for (var dep in dot[key]) {
                 var metaData = {
                     callees: {},

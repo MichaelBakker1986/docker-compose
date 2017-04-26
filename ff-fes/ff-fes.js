@@ -8,6 +8,7 @@ var WorkBook = require('./fesjs/JSWorkBook');
 var FESContext = require('./fesjs/fescontext');
 function FESApi() {
 }
+
 FESApi.prototype.init = function (data) {
     var JSWorkBook = new WorkBook(new FESContext());
     JSWorkBook.importSolution(data, 'ffl');
