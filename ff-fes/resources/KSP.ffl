@@ -606,58 +606,58 @@ model KSP uses BaseModel
                  options_title: locked;
                  options: locked;
               }
-          }
-          variable HourlyFeeChildCare
-          {
-            datatype: number;
-            frequency: document;
-            formula: 6.8;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Hourly fee childcare";
-            options_title: locked;
-          }
-          variable HourlyFeeOutOfSchoolCare
-          {
-            datatype: number;
-            frequency: document;
-            formula: 6.8;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Hourly fee out-of-school care";
-            options_title: locked;
-          }
-          variable ParentalContributionPrimaryEducation
-          {
-            datatype: number;
-            frequency: document;
-            formula: 80;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Parental contribution primary education";
-            options_title: locked;
-          }
-          variable CostsUnspecified
-          {
-            datatype: number;
-            frequency: document;
-            formula: 180;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Costs unspecified per month";
-            options_title: locked;
-          }
-          variable SecondaryEducationProfile
-          {
-            datatype: number;
-            frequency: document;
-            inputRequired: 1;
-            data_options: unscalable;
-            displaytype: select;
-            fixed_decimals: 1;
-            title: "secondary education (profile)";
-            choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
-            options_title: locked;
+              variable HourlyFeeChildCare
+              {
+                  datatype: number;
+                  frequency: document;
+                  formula: 6.8;
+                  data_options: unscalable;
+                  fixed_decimals: 1;
+                  title: "Hourly fee childcare";
+                  options_title: locked;
+              }
+              variable HourlyFeeOutOfSchoolCare
+              {
+                  datatype: number;
+                  frequency: document;
+                  formula: 6.8;
+                  data_options: unscalable;
+                  fixed_decimals: 1;
+                  title: "Hourly fee out-of-school care";
+                  options_title: locked;
+              }
+              variable ParentalContributionPrimaryEducation
+              {
+                  datatype: number;
+                  frequency: document;
+                  formula: 80;
+                  data_options: unscalable;
+                  fixed_decimals: 1;
+                  title: "Parental contribution primary education";
+                  options_title: locked;
+              }
+              variable CostsUnspecified
+              {
+                  datatype: number;
+                  frequency: document;
+                  formula: 180;
+                  data_options: unscalable;
+                  fixed_decimals: 1;
+                  title: "Costs unspecified per month";
+                  options_title: locked;
+              }
+              variable SecondaryEducationProfile
+              {
+                  datatype: number;
+                  frequency: document;
+                  inputRequired: 1;
+                  data_options: unscalable;
+                  displaytype: select;
+                  fixed_decimals: 1;
+                  title: "secondary education (profile)";
+                  choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
+                  options_title: locked;
+              }
           }
           variable Memo1
           {
