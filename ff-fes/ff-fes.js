@@ -69,8 +69,8 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
                 value = isNaN(choiceValue.name) ? choiceValue.name : parseInt(choiceValue.name);
             }
         }
-        JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, 0, 0)
-        return getEntry(JSWorkBook, rowId, columncontext)
+        JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, tupleindex)
+        return getEntry(JSWorkBook, rowId, columncontext, tupleindex)
     } else {
         var values = [];
         var rootNode = JSWorkBook.getSolutionNode(rowId);

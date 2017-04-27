@@ -25,7 +25,7 @@ TupleIndexConverter.prototype.getIndexNumber = function(context, tupleindex)
     if (returnIndex === undefined)
     {
         context.tupleIndexList.push(tupleindex);
-        return (context.tupleIndexList.length - 1) + 2;
+        return (context.tupleIndexList.length - 1) + 1;
     }
     else
     {
