@@ -83,8 +83,7 @@ model KSP uses BaseModel
         datatype: number;
         frequency: column;
         aggregation: balance;
-        formula_notrend: 1;
-        formula_trend: 1;
+        formula: 1;
         data_options: unscalable;
         fixed_decimals: 0;
         title: "Column visible";
@@ -509,7 +508,7 @@ model KSP uses BaseModel
             title: "Gross Income Parent 2";
             options_title: locked;
           }
-		  variable WorkingHoursWeeklyParent01
+          variable WorkingHoursWeeklyParent01
           {
             datatype: number;
             frequency: document;
@@ -541,7 +540,7 @@ model KSP uses BaseModel
             hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
             options_title: locked;
           }
-          variable Child
+          tuple Child
           {
             datatype: number;
             frequency: document;
@@ -550,28 +549,29 @@ model KSP uses BaseModel
             locked: 1;
             options_title: locked;
             options: locked;
-          }
-          variable ChildGender
-          {
-            datatype: number;
-            frequency: document;
-            inputRequired: 1;
-            data_options: unscalable;
-            displaytype: select;
-            fixed_decimals: 0;
-            title: "Gender";
-            choices: "0:Boy|1:Girl";
-            options_title: locked;
-          }
-          variable NrOfDaysChildcareWeek
-          {
-            datatype: number;
-            frequency: document;
-            inputRequired: 1;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Nr. of days childcare per week";
-            options_title: locked;
+            variable ChildGender
+            {
+                datatype: number;
+                frequency: document;
+                inputRequired: 1;
+                data_options: unscalable;
+                displaytype: select;
+                fixed_decimals: 0;
+                title: "Gender";
+                choices: "0:Boy|1:Girl";
+                options_title: locked;
+            }
+            variable NrOfDaysChildcareWeek
+            {
+                datatype: number;
+                formula: NA;
+                frequency: document;
+                inputRequired: 1;
+                data_options: unscalable;
+                fixed_decimals: 1;
+                title: "Nr. of days childcare per week";
+                options_title: locked;
+            }
           }
           variable NrOfDaysChildcareMonth
           {
@@ -864,7 +864,7 @@ model KSP uses BaseModel
           variable ChildcareContribution
           {
             datatype: none;
-            title: "Childcare Contribution"&":";
+            title: "Childcare Contribution"&";
             top_blanklines: 1;
             locked: 1;
             options_title: locked;
@@ -1420,7 +1420,7 @@ model KSP uses BaseModel
             datatype: string;
             frequency: document;
             data_options: unscalable;
-            title: "Info bij stap 2";
+
             locked: 1;
             options_title: locked;
             options: locked;
@@ -1566,8 +1566,7 @@ model KSP uses BaseModel
             datatype: number;
             frequency: column;
             aggregation: balance;
-            formula_notrend: TotalYearlyBalance;
-            formula_trend: TotalYearlyBalance;
+            formula: TotalYearlyBalance;
             data_options: unscalable;
             fixed_decimals: 2;
             title: "Total Net Costs (-)";
@@ -1594,8 +1593,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: (ValueT(T))-1;
-              formula_trend: (ValueT(T))-1;
+              formula: (ValueT(T))-1;
               data_options: unscalable;
               fixed_decimals: 0;
               title: "Age";
@@ -1609,8 +1607,7 @@ model KSP uses BaseModel
                 datatype: number;
                 frequency: column;
                 aggregation: balance;
-                formula_notrend: ValueT(T);
-                formula_trend: ValueT(T);
+                formula: ValueT(T);
                 data_options: unscalable;
                 fixed_decimals: 0;
                 title: "PeriodeInFormulaset";
@@ -1621,13 +1618,17 @@ model KSP uses BaseModel
                 options_trend: locked;
               }
             }
+            variable TestT
+            {
+             title: "TestT";
+                 formula: ValueT(T);
+            }
             variable Furniture
             {
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: if(ValueT(T)=1,1800,0);
-              formula_trend: if(ValueT(T)=1,1800,0);
+              formula: If(ValueT(T)=1,1800,0);
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Furniture";
@@ -1642,8 +1643,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: if((ValueT(T))<=4,ChildCareCosts,0);
-              formula_trend: if((ValueT(T))<=4,ChildCareCosts,0);
+              formula: If((ValueT(T))<=4,ChildCareCosts,0);
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Childcare costs";
@@ -1657,8 +1657,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Diapers";
@@ -1669,8 +1668,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: if(Childgender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
-              formula_trend: if(Childgender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
+              formula:If(ChildGender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Food";
@@ -1681,8 +1679,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Clothing";
@@ -1693,8 +1690,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Personal care";
@@ -1705,8 +1701,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Hairdresser";
@@ -1717,8 +1712,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Inventory";
@@ -1729,8 +1723,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Allowance";
@@ -1741,8 +1734,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Contributions";
@@ -1753,8 +1745,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Transport";
@@ -1765,8 +1756,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "MobilePhone";
@@ -1777,8 +1767,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "DrivingLicense";
@@ -1789,8 +1778,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12);
-              formula_trend: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12);
+              formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12, NA);
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Kosten BSO";
@@ -1801,8 +1789,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
-              formula_trend: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
+              formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Costs for Primary Education";
@@ -1813,8 +1800,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: if((Age>=12)and(Age<16),CostsYearOneFour,if(Age>=16,CostsYearFiveSixSeven,0));
-              formula_trend: if((Age>=12)and(Age<16),CostsYearOneFour,if(Age>=16,CostsYearFiveSixSeven,0));
+              formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Costs for Secondary Education";
@@ -1825,8 +1811,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: CostsUnspecified*12;
-              formula_trend: CostsUnspecified*12;
+              formula: CostsUnspecified*12;
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Costs unspecified";
@@ -1840,8 +1825,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
-              formula_trend: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
+              formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Total (yearly) costs";
@@ -1851,6 +1835,11 @@ model KSP uses BaseModel
               options_notrend: locked;
               options_trend: locked;
             }
+            variable TotalYearlyCostTSUM
+            {
+                formula: TSUM(TotalYearlyCosts)
+            }
+
           }
           variable Q_Map06Sub5Sub3 refers to TotalYearlyIncome
           {
@@ -1869,8 +1858,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ChildBenefits",(ValueT(T)));
-              formula_trend: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ChildBenefits",(ValueT(T)));
+              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ChildBenefits",(ValueT(T)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Child benefits";
@@ -1885,8 +1873,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: If(Age<4,(PremiumForChildcare*12),If(Age<11,(PremiumForOutofSchoolCare*12),0));
-              formula_trend: If(Age<4,(PremiumForChildcare*12),If(Age<11,(PremiumForOutofSchoolCare*12),0));
+              formula: If(Age<4,(PremiumForChildcare*12),If(Age<11,(PremiumForOutofSchoolCare*12),0));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Childcare premium";
@@ -1900,8 +1887,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)));
-              formula_trend: If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)));
+              formula: If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Childcare budget";
@@ -1915,8 +1901,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: If(Age<12,CombinationDiscountTotal,0);
-              formula_trend: If(Age<12,CombinationDiscountTotal,0);
+              formula: If(Age<12,CombinationDiscountTotal,0);
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Combination Discount";
@@ -1930,8 +1915,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: ChildBenefits+ChildCarePremiumOverview+ChildcareBudgetOverview+CombinationDiscountOverview;
-              formula_trend: ChildBenefits+ChildCarePremiumOverview+ChildcareBudgetOverview+CombinationDiscountOverview;
+              formula: ChildBenefits+ChildCarePremiumOverview+ChildcareBudgetOverview+CombinationDiscountOverview;
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Total (yearly) Income";
@@ -1947,8 +1931,7 @@ model KSP uses BaseModel
             datatype: number;
             frequency: column;
             aggregation: flow;
-            formula_notrend: TotalYearlyCosts-TotalYearlyIncome;
-            formula_trend: TotalYearlyCosts-TotalYearlyIncome;
+            formula: TotalYearlyCosts-TotalYearlyIncome;
             data_options: unscalable;
             fixed_decimals: 2;
             title: "Total Net Costs (-)";
@@ -1961,8 +1944,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula_notrend: TotalYearlyBalance/12;
-              formula_trend: TotalYearlyBalance/12;
+              formula: TotalYearlyBalance/12;
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Total monthly Net Costs, monthly()";
@@ -1978,8 +1960,7 @@ model KSP uses BaseModel
             datatype: number;
             frequency: column;
             aggregation: balance;
-            formula_notrend: (NrOfDaysChildcareMonth*HourlyFeeChildCare)*12;
-            formula_trend: (NrOfDaysChildcareMonth*HourlyFeeChildCare)*12;
+            formula: (NrOfDaysChildcareMonth*HourlyFeeChildCare)*12;
             data_options: unscalable;
             fixed_decimals: 2;
             title: "Childcare costs";
@@ -2142,7 +2123,7 @@ model KSP uses BaseModel
         data_options: unscalable;
         afterinput: (SetValue(MatrixVersion, MatrixVersion, true));
         displaytype: date;
-        title: "Definitief gemaakt op:";
+        title: "Definitief gemaakt op";
         options_title: locked;
       }
       variable Q_STATUS_FINAL_BY
@@ -2150,7 +2131,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Definitief gemaakt door (gebruikersnaam):";
+        title: "Definitief gemaakt door (gebruikersnaam)";
         options_title: locked;
       }
       variable Q_STATUS_FINAL_BY_NAME
@@ -2158,7 +2139,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Definitief gemaakt door (volledige naam):";
+        title: "Definitief gemaakt door (volledige naam)";
         options_title: locked;
       }
       variable Q_STATUS_STARTED_ON
@@ -2167,7 +2148,7 @@ model KSP uses BaseModel
         frequency: document;
         data_options: unscalable;
         displaytype: date;
-        title: "Aangemaakt op:";
+        title: "Aangemaakt op";
         options_title: locked;
       }
       variable Q_STATUS_STARTED_BY
@@ -2175,7 +2156,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Aangemaakt door (gebruikersnaam):";
+        title: "Aangemaakt door (gebruikersnaam)";
         options_title: locked;
       }
       variable Q_STATUS_STARTED_BY_NAME
@@ -2183,7 +2164,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Aangemaakt door (volledige naam):";
+        title: "Aangemaakt door (volledige naam)";
         options_title: locked;
       }
       variable ModelVersion
@@ -2288,7 +2269,7 @@ model KSP uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"[br][/br]Er zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT ,&""));
+        formula: EvaluateAsString(If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"[br][/br]Er zijn knockouts van toepassing"&Q_WARNING_GLOBALTXT ,&""));
         data_options: unscalable;
         displaytype: memo;
         title: "Knock-out(s)?";
@@ -2325,7 +2306,7 @@ model KSP uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT ,&""));
+        formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld"&Q_RESTRICTIESTXT ,&""));
         data_options: unscalable;
         displaytype: memo;
         title: "Restricties";

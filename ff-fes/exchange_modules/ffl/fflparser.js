@@ -223,12 +223,6 @@ function addnode(log, solution, rowId, node, parentId, tuple) {
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
 
-    // Only for debugging
-    if (rowId == "Child")
-    {
-        var hoi = 0;
-    }
-
     if (tuple) {
         logger.debug('Found tuple [%s]',rowId)
         uiNode.tuple = true;

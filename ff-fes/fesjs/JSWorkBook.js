@@ -174,6 +174,9 @@ JSWorkBook.prototype.get = function (row, col, x, y) {
     return this.getSolutionProperyValue(this.getSolutionName() + '_' + row, col, x, y);
 };
 JSWorkBook.prototype.getSolutionProperyValue = function (row, col, x, y) {
+
+    // TODO Als y niet '0' of leeg is: Ben jij wel lid van een tuple?
+
     var xas = resolveX(this, x);
     var yas = resolveY(this, y)
     return FESFacade.getSolutionProperyValue(this.context, row, col, xas, yas)
@@ -183,6 +186,9 @@ JSWorkBook.prototype.set = function (row, value, col, x, y) {
     return this.setSolutionPropertyValue(this.getSolutionName() + '_' + row, value, col, x, y);
 }
 JSWorkBook.prototype.setSolutionPropertyValue = function (row, value, col, x, y) {
+
+    // TODO Als y niet '0' of leeg is: Ben jij wel lid van een tuple?
+
     var xas = resolveX(this, x);
     var yas = resolveY(this, y);
     return FESFacade.setSolutionPropertyValue(this.context, row, value, col, xas, yas);
