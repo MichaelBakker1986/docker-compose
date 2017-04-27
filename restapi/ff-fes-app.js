@@ -69,4 +69,6 @@ server.listen(9001, function () {
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/ChildcareContribution/1/200')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/ChildcareContribution')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/context')
+    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/NrOfDaysChildcareWeek/0/Bob/2')
+    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/NrOfDaysChildcareWeek/0/Bob')
 });
