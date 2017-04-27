@@ -9,6 +9,35 @@ var log = require('ff-log')
  * value = new value
  * v = entered values
  */
+
+TSUM = function (func, fId, x, y, z, v) {
+    var current = y, returnValue = 0;
+    while (current && TINSTANCECOUNT(v, fId) >= current.index) {
+        // TODO: Better fix for this
+        if (current.hash > 0) {
+            returnValue += func(fId, x, current, z, v);
+        }
+        current = current.next;
+    }
+    return returnValue;
+}
+TINSTANCECOUNT = function (v, fId) {
+    var array = [];
+    Object.keys(v[fId]).forEach(function (key) {
+        array.push(parseInt(key))
+    })
+    var max = array.reduce(function (a, b) {
+        return Math.max(a, b);
+    });
+    var maxNumber = 0;
+    while (max >= 32768) {
+        max -= 32768;
+        maxNumber++;
+    }
+    return maxNumber;
+}
+
+
 function fm() {
 }
 //don't directly use this method, use JSWorkBook instead.
@@ -25,10 +54,8 @@ fm.prototype.apiSet = function (formula, x, y, z, value, v) {
         var hash = x.hash + y.hash + z;
         var newValue = value;
         if (value === '' || value === null) {
-            newValue = undefined;
             delete v[id][hash]
-        }
-        else {
+        }else{
             v[id][hash] = newValue;
         }
     }

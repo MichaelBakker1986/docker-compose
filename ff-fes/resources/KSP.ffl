@@ -659,6 +659,12 @@ model KSP uses BaseModel
                   options_title: locked;
               }
           }
+          variable TupleSumTest
+          {
+            datatype: number;
+            frequency: document;
+            formula: TupleSum(NrOfDaysChildcareWeek)
+          }
           variable Memo1
           {
             datatype: string;

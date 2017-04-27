@@ -1,14 +1,14 @@
 var log = require('ff-log')
 var WorkBook = require('../fesjs/JSWorkBook')
 var FESContext = require('../fesjs/fescontext')
-TSUM = function (func, fId, x, y, z, v) {
-    var current = y, returnValue = 0;
-    while (current) {
-        returnValue += func(fId, x, current, z, v);
-        current = current.next;
-    }
-    return returnValue;
-}
+// TSUM = function (func, fId, x, y, z, v) {
+//     var current = y, returnValue = 0;
+//     while (current) {
+//         returnValue += func(fId, x, current, z, v);
+//         current = current.next;
+//     }
+//     return returnValue;
+// }
 var wb = new WorkBook(new FESContext());
 wb.createFormula("1+1", "TupleTest");
 wb.createFormula("TSUM(TupleTest)", "TupleTestSUM");
