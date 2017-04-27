@@ -540,7 +540,7 @@ model KSP uses BaseModel
             hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
             options_title: locked;
           }
-          variable Child
+          tuple Child
           {
             datatype: number;
             frequency: document;
@@ -549,114 +549,121 @@ model KSP uses BaseModel
             locked: 1;
             options_title: locked;
             options: locked;
+            variable ChildGender
+            {
+                datatype: number;
+                frequency: document;
+                inputRequired: 1;
+                data_options: unscalable;
+                displaytype: select;
+                fixed_decimals: 0;
+                title: "Gender";
+                choices: "0:Boy|1:Girl";
+                options_title: locked;
+            }
+            variable NrOfDaysChildcareWeek
+            {
+                datatype: number;
+                formula: NA;
+                frequency: document;
+                inputRequired: 1;
+                data_options: unscalable;
+                fixed_decimals: 1;
+                title: "Nr. of days childcare per week";
+                options_title: locked;
+            }
+            variable NrOfDaysChildcareMonth
+            {
+                datatype: number;
+                frequency: document;
+                formula: OnER(10.5*NrOfDaysChildcareWeek*4,NA);
+                data_options: unscalable;
+                fixed_decimals: 1;
+                title: "Nr. of hours childcare per month";
+                locked: 1;
+                options_title: locked;
+                options: locked;
+            }
+            variable NrOfDaysCOutOfSchoolCareWeek
+             {
+                datatype: number;
+                frequency: document;
+                inputRequired: 1;
+                data_options: unscalable;
+                fixed_decimals: 1;
+                title: "Nr. of days out-of-school care per week";
+                options_title: locked;
+             }
+             variable NrOfDaysOutOfSchoolCareMonth
+              {
+                 datatype: number;
+                 frequency: document;
+                 formula: OnER(4*NrOfDaysCOutOfSchoolCareWeek*4.5,NA);
+                 data_options: unscalable;
+                 fixed_decimals: 1;
+                 title: "Nr. of hours out-of-school care per month";
+                 locked: 1;
+                 options_title: locked;
+                 options: locked;
+              }
+              variable HourlyFeeChildCare
+              {
+                  datatype: number;
+                  frequency: document;
+                  formula: 6.8;
+                  data_options: unscalable;
+                  fixed_decimals: 1;
+                  title: "Hourly fee childcare";
+                  options_title: locked;
+              }
+              variable HourlyFeeOutOfSchoolCare
+              {
+                  datatype: number;
+                  frequency: document;
+                  formula: 6.8;
+                  data_options: unscalable;
+                  fixed_decimals: 1;
+                  title: "Hourly fee out-of-school care";
+                  options_title: locked;
+              }
+              variable ParentalContributionPrimaryEducation
+              {
+                  datatype: number;
+                  frequency: document;
+                  formula: 80;
+                  data_options: unscalable;
+                  fixed_decimals: 1;
+                  title: "Parental contribution primary education";
+                  options_title: locked;
+              }
+              variable CostsUnspecified
+              {
+                  datatype: number;
+                  frequency: document;
+                  formula: 180;
+                  data_options: unscalable;
+                  fixed_decimals: 1;
+                  title: "Costs unspecified per month";
+                  options_title: locked;
+              }
+              variable SecondaryEducationProfile
+              {
+                  datatype: number;
+                  frequency: document;
+                  inputRequired: 1;
+                  data_options: unscalable;
+                  displaytype: select;
+                  fixed_decimals: 1;
+                  title: "secondary education (profile)";
+                  choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
+                  options_title: locked;
+              }
           }
-          variable ChildGender
+          variable TupleSumTest
           {
             datatype: number;
             frequency: document;
-            inputRequired: 1;
-            data_options: unscalable;
-            displaytype: select;
-            fixed_decimals: 0;
-            title: "Gender";
-            choices: "0:Boy|1:Girl";
-            options_title: locked;
-          }
-          variable NrOfDaysChildcareWeek
-          {
-            datatype: number;
-            frequency: document;
-            inputRequired: 1;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Nr. of days childcare per week";
-            options_title: locked;
-          }
-          variable NrOfDaysChildcareMonth
-          {
-            datatype: number;
-            frequency: document;
-            formula: OnER(10.5*NrOfDaysChildcareWeek*4,NA);
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Nr. of hours childcare per month";
-            locked: 1;
-            options_title: locked;
-            options: locked;
-          }
-          variable NrOfDaysCOutOfSchoolCareWeek
-          {
-            datatype: number;
-            frequency: document;
-            inputRequired: 1;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Nr. of days out-of-school care per week";
-            options_title: locked;
-          }
-          variable NrOfDaysOutOfSchoolCareMonth
-          {
-            datatype: number;
-            frequency: document;
-            formula: OnER(4*NrOfDaysCOutOfSchoolCareWeek*4.5,NA);
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Nr. of hours out-of-school care per month";
-            locked: 1;
-            options_title: locked;
-            options: locked;
-          }
-          variable HourlyFeeChildCare
-          {
-            datatype: number;
-            frequency: document;
-            formula: 6.8;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Hourly fee childcare";
-            options_title: locked;
-          }
-          variable HourlyFeeOutOfSchoolCare
-          {
-            datatype: number;
-            frequency: document;
-            formula: 6.8;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Hourly fee out-of-school care";
-            options_title: locked;
-          }
-          variable ParentalContributionPrimaryEducation
-          {
-            datatype: number;
-            frequency: document;
-            formula: 80;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Parental contribution primary education";
-            options_title: locked;
-          }
-          variable CostsUnspecified
-          {
-            datatype: number;
-            frequency: document;
-            formula: 180;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Costs unspecified per month";
-            options_title: locked;
-          }
-          variable SecondaryEducationProfile
-          {
-            datatype: number;
-            frequency: document;
-            inputRequired: 1;
-            data_options: unscalable;
-            displaytype: select;
-            fixed_decimals: 1;
-            title: "secondary education (profile)";
-            choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
-            options_title: locked;
+            formula: TSUM(NrOfDaysChildcareWeek)
           }
           variable Memo1
           {
@@ -863,7 +870,7 @@ model KSP uses BaseModel
           variable ChildcareContribution
           {
             datatype: none;
-            title: "Childcare Contribution"&":";
+            title: "Childcare Contribution"&";
             top_blanklines: 1;
             locked: 1;
             options_title: locked;
@@ -1419,7 +1426,7 @@ model KSP uses BaseModel
             datatype: string;
             frequency: document;
             data_options: unscalable;
-            title: "Info bij stap 2";
+
             locked: 1;
             options_title: locked;
             options: locked;
@@ -1667,7 +1674,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula: If(ChildGender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
+              formula:If(ChildGender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Food";
@@ -1834,6 +1841,11 @@ model KSP uses BaseModel
               options_notrend: locked;
               options_trend: locked;
             }
+            variable TotalYearlyCostTSUM
+            {
+                formula: TSUM(TotalYearlyCosts)
+            }
+
           }
           variable Q_Map06Sub5Sub3 refers to TotalYearlyIncome
           {
@@ -2117,7 +2129,7 @@ model KSP uses BaseModel
         data_options: unscalable;
         afterinput: (SetValue(MatrixVersion, MatrixVersion, true));
         displaytype: date;
-        title: "Definitief gemaakt op:";
+        title: "Definitief gemaakt op";
         options_title: locked;
       }
       variable Q_STATUS_FINAL_BY
@@ -2125,7 +2137,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Definitief gemaakt door (gebruikersnaam):";
+        title: "Definitief gemaakt door (gebruikersnaam)";
         options_title: locked;
       }
       variable Q_STATUS_FINAL_BY_NAME
@@ -2133,7 +2145,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Definitief gemaakt door (volledige naam):";
+        title: "Definitief gemaakt door (volledige naam)";
         options_title: locked;
       }
       variable Q_STATUS_STARTED_ON
@@ -2142,7 +2154,7 @@ model KSP uses BaseModel
         frequency: document;
         data_options: unscalable;
         displaytype: date;
-        title: "Aangemaakt op:";
+        title: "Aangemaakt op";
         options_title: locked;
       }
       variable Q_STATUS_STARTED_BY
@@ -2150,7 +2162,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Aangemaakt door (gebruikersnaam):";
+        title: "Aangemaakt door (gebruikersnaam)";
         options_title: locked;
       }
       variable Q_STATUS_STARTED_BY_NAME
@@ -2158,7 +2170,7 @@ model KSP uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Aangemaakt door (volledige naam):";
+        title: "Aangemaakt door (volledige naam)";
         options_title: locked;
       }
       variable ModelVersion
@@ -2263,7 +2275,7 @@ model KSP uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"[br][/br]Er zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT ,&""));
+        formula: EvaluateAsString(If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"[br][/br]Er zijn knockouts van toepassing"&Q_WARNING_GLOBALTXT ,&""));
         data_options: unscalable;
         displaytype: memo;
         title: "Knock-out(s)?";
@@ -2300,7 +2312,7 @@ model KSP uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT ,&""));
+        formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld"&Q_RESTRICTIESTXT ,&""));
         data_options: unscalable;
         displaytype: memo;
         title: "Restricties";
