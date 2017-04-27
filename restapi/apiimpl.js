@@ -39,11 +39,18 @@ function prefixVariable(variableName) {
     }
     return modelNames[0] + '_' + variableName;
 }
-apiimpl.prototype.value = function (contextKey, variable, columncontext, value) {
+apiimpl.prototype.value = function (contextKey, variable, columncontext, value, tupleindex) {
     var context = DBConnector.getUserContext(contextKey);
     //all values are strings when entering, wen it can be parsed to a number, we will parse it.
+
+    // Check if value is maybe a tupleindex
+    if (value != undefined && tupleindex == undefined && isNaN(value)) {
+        tupleindex = value;
+        value = undefined;
+    }
+
     var value = isNaN(value) ? value : parseFloat(value)
-    var result = fesjsApi.fesGetValue(context, prefixVariable(variable), columncontext, value);
+    var result = fesjsApi.fesGetValue(context, prefixVariable(variable), columncontext, value, tupleindex);
     return result;
 }
 apiimpl.prototype.context = function (contextKey, variable, columncontext, value) {

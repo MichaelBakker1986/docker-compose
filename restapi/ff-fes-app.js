@@ -15,12 +15,12 @@ var Respond = new apiimpl(DBConn);
  */
 function respond(req, res, next) {
     //handle request Async by default, create Promise, result when done.
-    log.info('Call context:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value)
+    log.info('Call context:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value, req.params.tupleindex)
     new Promise(function (success, fail) {
         try {
             //resolve context key to stored values
             var columncontext = req.params.columncontext || "0";
-            success(Respond[req.params.function](req.params.context, req.params.variable, parseInt(columncontext), req.params.value));
+            success(Respond[req.params.function](req.params.context, req.params.variable, parseInt(columncontext), req.params.value, req.params.tupleindex));
         } catch (err) {
             fail(err);
         }
@@ -50,12 +50,14 @@ var server = restify.createServer({
  * @:function      - (value to get and set values)
  * @:variable      - (account e.g. CREDIT / DEBIT / Q_ROOT)
  * @:columncontext - (index in a range for corresponding request)
+ * @:tupleindex    - (string name of tuple object)
  * @:value         - (new user value)
  */
 server.get('/:context/:function/:variable', respond);
 server.get('/:context/:function', respond);
 server.get('/:context/:function/:variable/:value', respond);
 server.get('/:context/:function/:variable/:columncontext/:value', respond);
+server.get('/:context/:function/:variable/:columncontext/:tupleindex/:value', respond);
 
 server.listen(9001, function () {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);

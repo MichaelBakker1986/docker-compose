@@ -572,40 +572,40 @@ model KSP uses BaseModel
                 title: "Nr. of days childcare per week";
                 options_title: locked;
             }
-          }
-          variable NrOfDaysChildcareMonth
-          {
-            datatype: number;
-            frequency: document;
-            formula: OnER(10.5*NrOfDaysChildcareWeek*4,NA);
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Nr. of hours childcare per month";
-            locked: 1;
-            options_title: locked;
-            options: locked;
-          }
-          variable NrOfDaysCOutOfSchoolCareWeek
-          {
-            datatype: number;
-            frequency: document;
-            inputRequired: 1;
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Nr. of days out-of-school care per week";
-            options_title: locked;
-          }
-          variable NrOfDaysOutOfSchoolCareMonth
-          {
-            datatype: number;
-            frequency: document;
-            formula: OnER(4*NrOfDaysCOutOfSchoolCareWeek*4.5,NA);
-            data_options: unscalable;
-            fixed_decimals: 1;
-            title: "Nr. of hours out-of-school care per month";
-            locked: 1;
-            options_title: locked;
-            options: locked;
+            variable NrOfDaysChildcareMonth
+            {
+                datatype: number;
+                frequency: document;
+                formula: OnER(10.5*NrOfDaysChildcareWeek*4,NA);
+                data_options: unscalable;
+                fixed_decimals: 1;
+                title: "Nr. of hours childcare per month";
+                locked: 1;
+                options_title: locked;
+                options: locked;
+            }
+            variable NrOfDaysCOutOfSchoolCareWeek
+             {
+                datatype: number;
+                frequency: document;
+                inputRequired: 1;
+                data_options: unscalable;
+                fixed_decimals: 1;
+                title: "Nr. of days out-of-school care per week";
+                options_title: locked;
+             }
+             variable NrOfDaysOutOfSchoolCareMonth
+              {
+                 datatype: number;
+                 frequency: document;
+                 formula: OnER(4*NrOfDaysCOutOfSchoolCareWeek*4.5,NA);
+                 data_options: unscalable;
+                 fixed_decimals: 1;
+                 title: "Nr. of hours out-of-school care per month";
+                 locked: 1;
+                 options_title: locked;
+                 options: locked;
+              }
           }
           variable HourlyFeeChildCare
           {

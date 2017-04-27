@@ -6,6 +6,8 @@ require('./exchange_modules/presentation/presentation');//just let it inject int
 var log = require('ff-log')
 var WorkBook = require('./fesjs/JSWorkBook');
 var FESContext = require('./fesjs/fescontext');
+var TupleIndexConverter = require('./fesjs/TupleIndexConverter');
+
 function FESApi() {
 }
 FESApi.prototype.init = function (data) {
@@ -36,7 +38,16 @@ FESApi.prototype.addFunctions = function (plugin) {
  * rowId - VariableName
  * @Optional value - new value
  */
-FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value) {
+
+
+FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, tupleindex) {
+
+    // Convert tuple index to tuple number
+    if (tupleindex !== undefined)
+    {
+        tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
+    }
+
     var fesContext = new FESContext();
     fesContext.values = context.values;
     var JSWorkBook = new WorkBook(fesContext)
@@ -65,7 +76,7 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value) {
         var rootNode = JSWorkBook.getSolutionNode(rowId);
         if (rootNode) {
             JSWorkBook.visit(rootNode, function (node) {
-                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext))
+                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, tupleindex))
             });
         } else {
             values.push({
@@ -82,7 +93,7 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value) {
  * @param columncontext
  * @returns {Array}
  */
-function getEntry(workbook, rowId, columncontext) {
+function getEntry(workbook, rowId, columncontext, tupleindex) {
     var data = [];
     var start = 0;
     var end = workbook.columns;
@@ -103,7 +114,7 @@ function getEntry(workbook, rowId, columncontext) {
     for (var x = start; x <= end; x++) {
         data[x] = {};
         for (var type in workbook.properties) {
-            data[x][type] = workbook.getSolutionProperyValue(rowId, type, x, 0);
+            data[x][type] = workbook.getSolutionProperyValue(rowId, type, x, tupleindex);
             data[x].column = x;
             data[x].variable = variable.rowId;
         }

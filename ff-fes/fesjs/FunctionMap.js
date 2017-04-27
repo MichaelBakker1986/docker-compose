@@ -26,8 +26,11 @@ fm.prototype.apiSet = function (formula, x, y, z, value, v) {
         var newValue = value;
         if (value === '' || value === null) {
             newValue = undefined;
+            delete v[id][hash]
         }
-        v[id][hash] = newValue;
+        else {
+            v[id][hash] = newValue;
+        }
     }
     else {
         log.debug('[%s] does not exist', id);
