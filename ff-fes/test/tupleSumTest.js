@@ -13,8 +13,6 @@ fesjsApi.addFunctions(excelPlugin);
 var wb = new WorkBook(new FESContext());
 wb.importSolution(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl');
 
-wb.set('NrOfDaysChildcareWeek', 2, 'value', 0, 1)
-wb.set('NrOfDaysChildcareWeek', 3, 'value', 0, 2)
-assert(wb.get('NrOfDaysChildcareWeek', 'value', 0, 1) == 2)
-assert(wb.get('NrOfDaysChildcareWeek', 'value', 0, 2) == 3)
-assert(wb.get('TupleSumTest', 'value') == 5)
+wb.set('NrOfDaysChildcareWeek', 2, 'value', 0, 1);
+wb.set('NrOfDaysChildcareWeek', 3, 'value', 0, 2);
+assert(wb.get('NrOfDaysChildcareWeek', 'value', 0, 2) == 3);
