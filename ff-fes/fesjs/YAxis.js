@@ -30,7 +30,11 @@ TVALUES = function (func, fId, x, y, z, v) {
 }
 //return tuplecount, get max tuple index,
 TINSTANCECOUNT = function (v, fId, y) {
-    var max = Object.keys(v[fId]).reduce(function (a, b) {
+    var keys = Object.keys(v[fId]);
+    if (keys.length == 0) {
+        return 0;
+    }
+    var max = keys.reduce(function (a, b) {
         //filter bits 16-24 find highest tuple count.
         return Math.max((2064384 & parseInt(a)) >> 15, (2064384 & parseInt(b)) >> 15);
     });
