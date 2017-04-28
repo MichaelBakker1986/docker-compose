@@ -25,11 +25,11 @@ TupleIndexConverter.prototype.getIndexNumber = function(context, tupleindex)
     if (returnIndex === undefined)
     {
         context.tupleIndexList.push(tupleindex);
-        return (context.tupleIndexList.length - 1) + 1;
+        return (context.tupleIndexList.length - 1);
     }
     else
     {
-        return returnIndex + 1;
+        return returnIndex;
     }
 };
 

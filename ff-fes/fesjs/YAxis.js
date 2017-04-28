@@ -23,10 +23,7 @@ TVALUES = function (func, fId, x, y, z, v) {
     var current = y, returnValue = [];
     var tinstancecount = TINSTANCECOUNT(v, fId, y);
     while (current && tinstancecount >= current.index) {
-        if (current.hash > 0)
-        {
             returnValue.push(func(fId, x, current, z, v));
-        }
         current = current.next;
     }
     return returnValue;
