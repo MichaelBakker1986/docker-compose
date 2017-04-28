@@ -19,13 +19,13 @@ assert(wb.get('TupleTest') == 10)
 assert(wb.get('TupleTest', 'value', 1) == 20)
 wb.set('TupleTest', 30, 'value', 1, 1)
 assert(wb.get('TupleTest', 'value', 1) == 20)
-wb.set('TupleTest', 40, 'value', 1, 0)
+wb.set('TupleTest', 40, 'value', 1, 2)
 assert(wb.get('TupleTest', 'value', 1, 1) == 30)
-assert(wb.get('TupleTestSUM') == 12) //10+2
+assert(wb.get('TupleTestSUM') == 4) //1+1 1+1
 assert(wb.get('TupleTestSUM', 'value', 1) == 70)// 40+30
 
 wb.set('TupleTest', 100, 'value', 1, 30)
-assert(wb.get('TupleTestSUM', 'value', 1) == 170+56)
+assert(wb.get('TupleTestSUM', 'value', 1) == 224)
 wb.set('TupleTest', null, 'value', 1, 30)
 console.info(wb.get('TupleTestSUM', 'value', 1))
 
