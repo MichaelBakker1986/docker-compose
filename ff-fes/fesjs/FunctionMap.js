@@ -9,7 +9,6 @@ var log = require('ff-log')
  * value = new value
  * v = entered values
  */
-
 TSUM = function (func, fId, x, y, z, v) {
     var current = y, returnValue = 0;
     while (current && TINSTANCECOUNT(v, fId) >= current.index) {
@@ -37,7 +36,6 @@ TINSTANCECOUNT = function (v, fId) {
     return maxNumber;
 }
 
-
 function fm() {
 }
 //don't directly use this method, use JSWorkBook instead.
@@ -54,6 +52,7 @@ fm.prototype.apiSet = function (formula, x, y, z, value, v) {
         var hash = x.hash + y.hash + z;
         var newValue = value;
         if (value === '' || value === null) {
+            newValue = undefined;
             delete v[id][hash]
         }else{
             v[id][hash] = newValue;
@@ -90,7 +89,7 @@ var formulaDecorators = {
             var hash = x.hash + y.hash + z;
             //check if user entered a value
             if (v[f][hash] === undefined) {
-                var valueOfFunction = innerFunction(f, x, y, z, v);
+                var valueOfFunction =  innerFunction(f, x, y, z, v);
                 //return function value;
                 //console.info('called:[' + varName + '][' + valueOfFunction + ']')
                 return valueOfFunction;
