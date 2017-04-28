@@ -111,7 +111,7 @@ simplified.SelectDescendants = function (formulaInfo, node) {
         if (foundEndUiModel !== undefined && foundEndUiModel.rowId === nodes[i].rowId) {
             break;
         }
-        // node.elements.push(AST.cloneAST(lambda, 'X', nodes[i].rowId));
+        node.elements.push(AST.cloneAST(lambda, 'X', nodes[i].rowId));
     }
     delete node.arguments;
     delete node.callee;
@@ -127,9 +127,8 @@ simplified.InputRequired = function (formulaInfo, node) {
 }
 simplified.TSUM = function (formulaInfo, node) {
     //all calls into a tuple should return a []
-    //convert TSUM(variableName) into TSUM(a123,'123',x,y,z,v)
-    var refId = buildModelFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], '').ref;
-    node.arguments[0].name = 'a' + refId + ",'" + refId + "',x,y,z,v"
+    //convert TSUM(variableName) into TSUM(TVALUES(a123,'123',x,y,z,v))
+    buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], '');
 }
 var escodegenOptions = {
     format: {
@@ -151,21 +150,27 @@ var xArgument = {
 };
 
 /**
- * In mainWhile we learned there are two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
- *
+ * Two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
  */
-function buildModelFunc(formulaInfo, node, fType, refer, propertyName) {
-    var referenceFormulaInfo = addFormulaDependency(formulaInfo, refer.name, propertiesArr[fType]);
-    if (referenceFormulaInfo.ref === undefined) {
-        return defaultValues[propertiesArr[fType]];
+function buildFunc(formulaInfo, node, property, referenceProperty, xapendix) {
+    xapendix = xapendix || '';
+    var referenceProperty = addFormulaDependency(formulaInfo, referenceProperty.name, propertiesArr[property]);
+
+    delete referenceProperty.refn;
+    var referenceFormulaId = referenceProperty.ref;
+    if (referenceProperty.tuple) {
+        if (referenceProperty.ref) {
+            node.name = 'TVALUES(a' + referenceFormulaId + ",'" + referenceFormulaId + "',x" + xapendix + ",y,z,v)"
+        } else {
+            node.name = '[' + defaultValues[propertiesArr[property]] + ']';
+        }
+    } else {
+        if (referenceProperty.ref === undefined) {
+            node.name = defaultValues[propertiesArr[property]];
+        } else {
+            node.name = 'a' + referenceFormulaId + "('" + referenceFormulaId + "',x" + xapendix + ",y,z,v)";
+        }
     }
-    delete refer.refn;
-    return referenceFormulaInfo;
-}
-function buildFunc(formulaInfo, node, fType, refer, propertyName) {
-    propertyName = propertyName || '';
-    var refId = buildModelFunc(formulaInfo, node, fType, refer, propertyName);
-    node.name = 'a' + refId.ref + "('" + refId.ref + "',x" + propertyName + ",y,z,v)";
 }
 var varproperties = {}
 

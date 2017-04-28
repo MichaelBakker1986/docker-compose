@@ -540,7 +540,7 @@ model KSP uses BaseModel
             hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
             options_title: locked;
           }
-          variable Child
+          tuple Child
           {
             datatype: number;
             frequency: document;

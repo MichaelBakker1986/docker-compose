@@ -1,6 +1,7 @@
 var log = require('ff-log')
 var WorkBook = require('../fesjs/JSWorkBook')
 var FESContext = require('../fesjs/fescontext')
+require('../../ff-math')
 
 /*var ARGUMENT_NAMES = /([^\s,]+)/g;
  function getParamNames(func) {
@@ -9,8 +10,8 @@ var FESContext = require('../fesjs/fescontext')
  }*/
 //var test = getParamNames(TSUM);
 var wb = new WorkBook(new FESContext());
-wb.createFormula("1+1", "TupleTest");
-wb.createFormula("TSUM(TupleTest)", "TupleTestSUM");
+wb.createFormula("1+1", "TupleTest", 'value', true);
+wb.createFormula("SUM(TupleTest)", "TupleTestSUM");
 var assert = require('assert');
 assert(wb.get('TupleTest') == 2)
 wb.set('TupleTest', 10)
@@ -26,9 +27,13 @@ wb.set('TupleTest', 30, 'value', FirstX, FirstY)
 assert(wb.get('TupleTest', 'value', FirstY) == 20)
 wb.set('TupleTest', 40, 'value', FirstY, 0)
 assert(wb.get('TupleTest', 'value', FirstX, FirstY) == 30)
-assert(wb.get('TupleTestSUM') == 10 + 2)
+var tupleTestSUM = wb.get('TupleTestSUM');
+assert(tupleTestSUM == 10 + 2)
 assert(wb.get('TupleTestSUM', 'value', FirstX) == 40 + 30)
 wb.set('TupleTest', 100, 'value', FirstX, 30)
 assert(wb.get('TupleTestSUM', 'value', FirstY) == 100 + 40 + 30 + 2 * 28)
 wb.set('TupleTest', null, 'value', FirstX, 30)
 assert(wb.get('TupleTestSUM', 'value', FirstX) == 40 + 30)
+
+var x = (491520 & 32768) >> 15// << 6 >> 21
+log.info(x)

@@ -9,25 +9,6 @@ var log = require('ff-log')
  * value = new value
  * v = entered values
  */
-TSUM = function (func, fId, x, y, z, v) {
-    var current = y, returnValue = 0;
-    while (current && TINSTANCECOUNT(v, fId, y) >= current.index) {
-        returnValue += func(fId, x, current, z, v);
-        current = current.next;
-    }
-    return returnValue;
-}
-TINSTANCECOUNT = function (v, fId, y) {
-    var max = Object.keys(v[fId]).reduce(function (a, b) {
-        return Math.max(a, b);
-    });
-    var maxNumber = 0;
-    while (max >= y.base.next.hash) {
-        max -= y.base.next.hash;
-        maxNumber++;
-    }
-    return maxNumber;
-}
 function fm() {
 }
 //don't directly use this method, use JSWorkBook instead.
