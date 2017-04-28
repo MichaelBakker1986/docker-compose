@@ -663,7 +663,7 @@ model KSP uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: TVALUES(NrOfDaysChildcareWeek)
+            formula: SUM(NrOfDaysChildcareWeek)
           }
           variable Memo1
           {
