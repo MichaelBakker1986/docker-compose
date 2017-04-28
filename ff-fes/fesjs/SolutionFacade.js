@@ -119,7 +119,8 @@ function moveFormula(old, newFormula) {
 }
 SolutionFacade.prototype.addFormulaDependency = function (formulaInfo, name, propertyName) {
     var property = PropertiesAssembler.getOrCreateProperty(formulaInfo.name.split('_')[0], name, propertyName || 'value');
-    return FormulaService.addFormulaDependency(formulaInfo, property.ref, property.name);
+    FormulaService.addFormulaDependency(formulaInfo, property.ref, property.name);
+    return property;
 }
 SolutionFacade.prototype.visitParsers = ParserService.visitParsers;
 SolutionFacade.prototype.addParser = ParserService.addParser;

@@ -203,9 +203,10 @@ JSWorkBook.prototype.getRootSolutionProperty = function () {
 };
 JSWorkBook.prototype.visit = FESFacade.visit;
 JSWorkBook.prototype.validate = validateImportedSolution;
-JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId) {
-
+JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId, tuple) {
     SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value');
+    var orCreateProperty = SolutionFacade.getOrCreateProperty(this.getSolutionName(), rowId, colId || 'value');
+    orCreateProperty.tuple = tuple;
     this.updateValueMap();
 }
 JSWorkBook.prototype.properties = SolutionFacade.properties;

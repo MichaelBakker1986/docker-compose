@@ -24,8 +24,8 @@
     "body": "{ if (v == undefined || isNaN(v)) { return onnav; } return v;}"
   },
   "SUM": {
-    "args": "args",
-    "body": "{ var total = 0; for (number in args) { total += args[number]; } return total;}"
+    "args": "values",
+    "body": "{ var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue; }"
   },
   "OnNeg": {
     "args": "arg0,arg1",

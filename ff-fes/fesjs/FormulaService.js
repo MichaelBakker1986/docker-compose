@@ -30,7 +30,7 @@ FormulaService.prototype.visitFormulas = function (visitFunction) {
         }
     }
 }
-FormulaService.prototype.addFormulaDependency = function (formulaInfo,referenceFormulaIndex, referenceName) {
+FormulaService.prototype.addFormulaDependency = function (formulaInfo, referenceFormulaIndex, referenceName) {
     //we want do know if we can all the value straight away or we have to invoke a function for it
     //in future we want to check here if its a dynamic formula, or plain value.
     //also inherited functions are nice to play around with.
