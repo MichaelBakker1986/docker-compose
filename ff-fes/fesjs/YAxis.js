@@ -23,14 +23,18 @@ TVALUES = function (func, fId, x, y, z, v) {
     var current = y, returnValue = [];
     var tinstancecount = TINSTANCECOUNT(v, fId, y);
     while (current && tinstancecount >= current.index) {
-            returnValue.push(func(fId, x, current, z, v));
+        returnValue.push(func(fId, x, current, z, v));
         current = current.next;
     }
     return returnValue;
 }
 //return tuplecount, get max tuple index,
 TINSTANCECOUNT = function (v, fId, y) {
-    var max = Object.keys(v[fId]).reduce(function (a, b) {
+    var keys = Object.keys(v[fId]);
+    if (keys.length == 0) {
+        return 0;
+    }
+    var max = keys.reduce(function (a, b) {
         //filter bits 16-24 find highest tuple count.
         return Math.max((2064384 & parseInt(a)) >> 15, (2064384 & parseInt(b)) >> 15);
     });

@@ -60,7 +60,7 @@ var formulaDecorators = {
         //y,x,z dimensions Tuple,Column,Layer
         //v = enteredValues
         return function (f, x, y, z, v) {
-            //console.info('calling formula ;' + formulaName)
+            //console.info('calling formula ;' + varName)
             var hash = x.hash + y.hash + z;
             //check if user entered a value
             if (v[f][hash] === undefined) {
