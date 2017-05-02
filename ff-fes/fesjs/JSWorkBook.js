@@ -171,9 +171,9 @@ function resolveY(wb, y) {
     return wb.yaxis[y || 0];
 }
 JSWorkBook.prototype.get = function (row, col, x, y) {
-    return this.getSolutionProperyValue(this.getSolutionName() + '_' + row, col, x, y);
+    return this.getSolutionPropertyValue(this.getSolutionName() + '_' + row, col, x, y);
 };
-JSWorkBook.prototype.getSolutionProperyValue = function (row, col, x, y) {
+JSWorkBook.prototype.getSolutionPropertyValue = function (row, col, x, y) {
 
     // TODO Als y niet '0' of leeg is: Ben jij wel lid van een tuple?
 

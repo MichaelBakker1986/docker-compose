@@ -60,7 +60,7 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
         //possible ?quick-fix? to change choice values into number value
         var variable = JSWorkBook.getSolutionNode(rowId, 'value');
         if (variable && variable.displayAs === 'select') {
-            var choices = JSWorkBook.getSolutionProperyValue(rowId, 'choices');
+            var choices = JSWorkBook.getSolutionPropertyValue(rowId, 'choices');
             var choiceValue = choices.lookup('value', value);
             if (choiceValue === undefined) {
                 log.warn('Could not find [%s] choice [%s] in %s. using [%s] to be value', rowId, value, JSON.stringify(choices), value)
@@ -113,7 +113,7 @@ function getEntry(workbook, rowId, columncontext, tupleindex) {
     for (var x = start; x <= end; x++) {
         data[x] = {};
         for (var type in workbook.properties) {
-            data[x][type] = workbook.getSolutionProperyValue(rowId, type, x, tupleindex);
+            data[x][type] = workbook.getSolutionPropertyValue(rowId, type, x, tupleindex);
             data[x].column = x;
             data[x].variable = variable.rowId;
         }
