@@ -133,7 +133,7 @@ var deparsers = [
 //create a native javascript object
 //Find parent-child relations
 //Add all properties to its parent
-FflToJsonConverter.prototype.parse = function (contents) {
+FflToJsonConverter.prototype.parseFFL = function (contents) {
     // log.time('fflParse')
     var stack = new Stack();
 
@@ -240,7 +240,7 @@ FflToJsonConverter.prototype.parse = function (contents) {
     return stack.peek();
 }
 FflToJsonConverter.prototype.deparseRegex = function (input) {
-    return fileParser.deparseRegex(deparsers, input)
+    return fileParser.deparseRegexs(deparsers, input)
 }
 FflToJsonConverter.prototype.parseRegex = FinFormula.parseFormula;
 module.exports = FflToJsonConverter.prototype;

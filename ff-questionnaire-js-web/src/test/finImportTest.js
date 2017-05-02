@@ -13,9 +13,9 @@ if (!skip) {
     var data = JUNIT.getFile('concepts.fin');
     var wb = new WorkBook();
     wb.importSolution(data, 'fin');
-    var validate = wb.validate();
+    var validate = wb.validateImportedSolution();
     var feedback = validate.fixProblemsInImportedSolution()
-    assert.ok(wb.validate().valid);
+    assert.ok(wb.validateImportedSolution().valid);
 
 //this is how the original FIN file looks like /resources/concepts.fin
     /*

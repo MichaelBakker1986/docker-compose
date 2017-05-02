@@ -44,7 +44,7 @@ function findFormula(uiModel) {
 function getStatelessVariable(row, col) {
     return PropertiesAssembler.fetch(row + '_' + col);
 }
-FESFacade.setSolutionPropertyValue = function (context, row, value, col, xas, yas) {
+FESFacade.putSolutionPropertyValue = function (context, row, value, col, xas, yas) {
     var rowId = row + '_' + ( col || 'value');
     var localFormula = findFormula(PropertiesAssembler.fetch(rowId));
     if (localFormula === undefined) {
@@ -55,9 +55,10 @@ FESFacade.setSolutionPropertyValue = function (context, row, value, col, xas, ya
     FunctionMap.apiSet(localFormula, xas, yas, 0, value, context.values);
 };
 
-FESFacade.getSolutionProperyValue = function (context, row, col, xas, yas) {
+FESFacade.fetchSolutionProperyValue = function (context, row, col, xas, yas) {
     var colType = col || 'value';
-    var localFormula = findFormula(getStatelessVariable(row, colType));
+    var variable = getStatelessVariable(row, colType);
+    var localFormula = findFormula(variable);
     var returnValue;
     if (localFormula === undefined) {
         returnValue = context.propertyDefaults[colType];
@@ -67,9 +68,9 @@ FESFacade.getSolutionProperyValue = function (context, row, col, xas, yas) {
     }
     return returnValue;
 }
-FESFacade.getRootSolutionProperty = PropertiesAssembler.getRootSolutionProperty;
-FESFacade.getSolutionNode = getStatelessVariable;
-FESFacade.apiGet = FunctionMap.apiGet;
+FESFacade.fetchRootSolutionProperty = PropertiesAssembler.getRootProperty;
+FESFacade.fetchSolutionNode = getStatelessVariable;
+FESFacade.apiGetValue = FunctionMap.apiGet;
 FESFacade.getAllValues = function (docValues) {
     //we cannot just return everything here, Because for now all formula's have a user-entered value cache.
     //Also Functions themSelves are bound to this object.
@@ -106,5 +107,5 @@ FESFacade.updateValueMap = function (values) {
         }
     });
 };
-FESFacade.visit = PropertiesAssembler.visit;
+FESFacade.visit = PropertiesAssembler.visitProperty;
 module.exports = FESFacade;

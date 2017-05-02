@@ -1,4 +1,4 @@
-function deparseRegex(deparsers, input)
+function deparseRegexs(deparsers, input)
 {
     for (var i = 0; i < deparsers.length; i++)
     {
@@ -9,5 +9,5 @@ function deparseRegex(deparsers, input)
     return input;
 }
 module.exports = {
-    deparseRegex: deparseRegex
+    deparseRegexs: deparseRegexs
 };

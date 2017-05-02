@@ -2,7 +2,7 @@
  * user friendly API
  */
 require('./exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
-require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
+//require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 var log = require('ff-log')
 var WorkBook = require('./fesjs/JSWorkBook');
 var FESContext = require('./fesjs/fescontext');
@@ -14,9 +14,9 @@ function FESApi() {
 FESApi.prototype.init = function (data) {
     var JSWorkBook = new WorkBook(new FESContext());
     JSWorkBook.importSolution(data, 'ffl');
-    var validate = JSWorkBook.validate();
+    var validate = JSWorkBook.validateImportedSolution();
     JSWorkBook.fixProblemsInImportedSolution();
-    var validateFeedback = JSWorkBook.validate();
+    var validateFeedback = JSWorkBook.validateImportedSolution();
     if (validateFeedback.valid) {
         //valid
         log.debug('Initialized model [' + JSWorkBook.getSolutionName() + ']');
@@ -39,8 +39,6 @@ FESApi.prototype.addFunctions = function (plugin) {
  * rowId - VariableName
  * @Optional value - new value
  */
-
-
 FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, tupleindex) {
 
     // Convert tuple index to tuple number
@@ -56,7 +54,7 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
     JSWorkBook.columns = context.columns || 17;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
     //prepare the workbook and context to match current appscope
-    JSWorkBook.updateValueMap()
+    JSWorkBook.updateValues()
     if (value !== undefined) {
         //choice(select) requests
         //possible ?quick-fix? to change choice values into number value

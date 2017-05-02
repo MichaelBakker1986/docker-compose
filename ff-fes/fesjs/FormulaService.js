@@ -18,15 +18,15 @@ formulas[100000] = null;
 var cache = {};
 function FormulaService() {
 }
-FormulaService.prototype.visitFormulas = function (visitFunction) {
+FormulaService.prototype.visitFormulas = function (visitFunctionArg) {
     for (var i = 0; i < formulas.length; i++) {
         var formula = formulas[i];
         if (formula !== null && formula !== undefined) {
-            visitFunction(formula);
+            visitFunctionArg(formula);
             continue;
         }
         else if (i > 100000) {
-            visitFunction(formula);
+            visitFunctionArg(formula);
         }
     }
 }

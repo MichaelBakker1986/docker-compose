@@ -1,0 +1,6 @@
+digraph G  {
+  graph [ rankdir = LR ];
+  "TestFirstFile";
+  "otherFile";
+  "TestFirstFile" -> "otherFile" [ label = "simpleCall\ncomplexFunction" ];
+}

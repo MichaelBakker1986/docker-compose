@@ -27,81 +27,80 @@ var logger = require('ff-log');
  }*/
 //@formatter:on
 
-var parser = {
-    name: 'ffl',
-    status: 'green',
-    headername: '.finance ffl',
-    parse: function (data, workbook) {
-        var log = {variables: []};
-        //convert FFL into JSON (Generic)
-        var json = FflToJsonConverter.parse(data);
+function FFLParser() {
+}
+FFLParser.prototype.name = 'ffl'
+FFLParser.prototype.status = 'green';
+FFLParser.prototype.headername = '.finance ffl';
+FFLParser.prototype.parseData = function (data, workbook) {
+    var log = {variables: []};
+    //convert FFL into JSON (Generic)
+    var json = FflToJsonConverter.parseFFL(data);
+    //lookup  modelName, we need this in the process;
+    //all nodes will be given the SolutionName member as ID of its corresponding SolutionName
+    var solutionName = findSolutionNameFromFFLFile(json);
+    //Create a Solution that will contain these formulas
+    var solution = SolutionFacade.createSolution(solutionName);
+    //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
+    JSVisitor.travelOne(json, null, function (keyArg, node) {
+        if (keyArg === null) {
+        }
+        else {
+            var tuple = keyArg.startsWith('tuple ');
+            if ((keyArg.startsWith('variable ') || tuple)) {
 
-        //lookup  modelName, we need this in the process;
-        //all nodes will be given the SolutionName member as ID of its corresponding SolutionName
-        var solutionName = findSolutionNameFromFFLFile(json);
-        //Create a Solution that will contain these formulas
-        var solution = SolutionFacade.createSolution(solutionName);
-        //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
-        JSVisitor.travelOne(json, null, function (keyArg, node) {
-            if (keyArg === null) {
+                var refersto = node.refer;
+                var nodeName = stripVariableOrtuple(keyArg, node);
+                var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
+                var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
+
+                addnode(log, solution, nodeName, node, parentId, tuple);
+            }
+        }
+    });
+    logger.debug('Add variables [' + log.variables + ']')
+    return solution;
+}
+FFLParser.prototype.deParse = function (rowId, workbook) {
+    var fflSolution = SolutionFacade.createSolution(workbook.getSolutionName());
+    workbook.visit(workbook.getNode(rowId), function (elem) {
+        //JSON output doesn't gurantee properties to be in the same order as inserted
+        //so little bit tricky here, wrap the node in another node
+        //add to its wrapper a child type []
+        //insert nodes in that array
+        var uielem = {};
+        //for now all nodes are variables
+        var realObject = {}
+        var formulaProperties = SolutionFacade.gatherFormulaProperties(workbook.getSolutionName(), workbook.properties, elem.rowId);
+        for (var key in formulaProperties) {
+            var formula = formulaProperties[key];
+            var finFormula;
+            if (key === 'choices') {
+                finFormula = FinFormula.toJavascriptChoice(formula);
             }
             else {
-                var tuple = keyArg.startsWith('tuple ');
-                if ((keyArg.startsWith('variable ') || tuple)) {
-
-                    var refersto = node.refer;
-                    var nodeName = stripVariableOrtuple(keyArg, node);
-                    var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
-                    var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
-
-                    addnode(log, solution, nodeName, node, parentId, tuple);
-                }
+                finFormula = FinFormula.javaScriptToFinGeneric(formula);
             }
-        });
-        logger.debug('Add variables [' + log.variables + ']')
-        return solution;
-    },
-    deParse: function (rowId, workbook) {
-        var fflSolution = SolutionFacade.createSolution(workbook.getSolutionName());
-        workbook.visit(workbook.getNode(rowId), function (elem) {
-            //JSON output doesn't gurantee properties to be in the same order as inserted
-            //so little bit tricky here, wrap the node in another node
-            //add to its wrapper a child type []
-            //insert nodes in that array
-            var uielem = {};
-            //for now all nodes are variables
-            var realObject = {}
-            var formulaProperties = SolutionFacade.gatherFormulaProperties(workbook.getSolutionName(), workbook.properties, elem.rowId);
-            for (var key in formulaProperties) {
-                var formula = formulaProperties[key];
-                var finFormula;
-                if (key === 'choices') {
-                    finFormula = FinFormula.toJavascriptChoice(formula);
-                }
-                else {
-                    finFormula = FinFormula.javaScriptToFinGeneric(formula);
-                }
-                if (finFormula != 'undefined') {
-                    logger.debug('[' + finFormula + ']');
-                    realObject[reversedFormulaMapping[key]] = finFormula;
-                }
-                if (reversedFormulaMapping[key] === 'locked') {
-                    /*realObject['options_notrend'] = formulaProperties[key];
-                     realObject['options_trend'] = formulaProperties[key];*/
-                }
+            if (finFormula != 'undefined') {
+                logger.debug('[' + finFormula + ']');
+                realObject[reversedFormulaMapping[key]] = finFormula;
             }
-            realObject.displaytype = displayAsMapping[elem.displayAs];
-            uielem['variable ' + elem.rowId] = realObject;
-            fflSolution.addNode(elem.rowId, uielem);
-            fflSolution.restoreDelegateProperties(realObject, elem);
-            fflSolution.setPreparser(FflToJsonConverter.deparseRegex);
-            fflSolution.addNodeToCorrespondingPlaceInHierarchie(elem.parentrowId, elem.rowId, uielem);
-        });
+            if (reversedFormulaMapping[key] === 'locked') {
+                /*realObject['options_notrend'] = formulaProperties[key];
+                 realObject['options_trend'] = formulaProperties[key];*/
+            }
+        }
+        realObject.displaytype = displayAsMapping[elem.displayAs];
+        uielem['variable ' + elem.rowId] = realObject;
+        fflSolution.addNode(elem.rowId, uielem);
+        fflSolution.restoreDelegateProperties(realObject, elem);
+        fflSolution.setPreparser(FflToJsonConverter.deparseRegex);
+        fflSolution.addNodeToCorrespondingPlaceInHierarchie(elem.parentrowId, elem.rowId, uielem);
+    });
 
-        var stringify = fflSolution.stringify();
-        return stringify;
-    }
-};
+    var stringify = fflSolution.stringify();
+    return stringify;
+}
 function findSolutionNameFromFFLFile(json) {
     for (var key in json) {
         if (key.toLowerCase().startsWith('model ')) {
@@ -218,13 +217,13 @@ function addnode(log, solution, rowId, node, parentId, tuple) {
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 
-    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', node.formula ? parseFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', node.formula ? parseFFLFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
 
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
 
     if (tuple) {
-        logger.debug('Found tuple [%s]',rowId)
+        logger.debug('Found tuple [%s]', rowId)
         uiNode.tuple = true;
     }
     for (var key in formulaMapping) {
@@ -235,11 +234,11 @@ function addnode(log, solution, rowId, node, parentId, tuple) {
                 logger.debug('Default [' + key + '] formula, skipping. [' + node[key] + '][' + rowId + ']');
                 continue;
             }
-            SolutionFacade.createUIFormulaLink(solution, rowId, formulaMapping[key], parseFormula(node[key]));
+            SolutionFacade.createUIFormulaLink(solution, rowId, formulaMapping[key], parseFFLFormula(node[key]));
         }
     }
 }
-function parseFormula(formula) {
+function parseFFLFormula(formula) {
     var formulaReturn = 'undefined';
     try {
         if (formula !== undefined) {
@@ -252,4 +251,4 @@ function parseFormula(formula) {
     }
     return formulaReturn;
 }
-SolutionFacade.addParser(parser);
+SolutionFacade.addParser(FFLParser.prototype);

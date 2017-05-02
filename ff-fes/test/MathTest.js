@@ -7,7 +7,7 @@ var JUNIT = require('./JUNIT');
 var logger = require('ff-log');
 var FESContext = require('../fesjs/fescontext');
 var wb = new WorkBook(new FESContext());
-wb.updateValueMap();
+wb.updateValues();
 //var kspModel = JUNIT.getFile('KSP.ffl');
 //wb.importSolution(kspModel, 'ffl');
 

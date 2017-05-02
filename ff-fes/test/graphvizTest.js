@@ -29,9 +29,9 @@ for (var i = 0; i < fflTestModels.length; i++) {
     var wb = new WorkBook(new FESContext());
 
     wb.importSolution(data, 'ffl');
-    var validate = wb.validate();
+    var validate = wb.validateImportedSolution();
     wb.fixProblemsInImportedSolution();
-    assert.ok(wb.validate().valid);
+    assert.ok(wb.validateImportedSolution().valid);
     var fflExport = wb.export('ffl');
     var screendefExport = wb.export('presentation');
     var allnodes = screendefExport.tree._tree.nodes;
@@ -52,7 +52,7 @@ for (var i = 0; i < fflTestModels.length; i++) {
     var variableNames = new Set();
 
     wb.solution.formulas.forEach(function (formulaId) {
-        var formula = SolutionFacade.findFormulaByIndex(formulaId);
+        var formula = SolutionFacade.fetchFormulaByIndex(formulaId);
         if (Object.keys(formula.deps).length > 0) {
             variableNames.add(correctFileName(formula.name))
         }
@@ -66,7 +66,7 @@ for (var i = 0; i < fflTestModels.length; i++) {
         depVariableNames += createRow(name);
     })
     var formulaInfo = {};
-    FormulaService.visitFormulas(function (formula) {
+    FormulaService.visitSolutionFormulas(function (formula) {
         formulaInfo[formula.name] = formula;
     })
     createFile(wb, "_dependencies.json", JSON.stringify(formulaInfo, null, 2));

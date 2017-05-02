@@ -53,7 +53,7 @@ simplified.DataAvailable = function (formulaInfo, node) {
     //If(DataEntered(TaxOnProfitPsayable&&TaxProfitPaymentCalc!==10),TaxOnProfitsPayable-(TaxOnProfitsCum+TaxOnProfitsAssessment-TaxOnProfitsPaidAccumulated),NA)
     var refFormula = addFormulaDependency(formulaInfo, node.arguments[0].name, 'value')
     if (refFormula.ref === undefined) {
-        log.warn("Can't find a variableReference for " + generate(node)) + " " + formulaInfo.name + ":" + formulaInfo.original;
+        log.warn("Can't find a variableReference for " + regenerate(node)) + " " + formulaInfo.name + ":" + formulaInfo.original;
         return;
     }
     node.type = 'Identifier'
@@ -440,7 +440,7 @@ function buildFormula(formulaInfo, parent, node) {
     }
     traverseTypes[node.type](formulaInfo, parent, node);
 }
-function generate(body) {
+function regenerate(body) {
     return escodegen.generate(body, escodegenOptions);
 }
 //public function, will return the parsed string
@@ -449,7 +449,7 @@ FormulaBootstrap.prototype.parseAsFormula = function (formulaInfo) {
     assert(formulaInfo.parsed === undefined)
     var ast;
     if (typeof formulaInfo.body === 'object') {
-        formulaInfo.original = generate(formulaInfo.body);
+        formulaInfo.original = regenerate(formulaInfo.body);
         ast = formulaInfo.body;
     }
     else {
@@ -466,7 +466,7 @@ FormulaBootstrap.prototype.parseAsFormula = function (formulaInfo) {
         log.warn('Self reference found [%s] in [%s]', formulaInfo.name, formulaInfo.original);
     }
     buildFormula(formulaInfo, null, ast);
-    var generated = generate(ast);
+    var generated = regenerate(ast);
     formulaInfo.ast = JSON.stringify(ast);
     formulaInfo.parsed = generated;
     formulaInfo.tempnaaam = undefined;

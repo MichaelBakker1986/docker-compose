@@ -663,7 +663,7 @@ model KSP uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: SUM(NrOfDaysChildcareWeek)
+            formula: SUM(NrOfDaysChildcareWeek);
           }
           variable Memo1
           {
@@ -1843,7 +1843,7 @@ model KSP uses BaseModel
             }
             variable TotalYearlyCostTSUM
             {
-                formula: TSUM(TotalYearlyCosts)
+                formula: SUM(TotalYearlyCosts);
             }
 
           }

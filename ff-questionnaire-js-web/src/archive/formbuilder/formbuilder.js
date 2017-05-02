@@ -182,7 +182,7 @@ APP.controller('formbuilder', ['$timeout', '$scope', '$http', '$location', funct
         }).then(function (data) {
             return $http.post($scope.apiPath + 'FORMULA/', Solution.formulas);
         }).then(function successCallback(response) {
-            JSWorkbook.updateValueMap();
+            JSWorkbook.updateValues();
             console.info(response);
         }, function errorCallback(response) {
             console.error(response)

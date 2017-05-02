@@ -16,12 +16,13 @@ SolutionFacade.prototype.createSolution = function (solutionName) {
     return new Solution(PropertiesAssembler.createRootNode(solutionName).solutionName);
 }
 
-SolutionFacade.prototype.importSolution = function (data, parserType, workbook) {
+SolutionFacade.prototype.importSolutionData = function (data, parserType, workbook) {
     if (data === undefined) {
         log.error('No data specified')
         return;
     }
-    var solution = ParserService.findParser(parserType).parse(data, workbook);
+    var foundParser = ParserService.findParser(parserType);
+    var solution = foundParser.parseData(data, workbook);
     log.debug('Update Solution [' + solution.getName() + ']');
     PropertiesAssembler.bulkInsert(solution);
     initFormulaBootstrap(solution.formulas, false);
@@ -100,16 +101,16 @@ SolutionFacade.prototype.mergeFormulas = function (formulasArg) {
             //of course this should not live here, its just a bug fix.
             if (localFormula.index !== formula.id) {
                 //move formula
-                moveFormula(localFormula, formula);
+                modify(localFormula, formula);
             }
         }
     });
     //rebuild the formulas
     this.initFormulaBootstrap(changed, true);
 };
-function moveFormula(old, newFormula) {
+function modifyFormula(old, newFormula) {
     FormulaService.moveFormula(old, newFormula);
-    FunctionMap.moveFormula(old, newFormula);
+    FunctionMap.moveFunction(old, newFormula);
     //update references
     for (var ref in old.refs) {
         var property = PropertiesAssembler.fetch(ref);
@@ -140,6 +141,6 @@ SolutionFacade.prototype.properties = {
     _testg: 9,
     _testh: 10
 };
-SolutionFacade.prototype.findFormulaByIndex = FormulaService.findFormulaByIndex;
+SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex;
 FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
-module.exports = SolutionFacade.prototype;
+ module.exports = SolutionFacade.prototype;

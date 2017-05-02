@@ -75,7 +75,7 @@ var formulaDecorators = {
     }
     //will need more types e.g. cacheLocked and cacheUnlocked.
 }
-fm.prototype.moveFormula = function (oldFormula, newFormula) {
+fm.prototype.moveFunction = function (oldFormula, newFormula) {
     if (oldFormula.index !== newFormula.id) {
         if (global['a' + newFormula.id]) {
             log.warn('Formula already taken[' + newFormula.id + ']');

@@ -11,7 +11,7 @@ var FESContext = require('../fesjs/fescontext')
 var wb = new JSWorkBook(new FESContext());
 
 wb.importSolution(JSON.stringify(data, null, 2), 'screendefinition');
-assert.ok(wb.validate().valid);
+assert.ok(wb.validateImportedSolution().valid);
 var screenDefexport = wb.export('screendefinition');
 assert.notStrictEqual(screenDefexport, undefined);
 assert.notStrictEqual(screenDefexport, null);

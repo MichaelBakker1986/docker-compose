@@ -7,7 +7,6 @@ wb.modelName = 'APITEST'
 //choices require value functions..
 wb.createFormula("''", "CHOICE_TEST")
 wb.createFormula("[{'name':' 0','value':'VWO'},{'name':'1','value':'VMBO-MBO'},{'name':'2','value':'VMBO-HAVO'},{'name':'3','value':'HAVO'}]", "CHOICE_TEST", "choices")
-log.info(wb.get('CHOICE_TEST', 'choices'));
 var fesGetValue = fesjsApi.fesGetValue({
     properties: {
         choices: true,

@@ -37,7 +37,7 @@ APP.controller('exchange', ['$timeout', '$scope', '$http', '$location', '$window
     }
     $scope.fixError = function (importtype, error) {
         error.fix();
-        var feedback = JSWorkBook.validate();
+        var feedback = JSWorkBook.validateImportedSolution();
         //TODO: in this file, i have this block three times.. FIX IT
         $timeout(function () {
             if (feedback.valid) {
@@ -69,7 +69,7 @@ APP.controller('exchange', ['$timeout', '$scope', '$http', '$location', '$window
             });
             JSWorkBook.importSolution(contents, importType.name);
             logger.info('import done.. performing monte carlo simulation')
-            var feedback = JSWorkBook.validate();
+            var feedback = JSWorkBook.validateImportedSolution();
 
             //display Errors on page
             importType.importFeedback = feedback;

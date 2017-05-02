@@ -74,7 +74,7 @@ Tree.prototype.update = function (node, properties) {
         actualNodes[subNode.rowId] = subNode;
         var uiTreeNode = uiTreeNodes[subNode.rowId];
         if (uiTreeNode === undefined) {
-            uiTreeNode = createNode(tree, subNode.rowId, subNode.displayAs)
+            uiTreeNode = createTreeNode(tree, subNode.rowId, subNode.displayAs)
             uiTreeNodes[subNode.rowId] = uiTreeNode;
         }
         //some variables reset, its the wrong way dependent
@@ -192,7 +192,7 @@ var presentationConverter = {
                 if (node.rowId !== rootNode.rowId) {
                     //can only make nodes via a Tree.
                     //To enforce integrity
-                    var newNode = createNode(tree, node.rowId, node.displayAs);
+                    var newNode = createTreeNode(tree, node.rowId, node.displayAs);
                     if (node.parentrowId !== undefined) {
                         tree.addChild(node.parentrowId, newNode);
                     }
@@ -247,7 +247,7 @@ var presentationConverter = {
         return exportValue
     }
 };
-function createNode(tree, nodeId, displayAs) {
+function createTreeNode(tree, nodeId, displayAs) {
     return tree.createNode(nodeId);
 }
 SolutionFacade.addParser(presentationConverter)

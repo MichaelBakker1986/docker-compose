@@ -133,7 +133,7 @@ for (var i = 0; i < tests.length; i++) {
     var wb = new JSWorkBook(new FESContext());
     wb.importSolution(data, 'ffl');
 
-    var feedback = wb.validate();
+    var feedback = wb.validateImportedSolution();
     if (!feedback.valid) {
         feedback = wb.fixProblemsInImportedSolution();
     }

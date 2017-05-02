@@ -127,11 +127,11 @@ PropertiesAssembler.prototype.bulkInsert = function (solution) {
 function getRootNode(modelName) {
     return rootNodes[modelName];
 }
-PropertiesAssembler.prototype.findAllInSolution = function (nodeId, visit) {
+PropertiesAssembler.prototype.findAllInSolution = function (nodeId, visitArg) {
     for (var key in PropertiesModel) {
         var property = PropertiesModel[key];
         if (property.solutionName === nodeId) {
-            visit(property);
+            visitArg(property);
         }
     }
 };
@@ -144,7 +144,7 @@ PropertiesAssembler.prototype.fetch = function fetch(name) {
  * if node is null we use root node
  * function is not thread safe, add parent and depth to function call instead of altering PropertyNode
  */
-PropertiesAssembler.prototype.visit = function (node, func) {
+PropertiesAssembler.prototype.visitProperty = function (node, func) {
     var startingNode = node || getRootNode('NEW');
     if (startingNode !== undefined) {
         startingNode._depth = 0;
@@ -168,6 +168,6 @@ function visitInternal(node, func, depth) {
         }
     }
 }
-PropertiesAssembler.prototype.getRootSolutionProperty = getRootNode;
+PropertiesAssembler.prototype.getRootProperty = getRootNode;
 PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 module.exports = PropertiesAssembler.prototype;

@@ -8,7 +8,7 @@ var parser = {
     name: 'screendefinition',
     headername: '.finance Screendefinition',
     //expection json as String for screen definitions
-    parse: function (json, workbook) {
+    parseData: function (json, workbook) {
         var data = JSON.parse(json);
         var solution = SolutionFacade.createSolution(data.modelName || workbook.getSolutionName());
 
@@ -27,7 +27,7 @@ var parser = {
     deParse: function (rowId, workbook) {
         var screenSolution = SolutionFacade.createSolution(workbook.getSolutionName());
 
-        PropertiesAssembler.visit(undefined, function (elem) {
+        PropertiesAssembler.visitProperty(undefined, function (elem) {
             //create output node
             var uielem = {
                 name: elem.rowId,

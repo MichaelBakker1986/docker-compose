@@ -11,9 +11,9 @@ for (var i = 0; i < fflTestModels.length; i++) {
     var wb = new WorkBook(new FESContext());
 
     wb.importSolution(data, 'ffl');
-    var validate = wb.validate();
+    var validate = wb.validateImportedSolution();
     wb.fixProblemsInImportedSolution();
-    assert.ok(wb.validate().valid);
+    assert.ok(wb.validateImportedSolution().valid);
     var fflExport = wb.export('ffl');
     //debugging..
     if (!process.alltest) {

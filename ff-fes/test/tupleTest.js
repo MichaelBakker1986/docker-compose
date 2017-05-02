@@ -33,6 +33,3 @@ wb.set('TupleTest', 100, 'value', FirstX, 30)
 assert(wb.get('TupleTestSUM', 'value', FirstY) == 100 + 40 + 30 + 2 * 28)
 wb.set('TupleTest', null, 'value', FirstX, 30)
 assert(wb.get('TupleTestSUM', 'value', FirstX) == 40 + 30)
-
-var x = (491520 & 32768) >> 15// << 6 >> 21
-log.info(x)
