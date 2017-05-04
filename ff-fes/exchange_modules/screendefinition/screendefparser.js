@@ -12,7 +12,7 @@ var parser = {
         var data = JSON.parse(json);
         var solution = SolutionFacade.createSolution(data.modelName || workbook.getSolutionName());
 
-        visitor.travelOne(data, null, function (keyArg, node) {
+        visitor.travelOne(data, null, function (keyArg, node, depth) {
             //keyArg !== null &&  is a hack, prevents RootNode from being added;
             if (node !== null && node !== undefined && keyArg !== null && (node.variableName || node.name) && !Array.isArray(node)) {
                 var parent = node._parent;
@@ -21,7 +21,7 @@ var parser = {
                     addnode(solution, nodeName, node, parent ? (parent.variableName || parent.name) : undefined, undefined);
                 }
             }
-        });
+        }, 0);
         return solution;
     },
     deParse: function (rowId, workbook) {
@@ -53,7 +53,8 @@ var parser = {
 
 function addnode(solution, rowId, node, parentId, referId) {
     if (solution.hasNode(rowId) || !rowId) {
-        throw Error()
+        return;
+        //throw Error()
     }
     //create formula if not exist
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType");

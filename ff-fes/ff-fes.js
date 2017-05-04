@@ -28,7 +28,7 @@ FESApi.prototype.init = function (data) {
 }
 FESApi.prototype.addFunctions = function (plugin) {
     var functions = [];
-    for (functionName in plugin.entries) {
+    for (var functionName in plugin.entries) {
         functions.push(functionName)
         global[functionName] = plugin.entries[functionName]
     }
@@ -42,11 +42,14 @@ FESApi.prototype.addFunctions = function (plugin) {
 FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, tupleindex) {
 
     // Convert tuple index to tuple number
-    if (tupleindex !== undefined)
-    {
+    if (tupleindex !== undefined) {
         tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
     }
-
+    var maxTupleCount = 0;
+    for (var key in context.values) {
+        var obj = context.values[key];
+        maxTupleCount = Math.max(maxTupleCount, TINSTANCECOUNT(context.values, key));
+    }
     var fesContext = new FESContext();
     fesContext.values = context.values;
     var JSWorkBook = new WorkBook(fesContext)
@@ -69,13 +72,13 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
             }
         }
         JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, tupleindex)
-        return getEntry(JSWorkBook, rowId, columncontext, tupleindex)
+        return getEntry(JSWorkBook, rowId, columncontext, tupleindex, maxTupleCount)
     } else {
         var values = [];
         var rootNode = JSWorkBook.getSolutionNode(rowId);
         if (rootNode) {
             JSWorkBook.visit(rootNode, function (node) {
-                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, tupleindex))
+                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, tupleindex, maxTupleCount))
             });
         } else {
             values.push({
@@ -92,32 +95,48 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
  * @param columncontext
  * @returns {Array}
  */
-function getEntry(workbook, rowId, columncontext, tupleindex) {
-    var data = [];
-    var start = 0;
-    var end = workbook.columns;
+function getEntry(workbook, rowId, columncontext, tupleindex, maxTupleCount) {
+    var outputData = [];
+    var columnStart = 0;
+    var columnEnd = workbook.columns;
     var variable = workbook.getSolutionNode(rowId, 'value');
-
-    // 'tuple = true' property uit fflparser.js (line 227)
-    // Hier werken voor Tuples uitvragen
-    if (variable.tuple)
-    {
-        var hoi = 0;
-    }
 
     //quick-fix for document variables;
     //TODO: all warnings for calls with document frequencies and columncontext>0 is useless
     if (variable && variable.delegate && variable.delegate.frequency === 'document') {
-        end = 0;
+        columnEnd = 0;
     }
-    for (var x = start; x <= end; x++) {
-        data[x] = {};
-        for (var type in workbook.properties) {
-            data[x][type] = workbook.getSolutionPropertyValue(rowId, type, x, tupleindex);
-            data[x].column = x;
-            data[x].variable = variable.rowId;
+    var tupleStart = 0;
+    var tupleEnd = 0;
+    if (variable.tupleDefinition) {
+        tupleEnd = maxTupleCount;
+        log.info('requested tupledefinition iterate [%s]times ', maxTupleCount)
+    }
+    for (var yAxisCounter = tupleStart; yAxisCounter <= tupleEnd; yAxisCounter++) {
+        outputData[yAxisCounter] = [];
+        var tupleData = outputData[yAxisCounter];
+        for (var xAxisCounter = columnStart; xAxisCounter <= columnEnd; xAxisCounter++) {
+            tupleData[xAxisCounter] = {};
+            for (var type in workbook.properties) {
+                tupleData[xAxisCounter][type] = workbook.getSolutionPropertyValue(rowId, type, xAxisCounter, yAxisCounter);
+                if (columnStart !== columnEnd) {
+                    tupleData[xAxisCounter].column = xAxisCounter;
+                }
+                tupleData[xAxisCounter].variable = variable.rowId;
+                if (tupleStart !== tupleEnd) {
+                    tupleData[xAxisCounter].tupleIndex = yAxisCounter;
+                }
+            }
+        }
+        //if there is only one column, the exported value is not presented to be an array
+        if (columnStart == columnEnd) {
+            tupleData = tupleData[0]
         }
     }
-    return data;
+    //if there is only one tuple, the exported value is not presented to be an array
+    if (tupleStart == tupleEnd) {
+        outputData = outputData[0]
+    }
+    return outputData;
 }
 exports.fesjs = FESApi.prototype

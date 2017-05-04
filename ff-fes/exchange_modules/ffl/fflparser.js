@@ -42,22 +42,29 @@ FFLParser.prototype.parseData = function (data, workbook) {
     //Create a Solution that will contain these formulas
     var solution = SolutionFacade.createSolution(solutionName);
     //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
-    JSVisitor.travelOne(json, null, function (keyArg, node) {
+    var tupleDefDepth = 999;//infinit max depth
+    JSVisitor.travelOne(json, null, function (keyArg, node, depth) {
         if (keyArg === null) {
         }
         else {
-            var tuple = keyArg.startsWith('tuple ');
-            if ((keyArg.startsWith('variable ') || tuple)) {
+            var tupleDefiniton = keyArg.startsWith('tuple ');
+            if ((keyArg.startsWith('variable ') || tupleDefiniton)) {
 
                 var refersto = node.refer;
                 var nodeName = stripVariableOrtuple(keyArg, node);
                 var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
                 var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
 
-                addnode(log, solution, nodeName, node, parentId, tuple);
+                addnode(log, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && depth > tupleDefDepth);
+                if (tupleDefiniton) {
+                    tupleDefDepth = depth;
+                }
+                else if (depth <= tupleDefDepth) {
+                    tupleDefDepth = 999;
+                }
             }
         }
-    });
+    }, 0);
     logger.debug('Add variables [' + log.variables + ']')
     return solution;
 }
@@ -206,7 +213,7 @@ var defaultValue = {
 
 //this is where it is all about, the variable with his properties
 //we should make it more Generic so i can use it for fin language parser
-function addnode(log, solution, rowId, node, parentId, tuple) {
+function addnode(log, solution, rowId, node, parentId, tupleDefinition, tupleProperty) {
     log.variables.push(rowId);
     if (rowId === undefined || rowId.trim() === '') {
         logger.info('NULL rowId')
@@ -222,9 +229,14 @@ function addnode(log, solution, rowId, node, parentId, tuple) {
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
 
-    if (tuple) {
-        logger.debug('Found tuple [%s]', rowId)
+    if (tupleDefinition) {
+        logger.debug('Found tupleDefinition [%s]', rowId)
         uiNode.tuple = true;
+        uiNode.tupleDefinition = true;
+    }
+    else if (tupleProperty) {
+        logger.debug('Found tupleProperty [%s]', rowId)
+        uiNode.tupleProperty = true;
     }
     for (var key in formulaMapping) {
         if (node[key] !== undefined) {

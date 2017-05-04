@@ -144,7 +144,7 @@ function validateImportedSolution() {
         }
     };
     this.visitSolutionFormulas(formulaFixer);
-    validateResponse.valid = validateResponse.error.length === 0 ? true : false;
+    validateResponse.valid = validateResponse.error.length === 0;
     validateResponse.fixProblemsInImportedSolution = fixAll;
     return validateResponse;
 };
@@ -179,7 +179,7 @@ JSWorkBook.prototype.getSolutionPropertyValue = function (row, col, x, y) {
 
     var xas = resolveX(this, x);
     var yas = resolveY(this, y)
-    return FESFacade.fetchSolutionProperyValue(this.context, row, col, xas, yas)
+    return FESFacade.fetchSolutionPropertyValue(this.context, row, col, xas, yas)
 };
 
 JSWorkBook.prototype.set = function (row, value, col, x, y) {

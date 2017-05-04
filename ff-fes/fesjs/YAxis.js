@@ -29,7 +29,7 @@ TVALUES = function (func, fId, x, y, z, v) {
     return returnValue;
 }
 //return tuplecount, get max tuple index,
-TINSTANCECOUNT = function (v, fId, y) {
+TINSTANCECOUNT = function (v, fId) {
     var keys = Object.keys(v[fId]);
     if (keys.length == 0) {
         return 0;

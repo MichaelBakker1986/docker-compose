@@ -227,7 +227,7 @@ function calculateCalculationDocument(data) {
 
     // convert meta data in real column object..
     // don't make references. The values are re-used over timelines
-    for (vmode in this.viewmodes) {
+    for (var vmode in this.viewmodes) {
         // this loop will be used for all viewmodes when wisely declared.
         for (var tId = 0; tId < timelineSize; tId++) {
             // create new array for the timeline
@@ -237,7 +237,7 @@ function calculateCalculationDocument(data) {
     // creat all real objects for all timeslines first, we use the indexes created to lookup the elements while
     // loooking for references
     for (var tId = 0; tId < timelineSize; tId++) {
-        for (vmode in this.viewmodes) {
+        for (var vmode in this.viewmodes) {
             // times multiplier
             // jsut for quick reference place the array in here;
             var currentviewmode = viewmodes[vmode];
@@ -269,7 +269,7 @@ function calculateCalculationDocument(data) {
         // but not about information about those children, since they are not determined yet, they exist, but the
         // references are not u can however obtain information about the children from the template. And ofc there
         // should not be a need to ask these kind of information
-        for (vmode in this.viewmodes) {
+        for (var vmode in this.viewmodes) {
             // times multiplier
             // jsut for quick reference place the array in here;
             var currentviewmode = viewmodes[vmode];

@@ -23,7 +23,7 @@ FormulaService.prototype.visitFormulas = function (visitFunctionArg) {
         var formula = formulas[i];
         if (formula !== null && formula !== undefined) {
             visitFunctionArg(formula);
-            continue;
+
         }
         else if (i > 100000) {
             visitFunctionArg(formula);

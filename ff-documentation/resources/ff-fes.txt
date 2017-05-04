@@ -39,7 +39,7 @@ digraph G  {
   "fesjs/SolutionFacade" -> "fesjs/PropertiesAssembler" [ label = "createRootNode\nbulkInsert\ngetOrCreateProperty\nfetch\ncontains" ];
   "fesjs/SolutionFacade" -> "fesjs/Solution" [ label = "" ];
   "ff-fes" -> "exchange_modules/ffl/fflparser" [ label = "" ];
-  "ff-fes" -> "fesjs/JSWorkBook" [ label = "importSolution\nvalidateImportedSolution\nfixProblemsInImportedSolution\ngetSolutionName\ngetRootSolutionProperty\ncolumns\nproperties\nupdateValues\ngetSolutionNode\ngetSolutionProperyValue\nsetSolutionPropertyValue\nvisit" ];
+  "ff-fes" -> "fesjs/JSWorkBook" [ label = "importSolution\nvalidateImportedSolution\nfixProblemsInImportedSolution\ngetSolutionName\ngetRootSolutionProperty\ncolumns\nproperties\nupdateValues\ngetSolutionNode\ngetSolutionPropertyValue\nsetSolutionPropertyValue\nvisit" ];
   "ff-fes" -> "fesjs/TupleIndexConverter" [ label = "getIndexNumber" ];
   "ff-fes" -> "fesjs/fescontext" [ label = "" ];
 }

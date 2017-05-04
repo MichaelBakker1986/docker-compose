@@ -5,19 +5,15 @@
  *
  * TODO: all the visitors are about to do the same. Maybe if look more abstract they can be merged.
  */
-function visit(node, keyArg, func)
-{
-    for (var key in node)
-    {
-        if (node[key] != undefined && key !== '_parent' && key !== '_parentKey')
-        {
+function JSVisitor() {
+}
+function visit(node, keyArg, func) {
+    for (var key in node) {
+        if (node[key] != undefined && key !== '_parent' && key !== '_parentKey') {
             var child = node[key];
-            if (typeof child === 'object')
-            {
-                if (Array.isArray(child))
-                {
-                    for (var i = 0, len = child.length; i < len; i++)
-                    {
+            if (typeof child === 'object') {
+                if (Array.isArray(child)) {
+                    for (var i = 0, len = child.length; i < len; i++) {
                         var arrayChild = child[i];
                         arrayChild._parent = node;
                         arrayChild._parentKey = keyArg;
@@ -26,8 +22,7 @@ function visit(node, keyArg, func)
                         arrayChild._parent = undefined;
                     }
                 }
-                else
-                {
+                else {
                     child._parent = node;
                     child._parentKey = keyArg;
                     visit(child, key, func);
@@ -36,45 +31,30 @@ function visit(node, keyArg, func)
                     child._parent = undefined;
                 }
             }
-            else
-            {
-                if (func[key] != undefined)
-                {
+            else {
+                if (func[key] != undefined) {
                     func[key](node);
                 }
             }
         }
     }
-    if (func[keyArg] != undefined)
-    {
+    if (func[keyArg] != undefined) {
         var travel = func[keyArg](node);
-        if (travel)
-        {
-            return;
-        }
     }
 }
-function visitTopDown(node, keyArg, func)
-{
-    if (func[keyArg] != undefined)
-    {
+function visitTopDown(node, keyArg, func) {
+    if (func[keyArg] != undefined) {
         var travel = func[keyArg](node);
-        if (travel)
-        {
+        if (travel) {
             return;
         }
     }
-    for (var key in node)
-    {
-        if (node[key] != undefined && key !== '_parent' && key !== '_parentKey')
-        {
+    for (var key in node) {
+        if (node[key] != undefined && key !== '_parent' && key !== '_parentKey') {
             var child = node[key];
-            if (typeof child === 'object')
-            {
-                if (Array.isArray(child))
-                {
-                    for (var i = 0, len = child.length; i < len; i++)
-                    {
+            if (typeof child === 'object') {
+                if (Array.isArray(child)) {
+                    for (var i = 0, len = child.length; i < len; i++) {
                         var arrayChild = child[i];
                         arrayChild._parent = node;
                         arrayChild._parentKey = keyArg;
@@ -83,8 +63,7 @@ function visitTopDown(node, keyArg, func)
                         arrayChild._parent = undefined;
                     }
                 }
-                else
-                {
+                else {
                     child._parent = node;
                     child.parentKey = keyArg;
                     visitTopDown(child, key, func);
@@ -93,107 +72,83 @@ function visitTopDown(node, keyArg, func)
                     child._parent = undefined;
                 }
             }
-            else
-            {
-                if (func[key] != undefined)
-                {
+            else {
+                if (func[key] != undefined) {
                     func[key](node);
                 }
             }
         }
     }
 }
-function travel(node, keyArg, func)
-{
+function travel(node, keyArg, func) {
     var traveller = func(keyArg, node);
-    if (traveller)
-    {
+    if (traveller) {
         return;
     }
-    for (var key in node)
-    {
-        if (node[key] != undefined)
-        {
+    for (var key in node) {
+        if (node[key] != undefined) {
             var child = node[key];
-            if (typeof child === 'object')
-            {
-                if (Array.isArray(child))
-                {
+            if (typeof child === 'object') {
+                if (Array.isArray(child)) {
                     var traveller = func(key, child);
-                    if (traveller)
-                    {
+                    if (traveller) {
                         return;
                     }
-                    for (var i = 0, len = child.length; i < len; i++)
-                    {
+                    for (var i = 0, len = child.length; i < len; i++) {
                         var arrayChild = child[i];
                         travel(arrayChild, key, func);
                     }
                 }
-                else
-                {
+                else {
                     travel(child, key, func);
                 }
             }
-            else
-            {
+            else {
                 func(key, node)
             }
         }
     }
 }
-function travelOne(node, keyArg, func)
-{
-    for (var key in node)
-    {
-        if (node[key] != undefined && key !== '_parent' && key !== '_parentKey')
-        {
+function travelOne(node, keyArg, func, depth) {
+    func(keyArg, node, depth);
+    for (var key in node) {
+        if (node[key] != undefined && key !== '_parent' && key !== '_parentKey') {
             var child = node[key];
-            if (typeof child === 'object')
-            {
-                if (Array.isArray(child))
-                {
-                    for (var i = 0, len = child.length; i < len; i++)
-                    {
+            if (typeof child === 'object') {
+                if (Array.isArray(child)) {
+                    for (var i = 0, len = child.length; i < len; i++) {
                         var arrayChild = child[i];
                         arrayChild._parent = node;
                         arrayChild._parentKey = keyArg;
-                        travelOne(arrayChild, key, func);
+                        travelOne(arrayChild, key, func, depth + 1);
                         arrayChild._parentKey = undefined;
                         arrayChild._parent = undefined;
                     }
                 }
-                else
-                {
+                else {
                     child._parent = node;
                     child._parentKey = keyArg;
-                    travelOne(child, key, func);
+                    travelOne(child, key, func, depth + 1);
                     child._parentKey = undefined;
-                     child._parent = undefined;
+                    child._parent = undefined;
                 }
             }
         }
     }
-    func(keyArg, node);
+
 }
-function find(node, property, name)
-{
+function find(node, property, name) {
     return findPredicate(node, StringPredicate(property, name))
 }
-function StringPredicate(property, name)
-{
-    return function (node)
-    {
+function StringPredicate(property, name) {
+    return function (node) {
         return (node[property] === name);
     };
 }
-function findPredicate(node, predicate)
-{
+function findPredicate(node, predicate) {
     var current = node;
-    while (current)
-    {
-        if (predicate(current))
-        {
+    while (current) {
+        if (predicate(current)) {
             return current._parent;
         }
         current = current._parent;

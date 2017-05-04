@@ -127,8 +127,9 @@ simplified.InputRequired = function (formulaInfo, node) {
 }
 simplified.TSUM = function (formulaInfo, node) {
     //all calls into a tuple should return a []
-    //convert TSUM(variableName) into TSUM(TVALUES(a123,'123',x,y,z,v))
-    buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], '');
+    //convert TSUM(variableName) into SUM(TVALUES(a123,'123',x,y,z,v))
+    node.callee.name = 'SUM'
+    buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], '', true);
 }
 var escodegenOptions = {
     format: {
@@ -151,14 +152,15 @@ var xArgument = {
 
 /**
  * Two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
+ * There is no information which property is calling and cannot be resolved, since multiple sources can share a formula
  */
-function buildFunc(formulaInfo, node, property, referenceProperty, xapendix) {
+function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tuple) {
     xapendix = xapendix || '';
     var referenceProperty = addFormulaDependency(formulaInfo, referenceProperty.name, propertiesArr[property]);
 
     delete referenceProperty.refn;
     var referenceFormulaId = referenceProperty.ref;
-    if (referenceProperty.tuple) {
+    if (tuple) {
         if (referenceProperty.ref) {
             node.name = 'TVALUES(a' + referenceFormulaId + ",'" + referenceFormulaId + "',x" + xapendix + ",y,z,v)"
         } else {
