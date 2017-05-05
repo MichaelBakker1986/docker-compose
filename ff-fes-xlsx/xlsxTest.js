@@ -1,4 +1,4 @@
-global.loglevel = 'debug'
+global.loglevel = 'trace'
 var WorkBook = require('../ff-fes/fesjs/JSWorkBook')
 var FESContext = require('../ff-fes/fesjs/fescontext')
 var log = require('ff-log')

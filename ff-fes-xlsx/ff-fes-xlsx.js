@@ -7,7 +7,7 @@ var log = require('ff-log');
 var Promise = require('promise')
 var matrix = {};
 var workbook = new Excel.Workbook();
-var fileName = __dirname + '\\resources\\ScorecardKSP1.xlsx';
+var fileName = __dirname + '\\resources\\SCorecardKSP1.xlsx';
 var succes;
 var initComplete = new Promise(function (succesArg) {
     succes = succesArg;
@@ -47,7 +47,7 @@ function printValues(range) {
             for (var columnId = 0; columnId < obj1.length; columnId++) {
                 var namedRangeAdressCell = obj1[columnId];
                 if (namedRangeAdressCell !== undefined) {
-                    var value = range.sheet.getCell(namedRangeAdressCell.address).value;
+                    var value = getCellValueFromRangeCell(range, namedRangeAdressCell);
                     if (value !== null && value !== undefined) {
                         log.trace('[%s]:[%s]', columnId, namedRangeAdressCell);
                         matrix[range.name].table[namedRangeAdressCell.row + '_' + namedRangeAdressCell.col] = value
@@ -58,14 +58,77 @@ function printValues(range) {
         }
     }
 }
+
+/**
+ * Resultaat na parsen van excel.
+ * rangenaam: {
+ *   var1: {
+ *      0 : value
+ *      1 : value
+ *   }
+ *   var2:{
+ *      0 : value
+ *      1 : value
+ *   }
+ * }
+ */
+function findStart(range) {
+    var yAs = -1;
+    var xAs = -1;
+    for (var y = 0; y < range.ranges.length; y++) {
+        if (range.ranges[y]) {
+            yAs = y;
+            for (var x = 0; x < range.ranges[y].length; x++) {
+                if (range.ranges[y][x]) {
+                    xAs = x;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+    return {
+        xStart: xAs,
+        yStart: yAs
+    }
+}
+function getCellValueFromRangeCell(range, rangeCell) {
+    return range.sheet.getCell(rangeCell.address).value;
+}
+function findYasNames(range, bounds) {
+    var yAsNames = {};
+    for (var y = bounds.yStart; y < range.ranges.length; y++) {
+        yAsNames[getCellValueFromRangeCell(range, range.ranges[y][bounds.xStart])] = range.ranges[y][bounds.xStart];
+    }
+    return yAsNames
+}
+function findXasValues(range, yasNames, bounds) {
+    var xAsValues = {};
+    for (var y = bounds.yStart; y < range.ranges.length; y++) {
+        var currentXAs = {};
+        xAsValues[getCellValueFromRangeCell(range, range.ranges[y][bounds.xStart])] = currentXAs
+        for (var x = bounds.xStart; x < range.ranges[y].length; x++) {
+            currentXAs[x - bounds.xStart] = true;
+        }
+    }
+    return xAsValues;
+}
 workbook.xlsx.readFile(fileName)
     .then(function (wb) {
         var definedNames = getDefinedNames(wb);
         for (definedName in definedNames) {
-            matrix[definedName] = {
-                table: {}
-            };
             var range = definedNames[definedName];
+            var bounds = findStart(range);
+            var yasNames = findYasNames(range, bounds);
+            var xasValues = findXasValues(range, yasNames, bounds);
+            matrix[definedName] = {
+                name: range.name,
+                table: {},
+                bounds: bounds,
+                yasNames: yasNames,
+                xasValues: xasValues
+            };
+            log.debug(matrix[definedName])
             log.debug('found named range:[%s]', range.name)
             printValues(range)
         }

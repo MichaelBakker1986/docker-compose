@@ -225,7 +225,8 @@ function addnode(log, solution, rowId, node, parentId, tupleDefinition, tuplePro
     solution.addDisplayType(mappedDisplayType);
 
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', node.formula ? parseFFLFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
-
+    uiNode.displayAs = mappedDisplayType;
+    uiNode.frequency = node.frequency;
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
 
@@ -237,6 +238,7 @@ function addnode(log, solution, rowId, node, parentId, tupleDefinition, tuplePro
     else if (tupleProperty) {
         logger.debug('Found tupleProperty [%s]', rowId)
         uiNode.tupleProperty = true;
+        uiNode.tuple = true;
     }
     for (var key in formulaMapping) {
         if (node[key] !== undefined) {

@@ -40,11 +40,12 @@ FESApi.prototype.addFunctions = function (plugin) {
  * @Optional value - new value
  */
 FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, tupleindex) {
-
+    columncontext = columncontext || 0
     // Convert tuple index to tuple number
     if (tupleindex !== undefined) {
         tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
     }
+    //resolve max tuple count from entered values.
     var maxTupleCount = 0;
     for (var key in context.values) {
         var obj = context.values[key];
@@ -53,14 +54,13 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
     var fesContext = new FESContext();
     fesContext.values = context.values;
     var JSWorkBook = new WorkBook(fesContext)
-    // Workbook property for 'TupleIndex'
     JSWorkBook.columns = context.columns || 17;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
     //prepare the workbook and context to match current appscope
     JSWorkBook.updateValues()
+    //setvalue
     if (value !== undefined) {
         //choice(select) requests
-        //possible ?quick-fix? to change choice values into number value
         var variable = JSWorkBook.getSolutionNode(rowId, 'value');
         if (variable && variable.displayAs === 'select') {
             var choices = JSWorkBook.getSolutionPropertyValue(rowId, 'choices');
@@ -74,11 +74,21 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
         JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, tupleindex)
         return getEntry(JSWorkBook, rowId, columncontext, tupleindex, maxTupleCount)
     } else {
+        //getValue
         var values = [];
         var rootNode = JSWorkBook.getSolutionNode(rowId);
         if (rootNode) {
             JSWorkBook.visit(rootNode, function (node) {
+                /* if (node.tupleDefinition) {
+                 JSWorkBook.visit(node, function (tupleChildNode) {
+                 log.info('tupledef.')
+                 values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, 0, maxTupleCount))
+                 values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, 1, maxTupleCount))
+                 });
+                 } else {
+                 */
                 values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, tupleindex, maxTupleCount))
+                /*}*/
             });
         } else {
             values.push({
@@ -97,18 +107,16 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
  */
 function getEntry(workbook, rowId, columncontext, tupleindex, maxTupleCount) {
     var outputData = [];
-    var columnStart = 0;
+    var columnStart = columncontext;
     var columnEnd = workbook.columns;
     var variable = workbook.getSolutionNode(rowId, 'value');
 
-    //quick-fix for document variables;
-    //TODO: all warnings for calls with document frequencies and columncontext>0 is useless
-    if (variable && variable.delegate && variable.delegate.frequency === 'document') {
-        columnEnd = 0;
+    if (variable && variable.frequency === 'document') {
+        columnEnd = columnStart;
     }
     var tupleStart = 0;
     var tupleEnd = 0;
-    if (variable.tupleDefinition) {
+    if (variable.tuple) {
         tupleEnd = maxTupleCount;
         log.info('requested tupledefinition iterate [%s]times ', maxTupleCount)
     }
@@ -116,15 +124,18 @@ function getEntry(workbook, rowId, columncontext, tupleindex, maxTupleCount) {
         outputData[yAxisCounter] = [];
         var tupleData = outputData[yAxisCounter];
         for (var xAxisCounter = columnStart; xAxisCounter <= columnEnd; xAxisCounter++) {
-            tupleData[xAxisCounter] = {};
+            var tupleDataEnty = {};
+            tupleData.push(tupleDataEnty);//) [xAxisCounter] = {};
+
             for (var type in workbook.properties) {
-                tupleData[xAxisCounter][type] = workbook.getSolutionPropertyValue(rowId, type, xAxisCounter, yAxisCounter);
-                if (columnStart !== columnEnd) {
-                    tupleData[xAxisCounter].column = xAxisCounter;
+                tupleDataEnty[type] = workbook.getSolutionPropertyValue(rowId, type, xAxisCounter, yAxisCounter);
+
+                if (columnStart !== columnEnd || columnStart > 0) {
+                    tupleDataEnty.column = xAxisCounter;
                 }
-                tupleData[xAxisCounter].variable = variable.rowId;
-                if (tupleStart !== tupleEnd) {
-                    tupleData[xAxisCounter].tupleIndex = yAxisCounter;
+                tupleDataEnty.variable = variable.rowId;
+                if (tupleStart !== tupleEnd || tupleStart > 0) {
+                    tupleDataEnty.tupleIndex = yAxisCounter;
                 }
             }
         }
