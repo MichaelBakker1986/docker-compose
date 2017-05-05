@@ -42,7 +42,10 @@ FFLParser.prototype.parseData = function (data, workbook) {
     //Create a Solution that will contain these formulas
     var solution = SolutionFacade.createSolution(solutionName);
     //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
-    var tupleDefDepth = 999;//infinit max depth
+    var tupleInfo = {
+        tupleDefDepth: 999,//infinit max depth
+        tupleDefinition: undefined
+    }
     JSVisitor.travelOne(json, null, function (keyArg, node, depth) {
         if (keyArg === null) {
         }
@@ -55,12 +58,14 @@ FFLParser.prototype.parseData = function (data, workbook) {
                 var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
                 var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
 
-                addnode(log, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && depth > tupleDefDepth);
+                addnode(log, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && depth > tupleInfo.tupleDefDepth, tupleInfo.tupleDefinition);
                 if (tupleDefiniton) {
-                    tupleDefDepth = depth;
+                    tupleInfo.tupleDefinition = solution.getName() + '_' + nodeName;
+                    tupleInfo.tupleDefDepth = depth;
                 }
-                else if (depth <= tupleDefDepth) {
-                    tupleDefDepth = 999;
+                else if (depth <= tupleInfo.tupleDefDepth) {
+                    tupleInfo.tupleDefDepth = 999;
+                    tupleInfo.tupleDefinition = undefined;
                 }
             }
         }
@@ -213,7 +218,7 @@ var defaultValue = {
 
 //this is where it is all about, the variable with his properties
 //we should make it more Generic so i can use it for fin language parser
-function addnode(log, solution, rowId, node, parentId, tupleDefinition, tupleProperty) {
+function addnode(log, solution, rowId, node, parentId, tupleDefinition, tupleProperty, tupleDefinitionName) {
     log.variables.push(rowId);
     if (rowId === undefined || rowId.trim() === '') {
         logger.info('NULL rowId')
@@ -230,15 +235,18 @@ function addnode(log, solution, rowId, node, parentId, tupleDefinition, tuplePro
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
 
+
     if (tupleDefinition) {
         logger.debug('Found tupleDefinition [%s]', rowId)
         uiNode.tuple = true;
         uiNode.tupleDefinition = true;
+        uiNode.tupleDefinitionName = tupleDefinitionName;
     }
     else if (tupleProperty) {
         logger.debug('Found tupleProperty [%s]', rowId)
         uiNode.tupleProperty = true;
         uiNode.tuple = true;
+        uiNode.tupleDefinitionName = tupleDefinitionName;
     }
     for (var key in formulaMapping) {
         if (node[key] !== undefined) {

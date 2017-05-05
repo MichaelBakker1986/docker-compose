@@ -34,7 +34,19 @@ FESApi.prototype.addFunctions = function (plugin) {
     }
     log.info('Added fes-plugin [%s] functions [%s]', plugin.name, functions)
 }
-
+function maxTupleCountForRow(wb, node) {
+    if (!node.tuple) {
+        return 0;
+    }
+    var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.tupleDefinitionName)
+    var maxTupleCount = 0;
+    wb.visit(tupleDefinition, function (child) {
+        if (child.tuple) {
+            maxTupleCount = Math.max(maxTupleCount, TINSTANCECOUNT(wb.context.values, child.ref));
+        }
+    });
+    return maxTupleCount;
+}
 /**
  * rowId - VariableName
  * @Optional value - new value
@@ -79,6 +91,12 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
         var rootNode = JSWorkBook.getSolutionNode(rowId);
         if (rootNode) {
             JSWorkBook.visit(rootNode, function (node) {
+                //require maxTupleCount from tupleDefinition
+
+                var maxTupleCounter = maxTupleCountForRow(JSWorkBook, node);
+                //if (node.tuple) {
+                log.info('maxTupleCount[%s][%s]', node.rowId, maxTupleCounter);
+                // }
                 /* if (node.tupleDefinition) {
                  JSWorkBook.visit(node, function (tupleChildNode) {
                  log.info('tupledef.')
@@ -87,7 +105,7 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
                  });
                  } else {
                  */
-                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, tupleindex, maxTupleCount))
+                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, tupleindex, maxTupleCounter))
                 /*}*/
             });
         } else {
@@ -125,7 +143,7 @@ function getEntry(workbook, rowId, columncontext, tupleindex, maxTupleCount) {
         var tupleData = outputData[yAxisCounter];
         for (var xAxisCounter = columnStart; xAxisCounter <= columnEnd; xAxisCounter++) {
             var tupleDataEnty = {};
-            tupleData.push(tupleDataEnty);//) [xAxisCounter] = {};
+            tupleData.push(tupleDataEnty);
 
             for (var type in workbook.properties) {
                 tupleDataEnty[type] = workbook.getSolutionPropertyValue(rowId, type, xAxisCounter, yAxisCounter);

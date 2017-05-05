@@ -561,7 +561,7 @@ model KSP uses BaseModel
                 choices: "0:Boy|1:Girl";
                 options_title: locked;
             }
-            tuple NrOfDaysChildcareWeek
+            variable NrOfDaysChildcareWeek
             {
                 datatype: number;
                 formula: NA;
@@ -658,8 +658,7 @@ model KSP uses BaseModel
                   choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
                   options_title: locked;
               }
-
-              tuple TotalyYearlyCostsChild
+              variable TotalyYearlyCostsChild
               {
                 datatype: number;
                 frequency: column;
