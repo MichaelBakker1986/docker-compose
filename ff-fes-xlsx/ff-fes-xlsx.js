@@ -108,7 +108,8 @@ function findXasValues(range, yasNames, bounds) {
         var currentXAs = {};
         xAsValues[getCellValueFromRangeCell(range, range.ranges[y][bounds.xStart])] = currentXAs
         for (var x = bounds.xStart; x < range.ranges[y].length; x++) {
-            currentXAs[x - bounds.xStart] = true;
+            var cellAdress = range.ranges[y][x];
+            currentXAs[x - bounds.xStart] = getCellValueFromRangeCell(range, cellAdress);
         }
     }
     return xAsValues;
@@ -130,7 +131,7 @@ workbook.xlsx.readFile(fileName)
             };
             log.debug(matrix[definedName])
             log.debug('found named range:[%s]', range.name)
-            printValues(range)
+            //printValues(range)
         }
         // use workbook
         succes(matrix);
