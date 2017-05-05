@@ -149,6 +149,9 @@ var entries = {
         }
 
         //write logic to find the table in sheet etc...
+        if (matrix[tableName] && matrix[tableName].xasValues && matrix[tableName].xasValues[row] && matrix[tableName].xasValues[row][col]) {
+            return matrix[tableName].xasValues[row][col];
+        }
         return NA;
     }
 };

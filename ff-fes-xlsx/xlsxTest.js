@@ -9,7 +9,7 @@ fesjsApi.addFunctions(excelPlugin);
 excelPlugin.initComplete.then(function () {
     log.info('excel done')
     var wb = new WorkBook(new FESContext());
-    wb.createFormula("MatrixLookup('','ABC',6,7)", 'MatrixLookupTest')
+    wb.createFormula("MatrixLookup('','LeeftijdGeslachtGebondenKosten','Diapers',1)", 'MatrixLookupTest')
     log.info(wb.get('MatrixLookupTest'))
 })
 
