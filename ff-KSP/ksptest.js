@@ -220,7 +220,7 @@ excelPlugin.initComplete.then(function () {
         }
     }
 
-    testVariable('TotalYearlyBalance', 1);
+    testVariable('TotalYearlyCosts', 1);
     log.info('done')
     //require('./totalyearlycosttest')
     //test core functionality

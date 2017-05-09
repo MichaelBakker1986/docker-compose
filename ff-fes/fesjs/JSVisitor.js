@@ -109,8 +109,14 @@ function travel(node, keyArg, func) {
         }
     }
 }
-function travelOne(node, keyArg, func, depth) {
-    func(keyArg, node, depth);
+function context() {
+}
+function travelOne(node, keyArg, func, contextArg) {
+    contextArg = contextArg || {};
+    var newContext = new context();
+    newContext.__proto__ = contextArg;
+    func(keyArg, node, newContext);
+
     for (var key in node) {
         if (node[key] != undefined && key !== '_parent' && key !== '_parentKey') {
             var child = node[key];
@@ -120,7 +126,7 @@ function travelOne(node, keyArg, func, depth) {
                         var arrayChild = child[i];
                         arrayChild._parent = node;
                         arrayChild._parentKey = keyArg;
-                        travelOne(arrayChild, key, func, depth + 1);
+                        travelOne(arrayChild, key, func, newContext);
                         arrayChild._parentKey = undefined;
                         arrayChild._parent = undefined;
                     }
@@ -128,7 +134,7 @@ function travelOne(node, keyArg, func, depth) {
                 else {
                     child._parent = node;
                     child._parentKey = keyArg;
-                    travelOne(child, key, func, depth + 1);
+                    travelOne(child, key, func, newContext);
                     child._parentKey = undefined;
                     child._parent = undefined;
                 }

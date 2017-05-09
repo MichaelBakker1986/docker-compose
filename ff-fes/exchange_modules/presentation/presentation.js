@@ -70,7 +70,7 @@ Tree.prototype.update = function (node, properties) {
     //so we know what number it is in the tree, we will never show more than 200 rows in a page.
     var count = 0;
     fetch.parentrowId = node._parent === undefined ? undefined : node._parent.rowId;
-    wb.visit(fetch, function (subNode, depth, parent) {
+    wb.visitProperties(fetch, function (subNode, yas) {
         actualNodes[subNode.rowId] = subNode;
         var uiTreeNode = uiTreeNodes[subNode.rowId];
         if (uiTreeNode === undefined) {
@@ -86,7 +86,7 @@ Tree.prototype.update = function (node, properties) {
         uiTreeNode.count = count++;
         uiTreeNode.tuple = subNode.tuple;
         uiTreeNode._seen = true;
-        uiTreeNode.depth = depth;
+        //uiTreeNode.depth = depth;
         uiTreeNode._actualParent = subNode.parentrowId;
     });
 //remainder/total / parent.childSize
@@ -187,7 +187,7 @@ var presentationConverter = {
         if (rootNode !== undefined) {
             var tree = new Tree(rootNode.rowId);
             tree.workbook = workbook;
-            workbook.visit(rootNode, function (node) {
+            workbook.visitProperties(rootNode, function (node) {
                 //skip the rootnode, we just used it
                 if (node.rowId !== rootNode.rowId) {
                     //can only make nodes via a Tree.

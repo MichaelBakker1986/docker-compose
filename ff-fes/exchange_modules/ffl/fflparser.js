@@ -4,7 +4,7 @@ var AST = require('ast-node-utils').ast;
 var FflToJsonConverter = require('./FflToJsonConverter');
 var FinFormula = require('./FinFormula.js');
 var esprima = require('esprima');
-var logger = require('ff-log');
+var log = require('ff-log');
 //DisplayAs require a Date object, need to add Converter for DisplayTypes.
 //@formatter:off
 /*variable FES_LAYOUTNR
@@ -33,7 +33,7 @@ FFLParser.prototype.name = 'ffl'
 FFLParser.prototype.status = 'green';
 FFLParser.prototype.headername = '.finance ffl';
 FFLParser.prototype.parseData = function (data, workbook) {
-    var log = {variables: []};
+    var logVars = {variables: []};
     //convert FFL into JSON (Generic)
     var json = FflToJsonConverter.parseFFL(data);
     //lookup  modelName, we need this in the process;
@@ -42,40 +42,33 @@ FFLParser.prototype.parseData = function (data, workbook) {
     //Create a Solution that will contain these formulas
     var solution = SolutionFacade.createSolution(solutionName);
     //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
-    var tupleInfo = {
-        tupleDefDepth: 999,//infinit max depth
-        tupleDefinition: undefined
-    }
-    JSVisitor.travelOne(json, null, function (keyArg, node, depth) {
+    JSVisitor.travelOne(json, null, function (keyArg, node, context) {
         if (keyArg === null) {
         }
         else {
             var tupleDefiniton = keyArg.startsWith('tuple ');
             if ((keyArg.startsWith('variable ') || tupleDefiniton)) {
-
                 var refersto = node.refer;
                 var nodeName = stripVariableOrtuple(keyArg, node);
                 var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
                 var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
-
-                addnode(log, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && depth > tupleInfo.tupleDefDepth, tupleInfo.tupleDefinition);
                 if (tupleDefiniton) {
-                    tupleInfo.tupleDefinition = solution.getName() + '_' + nodeName;
-                    tupleInfo.tupleDefDepth = depth;
+                    context.nestTupleDepth++;
                 }
-                else if (depth <= tupleInfo.tupleDefDepth) {
-                    tupleInfo.tupleDefDepth = 999;
-                    tupleInfo.tupleDefinition = undefined;
+                log.debug('tuple def for [%s].[%s] is [%s]', nodeName, context.nestTupleDepth, context.tupleDefinition);
+                addnode(logVars, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && context.tupleDefinition, context.tupleDefinition, context.nestTupleDepth);
+                if (tupleDefiniton) {
+                    context.tupleDefinition = solution.getName() + '_' + nodeName;
                 }
             }
         }
-    }, 0);
-    logger.debug('Add variables [' + log.variables + ']')
+    }, {nestTupleDepth: 0});
+    log.debug('Add variables [' + logVars.variables + ']')
     return solution;
 }
 FFLParser.prototype.deParse = function (rowId, workbook) {
     var fflSolution = SolutionFacade.createSolution(workbook.getSolutionName());
-    workbook.visit(workbook.getNode(rowId), function (elem) {
+    workbook.visitProperties(workbook.getNode(rowId), function (elem) {
         //JSON output doesn't gurantee properties to be in the same order as inserted
         //so little bit tricky here, wrap the node in another node
         //add to its wrapper a child type []
@@ -94,7 +87,7 @@ FFLParser.prototype.deParse = function (rowId, workbook) {
                 finFormula = FinFormula.javaScriptToFinGeneric(formula);
             }
             if (finFormula != 'undefined') {
-                logger.debug('[' + finFormula + ']');
+                log.debug('[' + finFormula + ']');
                 realObject[reversedFormulaMapping[key]] = finFormula;
             }
             if (reversedFormulaMapping[key] === 'locked') {
@@ -218,10 +211,10 @@ var defaultValue = {
 
 //this is where it is all about, the variable with his properties
 //we should make it more Generic so i can use it for fin language parser
-function addnode(log, solution, rowId, node, parentId, tupleDefinition, tupleProperty, tupleDefinitionName) {
-    log.variables.push(rowId);
+function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupleProperty, tupleDefinitionName, nestedTupleDepth) {
+    logVars.variables.push(rowId);
     if (rowId === undefined || rowId.trim() === '') {
-        logger.info('NULL rowId')
+        log.info('NULL rowId')
         return;
     }
 
@@ -235,25 +228,26 @@ function addnode(log, solution, rowId, node, parentId, tupleDefinition, tuplePro
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
 
-
-    if (tupleDefinition) {
-        logger.debug('Found tupleDefinition [%s]', rowId)
+    //nestedTupleDepth might be enough
+    if (tupleDefinition || tupleProperty) {
         uiNode.tuple = true;
-        uiNode.tupleDefinition = true;
+        uiNode.nestedTupleDepth = nestedTupleDepth;
         uiNode.tupleDefinitionName = tupleDefinitionName;
     }
+    if (tupleDefinition) {
+        log.debug('Found tupleDefinition [%s]', rowId)
+        uiNode.tupleDefinition = true;
+    }
     else if (tupleProperty) {
-        logger.debug('Found tupleProperty [%s]', rowId)
+        log.debug('Found tupleProperty [%s]', rowId)
         uiNode.tupleProperty = true;
-        uiNode.tuple = true;
-        uiNode.tupleDefinitionName = tupleDefinitionName;
     }
     for (var key in formulaMapping) {
         if (node[key] !== undefined) {
             //use the ASTCache for this later on
             //this could cause problems when internal formula's are requesting its value
             if (defaultValue[key] && defaultValue[key][node[key]]) {
-                logger.debug('Default [' + key + '] formula, skipping. [' + node[key] + '][' + rowId + ']');
+                log.debug('Default [' + key + '] formula, skipping. [' + node[key] + '][' + rowId + ']');
                 continue;
             }
             SolutionFacade.createUIFormulaLink(solution, rowId, formulaMapping[key], parseFFLFormula(node[key]));
@@ -268,7 +262,7 @@ function parseFFLFormula(formula) {
         }
     }
     catch (e) {
-        logger.error('unable to parse [' + formula + '] returning it as String value', e);
+        log.error('unable to parse [' + formula + '] returning it as String value', e);
         formulaReturn = AST.STRING(formula);
     }
     return formulaReturn;

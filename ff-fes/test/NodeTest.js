@@ -27,7 +27,7 @@ wb.importSolution(data, 'ffl');
 var presentation = wb.export('presentation');
 var uitree = presentation.tree;
 uitree.update(updateAll);
-info(uitree)
+//info(uitree)
 
 var root = new Node('root')
 

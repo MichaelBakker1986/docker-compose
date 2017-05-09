@@ -29,16 +29,38 @@ TVALUES = function (func, fId, x, y, z, v) {
     return returnValue;
 }
 //return tuplecount, get max tuple index,
+//TODO: build tuple/yaxis object while parsing entered values (updateValues())
 TINSTANCECOUNT = function (v, fId) {
     var keys = Object.keys(v[fId]);
     if (keys.length == 0) {
         return 0;
     }
-    var max = keys.reduce(function (a, b) {
+    if (keys.length == 1) {
+        return Math.max((2064384 & parseInt(keys[0])) >> 15);
+    }
+    var max = keys.reduce(function (a1, b1) {
         //filter bits 16-24 find highest tuple count.
-        return Math.max((2064384 & parseInt(a)) >> 15, (2064384 & parseInt(b)) >> 15);
+        //mask should be provided
+        //look for all values and obtain tuple instnace value
+        var number = Math.max((2064384 & parseInt(a1)) >> 15, (2064384 & parseInt(b1)) >> 15);
+        return number;
     });
     return max;
 }
+/*
+Does only look for document values
+* so only look for mask where first 15bits are 0
+* Get all 0*values for example used for tupleInstanceIdentiefiers
+ */
+TINSTANCEBYNAME = function (v, fId, y, name) {
+    var count = TINSTANCECOUNT(v, fId);
+    for (var i = 0; i < count; i++) {
+        var obj = v[fId][y];
 
+    }
+}
+//timelines we need aprox 8 4 bit
+//columns we need aprox 512 10bit
+//17bit for tuples, 8*8*8*8 (16bit)
+//when entering tuple in tuple y.children should be called.
 module.exports = all;

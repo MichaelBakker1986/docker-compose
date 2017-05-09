@@ -144,14 +144,15 @@ PropertiesAssembler.prototype.fetch = function fetch(name) {
  * Visitor walk the tree
  * if node is null we use root node
  * function is not thread safe, add parent and depth to function call instead of altering PropertyNode
+ * As expected, problems while recursive calling this method.
  */
 PropertiesAssembler.prototype.visitProperty = function (node, func) {
     var startingNode = node || getRootNode('NEW');
     if (startingNode !== undefined) {
-        startingNode._depth = 0;
+        //startingNode._depth = 0;
         visitInternal(startingNode, func, 0, undefined)
-        startingNode._depth = undefined;
-        startingNode.parentrowId = undefined;
+        //startingNode._depth = undefined;
+        //startingNode.parentrowId = undefined;
     }
 }
 function visitInternal(node, func, depth) {
@@ -160,12 +161,12 @@ function visitInternal(node, func, depth) {
         for (var i = 0; i < node.nodes.length; i++) {
             var childNode = PropertiesModel[node.nodes[i].name];
             childNode.parentrowId = node.rowId;
-            childNode._index = i;
-            childNode._depth = depth;
+            //childNode._index = i;
+            //childNode._depth = depth;
             visitInternal(childNode, func, depth + 1);
-            childNode.parentrowId = undefined;
-            childNode._index = undefined;
-            childNode._depth = undefined;
+            //childNode.parentrowId = undefined;
+            //childNode._index = undefined;
+            //childNode._depth = undefined;
         }
     }
 }

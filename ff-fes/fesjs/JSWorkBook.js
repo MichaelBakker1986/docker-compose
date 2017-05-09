@@ -168,15 +168,13 @@ function resolveX(wb, x) {
     return x ? wb.xaxis[x] : wb.xaxis[0];
 }
 function resolveY(wb, y) {
-    return wb.yaxis[y || 0];
+    var yAxis = y || 0;
+    return isNaN(yAxis) ? yAxis : wb.yaxis[yAxis];
 }
 JSWorkBook.prototype.get = function (row, col, x, y) {
     return this.getSolutionPropertyValue(this.getSolutionName() + '_' + row, col, x, y);
 };
 JSWorkBook.prototype.getSolutionPropertyValue = function (row, col, x, y) {
-
-    // TODO Als y niet '0' of leeg is: Ben jij wel lid van een tuple?
-
     var xas = resolveX(this, x);
     var yas = resolveY(this, y)
     return FESFacade.fetchSolutionPropertyValue(this.context, row, col, xas, yas)
@@ -186,9 +184,6 @@ JSWorkBook.prototype.set = function (row, value, col, x, y) {
     return this.setSolutionPropertyValue(this.getSolutionName() + '_' + row, value, col, x, y);
 }
 JSWorkBook.prototype.setSolutionPropertyValue = function (row, value, col, x, y) {
-
-    // TODO Als y niet '0' of leeg is: Ben jij wel lid van een tuple?
-
     var xas = resolveX(this, x);
     var yas = resolveY(this, y);
     return FESFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas);
@@ -201,7 +196,49 @@ JSWorkBook.prototype.fixProblemsInImportedSolution = fixAll
 JSWorkBook.prototype.getRootSolutionProperty = function () {
     return FESFacade.fetchRootSolutionProperty(this.getSolutionName());
 };
-JSWorkBook.prototype.visit = FESFacade.visit;
+function maxTupleCountForRow(wb, node) {
+    if (!node.tuple) {
+        return 0;
+    }
+    var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.tupleDefinitionName)
+    var maxTupleCount = 0;
+    FESFacade.visit(tupleDefinition, function (child) {
+        if (child.tuple) {
+            maxTupleCount = Math.max(maxTupleCount, TINSTANCECOUNT(wb.context.values, child.ref));
+        }
+    });
+    return maxTupleCount;
+}
+JSWorkBook.prototype.tupleIndexForName = function (node, name) {
+    var wb = this;
+    //if not tuple, index always 0
+    if (!node.tuple) {
+        return 0;
+    }
+    var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.tupleDefinitionName)
+    FESFacade.visit(tupleDefinition, function (child) {
+        if (child.tuple) {
+            maxTupleCount = Math.max(maxTupleCount, TINSTANCECOUNT(wb.context.values, child.ref));
+        }
+    });
+    return maxTupleCount;
+}
+/**
+ * Add tuple- iterations while iterating properties
+ */
+JSWorkBook.prototype.visitProperties = function (startProperty, visitor, y) {
+    var yax = resolveY(this, y)
+    var wb = this;
+    FESFacade.visit(startProperty, function (node) {
+        //find out how many of nodes there are in current yas
+        //given y
+        //for max tuplecount in current node loop visitor node
+        var maxTupleCountForTupleDefinition = maxTupleCountForRow(wb, node);
+        for (var tupleCounter = 0; tupleCounter <= maxTupleCountForTupleDefinition; tupleCounter++) {
+            visitor(node, resolveY(wb, tupleCounter))
+        }
+    });
+}
 JSWorkBook.prototype.validateImportedSolution = validateImportedSolution;
 JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId, tuple) {
     SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value');

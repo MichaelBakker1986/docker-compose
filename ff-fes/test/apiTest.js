@@ -45,6 +45,6 @@ var timeTestValuesa = fesjsApi.fesGetValue({
         value: true
     },
     values: wb.context.values
-}, 'APITEST_TimeTest', 0, 1000);
+}, 'APITEST_TimeTest', 0, 1000)[0];
 assert(timeTestValuesa[3].value === 1100)
 assert(timeTestValuesa[0].value === 1000)
