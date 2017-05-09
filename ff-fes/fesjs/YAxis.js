@@ -34,8 +34,12 @@ TINSTANCECOUNT = function (v, fId) {
     if (keys.length == 0) {
         return 0;
     }
+
     var max = keys.reduce(function (a, b) {
         //filter bits 16-24 find highest tuple count.
+        if (keys.length == 1) {
+            return Math.max((2064384 & parseInt(keys[0])) >> 15);
+        }
         return Math.max((2064384 & parseInt(a)) >> 15, (2064384 & parseInt(b)) >> 15);
     });
     return max;

@@ -129,8 +129,8 @@ workbook.xlsx.readFile(fileName)
                 yasNames: yasNames,
                 xasValues: xasValues
             };
-            log.debug(matrix[definedName])
-            log.debug('found named range:[%s]', range.name)
+            //log.debug(matrix[definedName])
+            //log.debug('found named range:[%s]', range.name)
             //printValues(range)
         }
         // use workbook
