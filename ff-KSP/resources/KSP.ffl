@@ -561,7 +561,7 @@ model KSP uses BaseModel
                 choices: "0:Boy|1:Girl";
                 options_title: locked;
             }
-            tuple NrOfDaysChildcareWeek
+            variable NrOfDaysChildcareWeek
             {
                 datatype: number;
                 formula: NA;
@@ -571,6 +571,18 @@ model KSP uses BaseModel
                 fixed_decimals: 1;
                 title: "Nr. of days childcare per week";
                 options_title: locked;
+                tuple test12
+                {
+                    datatype: number;
+                    formula: NA;
+                    title: "test12 Nr. of hours childcare per month";
+                    variable test13
+                    {
+                        datatype: number;
+                        formula: NA;
+                        title: "test13 Nr. of hours childcare per month";
+                    }
+                }
             }
             variable NrOfDaysChildcareMonth
             {
@@ -658,8 +670,7 @@ model KSP uses BaseModel
                   choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
                   options_title: locked;
               }
-
-              tuple TotalyYearlyCostsChild
+              variable TotalyYearlyCostsChild
               {
                 datatype: number;
                 frequency: column;

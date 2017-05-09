@@ -19,7 +19,7 @@ PropertiesAssembler.prototype.contains = function (name) {
 };
 //Don't call this method directly, business logic is within the Solution and JSWorkBook object
 //NULL is not valid, nor empty string
-PropertiesAssembler.prototype.createRootNode = function (modelName) {
+function createRootnode(modelName) {
     //when calling with undefined just return a Solution with current modelName
     var newModelName = modelName.toUpperCase();
     //create a root node if not exists
@@ -37,7 +37,8 @@ PropertiesAssembler.prototype.createRootNode = function (modelName) {
         rootNodes[newModelName] = PropertiesModel[newRootNodeName]
     }
     return rootNodes[newModelName];
-}
+};
+PropertiesAssembler.prototype.createRootNode = createRootnode
 function getOrCreateProperty(groupName, row, col) {
     var rowId = groupName + '_' + row;
     var name = rowId + "_" + col;
@@ -93,7 +94,7 @@ function addProperty(groupName, row, col, item, parentId) {
 PropertiesAssembler.prototype.bulkInsert = function (solution) {
     var solutionName = solution.getName();
     if (!rootNodes[solutionName]) {
-        create(solutionName);
+        createRootnode(solutionName);
     }
     var nodes = solution.nodes;
     var leftOver = [];
@@ -104,8 +105,8 @@ PropertiesAssembler.prototype.bulkInsert = function (solution) {
     while (iteration < 8) {
         for (var i = 0; i < nodes.length; i++) {
             var obj = nodes[i];
-            if (!obj.parentName || PropertiesModel[solutionName + '_' + obj.parentName] !== undefined) {
-                obj.ref = obj.formulaId === null || obj.formulaId === undefined ? obj.ref : obj.formulaId;
+            if (!obj.parentName || PropertiesModel[solutionName + '_' + obj.parentName]) {
+                obj.ref = obj.formulaId || obj.ref;
                 addProperty(solutionName, obj.rowId, obj.colId, obj, obj.parentName === null ? undefined : obj.parentName);
             }
             else {
@@ -143,14 +144,15 @@ PropertiesAssembler.prototype.fetch = function fetch(name) {
  * Visitor walk the tree
  * if node is null we use root node
  * function is not thread safe, add parent and depth to function call instead of altering PropertyNode
+ * As expected, problems while recursive calling this method.
  */
 PropertiesAssembler.prototype.visitProperty = function (node, func) {
     var startingNode = node || getRootNode('NEW');
     if (startingNode !== undefined) {
-        startingNode._depth = 0;
+        //startingNode._depth = 0;
         visitInternal(startingNode, func, 0, undefined)
-        startingNode._depth = undefined;
-        startingNode.parentrowId = undefined;
+        //startingNode._depth = undefined;
+        //startingNode.parentrowId = undefined;
     }
 }
 function visitInternal(node, func, depth) {
@@ -159,12 +161,12 @@ function visitInternal(node, func, depth) {
         for (var i = 0; i < node.nodes.length; i++) {
             var childNode = PropertiesModel[node.nodes[i].name];
             childNode.parentrowId = node.rowId;
-            childNode._index = i;
-            childNode._depth = depth;
+            //childNode._index = i;
+            //childNode._depth = depth;
             visitInternal(childNode, func, depth + 1);
-            childNode.parentrowId = undefined;
-            childNode._index = undefined;
-            childNode._depth = undefined;
+            //childNode.parentrowId = undefined;
+            //childNode._index = undefined;
+            //childNode._depth = undefined;
         }
     }
 }

@@ -115,7 +115,7 @@ APP.controller('formbuilder', ['$timeout', '$scope', '$http', '$location', funct
     $scope.mySchema = JSWorkbook.variableSchema;
     /*                $scope.$watch('myStartVal.' + key, function (newValue, oldValue)
      {
-     logger.info('selectedItem has changed[' + $scope.myStartVal.rowId + '[' + key + ']', newValue ? newValue.rowId : null, oldValue ? oldValue.rowId : null);
+     log.info('selectedItem has changed[' + $scope.myStartVal.rowId + '[' + key + ']', newValue ? newValue.rowId : null, oldValue ? oldValue.rowId : null);
      }, true);*/
     $scope.propertyEditorChange = function (test) {
         var node = present.getNode($scope.myStartVal.rowId)

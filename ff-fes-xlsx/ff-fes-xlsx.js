@@ -148,7 +148,6 @@ var entries = {
             log.debug('Matrix call [%s]:[%s:%s] tablevalue:[%s]', tableName, row, col, table[row + '_' + col]);
         }
 
-        //write logic to find the table in sheet etc...
         if (matrix[tableName] && matrix[tableName].xasValues && matrix[tableName].xasValues[row] && matrix[tableName].xasValues[row][col]) {
             return matrix[tableName].xasValues[row][col];
         }

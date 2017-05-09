@@ -198,7 +198,7 @@ FflToJsonConverter.prototype.parseFFL = function (contents) {
 
     var allProperties = {};
     //iterate entire stack
-    visitor.travelOne(stack.peek(), null, function (keyArg, node, depth) {
+    visitor.travelOne(stack.peek(), null, function (keyArg, node, context) {
         //only interest in the ._data part, the rest are empty lines etc... brackets
         if (node._data !== undefined) {
             //split the line with semi cols, this holds an element of every key-value pair
@@ -235,7 +235,7 @@ FflToJsonConverter.prototype.parseFFL = function (contents) {
                 }
             }
         }
-    }, 0);
+    });
     //log.timeEnd('fflParse')
     return stack.peek();
 }
