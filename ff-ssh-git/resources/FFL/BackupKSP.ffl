@@ -1293,7 +1293,7 @@ variable CostsYearOneFour
 {
 datatype: number;
 frequency: document;
-formula: 576;
+formula: Case(SecondaryEducationProfile,[0:576|1:394|2:394|3:535]);
 data_options: unscalable;
 fixed_decimals: 2;
 title: "Costs year 1 - 4";
@@ -1306,7 +1306,7 @@ variable CostsYearFiveSixSeven
 {
 datatype: number;
 frequency: document;
-formula: 576;
+formula: Case(SecondaryEducationProfile,[0:576|1:906|2:535|3:535]);
 data_options: unscalable;
 fixed_decimals: 2;
 title: "Costs year 5, 6, 7";
