@@ -2,6 +2,7 @@ var assert = require('assert')
 var log = require('ff-log')
 var AST = require('ast-node-utils').ast;
 var escodegen = require('escodegen');
+
 // some variables we shall use..
 //we want to modify its default behavior
 //Before entering a Function..
@@ -34,10 +35,24 @@ var simplified = {
         var statements = node.arguments[1];
         assert.ok(statements.type === 'ArrayExpression', "Second argument has to be ArrayExpression for now");
 
-        var cs = '_c0s' + caseCount++;
+        var cs = '__c0s' + caseCount++;
         node.type = "SequenceExpression";
         var elements = statements.elements;
         node.expressions = [
+            /*{
+             "type": "VariableDeclaration",
+             "declarations": [
+             {
+             "type": "VariableDeclarator",
+             "id": {
+             "type": "Identifier",
+             "name": cs
+             },
+             "init": node.arguments[0]
+             }
+             ],
+             "kind": "var"
+             }*/
             {
                 "type": "AssignmentExpression",
                 "operator": "=",
