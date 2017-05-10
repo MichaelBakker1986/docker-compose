@@ -303,10 +303,6 @@
     "args": "one",
     "body": "return 1"
   },
-  "Case": {
-    "args": "one",
-    "body": "return 1"
-  },
   "DateToMonth": {
     "args": "one",
     "body": "return one"
