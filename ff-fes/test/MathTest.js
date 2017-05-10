@@ -11,6 +11,10 @@ wb.updateValues();
 //var kspModel = JUNIT.getFile('KSP.ffl');
 //wb.importSolution(kspModel, 'ffl');
 
+wb.createFormula("0", 'caseselect');
+wb.createFormula('Case(caseselect,[0, 576 || 1, 906 || 2, 535 || 3, 535])', 'CaseTestVariable')
+assert(wb.get('CaseTestVariable'), 576);
+
 wb.createFormula('1+1', 'A', 'A')
 assert.equal(wb.get('A', 'A'), 2);
 

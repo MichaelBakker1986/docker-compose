@@ -1,9 +1,11 @@
 var AST = require('ast-node-utils').ast
 var assert = require('assert')
 var log = require('ff-log')
+var escodegen = require('escodegen');
 // some variables we shall use..
 //we want to modify its default behavior
 //Before entering a Function..
+var caseCount = 0;
 var simplified = {
     //gets Sels for the value also
     ExpandLevel: function (formulaInfo, node) {
@@ -82,6 +84,7 @@ var simplified = {
         //look into delete and undefined, we better use undefined since its quicker.
         node.callee = undefined;
         node.arguments = undefined;
+        log.info('CASE parsed into: [%s]', escodegen.generate(node));
     },
     //convert traditional If(q,a,b) into q?a:b, skip the entire Callee
     If: function (formulaInfo, node) {

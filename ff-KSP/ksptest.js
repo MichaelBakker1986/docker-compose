@@ -204,7 +204,7 @@ excelPlugin.initComplete.then(function () {
     assert(wbKSP.get('Q_MAP06_STATUS') == wbKSP.get('Q_MAP06') == true);
 
     var pad = '            '
-
+    wbKSP.get('CostsYearFiveSixSeven', 'value', 12)
     function testVariable(variableName, level) {
         var indent = pad.substring(0, level);
         var result = {};
@@ -213,7 +213,7 @@ excelPlugin.initComplete.then(function () {
         for (var i = 0; i < 10; i++) {
             // values.push(wbKSP.get(variableName, 'value', i))
         }
-        log.info(values + indent + '[%s][%s]=[%s]', variableName, wbKSP.get(variableName, 'value', 0), formula.original)
+        log.info(values + indent + '[%s][%s]=[%s]', variableName, wbKSP.get(variableName, 'value', 12), formula.original)
         for (var dependencyname in formula.deps) {
             var modelVarName = modelVariableName(dependencyname);
             testVariable(modelVarName, level + 1)
@@ -221,10 +221,12 @@ excelPlugin.initComplete.then(function () {
     }
 
     testVariable('TotalYearlyCosts', 1);
+    //CostsForSecondaryEducation,CostsYearFiveSixSeven,CostsYearOneFour
     log.info('done')
     //require('./totalyearlycosttest')
     //test core functionality
     // require('../ff-fes/test/RunAllTest')
 }).catch(function (err) {
     log.error(err)
+    assert(false)
 })
