@@ -24,15 +24,19 @@ excelPlugin.initComplete.then(function () {
     assert(wbKSP.get('IncomeParent01') === 25000)
 
     //same response from restApi
-    assert(fesjsApi.fesGetValue({
-            columns: 3,
-            properties: {value: true, title: true},
-            values: wbKSP.context.values
-        }, 'KSP_IncomeParent01', 0).value === 25000)
-
-    assert(fesjsApi.fesGetValue({
-            columns: 3,
-            properties: {value: true, title: true},
-            values: wbKSP.context.values
-        }, 'KSP_Q_FINAL_REPORT_VISIBLE', 0, "Ja").value === 1)
+    var fesGetValue = fesjsApi.fesGetValue({
+        columns: 3,
+        properties: {value: true, title: true},
+        values: wbKSP.context.values
+    }, 'KSP_IncomeParent01', 0);
+    assert(fesGetValue[0].value === 25000)
+    var fesGetValue2 = fesjsApi.fesGetValue({
+        columns: 3,
+        properties: {value: true, title: true},
+        values: wbKSP.context.values
+    }, 'KSP_Q_FINAL_REPORT_VISIBLE', 0, "Ja");
+    assert(fesGetValue2[0].value === 1)
+}).catch(function(err){
+    log.error(err)
+    assert(false, err)
 });

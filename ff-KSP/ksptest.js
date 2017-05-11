@@ -205,22 +205,22 @@ excelPlugin.initComplete.then(function () {
 
     var pad = '            '
     wbKSP.get('CostsYearFiveSixSeven', 'value', 12)
-    function testVariable(variableName, level) {
+    function testVariable(variableName, level, column) {
         var indent = pad.substring(0, level);
         var result = {};
         var formula = formulas[variableName];
         var values = [];
-        for (var i = 0; i < 10; i++) {
-            // values.push(wbKSP.get(variableName, 'value', i))
-        }
-        log.info(values + indent + '[%s][%s]=[%s]', variableName, wbKSP.get(variableName, 'value', 12), formula.original)
+        log.info(values + indent + '[%s][%s]=[%s]', variableName, wbKSP.get(variableName, 'value', column), formula.original)
         for (var dependencyname in formula.deps) {
             var modelVarName = modelVariableName(dependencyname);
-            testVariable(modelVarName, level + 1)
+            testVariable(modelVarName, level + 1, column)
         }
     }
 
-    testVariable('TotalYearlyCosts', 1);
+    for (var i = 0; i < 18; i++) {
+        testVariable('TotalYearlyCosts', 1, i);
+    }
+
     //CostsForSecondaryEducation,CostsYearFiveSixSeven,CostsYearOneFour
     log.info('done')
     //require('./totalyearlycosttest')
@@ -228,5 +228,5 @@ excelPlugin.initComplete.then(function () {
     // require('../ff-fes/test/RunAllTest')
 }).catch(function (err) {
     log.error(err)
-    assert(false)
+    assert(false, err)
 })

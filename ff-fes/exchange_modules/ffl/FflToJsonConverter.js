@@ -231,7 +231,10 @@ FflToJsonConverter.prototype.parseFFL = function (contents) {
                     else {
                         node[firstWord] = secondPart;
                     }
-
+                } else {
+                    //does only happen for now with Case calls;
+                    node[firstWord] = FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1));
+                    log.debug('Found Case(..,[*:*]); change : to , in %s', FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1)))
                 }
             }
         }

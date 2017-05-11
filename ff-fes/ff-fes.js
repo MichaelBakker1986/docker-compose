@@ -119,9 +119,6 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
             }
             dataEnty.variable = variable.rowId;
             if (variable.tuple) {
-                if (!yAxis) {
-                    log.error('?')
-                }
                 dataEnty.tupleIndex = yAxis.index;
             }
         }
