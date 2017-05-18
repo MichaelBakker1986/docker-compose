@@ -671,6 +671,205 @@ model KSP uses BaseModel
                   choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
                   options_title: locked;
               }
+
+              variable Furniture
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: If(ValueT(T)=1,1800,0);
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Furniture";
+                top_blanklines: 1;
+                locked: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+              variable ActualChildCareCosts
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: If(Age<=4,ChildCareCosts,0);
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Childcare costs";
+                locked: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+              variable ActualDiapers
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Diapers";
+                options_title: locked;
+              }
+              variable ActualFood
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula:If(ChildGender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Food";
+                options_title: locked;
+              }
+              variable ActualClothingCosts
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Clothing";
+                options_title: locked;
+              }
+              variable ActualPersonalCareCosts
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Personal care";
+                options_title: locked;
+              }
+              variable Hairdresser
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Hairdresser";
+                options_title: locked;
+              }
+              variable Inventory
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Inventory";
+                options_title: locked;
+              }
+              variable Allowance
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Allowance";
+                options_title: locked;
+              }
+              variable Contributions
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Contributions";
+                options_title: locked;
+              }
+              variable Transport
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Transport";
+                options_title: locked;
+              }
+              variable MobilePhone
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "MobilePhone";
+                options_title: locked;
+              }
+              variable DrivingLicense
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "DrivingLicense";
+                options_title: locked;
+              }
+              variable CostsForOutOfSchoolCare
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12, NA);
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Kosten BSO";
+                options_title: locked;
+              }
+              variable CostsForPrimaryEducation
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Costs for Primary Education";
+                options_title: locked;
+              }
+              variable CostsForSecondaryEducation
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Costs for Secondary Education";
+                options_title: locked;
+              }
+              variable CostsUnspecifiedOverview
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula: CostsUnspecified*12;
+                data_options: unscalable;
+                fixed_decimals: 2;
+                title: "Costs unspecified";
+                locked: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+
               variable TotalyYearlyCostsChild
               {
                 datatype: number;
@@ -1627,7 +1826,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula: (ValueT(T))-1;
+              formula: (ValueT(T))+ 1;
               data_options: unscalable;
               fixed_decimals: 0;
               title: "Age";
@@ -1657,203 +1856,7 @@ model KSP uses BaseModel
              title: "TestT";
                  formula: ValueT(T);
             }
-            variable Furniture
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: If(ValueT(T)=1,1800,0);
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Furniture";
-              top_blanklines: 1;
-              locked: 1;
-              options_title: locked;
-              options_notrend: locked;
-              options_trend: locked;
-            }
-            variable ActualChildCareCosts
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: If((ValueT(T))<=4,ChildCareCosts,0);
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Childcare costs";
-              locked: 1;
-              options_title: locked;
-              options_notrend: locked;
-              options_trend: locked;
-            }
-            variable ActualDiapers
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Diapers";
-              options_title: locked;
-            }
-            variable ActualFood
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula:If(ChildGender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Food";
-              options_title: locked;
-            }
-            variable ActualClothingCosts
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Clothing";
-              options_title: locked;
-            }
-            variable ActualPersonalCareCosts
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Personal care";
-              options_title: locked;
-            }
-            variable Hairdresser
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Hairdresser";
-              options_title: locked;
-            }
-            variable Inventory
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Inventory";
-              options_title: locked;
-            }
-            variable Allowance
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Allowance";
-              options_title: locked;
-            }
-            variable Contributions
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Contributions";
-              options_title: locked;
-            }
-            variable Transport
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Transport";
-              options_title: locked;
-            }
-            variable MobilePhone
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "MobilePhone";
-              options_title: locked;
-            }
-            variable DrivingLicense
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "DrivingLicense";
-              options_title: locked;
-            }
-            variable CostsForOutOfSchoolCare
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12, NA);
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Kosten BSO";
-              options_title: locked;
-            }
-            variable CostsForPrimaryEducation
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Costs for Primary Education";
-              options_title: locked;
-            }
-            variable CostsForSecondaryEducation
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Costs for Secondary Education";
-              options_title: locked;
-            }
-            variable CostsUnspecifiedOverview
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: CostsUnspecified*12;
-              data_options: unscalable;
-              fixed_decimals: 2;
-              title: "Costs unspecified";
-              locked: 1;
-              options_title: locked;
-              options_notrend: locked;
-              options_trend: locked;
-            }
+
             variable TotalYearlyCosts
             {
               datatype: number;
