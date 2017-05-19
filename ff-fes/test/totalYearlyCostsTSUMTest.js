@@ -13,10 +13,18 @@ fesjsApi.addFunctions(excelPlugin);
 var wb = new WorkBook(new FESContext());
 wb.importSolution(JUNIT.getFile('../../ff-ssh-git/resources/FFL/KSP.ffl'), 'ffl');
 
-// Child 1
-wb.set('ChildGender', 2, 'value', 0, 0);
-wb.set('NrOfDaysChildcareWeek', 3, 'value', 0, 0);
-wb.set('SecondaryEducationProfile', 1, 'value', 0, 0);
+excelPlugin.initComplete.then(function () {
 
-var result = wb.get('TotalYearlyCostsChild', 'value', 0, 0);
-assert(wb.get('TotalYearlyCostsChild', 'value', 0, 0) == 12711.65);
+    // Child 1
+    wb.set('ChildGender', 0, 'value', 0, 0);
+    wb.set('NrOfDaysChildcareWeek', 2, 'value', 0, 0);
+    wb.set('NrOfDaysOutOfSchoolCareWeek', 3, 'value', 0, 0);
+    wb.set('SecondaryEducationProfile', 1, 'value', 0, 0);
+
+    var result = wb.get('TotalYearlyCostsChild', 'value', 0, 0);
+    assert(wb.get('TotalYearlyCostsChild', 'value', 0, 0) == 11231231232);
+
+}).catch(function (err) {
+    log.error(err)
+    assert(false, err)
+})
