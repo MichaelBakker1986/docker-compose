@@ -18,28 +18,28 @@ new Promise(function (resolve, reject) {
     });
 }).then(function (message) {
     console.log(message);
-    NodeGit.Repository.init('./finanfinancials/', 0).then(function (repo) {
-        console.info('init')
-    }).catch(function (err) {
-        if (err) {
-            if (err.errno == -4) {
-                console.info('Already init');
-            } else {
-                throw err;
-            }
-        } else {
-            console.info('Init Repo');
-        }
-    });
+    /*NodeGit.Repository.init('./finanfinancials/', 0).then(function (repo) {
+     console.info('init')
+     }).catch(function (err) {
+     if (err) {
+     if (err.errno == -4) {
+     console.info('Already init');
+     } else {
+     throw err;
+     }
+     } else {
+     console.info('Init Repo');
+     }
+     });*/
 }).catch(function (err) {
     console.error(err);
 }).then(function () {
-    NodeGit.Repository
-        .open("./finanfinancials").then(function (repo) {
-        console.info(repo);
-    }).catch(function (err) {
-        console.error(err);
-    })
+    /*  NodeGit.Repository
+     .open("./finanfinancials").then(function (repo) {
+     console.info(repo);
+     }).catch(function (err) {
+     console.error(err);
+     })*/
 });
 
 // Clone a given repository into the `./tmp` folder.
