@@ -178,8 +178,8 @@ var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices').filter(function (choic
 });
 assert(layoutNRChoice[0].value === ' Polish');
 assert(wbKSP.get('Q_RESTRICTIES_01') == "");
-assert(wbKSP.get('CombinationDiscountPercentage') == .06159);
-assert(wbKSP.get('DecreasingPercentage') == 0.0675);
+assert(wbKSP.get('CombinationDiscountPercentage') == .062);
+assert(wbKSP.get('DecreasingPercentage') == 0.07);
 assert(wbKSP.get('Age') == 0);
 assert(wbKSP.get('Age', 'value', 4) == 4);
 assert(wbKSP.get('TestT') === 1);

@@ -66,6 +66,12 @@ FESFacade.fetchSolutionPropertyValue = function (context, row, col, xas, yas) {
     else {
         returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values);
     }
+    if (variable && variable.delegate && variable.delegate.fixed_decimals) {
+        if (!isNaN(returnValue)) {
+            var level = Math.pow(10, parseInt(variable.delegate.fixed_decimals));
+            returnValue = (Math.round(returnValue * level) / level)
+        }
+    }
     return returnValue;
 }
 FESFacade.fetchRootSolutionProperty = PropertiesAssembler.getRootProperty;
