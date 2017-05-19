@@ -166,6 +166,13 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
     }
     if (tuple) {
         if (referenceProperty.ref) {
+            var groupName = formulaInfo.name.split('_')[0];
+            var foundStartUiModel = getOrCreateProperty(groupName, referenceProperty.tupleDefinitionName, propertiesArr[0]);
+            var allrefIdes = [];
+            for (var i = 0; i < foundStartUiModel.nodes.length; i++) {
+                var tupleChild = foundStartUiModel.nodes[i];
+                allrefIdes.push(getOrCreateProperty(groupName, tupleChild.rowId, propertiesArr[0]).ref);
+            }
             node.name = 'TVALUES(a' + referenceFormulaId + ",'" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)"
         } else {
             node.name = '[' + defaultValues[propertiesArr[property]] + ']';
