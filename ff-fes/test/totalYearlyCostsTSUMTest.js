@@ -128,7 +128,7 @@ for (var i = 0; i < children.length; i++) {
 
     // Testing all the TotalYearlyCostsChild columns
     for (var j = 0; j < children[i].TotalYearlyCosts.length; j++) {
-        assert(parseFloat(wb.get('TotalYearlyCostsChild', 'value', j, i)).toFixed(2) == children[i].TotalYearlyCosts[j]);
+        assert(parseFloat(wb.get('TotalYearlyCostsChild', 'value', j, i)) == children[i].TotalYearlyCosts[j]);
     }
 }
 
@@ -137,3 +137,7 @@ for (var i = 0; i < children.length; i++) {
 // {
 //     assert(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)).toFixed(2) == totalYearlyCosts[i]);
 // }
+//TotalYearlyCosts test
+for (var i = 0; i < totalYearlyCosts.length; i++) {
+    // assert(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)).toFixed(2) == totalYearlyCosts[i]);
+}
