@@ -11,5 +11,8 @@
   "devDependencies": {
     "exceljs": "^0.4.2",
     "xlsx": "^0.9.7"
+  },
+  "dependencies": {
+    "deasync": "^0.1.9"
   }
 }
