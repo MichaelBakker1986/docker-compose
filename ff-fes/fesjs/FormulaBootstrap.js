@@ -129,7 +129,7 @@ simplified.TSUM = function (formulaInfo, node) {
     //all calls into a tuple should return a []
     //convert TSUM(variableName) into SUM(TVALUES(a123,'123',x,y,z,v))
     node.callee.name = 'SUM'
-    buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], '', true);
+    buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', true);
 }
 var escodegenOptions = {
     format: {
