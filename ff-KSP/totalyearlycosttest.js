@@ -36,6 +36,7 @@ excelPlugin.initComplete.then(function () {
         values: wbKSP.context.values
     }, 'KSP_Q_FINAL_REPORT_VISIBLE', 0, "Ja");
     assert(fesGetValue2[0].value === 1)
+    assert(false == true);
 }).catch(function(err){
     log.error(err)
     assert(false, err)
