@@ -114,6 +114,7 @@ function findXasValues(range, yasNames, bounds) {
     }
     return xAsValues;
 }
+var sync = true;
 workbook.xlsx.readFile(fileName)
     .then(function (wb) {
         var definedNames = getDefinedNames(wb);
@@ -135,10 +136,15 @@ workbook.xlsx.readFile(fileName)
         }
         // use workbook
         succes(matrix);
+        sync = false;
     }).catch(function (err) {
-    log.info(err);
-});
-
+        log.info(err);
+        sync = false;
+    }
+);
+while (sync) {
+    require('deasync').sleep(100);
+}
 var entries = {
     'MatrixLookup': function (xlsfileName, tableName, row, col) {
         if (!matrix[tableName]) {
