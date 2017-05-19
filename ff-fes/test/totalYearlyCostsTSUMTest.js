@@ -132,9 +132,6 @@ for (var i = 0; i < children.length; i++) {
     }
 }
 
-wb.set('TotalYearlyCostsChild', 100, 'value', 19, 0)
-wb.set('TotalYearlyCostsChild', 200, 'value', 19, 1)
-wb.set('TotalYearlyCostsChild', 300, 'value', 19, 2)
 for (var i = 0; i < totalYearlyCosts.length; i++) {
     log.info(wb.get('TotalYearlyCosts', 'value', i, 0) + " should be " + totalYearlyCosts[i])
     assert(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)) == totalYearlyCosts[i]);

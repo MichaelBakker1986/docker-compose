@@ -19,34 +19,37 @@ for (var i = 1; i < 40; i++) {
 }
 
 //return all values in given tuple
-TVALUES = function (func, fId, x, y, z, v) {
+TVALUES = function (fIds, func, fId, x, y, z, v) {
     var current = y, returnValue = [];
-    var tinstancecount = TINSTANCECOUNT(v, fId, y);
+    var tinstancecount = TINSTANCECOUNT(fIds, v);
     while (current && tinstancecount >= current.index) {
         var tempValue = func(fId, x, current, z, v);
-        // console.info('instancecount: [' + tinstancecount + '] fid:[' + fId + '] x:[' + x.hash + '] = ' + tempValue)
         returnValue.push(tempValue);
         current = current.next;
     }
     return returnValue;
 }
 //return tuplecount, get max tuple index,
-//TODO: build tuple/yaxis object while parsing entered values (updateValues())
-TINSTANCECOUNT = function (v, fId) {
-    var keys = Object.keys(v[fId]);
-    if (keys.length == 0) {
-        return 0;
+TINSTANCECOUNT = function (fIds, v) {
+    var max = 0;
+    for (var fid = 0; fid < fIds.length; fid++) {
+        var fId = fIds[fid];
+        var keys = Object.keys(v[fId]);
+        if (keys.length == 0) {
+            continue;
+        }
+        else if (keys.length == 1) {
+            max = Math.max((2064384 & parseInt(keys[0])) >> 15);
+        } else {
+            max = Math.max(max, keys.reduce(function (a1, b1) {
+                //filter bits 16-24 find highest tuple count.
+                //mask should be provided
+                //look for all values and obtain tuple instnace value
+                var number = Math.max((2064384 & parseInt(a1)) >> 15, (2064384 & parseInt(b1)) >> 15);
+                return number;
+            }))
+        }
     }
-    if (keys.length == 1) {
-        return Math.max((2064384 & parseInt(keys[0])) >> 15);
-    }
-    var max = keys.reduce(function (a1, b1) {
-        //filter bits 16-24 find highest tuple count.
-        //mask should be provided
-        //look for all values and obtain tuple instnace value
-        var number = Math.max((2064384 & parseInt(a1)) >> 15, (2064384 & parseInt(b1)) >> 15);
-        return number;
-    });
     return max;
 }
 /*

@@ -165,15 +165,23 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
         yAppendix += '.base';
     }
     if (tuple) {
-        if (referenceProperty.ref) {
+        if (referenceProperty) {
             var groupName = formulaInfo.name.split('_')[0];
             var foundStartUiModel = getOrCreateProperty(groupName, referenceProperty.tupleDefinitionName, propertiesArr[0]);
             var allrefIdes = [];
+            if (referenceProperty.ref) {
+                allrefIdes.push('' + referenceProperty.ref)
+            }
             for (var i = 0; i < foundStartUiModel.nodes.length; i++) {
                 var tupleChild = foundStartUiModel.nodes[i];
-                allrefIdes.push(getOrCreateProperty(groupName, tupleChild.rowId, propertiesArr[0]).ref);
+                var items = getOrCreateProperty(groupName, tupleChild.rowId, propertiesArr[0]).ref;
+                if (items) {
+                    allrefIdes.push('' + items);
+                }
             }
-            node.name = 'TVALUES(a' + referenceFormulaId + ",'" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)"
+            var test = '[' + allrefIdes.join(',') + "]"
+
+            node.name = 'TVALUES(' + test + ',a' + referenceFormulaId + ",'" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)"
         } else {
             node.name = '[' + defaultValues[propertiesArr[property]] + ']';
         }
