@@ -165,7 +165,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula:If(ChildGender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",Age),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",Age));
+			  formula:If(ChildGender[1]=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",Age),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",Age));
               fixed_decimals: 2;
             }
 			variable ActualClothingCosts
@@ -303,16 +303,33 @@ model KSP uses BaseModel
 			  fixed_decimals: 1;
 			}
 			
-			variable TotalyYearlyCostsChild
+			variable TotalYearlyCostsChild
               {
                 datatype: number;
                 frequency: column;
                 aggregation: flow;
                 formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
-                data_options: unscalable;
                 fixed_decimals: 2;
                 locked: 1;
               }
+		}
+		
+		variable TotalYearlyCosts
+		{
+		  datatype: number;
+		  frequency: column;
+		  aggregation: flow;
+		  formula: TSUM(TotalYearlyCostsChild);
+		  fixed_decimals: 2;
+		  locked: 1;
+		}
+		
+		variable TupleSumTest
+		{
+		  datatype: number;
+		  frequency: document;
+		  formula: TSUM(NrOfDaysChildcareWeek);
+		  locked: 1;
 		}
 	}
   }
