@@ -4,7 +4,7 @@ var parser = require('../exchange_modules/ffl/fflparser');//just let it inject i
 var WorkBook = require('../fesjs/JSWorkBook');
 var JSMATH = require('../../ff-math')
 var JUNIT = require('./JUNIT');
-var logger = require('ff-log');
+var log = require('ff-log');
 var FESContext = require('../fesjs/fescontext');
 var wb = new WorkBook(new FESContext());
 wb.updateValues();
@@ -14,6 +14,11 @@ wb.updateValues();
 wb.createFormula("0", 'caseselect');
 wb.createFormula('Case(caseselect,[0, 576 || 1, 906 || 2, 535 || 3, 535])', 'CaseTestVariable')
 assert(wb.get('CaseTestVariable'), 576);
+
+
+wb.createFormula("123", 'caseselectWithVariableReference');
+wb.createFormula('Case(caseselect,[0, 576 || 1, caseselectWithVariableReference +100 || 2, 535 || 3, 535])', 'CaseTestVariableWithReference')
+assert(wb.get('CaseTestVariableWithReference'), 223);
 
 wb.createFormula('1+1', 'A', 'A')
 assert.equal(wb.get('A', 'A'), 2);
@@ -92,10 +97,9 @@ wb.set('abc12', 'anyValue');
 assert.equal(wb.get('DATAAVAILABLE'), true);
 
 
-//wb.createFormula('SelectDescendants(Q_MAP01,Q_MAP01_HULPVARIABELEN),InputRequired(X))','SELECTDECENDANTS')
-
+/*wb.createFormula("Count(x,String(x),x)", "TestCount")
+log.info(wb.get("TestCount"))*/
 /**
  - Use function [Count]
  - Use function [SelectDescendants]
- - Use function [MatrixLookup], seperate project - use js-xlsx https://github.com/SheetJS/js-xlsx
  */

@@ -2,6 +2,7 @@ var log = require('ff-log')
 var WorkBook = require('../fesjs/JSWorkBook')
 var FESContext = require('../fesjs/fescontext')
 require('../../ff-math')
+var assert = require('assert');
 /*var ARGUMENT_NAMES = /([^\s,]+)/g;
  function getParamNames(func) {
  var fnStr = func.toString();
@@ -9,16 +10,35 @@ require('../../ff-math')
  }*/
 //var test = getParamNames(TSUM);
 var wb = new WorkBook(new FESContext());
+
+//test for calls within tuples using same tuple, and calls outside tuples use base tuple
+wb.createFormula("10", "DocumentValue", 'value', false);
+wb.createFormula("1", "TupleSibling1", 'value', true);
+wb.createFormula("2+DocumentValue", "TupleSibling2", 'value', true);
+wb.createFormula("TupleSibling1+TupleSibling2", "TestTupleValues", 'value', true);
+wb.createFormula("TSUM(TestTupleValues)", "TestTupleValuesSUM", 'value', false);
+
+assert(wb.get('TestTupleValues', 'value', 0, 0) == 13)
+wb.set('DocumentValue', 100, 'value', 0, 1)//will completely be ignored, since its not a tuple
+assert(wb.get('TestTupleValues', 'value', 0, 0) == 13)
+wb.set('DocumentValue', 100, 'value', 0, 0)
+assert(wb.get('TestTupleValues', 'value', 0, 0) == 103)
+wb.set('TupleSibling1', 2, 'value', 0, 1)
+assert(wb.get('TestTupleValues', 'value', 0, 0) == 103)
+assert(wb.get('TestTupleValues', 'value', 0, 1) == 104)
+//TupleSibling1 and TupleSibling2 do not know they belong to same tuple group
+log.info(wb.get('TestTupleValuesSUM'))
+
 wb.createFormula("1+1", "TupleTest", 'value', true);
 wb.createFormula("TSUM(TupleTest)", "TupleTestSUM");
-var assert = require('assert');
+
 assert(wb.get('TupleTest') == 2)
 wb.set('TupleTest', 10)
 assert(wb.get('TupleTest') == 10)
 
 var FirstY = 1;
 var FirstX = 1;
-
+//ga tupleInstantie in, y0(0) -> y0(1), check hoeveel Instanties er zijn
 wb.set('TupleTest', 20, 'value', FirstX)
 assert(wb.get('TupleTest') == 10)
 assert(wb.get('TupleTest', 'value', FirstX) == 20)

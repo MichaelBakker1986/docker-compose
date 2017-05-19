@@ -218,7 +218,7 @@ excelPlugin.initComplete.then(function () {
     }
 
     for (var i = 0; i < 18; i++) {
-        testVariable('TotalYearlyCosts', 1, i);
+        testVariable('ActualChildCareCosts', 1, i);
     }
 
     //CostsForSecondaryEducation,CostsYearFiveSixSeven,CostsYearOneFour

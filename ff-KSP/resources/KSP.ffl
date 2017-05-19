@@ -588,7 +588,7 @@ model KSP uses BaseModel
             {
                 datatype: number;
                 frequency: document;
-                formula: OnER(10.5*NrOfDaysChildcareWeek*4,NA);
+                formula: OnER(10.5*NrOfDaysChildcareWeek[1]*4,NA);
                 data_options: unscalable;
                 fixed_decimals: 1;
                 title: "Nr. of hours childcare per month";
@@ -1677,7 +1677,7 @@ model KSP uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              formula: If((ValueT(T))<=4,ChildCareCosts,0);
+              formula: If((ValueT(T))<=4,1,0);
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Childcare costs";
