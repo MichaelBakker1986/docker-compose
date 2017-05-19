@@ -23,7 +23,9 @@ TVALUES = function (func, fId, x, y, z, v) {
     var current = y, returnValue = [];
     var tinstancecount = TINSTANCECOUNT(v, fId, y);
     while (current && tinstancecount >= current.index) {
-        returnValue.push(func(fId, x, current, z, v));
+        var tempValue = func(fId, x, current, z, v);
+        // console.info('instancecount: [' + tinstancecount + '] fid:[' + fId + '] x:[' + x.hash + '] = ' + tempValue)
+        returnValue.push(tempValue);
         current = current.next;
     }
     return returnValue;
@@ -48,9 +50,9 @@ TINSTANCECOUNT = function (v, fId) {
     return max;
 }
 /*
-Does only look for document values
-* so only look for mask where first 15bits are 0
-* Get all 0*values for example used for tupleInstanceIdentiefiers
+ Does only look for document values
+ * so only look for mask where first 15bits are 0
+ * Get all 0*values for example used for tupleInstanceIdentiefiers
  */
 TINSTANCEBYNAME = function (v, fId, y, name) {
     var count = TINSTANCECOUNT(v, fId);
