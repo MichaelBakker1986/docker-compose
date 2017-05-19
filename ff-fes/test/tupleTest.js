@@ -12,11 +12,11 @@ var assert = require('assert');
 var wb = new WorkBook(new FESContext());
 
 //test for calls within tuples using same tuple, and calls outside tuples use base tuple
-wb.createFormula("10", "DocumentValue", 'value', false);
-wb.createFormula("1", "TupleSibling1", 'value', true);
-wb.createFormula("2+DocumentValue", "TupleSibling2", 'value', true);
-wb.createFormula("TupleSibling1+TupleSibling2", "TestTupleValues", 'value', true);
-wb.createFormula("TSUM(TestTupleValues)", "TestTupleValuesSUM", 'value', false);
+wb.createFormula("10", "DocumentValue", 'value', false, 'document');
+wb.createFormula("1", "TupleSibling1", 'value', true, 'document');
+wb.createFormula("2+DocumentValue", "TupleSibling2", 'value', true, 'document');
+wb.createFormula("TupleSibling1[doc]+TupleSibling2[doc]", "TestTupleValues", 'value', true, 'document');
+wb.createFormula("TSUM(TestTupleValues[doc])", "TestTupleValuesSUM", 'value', false, 'document');
 
 assert(wb.get('TestTupleValues', 'value', 0, 0) == 13)
 wb.set('DocumentValue', 100, 'value', 0, 1)//will completely be ignored, since its not a tuple
