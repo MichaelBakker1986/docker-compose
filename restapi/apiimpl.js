@@ -1,6 +1,5 @@
 var Promise = require('promise')
 var log = require('ff-log')
-var gitconnector = require('../ff-ssh-git/gitconnector')
 var DBConnector;
 var apiimpl = function (DBConnectorArg) {
     DBConnector = DBConnectorArg;
