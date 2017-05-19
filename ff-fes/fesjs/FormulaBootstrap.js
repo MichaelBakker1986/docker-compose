@@ -153,16 +153,20 @@ var xArgument = {
 /**
  * Two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
  * There is no information which property is calling and cannot be resolved, since multiple sources can share a formula
+ *
  */
 function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tuple) {
     xapendix = xapendix || '';
     var referenceProperty = addFormulaDependency(formulaInfo, referenceProperty.name, propertiesArr[property]);
-
+    var yAppendix = 'y';
     delete referenceProperty.refn;
     var referenceFormulaId = referenceProperty.ref;
+    if (!referenceProperty.tuple) {
+        yAppendix += '.base';
+    }
     if (tuple) {
         if (referenceProperty.ref) {
-            node.name = 'TVALUES(a' + referenceFormulaId + ",'" + referenceFormulaId + "',x" + xapendix + ",y,z,v)"
+            node.name = 'TVALUES(a' + referenceFormulaId + ",'" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)"
         } else {
             node.name = '[' + defaultValues[propertiesArr[property]] + ']';
         }
@@ -170,7 +174,7 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
         if (referenceProperty.ref === undefined) {
             node.name = defaultValues[propertiesArr[property]];
         } else {
-            node.name = 'a' + referenceFormulaId + "('" + referenceFormulaId + "',x" + xapendix + ",y,z,v)";
+            node.name = 'a' + referenceFormulaId + "('" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)";
         }
     }
 }
@@ -400,23 +404,30 @@ function buildFormula(formulaInfo, parent, node) {
         if (node.name === 'T') {
             node.name = 'x';
         }
+        //zAxis Reference, base period
         if (node.name === 'MainPeriod') {
             node.name = 'x';
         }
+        //
         if (node.name === 'MaxT') {
             node.name = 'x';
         }
+        //xAxisReference x.trend
         if (node.name === 'Trend') {
             node.name = 'x';
         }
+        //xAsReference x.notrend
         if (node.name === 'NoTrend') {
             node.name = 'x';
         }
+        //x.trend.lastbkyr
         if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
+        //should return the t.index.
         else if (node.name === 't') {
-            //return the real Index t.hash?
+            log.warn('invalid t parsing')
+            //return the hash t.hash or t.index?
             node.name = 'hash';
         }
     }
