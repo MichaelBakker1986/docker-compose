@@ -107,10 +107,13 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
     }
     var tupleStart = 0;
     var tupleEnd = 0;
+
+    // If frequency = column: return multiple columns
     for (var xAxisCounter = columnStart; xAxisCounter <= columnEnd; xAxisCounter++) {
         var dataEnty = {};
         outputData.push(dataEnty);
 
+        // For properties of the variable
         for (var type in workbook.properties) {
             dataEnty[type] = workbook.getSolutionPropertyValue(rowId, type, xAxisCounter, yAxis);
 

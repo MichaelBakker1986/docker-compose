@@ -31,7 +31,12 @@ module.exports = {
         if (storedValues[contextId] == undefined) {
             storedValues[contextId] = {
                 contextId: contextId,
-                values: {}
+                values: {},
+                // properties: {
+                //     column: true,
+                //     variable: true,
+                //     value: true
+                // }
             };
         }
         return storedValues[contextId];
