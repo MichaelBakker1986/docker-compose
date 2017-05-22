@@ -17,10 +17,6 @@ fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
-excelPlugin.initComplete.then(function () {
-    log.info('excel done')
-    var wb = new WorkBook(new FESContext());
-    wb.importSolution(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
-}).catch(function (err) {
-    log.error(err)
-})
+log.info('excel done')
+var wb = new WorkBook(new FESContext());
+wb.importSolution(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')

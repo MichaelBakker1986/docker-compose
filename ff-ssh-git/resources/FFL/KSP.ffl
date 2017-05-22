@@ -31,7 +31,7 @@ model KSP uses BaseModel
             datatype: number;
             frequency: document;
             displaytype: currency;
-            locked: 1;
+            locked: 0;
             variable ChildGender
 			{
 				datatype: number;

@@ -134,5 +134,6 @@ for (var i = 0; i < children.length; i++) {
 
 //TotalYearlyCosts test
 for (var i = 0; i < totalYearlyCosts.length; i++) {
-    // assert(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)).toFixed(2) == totalYearlyCosts[i]);
+    log.info(wb.get('TotalYearlyCosts', 'value', i, 0) + " should be " + totalYearlyCosts[i])
+    assert(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)) == totalYearlyCosts[i]);
 }

@@ -58,7 +58,7 @@ FFLParser.prototype.parseData = function (data, workbook) {
                 log.debug('tuple def for [%s].[%s] is [%s]', nodeName, context.nestTupleDepth, context.tupleDefinition);
                 addnode(logVars, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && context.tupleDefinition, context.tupleDefinition, context.nestTupleDepth);
                 if (tupleDefiniton) {
-                    context.tupleDefinition = solution.getName() + '_' + nodeName;
+                    context.tupleDefinition = nodeName;
                 }
             }
         }

@@ -200,14 +200,19 @@ function maxTupleCountForRow(wb, node) {
     if (!node.tuple) {
         return 0;
     }
-    var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.tupleDefinitionName)
-    var maxTupleCount = 0;
-    FESFacade.visit(tupleDefinition, function (child) {
-        if (child.tuple) {
-            maxTupleCount = Math.max(maxTupleCount, TINSTANCECOUNT(wb.context.values, child.ref));
+    var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
+    var allrefIdes = [];
+    if (tupleDefinition.ref) {
+        allrefIdes.push('' + tupleDefinition.ref)
+    }
+    for (var i = 0; i < tupleDefinition.nodes.length; i++) {
+        var tupleChild = tupleDefinition.nodes[i];
+        var items = wb.getSolutionNode(node.solutionName + '_' + tupleChild.rowId).ref;
+        if (items) {
+            allrefIdes.push('' + items);
         }
-    });
-    return maxTupleCount;
+    }
+    return TINSTANCECOUNT(allrefIdes, wb.context.values);
 }
 JSWorkBook.prototype.tupleIndexForName = function (node, name) {
     var wb = this;
