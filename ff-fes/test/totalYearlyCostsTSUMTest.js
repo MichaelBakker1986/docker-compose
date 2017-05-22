@@ -121,23 +121,17 @@ var totalYearlyCosts = [
 
 
 // Bug in adding tuples
-var fesContext = {};
-var result = fesjsApi.fesGetValue({
-    values: fesContext
-}, 'KSP_ChildGender', 0, 0, 'Bob');
-assert(result[0].value == 0);
-
-var BobEntry = fesjsApi.fesGetValue({
-    values: fesContext
-}, 'KSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
+var fesContext = {
+    values: {},
+    tupleIndexList: []
+};
+var result = fesjsApi.fesGetValue(fesContext, 'KSP_ChildGender', 0, 0, 'Bob');
+assert(result[0].value === 0);
+var BobEntry = fesjsApi.fesGetValue(fesContext, 'KSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
 var bobResult = BobEntry[0];
-assert(bobResult.value == 3);
-
-var LisaEntry = fesjsApi.fesGetValue({
-    values: fesContext
-}, 'KSP_ChildGender', 0, 1, 'Lisa');
-
-var LisaResult = LisaEntry[0];
+assert(bobResult.value === 3);
+var LisaEntry = fesjsApi.fesGetValue(fesContext, 'KSP_ChildGender', 0, 1, 'Lisa');
+var LisaResult = LisaEntry[1];
 assert(LisaResult.value == 1);
 
 

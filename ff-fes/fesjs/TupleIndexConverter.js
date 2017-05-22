@@ -5,7 +5,7 @@ TupleIndexConverter.prototype.getIndexNumber = function(context, tupleindex)
 {
     // If tuple index list does not exist, make one
     if (context.tupleIndexList === undefined){
-        context.tupleIndexList = new Array();
+        context.tupleIndexList = [];
     }
 
     // Check if tupleindex string exists
