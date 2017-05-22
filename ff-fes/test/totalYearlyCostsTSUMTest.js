@@ -119,6 +119,24 @@ var totalYearlyCosts = [
     26433.90    // 18
 ];
 
+
+// Bug in adding tuples
+var result = fesjsApi.fesGetValue({
+    values: {}
+}, 'KSP_ChildGender', 0, 0, 'Bob');
+assert(result[0].value == 0);
+
+result = fesjsApi.fesGetValue({
+    values: {}
+}, 'KSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
+assert(result[0].value == 3);
+
+result = fesjsApi.fesGetValue({
+    values: {}
+}, 'KSP_ChildGender', 0, 1, 'Lisa');
+assert(result[1].value == 1);
+
+
 for (var i = 0; i < children.length; i++) {
     // Setting the variables
     wb.set('ChildGender', children[i].ChildGender, 'value', 0, i);
