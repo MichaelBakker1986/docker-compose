@@ -1,4 +1,5 @@
 var assert = require('assert');
+var log = require('ff-log')
 var parser = require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
 var WorkBook = require('../fesjs/JSWorkBook');
 var JUNIT = require('./JUNIT');
@@ -16,8 +17,8 @@ for (var i = 0; i < fflTestModels.length; i++) {
     assert.ok(wb.validateImportedSolution().valid);
     var fflExport = wb.export('ffl');
     //debugging..
-    if (!process.alltest) {
-        console.info(fflExport);
+    if (log.TRACE) {
+        log.trace(fflExport);
     }
 }
-console.info('test fflExport succeed')
+log.info('test fflExport succeed')

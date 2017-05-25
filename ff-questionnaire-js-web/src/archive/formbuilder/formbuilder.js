@@ -160,14 +160,11 @@ APP.controller('formbuilder', ['$timeout', '$scope', '$http', '$location', funct
             else {
                 var node = event.source.nodeScope.$modelValue;
                 present.update({title: true});
-                console.info('Dropped')
             }
         }
     };
     uiSaveFunction = function () {
         var Solution;// = JSWorkbook.produceSolution();
-        console.info('save model' + $scope.apiPath + 'UPDATE/SOLUTION/')
-        console.info(Solution)
         var httpPromise = $http.post($scope.apiPath + 'FORMULA/', Solution.formulas);
         $scope.$parent.$parent.myPromise = httpPromise;
         httpPromise.success(function (formulas) {
@@ -183,7 +180,6 @@ APP.controller('formbuilder', ['$timeout', '$scope', '$http', '$location', funct
             return $http.post($scope.apiPath + 'FORMULA/', Solution.formulas);
         }).then(function successCallback(response) {
             JSWorkbook.updateValues();
-            console.info(response);
         }, function errorCallback(response) {
             console.error(response)
         });

@@ -27,7 +27,7 @@ wb.set('TupleSibling1', 2, 'value', 0, 1)
 assert(wb.get('TestTupleValues', 'value', 0, 0) == 103)
 assert(wb.get('TestTupleValues', 'value', 0, 1) == 104)
 //TupleSibling1 and TupleSibling2 do not know they belong to same tuple group
-log.info(wb.get('TestTupleValuesSUM'))
+assert(wb.get('TestTupleValuesSUM') === 0)
 
 wb.createFormula("1+1", "TupleTest", 'value', true);
 wb.createFormula("TSUM(TupleTest)", "TupleTestSUM");
@@ -58,7 +58,7 @@ wb.createFormula("''", "TupleName", 'value', true);
 wb.set('TupleName', 'Piet', 'value', 0, 0)
 wb.set('TupleName', 'Jan', 'value', 0, 1)
 wb.set('TupleName', 'Klaas', 'value', 0, 2)
-log.info(wb.get('TupleName'))
+assert(wb.get('TupleName') === 'Piet')
 /**
  * Gedachten bij het implementeren van tuples:
  * Van tuple naar tuple *binnen eigen tupleDefinition* word de TupleLocatie gebruikt om berekeningen te doen

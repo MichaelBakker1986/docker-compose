@@ -1,6 +1,5 @@
 var APP = require('../app.js');
 APP.pages.push({name: 'Solutions', order: 4, icon: 'fa-files-o', path: '/src/archive/solution/solution.html'});
-console.info('adding Solutions');
 var JSWorkBook = require('../fesjs/JSWorkBook.js')
 var wb = new JSWorkBook();
 APP.controller('choose', ['$timeout', '$scope', '$http', '$location', function ($timeout, $scope, $http, $location)

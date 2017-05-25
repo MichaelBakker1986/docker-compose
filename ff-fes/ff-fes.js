@@ -41,6 +41,7 @@ FESApi.prototype.addFunctions = function (plugin) {
 FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, tupleindex) {
     columncontext = columncontext || 0
     // Convert tuple index to tuple number
+    //TODO: move to tupleDefinition to support multiple tuple definition/tuple in tuple
     if (tupleindex !== undefined) {
         tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
     }

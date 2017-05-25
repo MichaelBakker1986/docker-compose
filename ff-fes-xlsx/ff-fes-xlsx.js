@@ -151,7 +151,9 @@ var entries = {
             log.warn('Defined name not found [%s]:[%s:%s]', tableName, row, col);
         }
         if (matrix[tableName] && matrix[tableName].xasValues && matrix[tableName].xasValues[row] && matrix[tableName].xasValues[row][col]) {
-            log.debug('Matrix call [%s]:[%s:%s] xlsxValue:[%s]', tableName, row, col, matrix[tableName].xasValues[row][col]);
+            if (log.TRACE) {
+                log.trace('Matrix call [%s]:[%s:%s] xlsxValue:[%s]', tableName, row, col, matrix[tableName].xasValues[row][col]);
+            }
             return matrix[tableName].xasValues[row][col];
         }
         return NA;

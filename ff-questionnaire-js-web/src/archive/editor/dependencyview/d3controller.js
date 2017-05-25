@@ -147,7 +147,6 @@ APP.controller('visual', ['$timeout', '$scope', '$http', '$location', '$window',
                     })
                 }
                 //filter unbound nodes, they are not interesting
-                console.info(accociatons)
 //filter out unbind formulas
                 var nodes = {};
 // Compute the distinct nodes from the links.
@@ -247,7 +246,6 @@ function generateDependencyMatrix2(exists) {
     FESFacade.visitFormulas(function (f) {
         if (exists(f.name)) {
             var packageDeps = [];
-            // console.info(formulaName)
             data.highest[f.name] = data.highest[f.name] || 0;
             data.packageNames.push(f.name);
             FESFacade.visitFormulas(function (inner) {
@@ -255,19 +253,10 @@ function generateDependencyMatrix2(exists) {
                 if (exists(inner.name)) {
                     var linked = 0;
                     for (var key in inner.deps) {
-                        //console.info(inner.name + ' deps: ' + key)
                         if (key === f.name && key !== inner.name) {
                             linked++;
                         }
                     }
-                    /*        for (var key in inner.refs)
-                     {
-                     //   console.info(inner.name + ' refs: ' + key)
-                     if (key === f.name && key !== inner.name)
-                     {
-                     linked++;
-                     }
-                     }*/
                     packageDeps.push(linked === 0 ? 0 : 1);
                     data.highest[f.name] += linked;
                 }
@@ -292,7 +281,6 @@ function generateDependencyMatrix(exists) {
         var fname = f.name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1')
         if (exists(f.name)) {
             var packageDeps = [];
-            // console.info(formulaName)
             data.highest[fname] = data.highest[fname] || 0;
             if (!packages.has(fname)) {
                 packages.add(fname);

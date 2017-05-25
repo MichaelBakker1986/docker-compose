@@ -48,7 +48,6 @@ APP.pages.push({
 });
 //TODO: make debug setting
 function print(message) {
-    console.info(message);
 }
 
 //we use the UI export to create the views

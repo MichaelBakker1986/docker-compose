@@ -7,7 +7,6 @@
 //-- visit it again
 //-- add node
 //-- remove node
-global.loglevel = 'debug'
 require('../exchange_modules/ffl/fflparser');
 require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
 require('../exchange_modules/presentation/presentation');//just let it inject into the FESFacade

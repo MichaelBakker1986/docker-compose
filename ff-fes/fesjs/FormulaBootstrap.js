@@ -28,7 +28,6 @@ var escodegen = require('escodegen')
 var simplified = require('./ASTPreparser')
 var variables;
 var getOrCreateProperty;
-var caseCount = 10;
 var addFormulaDependency;
 var properties;
 var propertiesArr = [
@@ -44,6 +43,8 @@ var propertiesArr = [
     'g',
     'h'
 ]
+var IDENTIFIER = 'Identifier';
+var ARRAYEXPRESSION = 'ArrayExpression'
 //this part is essencial to bind variables, extract support Variable types, supported Column types
 // these variables will be red from the given JSON asap.
 // for now we state them here..
@@ -56,7 +57,7 @@ simplified.DataAvailable = function (formulaInfo, node) {
         log.warn("Can't find a variableReference for " + regenerate(node)) + " " + formulaInfo.name + ":" + formulaInfo.original;
         return;
     }
-    node.type = 'Identifier'
+    node.type = IDENTIFIER;
     // looks like being extracted as object, while has to be array
     node.name = 'v[' + (refFormula.ref) + '][x.hash + y.hash + z]!==undefined';
     delete node.refn;
@@ -74,7 +75,7 @@ simplified.DataEntered = simplified.DataAvailable;
 //Its better to also rename the Callee to Something like Lambda(SequenceExpression), or removing the entire CallExpression
 //This must be the most complex seen in a while
 simplified.SelectDescendants = function (formulaInfo, node) {
-    node.type = 'ArrayExpression';
+    node.type = ARRAYEXPRESSION;
     var groupName = formulaInfo.name.split('_')[0];
     var foundStartUiModel = getOrCreateProperty(groupName, node.arguments[0].name, propertiesArr[0]);
     var lambda;
@@ -89,7 +90,6 @@ simplified.SelectDescendants = function (formulaInfo, node) {
     var foundEndUiModel;
     if (lambda === undefined) {
         lambda = node.arguments[1];
-        /*variableType.push('required');*/
         node.arguments.length = 1;
     }
     else {
@@ -145,11 +145,6 @@ var astValues = {
     "type": "Identifier",
     "name": "v"
 };
-var xArgument = {
-    "type": "Identifier",
-    "name": "x"
-};
-
 /**
  * Two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
  * There is no information which property is calling and cannot be resolved, since multiple sources can share a formula
@@ -207,12 +202,10 @@ var dummy = function (or, parent, node) {
 var expression = function (or, parent, node) {
     var left = node.left;
     if (left.refn) {
-        //node.left.name =
         buildFunc(or, left, 0, left);
     }
     var right = node.right;
     if (right.refn) {
-        //node.right.name =
         buildFunc(or, right, 0, right);
     }
 };
@@ -236,7 +229,6 @@ var traverseTypes = {
     //Don't check the left side of an AssignmentExpression, it would lead into a102('102',x,y,z,v) = 'something'
     AssignmentExpression: function (formulaInfo, parent, node) {
         if (node.right.refn) {
-            //node.right.name =
             buildFunc(formulaInfo, node.right, 0, node.right);
         }
     },
@@ -249,8 +241,7 @@ var traverseTypes = {
     ArrayExpression: function (or, parent, node) {
         node.elements.forEach(function (el) {
             if (el.refn) {
-                //Why is here a new Object created?
-                //el.name =
+                //Why is here a new Object created? {}
                 buildFunc(or, el, 0, {name: el.refn});
             }
         });
@@ -260,14 +251,12 @@ var traverseTypes = {
     ExpressionStatement: function (orId, parent, node) {
         var expression = node.expression;
         if (expression.refn) {
-            //expression.name =
             buildFunc(orId, expression, 0, expression);
         }
     },
     UnaryExpression: function (orId, parent, node) {
         var argument = node.argument;
         if (argument.refn) {
-            //argument.name =//
             buildFunc(orId, argument, 0, argument);
         }
     },
@@ -275,7 +264,6 @@ var traverseTypes = {
         for (var i = 0, len = node.arguments.length; i < len; i++) {
             var argument = node.arguments[i];
             if (argument.refn) {
-                //argument.name =
                 buildFunc(orId, argument, 0, argument);
             }
         }
@@ -285,15 +273,12 @@ var traverseTypes = {
     },
     ConditionalExpression: function (orId, parent, node) {
         if (node.test.refn) {
-            //node.test.name =
             buildFunc(orId, node.test, 0, node.test);
         }
         if (node.alternate.refn) {
-            //node.alternate.name =
             buildFunc(orId, node.alternate, 0, node.alternate);
         }
         if (node.consequent.refn) {
-            //node.consequent.name =
             buildFunc(orId, node.consequent, 0, node.consequent);
         }
     },
@@ -304,22 +289,6 @@ var traverseTypes = {
             if (property.type === 'Identifier') {
                 if (node.computed) {
                     if (parent.type === 'MemberExpression') {
-                        /*    // not refactored into new style!
-                         var tempparentporpertyname = parent.property.name;// we will lose this
-                         // now a tricky part, we going to use the parent, and place all of this in there.. removing the
-                         // entire sublevel.Extact the property name, inject it in here most complex situation we can
-                         // get into
-                         parent.type = 'CallExpression';
-                         var refer = variables[object.refn];
-                         var refFormId = refer.formula[properties[tempparentporpertyname]];
-                         node.object.name = 'this[' + refFormId + ']';
-                         parent.callee = node.object;
-                         delete node.object;
-                         parent.property.name = (buildFunc(orId, 0, object) + '.' + node.property.legacy);
-                         parent.arguments = [astYIndex, varproperties[tempparentporpertyname].t, node.property, astValues];
-                         delete parent.property;
-                         delete object.refn;
-                         delete property.legacy;*/
                         throw new Error('Not Supported Yet')
                     }
                     else {
@@ -342,11 +311,10 @@ var traverseTypes = {
                     //not computed = .xxxx..
                     //the .choices,.vsible,required.title etc.
                     //works partially
-                    node.type = 'Identifier';
+                    node.type = IDENTIFIER;
                     if (node.property.name === 'title') {
                     }
                     //this is very stupid to port it triple time. we will fix this later.
-                    //node.name =
                     buildFunc(orId, node, varproperties[node.property.name].f, node.object);
                     delete node.property;
                     delete node.object;
@@ -355,18 +323,7 @@ var traverseTypes = {
             }
             //Sequence is XYZ[a,b]...
             else if (property.type === 'SequenceExpression') {
-                /* Partially works, just a direct call to the Variables
-                 //this one should be able to resolve VARIABLE[prev,next]
-                 node.type = 'CallExpression';
-                 object.name = 'VALUES';
-                 node.arguments = node.property.expressions;
-                 node.arguments.splice(0, 0, {
-                 type: "Identifier",
-                 name: 'this[' + object.refid + ']'//be aware the DEPENDENCY is not made!
-                 }, varproperties.value.t, astYIndex);
-                 */
-                node.type = 'Identifier';
-                //node.name =
+                node.type = IDENTIFIER;
                 buildFunc(orId, node, 0, node.object);
                 delete node.arguments;
                 delete node.object;
@@ -375,7 +332,7 @@ var traverseTypes = {
                 //console.info('[x,x] Not implemented this feature yet : ' + orId.original)
             }
             else {
-                node.type = 'Identifier';
+                node.type = IDENTIFIER;
                 //this is where VARIABLE[1], VARIABLE[prev] ends up
                 //for now we will check if the caller, starts with the being called, to avoid loops
                 if (orId.tempnaaam === node.object.name) {
@@ -385,7 +342,6 @@ var traverseTypes = {
                 }
                 else {
                     //else will will what ever just get the onecol value back.
-                    //node.name =
                     buildFunc(orId, node, 0, node.object);
                 }
                 delete node.object;
@@ -402,7 +358,9 @@ function buildFormula(formulaInfo, parent, node) {
     // Simplified is only Top down
     // its only lookAhead
     if (node.type === 'CallExpression') {
-        log.trace('Use function [' + node.callee.name + "]")
+        if (log.TRACE) {
+            log.trace('Use function [' + node.callee.name + "]")
+        }
         if (simplified[node.callee.name]) {
             simplified[node.callee.name](formulaInfo, node);
         } else {
@@ -412,16 +370,16 @@ function buildFormula(formulaInfo, parent, node) {
             }
         }
     }
-    else if (node.type === 'Identifier') {
+    else if (node.type === IDENTIFIER) {
         /**
          * TODO: modify these parameters while parsing regex, directly inject the correct parameters
          */
         if (node.name === 'T') {
             node.name = 'x';
         }
-        //zAxis Reference, base period
+        //zAxis Reference, base period, z.base
         if (node.name === 'MainPeriod') {
-            node.name = 'x';
+            node.name = 'z';
         }
         //
         if (node.name === 'MaxT') {
@@ -439,9 +397,9 @@ function buildFormula(formulaInfo, parent, node) {
         if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
-        //should return the t.index.
+        //should return the x.index.
         else if (node.name === 't') {
-            log.warn('invalid t parsing')
+            log.warn('invalid t parsing [%s]', formulaInfo)
             //return the hash t.hash or t.index?
             node.name = 'hash';
         }
@@ -484,15 +442,7 @@ FormulaBootstrap.prototype.parseAsFormula = function (formulaInfo) {
         formulaInfo.original = formulaInfo.body;
         ast = esprima.parse(formulaInfo.body);
     }
-    //this part is cutting off a load of self-references. Not sure if going to build caching mechanism
-    //There is soo many to learn about dependency loops.
-    var tempnaaam = formulaInfo.name.replace(/^KSP_/, '').replace(/_value$/g, '');
-    formulaInfo.tempnaaam = tempnaaam;
-
-    //check if the formula contains a self-reference
-    if (new RegExp("\W" + tempnaaam + "\W", "gmi").test(formulaInfo.original)) {
-        log.warn('Self reference found [%s] in [%s]', formulaInfo.name, formulaInfo.original);
-    }
+    // formulaInfo.tempnaaam = formulaInfo.name.replace(/^KSP_/, '').replace(/_value$/g, '');
     buildFormula(formulaInfo, null, ast);
     var generated = regenerate(ast);
     formulaInfo.ast = JSON.stringify(ast);

@@ -2,6 +2,10 @@ var assert = require('assert')
 var log = require('ff-log')
 var AST = require('ast-node-utils').ast;
 var escodegen = require('escodegen');
+var xArgument = {
+    "type": "Identifier",
+    "name": "x"
+};
 
 // some variables we shall use..
 //we want to modify its default behavior
@@ -39,20 +43,6 @@ var simplified = {
         node.type = "SequenceExpression";
         var elements = statements.elements;
         node.expressions = [
-            /*{
-             "type": "VariableDeclaration",
-             "declarations": [
-             {
-             "type": "VariableDeclarator",
-             "id": {
-             "type": "Identifier",
-             "name": cs
-             },
-             "init": node.arguments[0]
-             }
-             ],
-             "kind": "var"
-             }*/
             {
                 "type": "AssignmentExpression",
                 "operator": "=",
@@ -78,7 +68,6 @@ var simplified = {
         var lastExpression = elements[elements.length - 1];
         elements[elements.length - 1] = {
             type: "ConditionalExpression",
-            // (elements.length > 1 ? : '')
             test: AST.IDENTIFIER(cs + ' === ' + elements[elements.length - 2].right.value),
             consequent: lastExpression,
             alternate: AST.IDENTIFIER('NA')
@@ -99,7 +88,7 @@ var simplified = {
         //look into delete and undefined, we better use undefined since its quicker.
         node.callee = undefined;
         node.arguments = undefined;
-        log.info('[%s] CASE parsed into: [%s]',formulaInfo.name, escodegen.generate(node));
+        log.debug('[%s] CASE parsed into: [%s]', formulaInfo.name, escodegen.generate(node));
     },
     //convert traditional If(q,a,b) into q?a:b, skip the entire Callee
     If: function (formulaInfo, node) {
@@ -117,7 +106,7 @@ var simplified = {
         node.arguments = undefined;
         node.callee = undefined;
     },
-    //wants horizontale aggregation
+    //wants horizontale aggregation from values in between two given columns
     Hsum: function (formulaInfo, node) {
         /* node.arguments = [{
          "type": "Identifier",
@@ -132,13 +121,15 @@ var simplified = {
      "name": "1"
      }];
      },*/
+    //returns max value in between two given columns. entered/non-entered
     MaxValueT: function (formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
             "name": "1"
         }];
     },
-    //ExpandFraction requires two variables
+    //ExpandFraction ExpandFraction(VariableCosts,Sales)
+    //http://wiki.findesk.com/index.php/ExpandFraction_(numeric_function)
     ExpandFraction: function (formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",

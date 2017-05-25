@@ -8,7 +8,7 @@
     "ast-node-utils": "file:ast-node-utils",
     "ff-fes": "^1.0.1",
     "ff-formulajs": "^1.0.1",
-    "ff-log": "^1.0.12",
+    "ff-log": "^1.0.16",
     "promise": "^7.1.1",
     "tracer": "^0.8.7"
   },
@@ -16,7 +16,7 @@
     "ff-fes": "^1.0.1",
     "ff-fes-xlsx": "^1.0.2",
     "ff-formulajs": "^1.0.1",
-    "ff-log": "^1.0.12",
+    "ff-log": "^1.0.16",
     "ff-math": "file:ff-math",
     "formulajs": "^1.0.8",
     "promise": "^7.1.1",

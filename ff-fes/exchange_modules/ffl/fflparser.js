@@ -55,7 +55,9 @@ FFLParser.prototype.parseData = function (data, workbook) {
                 if (tupleDefiniton) {
                     context.nestTupleDepth++;
                 }
-                log.debug('tuple def for [%s].[%s] is [%s]', nodeName, context.nestTupleDepth, context.tupleDefinition);
+                if (context.tupleDefinition) {
+                    log.debug('tuple def for [%s].[%s] is [%s]', nodeName, context.nestTupleDepth, context.tupleDefinition);
+                }
                 addnode(logVars, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && context.tupleDefinition, context.tupleDefinition, context.nestTupleDepth);
                 if (tupleDefiniton) {
                     context.tupleDefinition = nodeName;
@@ -247,7 +249,9 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
             //use the ASTCache for this later on
             //this could cause problems when internal formula's are requesting its value
             if (defaultValue[key] && defaultValue[key][node[key]]) {
-                log.debug('Default [' + key + '] formula, skipping. [' + node[key] + '][' + rowId + ']');
+                if (log.DEBUG) {
+                    log.debug('Default [%s.%s]-formula. Skipping formula:[%s]', rowId, key, node[key]);
+                }
                 continue;
             }
             SolutionFacade.createUIFormulaLink(solution, rowId, formulaMapping[key], parseFFLFormula(node[key]));

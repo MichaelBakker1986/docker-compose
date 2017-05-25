@@ -71,7 +71,6 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
     updateRows();
 
     saveFunction = function () {
-        console.info('save model' + $scope.apiPath + 'FORMULA/' + 1)
         var httpPromise;//= $http.post($scope.apiPath + 'FORMULA/' + 1, SolutionFacade.produceSolution().formulas);
 
         $scope.myPromise = httpPromise;
@@ -79,9 +78,7 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
             $scope.myPromise = httpPromise;
         });
         httpPromise.then(function successCallback(response) {
-            console.info(response);
         }, function errorCallback(response) {
-            console.error(response)
         });
     }
     sidebarHide();//just temporally fix, should be more angular'ish
@@ -98,7 +95,6 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
      */
     $scope.updateFormula = function (row, col, formulaUI) {
         if (row === undefined || col === undefined) {
-            console.info(row + ":" + col);
             throw Error('Invalid params');
         }
         var refName = row + "_" + col;
@@ -107,7 +103,6 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
                 /* //want to see all cols needed, rows needed..
                  //metadata is printed..
                  var metaData = pivot(data);
-                 console.info(metaData)
                  var aditional = $scope.rows;
                  for (var i = 0; i < metaData.count; i++)
                  {
@@ -125,8 +120,6 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
         }
         else {
             try {
-                console.info('row: ' + row + "  col : " + col)
-
                 //var uiCell = UIModel.getOrCreateProperty(row, col, true);
                 if (col === 'tuple') {
                     //var tupleTuple = UIModel.getOrCreateProperty(row, 'value', true);
@@ -149,7 +142,6 @@ APP.controller('editor', ['$timeout', '$scope', '$http', '$location', function (
         // var uiCell = UIModel.getOrCreateProperty(row, col, true);
         $timeout(function () {
             $scope.focussedId = row + "_" + col;
-            console.info($scope.focussedId)
             $scope.SelectedComponent = {
                 ui: uiCell,
                 row: row,

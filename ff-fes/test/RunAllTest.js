@@ -1,8 +1,8 @@
 /*
  * There is no way to clear State, every doImport will contribute to static state
  */
-process.alltest = true;
 process.loglevel = 'info'
+process.alltest = true;
 var log = require('ff-log')
 var performceTestStartTime = new Date().getTime();
 console.time('performance')

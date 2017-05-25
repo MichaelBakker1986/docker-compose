@@ -261,7 +261,7 @@ function addNode(solution, node, parentId)
     }
     if (solution.hasNode(rowId))
     {
-        console.info('Dupe..')
+        logger.info('Dupe..')
     }
     var parentName;
     if (parentId !== undefined && parentId !== null)

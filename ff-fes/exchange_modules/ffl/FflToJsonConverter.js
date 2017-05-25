@@ -233,8 +233,11 @@ FflToJsonConverter.prototype.parseFFL = function (contents) {
                     }
                 } else {
                     //does only happen for now with Case calls;
+                    //Fails for formula's including ':' e.g. "hint: Week number: 14"
                     node[firstWord] = FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1));
-                    log.debug('Found Case(..,[*:*]); change : to , in %s', FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1)))
+                    if (log.DEBUG) {
+                        log.debug('Found Case(..,[*:*]); change : to , in [%s] result [%s]',obj, FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1)))
+                    }
                 }
             }
         }

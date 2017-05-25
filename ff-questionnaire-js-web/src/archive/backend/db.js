@@ -1,4 +1,5 @@
 var Sequelize = require('sequelize');
+var log = require('ff-log')
 var dbSchema = process.dbSchema || 'questjs';
 
 var mysqldbstring = 'mysql://root:root@localhost:3306/' + dbSchema;
@@ -8,7 +9,7 @@ var mysqldbstring = 'mysql://root:root@localhost:3306/' + dbSchema;
  * Rest just meta-data
  * @type {*|exports|module.exports}
  */
-console.info('Database connection initializing. Schema:[' + dbSchema + ']');
+log.info('Database connection initializing. Schema:[' + dbSchema + ']');
 
 var sequelize = new Sequelize(mysqldbstring, {
     /*logging: false*/

@@ -59,17 +59,14 @@ types = {
     },
     language: function (solution, obj)
     {
-        //console.info('Language ' + obj)
         //nothing for now
     },
     tryinclude: function (solution, obj)
     {
-        //console.info('tryInclude ' + obj)
         //nothing for now
     },
     quit: function (solution, obj)
     {
-        //console.info('Quit ' + obj)
         //nothing for now
     },
     unknown: function (solution, obj)
@@ -87,7 +84,7 @@ types = {
         }
         else
         {
-            console.info('Warn:  ' + JSON.stringify(obj))
+            logger.info('Warn:  ' + JSON.stringify(obj))
         }
     },
     //there is soo many pattern, we can do this easier later.
@@ -132,10 +129,6 @@ types = {
         //obj.property = 'formula';
         //a variable can have some formula
         //hint,visible,locked,title
-        if (obj.title === undefined)
-        {
-            console.info('');
-        }
         obj.title = "'" + obj.title.replace(/["'](.*)["']/gm, "$1") + "'";
     }
 }
@@ -274,7 +267,6 @@ function parseFinFile(buf)
                 //ensure the array exists
                 //there are two groups, formulas and variables
                 orderedByType[obj._type].push(obj);
-                // console.info(obj.property || state.name)
                 //find a way to be case-insensitive
                 var objName = (obj.property || nestedState.name || state.name).toLowerCase();
 

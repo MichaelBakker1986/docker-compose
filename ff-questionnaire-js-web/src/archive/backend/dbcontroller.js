@@ -326,7 +326,6 @@ var templates = {
                 return null;
             }
             var result = JSON.parse(JSON.stringify(data.get()));
-            console.info('solutionID' + result.id)
             var select = 'SELECT distinct F.id,F.name,F.parsed, F.type,F.original from uimodels AS UI,formulas as F LEFT  JOIN formula_associations as FA ON FA.toId = F.id where UI.solutionId =' + result.id + ' AND (UI.formulaId = F.id OR (UI.formulaId = FA.fromId))';
             //var select = 'SELECT distinct F.* from uimodels AS UI,formula_associations as FA,formulas as F where UI.solutionId =' + result.id + ' AND (UI.formulaId = F.id OR
             // (FA.toId = F.id AND UI.formulaId = FA.fromId))'
