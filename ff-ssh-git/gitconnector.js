@@ -5,7 +5,7 @@ var fs = require('fs');
 function ModelListener() {
 }
 new Promise(function (resolve, reject) {
-    fs.writeFile('finanfinancials/', '', {flag: 'wx'}, function (err) {
+  /*  fs.writeFile('finanfinancials/', '', {flag: 'wx'}, function (err) {
         if (err) {
             if (err.errno == -4075) {
                 resolve("repo already created.");
@@ -13,9 +13,11 @@ new Promise(function (resolve, reject) {
                 throw err;
             }
         } else {
+        _*/
             resolve("repo created.");
-        }
-    });
+/*
+}
+    });*/
 }).then(function (message) {
     console.log(message);
     /*NodeGit.Repository.init('./finanfinancials/', 0).then(function (repo) {
@@ -115,7 +117,7 @@ ModelListener.prototype.initializeModels = function () {
         }
     };
     //  fetFileNames(__dirname + '\\finanfinancial\\', modelCallback);
-    fetFileNames(__dirname + '\\resources\\', modelCallback);
+    fetFileNames(__dirname + '/resources/', modelCallback);
 }
 ModelListener.prototype.onNewModel = function (modeldata) {
     log.info(modeldata)
