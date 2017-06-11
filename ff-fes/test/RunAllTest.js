@@ -17,7 +17,7 @@ var tests = [
     './jsonValuesTest',
     './presentationTest',
     './tupleTest',
-    './apiTest',
+    /*'./apiTest',*/
     './totalYearlyCostsTSUMTest'
 ];
 var testResults = [];

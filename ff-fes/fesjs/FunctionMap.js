@@ -14,14 +14,14 @@ var log = require('ff-log')
 function fm() {
 }
 //don't directly use this method, use JSWorkBook instead.
-fm.prototype.apiGet = function (formula, x, y, z, v) {
+fm.prototype.apiGet = function(formula, x, y, z, v) {
     // console.info('API call for formula: ' + formula.name);
     //temp fix fallback for ID, index is the Virtual ID, not persisted in the database
     //should be checked outside this function call
     var id = formula.id || formula.index;
     return global['a' + id](id, x, y, z, v);
 }
-fm.prototype.apiSet = function (formula, x, y, z, value, v) {
+fm.prototype.apiSet = function(formula, x, y, z, value, v) {
     var id = formula.id === undefined ? formula.index : formula.id;
     if (v[id] !== undefined) {
         var hash = x.hash + y.hash + z;
@@ -37,7 +37,7 @@ fm.prototype.apiSet = function (formula, x, y, z, value, v) {
         log.debug('[%s] does not exist', id);
     }
 }
-fm.prototype.initializeFormula = function (newFormula) {
+fm.prototype.initializeFormula = function(newFormula) {
     var id = newFormula.id || newFormula.index;
     if (log.DEBUG) {
         log.debug("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
@@ -51,17 +51,17 @@ fm.prototype.initializeFormula = function (newFormula) {
 // the ApiGet. we don't need the CacheLocked and the NoCacheUnlocked they are just for further optimalizations.
 var formulaDecorators = {
     //nothing to to, just return the inner function
-    noCacheLocked: function (innerFunction, formulaName) {
+    noCacheLocked: function(innerFunction, formulaName) {
         return innerFunction;
     },
     //Unlocked formula's can be user entered.
     //Encapsulates that part.
-    noCacheUnlocked: function (innerFunction, formulaName, varName) {
+    noCacheUnlocked: function(innerFunction, formulaName, varName) {
         //add a user value cache
         //f = formulaId
         //y,x,z dimensions Tuple,Column,Layer
         //v = enteredValues
-        return function (f, x, y, z, v) {
+        return function(f, x, y, z, v) {
             //console.info('calling formula ;' + varName)
             var hash = x.hash + y.hash + z;
             //check if user entered a value
@@ -77,7 +77,7 @@ var formulaDecorators = {
     }
     //will need more types e.g. cacheLocked and cacheUnlocked.
 }
-fm.prototype.moveFunction = function (oldFormula, newFormula) {
+fm.prototype.moveFunction = function(oldFormula, newFormula) {
     if (oldFormula.index !== newFormula.id) {
         if (global['a' + newFormula.id]) {
             log.warn('Formula already taken[' + newFormula.id + ']');

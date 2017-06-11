@@ -18,7 +18,7 @@ var Node = require('./Node.js')
 var Tree = require('./Tree.js')
 var SolutionFacade = require('../../fesjs/SolutionFacade');
 var AST = require('ast-node-utils').ast;
-Node.prototype.delete = function () {
+Node.prototype.delete = function() {
     throw Error('Remove not yet implemented')
     //PropertiesAssembler.remove(this.parent().rowId, this.rowId);
     this._tree.remove(this.rowId);
@@ -29,7 +29,7 @@ var UUID = 0;
 /*
  * please refactor..
  */
-Node.prototype.duplicate = function () {
+Node.prototype.duplicate = function() {
     //
     /* var wb = this._tree.workbook
      //This part does not belong here, just to test behavior
@@ -54,7 +54,7 @@ Node.prototype.duplicate = function () {
      this.parent().update({title: true});*/
 }
 
-Tree.prototype.update = function (node, properties) {
+Tree.prototype.update = function(node, properties) {
     var wb = this.workbook;
     var fetch = wb.getNode(node.rowId)
     if (fetch === undefined) {
@@ -64,13 +64,13 @@ Tree.prototype.update = function (node, properties) {
     var actualNodes = {};
     //get list of uiTreeNodes we gonna check
     var tree = this;
-    node.visit(function (subNode) {
+    node.visit(function(subNode) {
         uiTreeNodes[subNode.rowId] = subNode;
     });
     //so we know what number it is in the tree, we will never show more than 200 rows in a page.
     var count = 0;
     fetch.parentrowId = node._parent === undefined ? undefined : node._parent.rowId;
-    wb.visitProperties(fetch, function (subNode, yas) {
+    wb.visitProperties(fetch, function(subNode, yas) {
         actualNodes[subNode.rowId] = subNode;
         var uiTreeNode = uiTreeNodes[subNode.rowId];
         if (uiTreeNode === undefined) {
@@ -110,13 +110,13 @@ Tree.prototype.update = function (node, properties) {
         //uiTreeNode._index;
         //uiTreeNode._actualParent;
     }
-    node.visitTraverse(function (subNode) {
+    node.visitTraverse(function(subNode) {
         subNode._update(properties);
     });
     this.clearRowState();
     var nodelist = this.nodelist;
     //expand own children when own childrensize <  MAX viewtotal
-    node.visitTraverse(function (subNode) {
+    node.visitTraverse(function(subNode) {
         nodelist.push(subNode);
         //parent.totalChild
         if (subNode.nodes) {
@@ -133,7 +133,7 @@ Tree.prototype.update = function (node, properties) {
     });
 
 }
-Node.prototype._update = function (properties) {
+Node.prototype._update = function(properties) {
     var wb = this._tree.workbook;
     var fetch = wb.getNode(this.rowId)
     //should also be a property given from outside...
@@ -178,16 +178,16 @@ var presentationConverter = {
     hide: true,
     name: 'presentation',
     headername: 'Native Object Presentation',
-    parse: function (json) {
+    parse: function(json) {
         throw new Error('Not yet supported');
     },
-    deParse: function (rowId, workbook) {
+    deParse: function(rowId, workbook) {
         var modelName = workbook.getSolutionName();
         var rootNode = workbook.getRootSolutionProperty(modelName);
         if (rootNode !== undefined) {
             var tree = new Tree(rootNode.rowId);
             tree.workbook = workbook;
-            workbook.visitProperties(rootNode, function (node) {
+            workbook.visitProperties(rootNode, function(node) {
                 //skip the rootnode, we just used it
                 if (node.rowId !== rootNode.rowId) {
                     //can only make nodes via a Tree.
@@ -201,11 +201,11 @@ var presentationConverter = {
         }
         var exportValue = {
             tree: tree === undefined ? {
-                    getNode: function () {
-                        return undefined
-                    }, visit: function () {
-                    }
-                } : tree.getRoot(),
+                getNode: function() {
+                    return undefined
+                }, visit: function() {
+                }
+            } : tree.getRoot(),
             navigator: undefined
         };
         var navigator = {
@@ -214,7 +214,7 @@ var presentationConverter = {
             _up: undefined,
             _previous: undefined,
             _in: undefined,
-            move: function (rowId) {
+            move: function(rowId) {
                 var newCurrent = exportValue.tree.getNode(rowId);
                 if (newCurrent) {
                     _moveViewPoint(newCurrent)

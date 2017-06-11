@@ -1,0 +1,6 @@
+{
+  "preset": "google",
+  "maxErrors": 1000,
+  "requireCurlyBraces": null
+  // or false
+}

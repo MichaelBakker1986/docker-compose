@@ -31,6 +31,7 @@ function createRootnode(modelName) {
             rowId: 'root',
             colId: 'value',
             solutionName: newModelName,
+            frequency: 'document',
             displayAs: 'SectionAnswerType',
             nodes: []
         };

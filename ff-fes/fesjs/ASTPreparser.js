@@ -1,4 +1,4 @@
-var assert = require('assert')
+var assert = require("assert")
 var log = require('ff-log')
 var AST = require('ast-node-utils').ast;
 var escodegen = require('escodegen');

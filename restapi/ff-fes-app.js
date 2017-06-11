@@ -1,4 +1,4 @@
-global.loglevel = 'info'
+process.loglevel = 'info'
 var log = require('ff-log');
 log.info('Startup ff-restapi')
 var restify = require('restify');
@@ -16,7 +16,7 @@ var Respond = new apiimpl(DBConn);
 function respond(req, res, next) {
     //handle request Async by default, create Promise, result when done.
     log.info('Call context:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value, req.params.tupleindex)
-    new Promise(function (success, fail) {
+    new Promise(function(success, fail) {
         try {
             //resolve context key to stored values
             var columncontext = req.params.columncontext || "0";
@@ -24,10 +24,10 @@ function respond(req, res, next) {
         } catch (err) {
             fail(err);
         }
-    }).then(function (answer) {
+    }).then(function(answer) {
         log.info('End call succes context:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value)
         res.send(answer)
-    }).catch(function (err) {
+    }).catch(function(err) {
         res.send('Program error. [' + err.message + ']');
         log.error('Call context fail:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value)
         log.error("trace", err);
@@ -37,9 +37,15 @@ function respond(req, res, next) {
 }
 var server = restify.createServer({
     formatters: {
-        'application/json': function (req, res, body, cb) {
+        'application/json': function(req, res, body, cb) {
             res.setHeader('Content-Type', 'application/json');
-            return cb(null, JSON.stringify(body, null, 2));
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Length");
+            res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            res.header("Access-Control-Allow-Credentials", "true");
+            var stringify = JSON.stringify(body, null, 2);
+            res.setHeader('Content-Length', Buffer.byteLength(stringify));
+            return cb(null, stringify);
         }
     },
     name: 'ff-restapi'
@@ -58,10 +64,10 @@ server.get('/:context/:function', respond);
 server.get('/:context/:function/:variable/:value', respond);
 server.get('/:context/:function/:variable/:columncontext/:value', respond);
 server.get('/:context/:function/:variable/:columncontext/:tupleindex/:value', respond);
-
-server.listen(9001, function () {
+server.pre(restify.pre.userAgentConnection());
+server.listen(9001, function() {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT')
+    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/root')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_MAP00/0')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT/Incomplete')
     log.info('Test path: [%s]', 'http://localhost:9001/user1/value/KSP_Q_ROOT/Complete')

@@ -1,0 +1,178 @@
+import FinanMath;
+import BaseModel;
+
+model Invoice uses BaseModel
+{
+    version: "1.00";
+    frequency: document;
+    root
+    {
+        frequency: document;
+        variable logo
+        {
+            datatype: number;
+            frequency: document;
+            formula: "R0lGODlhAQABAIAAAAAAAP\/\/\/yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+        }
+        variable availableCurrencies
+        {
+            datatype: choice;
+            frequency: document;
+            choices:  "€:Euro (€)|$:US Dollar ($)|£:British Pound (£)|CAD $:Canadian Dollar ($)|₹:Indian Rupee (₹)|kr:Norwegian krone (kr)";
+            formula: '€';
+        }
+        tuple items
+        {
+            datatype: number;
+            frequency: document;
+            variable qty
+            {
+                datatype: number;
+                frequency: document;
+                formula: 10;
+            }
+            variable description
+            {
+                datatype: string;
+                frequency: document;
+                formula: 'Beschrijving';
+            }
+            variable cost
+            {
+                datatype: number;
+                frequency: document;
+                formula: 9.95;
+            }
+            variable qrtTax
+            {
+                formula: cost * qty;
+            }
+        }
+        variable currencySymbol
+        {
+            datatype: string;
+            frequency: document;
+            formula: '€';
+        }
+        variable tax
+        {
+            datatype: string;
+            frequency: document;
+            title: 'Tax(\u0025)\u003A';
+            formula: 13.00;
+        }
+        variable invoice_number
+        {
+            datatype: number;
+            frequency: document;
+            title: 'Invoice';
+            formula: 10;
+        }
+        variable customer_info
+        {
+            datatype: number;
+            frequency: document;
+            variable name
+            {
+                datatype: string;
+                frequency: document;
+                formula: 'Mr. John Doe';
+            }
+            variable web_link
+            {
+                datatype: string;
+                frequency: document;
+                formula: 'John Doe Designs Inc.';
+            }
+            variable address1
+            {
+                datatype: string;
+                frequency: document;
+                formula: '1 Infinite Loop';
+            }
+            variable address2
+            {
+                datatype: string;
+                frequency: document;
+                formula: 'Cupertino, California, US';
+            }
+            variable postal
+            {
+                datatype: string;
+                frequency: document;
+                formula:  '90210';
+            }
+        }
+        variable company_info
+        {
+            datatype: number;
+            frequency: document;
+            variable company_name
+            {
+                datatype: string;
+                frequency: document;
+                formula: 'Mr. John Doe';
+            }
+            variable company_web_link
+            {
+                datatype: string;
+                frequency: document;
+                formula: 'John Doe Designs Inc.';
+            }
+            variable company_address1
+            {
+                datatype: string;
+                frequency: document;
+                formula: '1 Infinite Loop';
+            }
+            variable company_address2
+            {
+                datatype: string;
+                frequency: document;
+                formula: 'Cupertino, California, US';
+            }
+            variable company_postal
+            {
+                datatype: string;
+                frequency: document;
+                formula:  '90210';
+            }
+        }
+        variable invoiceSubTotal
+        {
+            datatype: string;
+            title: 'Sub Total';
+            frequency: document;
+            formula: TupleSum(qrtTax);
+        }
+        variable calculateGrandTotal
+        {
+            datatype: string;
+            title: 'Grand Total:';
+            frequency: document;
+            formula: calculateTax + invoiceSubTotal;
+        }
+
+        variable addItem
+        {
+            datatype: string;
+            frequency: document;
+            //this.items.push({qty: 0, cost: 0, description: ""});
+        }
+
+        variable removeItem
+        {
+            datatype: string;
+            frequency: document;
+            formula: 1;
+            //*    this.items.splice(this.items.indexOf(item), 1);*/
+        }
+
+        variable calculateTax
+        {
+            datatype: string;
+            frequency: document;
+            formula: ((tax * invoiceSubTotal) / 100);
+        }
+    }
+}

@@ -1,57 +1,58 @@
+/* jshint node: true */
 /**
  * user friendly API
  */
-require('./exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
+require("./exchange_modules/ffl/fflparser");//just let it inject into the FESFacade
 //require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
-var log = require('ff-log')
-var WorkBook = require('./fesjs/JSWorkBook');
-var FESContext = require('./fesjs/fescontext');
-var TupleIndexConverter = require('./fesjs/TupleIndexConverter');
+var log = require("ff-log");
+var WorkBook = require("./fesjs/JSWorkBook");
+var FESContext = require("./fesjs/fescontext");
+var TupleIndexConverter = require("./fesjs/TupleIndexConverter");
 
 function FESApi() {
 }
 
-FESApi.prototype.init = function (data) {
+FESApi.prototype.init = function(data) {
     var JSWorkBook = new WorkBook(new FESContext());
-    JSWorkBook.importSolution(data, 'ffl');
+    JSWorkBook.importSolution(data, "ffl");
     var validate = JSWorkBook.validateImportedSolution();
     JSWorkBook.fixProblemsInImportedSolution();
     var validateFeedback = JSWorkBook.validateImportedSolution();
     if (validateFeedback.valid) {
         //valid
-        log.debug('Initialized model [' + JSWorkBook.getSolutionName() + ']');
+        log.debug("Initialized model [" + JSWorkBook.getSolutionName() + "]");
     } else {
-        log.error(validateFeedback)
-        throw Error('unable to initialize')
+        log.error(validateFeedback);
+        throw Error("unable to initialize");
     }
     return JSWorkBook.getRootSolutionProperty().solutionName;
-}
-FESApi.prototype.addFunctions = function (plugin) {
+};
+FESApi.prototype.addFunctions = function(plugin) {
     var functions = [];
     for (var functionName in plugin.entries) {
-        functions.push(functionName)
-        global[functionName] = plugin.entries[functionName]
+        functions.push(functionName);
+        global[functionName] = plugin.entries[functionName];
     }
-    log.info('Added fes-plugin [%s] functions [%s]', plugin.name, functions)
-}
+    log.info('Added fes-plugin [%s] functions [%s]', plugin.name, functions);
+};
 /**
  * rowId - VariableName
  * @Optional value - new value
+ * TODO: move to tupleDefinition to support multiple tuple definition/tuple in tuple
  */
-FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, tupleindex) {
-    columncontext = columncontext || 0
-    // Convert tuple index to tuple number
-    //TODO: move to tupleDefinition to support multiple tuple definition/tuple in tuple
+// Convert tuple index to tuple number
+FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tupleindex) {
+    columncontext = columncontext || 0;
     if (tupleindex !== undefined) {
         tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
     }
     var fesContext = new FESContext();
     fesContext.values = context.values;
-    var JSWorkBook = new WorkBook(fesContext)
+    var JSWorkBook = new WorkBook(fesContext);
     JSWorkBook.columns = context.columns || 17;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
     //prepare the workbook and context to match current appscope
-    JSWorkBook.updateValues()
+    JSWorkBook.updateValues();
     //setvalue
     if (value !== undefined) {
         //choice(select) requests
@@ -60,18 +61,18 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
             var choices = JSWorkBook.getSolutionPropertyValue(rowId, 'choices');
             var choiceValue = choices.lookup('value', value);
             if (choiceValue === undefined) {
-                log.warn('Could not find [%s] choice [%s] in %s. using [%s] to be value', rowId, value, JSON.stringify(choices), value)
+                log.warn('Could not find [%s] choice [%s] in %s. using [%s] to be value', rowId, value, JSON.stringify(choices), value);
             } else {
                 value = isNaN(choiceValue.name) ? choiceValue.name : parseInt(choiceValue.name);
             }
         }
-        JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, tupleindex)
+        JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, tupleindex);
 
         var values = [];
         var rootNode = JSWorkBook.getSolutionNode(rowId);
 
-        JSWorkBook.visitProperties(rootNode, function (node, yax) {
-            values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax))
+        JSWorkBook.visitProperties(rootNode, function(node, yax) {
+            values = values.concat(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
         }, 0);
         return values;
     } else {
@@ -79,17 +80,17 @@ FESApi.prototype.fesGetValue = function (context, rowId, columncontext, value, t
         var values = [];
         var rootNode = JSWorkBook.getSolutionNode(rowId);
         if (rootNode) {
-            JSWorkBook.visitProperties(rootNode, function (node, yax) {
-                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax))
+            JSWorkBook.visitProperties(rootNode, function(node, yax) {
+                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
             });
         } else {
             values.push({
                 variable: rowId
-            })
+            });
         }
         return values;
     }
-}
+};
 /**
  * Given properties in workbook return all values for given columns
  * @param workbook
@@ -125,12 +126,17 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
             if (variable.tuple) {
                 dataEnty.tupleIndex = yAxis.index;
             }
+            dataEnty.hash = yAxis.hash + xAxisCounter + 0;
         }
     }
     //if there is only one column, the exported value is not presented to be an array
     if (columnStart == columnEnd) {
-        outputData = outputData[0]
+        outputData = outputData[0];
     }
+    /*
+     if (variable && variable.frequency === 'document') {
+     outputData = outputData[0];
+     }*/
     return outputData;
 }
-exports.fesjs = FESApi.prototype
+exports.fesjs = FESApi.prototype;

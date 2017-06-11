@@ -1,7 +1,6 @@
-var log = require('ff-log')
-var WorkBook = require('../fesjs/JSWorkBook')
-var FESContext = require('../fesjs/fescontext')
-require('../../ff-math')
+var WorkBook = require('../fesjs/JSWorkBook');
+var FESContext = require('../fesjs/fescontext');
+require('../../ff-math');
 var assert = require('assert');
 /*var ARGUMENT_NAMES = /([^\s,]+)/g;
  function getParamNames(func) {
@@ -18,41 +17,41 @@ wb.createFormula("2+DocumentValue", "TupleSibling2", 'value', true, 'document');
 wb.createFormula("TupleSibling1[doc]+TupleSibling2[doc]", "TestTupleValues", 'value', true, 'document');
 wb.createFormula("TSUM(TestTupleValues[doc])", "TestTupleValuesSUM", 'value', false, 'document');
 
-assert(wb.get('TestTupleValues', 'value', 0, 0) == 13)
-wb.set('DocumentValue', 100, 'value', 0, 1)//will completely be ignored, since its not a tuple
-assert(wb.get('TestTupleValues', 'value', 0, 0) == 13)
-wb.set('DocumentValue', 100, 'value', 0, 0)
-assert(wb.get('TestTupleValues', 'value', 0, 0) == 103)
-wb.set('TupleSibling1', 2, 'value', 0, 1)
-assert(wb.get('TestTupleValues', 'value', 0, 0) == 103)
-assert(wb.get('TestTupleValues', 'value', 0, 1) == 104)
+assert(wb.get('TestTupleValues', 'value', 0, 0) === 13);
+wb.set('DocumentValue', 100, 'value', 0, 1);//will completely be ignored, since its not a tuple
+assert(wb.get('TestTupleValues', 'value', 0, 0) === 13);
+wb.set('DocumentValue', 100, 'value', 0, 0);
+assert(wb.get('TestTupleValues', 'value', 0, 0) === 103);
+wb.set('TupleSibling1', 2, 'value', 0, 1);
+assert(wb.get('TestTupleValues', 'value', 0, 0) === 103);
+assert(wb.get('TestTupleValues', 'value', 0, 1) === 104);
 //TupleSibling1 and TupleSibling2 do not know they belong to same tuple group
-assert(wb.get('TestTupleValuesSUM') === 0)
+assert(wb.get('TestTupleValuesSUM') === 0);
 
 wb.createFormula("1+1", "TupleTest", 'value', true);
 wb.createFormula("TSUM(TupleTest)", "TupleTestSUM");
 
-assert(wb.get('TupleTest') == 2)
-wb.set('TupleTest', 10)
-assert(wb.get('TupleTest') == 10)
+assert(wb.get('TupleTest') === 2);
+wb.set('TupleTest', 10);
+assert(wb.get('TupleTest') === 10);
 
 var FirstY = 1;
 var FirstX = 1;
 //ga tupleInstantie in, y0(0) -> y0(1), check hoeveel Instanties er zijn
 wb.set('TupleTest', 20, 'value', FirstX)
-assert(wb.get('TupleTest') == 10)
-assert(wb.get('TupleTest', 'value', FirstX) == 20)
+assert(wb.get('TupleTest') === 10)
+assert(wb.get('TupleTest', 'value', FirstX) === 20)
 wb.set('TupleTest', 30, 'value', FirstX, FirstY)
 assert(wb.get('TupleTest', 'value', FirstY) == 20)
 wb.set('TupleTest', 40, 'value', FirstY, 0)
 assert(wb.get('TupleTest', 'value', FirstX, FirstY) == 30)
 var tupleTestSUM = wb.get('TupleTestSUM');
 assert(tupleTestSUM == 10 + 2)
-assert(wb.get('TupleTestSUM', 'value', FirstX) == 40 + 30)
+assert(wb.get('TupleTestSUM', 'value', FirstX) === 40 + 30)
 wb.set('TupleTest', 100, 'value', FirstX, 30)
-assert(wb.get('TupleTestSUM', 'value', FirstY) == 100 + 40 + 30 + 2 * 28)
+assert(wb.get('TupleTestSUM', 'value', FirstY) === 100 + 40 + 30 + 2 * 28)
 wb.set('TupleTest', null, 'value', FirstX, 30)
-assert(wb.get('TupleTestSUM', 'value', FirstX) == 40 + 30)
+assert(wb.get('TupleTestSUM', 'value', FirstX) === 40 + 30)
 
 wb.createFormula("''", "TupleName", 'value', true);
 wb.set('TupleName', 'Piet', 'value', 0, 0)
