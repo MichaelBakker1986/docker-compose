@@ -7,7 +7,7 @@ var log = require('ff-log');
 var Promise = require('promise')
 var matrix = {};
 var workbook = new Excel.Workbook();
-var fileName = __dirname + '\\resources\\SCorecardKSP1.xlsx';
+var fileName = __dirname + '/resources/SCorecardKSP1.xlsx';
 var succes;
 var initComplete = new Promise(function (succesArg) {
     succes = succesArg;
