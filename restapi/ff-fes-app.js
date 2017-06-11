@@ -64,19 +64,20 @@ server.get('/:context/:function', respond);
 server.get('/:context/:function/:variable/:value', respond);
 server.get('/:context/:function/:variable/:columncontext/:value', respond);
 server.get('/:context/:function/:variable/:columncontext/:tupleindex/:value', respond);
+var port = 9020;
 server.pre(restify.pre.userAgentConnection());
-server.listen(9001, function() {
+server.listen(port, function() {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/root')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_MAP00/0')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Q_ROOT/Incomplete')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/KSP_Q_ROOT/Complete')
-    log.info('Test path: [%s]', 'http://localhost:9001/user2/value/Q_ROOT/110')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/ChildcareContribution/1/200')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/ChildcareContribution')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/context')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Child/0/0/Jip')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/ChildGender/0/0/Boy')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/Child/0/1/Janneke')
-    log.info('Test path: [%s]', 'http://localhost:9001/user1/value/ChildGender/0/1/Girl')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/root')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/Q_MAP00/0')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/Q_ROOT/Incomplete')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Q_ROOT/Complete')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user2/value/Q_ROOT/110')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/ChildcareContribution/1/200')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/ChildcareContribution')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/context')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/Child/0/0/Jip')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/ChildGender/0/0/Boy')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/Child/0/1/Janneke')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/ChildGender/0/1/Girl')
 });
