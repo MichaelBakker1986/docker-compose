@@ -64,7 +64,7 @@ server.get('/:context/:function', respond);
 server.get('/:context/:function/:variable/:value', respond);
 server.get('/:context/:function/:variable/:columncontext/:value', respond);
 server.get('/:context/:function/:variable/:columncontext/:tupleindex/:value', respond);
-var port = 443;
+var port = process.argv[2] || 9001;
 server.pre(restify.pre.userAgentConnection());
 server.listen(port, function() {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
