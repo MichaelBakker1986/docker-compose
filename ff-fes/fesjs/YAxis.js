@@ -19,7 +19,7 @@ for (var i = 1; i < 40; i++) {
 }
 
 //return all values in given tuple
-TVALUES = function (fIds, func, fId, x, y, z, v) {
+TVALUES = function(fIds, func, fId, x, y, z, v) {
     var current = y, returnValue = [];
     var tinstancecount = TINSTANCECOUNT(fIds, v);
     while (current && tinstancecount >= current.index) {
@@ -29,9 +29,12 @@ TVALUES = function (fIds, func, fId, x, y, z, v) {
     }
     return returnValue;
 }
+TCOUNT = function(fIds, func, fId, x, y, z, v) {
+    return TINSTANCECOUNT(fIds, v);
+}
 //return tuplecount, get max tuple index,
-TINSTANCECOUNT = function (fIds, v) {
-    var max = 0;
+TINSTANCECOUNT = function(fIds, v) {
+    var max = -1;
     for (var fid = 0; fid < fIds.length; fid++) {
         var fId = fIds[fid];
         var keys = Object.keys(v[fId]);
@@ -41,7 +44,7 @@ TINSTANCECOUNT = function (fIds, v) {
         else if (keys.length == 1) {
             max = Math.max(max, (2064384 & parseInt(keys[0])) >> 15);
         } else {
-            max = Math.max(max, keys.reduce(function (a1, b1) {
+            max = Math.max(max, keys.reduce(function(a1, b1) {
                 //filter bits 16-24 find highest tuple count.
                 //mask should be provided
                 //look for all values and obtain tuple instnace value
@@ -57,7 +60,7 @@ TINSTANCECOUNT = function (fIds, v) {
  * so only look for mask where first 15bits are 0
  * Get all 0*values for example used for tupleInstanceIdentiefiers
  */
-TINSTANCEBYNAME = function (v, fId, y, name) {
+TINSTANCEBYNAME = function(v, fId, y, name) {
     var count = TINSTANCECOUNT(v, fId);
     for (var i = 0; i < count; i++) {
         var obj = v[fId][y];

@@ -1,3 +1,7 @@
+var DEFAULT = 'value';
+var TUPLEVALUETEST = "TestTupleValues";
+
+//test for calls within tuples using same tuple, and calls outside tuples use base tuple
 var WorkBook = require('../fesjs/JSWorkBook');
 var FESContext = require('../fesjs/fescontext');
 require('../../ff-math');
@@ -7,28 +11,30 @@ var assert = require('assert');
  var fnStr = func.toString();
  return fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')')).match(ARGUMENT_NAMES) || [];
  }*/
+
 //var test = getParamNames(TSUM);
 var wb = new WorkBook(new FESContext());
+wb.createFormula("10", "DocumentValue", DEFAULT, false, 'document');
+wb.createFormula("1", "TupleSibling1", DEFAULT, true, 'document');
+wb.createFormula("2+DocumentValue", "TupleSibling2", DEFAULT, true, 'document');
 
-//test for calls within tuples using same tuple, and calls outside tuples use base tuple
-wb.createFormula("10", "DocumentValue", 'value', false, 'document');
-wb.createFormula("1", "TupleSibling1", 'value', true, 'document');
-wb.createFormula("2+DocumentValue", "TupleSibling2", 'value', true, 'document');
-wb.createFormula("TupleSibling1[doc]+TupleSibling2[doc]", "TestTupleValues", 'value', true, 'document');
-wb.createFormula("TSUM(TestTupleValues[doc])", "TestTupleValuesSUM", 'value', false, 'document');
+wb.createFormula("TupleSibling1[doc]+TupleSibling2[doc]", TUPLEVALUETEST, DEFAULT, true, 'document');
+wb.createFormula("TSUM(TestTupleValues[doc])", "TestTupleValuesSUM", DEFAULT, false, 'document');
+wb.createFormula("TCOUNT(TestTupleValues)", "TestTupleValuesCOUNT", DEFAULT, false, 'document');
 
-assert(wb.get('TestTupleValues', 'value', 0, 0) === 13);
-wb.set('DocumentValue', 100, 'value', 0, 1);//will completely be ignored, since its not a tuple
-assert(wb.get('TestTupleValues', 'value', 0, 0) === 13);
-wb.set('DocumentValue', 100, 'value', 0, 0);
-assert(wb.get('TestTupleValues', 'value', 0, 0) === 103);
-wb.set('TupleSibling1', 2, 'value', 0, 1);
-assert(wb.get('TestTupleValues', 'value', 0, 0) === 103);
-assert(wb.get('TestTupleValues', 'value', 0, 1) === 104);
+assert(wb.get("TestTupleValuesCOUNT") === -1);
+assert(wb.get(TUPLEVALUETEST, DEFAULT, 0, 0) === 13);
+wb.set('DocumentValue', 100, DEFAULT, 0, 1);//will completely be ignored, since its not a tuple
+assert(wb.get(TUPLEVALUETEST, DEFAULT, 0, 0) === 13);
+wb.set('DocumentValue', 100, DEFAULT, 0, 0);
+assert(wb.get(TUPLEVALUETEST, DEFAULT, 0, 0) === 103);
+wb.set('TupleSibling1', 2, DEFAULT, 0, 1);
+assert(wb.get(TUPLEVALUETEST, DEFAULT, 0, 0) === 103);
+assert(wb.get(TUPLEVALUETEST, DEFAULT, 0, 1) === 104);
 //TupleSibling1 and TupleSibling2 do not know they belong to same tuple group
 assert(wb.get('TestTupleValuesSUM') === 0);
 
-wb.createFormula("1+1", "TupleTest", 'value', true);
+wb.createFormula("1+1", "TupleTest", DEFAULT, true);
 wb.createFormula("TSUM(TupleTest)", "TupleTestSUM");
 
 assert(wb.get('TupleTest') === 2);
@@ -38,26 +44,33 @@ assert(wb.get('TupleTest') === 10);
 var FirstY = 1;
 var FirstX = 1;
 //ga tupleInstantie in, y0(0) -> y0(1), check hoeveel Instanties er zijn
-wb.set('TupleTest', 20, 'value', FirstX)
+wb.set('TupleTest', 20, DEFAULT, FirstX)
 assert(wb.get('TupleTest') === 10)
-assert(wb.get('TupleTest', 'value', FirstX) === 20)
-wb.set('TupleTest', 30, 'value', FirstX, FirstY)
-assert(wb.get('TupleTest', 'value', FirstY) == 20)
-wb.set('TupleTest', 40, 'value', FirstY, 0)
-assert(wb.get('TupleTest', 'value', FirstX, FirstY) == 30)
+assert(wb.get('TupleTest', DEFAULT, FirstX) === 20)
+wb.set('TupleTest', 30, DEFAULT, FirstX, FirstY)
+assert(wb.get('TupleTest', DEFAULT, FirstY) == 20)
+wb.set('TupleTest', 40, DEFAULT, FirstY, 0)
+assert(wb.get('TupleTest', DEFAULT, FirstX, FirstY) == 30)
 var tupleTestSUM = wb.get('TupleTestSUM');
 assert(tupleTestSUM == 10 + 2)
-assert(wb.get('TupleTestSUM', 'value', FirstX) === 40 + 30)
-wb.set('TupleTest', 100, 'value', FirstX, 30)
-assert(wb.get('TupleTestSUM', 'value', FirstY) === 100 + 40 + 30 + 2 * 28)
-wb.set('TupleTest', null, 'value', FirstX, 30)
-assert(wb.get('TupleTestSUM', 'value', FirstX) === 40 + 30)
+assert(wb.get('TupleTestSUM', DEFAULT, FirstX) === 40 + 30)
+wb.set('TupleTest', 100, DEFAULT, FirstX, 30)
+assert(wb.get('TupleTestSUM', DEFAULT, FirstY) === 100 + 40 + 30 + 2 * 28)
+wb.set('TupleTest', null, DEFAULT, FirstX, 30)
+assert(wb.get('TupleTestSUM', DEFAULT, FirstX) === 40 + 30)
 
-wb.createFormula("''", "TupleName", 'value', true);
-wb.set('TupleName', 'Piet', 'value', 0, 0)
-wb.set('TupleName', 'Jan', 'value', 0, 1)
-wb.set('TupleName', 'Klaas', 'value', 0, 2)
+wb.createFormula("''", "TupleName", DEFAULT, true);
+wb.set('TupleName', 'Piet', DEFAULT, 0, 0)
+wb.set('TupleName', 'Jan', DEFAULT, 0, 1)
+wb.set('TupleName', 'Klaas', DEFAULT, 0, 2)
 assert(wb.get('TupleName') === 'Piet')
+
+//assert(wb.wb.get("TestTupleValuesCOUNT") === 0);
+wb.set(TUPLEVALUETEST, 100, DEFAULT, 0, 0);
+assert(wb.get("TestTupleValuesCOUNT") === 0);
+wb.set(TUPLEVALUETEST, 100, DEFAULT, 0, 1);
+assert(wb.get("TestTupleValuesCOUNT") === 1);
+
 /**
  * Gedachten bij het implementeren van tuples:
  * Van tuple naar tuple *binnen eigen tupleDefinition* word de TupleLocatie gebruikt om berekeningen te doen

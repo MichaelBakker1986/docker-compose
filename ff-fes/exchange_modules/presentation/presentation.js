@@ -233,7 +233,7 @@ var presentationConverter = {
 
         function navRelative() {
             if (navigator[this] === undefined) {
-                throw Error('Should not be possible');
+                throw Error('Should not be possible WHY???');
             }
             navigator.move(navigator[this].rowId)
         }

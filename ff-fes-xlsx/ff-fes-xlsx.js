@@ -142,9 +142,9 @@ workbook.xlsx.readFile(fileName)
         sync = false;
     }
 );
-/*while (sync) {
+while (sync) {
     require('deasync').sleep(100);
-}*/
+}
 var entries = {
     'MatrixLookup': function (xlsfileName, tableName, row, col) {
         if (!matrix[tableName]) {

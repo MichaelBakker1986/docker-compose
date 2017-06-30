@@ -209,7 +209,7 @@ function testVariable(variableName, level, column) {
     var result = {};
     var formula = formulas[variableName];
     var values = [];
-    log.info(values + indent + '[%s][%s]=[%s]', variableName, wbKSP.get(variableName, 'value', column), formula.original)
+    log.debug(values + indent + '[%s][%s]=[%s]', variableName, wbKSP.get(variableName, 'value', column), formula.original)
     for (var dependencyname in formula.deps) {
         var modelVarName = modelVariableName(dependencyname);
         testVariable(modelVarName, level + 1, column)

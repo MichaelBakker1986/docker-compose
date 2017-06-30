@@ -150,6 +150,6 @@ for (var i = 0; i < children.length; i++) {
 
 //TotalYearlyCosts test
 for (var i = 0; i < totalYearlyCosts.length; i++) {
-    log.info(wb.get('TotalYearlyCosts', 'value', i, 0) + " should be " + totalYearlyCosts[i])
+    log.trace(wb.get('TotalYearlyCosts', 'value', i, 0) + " should be " + totalYearlyCosts[i])
     assert(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)) == totalYearlyCosts[i]);
 }

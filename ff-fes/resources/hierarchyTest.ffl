@@ -10,7 +10,7 @@ model TEST uses BaseModel
 			title : "Q_ROOT";
     	formula : 10;
     	frequency : document;
-			tuple Q_MAP01 refers to TestProperty
+			variable Q_MAP01 refers to TestProperty
 			{
 				title : "Hint";
 				formula : 50;
@@ -20,7 +20,7 @@ model TEST uses BaseModel
        	{
       			title : "Vraag01";
        			formula : 100;
-       							tuple: true;
+       							tuple: false;
        			displaytype: select;
        			choices: "0:History|1:Projection";
        			frequency : document;
