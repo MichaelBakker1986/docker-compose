@@ -13,13 +13,11 @@ node {
    stage('Build') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
-       app.inside {
          if (isUnix()) {
             sh "echo 'testabc1'"
          } else {
             bat(/echo 'testabc1'/)
          }
-       }
    }
     stage('Push image') {
        /* Finally, we'll push the image with two tags:
