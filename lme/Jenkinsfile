@@ -1,6 +1,6 @@
 node {
     def app
-    stage('Preparation') { // for display purposes
+    stage('Preparations') { // for display purposes
        // Get some code from a GitHub repository
        /* Let's make sure we have the repository cloned to our workspace */
        checkout scm
