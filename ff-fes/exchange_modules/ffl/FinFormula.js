@@ -4,9 +4,21 @@ function finFormulaGeneric(buf) {
     var buf = buf.replace(/:/gm, ', ');
     buf = buf.replace(/(\$p|@|#|%|\.\.)/gmi, '');
 
+    //temp case fix, <= lt,gt,lte,gte from Cases
+    buf = buf.replace(/\[\<\=/gm, '[');
+    buf = buf.replace(/\[\=/gm, '[');
+    buf = buf.replace(/\|\<\=/gm, '|');
+    buf = buf.replace(/\|\=/gm, '|');
+    buf = buf.replace(/\|\>\=/gm, '|');
+    buf = buf.replace(/\|\>/gm, '|');
+    //end temp case fix
+
     buf = buf.replace(/\[1\]/gm, '[doc]');
+    buf = buf.replace(/\[T\]/gm, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.
+
     buf = buf.replace(/\[LastT\]/gm, '');
     buf = buf.replace(/ValueT\(1\)/gm, 'x.first.detail');
+    // buf = buf.replace(/\[GetT\(T,-1\)\]/gmi, '');//x.first.detail
     // buf = buf.replace(/\[T-1\]/gm, '');
     //-- Context dependencies
     // buf = buf.replace(/\[t-1\]|@|#/gim, ''); //[prev]   : for now, just throw it away, its .prev when using Time
@@ -23,6 +35,8 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/ And /gmi, '&&');// convert & to &&
     buf = buf.replace(/\)\s*and\s*\(/gmi, '&&');// convert )  and ( => &&
 
+    buf = buf.replace(/\s*&&not\s*/gmi, '&& !');// convert )  and ( => &&
+
     //OR |
     buf = buf.replace(/\||\s+or /gmi, ' || ');// convert | to ||
     buf = buf.replace(/ Or /gmi, ' || ');// convert OR to ||
@@ -38,6 +52,8 @@ function finFormulaGeneric(buf) {
 
     return buf;
 }
+
+//console.info(finFormulaGeneric('[(VATPaymentFraction[GetT(T,-1)]>0)*(Round(VATPaymentFraction[GetT(T,-1)],0)=VATPaymentFraction[GetT(T,-1)])]'))
 function javaScriptToFinGeneric(buf) {
     var buf = buf.replace(/!=/gm, '<>');
     //buf = buf.replace(/<=/gm, '<==');
@@ -47,6 +63,7 @@ function javaScriptToFinGeneric(buf) {
     buf = buf.replace(/&&/gmi, ' & ');// convert )  and ( => &&
     return buf;
 }
+
 //if it ends up being impossible to resolve generic
 //we will have to do it in the formula-bootstrap.js
 //there we know what is a Variable name
@@ -84,9 +101,11 @@ function finChoice(formula) {
         return "[{ \"name\" : \"" + choices + "\" }]";
     }
 }
+
 function FinFormula() {
 }
-FinFormula.prototype.toJavascriptChoice = function (choiceObjectString) {
+
+FinFormula.prototype.toJavascriptChoice = function(choiceObjectString) {
     var choiceObject = JSON.parse(choiceObjectString.replace(/'/gmi, '"'));
     var response = '';
     for (var i = 0; i < choiceObject.length; i++) {
@@ -106,8 +125,8 @@ FinFormula.prototype.finChoice = finChoice;
 
 //something more usefull came to mind, catches this large chunk of possibilities.
 //>> old version would look like : buf = buf.replace(/Q_Map([0-9]{2})/gi, 'Q_MAP$1')9;
-FinFormula.prototype.fixCasing = function (buf) {
-    return buf.replace(/[^\w]{1}(Q_\w*)/gmi, function ($1) {
+FinFormula.prototype.fixCasing = function(buf) {
+    return buf.replace(/[^\w]{1}(Q_\w*)/gmi, function($1) {
         return $1.toUpperCase()
     })
 };

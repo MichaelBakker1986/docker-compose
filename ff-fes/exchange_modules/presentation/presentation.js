@@ -17,7 +17,7 @@
 var Node = require('./Node.js')
 var Tree = require('./Tree.js')
 var SolutionFacade = require('../../fesjs/SolutionFacade');
-var AST = require('ast-node-utils').ast;
+var AST = require('../../../ast-node-utils/index').ast;
 Node.prototype.delete = function() {
     throw Error('Remove not yet implemented')
     //PropertiesAssembler.remove(this.parent().rowId, this.rowId);
@@ -172,7 +172,8 @@ Node.prototype._update = function(properties) {
         }
     }
 }
-
+function PresentationParser(){
+}
 var presentationConverter = {
     exportAsObject: true,
     hide: true,

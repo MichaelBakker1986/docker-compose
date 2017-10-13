@@ -265,7 +265,7 @@
   },
   "LastDateInT": {
     "args": "one",
-    "body": "return one"
+    "body": "return 2016"
   },
   "FirstTinFormulaset": {
     "args": "one",
@@ -497,5 +497,8 @@
   "SETTINGS": {
     "LANGUAGE": "en"
   },
+  "ViewScaleFactor": 1,
+  "Backward": 1,
+  "Decimals": 2,
   "CACHE": {}
 }

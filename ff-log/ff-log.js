@@ -18,7 +18,7 @@ var levels = {
         INFO: true
     }
 }
-var console = tracer.console({
+var console = tracer.colorConsole({
     format: "{{timestamp}} ({{file}}:{{line}}) \t- {{message}}",
     dateformat: format,
     level: logLevel

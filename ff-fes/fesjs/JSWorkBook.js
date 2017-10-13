@@ -6,7 +6,7 @@
 
 var SolutionFacade = require('./SolutionFacade');
 var FESFacade = require('./FESFacade');
-var AST = require('ast-node-utils').ast;
+var AST = require('../../ast-node-utils/index').ast;
 var log = require('ff-log')
 var XAxis = require('./XAxis')
 var YAxis = require('./YAxis')
@@ -32,7 +32,7 @@ function JSWorkBook(context) {
     this.xaxis = XAxis.bkyr.columns[0]
 }
 
-JSWorkBook.prototype.importSolution = function (data, parserType) {
+JSWorkBook.prototype.importSolution = function(data, parserType) {
     var solution = SolutionFacade.importSolutionData(data, parserType, this);
     //TODO: getSolutionName() should return this.solution.getName();
     //or Don't use JSWorkBook for solution imports at all.
@@ -40,7 +40,7 @@ JSWorkBook.prototype.importSolution = function (data, parserType) {
     this.modelName = solution.getName();
     this.updateValues();
 }
-JSWorkBook.prototype.getSolutionName = function () {
+JSWorkBook.prototype.getSolutionName = function() {
     return this.modelName;
 }
 //if it is possible to fix missing functions
@@ -50,7 +50,7 @@ function fixAll() {
     var workbook = this;
     var feedback = workbook.validateImportedSolution();
     while (!feedback.valid && attempt < 20) {
-        feedback.error.forEach(function (item) {
+        feedback.error.forEach(function(item) {
             if (item.canFix) {
                 item.fix();
             }
@@ -60,6 +60,7 @@ function fixAll() {
     }
     return feedback;
 };
+
 /**
  * validateImportedSolution current solution
  * validation is done once they are imported
@@ -79,7 +80,9 @@ function validateImportedSolution() {
         var formulaInfo = SolutionFacade.fetchFormulaByIndex(elemId)
         //TODO: use timeout, this monte carlo is blocking UI thread
         try {
-            FESFacade.apiGetValue(formulaInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+            let resolveY2 = resolveY(workbook, 0);
+
+            FESFacade.apiGetValue(formulaInfo, resolveX(workbook, 0), resolveY2, 0, context.getValues());
             validateResponse.succes.push(formulaInfo.name);
         }
         catch (e) {
@@ -92,7 +95,7 @@ function validateImportedSolution() {
                         canFix: true,
                         variableName: variableName,
                         fixMessage: 'Add',
-                        fix: function () {
+                        fix: function() {
                             try {
                                 log.debug(formulaInfo.name + " : " + 'Fix for [' + variableName + '] in solution: ' + workbook.getSolutionName() + " : " + formulaInfo.original + ' message:[' + e + ']')
                                 workbook.createFormula(1, variableName);
@@ -114,7 +117,7 @@ function validateImportedSolution() {
                 fix = {
                     canFix: true,
                     fixMessage: 'Remove formula',
-                    fix: function () {
+                    fix: function() {
                         var deps = Object.keys(formulaInfo.deps);
                         var refs = Object.keys(formulaInfo.refs);
                         log.warn('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
@@ -129,12 +132,21 @@ function validateImportedSolution() {
                 };
             }
             else {
-                log.warn('unable to fix problem' + e)
+                log.warn('unable to fix problem in ' + formulaInfo.original + ' fail:' + e)
+                log.warn(formulaInfo);
                 fix = {
                     canFix: false
                 }
             }
-
+//
+// v[113047][x.hash + y.hash + z]!==undefined
+// ||
+// TimeAggregated?v[113049][x.hash + y.hash + z]
+// !==undefined&&TimeAggregated?
+// GetValue(a113049('113049',x,y.base,z,v),x,x):GetFrac(a112974('112974',x,y.base,z,v),a113047('113047',x,y.base,z,v))*(52+1/7):
+// Math.max(GetFrac(a112974('112974',x,y.base,z,v)
+// ,a113047('113047',x,y.base,z,v)
+// -a112974('112974',x.x,y.base,z,v))*(52+1/7),a113049('113049',x,y.base,z,v))
             //filter Exceptions not worth viewing e.g. Duplicates
             if (!fix.hide) {
                 fix.formulaName = formulaInfo.name;
@@ -151,51 +163,54 @@ function validateImportedSolution() {
 /**
  * Visit imported Formula's
  */
-JSWorkBook.prototype.visitSolutionFormulas = function (visitor) {
+JSWorkBook.prototype.visitSolutionFormulas = function(visitor) {
     return this.solution.formulas.forEach(visitor);
 }
-JSWorkBook.prototype.export = function (parserType, rowId) {
+JSWorkBook.prototype.export = function(parserType, rowId) {
     return SolutionFacade.exportSolution(parserType, rowId, this);
 }
-JSWorkBook.prototype.getNode = function (name) {
+JSWorkBook.prototype.getNode = function(name) {
     return this.getSolutionNode(this.getSolutionName() + "_" + name);
 }
-JSWorkBook.prototype.getSolutionNode = function (name) {
+JSWorkBook.prototype.getSolutionNode = function(name) {
     return FESFacade.fetchSolutionNode(name, 'value')
 };
 
 function resolveX(wb, x) {
     return x ? wb.xaxis[x] : wb.xaxis[0];
 }
+
 function resolveY(wb, y) {
     var yAxis = y || 0;
     return isNaN(yAxis) ? yAxis : wb.yaxis[yAxis];
 }
-JSWorkBook.prototype.get = function (row, col, x, y) {
+
+JSWorkBook.prototype.get = function(row, col, x, y) {
     return this.getSolutionPropertyValue(this.getSolutionName() + '_' + row, col, x, y);
 };
-JSWorkBook.prototype.getSolutionPropertyValue = function (row, col, x, y) {
+JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
     var xas = resolveX(this, x);
     var yas = resolveY(this, y)
     return FESFacade.fetchSolutionPropertyValue(this.context, row, col, xas, yas)
 };
 
-JSWorkBook.prototype.set = function (row, value, col, x, y) {
+JSWorkBook.prototype.set = function(row, value, col, x, y) {
     return this.setSolutionPropertyValue(this.getSolutionName() + '_' + row, value, col, x, y);
 }
-JSWorkBook.prototype.setSolutionPropertyValue = function (row, value, col, x, y) {
+JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) {
     var xas = resolveX(this, x);
     var yas = resolveY(this, y);
     return FESFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas);
 }
-JSWorkBook.prototype.updateValues = function () {
+JSWorkBook.prototype.updateValues = function() {
     FESFacade.updateValueMap(this.context.values);
 };
 JSWorkBook.prototype.fixProblemsInImportedSolution = fixAll
 //should return the solution instead. So its deprecated
-JSWorkBook.prototype.getRootSolutionProperty = function () {
+JSWorkBook.prototype.getRootSolutionProperty = function() {
     return FESFacade.fetchRootSolutionProperty(this.getSolutionName());
 };
+
 function maxTupleCountForRow(wb, node) {
     if (!node.tuple) {
         return 0;
@@ -214,14 +229,15 @@ function maxTupleCountForRow(wb, node) {
     }
     return TINSTANCECOUNT(allrefIdes, wb.context.values);
 }
-JSWorkBook.prototype.tupleIndexForName = function (node, name) {
+
+JSWorkBook.prototype.tupleIndexForName = function(node, name) {
     var wb = this;
     //if not tuple, index always 0
     if (!node.tuple) {
         return 0;
     }
     var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.tupleDefinitionName)
-    FESFacade.visit(tupleDefinition, function (child) {
+    FESFacade.visit(tupleDefinition, function(child) {
         if (child.tuple) {
             maxTupleCount = Math.max(maxTupleCount, TINSTANCECOUNT(wb.context.values, child.ref));
         }
@@ -231,10 +247,10 @@ JSWorkBook.prototype.tupleIndexForName = function (node, name) {
 /**
  * Add tuple- iterations while iterating properties
  */
-JSWorkBook.prototype.visitProperties = function (startProperty, visitor, y) {
+JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
     var yax = resolveY(this, y)
     var wb = this;
-    FESFacade.visit(startProperty, function (node) {
+    FESFacade.visit(startProperty, function(node) {
         //find out how many of nodes there are in current yas
         //given y
         //for max tuplecount in current node loop visitor node
@@ -245,7 +261,7 @@ JSWorkBook.prototype.visitProperties = function (startProperty, visitor, y) {
     });
 }
 JSWorkBook.prototype.validateImportedSolution = validateImportedSolution;
-JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId, tuple, frequency) {
+JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tuple, frequency) {
     SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value');
     var orCreateProperty = SolutionFacade.getOrCreateProperty(this.getSolutionName(), rowId, colId || 'value');
     orCreateProperty.tuple = tuple;
@@ -253,7 +269,7 @@ JSWorkBook.prototype.createFormula = function (formulaAsString, rowId, colId, tu
     this.updateValues();
 }
 JSWorkBook.prototype.properties = SolutionFacade.properties;
-JSWorkBook.prototype.getAllValues = function () {
+JSWorkBook.prototype.getAllValues = function() {
     return FESFacade.getAllValues(this.context.values);
 };
 module.exports = JSWorkBook;

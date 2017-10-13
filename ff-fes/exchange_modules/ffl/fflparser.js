@@ -1,6 +1,6 @@
 var JSVisitor = require('../../fesjs/JSVisitor');
 var SolutionFacade = require('../../fesjs/SolutionFacade.js')
-var AST = require('ast-node-utils').ast;
+var AST = require('../../../ast-node-utils/index').ast;
 var FflToJsonConverter = require('./FflToJsonConverter');
 var FinFormula = require('./FinFormula.js');
 var esprima = require('esprima');
@@ -25,14 +25,16 @@ var log = require('ff-log');
  options_notrend: locked;
  options_trend: locked;
  }*/
+
 //@formatter:on
 
 function FFLParser() {
 }
+
 FFLParser.prototype.name = 'ffl'
 FFLParser.prototype.status = 'green';
 FFLParser.prototype.headername = '.finance ffl';
-FFLParser.prototype.parseData = function (data, workbook) {
+FFLParser.prototype.parseData = function(data, workbook) {
     var logVars = {variables: []};
     //convert FFL into JSON (Generic)
     var json = FflToJsonConverter.parseFFL(data);
@@ -42,7 +44,7 @@ FFLParser.prototype.parseData = function (data, workbook) {
     //Create a Solution that will contain these formulas
     var solution = SolutionFacade.createSolution(solutionName);
     //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
-    JSVisitor.travelOne(json, null, function (keyArg, node, context) {
+    JSVisitor.travelOne(json, null, function(keyArg, node, context) {
         if (keyArg === null) {
         }
         else {
@@ -68,9 +70,9 @@ FFLParser.prototype.parseData = function (data, workbook) {
     log.debug('Add variables [' + logVars.variables + ']')
     return solution;
 }
-FFLParser.prototype.deParse = function (rowId, workbook) {
+FFLParser.prototype.deParse = function(rowId, workbook) {
     var fflSolution = SolutionFacade.createSolution(workbook.getSolutionName());
-    workbook.visitProperties(workbook.getNode(rowId), function (elem) {
+    workbook.visitProperties(workbook.getNode(rowId), function(elem) {
         //JSON output doesn't gurantee properties to be in the same order as inserted
         //so little bit tricky here, wrap the node in another node
         //add to its wrapper a child type []
@@ -108,6 +110,7 @@ FFLParser.prototype.deParse = function (rowId, workbook) {
     var stringify = fflSolution.stringify();
     return stringify;
 }
+
 function findSolutionNameFromFFLFile(json) {
     for (var key in json) {
         if (key.toLowerCase().startsWith('model ')) {
@@ -116,6 +119,7 @@ function findSolutionNameFromFFLFile(json) {
     }
     return undefined;
 }
+
 function stripVariableOrtuple(name, node) {
     if (!name) {
         return undefined;
@@ -147,12 +151,14 @@ function stripVariableOrtuple(name, node) {
     }
     return replace;
 }
+
 function StartWithVariableOrTuplePredicate(node) {
     if (node === undefined || !node._parentKey) {
         return false;
     }
     return (node._parentKey.startsWith('variable') || node._parentKey.startsWith('tuple'));
 }
+
 var displayAsMapping = {
     default: 'StringAnswerType',
     select: 'select',
@@ -173,6 +179,8 @@ var displayAsMapping = {
     line: "line"
 }
 var formulaMapping = {
+    formula_notrend: 'notrend',
+    formula_trend: 'trend',
     title: 'title',
     locked: 'locked',
     visible: 'visible',
@@ -186,6 +194,8 @@ var reversedFormulaMapping = {
     required: 'inputRequired',
     choices: 'choices',
     value: 'formula',
+    notrend: 'formula_notrend',
+    trend: 'formula_trend',
     displayAs: 'displaytype'
 }
 var defaultValue = {
@@ -224,7 +234,7 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 
-    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', node.formula ? parseFFLFormula(node.formula) : AST.UNDEFINED(), mappedDisplayType);
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', node.formula ? parseFFLFormula(node.formula, 'none', rowId) : AST.UNDEFINED(), mappedDisplayType);
     uiNode.displayAs = mappedDisplayType;
     uiNode.frequency = node.frequency;
     solution.setDelegate(uiNode, node);
@@ -254,11 +264,12 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
                 }
                 continue;
             }
-            SolutionFacade.createUIFormulaLink(solution, rowId, formulaMapping[key], parseFFLFormula(node[key]));
+            SolutionFacade.createUIFormulaLink(solution, rowId, formulaMapping[key], parseFFLFormula(node[key], key, rowId));
         }
     }
 }
-function parseFFLFormula(formula) {
+
+function parseFFLFormula(formula, node, row) {
     var formulaReturn = 'undefined';
     try {
         if (formula !== undefined) {
@@ -266,9 +277,10 @@ function parseFFLFormula(formula) {
         }
     }
     catch (e) {
-        log.error('unable to parse [' + formula + '] returning it as String value', e);
+        log.error('unable to parse [' + formula + '] returning it as String value' + node + " : " + row, e);
         formulaReturn = AST.STRING(formula);
     }
     return formulaReturn;
 }
+
 SolutionFacade.addParser(FFLParser.prototype);

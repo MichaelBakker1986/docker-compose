@@ -1,0 +1,164 @@
+// model "FINAN Prognose model"
+// created by FINAN 3.2.56.33 (user Niek Hulsman) on 03/01/2017 13:11
+
+import FinanMath.*;
+import BaseModel.*;
+
+model Invoice uses BaseModel
+{
+    version: "1.00";
+    root
+    {
+        variable logo
+        {
+            datatype: number;
+            frequency: document;
+            formula: R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7;
+        }
+        variable availableCurrencies
+        {
+            datatype: choice;
+            frequency: document;
+            choices:  [
+                {
+                    name: 'Euro (€)',
+                    symbol: '€'
+                },
+                {
+                    name: 'British Pound (£)',
+                    symbol: '£'
+                },
+                {
+                    name: 'Canadian Dollar ($)',
+                    symbol: 'CAD $ '
+                },
+                {
+                    name: 'Indian Rupee (₹)',
+                    symbol: '₹'
+                },
+                {
+                    name: 'Norwegian krone (kr)',
+                    symbol: 'kr '
+                },
+                {
+                    name: 'US Dollar ($)',
+                    symbol: '$'
+                }
+            ];
+            formula: '€';
+        }
+        variable items
+        {
+            datatype: number;
+            frequency: document;
+            variable qty
+            {
+                datatype: number;
+                frequency: document;
+                formula: 10;
+            }
+            var description
+            {
+                datatype: string;
+                frequency: document;
+            }
+            variable cost
+            {
+                datatype: number;
+                frequency: document;
+                formula: 9.95;
+            }
+            variable qrtTax
+            {
+                formula: cost * qty;
+            }
+        }
+        variable currencySymbol
+        {
+            datatype: string;
+            frequency: document;
+            formula: '€';
+        }
+        variable tax
+        {
+            datatype: string;
+            frequency: document;
+            formula: 13.00;
+        }
+        variable invoice_number
+        {
+            datatype: number;
+            frequency: document;
+            formula: 10;
+        }
+        variable customer_info
+        {
+            datatype: number;
+            frequency: document;
+            variable name
+            {
+                datatype: string;
+                frequency: document;
+                formula: 'Mr. John Doe';
+            }
+            variable web_link
+            {
+                datatype: string;
+                frequency: document;
+                formula: 'John Doe Designs Inc.';
+            }
+            variable address1
+            {
+                datatype: string;
+                frequency: document;
+                formula: '1 Infinite Loop';
+            }
+            variable address2
+            {
+                datatype: string;
+                frequency: document;
+                formula: 'Cupertino, California, US';
+            }
+            variable postal
+            {
+                datatype: string;
+                frequency: document;
+                formula:  '90210';
+            }
+        }
+        variable invoiceSubTotal
+        {
+            datatype: number;
+            frequency: document;
+            formula: TupleSum(qrtTax);
+            //*  var total = 0.00;        this.items.forEach(function(item, key) {                total += (item.qty * item.cost);            });            return total;*/
+        }
+        variable calculateGrandTotal
+        {
+            datatype: number;
+            frequency: document;
+            formula: calculateTax + invoiceSubTotal;
+        }
+
+        variable addItem
+        {
+            datatype: string;
+            frequency: document;
+            //this.items.push({qty: 0, cost: 0, description: ""});
+        }
+
+        variable removeItem
+        {
+            datatype: string;
+            frequency: document;
+            //*    this.items.splice(this.items.indexOf(item), 1);*/
+        }
+
+        variable calculateTax
+        {
+            datatype: number;
+            frequency: document;
+            formula: ((tax * invoiceSubTotal) / 100);
+        }
+    }
+}

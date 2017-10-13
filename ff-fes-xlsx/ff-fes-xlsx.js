@@ -9,10 +9,11 @@ var matrix = {};
 var workbook = new Excel.Workbook();
 var fileName = __dirname + '/resources/ScorecardKSP1.xlsx';
 var succes;
-var initComplete = new Promise(function (succesArg) {
+var initComplete = new Promise(function(succesArg) {
     succes = succesArg;
-}, function () {
+}, function() {
 });
+
 function getDefinedNames(wb) {
     var names = {};
     var matrixMap = wb._definedNames.matrixMap;
@@ -92,9 +93,11 @@ function findStart(range) {
         yStart: yAs
     }
 }
+
 function getCellValueFromRangeCell(range, rangeCell) {
     return range.sheet.getCell(rangeCell.address).value;
 }
+
 function findYasNames(range, bounds) {
     var yAsNames = {};
     for (var y = bounds.yStart; y < range.ranges.length; y++) {
@@ -102,6 +105,7 @@ function findYasNames(range, bounds) {
     }
     return yAsNames
 }
+
 function findXasValues(range, yasNames, bounds) {
     var xAsValues = {};
     for (var y = bounds.yStart; y < range.ranges.length; y++) {
@@ -114,9 +118,10 @@ function findXasValues(range, yasNames, bounds) {
     }
     return xAsValues;
 }
+
 var sync = true;
 workbook.xlsx.readFile(fileName)
-    .then(function (wb) {
+    .then(function(wb) {
         var definedNames = getDefinedNames(wb);
         for (definedName in definedNames) {
             var range = definedNames[definedName];
@@ -137,7 +142,7 @@ workbook.xlsx.readFile(fileName)
         // use workbook
         succes(matrix);
         sync = false;
-    }).catch(function (err) {
+    }).catch(function(err) {
         log.info(err);
         sync = false;
     }
@@ -146,7 +151,7 @@ while (sync) {
     require('deasync').sleep(100);
 }
 var entries = {
-    'MatrixLookup': function (xlsfileName, tableName, row, col) {
+    'MatrixLookup': function(xlsfileName, tableName, row, col) {
         if (!matrix[tableName]) {
             log.warn('Defined name not found [%s]:[%s:%s]', tableName, row, col);
         }

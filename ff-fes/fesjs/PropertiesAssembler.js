@@ -129,10 +129,10 @@ PropertiesAssembler.prototype.bulkInsert = function (solution) {
 function getRootNode(modelName) {
     return rootNodes[modelName];
 }
-PropertiesAssembler.prototype.findAllInSolution = function (nodeId, visitArg) {
+PropertiesAssembler.prototype.findAllInSolution = function (modelName, visitArg) {
     for (var key in PropertiesModel) {
         var property = PropertiesModel[key];
-        if (property.solutionName === nodeId) {
+        if (property.solutionName === modelName) {
             visitArg(property);
         }
     }

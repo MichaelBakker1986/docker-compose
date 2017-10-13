@@ -49,7 +49,7 @@ FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tu
     var fesContext = new FESContext();
     fesContext.values = context.values;
     var JSWorkBook = new WorkBook(fesContext);
-    JSWorkBook.columns = context.columns || 17;
+    JSWorkBook.columns = context.columns || 2;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
     //prepare the workbook and context to match current appscope
     JSWorkBook.updateValues();

@@ -47,7 +47,7 @@ for (var i = 0; i < tests.length; i++) {
 var totalTestTime = (new Date().getTime() - performceTestStartTime);
 testResults.push(['performceTest', 'total', totalTestTime]);
 
-testResults.forEach(function (testResult) {
+testResults.forEach(function(testResult) {
     log.info(testResult)
 })
 if (totalTestTime > 910) {

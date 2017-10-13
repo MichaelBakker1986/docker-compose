@@ -22,7 +22,7 @@ function FormulaBootstrap() {
 }
 var log = require('ff-log');
 var assert = require('assert');
-var AST = require('ast-node-utils').ast;
+var AST = require('../../ast-node-utils/index').ast;
 var esprima = require('esprima')
 var escodegen = require('escodegen')
 var simplified = require('./ASTPreparser')
@@ -355,6 +355,16 @@ var traverseTypes = {
         }
     }
 }
+global.ExpandGrowth = function(){
+    return 0;
+}
+global.FormulaSetInT = function(){
+    return 0;
+}
+global.Onzero = function(){
+    return 0;
+}
+global.Hm = function(){return 0}
 //recursive walk the formula ast
 function buildFormula(formulaInfo, parent, node) {
     // just simplify some MODEL code, when a CallExpression appears, we might want to modify the structure before
@@ -387,6 +397,9 @@ function buildFormula(formulaInfo, parent, node) {
         }
         //
         if (node.name === 'MaxT') {
+            node.name = 'x';
+        }
+        if (node.name === 'TsY') {
             node.name = 'x';
         }
         //xAxisReference x.trend
