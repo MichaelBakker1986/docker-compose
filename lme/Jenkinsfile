@@ -1,21 +1,20 @@
 node {
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
-      git 'https://github.com/jglick/simple-maven-project-with-tests.git'
    }
    stage('Build') {
       // Run the maven build
       if (isUnix()) {
-         sh "echo 'testabc'"
+         sh "echo 'testabc1'"
       } else {
-         bat(/echo 'testabc'/)
+         bat(/echo 'testabc1'/)
       }
    }
    stage('Results') {
      if (isUnix()) {
-            sh "echo 'doneabc'"
+            sh "echo 'doneabc1'"
          } else {
-            bat(/echo 'doneabc'/)
+            bat(/echo 'doneabc1'/)
          }
    }
 }
