@@ -1,6 +1,6 @@
 {
   "name": "lme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "license": "ISC",
   "private": true,
@@ -10,13 +10,11 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "auto-updater": "^1.0.2",
     "body-parser": "~1.17.1",
     "browserify": "^14.4.0",
     "browserify-fastjson": "^1.2.1",
     "browserify-middleware": "^7.1.0",
     "compression": "^1.7.1",
-    "connect": "^3.6.5",
     "cookie-parser": "~1.4.3",
     "exceljs": "^0.6.2",
     "express": "^4.16.2",
@@ -25,9 +23,5 @@
     "request-progress": "^3.0.0",
     "serve-favicon": "~2.4.2",
     "serve-static": "^1.13.1"
-  },
-  "auto-updater": {
-    "repo": "ff/fesjs",
-    "branch": "master"
   }
 }
