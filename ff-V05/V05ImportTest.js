@@ -1,5 +1,5 @@
-process.loglevel = "debug";
-global.loglevel = "debug";
+process.loglevel = "info";
+global.loglevel = "info";
 require("../ff-fes/exchange_modules/lme/lmeparser")
 var WorkBook = require('../ff-fes/fesjs/JSWorkBook');
 var FESContext = require('../ff-fes/fesjs/fescontext');
@@ -16,9 +16,9 @@ MatrixLookup = function() {
 }
 log.info('excel done');
 var wb = new WorkBook(new FESContext());
-wb.importSolution(JUNIT.getFile("../../ff-V05/resources/V05.FFL"), "ffl");
+//wb.importSolution(JUNIT.getFile("../../ff-V05/resources/V05.FFL"), "ffl");
 //wb.importSolution(JUNIT.getFile("../../ff-KSP/resources/KSP.ffl"), "ffl");
-//var ksp = require('../ff-fes/exchange_modules/ffl/KSP_lme.json')
-//wb.importSolution(ksp, "lme");
-wb.fixProblemsInImportedSolution();
+var v05 = require('../lme/public/json/V05_canvas.json')
+wb.importSolution(v05, "lme");
+//wb.fixProblemsInImportedSolution();
 //console.info(wb.export('lme'))

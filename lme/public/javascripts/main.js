@@ -1,11 +1,8 @@
 /**
  * UI Canvas part
  */
-/*
-var fesjsApi = require('../../../../../../stack/FESJS/ff-fes/ff-fes').fesjs;
-var ModelListener = require('../../../../../../stack/FESJS/ff-ssh-git/gitconnector').ModelListener;
-*/
-DEBUG = false;
+var modelengine = require('./lme');
+DEBUG = true;
 var counter = 0;
 
 function prox(row, column, value) {
@@ -22,7 +19,7 @@ function prox(row, column, value) {
             }
             if (icount !== counter) {
                 icount = counter;
-                rval = LME.get(row.name, column.name, 0, 0);
+                rval = modelengine.get(row.name, column.name, 0, 0);
                 if (typeof(rval) === 'object') {
                     rval = 1;
                 }
@@ -79,7 +76,6 @@ function demo() {
         allowMovingSelection: true,
         columnHeaderClickBehavior: 'select'
     });
-
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('progress', function(e) {
         Xgrid.data = [{status: 'Loading data: ' + e.loaded + ' of ' + (e.total || 'unknown') + ' bytes...'}];
@@ -90,9 +86,22 @@ function demo() {
         var openData = parseOpenData(returnData);
         Xgrid.schema = openData.schema;
         Xgrid.data = openData.data;
+
+        modelengine.importSolution(returnData, "lme");
+        //modelengine.fixProblemsInImportedSolution();
     });
     xhr.open('GET', '/public/json/V05_canvas.json');
     xhr.send();
+
+    /*Xgrid.data = [{status: 'Loading data ' + '...'}];
+    setTimeout(function() {
+        let returnData = require('../json/V05_canvas.json');// JSON.parse(this.responseText);
+        var openData = parseOpenData(returnData);
+        Xgrid.schema = openData.schema;
+        Xgrid.data = openData.data;
+        modelengine.importSolution(returnData, "lme");
+        modelengine.fixProblemsInImportedSolution();
+    }, 10)*/
 }
 
 if (document.addEventListener) {

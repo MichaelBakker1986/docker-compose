@@ -1,4 +1,4 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 },{}],2:[function(require,module,exports){
 (function (global){
@@ -1848,7 +1848,7 @@ module.exports = workBook;
 
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../ff-fes/fesjs/JSWorkBook":23,"../ff-fes/fesjs/fescontext":31,"../ff-fes/ff-fes":32,"../ff-formulajs/ff-formulajs":56,"../ff-math/ff-math":61,"_process":4,"ff-log":74}],12:[function(require,module,exports){
+},{"../ff-fes/fesjs/JSWorkBook":23,"../ff-fes/fesjs/fescontext":31,"../ff-fes/ff-fes":32,"../ff-formulajs/ff-formulajs":56,"../ff-math/ff-math":61,"_process":4,"ff-log":75}],12:[function(require,module,exports){
 var assert = require('assert');
 var fileParser = require('./fileParser');
 var FinFormula = require('./FinFormula');
@@ -2103,7 +2103,7 @@ FflToJsonConverter.prototype.deparseRegex = function (input) {
 }
 FflToJsonConverter.prototype.parseRegex = FinFormula.parseFormula;
 module.exports = FflToJsonConverter.prototype;
-},{"../../fesjs/JSVisitor":22,"./FinFormula":13,"./fileParser":15,"assert":2,"ff-log":74,"stack-adt":54}],13:[function(require,module,exports){
+},{"../../fesjs/JSVisitor":22,"./FinFormula":13,"./fileParser":15,"assert":2,"ff-log":75,"stack-adt":54}],13:[function(require,module,exports){
 //http://excelformulabeautifier.com/
 function finFormulaGeneric(buf) {
     //choices fix
@@ -2524,7 +2524,7 @@ function parseFFLFormula(formula, node, row) {
 }
 
 SolutionFacade.addParser(FFLParser.prototype);
-},{"../../../ast-node-utils/index":10,"../../fesjs/JSVisitor":22,"../../fesjs/SolutionFacade.js":27,"./FflToJsonConverter":12,"./FinFormula.js":13,"esprima":36,"ff-log":74}],15:[function(require,module,exports){
+},{"../../../ast-node-utils/index":10,"../../fesjs/JSVisitor":22,"../../fesjs/SolutionFacade.js":27,"./FflToJsonConverter":12,"./FinFormula.js":13,"esprima":36,"ff-log":75}],15:[function(require,module,exports){
 function deparseRegexs(deparsers, input)
 {
     for (var i = 0; i < deparsers.length; i++)
@@ -2547,17 +2547,19 @@ var log = require('ff-log');
 
 function FormulaInfo(data, schema) {
     this.formulas = [];
-    this.data = [];
+    var self = this;
+    var data = [];
+    this.data = data;
     this.nodes = [];
     var forms = {};
-    FormulaService.visitFormulas((formula) => {
+    FormulaService.visitFormulas(function(formula) {
         formula.id = formula.id || formula.index;
         forms[formula.name] = formula;
-        this.addFormula(formula)
+        self.addFormula(formula)
     });
     var names = {};
     var modelName = 'V05_';
-    this.formulas.forEach((formula) => {
+    this.formulas.forEach(function(formula) {
         var name = correctFileName(formula.name);
         if (names[name] === undefined) {
             names[name] = true;
@@ -2568,7 +2570,7 @@ function FormulaInfo(data, schema) {
             var formula_notrend = forms[modelName + name + '_notrend'] || {original: ''};
             var locked = forms[modelName + name + '_locked'] || {original: false};
             var choices = forms[modelName + name + '_choices'] || {original: null};
-            this.data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original])
+            data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original])
         }
     })
     var types = ['name', 'title', 'visible', 'value', 'notrend', 'trend', 'locked', 'choices'];
@@ -2579,8 +2581,8 @@ function FormulaInfo(data, schema) {
         }
     }
     var counter = 0;
-    types.forEach((type) => {
-        this.meta.view.columns.push({
+    types.forEach(function(type) {
+        self.meta.view.columns.push({
             "name": type,
             "dataTypeName": "text",
             "fieldName": type,
@@ -2637,7 +2639,7 @@ LMEParser.prototype.deParse = function(rowId, workbook) {
     }, 2);
 }
 SolutionFacade.addParser(LMEParser.prototype);
-},{"../../fesjs/FormulaService.js":20,"../../fesjs/FunctionMap.js":21,"../../fesjs/PropertiesAssembler.js":25,"../../fesjs/SolutionFacade.js":27,"ff-log":74}],17:[function(require,module,exports){
+},{"../../fesjs/FormulaService.js":20,"../../fesjs/FunctionMap.js":21,"../../fesjs/PropertiesAssembler.js":25,"../../fesjs/SolutionFacade.js":27,"ff-log":75}],17:[function(require,module,exports){
 var assert = require("assert")
 var log = require('ff-log')
 var AST = require('../../ast-node-utils/index').ast;
@@ -2838,7 +2840,7 @@ simplified.min = simplified.Min;
 simplified.max = simplified.Max;
 simplified.ABS = simplified.Abs;
 module.exports = simplified;
-},{"../../ast-node-utils/index":10,"assert":2,"escodegen":34,"ff-log":74}],18:[function(require,module,exports){
+},{"../../ast-node-utils/index":10,"assert":2,"escodegen":34,"ff-log":75}],18:[function(require,module,exports){
 /**
  * Bridge between FormulaService,PropertiesAssembler and FunctionMap
  */
@@ -2956,7 +2958,7 @@ FESFacade.updateValueMap = function (values) {
 };
 FESFacade.visit = PropertiesAssembler.visitProperty;
 module.exports = FESFacade;
-},{"./FormulaService":20,"./FunctionMap":21,"./PropertiesAssembler":25,"ff-log":74}],19:[function(require,module,exports){
+},{"./FormulaService":20,"./FunctionMap":21,"./PropertiesAssembler":25,"ff-log":75}],19:[function(require,module,exports){
 (function (global){
 /**
  * Bootstrap formula's
@@ -3443,7 +3445,7 @@ FormulaBootstrap.prototype.initStateBootstrap = function(configs) {
 };
 module.exports = FormulaBootstrap.prototype;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../../ast-node-utils/index":10,"./ASTPreparser":17,"assert":2,"escodegen":34,"esprima":36,"ff-log":74}],20:[function(require,module,exports){
+},{"../../ast-node-utils/index":10,"./ASTPreparser":17,"assert":2,"escodegen":34,"esprima":36,"ff-log":75}],20:[function(require,module,exports){
 var log = require('ff-log');
 var AST = require('../../ast-node-utils/index').ast;
 var assert = require('assert')
@@ -3606,7 +3608,7 @@ FormulaService.prototype.moveFormula = function (old, newFormula) {
     }
 }
 module.exports = FormulaService.prototype;
-},{"../../ast-node-utils/index":10,"assert":2,"escodegen":34,"ff-log":74}],21:[function(require,module,exports){
+},{"../../ast-node-utils/index":10,"assert":2,"escodegen":34,"ff-log":75}],21:[function(require,module,exports){
 (function (global){
 var log = require('ff-log')
 /**
@@ -3700,7 +3702,7 @@ fm.prototype.moveFunction = function(oldFormula, newFormula) {
 };
 module.exports = fm.prototype;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"ff-log":74}],22:[function(require,module,exports){
+},{"ff-log":75}],22:[function(require,module,exports){
 /**
  * Just a Javascript Native Object visitor
  * While an element is called the .parent and .parentKey functions are filled.
@@ -4148,7 +4150,7 @@ JSWorkBook.prototype.getAllValues = function() {
     return FESFacade.getAllValues(this.context.values);
 };
 module.exports = JSWorkBook;
-},{"../../ast-node-utils/index":10,"./FESFacade":18,"./SolutionFacade":27,"./XAxis":29,"./YAxis":30,"ff-log":74}],24:[function(require,module,exports){
+},{"../../ast-node-utils/index":10,"./FESFacade":18,"./SolutionFacade":27,"./XAxis":29,"./YAxis":30,"ff-log":75}],24:[function(require,module,exports){
 /*
  register/resolve echange modules e.g. ffl,screendefinition,presentation
  TODO: rename into exchangeModulesSerivce
@@ -4630,7 +4632,7 @@ SolutionFacade.prototype.properties = {
 SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex;
 FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
  module.exports = SolutionFacade.prototype;
-},{"./FormulaBootstrap":19,"./FormulaService":20,"./FunctionMap":21,"./ParserService":24,"./PropertiesAssembler":25,"./Solution":26,"esprima":36,"ff-log":74}],28:[function(require,module,exports){
+},{"./FormulaBootstrap":19,"./FormulaService":20,"./FunctionMap":21,"./ParserService":24,"./PropertiesAssembler":25,"./Solution":26,"esprima":36,"ff-log":75}],28:[function(require,module,exports){
 var assert = require('assert')
 function TupleIndexConverter() {
 }
@@ -5050,7 +5052,7 @@ CalculationDocument.prototype = calculateCalculationDocument(importData);
 // tricks here.. but possible from here only prevbkyear, might consider removing *[agg*], only keep the *[top*]
 // currently we have max7 year 10timelines
 module.exports = CalculationDocument.prototype;
-},{"../resources/CustomImport.json":55,"ff-log":74}],30:[function(require,module,exports){
+},{"../resources/CustomImport.json":55,"ff-log":75}],30:[function(require,module,exports){
 /**
  * Tuple concept
  */
@@ -5299,7 +5301,7 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
 exports.fesjs = FESApi.prototype;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./exchange_modules/ffl/fflparser":14,"./fesjs/JSWorkBook":23,"./fesjs/TupleIndexConverter":28,"./fesjs/fescontext":31,"ff-log":74}],33:[function(require,module,exports){
+},{"./exchange_modules/ffl/fflparser":14,"./fesjs/JSWorkBook":23,"./fesjs/TupleIndexConverter":28,"./fesjs/fescontext":31,"ff-log":75}],33:[function(require,module,exports){
 (function (process,__filename){
 /** vim: et:ts=4:sw=4:sts=4
  * @license amdefine 1.0.1 Copyright (c) 2011-2016, The Dojo Foundation All Rights Reserved.
@@ -18207,7 +18209,7 @@ exports.formulajs = {
     entries: entries
 }
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"ff-log":74,"formulajs":57}],57:[function(require,module,exports){
+},{"ff-log":75,"formulajs":57}],57:[function(require,module,exports){
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("numeric"), require("numeral"), require("jStat"));
@@ -34322,7 +34324,7 @@ exports.mathJs = {
     entries: entries
 }
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./jsMath.json":62,"ff-log":74}],62:[function(require,module,exports){
+},{"./jsMath.json":62,"ff-log":75}],62:[function(require,module,exports){
 module.exports={
   "Length": {
     "args": "v1",
@@ -34828,6 +34830,32 @@ module.exports={
   "CACHE": {}
 }
 },{}],63:[function(require,module,exports){
+(function (process,global){
+process.loglevel = "info";
+global.loglevel = "info";
+require('../../../ff-fes/exchange_modules/lme/lmeparser');
+const lme = require('../../../ff-V05/V05');
+//var model = require('../json/V05_canvas.json');
+MatrixLookup = function() {
+    return 1;
+}
+var xhr = new XMLHttpRequest();
+xhr.addEventListener('load', function(e) {
+    let returnData = JSON.parse(this.responseText);
+    lme.importSolution(returnData , "lme");
+    lme.fixProblemsInImportedSolution();
+});
+//xhr.open('GET', '/public/json/V05_canvas.json');
+//xhr.send();
+LME = lme;
+module.exports = lme;
+/*etTimeout(function go() {
+    lme.importSolution(model, "lme");
+    /!*   lme.fixProblemsInImportedSolution();*!/
+}, 100)*/
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../../../ff-V05/V05":11,"../../../ff-fes/exchange_modules/lme/lmeparser":16,"_process":4}],64:[function(require,module,exports){
 /*
 
 The MIT License (MIT)
@@ -35015,7 +35043,7 @@ for (var map in colors.maps) {
 }
 
 defineProps(colors, init());
-},{"./custom/trap":64,"./custom/zalgo":65,"./maps/america":66,"./maps/rainbow":67,"./maps/random":68,"./maps/zebra":69,"./styles":70,"./system/supports-colors":71}],64:[function(require,module,exports){
+},{"./custom/trap":65,"./custom/zalgo":66,"./maps/america":67,"./maps/rainbow":68,"./maps/random":69,"./maps/zebra":70,"./styles":71,"./system/supports-colors":72}],65:[function(require,module,exports){
 module['exports'] = function runTheTrap (text, options) {
   var result = "";
   text = text || "Run the trap, drop the bass";
@@ -35062,7 +35090,7 @@ module['exports'] = function runTheTrap (text, options) {
 
 }
 
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 // please no
 module['exports'] = function zalgo(text, options) {
   text = text || "   he is here   ";
@@ -35168,7 +35196,7 @@ module['exports'] = function zalgo(text, options) {
   return heComes(text, options);
 }
 
-},{}],66:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 var colors = require('../colors');
 
 module['exports'] = (function() {
@@ -35181,7 +35209,7 @@ module['exports'] = (function() {
     }
   }
 })();
-},{"../colors":63}],67:[function(require,module,exports){
+},{"../colors":64}],68:[function(require,module,exports){
 var colors = require('../colors');
 
 module['exports'] = (function () {
@@ -35196,7 +35224,7 @@ module['exports'] = (function () {
 })();
 
 
-},{"../colors":63}],68:[function(require,module,exports){
+},{"../colors":64}],69:[function(require,module,exports){
 var colors = require('../colors');
 
 module['exports'] = (function () {
@@ -35205,13 +35233,13 @@ module['exports'] = (function () {
     return letter === " " ? letter : colors[available[Math.round(Math.random() * (available.length - 1))]](letter);
   };
 })();
-},{"../colors":63}],69:[function(require,module,exports){
+},{"../colors":64}],70:[function(require,module,exports){
 var colors = require('../colors');
 
 module['exports'] = function (letter, i, exploded) {
   return i % 2 === 0 ? letter : colors.inverse(letter);
 };
-},{"../colors":63}],70:[function(require,module,exports){
+},{"../colors":64}],71:[function(require,module,exports){
 /*
 The MIT License (MIT)
 
@@ -35289,7 +35317,7 @@ Object.keys(codes).forEach(function (key) {
   style.open = '\u001b[' + val[0] + 'm';
   style.close = '\u001b[' + val[1] + 'm';
 });
-},{}],71:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 (function (process){
 /*
 The MIT License (MIT)
@@ -35353,7 +35381,7 @@ module.exports = (function () {
   return false;
 })();
 }).call(this,require('_process'))
-},{"_process":4}],72:[function(require,module,exports){
+},{"_process":4}],73:[function(require,module,exports){
 //
 // Remark: Requiring this file will use the "safe" colors API which will not touch String.prototype
 //
@@ -35363,7 +35391,7 @@ module.exports = (function () {
 //
 var colors = require('./lib/colors');
 module['exports'] = colors;
-},{"./lib/colors":63}],73:[function(require,module,exports){
+},{"./lib/colors":64}],74:[function(require,module,exports){
 /*
  * Date Format 1.2.3
  * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
@@ -35591,7 +35619,7 @@ function kindOf(val) {
   }
 })(this);
 
-},{}],74:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 (function (process){
 var tracer = require('tracer');
 var format = "HH.MM.ssl";
@@ -35624,7 +35652,7 @@ console.TRACE = levels[logLevel].TRACE;
 module.exports = console;
 exports = console;
 }).call(this,require('_process'))
-},{"_process":4,"tracer":80}],75:[function(require,module,exports){
+},{"_process":4,"tracer":81}],76:[function(require,module,exports){
 module.exports = require('./tinytim');
 
 /**
@@ -35681,7 +35709,7 @@ module.exports.renderFile = function(path, vars, useCache) {
 	return module.exports.render(str, vars);
 };
 
-},{"./tinytim":76,"fs":1}],76:[function(require,module,exports){
+},{"./tinytim":77,"fs":1}],77:[function(require,module,exports){
 /*!
  tinytim.js
    github.com/premasagar/tim
@@ -35733,7 +35761,7 @@ var tim = exports.tim = (function(){
     };
 }());
 
-},{}],77:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 "use strict";
 var colors = require('colors/safe');
 module.exports = function(conf) {
@@ -35749,7 +35777,7 @@ module.exports = function(conf) {
 	}, conf);
 };
 
-},{"./console":78,"colors/safe":72}],78:[function(require,module,exports){
+},{"./console":79,"colors/safe":73}],79:[function(require,module,exports){
 "use strict";
 var tinytim = require('tinytim'), dateFormat = require('dateformat'), utils = require('./utils'), path = require('path'), settings = require('./settings').settings;
 
@@ -35892,7 +35920,7 @@ module.exports = (function() {
 	return _self;
 });
 
-},{"./settings":81,"./utils":82,"dateformat":73,"path":3,"tinytim":75}],79:[function(require,module,exports){
+},{"./settings":82,"./utils":83,"dateformat":74,"path":3,"tinytim":76}],80:[function(require,module,exports){
 "use strict";
 var fs = require('fs'), dateFormat = require('dateformat'), tinytim = require('tinytim'), utils = require('./utils'), spawn = require('child_process').spawn, spawnSync = require('child_process').spawnSync;
 var path = require('path');
@@ -35973,7 +36001,7 @@ module.exports = function (conf) {
     }
     return require('./console')(conf);
 };
-},{"./console":78,"./utils":82,"child_process":1,"dateformat":73,"fs":1,"path":3,"tinytim":75}],80:[function(require,module,exports){
+},{"./console":79,"./utils":83,"child_process":1,"dateformat":74,"fs":1,"path":3,"tinytim":76}],81:[function(require,module,exports){
 "use strict";
 exports.console = require('./console');
 exports.colorConsole = require('./color_console');
@@ -35985,7 +36013,7 @@ exports.close = settings.close;
 exports.setLevel = settings.setLevel;
 exports.getLevel = settings.getLevel;
 
-},{"./color_console":77,"./console":78,"./dailyfile":79,"./settings":81}],81:[function(require,module,exports){
+},{"./color_console":78,"./console":79,"./dailyfile":80,"./settings":82}],82:[function(require,module,exports){
 "use strict";
 var settings = {
 	level : undefined
@@ -36012,7 +36040,7 @@ exports.close = close;
 exports.setLevel = setLevel;
 exports.getLevel = getLevel;
 
-},{}],82:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 "use strict";
 exports.union = function(obj, args) {
 	for (var i = 0, len = args.length; i < len; i += 1) {
@@ -36072,19 +36100,4 @@ exports.format = function(f) {
 	return str;
 };
 
-},{"util":7}],"lme":[function(require,module,exports){
-require('../../../../../../stack/FESJS/ff-fes/exchange_modules/lme/lmeparser');
-const lme = require('../../../../../../stack/FESJS/ff-V05/V05');
-var xhr = new XMLHttpRequest();
-MatrixLookup = function() {
-    return 1;
-}
-xhr.addEventListener('load', function(e) {
-    let returnData = JSON.parse(this.responseText);
-    lme.importSolution(returnData , "lme");
-    lme.fixProblemsInImportedSolution();
-});
-xhr.open('GET', '/public/json/V05_canvas.json');
-xhr.send();
-module.exports = lme;
-},{"../../../../../../stack/FESJS/ff-V05/V05":11,"../../../../../../stack/FESJS/ff-fes/exchange_modules/lme/lmeparser":16}]},{},[]);
+},{"util":7}]},{},[63]);

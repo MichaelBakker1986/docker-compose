@@ -6,17 +6,19 @@ var log = require('ff-log');
 
 function FormulaInfo(data, schema) {
     this.formulas = [];
-    this.data = [];
+    var self = this;
+    var data = [];
+    this.data = data;
     this.nodes = [];
     var forms = {};
-    FormulaService.visitFormulas((formula) => {
+    FormulaService.visitFormulas(function(formula) {
         formula.id = formula.id || formula.index;
         forms[formula.name] = formula;
-        this.addFormula(formula)
+        self.addFormula(formula)
     });
     var names = {};
     var modelName = 'V05_';
-    this.formulas.forEach((formula) => {
+    this.formulas.forEach(function(formula) {
         var name = correctFileName(formula.name);
         if (names[name] === undefined) {
             names[name] = true;
@@ -27,7 +29,7 @@ function FormulaInfo(data, schema) {
             var formula_notrend = forms[modelName + name + '_notrend'] || {original: ''};
             var locked = forms[modelName + name + '_locked'] || {original: false};
             var choices = forms[modelName + name + '_choices'] || {original: null};
-            this.data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original])
+            data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original])
         }
     })
     var types = ['name', 'title', 'visible', 'value', 'notrend', 'trend', 'locked', 'choices'];
@@ -38,8 +40,8 @@ function FormulaInfo(data, schema) {
         }
     }
     var counter = 0;
-    types.forEach((type) => {
-        this.meta.view.columns.push({
+    types.forEach(function(type) {
+        self.meta.view.columns.push({
             "name": type,
             "dataTypeName": "text",
             "fieldName": type,

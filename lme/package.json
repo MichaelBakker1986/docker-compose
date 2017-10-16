@@ -1,16 +1,34 @@
 {
   "name": "lme",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "",
+  "license": "ISC",
   "private": true,
+  "author": "Michael Bakker",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
   "dependencies": {
+    "auto-updater": "^1.0.2",
     "body-parser": "~1.17.1",
-    "canvas-datagrid": "^0.16.8",
+    "browserify": "^14.4.0",
+    "browserify-fastjson": "^1.2.1",
+    "browserify-middleware": "^7.1.0",
+    "canvas-datagrid": "^0.16.16",
+    "compression": "^1.7.1",
     "connect": "^3.6.5",
     "cookie-parser": "~1.4.3",
     "exceljs": "^0.6.2",
+    "express": "^4.16.2",
+    "ff-log": "^1.0.19",
     "request": "^2.83.0",
     "request-progress": "^3.0.0",
     "serve-favicon": "~2.4.2",
     "serve-static": "^1.13.1"
+  },
+  "auto-updater": {
+    "repo": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git",
+    "branch": "master"
   }
 }

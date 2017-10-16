@@ -12,6 +12,12 @@ var levels = {
         TRACE: false,
         INFO: true
     },
+    error: {
+        DEBUG: false,
+        TRACE: false,
+        INFO: false,
+        WARN: false
+    },
     trace: {
         DEBUG: true,
         TRACE: true,

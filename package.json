@@ -8,7 +8,8 @@
     "ast-node-utils": "file:ast-node-utils",
     "deasync": "^0.1.10",
     "ff-fes": "^1.0.1",
-    "ff-formulajs": "^1.0.1"
+    "ff-formulajs": "^1.0.1",
+    "serve-favicon": "^2.4.5"
   },
   "devDependencies": {
     "ff-fes": "^1.0.1",
