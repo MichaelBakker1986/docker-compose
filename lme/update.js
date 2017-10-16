@@ -4,8 +4,14 @@ var request = require('request');
 var port = 8081;
 var exec = require('child_process').exec;
 var server;
+var busy = false;
 //Ok, ik ga dus de app.js stoppen. een nieuwe staten als child, daarna mezelf stoppen
 app.get('/update', function(req, res) {
+    if (busy) {
+        res.end('budy');
+        return;
+    }
+    busy = true;
     res.end('succes');
     console.info('Called update')
     //pkill -f node
@@ -24,6 +30,7 @@ app.get('/update', function(req, res) {
                 console.info('Killed all node processes [' + response + ']')
                 process.kill();
                 send("<span>Killed all node processes</span>")
+                busy = false;
             })
         })
     })
