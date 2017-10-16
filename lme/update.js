@@ -18,7 +18,6 @@ var levels = {
         color: 'red'
     }
 }
-
 function spawnChild() {
     child = spawn('node', ['app.js']);
     child.on('exit', function() {
@@ -40,11 +39,8 @@ app.get('/update', function(req, res) {
         }
         busy = true;
         res.end('Succes restarting');
-        //git reset --hard origin/master
-        exec('echo "a"', function(err, response) {
+        exec('git reset --hard origin/master', function(err, response) {
             if (err) throw err
-            log('<span>Git update</span>')
-            //do update here
             exec('git pull', function(err, response) {
                 if (err) throw err
                 log('<span>Restarting server</span>');
@@ -79,11 +75,10 @@ function send(text, level) {
 
 httpServer.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        log('Auto update server running <a href="http://' + add + ":" + port + '/update' + '"></a>');
+        log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update' + '">server</a><span> deployed</span>');
     })
 });
 spawnChild();
-
 function log(message, levelArg) {
     if (message) {
         send(message, 'info');
