@@ -1,8 +1,6 @@
 var express = require('express');
 var app = express();
 var httpServer = require('http').createServer(app);
-
-
 var request = require('request');
 var port = 8081;
 var exec = require('child_process').exec;
@@ -29,13 +27,12 @@ app.get('/update', function(req, res) {
                 send("<span>Restart server</span>");
                 httpServer.close();
                 send("<span>Closed appserver</span>");
-                exec('node update', function(err, response) {
+                console.info('exec:' + exec('node app', function(err, response) {
                     if (err) throw err
                     console.info('Killed all node processes [' + response + ']')
-                    send("<span>Killed all node processes</span>")
+                    //send("<span>Killed all node processes</span>")
                     busy = false;
-                    process.kill();
-                })
+                }))
             })
         })
     } catch (err) {
