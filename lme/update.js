@@ -3,7 +3,7 @@ var app = express();
 var request = require('request');
 var port = 8081;
 var exec = require('child_process').exec;
-
+var server;
 //Ok, ik ga dus de app.js stoppen. een nieuwe staten als child, daarna mezelf stoppen
 app.get('/update', function(req, res) {
     res.end('succes');
@@ -17,7 +17,7 @@ app.get('/update', function(req, res) {
             if (err) throw err
             console.info('Excecuted git pull [' + response + ']')
             send("<span>Restart server</span>");
-            app.close();
+            server.close();
             send("<span>Closed appserver</span>");
             exec('node update', function(err, response) {
                 if (err) throw err
@@ -46,6 +46,6 @@ function send(text) {
     )
 }
 
-app.listen(port, function() {
+server = app.listen(port, function() {
     console.log('Update server running on ' + port + '...');
 });
