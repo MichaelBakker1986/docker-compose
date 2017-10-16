@@ -7,6 +7,8 @@
   "dependencies": {
     "ast-node-utils": "file:ast-node-utils",
     "deasync": "^0.1.10",
+    "escodegen": "^1.9.0",
+    "esprima": "^4.0.0",
     "ff-fes": "^1.0.1",
     "ff-formulajs": "^1.0.1",
     "serve-favicon": "^2.4.5"
@@ -15,7 +17,7 @@
     "ff-fes": "^1.0.1",
     "ff-fes-xlsx": "^1.0.2",
     "ff-formulajs": "^1.0.1",
-    "ff-log": "^1.0.18",
+    "ff-log": "file:ff-log",
     "ff-math": "file:ff-math",
     "formulajs": "^1.0.8",
     "promise": "^7.3.1",
