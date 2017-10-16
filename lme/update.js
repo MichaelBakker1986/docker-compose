@@ -7,60 +7,86 @@ var exec = require('child_process').exec;
 var spawn = require('child_process').spawn;
 var server;
 var busy = false;
-var childprocess;
-//Ok, ik ga dus de app.js stoppen. een nieuwe staten als child, daarna mezelf stoppen
+var child;
+var levels = {
+    info: {
+        level: 'info',
+        color: 'green'
+    },
+    error: {
+        levels: 'error',
+        color: 'red'
+    }
+}
+
+function spawnChild() {
+    child = spawn('node', ['app.js']);
+    child.on('exit', function() {
+        log('Appserver exited!');
+    });
+    child.stdout.on('data', function(data) {
+        log('' + data, 'info');
+    });
+    child.stderr.on('data', function(data) {
+        log('' + data, 'error');
+    });
+}
+
 app.get('/update', function(req, res) {
     try {
         if (busy) {
-            res.end('budy');
+            res.end('Busy restarting');
             return;
         }
         busy = true;
-        res.end('succes');
-        console.info('Called update')
+        res.end('Succes restarting');
         //git reset --hard origin/master
-        exec('echo "a", function(err, response) {
+        exec('echo "a"', function(err, response) {
             if (err) throw err
-            //  send("<span>Git update</span>")
+            log('<span>Git update</span>')
             //do update here
             exec('git pull', function(err, response) {
                 if (err) throw err
-                console.info('Excecuted git pull [' + response + ']')
-                // send("<span>Restart server</span>");
-                childprocess.kill('SIGINT');
-                childprocess = spawn('node app', function(err, response) {
-                    if (err) throw err
-                    console.info('Killed all node processes [' + response + ']')
-                    //send("<span>Killed all node processes</span>")
-                    busy = false;
-                });
+                log('<span>Restarting server</span>');
+                if (child) {
+                    child.kill('SIGINT');
+                }
+                child = spawnChild();
+                busy = false;
             })
         })
     } catch (err) {
         busy = false;
-        httpServer.listen(port, function() {
-            console.log('Update server running on ' + port + '...');
-        });
     }
 });
 
-function send(text) {
+function send(text, level) {
     request.post({
             url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW',
             json: {
-                "color": "green",
+                "color": 'green',
                 "message": text
             }
         },
         function(err, res, body) {
             if (err) {
-                return console.info(err)
+                return console.info('error:' + res)
             }
-            console.info(body)
+            console.info('Hipchat post ok')
         }
     )
 }
 
 httpServer.listen(port, function() {
-    console.log('Update server running on ' + port + '...');
+    require('dns').lookup(require('os').hostname(), function(err, add, fam) {
+        log('Auto update server running <a href="http://' + add + ":" + port + '/update' + '"></a>');
+    })
 });
+spawnChild();
+
+function log(message, levelArg) {
+    if (message) {
+        send(message, 'info');
+    }
+    console.info(message);
+}
