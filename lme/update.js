@@ -6,7 +6,7 @@ var exec = require('child_process').exec;
 
 app.get('/update', function(req, res) {
     res.end('succes');
-    console.info('called update')
+    console.info('Called update')
     //pkill -f node
     exec('git reset --hard origin/master', function(err, response) {
         if (err) throw err
