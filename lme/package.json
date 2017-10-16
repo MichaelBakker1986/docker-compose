@@ -19,6 +19,7 @@
     "exceljs": "^0.6.2",
     "express": "^4.16.2",
     "ff-log": "^1.0.19",
+    "github-auth": "^1.0.1",
     "request": "^2.83.0",
     "request-progress": "^3.0.0",
     "serve-favicon": "~2.4.2",

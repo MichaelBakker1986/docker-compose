@@ -22,7 +22,7 @@ var levels = {
 function spawnChild() {
     child = spawn('node', ['app.js']);
     child.on('exit', function() {
-        log('Appserver exited!');
+        console.info('Appserver down')
     });
     child.stdout.on('data', function(data) {
         log('' + data, 'info');
@@ -54,6 +54,7 @@ app.get('/update/git/notifyCommit', function(req, res) {
         })
     } catch (err) {
         busy = false;
+        log('Fail [' + err + ']')
     }
 });
 

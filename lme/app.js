@@ -8,6 +8,17 @@ var favicon = require('serve-favicon')
 var compression = require('compression')
 var browser = require('browserify');
 var fastjson = require('browserify-fastjson');
+
+var githubAuth = require('github-auth');
+var config = {
+    team: 'lme',
+    organization: 'lme',
+    autologin: true, // This automatically redirects you to github to login.
+    hideAuthInternals: true // After authentication this redirects to original url but without query parameters 'code' and 'state'.
+};
+var gh = githubAuth('Iv1.eba2e3eea8f35f4d', '71bb2fb50341910f4497acbbf44a8cb25a17a825', config);
+app.use(gh.authenticate);
+
 browserify.settings({
     transform: [fastjson]
 })

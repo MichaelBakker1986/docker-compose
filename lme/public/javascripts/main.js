@@ -90,20 +90,15 @@ function demo() {
         modelengine.importSolution(returnData, "lme");
         //modelengine.fixProblemsInImportedSolution();
     });
-    xhr.open('GET', '/public/json/V05_canvas.json');
+    var modelName = 'V05';
+    try {
+        modelName = window.location.search.split('model=')[1] || 'V05';
+    } catch (err) {
+        modelName = 'V05'
+    }
+    xhr.open('GET', '/public/json/' + modelName + '_canvas.json');
     xhr.send();
-
-    /*Xgrid.data = [{status: 'Loading data ' + '...'}];
-    setTimeout(function() {
-        let returnData = require('../json/V05_canvas.json');// JSON.parse(this.responseText);
-        var openData = parseOpenData(returnData);
-        Xgrid.schema = openData.schema;
-        Xgrid.data = openData.data;
-        modelengine.importSolution(returnData, "lme");
-        modelengine.fixProblemsInImportedSolution();
-    }, 10)*/
 }
-
 if (document.addEventListener) {
     document.addEventListener('DOMContentLoaded', demo);
 } else {
@@ -112,3 +107,14 @@ if (document.addEventListener) {
         demo();
     }, 500);
 }
+
+var langTools = ace.require("ace/ext/language_tools");
+/*   ace.require("ace/ext/beautify");*/
+/*ace.require("ace/mode/javascript");*/
+ace.require("ace/mode/json");
+editor.setOptions({
+    showGutter: true,
+    enableBasicAutocompletion: false,
+    enableSnippets: true,
+    enableLiveAutocompletion: true
+});
