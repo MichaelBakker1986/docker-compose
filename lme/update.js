@@ -4,6 +4,7 @@ var request = require('request');
 var port = 8081;
 var exec = require('child_process').exec;
 
+//Ok, ik ga dus de app.js stoppen. een nieuwe staten als child, daarna mezelf stoppen
 app.get('/update', function(req, res) {
     res.end('succes');
     console.info('Called update')
@@ -16,9 +17,12 @@ app.get('/update', function(req, res) {
             if (err) throw err
             console.info('Excecuted git pull [' + response + ']')
             send("<span>Restart server</span>");
-            exec('pkill -f node; node app &', function(err, response) {
+            app.close();
+            send("<span>Closed appserver</span>");
+            exec('node update', function(err, response) {
                 if (err) throw err
                 console.info('Killed all node processes [' + response + ']')
+                process.kill();
                 send("<span>Killed all node processes</span>")
             })
         })
