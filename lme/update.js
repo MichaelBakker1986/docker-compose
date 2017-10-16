@@ -15,9 +15,8 @@ app.get('/update', function(req, res) {
         exec('git pull', function(err, response) {
             if (err) throw err
             console.info('Excecuted git pull [' + response + ']')
-            console.info('Excecuted git pull [' + response + ']')
             send("<span>Restart server</span>");
-            exec('pkill -f node; node update &', function(err, response) {
+            exec('pkill -f node; node app &', function(err, response) {
                 if (err) throw err
                 console.info('Killed all node processes [' + response + ']')
                 send("<span>Killed all node processes</span>")
