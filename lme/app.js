@@ -1,4 +1,4 @@
-//default test message
+//default test message2
 var browserify = require('browserify-middleware');
 var express = require('express');
 var app = express();
