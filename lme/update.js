@@ -3,6 +3,7 @@ var app = express();
 var request = require('request');
 var port = 8081;
 var exec = require('child_process').exec;
+
 app.get('/update', function(req, res) {
 
     //pkill -f node
@@ -10,20 +11,17 @@ app.get('/update', function(req, res) {
         if (err) throw err
         send("<span>Git update</span>")
     })
-    exec('pkill -f node', function(err, response) {
-        if (err) throw err
-        console.info('Killed all node processes [' + response + ']')
-        send("<span>Killed all node processes</span>")
-    })
-
-    send("<a href='http://blfif-tv-tr03.finance.lab:8080/public/index.html'>DEMO</a>");
-
     //do update here
     exec('git pull', function(err, response) {
         if (err) throw err
         console.info('Excecuted git pull [' + response + ']')
         send("<span>Excecuted git pull</span>");
     })
+    /*  exec('pkill -f node', function(err, response) {
+          if (err) throw err
+          console.info('Killed all node processes [' + response + ']')
+          send("<span>Killed all node processes</span>")
+      })*/
     res.end('succes');
 });
 
