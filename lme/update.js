@@ -31,7 +31,7 @@ function spawnChild() {
     });
 }
 
-app.get('/update', function(req, res) {
+app.get('/update/git/notifyCommit', function(req, res) {
     try {
         if (busy) {
             res.end('Busy restarting');
