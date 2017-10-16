@@ -28,14 +28,13 @@ app.get('/update', function(req, res) {
             exec('node update', function(err, response) {
                 if (err) throw err
                 console.info('Killed all node processes [' + response + ']')
-                process.kill();
                 send("<span>Killed all node processes</span>")
                 busy = false;
+                process.kill();
             })
         })
     })
 });
-
 function send(text) {
     request.post({
             url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW',
