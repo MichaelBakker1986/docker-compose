@@ -18,6 +18,7 @@ var levels = {
         color: 'red'
     }
 }
+
 function spawnChild() {
     child = spawn('node', ['app.js']);
     child.on('exit', function() {
@@ -47,7 +48,7 @@ app.get('/update/git/notifyCommit', function(req, res) {
                 if (child) {
                     child.kill('SIGINT');
                 }
-                child = spawnChild();
+                spawnChild();
                 busy = false;
             })
         })
@@ -75,10 +76,11 @@ function send(text, level) {
 
 httpServer.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update' + '">server</a><span> deployed</span>');
+        log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
     })
 });
 spawnChild();
+
 function log(message, levelArg) {
     if (message) {
         send(message, 'info');
