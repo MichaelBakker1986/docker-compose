@@ -4,8 +4,10 @@ var httpServer = require('http').createServer(app);
 var request = require('request');
 var port = 8081;
 var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 var server;
 var busy = false;
+var childprocess;
 //Ok, ik ga dus de app.js stoppen. een nieuwe staten als child, daarna mezelf stoppen
 app.get('/update', function(req, res) {
     try {
@@ -16,23 +18,22 @@ app.get('/update', function(req, res) {
         busy = true;
         res.end('succes');
         console.info('Called update')
-        //pkill -f node
-        exec('git reset --hard origin/master', function(err, response) {
+        //git reset --hard origin/master
+        exec('echo "a", function(err, response) {
             if (err) throw err
-            send("<span>Git update</span>")
+            //  send("<span>Git update</span>")
             //do update here
             exec('git pull', function(err, response) {
                 if (err) throw err
                 console.info('Excecuted git pull [' + response + ']')
-                send("<span>Restart server</span>");
-                httpServer.close();
-                send("<span>Closed appserver</span>");
-                console.info('exec:' + exec('node app', function(err, response) {
+                // send("<span>Restart server</span>");
+                childprocess.kill('SIGINT');
+                childprocess = spawn('node app', function(err, response) {
                     if (err) throw err
                     console.info('Killed all node processes [' + response + ']')
                     //send("<span>Killed all node processes</span>")
                     busy = false;
-                }))
+                });
             })
         })
     } catch (err) {
