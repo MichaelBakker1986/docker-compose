@@ -1,3 +1,4 @@
+//default
 var browserify = require('browserify-middleware');
 var express = require('express');
 var app = express();
@@ -30,7 +31,6 @@ app.use('/web.js', browserify(__dirname + '/public/javascripts/main.js', {
     minify: true,
     precompile: true
 }));
-
 app.use(serveStatic(__dirname)).listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
         console.log('<a href="http://' + add + ':' + port + '/public/index.html">DEMO Server</a><span> deployed</span>');
