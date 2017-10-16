@@ -15,7 +15,6 @@
     "browserify": "^14.4.0",
     "browserify-fastjson": "^1.2.1",
     "browserify-middleware": "^7.1.0",
-    "canvas-datagrid": "^0.16.16",
     "compression": "^1.7.1",
     "connect": "^3.6.5",
     "cookie-parser": "~1.4.3",
@@ -28,7 +27,7 @@
     "serve-static": "^1.13.1"
   },
   "auto-updater": {
-    "repo": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git",
+    "repo": "ff/fesjs",
     "branch": "master"
   }
 }
