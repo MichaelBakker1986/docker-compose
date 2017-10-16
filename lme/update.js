@@ -6,7 +6,7 @@ app.get('/update', function(req, res) {
     var exec = require('child_process').exec;
     exec('git pull', function(err, response) {
         if (err) throw err
-        console.info('done213')
+        console.info('Excecuted git pull [' + response + ']')
     })
     res.end('succes');
 });
