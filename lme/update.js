@@ -5,24 +5,25 @@ var port = 8081;
 var exec = require('child_process').exec;
 
 app.get('/update', function(req, res) {
-
+    res.end('succes');
+    console.info('called update')
     //pkill -f node
     exec('git reset --hard origin/master', function(err, response) {
         if (err) throw err
         send("<span>Git update</span>")
+        //do update here
+        exec('git pull', function(err, response) {
+            if (err) throw err
+            console.info('Excecuted git pull [' + response + ']')
+            console.info('Excecuted git pull [' + response + ']')
+            send("<span>Restart server</span>");
+            exec('pkill -f node; node update &', function(err, response) {
+                if (err) throw err
+                console.info('Killed all node processes [' + response + ']')
+                send("<span>Killed all node processes</span>")
+            })
+        })
     })
-    //do update here
-    exec('git pull', function(err, response) {
-        if (err) throw err
-        console.info('Excecuted git pull [' + response + ']')
-        send("<span>Excecuted git pull</span>");
-    })
-    /*  exec('pkill -f node', function(err, response) {
-          if (err) throw err
-          console.info('Killed all node processes [' + response + ']')
-          send("<span>Killed all node processes</span>")
-      })*/
-    res.end('succes');
 });
 
 function send(text) {
