@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+var httpServer = require('http').createServer(app);
+
+
 var request = require('request');
 var port = 8081;
 var exec = require('child_process').exec;
@@ -24,7 +27,7 @@ app.get('/update', function(req, res) {
                 if (err) throw err
                 console.info('Excecuted git pull [' + response + ']')
                 send("<span>Restart server</span>");
-                server.close();
+                httpServer.close();
                 send("<span>Closed appserver</span>");
                 exec('node update', function(err, response) {
                     if (err) throw err
@@ -37,7 +40,7 @@ app.get('/update', function(req, res) {
         })
     } catch (err) {
         busy = false;
-        server = app.listen(port, function() {
+        httpServer.listen(port, function() {
             console.log('Update server running on ' + port + '...');
         });
     }
@@ -60,6 +63,6 @@ function send(text) {
     )
 }
 
-server = app.listen(port, function() {
+httpServer.listen(port, function() {
     console.log('Update server running on ' + port + '...');
 });
