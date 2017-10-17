@@ -3,6 +3,7 @@ function aceEdit() {
     var langTools = ace.require("ace/ext/language_tools");
     editor.session.setMode("ace/mode/ffl");
     editor.setTheme("ace/theme/tomorrow");
+    editor.resize(true)
 // enable autocompletion and snippets
     editor.setOptions({
         enableBasicAutocompletion: true,
@@ -15,10 +16,13 @@ function aceEdit() {
     });
     xhr.addEventListener('load', function(e) {
         editor.setValue(this.responseText);
+        editor.scrollToLine(1, true, true, function () {});
+        editor.gotoLine(1, 1, true);
     });
     xhr.open('GET', '/public/json/V05.FFL');
     xhr.send();
 }
+
 if (document.addEventListener) {
     document.addEventListener('DOMContentLoaded', aceEdit);
 } else {

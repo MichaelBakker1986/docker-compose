@@ -8,6 +8,7 @@ var compression = require('compression')
 var browser = require('browserify');
 var fastjson = require('browserify-fastjson');
 app.use(require('express-favicon')());
+var stash = require('./public/stash');
 browserify.settings({
     transform: [fastjson]
 })
@@ -23,6 +24,11 @@ app.get('/:id/create', function(req, res) {
     b.add(__dirname + '/public/javascripts/output.js');
     b.transform(fastjson);
     b.bundle().pipe(res);
+});
+app.get('/stash/*', function(req, res) {
+    stash.api(req.originalUrl.substr(7)).then((data) => {
+        res.end(data);
+    })
 });
 app.use('/:id/web.js', browserify(__dirname + '/public/javascripts/main.js', {
     cache: true,

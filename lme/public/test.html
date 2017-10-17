@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>LME</title>
-    <script src="/create"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="javascripts/test.js"></script>
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <style>
@@ -14,9 +17,22 @@
             padding: 0;
             overflow: hidden;
         }
+        .ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
     </style>
 </head>
 <body>
+<div class="ui-widget">
+    <label for="tags">Tags: </label>
+    <input id="tags">
+</div>
+<div class="ui-widget">
+    <label for="models">models: </label>
+    <input id="models">
+</div>
 <span>Test page.</span>
 </body>
 </html>
