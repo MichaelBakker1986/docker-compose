@@ -31,7 +31,6 @@ function spawnChild() {
         log('' + data, 'error');
     });
 }
-
 app.get('/update/git/notifyCommit', function(req, res) {
     try {
         if (busy) {
@@ -81,7 +80,6 @@ httpServer.listen(port, function() {
     })
 });
 spawnChild();
-
 function log(message, levelArg) {
     if (message) {
         send(message, 'info');

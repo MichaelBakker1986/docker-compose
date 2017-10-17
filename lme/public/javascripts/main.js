@@ -99,6 +99,7 @@ function demo() {
     xhr.open('GET', '/public/json/' + modelName + '_canvas.json');
     xhr.send();
 }
+
 if (document.addEventListener) {
     document.addEventListener('DOMContentLoaded', demo);
 } else {
@@ -107,14 +108,3 @@ if (document.addEventListener) {
         demo();
     }, 500);
 }
-
-var langTools = ace.require("ace/ext/language_tools");
-/*   ace.require("ace/ext/beautify");*/
-/*ace.require("ace/mode/javascript");*/
-ace.require("ace/mode/json");
-editor.setOptions({
-    showGutter: true,
-    enableBasicAutocompletion: false,
-    enableSnippets: true,
-    enableLiveAutocompletion: true
-});
