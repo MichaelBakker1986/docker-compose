@@ -35,6 +35,6 @@ app.use('/:id/web.js', browserify(__dirname + '/public/javascripts/main.js', {
 app.use(serveStatic(__dirname));
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.log('<a href="http://' + add + ':' + port + '/public/index.html">DEMO Server</a><span> deployed (test6).</span>');
+        console.log('<a href="http://' + add + ':' + port + '/public/index.html">DEMO Server</a><span> deployed (test7).</span>');
     })
 });
