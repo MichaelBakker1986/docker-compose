@@ -42,7 +42,7 @@ app.get('/update/git/notifyCommit', (req, res) => {
         res.end('Succes restarting');
         exec('git reset --hard origin/master', function(err, response) {
             if (err) throw err
-            exec('git pull', function(err, response) {
+            exec('git pull && npm install', function(err, response) {
                 if (err) throw err
                 log('<span>Restarting server</span>');
                 if (child) {

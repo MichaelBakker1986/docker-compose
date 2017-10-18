@@ -1,0 +1,25 @@
+{
+  "name": "lme",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Michael Bakker"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "^0.100.2",
+    "canvas-datagrid": "^0.16.8",
+    "components-font-awesome": "^4.7.0",
+    "proxy-polyfill": "^0.1.7",
+    "ace-builds": "^1.2.8"
+  }
+}
