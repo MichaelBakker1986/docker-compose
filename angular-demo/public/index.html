@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angapp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DEMO angular app</title>
+    <script src="http://localhost:8080/DEMO/create"></script>
+    <script src="/angular/angular.min.js"></script>
+    <link rel="stylesheet" href="/masonry-css/dist/masonry.css">
+    <!--    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css"/>-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body ng-controller="kspController">
+
+<H1>Figure data:</H1>
+<input ng-model="LME_MODEL.FES_LAYOUTNR.rowId"/>
+<div class="wrapper">
+    <div class="masonry" data-masonry='{ "itemSelector": ".item" }'>
+        <div class="masonry-item" ng-repeat="figure in LME_MODEL" style="width:{{figure.rowId.length}}px; height:{{figure.rowId.length}}px">
+            {{figure.rowId}}
+        </div>
+    </div>
+</div>
+<script>
+    angular.module('angapp', []).controller('kspController', function($scope) {
+        var tree = LME.export('presentation').tree;
+        tree.update(tree.root, {value: true, title: true})
+        console.info(tree._tree.nodes.FES_LAYOUTNR)
+        $scope.LME_MODEL = tree._tree.nodes
+    });
+</script>
+</body>
+</html>

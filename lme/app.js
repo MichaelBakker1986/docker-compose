@@ -17,6 +17,7 @@ app.get('/:id/create', function(req, res) {
     /**
      * Create identified compiled js file
      */
+    res.header("Access-Control-Allow-Origin", "*");
     var b = browser({
         insertGlobals: true,
         debug: false
@@ -30,6 +31,11 @@ app.get('/stash/*', function(req, res) {
         res.end(data);
     })
 });
+app.get('/stash2/*', function(req, res) {
+    stash.models('master', 'ffl').then((data) => {
+        res.end(JSON.stringify(data));
+    })
+});
 app.use('/:id/web.js', browserify(__dirname + '/public/javascripts/main.js', {
     cache: true,
     gzip: true,
@@ -38,9 +44,10 @@ app.use('/:id/web.js', browserify(__dirname + '/public/javascripts/main.js', {
     minify: true,
     precompile: true
 }));
-app.use(serveStatic(__dirname));
+app.use(serveStatic(__dirname + "/public/"));
+app.use(serveStatic(__dirname + "/bower_components/"));
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.log('<a href="http://' + add + ':' + port + '/public/index.html">DEMO Server</a><span> deployed (test7).</span>');
+        console.log('<a href="http://' + add + ':' + port + '/index.html">DEMO Server</a><span> deployed (test7).</span>');
     })
 });

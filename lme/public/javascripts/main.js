@@ -96,7 +96,7 @@ function demo() {
     } catch (err) {
         modelName = 'V05'
     }
-    xhr.open('GET', '/public/json/' + modelName + '_canvas.json');
+    xhr.open('GET', '/json/' + modelName + '_canvas.json');
     xhr.send();
 }
 

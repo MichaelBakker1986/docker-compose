@@ -31,7 +31,8 @@ function spawnChild() {
         log('' + data, 'error');
     });
 }
-app.get('/update/git/notifyCommit', function(req, res) {
+
+app.get('/update/git/notifyCommit', (req, res) => {
     try {
         if (busy) {
             res.end('Busy restarting');
@@ -65,7 +66,7 @@ function send(text, level) {
                 "message": text
             }
         },
-        function(err, res, body) {
+        (err, res, body) => {
             if (err) {
                 return console.info('error:' + res)
             }
@@ -74,8 +75,8 @@ function send(text, level) {
     )
 }
 
-httpServer.listen(port, function() {
-    require('dns').lookup(require('os').hostname(), function(err, add, fam) {
+httpServer.listen(port, () => {
+    require('dns').lookup(require('os').hostname(), (err, add, fam) => {
         log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
     })
 });
