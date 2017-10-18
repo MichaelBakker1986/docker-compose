@@ -29,11 +29,15 @@ app.get('/:id/create', function(req, res) {
 app.get('/stash/*', function(req, res) {
     stash.api(req.originalUrl.substr(7)).then((data) => {
         res.end(data);
+    }).catch((err) => {
+        res.end("" + err);
     })
 });
 app.get('/stash2/*', function(req, res) {
     stash.models('master', 'ffl').then((data) => {
         res.end(JSON.stringify(data));
+    }).catch((err) => {
+        res.end("" + err)
     })
 });
 app.use('/:id/web.js', browserify(__dirname + '/public/javascripts/main.js', {
