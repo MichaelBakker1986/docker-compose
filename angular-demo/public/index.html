@@ -11,9 +11,14 @@
     <!--    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css"/>-->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <style>
-
-    </style>
+    <script>
+        angular.module('angapp', []).controller('kspController', function($scope) {
+            var tree = LME.exportPresentation().tree;
+            tree.update(tree.root, {value: true, title: true})
+            console.info(tree._tree.nodes.FES_LAYOUTNR)
+            $scope.LME_MODEL = tree._tree.nodes
+        });
+    </script>
 </head>
 <body ng-controller="kspController">
 
@@ -26,13 +31,5 @@
         </div>
     </div>
 </div>
-<script>
-    angular.module('angapp', []).controller('kspController', function($scope) {
-        var tree = LME.exportPresentation().tree;
-        tree.update(tree.root, {value: true, title: true})
-        console.info(tree._tree.nodes.FES_LAYOUTNR)
-        $scope.LME_MODEL = tree._tree.nodes
-    });
-</script>
 </body>
 </html>
