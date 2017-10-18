@@ -8,6 +8,7 @@ var spawn = require('child-process-promise').spawn;
 var busy = false;
 var childProcesses = {}
 var hostname = require('os').hostname();
+var developer = hostname === 'michael';
 var levels = {
     info: {
         level: 'info',
@@ -18,6 +19,7 @@ var levels = {
         color: 'red'
     }
 }
+
 function spawnChild(appname, args) {
     var promise = spawn('node', [appname + '.js', args])
     var childProcess = promise.childProcess;
@@ -45,7 +47,8 @@ function update() {
             reject('Busy restarting');
         } else {
             busy = true;
-            exec('git reset --hard origin/master && git pull && npm install && bower install').then((result) => {
+            var command = developer ? 'echo a' : 'git reset --hard origin/master && git pull && npm install && bower install';
+            exec(command).then((result) => {
                 log('<span>Restarting server</span>');
                 for (var key in childProcesses) {
                     childProcesses[key].kill('SIGKILL')

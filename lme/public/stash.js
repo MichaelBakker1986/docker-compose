@@ -20,7 +20,7 @@ class Stash {
         write('./public/json/' + name + '.ffl', data)
             .then(function(filename) {
                 console.log(filename) //=> '/tmp/foo'
-                let command = "git add *";
+                let command = "git add * && git commit -m changeByDEMO";
                 return exec(command)
             })
             .catch(function(err) {
