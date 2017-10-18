@@ -46,7 +46,6 @@ function aceEdit() {
         }, function(data) {
             console.info('send complete');
         });
-        console.info('click' + editor.getSession().getValue())
     })
 }
 

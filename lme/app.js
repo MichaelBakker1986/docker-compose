@@ -9,6 +9,11 @@ var browser = require('browserify');
 var fastjson = require('browserify-fastjson');
 var static = require('static-nocase')
 var lmeAPI = require('./src/lme')
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
+}));
 
 app.use(require('express-favicon')());
 var stash = require('./public/stash');
@@ -19,10 +24,8 @@ app.use(compression())
 /**
  * Create identified compiled js file.
  */
-app.get('/:id/saveFFL_LME', (req, res) => {
-    var model = req.param('model');
-    var data = req.param('data');
-    console.info(model + "  : " + data.length)
+app.post('/:id/saveFFL_LME', (req, res) => {
+    stash.commit(req.body.model, req.body.data)
     res.end('done');
 });
 app.get('/:id/transformFFL_LME/*', (req, res) => {
