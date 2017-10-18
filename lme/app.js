@@ -17,7 +17,7 @@ browserify.settings({
 })
 app.use(compression())
 /**
- * Create identified compiled js file
+ * Create identified compiled js file.
  */
 app.get('/:id/saveFFL_LME', (req, res) => {
     var model = req.param('model');
