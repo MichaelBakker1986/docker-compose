@@ -16,8 +16,7 @@ class Stash {
     }
 
     models(branch, path) {
-        //git checkout " + branch + " -q &&
-        let command = "git pull -q && git ls-files-root *." + path;
+        let command = "git checkout " + branch + " -q && git pull -q && git ls-files-root *." + path;
         //log.info("Do command: [" + command + "]");
         return exec(command)
             .then(function(result) {
