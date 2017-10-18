@@ -3,8 +3,8 @@ var app = express();
 var httpServer = require('http').createServer(app);
 var request = require('request');
 var port = 8081;
-var exec = require('child_process').exec;
-var spawn = require('child_process').spawn;
+var exec = require('child-process-promise').exec;
+var spawn = require('child-process-promise').spawn;
 var busy = false;
 
 var lmeChild;
@@ -35,31 +35,35 @@ function spawnChild(appname, args) {
     return child;
 }
 
-app.get('/update/git/notifyCommit', (req, res) => {
-    try {
+function update() {
+    return new Promise((fulfill, reject) => {
         if (busy) {
-            res.end('Busy restarting');
-            return;
+            reject('Busy restarting');
+        } else {
+            busy = true;
+            exec('git reset --hard origin/master && git pull && npm install && bower install').then((result) => {
+                log('<span>Restarting server</span>');
+                if (lmeChild) lmeChild.kill('SIGINT');
+                if (angularChild) angularChild.kill('SIGINT');
+                angularChild = spawnChild('../angular-demo/angularapp');
+                lmeChild = spawnChild('app', process.argv[2]);
+                busy = false;
+                fulfill('Succes restarting');
+            }).catch((err) => {
+                busy = false;
+                log('Fail [' + err + ']')
+                reject('Fail restarting ' + err)
+            });
         }
-        busy = true;
-        res.end('Succes restarting');
-        exec('git reset --hard origin/master && git pull && npm install && bower install', function(err, response) {
-            if (err) throw err
-            log('<span>Restarting server</span>');
-            if (lmeChild) {
-                lmeChild.kill('SIGINT');
-            }
-            if (angularChild) {
-                angularChild.kill('SIGINT');
-            }
-            angularChild = spawnChild('../angular-demo/angularapp');
-            lmeChild = spawnChild('app');
-            busy = false;
-        })
-    } catch (err) {
-        busy = false;
-        log('Fail [' + err + ']')
-    }
+    });
+}
+
+app.get('/update/git/notifyCommit', function(req, res) {
+    update().then((result) => {
+        res.end("" + result);
+    }).catch((err) => {
+        res.end("" + err);
+    })
 });
 
 function send(text, level) {
@@ -69,10 +73,8 @@ function send(text, level) {
                 "color": 'green',
                 "message": text
             }
-        },
-        (err, res, body) => {
-            if (err) return console.info('error:' + res)
-            console.info('Hipchat post ok')
+        }, (err, res, body) => {
+            console.info(err ? "" + err : 'Hipchat post ok')
         }
     )
 }
@@ -82,8 +84,8 @@ httpServer.listen(port, () => {
         log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
     })
 });
-spawnChild('app', process.argv[2]);
-spawnChild('../angular-demo/angularapp');
+angularChild = spawnChild('../angular-demo/angularapp');
+lmeChild = spawnChild('app', process.argv[2]);
 
 function log(message, levelArg) {
     if (message && hostname !== 'michael') {
