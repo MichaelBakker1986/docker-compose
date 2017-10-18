@@ -7,6 +7,8 @@ var serveStatic = require('serve-static');
 var compression = require('compression')
 var browser = require('browserify');
 var fastjson = require('browserify-fastjson');
+var static = require('static-nocase')
+
 app.use(require('express-favicon')());
 var stash = require('./public/stash');
 browserify.settings({
@@ -48,11 +50,11 @@ app.use('/:id/web.js', browserify(__dirname + '/public/javascripts/main.js', {
     minify: true,
     precompile: true
 }));
-app.use(serveStatic(__dirname + "/public/"));
+app.use(static(__dirname + '/public/'))
 app.use(serveStatic(__dirname + "/bower_components/"));
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.log('<a href="http://' + add + ':' + port + '/index.html">LME DEMO Server</a><span> deployed (test7).</span>');
-        console.log('<a href="http://' + add + ':' + port + '/ide.html">LME IDE Server</a><span> deployed (test7).</span>');
+        console.log('<a href="http://' + add + ':' + port + '/index.html">DEMO application</a><span> up.</span>');
+        console.log('<a href="http://' + add + ':' + port + '/ide.html">IDE application</a><span> up.</span>');
     })
 });

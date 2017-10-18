@@ -46,7 +46,4 @@ class Stash {
         })
     }
 }
-
-//Stash.prototype.models('master', 'ffl')
-//https://stash.topicus.nl/rest/api/1.0/projects/ff/repos/finanfinancials/browse/CODELISTS/?at=develop
 module.exports = Stash.prototype;

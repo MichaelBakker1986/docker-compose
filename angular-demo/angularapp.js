@@ -9,7 +9,7 @@ app.use(serveStatic(__dirname + "/bower_components/"));
 app.use(require('express-favicon')());
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        let message = '<a href="http://' + add + ':' + port + '/index.html">Angular DEMO Server</a><span> deployed.</span>';
+        let message = '<a href="http://' + add + ':' + port + '/index.html">Angular demo Application</a><span> deployed.</span>';
         request.post({
             url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW',
             json: {

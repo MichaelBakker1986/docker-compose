@@ -90,12 +90,7 @@ function demo() {
         modelengine.importSolution(returnData, "lme");
         //modelengine.fixProblemsInImportedSolution();
     });
-    var modelName = 'V05';
-    try {
-        modelName = window.location.search.split('model=')[1] || 'V05';
-    } catch (err) {
-        modelName = 'V05'
-    }
+    var modelName = window.location.search.split('model=')[1] || 'V05';
     xhr.open('GET', '/json/' + modelName + '_canvas.json');
     xhr.send();
 }

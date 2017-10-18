@@ -59,13 +59,13 @@ app.get('/update/git/notifyCommit', (req, res) => {
 });
 
 function send(text, level) {
-    request.post({
-            url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW',
-            json: {
-                "color": 'green',
-                "message": text
-            }
-        },
+        request.post({
+                url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW',
+                json: {
+                    "color": 'green',
+                    "message": text
+                }
+            },
         (err, res, body) => {
             if (err) {
                 return console.info('error:' + res)

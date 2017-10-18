@@ -20,7 +20,8 @@ function aceEdit() {
         });
         editor.gotoLine(1, 1, true);
     });
-    xhr.open('GET', '/json/KSP.FFL');
+    var modelName = window.location.search.split('model=')[1] || 'KSP';
+    xhr.open('GET', '/json/' + modelName + '.ffl');
     xhr.send();
 }
 
