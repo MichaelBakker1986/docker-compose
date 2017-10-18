@@ -3,6 +3,7 @@ var rp = require('request-promise');
 var rpJSON = require('request-promise-json');
 var args = process.argv;
 var exec = require('child-process-promise').exec;
+var log = require('ff-log');
 exec('git config --global alias.ls-files-root "! git ls-files"')
 
 class Stash {
@@ -16,10 +17,9 @@ class Stash {
 
     models(branch, path) {
         let command = "git checkout " + branch + " -q && git pull -q && git ls-files-root *." + path;
-        console.info(command);
+        log.info("Do command: [" + command + "]");
         return exec(command)
             .then(function(result) {
-                console.info("Got result")
                 return result.stdout.split('\n');
             })
             .catch(function(err) {
@@ -46,6 +46,7 @@ class Stash {
         })
     }
 }
+
 //Stash.prototype.models('master', 'ffl')
 //https://stash.topicus.nl/rest/api/1.0/projects/ff/repos/finanfinancials/browse/CODELISTS/?at=develop
 module.exports = Stash.prototype;
