@@ -21,7 +21,9 @@ class Stash {
             .then(function(filename) {
                 console.log(filename) //=> '/tmp/foo'
                 let command = "git add * && git commit -m changeByDEMO";
-                return exec(command)
+                return exec(command).then((ok) => {
+                    console.info('done')
+                })
             })
             .catch(function(err) {
                 console.error(err)
