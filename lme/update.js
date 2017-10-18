@@ -52,7 +52,7 @@ app.get('/update/git/notifyCommit', (req, res) => {
                     lmeChild.kill('SIGINT');
                 }
                 if (angularChild) {
-                    lmeChild.kill('SIGINT');
+                    angularChild.kill('SIGINT');
                 }
                 angularChild = spawnChild('../angular-demo/angularapp');
                 lmeChild = spawnChild('app');
