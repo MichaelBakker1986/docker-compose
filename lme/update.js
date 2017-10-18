@@ -43,21 +43,18 @@ app.get('/update/git/notifyCommit', (req, res) => {
         }
         busy = true;
         res.end('Succes restarting');
-        exec('git reset --hard origin/master', function(err, response) {
+        exec('git reset --hard origin/master && git pull && npm install && bower install', function(err, response) {
             if (err) throw err
-            exec('git pull && npm install && bower install', function(err, response) {
-                if (err) throw err
-                log('<span>Restarting server</span>');
-                if (lmeChild) {
-                    lmeChild.kill('SIGINT');
-                }
-                if (angularChild) {
-                    angularChild.kill('SIGINT');
-                }
-                angularChild = spawnChild('../angular-demo/angularapp');
-                lmeChild = spawnChild('app');
-                busy = false;
-            })
+            log('<span>Restarting server</span>');
+            if (lmeChild) {
+                lmeChild.kill('SIGINT');
+            }
+            if (angularChild) {
+                angularChild.kill('SIGINT');
+            }
+            angularChild = spawnChild('../angular-demo/angularapp');
+            lmeChild = spawnChild('app');
+            busy = false;
         })
     } catch (err) {
         busy = false;
