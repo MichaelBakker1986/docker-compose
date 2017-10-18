@@ -14,7 +14,7 @@ function requestLoop() {
     request({
         url: host + "0/TEST/saveFFL_LME",
         method: "POST",
-        data: {
+        json: {
             model: 'TEST',
             data: 'testData' + counter++
         },
@@ -25,7 +25,7 @@ function requestLoop() {
         if (!error && response.statusCode == 200) {
             console.log('sucess!');
         } else {
-            console.log('error' + response.statusCode);
+            console.log('error' + response);
         }
         request({
             url: host + "1/update/git/notifyCommit",
@@ -43,4 +43,5 @@ function requestLoop() {
     });
     setTimeout(requestLoop, getRandomInt(100, 600) * 100);
 }
+
 setTimeout(requestLoop, 2000);
