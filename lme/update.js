@@ -5,9 +5,11 @@ var request = require('request');
 var port = 8081;
 var exec = require('child_process').exec;
 var spawn = require('child_process').spawn;
-var server;
 var busy = false;
-var child;
+
+var lmeChild;
+var angularChild;
+
 var levels = {
     info: {
         level: 'info',
@@ -19,8 +21,8 @@ var levels = {
     }
 }
 
-function spawnChild() {
-    child = spawn('node', ['app.js']);
+function spawnChild(appname) {
+    var child = spawn('node', [appname + '.js']);
     child.on('exit', function() {
         console.info('Appserver down')
     });
@@ -30,6 +32,7 @@ function spawnChild() {
     child.stderr.on('data', function(data) {
         log('' + data, 'error');
     });
+    return child;
 }
 
 app.get('/update/git/notifyCommit', (req, res) => {
@@ -42,13 +45,17 @@ app.get('/update/git/notifyCommit', (req, res) => {
         res.end('Succes restarting');
         exec('git reset --hard origin/master', function(err, response) {
             if (err) throw err
-            exec('git pull && npm install', function(err, response) {
+            exec('git pull && npm install && bower install', function(err, response) {
                 if (err) throw err
                 log('<span>Restarting server</span>');
-                if (child) {
-                    child.kill('SIGINT');
+                if (lmeChild) {
+                    lmeChild.kill('SIGINT');
                 }
-                spawnChild();
+                if (angularChild) {
+                    lmeChild.kill('SIGINT');
+                }
+                angularChild = spawnChild('../angular-demo/angularapp');
+                lmeChild = spawnChild('app');
                 busy = false;
             })
         })
@@ -59,28 +66,27 @@ app.get('/update/git/notifyCommit', (req, res) => {
 });
 
 function send(text, level) {
-        request.post({
-                url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW',
-                json: {
-                    "color": 'green',
-                    "message": text
-                }
-            },
-        (err, res, body) => {
-            if (err) {
-                return console.info('error:' + res)
+    request.post({
+            url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW',
+            json: {
+                "color": 'green',
+                "message": text
             }
+        },
+        (err, res, body) => {
+            if (err) return console.info('error:' + res)
             console.info('Hipchat post ok')
         }
     )
 }
-
 httpServer.listen(port, () => {
     require('dns').lookup(require('os').hostname(), (err, add, fam) => {
         log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
     })
 });
-spawnChild();
+spawnChild('app');
+spawnChild('../angular-demo/angularapp');
+
 function log(message, levelArg) {
     if (message) {
         send(message, 'info');
