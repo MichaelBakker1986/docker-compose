@@ -9,7 +9,7 @@ var busy = false;
 
 var lmeChild;
 var angularChild;
-
+var hostname = require('os').hostname();
 var levels = {
     info: {
         level: 'info',
@@ -21,8 +21,8 @@ var levels = {
     }
 }
 
-function spawnChild(appname) {
-    var child = spawn('node', [appname + '.js']);
+function spawnChild(appname, args) {
+    var child = spawn('node', [appname + '.js', args]);
     child.on('exit', function() {
         console.info('Appserver down')
     });
@@ -79,16 +79,17 @@ function send(text, level) {
         }
     )
 }
+
 httpServer.listen(port, () => {
-    require('dns').lookup(require('os').hostname(), (err, add, fam) => {
+    require('dns').lookup(hostname, (err, add, fam) => {
         log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
     })
 });
-spawnChild('app');
+spawnChild('app', process.argv[2]);
 spawnChild('../angular-demo/angularapp');
 
 function log(message, levelArg) {
-    if (message) {
+    if (message && hostname !== 'michael') {
         send(message, 'info');
     }
     console.info(message);

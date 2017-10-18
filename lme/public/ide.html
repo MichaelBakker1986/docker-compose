@@ -5,7 +5,8 @@
     <title>LME IDE</title>
     <script src="/ace-builds/src-min/ace.js"></script>
     <script src="/ace-builds/src-min/ext-language_tools.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link async rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link async rel="stylesheet" async href="/components-font-awesome/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="javascripts/ide.js"></script>
@@ -57,8 +58,9 @@
     <input placeholder="master" style="width: 400px" id="tags">
     <label for="models">Model: </label>
     <input placeholder="KSP" style="width: 300px" id="models">
+    <button id="save-model" href="#home"> <i class="fa fa-pencil" aria-hidden="true"></i> Save</button>
+
 </div>
 <pre id="editor"></pre>
-<script src="/javascripts/ace.js"></script>
 </body>
 </html>

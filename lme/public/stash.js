@@ -46,4 +46,5 @@ class Stash {
         })
     }
 }
+
 module.exports = Stash.prototype;

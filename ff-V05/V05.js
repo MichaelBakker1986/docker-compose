@@ -1,7 +1,4 @@
-global.loglevel = "info";
-process.loglevel = "info";
 var log = require('ff-log');
-log.DEBUG = false;
 var FESContext = require('../ff-fes/fesjs/fescontext');
 var WorkBook = require('../ff-fes/fesjs/JSWorkBook');
 require('../ff-math/ff-math');

@@ -32,7 +32,7 @@ function FormulaInfo(data, schema) {
             data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original])
         }
     })
-    var types = ['name', 'title', 'visible', 'value', 'notrend', 'trend', 'locked', 'choices'];
+    var types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices'];
     //this.formulas = undefined;
     this.meta = {
         view: {
@@ -42,6 +42,7 @@ function FormulaInfo(data, schema) {
     var counter = 0;
     types.forEach(function(type) {
         self.meta.view.columns.push({
+            "width": ['locked', 'visible'].indexOf(type) == -1 ? 50 : undefined,
             "name": type,
             "dataTypeName": "text",
             "fieldName": type,

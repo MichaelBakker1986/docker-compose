@@ -1,7 +1,8 @@
 /**
  * UI Canvas part
  */
-var modelengine = require('./lme');
+var model = require('./lme');
+var modelengine = new model();
 DEBUG = true;
 var counter = 0;
 
@@ -42,7 +43,7 @@ function demo() {
     };
 
     function isNoiseData(name) {
-        return ['choices'].indexOf(name) !== -1;
+        return ['choices', 'visible'].indexOf(name) !== -1;
     }
 
     function parseOpenData(openData) {
@@ -69,7 +70,7 @@ function demo() {
         };
     }
 
-    var Xgrid = canvasDatagrid({
+    Xgrid = canvasDatagrid({
         tree: true,
         parentNode: document.getElementById('grid'),
         borderDragBehavior: 'move',
@@ -87,7 +88,7 @@ function demo() {
         Xgrid.schema = openData.schema;
         Xgrid.data = openData.data;
 
-        modelengine.importSolution(returnData, "lme");
+        modelengine.importLME(returnData);
         //modelengine.fixProblemsInImportedSolution();
     });
     var modelName = window.location.search.split('model=')[1] || 'V05';

@@ -8,6 +8,7 @@ var compression = require('compression')
 var browser = require('browserify');
 var fastjson = require('browserify-fastjson');
 var static = require('static-nocase')
+var lmeAPI = require('./src/lme')
 
 app.use(require('express-favicon')());
 var stash = require('./public/stash');
@@ -15,34 +16,52 @@ browserify.settings({
     transform: [fastjson]
 })
 app.use(compression())
-app.get('/:id/create', function(req, res) {
-    /**
-     * Create identified compiled js file
-     */
-    res.header("Access-Control-Allow-Origin", "*");
-    var b = browser({
+/**
+ * Create identified compiled js file
+ */
+app.get('/:id/saveFFL_LME', (req, res) => {
+    var model = req.param('model');
+    var data = req.param('data');
+    console.info(model + "  : " + data.length)
+    res.end('done');
+});
+app.get('/:id/transformFFL_LME/*', (req, res) => {
+    var modelName = req.originalUrl.substring(req.originalUrl.indexOf('transformFFL_LME/') + 17);
+    var includeModule = '/public/json/' + modelName + '_canvas.json';
+    let options = {
+        insertGlobals: true,
+        insertGlobalVars: {
+            JSON_MODEL: (file, dir) => {
+                return (file.endsWith('output.js')) ? "require('" + '..' + includeModule + "')" : 'undefined';
+            }
+        },
+        gzip: true, minify: true,
         insertGlobals: true,
         debug: false
-    });
-    b.add(__dirname + '/public/javascripts/output.js');
+    };
+    let b = browser(options);
+    b.add(__dirname + '/src/output.js');
+    b.add(__dirname + includeModule);
     b.transform(fastjson);
+    res.header("Access-Control-Allow-Origin", "*");
     b.bundle().pipe(res);
-});
-app.get('/stash/*', function(req, res) {
+})
+
+app.get('/stash/*', (req, res) => {
     stash.api(req.originalUrl.substr(7)).then((data) => {
-        res.end(data);
+        res.end("" + data);
     }).catch((err) => {
         res.end("" + err);
     })
 });
-app.get('/stash2/*', function(req, res) {
+app.get('/stash2/*', (req, res) => {
     stash.models('master', 'ffl').then((data) => {
         res.end(JSON.stringify(data));
     }).catch((err) => {
         res.end("" + err)
     })
 });
-app.use('/:id/web.js', browserify(__dirname + '/public/javascripts/main.js', {
+app.use('/:id/web.js', browserify(__dirname + '/src/main.js', {
     cache: true,
     gzip: true,
     insertGlobals: true,
@@ -52,10 +71,13 @@ app.use('/:id/web.js', browserify(__dirname + '/public/javascripts/main.js', {
 }));
 app.use(static(__dirname + '/public/'))
 app.use(serveStatic(__dirname + "/bower_components/"));
-app.listen(port, function() {
-    require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.log(this.hostname)
-        console.log('<a href="http://' + add + ':' + port + '/index.html">DEMO application</a><span> up.</span>');
-        console.log('<a href="http://' + add + ':' + port + '/ide.html">IDE application</a><span> up.</span>');
+app.listen(port, () => {
+    require('dns').lookup(require('os').hostname(), (err, add, fam) => {
+        let domain = 'http://' + add + ':' + port + '/';
+        console.info('<a href="' + domain + 'index.html">DEMO application</a><span> up.</span>\n' +
+            '<a href="' + domain + 'DEMO/transformFFL_LME/KSP">JS API</a>\n' +
+            '<a href="' + domain + 'stash/projects/FF/repos/finanfinancials/branches?limit=1000">JSON API (branches)</a>\n' +
+            '<a href="' + domain + 'stash2/models">JSON API (models)</a>\n' +
+            '<a href="' + domain + 'ide.html">IDE application</a><span> up.</span>');
     })
 });

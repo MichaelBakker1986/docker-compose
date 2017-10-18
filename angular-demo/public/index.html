@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>DEMO angular app</title>
-    <script src="http://localhost:8080/DEMO/create"></script>
+    <script src="http://localhost:8080/DEMO/transformFFL_LME/KSP"></script>
     <script src="/angular/angular.min.js"></script>
     <link rel="stylesheet" href="/masonry-css/dist/masonry.css">
     <!--    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css"/>-->
@@ -28,7 +28,7 @@
 </div>
 <script>
     angular.module('angapp', []).controller('kspController', function($scope) {
-        var tree = LME.export('presentation').tree;
+        var tree = LME.exportPresentation().tree;
         tree.update(tree.root, {value: true, title: true})
         console.info(tree._tree.nodes.FES_LAYOUTNR)
         $scope.LME_MODEL = tree._tree.nodes
