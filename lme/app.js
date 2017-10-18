@@ -54,6 +54,7 @@ app.use(static(__dirname + '/public/'))
 app.use(serveStatic(__dirname + "/bower_components/"));
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
+        console.log(this.hostname)
         console.log('<a href="http://' + add + ':' + port + '/index.html">DEMO application</a><span> up.</span>');
         console.log('<a href="http://' + add + ':' + port + '/ide.html">IDE application</a><span> up.</span>');
     })
