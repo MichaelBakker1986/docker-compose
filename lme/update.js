@@ -6,9 +6,8 @@ var port = 8081;
 var exec = require('child-process-promise').exec;
 var spawn = require('child-process-promise').spawn;
 var busy = false;
-
-var lmeChild;
-var angularChild;
+//git reset --hard origin/master && git pull && npm install && bower install
+var childProcesses = {}
 var hostname = require('os').hostname();
 var levels = {
     info: {
@@ -21,19 +20,28 @@ var levels = {
     }
 }
 
+//git reset --hard origin/master && git pull && npm install && bower install
 function spawnChild(appname, args) {
-    var child = spawn('node', [appname + '.js', args]);
-    child.on('exit', function() {
-        console.info('Appserver down')
-    });
-    child.stdout.on('data', function(data) {
+    var promise = spawn('node', [appname + '.js', args])
+    var childProcess = promise.childProcess;
+    childProcesses[appname] = childProcess;
+    childProcess.stdout.on('data', function(data) {
         log('' + data, 'info');
     });
-    child.stderr.on('data', function(data) {
+    childProcess.stderr.on('data', function(data) {
         log('' + data, 'error');
     });
-    return child;
+    childProcess.on('exit', function() {
+        console.info('Appserver down')
+        return '';
+    });
+    promise.then(() => {
+        console.info('done');
+    }).catch(function(err) {
+        //console.error('ERROR: ', err);
+    });
 }
+
 
 function update() {
     return new Promise((fulfill, reject) => {
@@ -41,12 +49,12 @@ function update() {
             reject('Busy restarting');
         } else {
             busy = true;
-            exec('git reset --hard origin/master && git pull && npm install && bower install').then((result) => {
+            exec('echo a').then((result) => {
                 log('<span>Restarting server</span>');
-                if (lmeChild) lmeChild.kill('SIGINT');
-                if (angularChild) angularChild.kill('SIGINT');
-                angularChild = spawnChild('../angular-demo/angularapp');
-                lmeChild = spawnChild('app', process.argv[2]);
+                for (var key in childProcesses) {
+                    childProcesses[key].kill('SIGKILL')
+                    spawnChild(key, process.argv[2])
+                }
                 busy = false;
                 fulfill('Succes restarting');
             }).catch((err) => {
@@ -84,8 +92,8 @@ httpServer.listen(port, () => {
         log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
     })
 });
-angularChild = spawnChild('../angular-demo/angularapp');
-lmeChild = spawnChild('app', process.argv[2]);
+spawnChild('../angular-demo/angularapp')
+spawnChild('app', process.argv[2])
 
 function log(message, levelArg) {
     if (message && hostname !== 'michael') {
