@@ -16,33 +16,33 @@
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Charlotte_value": true
+        "KSP_NewVariable_value": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
       "index": 100002,
-      "name": "KSP_Charlotte_value",
+      "name": "KSP_NewVariable_value",
       "parsed": "undefined",
       "id": 100002
     },
     {
       "type": "noCacheLocked",
       "refs": {
-        "KSP_Charlotte_title": true
+        "KSP_NewVariable_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'prachtig'",
       "index": 100003,
-      "name": "KSP_Charlotte_title",
+      "name": "KSP_NewVariable_title",
       "parsed": "'prachtig'",
       "id": 100003
     },
     {
       "type": "noCacheLocked",
       "refs": {
-        "KSP_Charlotte_required": true,
+        "KSP_NewVariable_required": true,
         "KSP_IncomeParent01_required": true,
         "KSP_IncomeParent02_required": true,
         "KSP_ChildGender_required": true,
@@ -55,7 +55,7 @@
       "deps": {},
       "original": "1",
       "index": 100004,
-      "name": "KSP_Charlotte_required",
+      "name": "KSP_NewVariable_required",
       "parsed": "1",
       "id": 100004
     },
@@ -1224,7 +1224,7 @@
       null
     ],
     [
-      "Charlotte",
+      "NewVariable",
       null,
       "",
       "",
@@ -1628,8 +1628,8 @@
       "name": "KSP_Q_ROOT_value",
       "nodes": [
         {
-          "name": "KSP_Charlotte_value",
-          "rowId": "Charlotte",
+          "name": "KSP_NewVariable_value",
+          "rowId": "NewVariable",
           "colId": "value",
           "identifier": "KSP_Q_ROOT_value"
         },
@@ -1672,37 +1672,37 @@
       "parentName": "root_value"
     },
     {
-      "rowId": "Charlotte",
+      "rowId": "NewVariable",
       "solutionName": "KSP",
       "colId": "value",
-      "name": "KSP_Charlotte_value",
+      "name": "KSP_NewVariable_value",
       "nodes": [],
       "ref": 100002,
-      "formulaName": "KSP_Charlotte_value",
+      "formulaName": "KSP_NewVariable_value",
       "refId": 100002,
       "displayAs": "StringAnswerType",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
     {
-      "rowId": "Charlotte",
+      "rowId": "NewVariable",
       "solutionName": "KSP",
       "colId": "title",
-      "name": "KSP_Charlotte_title",
+      "name": "KSP_NewVariable_title",
       "nodes": [],
       "ref": 100003,
-      "formulaName": "KSP_Charlotte_title",
+      "formulaName": "KSP_NewVariable_title",
       "refId": 100003,
       "displayAs": "PropertyType"
     },
     {
-      "rowId": "Charlotte",
+      "rowId": "NewVariable",
       "solutionName": "KSP",
       "colId": "required",
-      "name": "KSP_Charlotte_required",
+      "name": "KSP_NewVariable_required",
       "nodes": [],
       "ref": 100004,
-      "formulaName": "KSP_Charlotte_required",
+      "formulaName": "KSP_NewVariable_required",
       "refId": 100004,
       "displayAs": "PropertyType"
     },
@@ -1726,7 +1726,7 @@
       "name": "KSP_IncomeParent01_required",
       "nodes": [],
       "ref": 100004,
-      "formulaName": "KSP_Charlotte_required",
+      "formulaName": "KSP_NewVariable_required",
       "refId": 100004,
       "displayAs": "PropertyType"
     },
@@ -1750,7 +1750,7 @@
       "name": "KSP_IncomeParent02_required",
       "nodes": [],
       "ref": 100004,
-      "formulaName": "KSP_Charlotte_required",
+      "formulaName": "KSP_NewVariable_required",
       "refId": 100004,
       "displayAs": "PropertyType"
     },
@@ -1987,7 +1987,7 @@
       "name": "KSP_ChildGender_required",
       "nodes": [],
       "ref": 100004,
-      "formulaName": "KSP_Charlotte_required",
+      "formulaName": "KSP_NewVariable_required",
       "refId": 100004,
       "displayAs": "PropertyType"
     },
@@ -2026,7 +2026,7 @@
       "name": "KSP_NrOfDaysChildcareWeek_required",
       "nodes": [],
       "ref": 100004,
-      "formulaName": "KSP_Charlotte_required",
+      "formulaName": "KSP_NewVariable_required",
       "refId": 100004,
       "displayAs": "PropertyType"
     },
@@ -2054,7 +2054,7 @@
       "name": "KSP_NrOfDaysChildcareMonth_locked",
       "nodes": [],
       "ref": 100004,
-      "formulaName": "KSP_Charlotte_required",
+      "formulaName": "KSP_NewVariable_required",
       "refId": 100004,
       "displayAs": "PropertyType"
     },
@@ -2082,7 +2082,7 @@
       "name": "KSP_NrOfDaysOutOfSchoolCareWeek_required",
       "nodes": [],
       "ref": 100004,
-      "formulaName": "KSP_Charlotte_required",
+      "formulaName": "KSP_NewVariable_required",
       "refId": 100004,
       "displayAs": "PropertyType"
     },
@@ -2110,7 +2110,7 @@
       "name": "KSP_NrOfDaysOutOfSchoolCareMonth_locked",
       "nodes": [],
       "ref": 100004,
-      "formulaName": "KSP_Charlotte_required",
+      "formulaName": "KSP_NewVariable_required",
       "refId": 100004,
       "displayAs": "PropertyType"
     },
