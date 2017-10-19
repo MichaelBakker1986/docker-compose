@@ -19,10 +19,12 @@ class Stash {
     commit(name, data) {
         write('./public/json/' + name + '.ffl', data)
             .then(function(filename) {
-                console.log(filename) //=> '/tmp/foo'
+                console.log("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                 let command = "git pull &&  git add -f * && git commit -m changeByDEMO && git push";
                 return exec(command).then((ok) => {
-                    console.info('done')
+                    console.info("GIT commit succes while pushing file to repository: [" + err + "]")
+                }).catch((err) => {
+                    console.error("GIT commit failed while pushing file to repository: [" + err + "]")
                 })
             })
             .catch(function(err) {
