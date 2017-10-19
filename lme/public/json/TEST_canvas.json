@@ -108,164 +108,6 @@
       "name": "KSP_TupleSumTest_value",
       "parsed": "SUM(TVALUES([],aundefined,'undefined',x,y.base,z,v))",
       "id": 100007
-    },
-    {
-      "type": "noCacheUnlocked",
-      "refs": {
-        "KSP_NewVariable_value": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "undefined",
-      "index": 100008,
-      "name": "KSP_NewVariable_value",
-      "parsed": "undefined",
-      "id": 100008
-    },
-    {
-      "type": "noCacheUnlocked",
-      "refs": {
-        "KSP_IncomeParent01_value": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "undefined",
-      "index": 100009,
-      "name": "KSP_IncomeParent01_value",
-      "parsed": "undefined",
-      "id": 100009
-    },
-    {
-      "type": "noCacheUnlocked",
-      "refs": {
-        "KSP_IncomeParent02_value": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "undefined",
-      "index": 100010,
-      "name": "KSP_IncomeParent02_value",
-      "parsed": "undefined",
-      "id": 100010
-    },
-    {
-      "type": "noCacheUnlocked",
-      "refs": {
-        "KSP_TotalYearlyCosts_value": true
-      },
-      "formulaDependencys": [
-        {
-          "name": "KSP_TotalYearlyCostsChild_value",
-          "association": "deps"
-        }
-      ],
-      "deps": {
-        "KSP_TotalYearlyCostsChild_value": true
-      },
-      "original": "TSUM(TotalYearlyCostsChild)",
-      "index": 100011,
-      "name": "KSP_TotalYearlyCosts_value",
-      "parsed": "SUM(TVALUES([],aundefined,'undefined',x,y.base,z,v))",
-      "id": 100011
-    },
-    {
-      "type": "noCacheUnlocked",
-      "refs": {
-        "KSP_TupleSumTest_value": true
-      },
-      "formulaDependencys": [
-        {
-          "name": "KSP_NrOfDaysChildcareWeek_value",
-          "association": "deps"
-        }
-      ],
-      "deps": {
-        "KSP_NrOfDaysChildcareWeek_value": true
-      },
-      "original": "TSUM(NrOfDaysChildcareWeek)",
-      "index": 100012,
-      "name": "KSP_TupleSumTest_value",
-      "parsed": "SUM(TVALUES([],aundefined,'undefined',x,y.base,z,v))",
-      "id": 100012
-    },
-    {
-      "type": "noCacheUnlocked",
-      "refs": {
-        "KSP_NewVariable_value": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "undefined",
-      "index": 100013,
-      "name": "KSP_NewVariable_value",
-      "parsed": "undefined",
-      "id": 100013
-    },
-    {
-      "type": "noCacheUnlocked",
-      "refs": {
-        "KSP_IncomeParent01_value": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "undefined",
-      "index": 100014,
-      "name": "KSP_IncomeParent01_value",
-      "parsed": "undefined",
-      "id": 100014
-    },
-    {
-      "type": "noCacheUnlocked",
-      "refs": {
-        "KSP_IncomeParent02_value": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "undefined",
-      "index": 100015,
-      "name": "KSP_IncomeParent02_value",
-      "parsed": "undefined",
-      "id": 100015
-    },
-    {
-      "type": "noCacheUnlocked",
-      "refs": {
-        "KSP_TotalYearlyCosts_value": true
-      },
-      "formulaDependencys": [
-        {
-          "name": "KSP_TotalYearlyCostsChild_value",
-          "association": "deps"
-        }
-      ],
-      "deps": {
-        "KSP_TotalYearlyCostsChild_value": true
-      },
-      "original": "TSUM(TotalYearlyCostsChild)",
-      "index": 100016,
-      "name": "KSP_TotalYearlyCosts_value",
-      "parsed": "SUM(TVALUES([],aundefined,'undefined',x,y.base,z,v))",
-      "id": 100016
-    },
-    {
-      "type": "noCacheUnlocked",
-      "refs": {
-        "KSP_TupleSumTest_value": true
-      },
-      "formulaDependencys": [
-        {
-          "name": "KSP_NrOfDaysChildcareWeek_value",
-          "association": "deps"
-        }
-      ],
-      "deps": {
-        "KSP_NrOfDaysChildcareWeek_value": true
-      },
-      "original": "TSUM(NrOfDaysChildcareWeek)",
-      "index": 100017,
-      "name": "KSP_TupleSumTest_value",
-      "parsed": "SUM(TVALUES([],aundefined,'undefined',x,y.base,z,v))",
-      "id": 100017
     }
   ],
   "data": [
@@ -367,7 +209,7 @@
       "colId": "value",
       "name": "KSP_NewVariable_value",
       "nodes": [],
-      "ref": 100013,
+      "ref": 100001,
       "formulaName": "KSP_NewVariable_value",
       "refId": 100001,
       "displayAs": "StringAnswerType",
@@ -401,7 +243,7 @@
       "colId": "value",
       "name": "KSP_IncomeParent01_value",
       "nodes": [],
-      "ref": 100014,
+      "ref": 100004,
       "formulaName": "KSP_IncomeParent01_value",
       "refId": 100004,
       "displayAs": "StringAnswerType",
@@ -424,7 +266,7 @@
       "colId": "value",
       "name": "KSP_IncomeParent02_value",
       "nodes": [],
-      "ref": 100015,
+      "ref": 100005,
       "formulaName": "KSP_IncomeParent02_value",
       "refId": 100005,
       "displayAs": "StringAnswerType",
@@ -447,7 +289,7 @@
       "colId": "value",
       "name": "KSP_TotalYearlyCosts_value",
       "nodes": [],
-      "ref": 100016,
+      "ref": 100006,
       "formulaName": "KSP_TotalYearlyCosts_value",
       "refId": 100006,
       "displayAs": "StringAnswerType",
@@ -470,7 +312,7 @@
       "colId": "value",
       "name": "KSP_TupleSumTest_value",
       "nodes": [],
-      "ref": 100017,
+      "ref": 100007,
       "formulaName": "KSP_TupleSumTest_value",
       "refId": 100007,
       "displayAs": "StringAnswerType",
