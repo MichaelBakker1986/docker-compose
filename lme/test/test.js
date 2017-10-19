@@ -8,7 +8,8 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
-var host = "http://localhost:808";
+//var host = "http://localhost:808";
+var host = "http://10.146.2.87:808";
 
 function requestLoop() {
     request({
