@@ -10,6 +10,9 @@ function LME() {
     this.lme = require('../../ff-V05/V05');
 }
 
+LME.prototype.exportLME = function() {
+    return this.lme.export('lme')
+}
 LME.prototype.importLME = function(json) {
     this.lme.importSolution(json, 'lme')
 }

@@ -25,7 +25,10 @@ app.use(compression())
  * Create identified compiled js file.
  */
 app.post('/:id/saveFFL_LME', (req, res) => {
-    stash.commit(req.body.model, req.body.data)
+    let lmeAPiImpl = new lmeAPI();
+    lmeAPiImpl.importFFL(req.body.data);
+    var lme = lmeAPiImpl.exportLME();
+    stash.commit(req.body.model, req.body.data, lme)
     res.end('done');
 });
 app.get('/:id/transformFFL_LME/*', (req, res) => {

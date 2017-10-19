@@ -16,20 +16,20 @@ class Stash {
         }
     }
 
-    commit(name, data) {
-        write('./public/json/' + name + '.ffl', data)
-            .then(function(filename) {
-                console.log("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
-                let command = "git pull &&  git add . && git commit -m changeByDEMO && git push";
-                return exec(command).then((ok) => {
-                    console.info("GIT commit success while pushing file to repository: " + filename)
-                }).catch((err) => {
-                    console.error("GIT commit failed while pushing file to repository: [" + err + "]")
-                })
+    commit(name, data, lme) {
+        //transform ffl to JSON canvas file
+        write('./public/json/' + name + '.ffl', data).then(write('./public/json/' + name + '_canvas.json')).then(function(filename) {
+            console.log("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
+            let command = "git pull &&  git add . && git commit -m changeByDEMO && git push";
+            return exec(command).then((ok) => {
+                console.info("GIT commit success while pushing file to repository: " + filename)
+            }).catch((err) => {
+                console.error("GIT commit failed while pushing file to repository: [" + err + "]")
             })
-            .catch(function(err) {
-                console.error(err)
-            })
+        }).catch(function(err) {
+            console.error(err)
+        })
+
     }
 
     models(branch, path) {
