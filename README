@@ -2,20 +2,30 @@
 #become su
 sudo su
 mkdir .ssh
-id_rsa = SSH key for Stash
-id_rsa = Public SSH key for Stash
+vim id_rsa = {SSH key for Stash}
+vim id_rsa.pub = {Public SSH key for Stash}
 //git preinstalled
+
+#expose ports
+sudo firewall-cmd --zone=public --add-port=8083/tcp -permanent
+sudo firewall-cmd --zone=public --add-port=8082/tcp -permanent
 sudo firewall-cmd --zone=public --add-port=8081/tcp -permanent
 sudo firewall-cmd --zone=public --add-port=8080/tcp -permanent
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
+
 yum install
 git pull
 npm install
 npm install -g bower
-bower install canvas-datagrid
-sudo nohup node lme/app &
+bower install
+#start node app
 sudo nohup mode lme/update &
 
-/update is het auto-update webhook
-/create is het maak model.js api
-/public/index.html model editor
+#IDE page
+http://localhost:8080/
+
+#FFL IDE page
+http://localhost:8080/ide.html
+
+#Angular app
+http://localhost:8083/
