@@ -13,7 +13,13 @@ model KSP uses BaseModel
     {
 		datatype: number;
 		frequency: document;
-		
+		variable Charlotte
+		{
+		    title: topper;
+			datatype: number;
+			frequency: document;
+			inputRequired: 1;
+		}
 		variable IncomeParent01
 		{
 			datatype: number;
