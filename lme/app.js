@@ -29,10 +29,13 @@ app.post('/:id/saveFFL_LME', (req, res) => {
         let lmeAPiImpl = new lmeAPI();
         lmeAPiImpl.importFFL(req.body.data);
         var lme = lmeAPiImpl.exportLME();
+
+        console.info(lme)
         stash.commit(req.body.model, req.body.data, lme)
 
         res.end('done');
     } catch (err) {
+        console.error(err)
         res.end('ERROR: ' + err);
     }
 });

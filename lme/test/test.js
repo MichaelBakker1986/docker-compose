@@ -1,6 +1,11 @@
 var request = require('request')
 var rp = require('request-promise');
 var counter = 1000;
+var modelAPI = require('../src/lme')
+var newModel = new modelAPI();
+newModel.importLME(require('../public/json/KSP_canvas.json'));
+var fflFile = '\nmodel KSP uses BaseModel\n' +
+    '{' + newModel.exportFFL() + "\n}";
 
 function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -9,7 +14,7 @@ function getRandomInt(min, max) {
 }
 
 //var host = "http://localhost:808";
-var host = "http://10.146.2.87:808";
+var host = "http://blfif-tv-tr03.finance.lab:808";
 
 function post(type, url, data) {
     request({
@@ -39,5 +44,5 @@ requestLoops("GET", "0/models")
 requestLoops("GET", "0/branches")
 requestLoops("POST", "0/TEST/saveFFL_LME", {
     model: 'TEST',
-    data: 'testData' + counter++
+    data: '//' + counter++ + '\n' + fflFile
 })
