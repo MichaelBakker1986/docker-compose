@@ -1,20 +1,13 @@
 var request = require('request')
 var rp = require('request-promise');
 var rpJSON = require('request-promise-json');
-var args = process.argv;
 var exec = require('child-process-promise').exec;
 var log = require('ff-log');
+
+//make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
 const write = require('fs-writefile-promise/lib/node7')
-
 class Stash {
-    Auth() {
-        return {
-            'user': 'michael.bakker',
-            'pass': args[2],
-            'sendImmediately': true
-        }
-    }
 
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
@@ -29,7 +22,6 @@ class Stash {
         }).catch(function(err) {
             console.error(err)
         })
-
     }
 
     models(branch, path) {
@@ -38,30 +30,23 @@ class Stash {
         return exec(command)
             .then(function(result) {
                 return result.stdout.split('\n');
-            })
-            .catch(function(err) {
+            }).catch(function(err) {
                 console.error('ERROR: ', err);
             });
     }
 
-    json(qs) {
-        return rpJSON.request({
-            'url': qs,
-            'auth': this.Auth()
-        }).then((data) => {
-            return data;
-        }).catch((err) => {
-            return err;
-        })
-    }
-
-    api(qs) {
-        return rp.get('http://stash.topicus.nl/rest/api/1.0/' + qs, {
-            'auth': this.Auth()
-        }).catch((err) => {
-            return err;
-        })
+    branches() {
+        let command = "git ls-remote --heads";
+        //log.info("Do command: [" + command + "]");
+        return exec(command)
+            .then(function(result) {
+                //split results with tabs and newlines, extract only the branchnames
+                return result.stdout.split(/\t|\n/).filter((element, index, array) => {
+                    return (index % 2 !== 0);
+                });
+            }).catch(function(err) {
+                console.error('ERROR: ', err);
+            });
     }
 }
-
 module.exports = Stash.prototype;

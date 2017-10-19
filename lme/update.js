@@ -21,7 +21,7 @@ var levels = {
 }
 
 function spawnChild(appname, args) {
-    var promise = spawn('node', [appname + '.js', args])
+    var promise = spawn('node', [appname + '.js'])
     var childProcess = promise.childProcess;
     childProcesses[appname] = childProcess;
     childProcess.stdout.on('data', function(data) {
@@ -52,7 +52,7 @@ function update() {
                 log('<span>Restarting server</span>');
                 for (var key in childProcesses) {
                     childProcesses[key].kill('SIGKILL')
-                    spawnChild(key, process.argv[2])
+                    spawnChild(key)
                 }
                 busy = false;
                 fulfill('Succes restarting');
@@ -91,8 +91,9 @@ httpServer.listen(port, () => {
         log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
     })
 });
+//start sub processes
 spawnChild('../angular-demo/angularapp')
-spawnChild('app', process.argv[2])
+spawnChild('app')
 
 function log(message, levelArg) {
     if (message && hostname !== 'michael') {

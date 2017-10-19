@@ -53,16 +53,16 @@ app.get('/:id/transformFFL_LME/*', (req, res) => {
     b.bundle().pipe(res);
 })
 
-app.get('/stash/*', (req, res) => {
-    stash.api(req.originalUrl.substr(7)).then((data) => {
-        res.end("" + data);
+app.get('/branches', (req, res) => {
+    stash.branches().then((data) => {
+        res.json(data);
     }).catch((err) => {
         res.end("" + err);
     })
 });
-app.get('/stash2/*', (req, res) => {
+app.get('/models', (req, res) => {
     stash.models('master', 'ffl').then((data) => {
-        res.end(JSON.stringify(data));
+        res.json(data);
     }).catch((err) => {
         res.end("" + err)
     })
