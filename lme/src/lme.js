@@ -8,7 +8,6 @@ require('../../ff-fes/exchange_modules/lme/lmeparser');
 
 function LME() {
     this.lme = require('../../ff-V05/V05');
-    this.get = this.lme.get;
 }
 
 LME.prototype.importLME = function(json) {

@@ -20,7 +20,7 @@ function prox(row, column, value) {
             }
             if (icount !== counter) {
                 icount = counter;
-                rval = modelengine.get(row.name, column.name, 0, 0);
+                rval = modelengine.lme.get(row.name, column.name, 0, 0);
                 if (typeof(rval) === 'object') {
                     rval = 1;
                 }
