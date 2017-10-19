@@ -72,7 +72,7 @@ FFLParser.prototype.parseData = function(data, workbook) {
 }
 FFLParser.prototype.deParse = function(rowId, workbook) {
     var fflSolution = SolutionFacade.createSolution(workbook.getSolutionName());
-    workbook.visitProperties(workbook.getNode(rowId), function(elem) {
+    workbook.visitProperties(workbook.getNode(rowId || 'root'), function(elem) {
         //JSON output doesn't gurantee properties to be in the same order as inserted
         //so little bit tricky here, wrap the node in another node
         //add to its wrapper a child type []

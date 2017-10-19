@@ -16,8 +16,11 @@ LME.prototype.exportLME = function() {
 LME.prototype.importLME = function(json) {
     this.lme.importSolution(json, 'lme')
 }
-LME.prototype.importFFL = function(json) {
-    this.lme.importSolution(json, 'ffl')
+LME.prototype.importFFL = function(ffl) {
+    this.lme.importSolution(ffl, 'ffl')
+}
+LME.prototype.exportFFL = function(ffl) {
+    return this.lme.export('ffl')
 }
 LME.prototype.exportPresentation = function() {
     return this.lme.export('presentation')

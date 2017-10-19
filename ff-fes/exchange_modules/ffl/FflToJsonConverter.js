@@ -31,6 +31,7 @@ var log = require('ff-log');
  unspecified: true,
  afterinput: true,
  */
+
 /*
  The purpose of these methods is:
  convert ffl into Javascript
@@ -48,6 +49,7 @@ var log = require('ff-log');
  */
 function FflToJsonConverter() {
 }
+
 //has to be Unit Tested very intensive
 //FIN,FFL formula language to JavaScript language
 function parseRegex(contents) {
@@ -83,6 +85,7 @@ function parseRegex(contents) {
     //becomes EvaluateAsString(If(Q_Map13 = 0.0, "Nog niet alle vragen zijn beantwoord.", "") + scRestricties + Q_WARNING_GLOBAL)
     return data;
 }
+
 //these steps are done to go back from a JSON object to ffl
 var deparsers = [
     {
@@ -133,7 +136,7 @@ var deparsers = [
 //create a native javascript object
 //Find parent-child relations
 //Add all properties to its parent
-FflToJsonConverter.prototype.parseFFL = function (contents) {
+FflToJsonConverter.prototype.parseFFL = function(contents) {
     // log.time('fflParse')
     var stack = new Stack();
 
@@ -180,7 +183,7 @@ FflToJsonConverter.prototype.parseFFL = function (contents) {
                 lastname += currChar;
         }
     }
-    assert.equal(0, stack.peek()._start);//_end scope must be _start scope, else invalid data
+    assert.equal(0, stack.peek()._start, "there are more open or close brackets in file");//_end scope must be _start scope, else invalid data
     assert.equal(1, stack.size());//_end scope must be _start scope, else invalid _data
     //presumably upper part can be rewritten with some regex
     // console.info(JSON.stringify(stack.peek(), null, 2));
@@ -200,7 +203,7 @@ FflToJsonConverter.prototype.parseFFL = function (contents) {
 
     var allProperties = {};
     //iterate entire stack
-    visitor.travelOne(stack.peek(), null, function (keyArg, node, context) {
+    visitor.travelOne(stack.peek(), null, function(keyArg, node, context) {
         //only interest in the ._data part, the rest are empty lines etc... brackets
         if (node._data !== undefined) {
             //split the line with semi cols, this holds an element of every key-value pair
@@ -238,7 +241,7 @@ FflToJsonConverter.prototype.parseFFL = function (contents) {
                     //Fails for formula's including ':' e.g. "hint: Week number: 14"
                     node[firstWord] = FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1));
                     if (log.DEBUG) {
-                        log.debug('Found Case(..,[*:*]); change : to , in [%s] result [%s]',obj, FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1)))
+                        log.debug('Found Case(..,[*:*]); change : to , in [%s] result [%s]', obj, FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1)))
                     }
                 }
             }
@@ -247,7 +250,7 @@ FflToJsonConverter.prototype.parseFFL = function (contents) {
     //log.timeEnd('fflParse')
     return stack.peek();
 }
-FflToJsonConverter.prototype.deparseRegex = function (input) {
+FflToJsonConverter.prototype.deparseRegex = function(input) {
     return fileParser.deparseRegexs(deparsers, input)
 }
 FflToJsonConverter.prototype.parseRegex = FinFormula.parseFormula;
