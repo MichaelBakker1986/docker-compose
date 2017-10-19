@@ -1,0 +1,37 @@
+{
+  "name": "canvas-datagrid",
+  "main": "lib/main.js",
+  "version": "0.16.16",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "homepage": "https://github.com/TonyGermaneri/canvas-datagrid",
+  "authors": [
+    "Tony Germaneri <Tony.Germaneri@gmail.com>"
+  ],
+  "description": "Canvas based data grid web component.  Capable of displaying millions of contiguous hierarchical rows and columns without paging or loading, on a single canvas element.",
+  "keywords": [
+    "data",
+    "datagrid",
+    "grid",
+    "data-grid",
+    "data-table",
+    "table",
+    "datatable",
+    "component"
+  ],
+  "license": "BSD",
+  "_release": "0.16.16",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.16.16",
+    "commit": "630a3f26baf169c6da7d849f5d2f7dd63ae3a66d"
+  },
+  "_source": "https://github.com/TonyGermaneri/canvas-datagrid.git",
+  "_target": "^0.16.8",
+  "_originalSource": "canvas-datagrid"
+}
