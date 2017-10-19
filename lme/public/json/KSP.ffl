@@ -15,7 +15,7 @@ model KSP uses BaseModel
 		frequency: document;
 		variable Charlotte
 		{
-		    title: topper;
+		    title: prachtig;
 			datatype: number;
 			frequency: document;
 			inputRequired: 1;
