@@ -18,7 +18,7 @@ function initJSMath(jsMath) {
             }
         }
         else {
-            logger.warn('Function [' + func + '] is already defined.');
+            logger.debug('Function [' + func + '] is already defined.');
         }
     }
 }

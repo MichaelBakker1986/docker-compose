@@ -18,7 +18,7 @@ class Stash {
 
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
-        write('./public/json/' + name + '.ffl', data).then(write('./public/json/' + name + '_canvas.json')).then(function(filename) {
+        write('./public/json/' + name + '.ffl', data).then(write('./public/json/' + name + '_canvas.json', lme)).then(function(filename) {
             console.log("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
             let command = "git pull &&  git add . && git commit -m changeByDEMO && git push";
             return exec(command).then((ok) => {

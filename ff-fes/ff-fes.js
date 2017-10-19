@@ -33,7 +33,7 @@ FESApi.prototype.addFunctions = function(plugin) {
         functions.push(functionName);
         global[functionName] = plugin.entries[functionName];
     }
-    log.info('Added fes-plugin [%s] functions [%s]', plugin.name, functions);
+    log.debug('Added fes-plugin [%s] functions [%s]', plugin.name, functions);
 };
 /**
  * rowId - VariableName
