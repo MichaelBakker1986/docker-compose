@@ -7,5 +7,5 @@ exportWebModel.nodes.forEach((node) => {
     console.info(node.rowId + ":" + node.value);
 })
 
-console.info(exportWebModel);
+console.info(exportWebModel.nodes);
 

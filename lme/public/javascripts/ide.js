@@ -1,10 +1,5 @@
 function aceEdit() {
-    $(window).keypress(function(event) {
-        if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
-        alert("Ctrl-S pressed");
-        event.preventDefault();
-        return false;
-    });
+
     $.getJSON("/branches", function(data, status, xhr) {
         $("#tags").autocomplete({
             source: data
@@ -24,7 +19,7 @@ function aceEdit() {
     editor.setOptions({
         enableBasicAutocompletion: true,
         /*   enableSnippets: true,*/
-        enableLiveAutocompletion: false
+        enableLiveAutocompletion: true
     });
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('progress', function(e) {
@@ -40,14 +35,27 @@ function aceEdit() {
     var modelName = window.location.search.split('model=')[1] || 'KSP';
     xhr.open('GET', '/json/' + modelName + '.ffl');
     xhr.send();
-    $('#save-model').click(function() {
+
+    function saveDocument() {
         $.post("/DEMO/saveFFL_LME", {
             model: 'KSP',
             data: editor.getSession().getValue()
         }, function(data) {
             console.info('send complete');
         });
-    })
+    }
+
+    $(window).bind('keydown', function(event) {
+        if (event.ctrlKey || event.metaKey) {
+            switch (String.fromCharCode(event.which).toLowerCase()) {
+                case 's':
+                    event.preventDefault();
+                    saveDocument()
+                    break;
+            }
+        }
+    });
+    $('#save-model').click(saveDocument)
 }
 
 if (document.addEventListener) {

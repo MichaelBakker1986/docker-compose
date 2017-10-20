@@ -18,29 +18,33 @@ function LMETree(name, workbook) {
     this.nodes = [];
 }
 
-LMETree.prototype.addNode = function(node) {
+LMETree.prototype.addNode = function(node, columns) {
     var icount = -1;
     var rval;
     var workbook = this.workbook;
-    if (!node.hasOwnProperty('value')) {
-        Object.defineProperty(node, 'value', {
-            get: function() {
-                if (icount !== counter) {
-                    icount = counter;
-                    rval = workbook.get(node.rowId, 'value', 0, 0);
-                    if (typeof(rval) === 'object') {
-                        rval = 1;
+    columns.forEach(function(column) {
+        //temp check, seems to proxy multiple times.
+        if (!node.hasOwnProperty(column)) {
+            Object.defineProperty(node, column, {
+                get: function() {
+                    if (icount !== counter) {
+                        icount = counter;
+                        rval = workbook.get(node.rowId, column, 0, 0);
+                        if (typeof(rval) === 'object') {
+                            rval = 1;
+                        }
                     }
+                    return rval;
+                },
+                set: function(v) {
+                    //only for 'value,formula_trend,...'
+                    console.info('user set value' + v + ' :' + node.rowId)
+                    counter++;
+                    workbook.set(node.rowId, v, column, 0, 0);
                 }
-                return rval;
-            },
-            set: function(v) {
-                console.info('user set value' + v + ' :' + node.rowId)
-                counter++;
-                workbook.set(node.rowId, v, 'value', 0, 0);
-            }
-        });
-    }
+            });
+        }
+    });
     this.nodes.push(node);
 }
 
@@ -49,7 +53,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     var rootNode = workbook.getRootSolutionProperty(modelName);
     var lmeTree = new LMETree(modelName, workbook);
     workbook.visitProperties(rootNode, function(node) {
-        lmeTree.addNode(node)
+        lmeTree.addNode(node, ['title', 'value', 'visible', 'locked'])
     })
     return lmeTree;
 }

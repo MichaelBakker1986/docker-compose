@@ -42,7 +42,7 @@
 <H1>Figure {{LME_MODEL.name}}</H1>
 <table>
     <tr ng-repeat="figure in LME_MODEL.nodes">
-        <td><span>{{figure.rowId}}</span></td>
+        <td><span>{{figure.title||figure.rowId}}</span></td>
         <td><input ng-model="figure.value" placeholder="{{figure.rowId}}"/></td>
     </tr>
 </table>

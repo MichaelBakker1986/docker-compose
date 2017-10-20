@@ -49,7 +49,6 @@ function update() {
             busy = true;
             var command = developer ? 'echo a' : 'git reset --hard origin/master && git pull && npm install && bower install';
             exec(command).then((result) => {
-                log('<span>Restarting server</span>');
                 for (var key in childProcesses) {
                     childProcesses[key].kill('SIGKILL')
                     spawnChild(key)
