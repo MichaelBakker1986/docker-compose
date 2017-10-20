@@ -33,6 +33,7 @@ model KSP uses BaseModel
 			datatype: number;
 			frequency: document;
 			inputRequired: 1;
+			formula: 10*10;
 		}
         variable IncomeParent02
         {
