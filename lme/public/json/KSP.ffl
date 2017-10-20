@@ -13,7 +13,7 @@ model KSP uses BaseModel
     {
 		datatype: number;
 		frequency: document;
-		variable TeamMembers4
+		variable TeamMembers5
 		{
 			datatype: number;
 			formula: 500;
