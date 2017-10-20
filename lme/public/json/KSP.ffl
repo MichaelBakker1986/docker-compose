@@ -13,7 +13,15 @@ model KSP uses BaseModel
     {
 		datatype: number;
 		frequency: document;
-		variable NewVariable
+		variable TeamMembers2
+		{
+			datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            fixed_decimals: 0;
+            choices: "0:Michael|1:Ramon";
+		}
+		variable NewVariables
 		{
 		    title: prachtig;
 			datatype: number;
