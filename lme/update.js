@@ -92,6 +92,7 @@ httpServer.listen(port, () => {
 });
 //start sub processes
 spawnChild('../demo-apps/angular-demo/angularapp')
+spawnChild('../demo-apps/adminlte/ltelite')
 spawnChild('app')
 
 function log(message, levelArg) {
