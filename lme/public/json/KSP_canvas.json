@@ -2701,7 +2701,16 @@
         "KSP_TotalYearlyCosts_locked": true,
         "KSP_TupleSumTest_locked": true,
         "KSP_CostsYearOneFour_value": true,
-        "KSP_CostsYearFiveSixSeven_value": true
+        "KSP_CostsYearFiveSixSeven_value": true,
+        "KSP_TeamMembers9_required": true,
+        "KSP_NewVariables_required": true,
+        "KSP_IncomeParent01_required": true,
+        "KSP_IncomeParent02_required": true,
+        "KSP_ChildGender_required": true,
+        "KSP_NrOfDaysChildcareWeek_required": true,
+        "KSP_NrOfDaysChildcareMonth_locked": true,
+        "KSP_NrOfDaysOutOfSchoolCareWeek_required": true,
+        "KSP_NrOfDaysOutOfSchoolCareMonth_locked": true
       },
       "formulaDependencys": [
         {
@@ -3572,6 +3581,1171 @@
       "name": "KSP_TupleSumTest_value",
       "parsed": "SUM(TVALUES([100092,100091,100092,100093,100094,100095,100096,100097,100098,100099,100100,100101,100102,100103,100104,100105,100106,100107,100108,100109,100110,100111,100112,100113,100114,100115,100116,100117,100118,100119,100120,100121,100122],a100092,'100092',x,y,z,v))",
       "id": 100124
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_ROOT_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "undefined",
+      "index": 100125,
+      "name": "KSP_Q_ROOT_value",
+      "parsed": "undefined",
+      "id": 100125
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_TeamMembers9_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "500",
+      "index": 100126,
+      "name": "KSP_TeamMembers9_value",
+      "parsed": "500",
+      "id": 100126
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_NewVariables_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "12345",
+      "index": 100127,
+      "name": "KSP_NewVariables_value",
+      "parsed": "12345",
+      "id": 100127
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_IncomeParent01_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "10*10",
+      "index": 100128,
+      "name": "KSP_IncomeParent01_value",
+      "parsed": "10*10",
+      "id": 100128
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_IncomeParent02_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "undefined",
+      "index": 100129,
+      "name": "KSP_IncomeParent02_value",
+      "parsed": "undefined",
+      "id": 100129
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Child_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "undefined",
+      "index": 100130,
+      "name": "KSP_Child_value",
+      "parsed": "undefined",
+      "id": 100130
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_ChildGender_value": true,
+        "KSP_ActualFood_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_ActualFood_value",
+          "association": "refs",
+          "refId": 100146
+        }
+      ],
+      "deps": {},
+      "original": "undefined",
+      "index": 100131,
+      "name": "KSP_ChildGender_value",
+      "parsed": "undefined",
+      "id": 100131
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_NrOfDaysChildcareWeek_value": true,
+        "KSP_NrOfDaysChildcareMonth_value": true,
+        "KSP_TupleSumTest_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_NrOfDaysChildcareMonth_value",
+          "association": "refs",
+          "refId": 100133
+        },
+        {
+          "name": "KSP_TupleSumTest_value",
+          "association": "refs",
+          "refId": 100164
+        }
+      ],
+      "deps": {},
+      "original": "0",
+      "index": 100132,
+      "name": "KSP_NrOfDaysChildcareWeek_value",
+      "parsed": "0",
+      "id": 100132
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_NrOfDaysChildcareMonth_value": true,
+        "KSP_ChildCareCosts_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_NrOfDaysChildcareWeek_value",
+          "association": "deps",
+          "refId": 100132
+        },
+        {
+          "name": "KSP_ChildCareCosts_value",
+          "association": "refs",
+          "refId": 100143
+        }
+      ],
+      "deps": {
+        "KSP_NrOfDaysChildcareWeek_value": true
+      },
+      "original": "OnER(10.5*NrOfDaysChildcareWeek*4,0)",
+      "index": 100133,
+      "name": "KSP_NrOfDaysChildcareMonth_value",
+      "parsed": "OnER(10.5*a100132('100132',x,y,z,v)*4,0)",
+      "id": 100133
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_NrOfDaysOutOfSchoolCareWeek_value": true,
+        "KSP_NrOfDaysOutOfSchoolCareMonth_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
+          "association": "refs",
+          "refId": 100135
+        }
+      ],
+      "deps": {},
+      "original": "undefined",
+      "index": 100134,
+      "name": "KSP_NrOfDaysOutOfSchoolCareWeek_value",
+      "parsed": "undefined",
+      "id": 100134
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_NrOfDaysOutOfSchoolCareMonth_value": true,
+        "KSP_CostsForOutOfSchoolCare_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_NrOfDaysOutOfSchoolCareWeek_value",
+          "association": "deps",
+          "refId": 100134
+        },
+        {
+          "name": "KSP_CostsForOutOfSchoolCare_value",
+          "association": "refs",
+          "refId": 100156
+        }
+      ],
+      "deps": {
+        "KSP_NrOfDaysOutOfSchoolCareWeek_value": true
+      },
+      "original": "OnER(4*NrOfDaysOutOfSchoolCareWeek*4.5,0)",
+      "index": 100135,
+      "name": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
+      "parsed": "OnER(4*a100134('100134',x,y,z,v)*4.5,0)",
+      "id": 100135
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_HourlyFeeChildCare_value": true,
+        "KSP_ChildCareCosts_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_ChildCareCosts_value",
+          "association": "refs",
+          "refId": 100143
+        }
+      ],
+      "deps": {},
+      "original": "6.8",
+      "index": 100136,
+      "name": "KSP_HourlyFeeChildCare_value",
+      "parsed": "6.8",
+      "id": 100136
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_HourlyFeeOutOfSchoolCare_value": true,
+        "KSP_CostsForOutOfSchoolCare_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_CostsForOutOfSchoolCare_value",
+          "association": "refs",
+          "refId": 100156
+        }
+      ],
+      "deps": {},
+      "original": "6.8",
+      "index": 100137,
+      "name": "KSP_HourlyFeeOutOfSchoolCare_value",
+      "parsed": "6.8",
+      "id": 100137
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_ParentalContributionPrimaryEducation_value": true,
+        "KSP_CostsForPrimaryEducation_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_CostsForPrimaryEducation_value",
+          "association": "refs",
+          "refId": 100157
+        }
+      ],
+      "deps": {},
+      "original": "80",
+      "index": 100138,
+      "name": "KSP_ParentalContributionPrimaryEducation_value",
+      "parsed": "80",
+      "id": 100138
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_CostsUnspecified_value": true,
+        "KSP_CostsUnspecifiedOverview_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_CostsUnspecifiedOverview_value",
+          "association": "refs",
+          "refId": 100161
+        }
+      ],
+      "deps": {},
+      "original": "180",
+      "index": 100139,
+      "name": "KSP_CostsUnspecified_value",
+      "parsed": "180",
+      "id": 100139
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_SecondaryEducationProfile_value": true,
+        "KSP_SecondaryEducationProfile_required": true,
+        "KSP_Age_locked": true,
+        "KSP_Furniture_locked": true,
+        "KSP_ActualChildCareCosts_locked": true,
+        "KSP_CostsYearOneFour_locked": true,
+        "KSP_CostsYearFiveSixSeven_locked": true,
+        "KSP_CostsUnspecifiedOverview_locked": true,
+        "KSP_TotalYearlyCostsChild_locked": true,
+        "KSP_TotalYearlyCosts_locked": true,
+        "KSP_TupleSumTest_locked": true,
+        "KSP_CostsYearOneFour_value": true,
+        "KSP_CostsYearFiveSixSeven_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_CostsYearOneFour_value",
+          "association": "refs",
+          "refId": 100159
+        },
+        {
+          "name": "KSP_CostsYearFiveSixSeven_value",
+          "association": "refs",
+          "refId": 100160
+        }
+      ],
+      "deps": {},
+      "original": "1",
+      "index": 100140,
+      "name": "KSP_SecondaryEducationProfile_value",
+      "parsed": "1",
+      "id": 100140
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Age_value": true,
+        "KSP_Furniture_value": true,
+        "KSP_ActualChildCareCosts_value": true,
+        "KSP_ActualDiapers_value": true,
+        "KSP_ActualFood_value": true,
+        "KSP_ActualClothingCosts_value": true,
+        "KSP_ActualPersonalCareCosts_value": true,
+        "KSP_Hairdresser_value": true,
+        "KSP_Inventory_value": true,
+        "KSP_Allowance_value": true,
+        "KSP_Contributions_value": true,
+        "KSP_Transport_value": true,
+        "KSP_MobilePhone_value": true,
+        "KSP_DrivingLicense_value": true,
+        "KSP_CostsForOutOfSchoolCare_value": true,
+        "KSP_CostsForPrimaryEducation_value": true,
+        "KSP_CostsForSecondaryEducation_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Furniture_value",
+          "association": "refs",
+          "refId": 100142
+        },
+        {
+          "name": "KSP_ActualChildCareCosts_value",
+          "association": "refs",
+          "refId": 100144
+        },
+        {
+          "name": "KSP_ActualDiapers_value",
+          "association": "refs",
+          "refId": 100145
+        },
+        {
+          "name": "KSP_ActualFood_value",
+          "association": "refs",
+          "refId": 100146
+        },
+        {
+          "name": "KSP_ActualClothingCosts_value",
+          "association": "refs",
+          "refId": 100147
+        },
+        {
+          "name": "KSP_ActualPersonalCareCosts_value",
+          "association": "refs",
+          "refId": 100148
+        },
+        {
+          "name": "KSP_Hairdresser_value",
+          "association": "refs",
+          "refId": 100149
+        },
+        {
+          "name": "KSP_Inventory_value",
+          "association": "refs",
+          "refId": 100150
+        },
+        {
+          "name": "KSP_Allowance_value",
+          "association": "refs",
+          "refId": 100151
+        },
+        {
+          "name": "KSP_Contributions_value",
+          "association": "refs",
+          "refId": 100152
+        },
+        {
+          "name": "KSP_Transport_value",
+          "association": "refs",
+          "refId": 100153
+        },
+        {
+          "name": "KSP_MobilePhone_value",
+          "association": "refs",
+          "refId": 100154
+        },
+        {
+          "name": "KSP_DrivingLicense_value",
+          "association": "refs",
+          "refId": 100155
+        },
+        {
+          "name": "KSP_CostsForOutOfSchoolCare_value",
+          "association": "refs",
+          "refId": 100156
+        },
+        {
+          "name": "KSP_CostsForPrimaryEducation_value",
+          "association": "refs",
+          "refId": 100157
+        },
+        {
+          "name": "KSP_CostsForSecondaryEducation_value",
+          "association": "refs",
+          "refId": 100158
+        }
+      ],
+      "deps": {},
+      "original": "ValueT(T)",
+      "index": 100141,
+      "name": "KSP_Age_value",
+      "parsed": "ValueT(x)",
+      "id": 100141
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Furniture_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "If(Age==1,1800,0)",
+      "index": 100142,
+      "name": "KSP_Furniture_value",
+      "parsed": "a100141('100141',x,y,z,v)==1?1800:0",
+      "id": 100142
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_ChildCareCosts_value": true,
+        "KSP_ActualChildCareCosts_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_NrOfDaysChildcareMonth_value",
+          "association": "deps",
+          "refId": 100133
+        },
+        {
+          "name": "KSP_HourlyFeeChildCare_value",
+          "association": "deps",
+          "refId": 100136
+        },
+        {
+          "name": "KSP_ActualChildCareCosts_value",
+          "association": "refs",
+          "refId": 100144
+        }
+      ],
+      "deps": {
+        "KSP_NrOfDaysChildcareMonth_value": true,
+        "KSP_HourlyFeeChildCare_value": true
+      },
+      "original": "NrOfDaysChildcareMonth[doc]*HourlyFeeChildCare[doc]*12",
+      "index": 100143,
+      "name": "KSP_ChildCareCosts_value",
+      "parsed": "a100133('100133',x.doc,y,z,v)*a100136('100136',x.doc,y,z,v)*12",
+      "id": 100143
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_ActualChildCareCosts_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_ChildCareCosts_value",
+          "association": "deps",
+          "refId": 100143
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true,
+        "KSP_ChildCareCosts_value": true
+      },
+      "original": "If(Age<=3,ChildCareCosts,0)",
+      "index": 100144,
+      "name": "KSP_ActualChildCareCosts_value",
+      "parsed": "a100141('100141',x,y,z,v)<=3?a100143('100143',x,y,z,v):0",
+      "id": 100144
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_ActualDiapers_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Diapers',Age)",
+      "index": 100145,
+      "name": "KSP_ActualDiapers_value",
+      "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Diapers',a100141('100141',x,y,z,v))",
+      "id": 100145
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_ActualFood_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_ChildGender_value",
+          "association": "deps",
+          "refId": 100131
+        },
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_ChildGender_value": true,
+        "KSP_Age_value": true
+      },
+      "original": "If(ChildGender[doc]==0,MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','FoodCostsBoy',Age),MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','FoodCostsGirl',Age))",
+      "index": 100146,
+      "name": "KSP_ActualFood_value",
+      "parsed": "a100131('100131',x.doc,y,z,v)==0?MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','FoodCostsBoy',a100141('100141',x,y,z,v)):MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','FoodCostsGirl',a100141('100141',x,y,z,v))",
+      "id": 100146
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_ActualClothingCosts_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','ClothingCosts',Age)",
+      "index": 100147,
+      "name": "KSP_ActualClothingCosts_value",
+      "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','ClothingCosts',a100141('100141',x,y,z,v))",
+      "id": 100147
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_ActualPersonalCareCosts_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','PersonalCare',Age)",
+      "index": 100148,
+      "name": "KSP_ActualPersonalCareCosts_value",
+      "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','PersonalCare',a100141('100141',x,y,z,v))",
+      "id": 100148
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Hairdresser_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Hairdresser',Age)",
+      "index": 100149,
+      "name": "KSP_Hairdresser_value",
+      "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Hairdresser',a100141('100141',x,y,z,v))",
+      "id": 100149
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Inventory_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Inventory',Age)",
+      "index": 100150,
+      "name": "KSP_Inventory_value",
+      "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Inventory',a100141('100141',x,y,z,v))",
+      "id": 100150
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Allowance_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Allowance',Age)",
+      "index": 100151,
+      "name": "KSP_Allowance_value",
+      "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Allowance',a100141('100141',x,y,z,v))",
+      "id": 100151
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Contributions_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Contributions',Age)",
+      "index": 100152,
+      "name": "KSP_Contributions_value",
+      "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Contributions',a100141('100141',x,y,z,v))",
+      "id": 100152
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Transport_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Transport',Age)",
+      "index": 100153,
+      "name": "KSP_Transport_value",
+      "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Transport',a100141('100141',x,y,z,v))",
+      "id": 100153
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_MobilePhone_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','MobilePhone',Age)",
+      "index": 100154,
+      "name": "KSP_MobilePhone_value",
+      "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','MobilePhone',a100141('100141',x,y,z,v))",
+      "id": 100154
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_DrivingLicense_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true
+      },
+      "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','DrivingLicense',Age)",
+      "index": 100155,
+      "name": "KSP_DrivingLicense_value",
+      "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','DrivingLicense',a100141('100141',x,y,z,v))",
+      "id": 100155
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_CostsForOutOfSchoolCare_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_HourlyFeeOutOfSchoolCare_value",
+          "association": "deps",
+          "refId": 100137
+        },
+        {
+          "name": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
+          "association": "deps",
+          "refId": 100135
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true,
+        "KSP_HourlyFeeOutOfSchoolCare_value": true,
+        "KSP_NrOfDaysOutOfSchoolCareMonth_value": true
+      },
+      "original": "If(Age>=4&&Age<=11,HourlyFeeOutOfSchoolCare[doc]*NrOfDaysOutOfSchoolCareMonth[doc]*12,0)",
+      "index": 100156,
+      "name": "KSP_CostsForOutOfSchoolCare_value",
+      "parsed": "a100141('100141',x,y,z,v)>=4&&a100141('100141',x,y,z,v)<=11?a100137('100137',x.doc,y,z,v)*a100135('100135',x.doc,y,z,v)*12:0",
+      "id": 100156
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_CostsForPrimaryEducation_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_ParentalContributionPrimaryEducation_value",
+          "association": "deps",
+          "refId": 100138
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true,
+        "KSP_ParentalContributionPrimaryEducation_value": true
+      },
+      "original": "If(Age>=4&&Age<=11,ParentalContributionPrimaryEducation[doc],0)",
+      "index": 100157,
+      "name": "KSP_CostsForPrimaryEducation_value",
+      "parsed": "a100141('100141',x,y,z,v)>=4&&a100141('100141',x,y,z,v)<=11?a100138('100138',x.doc,y,z,v):0",
+      "id": 100157
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_CostsForSecondaryEducation_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Age_value",
+          "association": "deps",
+          "refId": 100141
+        },
+        {
+          "name": "KSP_CostsYearOneFour_value",
+          "association": "deps",
+          "refId": 100159
+        },
+        {
+          "name": "KSP_CostsYearFiveSixSeven_value",
+          "association": "deps",
+          "refId": 100160
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_Age_value": true,
+        "KSP_CostsYearOneFour_value": true,
+        "KSP_CostsYearFiveSixSeven_value": true
+      },
+      "original": "If(Age>=12&&Age<16,CostsYearOneFour[doc],If(Age>=16,CostsYearFiveSixSeven[doc],0))",
+      "index": 100158,
+      "name": "KSP_CostsForSecondaryEducation_value",
+      "parsed": "a100141('100141',x,y,z,v)>=12&&a100141('100141',x,y,z,v)<16?a100159('100159',x.doc,y,z,v):a100141('100141',x,y,z,v)>=16?a100160('100160',x.doc,y,z,v):0",
+      "id": 100158
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_CostsYearOneFour_value": true,
+        "KSP_CostsForSecondaryEducation_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_CostsForSecondaryEducation_value",
+          "association": "refs",
+          "refId": 100158
+        },
+        {
+          "name": "KSP_SecondaryEducationProfile_value",
+          "association": "deps",
+          "refId": 100140
+        }
+      ],
+      "deps": {
+        "KSP_SecondaryEducationProfile_value": true
+      },
+      "original": "Case(SecondaryEducationProfile,[0,576||1,906||2,535||3,535])",
+      "index": 100159,
+      "name": "KSP_CostsYearOneFour_value",
+      "parsed": "__c0s6=a100140('100140',x,y,z,v),__c0s6 === 0?576:__c0s6 === 1?906:__c0s6 === 2?535:__c0s6 === 3?535:NA",
+      "id": 100159
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_CostsYearFiveSixSeven_value": true,
+        "KSP_CostsForSecondaryEducation_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_CostsForSecondaryEducation_value",
+          "association": "refs",
+          "refId": 100158
+        },
+        {
+          "name": "KSP_SecondaryEducationProfile_value",
+          "association": "deps",
+          "refId": 100140
+        }
+      ],
+      "deps": {
+        "KSP_SecondaryEducationProfile_value": true
+      },
+      "original": "Case(SecondaryEducationProfile,[0,576||1,906||2,535||3,535])",
+      "index": 100160,
+      "name": "KSP_CostsYearFiveSixSeven_value",
+      "parsed": "__c0s7=a100140('100140',x,y,z,v),__c0s7 === 0?576:__c0s7 === 1?906:__c0s7 === 2?535:__c0s7 === 3?535:NA",
+      "id": 100160
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_CostsUnspecifiedOverview_value": true,
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_CostsUnspecified_value",
+          "association": "deps",
+          "refId": 100139
+        },
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "refs",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_CostsUnspecified_value": true
+      },
+      "original": "CostsUnspecified[doc]*12",
+      "index": 100161,
+      "name": "KSP_CostsUnspecifiedOverview_value",
+      "parsed": "a100139('100139',x.doc,y,z,v)*12",
+      "id": 100161
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_TotalYearlyCostsChild_value": true,
+        "KSP_TotalYearlyCosts_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Furniture_value",
+          "association": "deps",
+          "refId": 100142
+        },
+        {
+          "name": "KSP_ActualChildCareCosts_value",
+          "association": "deps",
+          "refId": 100144
+        },
+        {
+          "name": "KSP_ActualDiapers_value",
+          "association": "deps",
+          "refId": 100145
+        },
+        {
+          "name": "KSP_ActualFood_value",
+          "association": "deps",
+          "refId": 100146
+        },
+        {
+          "name": "KSP_ActualClothingCosts_value",
+          "association": "deps",
+          "refId": 100147
+        },
+        {
+          "name": "KSP_ActualPersonalCareCosts_value",
+          "association": "deps",
+          "refId": 100148
+        },
+        {
+          "name": "KSP_Hairdresser_value",
+          "association": "deps",
+          "refId": 100149
+        },
+        {
+          "name": "KSP_Inventory_value",
+          "association": "deps",
+          "refId": 100150
+        },
+        {
+          "name": "KSP_Contributions_value",
+          "association": "deps",
+          "refId": 100152
+        },
+        {
+          "name": "KSP_Transport_value",
+          "association": "deps",
+          "refId": 100153
+        },
+        {
+          "name": "KSP_MobilePhone_value",
+          "association": "deps",
+          "refId": 100154
+        },
+        {
+          "name": "KSP_DrivingLicense_value",
+          "association": "deps",
+          "refId": 100155
+        },
+        {
+          "name": "KSP_CostsForOutOfSchoolCare_value",
+          "association": "deps",
+          "refId": 100156
+        },
+        {
+          "name": "KSP_CostsForPrimaryEducation_value",
+          "association": "deps",
+          "refId": 100157
+        },
+        {
+          "name": "KSP_CostsForSecondaryEducation_value",
+          "association": "deps",
+          "refId": 100158
+        },
+        {
+          "name": "KSP_CostsUnspecifiedOverview_value",
+          "association": "deps",
+          "refId": 100161
+        },
+        {
+          "name": "KSP_TotalYearlyCosts_value",
+          "association": "refs",
+          "refId": 100163
+        }
+      ],
+      "deps": {
+        "KSP_Furniture_value": true,
+        "KSP_ActualChildCareCosts_value": true,
+        "KSP_ActualDiapers_value": true,
+        "KSP_ActualFood_value": true,
+        "KSP_ActualClothingCosts_value": true,
+        "KSP_ActualPersonalCareCosts_value": true,
+        "KSP_Hairdresser_value": true,
+        "KSP_Inventory_value": true,
+        "KSP_Contributions_value": true,
+        "KSP_Transport_value": true,
+        "KSP_MobilePhone_value": true,
+        "KSP_DrivingLicense_value": true,
+        "KSP_CostsForOutOfSchoolCare_value": true,
+        "KSP_CostsForPrimaryEducation_value": true,
+        "KSP_CostsForSecondaryEducation_value": true,
+        "KSP_CostsUnspecifiedOverview_value": true
+      },
+      "original": "Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview",
+      "index": 100162,
+      "name": "KSP_TotalYearlyCostsChild_value",
+      "parsed": "a100142('100142',x,y,z,v)+a100144('100144',x,y,z,v)+a100145('100145',x,y,z,v)+a100146('100146',x,y,z,v)+a100147('100147',x,y,z,v)+a100148('100148',x,y,z,v)+a100149('100149',x,y,z,v)+a100150('100150',x,y,z,v)+a100152('100152',x,y,z,v)+a100153('100153',x,y,z,v)+a100154('100154',x,y,z,v)+a100155('100155',x,y,z,v)+a100156('100156',x,y,z,v)+a100157('100157',x,y,z,v)+a100158('100158',x,y,z,v)+a100161('100161',x,y,z,v)",
+      "id": 100162
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_TotalYearlyCosts_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_TotalYearlyCostsChild_value",
+          "association": "deps",
+          "refId": 100162
+        }
+      ],
+      "deps": {
+        "KSP_TotalYearlyCostsChild_value": true
+      },
+      "original": "TSUM(TotalYearlyCostsChild)",
+      "index": 100163,
+      "name": "KSP_TotalYearlyCosts_value",
+      "parsed": "SUM(TVALUES([100162,100131,100132,100133,100134,100135,100136,100137,100138,100139,100140,100141,100142,100143,100144,100145,100146,100147,100148,100149,100150,100151,100152,100153,100154,100155,100156,100157,100158,100159,100160,100161,100162],a100162,'100162',x,y,z,v))",
+      "id": 100163
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_TupleSumTest_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_NrOfDaysChildcareWeek_value",
+          "association": "deps",
+          "refId": 100132
+        }
+      ],
+      "deps": {
+        "KSP_NrOfDaysChildcareWeek_value": true
+      },
+      "original": "TSUM(NrOfDaysChildcareWeek)",
+      "index": 100164,
+      "name": "KSP_TupleSumTest_value",
+      "parsed": "SUM(TVALUES([100132,100131,100132,100133,100134,100135,100136,100137,100138,100139,100140,100141,100142,100143,100144,100145,100146,100147,100148,100149,100150,100151,100152,100153,100154,100155,100156,100157,100158,100159,100160,100161,100162],a100132,'100132',x,y,z,v))",
+      "id": 100164
     }
   ],
   "data": [
@@ -3984,6 +5158,16 @@
       false,
       false,
       null
+    ],
+    [
+      "TeamMembers9",
+      null,
+      "",
+      "",
+      "",
+      false,
+      false,
+      null
     ]
   ],
   "nodes": [
@@ -4056,9 +5240,15 @@
           "rowId": "TeamMembers7",
           "colId": "value",
           "identifier": "KSP_Q_ROOT_value"
+        },
+        {
+          "name": "KSP_TeamMembers9_value",
+          "rowId": "TeamMembers9",
+          "colId": "value",
+          "identifier": "KSP_Q_ROOT_value"
         }
       ],
-      "ref": 100085,
+      "ref": 100125,
       "formulaName": "KSP_Q_ROOT_value",
       "refId": 100001,
       "displayAs": "StringAnswerType",
@@ -4095,7 +5285,7 @@
       "colId": "value",
       "name": "KSP_NewVariables_value",
       "nodes": [],
-      "ref": 100087,
+      "ref": 100127,
       "formulaName": "KSP_NewVariables_value",
       "refId": 100004,
       "displayAs": "StringAnswerType",
@@ -4119,7 +5309,7 @@
       "colId": "required",
       "name": "KSP_NewVariables_required",
       "nodes": [],
-      "ref": 100060,
+      "ref": 100100,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100003,
       "displayAs": "PropertyType"
@@ -4130,7 +5320,7 @@
       "colId": "value",
       "name": "KSP_IncomeParent01_value",
       "nodes": [],
-      "ref": 100088,
+      "ref": 100128,
       "formulaName": "KSP_IncomeParent01_value",
       "refId": 100006,
       "displayAs": "StringAnswerType",
@@ -4143,7 +5333,7 @@
       "colId": "required",
       "name": "KSP_IncomeParent01_required",
       "nodes": [],
-      "ref": 100060,
+      "ref": 100100,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100003,
       "displayAs": "PropertyType"
@@ -4154,7 +5344,7 @@
       "colId": "value",
       "name": "KSP_IncomeParent02_value",
       "nodes": [],
-      "ref": 100089,
+      "ref": 100129,
       "formulaName": "KSP_IncomeParent02_value",
       "refId": 100007,
       "displayAs": "StringAnswerType",
@@ -4167,7 +5357,7 @@
       "colId": "required",
       "name": "KSP_IncomeParent02_required",
       "nodes": [],
-      "ref": 100060,
+      "ref": 100100,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100003,
       "displayAs": "PropertyType"
@@ -4371,7 +5561,7 @@
           "identifier": "KSP_Child_value"
         }
       ],
-      "ref": 100090,
+      "ref": 100130,
       "formulaName": "KSP_Child_value",
       "refId": 100008,
       "displayAs": "AmountAnswerType",
@@ -4387,7 +5577,7 @@
       "colId": "value",
       "name": "KSP_ChildGender_value",
       "nodes": [],
-      "ref": 100091,
+      "ref": 100131,
       "formulaName": "KSP_ChildGender_value",
       "refId": 100009,
       "displayAs": "StringAnswerType",
@@ -4404,7 +5594,7 @@
       "colId": "required",
       "name": "KSP_ChildGender_required",
       "nodes": [],
-      "ref": 100060,
+      "ref": 100100,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100003,
       "displayAs": "PropertyType"
@@ -4426,7 +5616,7 @@
       "colId": "value",
       "name": "KSP_NrOfDaysChildcareWeek_value",
       "nodes": [],
-      "ref": 100092,
+      "ref": 100132,
       "formulaName": "KSP_NrOfDaysChildcareWeek_value",
       "refId": 100011,
       "displayAs": "StringAnswerType",
@@ -4443,7 +5633,7 @@
       "colId": "required",
       "name": "KSP_NrOfDaysChildcareWeek_required",
       "nodes": [],
-      "ref": 100060,
+      "ref": 100100,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100003,
       "displayAs": "PropertyType"
@@ -4454,7 +5644,7 @@
       "colId": "value",
       "name": "KSP_NrOfDaysChildcareMonth_value",
       "nodes": [],
-      "ref": 100093,
+      "ref": 100133,
       "formulaName": "KSP_NrOfDaysChildcareMonth_value",
       "refId": 100012,
       "displayAs": "StringAnswerType",
@@ -4471,7 +5661,7 @@
       "colId": "locked",
       "name": "KSP_NrOfDaysChildcareMonth_locked",
       "nodes": [],
-      "ref": 100060,
+      "ref": 100100,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100003,
       "displayAs": "PropertyType"
@@ -4482,7 +5672,7 @@
       "colId": "value",
       "name": "KSP_NrOfDaysOutOfSchoolCareWeek_value",
       "nodes": [],
-      "ref": 100094,
+      "ref": 100134,
       "formulaName": "KSP_NrOfDaysOutOfSchoolCareWeek_value",
       "refId": 100013,
       "displayAs": "StringAnswerType",
@@ -4499,7 +5689,7 @@
       "colId": "required",
       "name": "KSP_NrOfDaysOutOfSchoolCareWeek_required",
       "nodes": [],
-      "ref": 100060,
+      "ref": 100100,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100003,
       "displayAs": "PropertyType"
@@ -4510,7 +5700,7 @@
       "colId": "value",
       "name": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
       "nodes": [],
-      "ref": 100095,
+      "ref": 100135,
       "formulaName": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
       "refId": 100014,
       "displayAs": "StringAnswerType",
@@ -4527,7 +5717,7 @@
       "colId": "locked",
       "name": "KSP_NrOfDaysOutOfSchoolCareMonth_locked",
       "nodes": [],
-      "ref": 100060,
+      "ref": 100100,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100003,
       "displayAs": "PropertyType"
@@ -4538,7 +5728,7 @@
       "colId": "value",
       "name": "KSP_HourlyFeeChildCare_value",
       "nodes": [],
-      "ref": 100096,
+      "ref": 100136,
       "formulaName": "KSP_HourlyFeeChildCare_value",
       "refId": 100015,
       "displayAs": "StringAnswerType",
@@ -4555,7 +5745,7 @@
       "colId": "value",
       "name": "KSP_HourlyFeeOutOfSchoolCare_value",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100137,
       "formulaName": "KSP_HourlyFeeOutOfSchoolCare_value",
       "refId": 100016,
       "displayAs": "StringAnswerType",
@@ -4572,7 +5762,7 @@
       "colId": "value",
       "name": "KSP_ParentalContributionPrimaryEducation_value",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100138,
       "formulaName": "KSP_ParentalContributionPrimaryEducation_value",
       "refId": 100017,
       "displayAs": "StringAnswerType",
@@ -4589,7 +5779,7 @@
       "colId": "value",
       "name": "KSP_CostsUnspecified_value",
       "nodes": [],
-      "ref": 100099,
+      "ref": 100139,
       "formulaName": "KSP_CostsUnspecified_value",
       "refId": 100018,
       "displayAs": "StringAnswerType",
@@ -4606,7 +5796,7 @@
       "colId": "value",
       "name": "KSP_SecondaryEducationProfile_value",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "select",
@@ -4623,7 +5813,7 @@
       "colId": "required",
       "name": "KSP_SecondaryEducationProfile_required",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "PropertyType"
@@ -4645,7 +5835,7 @@
       "colId": "value",
       "name": "KSP_Age_value",
       "nodes": [],
-      "ref": 100101,
+      "ref": 100141,
       "formulaName": "KSP_Age_value",
       "refId": 100021,
       "displayAs": "StringAnswerType",
@@ -4662,7 +5852,7 @@
       "colId": "locked",
       "name": "KSP_Age_locked",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "PropertyType"
@@ -4673,7 +5863,7 @@
       "colId": "value",
       "name": "KSP_Furniture_value",
       "nodes": [],
-      "ref": 100102,
+      "ref": 100142,
       "formulaName": "KSP_Furniture_value",
       "refId": 100022,
       "displayAs": "StringAnswerType",
@@ -4690,7 +5880,7 @@
       "colId": "locked",
       "name": "KSP_Furniture_locked",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "PropertyType"
@@ -4701,7 +5891,7 @@
       "colId": "value",
       "name": "KSP_ChildCareCosts_value",
       "nodes": [],
-      "ref": 100103,
+      "ref": 100143,
       "formulaName": "KSP_ChildCareCosts_value",
       "refId": 100023,
       "displayAs": "StringAnswerType",
@@ -4718,7 +5908,7 @@
       "colId": "value",
       "name": "KSP_ActualChildCareCosts_value",
       "nodes": [],
-      "ref": 100104,
+      "ref": 100144,
       "formulaName": "KSP_ActualChildCareCosts_value",
       "refId": 100024,
       "displayAs": "StringAnswerType",
@@ -4735,7 +5925,7 @@
       "colId": "locked",
       "name": "KSP_ActualChildCareCosts_locked",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "PropertyType"
@@ -4746,7 +5936,7 @@
       "colId": "value",
       "name": "KSP_ActualDiapers_value",
       "nodes": [],
-      "ref": 100105,
+      "ref": 100145,
       "formulaName": "KSP_ActualDiapers_value",
       "refId": 100025,
       "displayAs": "StringAnswerType",
@@ -4763,7 +5953,7 @@
       "colId": "value",
       "name": "KSP_ActualFood_value",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100146,
       "formulaName": "KSP_ActualFood_value",
       "refId": 100026,
       "displayAs": "StringAnswerType",
@@ -4780,7 +5970,7 @@
       "colId": "value",
       "name": "KSP_ActualClothingCosts_value",
       "nodes": [],
-      "ref": 100107,
+      "ref": 100147,
       "formulaName": "KSP_ActualClothingCosts_value",
       "refId": 100027,
       "displayAs": "StringAnswerType",
@@ -4797,7 +5987,7 @@
       "colId": "value",
       "name": "KSP_ActualPersonalCareCosts_value",
       "nodes": [],
-      "ref": 100108,
+      "ref": 100148,
       "formulaName": "KSP_ActualPersonalCareCosts_value",
       "refId": 100028,
       "displayAs": "StringAnswerType",
@@ -4814,7 +6004,7 @@
       "colId": "value",
       "name": "KSP_Hairdresser_value",
       "nodes": [],
-      "ref": 100109,
+      "ref": 100149,
       "formulaName": "KSP_Hairdresser_value",
       "refId": 100029,
       "displayAs": "StringAnswerType",
@@ -4831,7 +6021,7 @@
       "colId": "value",
       "name": "KSP_Inventory_value",
       "nodes": [],
-      "ref": 100110,
+      "ref": 100150,
       "formulaName": "KSP_Inventory_value",
       "refId": 100030,
       "displayAs": "StringAnswerType",
@@ -4848,7 +6038,7 @@
       "colId": "value",
       "name": "KSP_Allowance_value",
       "nodes": [],
-      "ref": 100111,
+      "ref": 100151,
       "formulaName": "KSP_Allowance_value",
       "refId": 100031,
       "displayAs": "StringAnswerType",
@@ -4865,7 +6055,7 @@
       "colId": "value",
       "name": "KSP_Contributions_value",
       "nodes": [],
-      "ref": 100112,
+      "ref": 100152,
       "formulaName": "KSP_Contributions_value",
       "refId": 100032,
       "displayAs": "StringAnswerType",
@@ -4882,7 +6072,7 @@
       "colId": "value",
       "name": "KSP_Transport_value",
       "nodes": [],
-      "ref": 100113,
+      "ref": 100153,
       "formulaName": "KSP_Transport_value",
       "refId": 100033,
       "displayAs": "StringAnswerType",
@@ -4899,7 +6089,7 @@
       "colId": "value",
       "name": "KSP_MobilePhone_value",
       "nodes": [],
-      "ref": 100114,
+      "ref": 100154,
       "formulaName": "KSP_MobilePhone_value",
       "refId": 100034,
       "displayAs": "StringAnswerType",
@@ -4916,7 +6106,7 @@
       "colId": "value",
       "name": "KSP_DrivingLicense_value",
       "nodes": [],
-      "ref": 100115,
+      "ref": 100155,
       "formulaName": "KSP_DrivingLicense_value",
       "refId": 100035,
       "displayAs": "StringAnswerType",
@@ -4933,7 +6123,7 @@
       "colId": "value",
       "name": "KSP_CostsForOutOfSchoolCare_value",
       "nodes": [],
-      "ref": 100116,
+      "ref": 100156,
       "formulaName": "KSP_CostsForOutOfSchoolCare_value",
       "refId": 100036,
       "displayAs": "StringAnswerType",
@@ -4950,7 +6140,7 @@
       "colId": "value",
       "name": "KSP_CostsForPrimaryEducation_value",
       "nodes": [],
-      "ref": 100117,
+      "ref": 100157,
       "formulaName": "KSP_CostsForPrimaryEducation_value",
       "refId": 100037,
       "displayAs": "StringAnswerType",
@@ -4967,7 +6157,7 @@
       "colId": "value",
       "name": "KSP_CostsForSecondaryEducation_value",
       "nodes": [],
-      "ref": 100118,
+      "ref": 100158,
       "formulaName": "KSP_CostsForSecondaryEducation_value",
       "refId": 100038,
       "displayAs": "StringAnswerType",
@@ -4984,7 +6174,7 @@
       "colId": "value",
       "name": "KSP_CostsYearOneFour_value",
       "nodes": [],
-      "ref": 100119,
+      "ref": 100159,
       "formulaName": "KSP_CostsYearOneFour_value",
       "refId": 100039,
       "displayAs": "StringAnswerType",
@@ -5001,7 +6191,7 @@
       "colId": "locked",
       "name": "KSP_CostsYearOneFour_locked",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "PropertyType"
@@ -5012,7 +6202,7 @@
       "colId": "value",
       "name": "KSP_CostsYearFiveSixSeven_value",
       "nodes": [],
-      "ref": 100120,
+      "ref": 100160,
       "formulaName": "KSP_CostsYearFiveSixSeven_value",
       "refId": 100040,
       "displayAs": "StringAnswerType",
@@ -5029,7 +6219,7 @@
       "colId": "locked",
       "name": "KSP_CostsYearFiveSixSeven_locked",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "PropertyType"
@@ -5040,7 +6230,7 @@
       "colId": "value",
       "name": "KSP_CostsUnspecifiedOverview_value",
       "nodes": [],
-      "ref": 100121,
+      "ref": 100161,
       "formulaName": "KSP_CostsUnspecifiedOverview_value",
       "refId": 100041,
       "displayAs": "StringAnswerType",
@@ -5057,7 +6247,7 @@
       "colId": "locked",
       "name": "KSP_CostsUnspecifiedOverview_locked",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "PropertyType"
@@ -5068,7 +6258,7 @@
       "colId": "value",
       "name": "KSP_TotalYearlyCostsChild_value",
       "nodes": [],
-      "ref": 100122,
+      "ref": 100162,
       "formulaName": "KSP_TotalYearlyCostsChild_value",
       "refId": 100042,
       "displayAs": "StringAnswerType",
@@ -5085,7 +6275,7 @@
       "colId": "locked",
       "name": "KSP_TotalYearlyCostsChild_locked",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "PropertyType"
@@ -5096,7 +6286,7 @@
       "colId": "value",
       "name": "KSP_TotalYearlyCosts_value",
       "nodes": [],
-      "ref": 100123,
+      "ref": 100163,
       "formulaName": "KSP_TotalYearlyCosts_value",
       "refId": 100043,
       "displayAs": "StringAnswerType",
@@ -5109,7 +6299,7 @@
       "colId": "locked",
       "name": "KSP_TotalYearlyCosts_locked",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "PropertyType"
@@ -5120,7 +6310,7 @@
       "colId": "value",
       "name": "KSP_TupleSumTest_value",
       "nodes": [],
-      "ref": 100124,
+      "ref": 100164,
       "formulaName": "KSP_TupleSumTest_value",
       "refId": 100044,
       "displayAs": "StringAnswerType",
@@ -5133,7 +6323,7 @@
       "colId": "locked",
       "name": "KSP_TupleSumTest_locked",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100140,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
       "displayAs": "PropertyType"
@@ -5160,6 +6350,30 @@
       "ref": 100060,
       "formulaName": "KSP_SecondaryEducationProfile_value",
       "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "TeamMembers9",
+      "solutionName": "KSP",
+      "colId": "value",
+      "name": "KSP_TeamMembers9_value",
+      "nodes": [],
+      "ref": 100126,
+      "formulaName": "KSP_TeamMembers9_value",
+      "refId": 100126,
+      "displayAs": "StringAnswerType",
+      "frequency": "document",
+      "parentName": "Q_ROOT_value"
+    },
+    {
+      "rowId": "TeamMembers9",
+      "solutionName": "KSP",
+      "colId": "required",
+      "name": "KSP_TeamMembers9_required",
+      "nodes": [],
+      "ref": 100100,
+      "formulaName": "KSP_SecondaryEducationProfile_value",
+      "refId": 100100,
       "displayAs": "PropertyType"
     }
   ],
