@@ -8,7 +8,7 @@ newModel.importLME(require('../public/json/KSP_canvas.json'));
 class IntegrationTest {
     constructor() {
         this.host = "http://blfif-tv-tr03.finance.lab:808";
-        this.fflFile = '\nmodel KSP uses BaseModel\n{' + newModel.exportFFL() + "\n}";
+        this.fflFile = '\nmodel KSP uses BaseModel\n' + newModel.exportFFL();
     }
 
     getRandomInt(min, max) {
