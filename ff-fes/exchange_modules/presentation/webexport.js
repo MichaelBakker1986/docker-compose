@@ -15,7 +15,7 @@ var counter = 0;
 function LMETree(name, workbook) {
     this.name = name;
     this.workbook = workbook;
-    this.nodes = [];
+    this.nodes = {};
 }
 
 LMETree.prototype.addNode = function(node, columns) {
@@ -45,7 +45,7 @@ LMETree.prototype.addNode = function(node, columns) {
             });
         }
     });
-    this.nodes.push(node);
+    this.nodes[node.name] = node;
 }
 
 WebExport.prototype.deParse = function(rowId, workbook) {
