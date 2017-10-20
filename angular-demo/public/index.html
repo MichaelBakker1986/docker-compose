@@ -25,6 +25,7 @@
             script.src = url;
             document.getElementsByTagName("head")[0].appendChild(script);
         }
+
         angular.module('angapp', []).controller('kspController', function($scope) {
             var url = window.location.href
             var arr = url.split("/");
@@ -40,10 +41,8 @@
 </head>
 <body ng-controller="kspController">
 <H1>Figure {{LME_MODEL.name}}:</H1>
-<div>
-    <div class="masonry-item" ng-repeat="figure in LME_MODEL.nodes">
-        <input ng-model="figure.value" placeholder="{{figure.rowId}}"/>
-    </div>
+<div ng-repeat="figure in LME_MODEL.nodes">
+    <input ng-model="figure.value" placeholder="{{figure.rowId}}"/>
 </div>
 </body>
 </html>
