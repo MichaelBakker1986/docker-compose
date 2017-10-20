@@ -89,8 +89,8 @@ app.listen(port, () => {
         let domain = 'http://' + add + ':' + port + '/';
         console.info('<a href="' + domain + 'index.html">DEMO application</a><span> up.</span>\n' +
             '<a href="' + domain + 'DEMO/transformFFL_LME/KSP">JS API</a>\n' +
-            '<a href="' + domain + 'stash/projects/FF/repos/finanfinancials/branches?limit=1000">JSON API (branches)</a>\n' +
-            '<a href="' + domain + 'stash2/models">JSON API (models)</a>\n' +
+            '<a href="' + domain + 'branches">JSON API (branches)</a>\n' +
+            '<a href="' + domain + 'models">JSON API (models)</a>\n' +
             '<a href="' + domain + 'ide.html">IDE application</a><span> up.</span>');
     })
 });

@@ -25,7 +25,6 @@ LMETree.prototype.addNode = function(node) {
     if (!node.hasOwnProperty('value')) {
         Object.defineProperty(node, 'value', {
             get: function() {
-                console.info('user get value' + node.rowId)
                 if (icount !== counter) {
                     icount = counter;
                     rval = workbook.get(node.rowId, 'value', 0, 0);

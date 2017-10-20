@@ -4,5 +4,6 @@ ff-questionnaire-js-web/.idea/
 **/bower_components/
 **/node_modules/
 **/.idea/
+package-lock.json
 restapi/dbSettings.js
 *package-lock.json
