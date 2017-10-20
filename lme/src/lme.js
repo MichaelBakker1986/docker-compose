@@ -5,9 +5,14 @@ MatrixLookup = function() {
     return 1;
 }
 require('../../ff-fes/exchange_modules/lme/lmeparser');
+require('../../ff-math/ff-math');
+var fesjsApi = require('../../ff-fes/ff-fes').fesjs;
+fesjsApi.addFunctions(require("../../ff-formulajs/ff-formulajs").formulajs);
 
 function LME() {
-    this.lme = require('../../ff-V05/V05');
+    let FESContext = require('../../ff-fes/fesjs/fescontext');
+    let WorkBook = require('../../ff-fes/fesjs/JSWorkBook');
+    this.lme = new WorkBook(new FESContext());
 }
 
 LME.prototype.exportLME = function() {
