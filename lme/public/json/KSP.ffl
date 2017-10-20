@@ -22,7 +22,7 @@ model KSP uses BaseModel
 		}
 		variable NewVariables
 		{
-		    title: prachtig;
+		    title: Topper;
 		    formula: 12345;
 			datatype: number;
 			frequency: document;
