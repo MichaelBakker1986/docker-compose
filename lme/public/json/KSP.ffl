@@ -16,7 +16,7 @@ model KSP uses BaseModel
 		variable TeamMembers4
 		{
 			datatype: number;
-			formula: 101 + parseInt(NewVariables) + TupleSumTest;
+			formula: 102 + parseInt(NewVariables) + TupleSumTest;
             frequency: document;
             inputRequired: 1;
 		}
