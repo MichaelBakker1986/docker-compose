@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 
 app.use(require('express-favicon')());
-var stash = require('./public/stash');
+var stash = require('./src/stash');
 browserify.settings({
     transform: [fastjson]
 })

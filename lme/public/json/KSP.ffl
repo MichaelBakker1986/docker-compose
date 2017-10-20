@@ -15,16 +15,15 @@ model KSP uses BaseModel
 		frequency: document;
 		variable TeamMembers4
 		{
-			datatype: number;
+			datatype: string;
+			formula: NewVariables;
             frequency: document;
             inputRequired: 1;
-            fixed_decimals: 0;
-            choices: "0:Michael|1:Ramon";
 		}
 		variable NewVariables
 		{
 		    title: prachtig;
-			datatype: number;
+			datatype: string;
 			frequency: document;
 			inputRequired: 1;
 		}

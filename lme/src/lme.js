@@ -25,4 +25,7 @@ LME.prototype.exportFFL = function(ffl) {
 LME.prototype.exportPresentation = function() {
     return this.lme.export('presentation')
 }
+LME.prototype.exportWebModel = function() {
+    return this.lme.export('webexport')
+}
 module.exports = LME;
