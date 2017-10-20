@@ -15,7 +15,7 @@ model KSP uses BaseModel
 		frequency: document;
 		variable TeamMembers4
 		{
-			datatype: string;
+			datatype: number;
 			formula: NewVariables + TupleSumTest;
             frequency: document;
             inputRequired: 1;
@@ -23,7 +23,8 @@ model KSP uses BaseModel
 		variable NewVariables
 		{
 		    title: prachtig;
-			datatype: string;
+		    formula: 1;
+			datatype: number;
 			frequency: document;
 			inputRequired: 1;
 		}
