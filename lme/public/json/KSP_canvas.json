@@ -18,26 +18,12 @@
       "refs": {
         "KSP_TeamMembers4_value": true
       },
-      "formulaDependencys": [
-        {
-          "name": "KSP_NewVariables_value",
-          "association": "deps",
-          "refId": 100004
-        },
-        {
-          "name": "KSP_TupleSumTest_value",
-          "association": "deps",
-          "refId": 100044
-        }
-      ],
-      "deps": {
-        "KSP_NewVariables_value": true,
-        "KSP_TupleSumTest_value": true
-      },
-      "original": "102+parseInt(NewVariables)+TupleSumTest",
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "500",
       "index": 100002,
       "name": "KSP_TeamMembers4_value",
-      "parsed": "102+parseInt(a100004('100004',x,y.base,z,v))+a100044('100044',x,y.base,z,v)",
+      "parsed": "500",
       "id": 100002
     },
     {
@@ -64,16 +50,9 @@
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "KSP_NewVariables_value": true,
-        "KSP_TeamMembers4_value": true
+        "KSP_NewVariables_value": true
       },
-      "formulaDependencys": [
-        {
-          "name": "KSP_TeamMembers4_value",
-          "association": "refs",
-          "refId": 100002
-        }
-      ],
+      "formulaDependencys": [],
       "deps": {},
       "original": "12345",
       "index": 100004,
@@ -1228,15 +1207,9 @@
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "KSP_TupleSumTest_value": true,
-        "KSP_TeamMembers4_value": true
+        "KSP_TupleSumTest_value": true
       },
       "formulaDependencys": [
-        {
-          "name": "KSP_TeamMembers4_value",
-          "association": "refs",
-          "refId": 100002
-        },
         {
           "name": "KSP_NrOfDaysChildcareWeek_value",
           "association": "deps",
