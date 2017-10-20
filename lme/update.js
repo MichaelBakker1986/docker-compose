@@ -91,7 +91,7 @@ httpServer.listen(port, () => {
     })
 });
 //start sub processes
-spawnChild('../angular-demo/angularapp')
+spawnChild('../demo-apps/angular-demo/angularapp')
 spawnChild('app')
 
 function log(message, levelArg) {
