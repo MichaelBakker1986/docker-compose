@@ -44,25 +44,6 @@ new Promise(function (resolve, reject) {
      })*/
 });
 
-// Clone a given repository into the `./tmp` folder.
-//Git.Clone("ssh://git@stash.topicus.nl:7999/ff/finanfinancials.git", "./tmp")
-// Look up this known commit.
-/*Git.Repository
- .open("./finanfinancial/").then(function (repo) {
- // Use a known commit sha from this repository.
- return repo.getBranchCommit('develop');
- }).then(function (branch) {
- console.info(branch.getTree());
- }).catch(function (err) {
- console.error(err);
- });*/
-
-//git clone ssh://git@stash.topicus.nl:7999/ff/finanfinancials.git
-//--open ssh
-//git init
-//git remote add -f origin ssh://git@stash.topicus.nl:7999/ff/finanfinancials.git
-//git config core.sparseCheckout true
-//echo "*codelist*" >> .git/info/sparse-checkout
 ModelListener.prototype.initializeModels = function () {
     var modelListener = this;
     var ffls = [];
