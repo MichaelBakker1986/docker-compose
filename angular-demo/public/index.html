@@ -27,9 +27,8 @@
         }
 
         angular.module('angapp', []).controller('kspController', function($scope) {
-            var url = window.location.href
-            var arr = url.split("/");
-            var result = arr[0] + "//" + arr[2].split(':')[0]
+            var url = window.location.href.split("/")
+            var result = url[0] + "//" + url[2].split(':')[0]
             loadScript(result + ':8080/DEMO/transformFFL_LME/KSP', function() {
                 var tree = LME.exportWebModel();
                 $scope.$apply(function() {
@@ -41,8 +40,11 @@
 </head>
 <body ng-controller="kspController">
 <H1>Figure {{LME_MODEL.name}}</H1>
-<div ng-repeat="figure in LME_MODEL.nodes">
-    <input ng-model="figure.value" placeholder="{{figure.rowId}}"/>
-</div>
+<table>
+    <tr ng-repeat="figure in LME_MODEL.nodes">
+        <td><span>{{figure.rowId}}</span></td>
+        <td><input ng-model="figure.value" placeholder="{{figure.rowId}}"/></td>
+    </tr>
+</table>
 </body>
 </html>
