@@ -1,20 +1,28 @@
 //1000
 
 model KSP uses BaseModel
-{{
+{
   variable root
   {
       variable Q_ROOT
       {
         displaytype: StringAnswerType;
-          variable NewVariable
+          variable TeamMembers9
           {
+            formula: 500;
             inputRequired: 1;
-            title: 'prachtig';
+            displaytype: StringAnswerType;
+          }
+          variable NewVariables
+          {
+            formula: 12345;
+            inputRequired: 1;
+            title: 'Topper';
             displaytype: StringAnswerType;
           }
           variable IncomeParent01
           {
+            formula: 10*10;
             inputRequired: 1;
             displaytype: StringAnswerType;
           }
@@ -37,5 +45,4 @@ model KSP uses BaseModel
           }
         }
     }
-}
 }

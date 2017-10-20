@@ -3,33 +3,21 @@
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "KSP_NewVariable_value": true
+        "KSP_TeamMembers9_value": true
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "undefined",
+      "original": "500",
       "index": 100001,
-      "name": "KSP_NewVariable_value",
-      "parsed": "undefined",
+      "name": "KSP_TeamMembers9_value",
+      "parsed": "500",
       "id": 100001
     },
     {
       "type": "noCacheLocked",
       "refs": {
-        "KSP_NewVariable_title": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "'prachtig'",
-      "index": 100002,
-      "name": "KSP_NewVariable_title",
-      "parsed": "'prachtig'",
-      "id": 100002
-    },
-    {
-      "type": "noCacheLocked",
-      "refs": {
-        "KSP_NewVariable_required": true,
+        "KSP_TeamMembers9_required": true,
+        "KSP_NewVariables_required": true,
         "KSP_IncomeParent01_required": true,
         "KSP_IncomeParent02_required": true,
         "KSP_TotalYearlyCosts_locked": true,
@@ -38,10 +26,36 @@
       "formulaDependencys": [],
       "deps": {},
       "original": "1",
-      "index": 100003,
-      "name": "KSP_NewVariable_required",
+      "index": 100002,
+      "name": "KSP_TeamMembers9_required",
       "parsed": "1",
+      "id": 100002
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_NewVariables_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "12345",
+      "index": 100003,
+      "name": "KSP_NewVariables_value",
+      "parsed": "12345",
       "id": 100003
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_NewVariables_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Topper'",
+      "index": 100004,
+      "name": "KSP_NewVariables_title",
+      "parsed": "'Topper'",
+      "id": 100004
     },
     {
       "type": "noCacheUnlocked",
@@ -50,11 +64,11 @@
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "undefined",
-      "index": 100004,
+      "original": "10*10",
+      "index": 100005,
       "name": "KSP_IncomeParent01_value",
-      "parsed": "undefined",
-      "id": 100004
+      "parsed": "10*10",
+      "id": 100005
     },
     {
       "type": "noCacheUnlocked",
@@ -64,10 +78,10 @@
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100005,
+      "index": 100006,
       "name": "KSP_IncomeParent02_value",
       "parsed": "undefined",
-      "id": 100005
+      "id": 100006
     },
     {
       "type": "noCacheUnlocked",
@@ -84,10 +98,10 @@
         "KSP_TotalYearlyCostsChild_value": true
       },
       "original": "TSUM(TotalYearlyCostsChild)",
-      "index": 100006,
+      "index": 100007,
       "name": "KSP_TotalYearlyCosts_value",
       "parsed": "SUM(TVALUES([],aundefined,'undefined',x,y.base,z,v))",
-      "id": 100006
+      "id": 100007
     },
     {
       "type": "noCacheUnlocked",
@@ -104,15 +118,25 @@
         "KSP_NrOfDaysChildcareWeek_value": true
       },
       "original": "TSUM(NrOfDaysChildcareWeek)",
-      "index": 100007,
+      "index": 100008,
       "name": "KSP_TupleSumTest_value",
       "parsed": "SUM(TVALUES([],aundefined,'undefined',x,y.base,z,v))",
-      "id": 100007
+      "id": 100008
     }
   ],
   "data": [
     [
-      "NewVariable",
+      "TeamMembers9",
+      null,
+      "",
+      "",
+      "",
+      false,
+      false,
+      null
+    ],
+    [
+      "NewVariables",
       null,
       "",
       "",
@@ -172,8 +196,14 @@
       "displayAs": "SectionAnswerType",
       "nodes": [
         {
-          "name": "KSP_NewVariable_value",
-          "rowId": "NewVariable",
+          "name": "KSP_TeamMembers9_value",
+          "rowId": "TeamMembers9",
+          "colId": "value",
+          "identifier": "KSP_root_value"
+        },
+        {
+          "name": "KSP_NewVariables_value",
+          "rowId": "NewVariables",
           "colId": "value",
           "identifier": "KSP_root_value"
         },
@@ -204,37 +234,60 @@
       ]
     },
     {
-      "rowId": "NewVariable",
+      "rowId": "TeamMembers9",
       "solutionName": "KSP",
       "colId": "value",
-      "name": "KSP_NewVariable_value",
+      "name": "KSP_TeamMembers9_value",
       "nodes": [],
       "ref": 100001,
-      "formulaName": "KSP_NewVariable_value",
+      "formulaName": "KSP_TeamMembers9_value",
       "refId": 100001,
       "displayAs": "StringAnswerType",
       "parentName": "root_value"
     },
     {
-      "rowId": "NewVariable",
+      "rowId": "TeamMembers9",
       "solutionName": "KSP",
-      "colId": "title",
-      "name": "KSP_NewVariable_title",
+      "colId": "required",
+      "name": "KSP_TeamMembers9_required",
       "nodes": [],
       "ref": 100002,
-      "formulaName": "KSP_NewVariable_title",
+      "formulaName": "KSP_TeamMembers9_required",
       "refId": 100002,
       "displayAs": "PropertyType"
     },
     {
-      "rowId": "NewVariable",
+      "rowId": "NewVariables",
       "solutionName": "KSP",
-      "colId": "required",
-      "name": "KSP_NewVariable_required",
+      "colId": "value",
+      "name": "KSP_NewVariables_value",
       "nodes": [],
       "ref": 100003,
-      "formulaName": "KSP_NewVariable_required",
+      "formulaName": "KSP_NewVariables_value",
       "refId": 100003,
+      "displayAs": "StringAnswerType",
+      "parentName": "root_value"
+    },
+    {
+      "rowId": "NewVariables",
+      "solutionName": "KSP",
+      "colId": "title",
+      "name": "KSP_NewVariables_title",
+      "nodes": [],
+      "ref": 100004,
+      "formulaName": "KSP_NewVariables_title",
+      "refId": 100004,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "NewVariables",
+      "solutionName": "KSP",
+      "colId": "required",
+      "name": "KSP_NewVariables_required",
+      "nodes": [],
+      "ref": 100002,
+      "formulaName": "KSP_TeamMembers9_required",
+      "refId": 100002,
       "displayAs": "PropertyType"
     },
     {
@@ -243,9 +296,9 @@
       "colId": "value",
       "name": "KSP_IncomeParent01_value",
       "nodes": [],
-      "ref": 100004,
+      "ref": 100005,
       "formulaName": "KSP_IncomeParent01_value",
-      "refId": 100004,
+      "refId": 100005,
       "displayAs": "StringAnswerType",
       "parentName": "root_value"
     },
@@ -255,9 +308,9 @@
       "colId": "required",
       "name": "KSP_IncomeParent01_required",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "KSP_NewVariable_required",
-      "refId": 100003,
+      "ref": 100002,
+      "formulaName": "KSP_TeamMembers9_required",
+      "refId": 100002,
       "displayAs": "PropertyType"
     },
     {
@@ -266,9 +319,9 @@
       "colId": "value",
       "name": "KSP_IncomeParent02_value",
       "nodes": [],
-      "ref": 100005,
+      "ref": 100006,
       "formulaName": "KSP_IncomeParent02_value",
-      "refId": 100005,
+      "refId": 100006,
       "displayAs": "StringAnswerType",
       "parentName": "root_value"
     },
@@ -278,9 +331,9 @@
       "colId": "required",
       "name": "KSP_IncomeParent02_required",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "KSP_NewVariable_required",
-      "refId": 100003,
+      "ref": 100002,
+      "formulaName": "KSP_TeamMembers9_required",
+      "refId": 100002,
       "displayAs": "PropertyType"
     },
     {
@@ -289,9 +342,9 @@
       "colId": "value",
       "name": "KSP_TotalYearlyCosts_value",
       "nodes": [],
-      "ref": 100006,
+      "ref": 100007,
       "formulaName": "KSP_TotalYearlyCosts_value",
-      "refId": 100006,
+      "refId": 100007,
       "displayAs": "StringAnswerType",
       "parentName": "root_value"
     },
@@ -301,9 +354,9 @@
       "colId": "locked",
       "name": "KSP_TotalYearlyCosts_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "KSP_NewVariable_required",
-      "refId": 100003,
+      "ref": 100002,
+      "formulaName": "KSP_TeamMembers9_required",
+      "refId": 100002,
       "displayAs": "PropertyType"
     },
     {
@@ -312,9 +365,9 @@
       "colId": "value",
       "name": "KSP_TupleSumTest_value",
       "nodes": [],
-      "ref": 100007,
+      "ref": 100008,
       "formulaName": "KSP_TupleSumTest_value",
-      "refId": 100007,
+      "refId": 100008,
       "displayAs": "StringAnswerType",
       "parentName": "root_value"
     },
@@ -324,9 +377,9 @@
       "colId": "locked",
       "name": "KSP_TupleSumTest_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "KSP_NewVariable_required",
-      "refId": 100003,
+      "ref": 100002,
+      "formulaName": "KSP_TeamMembers9_required",
+      "refId": 100002,
       "displayAs": "PropertyType"
     },
     {
