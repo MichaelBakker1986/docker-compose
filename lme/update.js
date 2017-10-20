@@ -85,6 +85,8 @@ function send(text, level) {
     )
 }
 
+
+
 httpServer.listen(port, () => {
     require('dns').lookup(hostname, (err, add, fam) => {
         log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');

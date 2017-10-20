@@ -7,10 +7,10 @@ import BaseModel.*;
 model KSP uses BaseModel
 {
   version: "1.14";
-  root
+  root 
   {
     variable Q_ROOT
-    {
+    { 
 		datatype: number;
 		frequency: document;
 		variable TeamMembers9
@@ -18,6 +18,7 @@ model KSP uses BaseModel
 			datatype: number;
 			formula: 500;
             frequency: document;
+            required: 1;
             inputRequired: 1;
 		}
 		variable NewVariables

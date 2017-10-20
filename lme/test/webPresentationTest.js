@@ -6,6 +6,6 @@ let exportWebModel = newModel.exportWebModel();
 for (var node in exportWebModel.nodes) {
     var n = exportWebModel.nodes[node];
     console.info(n.rowId + ":" + n.value);
+    console.info(n.rowId + ":" + n.title);
 }
-console.info(exportWebModel.nodes);
 

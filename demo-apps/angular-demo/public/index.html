@@ -37,13 +37,19 @@
             });
         });
     </script>
+    <style>
+        input:required {
+            border-color: #800000;
+            border-width: 3px;
+        }
+    </style>
 </head>
 <body ng-controller="kspController">
 <H1>Figure {{LME_MODEL.name}}</H1>
 <table>
-    <tr ng-repeat="figure in LME_MODEL.nodes">
+    <tr ng-repeat="figure in LME_MODEL.nodes" ng-show="figure.visible">
         <td><span>{{figure.title||figure.rowId}}</span></td>
-        <td><input ng-model="figure.value" placeholder="{{figure.rowId}}"/></td>
+        <td><input ng-required="figure.required" ng-model="figure.value" placeholder="{{figure.rowId}}"/></td>
     </tr>
 </table>
 </body>
