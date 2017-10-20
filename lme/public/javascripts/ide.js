@@ -1,5 +1,10 @@
 function aceEdit() {
-
+    $(window).keypress(function(event) {
+        if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
+        alert("Ctrl-S pressed");
+        event.preventDefault();
+        return false;
+    });
     $.getJSON("/branches", function(data, status, xhr) {
         $("#tags").autocomplete({
             source: data
