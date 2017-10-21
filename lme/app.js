@@ -1,7 +1,6 @@
 //default test message
 var browserify = require('browserify-middleware');
 var express = require('express');
-var app = express();
 var port = 8080;
 var serveStatic = require('serve-static');
 var compression = require('compression')
@@ -9,13 +8,15 @@ var browser = require('browserify');
 var fastjson = require('browserify-fastjson');
 var static = require('static-nocase')
 var lmeAPI = require('./src/lme')
+var app = express();
+app.use(require('express-favicon')());
 var bodyParser = require('body-parser')
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-app.use(require('express-favicon')());
+
 var stash = require('./src/stash');
 browserify.settings({
     transform: [fastjson]

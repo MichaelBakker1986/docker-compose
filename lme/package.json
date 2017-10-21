@@ -21,7 +21,7 @@
     "exceljs": "^0.6.2",
     "express": "^4.16.2",
     "express-favicon": "^2.0.0",
-    "ff-log": "^1.0.19",
+    "ff-log": "^1.0.20",
     "fs-writefile-promise": "^2.0.0",
     "github-auth": "^1.0.1",
     "http-proxy": "^1.16.2",

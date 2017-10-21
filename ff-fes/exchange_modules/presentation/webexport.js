@@ -1,5 +1,5 @@
 var SolutionFacade = require('../../fesjs/SolutionFacade');
-
+var log = require('ff-log')
 function WebExport() {
     this.exportAsObject = true;
     this.hide = true;
@@ -21,32 +21,28 @@ function LMETree(name, workbook) {
 LMETree.prototype.addNode = function(node, columns) {
 
     var workbook = this.workbook;
+    var rowId = node.rowId;
+    var r = {};
     columns.forEach(function(column) {
-        var icount = -1;
-        var rval;
         //temp check, seems to proxy multiple times.
-        if (!node.hasOwnProperty(column)) {
-            Object.defineProperty(node, column, {
-                get: function() {
-                    if (icount !== counter) {
-                        icount = counter;
-                        rval = workbook.get(node.rowId, column, 0, 0);
-                        if (typeof(rval) === 'object') {
-                            rval = 1;
-                        }
-                    }
-                    return rval;
-                },
-                set: function(v) {
-                    //only for 'value,formula_trend,...'
-                    console.info('user set value' + v + ' :' + node.rowId)
-                    counter++;
-                    workbook.set(node.rowId, v, column, 0, 0);
+        Object.defineProperty(r, column, {
+            get: function() {
+                let rval = workbook.get(rowId, column, 0, 0);
+                log.info('get ' + rowId + "." + column + " = "  + rval)
+                if (typeof(rval) === 'object') {
+                    rval = null;
                 }
-            });
-        }
+                return rval;
+            },
+            set: function(v) {
+                //only for 'value,formula_trend,...'
+                log.info('user set value ' + parseInt(v) + ' :' + rowId)
+                counter++;
+                workbook.set(rowId, parseInt(v), column, 0, 0);
+            }
+        });
     });
-    this.nodes[node.name] = node;
+    this.nodes[rowId] = r;
 }
 
 WebExport.prototype.deParse = function(rowId, workbook) {
@@ -54,7 +50,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     var rootNode = workbook.getRootSolutionProperty(modelName);
     var lmeTree = new LMETree(modelName, workbook);
     workbook.visitProperties(rootNode, function(node) {
-        lmeTree.addNode(node, ['title', 'value', 'visible', 'locked'])
+        lmeTree.addNode(node, ['title', 'value', 'visible', 'locked', 'required'])
     })
     return lmeTree;
 }

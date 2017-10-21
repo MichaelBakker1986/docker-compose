@@ -7,40 +7,46 @@ import BaseModel.*;
 model KSP uses BaseModel
 {
   version: "1.14";
-  root 
+  root
   {
     variable Q_ROOT
-    { 
+    {
 		datatype: number;
 		frequency: document;
 		variable TeamMembers9
 		{
+		    title: TeamMembers9;
 			datatype: number;
-			formula: 500;
+			formula: 101;
             frequency: document;
-            required: 1;
             inputRequired: 1;
 		}
 		variable NewVariables
 		{
-		    title: Topper;
-		    formula: 12345;
+		    title: NewVariables;
+		    formula: 123456999997;
 			datatype: number;
+			inputRequired: IncomeParent01 = 100;
+			visible: IncomeParent01 = 400;
 			frequency: document;
-			inputRequired: 1;
 		}
 		variable IncomeParent01
 		{
+			title: IncomeParent01;
+			formula: 102;
 			datatype: number;
 			frequency: document;
 			inputRequired: 1;
-			formula: 10*10;
+			formula: 10 * 10;
 		}
         variable IncomeParent02
-        {
+        { 
+            title: IncomeParent02;
+            formula: 103;
             datatype: number;
             frequency: document;
-            inputRequired: 1;
+            inputRequired: IncomeParent01 = 200;
+            locked: IncomeParent01 = 300;
 		}
 		tuple Child
         {

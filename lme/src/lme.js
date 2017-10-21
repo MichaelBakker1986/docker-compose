@@ -1,6 +1,4 @@
 Error.prototype.stack = Error.prototype.stack || "";
-process.loglevel = "info";
-global.loglevel = "info";
 MatrixLookup = function() {
     return 1;
 }

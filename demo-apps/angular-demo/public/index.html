@@ -40,7 +40,11 @@
     <style>
         input:required {
             border-color: #800000;
-            border-width: 3px;
+            border-width: 1px;
+        }
+
+        input:read-only {
+            border: none;
         }
     </style>
 </head>
@@ -48,8 +52,11 @@
 <H1>Figure {{LME_MODEL.name}}</H1>
 <table>
     <tr ng-repeat="figure in LME_MODEL.nodes" ng-show="figure.visible">
-        <td><span>{{figure.title||figure.rowId}}</span></td>
-        <td><input ng-required="figure.required" ng-model="figure.value" placeholder="{{figure.rowId}}"/></td>
+        <td><span>{{figure.title}}</span></td>
+        <td><span ng-bind="figure.visible"></span></td>
+        <td><span ng-bind="figure.locked"></span></td>
+        <td><span ng-bind="figure.required"></span></td>
+        <td><input ng-readonly="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder="{{figure.rowId}}"/></td>
     </tr>
 </table>
 </body>

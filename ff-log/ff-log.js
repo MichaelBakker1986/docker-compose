@@ -1,6 +1,6 @@
 var tracer = require('tracer');
 var format = "HH.MM.ssl";
-var logLevel = process.loglevel || 'debug';
+var logLevel = process.env.ENV || 'info';
 var levels = {
     debug: {
         DEBUG: true,
