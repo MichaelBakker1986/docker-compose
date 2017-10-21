@@ -1,4 +1,4 @@
-#install commands
+##install commands
 #become su
 sudo su
 mkdir .ssh
