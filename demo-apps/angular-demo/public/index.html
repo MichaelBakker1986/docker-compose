@@ -30,9 +30,8 @@
             var url = window.location.href.split("/")
             var result = url[0] + "//" + url[2].split(':')[0]
             loadScript(result + ':8080/DEMO/transformFFL_LME/KSP', function() {
-                var tree = LME.exportWebModel();
                 $scope.$apply(function() {
-                    $scope.LME_MODEL = tree
+                    $scope.LME_MODEL = LME.exportWebModel()
                 });
             });
         });
