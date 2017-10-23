@@ -1,39 +1,3229 @@
-// model "Scorecard Test Model"
-// created by FINAN 3.2.56.19 (user Ronald van Aalderen) on 20-01-2017 20:57
+// model "Maatschappelijk Verantwoord Ondernemen"
+// created by FINAN 3.2.57.14
 
 import FinanMath.*;
 import BaseModel.*;
 
-model TESTMODEL uses BaseModel
+model MVO uses BaseModel
 {
-  version: "1.14";
+  version: "0.1";
+  ffl_version: "1.2";
   root
-  { 
-	variable VariableOne
-	{
-	    title: VariableOne;
-		datatype: number;
-		formula: 101;
+  {
+    variable RootSub1
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for webclient";
+      top_blanklines: 1;
+      display_options: showColumnTitlesAboveSubVars;
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FES_LAYOUTNR
+      {
+        datatype: number;
         frequency: document;
-        inputRequired: 1;
-	}
-	variable VariableTwo
-	{
-	    title: VariableTwo;
-	    formula: 102;
-		datatype: number;
-		inputRequired: Total > 1000;
-		visible: VariableOne <> 100;
-		frequency: document;
-	}
-	variable Total
-	{
-		title: Total;
-		formula: VariableOne + VariableTwo;
-		datatype: number;
-		frequency: document;
-		locked: 1;
-		inputRequired: 1;
-	}
+        formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        data_options: unscalable;
+        displaytype: select;
+        title: "Layout";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
+        options_title: locked;
+        options: locked;
+      }
+      variable FES_EXCHANGE_RATES
+      {
+        datatype: string;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        title: "Exchange Rates";
+        top_separator: 1;
+        bottom_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_LAYOUT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Layout name";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_FLATINPUT
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Is flat input used? (1=yes)";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_PROJECTION_PROFILE
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Projection Profile";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_ORDER
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column order";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_VISIBLE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        formula_notrend: 1;
+        formula_trend: 1;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column visible";
+        top_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_STARTDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Start Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_ENDDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "End Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_BASECURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Base Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_VIEWCURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "View Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMNTYPE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        displaytype: select;
+        fixed_decimals: 0;
+        title: "Column Type";
+        visible: 1;
+        choices: "0:History|1:Projection";
+        options_title: locked;
+      }
+    }
+    variable RootSub2
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for FPS database";
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FPS_VAR_Naam
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "NAME";
+        top_blanklines: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Relatienummer
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CUSTOMERNUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_KVKnr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CHAMBEROFCOMMERCENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_nr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_CODE
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_Omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_GridId
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "GRIDID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Accountmanager
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ACCOUNTMANAGER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Kantoor
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "OFFICENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Straat
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STREET";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Housenumber
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "HOUSENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Postcode
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ZIPCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Woonplaats
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CITY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Provincie
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STATEORPROVINCE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Land
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "COUNTRY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BvDID
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Bureau van Dijk ID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Telefoon
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Telefoonnummer";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Emailadres
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Emailadres";
+        visible: 1;
+        options_title: locked;
+        variable FPS_FINAN_USER_ROLES
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "FPS_FINAN_USER_ROLES";
+          top_blanklines: 1;
+          visible: 1;
+          options_title: locked;
+        }
+        variable FPS_FINAN_USER
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "FPS_FINAN_USER";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+    }
+    variable Q_ROOT
+    {
+      datatype: number;
+      frequency: document;
+      formula: If(((Q_Map01[1]=1) and (Q_Map02[1]=1) and (Q_Map03[1]=1)),1,0);
+      data_options: unscalable;
+      displaytype: select;
+      title: "Maatschappelijk Verantwoord Ondernemen";
+      locked: 1;
+      visible: 1;
+      choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+      options_title: locked;
+      options: locked;
+      variable Q_Map01
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Principes";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map01_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 1";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_HINT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Hinttekst stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_Paragraaf00
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Toelichting principes";
+          hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 4 van de ISO 26000 richtlijn. Het MVO-beleid van de organisatie is gebaseerd op onder andere deze zeven principes.";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map01_Verborgen
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Verborgen variabele";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked, invisible;
+            options: locked, invisible;
+          }
+        }
+        variable Q_Map01_Paragraaf01
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Verantwoordelijkheid en verantwoording";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map01_Vraag01
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U voelt zich verantwoordelijk voor de effecten van beslissingen en activiteiten, ook als deze gevolgen onbedoeld of onvoorzien zijn";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag01_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag01_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Geef hier uw toelichting of relevante voorbeelden m.b.t. bovenstaande vraag";
+            visible: (Q_Map01_Vraag01=1);
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag02
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U bent bereid verantwoording af te leggen over gemaakte keuzes";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag02_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag02_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag02=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Paragraaf02
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Transparantie";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map01_Vraag03
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U geeft openheid aan stakeholders over activiteiten die invloed hebben op de maatschappij";
+            hint: "Stakeholders zijn personen of organisaties die (positief of negatief) kunnen worden beinvloed door uw activiteiten. De meest bekende voorbeelden van stakeholders zijn aandeelhouders, werknemers, leveranciers, banken / kredietgevers en omwonenden.";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag03_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag03_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag03=1);
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag04
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U heeft openlijk beschikbaar hoe u uw eigen bedrijf beoordeeld op het gebied van MVO";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag04_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag04_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag04=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Paragraaf03
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Ethisch gedrag";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map01_Vraag05
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U heeft respect voor mens, dier en milieu";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag05_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag05_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag05=1);
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag06
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U heeft schriftelijk (gedrags)regels opgesteld, die aan alle medewerkers worden gecommuniceerd";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag06_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag06_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag06=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Paragraaf04
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Respect voor belangen van stakeholders";
+          hint: "Stakeholders zijn personen of organisaties die (positief of negatief) kunnen worden beinvloed door uw activiteiten. De meest bekende voorbeelden van stakeholders zijn aandeelhouders, werknemers, leveranciers, banken / kredietgevers en omwonenden.";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map01_Vraag07
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag07_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag07_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag07=1);
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag08
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U heeft respect voor de belangen van de stakeholders";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag08_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag08_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag08=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Paragraaf05
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Respect voor de wet";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map01_Vraag09
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U ziet de letter van de wet als bindend";
+            hint: "Tegenstellende wetten (bv. deuren die volgens het Bouwbesluit naar buiten moeten opendraaien maar volgens de gemeente naar binnen) kunt u buiten beschouwing laten bij het beoordelen van deze vraag.";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag09_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag09_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag09=1);
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag10
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U bent op de hoogte van wettelijke veranderingen";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag10_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag10_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag10=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Paragraaf06
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Respect voor internationale gedragsvormen";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map01_Vraag11
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U bent op de hoogte van internationale gedragsvormen";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag11_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag11_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag11=1);
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag12
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties de internationale gedragsvormen opvolgen";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag12_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag12_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag12=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Paragraaf07
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Respect voor mensenrechten";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map01_Vraag13
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U bent op de hoogte van mensenrechten";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag13_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag13_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag13=1);
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag14
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map01_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties de mensenrechten opvolgen";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map01_Vraag14_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map01_Vraag14_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map01_Vraag14=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map01_Paragraaf09Sub1 refers to Q_Map01_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 1";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf09Sub2 refers to Q_Map01_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf09Sub3 refers to Q_Map01_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf09Sub4 refers to Q_Map01_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf09Sub5 refers to Q_Map01_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map01_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map01_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Verplicht
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Zijn de vragen in deze stap verplicht?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map02
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map02_ENTEREDREQUIREDVARS=Q_Map02_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Omgeving";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map02_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 2";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map02_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map02_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map02_HINT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Hinttekst stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map02_Paragraaf00
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Toelichting omgeving";
+          hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 5 van de ISO 26000 richtlijn. Dit hoofdstuk gaat in op het erkennen en betrekken van stakeholders bij het MVO-beleid.";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map02_Verborgen
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Verborgen variabele";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked, invisible;
+            options: locked, invisible;
+          }
+        }
+        variable Q_Map02_Paragraaf01
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Stakeholders";
+          hint: "Stakeholders zijn personen of organisaties die (positief of negatief) kunnen worden beinvloed door uw activiteiten. De meest bekende voorbeelden van stakeholders zijn aandeelhouders, werknemers, leveranciers, banken / kredietgevers en omwonenden.";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map02_Vraag01
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map02_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag07));
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map02_Vraag01_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map02_Vraag01_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map02_Vraag01=1);
+            options_title: locked;
+          }
+          variable Q_Map02_Vraag02
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map02_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U betrekt de stakeholders bij relevante veranderingen";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map02_Vraag02_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map02_Vraag02_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map02_Vraag02=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map02_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map02_Paragraaf09Sub1 refers to Q_Map02_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 2";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map02_Paragraaf09Sub2 refers to Q_Map02_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 2";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map02_Paragraaf09Sub3 refers to Q_Map02_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 2";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map02_Paragraaf09Sub4 refers to Q_Map02_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map02_Paragraaf09Sub5 refers to Q_Map02_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map02_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map02_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map02_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map02_Verplicht
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Zijn de vragen in deze stap verplicht?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map03
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map03_ENTEREDREQUIREDVARS=Q_Map03_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Thema's";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map03_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 3";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map03_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map03[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map03_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map03_HINT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Hinttekst stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map03_Paragraaf01
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Relevantie thema's";
+          hint: "Specificeer de mate waarin u zaken doet via B2B (ten opzichte van B2C). 0 punten op B2B betekent 100 punten op B2C en dat betekent dat u 100% zaken doet met consumenten. Voor de scores betekent dit dat uw antwoorden op de vragen over B2B niet meetellen.";
+          visible: 1;
+          options_title: locked;
+          variable +Q_Map03_Gewicht_Vraag05_Input
+          {
+            datatype: number;
+            frequency: document;
+            formula: 50;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Zaken doen (B2B)";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Q_Map03_Gewicht_Vraag06_Input
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(100-Q_Map03_Gewicht_Vraag05_Input,NA);
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Omgang met consumenten (B2C)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_GewichtTotaal
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map03_Gewicht_Vraag05_Input+Q_Map03_Gewicht_Vraag06_Input;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Totaal aantal punten";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf11
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Omgerekende relevantie thema's";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable +Q_Map03_Gewicht_Vraag05
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER((1/6)*Q_Map03_Gewicht_Vraag05_Input,NA);
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Zaken doen (B2B)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_Gewicht_Vraag06
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER((1/6)*Q_Map03_Gewicht_Vraag06_Input,NA);
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Omgang met consumenten (B2C)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_GewichtTotaal_Omgerekend
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map03_Gewicht_Vraag05+Q_Map03_Gewicht_Vraag06;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Totaal aantal punten";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf10
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Verborgen mapje met vastgezette gewichten voor de 5 overige thema's";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable +Q_Map03_Gewicht_Vraag01
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER((1/6)*100,NA);
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Bestuur";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_Gewicht_Vraag02
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER((1/6)*100,NA);
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Mensenrechten";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_Gewicht_Vraag03
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER((1/6)*100,NA);
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Werknemers / arbeid";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_Gewicht_Vraag04
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER((1/6)*100,NA);
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Milieu / omgeving";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_Gewicht_Vraag07
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER((1/6)*100,NA);
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Maatschappelijke betrokkenheid";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_GewichtTotaalOverig
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map03_Gewicht_Vraag01+Q_Map03_Gewicht_Vraag02+Q_Map03_Gewicht_Vraag03+Q_Map03_Gewicht_Vraag04+Q_Map03_Gewicht_Vraag07;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Totaal aantal punten";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf00
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Toelichting thema's";
+          hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 6 van de ISO 26000 richtlijn. Hoofdstuk 4 (principes) en hoofdstuk 6 (thema's) zijn een gezamenlijke basis voor het MVO-beleid.";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map03_Verborgen
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Verborgen variabele";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked, invisible;
+            options: locked, invisible;
+          }
+        }
+        variable Q_Map03_Paragraaf02
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Bestuur";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map03_Vraag01
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "MVO is een onderdeel van uw strategie(plannen)";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag01_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag01_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag01=1);
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag02
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U neemt het effect op MVO onderwerpen mee in het maken van belangrijke beslissingen";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag02_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag02_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag02=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf03
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Mensenrechten";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map03_Vraag03
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U bent op de hoogte van mensenrechten";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag03_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag03_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag03=1);
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag04
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties de mensenrechten opvolgen";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag04_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag04_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag04=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf04
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Werknemers / arbeid";
+          hint: "Dit MVO thema wordt in de volgende stap concreter uitgewerkt, met vragen betreffende de implementatie ervan.";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map03_Vraag05
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Het welzijn van werknemers is onderdeel van het beleid";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag05_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag05_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag05=1);
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag06
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties werknemerswelzijn relevant vinden";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag06_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag06_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag06=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf05
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Milieu / omgeving";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map03_Vraag07
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U heeft schriftelijk (gedrags)regels opgesteld over milieuvervuiling, die aan alle medewerkers worden gecommuniceerd";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag07_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag07_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag07=1);
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag08
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U neemt de mate van milieuvervuiling mee in het maken van belangrijke beslissingen";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag08_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag08_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag08=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf06
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Zaken doen (B2B)";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map03_Vraag09
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U heeft schriftelijk (gedrags)regels opgesteld over eerlijk zakendoen, die aan alle relevante medewerkers worden gecommuniceerd";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag09_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag09_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag09=1);
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag10
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U neemt de mate van het eerlijk zakendoen (B2B) mee in het maken van belangrijke beslissingen";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag10_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag10_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag10=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf07
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Omgang met consumenten (B2C)";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map03_Vraag11
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U heeft schriftelijk (gedrags)regels opgesteld over eerlijk zakendoen met consumenten, die aan alle relevante medewerkers worden gecommuniceerd";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag11_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag11_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag11=1);
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag12
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U neemt de mate van het eerlijk behandelen van consumenten mee in het maken van belangrijke beslissingen";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag12_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag12_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag12=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf08
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Maatschappelijke betrokkenheid";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map03_Vraag13
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Maatschappelijke betrokkenheid is onderdeel van uw strategie(plannen)";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag13_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag13_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag13=1);
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag14
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map03_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties maatschappelijke betrokkenheid relevant vinden";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map03_Vraag14_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map03_Vraag14_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map03_Vraag14=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map03_Paragraaf09Sub1 refers to Q_Map03_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 3";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_Paragraaf09Sub2 refers to Q_Map03_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 3";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_Paragraaf09Sub3 refers to Q_Map03_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 3";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_Paragraaf09Sub4 refers to Q_Map03_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_Paragraaf09Sub5 refers to Q_Map03_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map03_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map03_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_Verplicht
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Zijn de vragen in deze stap verplicht?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map04
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map04_ENTEREDREQUIREDVARS=Q_Map04_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Implementatie thema Werknemers";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map04_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 4";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map04_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map04[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map04_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map04_HINT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Hinttekst stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map04_Paragraaf00
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Toelichting implementatie";
+          hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Hoofdstuk 7 van de ISO 26000 richtlijn gaat in op de implementatie van het MVO-beleid. In deze stap van de MVO Scan worden voor het thema Werknemers stelling en vragen gepresenteerd die in een indicatie geven van de daadwerkelijke implementatie van dit thema.";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map04_Verborgen
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Verborgen variabele";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked, invisible;
+            options: locked, invisible;
+          }
+        }
+        variable Q_Map04_Paragraaf01
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Arbeidsomstandigheden";
+          hint: "ISO 26000 - hoofdstuk 6.4.4";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map04_Vraag01
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Ons beleid is niet in strijd met de CAO('s)";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag01_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag01_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag01=1);
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag02
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Voert u wijzigingen in de CAO door in uw arbeidscontracten, ook wanneer dit voor u als werkgever substantiele nadelige financiele consequenties heeft?";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag02_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag02_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag02=1);
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag03
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U zorgt ervoor dat u tijdig op de hoogte bent van wijzigingen in CAO('s)";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag03_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag03_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag03=1);
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag04
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de potentiele klant in zijn arbeidscontractens salarissen hanteert die in strijd zijn met de geldende CAO?";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag04_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag04_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag04=1);
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag04_Memo_Extra
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag04_Memo_Extra);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Welk onderwerp / onderwerpen van de CAO zou voor u eventueel wel een reden zijn om bovenstaande deal af te slaan?";
+            hint: "Mogelijke andere onderwerpen van een CAO zijn: werktijden, opzegtermijn en pensioenregeling. Over arbeidsomstandigheden wordt overigens op deze stap een aparte vraag gesteld.";
+            visible: (Q_Map04_Vraag04=0);
+            options_title: locked;
+          }
+        }
+        variable Q_Map04_Paragraaf02
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Gezondheid en veiligheid";
+          hint: "ISO 26000 - hoofdstuk 6.4.6";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map04_Vraag05
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Wij hebben een gezondheids- en veiligheidsbeleid";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag05_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag05_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag05=1);
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag06
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Zorgt u ervoor dat procedures en veilige werkwijzen altijd worden gevolgd, ook wanneer dit voor u als werkgever substantiele nadelige financiele consequenties heeft?";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag06_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag06_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag06=1);
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag07
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "U zorgt ervoor dat het calamiteitenplan minstens jaarlijks wordt doorlopen";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag07_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag07_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag07=1);
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag08
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de werknemers van de potentiele klant in onveilige omstandigheden werken?";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag08_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag08_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag08=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map04_Paragraaf03
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Persoonlijke ontwikkeling en opleiding";
+          hint: "ISO 26000 - hoofdstuk 6.4.7";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map04_Vraag09
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Ons HRM beleid moedigt opleidingen voor werknemers aan";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag09_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag09_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag09=1);
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag10
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Moedigt u aan dat ingeplande opleidingen worden gevolgd, ook al brengt dit deadlines in gevaar?";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag10_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag10_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag10=1);
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag11
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Bij de jaarlijkse gesprekken wordt met de werknemer overlegd welke opleiding passend is";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag11_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag11_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag11=1);
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag12
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: (Q_Map04_Verplicht[1]=1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de potentiele klant persoonlijke ontwikkeling van zijn werknemers ontmoedigt?";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map04_Vraag12_Memo
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: Visible(Q_Map04_Vraag12_Memo);
+            data_options: unscalable;
+            displaytype: memo;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01_Memo));
+            visible: (Q_Map04_Vraag12=1);
+            options_title: locked;
+          }
+        }
+        variable Q_Map04_Paragraaf10
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Verborgen mapje met gewichten voor deze stap";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map04_Gewicht_Vraag01
+          {
+            datatype: number;
+            frequency: document;
+            formula: 10;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag01));
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag02
+          {
+            datatype: number;
+            frequency: document;
+            formula: 30;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag02));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag03
+          {
+            datatype: number;
+            frequency: document;
+            formula: 20;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag03));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag04
+          {
+            datatype: number;
+            frequency: document;
+            formula: 40;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag04));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag05
+          {
+            datatype: number;
+            frequency: document;
+            formula: 10;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag05));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag06
+          {
+            datatype: number;
+            frequency: document;
+            formula: 30;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag06));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag07
+          {
+            datatype: number;
+            frequency: document;
+            formula: 20;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag07));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag08
+          {
+            datatype: number;
+            frequency: document;
+            formula: 40;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag08));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag09
+          {
+            datatype: number;
+            frequency: document;
+            formula: 10;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag09));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag10
+          {
+            datatype: number;
+            frequency: document;
+            formula: 30;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag10));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag11
+          {
+            datatype: number;
+            frequency: document;
+            formula: 20;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag11));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Gewicht_Vraag12
+          {
+            datatype: number;
+            frequency: document;
+            formula: 40;
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: EvaluateAsString(GetTitle(Q_Map01_Vraag12));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map04_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map04_Paragraaf09Sub1 refers to Q_Map04_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 4";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Paragraaf09Sub2 refers to Q_Map04_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 4";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Paragraaf09Sub3 refers to Q_Map04_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 4";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Paragraaf09Sub4 refers to Q_Map04_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Paragraaf09Sub5 refers to Q_Map04_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map04_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map04_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Verplicht
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Zijn de vragen in deze stap verplicht?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_RESULT
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If(Q_ROOT[1]=0,&"Nog niet alle vragen zijn ingevuld.[br][/br]",&"Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+        data_options: unscalable;
+        title: "Resultaat";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_RESULTSub1 refers to Q_RESULT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Resultaat";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_MapResult_Paragraaf01
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Score Principes";
+          hint: "Een score van 100 punten betekent dat u het 100% eens bent met de stellingen over de 7 principes van de ISO 26000 MVO richtlijn";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map01_Score01
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER((((Q_Map01_Vraag01+Q_Map01_Vraag02+Q_Map01_Vraag03+Q_Map01_Vraag04+Q_Map01_Vraag05+Q_Map01_Vraag06+Q_Map01_Vraag07+Q_Map01_Vraag08+Q_Map01_Vraag09+Q_Map01_Vraag10+Q_Map01_Vraag11+Q_Map01_Vraag12+Q_Map01_Vraag13+Q_Map01_Vraag14)/14)*100),NA);
+            displaytype: currency;
+            title: "Score Principes";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_MapResult_Paragraaf02
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Score Omgeving";
+          hint: "Een score van 100 punten betekent dat u voor 100% de stakeholders relevant vindt en bij veranderingen betrekt";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map02_Score01
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER((((Q_Map02_Vraag01+Q_Map02_Vraag02)/2)*100),NA);
+            displaytype: currency;
+            title: "Score Omgeving";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_MapResult_Paragraaf03
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Score Thema's";
+          hint: "Een score van 100 punten betekent dat u het 100% eens bent met de stellingen over de 7 thema's van de ISO 26000 MVO richtlijn";
+          visible: 1;
+          options_title: locked;
+          variable +Q_Map03_SubScore01
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(((Q_Map03_Vraag01*Q_Map03_Gewicht_Vraag01)+(Q_Map03_Vraag02*Q_Map03_Gewicht_Vraag01))/2,NA);
+            displaytype: currency;
+            title: EvaluateAsString("Score "&GetTitle(Q_Map03_Gewicht_Vraag01));
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_SubScore02
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(((Q_Map03_Vraag03*Q_Map03_Gewicht_Vraag02)+(Q_Map03_Vraag04*Q_Map03_Gewicht_Vraag02))/2,NA);
+            displaytype: currency;
+            title: EvaluateAsString("Score "&GetTitle(Q_Map03_Gewicht_Vraag02));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_SubScore03
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(((Q_Map03_Vraag05*Q_Map03_Gewicht_Vraag03)+(Q_Map03_Vraag06*Q_Map03_Gewicht_Vraag03))/2,NA);
+            displaytype: currency;
+            title: EvaluateAsString("Score "&GetTitle(Q_Map03_Gewicht_Vraag03));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_SubScore04
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(((Q_Map03_Vraag07*Q_Map03_Gewicht_Vraag04)+(Q_Map03_Vraag08*Q_Map03_Gewicht_Vraag04))/2,NA);
+            displaytype: currency;
+            title: EvaluateAsString("Score "&GetTitle(Q_Map03_Gewicht_Vraag04));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_SubScore05
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(((Q_Map03_Vraag09*Q_Map03_Gewicht_Vraag05)+(Q_Map03_Vraag10*Q_Map03_Gewicht_Vraag05))/2,NA);
+            displaytype: currency;
+            title: EvaluateAsString("Score "&GetTitle(Q_Map03_Gewicht_Vraag05));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_SubScore06
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(((Q_Map03_Vraag11*Q_Map03_Gewicht_Vraag06)+(Q_Map03_Vraag12*Q_Map03_Gewicht_Vraag06))/2,NA);
+            displaytype: currency;
+            title: EvaluateAsString("Score "&GetTitle(Q_Map03_Gewicht_Vraag06));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +Q_Map03_SubScore07
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(((Q_Map03_Vraag13*Q_Map03_Gewicht_Vraag07)+(Q_Map03_Vraag14*Q_Map03_Gewicht_Vraag07))/2,NA);
+            displaytype: currency;
+            title: EvaluateAsString("Score "&GetTitle(Q_Map03_Gewicht_Vraag07));
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_Score01
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map03_SubScore01+Q_Map03_SubScore02+Q_Map03_SubScore03+Q_Map03_SubScore04+Q_Map03_SubScore05+Q_Map03_SubScore06+Q_Map03_SubScore07;
+            displaytype: currency;
+            title: "Score thema's";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_MapResult_Paragraaf04
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Score Werknemers";
+          hint: "Deze score geeft een indicatie in hoeverre u handelt volgens de richtlijnen van drie van de vijf subthema's van het thema Werknemers (100 is de maximale score)";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map04_SubScore01
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(((Q_Map04_Gewicht_Vraag01*Q_Map04_Vraag01)+(Q_Map04_Gewicht_Vraag02*Q_Map04_Vraag02)+(Q_Map04_Gewicht_Vraag03*Q_Map04_Vraag03)+(Q_Map04_Gewicht_Vraag04*Q_Map04_Vraag04)),NA);
+            displaytype: currency;
+            title: "Score Arbeidsomstandigheden";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_SubScore02
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(((Q_Map04_Gewicht_Vraag05*Q_Map04_Vraag05)+(Q_Map04_Gewicht_Vraag06*Q_Map04_Vraag06)+(Q_Map04_Gewicht_Vraag07*Q_Map04_Vraag07)+(Q_Map04_Gewicht_Vraag08*Q_Map04_Vraag08)),NA);
+            displaytype: currency;
+            title: "Score Gezondheid en veiligheid";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_SubScore03
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(((Q_Map04_Gewicht_Vraag09*Q_Map04_Vraag09)+(Q_Map04_Gewicht_Vraag10*Q_Map04_Vraag10)+(Q_Map04_Gewicht_Vraag11*Q_Map04_Vraag11)+(Q_Map04_Gewicht_Vraag12*Q_Map04_Vraag12)),NA);
+            displaytype: currency;
+            title: "Score Ontwikkeling en opleiding";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Score01
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER((Q_Map04_SubScore01+Q_Map04_SubScore02+Q_Map04_SubScore03)/3,NA);
+            displaytype: currency;
+            title: "Score Werknemers";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_STATUS
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Status";
+        top_blanklines: 1;
+        visible: 1;
+        choices: "0:Actief|1:Defintief";
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        afterinput: (SetValue(MatrixVersion, MatrixVersion, true));
+        displaytype: date;
+        title: "Definitief gemaakt op:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Definitief gemaakt door (gebruikersnaam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Definitief gemaakt door (volledige naam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: date;
+        title: "Aangemaakt op:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Aangemaakt door (gebruikersnaam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Aangemaakt door (volledige naam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable ModelVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: "00.01.000.000";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modelversie";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable ModelType
+      {
+        datatype: string;
+        frequency: document;
+        formula: "TEST";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modeltype";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable MatrixVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: "None";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Parametersversie";
+        hint: "Bij het definitief maken wordt de waarde 'vastgezet'.";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_PREVIOUS_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Vorige";
+        visible: 1;
+        choices: "0:Nooit|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_NEXT_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Volgende";
+        visible: 1;
+        choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_CONCEPT_REPORT_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Concept rapport";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+      variable Q_MAKE_FINAL_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Definitief maken";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+      variable Q_FINAL_REPORT_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Definitief rapport";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+    }
+    variable HULPVARS
+    {
+      datatype: string;
+      frequency: document;
+      data_options: unscalable;
+      title: "Hulpvariabelen";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options: locked;
+      variable Q_WARNING_GLOBAL
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"[br][/br]Er zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT ,&""));
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Knock-out(s)?";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_WARNING_01
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Map6 - Vraag 6";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_WARNING_GLOBALTXT
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If( Length(&Q_WARNING_01[1])>0,&"[br][/br]"&Q_WARNING_01[1],""));
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Knock-out tekst";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+      variable Q_RESTRICTIES
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT ,&""));
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Restricties";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_RESTRICTIES_01
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_RESTRICTIES_02
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_RESTRICTIESTXT
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If( Length(&Q_RESTRICTIES_01[1])>0,&"[br][/br]"&Q_RESTRICTIES_01[1],""));
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Restricties tekst";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+    }
   }
 }

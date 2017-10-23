@@ -16,16 +16,14 @@
     {
       "type": "noCacheLocked",
       "refs": {
-        "TESTMODEL_TotalConfusedMore_title": true,
-        "TESTMODEL_Total_title": true,
-        "TESTMODEL_TotalConfused_title": true
+        "TESTMODEL_TotalConfusedMore_title": true
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "'Total'",
+      "original": "'TotalConfusedMore'",
       "index": 100002,
       "name": "TESTMODEL_TotalConfusedMore_title",
-      "parsed": "'Total'",
+      "parsed": "'TotalConfusedMore'",
       "id": 100002
     },
     {
@@ -33,7 +31,9 @@
       "refs": {
         "TESTMODEL_TotalConfusedMore_required": true,
         "TESTMODEL_VariableOne_required": true,
+        "TESTMODEL_Total_locked": true,
         "TESTMODEL_Total_required": true,
+        "TESTMODEL_TotalConfused_locked": true,
         "TESTMODEL_TotalConfused_required": true
       },
       "formulaDependencys": [],
@@ -192,6 +192,19 @@
       "id": 100010
     },
     {
+      "type": "noCacheLocked",
+      "refs": {
+        "TESTMODEL_Total_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Total'",
+      "index": 100011,
+      "name": "TESTMODEL_Total_title",
+      "parsed": "'Total'",
+      "id": 100011
+    },
+    {
       "type": "noCacheUnlocked",
       "refs": {
         "TESTMODEL_TotalConfused_value": true
@@ -199,10 +212,23 @@
       "formulaDependencys": [],
       "deps": {},
       "original": "102",
-      "index": 100011,
+      "index": 100012,
       "name": "TESTMODEL_TotalConfused_value",
       "parsed": "102",
-      "id": 100011
+      "id": 100012
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "TESTMODEL_TotalConfused_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'TotalConfused'",
+      "index": 100013,
+      "name": "TESTMODEL_TotalConfused_title",
+      "parsed": "'TotalConfused'",
+      "id": 100013
     }
   ],
   "data": [
@@ -433,9 +459,20 @@
       "colId": "title",
       "name": "TESTMODEL_Total_title",
       "nodes": [],
-      "ref": 100002,
-      "formulaName": "TESTMODEL_TotalConfusedMore_title",
-      "refId": 100002,
+      "ref": 100011,
+      "formulaName": "TESTMODEL_Total_title",
+      "refId": 100011,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Total",
+      "solutionName": "TESTMODEL",
+      "colId": "locked",
+      "name": "TESTMODEL_Total_locked",
+      "nodes": [],
+      "ref": 100003,
+      "formulaName": "TESTMODEL_TotalConfusedMore_required",
+      "refId": 100003,
       "displayAs": "PropertyType"
     },
     {
@@ -455,9 +492,9 @@
       "colId": "value",
       "name": "TESTMODEL_TotalConfused_value",
       "nodes": [],
-      "ref": 100011,
+      "ref": 100012,
       "formulaName": "TESTMODEL_TotalConfused_value",
-      "refId": 100011,
+      "refId": 100012,
       "displayAs": "StringAnswerType",
       "frequency": "document",
       "parentName": "root_value"
@@ -468,9 +505,20 @@
       "colId": "title",
       "name": "TESTMODEL_TotalConfused_title",
       "nodes": [],
-      "ref": 100002,
-      "formulaName": "TESTMODEL_TotalConfusedMore_title",
-      "refId": 100002,
+      "ref": 100013,
+      "formulaName": "TESTMODEL_TotalConfused_title",
+      "refId": 100013,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "TotalConfused",
+      "solutionName": "TESTMODEL",
+      "colId": "locked",
+      "name": "TESTMODEL_TotalConfused_locked",
+      "nodes": [],
+      "ref": 100003,
+      "formulaName": "TESTMODEL_TotalConfusedMore_required",
+      "refId": 100003,
       "displayAs": "PropertyType"
     },
     {
