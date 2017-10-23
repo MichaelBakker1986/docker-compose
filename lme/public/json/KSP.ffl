@@ -16,7 +16,7 @@ model KSP uses BaseModel
 		variable TeamMembers9
 		{
 			datatype: number;
-			formula: 5050;
+			formula: 50501;
             frequency: document;
             inputRequired: 1;
 		}
