@@ -55,9 +55,6 @@
 <table>
     <tr>
         <td>
-            <pre ng-bind="ffl"></pre>
-        </td>
-        <td>
             <H1>Figure {{LME_MODEL.name}}</H1>
             <table>
                 <tr ng-repeat="figure in LME_MODEL.nodes" ng-show="figure.visible">
@@ -68,6 +65,9 @@
                     <td><input ng-readonly="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder="{{figure.rowId}}"/></td>
                 </tr>
             </table>
+        </td>
+        <td>
+            <pre ng-bind="ffl"></pre>
         </td>
     </tr>
 </table>

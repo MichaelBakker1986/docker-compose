@@ -50,7 +50,7 @@ function update() {
             //npm install && bower install
             var command = developer ? 'echo a' : 'git reset --hard origin/master && git pull && cd .. && npm test';
             exec(command).then((result) => {
-                log.info(result.stdout)
+                info(result.stdout)
                 for (var key in childProcesses) {
                     childProcesses[key].kill('SIGKILL')
                     spawnChild(key)
