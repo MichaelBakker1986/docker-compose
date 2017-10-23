@@ -7,29 +7,39 @@
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "500",
+      "original": "101",
       "index": 100001,
       "name": "KSP_TeamMembers9_value",
-      "parsed": "500",
+      "parsed": "101",
       "id": 100001
     },
     {
       "type": "noCacheLocked",
       "refs": {
+        "KSP_TeamMembers9_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'TeamMembers9'",
+      "index": 100002,
+      "name": "KSP_TeamMembers9_title",
+      "parsed": "'TeamMembers9'",
+      "id": 100002
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
         "KSP_TeamMembers9_required": true,
-        "KSP_NewVariables_required": true,
         "KSP_IncomeParent01_required": true,
-        "KSP_IncomeParent02_required": true,
-        "KSP_TotalYearlyCosts_locked": true,
         "KSP_TupleSumTest_locked": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "1",
-      "index": 100002,
+      "index": 100003,
       "name": "KSP_TeamMembers9_required",
       "parsed": "1",
-      "id": 100002
+      "id": 100003
     },
     {
       "type": "noCacheUnlocked",
@@ -38,11 +48,11 @@
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "12345",
-      "index": 100003,
+      "original": "123456999997",
+      "index": 100004,
       "name": "KSP_NewVariables_value",
-      "parsed": "12345",
-      "id": 100003
+      "parsed": "123456999997",
+      "id": 100004
     },
     {
       "type": "noCacheLocked",
@@ -51,24 +61,104 @@
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "'Topper'",
-      "index": 100004,
+      "original": "'NewVariables'",
+      "index": 100005,
       "name": "KSP_NewVariables_title",
-      "parsed": "'Topper'",
-      "id": 100004
+      "parsed": "'NewVariables'",
+      "id": 100005
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_NewVariables_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_IncomeParent01_value",
+          "association": "deps",
+          "refId": 100008
+        }
+      ],
+      "deps": {
+        "KSP_IncomeParent01_value": true
+      },
+      "original": "IncomeParent01==400",
+      "index": 100006,
+      "name": "KSP_NewVariables_visible",
+      "parsed": "a100008('100008',x,y.base,z,v)==400",
+      "id": 100006
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_NewVariables_required": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_IncomeParent01_value",
+          "association": "deps",
+          "refId": 100008
+        }
+      ],
+      "deps": {
+        "KSP_IncomeParent01_value": true
+      },
+      "original": "IncomeParent01==100",
+      "index": 100007,
+      "name": "KSP_NewVariables_required",
+      "parsed": "a100008('100008',x,y.base,z,v)==100",
+      "id": 100007
     },
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "KSP_IncomeParent01_value": true
+        "KSP_IncomeParent01_value": true,
+        "KSP_NewVariables_visible": true,
+        "KSP_NewVariables_required": true,
+        "KSP_IncomeParent02_locked": true,
+        "KSP_IncomeParent02_required": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_NewVariables_visible",
+          "association": "refs",
+          "refId": 100006
+        },
+        {
+          "name": "KSP_NewVariables_required",
+          "association": "refs",
+          "refId": 100007
+        },
+        {
+          "name": "KSP_IncomeParent02_locked",
+          "association": "refs",
+          "refId": 100012
+        },
+        {
+          "name": "KSP_IncomeParent02_required",
+          "association": "refs",
+          "refId": 100013
+        }
+      ],
+      "deps": {},
+      "original": "10*10",
+      "index": 100008,
+      "name": "KSP_IncomeParent01_value",
+      "parsed": "10*10",
+      "id": 100008
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_IncomeParent01_title": true
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "10*10",
-      "index": 100005,
-      "name": "KSP_IncomeParent01_value",
-      "parsed": "10*10",
-      "id": 100005
+      "original": "'IncomeParent01'",
+      "index": 100009,
+      "name": "KSP_IncomeParent01_title",
+      "parsed": "'IncomeParent01'",
+      "id": 100009
     },
     {
       "type": "noCacheUnlocked",
@@ -77,51 +167,105 @@
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "undefined",
-      "index": 100006,
+      "original": "109",
+      "index": 100010,
       "name": "KSP_IncomeParent02_value",
-      "parsed": "undefined",
-      "id": 100006
+      "parsed": "109",
+      "id": 100010
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_IncomeParent02_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'IncomeParent02'",
+      "index": 100011,
+      "name": "KSP_IncomeParent02_title",
+      "parsed": "'IncomeParent02'",
+      "id": 100011
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_IncomeParent02_locked": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_IncomeParent01_value",
+          "association": "deps",
+          "refId": 100008
+        }
+      ],
+      "deps": {
+        "KSP_IncomeParent01_value": true
+      },
+      "original": "IncomeParent01==300",
+      "index": 100012,
+      "name": "KSP_IncomeParent02_locked",
+      "parsed": "a100008('100008',x,y.base,z,v)==300",
+      "id": 100012
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_IncomeParent02_required": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_IncomeParent01_value",
+          "association": "deps",
+          "refId": 100008
+        }
+      ],
+      "deps": {
+        "KSP_IncomeParent01_value": true
+      },
+      "original": "IncomeParent01==200",
+      "index": 100013,
+      "name": "KSP_IncomeParent02_required",
+      "parsed": "a100008('100008',x,y.base,z,v)==200",
+      "id": 100013
     },
     {
       "type": "noCacheUnlocked",
       "refs": {
         "KSP_TotalYearlyCosts_value": true
       },
-      "formulaDependencys": [
-        {
-          "name": "KSP_TotalYearlyCostsChild_value",
-          "association": "deps"
-        }
-      ],
-      "deps": {
-        "KSP_TotalYearlyCostsChild_value": true
-      },
-      "original": "TSUM(TotalYearlyCostsChild)",
-      "index": 100007,
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'test2'",
+      "index": 100014,
       "name": "KSP_TotalYearlyCosts_value",
-      "parsed": "SUM(TVALUES([],aundefined,'undefined',x,y.base,z,v))",
-      "id": 100007
+      "parsed": "'test2'",
+      "id": 100014
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_TotalYearlyCosts_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'TotalYearlyCosts'",
+      "index": 100015,
+      "name": "KSP_TotalYearlyCosts_title",
+      "parsed": "'TotalYearlyCosts'",
+      "id": 100015
     },
     {
       "type": "noCacheUnlocked",
       "refs": {
         "KSP_TupleSumTest_value": true
       },
-      "formulaDependencys": [
-        {
-          "name": "KSP_NrOfDaysChildcareWeek_value",
-          "association": "deps"
-        }
-      ],
-      "deps": {
-        "KSP_NrOfDaysChildcareWeek_value": true
-      },
-      "original": "TSUM(NrOfDaysChildcareWeek)",
-      "index": 100008,
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'test'",
+      "index": 100016,
       "name": "KSP_TupleSumTest_value",
-      "parsed": "SUM(TVALUES([],aundefined,'undefined',x,y.base,z,v))",
-      "id": 100008
+      "parsed": "'test'",
+      "id": 100016
     }
   ],
   "data": [
@@ -248,12 +392,23 @@
     {
       "rowId": "TeamMembers9",
       "solutionName": "KSP",
+      "colId": "title",
+      "name": "KSP_TeamMembers9_title",
+      "nodes": [],
+      "ref": 100002,
+      "formulaName": "KSP_TeamMembers9_title",
+      "refId": 100002,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "TeamMembers9",
+      "solutionName": "KSP",
       "colId": "required",
       "name": "KSP_TeamMembers9_required",
       "nodes": [],
-      "ref": 100002,
+      "ref": 100003,
       "formulaName": "KSP_TeamMembers9_required",
-      "refId": 100002,
+      "refId": 100003,
       "displayAs": "PropertyType"
     },
     {
@@ -262,9 +417,9 @@
       "colId": "value",
       "name": "KSP_NewVariables_value",
       "nodes": [],
-      "ref": 100003,
+      "ref": 100004,
       "formulaName": "KSP_NewVariables_value",
-      "refId": 100003,
+      "refId": 100004,
       "displayAs": "StringAnswerType",
       "parentName": "root_value"
     },
@@ -274,9 +429,20 @@
       "colId": "title",
       "name": "KSP_NewVariables_title",
       "nodes": [],
-      "ref": 100004,
+      "ref": 100005,
       "formulaName": "KSP_NewVariables_title",
-      "refId": 100004,
+      "refId": 100005,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "NewVariables",
+      "solutionName": "KSP",
+      "colId": "visible",
+      "name": "KSP_NewVariables_visible",
+      "nodes": [],
+      "ref": 100006,
+      "formulaName": "KSP_NewVariables_visible",
+      "refId": 100006,
       "displayAs": "PropertyType"
     },
     {
@@ -285,9 +451,9 @@
       "colId": "required",
       "name": "KSP_NewVariables_required",
       "nodes": [],
-      "ref": 100002,
-      "formulaName": "KSP_TeamMembers9_required",
-      "refId": 100002,
+      "ref": 100007,
+      "formulaName": "KSP_NewVariables_required",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -296,11 +462,22 @@
       "colId": "value",
       "name": "KSP_IncomeParent01_value",
       "nodes": [],
-      "ref": 100005,
+      "ref": 100008,
       "formulaName": "KSP_IncomeParent01_value",
-      "refId": 100005,
+      "refId": 100008,
       "displayAs": "StringAnswerType",
       "parentName": "root_value"
+    },
+    {
+      "rowId": "IncomeParent01",
+      "solutionName": "KSP",
+      "colId": "title",
+      "name": "KSP_IncomeParent01_title",
+      "nodes": [],
+      "ref": 100009,
+      "formulaName": "KSP_IncomeParent01_title",
+      "refId": 100009,
+      "displayAs": "PropertyType"
     },
     {
       "rowId": "IncomeParent01",
@@ -308,9 +485,9 @@
       "colId": "required",
       "name": "KSP_IncomeParent01_required",
       "nodes": [],
-      "ref": 100002,
+      "ref": 100003,
       "formulaName": "KSP_TeamMembers9_required",
-      "refId": 100002,
+      "refId": 100003,
       "displayAs": "PropertyType"
     },
     {
@@ -319,11 +496,33 @@
       "colId": "value",
       "name": "KSP_IncomeParent02_value",
       "nodes": [],
-      "ref": 100006,
+      "ref": 100010,
       "formulaName": "KSP_IncomeParent02_value",
-      "refId": 100006,
+      "refId": 100010,
       "displayAs": "StringAnswerType",
       "parentName": "root_value"
+    },
+    {
+      "rowId": "IncomeParent02",
+      "solutionName": "KSP",
+      "colId": "title",
+      "name": "KSP_IncomeParent02_title",
+      "nodes": [],
+      "ref": 100011,
+      "formulaName": "KSP_IncomeParent02_title",
+      "refId": 100011,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "IncomeParent02",
+      "solutionName": "KSP",
+      "colId": "locked",
+      "name": "KSP_IncomeParent02_locked",
+      "nodes": [],
+      "ref": 100012,
+      "formulaName": "KSP_IncomeParent02_locked",
+      "refId": 100012,
+      "displayAs": "PropertyType"
     },
     {
       "rowId": "IncomeParent02",
@@ -331,9 +530,9 @@
       "colId": "required",
       "name": "KSP_IncomeParent02_required",
       "nodes": [],
-      "ref": 100002,
-      "formulaName": "KSP_TeamMembers9_required",
-      "refId": 100002,
+      "ref": 100013,
+      "formulaName": "KSP_IncomeParent02_required",
+      "refId": 100013,
       "displayAs": "PropertyType"
     },
     {
@@ -342,21 +541,21 @@
       "colId": "value",
       "name": "KSP_TotalYearlyCosts_value",
       "nodes": [],
-      "ref": 100007,
+      "ref": 100014,
       "formulaName": "KSP_TotalYearlyCosts_value",
-      "refId": 100007,
+      "refId": 100014,
       "displayAs": "StringAnswerType",
       "parentName": "root_value"
     },
     {
       "rowId": "TotalYearlyCosts",
       "solutionName": "KSP",
-      "colId": "locked",
-      "name": "KSP_TotalYearlyCosts_locked",
+      "colId": "title",
+      "name": "KSP_TotalYearlyCosts_title",
       "nodes": [],
-      "ref": 100002,
-      "formulaName": "KSP_TeamMembers9_required",
-      "refId": 100002,
+      "ref": 100015,
+      "formulaName": "KSP_TotalYearlyCosts_title",
+      "refId": 100015,
       "displayAs": "PropertyType"
     },
     {
@@ -365,9 +564,9 @@
       "colId": "value",
       "name": "KSP_TupleSumTest_value",
       "nodes": [],
-      "ref": 100008,
+      "ref": 100016,
       "formulaName": "KSP_TupleSumTest_value",
-      "refId": 100008,
+      "refId": 100016,
       "displayAs": "StringAnswerType",
       "parentName": "root_value"
     },
@@ -377,30 +576,10 @@
       "colId": "locked",
       "name": "KSP_TupleSumTest_locked",
       "nodes": [],
-      "ref": 100002,
+      "ref": 100003,
       "formulaName": "KSP_TeamMembers9_required",
-      "refId": 100002,
+      "refId": 100003,
       "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "TotalYearlyCostsChild",
-      "solutionName": "KSP",
-      "colId": "value",
-      "name": "KSP_TotalYearlyCostsChild_value",
-      "nodes": []
-    },
-    {
-      "solutionName": "KSP",
-      "colId": "value",
-      "name": "KSP_undefined_value",
-      "nodes": []
-    },
-    {
-      "rowId": "NrOfDaysChildcareWeek",
-      "solutionName": "KSP",
-      "colId": "value",
-      "name": "KSP_NrOfDaysChildcareWeek_value",
-      "nodes": []
     }
   ],
   "meta": {
