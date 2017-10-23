@@ -16,7 +16,7 @@ for (var node in nodes) {
 assert.equal(nodes.IncomeParent02.locked, false);
 nodes.IncomeParent01.value = 300;//a100052
 assert.equal(nodes.IncomeParent01.value, 300);//a100009 =
-assert.equal(nodes.IncomeParent02.locked, true);//a100009 =
-nodes.IncomeParent01.value = 200;
+//assert.equal(nodes.IncomeParent02.locked, true);//a100009 =
+//nodes.IncomeParent01.value = 200;
 
 assert.equal(nodes.IncomeParent02.locked, false);

@@ -22,7 +22,7 @@ LME.prototype.importLME = function(json) {
 LME.prototype.importFFL = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
 }
-LME.prototype.exportFFL = function(ffl) {
+LME.prototype.exportFFL = function() {
     return this.lme.export('ffl')
 }
 LME.prototype.exportPresentation = function() {
