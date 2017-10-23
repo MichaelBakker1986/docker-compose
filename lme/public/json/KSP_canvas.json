@@ -33,7 +33,9 @@
       "refs": {
         "TESTMODEL_TotalConfusedMore_required": true,
         "TESTMODEL_VariableOne_required": true,
+        "TESTMODEL_Total_locked": true,
         "TESTMODEL_Total_required": true,
+        "TESTMODEL_TotalConfused_locked": true,
         "TESTMODEL_TotalConfused_required": true
       },
       "formulaDependencys": [],
@@ -441,6 +443,17 @@
     {
       "rowId": "Total",
       "solutionName": "TESTMODEL",
+      "colId": "locked",
+      "name": "TESTMODEL_Total_locked",
+      "nodes": [],
+      "ref": 100003,
+      "formulaName": "TESTMODEL_TotalConfusedMore_required",
+      "refId": 100003,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Total",
+      "solutionName": "TESTMODEL",
       "colId": "required",
       "name": "TESTMODEL_Total_required",
       "nodes": [],
@@ -471,6 +484,17 @@
       "ref": 100002,
       "formulaName": "TESTMODEL_TotalConfusedMore_title",
       "refId": 100002,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "TotalConfused",
+      "solutionName": "TESTMODEL",
+      "colId": "locked",
+      "name": "TESTMODEL_TotalConfused_locked",
+      "nodes": [],
+      "ref": 100003,
+      "formulaName": "TESTMODEL_TotalConfusedMore_required",
+      "refId": 100003,
       "displayAs": "PropertyType"
     },
     {

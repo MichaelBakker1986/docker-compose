@@ -40,6 +40,7 @@ model TESTMODEL uses BaseModel
 		formula: VariableOne + VariableTwo;
 		datatype: number;
 		frequency: document;
+		locked: 1;
 		inputRequired: 1;
 	}
     variable TotalConfused
@@ -48,6 +49,7 @@ model TESTMODEL uses BaseModel
         formula: 102;
         datatype: number;
         frequency: document;
+        locked: 1;
         inputRequired: 1;
     }
   }
