@@ -962,6 +962,73 @@
       "name": "TESTMODEL_TotalConfused_value",
       "parsed": "106",
       "id": 100052
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_VariableOne_value": true,
+        "TESTMODEL_Total_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_Total_value",
+          "association": "refs",
+          "refId": 100055
+        }
+      ],
+      "deps": {},
+      "original": "101",
+      "index": 100053,
+      "name": "TESTMODEL_VariableOne_value",
+      "parsed": "101",
+      "id": 100053
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_VariableTwo_value": true,
+        "TESTMODEL_Total_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_Total_value",
+          "association": "refs",
+          "refId": 100055
+        }
+      ],
+      "deps": {},
+      "original": "102",
+      "index": 100054,
+      "name": "TESTMODEL_VariableTwo_value",
+      "parsed": "102",
+      "id": 100054
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_Total_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_VariableOne_value",
+          "association": "deps",
+          "refId": 100053
+        },
+        {
+          "name": "TESTMODEL_VariableTwo_value",
+          "association": "deps",
+          "refId": 100054
+        }
+      ],
+      "deps": {
+        "TESTMODEL_VariableOne_value": true,
+        "TESTMODEL_VariableTwo_value": true
+      },
+      "original": "VariableOne+VariableTwo",
+      "index": 100055,
+      "name": "TESTMODEL_Total_value",
+      "parsed": "a100053('100053',x,y.base,z,v)+a100054('100054',x,y.base,z,v)",
+      "id": 100055
     }
   ],
   "data": [
@@ -1098,7 +1165,7 @@
       "colId": "value",
       "name": "TESTMODEL_VariableOne_value",
       "nodes": [],
-      "ref": 100049,
+      "ref": 100053,
       "formulaName": "TESTMODEL_VariableOne_value",
       "refId": 100004,
       "displayAs": "StringAnswerType",
@@ -1133,7 +1200,7 @@
       "colId": "value",
       "name": "TESTMODEL_VariableTwo_value",
       "nodes": [],
-      "ref": 100050,
+      "ref": 100054,
       "formulaName": "TESTMODEL_VariableTwo_value",
       "refId": 100006,
       "displayAs": "StringAnswerType",
@@ -1179,7 +1246,7 @@
       "colId": "value",
       "name": "TESTMODEL_Total_value",
       "nodes": [],
-      "ref": 100051,
+      "ref": 100055,
       "formulaName": "TESTMODEL_Total_value",
       "refId": 100010,
       "displayAs": "StringAnswerType",
