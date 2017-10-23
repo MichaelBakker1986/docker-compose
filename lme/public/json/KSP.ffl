@@ -9,11 +9,9 @@ model TESTMODEL uses BaseModel
   version: "1.14";
   root
   { 
-    locked: 1;
-    formula: 1;
     variable TotalConfusedMore
     {
-        title: Total;
+        title: TotalConfusedMore;
         formula: 101;
         datatype: number;
         frequency: document;
@@ -47,7 +45,7 @@ model TESTMODEL uses BaseModel
 	}
     variable TotalConfused
     {
-        title: Total;
+        title: TotalConfused;
         formula: 102;
         datatype: number;
         frequency: document;
