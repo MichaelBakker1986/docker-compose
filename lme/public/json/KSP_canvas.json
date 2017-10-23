@@ -453,14 +453,6 @@
       "name": "MVO_RootSub2_value",
       "parsed": "undefined",
       "id": 100031
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "'TotalConfusedMore'",
-      "index": 100002,
-      "name": "TESTMODEL2_TotalConfusedMore_title",
-      "parsed": "'TotalConfusedMore'",
-      "id": 100002
     },
     {
       "type": "noCacheLocked",
@@ -500,21 +492,6 @@
       "name": "MVO_FPS_VAR_Naam_title",
       "parsed": "'NAME'",
       "id": 100034
-=======
-        "TESTMODEL2_TotalConfusedMore_required": true,
-        "TESTMODEL2_VariableOne_required": true,
-        "TESTMODEL2_Total_locked": true,
-        "TESTMODEL2_Total_required": true,
-        "TESTMODEL2_TotalConfused_locked": true,
-        "TESTMODEL2_TotalConfused_required": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "1",
-      "index": 100003,
-      "name": "TESTMODEL2_TotalConfusedMore_required",
-      "parsed": "1",
-      "id": 100003
     },
     {
       "type": "noCacheUnlocked",
@@ -580,29 +557,6 @@
       "name": "MVO_FPS_VAR_Rechtsvorm_nr_value",
       "parsed": "undefined",
       "id": 100039
-=======
-        "TESTMODEL2_VariableOne_value": true,
-        "TESTMODEL2_VariableTwo_visible": true,
-        "TESTMODEL2_Total_value": true
-      },
-      "formulaDependencys": [
-        {
-          "name": "TESTMODEL2_VariableTwo_visible",
-          "association": "refs",
-          "refId": 100008
-        },
-        {
-          "name": "TESTMODEL2_Total_value",
-          "association": "refs",
-          "refId": 100010
-        }
-      ],
-      "deps": {},
-      "original": "101",
-      "index": 100004,
-      "name": "TESTMODEL2_VariableOne_value",
-      "parsed": "101",
-      "id": 100004
     },
     {
       "type": "noCacheLocked",
@@ -616,16 +570,6 @@
       "name": "MVO_FPS_VAR_Rechtsvorm_nr_title",
       "parsed": "'LEGALSTATUSCODE'",
       "id": 100040
-=======
-        "TESTMODEL2_VariableOne_title": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "'VariableOne'",
-      "index": 100005,
-      "name": "TESTMODEL2_VariableOne_title",
-      "parsed": "'VariableOne'",
-      "id": 100005
     },
     {
       "type": "noCacheUnlocked",
@@ -652,26 +596,9 @@
       "name": "MVO_FPS_VAR_Rechtsvorm_omschr_title",
       "parsed": "'LEGALSTATUSDESCRIPTION'",
       "id": 100042
-=======
-        "TESTMODEL2_VariableTwo_value": true,
-        "TESTMODEL2_Total_value": true
-      },
-      "formulaDependencys": [
-        {
-          "name": "TESTMODEL2_Total_value",
-          "association": "refs",
-          "refId": 100010
-        }
-      ],
-      "deps": {},
-      "original": "102",
-      "index": 100006,
-      "name": "TESTMODEL2_VariableTwo_value",
-      "parsed": "102",
-      "id": 100006
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "MVO_FPS_VAR_BIK_CODE_value": true
       },
@@ -682,15 +609,6 @@
       "name": "MVO_FPS_VAR_BIK_CODE_value",
       "parsed": "undefined",
       "id": 100043
-        "TESTMODEL2_VariableTwo_title": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "'VariableTwo'",
-      "index": 100007,
-      "name": "TESTMODEL2_VariableTwo_title",
-      "parsed": "'VariableTwo'",
-      "id": 100007
     },
     {
       "type": "noCacheLocked",
@@ -717,24 +635,6 @@
       "name": "MVO_FPS_VAR_BIK_Omschr_value",
       "parsed": "undefined",
       "id": 100045
-=======
-        "TESTMODEL2_VariableTwo_visible": true
-      },
-      "formulaDependencys": [
-        {
-          "name": "TESTMODEL2_VariableOne_value",
-          "association": "deps",
-          "refId": 100004
-        }
-      ],
-      "deps": {
-        "TESTMODEL2_VariableOne_value": true
-      },
-      "original": "VariableOne!=100",
-      "index": 100008,
-      "name": "TESTMODEL2_VariableTwo_visible",
-      "parsed": "a100004('100004',x,y.base,z,v)!=100",
-      "id": 100008
     },
     {
       "type": "noCacheLocked",
@@ -787,24 +687,6 @@
       "name": "MVO_FPS_VAR_Accountmanager_value",
       "parsed": "undefined",
       "id": 100049
-=======
-        "TESTMODEL2_VariableTwo_required": true
-      },
-      "formulaDependencys": [
-        {
-          "name": "TESTMODEL2_Total_value",
-          "association": "deps",
-          "refId": 100010
-        }
-      ],
-      "deps": {
-        "TESTMODEL2_Total_value": true
-      },
-      "original": "Total>1e3",
-      "index": 100009,
-      "name": "TESTMODEL2_VariableTwo_required",
-      "parsed": "a100010('100010',x,y.base,z,v)>1e3",
-      "id": 100009
     },
     {
       "type": "noCacheLocked",
@@ -831,36 +713,6 @@
       "name": "MVO_FPS_VAR_Kantoor_value",
       "parsed": "undefined",
       "id": 100051
-=======
-        "TESTMODEL2_Total_value": true,
-        "TESTMODEL2_VariableTwo_required": true
-      },
-      "formulaDependencys": [
-        {
-          "name": "TESTMODEL2_VariableTwo_required",
-          "association": "refs",
-          "refId": 100009
-        },
-        {
-          "name": "TESTMODEL2_VariableOne_value",
-          "association": "deps",
-          "refId": 100004
-        },
-        {
-          "name": "TESTMODEL2_VariableTwo_value",
-          "association": "deps",
-          "refId": 100006
-        }
-      ],
-      "deps": {
-        "TESTMODEL2_VariableOne_value": true,
-        "TESTMODEL2_VariableTwo_value": true
-      },
-      "original": "VariableOne+VariableTwo",
-      "index": 100010,
-      "name": "TESTMODEL2_Total_value",
-      "parsed": "a100004('100004',x,y.base,z,v)+a100006('100006',x,y.base,z,v)",
-      "id": 100010
     },
     {
       "type": "noCacheLocked",
@@ -887,16 +739,6 @@
       "name": "MVO_FPS_VAR_Straat_value",
       "parsed": "undefined",
       "id": 100053
-=======
-        "TESTMODEL2_Total_title": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "'Total'",
-      "index": 100011,
-      "name": "TESTMODEL2_Total_title",
-      "parsed": "'Total'",
-      "id": 100011
     },
     {
       "type": "noCacheLocked",
@@ -910,18 +752,9 @@
       "name": "MVO_FPS_VAR_Straat_title",
       "parsed": "'STREET'",
       "id": 100054
-        "TESTMODEL2_TotalConfused_value": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "102",
-      "index": 100012,
-      "name": "TESTMODEL2_TotalConfused_value",
-      "parsed": "102",
-      "id": 100012
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "MVO_FPS_VAR_Housenumber_value": true
       },
@@ -26108,282 +25941,6 @@
       "ref": 100547,
       "formulaName": "MVO_Q_WARNING_01_value",
       "refId": 100547,
-=======
-        "TESTMODEL2_TotalConfused_title": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "'TotalConfused'",
-      "index": 100013,
-      "name": "TESTMODEL2_TotalConfused_title",
-      "parsed": "'TotalConfused'",
-      "id": 100013
-    }
-  ],
-  "data": [
-    [
-      "TotalConfusedMore",
-      null,
-      "",
-      "",
-      "",
-      false,
-      false,
-      null
-    ],
-    [
-      "VariableOne",
-      null,
-      "",
-      "",
-      "",
-      false,
-      false,
-      null
-    ],
-    [
-      "VariableTwo",
-      null,
-      "",
-      "",
-      "",
-      false,
-      false,
-      null
-    ],
-    [
-      "Total",
-      null,
-      "",
-      "",
-      "",
-      false,
-      false,
-      null
-    ],
-    [
-      "TotalConfused",
-      null,
-      "",
-      "",
-      "",
-      false,
-      false,
-      null
-    ]
-  ],
-  "nodes": [
-    {
-      "name": "TESTMODEL2_root_value",
-      "rowId": "root",
-      "colId": "value",
-      "solutionName": "TESTMODEL2",
-      "frequency": "document",
-      "displayAs": "SectionAnswerType",
-      "nodes": [
-        {
-          "name": "TESTMODEL2_TotalConfusedMore_value",
-          "rowId": "TotalConfusedMore",
-          "colId": "value",
-          "identifier": "TESTMODEL2_root_value"
-        },
-        {
-          "name": "TESTMODEL2_VariableOne_value",
-          "rowId": "VariableOne",
-          "colId": "value",
-          "identifier": "TESTMODEL2_root_value"
-        },
-        {
-          "name": "TESTMODEL2_VariableTwo_value",
-          "rowId": "VariableTwo",
-          "colId": "value",
-          "identifier": "TESTMODEL2_root_value"
-        },
-        {
-          "name": "TESTMODEL2_Total_value",
-          "rowId": "Total",
-          "colId": "value",
-          "identifier": "TESTMODEL2_root_value"
-        },
-        {
-          "name": "TESTMODEL2_TotalConfused_value",
-          "rowId": "TotalConfused",
-          "colId": "value",
-          "identifier": "TESTMODEL2_root_value"
-        }
-      ]
-    },
-    {
-      "rowId": "TotalConfusedMore",
-      "solutionName": "TESTMODEL2",
-      "colId": "value",
-      "name": "TESTMODEL2_TotalConfusedMore_value",
-      "nodes": [],
-      "ref": 100001,
-      "formulaName": "TESTMODEL2_TotalConfusedMore_value",
-      "refId": 100001,
-      "displayAs": "StringAnswerType",
-      "frequency": "document",
-      "parentName": "root_value"
-    },
-    {
-      "rowId": "TotalConfusedMore",
-      "solutionName": "TESTMODEL2",
-      "colId": "title",
-      "name": "TESTMODEL2_TotalConfusedMore_title",
-      "nodes": [],
-      "ref": 100002,
-      "formulaName": "TESTMODEL2_TotalConfusedMore_title",
-      "refId": 100002,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "TotalConfusedMore",
-      "solutionName": "TESTMODEL2",
-      "colId": "required",
-      "name": "TESTMODEL2_TotalConfusedMore_required",
-      "nodes": [],
-      "ref": 100003,
-      "formulaName": "TESTMODEL2_TotalConfusedMore_required",
-      "refId": 100003,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "VariableOne",
-      "solutionName": "TESTMODEL2",
-      "colId": "value",
-      "name": "TESTMODEL2_VariableOne_value",
-      "nodes": [],
-      "ref": 100004,
-      "formulaName": "TESTMODEL2_VariableOne_value",
-      "refId": 100004,
-      "displayAs": "StringAnswerType",
-      "frequency": "document",
-      "parentName": "root_value"
-    },
-    {
-      "rowId": "VariableOne",
-      "solutionName": "TESTMODEL2",
-      "colId": "title",
-      "name": "TESTMODEL2_VariableOne_title",
-      "nodes": [],
-      "ref": 100005,
-      "formulaName": "TESTMODEL2_VariableOne_title",
-      "refId": 100005,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "VariableOne",
-      "solutionName": "TESTMODEL2",
-      "colId": "required",
-      "name": "TESTMODEL2_VariableOne_required",
-      "nodes": [],
-      "ref": 100003,
-      "formulaName": "TESTMODEL2_TotalConfusedMore_required",
-      "refId": 100003,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "VariableTwo",
-      "solutionName": "TESTMODEL2",
-      "colId": "value",
-      "name": "TESTMODEL2_VariableTwo_value",
-      "nodes": [],
-      "ref": 100006,
-      "formulaName": "TESTMODEL2_VariableTwo_value",
-      "refId": 100006,
-      "displayAs": "StringAnswerType",
-      "frequency": "document",
-      "parentName": "root_value"
-    },
-    {
-      "rowId": "VariableTwo",
-      "solutionName": "TESTMODEL2",
-      "colId": "title",
-      "name": "TESTMODEL2_VariableTwo_title",
-      "nodes": [],
-      "ref": 100007,
-      "formulaName": "TESTMODEL2_VariableTwo_title",
-      "refId": 100007,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "VariableTwo",
-      "solutionName": "TESTMODEL2",
-      "colId": "visible",
-      "name": "TESTMODEL2_VariableTwo_visible",
-      "nodes": [],
-      "ref": 100008,
-      "formulaName": "TESTMODEL2_VariableTwo_visible",
-      "refId": 100008,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "VariableTwo",
-      "solutionName": "TESTMODEL2",
-      "colId": "required",
-      "name": "TESTMODEL2_VariableTwo_required",
-      "nodes": [],
-      "ref": 100009,
-      "formulaName": "TESTMODEL2_VariableTwo_required",
-      "refId": 100009,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "Total",
-      "solutionName": "TESTMODEL2",
-      "colId": "value",
-      "name": "TESTMODEL2_Total_value",
-      "nodes": [],
-      "ref": 100010,
-      "formulaName": "TESTMODEL2_Total_value",
-      "refId": 100010,
-      "displayAs": "StringAnswerType",
-      "frequency": "document",
-      "parentName": "root_value"
-    },
-    {
-      "rowId": "Total",
-      "solutionName": "TESTMODEL2",
-      "colId": "title",
-      "name": "TESTMODEL2_Total_title",
-      "nodes": [],
-      "ref": 100011,
-      "formulaName": "TESTMODEL2_Total_title",
-      "refId": 100011,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "Total",
-      "solutionName": "TESTMODEL2",
-      "colId": "locked",
-      "name": "TESTMODEL2_Total_locked",
-      "nodes": [],
-      "ref": 100003,
-      "formulaName": "TESTMODEL2_TotalConfusedMore_required",
-      "refId": 100003,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "Total",
-      "solutionName": "TESTMODEL2",
-      "colId": "required",
-      "name": "TESTMODEL2_Total_required",
-      "nodes": [],
-      "ref": 100003,
-      "formulaName": "TESTMODEL2_TotalConfusedMore_required",
-      "refId": 100003,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "TotalConfused",
-      "solutionName": "TESTMODEL2",
-      "colId": "value",
-      "name": "TESTMODEL2_TotalConfused_value",
-      "nodes": [],
-      "ref": 100012,
-      "formulaName": "TESTMODEL2_TotalConfused_value",
-      "refId": 100012,
       "displayAs": "StringAnswerType",
       "frequency": "document",
       "parentName": "Q_WARNING_GLOBAL_value"
@@ -26580,37 +26137,6 @@
       "ref": 100542,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
       "refId": 100542,
-=======
-      "rowId": "TotalConfused",
-      "solutionName": "TESTMODEL2",
-      "colId": "title",
-      "name": "TESTMODEL2_TotalConfused_title",
-      "nodes": [],
-      "ref": 100013,
-      "formulaName": "TESTMODEL2_TotalConfused_title",
-      "refId": 100013,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "TotalConfused",
-      "solutionName": "TESTMODEL2",
-      "colId": "locked",
-      "name": "TESTMODEL2_TotalConfused_locked",
-      "nodes": [],
-      "ref": 100003,
-      "formulaName": "TESTMODEL2_TotalConfusedMore_required",
-      "refId": 100003,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "TotalConfused",
-      "solutionName": "TESTMODEL2",
-      "colId": "required",
-      "name": "TESTMODEL2_TotalConfused_required",
-      "nodes": [],
-      "ref": 100003,
-      "formulaName": "TESTMODEL2_TotalConfusedMore_required",
-      "refId": 100003,
       "displayAs": "PropertyType"
     },
     {
