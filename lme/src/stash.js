@@ -33,7 +33,6 @@ class Stash {
         //log.info("Do command: [" + command + "]");
         return exec(command)
             .then(function(result) {
-                console.info('saved')
                 return result.stdout.split('\n');
             }).catch(function(err) {
                 if (err.code === 1) {
