@@ -12,7 +12,7 @@ model TESTMODEL uses BaseModel
     variable TotalConfusedMore
     {
         title: Total;
-        formula: 101;
+        formula: 107;
         datatype: number;
         frequency: document;
         inputRequired: 1;
@@ -46,7 +46,7 @@ model TESTMODEL uses BaseModel
     variable TotalConfused
     {
         title: Total;
-        formula: 102;
+        formula: 106;
         datatype: number;
         frequency: document;
         locked: 1;
