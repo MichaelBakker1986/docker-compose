@@ -298,6 +298,86 @@
       "name": "TESTMODEL_TotalConfused_value",
       "parsed": "102",
       "id": 100016
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_VariableOne_value": true,
+        "TESTMODEL_Total_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_Total_value",
+          "association": "refs",
+          "refId": 100019
+        }
+      ],
+      "deps": {},
+      "original": "101",
+      "index": 100017,
+      "name": "TESTMODEL_VariableOne_value",
+      "parsed": "101",
+      "id": 100017
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_VariableTwo_value": true,
+        "TESTMODEL_Total_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_Total_value",
+          "association": "refs",
+          "refId": 100019
+        }
+      ],
+      "deps": {},
+      "original": "102",
+      "index": 100018,
+      "name": "TESTMODEL_VariableTwo_value",
+      "parsed": "102",
+      "id": 100018
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_Total_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_VariableOne_value",
+          "association": "deps",
+          "refId": 100017
+        },
+        {
+          "name": "TESTMODEL_VariableTwo_value",
+          "association": "deps",
+          "refId": 100018
+        }
+      ],
+      "deps": {
+        "TESTMODEL_VariableOne_value": true,
+        "TESTMODEL_VariableTwo_value": true
+      },
+      "original": "VariableOne+VariableTwo",
+      "index": 100019,
+      "name": "TESTMODEL_Total_value",
+      "parsed": "a100017('100017',x,y.base,z,v)+a100018('100018',x,y.base,z,v)",
+      "id": 100019
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_TotalConfused_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "102",
+      "index": 100020,
+      "name": "TESTMODEL_TotalConfused_value",
+      "parsed": "102",
+      "id": 100020
     }
   ],
   "data": [
@@ -434,7 +514,7 @@
       "colId": "value",
       "name": "TESTMODEL_VariableOne_value",
       "nodes": [],
-      "ref": 100013,
+      "ref": 100017,
       "formulaName": "TESTMODEL_VariableOne_value",
       "refId": 100004,
       "displayAs": "StringAnswerType",
@@ -469,7 +549,7 @@
       "colId": "value",
       "name": "TESTMODEL_VariableTwo_value",
       "nodes": [],
-      "ref": 100014,
+      "ref": 100018,
       "formulaName": "TESTMODEL_VariableTwo_value",
       "refId": 100006,
       "displayAs": "StringAnswerType",
@@ -515,7 +595,7 @@
       "colId": "value",
       "name": "TESTMODEL_Total_value",
       "nodes": [],
-      "ref": 100015,
+      "ref": 100019,
       "formulaName": "TESTMODEL_Total_value",
       "refId": 100010,
       "displayAs": "StringAnswerType",
@@ -561,7 +641,7 @@
       "colId": "value",
       "name": "TESTMODEL_TotalConfused_value",
       "nodes": [],
-      "ref": 100016,
+      "ref": 100020,
       "formulaName": "TESTMODEL_TotalConfused_value",
       "refId": 100011,
       "displayAs": "StringAnswerType",

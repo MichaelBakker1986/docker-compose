@@ -10,6 +10,7 @@ model TESTMODEL uses BaseModel
   root
   { 
     locked: 1;
+    formula: 1:
     variable TotalConfusedMore
     {
         title: Total;
