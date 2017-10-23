@@ -776,6 +776,99 @@
       "name": "TESTMODEL_TotalConfused_value",
       "parsed": "102",
       "id": 100042
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_TotalConfusedMore_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "101",
+      "index": 100043,
+      "name": "TESTMODEL_TotalConfusedMore_value",
+      "parsed": "101",
+      "id": 100043
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_VariableOne_value": true,
+        "TESTMODEL_Total_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_Total_value",
+          "association": "refs",
+          "refId": 100046
+        }
+      ],
+      "deps": {},
+      "original": "101",
+      "index": 100044,
+      "name": "TESTMODEL_VariableOne_value",
+      "parsed": "101",
+      "id": 100044
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_VariableTwo_value": true,
+        "TESTMODEL_Total_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_Total_value",
+          "association": "refs",
+          "refId": 100046
+        }
+      ],
+      "deps": {},
+      "original": "102",
+      "index": 100045,
+      "name": "TESTMODEL_VariableTwo_value",
+      "parsed": "102",
+      "id": 100045
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_Total_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_VariableOne_value",
+          "association": "deps",
+          "refId": 100044
+        },
+        {
+          "name": "TESTMODEL_VariableTwo_value",
+          "association": "deps",
+          "refId": 100045
+        }
+      ],
+      "deps": {
+        "TESTMODEL_VariableOne_value": true,
+        "TESTMODEL_VariableTwo_value": true
+      },
+      "original": "VariableOne+VariableTwo",
+      "index": 100046,
+      "name": "TESTMODEL_Total_value",
+      "parsed": "a100044('100044',x,y.base,z,v)+a100045('100045',x,y.base,z,v)",
+      "id": 100046
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_TotalConfused_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "102",
+      "index": 100047,
+      "name": "TESTMODEL_TotalConfused_value",
+      "parsed": "102",
+      "id": 100047
     }
   ],
   "data": [
@@ -877,7 +970,7 @@
       "colId": "value",
       "name": "TESTMODEL_TotalConfusedMore_value",
       "nodes": [],
-      "ref": 100038,
+      "ref": 100043,
       "formulaName": "TESTMODEL_TotalConfusedMore_value",
       "refId": 100001,
       "displayAs": "StringAnswerType",
@@ -890,7 +983,7 @@
       "colId": "title",
       "name": "TESTMODEL_TotalConfusedMore_title",
       "nodes": [],
-      "ref": 100027,
+      "ref": 100002,
       "formulaName": "TESTMODEL_TotalConfusedMore_title",
       "refId": 100002,
       "displayAs": "PropertyType"
@@ -912,7 +1005,7 @@
       "colId": "value",
       "name": "TESTMODEL_VariableOne_value",
       "nodes": [],
-      "ref": 100039,
+      "ref": 100044,
       "formulaName": "TESTMODEL_VariableOne_value",
       "refId": 100004,
       "displayAs": "StringAnswerType",
@@ -947,7 +1040,7 @@
       "colId": "value",
       "name": "TESTMODEL_VariableTwo_value",
       "nodes": [],
-      "ref": 100040,
+      "ref": 100045,
       "formulaName": "TESTMODEL_VariableTwo_value",
       "refId": 100006,
       "displayAs": "StringAnswerType",
@@ -993,7 +1086,7 @@
       "colId": "value",
       "name": "TESTMODEL_Total_value",
       "nodes": [],
-      "ref": 100041,
+      "ref": 100046,
       "formulaName": "TESTMODEL_Total_value",
       "refId": 100010,
       "displayAs": "StringAnswerType",
@@ -1039,7 +1132,7 @@
       "colId": "value",
       "name": "TESTMODEL_TotalConfused_value",
       "nodes": [],
-      "ref": 100042,
+      "ref": 100047,
       "formulaName": "TESTMODEL_TotalConfused_value",
       "refId": 100011,
       "displayAs": "StringAnswerType",

@@ -11,7 +11,7 @@ model TESTMODEL uses BaseModel
   { 
     variable TotalConfusedMore
     {
-        title: TotalConfusedMore;
+        title: Total;
         formula: 101;
         datatype: number;
         frequency: document;
