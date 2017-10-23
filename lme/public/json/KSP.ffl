@@ -8,7 +8,8 @@ model TESTMODEL uses BaseModel
 {
   version: "1.14";
   root
-  {
+  { 
+    locked: 1;
     variable TotalConfusedMore
     {
         title: Total;
