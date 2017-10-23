@@ -31,7 +31,6 @@ LMETree.prototype.addNode = function(node, columns) {
         Object.defineProperty(r, column, {
             get: function() {
                 let rval = workbook.get(rowId, column, 0, 0);
-                log.info('get ' + rowId + "." + column + " = " + rval)
                 if (typeof(rval) === 'object') {
                     rval = null;
                 }
@@ -39,9 +38,9 @@ LMETree.prototype.addNode = function(node, columns) {
             },
             set: function(v) {
                 //only for 'value,formula_trend,...'
-                log.info('user set value ' + parseInt(v) + ' :' + rowId)
                 counter++;
-                workbook.set(rowId, parseInt(v), column, 0, 0);
+                var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
+                workbook.set(rowId, value, column, 0, 0);
             }
         });
     });

@@ -32,7 +32,7 @@
             loadScript(result + ':8080/DEMO/transformFFL_LME/KSP', function() {
                 $scope.$apply(function() {
                     $scope.LME_MODEL = LME.exportWebModel()
-                    //  $scope.ffl = LME.exportFFL();
+                    $scope.ffl = LME.exportFFL();
                 });
             });
         });
@@ -52,8 +52,7 @@
 <table>
     <tr>
         <td>
-
-            </pre>
+            <pre ng-bind="ffl"></pre>
         </td>
         <td>
             <H1>Figure {{LME_MODEL.name}}</H1>
