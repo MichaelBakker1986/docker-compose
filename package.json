@@ -25,7 +25,7 @@
     "xlsx": "^0.9.3"
   },
   "scripts": {
-    "test": "npm install && cd ff-fes && npm install && npm test && cd .. && cd lme && npm install && npm test && cd .. && cd ff-fex-xlsx && npm install && cd .. && cd demo-apps/angular-demo && npm install && bower install && cd .."
+    "test": "npm install && cd ff-fes && npm install && cd ff-fex-xlsx && npm install && cd .. && npm test && cd .. && cd lme && npm install && npm test && cd .. && cd demo-apps/angular-demo && npm install && bower install && cd .."
   },
   "repository": {
     "type": "git",
