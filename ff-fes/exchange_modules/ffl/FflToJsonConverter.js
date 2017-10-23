@@ -222,21 +222,33 @@ FflToJsonConverter.prototype.parseFFL = function(contents) {
                 }
                 var foundValue = split[1].trim();
                 if (firstWord.startsWith('choices')) {
+                    if (node[firstWord]) {
+                        throw Error('invalid ffl, duplicate property ' + firstWord);
+                    }
                     node[firstWord] = FinFormula.finChoice(obj.substring(obj.indexOf(':') + 1, obj.length));
                 }
                 else if (split.length == 2) {
                     var secondPart = split[1].trim();
                     if (firstWord === 'title') {
                         secondPart = "'" + secondPart.replace(/["']*/gm, "") + "'";// secondPart.replace(/'/gm, "\\'");
+                        if (node[firstWord]) {
+                            throw Error('invalid ffl, duplicate property ' + firstWord);
+                        }
                         node[firstWord] = FinFormula.parseFormula(secondPart);
                     }
                     else if (formulaType[firstWord] !== undefined) {
                         node[firstWord] = FinFormula.parseFormula(secondPart);
                     }
                     else {
+                        if (node[firstWord]) {
+                            throw Error('invalid ffl, duplicate property ' + firstWord);
+                        }
                         node[firstWord] = secondPart;
                     }
                 } else {
+                    if (node[firstWord]) {
+                        throw Error('invalid ffl, duplicate property ' + firstWord);
+                    }
                     //does only happen for now with Case calls;
                     //Fails for formula's including ':' e.g. "hint: Week number: 14"
                     node[firstWord] = FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1));

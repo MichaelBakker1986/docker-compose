@@ -1,0 +1,12 @@
+TestPattern value,required,visible
+VariableOne => 200
+ VariableOne is 100,required,visible,locked
+ Total       is 400,required,visible
+ VariableTwo is 100,required
+ VariableTwo is 100,visible
+VariableTwo => 200
+ VariableOne is 100,required,visible,locked
+ Total       is 400,required,visible
+ VariableTwo is 100,required
+ VariableTwo is 100,visible
+

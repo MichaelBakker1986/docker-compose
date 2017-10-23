@@ -6,7 +6,7 @@
   "private": true,
   "author": "Michael Bakker",
   "scripts": {
-    "test": "node test/webPresentationTest.js",
+    "test": "node test/TESTMODEL.js",
     "start": "node app.js"
   },
   "dependencies": {
