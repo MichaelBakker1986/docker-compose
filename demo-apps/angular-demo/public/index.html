@@ -9,10 +9,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script>
         angular.module('angapp', []).controller('kspController', function($scope, $http) {
+
             var url = window.location.href.split("/")
             var result = url[0] + "//" + url[2].split(':')[0]
+            var modelName = window.location.href.split('model=')[1];
 
-            $http.get('KSP.js').then(function(data) {
+            let liveUrl = 'KSP.js';
+            if (modelName) {
+                liveUrl = result + ':8080/DEMO/transformFFL_LME/' + modelName
+            }
+
+            $http.get(liveUrl).then(function(data) {
                 eval(data.data)
                 $scope.LME_MODEL = LME.exportWebModel()
 
