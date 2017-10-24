@@ -88,7 +88,6 @@ function send(text, level) {
     )
 }
 
-
 httpServer.listen(port, () => {
     require('dns').lookup(hostname, (err, add, fam) => {
         log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
@@ -98,7 +97,8 @@ httpServer.listen(port, () => {
 function testAndDeploy() {
     const command = 'cd .. && npm test && cd lme'
     exec(command).then((data) => {
-        log(data.stdout)
+        console.info(data.stdout)
+        log(data.stderr)
         log('Tests passed deploying stack');
         //start sub processes
         spawnChild('../demo-apps/angular-demo/angularapp')

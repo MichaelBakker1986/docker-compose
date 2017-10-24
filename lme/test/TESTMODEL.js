@@ -51,3 +51,6 @@ assert.equal(OneFixedDecimal.value.countDecimals(), 1);
 assert.equal(ZeroFixedDecimal.value.countDecimals(), 0);
 
 log.info('Tests passed');
+
+
+
