@@ -15,6 +15,7 @@
     "eslint": "3.19.0",
     "stack-adt": "^0.2.3"
   },
+  "repository": {},
   "scripts": {
     "test": "node test/RunAllTest.js"
   },

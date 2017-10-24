@@ -45,9 +45,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "install": "bower install",
+    "install": "bower install &",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {},
   "author": "michael.bakker@topicus.nl",
   "license": "ISC"
 }

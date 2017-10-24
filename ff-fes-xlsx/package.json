@@ -12,6 +12,7 @@
     "exceljs": "^0.4.2",
     "xlsx": "^0.9.7"
   },
+  "repository": {},
   "dependencies": {
     "deasync": "^0.1.10"
   }
