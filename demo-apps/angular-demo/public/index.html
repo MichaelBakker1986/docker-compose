@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="angapp">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +12,12 @@
             var url = window.location.href.split("/")
             var result = url[0] + "//" + url[2].split(':')[0]
             var modelName = window.location.href.split('model=')[1];
-
+            $scope.echo = function(data) {
+                console.info(data)
+            }
+            $scope.goto = function(data) {
+                alert(data)
+            }
             let liveUrl = 'KSP.js';
             if (modelName) {
                 liveUrl = result + ':8080/DEMO/transformFFL_LME/' + modelName
@@ -29,13 +33,31 @@
         });
     </script>
     <style>
+
         input:required {
             border-color: #800000;
             border-width: 1px;
         }
 
         input:read-only {
-            border: none;
+            border-width: 2px;
+            border-color: transparent;
+        }
+
+        lmetable.td {
+            white-space: nowrap;
+        }
+
+        td.txttd {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 400px;
+        }
+
+        span.text {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
         }
     </style>
 </head>
@@ -44,24 +66,20 @@
     <tr>
         <td>
             <H1>Figure {{LME_MODEL.name}}</H1>
-            <table>
+            <table class="lmetable">
                 <tr ng-repeat="figure in LME_MODEL.nodes" ng-show="figure.visible">
-                    <td><span>{{figure.title}}</span></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.visible"></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.locked"></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
-                    <td><input ng-readonly="figure.locked" ng-disabled="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder=""/></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
-                    <td><input ng-readonly="figure.locked" ng-disabled="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder=""/></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
-                    <td><input ng-readonly="figure.locked" ng-disabled="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder=""/></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
-                    <td><input ng-readonly="figure.locked" ng-disabled="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder=""/></td>
-                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
+                    <td ng-click="echo(figure)"> ¡</td>
+                    <td class="txttd"><span class="text">{{figure.title}}</span></td>
+                    <td ng-click="goto(figure)"> ²</td>
+                    <td ng-click="goto(figure)"> ³</td>
+                    <td>-</td>
+                    <td>€</td>
+                    <td ng-repeat="column in [ 1 , 2 , 3 ]">
+                        <span>-</span>
+                        <input ng-readonly="figure.locked" ng-disabled="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder="">
+                        <span>*</span>
+                    </td>
+                    <td>+</td>
                 </tr>
             </table>
         </td>
