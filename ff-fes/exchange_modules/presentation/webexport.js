@@ -23,16 +23,18 @@ LMETree.prototype.addNode = function(node, columns) {
 
     var workbook = this.workbook;
     var rowId = node.rowId;
-    var r = {
-        node: node
-    };
+    var r = {};
     columns.forEach(function(column) {
         //temp check, seems to proxy multiple times.
+        let rval, vcount;
         Object.defineProperty(r, column, {
             get: function() {
-                let rval = workbook.get(rowId, column, 0, 0);
-                if (typeof(rval) === 'object') {
-                    rval = null;
+                if (counter !== vcount) {
+                    vcount = counter;
+                    rval = workbook.get(rowId, column, 0, 0);
+                    if (typeof(rval) === 'object') {
+                        rval = null;
+                    }
                 }
                 return rval;
             },

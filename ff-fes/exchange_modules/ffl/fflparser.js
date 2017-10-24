@@ -100,6 +100,7 @@ FFLParser.prototype.deParse = function(rowId, workbook) {
             }
         }
         realObject.displaytype = displayAsMapping[elem.displayAs];
+
         uielem['variable ' + elem.rowId] = realObject;
         fflSolution.addNode(elem.rowId, uielem);
         fflSolution.restoreDelegateProperties(realObject, elem);

@@ -45,9 +45,9 @@ model TESTMODEL uses BaseModel
 	}
     variable TotalConfused
     {
-        title: TotalConfused;
-        formula: 102;
-        datatype: number;
+        title: EvaluateAsString(GetTitle(Total));
+        formula: EvaluateAsString(GetTitle(Total));
+        datatype: string;
         frequency: document;
         locked: 1;
         inputRequired: 1;

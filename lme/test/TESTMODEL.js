@@ -4,6 +4,9 @@ const log = require('ff-log');
 const fs = require('fs');
 const assert = require('assert');
 const newModel = new modelAPI();
+assert.ok((1 || false))
+assert.ok(!(null == 'true'))
+assert.ok(!(undefined == 'true'))
 /**
  * FFL->LME->WebExport
  */
@@ -14,13 +17,9 @@ const nodes = newModel.exportWebModel().nodes;
  * Declare variables
  */
 const [VariableOne, VariableTwo, Total] = [nodes.VariableOne, nodes.VariableTwo, nodes.Total];
-const [VariableOneFormula, VariableTwoFormula, TotalFormula] = [nodes.VariableOne.node.delegate.formula, nodes.VariableTwo.node.delegate.formula, nodes.Total.node.delegate.formula];
 
-log.debug("Test formula [" + VariableOneFormula + "]")
 assert.equal(VariableOne.value, 101, "default value is 101. Found [" + VariableOne.value + ']');
-log.debug("Test formula [" + VariableTwoFormula + "]")
 assert.equal(VariableTwo.value, 102, "default value is 102");
-log.debug("Test formula [" + TotalFormula + "]")
 //101+102=203
 assert.equal(Total.value, 203, "default value is 102. but is [" + Total.value + "][" + VariableOne.parsed + "]");
 VariableOne.value = 200;

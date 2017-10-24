@@ -7,40 +7,20 @@
     <title>angular app</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script>
-        function loadScript(url, callback) {
-            var script = document.createElement("script")
-            script.type = "text/javascript";
-            if (script.readyState) { //IE
-                script.onreadystatechange = function() {
-                    if (script.readyState == "loaded" || script.readyState == "complete") {
-                        script.onreadystatechange = null;
-                        callback();
-                    }
-                };
-            } else { //Others
-                script.onload = function() {
-                    callback();
-                };
-            }
-            script.src = url;
-            document.getElementsByTagName("head")[0].appendChild(script);
-        }
-
-        angular.module('angapp', []).controller('kspController', function($scope) {
+        angular.module('angapp', []).controller('kspController', function($scope, $http) {
             var url = window.location.href.split("/")
             var result = url[0] + "//" + url[2].split(':')[0]
-            loadScript(result + ':8080/DEMO/transformFFL_LME/KSP', function() {
-                $scope.$apply(function() {
-                    $scope.LME_MODEL = LME.exportWebModel()
-                    $scope.ffl = LME.exportFFL();
-                });
+
+            $http.get('KSP.js').then(function(data) {
+                eval(data.data)
+                $scope.LME_MODEL = LME.exportWebModel()
+
+            }).catch(function(err) {
+                console.info(err);
             });
         });
     </script>
     <style>
-
-
-
         input:required {
             border-color: #800000;
             border-width: 1px;
@@ -59,15 +39,23 @@
             <table>
                 <tr ng-repeat="figure in LME_MODEL.nodes" ng-show="figure.visible">
                     <td><span>{{figure.title}}</span></td>
-                    <td><span ng-bind="figure.visible"></span></td>
-                    <td><span ng-bind="figure.locked"></span></td>
-                    <td><span ng-bind="figure.required"></span></td>
-                    <td><input ng-readonly="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder="{{figure.rowId}}"/></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.visible"></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.locked"></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
+                    <td><input ng-readonly="figure.locked" ng-disabled="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder=""/></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
+                    <td><input ng-readonly="figure.locked" ng-disabled="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder=""/></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
+                    <td><input ng-readonly="figure.locked" ng-disabled="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder=""/></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
+                    <td><input ng-readonly="figure.locked" ng-disabled="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder=""/></td>
+                    <td><input disabled type="checkbox" ng-checked="figure.required"></td>
                 </tr>
             </table>
-        </td>
-        <td>
-            <pre ng-bind="ffl"></pre>
         </td>
     </tr>
 </table>

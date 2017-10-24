@@ -162,7 +162,8 @@
       "type": "noCacheUnlocked",
       "refs": {
         "TESTMODEL_Total_value": true,
-        "TESTMODEL_VariableTwo_required": true
+        "TESTMODEL_VariableTwo_required": true,
+        "TESTMODEL_TotalConfused_value": true
       },
       "formulaDependencys": [
         {
@@ -179,6 +180,11 @@
           "name": "TESTMODEL_VariableTwo_value",
           "association": "deps",
           "refId": 100006
+        },
+        {
+          "name": "TESTMODEL_TotalConfused_value",
+          "association": "refs",
+          "refId": 100012
         }
       ],
       "deps": {
@@ -209,12 +215,20 @@
       "refs": {
         "TESTMODEL_TotalConfused_value": true
       },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "102",
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_Total_value",
+          "association": "deps",
+          "refId": 100010
+        }
+      ],
+      "deps": {
+        "TESTMODEL_Total_value": true
+      },
+      "original": "EvaluateAsString(GetTitle(Total))",
       "index": 100012,
       "name": "TESTMODEL_TotalConfused_value",
-      "parsed": "102",
+      "parsed": "String(GetTitle(a100010('100010',x,y.base,z,v)))",
       "id": 100012
     },
     {
@@ -224,10 +238,10 @@
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "'TotalConfused'",
+      "original": "'EvaluateAsString(GetTitle(Total))'",
       "index": 100013,
       "name": "TESTMODEL_TotalConfused_title",
-      "parsed": "'TotalConfused'",
+      "parsed": "'EvaluateAsString(GetTitle(Total))'",
       "id": 100013
     }
   ],
