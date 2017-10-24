@@ -6,6 +6,7 @@
   "private": true,
   "author": "Michael Bakker",
   "scripts": {
+    "install": "bower install &",
     "test": "node test/TESTMODEL.js",
     "start": "node app.js"
   },
