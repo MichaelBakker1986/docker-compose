@@ -53,7 +53,7 @@ model MVO uses BaseModel
         datatype: string;
         frequency: document;
         data_options: unscalable;
-        title: "Layout namesdd";
+        title: "Layout X";
         visible: 1;
         options_title: locked;
       }
