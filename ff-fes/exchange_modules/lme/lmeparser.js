@@ -4,7 +4,7 @@ var PropertiesAssembler = require('../../fesjs/PropertiesAssembler.js')
 var FunctionMap = require('../../fesjs/FunctionMap.js')
 var log = require('ff-log');
 
-function FormulaInfo(data, schema) {
+function FormulaInfo(data, schema, modelName) {
     this.formulas = [];
     var self = this;
     var data = [];
@@ -17,18 +17,18 @@ function FormulaInfo(data, schema) {
         self.addFormula(formula)
     });
     var names = {};
-    var modelName = 'V05_';
+    var modelNamePrefix = modelName + '_';
     this.formulas.forEach(function(formula) {
         var name = correctFileName(formula.name);
         if (names[name] === undefined) {
             names[name] = true;
-            var title = forms[modelName + name + '_title'] || {original: null};
-            var visible = forms[modelName + name + '_visible'] || {original: false};
-            var value = forms[modelName + name + '_value'] || {original: ''};
-            var formula_trend = forms[modelName + name + '_trend'] || {original: ''};
-            var formula_notrend = forms[modelName + name + '_notrend'] || {original: ''};
-            var locked = forms[modelName + name + '_locked'] || {original: false};
-            var choices = forms[modelName + name + '_choices'] || {original: null};
+            var title = forms[modelNamePrefix + name + '_title'] || {original: null};
+            var visible = forms[modelNamePrefix + name + '_visible'] || {original: false};
+            var value = forms[modelNamePrefix + name + '_value'] || {original: ''};
+            var formula_trend = forms[modelNamePrefix + name + '_trend'] || {original: ''};
+            var formula_notrend = forms[modelNamePrefix + name + '_notrend'] || {original: ''};
+            var locked = forms[modelNamePrefix + name + '_locked'] || {original: false};
+            var choices = forms[modelNamePrefix + name + '_choices'] || {original: null};
             data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original])
         }
     })
@@ -89,7 +89,7 @@ var unwantedKeys = {
 LMEParser.prototype.deParse = function(rowId, workbook) {
     var modelName = workbook.getSolutionName();
     var formulaInfo = {};
-    let info = new FormulaInfo(formulaInfo, {});
+    let info = new FormulaInfo(formulaInfo, {}, modelName);
     info.name = modelName;
     PropertiesAssembler.findAllInSolution(modelName, function(property) {
         info.nodes.push(property)

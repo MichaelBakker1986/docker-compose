@@ -184,7 +184,7 @@
         {
           "name": "TESTMODEL_TotalConfused_value",
           "association": "refs",
-          "refId": 100012
+          "refId": 100015
         }
       ],
       "deps": {
@@ -213,6 +213,46 @@
     {
       "type": "noCacheUnlocked",
       "refs": {
+        "TESTMODEL_OneFixedDecimal_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "100.801+100.9999999",
+      "index": 100012,
+      "name": "TESTMODEL_OneFixedDecimal_value",
+      "parsed": "100.801+100.9999999",
+      "id": 100012
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "TESTMODEL_OneFixedDecimal_title": true,
+        "TESTMODEL_ZeroFixedDecimal_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'OneFixedDecimal'",
+      "index": 100013,
+      "name": "TESTMODEL_OneFixedDecimal_title",
+      "parsed": "'OneFixedDecimal'",
+      "id": 100013
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_ZeroFixedDecimal_value": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "100.801+100.9999999",
+      "index": 100014,
+      "name": "TESTMODEL_ZeroFixedDecimal_value",
+      "parsed": "100.801+100.9999999",
+      "id": 100014
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
         "TESTMODEL_TotalConfused_value": true
       },
       "formulaDependencys": [
@@ -226,10 +266,10 @@
         "TESTMODEL_Total_value": true
       },
       "original": "EvaluateAsString(GetTitle(Total))",
-      "index": 100012,
+      "index": 100015,
       "name": "TESTMODEL_TotalConfused_value",
       "parsed": "String(GetTitle(a100010('100010',x,y.base,z,v)))",
-      "id": 100012
+      "id": 100015
     },
     {
       "type": "noCacheLocked",
@@ -239,17 +279,17 @@
       "formulaDependencys": [],
       "deps": {},
       "original": "'EvaluateAsString(GetTitle(Total))'",
-      "index": 100013,
+      "index": 100016,
       "name": "TESTMODEL_TotalConfused_title",
       "parsed": "'EvaluateAsString(GetTitle(Total))'",
-      "id": 100013
+      "id": 100016
     }
   ],
   "data": [
     [
       "TotalConfusedMore",
-      null,
-      "",
+      "'TotalConfusedMore'",
+      "101",
       "",
       "",
       false,
@@ -258,8 +298,8 @@
     ],
     [
       "VariableOne",
-      null,
-      "",
+      "'VariableOne'",
+      "101",
       "",
       "",
       false,
@@ -268,8 +308,18 @@
     ],
     [
       "VariableTwo",
-      null,
+      "'VariableTwo'",
+      "102",
       "",
+      "",
+      "VariableOne!=100",
+      false,
+      null
+    ],
+    [
+      "Total",
+      "'Total'",
+      "VariableOne+VariableTwo",
       "",
       "",
       false,
@@ -277,9 +327,19 @@
       null
     ],
     [
-      "Total",
-      null,
+      "OneFixedDecimal",
+      "'OneFixedDecimal'",
+      "100.801+100.9999999",
       "",
+      "",
+      false,
+      false,
+      null
+    ],
+    [
+      "ZeroFixedDecimal",
+      null,
+      "100.801+100.9999999",
       "",
       "",
       false,
@@ -288,8 +348,8 @@
     ],
     [
       "TotalConfused",
-      null,
-      "",
+      "'EvaluateAsString(GetTitle(Total))'",
+      "EvaluateAsString(GetTitle(Total))",
       "",
       "",
       false,
@@ -327,6 +387,18 @@
         {
           "name": "TESTMODEL_Total_value",
           "rowId": "Total",
+          "colId": "value",
+          "identifier": "TESTMODEL_root_value"
+        },
+        {
+          "name": "TESTMODEL_OneFixedDecimal_value",
+          "rowId": "OneFixedDecimal",
+          "colId": "value",
+          "identifier": "TESTMODEL_root_value"
+        },
+        {
+          "name": "TESTMODEL_ZeroFixedDecimal_value",
+          "rowId": "ZeroFixedDecimal",
           "colId": "value",
           "identifier": "TESTMODEL_root_value"
         },
@@ -501,14 +573,62 @@
       "displayAs": "PropertyType"
     },
     {
+      "rowId": "OneFixedDecimal",
+      "solutionName": "TESTMODEL",
+      "colId": "value",
+      "name": "TESTMODEL_OneFixedDecimal_value",
+      "nodes": [],
+      "ref": 100012,
+      "formulaName": "TESTMODEL_OneFixedDecimal_value",
+      "refId": 100012,
+      "displayAs": "StringAnswerType",
+      "frequency": "document",
+      "parentName": "root_value"
+    },
+    {
+      "rowId": "OneFixedDecimal",
+      "solutionName": "TESTMODEL",
+      "colId": "title",
+      "name": "TESTMODEL_OneFixedDecimal_title",
+      "nodes": [],
+      "ref": 100013,
+      "formulaName": "TESTMODEL_OneFixedDecimal_title",
+      "refId": 100013,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "ZeroFixedDecimal",
+      "solutionName": "TESTMODEL",
+      "colId": "value",
+      "name": "TESTMODEL_ZeroFixedDecimal_value",
+      "nodes": [],
+      "ref": 100014,
+      "formulaName": "TESTMODEL_ZeroFixedDecimal_value",
+      "refId": 100014,
+      "displayAs": "StringAnswerType",
+      "frequency": "document",
+      "parentName": "root_value"
+    },
+    {
+      "rowId": "ZeroFixedDecimal",
+      "solutionName": "TESTMODEL",
+      "colId": "title",
+      "name": "TESTMODEL_ZeroFixedDecimal_title",
+      "nodes": [],
+      "ref": 100013,
+      "formulaName": "TESTMODEL_OneFixedDecimal_title",
+      "refId": 100013,
+      "displayAs": "PropertyType"
+    },
+    {
       "rowId": "TotalConfused",
       "solutionName": "TESTMODEL",
       "colId": "value",
       "name": "TESTMODEL_TotalConfused_value",
       "nodes": [],
-      "ref": 100012,
+      "ref": 100015,
       "formulaName": "TESTMODEL_TotalConfused_value",
-      "refId": 100012,
+      "refId": 100015,
       "displayAs": "StringAnswerType",
       "frequency": "document",
       "parentName": "root_value"
@@ -519,9 +639,9 @@
       "colId": "title",
       "name": "TESTMODEL_TotalConfused_title",
       "nodes": [],
-      "ref": 100013,
+      "ref": 100016,
       "formulaName": "TESTMODEL_TotalConfused_title",
-      "refId": 100013,
+      "refId": 100016,
       "displayAs": "PropertyType"
     },
     {

@@ -43,6 +43,22 @@ model TESTMODEL uses BaseModel
 		locked: 1;
 		inputRequired: 1;
 	}
+	variable OneFixedDecimal
+	{
+    	title: OneFixedDecimal;
+    	formula: 100.801 + 100.9999999;
+    	datatype: number;
+    	frequency: document;
+	   	fixed_decimals: 1;
+	}
+	variable ZeroFixedDecimal
+	{
+    	title: OneFixedDecimal;
+    	formula: 100.801 + 100.9999999;
+    	datatype: number;
+    	frequency: document;
+	   	fixed_decimals: 0;
+	}
     variable TotalConfused
     {
         title: EvaluateAsString(GetTitle(Total));

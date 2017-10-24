@@ -56,7 +56,9 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
     logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
     FunctionMap.apiSet(localFormula, xas, yas, 0, value, context.values);
 };
-
+/**
+ * Default values, formatter transformers
+ */
 FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     var colType = col || 'value';
     var variable = fetchSolutionNode(row, colType);
@@ -68,6 +70,8 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     else {
         returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values);
     }
+    //TODO: should be added to the UI element or Formula
+    //formatter, for fixed decimals is a part of the UI, frequency is a part of the Formula.
     if (variable && variable.delegate && variable.delegate.fixed_decimals) {
         if (!isNaN(returnValue)) {
             var level = Math.pow(10, parseInt(variable.delegate.fixed_decimals));
