@@ -68,5 +68,12 @@ model TESTMODEL uses BaseModel
         locked: 1;
         inputRequired: 1;
     }
+    variable DataEntered
+    {
+        title: "DataEntered";
+        formula: DataEntered(Total);
+        datatype: number;
+        frequency: document;
+    }
   }
 }

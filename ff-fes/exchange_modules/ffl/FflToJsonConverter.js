@@ -199,6 +199,7 @@ FflToJsonConverter.prototype.parseFFL = function(contents) {
         formula_notrend: true,
         visible: true,
         title: true,
+        entered: true,
         locked: true,
         flipflop_notrend: true,
         inputRequired: true,

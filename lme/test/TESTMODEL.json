@@ -162,7 +162,8 @@
       "type": "noCacheUnlocked",
       "refs": {
         "TESTMODEL_Total_value": true,
-        "TESTMODEL_VariableTwo_required": true
+        "TESTMODEL_VariableTwo_required": true,
+        "TESTMODEL_DataEntered_value": true
       },
       "formulaDependencys": [
         {
@@ -179,6 +180,11 @@
           "name": "TESTMODEL_VariableTwo_value",
           "association": "deps",
           "refId": 100006
+        },
+        {
+          "name": "TESTMODEL_DataEntered_value",
+          "association": "refs",
+          "refId": 100016
         }
       ],
       "deps": {
@@ -272,6 +278,40 @@
       "name": "TESTMODEL_EvaluateStringTitle_value",
       "parsed": "String(a100011('100011',x,y.base,z,v))",
       "id": 100015
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "TESTMODEL_DataEntered_value": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_Total_value",
+          "association": "deps",
+          "refId": 100010
+        }
+      ],
+      "deps": {
+        "TESTMODEL_Total_value": true
+      },
+      "original": "DataEntered(Total)",
+      "index": 100016,
+      "name": "TESTMODEL_DataEntered_value",
+      "parsed": "v[100010][x.hash + y.hash + z]!==undefined",
+      "id": 100016
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "TESTMODEL_DataEntered_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'DataEntered'",
+      "index": 100017,
+      "name": "TESTMODEL_DataEntered_title",
+      "parsed": "'DataEntered'",
+      "id": 100017
     }
   ],
   "data": [
@@ -344,6 +384,16 @@
       false,
       false,
       null
+    ],
+    [
+      "DataEntered",
+      "'DataEntered'",
+      "DataEntered(Total)",
+      "",
+      "",
+      false,
+      false,
+      null
     ]
   ],
   "nodes": [
@@ -394,6 +444,12 @@
         {
           "name": "TESTMODEL_EvaluateStringTitle_value",
           "rowId": "EvaluateStringTitle",
+          "colId": "value",
+          "identifier": "TESTMODEL_root_value"
+        },
+        {
+          "name": "TESTMODEL_DataEntered_value",
+          "rowId": "DataEntered",
           "colId": "value",
           "identifier": "TESTMODEL_root_value"
         }
@@ -653,6 +709,30 @@
       "ref": 100003,
       "formulaName": "TESTMODEL_TotalConfusedMore_required",
       "refId": 100003,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "DataEntered",
+      "solutionName": "TESTMODEL",
+      "colId": "value",
+      "name": "TESTMODEL_DataEntered_value",
+      "nodes": [],
+      "ref": 100016,
+      "formulaName": "TESTMODEL_DataEntered_value",
+      "refId": 100016,
+      "displayAs": "StringAnswerType",
+      "frequency": "document",
+      "parentName": "root_value"
+    },
+    {
+      "rowId": "DataEntered",
+      "solutionName": "TESTMODEL",
+      "colId": "title",
+      "name": "TESTMODEL_DataEntered_title",
+      "nodes": [],
+      "ref": 100017,
+      "formulaName": "TESTMODEL_DataEntered_title",
+      "refId": 100017,
       "displayAs": "PropertyType"
     }
   ],

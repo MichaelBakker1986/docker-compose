@@ -61,6 +61,15 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
  */
 FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     var colType = col || 'value';
+    if (colType === 'entered') {
+        //kinda copy-paste, find way to refactor. there is no real enteredValue formula.
+        //retrieve the 'value' formula, check if there is an entered value
+        var variable = fetchSolutionNode(row, 'value');
+        var localFormula = findFormula(variable);
+        var id = localFormula.id || localFormula.index;
+        var hash = xas.hash + yas.hash + 0;
+        return context.values[id][hash];
+    }
     var variable = fetchSolutionNode(row, colType);
     var localFormula = findFormula(variable);
     var returnValue;
@@ -72,7 +81,7 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     }
     //TODO: should be added to the UI element or Formula
     //formatter, for fixed decimals is a part of the UI, frequency is a part of the Formula.
-    if (variable && variable.delegate && variable.delegate.fixed_decimals) {
+    if (variable && colType === 'value' && variable.delegate && variable.delegate.fixed_decimals) {
         if (!isNaN(returnValue)) {
             var level = Math.pow(10, parseInt(variable.delegate.fixed_decimals));
             returnValue = (Math.round(returnValue * level) / level)

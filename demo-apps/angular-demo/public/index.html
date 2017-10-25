@@ -22,7 +22,12 @@
             if (modelName) {
                 liveUrl = result + ':8080/DEMO/transformFFL_LME/' + modelName
             }
-
+            $scope.clicked = function(e) {
+                console.info(e)
+            }
+            $scope.cclass = function(figure) {
+                return figure.entered ? 'isentered' : '';
+            }
             $http.get(liveUrl).then(function(data) {
                 eval(data.data)
                 $scope.LME_MODEL = LME.exportWebModel()
@@ -33,6 +38,9 @@
         });
     </script>
     <style>
+        input {
+            border: 1px solid #ccc;
+        }
 
         input:required {
             border-color: #800000;
@@ -46,6 +54,12 @@
 
         .lmetable td {
             white-space: nowrap;
+        }
+
+        input.isentered {
+            border-left: 2px solid #000;
+            border-right: 1px solid #ccc;
+            color: #1A3485;
         }
 
         td.txttd {
@@ -66,17 +80,17 @@
     <tr>
         <td>
             <H1>Figure {{LME_MODEL.name}}</H1>
-            <table class="lmetable">
-                <tr ng-repeat="figure in LME_MODEL.nodes" ng-show="figure.visible">
-                    <td ng-click="echo(figure)"> ¡</td>
-                    <td class="txttd"><span class="text">{{figure.title}}</span></td>
-                    <td ng-click="goto(figure)"> ²</td>
-                    <td ng-click="goto(figure)"> ³</td>
+            <table ng-click="clicked($event)" class="lmetable">
+                <tr ng-repeat="f in LME_MODEL.nodes" ng-show="f.visible">
+                    <td ng-click="echo(f)"> ¡</td>
+                    <td class="txttd"><span class="text">{{f.title}}</span></td>
+                    <td ng-click="goto(f)"> ²</td>
+                    <td ng-click="goto(f)"> ³</td>
                     <td>-</td>
                     <td>€</td>
                     <td ng-repeat="column in [ 1 , 2 , 3 ]">
                         <span>-</span>
-                        <input ng-readonly="figure.locked" ng-disabled="figure.locked" ng-required="figure.required" ng-model="figure.value" placeholder="">
+                        <input ng-class="cclass(f)" ng-readonly="f.locked" ng-disabled="f.locked" ng-required="f.required" ng-model="f.value" placeholder="">
                         <span>*</span>
                     </td>
                     <td>+</td>

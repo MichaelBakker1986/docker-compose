@@ -1,13 +1,9 @@
-/**
- * Created by Gyllion-PC on 13-4-2017.
- */
 var WorkBook = require('../../ff-fes/fesjs/JSWorkBook')
 var FESContext = require('../../ff-fes/fesjs/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
 require('../../ff-math/ff-math')
 var fesjsApi = require('../../ff-fes/ff-fes').fesjs;
-var JUNIT = require('../../ff-fes/test/JUNIT');
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
@@ -15,7 +11,7 @@ fesjsApi.addFunctions(excelPlugin);
 
 var wbKSP = new WorkBook(new FESContext());
 var fs = require("fs");
-var buf = fs.readFileSync('resources/KSP.ffl', "utf8");
+var buf = fs.readFileSync(__dirname + '/KSP.ffl', "utf8");
 wbKSP.importSolution((buf), 'ffl')
 wbKSP.set('IncomeParent01', 25000)
 assert(wbKSP.get('IncomeParent01') === 25000)

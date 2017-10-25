@@ -14,7 +14,7 @@ var log = require('ff-log')
 var assert = require('assert')
 require('../ff-math/ff-math')
 var fesjsApi = require('../ff-fes/ff-fes').fesjs;
-var JUNIT = require('../ff-fes/test/JUNIT');
+var fs = require('fs');
 fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
@@ -148,11 +148,11 @@ function modelVariableName(name) {
 }
 
 var wbKSP = new WorkBook(new FESContext());
-wbKSP.importSolution(JUNIT.getFile('../../lme-model-tests/resources/KSP.ffl'), 'ffl')
+wbKSP.importSolution("" + fs.readFileSync(__dirname + '/KSP/KSP.ffl'), 'ffl')
 var untestedformulas = 0;
 var totalformulas = 0;
 var formulas = {}
-FormulaService.visitFormulas(function (formula) {
+FormulaService.visitFormulas(function(formula) {
     totalformulas++;
 
     var variableName = formula.name.replace(/(_value$|_title$|_choices$|_locked$|_visible$)/gmi, '');
@@ -175,7 +175,7 @@ FormulaService.visitFormulas(function (formula) {
 log.info('KSP untested formulas:[%s/%s]', untestedformulas, totalformulas)
 wbKSP.set('FES_LAYOUT', 'IIFRS-PL')
 var layoutNR = wbKSP.get('FES_LAYOUTNR');
-var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices').filter(function (choice) {
+var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices').filter(function(choice) {
     return parseInt(choice.name) === layoutNR;
 });
 assert(layoutNRChoice[0].value === ' Polish');
@@ -206,6 +206,7 @@ assert(wbKSP.get('Q_MAP06_STATUS') == wbKSP.get('Q_MAP06') == true);
 
 var pad = '            '
 wbKSP.get('CostsYearFiveSixSeven', 'value', 12)
+
 function testVariable(variableName, level, column) {
     var indent = pad.substring(0, level);
     var result = {};

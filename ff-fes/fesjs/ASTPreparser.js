@@ -3,7 +3,6 @@ var log = require('ff-log')
 var AST = require('../../ast-node-utils/index').ast;
 var escodegen = require('escodegen');
 var xArgument = {
-    "type": "Identifier",
     "name": "x"
 };
 

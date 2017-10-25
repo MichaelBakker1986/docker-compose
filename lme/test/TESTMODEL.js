@@ -21,7 +21,7 @@ const nodes = newModel.exportWebModel().nodes;
 /**
  * Declare variables
  */
-const [VariableOne, VariableTwo, Total, OneFixedDecimal, ZeroFixedDecimal, EvaluateStringTitle] = [nodes.VariableOne, nodes.VariableTwo, nodes.Total, nodes.OneFixedDecimal, nodes.ZeroFixedDecimal, nodes.EvaluateStringTitle];
+const [VariableOne, VariableTwo, Total, OneFixedDecimal, ZeroFixedDecimal, EvaluateStringTitle, DataEntered] = [nodes.VariableOne, nodes.VariableTwo, nodes.Total, nodes.OneFixedDecimal, nodes.ZeroFixedDecimal, nodes.EvaluateStringTitle, nodes.DataEntered];
 
 assert.equal(VariableOne.value, 101, "default value is 101. Found [" + VariableOne.value + ']');
 assert.equal(VariableTwo.value, 102, "default value is 102");
@@ -50,5 +50,6 @@ assert.equal(VariableTwo.required, true, "inputRequired: Total > 1000;" + Total.
 assert.equal(OneFixedDecimal.value.countDecimals(), 1);
 assert.equal(ZeroFixedDecimal.value.countDecimals(), 0);
 assert.equal(EvaluateStringTitle.title, Total.title, 'Testing EvaluateStringTitle.title failed. ["' + EvaluateStringTitle.title + '"], it should be the same as Total.title ["' + Total.title + '"] ["' + EvaluateStringTitle.title + " == " + Total.title + '"]')
-
+assert.ok(VariableOne.entered)
+assert.ok(!Total.entered)
 log.info('Tests passed');

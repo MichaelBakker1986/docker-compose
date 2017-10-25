@@ -42,7 +42,7 @@ function FormulaInfo(data, schema, modelName) {
     var counter = 0;
     types.forEach(function(type) {
         self.meta.view.columns.push({
-            "width": ['locked', 'visible'].indexOf(type) == -1 ? 50 : undefined,
+            "width": ['locked', 'visible', 'entered'].indexOf(type) == -1 ? 50 : undefined,
             "name": type,
             "dataTypeName": "text",
             "fieldName": type,

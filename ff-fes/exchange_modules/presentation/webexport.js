@@ -55,7 +55,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     var lmeTree = new LMETree(modelName, workbook);
     workbook.visitProperties(rootNode, function(node) {
         if (node !== rootNode) {
-            lmeTree.addNode(node, ['title', 'value', 'visible', 'locked', 'required'])
+            lmeTree.addNode(node, ['title', 'value', 'visible', 'entered', 'locked', 'required'])
         }
     })
     return lmeTree;

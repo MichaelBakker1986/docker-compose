@@ -8,8 +8,6 @@ var log = require('ff-log');
 var FESContext = require('../fesjs/fescontext');
 var wb = new WorkBook(new FESContext());
 wb.updateValues();
-//var kspModel = JUNIT.getFile('KSP.ffl');
-//wb.importSolution(kspModel, 'ffl');
 
 wb.createFormula("0", 'caseselect');
 wb.createFormula('Case(caseselect,[0, 576 || 1, 906 || 2, 535 || 3, 535])', 'CaseTestVariable')
