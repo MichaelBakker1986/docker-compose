@@ -33,8 +33,8 @@
         "TESTMODEL_VariableOne_required": true,
         "TESTMODEL_Total_locked": true,
         "TESTMODEL_Total_required": true,
-        "TESTMODEL_TotalConfused_locked": true,
-        "TESTMODEL_TotalConfused_required": true
+        "TESTMODEL_EvaluateStringTitle_locked": true,
+        "TESTMODEL_EvaluateStringTitle_required": true
       },
       "formulaDependencys": [],
       "deps": {},
@@ -163,7 +163,7 @@
       "refs": {
         "TESTMODEL_Total_value": true,
         "TESTMODEL_VariableTwo_required": true,
-        "TESTMODEL_TotalConfused_value": true
+        "TESTMODEL_EvaluateStringTitle_value": true
       },
       "formulaDependencys": [
         {
@@ -182,7 +182,7 @@
           "refId": 100006
         },
         {
-          "name": "TESTMODEL_TotalConfused_value",
+          "name": "TESTMODEL_EvaluateStringTitle_value",
           "association": "refs",
           "refId": 100015
         }
@@ -253,7 +253,7 @@
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "TESTMODEL_TotalConfused_value": true
+        "TESTMODEL_EvaluateStringTitle_value": true
       },
       "formulaDependencys": [
         {
@@ -267,20 +267,20 @@
       },
       "original": "EvaluateAsString(GetTitle(Total))",
       "index": 100015,
-      "name": "TESTMODEL_TotalConfused_value",
+      "name": "TESTMODEL_EvaluateStringTitle_value",
       "parsed": "String(GetTitle(a100010('100010',x,y.base,z,v)))",
       "id": 100015
     },
     {
       "type": "noCacheLocked",
       "refs": {
-        "TESTMODEL_TotalConfused_title": true
+        "TESTMODEL_EvaluateStringTitle_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'EvaluateAsString(GetTitle(Total))'",
       "index": 100016,
-      "name": "TESTMODEL_TotalConfused_title",
+      "name": "TESTMODEL_EvaluateStringTitle_title",
       "parsed": "'EvaluateAsString(GetTitle(Total))'",
       "id": 100016
     }
@@ -347,7 +347,7 @@
       null
     ],
     [
-      "TotalConfused",
+      "EvaluateStringTitle",
       "'EvaluateAsString(GetTitle(Total))'",
       "EvaluateAsString(GetTitle(Total))",
       "",
@@ -403,8 +403,8 @@
           "identifier": "TESTMODEL_root_value"
         },
         {
-          "name": "TESTMODEL_TotalConfused_value",
-          "rowId": "TotalConfused",
+          "name": "TESTMODEL_EvaluateStringTitle_value",
+          "rowId": "EvaluateStringTitle",
           "colId": "value",
           "identifier": "TESTMODEL_root_value"
         }
@@ -621,34 +621,34 @@
       "displayAs": "PropertyType"
     },
     {
-      "rowId": "TotalConfused",
+      "rowId": "EvaluateStringTitle",
       "solutionName": "TESTMODEL",
       "colId": "value",
-      "name": "TESTMODEL_TotalConfused_value",
+      "name": "TESTMODEL_EvaluateStringTitle_value",
       "nodes": [],
       "ref": 100015,
-      "formulaName": "TESTMODEL_TotalConfused_value",
+      "formulaName": "TESTMODEL_EvaluateStringTitle_value",
       "refId": 100015,
       "displayAs": "StringAnswerType",
       "frequency": "document",
       "parentName": "root_value"
     },
     {
-      "rowId": "TotalConfused",
+      "rowId": "EvaluateStringTitle",
       "solutionName": "TESTMODEL",
       "colId": "title",
-      "name": "TESTMODEL_TotalConfused_title",
+      "name": "TESTMODEL_EvaluateStringTitle_title",
       "nodes": [],
       "ref": 100016,
-      "formulaName": "TESTMODEL_TotalConfused_title",
+      "formulaName": "TESTMODEL_EvaluateStringTitle_title",
       "refId": 100016,
       "displayAs": "PropertyType"
     },
     {
-      "rowId": "TotalConfused",
+      "rowId": "EvaluateStringTitle",
       "solutionName": "TESTMODEL",
       "colId": "locked",
-      "name": "TESTMODEL_TotalConfused_locked",
+      "name": "TESTMODEL_EvaluateStringTitle_locked",
       "nodes": [],
       "ref": 100003,
       "formulaName": "TESTMODEL_TotalConfusedMore_required",
@@ -656,10 +656,10 @@
       "displayAs": "PropertyType"
     },
     {
-      "rowId": "TotalConfused",
+      "rowId": "EvaluateStringTitle",
       "solutionName": "TESTMODEL",
       "colId": "required",
-      "name": "TESTMODEL_TotalConfused_required",
+      "name": "TESTMODEL_EvaluateStringTitle_required",
       "nodes": [],
       "ref": 100003,
       "formulaName": "TESTMODEL_TotalConfusedMore_required",

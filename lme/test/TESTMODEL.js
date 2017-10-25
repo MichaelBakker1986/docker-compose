@@ -7,8 +7,8 @@ const newModel = new modelAPI();
 assert.ok((1 || false));
 assert.ok(!(null == 'true'));
 assert.ok(!(undefined == 'true'));
-Number.prototype.countDecimals = function () {
-    if(Math.floor(this.valueOf()) === this.valueOf()) return 0;
+Number.prototype.countDecimals = function() {
+    if (Math.floor(this.valueOf()) === this.valueOf()) return 0;
     return this.toString().split(".")[1].length || 0;
 }
 
@@ -21,7 +21,7 @@ const nodes = newModel.exportWebModel().nodes;
 /**
  * Declare variables
  */
-const [VariableOne, VariableTwo, Total, OneFixedDecimal,ZeroFixedDecimal] = [nodes.VariableOne, nodes.VariableTwo, nodes.Total, nodes.OneFixedDecimal,nodes.ZeroFixedDecimal];
+const [VariableOne, VariableTwo, Total, OneFixedDecimal, ZeroFixedDecimal, EvaluateStringTitle] = [nodes.VariableOne, nodes.VariableTwo, nodes.Total, nodes.OneFixedDecimal, nodes.ZeroFixedDecimal, nodes.EvaluateStringTitle];
 
 assert.equal(VariableOne.value, 101, "default value is 101. Found [" + VariableOne.value + ']');
 assert.equal(VariableTwo.value, 102, "default value is 102");
@@ -49,6 +49,7 @@ assert.equal(VariableTwo.required, true, "inputRequired: Total > 1000;" + Total.
 
 assert.equal(OneFixedDecimal.value.countDecimals(), 1);
 assert.equal(ZeroFixedDecimal.value.countDecimals(), 0);
+assert.equal(EvaluateStringTitle.title, Total.title, 'Testing EvaluateStringTitle.title failed. ["' + EvaluateStringTitle.title + '"], it should be the same as Total.title ["' + Total.title + '"] ["' + EvaluateStringTitle.title + " == " + Total.title + '"]')
 
 log.info('Tests passed');
 

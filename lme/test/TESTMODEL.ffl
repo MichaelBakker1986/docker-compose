@@ -59,7 +59,7 @@ model TESTMODEL uses BaseModel
     	frequency: document;
 	   	fixed_decimals: 0;
 	}
-    variable TotalConfused
+    variable EvaluateStringTitle
     {
         title: EvaluateAsString(GetTitle(Total));
         formula: EvaluateAsString(GetTitle(Total));

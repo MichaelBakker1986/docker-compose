@@ -95,7 +95,7 @@ httpServer.listen(port, () => {
 });
 
 function testAndDeploy() {
-    const command = 'cd .. && npm test && cd lme'
+    const command = 'cd .. && npm install && npm test'
     exec(command).then((data) => {
         console.info(data.stdout)
         log(data.stderr)
