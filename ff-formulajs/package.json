@@ -4,7 +4,7 @@
   "main": "ff-formulajs.js",
   "description": "binding between ff-fes and formulajs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ff-formulasjs-test.js"
   },
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",

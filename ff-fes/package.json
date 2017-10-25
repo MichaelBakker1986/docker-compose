@@ -11,8 +11,9 @@
   "main": "ff-fes.js",
   "dependencies": {
     "escodegen": "^1.8.0",
-    "esprima": "^2.7.2",
     "eslint": "3.19.0",
+    "esprima": "^2.7.2",
+    "formulajs": "^1.0.8",
     "stack-adt": "^0.2.3"
   },
   "repository": {},

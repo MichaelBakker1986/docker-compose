@@ -4,11 +4,12 @@
   "description": "",
   "main": "ff-KSP.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ksptest.js"
   },
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "exceljs": "^0.6.2"
+    "exceljs": "^0.6.2",
+    "formulajs": "^1.0.8"
   }
 }

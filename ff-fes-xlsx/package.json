@@ -4,7 +4,7 @@
   "description": "ff-fes-xlsx",
   "main": "ff-fes-xlsx.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node xlsxTest.js"
   },
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",
