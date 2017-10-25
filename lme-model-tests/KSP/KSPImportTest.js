@@ -4,7 +4,6 @@
  * formulas containing ":" are not parsed correctly, changes are made within KSP.ffl file
  *
  */
-global.loglevel = "info";
 var FormulaService = require('../../ff-fes/fesjs/FormulaService')
 var WorkBook = require('../../ff-fes/fesjs/JSWorkBook')
 var FESContext = require('../../ff-fes/fesjs/fescontext')

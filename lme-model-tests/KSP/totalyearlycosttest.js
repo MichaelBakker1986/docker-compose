@@ -1,7 +1,6 @@
 /**
  * Created by Gyllion-PC on 13-4-2017.
  */
-global.loglevel = 'debug'
 var WorkBook = require('../../ff-fes/fesjs/JSWorkBook')
 var FESContext = require('../../ff-fes/fesjs/fescontext')
 var log = require('ff-log')
