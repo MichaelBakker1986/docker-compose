@@ -1,14 +1,15 @@
 {
-  "name": "ff-KSP",
+  "name": "lme-model-tests",
   "version": "1.0.0",
   "description": "",
-  "main": "ff-KSP.js",
+  "main": "lme-model-tests.js",
   "scripts": {
-    "test": "node ksptest.js"
+    "test": "concurrently \"node lme-model-tests.js\" \"node MVO/MVOtest.js\""
   },
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^3.5.0",
     "exceljs": "^0.6.2",
     "formulajs": "^1.0.8"
   }

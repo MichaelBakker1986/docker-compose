@@ -4,6 +4,8 @@
  * formulas containing ":" are not parsed correctly, changes are made within KSP.ffl file
  *
  */
+require('./KSP/KSPImportTest')
+require('./KSP/totalyearlycosttest')
 global.loglevel = 'debug'
 var FormulaService = require('../ff-fes/fesjs/FormulaService')
 var WorkBook = require('../ff-fes/fesjs/JSWorkBook')
@@ -146,7 +148,7 @@ function modelVariableName(name) {
 }
 
 var wbKSP = new WorkBook(new FESContext());
-wbKSP.importSolution(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl')
+wbKSP.importSolution(JUNIT.getFile('../../lme-model-tests/resources/KSP.ffl'), 'ffl')
 var untestedformulas = 0;
 var totalformulas = 0;
 var formulas = {}

@@ -11,7 +11,7 @@ var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 
 var wb = new WorkBook(new FESContext());
-wb.importSolution(JUNIT.getFile('../../ff-KSP/resources/KSP.ffl'), 'ffl');
+wb.importSolution(JUNIT.getFile('../../lme-model-tests/resources/KSP.ffl'), 'ffl');
 
 excelPlugin.initComplete.then(function () {
     //assert(wb.get('ActualDiapers') === 300);

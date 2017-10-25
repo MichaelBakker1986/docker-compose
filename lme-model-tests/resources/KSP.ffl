@@ -515,7 +515,7 @@ model KSP uses BaseModel
             inputRequired: 1;
             data_options: unscalable;
             fixed_decimals: 1;
-            title: "Working hours parent 1;
+            title: "Working hours parent 1";
             options_title: locked;
           }
 		  variable WorkingHoursWeeklyParent02
@@ -525,7 +525,7 @@ model KSP uses BaseModel
             inputRequired: 1;
             data_options: unscalable;
             fixed_decimals: 1;
-            title: "Working hours parent 2;
+            title: "Working hours parent 2";
             options_title: locked;
           }
           variable WorkingHoursWeeklyOfLeastWorkingParent
@@ -898,7 +898,7 @@ model KSP uses BaseModel
           variable ChildcareContribution
           {
             datatype: none;
-            title: "Childcare Contribution"&";
+            title: "Childcare Contribution";
             top_blanklines: 1;
             locked: 1;
             options_title: locked;
