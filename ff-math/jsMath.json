@@ -113,7 +113,7 @@
   },
   "GetTitle": {
     "args": "one",
-    "body": "{ return 1 }"
+    "body": "{ return 'tst' }"
   },
   "Pos": {
     "args": "one,two",

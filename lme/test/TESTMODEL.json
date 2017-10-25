@@ -162,8 +162,7 @@
       "type": "noCacheUnlocked",
       "refs": {
         "TESTMODEL_Total_value": true,
-        "TESTMODEL_VariableTwo_required": true,
-        "TESTMODEL_EvaluateStringTitle_value": true
+        "TESTMODEL_VariableTwo_required": true
       },
       "formulaDependencys": [
         {
@@ -180,11 +179,6 @@
           "name": "TESTMODEL_VariableTwo_value",
           "association": "deps",
           "refId": 100006
-        },
-        {
-          "name": "TESTMODEL_EvaluateStringTitle_value",
-          "association": "refs",
-          "refId": 100015
         }
       ],
       "deps": {
@@ -200,9 +194,16 @@
     {
       "type": "noCacheLocked",
       "refs": {
-        "TESTMODEL_Total_title": true
+        "TESTMODEL_Total_title": true,
+        "TESTMODEL_EvaluateStringTitle_value": true
       },
-      "formulaDependencys": [],
+      "formulaDependencys": [
+        {
+          "name": "TESTMODEL_EvaluateStringTitle_value",
+          "association": "refs",
+          "refId": 100015
+        }
+      ],
       "deps": {},
       "original": "'Total'",
       "index": 100011,
@@ -253,36 +254,24 @@
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "TESTMODEL_EvaluateStringTitle_value": true
+        "TESTMODEL_EvaluateStringTitle_value": true,
+        "TESTMODEL_EvaluateStringTitle_title": true
       },
       "formulaDependencys": [
         {
-          "name": "TESTMODEL_Total_value",
+          "name": "TESTMODEL_Total_title",
           "association": "deps",
-          "refId": 100010
+          "refId": 100011
         }
       ],
       "deps": {
-        "TESTMODEL_Total_value": true
+        "TESTMODEL_Total_title": true
       },
       "original": "EvaluateAsString(GetTitle(Total))",
       "index": 100015,
       "name": "TESTMODEL_EvaluateStringTitle_value",
-      "parsed": "String(GetTitle(a100010('100010',x,y.base,z,v)))",
+      "parsed": "String(a100011('100011',x,y.base,z,v))",
       "id": 100015
-    },
-    {
-      "type": "noCacheLocked",
-      "refs": {
-        "TESTMODEL_EvaluateStringTitle_title": true
-      },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "'EvaluateAsString(GetTitle(Total))'",
-      "index": 100016,
-      "name": "TESTMODEL_EvaluateStringTitle_title",
-      "parsed": "'EvaluateAsString(GetTitle(Total))'",
-      "id": 100016
     }
   ],
   "data": [
@@ -348,7 +337,7 @@
     ],
     [
       "EvaluateStringTitle",
-      "'EvaluateAsString(GetTitle(Total))'",
+      null,
       "EvaluateAsString(GetTitle(Total))",
       "",
       "",
@@ -639,9 +628,9 @@
       "colId": "title",
       "name": "TESTMODEL_EvaluateStringTitle_title",
       "nodes": [],
-      "ref": 100016,
-      "formulaName": "TESTMODEL_EvaluateStringTitle_title",
-      "refId": 100016,
+      "ref": 100015,
+      "formulaName": "TESTMODEL_EvaluateStringTitle_value",
+      "refId": 100015,
       "displayAs": "PropertyType"
     },
     {

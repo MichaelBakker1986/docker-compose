@@ -235,7 +235,7 @@ FflToJsonConverter.prototype.parseFFL = function(contents) {
                     var secondPart = split[1].trim();
                     if (firstWord === 'title') {
                         validate(node, firstWord);
-                        secondPart = "'" + secondPart.replace(/["']*/gm, "") + "'";// secondPart.replace(/'/gm, "\\'");
+                        //secondPart = "'" + secondPart.replace(/["']*/gm, "") + "'";// secondPart.replace(/'/gm, "\\'");
                         node[firstWord] = FinFormula.parseFormula(secondPart);
                     }
                     else if (formulaType[firstWord] !== undefined) {

@@ -52,6 +52,3 @@ assert.equal(ZeroFixedDecimal.value.countDecimals(), 0);
 assert.equal(EvaluateStringTitle.title, Total.title, 'Testing EvaluateStringTitle.title failed. ["' + EvaluateStringTitle.title + '"], it should be the same as Total.title ["' + Total.title + '"] ["' + EvaluateStringTitle.title + " == " + Total.title + '"]')
 
 log.info('Tests passed');
-
-
-

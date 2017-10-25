@@ -11,7 +11,7 @@ model TESTMODEL uses BaseModel
   {
     variable TotalConfusedMore
     {
-        title: TotalConfusedMore;
+        title: "TotalConfusedMore";
         formula: 101;
         datatype: number;
         frequency: document;
@@ -19,7 +19,7 @@ model TESTMODEL uses BaseModel
     }
 	variable VariableOne
 	{
-	    title: VariableOne;
+	    title: "VariableOne";
 		datatype: number;
 		formula: 101;
         frequency: document;
@@ -27,7 +27,7 @@ model TESTMODEL uses BaseModel
 	}
 	variable VariableTwo
 	{
-	    title: VariableTwo;
+	    title: "VariableTwo";
 	    formula: 102;
 		datatype: number;
 		inputRequired: Total > 1000;
@@ -36,7 +36,7 @@ model TESTMODEL uses BaseModel
 	}
 	variable Total
 	{
-		title: Total;
+		title: "Total";
 		formula: VariableOne + VariableTwo;
 		datatype: number;
 		frequency: document;
@@ -45,7 +45,7 @@ model TESTMODEL uses BaseModel
 	}
 	variable OneFixedDecimal
 	{
-    	title: OneFixedDecimal;
+    	title: "OneFixedDecimal";
     	formula: 100.801 + 100.9999999;
     	datatype: number;
     	frequency: document;
@@ -53,7 +53,7 @@ model TESTMODEL uses BaseModel
 	}
 	variable ZeroFixedDecimal
 	{
-    	title: OneFixedDecimal;
+    	title: "OneFixedDecimal";
     	formula: 100.801 + 100.9999999;
     	datatype: number;
     	frequency: document;

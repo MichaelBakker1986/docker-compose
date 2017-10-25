@@ -125,6 +125,15 @@ simplified.InputRequired = function(formulaInfo, node) {
     delete node.callee;
     delete node.refn;
 }
+simplified.GetTitle = function(formulaInfo, node) {
+    node.type = "MemberExpression";
+    node.computed = false;
+    node.object = AST.IDENTIFIER(node.arguments[0].name);
+    node.property = AST.IDENTIFIER(propertiesArr[6]);
+    delete node.arguments;
+    delete node.callee;
+    delete node.refn;
+}
 simplified.TSUM = function(formulaInfo, node) {
     //all calls into a tuple should return a []
     //convert TSUM(variableName) into SUM(TVALUES(a123,'123',x,y,z,v))
