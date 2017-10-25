@@ -1,15 +1,15 @@
-var express = require('express');
-var app = express();
-var httpServer = require('http').createServer(app);
-var request = require('request');
-var port = 8081;
-var exec = require('child-process-promise').exec;
-var spawn = require('child-process-promise').spawn;
-var busy = false;
+const express = require('express');
+const app = express();
+const httpServer = require('http').createServer(app);
+const request = require('request');
+const port = 8081;
+const exec = require('child-process-promise').exec;
+const spawn = require('child-process-promise').spawn;
+let busy = false;
 var childProcesses = {}
-var hostname = require('os').hostname();
-var developer = hostname === 'michael';
-var levels = {
+const hostname = require('os').hostname();
+const developer = hostname === 'michael';
+const levels = {
     info: {
         level: 'info',
         color: 'green'
