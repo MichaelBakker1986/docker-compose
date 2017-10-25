@@ -26,7 +26,8 @@
                 console.info(e)
             }
             $scope.cclass = function(figure) {
-                return figure.entered ? 'isentered' : '';
+                let visible = figure.visible ? 'on ' : '';
+                return visible + (figure.entered ? 'isentered' : '');
             }
             $http.get(liveUrl).then(function(data) {
                 eval(data.data)

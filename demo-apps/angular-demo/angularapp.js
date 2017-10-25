@@ -10,6 +10,6 @@ app.use(serveStatic(__dirname + "/public/"));
 app.use(serveStatic(__dirname + "/bower_components/"));
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.info('<a href="http://' + add + ':' + port + '/index.html">Angular demo Application</a><span> up.</span>');
+        console.info('<a href="http://' + add + ':' + port + '/#model=KSP">Angular demo Application</a><span> up.</span>');
     })
 });

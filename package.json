@@ -24,7 +24,8 @@
   },
   "scripts": {
     "install": "concurrently \"cd ff-fes-xlsx && npm install\" \"cd ff-fes && npm install\" \"cd lme && npm install\" \"cd ff-formulajs && npm install\" \"cd demo-apps/angular-demo && npm install\" \"cd demo-apps/adminlte && npm install\"",
-    "test": "concurrently \"cd ff-fes-xlsx && npm test\" \"cd ff-fes && npm test\" \"cd lme-model-tests && npm test\" \"cd lme && npm test\""
+    "test": "concurrently \"cd ff-fes-xlsx && npm test\" \"cd ff-fes && npm test\" \"cd lme-model-tests && npm test\" \"cd lme && npm test\"",
+    "start": "node lme/update.js"
   },
   "repository": {
     "type": "git",
