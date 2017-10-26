@@ -31,7 +31,7 @@ model MVO uses BaseModel
         title: "KVOLayout";
         top_blanklines: 1;
         locked: 1;
-        visible: 1;
+        visible: FES_EXCHANGE_RATES = 2;
         choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
         options_title: locked;
         options: locked;

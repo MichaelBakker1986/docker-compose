@@ -19,7 +19,8 @@ function aceEdit() {
     editor.setOptions({
         enableBasicAutocompletion: true,
         /*   enableSnippets: true,*/
-        enableLiveAutocompletion: true
+        enableLiveAutocompletion: true,
+        maxLines: 50
     });
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('progress', function(e) {
