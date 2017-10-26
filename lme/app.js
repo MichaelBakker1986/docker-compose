@@ -95,6 +95,6 @@ app.listen(port, () => {
             '<a href="' + domain + 'DEMO/transformFFL_LME/KSP">JS API</a></br>\n' +
             '<a href="' + domain + 'branches">JSON API (branches)</a></br>\n' +
             '<a href="' + domain + 'models">JSON API (models)</a></br>\n' +
-            '<a href="' + domain + 'ide.html">IDE application</a><span> up.</span>');
+            '<a href="' + domain + 'ide.html">SIMPLE IDE application</a><span> up.</span>');
     })
 });

@@ -16,6 +16,6 @@ app.use(serveStatic(__dirname + "/../../lme/bower_components/"));
 app.use(serveStatic(__dirname + "/../../lme/public/"));
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.info('<a href="http://' + add + ':' + port + '/ideplus.html">AdminLTE demo Application</a><span> up.</span>');
+        console.info('<a href="http://' + add + ':' + port + '/ideplus.html">IDE DEMO Application</a><span> up.</span>');
     })
 });
