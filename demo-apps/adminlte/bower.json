@@ -6,7 +6,7 @@
   ],
   "description": "Admin dashboard and control panel template",
   "main": [
-    "index2.html",
+    "ideplus.html",
     "dist/css/AdminLTE.css",
     "dist/js/app.js",
     "build/less/AdminLTE.less"
@@ -31,6 +31,7 @@
     "documentation"
   ],
   "dependencies": {
+    "ace-builds": "^1.2.8",
     "bootstrap-slider": "*",
     "chart.js": "1.0.*",
     "ckeditor": "^4.7.0",

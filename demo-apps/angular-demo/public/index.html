@@ -49,6 +49,14 @@
             border-width: 1px;
         }
 
+        .lmetable tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .lmetable tr:nth-child(even) {
+            background-color: whitesmoke;
+        }
+
         input:read-only {
             border-width: 2px;
             border-color: transparent;
@@ -83,7 +91,7 @@
         <td>
             <H1>Figure {{LME_MODEL.name}}</H1>
             <table ng-click="clicked($event)" class="lmetable">
-                <tr ng-repeat="f in LME_MODEL.nodes" ng-show="f.visible">
+                <tr ng-repeat="f in LME_MODEL.nodes" ng-if="f.visible">
                     <td ng-click="echo(f)"> ¡</td>
                     <td class="txttd"><span class="text">{{f.title}}</span></td>
                     <td ng-click="goto(f)"> ²</td>
