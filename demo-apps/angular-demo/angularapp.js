@@ -16,7 +16,8 @@ app.use(serveStatic(__dirname + "/bower_components/"));
 app.get('/:id/transformFFL_LME/*', function(req, res) {
     var path = __dirname + '/CONFIGURATION/DEMO/' + req.originalUrl.substring(req.originalUrl.indexOf('transformFFL_LME/') + 17);
     if (!fs.existsSync(__dirname + '/CONFIGURATION/DEMO/')) {
-        fs.mkdir(__dirname + '/CONFIGURATION/DEMO/')
+        fs.mkdir(__dirname + '/CONFIGURATION/DEMO/', function() {
+        })
     }
     if (fs.existsSync(path)) {
         fs.createReadStream(path).pipe(res);
