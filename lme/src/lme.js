@@ -19,6 +19,9 @@ LME.prototype.exportLME = function() {
 LME.prototype.importLME = function(json) {
     this.lme.importSolution(json, 'lme')
 }
+LME.prototype.exportJavaScript = function() {
+    return this.lme.export('js');
+}
 LME.prototype.importFFL = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
 }

@@ -12,28 +12,28 @@ var xArgument = {
 var caseCount = 0;
 var simplified = {
     //gets Sels for the value also
-    ExpandLevel: function (formulaInfo, node) {
+    ExpandLevel: function(formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
             "name": "1.1"
         }];
     },
-    Min: function (formulaInfo, node) {
+    Min: function(formulaInfo, node) {
         node.callee.name = 'Math.min'
     },
     //we will need this one later to determine + or &&
-    EvaluateAsString: function (formulaInfo, node) {
+    EvaluateAsString: function(formulaInfo, node) {
         node.callee.name = 'String'
     },
-    Max: function (formulaInfo, node) {
+    Max: function(formulaInfo, node) {
         node.callee.name = 'Math.max'
     },
-    Abs: function (formulaInfo, node) {
+    Abs: function(formulaInfo, node) {
         node.callee.name = 'Math.abs'
     },
     //the format is strange, hard to get a better format in the fin->json parser.
     //Expected format: Case(X_MAP01_Verplicht,[0,0||1,10||2,20||11,30||12,120||13,130])
-    Case: function (formulaInfo, node) {
+    Case: function(formulaInfo, node) {
         assert.ok(node.arguments.length === 2, "Only expecting 2 arguments for now");
         var statements = node.arguments[1];
         assert.ok(statements.type === 'ArrayExpression', "Second argument has to be ArrayExpression for now");
@@ -90,7 +90,7 @@ var simplified = {
         log.debug('[%s] CASE parsed into: [%s]', formulaInfo.name, escodegen.generate(node));
     },
     //convert traditional If(q,a,b) into q?a:b, skip the entire Callee
-    If: function (formulaInfo, node) {
+    If: function(formulaInfo, node) {
         //could be replaced with the default property value..
         if (node.arguments.length === 2) {
             log.warn('Strange formuala setup IF(q,a,b) without b) Using NA as b. [' + formulaInfo.original + ']')
@@ -106,7 +106,7 @@ var simplified = {
         node.callee = undefined;
     },
     //wants horizontale aggregation from values in between two given columns
-    Hsum: function (formulaInfo, node) {
+    Hsum: function(formulaInfo, node) {
         /* node.arguments = [{
          "type": "Identifier",
          "name": "1"
@@ -121,7 +121,7 @@ var simplified = {
      }];
      },*/
     //returns max value in between two given columns. entered/non-entered
-    MaxValueT: function (formulaInfo, node) {
+    MaxValueT: function(formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
             "name": "1"
@@ -129,7 +129,7 @@ var simplified = {
     },
     //ExpandFraction ExpandFraction(VariableCosts,Sales)
     //http://wiki.findesk.com/index.php/ExpandFraction_(numeric_function)
-    ExpandFraction: function (formulaInfo, node) {
+    ExpandFraction: function(formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
             "name": "1"
@@ -138,7 +138,7 @@ var simplified = {
             "name": "2"
         }];
     },
-    ExpandOriginalValue: function (formulaInfo, node) {
+    ExpandOriginalValue: function(formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
             "name": "1"
@@ -147,13 +147,17 @@ var simplified = {
     /**
      * Inject the x parameter into the call
      */
-    FirstValueT: function (formulaInfo, node) {
+    FirstValueT: function(formulaInfo, node) {
         node.arguments.unshift(xArgument);
     },
-    DateToT: function (formulaInfo, node) {
-        node.arguments.unshift(xArgument);
+    DateToT: function(formulaInfo, node) {
+        node.arguments.unshift({
+            "type": "Literal",
+            "value": "x",
+            "raw": "x"
+        });
     },
-    Visible: function (formulaInfo, node) {
+    Visible: function(formulaInfo, node) {
         node.type = "MemberExpression";
         node.computed = false;
         node.object = AST.IDENTIFIER(node.arguments[0].name);
@@ -165,7 +169,7 @@ var simplified = {
     //now its provided with (x,SelectDecendents/Array,LambaExpression)
     //we gonna narrow it down until further use of the 'X'. so ForAll(array,property[])
     //now ForAllFunction has no use anymore
-    Count: function (formulaInfo, node) {
+    Count: function(formulaInfo, node) {
         //ok remove first argument X
         node.arguments.splice(0, 1);
         //give the lambda expression to the SelectDecendants function
@@ -173,13 +177,13 @@ var simplified = {
         //remove the lambda expression
         node.arguments.splice(1, 1);
     },
-    Self: function (formulaInfo, node) {
+    Self: function(formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
             "name": "1"
         }];
     },
-    Mut: function (formulaInfo, node) {
+    Mut: function(formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
             "name": "1"

@@ -6,6 +6,8 @@ function finFormulaGeneric(buf) {
 
     //temp case fix, <= lt,gt,lte,gte from Cases
     buf = buf.replace(/\[\<\=/gm, '[');
+    buf = buf.replace(/\[\</gm, '[');
+    buf = buf.replace(/\|\</gm, '|');
     buf = buf.replace(/\[\=/gm, '[');
     buf = buf.replace(/\|\<\=/gm, '|');
     buf = buf.replace(/\|\=/gm, '|');

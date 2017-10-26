@@ -20,7 +20,7 @@ function aceEdit() {
         enableBasicAutocompletion: true,
         /*   enableSnippets: true,*/
         enableLiveAutocompletion: true,
-        maxLines: 50
+        maxLines: 40
     });
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('progress', function(e) {

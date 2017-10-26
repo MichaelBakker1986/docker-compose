@@ -10,10 +10,11 @@
     "deasync": "^0.1.10",
     "escodegen": "^1.9.0",
     "esprima": "^4.0.0",
+    "excel-formula": "^1.4.2",
     "ff-fes": "^1.0.1",
-    "ff-math": "file:ff-math",
     "ff-formulajs": "^1.0.1",
     "ff-log": "file:ff-log",
+    "ff-math": "file:ff-math",
     "serve-favicon": "^2.4.5"
   },
   "devDependencies": {
