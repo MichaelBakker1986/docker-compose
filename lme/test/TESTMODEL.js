@@ -11,7 +11,6 @@ Number.prototype.countDecimals = function() {
     if (Math.floor(this.valueOf()) === this.valueOf()) return 0;
     return this.toString().split(".")[1].length || 0;
 }
-
 /**
  * FFL->LME->WebExport
  */
@@ -46,7 +45,6 @@ Total.value = null;
 assert.equal(VariableTwo.required, false, "inputRequired: Total > 1000;");
 VariableOne.value = 900;
 assert.equal(VariableTwo.required, true, "inputRequired: Total > 1000;" + Total.value);
-
 assert.equal(OneFixedDecimal.value.countDecimals(), 1);
 assert.equal(ZeroFixedDecimal.value.countDecimals(), 0);
 assert.equal(EvaluateStringTitle.title, Total.title, 'Testing EvaluateStringTitle.title failed. ["' + EvaluateStringTitle.title + '"], it should be the same as Total.title ["' + Total.title + '"] ["' + EvaluateStringTitle.title + " == " + Total.title + '"]')

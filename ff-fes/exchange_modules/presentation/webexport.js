@@ -19,15 +19,56 @@ function LMETree(name, workbook) {
     this.nodes = {};
 }
 
+var repeats = {
+    none: [1, 3],
+    column: [3, 1],
+    document: [1, 3]
+}
 LMETree.prototype.addNode = function(node, columns) {
 
     var workbook = this.workbook;
     var rowId = node.rowId;
-    var r = {};
+    var details = repeats[node.frequency];
+    var amount = repeats[node.frequency][0]
+    var colspan = repeats[node.frequency][1];
+    var rv = {
+        ammount: amount,
+        colspan: colspan,
+        cols: []
+    };
+
+
+    for (var cm = 0; cm < amount; cm++) {
+        var r = {}
+        rv.cols[cm] = r;
+        columns.forEach(function(column) {
+            //temp check, seems to proxy multiple times.
+            const ammount = cm;
+            let rval, vcount;
+            Object.defineProperty(r, column, {
+                get: function() {
+                    if (counter !== vcount) {
+                        vcount = counter;
+                        rval = workbook.get(rowId, column, ammount, 0);
+                        if (typeof(rval) === 'object') {
+                            rval = null;
+                        }
+                    }
+                    return rval;
+                },
+                set: function(v) {
+                    //only for 'value,formula_trend,...'
+                    counter++;
+                    var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
+                    workbook.set(rowId, value, column, ammount, 0);
+                }
+            });
+        });
+    }
     columns.forEach(function(column) {
         //temp check, seems to proxy multiple times.
         let rval, vcount;
-        Object.defineProperty(r, column, {
+        Object.defineProperty(rv, column, {
             get: function() {
                 if (counter !== vcount) {
                     vcount = counter;
@@ -46,7 +87,7 @@ LMETree.prototype.addNode = function(node, columns) {
             }
         });
     });
-    this.nodes[rowId] = r;
+    this.nodes[rowId] = rv;
 }
 
 WebExport.prototype.deParse = function(rowId, workbook) {

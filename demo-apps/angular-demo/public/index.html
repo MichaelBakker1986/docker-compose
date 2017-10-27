@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Angular DEMO</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="/css/AdminLTE.min.css">-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+
     <script>
         angular.module('angapp', []).controller('kspController', function($scope, $http) {
 
@@ -27,8 +31,7 @@
             }
 
             $scope.cclass = function(figure) {
-                let visible = figure.visible ? 'on ' : '';
-                return visible + (figure.entered ? 'isentered' : '');
+                return (figure.entered ? 'isentered' : '');
             }
             $http.get(liveUrl).then(function(data) {
                 eval(data.data)
@@ -40,13 +43,9 @@
         });
     </script>
     <style>
-        input {
-            border: 1px solid #ccc;
-        }
 
-        input:required {
-            border-color: #800000;
-            border-width: 1px;
+        .input-group {
+            width: 100%;
         }
 
         .lmetable tr:nth-child(odd) {
@@ -55,11 +54,6 @@
 
         .lmetable tr:nth-child(even) {
             background-color: whitesmoke;
-        }
-
-        input:read-only {
-            border-width: 2px;
-            border-color: transparent;
         }
 
         .lmetable td {
@@ -86,28 +80,31 @@
     </style>
 </head>
 <body ng-controller="kspController">
-<table>
-    <tr>
-        <td>
-            <H1>Figure {{LME_MODEL.name}}</H1>
-            <table ng-click="clicked($event)" class="lmetable">
-                <tr ng-repeat="f in LME_MODEL.nodes" ng-if="f.visible">
-                    <td ng-click="echo(f)"> ¡</td>
-                    <td class="txttd"><span class="text">{{f.title}}</span></td>
-                    <td ng-click="goto(f)"> ²</td>
-                    <td ng-click="goto(f)"> ³</td>
-                    <td>-</td>
-                    <td>€</td>
-                    <td ng-repeat="column in [ 1 , 2 , 3 ]">
-                        <span>-</span>
-                        <input ng-class="cclass(f)" ng-readonly="f.locked" ng-disabled="f.locked" ng-required="f.required" ng-model="f.value" placeholder="">
-                        <span>*</span>
-                    </td>
-                    <td>+</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
+<div class="">
+    <section class="container">
+        <section class="content-header">
+            <H1>Figure {{LME_MODEL.name}}
+                <small>Preview page</small>
+            </H1>
+        </section>
+
+        <table ng-click="clicked($event)" class="lmetable">
+            <tr ng-repeat="f in LME_MODEL.nodes" ng-if="f.visible">
+                <td><i class="fa fa-caret-right"></i></td>
+                <td class="txttd"><span contenteditable="true" class="text" ng-bind="f.title"></span></td>
+                <td ng-click="goto(f)"><i class="fa fa-info"></i></td>
+                <td ng-click="goto(f)"><i class="fa fa-link"></i></td>
+                <td ng-repeat="cv in f.cols" colspan="{{f.colspan}}">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                        <input type="text" class="form-control" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder="">
+                        <span class="input-group-addon"><i ng-if="cv.required" class="fa fa-asterisk"></i></span>
+                        <span ng-if="$last" class="input-group-addon"><i class="fa fa-plus"></i></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </section>
+</div>
 </body>
 </html>
