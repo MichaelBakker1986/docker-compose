@@ -79,7 +79,7 @@ function send(text, level) {
     request.post({
             url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + process.env.HIPCHAT_API_KEY,
             json: {
-                "color": 'green',
+                "color": level,
                 "message": text
             }
         }, (err, res, body) => {
@@ -95,6 +95,7 @@ httpServer.listen(port, () => {
 });
 
 function testAndDeploy() {
+    log('Running tests.', 'info')
     const command = 'cd .. && npm install && npm test'
     exec(command).then((data) => {
         log('Tests passed deploying stack ');
@@ -104,8 +105,8 @@ function testAndDeploy() {
         spawnChild('app')
 
     }).catch(function(err) {
-        log('Tests failed NOT deploying stack, and here the very readable Error. .');
-        //log(err);
+        log('Tests failed NOT deploying stack, and here the very readable Error. .', 'red');
+        log('' + err, 'red');
     });
 }
 
@@ -113,7 +114,7 @@ testAndDeploy();
 
 function log(message, levelArg) {
     if (message && hostname !== 'michael') {
-        send(message, 'info');
+        send(message, levelArg || 'green');
     }
     console.info(message);
 }
