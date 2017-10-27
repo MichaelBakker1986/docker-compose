@@ -54,7 +54,7 @@ model MVO uses BaseModel
         frequency: document;
         data_options: unscalable;
         formula: "";
-        title: "Layout";
+        title: "Very secret";
         visible: 1;
         options_title: locked;
       }
