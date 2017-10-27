@@ -1,6 +1,5 @@
 var express = require('express');
 var request = require('request');
-var rp = require('request-promise');
 
 var fs = require('fs')
 var port = 8083;
