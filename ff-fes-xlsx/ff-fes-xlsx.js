@@ -153,7 +153,7 @@ while (sync) {
 var entries = {
     'MatrixLookup': function(xlsfileName, tableName, row, col) {
         if (!matrix[tableName]) {
-            log.warn('Defined name not found [%s]:[%s:%s]', tableName, row, col);
+            log.warn('Defined matrix name not found [%s]:[%s:%s]', tableName, row, col);
         }
         if (matrix[tableName] && matrix[tableName].xasValues && matrix[tableName].xasValues[row] && matrix[tableName].xasValues[row][col]) {
             if (log.TRACE) {
@@ -164,8 +164,8 @@ var entries = {
         return NA;
     }
 };
-
 entries.Matrixlookup = entries.MatrixLookup;
+MatrixLookup = entries.MatrixLookup
 exports.xlsxLookup = {
     name: 'xlsx-lookup',
     entries: entries,
