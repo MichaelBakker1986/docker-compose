@@ -100,3 +100,4 @@ log.info(wb.get("TestCount"))*/
  - Use function [Count]
  - Use function [SelectDescendants]
  */
+throw Error('Test fail')
