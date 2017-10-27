@@ -27,7 +27,7 @@
                 liveUrl = '/DEMO/transformFFL_LME/' + modelName
             }
             $scope.sendData = function(e) {
-                alert(LME.exportData())
+                alert(JSON.stringify(LME.exportData(), null, 2))
             }
             $scope.clicked = function(e) {
                 console.info(e)

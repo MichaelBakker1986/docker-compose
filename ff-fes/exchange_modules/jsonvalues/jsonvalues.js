@@ -7,14 +7,22 @@ var jsonValues = {
     name: 'jsonvalues',
     extension: 'json',
     headername: 'JSON Values',
-    parse: function (values, workbook) {
+    parse: function(values, workbook) {
         updateValues(JSON.parse(values), workbook.context.values);
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
-    deParse: function (rowId, workbook) {
-        return workbook.getAllValues();
+    deParse: function(rowId, workbook) {
+        let allValues = workbook.getAllValues();
+        allValues.forEach(function(el) {
+            el.varName = correctFileName(el.varName)
+        })
+        return allValues;
     }
 };
+
+function correctFileName(name) {
+    return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
+}
 
 function updateValues(values, docValues) {
     for (var i = 0; i < values.length; i++) {
@@ -25,4 +33,5 @@ function updateValues(values, docValues) {
         docValues[obj.formulaId][obj.colId] = obj.value;
     }
 }
+
 SolutionFacade.addParser(jsonValues)
