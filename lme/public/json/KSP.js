@@ -36877,10 +36877,10 @@ LME.importLME(JSON_MODEL);
         }
       ],
       "deps": {},
-      "original": "undefined",
+      "original": "'something secret'",
       "index": 100009,
       "name": "MVO_FES_EXCHANGE_RATES_value",
-      "parsed": "undefined",
+      "parsed": "'something secret'",
       "id": 100009
     },
     {
@@ -48487,7 +48487,7 @@ LME.importLME(JSON_MODEL);
     [
       "FES_EXCHANGE_RATES",
       "'Exchange Rates'",
-      "undefined",
+      "'something secret'",
       "",
       "",
       false,
