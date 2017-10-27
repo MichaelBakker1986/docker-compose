@@ -83,10 +83,9 @@ app.use(serveStatic(__dirname + "/bower_components/"));
 app.listen(port, () => {
     require('dns').lookup(require('os').hostname(), (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
-        console.info('<a href="' + domain + 'index.html">DEMO application</a><span> up.</span></br>\n' +
+        console.info('<a href="' + domain + '">DEMO application</a><span> up.</span></br>\n' +
             '<a href="' + domain + 'DEMO/transformFFL_LME/KSP">JS API</a></br>\n' +
             '<a href="' + domain + 'branches">JSON API (branches)</a></br>\n' +
-            '<a href="' + domain + 'models">JSON API (models)</a></br>\n' +
-            '<a href="' + domain + 'ide.html">SIMPLE IDE application</a><span> up.</span>');
+            '<a href="' + domain + 'models">JSON API (models)</a></br><span> up.</span>');
     })
 });

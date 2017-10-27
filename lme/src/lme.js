@@ -3,6 +3,7 @@ MatrixLookup = function() {
     return 1;
 }
 require('../../ff-fes/exchange_modules/lme/lmeparser');
+require('../../ff-fes/exchange_modules/jsonvalues/jsonvalues');
 require('../../ff-math/ff-math');
 var fesjsApi = require('../../ff-fes/ff-fes').fesjs;
 fesjsApi.addFunctions(require("../../ff-formulajs/ff-formulajs").formulajs);
@@ -20,7 +21,7 @@ LME.prototype.importLME = function(json) {
     this.lme.importSolution(json, 'lme')
 }
 LME.prototype.exportJavaScript = function() {
- return   this.lme.export('js')
+    return this.lme.export('js')
 }
 LME.prototype.importFFL = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
@@ -33,5 +34,8 @@ LME.prototype.exportPresentation = function() {
 }
 LME.prototype.exportWebModel = function() {
     return this.lme.export('webexport')
+}
+LME.prototype.exportData = function() {
+    return this.lme.export('jsonvalues')
 }
 module.exports = LME;

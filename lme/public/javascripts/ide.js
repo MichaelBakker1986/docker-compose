@@ -42,7 +42,7 @@ function aceEdit() {
             model: modelName,
             data: editor.getSession().getValue()
         }, function(data) {
-            console.info('send complete');
+            alert('Model [' + modelName + '] is updated');
         });
     }
 

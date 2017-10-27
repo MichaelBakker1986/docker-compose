@@ -278,8 +278,8 @@ var AST = {
     cloneAST: cloneAST
 }
 module.exports = AST;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ast-node-utils/AST.js","/../ast-node-utils",undefined)
-},{"_process":61,"buffer":58}],2:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ast-node-utils\\AST.js","/..\\ast-node-utils",undefined)
+},{"_process":62,"buffer":59}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 function walkAst(func, info, parent, node) {
     func(info, node)
@@ -300,13 +300,13 @@ function walkAst(func, info, parent, node) {
     }
 }
 module.exports = walkAst;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ast-node-utils/ASTVisitor.js","/../ast-node-utils",undefined)
-},{"_process":61,"buffer":58}],3:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ast-node-utils\\ASTVisitor.js","/..\\ast-node-utils",undefined)
+},{"_process":62,"buffer":59}],3:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 exports.ast = require('./AST')
 exports.astWalk = require('./ASTVisitor')
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ast-node-utils/index.js","/../ast-node-utils",undefined)
-},{"./AST":1,"./ASTVisitor":2,"_process":61,"buffer":58}],4:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ast-node-utils\\index.js","/..\\ast-node-utils",undefined)
+},{"./AST":1,"./ASTVisitor":2,"_process":62,"buffer":59}],4:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var assert = require('assert');
 var fileParser = require('./fileParser');
@@ -578,8 +578,8 @@ FflToJsonConverter.prototype.deparseRegex = function(input) {
 }
 FflToJsonConverter.prototype.parseRegex = FinFormula.parseFormula;
 module.exports = FflToJsonConverter.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/ffl/FflToJsonConverter.js","/../ff-fes/exchange_modules/ffl",undefined)
-},{"../../fesjs/JSVisitor":15,"./FinFormula":5,"./fileParser":7,"_process":61,"assert":55,"buffer":58,"ff-log":35,"stack-adt":47}],5:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\ffl\\FflToJsonConverter.js","/..\\ff-fes\\exchange_modules\\ffl",undefined)
+},{"../../fesjs/JSVisitor":16,"./FinFormula":5,"./fileParser":7,"_process":62,"assert":56,"buffer":59,"ff-log":36,"stack-adt":48}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //http://excelformulabeautifier.com/
 function finFormulaGeneric(buf) {
@@ -716,8 +716,8 @@ FinFormula.prototype.fixCasing = function(buf) {
     })
 };
 module.exports = FinFormula.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/ffl/FinFormula.js","/../ff-fes/exchange_modules/ffl",undefined)
-},{"_process":61,"buffer":58}],6:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\ffl\\FinFormula.js","/..\\ff-fes\\exchange_modules\\ffl",undefined)
+},{"_process":62,"buffer":59}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var JSVisitor = require('../../fesjs/JSVisitor');
 var SolutionFacade = require('../../fesjs/SolutionFacade.js')
@@ -1006,8 +1006,8 @@ function parseFFLFormula(formula, node, row) {
 }
 
 SolutionFacade.addParser(FFLParser.prototype);
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/ffl/fflparser.js","/../ff-fes/exchange_modules/ffl",undefined)
-},{"../../../ast-node-utils/index":3,"../../fesjs/JSVisitor":15,"../../fesjs/SolutionFacade.js":20,"./FflToJsonConverter":4,"./FinFormula.js":5,"_process":61,"buffer":58,"esprima":28,"ff-log":35}],7:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\ffl\\fflparser.js","/..\\ff-fes\\exchange_modules\\ffl",undefined)
+},{"../../../ast-node-utils/index":3,"../../fesjs/JSVisitor":16,"../../fesjs/SolutionFacade.js":21,"./FflToJsonConverter":4,"./FinFormula.js":5,"_process":62,"buffer":59,"esprima":29,"ff-log":36}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 function deparseRegexs(deparsers, input)
 {
@@ -1022,8 +1022,39 @@ function deparseRegexs(deparsers, input)
 module.exports = {
     deparseRegexs: deparseRegexs
 };
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/ffl/fileParser.js","/../ff-fes/exchange_modules/ffl",undefined)
-},{"_process":61,"buffer":58}],8:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\ffl\\fileParser.js","/..\\ff-fes\\exchange_modules\\ffl",undefined)
+},{"_process":62,"buffer":59}],8:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*
+ First, most basic export of values
+ Just calling getAllValues() internally to export
+ */
+var SolutionFacade = require('../../fesjs/SolutionFacade');
+var jsonValues = {
+    name: 'jsonvalues',
+    extension: 'json',
+    headername: 'JSON Values',
+    parse: function (values, workbook) {
+        updateValues(JSON.parse(values), workbook.context.values);
+        return SolutionFacade.createSolution(workbook.getSolutionName());
+    },
+    deParse: function (rowId, workbook) {
+        return workbook.getAllValues();
+    }
+};
+
+function updateValues(values, docValues) {
+    for (var i = 0; i < values.length; i++) {
+        var obj = values[i];
+        if (!docValues[obj.formulaId]) {
+            docValues[obj.formulaId] = [];
+        }
+        docValues[obj.formulaId][obj.colId] = obj.value;
+    }
+}
+SolutionFacade.addParser(jsonValues)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\jsonvalues\\jsonvalues.js","/..\\ff-fes\\exchange_modules\\jsonvalues",undefined)
+},{"../../fesjs/SolutionFacade":21,"_process":62,"buffer":59}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var SolutionFacade = require('../../fesjs/SolutionFacade.js')
 var FormulaService = require('../../fesjs/FormulaService.js')
@@ -1126,8 +1157,8 @@ LMEParser.prototype.deParse = function(rowId, workbook) {
     }, 2);
 }
 SolutionFacade.addParser(LMEParser.prototype);
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/lme/lmeparser.js","/../ff-fes/exchange_modules/lme",undefined)
-},{"../../fesjs/FormulaService.js":13,"../../fesjs/FunctionMap.js":14,"../../fesjs/PropertiesAssembler.js":18,"../../fesjs/SolutionFacade.js":20,"_process":61,"buffer":58,"ff-log":35}],9:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\lme\\lmeparser.js","/..\\ff-fes\\exchange_modules\\lme",undefined)
+},{"../../fesjs/FormulaService.js":14,"../../fesjs/FunctionMap.js":15,"../../fesjs/PropertiesAssembler.js":19,"../../fesjs/SolutionFacade.js":21,"_process":62,"buffer":59,"ff-log":36}],10:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var SolutionFacade = require('../../fesjs/SolutionFacade');
 var log = require('ff-log')
@@ -1151,6 +1182,7 @@ function LMETree(name, workbook) {
 }
 
 var repeats = {
+    undefined: [3, 1],
     none: [1, 3],
     column: [3, 1],
     document: [1, 3]
@@ -1234,8 +1266,8 @@ WebExport.prototype.deParse = function(rowId, workbook) {
 }
 
 SolutionFacade.addParser(new WebExport())
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/presentation/webexport.js","/../ff-fes/exchange_modules/presentation",undefined)
-},{"../../fesjs/SolutionFacade":20,"_process":61,"buffer":58,"ff-log":35}],10:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\presentation\\webexport.js","/..\\ff-fes\\exchange_modules\\presentation",undefined)
+},{"../../fesjs/SolutionFacade":21,"_process":62,"buffer":59,"ff-log":36}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var assert = require("assert")
 var log = require('ff-log')
@@ -1440,8 +1472,8 @@ simplified.min = simplified.Min;
 simplified.max = simplified.Max;
 simplified.ABS = simplified.Abs;
 module.exports = simplified;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/ASTPreparser.js","/../ff-fes/fesjs",undefined)
-},{"../../ast-node-utils/index":3,"_process":61,"assert":55,"buffer":58,"escodegen":26,"ff-log":35}],11:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\ASTPreparser.js","/..\\ff-fes\\fesjs",undefined)
+},{"../../ast-node-utils/index":3,"_process":62,"assert":56,"buffer":59,"escodegen":27,"ff-log":36}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Bridge between FormulaService,PropertiesAssembler and FunctionMap
@@ -1575,8 +1607,8 @@ FESFacade.updateValueMap = function(values) {
 };
 FESFacade.visit = PropertiesAssembler.visitProperty;
 module.exports = FESFacade;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/FESFacade.js","/../ff-fes/fesjs",undefined)
-},{"./FormulaService":13,"./FunctionMap":14,"./PropertiesAssembler":18,"_process":61,"buffer":58,"ff-log":35}],12:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\FESFacade.js","/..\\ff-fes\\fesjs",undefined)
+},{"./FormulaService":14,"./FunctionMap":15,"./PropertiesAssembler":19,"_process":62,"buffer":59,"ff-log":36}],13:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Bootstrap formula's
@@ -1600,6 +1632,7 @@ module.exports = FESFacade;
  **/
 function FormulaBootstrap() {
 }
+
 var log = require('ff-log');
 var assert = require('assert');
 var AST = require('../../ast-node-utils/index').ast;
@@ -1738,6 +1771,7 @@ var astValues = {
     "type": "Identifier",
     "name": "v"
 };
+
 /**
  * Two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
  * There is no information which property is calling and cannot be resolved, since multiple sources can share a formula
@@ -1781,6 +1815,7 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
         }
     }
 }
+
 var varproperties = {}
 
 var defaultValues = {
@@ -1944,16 +1979,19 @@ var traverseTypes = {
         }
     }
 }
-global.ExpandGrowth = function(){
+global.ExpandGrowth = function() {
     return 0;
 }
-global.FormulaSetInT = function(){
+global.FormulaSetInT = function() {
     return 0;
 }
-global.Onzero = function(){
+global.Onzero = function() {
     return 0;
 }
-global.Hm = function(){return 0}
+global.Hm = function() {
+    return 0
+}
+
 //recursive walk the formula ast
 function buildFormula(formulaInfo, parent, node) {
     // just simplify some MODEL code, when a CallExpression appears, we might want to modify the structure before
@@ -2028,13 +2066,15 @@ function buildFormula(formulaInfo, parent, node) {
         }
     }
     if (!traverseTypes[node.type]) {
-        log.error('ERROR: [%s] not registered AST expression', node.type);
+        log.error('ERROR: [%s] not registered AST expression [%s]', node.type, node.name);
     }
     traverseTypes[node.type](formulaInfo, parent, node);
 }
+
 function regenerate(body) {
     return escodegen.generate(body, escodegenOptions);
 }
+
 //public function, will return the parsed string
 //its getting nasty, with supporting this many options, consider only expecting on valid type either AST or STRING only
 FormulaBootstrap.prototype.parseAsFormula = function(formulaInfo) {
@@ -2071,8 +2111,8 @@ FormulaBootstrap.prototype.initStateBootstrap = function(configs) {
     }
 };
 module.exports = FormulaBootstrap.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/FormulaBootstrap.js","/../ff-fes/fesjs",undefined)
-},{"../../ast-node-utils/index":3,"./ASTPreparser":10,"_process":61,"assert":55,"buffer":58,"escodegen":26,"esprima":28,"ff-log":35}],13:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\FormulaBootstrap.js","/..\\ff-fes\\fesjs",undefined)
+},{"../../ast-node-utils/index":3,"./ASTPreparser":11,"_process":62,"assert":56,"buffer":59,"escodegen":27,"esprima":29,"ff-log":36}],14:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var log = require('ff-log');
 var AST = require('../../ast-node-utils/index').ast;
@@ -2236,8 +2276,8 @@ FormulaService.prototype.moveFormula = function (old, newFormula) {
     }
 }
 module.exports = FormulaService.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/FormulaService.js","/../ff-fes/fesjs",undefined)
-},{"../../ast-node-utils/index":3,"_process":61,"assert":55,"buffer":58,"escodegen":26,"ff-log":35}],14:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\FormulaService.js","/..\\ff-fes\\fesjs",undefined)
+},{"../../ast-node-utils/index":3,"_process":62,"assert":56,"buffer":59,"escodegen":27,"ff-log":36}],15:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var log = require('ff-log')
 /**
@@ -2330,8 +2370,8 @@ fm.prototype.moveFunction = function(oldFormula, newFormula) {
     }
 };
 module.exports = fm.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/FunctionMap.js","/../ff-fes/fesjs",undefined)
-},{"_process":61,"buffer":58,"ff-log":35}],15:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\FunctionMap.js","/..\\ff-fes\\fesjs",undefined)
+},{"_process":62,"buffer":59,"ff-log":36}],16:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Just a Javascript Native Object visitor
@@ -2504,8 +2544,8 @@ module.exports = {
     find: find,
     findPredicate: findPredicate
 };
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/JSVisitor.js","/../ff-fes/fesjs",undefined)
-},{"_process":61,"buffer":58}],16:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\JSVisitor.js","/..\\ff-fes\\fesjs",undefined)
+},{"_process":62,"buffer":59}],17:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  This class should have less business logic,
@@ -2782,8 +2822,8 @@ JSWorkBook.prototype.getAllValues = function() {
     return FESFacade.getAllValues(this.context.values);
 };
 module.exports = JSWorkBook;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/JSWorkBook.js","/../ff-fes/fesjs",undefined)
-},{"../../ast-node-utils/index":3,"./FESFacade":11,"./SolutionFacade":20,"./XAxis":22,"./YAxis":23,"_process":61,"buffer":58,"ff-log":35}],17:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\JSWorkBook.js","/..\\ff-fes\\fesjs",undefined)
+},{"../../ast-node-utils/index":3,"./FESFacade":12,"./SolutionFacade":21,"./XAxis":23,"./YAxis":24,"_process":62,"buffer":59,"ff-log":36}],18:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  register/resolve echange modules e.g. ffl,screendefinition,presentation
@@ -2812,8 +2852,8 @@ ParserService.prototype.findParser = function (parserName) {
     return parsers[parserName];
 }
 module.exports = ParserService.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/ParserService.js","/../ff-fes/fesjs",undefined)
-},{"_process":61,"buffer":58}],18:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\ParserService.js","/..\\ff-fes\\fesjs",undefined)
+},{"_process":62,"buffer":59}],19:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 function PropertiesAssembler() {
 }
@@ -2991,8 +3031,8 @@ function visitInternal(node, func, depth) {
 PropertiesAssembler.prototype.getRootProperty = getRootNode;
 PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 module.exports = PropertiesAssembler.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/PropertiesAssembler.js","/../ff-fes/fesjs",undefined)
-},{"_process":61,"buffer":58}],19:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\PropertiesAssembler.js","/..\\ff-fes\\fesjs",undefined)
+},{"_process":62,"buffer":59}],20:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Parsers/Exchange modules create Solution objects filled with generic metadata (formula's,properties concerning a variable)
@@ -3123,8 +3163,8 @@ Solution.prototype.size = function () {
     return this.nodes.length;
 }
 module.exports = Solution;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/Solution.js","/../ff-fes/fesjs",undefined)
-},{"_process":61,"buffer":58}],20:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\Solution.js","/..\\ff-fes\\fesjs",undefined)
+},{"_process":62,"buffer":59}],21:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Solution encapsulation
@@ -3272,8 +3312,8 @@ SolutionFacade.prototype.properties = {
 SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex;
 FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
  module.exports = SolutionFacade.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/SolutionFacade.js","/../ff-fes/fesjs",undefined)
-},{"./FormulaBootstrap":12,"./FormulaService":13,"./FunctionMap":14,"./ParserService":17,"./PropertiesAssembler":18,"./Solution":19,"_process":61,"buffer":58,"esprima":28,"ff-log":35}],21:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\SolutionFacade.js","/..\\ff-fes\\fesjs",undefined)
+},{"./FormulaBootstrap":13,"./FormulaService":14,"./FunctionMap":15,"./ParserService":18,"./PropertiesAssembler":19,"./Solution":20,"_process":62,"buffer":59,"esprima":29,"ff-log":36}],22:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var assert = require('assert')
 function TupleIndexConverter() {
@@ -3300,8 +3340,8 @@ assert.equal(2, TupleIndexConverter.prototype.getIndexNumber(ctx, '2Alisia'));
 assert.equal(0, TupleIndexConverter.prototype.getIndexNumber({}, 'Alisia'));
 module.exports = TupleIndexConverter.prototype;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/TupleIndexConverter.js","/../ff-fes/fesjs",undefined)
-},{"_process":61,"assert":55,"buffer":58}],22:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\TupleIndexConverter.js","/..\\ff-fes\\fesjs",undefined)
+},{"_process":62,"assert":56,"buffer":59}],23:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* 
  *  Here we will do column/timeline ordering, referencing previous and adjacent columns
@@ -3696,8 +3736,8 @@ CalculationDocument.prototype = calculateCalculationDocument(importData);
 // tricks here.. but possible from here only prevbkyear, might consider removing *[agg*], only keep the *[top*]
 // currently we have max7 year 10timelines
 module.exports = CalculationDocument.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/XAxis.js","/../ff-fes/fesjs",undefined)
-},{"_process":61,"buffer":58,"ff-log":35}],23:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\XAxis.js","/..\\ff-fes\\fesjs",undefined)
+},{"_process":62,"buffer":59,"ff-log":36}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Tuple concept
@@ -3773,8 +3813,8 @@ TINSTANCEBYNAME = function(v, fId, y, name) {
 //17bit for tuples, 8*8*8*8 (16bit)
 //when entering tuple in tuple y.children should be called.
 module.exports = all;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/YAxis.js","/../ff-fes/fesjs",undefined)
-},{"_process":61,"buffer":58}],24:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\YAxis.js","/..\\ff-fes\\fesjs",undefined)
+},{"_process":62,"buffer":59}],25:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //app scope context
 var ApplicationContext = {
@@ -3803,8 +3843,8 @@ Context.prototype.getValues = function () {
 }
 module.exports = Context
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/fescontext.js","/../ff-fes/fesjs",undefined)
-},{"_process":61,"buffer":58}],25:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\fescontext.js","/..\\ff-fes\\fesjs",undefined)
+},{"_process":62,"buffer":59}],26:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* jshint node: true */
 /**
@@ -3949,8 +3989,8 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
 }
 exports.fesjs = FESApi.prototype;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/ff-fes.js","/../ff-fes",undefined)
-},{"./exchange_modules/ffl/fflparser":6,"./fesjs/JSWorkBook":16,"./fesjs/TupleIndexConverter":21,"./fesjs/fescontext":24,"_process":61,"buffer":58,"ff-log":35}],26:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\ff-fes.js","/..\\ff-fes",undefined)
+},{"./exchange_modules/ffl/fflparser":6,"./fesjs/JSWorkBook":17,"./fesjs/TupleIndexConverter":22,"./fesjs/fescontext":25,"_process":62,"buffer":59,"ff-log":36}],27:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
   Copyright (C) 2012-2014 Yusuke Suzuki <utatane.tea@gmail.com>
@@ -6563,13 +6603,13 @@ exports.fesjs = FESApi.prototype;
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/escodegen/escodegen.js","/../ff-fes/node_modules/escodegen",undefined)
-},{"./package.json":27,"_process":61,"buffer":58,"estraverse":29,"esutils":34,"source-map":46}],27:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\escodegen\\escodegen.js","/..\\ff-fes\\node_modules\\escodegen",undefined)
+},{"./package.json":28,"_process":62,"buffer":59,"estraverse":30,"esutils":35,"source-map":47}],28:[function(require,module,exports){
 module.exports={
   "_args": [
     [
       "escodegen@1.9.0",
-      "/home/jenkins/fesjs/ff-fes"
+      "C:\\stack\\lme\\ff-fes"
     ]
   ],
   "_from": "escodegen@1.9.0",
@@ -6594,7 +6634,7 @@ module.exports={
   ],
   "_resolved": "https://registry.npmjs.org/escodegen/-/escodegen-1.9.0.tgz",
   "_spec": "1.9.0",
-  "_where": "/home/jenkins/fesjs/ff-fes",
+  "_where": "C:\\stack\\lme\\ff-fes",
   "bin": {
     "esgenerate": "./bin/esgenerate.js",
     "escodegen": "./bin/escodegen.js"
@@ -6661,7 +6701,7 @@ module.exports={
   "version": "1.9.0"
 }
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
   Copyright (c) jQuery Foundation, Inc. and Contributors, All Rights Reserved.
@@ -12404,8 +12444,8 @@ module.exports={
 }));
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/esprima/esprima.js","/../ff-fes/node_modules/esprima",undefined)
-},{"_process":61,"buffer":58}],29:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\esprima\\esprima.js","/..\\ff-fes\\node_modules\\esprima",undefined)
+},{"_process":62,"buffer":59}],30:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
   Copyright (C) 2012-2013 Yusuke Suzuki <utatane.tea@gmail.com>
@@ -13257,13 +13297,13 @@ module.exports={
 }(exports));
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/estraverse/estraverse.js","/../ff-fes/node_modules/estraverse",undefined)
-},{"./package.json":30,"_process":61,"buffer":58}],30:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\estraverse\\estraverse.js","/..\\ff-fes\\node_modules\\estraverse",undefined)
+},{"./package.json":31,"_process":62,"buffer":59}],31:[function(require,module,exports){
 module.exports={
   "_args": [
     [
       "estraverse@4.2.0",
-      "/home/jenkins/fesjs/ff-fes"
+      "C:\\stack\\lme\\ff-fes"
     ]
   ],
   "_from": "estraverse@4.2.0",
@@ -13291,7 +13331,7 @@ module.exports={
   ],
   "_resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.2.0.tgz",
   "_spec": "4.2.0",
-  "_where": "/home/jenkins/fesjs/ff-fes",
+  "_where": "C:\\stack\\lme\\ff-fes",
   "bugs": {
     "url": "https://github.com/estools/estraverse/issues"
   },
@@ -13335,7 +13375,7 @@ module.exports={
   "version": "4.2.0"
 }
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
@@ -13482,8 +13522,8 @@ module.exports={
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/esutils/lib/ast.js","/../ff-fes/node_modules/esutils/lib",undefined)
-},{"_process":61,"buffer":58}],32:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\esutils\\lib\\ast.js","/..\\ff-fes\\node_modules\\esutils\\lib",undefined)
+},{"_process":62,"buffer":59}],33:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
   Copyright (C) 2013-2014 Yusuke Suzuki <utatane.tea@gmail.com>
@@ -13621,8 +13661,8 @@ module.exports={
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/esutils/lib/code.js","/../ff-fes/node_modules/esutils/lib",undefined)
-},{"_process":61,"buffer":58}],33:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\esutils\\lib\\code.js","/..\\ff-fes\\node_modules\\esutils\\lib",undefined)
+},{"_process":62,"buffer":59}],34:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
@@ -13790,8 +13830,8 @@ module.exports={
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/esutils/lib/keyword.js","/../ff-fes/node_modules/esutils/lib",undefined)
-},{"./code":32,"_process":61,"buffer":58}],34:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\esutils\\lib\\keyword.js","/..\\ff-fes\\node_modules\\esutils\\lib",undefined)
+},{"./code":33,"_process":62,"buffer":59}],35:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
@@ -13827,8 +13867,8 @@ module.exports={
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/esutils/lib/utils.js","/../ff-fes/node_modules/esutils/lib",undefined)
-},{"./ast":31,"./code":32,"./keyword":33,"_process":61,"buffer":58}],35:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\esutils\\lib\\utils.js","/..\\ff-fes\\node_modules\\esutils\\lib",undefined)
+},{"./ast":32,"./code":33,"./keyword":34,"_process":62,"buffer":59}],36:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var tracer = require('tracer');
 var format = "HH.MM.ssl";
@@ -13866,8 +13906,8 @@ console.INFO = levels[logLevel].INFO;
 console.TRACE = levels[logLevel].TRACE;
 module.exports = console;
 exports = console;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/ff-log/ff-log.js","/../ff-fes/node_modules/ff-log",undefined)
-},{"_process":61,"buffer":58,"tracer":83}],36:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\ff-log\\ff-log.js","/..\\ff-fes\\node_modules\\ff-log",undefined)
+},{"_process":62,"buffer":59,"tracer":84}],37:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
@@ -13991,8 +14031,8 @@ ArraySet.prototype.toArray = function ArraySet_toArray() {
 
 exports.ArraySet = ArraySet;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/lib/array-set.js","/../ff-fes/node_modules/source-map/lib",undefined)
-},{"./util":45,"_process":61,"buffer":58}],37:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\lib\\array-set.js","/..\\ff-fes\\node_modules\\source-map\\lib",undefined)
+},{"./util":46,"_process":62,"buffer":59}],38:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
@@ -14135,8 +14175,8 @@ exports.decode = function base64VLQ_decode(aStr, aIndex, aOutParam) {
   aOutParam.rest = aIndex;
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/lib/base64-vlq.js","/../ff-fes/node_modules/source-map/lib",undefined)
-},{"./base64":38,"_process":61,"buffer":58}],38:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\lib\\base64-vlq.js","/..\\ff-fes\\node_modules\\source-map\\lib",undefined)
+},{"./base64":39,"_process":62,"buffer":59}],39:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
@@ -14206,8 +14246,8 @@ exports.decode = function (charCode) {
   return -1;
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/lib/base64.js","/../ff-fes/node_modules/source-map/lib",undefined)
-},{"_process":61,"buffer":58}],39:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\lib\\base64.js","/..\\ff-fes\\node_modules\\source-map\\lib",undefined)
+},{"_process":62,"buffer":59}],40:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
@@ -14321,8 +14361,8 @@ exports.search = function search(aNeedle, aHaystack, aCompare, aBias) {
   return index;
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/lib/binary-search.js","/../ff-fes/node_modules/source-map/lib",undefined)
-},{"_process":61,"buffer":58}],40:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\lib\\binary-search.js","/..\\ff-fes\\node_modules\\source-map\\lib",undefined)
+},{"_process":62,"buffer":59}],41:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
@@ -14404,8 +14444,8 @@ MappingList.prototype.toArray = function MappingList_toArray() {
 
 exports.MappingList = MappingList;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/lib/mapping-list.js","/../ff-fes/node_modules/source-map/lib",undefined)
-},{"./util":45,"_process":61,"buffer":58}],41:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\lib\\mapping-list.js","/..\\ff-fes\\node_modules\\source-map\\lib",undefined)
+},{"./util":46,"_process":62,"buffer":59}],42:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
@@ -14522,8 +14562,8 @@ exports.quickSort = function (ary, comparator) {
   doQuickSort(ary, comparator, 0, ary.length - 1);
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/lib/quick-sort.js","/../ff-fes/node_modules/source-map/lib",undefined)
-},{"_process":61,"buffer":58}],42:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\lib\\quick-sort.js","/..\\ff-fes\\node_modules\\source-map\\lib",undefined)
+},{"_process":62,"buffer":59}],43:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
@@ -15608,8 +15648,8 @@ IndexedSourceMapConsumer.prototype._parseMappings =
 
 exports.IndexedSourceMapConsumer = IndexedSourceMapConsumer;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/lib/source-map-consumer.js","/../ff-fes/node_modules/source-map/lib",undefined)
-},{"./array-set":36,"./base64-vlq":37,"./binary-search":39,"./quick-sort":41,"./util":45,"_process":61,"buffer":58}],43:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\lib\\source-map-consumer.js","/..\\ff-fes\\node_modules\\source-map\\lib",undefined)
+},{"./array-set":37,"./base64-vlq":38,"./binary-search":40,"./quick-sort":42,"./util":46,"_process":62,"buffer":59}],44:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
@@ -16028,8 +16068,8 @@ SourceMapGenerator.prototype.toString =
 
 exports.SourceMapGenerator = SourceMapGenerator;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/lib/source-map-generator.js","/../ff-fes/node_modules/source-map/lib",undefined)
-},{"./array-set":36,"./base64-vlq":37,"./mapping-list":40,"./util":45,"_process":61,"buffer":58}],44:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\lib\\source-map-generator.js","/..\\ff-fes\\node_modules\\source-map\\lib",undefined)
+},{"./array-set":37,"./base64-vlq":38,"./mapping-list":41,"./util":46,"_process":62,"buffer":59}],45:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
@@ -16445,8 +16485,8 @@ SourceNode.prototype.toStringWithSourceMap = function SourceNode_toStringWithSou
 
 exports.SourceNode = SourceNode;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/lib/source-node.js","/../ff-fes/node_modules/source-map/lib",undefined)
-},{"./source-map-generator":43,"./util":45,"_process":61,"buffer":58}],45:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\lib\\source-node.js","/..\\ff-fes\\node_modules\\source-map\\lib",undefined)
+},{"./source-map-generator":44,"./util":46,"_process":62,"buffer":59}],46:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
@@ -16866,8 +16906,8 @@ function compareByGeneratedPositionsInflated(mappingA, mappingB) {
 }
 exports.compareByGeneratedPositionsInflated = compareByGeneratedPositionsInflated;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/lib/util.js","/../ff-fes/node_modules/source-map/lib",undefined)
-},{"_process":61,"buffer":58}],46:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\lib\\util.js","/..\\ff-fes\\node_modules\\source-map\\lib",undefined)
+},{"_process":62,"buffer":59}],47:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  * Copyright 2009-2011 Mozilla Foundation and contributors
@@ -16878,8 +16918,8 @@ exports.SourceMapGenerator = require('./lib/source-map-generator').SourceMapGene
 exports.SourceMapConsumer = require('./lib/source-map-consumer').SourceMapConsumer;
 exports.SourceNode = require('./lib/source-node').SourceNode;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/source-map/source-map.js","/../ff-fes/node_modules/source-map",undefined)
-},{"./lib/source-map-consumer":42,"./lib/source-map-generator":43,"./lib/source-node":44,"_process":61,"buffer":58}],47:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\source-map\\source-map.js","/..\\ff-fes\\node_modules\\source-map",undefined)
+},{"./lib/source-map-consumer":43,"./lib/source-map-generator":44,"./lib/source-node":45,"_process":62,"buffer":59}],48:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
 * stack-adt
@@ -16970,8 +17010,8 @@ exports.SourceNode = require('./lib/source-node').SourceNode;
     }
 })();
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/stack-adt/dist/stack-adt.js","/../ff-fes/node_modules/stack-adt/dist",undefined)
-},{"_process":61,"buffer":58}],48:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\stack-adt\\dist\\stack-adt.js","/..\\ff-fes\\node_modules\\stack-adt\\dist",undefined)
+},{"_process":62,"buffer":59}],49:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * bridge between formulajs and fesjs
@@ -16991,8 +17031,8 @@ exports.formulajs = {
     name: 'formulaJs',
     entries: entries
 }
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/ff-formulajs.js","/../ff-formulajs",undefined)
-},{"_process":61,"buffer":58,"ff-log":53,"formulajs":49}],49:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\ff-formulajs.js","/..\\ff-formulajs",undefined)
+},{"_process":62,"buffer":59,"ff-log":54,"formulajs":50}],50:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -24703,8 +24743,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/node_modules/formulajs/dist/formula.js","/../ff-formulajs/node_modules/formulajs/dist",undefined)
-},{"_process":61,"buffer":58,"jStat":50,"numeral":51,"numeric":52}],50:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\node_modules\\formulajs\\dist\\formula.js","/..\\ff-formulajs\\node_modules\\formulajs\\dist",undefined)
+},{"_process":62,"buffer":59,"jStat":51,"numeral":52,"numeric":53}],51:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 this.j$ = this.jStat = (function(Math, undefined) {
 
@@ -27961,8 +28001,8 @@ jStat.extend(jStat.fn, {
 
 }(this.jStat, Math));
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/node_modules/jStat/dist/jstat.js","/../ff-formulajs/node_modules/jStat/dist",undefined)
-},{"_process":61,"buffer":58}],51:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\node_modules\\jStat\\dist\\jstat.js","/..\\ff-formulajs\\node_modules\\jStat\\dist",undefined)
+},{"_process":62,"buffer":59}],52:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
  * numeral.js
@@ -28644,8 +28684,8 @@ jStat.extend(jStat.fn, {
     }
 }).call(this);
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/node_modules/numeral/numeral.js","/../ff-formulajs/node_modules/numeral",undefined)
-},{"_process":61,"buffer":58}],52:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\node_modules\\numeral\\numeral.js","/..\\ff-formulajs\\node_modules\\numeral",undefined)
+},{"_process":62,"buffer":59}],53:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
 
@@ -33072,8 +33112,8 @@ numeric.svd= function svd(A) {
 };
 
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/node_modules/numeric/numeric-1.2.6.js","/../ff-formulajs/node_modules/numeric",undefined)
-},{"_process":61,"buffer":58}],53:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\node_modules\\numeric\\numeric-1.2.6.js","/..\\ff-formulajs\\node_modules\\numeric",undefined)
+},{"_process":62,"buffer":59}],54:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var tracer = require('tracer');
 var format = "HH.MM.ssl";
@@ -33111,8 +33151,8 @@ console.INFO = levels[logLevel].INFO;
 console.TRACE = levels[logLevel].TRACE;
 module.exports = console;
 exports = console;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/ff-log/ff-log.js","/../node_modules/ff-log",undefined)
-},{"_process":61,"buffer":58,"tracer":83}],54:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\ff-log\\ff-log.js","/..\\node_modules\\ff-log",undefined)
+},{"_process":62,"buffer":59,"tracer":84}],55:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var logger = require('ff-log')
 var jsMath = {"Length":{"args":"v1","body":"{ if (v1 === undefined){return 0;} return v1.length;}"},"OnER":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"OnEr":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"OnZero":{"args":"v,onzerov","body":"{ if (v <= 0) { return onzerov; } return v;}"},"If":{"args":"o,v1,v2","body":"{ if (o) { return v1; } else { return v2; }}"},"OnNA":{"args":"v,onnav","body":"{ if (v == undefined || isNaN(v)) { return onnav; } return v;}"},"SUM":{"args":"values","body":"{ var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue; }"},"OnNeg":{"args":"arg0,arg1","body":"{ if (arg0 < 0) { return arg1; } return arg0;}"},"OnZeroOrNA":{"args":"arg0,arg1","body":"{ if (arg0 == undefined || isNaN(arg0)) { return arg1; } return arg0;}"},"OnZeroOrNa":{"args":"v,arg1","body":"{ if (v == undefined || isNaN(v)) { return arg1; } return v;}"},"Exp":{"args":"v","body":"{ return Math.pow(v, 2);}"},"OnERorNA":{"args":"v,onerrornav","body":"{ if (v == undefined || isNaN(v)) { return onerrornav; } return v;}"},"Round":{"args":"v,decimals","body":"{ var pow = Math.pow(10, decimals); return Math.round(v * pow) / pow;}"},"AVG":{"args":"vs","body":"EJS.AVERAGE(vs)"},"MATCH":{"args":"v,p","body":"{ return v === undefined? false : v.match(p); }"},"ZeroOnNaN":{"args":"v","body":"{ return parseFloat(isNaN(v) ? 0 : v); }"},"VALIDDATE":{"args":"d","body":"{ if (Object.prototype.toString.call(d) === '[object Date]' ) {if ( isNaN( d.getTime() ) ) {  return false; } else { return true; } }else { return false; } }"},"LOOKUP":{"args":"key","body":"{ return CACHE[key]; }"},"GET":{"args":"url,name","body":"{ $.getJSON( 'js/data.json', function( data ) { CACHE[name] = data; }); }"},"TupleCount":{"args":"x","body":"{ return 1; }"},"TupleSum":{"args":"value","body":"{ return value; }"},"EvaluateAsString":{"args":"value","body":"{ return value }"},"FirstUC":{"args":"value","body":"{ return value }"},"AddMonth":{"args":"value,ammount","body":"{ return 1 }"},"Visible":{"args":"variableOrValue","body":"{ return 1 }"},"InputRequired":{"args":"variableOrValue","body":"{ return 1 }"},"ForAll":{"args":"elements","body":"{ for (var i = 0; i < elements.length; i++) { if (elements[i] ){ return 1 } } return 0; }"},"PROXY":{"args":"proxy","body":"{ return proxy }"},"GetTitle":{"args":"one","body":"{ return 'tst' }"},"Pos":{"args":"one,two","body":"{ if (two===undefined){return -1};return two.indexOf(one) }"},"Count":{"args":"elements","body":"{ var counter = 0; for (var i = 0; i < elements.length; i++) { if (elements[i] ){ counter++ } } return counter; }"},"TupleMin":{"args":"one","body":"{ return 1 }"},"TupleMax":{"args":"one","body":"{ return 1 }"},"ValueT":{"args":"one","body":"{ var retrunValue = 1; while(one.prev.hash){ retrunValue++;one=one.prev } return retrunValue }"},"FirstValueT":{"args":"x,values,first,last","body":"{ return x }"},"LastValueT":{"args":"one","body":"{ return 1 }"},"DMYtoDate":{"args":"d,m,y","body":"{ return new Date(d,m,y).toLocaleString(); }"},"DataEntered":{"args":"one","body":"{ return one }"},"LastTInFormulaSet":{"args":"x,x2","body":"{ return x }"},"LastTinFormulaSet":{"args":"x,x2","body":"{ return x }"},"FirstTinFormulaSet":{"args":"x,x2","body":"{ return x }"},"FirstTInFormulaset":{"args":"x,x2","body":"{ return x }"},"FirstTInFormulaSet":{"args":"x,x2","body":"{ return x }"},"FirstTinPeriod":{"args":"x,x2","body":"{ return x }"},"LastTinPeriod":{"args":"x,x2","body":"{ return x }"},"LastTinYear":{"args":"x","body":"{ return x }"},"FirstDateInT":{"args":"one","body":"{ return 1 }"},"FirstT":{"args":"one","body":"{ return 1 }"},"LastT":{"args":"one","body":"{ return 1 }"},"TableLookup":{"args":"row,col","body":"{ return row + col }"},"HINT":{"args":"one","body":"{ return 1 }"},"GetFrac":{"args":"one","body":"{ return 1 }"},"VSum":{"args":"one","body":"{ return 1 }"},"FormulasetInT":{"args":"one","body":"{ return 1 }"},"RelMut":{"args":"one","body":"{ return 1 }"},"YearInT":{"args":"one","body":"{ return 1 }"},"YearToT":{"args":"one","body":"{ return 1 }"},"PMT":{"args":"one","body":"{ return 1 }"},"NPV2":{"args":"one","body":"{ return 1 }"},"GetT":{"args":"one","body":"{ return 1 }"},"FirstTInYear":{"args":"one","body":"{ return 1 }"},"FirstTinYear":{"args":"one","body":"{ return 1 }"},"TsY":{"args":"one","body":"{ return 1 }"},"FirstTinformulaset":{"args":"one","body":"{ return 1 }"},"PeriodInT":{"args":"one","body":"{ return 1 }"},"LastDateInT":{"args":"one","body":"return 2016"},"FirstTinFormulaset":{"args":"one","body":"{ return 1 }"},"GetValue":{"args":"one","body":"{ return 1 }"},"FesExpression":{"args":"one","body":"{ return one }"},"RoundUp":{"args":"one","body":"{ return 1 }"},"Mut":{"args":"one","body":"{ return 1 }"},"HSum":{"args":"one","body":"{ return 1 }"},"HSUM":{"args":"one","body":"{ return 1 }"},"VSUM":{"args":"one","body":"{ return 1 }"},"GetPoint":{"args":"one","body":"return 1"},"Exists":{"args":"one","body":"return 1"},"DateToMonth":{"args":"one","body":"return one"},"HAvg":{"args":"one","body":"return 1"},"HOVR":{"args":"one","body":"return 1"},"BaseCurrencyValue":{"args":"one","body":"return 1"},"TitleEntered":{"args":"one","body":"return 1"},"Hsum":{"args":"one","body":"return 1"},"LastTinFormulaset":{"args":"one","body":"return one"},"FirstLC":{"args":"one","body":"return 1"},"ExpandFraction":{"args":"one","body":"return 1"},"ExpandLevel":{"args":"one","body":"return 1"},"MaxValueT":{"args":"one","body":"return 1"},"ValueOfT":{"args":"one","body":"return 1"},"GuessTerm":{"args":"one","body":"return 1"},"ExpandOriginalValue":{"args":"one","body":"return 1"},"Datetot":{"args":"one","body":"return 1"},"DateToT":{"args":"x","body":"return x"},"Not":{"args":"one","body":"return !one"},"not":{"args":"one","body":"return !one"},"Str":{"args":"one","body":"return ''+one;"},"DateToYear":{"args":"one","body":"return new Date(one)"},"DateToDay":{"args":"one","body":"return 1"},"CumNormal":{"args":"one","body":"return 1"},"SubStr":{"args":"one,two","body":"return 1"},"Val":{"args":"one","body":"return 1"},"SumFor":{"args":"one,two,three,fours","body":"return 1"},"MinMax":{"args":"one","body":"return 1"},"PPMT":{"args":"one","body":"return 1"},"IRR":{"args":"one","body":"return 1"},"LN":{"args":"one","body":"return 1"},"MIN":{"args":"one","body":"return 1"},"InvNormal":{"args":"one","body":"return 1"},"BivarNormal":{"args":"one","body":"return 1"},"GoalSeek":{"args":"one","body":"return 1"},"TupleInstanceIndex":{"args":"","body":"return 1"},"OnNEG":{"args":"a,b","body":"{ if (a < 0) { return a; } return b;}"},"OnError":{"args":"a,b","body":"{ if (isNaN(a)) { return b; } return a;}"},"DateStr":{"args":"string","body":"{ return string }"},"DateToYearNum":{"args":"string","body":"{ return string }"},"VAL":{"args":"string","body":"{ return string }"},"BeforeStr":{"args":"string","body":"{ return string }"},"AfterStr":{"args":"string","body":"{ return string }"},"MutCalc":1,"CalculatedInBaseCurrency":1,"PeriodinT":1,"TimeAggregated":false,"Bookyear":1,"ScaleFactor":1,"Self":1,"Notrend":1,"NoTrend":1,"Trend":1,"ApplicationStartDateTime":1,"Values":1,"MainPeriod":3,"X":1,"MaxT":1,"FAM":1,"Now":1,"NA":1e-10,"On":1,"No":0,"Off":0,"True":1,"False":0,"SETTINGS":{"LANGUAGE":"en"},"ViewScaleFactor":1,"Backward":1,"Decimals":2,"CACHE":{}}
@@ -33151,8 +33191,8 @@ exports.mathJs = {
     name: 'ff-math',
     entries: entries
 }
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-math/ff-math.js","/../ff-math",undefined)
-},{"_process":61,"buffer":58,"ff-log":53}],55:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-math\\ff-math.js","/..\\ff-math",undefined)
+},{"_process":62,"buffer":59,"ff-log":54}],56:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 'use strict';
 
@@ -33645,8 +33685,8 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/assert/assert.js","/node_modules/assert",undefined)
-},{"_process":61,"buffer":58,"util/":64}],56:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\assert\\assert.js","/node_modules\\assert",undefined)
+},{"_process":62,"buffer":59,"util/":65}],57:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 'use strict'
 
@@ -33763,12 +33803,12 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/base64-js/index.js","/node_modules/base64-js",undefined)
-},{"_process":61,"buffer":58}],57:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\base64-js\\index.js","/node_modules\\base64-js",undefined)
+},{"_process":62,"buffer":59}],58:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/browserify/lib/_empty.js","/node_modules/browserify/lib",undefined)
-},{"_process":61,"buffer":58}],58:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\browserify\\lib\\_empty.js","/node_modules\\browserify\\lib",undefined)
+},{"_process":62,"buffer":59}],59:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
  * The buffer module from node.js, for the browser.
@@ -35485,8 +35525,8 @@ function numberIsNaN (obj) {
   return obj !== obj // eslint-disable-line no-self-compare
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/buffer/index.js","/node_modules/buffer",undefined)
-},{"_process":61,"base64-js":56,"buffer":58,"ieee754":59}],59:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\buffer\\index.js","/node_modules\\buffer",undefined)
+},{"_process":62,"base64-js":57,"buffer":59,"ieee754":60}],60:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -35573,8 +35613,8 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/ieee754/index.js","/node_modules/ieee754",undefined)
-},{"_process":61,"buffer":58}],60:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\ieee754\\index.js","/node_modules\\ieee754",undefined)
+},{"_process":62,"buffer":59}],61:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -35801,8 +35841,8 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/path-browserify/index.js","/node_modules/path-browserify",undefined)
-},{"_process":61,"buffer":58}],61:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\path-browserify\\index.js","/node_modules\\path-browserify",undefined)
+},{"_process":62,"buffer":59}],62:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // shim for using process in browser
 var process = module.exports = {};
@@ -35989,8 +36029,8 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/process/browser.js","/node_modules/process",undefined)
-},{"_process":61,"buffer":58}],62:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\process\\browser.js","/node_modules\\process",undefined)
+},{"_process":62,"buffer":59}],63:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
@@ -36016,8 +36056,8 @@ if (typeof Object.create === 'function') {
   }
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/util/node_modules/inherits/inherits_browser.js","/node_modules/util/node_modules/inherits",undefined)
-},{"_process":61,"buffer":58}],63:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\util\\node_modules\\inherits\\inherits_browser.js","/node_modules\\util\\node_modules\\inherits",undefined)
+},{"_process":62,"buffer":59}],64:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
@@ -36025,8 +36065,8 @@ module.exports = function isBuffer(arg) {
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/util/support/isBufferBrowser.js","/node_modules/util/support",undefined)
-},{"_process":61,"buffer":58}],64:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\util\\support\\isBufferBrowser.js","/node_modules\\util\\support",undefined)
+},{"_process":62,"buffer":59}],65:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -36615,14 +36655,15 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/util/util.js","/node_modules/util",undefined)
-},{"./support/isBuffer":63,"_process":61,"buffer":58,"inherits":62}],65:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\util\\util.js","/node_modules\\util",undefined)
+},{"./support/isBuffer":64,"_process":62,"buffer":59,"inherits":63}],66:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 Error.prototype.stack = Error.prototype.stack || "";
 MatrixLookup = function() {
     return 1;
 }
 require('../../ff-fes/exchange_modules/lme/lmeparser');
+require('../../ff-fes/exchange_modules/jsonvalues/jsonvalues');
 require('../../ff-math/ff-math');
 var fesjsApi = require('../../ff-fes/ff-fes').fesjs;
 fesjsApi.addFunctions(require("../../ff-formulajs/ff-formulajs").formulajs);
@@ -36640,7 +36681,7 @@ LME.prototype.importLME = function(json) {
     this.lme.importSolution(json, 'lme')
 }
 LME.prototype.exportJavaScript = function() {
- return   this.lme.export('js')
+    return this.lme.export('js')
 }
 LME.prototype.importFFL = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
@@ -36654,15 +36695,18 @@ LME.prototype.exportPresentation = function() {
 LME.prototype.exportWebModel = function() {
     return this.lme.export('webexport')
 }
+LME.prototype.exportData = function() {
+    return this.lme.export('jsonvalues')
+}
 module.exports = LME;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src/lme.js","/src",undefined)
-},{"../../ff-fes/exchange_modules/lme/lmeparser":8,"../../ff-fes/fesjs/JSWorkBook":16,"../../ff-fes/fesjs/fescontext":24,"../../ff-fes/ff-fes":25,"../../ff-formulajs/ff-formulajs":48,"../../ff-math/ff-math":54,"_process":61,"buffer":58}],66:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\lme.js","/src",undefined)
+},{"../../ff-fes/exchange_modules/jsonvalues/jsonvalues":8,"../../ff-fes/exchange_modules/lme/lmeparser":9,"../../ff-fes/fesjs/JSWorkBook":17,"../../ff-fes/fesjs/fescontext":25,"../../ff-fes/ff-fes":26,"../../ff-formulajs/ff-formulajs":49,"../../ff-math/ff-math":55,"_process":62,"buffer":59}],67:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 require('../../ff-fes/exchange_modules/presentation/webexport');
 var model = require('./lme')
 LME = new model()
 LME.importLME(JSON_MODEL);
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src/output.js","/src",{
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\output.js","/src",{
   "formulas": [
     {
       "type": "noCacheUnlocked",
@@ -63547,7 +63591,7 @@ LME.importLME(JSON_MODEL);
   },
   "name": "MVO"
 })
-},{"../../ff-fes/exchange_modules/presentation/webexport":9,"./lme":65,"_process":61,"buffer":58}],67:[function(require,module,exports){
+},{"../../ff-fes/exchange_modules/presentation/webexport":10,"./lme":66,"_process":62,"buffer":59}],68:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
 
@@ -63736,8 +63780,8 @@ for (var map in colors.maps) {
 }
 
 defineProps(colors, init());
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/colors/lib/colors.js","/../node_modules/colors/lib",undefined)
-},{"./custom/trap":68,"./custom/zalgo":69,"./maps/america":70,"./maps/rainbow":71,"./maps/random":72,"./maps/zebra":73,"./styles":74,"./system/supports-colors":75,"_process":61,"buffer":58}],68:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\colors\\lib\\colors.js","/..\\node_modules\\colors\\lib",undefined)
+},{"./custom/trap":69,"./custom/zalgo":70,"./maps/america":71,"./maps/rainbow":72,"./maps/random":73,"./maps/zebra":74,"./styles":75,"./system/supports-colors":76,"_process":62,"buffer":59}],69:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 module['exports'] = function runTheTrap (text, options) {
   var result = "";
@@ -63785,8 +63829,8 @@ module['exports'] = function runTheTrap (text, options) {
 
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/colors/lib/custom/trap.js","/../node_modules/colors/lib/custom",undefined)
-},{"_process":61,"buffer":58}],69:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\colors\\lib\\custom\\trap.js","/..\\node_modules\\colors\\lib\\custom",undefined)
+},{"_process":62,"buffer":59}],70:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // please no
 module['exports'] = function zalgo(text, options) {
@@ -63893,8 +63937,8 @@ module['exports'] = function zalgo(text, options) {
   return heComes(text, options);
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/colors/lib/custom/zalgo.js","/../node_modules/colors/lib/custom",undefined)
-},{"_process":61,"buffer":58}],70:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\colors\\lib\\custom\\zalgo.js","/..\\node_modules\\colors\\lib\\custom",undefined)
+},{"_process":62,"buffer":59}],71:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
 
@@ -63908,8 +63952,8 @@ module['exports'] = (function() {
     }
   }
 })();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/colors/lib/maps/america.js","/../node_modules/colors/lib/maps",undefined)
-},{"../colors":67,"_process":61,"buffer":58}],71:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\colors\\lib\\maps\\america.js","/..\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":68,"_process":62,"buffer":59}],72:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
 
@@ -63925,8 +63969,8 @@ module['exports'] = (function () {
 })();
 
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/colors/lib/maps/rainbow.js","/../node_modules/colors/lib/maps",undefined)
-},{"../colors":67,"_process":61,"buffer":58}],72:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\colors\\lib\\maps\\rainbow.js","/..\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":68,"_process":62,"buffer":59}],73:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
 
@@ -63936,16 +63980,16 @@ module['exports'] = (function () {
     return letter === " " ? letter : colors[available[Math.round(Math.random() * (available.length - 1))]](letter);
   };
 })();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/colors/lib/maps/random.js","/../node_modules/colors/lib/maps",undefined)
-},{"../colors":67,"_process":61,"buffer":58}],73:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\colors\\lib\\maps\\random.js","/..\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":68,"_process":62,"buffer":59}],74:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
 
 module['exports'] = function (letter, i, exploded) {
   return i % 2 === 0 ? letter : colors.inverse(letter);
 };
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/colors/lib/maps/zebra.js","/../node_modules/colors/lib/maps",undefined)
-},{"../colors":67,"_process":61,"buffer":58}],74:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\colors\\lib\\maps\\zebra.js","/..\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":68,"_process":62,"buffer":59}],75:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
 The MIT License (MIT)
@@ -64024,8 +64068,8 @@ Object.keys(codes).forEach(function (key) {
   style.open = '\u001b[' + val[0] + 'm';
   style.close = '\u001b[' + val[1] + 'm';
 });
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/colors/lib/styles.js","/../node_modules/colors/lib",undefined)
-},{"_process":61,"buffer":58}],75:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\colors\\lib\\styles.js","/..\\node_modules\\colors\\lib",undefined)
+},{"_process":62,"buffer":59}],76:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
 The MIT License (MIT)
@@ -64088,8 +64132,8 @@ module.exports = (function () {
 
   return false;
 })();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/colors/lib/system/supports-colors.js","/../node_modules/colors/lib/system",undefined)
-},{"_process":61,"buffer":58}],76:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\colors\\lib\\system\\supports-colors.js","/..\\node_modules\\colors\\lib\\system",undefined)
+},{"_process":62,"buffer":59}],77:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //
 // Remark: Requiring this file will use the "safe" colors API which will not touch String.prototype
@@ -64100,8 +64144,8 @@ module.exports = (function () {
 //
 var colors = require('./lib/colors');
 module['exports'] = colors;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/colors/safe.js","/../node_modules/colors",undefined)
-},{"./lib/colors":67,"_process":61,"buffer":58}],77:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\colors\\safe.js","/..\\node_modules\\colors",undefined)
+},{"./lib/colors":68,"_process":62,"buffer":59}],78:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  * Date Format 1.2.3
@@ -64330,8 +64374,8 @@ function kindOf(val) {
   }
 })(this);
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/dateformat/lib/dateformat.js","/../node_modules/dateformat/lib",undefined)
-},{"_process":61,"buffer":58}],78:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\dateformat\\lib\\dateformat.js","/..\\node_modules\\dateformat\\lib",undefined)
+},{"_process":62,"buffer":59}],79:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 module.exports = require('./tinytim');
 
@@ -64389,8 +64433,8 @@ module.exports.renderFile = function(path, vars, useCache) {
 	return module.exports.render(str, vars);
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/tinytim/lib/index.js","/../node_modules/tinytim/lib",undefined)
-},{"./tinytim":79,"_process":61,"buffer":58,"fs":57}],79:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\tinytim\\lib\\index.js","/..\\node_modules\\tinytim\\lib",undefined)
+},{"./tinytim":80,"_process":62,"buffer":59,"fs":58}],80:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
  tinytim.js
@@ -64443,8 +64487,8 @@ var tim = exports.tim = (function(){
     };
 }());
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/tinytim/lib/tinytim.js","/../node_modules/tinytim/lib",undefined)
-},{"_process":61,"buffer":58}],80:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\tinytim\\lib\\tinytim.js","/..\\node_modules\\tinytim\\lib",undefined)
+},{"_process":62,"buffer":59}],81:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
 var colors = require('colors/safe');
@@ -64461,8 +64505,8 @@ module.exports = function(conf) {
 	}, conf);
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/tracer/lib/color_console.js","/../node_modules/tracer/lib",undefined)
-},{"./console":81,"_process":61,"buffer":58,"colors/safe":76}],81:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\tracer\\lib\\color_console.js","/..\\node_modules\\tracer\\lib",undefined)
+},{"./console":82,"_process":62,"buffer":59,"colors/safe":77}],82:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
 var tinytim = require('tinytim'), dateFormat = require('dateformat'), utils = require('./utils'), path = require('path'), settings = require('./settings').settings;
@@ -64606,8 +64650,8 @@ module.exports = (function() {
 	return _self;
 });
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/tracer/lib/console.js","/../node_modules/tracer/lib",undefined)
-},{"./settings":84,"./utils":85,"_process":61,"buffer":58,"dateformat":77,"path":60,"tinytim":78}],82:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\tracer\\lib\\console.js","/..\\node_modules\\tracer\\lib",undefined)
+},{"./settings":85,"./utils":86,"_process":62,"buffer":59,"dateformat":78,"path":61,"tinytim":79}],83:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
 var fs = require('fs'), dateFormat = require('dateformat'), tinytim = require('tinytim'), utils = require('./utils'), spawn = require('child_process').spawn, spawnSync = require('child_process').spawnSync;
@@ -64689,8 +64733,8 @@ module.exports = function (conf) {
     }
     return require('./console')(conf);
 };
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/tracer/lib/dailyfile.js","/../node_modules/tracer/lib",undefined)
-},{"./console":81,"./utils":85,"_process":61,"buffer":58,"child_process":57,"dateformat":77,"fs":57,"path":60,"tinytim":78}],83:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\tracer\\lib\\dailyfile.js","/..\\node_modules\\tracer\\lib",undefined)
+},{"./console":82,"./utils":86,"_process":62,"buffer":59,"child_process":58,"dateformat":78,"fs":58,"path":61,"tinytim":79}],84:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
 exports.console = require('./console');
@@ -64703,8 +64747,8 @@ exports.close = settings.close;
 exports.setLevel = settings.setLevel;
 exports.getLevel = settings.getLevel;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/tracer/lib/index.js","/../node_modules/tracer/lib",undefined)
-},{"./color_console":80,"./console":81,"./dailyfile":82,"./settings":84,"_process":61,"buffer":58}],84:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\tracer\\lib\\index.js","/..\\node_modules\\tracer\\lib",undefined)
+},{"./color_console":81,"./console":82,"./dailyfile":83,"./settings":85,"_process":62,"buffer":59}],85:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
 var settings = {
@@ -64732,8 +64776,8 @@ exports.close = close;
 exports.setLevel = setLevel;
 exports.getLevel = getLevel;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/tracer/lib/settings.js","/../node_modules/tracer/lib",undefined)
-},{"_process":61,"buffer":58}],85:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\tracer\\lib\\settings.js","/..\\node_modules\\tracer\\lib",undefined)
+},{"_process":62,"buffer":59}],86:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
 exports.union = function(obj, args) {
@@ -64794,5 +64838,5 @@ exports.format = function(f) {
 	return str;
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/tracer/lib/utils.js","/../node_modules/tracer/lib",undefined)
-},{"_process":61,"buffer":58,"util":64}]},{},[66]);
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\node_modules\\tracer\\lib\\utils.js","/..\\node_modules\\tracer\\lib",undefined)
+},{"_process":62,"buffer":59,"util":65}]},{},[67]);
