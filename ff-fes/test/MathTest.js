@@ -101,3 +101,4 @@ log.info(wb.get("TestCount"))*/
  - Use function [Count]
  - Use function [SelectDescendants]
  */
+assert.fail(false, 'TEST FAILING TEST')
