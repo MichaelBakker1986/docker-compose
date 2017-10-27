@@ -3,6 +3,9 @@ var rp = require('request-promise');
 var rpJSON = require('request-promise-json');
 var exec = require('child-process-promise').exec;
 var log = require('ff-log');
+var browser = require('browserify');
+var fastjson = require('browserify-fastjson');
+var fs = require('fs')
 var develop = require('os').hostname() == 'michael';
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
@@ -13,15 +16,19 @@ class Stash {
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
         write('./public/json/' + name + '.ffl', data).then(write('./public/json/' + name + '_canvas.json', lme)).then(function(filename) {
-            if (develop) {
-                log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
-                return "develop mode";
-            }
-            let command = "git pull &&  git add . && git commit -m changeByDEMO && git push";
-            return exec(command).then((ok) => {
-                log.info("GIT commit success while pushing file to repository: " + filename)
+            exec('node src/exportLME_FFL.js ' + name).then((result) => {
+                if (develop) {
+                    log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
+                    return "develop mode";
+                }
+                let command = "git pull &&  git add . && git commit -m changeByDEMO && git push";
+                return exec(command).then((ok) => {
+                    log.info("GIT commit success while pushing file to repository: " + filename)
+                }).catch((err) => {
+                    log.error("GIT commit failed while pushing file to repository: [" + err + "]")
+                })
             }).catch((err) => {
-                log.error("GIT commit failed while pushing file to repository: [" + err + "]")
+                console.error('fail' + err.toString())
             })
         }).catch(function(err) {
             log.error(err)

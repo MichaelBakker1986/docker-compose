@@ -9,6 +9,7 @@ var compression = require('compression')
 app.use(require('express-favicon')());
 //proxy forward to 8080 rest-api
 app.get('/models', proxy('http://' + require('os').hostname() + ':8080/models'));
+app.post('/:id/saveFFL_LME', proxy('http://' + require('os').hostname() + ':8080/:id/saveFFL_LME'));
 app.get('/branches', proxy('http://' + require('os').hostname() + ':8080/branches'));
 app.use(compression())
 app.use(serveStatic(__dirname + "/"));

@@ -10,7 +10,7 @@ var static = require('static-nocase')
 var lmeAPI = require('./src/lme')
 var app = express();
 app.use(require('express-favicon')());
-
+var fs = require('fs')
 var bodyParser = require('body-parser')
 app.use(bodyParser.json({limit: '5mb'}));       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -43,25 +43,9 @@ app.post('/:id/saveFFL_LME', (req, res) => {
 });
 app.get('/:id/transformFFL_LME/*', (req, res) => {
     var modelName = req.originalUrl.substring(req.originalUrl.indexOf('transformFFL_LME/') + 17);
-    var includeModule = '/public/json/' + modelName + '_canvas.json';
-    let options = {
-        insertGlobals: true,
-        insertGlobalVars: {
-            JSON_MODEL: (file, dir) => {
-                return (file.endsWith('output.js')) ? "require('" + '..' + includeModule + "')" : 'undefined';
-            }
-        },
-        gzip: true,
-        minify: true,
-        insertGlobals: true,
-        debug: false
-    };
-    let b = browser(options);
-    b.add(__dirname + '/src/output.js');
-    b.add(__dirname + includeModule);
-    b.transform(fastjson);
+    var ffl = fs.createReadStream(__dirname + '/public/json/' + modelName + '.js')
     res.header("Access-Control-Allow-Origin", "*");
-    b.bundle().pipe(res);
+    ffl.pipe(res);
 })
 
 app.get('/branches', (req, res) => {
