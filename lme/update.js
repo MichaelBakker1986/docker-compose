@@ -105,8 +105,8 @@ function testAndDeploy() {
         spawnChild('app')
 
     }).catch(function(err) {
-        log('Tests failed NOT deploying stack, and here the very readable Error');
-        console.error('ERROR: ', err);
+        log('Tests failed NOT deploying stack, and here the very readable Error.');
+        log(err);
     });
 }
 
