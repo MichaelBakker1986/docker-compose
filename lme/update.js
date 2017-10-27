@@ -50,7 +50,6 @@ function update() {
             //npm install && bower install
             var command = developer ? 'echo a' : 'git reset --hard origin/master && git pull && cd .. && npm test';
             exec(command).then((result) => {
-                log(result.stdout)
                 for (var key in childProcesses) {
                     childProcesses[key].kill('SIGKILL')
                     spawnChild(key)
@@ -59,7 +58,7 @@ function update() {
                 fulfill('Succes restarting');
             }).catch((err) => {
                 busy = false;
-                log('Fail [' + err + ']')
+                log('Tests failed NOT deploying stack, and here the very readable Error. .', 'red');
                 reject('Fail restarting ' + err)
             });
         }
