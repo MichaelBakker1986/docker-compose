@@ -98,7 +98,7 @@ function testAndDeploy() {
     const command = 'cd .. && npm install && npm test'
     exec(command).then((data) => {
         console.info(data.stdout)
-        log('Tests passed deploying stack');
+        log('Tests passed deploying stack ');
         //start sub processes
         spawnChild('../demo-apps/angular-demo/angularapp')
         spawnChild('../demo-apps/adminlte/ltelite')
