@@ -144,26 +144,20 @@
       "type": "noCacheUnlocked",
       "refs": {
         "MVO_FES_EXCHANGE_RATES_value": true,
-        "MVO_FES_LAYOUTNR_visible": true,
-        "MVO_FES_LAYOUT_title": true
+        "MVO_FES_LAYOUTNR_visible": true
       },
       "formulaDependencys": [
         {
           "name": "MVO_FES_LAYOUTNR_visible",
           "association": "refs",
           "refId": 100007
-        },
-        {
-          "name": "MVO_FES_LAYOUT_title",
-          "association": "refs",
-          "refId": 100012
         }
       ],
       "deps": {},
-      "original": "'something secret'",
+      "original": "undefined",
       "index": 100009,
       "name": "MVO_FES_EXCHANGE_RATES_value",
-      "parsed": "'something secret'",
+      "parsed": "undefined",
       "id": 100009
     },
     {
@@ -204,20 +198,12 @@
       "refs": {
         "MVO_FES_LAYOUT_title": true
       },
-      "formulaDependencys": [
-        {
-          "name": "MVO_FES_EXCHANGE_RATES_value",
-          "association": "deps",
-          "refId": 100009
-        }
-      ],
-      "deps": {
-        "MVO_FES_EXCHANGE_RATES_value": true
-      },
-      "original": "FES_EXCHANGE_RATES",
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'FES_LAYOUT'",
       "index": 100012,
       "name": "MVO_FES_LAYOUT_title",
-      "parsed": "a100009('100009',x,y.base,z,v)",
+      "parsed": "'FES_LAYOUT'",
       "id": 100012
     },
     {
@@ -11770,7 +11756,7 @@
     [
       "FES_EXCHANGE_RATES",
       "'Exchange Rates'",
-      "'something secret'",
+      "undefined",
       "",
       "",
       false,
@@ -11779,7 +11765,7 @@
     ],
     [
       "FES_LAYOUT",
-      "FES_EXCHANGE_RATES",
+      "'FES_LAYOUT'",
       "''",
       "",
       "",

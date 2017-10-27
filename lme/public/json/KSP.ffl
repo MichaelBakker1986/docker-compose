@@ -40,7 +40,6 @@ model MVO uses BaseModel
       {
         datatype: string;
         frequency: column;
-        formula: 'something secret';
         aggregation: balance;
         data_options: unscalable;
         title: "Exchange Rates";
@@ -55,7 +54,7 @@ model MVO uses BaseModel
         frequency: document;
         data_options: unscalable;
         formula: "";
-        title: FES_EXCHANGE_RATES;
+        title: "FES_LAYOUT";
         visible: 1;
         options_title: locked;
       }
