@@ -2,23 +2,25 @@
 var glob = require('glob')
 var log = require('ff-log')
 var fs = require('fs');
+
 function ModelListener() {
 }
-new Promise(function (resolve, reject) {
-  /*  fs.writeFile('finanfinancials/', '', {flag: 'wx'}, function (err) {
-        if (err) {
-            if (err.errno == -4075) {
-                resolve("repo already created.");
-            } else {
-                throw err;
-            }
-        } else {
-        _*/
-            resolve("repo created.");
-/*
-}
-    });*/
-}).then(function (message) {
+
+new Promise(function(resolve, reject) {
+    /*  fs.writeFile('finanfinancials/', '', {flag: 'wx'}, function (err) {
+          if (err) {
+              if (err.errno == -4075) {
+                  resolve("repo already created.");
+              } else {
+                  throw err;
+              }
+          } else {
+          _*/
+    resolve("repo created.");
+    /*
+    }
+        });*/
+}).then(function(message) {
     console.log(message);
     /*NodeGit.Repository.init('./finanfinancials/', 0).then(function (repo) {
      console.info('init')
@@ -33,9 +35,9 @@ new Promise(function (resolve, reject) {
      console.info('Init Repo');
      }
      });*/
-}).catch(function (err) {
+}).catch(function(err) {
     console.error(err);
-}).then(function () {
+}).then(function() {
     /*  NodeGit.Repository
      .open("./finanfinancials").then(function (repo) {
      console.info(repo);
@@ -44,17 +46,17 @@ new Promise(function (resolve, reject) {
      })*/
 });
 
-ModelListener.prototype.initializeModels = function () {
+ModelListener.prototype.initializeModels = function() {
     var modelListener = this;
     var ffls = [];
-    var fetFileNames = function (src, callback) {
+    var fetFileNames = function(src, callback) {
         glob(src + '**/FFL/**', callback);
     };
-    var modelCallback = function (err, res) {
+    var modelCallback = function(err, res) {
         if (err) {
             console.log('Error', err);
         } else {
-            res.forEach(function (file) {
+            res.forEach(function(file) {
                 if (file.toLowerCase().endsWith('.ffl')) {
                     //these models are not supported for unknown reasons, most involve case-sensitive constructions
                     if (file.toLowerCase().endsWith('vbi.ffl')) {
@@ -90,7 +92,7 @@ ModelListener.prototype.initializeModels = function () {
                             throw err;
                         }
                         var modelData = new Buffer(data, 'binary').toString('utf-8');
-                        ffls.push(modelData);
+                        ffls.push("" + modelData);
                         modelListener.onNewModel(modelData)
                     });
                 }
@@ -100,7 +102,7 @@ ModelListener.prototype.initializeModels = function () {
     //  fetFileNames(__dirname + '\\finanfinancial\\', modelCallback);
     fetFileNames(__dirname + '/resources/', modelCallback);
 }
-ModelListener.prototype.onNewModel = function (modeldata) {
+ModelListener.prototype.onNewModel = function(modeldata) {
     log.info(modeldata)
 }
 exports.ModelListener = ModelListener;

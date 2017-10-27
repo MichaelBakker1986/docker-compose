@@ -69,16 +69,14 @@ var port = process.argv[2] || 9001;
 server.pre(restify.pre.userAgentConnection());
 server.listen(port, function() {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/root')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/Q_MAP00/0')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/Q_ROOT/Incomplete')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Q_ROOT/Incomplete')
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Q_ROOT/Complete')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user2/value/Q_ROOT/110')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/ChildcareContribution/1/200')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/ChildcareContribution')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user2/value/KSP_Q_ROOT/110')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildcareContribution/1/200')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildcareContribution')
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/context')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/Child/0/0/Jip')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/ChildGender/0/0/Boy')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/Child/0/1/Janneke')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/ChildGender/0/1/Girl')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Child/0/0/Jip')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildGender/0/0/Boy')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Child/0/1/Janneke')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildGender/0/1/Girl')
 });
