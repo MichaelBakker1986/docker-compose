@@ -20,6 +20,7 @@
  **/
 function FormulaBootstrap() {
 }
+
 var log = require('ff-log');
 var assert = require('assert');
 var AST = require('../../ast-node-utils/index').ast;
@@ -158,6 +159,7 @@ var astValues = {
     "type": "Identifier",
     "name": "v"
 };
+
 /**
  * Two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
  * There is no information which property is calling and cannot be resolved, since multiple sources can share a formula
@@ -201,6 +203,7 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
         }
     }
 }
+
 var varproperties = {}
 
 var defaultValues = {
@@ -364,16 +367,19 @@ var traverseTypes = {
         }
     }
 }
-global.ExpandGrowth = function(){
+global.ExpandGrowth = function() {
     return 0;
 }
-global.FormulaSetInT = function(){
+global.FormulaSetInT = function() {
     return 0;
 }
-global.Onzero = function(){
+global.Onzero = function() {
     return 0;
 }
-global.Hm = function(){return 0}
+global.Hm = function() {
+    return 0
+}
+
 //recursive walk the formula ast
 function buildFormula(formulaInfo, parent, node) {
     // just simplify some MODEL code, when a CallExpression appears, we might want to modify the structure before
@@ -448,13 +454,15 @@ function buildFormula(formulaInfo, parent, node) {
         }
     }
     if (!traverseTypes[node.type]) {
-        log.error('ERROR: [%s] not registered AST expression', node.type);
+        log.error('ERROR: [%s] not registered AST expression [%s]', node.type, node.name);
     }
     traverseTypes[node.type](formulaInfo, parent, node);
 }
+
 function regenerate(body) {
     return escodegen.generate(body, escodegenOptions);
 }
+
 //public function, will return the parsed string
 //its getting nasty, with supporting this many options, consider only expecting on valid type either AST or STRING only
 FormulaBootstrap.prototype.parseAsFormula = function(formulaInfo) {

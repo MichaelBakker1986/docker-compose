@@ -1,0 +1,6572 @@
+import FinanMath.*;
+import BaseModel.*;
+
+model SCORECARDTESTMODEL  uses BaseModel
+{
+	version: "01.19.000.000";
+	root
+	{
+		variable RootSub1 
+		{
+			datatype: none;
+			data_options: unscalable;
+			top_blanklines: 1;
+			visible: 0;
+			options_title: locked, invisible;
+			options_notrend: locked, invisible;
+			options_trend: locked, invisible;
+			variable FES_LAYOUTNR 
+			{
+				datatype: number;
+				frequency: document;
+				formula: If(Pos("IFRS-EU",&FES_LAYOUT)>0,1,If(Pos("IFRS-PL",&FES_LAYOUT)>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT)>0,2,0)));
+				data_options: unscalable;
+				title: "Layout";
+				displaytype: select;
+				choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
+				top_blanklines: 1;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable FES_EXCHANGE_RATES 
+			{
+				datatype: string;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "Exchange Rates";
+				top_separator: 1;
+				bottom_separator: 1;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_LAYOUT 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Layout name";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_FLATINPUT 
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				title: "Is flat input used? (1=yes)";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_PROJECTION_PROFILE 
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				title: "Projection Profile";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_COLUMN_ORDER 
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				title: "Column order";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_COLUMN_VISIBLE 
+			{
+				datatype: number;
+				aggregation: balance;
+				formula: 1;
+				data_options: unscalable;
+				title: "Column visible";
+				fixed_decimals: 0;
+				top_separator: 1;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_STARTDATEPERIOD 
+			{
+				datatype: number;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "Start Date Period";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_ENDDATEPERIOD 
+			{
+				datatype: number;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "End Date Period";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_BASECURRENCYPERIOD 
+			{
+				datatype: number;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "Base Currency Period";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_VIEWCURRENCYPERIOD 
+			{
+				datatype: number;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "View Currency Period";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FES_COLUMNTYPE 
+			{
+				datatype: number;
+				aggregation: balance;
+				data_options: unscalable;
+				title: "Column Type";
+				displaytype: select;
+				choices: "0:History|1:Projection";
+				fixed_decimals: 0;
+				visible: 1;
+				options_title: locked;
+			}
+		}
+		variable RootSub2 
+		{
+			datatype: none;
+			data_options: unscalable;
+			title: "General variables for FPS database";
+			visible: 0;
+			options_title: locked, invisible;
+			options_notrend: locked, invisible;
+			options_trend: locked, invisible;
+			variable FPS_VAR_Naam 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "NAME";
+				top_blanklines: 1;
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Relatienummer 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "CUSTOMERNUMBER";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_KVKnr 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "CHAMBEROFCOMMERCENUMBER";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Rechtsvorm_nr 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "LEGALSTATUSCODE";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Rechtsvorm_omschr 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "LEGALSTATUSDESCRIPTION";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_BIK_CODE 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "SECTOROFINDUSTRYCODE";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_BIK_Omschr 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "SECTOROFINDUSTRYDESCRIPTION";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_GridId 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "GRIDID";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Accountmanager 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "ACCOUNTMANAGER";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Kantoor 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "OFFICENUMBER";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Straat 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "STREET";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Housenumber 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "HOUSENUMBER";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Postcode 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "ZIPCODE";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Woonplaats 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "CITY";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Provincie 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "STATEORPROVINCE";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Land 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "COUNTRY";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_BvDID 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Bureau van Dijk ID";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Telefoon 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Telefoonnummer";
+				visible: 1;
+				options_title: locked;
+			}
+			variable FPS_VAR_Emailadres 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Emailadres";
+				visible: 1;
+				options_title: locked;
+				variable FPS_FINAN_USER_ROLES 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "FPS_FINAN_USER_ROLES";
+					top_blanklines: 1;
+					visible: 1;
+					options_title: locked;
+				}
+				variable FPS_FINAN_USER 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "FPS_FINAN_USER";
+					visible: 1;
+					options_title: locked;
+				}
+			}
+		}
+		variable Q_ROOT 
+		{
+			datatype: number;
+			frequency: document;
+			formula: If( (Q_Map01=1) And (Q_Map02=1) And (Q_Map03=1) And (Q_Map04=1) And (Q_Map05=1) And (Q_Map06=1) And (Q_Map07=1)And (Q_Map08=1) Or (Length(&Q_WARNING_GLOBALTXT)>0) , 1, 0);
+			data_options: unscalable;
+			title: "Scorecard Test Model";
+			displaytype: select;
+			choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+			hint: "Dit is een model om de scorecard applicatie te testen.";
+			locked: On;
+			visible: 1;
+			options_title: locked;
+			options_notrend: locked;
+			options_trend: locked;
+			variable Q_Map01 
+			{
+				datatype: number;
+				frequency: document;
+				formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+				data_options: unscalable;
+				title: "Map 1";
+				displaytype: select;
+				choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+				hint: "t";
+				top_blanklines: 1;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map01_WARNING 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(Q_RESTRICTIES&Q_WARNING_GLOBAL);
+					data_options: unscalable;
+					title: "Warning voor map 1";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map01_INFO 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If(Q_Map01=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+					data_options: unscalable;
+					title: "Info bij stap 1";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map01_VALIDATION 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Validatie stap 1";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map01_HINT 
+				{
+					datatype: string;
+					frequency: document;
+					formula: "Dit is de hinttekst van  ";
+					data_options: unscalable;
+					title: "Hinttekst stap 1";
+					hint: "Dit is de hinttekst van de variable (DEZE REGEL WORDT NIET GEBRUIKT!)";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map01_Paragraaf01 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 1";
+					displaytype: currency;
+					hint: "Hinttekst voor paragraaf 1";
+					visible: 1;
+					options_title: locked;
+					variable Q_Map01_Vraag01 
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 1 (String)";
+						hint: "Hinttekst voor vraag 1";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag02 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 2 (Bedrag)";
+						displaytype: currency;
+						fixed_decimals: 0;
+						hint: "Hinttekst voor vraag 2";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag03 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 3 (Getal, dus geen bedrag)";
+						fixed_decimals: 0;
+						hint: "Hinttekst voor vraag 3";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag04 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 4 (Keuzelijst)";
+						displaytype: select;
+						choices: "1:ADO Den Haag|2:Ajax|3:AZ|4:De Graafschap|5:Excelsior|6:Feyenoord|7:Groningen|8:Heerenveen|9:Heracles|10:NAC Breda|11:NEC|12:PSV|13:RKC Waalwijk|14:Roda JC|15:Twente|16:Utrecht|17:Vitesse|18:VVV";
+						hint: "http://www.finan.nl Hinttekst voor vraag 4. Inclusief een URL naar www.finan.nl";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag05 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 5 (Keuzelijst J/N)";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag06 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 6 (Percentage)";
+						displaytype: percentage;
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag07 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 7 (Datumveld)";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag08 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+						data_options: unscalable;
+						title: "Vraag 8 (Memoveld)";
+						displaytype: memo;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag09 
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 9 (Image)";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map01_Paragraaf02 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 2";
+					displaytype: currency;
+					hint: "Alle vragen in deze paragraaf zijn verplicht afhankelijk van onderstaande schakelaar.";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map01_Verplicht 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Zijn de vragen in deze paragraaf verplicht?";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag11 
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Q_Map01_Verplicht=1);
+						data_options: unscalable;
+						title: "Vraag 11 (String)";
+						hint: "http://www.topicus.nl Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag12 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Q_Map01_Verplicht=1);
+						data_options: unscalable;
+						title: "Vraag 12 (Bedrag)";
+						displaytype: currency;
+						fixed_decimals: 0;
+						hint: "http://www.topicus.nl Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag13 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Q_Map01_Verplicht=1);
+						data_options: unscalable;
+						title: "Vraag 13 (Getal, dus geen bedrag)";
+						fixed_decimals: 0;
+						hint: "http://www.topicus.nl Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag14 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Q_Map01_Verplicht=1);
+						data_options: unscalable;
+						title: "Vraag 14 (Keuzelijst)";
+						displaytype: select;
+						choices: "1:ADO Den Haag|2:Ajax|3:AZ|4:De Graafschap|5:Excelsior|6:Feyenoord|7:Groningen|8:Heerenveen|9:Heracles|10:NAC Breda|11:NEC|12:PSV|13:RKC Waalwijk|14:Roda JC|15:Twente|16:Utrecht|17:Vitesse|18:VVV";
+						hint: "http://www.topicus.nl Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag15 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Q_Map01_Verplicht=1);
+						data_options: unscalable;
+						title: "Vraag 15 (Keuzelijst J/N)";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						hint: "http://www.topicus.nl Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag16 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Q_Map01_Verplicht=1);
+						data_options: unscalable;
+						title: "Vraag 16 (Percentage)";
+						displaytype: percentage;
+						fixed_decimals: 0;
+						hint: "http://www.topicus.nl Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag17 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Q_Map01_Verplicht=1);
+						data_options: unscalable;
+						title: "Vraag 17 (Datumveld)";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						hint: "http://www.topicus.nl Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag18 
+					{
+						datatype: string;
+						frequency: document;
+						inputRequired: (Q_Map01_Verplicht=1);
+						data_options: unscalable;
+						title: "Vraag 18 (Memoveld)";
+						displaytype: memo;
+						hint: "http://www.topicus.nl Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map01_Paragraaf03 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 3";
+					displaytype: currency;
+					hint: "Alle vragen in deze paragraaf zijn verplicht.[br][/br]Echter alle velden bevatten al een default waarde.";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map01_Vraag21 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "1";
+						inputRequired: 1;
+						data_options: unscalable;
+						title: "Vraag 1 (String)";
+						hint: "Verplicht veld";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag22 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						inputRequired: 1;
+						data_options: unscalable;
+						title: "Vraag 2 (Bedrag)";
+						displaytype: currency;
+						fixed_decimals: 0;
+						hint: "Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag23 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						inputRequired: 1;
+						data_options: unscalable;
+						title: "Vraag 3 (Getal, dus geen bedrag)";
+						fixed_decimals: 0;
+						hint: "Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag24 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						inputRequired: 1;
+						data_options: unscalable;
+						title: "Vraag 4 (Keuzelijst)";
+						displaytype: select;
+						choices: "1:ADO Den Haag|2:Ajax|3:AZ|4:De Graafschap|5:Excelsior|6:Feyenoord|7:Groningen|8:Heerenveen|9:Heracles|10:NAC Breda|11:NEC|12:PSV|13:RKC Waalwijk|14:Roda JC|15:Twente|16:Utrecht|17:Vitesse|18:VVV";
+						hint: "Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag25 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						inputRequired: 1;
+						data_options: unscalable;
+						title: "Vraag 5 (Keuzelijst J/N)";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						hint: "Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag26 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						inputRequired: 1;
+						data_options: unscalable;
+						title: "Vraag 6 (Percentage)";
+						displaytype: percentage;
+						fixed_decimals: 0;
+						hint: "Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag27 
+					{
+						datatype: number;
+						frequency: document;
+						formula: DMYtoDate(23,8,1974);
+						inputRequired: 1;
+						data_options: unscalable;
+						title: "Vraag 7 (Datumveld)";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						hint: "Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map01_Vraag28 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "Vraag 8 (Memoveld)";
+						inputRequired: 1;
+						data_options: unscalable;
+						title: "Vraag 8 (Memoveld)";
+						displaytype: memo;
+						hint: "Verplicht veld";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map01_Paragraaf03_2 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 3 (deel 2)";
+					displaytype: currency;
+					hint: "Dit is een paragraaf om de BBcodes te testen[br][/br]Hier onder een opsomming van stijlen:[br][/br][b]bolded text[/b][br][/br][i]italicized text[/i][br][/br][u]underlined text[/u][br][/br][url=http://www.finan.nl]Website FINAN[/url][br][/br][p]paragraph[/p][br][/br]";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map01_Paragraaf03_2Sub1 refers to Q_Map01_Vraag28
+					{
+						title: "Vraag 8 (Memoveld) (Copy en ReadOnly)";
+						displaytype: memo;
+						hint: "Dit is een paragraaf om de BBcodes te testen[br][/br]Hier onder een opsomming van stijlen:[br][/br][b]bolded text[/b][br][/br][i]italicized text[/i][br][/br][u]underlined text[/u][br][/br][url=http://www.finan.nl]Website FINAN[/url][br][/br][p]paragraph[/p][br][/br]";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf03_2Sub2 refers to Q_Map01_Vraag28
+					{
+						title: "Dit is een vraag om de BBcodes ";
+						displaytype: memo;
+						hint: "Verplicht veld";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_Map01_Paragraaf04 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 4 (Locked)";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map01_Vraag04Copy refers to Q_Map01_Vraag04
+					{
+						title: "Kopie van vraag 4 (alleen readonly)";
+						displaytype: select;
+						choices: "1:ADO Den Haag|2:Ajax|3:AZ|4:De Graafschap|5:Excelsior|6:Feyenoord|7:Groningen|8:Heerenveen|9:Heracles|10:NAC Breda|11:NEC|12:PSV|13:RKC Waalwijk|14:Roda JC|15:Twente|16:Utrecht|17:Vitesse|18:VVV";
+						hint: "http://www.finan.nl Hinttekst voor vraag 4. Inclusief een URL naar www.finan.nl";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Vraag07Copy refers to Q_Map01_Vraag07
+					{
+						title: "Kopie van vraag 7 (alleen readonly)";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf04Sub3 refers to Q_Map01_Vraag04
+					{
+						title: "Numerieke waarde van vraag 4 (alleen readonly)";
+						choices: "1:ADO Den Haag|2:Ajax|3:AZ|4:De Graafschap|5:Excelsior|6:Feyenoord|7:Groningen|8:Heerenveen|9:Heracles|10:NAC Breda|11:NEC|12:PSV|13:RKC Waalwijk|14:Roda JC|15:Twente|16:Utrecht|17:Vitesse|18:VVV";
+						fixed_decimals: 0;
+						hint: "http://www.finan.nl Hinttekst voor vraag 4. Inclusief een URL naar www.finan.nl";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Vraag04Tekst 
+					{
+						datatype: string;
+						frequency: document;
+						formula: EvaluateAsString(Case(Q_Map01_Vraag04,[=1:"ADO Den Haag"|=2:"Ajax"|=3:"AZ"|=4:"De Graafschap"|=5:"Excelsior"|=6:"Feyenoord"|=7:"Groningen"|=8:"Heerenveen"|=9:"Heracles"|=10:"NAC Breda"|=11:"NEC"|=12:"PSV"|=13:"RKC Waalwijk"|=14:"Roda JC"|=15:"Twente"|=16:"Utrecht"|=17:"Vitesse"|=18:"VVV"]));
+						data_options: unscalable;
+						title: "Alfanumerieke waarde van vraag 4 (alleen readonly)";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf04Sub5 refers to Q_STATUS_STARTED_ON
+					{
+						title: "Aangemaakt op:";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf04Sub6 refers to Q_STATUS_STARTED_BY
+					{
+						title: "Aangemaakt door (gebruikersnaam):";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf04Sub7 refers to Q_STATUS_STARTED_BY_NAME
+					{
+						title: "Aangemaakt door (volledige naam):";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf04Sub8 refers to Q_STATUS_FINAL_ON
+					{
+						title: "Definitief gemaakt op:";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf04Sub9 refers to Q_STATUS_FINAL_BY
+					{
+						title: "Definitief gemaakt door (gebruikersnaam):";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf04Sub10 refers to Q_STATUS_FINAL_BY_NAME
+					{
+						title: "Definitief gemaakt door (volledige naam):";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf04Sub11 refers to FPS_FINAN_USER_ROLES
+					{
+						title: "FPS_FINAN_USER_ROLES";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf04Sub12 refers to FPS_FINAN_USER
+					{
+						title: "FPS_FINAN_USER";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_Map01_Paragraaf05 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 5: Model info";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map01_Paragraaf05Sub1 refers to ModelVersion
+					{
+						title: "Modelversie";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable WindowsUserName 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "r.vanaalderen";
+						data_options: unscalable;
+						title: "Gemaakt door";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable CurrentDate 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 42529.979103461;
+						data_options: unscalable;
+						title: "Gemaakt op";
+						displaytype: date;
+						choices: "dd/MM/yyyy";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable FinanFullVersion 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "03.02.055.001";
+						data_options: unscalable;
+						title: "Gemaakt met FINAN versie";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable ModelCode 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "SCORECARDTESTMODEL";
+						data_options: unscalable;
+						title: "Modelcode";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf05Sub6 refers to MatrixVersion
+					{
+						title: "Parametersversie";
+						hint: "t";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map01_Paragraaf09 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Eigenschappen van de stap";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map01_STATUS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Q_Map01;
+						data_options: unscalable;
+						title: "Status van de stap";
+						displaytype: select;
+						choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf09Sub2 refers to Q_Map01_WARNING
+					{
+						title: "Warning voor map 1";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf09Sub3 refers to Q_Map01_INFO
+					{
+						title: "Info bij stap 1";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf09Sub4 refers to Q_Map01_VALIDATION
+					{
+						title: "Validatie stap 1";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf09Sub5 refers to Q_Map01_REQUIREDVARS
+					{
+						title: "Aantal verplichte velden (1)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_Paragraaf09Sub6 refers to Q_Map01_ENTEREDREQUIREDVARS
+					{
+						title: "Aantal ingevulde verplichte velden (1)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_Map01_Hulpvariabelen 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Hulpvariabelen";
+					displaytype: currency;
+					locked: On;
+					visible: 0;
+					options_title: locked, invisible;
+					options_notrend: locked, invisible;
+					options_trend: locked, invisible;
+					variable Q_Map01_REQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X));
+						data_options: unscalable;
+						title: "Aantal verplichte velden (1)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map01_ENTEREDREQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) And DataAvailable(X));
+						data_options: unscalable;
+						title: "Aantal ingevulde verplichte velden (1)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_Map02 
+			{
+				datatype: number;
+				frequency: document;
+				formula: (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS);
+				data_options: unscalable;
+				title: "Map 2";
+				displaytype: select;
+				choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map02_WARNING 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(Q_RESTRICTIES&Q_WARNING_GLOBAL);
+					data_options: unscalable;
+					title: "Warning voor map 2";
+					top_blanklines: 1;
+					visible: 1;
+					options_title: locked;
+				}
+				variable Q_Map02_INFO 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If(Q_Map02=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+					data_options: unscalable;
+					title: "Info bij stap 2";
+					visible: 1;
+					options_title: locked;
+				}
+				variable Q_Map02_VALIDATION 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Validatie stap 2";
+					visible: 1;
+					options_title: locked;
+				}
+				variable Q_Map02_Paragraaf01 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 1";
+					displaytype: currency;
+					hint: "Flipflop voorbeeld. A+B=C[br][/br]Wanneer een waarde wordt ingevuld in C, dan wordt de waarde in B verwijderd. B rekent vervolgens de waarde (C-A = B) uit. De opteling blijft correct.";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map02_A 
+					{
+						datatype: number;
+						frequency: document;
+						title: "A";
+						displaytype: currency;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map02_B 
+					{
+						datatype: number;
+						frequency: document;
+						formula: If( DataEntered(Q_Map02_C), Q_Map02_C - Q_Map02_A, NA);
+						flipflop_notrend: Q_Map02_C;
+						title: "B";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map02_C 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Q_Map02_A + Q_Map02_B;
+						flipflop_notrend: Q_Map02_B;
+						title: "C";
+						displaytype: currency;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map02_Paragraaf02 
+				{
+					datatype: number;
+					aggregation: flow;
+					title: "Paragraaf 2";
+					displaytype: currency;
+					hint: "Flipflop voorbeeld. X+Y=Z[br][/br]Wanneer een waarde wordt ingevuld in Z, dan wordt de waarde in Y verwijderd. Y rekent vervolgens de waarde (Z-X = Y) uit. De opteling blijft correct.";
+					top_separator: 1;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map02_X 
+					{
+						datatype: number;
+						aggregation: flow;
+						title: "X";
+						displaytype: currency;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map02_Y 
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: If( DataEntered(Q_Map02_Z), Q_Map02_Z - Q_Map02_X, NA);
+						flipflop_notrend: Q_Map02_Z;
+						flipflop_trend: Q_Map02_Z;
+						title: "Y";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map02_Z 
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: Q_Map02_X + Q_Map02_Y;
+						flipflop_notrend: Q_Map02_Y;
+						flipflop_trend: Q_Map02_Y;
+						title: "Z";
+						displaytype: currency;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map02_Paragraaf03 
+				{
+					datatype: number;
+					aggregation: flow;
+					title: "Paragraaf 3";
+					displaytype: currency;
+					hint: "Hieronder de tekstvelden die panel boven in beeld verschijnen";
+					bottom_separator: 1;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map02_Paragraaf03Sub1 refers to Q_Map02_WARNING
+					{
+						title: "Warning voor map 2";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map02_Paragraaf03Sub2 refers to Q_Map02_INFO
+					{
+						title: "Info bij stap 2";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map02_Paragraaf03Sub3 refers to Q_Map02_VALIDATION
+					{
+						title: "Validatie stap 2";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map02_Paragraaf09 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Eigenschappen van de stap";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map02_Paragraaf09Sub1 refers to Q_Map02_WARNING
+					{
+						title: "Warning voor map 2";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map02_Paragraaf09Sub2 refers to Q_Map02_INFO
+					{
+						title: "Info bij stap 2";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map02_Paragraaf09Sub3 refers to Q_Map02_VALIDATION
+					{
+						title: "Validatie stap 2";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map02_Paragraaf09Sub4 refers to Q_Map02_REQUIREDVARS
+					{
+						title: "Aantal verplichte velden (2)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map02_Paragraaf09Sub5 refers to Q_Map02_ENTEREDREQUIREDVARS
+					{
+						title: "Aantal ingevulde verplichte velden (2)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_Map02_Hulpvariabelen 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Hulpvariabelen";
+					displaytype: currency;
+					locked: On;
+					visible: 0;
+					options_title: locked, invisible;
+					options_notrend: locked, invisible;
+					options_trend: locked, invisible;
+					variable Q_Map02_REQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_Hulpvariabelen),InputRequired(X));
+						data_options: unscalable;
+						title: "Aantal verplichte velden (2)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map02_ENTEREDREQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_Hulpvariabelen),InputRequired(X) And DataAvailable(X));
+						data_options: unscalable;
+						title: "Aantal ingevulde verplichte velden (2)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_Map03 
+			{
+				datatype: number;
+				frequency: document;
+				formula: (Q_MAP03_ENTEREDREQUIREDVARS=Q_MAP03_REQUIREDVARS);
+				data_options: unscalable;
+				title: "Map 3 (Jaarrekening)";
+				displaytype: select;
+				choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map03_WARNING 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(Q_RESTRICTIES&Q_WARNING_GLOBAL);
+					data_options: unscalable;
+					title: "Warning voor map 3";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map03_INFO 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If(Q_Map03=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+					data_options: unscalable;
+					title: "Info bij stap 3";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map03_VALIDATION 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Validatie stap 3";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map03_Paragraaf01 
+				{
+					datatype: number;
+					aggregation: balance;
+					title: "Balans";
+					displaytype: currency;
+					top_separator: 1;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable +HeaderExtra 
+					{
+						datatype: number;
+						aggregation: average;
+						formula: EvaluateAsString(If(ValueT(T)=ValueT(LastTinYear(FirstTinFormulaSet(Trend,MainPeriod))),&"1e Progn" ,&"!= 1e Progn"));
+						title: "Extra info";
+						displaytype: currency;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable +IntangibleFixedAssets 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Immateriële vaste activa";
+						displaytype: currency;
+						hint: "Dit is een test om te controleren of alles tussen quotes wordt vertaald.";
+						visible: 1;
+						options_title: locked;
+					}
+					variable +MaterialFixedAssets 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Materiële vaste activa";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable +FinancialFixedAssets 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Financiële vaste activa";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable +Inventories 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Voorraden";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable +Receivables2 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Vorderingen";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable +CashAndEquivalents 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Liquide middelen";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable =TotalAssets2 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Totaal activa";
+						displaytype: currency;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable +NetWorth 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Eigen vermogen";
+						displaytype: currency;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable +Provisions 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Voorzieningen";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable +NonCurrentLiabilities 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Langlopende schulden";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable CurrentLiabilities 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Kortlopende schulden";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable =TotalEquityAndLiabilities 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Totaal passiva";
+						displaytype: currency;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable OffBalance 
+					{
+						datatype: number;
+						aggregation: balance;
+						title: "Off balance";
+						displaytype: currency;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable ValCheck 
+					{
+						datatype: number;
+						aggregation: maximum;
+						formula: Abs(TotalAssets2-TotalEquityAndLiabilities);
+						title: "Balans uitevenwicht?";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable IncomeStatement 
+				{
+					datatype: number;
+					aggregation: flow;
+					title: "Resultatenrekening";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable +NetSales 
+					{
+						datatype: number;
+						aggregation: flow;
+						formula_trend: NetSales[GetT(T,-1)];
+						title: "Netto omzet";
+						displaytype: currency;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable -CostOfSales 
+					{
+						datatype: number;
+						aggregation: flow;
+						formula_trend: CostOfSales[GetT(T,-1)];
+						title: "Inkoopwaarde";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable =GrossProfit 
+					{
+						datatype: number;
+						aggregation: flow;
+						title: "Bruto winst";
+						displaytype: currency;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_MAP03_Paragraaf03 
+				{
+					datatype: number;
+					aggregation: flow;
+					title: "Paragraaf 3 (alle kolommen)";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable +Q_MAP03_Paragraaf03Sub1 refers to NetSales
+					{
+						title: "Netto omzet";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable -Q_MAP03_Paragraaf03Sub2 refers to CostOfSales
+					{
+						title: "Inkoopwaarde";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_MAP03_Paragraaf03Sub3 refers to GrossProfit
+					{
+						title: "Bruto winst";
+						fixed_decimals: 0;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_MAP03_Paragraaf04 
+				{
+					datatype: number;
+					aggregation: flow;
+					title: "Paragraaf 4 (alleen historische kolommen)";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable +Q_MAP03_Paragraaf04Sub1 refers to NetSales
+					{
+						title: "Netto omzet";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+						options_trend: locked, invisible;
+					}
+					variable -Q_MAP03_Paragraaf04Sub2 refers to CostOfSales
+					{
+						title: "Inkoopwaarde";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+						options_trend: locked, invisible;
+					}
+					variable Q_MAP03_Paragraaf04Sub3 refers to GrossProfit
+					{
+						title: "Bruto winst";
+						fixed_decimals: 0;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked, invisible;
+					}
+				}
+				variable Q_MAP03_Paragraaf041 
+				{
+					datatype: number;
+					aggregation: flow;
+					title: "Paragraaf 4 (alleen historische kolommen incl. header)";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					options_trend: locked, invisible;
+					variable +Q_MAP03_Paragraaf041Sub1 refers to NetSales
+					{
+						title: "Netto omzet";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+						options_trend: locked, invisible;
+					}
+					variable -Q_MAP03_Paragraaf041Sub2 refers to CostOfSales
+					{
+						title: "Inkoopwaarde";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+						options_trend: locked, invisible;
+					}
+					variable Q_MAP03_Paragraaf041Sub3 refers to GrossProfit
+					{
+						title: "Bruto winst";
+						fixed_decimals: 0;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked, invisible;
+					}
+				}
+				variable Q_MAP03_Paragraaf05 
+				{
+					datatype: number;
+					aggregation: flow;
+					title: "Paragraaf 5 (alleen prognose kolommen)";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable +Q_MAP03_Paragraaf05Sub1 refers to NetSales
+					{
+						title: "Netto omzet";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked, invisible;
+					}
+					variable -Q_MAP03_Paragraaf05Sub2 refers to CostOfSales
+					{
+						title: "Inkoopwaarde";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked, invisible;
+					}
+					variable Q_MAP03_Paragraaf05Sub3 refers to GrossProfit
+					{
+						title: "Bruto winst";
+						fixed_decimals: 0;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked, invisible;
+						options_trend: locked;
+					}
+				}
+				variable Q_MAP03_Paragraaf051 
+				{
+					datatype: number;
+					aggregation: flow;
+					title: "Paragraaf 5 (alleen prognose kolommen incl. header)";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked, invisible;
+					variable +Q_MAP03_Paragraaf051Sub1 refers to NetSales
+					{
+						title: "Netto omzet";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked, invisible;
+					}
+					variable -Q_MAP03_Paragraaf051Sub2 refers to CostOfSales
+					{
+						title: "Inkoopwaarde";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked, invisible;
+					}
+					variable Q_MAP03_Paragraaf051Sub3 refers to GrossProfit
+					{
+						title: "Bruto winst";
+						fixed_decimals: 0;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked, invisible;
+						options_trend: locked;
+					}
+				}
+				variable Q_MAP03_Paragraaf06 
+				{
+					datatype: number;
+					aggregation: flow;
+					title: "Paragraaf 6 (geen history en prognose kolommen)";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable +Q_MAP03_Paragraaf06Sub1 refers to NetSales
+					{
+						title: "Netto omzet";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked, invisible;
+						options_trend: locked, invisible;
+					}
+					variable -Q_MAP03_Paragraaf06Sub2 refers to CostOfSales
+					{
+						title: "Inkoopwaarde";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked, invisible;
+						options_trend: locked, invisible;
+					}
+					variable Q_MAP03_Paragraaf06Sub3 refers to GrossProfit
+					{
+						title: "Bruto winst";
+						fixed_decimals: 0;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked, invisible;
+						options_trend: locked, invisible;
+					}
+				}
+				variable Q_MAP03_Paragraaf07 
+				{
+					datatype: number;
+					aggregation: flow;
+					title: "Paragraaf 7 (prognose kolommen locken)";
+					displaytype: currency;
+					hint: "TestLockedVar bepaalt de locking van de variabelen die hier onder staan";
+					bottom_separator: 1;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					variable TestLockedVar 
+					{
+						datatype: number;
+						aggregation: balance;
+						data_options: unscalable;
+						title: "TestLockedVar";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable NetSalesLock 
+					{
+						datatype: number;
+						aggregation: flow;
+						formula_trend: NetSales;
+						data_options: unscalable;
+						title: "NetSalesLock, locked=(TestLockedVar=4)";
+						fixed_decimals: 0;
+						hint: "Eerst getoonde NetSalesLock is de originele variabele, die eronder is de kopie die de locking-eigenschappen moet overerven";
+						locked: (TestLockedVar=4);
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_MAP03_Paragraaf07Sub3 refers to NetSalesLock
+					{
+						title: "Kopie NetSalesLock";
+						fixed_decimals: 0;
+						hint: "Eerst getoonde NetSalesLock is de originele variabele, die eronder is de kopie die de locking-eigenschappen moet overerven";
+						locked: (TestLockedVar=4);
+						visible: 1;
+						options_title: locked;
+					}
+					variable NetSalesLock2 
+					{
+						datatype: number;
+						aggregation: flow;
+						formula_trend: NetSales;
+						data_options: unscalable;
+						title: "NetSalesLock2, locked=(TestLockedVar<>4)";
+						fixed_decimals: 0;
+						hint: "Eerst getoonde NetSalesLock2 is de originele variabele, die eronder is de kopie die de locking-eigenschappen moet overerven";
+						locked: (TestLockedVar<>4);
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_MAP03_Paragraaf07Sub5 refers to NetSalesLock2
+					{
+						title: "Kopie NetSalesLock2";
+						fixed_decimals: 0;
+						hint: "Eerst getoonde NetSalesLock2 is de originele variabele, die eronder is de kopie die de locking-eigenschappen moet overerven";
+						locked: (TestLockedVar<>4);
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map03_Paragraaf09 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Eigenschappen van de stap";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map03_Paragraaf09Sub1 refers to Q_Map03_WARNING
+					{
+						title: "Warning voor map 3";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map03_Paragraaf09Sub2 refers to Q_Map03_INFO
+					{
+						title: "Info bij stap 3";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map03_Paragraaf09Sub3 refers to Q_Map03_VALIDATION
+					{
+						title: "Validatie stap 3";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map03_Paragraaf09Sub4 refers to Q_Map03_REQUIREDVARS
+					{
+						title: "Aantal verplichte velden (3)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map03_Paragraaf09Sub5 refers to Q_Map03_ENTEREDREQUIREDVARS
+					{
+						title: "Aantal ingevulde verplichte velden (3)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_Map03_Hulpvariabelen 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Hulpvariabelen";
+					displaytype: currency;
+					locked: On;
+					visible: 0;
+					options_title: locked, invisible;
+					options_notrend: locked, invisible;
+					options_trend: locked, invisible;
+					variable Q_Map03_REQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_Hulpvariabelen),InputRequired(X));
+						data_options: unscalable;
+						title: "Aantal verplichte velden (3)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map03_ENTEREDREQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_Hulpvariabelen),InputRequired(X) And DataAvailable(X));
+						data_options: unscalable;
+						title: "Aantal ingevulde verplichte velden (3)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_Map04 
+			{
+				datatype: number;
+				frequency: document;
+				formula: (Q_MAP04_ENTEREDREQUIREDVARS=Q_MAP04_REQUIREDVARS);
+				data_options: unscalable;
+				title: "Map 4 Locking / Visible en Type variabelen";
+				displaytype: select;
+				choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map04_WARNING 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(Q_RESTRICTIES&Q_WARNING_GLOBAL);
+					data_options: unscalable;
+					title: "Warning voor map 4";
+					displaytype: memo;
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map04_INFO 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If(Q_Map04=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+					data_options: unscalable;
+					title: "Info bij stap 4";
+					displaytype: memo;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map04_VALIDATION 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Validatie stap 4";
+					displaytype: memo;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map04_Paragraaf01 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 1";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map04_Vraag01 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 0;
+						data_options: unscalable;
+						title: "Lock variabel Map 5 Vraag 1";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map04_Vraag02 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Laat variabel Map 5 Vraag 2 zien";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map04_Vraag03 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Laat paragraaf Map 5 Paragraaf 1 zien";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map04_Vraag04 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Laat Map 5 zien";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map04_Paragraaf03 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Sting types";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable StringInputpattern 
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						pattern: "([0-9]*)";
+						title: "Alleen getallen";
+						hint: "Een tekstveld waarin alleen numerieke waarden ingevuld mogen worden$$Pattern=([0-9]*)";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable StringInputmax 
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						length:  < 11;
+						title: "Maximaal 10 karakters";
+						hint: "Maximaal 10 karakters$$MaxLength=10";
+						visible: 1;
+						options_title: locked;
+					}
+					variable StringInputmin 
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						length:  > 4;
+						title: "Minimaal 5 karakters";
+						hint: "Minimaal 5 karakters (incl 5)$$MinLength=5";
+						visible: 1;
+						options_title: locked;
+					}
+					variable EmailAdres 
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						pattern: "^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
+						title: "Email adres";
+						hint: "Door middel van een reguliere expressie wordt gecontroleerd of het ingevuld veld een emailadres is.$$Pattern=^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map04_Paragraaf04 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Currency types";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable InputminInclInputMaxIncl 
+					{
+						datatype: number;
+						frequency: document;
+						range: >= 5.0 and <= 10.0;
+						title: "Vul een getal in tussen >=5 en <=10";
+						displaytype: currency;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable InputminExclInputMaxExcl 
+					{
+						datatype: number;
+						frequency: document;
+						range: > 5.0 and < 10.0;
+						title: "Vul een getal in tussen > 5 en < 10";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable InputminInclInputMaxExcl 
+					{
+						datatype: number;
+						frequency: document;
+						range: >= 5.0 and < 10.0;
+						title: "Vul een getal in tussen >=5 en < 10";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable InputminExclInputMaxIncl 
+					{
+						datatype: number;
+						frequency: document;
+						range: > 5.0 and <= 10.0;
+						title: "Vul een getal in tussen > 5 en <=10";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map04_Paragraaf05 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Foto type";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable PhotoUpload 
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						title: "PhotoUpload";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map04_Paragraaf06 
+				{
+					datatype: number;
+					frequency: document;
+					title: "File upload type";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable FileUpload 
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						title: "Upload een file";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map04_Paragraaf09 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Eigenschappen van de stap";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map04_Paragraaf09Sub1 refers to Q_Map04_WARNING
+					{
+						title: "Warning voor map 4";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map04_Paragraaf09Sub2 refers to Q_Map04_INFO
+					{
+						title: "Info bij stap 4";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map04_Paragraaf09Sub3 refers to Q_Map04_VALIDATION
+					{
+						title: "Validatie stap 4";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map04_Paragraaf09Sub4 refers to Q_Map04_REQUIREDVARS
+					{
+						title: "Aantal verplichte velden (4)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map04_Paragraaf09Sub5 refers to Q_Map04_ENTEREDREQUIREDVARS
+					{
+						title: "Aantal ingevulde verplichte velden (4)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_Map04_Hulpvariabelen 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Hulpvariabelen";
+					displaytype: currency;
+					locked: On;
+					visible: 0;
+					options_title: locked, invisible;
+					options_notrend: locked, invisible;
+					options_trend: locked, invisible;
+					variable Q_Map04_REQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_Hulpvariabelen),InputRequired(X));
+						data_options: unscalable;
+						title: "Aantal verplichte velden (4)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map04_ENTEREDREQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_Hulpvariabelen),InputRequired(X) And DataAvailable(X));
+						data_options: unscalable;
+						title: "Aantal ingevulde verplichte velden (4)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_Map05 
+			{
+				datatype: number;
+				frequency: document;
+				formula: (Q_MAP05_ENTEREDREQUIREDVARS=Q_MAP05_REQUIREDVARS);
+				data_options: unscalable;
+				title: "Map 5 Tuples";
+				displaytype: select;
+				choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+				locked: On;
+				visible: (Q_Map04_Vraag04=1);
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map05_WARNING 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(Q_RESTRICTIES&Q_WARNING_GLOBAL);
+					data_options: unscalable;
+					title: "Warning voor map 5";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map05_INFO 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If(Q_Map05=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+					data_options: unscalable;
+					title: "Info bij stap 5";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map05_VALIDATION 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Validatie stap 5";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map05_Paragraaf01 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 1";
+					displaytype: currency;
+					hint: "De invoer bij vraag 2 wordt automatisch ook ingevuld bij vraag 1.";
+					locked: On;
+					visible: (Q_Map04_Vraag03=1);
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map05_Vraag01 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Visible(Q_Map05_Vraag01));
+						data_options: unscalable;
+						title: "Vraag 1";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: (Q_STATUS=1) or (Q_Map04_Vraag01=1);
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map05_Vraag02 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 2";
+						fixed_decimals: 0;
+						visible: (Q_Map04_Vraag02=1);
+						options_title: locked;
+					}
+					variable Q_Map05_Vraag03 
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 3";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map05_Paragraaf03 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Lijstje";
+					displaytype: currency;
+					hint: "Hieronder wordt een lijstje getoond. Vul één regel in automatisch verschijnt er een nieuwe regel getoond. Je kunt de omschrijving aanpassen door op het pennetje te klikken.";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map05_Lijst01 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Omschrijving";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+					}
+					variable Q_Map05_Lijst02 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Omschrijving";
+						fixed_decimals: 0;
+						visible: DataEntered(Q_Map05_Lijst01,1);
+					}
+					variable Q_Map05_Lijst03 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Omschrijving";
+						fixed_decimals: 0;
+						visible: DataEntered(Q_Map05_Lijst02,1);
+					}
+					variable Q_Map05_LijstTotaal 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Q_Map05_Lijst01+Q_Map05_Lijst02+Q_Map05_Lijst03;
+						data_options: unscalable;
+						title: "Totaal";
+						fixed_decimals: 0;
+						top_separator: 2;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_Map05_Paragraaf04 
+				{
+					datatype: number;
+					frequency: document;
+					title: "asdas";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable OnroerendGoedTupleSum 
+					{
+						datatype: number;
+						frequency: document;
+						formula: TupleSum(OnroerendGoed_tpAanschafwaarde);
+						data_options: unscalable;
+						title: "TupleSum Aanschafwaarde";
+						displaytype: currency;
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable OnroerendGoedTupleMin 
+					{
+						datatype: number;
+						frequency: document;
+						formula: TupleMin(OnroerendGoed_tpAanschafwaarde);
+						data_options: unscalable;
+						title: "TupleMin Aanschafwaarde";
+						displaytype: currency;
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable OnroerendGoedTupleMax 
+					{
+						datatype: number;
+						frequency: document;
+						formula: TupleMax(OnroerendGoed_tpAanschafwaarde);
+						data_options: unscalable;
+						title: "TupleMax Aanschafwaarde";
+						displaytype: currency;
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable OnroerendGoedTupleSumVerschil 
+					{
+						datatype: number;
+						frequency: document;
+						formula: TupleSum(OnroerendGoed_tpVerschil);
+						data_options: unscalable;
+						title: "t";
+						displaytype: currency;
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable OnroerendGoedTupleSumGroter0 
+					{
+						datatype: number;
+						frequency: document;
+						formula: TupleSum(OnroerendGoed_tpGroter0);
+						data_options: unscalable;
+						title: "t";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable OnroerendGoedTupleSumJonger6Mnd 
+					{
+						datatype: number;
+						frequency: document;
+						formula: TupleSum(OnroerendGoed_tpJonger6Mnd);
+						data_options: unscalable;
+						title: "t";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					tuple OnroerendGoed 
+					{
+						title: "Onroerend goed";
+						options_title: locked;
+						variable OnroerendGoed_tpRegistratienummer 
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "Registernummer";
+							top_blanklines: 1;
+							options_title: locked;
+						}
+						variable OnroerendGoed_tpAanschafwaarde 
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "Aanschafwaarde registergoed";
+							displaytype: currency;
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+						variable OnroerendGoed_tpAanschafjaar 
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "Aanschafjaar registergoed";
+							options_title: locked;
+						}
+						variable OnroerendGoed_tpWOZwaarde 
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "WOZ-waarde registergoed";
+							displaytype: currency;
+							fixed_decimals: 0;
+							hint: "Wanneer WOZ-waarde wordt ingevuld dan wordt datum ook getoond, anders wordt deze verborgen";
+							options_title: locked;
+						}
+						variable OnroerendGoed_tpWOZwaardeDatum 
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "Datum vaststelling WOZ-waarde registergoed";
+							displaytype: date;
+							choices: "dd/MM/yyyy";
+							options_title: locked;
+						}
+						variable OnroerendGoed_tpBoekwaarde 
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "Boekwaarde registergoed";
+							displaytype: currency;
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+						variable OnroerendGoed_tpAfschrijvingsmethode 
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "Afschrijvingsmethode registergoed";
+							options_title: locked;
+						}
+						variable OnroerendGoed_tpVerschil 
+						{
+							datatype: number;
+							frequency: document;
+							formula: (OnroerendGoed_tpAanschafwaarde - OnroerendGoed_tpWOZwaarde);
+							data_options: unscalable;
+							title: "Verschil aanschafwaarde <> WOZ ";
+							displaytype: currency;
+							fixed_decimals: 0;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable OnroerendGoed_tpGroter0 
+						{
+							datatype: number;
+							frequency: document;
+							formula: If(OnroerendGoed_tpAanschafwaarde>0,1,0);
+							data_options: unscalable;
+							title: "Aanschafwaarde registergoed > 0 euro?";
+							displaytype: select;
+							choices: "0:Nee|1:Ja";
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable OnroerendGoed_tpJonger6Mnd 
+						{
+							datatype: number;
+							frequency: document;
+							formula: If( (OnNA(Q_STATUS_FINAL_ON,Now) - (365/2)) > OnroerendGoed_tpWOZwaardeDatum ,0,1);
+							data_options: unscalable;
+							title: "Datum vaststelling WOZ jonger dan 6 maand?";
+							displaytype: select;
+							choices: "0:Nee|1:Ja";
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+				}
+				variable Q_Map05_Paragraaf05 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Tuple Omzetgroep";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					tuple OmzetGroep 
+					{
+						title: "Omzetgroep";
+						options_title: locked;
+						variable Omzetgroep_tpNaam 
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "Naam";
+							top_blanklines: 1;
+							options_title: locked;
+						}
+						variable +Omzetgroep_tpOmzet 
+						{
+							datatype: number;
+							aggregation: flow;
+							title: "Omzet";
+							displaytype: currency;
+							top_separator: 1;
+							top_blanklines: 1;
+							options_title: locked;
+						}
+						variable -Omzetgroep_tpInkoop 
+						{
+							datatype: number;
+							aggregation: flow;
+							unspecified: default, preferred;
+							title: "Inkoop";
+							displaytype: currency;
+							options_title: locked;
+						}
+						variable =Omzetgroep_tpBrutowinst 
+						{
+							datatype: number;
+							aggregation: flow;
+							title: "Brutowinst";
+							displaytype: currency;
+							top_separator: 1;
+							options_title: locked;
+						}
+						variable Omzetgroep_tpBrutomarge 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: OnEr((Omzetgroep_tpOmzet - Omzetgroep_tpInkoop) / Omzetgroep_tpOmzet ,NA);
+							data_options: calculateAggregation, unscalable;
+							title: "Brutomarge";
+							displaytype: percentage;
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+					}
+					variable SOMOmzetgroepOmzet 
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: TupleSum(Omzetgroep_tpOmzet);
+						title: "SOM: Omzet";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+					variable SOMOmzetgroepBrutowinst 
+					{
+						datatype: number;
+						aggregation: flow;
+						formula: TupleSum(Omzetgroep_tpBrutowinst);
+						title: "SOM: Brutowinst";
+						displaytype: currency;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map05_Paragraaf06 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Overeenkomst (Tuple in Tuple in Tuple)";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					tuple OVK 
+					{
+						title: "Overeenkomst (T)";
+						options_title: locked;
+						variable OVK_tpID 
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "ID";
+							top_blanklines: 1;
+							options_title: locked;
+						}
+						variable OVK_tpNaam 
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "Naam";
+							options_title: locked;
+						}
+						tuple OVK_Lening 
+						{
+							title: "Lening (T)";
+							options_title: locked;
+							variable OVK_Lening_tpID 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "ID";
+								top_blanklines: 1;
+								options_title: locked;
+							}
+							variable OVK_Lening_tpNummer 
+							{
+								datatype: string;
+								frequency: document;
+								formula: EvaluateAsString("t");
+								data_options: unscalable;
+								title: "Rekeningnummer";
+								options_title: locked;
+							}
+							variable OVK_Lening_tpHoofdsom 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Hoofdsom";
+								displaytype: currency;
+								fixed_decimals: 0;
+								options_title: locked;
+							}
+							variable OVK_Lening_tpDetails 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "Details";
+								options_title: locked;
+								variable OVK_Lening_tpRenteProduct 
+								{
+									datatype: string;
+									frequency: document;
+									data_options: unscalable;
+									title: "Rente Product";
+									top_blanklines: 1;
+									options_title: locked;
+								}
+								variable OVK_Lening_tpRentepercentage 
+								{
+									datatype: number;
+									frequency: document;
+									data_options: unscalable;
+									title: "Rente percentage";
+									displaytype: percentage;
+									fixed_decimals: 2;
+									options_title: locked;
+								}
+								variable +OVK_Lening_tpLooptijd 
+								{
+									datatype: number;
+									frequency: document;
+									data_options: unscalable;
+									title: "Looptijd";
+									fixed_decimals: 0;
+									options_title: locked;
+								}
+							}
+							tuple OVK_Lening_Zekerheid 
+							{
+								title: "Zekerheid (T) (Gealloceerd)";
+								options_title: locked;
+								variable OVK_Lening_Zekerheid_tpID 
+								{
+									datatype: string;
+									frequency: document;
+									data_options: unscalable;
+									title: "ID";
+									top_blanklines: 1;
+									options_title: locked;
+								}
+								variable OVK_Lening_Zekerheid_tpNaam 
+								{
+									datatype: string;
+									frequency: document;
+									data_options: unscalable;
+									title: "Omschrijving";
+									options_title: locked;
+								}
+								variable OVK_Lening_Zekerheid_tpWaarde 
+								{
+									datatype: number;
+									frequency: document;
+									data_options: unscalable;
+									title: "Waarde";
+									displaytype: currency;
+									fixed_decimals: 0;
+									options_title: locked;
+								}
+								variable OVK_Lening_Zekerheid_tpType 
+								{
+									datatype: number;
+									frequency: document;
+									data_options: unscalable;
+									title: "Soort";
+									displaytype: select;
+									choices: "1:Onroerend Goed|2:Inventaris|3:Bankgarantie";
+									options_title: locked;
+								}
+								variable OVK_Lening_Zekerheid_tpDekkingsPercentage 
+								{
+									datatype: number;
+									frequency: document;
+									formula: If(OVK_Lening_Zekerheid_tpType=1,0.90,If(OVK_Lening_Zekerheid_tpType=2,0.40,If(OVK_Lening_Zekerheid_tpType=1,1,NA)));
+									data_options: unscalable;
+									title: "Dekkingspercentage percentage";
+									displaytype: percentage;
+									fixed_decimals: 2;
+									options_title: locked;
+									options_notrend: locked;
+									options_trend: locked;
+								}
+								variable OVK_Lening_Zekerheid_tpAllocatiePercentage 
+								{
+									datatype: number;
+									frequency: document;
+									formula: 1;
+									data_options: unscalable;
+									title: "Allocatie percentage";
+									displaytype: percentage;
+									fixed_decimals: 2;
+									options_title: locked;
+								}
+								variable OVK_Lening_Zekerheid_tpDekkingsWaarde 
+								{
+									datatype: number;
+									frequency: document;
+									formula: OVK_Lening_Zekerheid_tpDekkingsPercentage*OVK_Lening_Zekerheid_tpAllocatiePercentage*OVK_Lening_Zekerheid_tpWaarde;
+									data_options: unscalable;
+									title: "Dekkingswaarde";
+									displaytype: currency;
+									fixed_decimals: 0;
+									options_title: locked;
+									options_notrend: locked;
+									options_trend: locked;
+								}
+								variable =OVK_Lening_Zekerheid_tpLooptijdLening 
+								{
+									datatype: number;
+									frequency: document;
+									data_options: unscalable;
+									title: "De looptijd van de onderliggende lening is";
+									fixed_decimals: 0;
+									hint: "Controle om gegevens op te vragen vanuit bovenliggende tuple";
+									top_separator: 1;
+									options_title: locked;
+								}
+							}
+							variable OVK_Lening_tpZekerheidGealloceerdTotaal 
+							{
+								datatype: number;
+								frequency: document;
+								formula: TupleSum(OVK_Lening_Zekerheid_tpDekkingsWaarde);
+								title: "Totaal Zekerheid (T) (Gealloceerd)";
+								displaytype: currency;
+								options_title: locked;
+							}
+							variable OVK_Lening_tpZekerheidNietGealloceerd 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Zekerheid (Niet Gealloceerd)";
+								displaytype: currency;
+								fixed_decimals: 0;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable OVK_Lening_tpZekerheidTotaal 
+							{
+								datatype: number;
+								frequency: document;
+								formula: OVK_Lening_tpZekerheidGealloceerdTotaal + OVK_Lening_tpZekerheidNietGealloceerd;
+								data_options: unscalable;
+								title: "Totale dekkingswaarde zekerheden";
+								displaytype: currency;
+								fixed_decimals: 0;
+								options_title: locked;
+							}
+							variable OVK_Lening_tpTotaleDekkinngsPercentage 
+							{
+								datatype: number;
+								frequency: document;
+								formula: OnER(OVK_Lening_tpZekerheidTotaal/OVK_Lening_tpHoofdsom,NA);
+								data_options: unscalable;
+								title: "Totale dekkingspercentage";
+								displaytype: currency;
+								fixed_decimals: 0;
+								options_title: locked;
+							}
+						}
+					}
+					variable OVK_LeningHoofdsomSum 
+					{
+						datatype: number;
+						frequency: document;
+						formula: TupleSum(OVK_Lening_tpHoofdsom);
+						data_options: unscalable;
+						title: "Totaal leningen";
+						displaytype: currency;
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map05_Paragraaf07 
+				{
+					datatype: number;
+					frequency: document;
+					title: "(KOPIE) Overeenkomst (Tuple in Tuple in Tuple) [READONLY]";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					tuple Q_Map05_Paragraaf07Sub1 
+					{
+						title: EvaluateAsString(OVK_tpNaam);
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable Q_Map05_Paragraaf07Sub1Sub1 refers to OVK_tpID
+						{
+							title: "ID";
+							locked: On;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable Q_Map05_Paragraaf07Sub1Sub2 refers to OVK_tpNaam
+						{
+							title: "Naam";
+							locked: On;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						tuple Q_Map05_Paragraaf07Sub1Sub3 
+						{
+							title: EvaluateAsString(OVK_Lening_tpNummer);
+							displaytype: currency;
+							fixed_decimals: 0;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+							variable Q_Map05_Paragraaf07Sub1Sub3Sub1 refers to OVK_Lening_tpNummer
+							{
+								title: "Rekeningnummer";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_Paragraaf07Sub1Sub3Sub2 refers to OVK_Lening_tpHoofdsom
+							{
+								title: "Hoofdsom";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_Paragraaf07Sub1Sub3Sub3 refers to OVK_Lening_tpDetails
+							{
+								title: "Details";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+								variable Q_Map05_Paragraaf07Sub1Sub3Sub3Sub1 refers to OVK_Lening_tpRenteProduct
+								{
+									title: "Rente Product";
+									visible: 1;
+									options_title: locked;
+								}
+								variable Q_Map05_Paragraaf07Sub1Sub3Sub3Sub2 refers to OVK_Lening_tpRentepercentage
+								{
+									title: "Rente percentage";
+									displaytype: percentage;
+									fixed_decimals: 2;
+									visible: 1;
+									options_title: locked;
+								}
+								variable +Q_Map05_Paragraaf07Sub1Sub3Sub3Sub3 refers to OVK_Lening_tpLooptijd
+								{
+									title: "Looptijd";
+									fixed_decimals: 0;
+									visible: 1;
+									options_title: locked;
+								}
+							}
+							tuple Q_Map05_Paragraaf07Sub1Sub3Sub4 
+							{
+								title: EvaluateAsString(OVK_Lening_Zekerheid_tpNaam);
+								displaytype: currency;
+								fixed_decimals: 0;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+								variable Q_Map05_Paragraaf07Sub1Sub3Sub4Sub1 refers to OVK_Lening_Zekerheid_tpNaam
+								{
+									title: "Omschrijving";
+									locked: On;
+									visible: 1;
+									options_title: locked;
+									options_notrend: locked;
+									options_trend: locked;
+								}
+								variable Q_Map05_Paragraaf07Sub1Sub3Sub4Sub2 refers to OVK_Lening_Zekerheid_tpWaarde
+								{
+									title: "Waarde";
+									fixed_decimals: 0;
+									locked: On;
+									visible: 1;
+									options_title: locked;
+									options_notrend: locked;
+									options_trend: locked;
+								}
+								variable Q_Map05_Paragraaf07Sub1Sub3Sub4Sub3 refers to OVK_Lening_Zekerheid_tpType
+								{
+									title: "Soort";
+									displaytype: select;
+									choices: "1:Onroerend Goed|2:Inventaris|3:Bankgarantie";
+									locked: On;
+									visible: 1;
+									options_title: locked;
+									options_notrend: locked;
+									options_trend: locked;
+								}
+								variable Q_Map05_Paragraaf07Sub1Sub3Sub4Sub4 refers to OVK_Lening_Zekerheid_tpDekkingsPercentage
+								{
+									title: "Dekkingspercentage percentage";
+									displaytype: percentage;
+									fixed_decimals: 2;
+									locked: On;
+									visible: 1;
+									options_title: locked;
+									options_notrend: locked;
+									options_trend: locked;
+								}
+								variable Q_Map05_Paragraaf07Sub1Sub3Sub4Sub5 refers to OVK_Lening_Zekerheid_tpAllocatiePercentage
+								{
+									title: "Allocatie percentage";
+									displaytype: percentage;
+									fixed_decimals: 2;
+									locked: On;
+									visible: 1;
+									options_title: locked;
+									options_notrend: locked;
+									options_trend: locked;
+								}
+								variable Q_Map05_Paragraaf07Sub1Sub3Sub4Sub6 refers to OVK_Lening_Zekerheid_tpDekkingsWaarde
+								{
+									title: "Dekkingswaarde";
+									fixed_decimals: 0;
+									locked: On;
+									visible: 1;
+									options_title: locked;
+									options_notrend: locked;
+									options_trend: locked;
+								}
+							}
+							variable Q_Map05_Paragraaf07Sub1Sub3Sub5 refers to OVK_Lening_tpZekerheidGealloceerdTotaal
+							{
+								title: "Totaal Zekerheid (T) (Gealloceerd)";
+								top_separator: 1;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map05_Paragraaf07Sub1Sub3Sub6 refers to OVK_Lening_tpZekerheidNietGealloceerd
+							{
+								title: "Zekerheid (Niet Gealloceerd)";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_Paragraaf07Sub1Sub3Sub7 refers to OVK_Lening_tpZekerheidTotaal
+							{
+								title: "Totale dekkingswaarde zekerheden";
+								fixed_decimals: 0;
+								top_separator: 1;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_Paragraaf07Sub1Sub3Sub8 refers to OVK_Lening_tpTotaleDekkinngsPercentage
+							{
+								title: "Totale dekkingspercentage";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+					}
+				}
+				variable Q_Map05_Paragraaf08 
+				{
+					datatype: number;
+					frequency: document;
+					title: "(KOPIE) Overeenkomst (Tuple in Tuple in Tuple) [NIET READONLY]";
+					displaytype: currency;
+					visible: 1;
+					tuple Q_Map05_Paragraaf08Sub1 
+					{
+						title: EvaluateAsString(OVK_tpNaam);
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable Q_Map05_Paragraaf08Sub1Sub1 refers to OVK_tpID
+						{
+							title: "ID";
+							locked: On;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable Q_Map05_Paragraaf08Sub1Sub2 refers to OVK_tpNaam
+						{
+							title: "Naam";
+							locked: On;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+					}
+				}
+				variable Q_Map05_ParagraafXX 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Zekerheid";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					tuple Zekerheid 
+					{
+						title: "Zekerheid (T)";
+						options_title: locked;
+						variable Zekerheid_tpID 
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "ID";
+							top_blanklines: 1;
+							options_title: locked;
+						}
+						variable Zekerheid_tpType 
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "Type";
+							options_title: locked;
+						}
+						variable Zekerheid_tpBeschrijving 
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "Beschrijving";
+							options_title: locked;
+						}
+						variable Zekerheid_tpStatus 
+						{
+							datatype: string;
+							frequency: document;
+							data_options: unscalable;
+							title: "Status";
+							options_title: locked;
+						}
+						variable Zekerheid_tpWaarde 
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "Waarde";
+							displaytype: currency;
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+						variable Zekerheid_tpDekkingswaarde 
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "Dekkingswaarde";
+							displaytype: currency;
+							fixed_decimals: 0;
+							options_title: locked;
+						}
+						tuple Zekerheid_OR 
+						{
+							title: "Onroerende zaken (T)";
+							options_title: locked;
+							variable Zekerheid_OR_tpID 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "ID";
+								top_blanklines: 1;
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpSoort 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "Soort";
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpVervallen 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "Vervallen";
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpTaxateur 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "Taxateur";
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpTaxatiedatum 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Taxatiedatum";
+								displaytype: date;
+								choices: "dd/MM/yyyy";
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpVrijeVerkoopwaarde 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Vrije verkoopwaarde";
+								displaytype: currency;
+								fixed_decimals: 0;
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpExecutiewaarde 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Executiewaarde";
+								displaytype: currency;
+								fixed_decimals: 0;
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpBoekwaarde 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Boekwaarde";
+								displaytype: currency;
+								fixed_decimals: 0;
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpEinddatumJaarrapport 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Einddatum jaarrapport";
+								displaytype: date;
+								choices: "dd/MM/yyyy";
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpWOZwaarde 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "WOZ waarde";
+								fixed_decimals: 0;
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpWOZwaardepeildatum 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "WOZ waardepeildatum";
+								displaytype: date;
+								choices: "dd/MM/yyyy";
+								options_title: locked;
+							}
+							variable Zekerheid_OR_tpOmschrijving 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "Vrije tekst";
+								options_title: locked;
+							}
+						}
+						tuple Zekerheid_Party 
+						{
+							title: "Partijen (T)";
+							options_title: locked;
+							variable Zekerheid_Party_tpID 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "ID";
+								top_blanklines: 1;
+								options_title: locked;
+							}
+							variable Zekerheid_Party_tpSoort 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "Soort";
+								options_title: locked;
+							}
+							variable Zekerheid_Party_tpRelatienaam 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "Relatienaam";
+								options_title: locked;
+							}
+							variable Zekerheid_Party_tpRelatienummer 
+							{
+								datatype: string;
+								frequency: document;
+								data_options: unscalable;
+								title: "Relatienummer";
+								options_title: locked;
+							}
+						}
+					}
+					variable Zekerheid_TotaalDekkingswaarde 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Totaal dekkingswaarde";
+						displaytype: currency;
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map05_ParagraafXXX 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Zekerheid (READONLY)";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable Q_Map05_ParagraafXXXSub1 
+					{
+						datatype: string;
+						frequency: document;
+						data_options: unscalable;
+						title: "Zekerheden";
+						top_separator: 1;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked, invisible;
+						options_trend: locked, invisible;
+					}
+					tuple Q_Map05_ParagraafXXXSub2 
+					{
+						title: EvaluateAsString(Zekerheid_tpBeschrijving);
+						displaytype: currency;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+						variable Q_Map05_ParagraafXXXSub2Sub1 refers to Zekerheid_tpID
+						{
+							title: "ID";
+							locked: On;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable Q_Map05_ParagraafXXXSub2Sub2 refers to Zekerheid_tpType
+						{
+							title: "Type";
+							locked: On;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable Q_Map05_ParagraafXXXSub2Sub3 refers to Zekerheid_tpBeschrijving
+						{
+							title: "Beschrijving";
+							locked: On;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable Q_Map05_ParagraafXXXSub2Sub4 refers to Zekerheid_tpStatus
+						{
+							title: "Status";
+							locked: On;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable Q_Map05_ParagraafXXXSub2Sub5 refers to Zekerheid_tpWaarde
+						{
+							title: "Waarde";
+							fixed_decimals: 0;
+							locked: On;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						variable Q_Map05_ParagraafXXXSub2Sub6 refers to Zekerheid_tpDekkingswaarde
+						{
+							title: "Dekkingswaarde";
+							fixed_decimals: 0;
+							locked: On;
+							visible: 1;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+						}
+						tuple Q_Map05_ParagraafXXXSub2Sub7 
+						{
+							title: EvaluateAsString(Zekerheid_OR_tpSoort);
+							displaytype: currency;
+							fixed_decimals: 0;
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub1 refers to Zekerheid_OR_tpID
+							{
+								title: "ID";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub2 refers to Zekerheid_OR_tpSoort
+							{
+								title: "Soort";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub3 refers to Zekerheid_OR_tpVervallen
+							{
+								title: "Vervallen";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub4 refers to Zekerheid_OR_tpTaxateur
+							{
+								title: "Taxateur";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub5 refers to Zekerheid_OR_tpTaxatiedatum
+							{
+								title: "Taxatiedatum";
+								displaytype: date;
+								choices: "dd/MM/yyyy";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub6 refers to Zekerheid_OR_tpVrijeVerkoopwaarde
+							{
+								title: "Vrije verkoopwaarde";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub7 refers to Zekerheid_OR_tpExecutiewaarde
+							{
+								title: "Executiewaarde";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub8 refers to Zekerheid_OR_tpBoekwaarde
+							{
+								title: "Boekwaarde";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub9 refers to Zekerheid_OR_tpEinddatumJaarrapport
+							{
+								title: "Einddatum jaarrapport";
+								displaytype: date;
+								choices: "dd/MM/yyyy";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub10 refers to Zekerheid_OR_tpWOZwaarde
+							{
+								title: "WOZ waarde";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub11 refers to Zekerheid_OR_tpWOZwaardepeildatum
+							{
+								title: "WOZ waardepeildatum";
+								displaytype: date;
+								choices: "dd/MM/yyyy";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub7Sub12 refers to Zekerheid_OR_tpOmschrijving
+							{
+								title: "Vrije tekst";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+						tuple Q_Map05_ParagraafXXXSub2Sub8 
+						{
+							title: EvaluateAsString(Zekerheid_Party_tpSoort);
+							options_title: locked;
+							options_notrend: locked;
+							options_trend: locked;
+							variable Q_Map05_ParagraafXXXSub2Sub8Sub1 refers to Zekerheid_Party_tpID
+							{
+								title: "ID";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub8Sub2 refers to Zekerheid_Party_tpSoort
+							{
+								title: "Soort";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub8Sub3 refers to Zekerheid_Party_tpRelatienaam
+							{
+								title: "Relatienaam";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+							variable Q_Map05_ParagraafXXXSub2Sub8Sub4 refers to Zekerheid_Party_tpRelatienummer
+							{
+								title: "Relatienummer";
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+					}
+				}
+				variable Q_Map05_Paragraaf08A 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Matrixlookup (numeriek)";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map05_A_XLS 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "ScorecardTestModel.xls";
+						data_options: unscalable;
+						title: "XLS name";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map05_A_Range 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "ZoekenNumeriek";
+						data_options: unscalable;
+						title: "Range name";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map05_A_SearchKey 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 2;
+						data_options: unscalable;
+						title: "Search key (numeriek)";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map05_A_ColIndex 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Col index";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map05_A_MatrixLookupResult 
+					{
+						datatype: string;
+						frequency: document;
+						formula: EvaluateAsString(MatrixLookup(&Q_Map05_A_XLS,&Q_Map05_A_Range,Q_Map05_A_SearchKey,Q_Map05_A_ColIndex));
+						data_options: unscalable;
+						title: "Result";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map05_Paragraaf08B 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Matrixlookup (alfanumeriek)";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map05_B_XLS 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "ScorecardTestModel.xls";
+						data_options: unscalable;
+						title: "XLS name";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map05_B_Range 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "ZoekenAlfanumeriek";
+						data_options: unscalable;
+						title: "Range name";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map05_B_SearchKey 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "twee";
+						data_options: unscalable;
+						title: "Search key (alfanumeriek)";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map05_B_ColIndex 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Col index";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map05_B_MatrixLookupResult 
+					{
+						datatype: string;
+						frequency: document;
+						formula: EvaluateAsString(MatrixLookup(&Q_Map05_B_XLS,&Q_Map05_B_Range,Q_Map05_B_SearchKey,Q_Map05_B_ColIndex));
+						data_options: unscalable;
+						title: "Result";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map05_Paragraaf09 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Eigenschappen van de stap";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map05_Paragraaf09Sub1 refers to Q_Map05_WARNING
+					{
+						title: "Warning voor map 5";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map05_Paragraaf09Sub2 refers to Q_Map05_INFO
+					{
+						title: "Info bij stap 5";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map05_Paragraaf09Sub3 refers to Q_Map05_VALIDATION
+					{
+						title: "Validatie stap 5";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map05_Paragraaf09Sub4 refers to Q_Map05_REQUIREDVARS
+					{
+						title: "Aantal verplichte velden (5)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map05_Paragraaf09Sub5 refers to Q_Map05_ENTEREDREQUIREDVARS
+					{
+						title: "Aantal ingevulde verplichte velden (5)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_Map05_Hulpvariabelen 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Hulpvariabelen";
+					displaytype: currency;
+					locked: On;
+					visible: 0;
+					options_title: locked, invisible;
+					options_notrend: locked, invisible;
+					options_trend: locked, invisible;
+					variable Q_Map05_REQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_Hulpvariabelen),InputRequired(X));
+						data_options: unscalable;
+						title: "Aantal verplichte velden (5)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map05_ENTEREDREQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_Hulpvariabelen),InputRequired(X) And DataAvailable(X));
+						data_options: unscalable;
+						title: "Aantal ingevulde verplichte velden (5)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_Map06 
+			{
+				datatype: number;
+				frequency: document;
+				formula: (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS);
+				data_options: unscalable;
+				title: "Map 6";
+				displaytype: select;
+				choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map06_WARNING 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(Q_RESTRICTIES&Q_WARNING_GLOBAL);
+					data_options: unscalable;
+					title: "Warning voor map 6";
+					displaytype: memo;
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map06_INFO 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If(Q_Map06=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+					data_options: unscalable;
+					title: "Info bij stap 6";
+					displaytype: memo;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map06_VALIDATION 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Validatie stap 6";
+					displaytype: memo;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map06_Paragraaf01 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 1: Restrictie en Knockout";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map06_Vraag01 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 1: Vul een getal tussen -10 en 10 in.";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map06_Vraag02 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Vraag 2: Is er een knockout van toepassing?";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map06_Paragraaf02 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Paragraaf 2:Visibility and Required";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map06_P02Vraag01 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: 1;
+						data_options: unscalable;
+						title: "Vraag 1: Naar volgende vraag?";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						top_blanklines: 1;
+						visible: InputRequired(Q_Map06_P02Vraag01);
+						options_title: locked;
+					}
+					variable Q_Map06_P02Vraag02 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Q_Map06_P02Vraag01=1);
+						data_options: unscalable;
+						title: "Vraag 2: Naar volgende vraag?";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: InputRequired(Q_Map06_P02Vraag02);
+						options_title: locked;
+					}
+					variable Q_Map06_P02Vraag03 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Q_Map06_P02Vraag02=1);
+						data_options: unscalable;
+						title: "Vraag 3: Naar volgende vraag?";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: InputRequired(Q_Map06_P02Vraag03);
+						options_title: locked;
+					}
+					variable Q_Map06_P02Vraag04 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Q_Map06_P02Vraag03=1);
+						data_options: unscalable;
+						title: "Vraag 4: Naar volgende vraag?";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: InputRequired(Q_Map06_P02Vraag04);
+						options_title: locked;
+					}
+					variable Q_Map06_P02Vraag05 
+					{
+						datatype: number;
+						frequency: document;
+						inputRequired: (Q_Map06_P02Vraag04=1);
+						data_options: unscalable;
+						title: "Vraag 5: Naar volgende vraag?";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: InputRequired(Q_Map06_P02Vraag05);
+						options_title: locked;
+					}
+				}
+				variable Q_Map06_Paragraaf09 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Eigenschappen van de stap";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map06_Paragraaf09Sub1 refers to Q_Map06_WARNING
+					{
+						title: "Warning voor map 6";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map06_Paragraaf09Sub2 refers to Q_Map06_INFO
+					{
+						title: "Info bij stap 6";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map06_Paragraaf09Sub3 refers to Q_Map06_VALIDATION
+					{
+						title: "Validatie stap 6";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map06_Paragraaf09Sub4 refers to Q_Map06_REQUIREDVARS
+					{
+						title: "Aantal verplichte velden (6)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked, invisible;
+						options_notrend: locked, invisible;
+						options_trend: locked, invisible;
+					}
+					variable Q_Map06_Paragraaf09Sub5 refers to Q_Map06_ENTEREDREQUIREDVARS
+					{
+						title: "Aantal ingevulde verplichte velden (6)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked, invisible;
+						options_notrend: locked, invisible;
+						options_trend: locked, invisible;
+					}
+				}
+				variable Q_Map06_Hulpvariabelen 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Hulpvariabelen";
+					displaytype: currency;
+					locked: On;
+					visible: 0;
+					options_title: locked, invisible;
+					options_notrend: locked, invisible;
+					options_trend: locked, invisible;
+					variable Q_Map06_REQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_Hulpvariabelen),InputRequired(X));
+						data_options: unscalable;
+						title: "Aantal verplichte velden (6)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map06_ENTEREDREQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_Hulpvariabelen),InputRequired(X) And DataAvailable(X));
+						data_options: unscalable;
+						title: "Aantal ingevulde verplichte velden (6)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_Map07 
+			{
+				datatype: number;
+				frequency: document;
+				formula: (Q_MAP07_ENTEREDREQUIREDVARS=Q_MAP07_REQUIREDVARS);
+				data_options: unscalable;
+				title: "Map 7: Rapportage";
+				displaytype: select;
+				choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map07_WARNING 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(Q_RESTRICTIES&Q_WARNING_GLOBAL);
+					data_options: unscalable;
+					title: "Warning voor map 7";
+					displaytype: memo;
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map07_INFO 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If(Q_Map07=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+					data_options: unscalable;
+					title: "Info bij stap 7";
+					displaytype: memo;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map07_VALIDATION 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Validatie stap 7";
+					displaytype: memo;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map07_Paragraaf01 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Layout";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable Q_Map07_Keuze 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Welke regels tonen?";
+						displaytype: select;
+						choices: "0:Alle regels|1:Oneven regels|2:Even regels";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map07_Paragraaf02 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Eénkolomsvariabelen";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable Q_Map07_Par01 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 111;
+						data_options: unscalable;
+						title: "Paragraaf 1";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=1);
+						options_title: locked;
+						variable Q_Map07_Par01_Vr01 
+						{
+							datatype: number;
+							frequency: document;
+							formula: 111;
+							data_options: unscalable;
+							title: "Paragraaf 1 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par01_Vr02 
+						{
+							datatype: number;
+							frequency: document;
+							formula: 111;
+							data_options: unscalable;
+							title: "Paragraaf 1 - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+					variable Q_Map07_Par02 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 222;
+						data_options: unscalable;
+						title: "Paragraaf 2";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=2);
+						options_title: locked;
+						variable Q_Map07_Par02_Vr01 
+						{
+							datatype: number;
+							frequency: document;
+							formula: 222;
+							data_options: unscalable;
+							title: "Paragraaf 2 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par02_Vr02 
+						{
+							datatype: number;
+							frequency: document;
+							formula: 222;
+							data_options: unscalable;
+							title: "Paragraaf 2 - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+					variable Q_Map07_Par03 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 333;
+						data_options: unscalable;
+						title: "Paragraaf 3";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=1);
+						options_title: locked;
+						variable Q_Map07_Par03_Vr01 
+						{
+							datatype: number;
+							frequency: document;
+							formula: 333;
+							data_options: unscalable;
+							title: "Paragraaf 3 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+							variable Q_Map07_Par03_Vr01_sub1 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Sub 1";
+								fixed_decimals: 0;
+								top_blanklines: 1;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par03_Vr01_sub2 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Sub 2";
+								fixed_decimals: 0;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par03_Vr01_totaal 
+							{
+								datatype: number;
+								frequency: document;
+								formula: Q_Map07_Par03_Vr01_sub1+Q_Map07_Par03_Vr01_sub2;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Totaal";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+						variable Q_Map07_Par03_Vr02 
+						{
+							datatype: number;
+							frequency: document;
+							formula: 333;
+							data_options: unscalable;
+							title: "Paragraaf 3 - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+							variable Q_Map07_Par03_Vr02_sub1 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 2 - Sub 1";
+								fixed_decimals: 0;
+								top_blanklines: 1;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par03_Vr02_sub2 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 2 - Sub 2";
+								fixed_decimals: 0;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par03_Vr02_totaal 
+							{
+								datatype: number;
+								frequency: document;
+								formula: Q_Map07_Par03_Vr02_sub1+Q_Map07_Par03_Vr02_sub2;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 2 - Totaal";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+					}
+					variable Q_Map07_Par04 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 444;
+						data_options: unscalable;
+						title: "Paragraaf 4";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=2);
+						options_title: locked;
+						variable Q_Map07_Par04_Vr01 
+						{
+							datatype: number;
+							frequency: document;
+							formula: 444;
+							data_options: unscalable;
+							title: "Paragraaf 4 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par04_Vr02 
+						{
+							datatype: number;
+							frequency: document;
+							formula: 444;
+							data_options: unscalable;
+							title: "Paragraaf 4 - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+					variable Q_Map07_Par05 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 555;
+						data_options: unscalable;
+						title: "Paragraaf 5";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=1);
+						options_title: locked;
+						variable Q_Map07_Par05_Vr01 
+						{
+							datatype: number;
+							frequency: document;
+							formula: 555;
+							data_options: unscalable;
+							title: "Paragraaf 5 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par05_Vr02 
+						{
+							datatype: number;
+							frequency: document;
+							formula: 555;
+							data_options: unscalable;
+							title: "Paragraaf 5 - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+					variable Q_Map07_Par06 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Paragraaf 6 (leeg)";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=2);
+						options_title: locked;
+						variable Q_Map07_Par06_Vr01 
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "Paragraaf 6 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par06_Vr02 
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "Paragraaf 6 - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+					variable Q_Map07_Par07 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Paragraaf 7 (leeg)";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=1);
+						options_title: locked;
+						variable Q_Map07_Par07_Vr01 
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "Paragraaf 7 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par07_Vr02 
+						{
+							datatype: number;
+							frequency: document;
+							data_options: unscalable;
+							title: "Paragraaf 7 - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+				}
+				variable Q_Map07_Paragraaf03 
+				{
+					datatype: number;
+					aggregation: balance;
+					title: "Jaarkolomvariabelen";
+					displaytype: currency;
+					top_separator: 1;
+					bottom_separator: 1;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map07_Par11 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 111;
+						data_options: unscalable;
+						title: "Paragraaf 1";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=1);
+						options_title: locked;
+						variable Q_Map07_Par11_Vr01 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: 111;
+							data_options: unscalable;
+							title: "Paragraaf 1 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par11_Vr02 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: 111;
+							data_options: unscalable;
+							title: "Paragraaf 1 - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+					variable Q_Map07_Par12 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 222;
+						data_options: unscalable;
+						title: "Paragraaf 2";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=2);
+						options_title: locked;
+						variable Q_Map07_Par12_Vr01 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: 222;
+							data_options: unscalable;
+							title: "Paragraaf 2 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par12_Vr02 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: 222;
+							data_options: unscalable;
+							title: "Paragraaf 2 - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+					variable Q_Map07_Par13 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 333;
+						data_options: unscalable;
+						title: "Paragraaf 3";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=1);
+						options_title: locked;
+						variable Q_Map07_Par13_Vr01 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: 333;
+							data_options: unscalable;
+							title: "Paragraaf 3 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=1);
+							options_title: locked;
+							variable Q_Map07_Par13_Vr01_sub1 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Sub 1";
+								fixed_decimals: 0;
+								top_blanklines: 1;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par13_Vr01_sub2 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Sub 2";
+								fixed_decimals: 0;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par13_Vr01_totaal 
+							{
+								datatype: number;
+								frequency: document;
+								formula: Q_Map07_Par13_Vr01_sub1+Q_Map07_Par13_Vr01_sub2;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Totaal";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+						variable Q_Map07_Par13_Vr02 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: 333;
+							data_options: unscalable;
+							title: "Paragraaf 3 - Vraag 2";
+							fixed_decimals: 0;
+							visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=1);
+							options_title: locked;
+							variable Q_Map07_Par13_Vr02_sub1 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Sub 1";
+								fixed_decimals: 0;
+								top_blanklines: 1;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par13_Vr02_sub2 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Sub 2";
+								fixed_decimals: 0;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par13_Vr02_totaal 
+							{
+								datatype: number;
+								frequency: document;
+								formula: Q_Map07_Par13_Vr02_sub1+Q_Map07_Par13_Vr02_sub2;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Totaal";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+					}
+					variable Q_Map07_Par14 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 444;
+						data_options: unscalable;
+						title: "Paragraaf 4";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=2);
+						options_title: locked;
+						variable Q_Map07_Par14_Vr01 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: 444;
+							data_options: unscalable;
+							title: "Paragraaf 4 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=2);
+							options_title: locked;
+							variable Q_Map07_Par14_Vr01_sub1 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Sub 1";
+								fixed_decimals: 0;
+								top_blanklines: 1;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par14_Vr01_sub2 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Sub 2";
+								fixed_decimals: 0;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par14_Vr01_totaal 
+							{
+								datatype: number;
+								frequency: document;
+								formula: Q_Map07_Par14_Vr01_sub1+Q_Map07_Par14_Vr01_sub2;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Totaal";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+						variable Q_Map07_Par14_Vr02 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: 444;
+							data_options: unscalable;
+							title: "Paragraaf 4 - Vraag 2";
+							fixed_decimals: 0;
+							visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=2);
+							options_title: locked;
+							variable Q_Map07_Par14_Vr02_sub1 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Sub 1";
+								fixed_decimals: 0;
+								top_blanklines: 1;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par14_Vr02_sub2 
+							{
+								datatype: number;
+								frequency: document;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Sub 2";
+								fixed_decimals: 0;
+								visible: 1;
+								options_title: locked;
+							}
+							variable Q_Map07_Par14_Vr02_totaal 
+							{
+								datatype: number;
+								frequency: document;
+								formula: Q_Map07_Par14_Vr02_sub1+Q_Map07_Par14_Vr02_sub2;
+								data_options: unscalable;
+								title: "Paragraaf 3 - Vraag 1 - Totaal";
+								fixed_decimals: 0;
+								locked: On;
+								visible: 1;
+								options_title: locked;
+								options_notrend: locked;
+								options_trend: locked;
+							}
+						}
+					}
+					variable Q_Map07_Par15 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 555;
+						data_options: unscalable;
+						title: "Paragraaf 5";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=1);
+						options_title: locked;
+						variable Q_Map07_Par15_Vr01 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: 555;
+							data_options: unscalable;
+							title: "Paragraaf 5 - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par15_Vr02 
+						{
+							datatype: number;
+							aggregation: balance;
+							formula: 555;
+							data_options: unscalable;
+							title: "Paragraaf 5 - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+					variable Q_Map07_Par16 
+					{
+						datatype: number;
+						aggregation: balance;
+						data_options: unscalable;
+						title: "Paragraaf 6 (leeg)";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=2);
+						options_title: locked;
+						variable Q_Map07_Par16_Vr01 
+						{
+							datatype: number;
+							aggregation: balance;
+							data_options: unscalable;
+							title: "Paragraaf 6 (leeg) - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par16_Vr02 
+						{
+							datatype: number;
+							aggregation: balance;
+							data_options: unscalable;
+							title: "Paragraaf 6 (leeg) - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+					variable Q_Map07_Par17 
+					{
+						datatype: number;
+						aggregation: balance;
+						data_options: unscalable;
+						title: "Paragraaf 7 (leeg)";
+						fixed_decimals: 0;
+						visible: (Q_Map07_Keuze=0) or (Q_Map07_Keuze=1);
+						options_title: locked;
+						variable Q_Map07_Par17_Vr01 
+						{
+							datatype: number;
+							aggregation: balance;
+							data_options: unscalable;
+							title: "Paragraaf 7 (leeg) - Vraag 1";
+							fixed_decimals: 0;
+							top_blanklines: 1;
+							visible: 1;
+							options_title: locked;
+						}
+						variable Q_Map07_Par17_Vr02 
+						{
+							datatype: number;
+							aggregation: balance;
+							data_options: unscalable;
+							title: "Paragraaf 7 (leeg) - Vraag 2";
+							fixed_decimals: 0;
+							visible: 1;
+							options_title: locked;
+						}
+					}
+				}
+				variable Q_Map07_Paragraaf09 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Eigenschappen van de stap";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map07_Paragraaf09Sub1 refers to Q_Map07_WARNING
+					{
+						title: "Warning voor map 7";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map07_Paragraaf09Sub2 refers to Q_Map07_INFO
+					{
+						title: "Info bij stap 7";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map07_Paragraaf09Sub3 refers to Q_Map07_VALIDATION
+					{
+						title: "Validatie stap 7";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map07_Paragraaf09Sub4 refers to Q_Map07_REQUIREDVARS
+					{
+						title: "Aantal verplichte velden (7)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map07_Paragraaf09Sub5 refers to Q_Map07_ENTEREDREQUIREDVARS
+					{
+						title: "Aantal ingevulde verplichte velden (7)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_Map07_Hulpvariabelen 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Hulpvariabelen";
+					displaytype: currency;
+					locked: On;
+					visible: 0;
+					options_title: locked, invisible;
+					options_notrend: locked, invisible;
+					options_trend: locked, invisible;
+					variable Q_Map07_REQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_Hulpvariabelen),InputRequired(X));
+						data_options: unscalable;
+						title: "Aantal verplichte velden (7)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map07_ENTEREDREQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_Hulpvariabelen),InputRequired(X) And DataAvailable(X));
+						data_options: unscalable;
+						title: "Aantal ingevulde verplichte velden (7)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_Map09 
+			{
+				datatype: number;
+				frequency: document;
+				formula: (Q_MAP09_ENTEREDREQUIREDVARS=Q_MAP09_REQUIREDVARS);
+				data_options: unscalable;
+				title: "Map 7,5 Includefiles EJS";
+				displaytype: select;
+				choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map09_WARNING 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(Q_RESTRICTIES&Q_WARNING_GLOBAL);
+					data_options: unscalable;
+					title: "Warning voor map 9";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map09_INFO 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If(Q_Map09=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+					data_options: unscalable;
+					title: "Info bij stap 9";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map09_VALIDATION 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Validatie stap 9";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable TestChoiceVars 
+				{
+					datatype: number;
+					aggregation: balance;
+					title: "Test Choice Variables";
+					displaytype: currency;
+					top_separator: 1;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable tcvTest1 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Test 1: Choice (zero\r\none\r\ntwo\r\nthree\r\nfour)";
+						displaytype: select;
+						choices: "zero|one|two|three|four";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable TestChoiceVarsSub2 refers to tcvTest1
+					{
+						title: "Test 1: Copy as number";
+						choices: "zero|one|two|three|four";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tcvTest2String 
+					{
+						datatype: string;
+						frequency: document;
+						formula: "zero\r\none\r\ntwo\r\nthree\r\nfour";
+						data_options: unscalable;
+						title: "Test 2: Enter a choice string here";
+						visible: 1;
+						options_title: locked;
+					}
+					variable tcvTest2 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Test 2: Make your choice";
+						displaytype: select;
+						choices: "zero|one|two|three|four";
+						visible: 1;
+						options_title: locked;
+					}
+					variable TestChoiceVarsSub5 refers to tcvTest2
+					{
+						title: "Test 2: Copy as number";
+						choices: "zero|one|two|three|four";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tcvTest3 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Test 3: Choice (zero\r\none\r\n\r\n\r\nfour)";
+						displaytype: select;
+						choices: "zero|one|||four";
+						visible: 1;
+						options_title: locked;
+					}
+					variable TestChoiceVarsSub7 refers to tcvTest3
+					{
+						title: "Test 3: Copy as number";
+						choices: "zero|one|||four";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tcvTest4Country 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Test 4: Choice step 1 Country";
+						displaytype: select;
+						choices: "Unknown|Netherlands|Germany";
+						visible: 1;
+						options_title: locked;
+					}
+					variable tcvTest4City 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Test 4: Choice step 2 City depends on country";
+						displaytype: select;
+						choices: "Unknown|Hamburg|Berlin";
+						visible: 1;
+						options_title: locked;
+					}
+					variable TestChoiceVarsSub10 refers to tcvTest4Country
+					{
+						title: "Test 4: Copy country as number";
+						choices: "Unknown|Netherlands|Germany";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable TestChoiceVarsSub11 refers to tcvTest4City
+					{
+						title: "Test 4: Copy city as number";
+						choices: "Unknown|Hamburg|Berlin";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tcvTest5 
+					{
+						datatype: number;
+						frequency: document;
+						data_options: unscalable;
+						title: "Test 5: Choice (0:zero\r\n10:ten\r\n11:eleven\r\n20:twenty)";
+						displaytype: select;
+						choices: "0:zero|10:ten|11:eleven|20:twenty";
+						visible: 1;
+						options_title: locked;
+					}
+					variable TestChoiceVarsSub13 refers to tcvTest5
+					{
+						title: "Test 5: Copy as number";
+						choices: "0:zero|10:ten|11:eleven|20:twenty";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable TestColumnFunctions 
+				{
+					datatype: number;
+					aggregation: balance;
+					title: "Test column functions";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable tplT 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T);
+						data_options: unscalable;
+						title: "ValueT(T)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplTsY 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 1;
+						data_options: unscalable;
+						title: "TsY(T)";
+						fixed_decimals: 0;
+						bottom_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplMaxT 
+					{
+						datatype: number;
+						frequency: document;
+						formula: ValueT(MaxT);
+						data_options: unscalable;
+						title: "MaxT";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplFirstTInFormaSetNoTrend 
+					{
+						datatype: number;
+						frequency: document;
+						formula: ValueT(FirstTInFormulaSet(NoTrend,MainPeriod));
+						data_options: unscalable;
+						title: "FirstTInFormulaSet(NoTrend,MainPeriod)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplLastTInFormaSetNoTrend 
+					{
+						datatype: number;
+						frequency: document;
+						formula: ValueT(LastTInFormulaSet(NoTrend,MainPeriod));
+						data_options: unscalable;
+						title: "LastTInFormulaSet(NoTrend,MainPeriod)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplFirstTInFormaSetTrend 
+					{
+						datatype: number;
+						frequency: document;
+						formula: ValueT(FirstTInFormulaSet(Trend,MainPeriod));
+						data_options: unscalable;
+						title: "FirstTInFormulaSet(Trend,MainPeriod)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplLastTInFormaSetTrend 
+					{
+						datatype: number;
+						frequency: document;
+						formula: ValueT(LastTInFormulaSet(Trend,MainPeriod));
+						data_options: unscalable;
+						title: "LastTInFormulaSet(Trend,MainPeriod)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplFirstTInPeriod 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "FirstTInPeriod(MainPeriod)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplLastTInPeriod 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "LastTInPeriod(MainPeriod)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplLastTinYear 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 1;
+						data_options: unscalable;
+						title: "LastTinYear";
+						fixed_decimals: 0;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplValues 
+					{
+						datatype: number;
+						aggregation: balance;
+						data_options: unscalable;
+						title: "Values";
+						fixed_decimals: 0;
+						bottom_separator: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tplFirstT 
+					{
+						datatype: number;
+						frequency: document;
+						formula: ValueT(1);
+						data_options: unscalable;
+						title: "FirstT";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tplLastT 
+					{
+						datatype: number;
+						frequency: document;
+						formula: ValueT(MaxT);
+						data_options: unscalable;
+						title: "LastT";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tplFirstValueT 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 1;
+						data_options: unscalable;
+						title: "FirstValueT(Values,FirstT,LastT)";
+						fixed_decimals: 0;
+						top_separator: 1;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable tplLastValueT 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 1;
+						data_options: unscalable;
+						title: "LastValueT(Values,FirstT,LastT)";
+						fixed_decimals: 0;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable TestColumnLocking 
+				{
+					datatype: number;
+					aggregation: balance;
+					title: "Test Column Locking";
+					displaytype: currency;
+					bottom_separator: 1;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable tclTestA 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 0;
+						data_options: unscalable;
+						title: "Value 0 (unlock expected)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestB 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: 1;
+						data_options: unscalable;
+						title: "Value 1 (lock expected)";
+						fixed_decimals: 0;
+						locked: 1;
+						options_title: locked;
+					}
+					variable tclTestC 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)=3;
+						data_options: unscalable;
+						title: "T=3";
+						fixed_decimals: 0;
+						locked: ValueT(T)=3;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestD 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)<=3;
+						data_options: unscalable;
+						title: "T<=3";
+						fixed_decimals: 0;
+						locked: ValueT(T)<=3;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestE 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)=1;
+						data_options: unscalable;
+						title: "T=1";
+						fixed_decimals: 0;
+						locked: ValueT(T)=1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestF 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)=2;
+						data_options: unscalable;
+						title: "T=2";
+						fixed_decimals: 0;
+						locked: ValueT(T)=2;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestG 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)=3;
+						data_options: unscalable;
+						title: "T=3";
+						fixed_decimals: 0;
+						locked: ValueT(T)=3;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestH 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)=4;
+						data_options: unscalable;
+						title: "T=4";
+						fixed_decimals: 0;
+						locked: ValueT(T)=4;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestI 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)<>1;
+						data_options: unscalable;
+						title: "T<>1";
+						fixed_decimals: 0;
+						locked: ValueT(T)<>1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestJ 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)<>2;
+						data_options: unscalable;
+						title: "T<>2";
+						fixed_decimals: 0;
+						locked: ValueT(T)<>2;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestK 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)<>3;
+						data_options: unscalable;
+						title: "T<>3";
+						fixed_decimals: 0;
+						locked: ValueT(T)<>3;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestL 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)<>4;
+						data_options: unscalable;
+						title: "T<>4";
+						fixed_decimals: 0;
+						locked: ValueT(T)<>4;
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestM 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)<=ValueT(LastTinYear(FirstTinFormulaSet(Trend,MainPeriod)));
+						data_options: unscalable;
+						title: "T<=LastTinYear(FirstTinFormulaSet(Trend,MainPeriod))";
+						fixed_decimals: 0;
+						locked: ValueT(T)<=ValueT(LastTinYear(FirstTinFormulaSet(Trend,MainPeriod)));
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestN 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)=ValueT(LastTinFormulaSet(Trend,MainPeriod));
+						data_options: unscalable;
+						title: "T=LastTinFormulaSet(Trend,MainPeriod)";
+						fixed_decimals: 0;
+						locked: ValueT(T)=ValueT(LastTinFormulaSet(Trend,MainPeriod));
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestO 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)<>ValueT(LastTinFormulaSet(Trend,MainPeriod));
+						data_options: unscalable;
+						title: "T<>LastTinFormulaSet(Trend,MainPeriod)";
+						fixed_decimals: 0;
+						locked: ValueT(T)<>ValueT(LastTinFormulaSet(Trend,MainPeriod));
+						visible: 1;
+						options_title: locked;
+					}
+					variable tclTestP 
+					{
+						datatype: number;
+						aggregation: balance;
+						formula: ValueT(T)<ValueT(LastTinFormulaSet(Trend,MainPeriod));
+						data_options: unscalable;
+						title: "T<LastTinFormulaSet(Trend,MainPeriod)";
+						fixed_decimals: 0;
+						locked: ValueT(T)<ValueT(LastTinFormulaSet(Trend,MainPeriod));
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map09_Hulpvariabelen 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Hulpvariabelen";
+					displaytype: currency;
+					locked: On;
+					visible: 0;
+					options_title: locked, invisible;
+					options_notrend: locked, invisible;
+					options_trend: locked, invisible;
+					variable Q_Map09_REQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_Hulpvariabelen),InputRequired(X));
+						data_options: unscalable;
+						title: "Aantal verplichte velden (x)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map09_ENTEREDREQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_Hulpvariabelen),InputRequired(X) And DataAvailable(X));
+						data_options: unscalable;
+						title: "Aantal ingevulde verplichte velden (x)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_Map08 
+			{
+				datatype: number;
+				frequency: document;
+				formula: (Q_MAP08_ENTEREDREQUIREDVARS=Q_MAP08_REQUIREDVARS);
+				data_options: unscalable;
+				title: "Map 8 knopppen";
+				displaytype: select;
+				choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_Map08_WARNING 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(Q_RESTRICTIES&Q_WARNING_GLOBAL);
+					data_options: unscalable;
+					title: "Warning voor map 8";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map08_INFO 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If(Q_Map08=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+					data_options: unscalable;
+					title: "Info bij stap 8";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map08_VALIDATION 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Validatie stap 8";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_Map08_Paragraaf03 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Knoppen";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable Q_Map08_Paragraaf03Sub1 refers to Q_PREVIOUS_BUTTON_VISIBLE
+					{
+						title: "Vorige";
+						displaytype: select;
+						choices: "0:Nooit|2:Altijd";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map08_Paragraaf03Sub2 refers to Q_NEXT_BUTTON_VISIBLE
+					{
+						title: "Volgende";
+						displaytype: select;
+						choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map08_Paragraaf03Sub3 refers to Q_CONCEPT_REPORT_VISIBLE
+					{
+						title: "Concept rapport";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map08_Paragraaf03Sub4 refers to Q_FINAL_REPORT_VISIBLE
+					{
+						title: "Definitief rapport";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: 1;
+						options_title: locked;
+					}
+					variable Q_Map08_Paragraaf03Sub5 refers to Q_MAKE_FINAL_VISIBLE
+					{
+						title: "Definitief maken";
+						displaytype: select;
+						choices: "0:Nee|1:Ja";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_Map08_Paragraaf09 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Eigenschappen van de stap";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_Map08_Paragraaf09Sub1 refers to Q_Map08_WARNING
+					{
+						title: "Warning voor map 8";
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map08_Paragraaf09Sub2 refers to Q_Map08_INFO
+					{
+						title: "Info bij stap 8";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map08_Paragraaf09Sub3 refers to Q_Map08_VALIDATION
+					{
+						title: "Validatie stap 8";
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map08_Paragraaf09Sub4 refers to Q_Map08_REQUIREDVARS
+					{
+						title: "Aantal verplichte velden (8)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map08_Paragraaf09Sub5 refers to Q_Map08_ENTEREDREQUIREDVARS
+					{
+						title: "Aantal ingevulde verplichte velden (8)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_Map08_Hulpvariabelen 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Hulpvariabelen";
+					displaytype: currency;
+					locked: On;
+					visible: 0;
+					options_title: locked, invisible;
+					options_notrend: locked, invisible;
+					options_trend: locked, invisible;
+					variable Q_Map08_REQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Aantal verplichte velden (8)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_Map08_ENTEREDREQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Aantal ingevulde verplichte velden (8)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_MAP0A 
+			{
+				datatype: number;
+				frequency: document;
+				formula: (Q_MAP0A_ENTEREDREQUIREDVARS=Q_MAP0A_REQUIREDVARS);
+				data_options: unscalable;
+				title: "Map 10: Grafieken";
+				displaytype: select;
+				choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_MAP0A_WARNING 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(Q_RESTRICTIES&Q_WARNING_GLOBAL);
+					data_options: unscalable;
+					title: "Warning voor map 8";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_MAP0A_INFO 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If(Q_MAP0A=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+					data_options: unscalable;
+					title: "Info bij stap 8";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_MAP0A_VALIDATION 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					title: "Validatie stap 8";
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable GraphResRek 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Grafiek resultatenrekening";
+					displaytype: currency;
+					visible: 1;
+					options_title: locked;
+					variable +GraphResRek1 refers to NetSales
+					{
+						title: "Netto omzet";
+						top_blanklines: 1;
+						visible: 1;
+						options_title: locked;
+					}
+					variable -GraphResRek2 refers to CostOfSales
+					{
+						title: "Inkoopwaarde";
+						visible: 1;
+						options_title: locked;
+					}
+				}
+				variable Q_MAP0A_Paragraaf09 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Eigenschappen van de stap";
+					displaytype: currency;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+					variable Q_MAP0A_Paragraaf09Sub1 refers to Q_MAP0A_WARNING
+					{
+						title: "Warning voor map 8";
+						displaytype: memo;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_MAP0A_Paragraaf09Sub2 refers to Q_MAP0A_INFO
+					{
+						title: "Info bij stap 8";
+						displaytype: memo;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_MAP0A_Paragraaf09Sub3 refers to Q_MAP0A_VALIDATION
+					{
+						title: "Validatie stap 8";
+						displaytype: memo;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_MAP0A_Paragraaf09Sub4 refers to Q_MAP0A_REQUIREDVARS
+					{
+						title: "Aantal verplichte velden (8)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_MAP0A_Paragraaf09Sub5 refers to Q_MAP0A_ENTEREDREQUIREDVARS
+					{
+						title: "Aantal ingevulde verplichte velden (8)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+				variable Q_MAP0A_Hulpvariabelen 
+				{
+					datatype: number;
+					frequency: document;
+					title: "Hulpvariabelen";
+					displaytype: currency;
+					locked: On;
+					visible: 0;
+					options_title: locked, invisible;
+					options_notrend: locked, invisible;
+					options_trend: locked, invisible;
+					variable Q_MAP0A_REQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Aantal verplichte velden (8)";
+						fixed_decimals: 0;
+						top_blanklines: 1;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+					variable Q_MAP0A_ENTEREDREQUIREDVARS 
+					{
+						datatype: number;
+						frequency: document;
+						formula: 1;
+						data_options: unscalable;
+						title: "Aantal ingevulde verplichte velden (8)";
+						fixed_decimals: 0;
+						locked: On;
+						visible: 1;
+						options_title: locked;
+						options_notrend: locked;
+						options_trend: locked;
+					}
+				}
+			}
+			variable Q_RESULT 
+			{
+				datatype: string;
+				frequency: document;
+				formula: EvaluateAsString(If(Q_ROOT=0,&"Nog niet alle vragen zijn ingevuld.[br][/br]",&"Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES&Q_WARNING_GLOBAL);
+				data_options: unscalable;
+				title: "Resultaat";
+				top_blanklines: 1;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_RESULTSub1 refers to Q_RESULT
+				{
+					title: "Resultaat";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+			}
+			variable Q_STATUS 
+			{
+				datatype: number;
+				frequency: document;
+				formula: 0;
+				data_options: unscalable;
+				title: "Status";
+				displaytype: select;
+				choices: "0:Actief|1:Defintief";
+				top_blanklines: 1;
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_FINAL_ON 
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				afterinput: Execute((SetValue(MatrixVersion, MatrixVersion, true)));
+				title: "Definitief gemaakt op:";
+				displaytype: date;
+				choices: "dd/MM/yyyy";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_FINAL_BY 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Definitief gemaakt door (gebruikersnaam):";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_FINAL_BY_NAME 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Definitief gemaakt door (volledige naam):";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_STARTED_ON 
+			{
+				datatype: number;
+				frequency: document;
+				data_options: unscalable;
+				title: "Aangemaakt op:";
+				displaytype: date;
+				choices: "dd/MM/yyyy";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_STARTED_BY 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Aangemaakt door (gebruikersnaam):";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_STATUS_STARTED_BY_NAME 
+			{
+				datatype: string;
+				frequency: document;
+				data_options: unscalable;
+				title: "Aangemaakt door (volledige naam):";
+				visible: 1;
+				options_title: locked;
+			}
+			variable ModelVersion 
+			{
+				datatype: string;
+				frequency: document;
+				formula: "01.19.000.000";
+				data_options: saveCalculatedValue, unscalable;
+				title: "Modelversie";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable ModelType 
+			{
+				datatype: string;
+				frequency: document;
+				formula: "TEST";
+				data_options: saveCalculatedValue, unscalable;
+				title: "Modeltype";
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+			}
+			variable MatrixVersion 
+			{
+				datatype: string;
+				frequency: document;
+				formula: EvaluateAsString(MatrixLookup("ScorecardTestModel.xls","Version",1,3));
+				data_options: saveCalculatedValue, unscalable;
+				title: "Parametersversie";
+				hint: "t";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_PREVIOUS_BUTTON_VISIBLE 
+			{
+				datatype: number;
+				frequency: document;
+				formula: 2;
+				data_options: unscalable;
+				title: "Vorige";
+				displaytype: select;
+				choices: "0:Nooit|2:Altijd";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_NEXT_BUTTON_VISIBLE 
+			{
+				datatype: number;
+				frequency: document;
+				formula: 2;
+				data_options: unscalable;
+				title: "Volgende";
+				displaytype: select;
+				choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_CONCEPT_REPORT_VISIBLE 
+			{
+				datatype: number;
+				frequency: document;
+				formula: 1;
+				data_options: unscalable;
+				title: "Concept rapport";
+				displaytype: select;
+				choices: "0:Nee|1:Ja";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_MAKE_FINAL_VISIBLE 
+			{
+				datatype: number;
+				frequency: document;
+				formula: 1;
+				data_options: unscalable;
+				title: "Definitief maken";
+				displaytype: select;
+				choices: "0:Nee|1:Ja";
+				visible: 1;
+				options_title: locked;
+			}
+			variable Q_FINAL_REPORT_VISIBLE 
+			{
+				datatype: number;
+				frequency: document;
+				formula: 1;
+				data_options: unscalable;
+				title: "Definitief rapport";
+				displaytype: select;
+				choices: "0:Nee|1:Ja";
+				visible: 1;
+				options_title: locked;
+			}
+		}
+		variable HULPVARS 
+		{
+			datatype: string;
+			frequency: document;
+			data_options: unscalable;
+			title: "Hulpvariabelen";
+			top_blanklines: 1;
+			locked: On;
+			visible: 1;
+			options_title: locked;
+			options_notrend: locked;
+			options_trend: locked;
+			variable Q_WARNING_GLOBAL 
+			{
+				datatype: string;
+				frequency: document;
+				formula: EvaluateAsString(If( Length(&Q_WARNING_GLOBALTXT)>0 ,&"[br][/br]Er zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT ,&""));
+				data_options: unscalable;
+				title: "Knock-out(s)?";
+				displaytype: memo;
+				top_blanklines: 1;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_WARNING_01 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If( Q_Map06_Vraag02=1,"- Map6 - Vraag 2: Is er een knockout van toepassing? JA",""));
+					data_options: unscalable;
+					title: "Map6 - Vraag 6";
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_WARNING_GLOBALTXT 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If( Length(&Q_WARNING_01)>0,&"[br][/br]"&Q_WARNING_01,""));
+					data_options: unscalable;
+					title: "Knock-out tekst";
+					displaytype: memo;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+			}
+			variable Q_RESTRICTIES 
+			{
+				datatype: string;
+				frequency: document;
+				formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT)>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT ,&""));
+				data_options: unscalable;
+				title: "Restricties";
+				displaytype: memo;
+				locked: On;
+				visible: 1;
+				options_title: locked;
+				options_notrend: locked;
+				options_trend: locked;
+				variable Q_RESTRICTIES_01 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If( (Q_Map06_Vraag01>=-10) And (Q_Map06_Vraag01<=10),"","- Getal van [url=Q_Map06_Vraag01] Map 6 Vraag 1[/url] ligt niet tussen -10 en 10"));
+					data_options: unscalable;
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_RESTRICTIES_02 
+				{
+					datatype: string;
+					frequency: document;
+					data_options: unscalable;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+				variable Q_RESTRICTIESTXT 
+				{
+					datatype: string;
+					frequency: document;
+					formula: EvaluateAsString(If( Length(&Q_RESTRICTIES_01)>0,&"[br][/br]"&Q_RESTRICTIES_01,""));
+					data_options: unscalable;
+					title: "Restricties tekst";
+					displaytype: memo;
+					top_blanklines: 1;
+					locked: On;
+					visible: 1;
+					options_title: locked;
+					options_notrend: locked;
+					options_trend: locked;
+				}
+			}
+		}
+	}
+}

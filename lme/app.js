@@ -43,9 +43,17 @@ app.post('/:id/saveFFL_LME', (req, res) => {
 });
 app.get('/:id/transformFFL_LME/*', (req, res) => {
     var modelName = req.originalUrl.substring(req.originalUrl.indexOf('transformFFL_LME/') + 17);
-    var ffl = fs.createReadStream(__dirname + '/public/json/' + modelName + '.js')
-    res.header("Access-Control-Allow-Origin", "*");
-    ffl.pipe(res);
+    var fflReadStream = fs.createReadStream(__dirname + '/public/json/' + modelName + '.js')
+    // This will wait until we know the readable stream is actually valid before piping
+    fflReadStream.on('open', function() {
+        res.header("Access-Control-Allow-Origin", "*");
+        // This just pipes the read stream to the response object (which goes to the client)
+        fflReadStream.pipe(res);
+    });
+    // This catches any errors that happen while creating the readable stream (usually invalid names)
+    fflReadStream.on('error', function(err) {
+        res.end(err.toString());
+    });
 })
 
 app.get('/branches', (req, res) => {

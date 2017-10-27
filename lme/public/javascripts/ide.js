@@ -39,7 +39,7 @@ function aceEdit() {
 
     function saveDocument() {
         $.post("/DEMO/saveFFL_LME", {
-            model: 'KSP',
+            model: modelName,
             data: editor.getSession().getValue()
         }, function(data) {
             console.info('send complete');

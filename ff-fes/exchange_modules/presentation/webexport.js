@@ -20,6 +20,7 @@ function LMETree(name, workbook) {
 }
 
 var repeats = {
+    undefined: [3, 1],
     none: [1, 3],
     column: [3, 1],
     document: [1, 3]

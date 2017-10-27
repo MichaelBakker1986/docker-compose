@@ -1,5 +1,7 @@
 var express = require('express');
 var request = require('request');
+var rp = require('request-promise');
+
 var fs = require('fs')
 var port = 8083;
 var serveStatic = require('serve-static');
@@ -15,9 +17,11 @@ app.use(serveStatic(__dirname + "/../adminlte/dist/"));
  * Just a file system cache
  */
 app.get('/:id/transformFFL_LME/*', function(req, res) {
-    var path = __dirname + '/CONFIGURATION/DEMO/' + req.originalUrl.substring(req.originalUrl.indexOf('transformFFL_LME/') + 17);
-    let newVar = request.get('http://' + require('os').hostname() + ':8080/DEMO/transformFFL_LME/KSP');
-    newVar.pipe(res)
+    let modelName = req.originalUrl.substring(req.originalUrl.indexOf('transformFFL_LME/') + 17);
+    var path = __dirname + '/CONFIGURATION/DEMO/' + modelName;
+    request.get('http://' + require('os').hostname() + ':8080/DEMO/transformFFL_LME/' + modelName).on('error', (err) => {
+        res.send(err.toString())
+    }).pipe(res)
 });
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
