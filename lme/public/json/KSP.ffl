@@ -54,7 +54,7 @@ model MVO uses BaseModel
         frequency: document;
         data_options: unscalable;
         formula: "";
-        title: "Very secret232";
+        title: "Very formula " + FES_EXCHANGE_RATES;
         visible: 1;
         options_title: locked;
       }

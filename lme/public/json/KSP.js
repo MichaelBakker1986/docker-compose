@@ -36917,10 +36917,10 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "'Very secret232'",
+      "original": "'\\'Very formula \" + FES_EXCHANGE_RATES'",
       "index": 100012,
       "name": "MVO_FES_LAYOUT_title",
-      "parsed": "'Very secret232'",
+      "parsed": "'\\'Very formula \" + FES_EXCHANGE_RATES'",
       "id": 100012
     },
     {
@@ -48482,7 +48482,7 @@ LME.importLME(JSON_MODEL);
     ],
     [
       "FES_LAYOUT",
-      "'Very secret232'",
+      "'\\'Very formula \" + FES_EXCHANGE_RATES'",
       "''",
       "",
       "",
