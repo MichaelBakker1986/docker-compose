@@ -29,7 +29,6 @@
     "test"
   ],
   "pre-push": [
-    "test"
   ],
   "scripts": {
     "install": "concurrently \"cd ff-fes-xlsx && npm install\" \"cd ff-fes && npm install\" \"cd lme && npm install\" \"cd ff-formulajs && npm install\" \"cd demo-apps/angular-demo && npm install\" \"cd demo-apps/adminlte && npm install\"",
