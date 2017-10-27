@@ -41,12 +41,13 @@ function spawnChild(appname, args) {
 function update() {
     return new Promise((fulfill, reject) => {
         if (busy) {
-            reject('Busy restarting');
+            reject('Busy restarting.');
         } else {
             busy = true;
             //npm install && bower install
             var command = developer ? 'echo a' : 'git reset --hard origin/master && git pull && cd .. && npm test';
             exec(command).then((result) => {
+                log('Tests passed deploying stack ');
                 for (var key in childProcesses) {
                     childProcesses[key].kill('SIGKILL')
                     spawnChild(key)
