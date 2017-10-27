@@ -21,19 +21,16 @@ const levels = {
 }
 
 function spawnChild(appname, args) {
-    var promise = spawn('node', [appname + '.js'])
+    var promise = spawn('node', [appname + '.js'], {capture: ['stdout', 'stderr']})
     var childProcess = promise.childProcess;
     childProcesses[appname] = childProcess;
     childProcess.stdout.on('data', function(data) {
-        log('' + data, 'info');
+        log(data.toString(), 'green');
     });
     childProcess.stderr.on('data', function(data) {
-        log('' + data, 'error');
+        log(data.toString(), 'red');
     });
-    childProcess.on('exit', function() {
-        return '';
-    });
-    promise.then(() => {
+    promise.then(function() {
         console.info('done');
     }).catch(function(err) {
         //console.error('ERROR: ', err);
@@ -96,7 +93,7 @@ httpServer.listen(port, () => {
 function testAndDeploy() {
     log('Running tests.', 'info')
     const command = 'cd .. && npm install && npm test'
-    exec(command).then((data) => {
+    exec(command).then(function(result) {
         log('Tests passed deploying stack ');
         //start sub processes
         spawnChild('../demo-apps/angular-demo/angularapp')
@@ -105,7 +102,7 @@ function testAndDeploy() {
 
     }).catch(function(err) {
         log('Tests failed NOT deploying stack, and here the very readable Error. .', 'red');
-        log('' + err, 'red');
+        log(err.toString(), 'red');
     });
 }
 
