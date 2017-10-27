@@ -36861,13 +36861,19 @@ LME.importLME(JSON_MODEL);
       "type": "noCacheUnlocked",
       "refs": {
         "MVO_FES_EXCHANGE_RATES_value": true,
-        "MVO_FES_LAYOUTNR_visible": true
+        "MVO_FES_LAYOUTNR_visible": true,
+        "MVO_FES_LAYOUT_title": true
       },
       "formulaDependencys": [
         {
           "name": "MVO_FES_LAYOUTNR_visible",
           "association": "refs",
           "refId": 100007
+        },
+        {
+          "name": "MVO_FES_LAYOUT_title",
+          "association": "refs",
+          "refId": 100012
         }
       ],
       "deps": {},
@@ -36915,12 +36921,20 @@ LME.importLME(JSON_MODEL);
       "refs": {
         "MVO_FES_LAYOUT_title": true
       },
-      "formulaDependencys": [],
-      "deps": {},
-      "original": "'\\'Very formula \" + FES_EXCHANGE_RATES'",
+      "formulaDependencys": [
+        {
+          "name": "MVO_FES_EXCHANGE_RATES_value",
+          "association": "deps",
+          "refId": 100009
+        }
+      ],
+      "deps": {
+        "MVO_FES_EXCHANGE_RATES_value": true
+      },
+      "original": "FES_EXCHANGE_RATES",
       "index": 100012,
       "name": "MVO_FES_LAYOUT_title",
-      "parsed": "'\\'Very formula \" + FES_EXCHANGE_RATES'",
+      "parsed": "a100009('100009',x,y.base,z,v)",
       "id": 100012
     },
     {
@@ -48482,7 +48496,7 @@ LME.importLME(JSON_MODEL);
     ],
     [
       "FES_LAYOUT",
-      "'\\'Very formula \" + FES_EXCHANGE_RATES'",
+      "FES_EXCHANGE_RATES",
       "''",
       "",
       "",
