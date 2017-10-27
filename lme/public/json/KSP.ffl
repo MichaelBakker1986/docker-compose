@@ -18,7 +18,7 @@ model MVO uses BaseModel
       top_blanklines: 1;
       display_options: showColumnTitlesAboveSubVars;
       locked: 1;
-      visible: 0;
+      visible: false;
       options_title: locked, invisible;
       options: locked, invisible;
       variable FES_LAYOUTNR
