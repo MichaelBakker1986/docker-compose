@@ -20,15 +20,12 @@
   "devDependencies": {
     "ff-fes-xlsx": "^1.0.2",
     "pre-commit": "^1.2.2",
-    "pre-push": "^0.1.1",
     "promise": "^7.3.1",
     "tracer": "^0.8.11",
     "xlsx": "^0.9.3"
   },
   "pre-commit": [
     "test"
-  ],
-  "pre-push": [
   ],
   "scripts": {
     "install": "concurrently \"cd ff-fes-xlsx && npm install\" \"cd ff-fes && npm install\" \"cd lme && npm install\" \"cd ff-formulajs && npm install\" \"cd demo-apps/angular-demo && npm install\" \"cd demo-apps/adminlte && npm install\"",
