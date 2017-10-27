@@ -21,7 +21,7 @@ model MVO uses BaseModel
       visible: false;
       options_title: locked, invisible;
       options: locked, invisible;
-      variable FES_LAYOUTNR
+      variable FES_LAYOUTNR 
       {
         datatype: number;
         frequency: document;
