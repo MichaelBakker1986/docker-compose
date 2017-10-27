@@ -33,6 +33,7 @@
             $scope.cclass = function(figure) {
                 return (figure.entered ? 'isentered' : '');
             }
+
             $http.get(liveUrl).then(function(data) {
                 eval(data.data)
                 $scope.LME_MODEL = LME.exportWebModel()
