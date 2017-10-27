@@ -98,7 +98,6 @@ function testAndDeploy() {
     const command = 'cd .. && npm install && npm test'
     exec(command).then((data) => {
         console.info(data.stdout)
-        log(data.stderr)
         log('Tests passed deploying stack');
         //start sub processes
         spawnChild('../demo-apps/angular-demo/angularapp')
@@ -106,6 +105,7 @@ function testAndDeploy() {
         spawnChild('app')
 
     }).catch(function(err) {
+        log('Tests failed NOT deploying stack, and here the very readable Error');
         console.error('ERROR: ', err);
     });
 }

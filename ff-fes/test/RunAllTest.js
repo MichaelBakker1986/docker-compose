@@ -53,13 +53,14 @@ testResults.forEach(function(testResult) {
 if (totalTestTime > 910) {
     log.error('Total time exceeded')
 }
+console.timeEnd('performance')
 if (failure.length > 0) {
     log.error('A test failed')
+    throw Error('A test failed');
 }
 else {
     log.info('All test success')
 }
-console.timeEnd('performance')
 module.exports = {
     results: testResults
 }
