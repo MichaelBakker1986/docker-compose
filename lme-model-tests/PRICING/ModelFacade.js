@@ -1,0 +1,41 @@
+/*
+ * Never include this in frond-end-dist for evaluation purpose
+ * lme.js is the front-end opponent
+ */
+require('../../ff-fes/exchange_modules/presentation/webexport');
+const FormulaService = require('../../ff-fes/fesjs/FormulaService');
+var esprima = require('esprima')
+var escodegen = require('escodegen')
+var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
+const LME = require('../../lme/src/lme');
+const log = require('ff-log');
+const fs = require('fs');
+const assert = require('assert');
+const model = new LME();
+model.addFunctions(excelPlugin);
+
+
+function importModel(name) {
+    model.importFFL(fs.readFileSync(__dirname + '/' + name + '.ffl', "utf8"));
+}
+
+LME.prototype.visitFormulas = FormulaService.visitFormulas
+LME.prototype.maxDependencies = function() {
+    var bestMatchingDependency, max = -1;
+    FormulaService.visitFormulas((formula) => {
+        //tempOutput += formula.fflname + '=' + formula.original + ';\n';
+        var depsSize = Object.keys(formula.deps).length;
+        if (max < depsSize) {
+            max = depsSize;
+            log.info(formula.name + ":" + depsSize)
+            bestMatchingDependency = formula;
+        }
+    })
+    return bestMatchingDependency;
+}
+
+function readFileSync(name) {
+    return fs.readFileSync(name, 'utf8')
+}
+
+module.exports = [assert, importModel, model, log, readFileSync, fs.writeFileSync];

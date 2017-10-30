@@ -4,7 +4,7 @@ function finFormulaGeneric(buf) {
     var buf = buf.replace(/:/gm, ', ');
     buf = buf.replace(/(\$p|@|#|%|\.\.)/gmi, '');
 
-    //temp case fix, <= lt,gt,lte,gte from Cases
+    //temp case fix, <= lt,gt,lte,gte from Cases,
     buf = buf.replace(/\[\<\=/gm, '[');
     buf = buf.replace(/\[\</gm, '[');
     buf = buf.replace(/\|\</gm, '|');
@@ -15,8 +15,9 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/\|\>/gm, '|');
     //end temp case fix
 
-    buf = buf.replace(/\[1\]/gm, '[doc]');
-    buf = buf.replace(/\[T\]/gm, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.
+    buf = buf.replace(/\[1]/gm, '[doc]');
+    buf = buf.replace(/\[T]/gm, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.
+    buf = buf.replace(/\[GetT\(T,-1\)]/gm, '[prev]'); //Variable[T] is the same as Variable, its always in default to the corresponding time.
 
     buf = buf.replace(/\[LastT\]/gm, '');
     buf = buf.replace(/ValueT\(1\)/gm, 'x.first.detail');
@@ -70,6 +71,14 @@ function javaScriptToFinGeneric(buf) {
 //we will have to do it in the formula-bootstrap.js
 //there we know what is a Variable name
 function finChoice(formula) {
+    /**
+     * Sometimes FFL is converted incorrectly with a trailing '\''
+     * This is bugfixing the problem
+     */
+    formula = formula.replace(/\\''$/g, "'")
+
+
+
     //looks like a variable reference
     if (/^[a-z0-9_ ]+$/i.test(formula)) {
         return formula + '.choices';

@@ -89,7 +89,7 @@ assert.equal(wb.get('POS'), 2);
  *  test DataAvailable function
  */
 wb.createFormula('defaults', 'abc12')
-wb.createFormula("DataAvailable(abc12)", 'DATAAVAILABLE')
+wb.createFormula('DataAvailable(abc12)', 'DATAAVAILABLE')
 assert.equal(wb.get('DATAAVAILABLE'), false);
 wb.set('abc12', 'anyValue');
 assert.equal(wb.get('DATAAVAILABLE'), true);

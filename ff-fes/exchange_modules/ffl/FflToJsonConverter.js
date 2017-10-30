@@ -76,8 +76,9 @@ function parseRegex(contents) {
     data = data.replace(/^(\s+)((?:variable|tuple)\s*)?([\-\=\+]{1})\s*([\w]+)\s*\{'/gmi).replace("$1$2$4$1{$1  modifier: $3;");
 
     //remove tabs,remove line-breaks, replace " with '
-    data = data.replace(/\t/gm, '').replace(/^\s*root\s*$/gmi, ' Root ;').replace(/([^;])[\r?\n]+/gm, '$1').replace(/\r?\n|\r/gm, ';').replace(/\s\s+/gm, ' ').replace(/\"(.*)'(.*)\"/gm, '"$1 $2"')
-    //
+    data = data.replace(/\t/gm, '').replace(/^\s*root\s*$/gmi, ' Root ;').replace(/([^;])[\r?\n]+/gm, '$1').replace(/\r?\n|\r/gm, ';').replace(/\s\s+/gm, ' ')
+    //.replace(/\"(.*)'(.*)\"/gm, '"$1 $2"')
+        .replace(/'/gm, '@')
         .replace(/"/gm, '\'');
 
     //in ffl some variables are just prepended with &, for some reason i don't understand
@@ -237,7 +238,12 @@ FflToJsonConverter.prototype.parseFFL = function(contents) {
                     if (firstWord === 'title') {
                         validate(node, firstWord);
                         //transform 'thema's' into 'thema\'s'
-                        secondPart = secondPart.replace(/(.)'(.)/gi, '$1"$2');//.replace(/(')/gmi, "");// secondPart.replace(/'/gm, "\\'");
+                       // secondPart = secondPart.replace(/'&' '&/gi, "' + ");
+                        //secondPart = secondPart.replace(/&'/gmi, " + '");//.replace(/(')/gmi, "");// secondPart.replace(/'/gm, "\\'");
+                        //TODO: move to FinFormula.js
+                        //secondPart = secondPart.replace(/(.)'(.)/gi, '$1"$2');//.replace(/(')/gmi, "");// secondPart.replace(/'/gm, "\\'");
+                        //secondPart = secondPart.replace(/'\)/gi, '")');//.replace(/(')/gmi, "");// secondPart.replace(/'/gm, "\\'");
+                        //.replace(/(')/gmi, "");// secondPart.replace(/'/gm, "\\'");
                         node[firstWord] = FinFormula.parseFormula(secondPart);
                     }
                     else if (formulaType[firstWord] !== undefined) {

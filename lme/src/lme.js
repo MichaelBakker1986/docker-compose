@@ -13,7 +13,7 @@ function LME() {
     let WorkBook = require('../../ff-fes/fesjs/JSWorkBook');
     this.lme = new WorkBook(new FESContext());
 }
-
+LME.prototype.addFunctions = fesjsApi.addFunctions;
 LME.prototype.exportLME = function() {
     return this.lme.export('lme')
 }

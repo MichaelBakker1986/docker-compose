@@ -18,14 +18,14 @@ model MVO uses BaseModel
       top_blanklines: 1;
       display_options: showColumnTitlesAboveSubVars;
       locked: 1;
-      visible: 0;
+      visible: 0;If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)))
       options_title: locked, invisible;
       options: locked, invisible;
       variable FES_LAYOUTNR
       {
         datatype: number;
         frequency: document;
-        formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        formula: ;
         data_options: unscalable;
         displaytype: select;
         title: "KVOLayout";

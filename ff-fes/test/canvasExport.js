@@ -20,7 +20,7 @@ var WorkBook = require('../fesjs/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');
 var fs = require('fs');
 
-var fflTestModels = ['../../lme-model-tests/resources/KSP'];
+var fflTestModels = ['../../lme-model-tests/V05/V05'];
 
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');

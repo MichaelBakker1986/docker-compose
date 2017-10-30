@@ -58,7 +58,7 @@ simplified.DataAvailable = function(formulaInfo, node) {
         log.warn("Can't find a variableReference for " + regenerate(node)) + " " + formulaInfo.name + ":" + formulaInfo.original;
         return;
     }
-    node.type = IDENTIFIER;
+    node.type = 'Identifier';
     // looks like being extracted as object, while has to be array
     node.name = 'v[' + (refFormula.ref) + '][x.hash + y.hash + z]!==undefined';
     delete node.refn;
@@ -154,10 +154,6 @@ var escodegenOptions = {
         semicolons: false,
         parentheses: false
     }
-};
-var astValues = {
-    "type": "Identifier",
-    "name": "v"
 };
 
 /**
@@ -423,6 +419,10 @@ function buildFormula(formulaInfo, parent, node) {
         }
         //xAsReference x.notrend
         if (node.name === 'NoTrend') {
+            node.name = 'x';
+        }
+        //x.trend.lastbkyr
+        if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
         //x.trend.lastbkyr

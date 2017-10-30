@@ -29,7 +29,7 @@ var escodegenOptions = {
         parentheses: false
     }
 };
-newModel.importFFL("" + fs.readFileSync(__dirname + '/' + modelName + '.ffl'));
+newModel.importFFL(fs.readFileSync(__dirname + '/' + modelName + '.ffl', 'utf8'));
 let exportJavascript = newModel.exportJavaScript();
 var javascript = '';
 String.prototype.replaceAll = function(or, alt) {
@@ -54,8 +54,7 @@ javascript = javascript.replace(/ 1e /gmi, parseFloat("1"))
 
 for (var key in jsMathA) {
     var f = jsMathA[key];
-    let functionScript = f.body// regenerate(f.body);
-
+    let functionScript = f.body
     javascript += '\n/* ' + key + ':' + (functionScript || f) + ' */';
     let javascript2;
     if (f.body) {

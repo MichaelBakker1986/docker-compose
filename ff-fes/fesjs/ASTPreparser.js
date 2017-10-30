@@ -2,9 +2,6 @@ var assert = require("assert")
 var log = require('ff-log')
 var AST = require('../../ast-node-utils/index').ast;
 var escodegen = require('escodegen');
-var xArgument = {
-    "name": "x"
-};
 
 // some variables we shall use..
 //we want to modify its default behavior
@@ -15,7 +12,8 @@ var simplified = {
     ExpandLevel: function(formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
-            "name": "1.1"
+            "name": "1.1",
+            "raw": "1.1"
         }];
     },
     Min: function(formulaInfo, node) {
@@ -30,6 +28,9 @@ var simplified = {
     },
     Abs: function(formulaInfo, node) {
         node.callee.name = 'Math.abs'
+    },
+    InvNormal: function(formulaInfo, node) {
+        node.callee.name = 'NORMSINV'
     },
     //the format is strange, hard to get a better format in the fin->json parser.
     //Expected format: Case(X_MAP01_Verplicht,[0,0||1,10||2,20||11,30||12,120||13,130])
@@ -124,7 +125,8 @@ var simplified = {
     MaxValueT: function(formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
-            "name": "1"
+            "name": "1",
+            "raw": "1"
         }];
     },
     //ExpandFraction ExpandFraction(VariableCosts,Sales)
@@ -132,7 +134,8 @@ var simplified = {
     ExpandFraction: function(formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",
-            "name": "1"
+            "name": "1",
+            "raw": "1"
         }, {
             "type": "Identifier",
             "name": "2"
@@ -148,13 +151,15 @@ var simplified = {
      * Inject the x parameter into the call
      */
     FirstValueT: function(formulaInfo, node) {
-        node.arguments.unshift(xArgument);
+        node.arguments.unshift({
+            "type": "Identifier",
+            "name": "x"
+        });
     },
     DateToT: function(formulaInfo, node) {
         node.arguments.unshift({
-            "type": "Literal",
-            "value": "x",
-            "raw": "x"
+            "type": "Identifier",
+            "name": "x"
         });
     },
     Visible: function(formulaInfo, node) {

@@ -56,11 +56,15 @@ FormulaInfo.prototype.setSchema = function(schema) {
     this.schema = schema;
 }
 FormulaInfo.prototype.addFormula = function(formula) {
+    formula.fflname = variableName(formula.name)
     this.formulas.push(formula);
 }
 
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
+}
+function variableName(name) {
+    return name.replace(/^[^_]+_([\w]*_\w+)$/gmi, '$1');
 }
 
 function LMEParser() {

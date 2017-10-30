@@ -69,7 +69,7 @@ var port = process.argv[2] || 9001;
 server.pre(restify.pre.userAgentConnection());
 server.listen(port, function() {
     log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Q_ROOT/Incomplete')
+    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/?var=KSP_Q_ROOT&Incomplete')
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Q_ROOT/Complete')
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user2/value/KSP_Q_ROOT/110')
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildcareContribution/1/200')
@@ -80,3 +80,6 @@ server.listen(port, function() {
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Child/0/1/Janneke')
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildGender/0/1/Girl')
 });
+
+
+//variable/QRoot/tuple/0/column/2017

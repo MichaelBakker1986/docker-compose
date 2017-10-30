@@ -8,6 +8,7 @@ var Promise = require('promise')
 var matrix = {};
 var workbook = new Excel.Workbook();
 var fileName = __dirname + '/resources/ScorecardKSP1.xlsx';
+var fileName2 = __dirname + '/resources/AAB_Parameters.xlsx';
 var succes;
 var initComplete = new Promise(function(succesArg) {
     succes = succesArg;
@@ -120,29 +121,32 @@ function findXasValues(range, yasNames, bounds) {
 }
 
 var sync = true;
-workbook.xlsx.readFile(fileName)
-    .then(function(wb) {
-        var definedNames = getDefinedNames(wb);
-        for (definedName in definedNames) {
-            var range = definedNames[definedName];
-            var bounds = findStart(range);
-            var yasNames = findYasNames(range, bounds);
-            var xasValues = findXasValues(range, yasNames, bounds);
-            matrix[definedName] = {
-                name: range.name,
-                table: {},
-                bounds: bounds,
-                yasNames: yasNames,
-                xasValues: xasValues
-            };
-            //log.debug(matrix[definedName])
-            //log.debug('found named range:[%s]', range.name)
-            //printValues(range)
-        }
-        // use workbook
-        succes(matrix);
-        sync = false;
-    }).catch(function(err) {
+
+function readFunction(wb) {
+    var definedNames = getDefinedNames(wb);
+    for (definedName in definedNames) {
+        var range = definedNames[definedName];
+        var bounds = findStart(range);
+        var yasNames = findYasNames(range, bounds);
+        var xasValues = findXasValues(range, yasNames, bounds);
+        matrix[definedName] = {
+            name: range.name,
+            table: {},
+            bounds: bounds,
+            yasNames: yasNames,
+            xasValues: xasValues
+        };
+        //log.debug(matrix[definedName])
+        //log.debug('found named range:[%s]', range.name)
+        //printValues(range)
+    }
+    // use workbook
+    succes(matrix);
+}
+
+Promise.all([workbook.xlsx.readFile(fileName).then(readFunction), workbook.xlsx.readFile(fileName2).then(readFunction)]).then(function(ok) {
+    sync = false;
+}).catch(function(err) {
         log.info(err);
         sync = false;
     }
@@ -153,7 +157,7 @@ while (sync) {
 var entries = {
     'MatrixLookup': function(xlsfileName, tableName, row, col) {
         if (!matrix[tableName]) {
-            log.warn('Defined matrix name not found [%s]:[%s:%s]', tableName, row, col);
+            log.debug('Defined matrix name not found [%s]:[%s:%s]', tableName, row, col);
         }
         if (matrix[tableName] && matrix[tableName].xasValues && matrix[tableName].xasValues[row] && matrix[tableName].xasValues[row][col]) {
             if (log.TRACE) {

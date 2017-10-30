@@ -132,6 +132,20 @@ function validateImportedSolution() {
                 };
             }
             else {
+                //try underlying formulas
+                formulaInfo.formulaDependencys.forEach(function(dependency) {
+                    if (dependency.association === 'deps') {
+                        const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
+                        try {
+                            let resolveY2 = resolveY(workbook, 0);
+                            FESFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY2, 0, context.getValues());
+                        } catch (e) {
+                            log.error(e)
+                            //NOOP
+                        }
+                    }
+                })
+                log.error(e)
                 log.warn('unable to fix problem in ' + formulaInfo.original + ' fail:' + e)
                 log.warn(formulaInfo);
                 fix = {

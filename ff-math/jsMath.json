@@ -1,7 +1,7 @@
 {
   "Length": {
     "args": "v1",
-    "body": "{ if (v1 === undefined){return 0;} return v1.length;}"
+    "body": "return String(v1).length"
   },
   "OnER": {
     "args": "v,onerrv",
@@ -85,7 +85,7 @@
   },
   "EvaluateAsString": {
     "args": "value",
-    "body": "{ return value }"
+    "body": "{ return String(value) }"
   },
   "FirstUC": {
     "args": "value",
@@ -96,10 +96,6 @@
     "body": "{ return 1 }"
   },
   "Visible": {
-    "args": "variableOrValue",
-    "body": "{ return 1 }"
-  },
-  "InputRequired": {
     "args": "variableOrValue",
     "body": "{ return 1 }"
   },
@@ -280,8 +276,8 @@
     "body": "{ return one }"
   },
   "RoundUp": {
-    "args": "one",
-    "body": "{ return 1 }"
+    "args": "num,precision",
+    "body": "return Math.ceil(num * precision) / precision"
   },
   "Mut": {
     "args": "one",
@@ -327,10 +323,6 @@
     "args": "one",
     "body": "return 1"
   },
-  "Hsum": {
-    "args": "one",
-    "body": "return 1"
-  },
   "LastTinFormulaset": {
     "args": "one",
     "body": "return one"
@@ -365,7 +357,7 @@
   },
   "Datetot": {
     "args": "one",
-    "body": "return 1"
+    "body": "return x"
   },
   "DateToT": {
     "args": "x",
@@ -396,8 +388,8 @@
     "body": "return 1"
   },
   "SubStr": {
-    "args": "one,two",
-    "body": "return 1"
+    "args": "value,from,to",
+    "body": "return String(value).substring(from,to)"
   },
   "Val": {
     "args": "one",
@@ -408,8 +400,8 @@
     "body": "return 1"
   },
   "MinMax": {
-    "args": "one",
-    "body": "return 1"
+    "args": "value,min,max,fallback",
+    "body": "return value < min ? fallback : value > max ? fallback : value"
   },
   "PPMT": {
     "args": "one",
@@ -420,14 +412,6 @@
     "body": "return 1"
   },
   "LN": {
-    "args": "one",
-    "body": "return 1"
-  },
-  "MIN": {
-    "args": "one",
-    "body": "return 1"
-  },
-  "InvNormal": {
     "args": "one",
     "body": "return 1"
   },

@@ -11,7 +11,8 @@
       "index": 100001,
       "name": "TESTMODEL_TotalConfusedMore_value",
       "parsed": "101",
-      "id": 100001
+      "id": 100001,
+      "fflname": "TotalConfusedMore_value"
     },
     {
       "type": "noCacheLocked",
@@ -24,7 +25,8 @@
       "index": 100002,
       "name": "TESTMODEL_TotalConfusedMore_title",
       "parsed": "'TotalConfusedMore'",
-      "id": 100002
+      "id": 100002,
+      "fflname": "TotalConfusedMore_title"
     },
     {
       "type": "noCacheLocked",
@@ -42,7 +44,8 @@
       "index": 100003,
       "name": "TESTMODEL_TotalConfusedMore_required",
       "parsed": "1",
-      "id": 100003
+      "id": 100003,
+      "fflname": "TotalConfusedMore_required"
     },
     {
       "type": "noCacheUnlocked",
@@ -68,7 +71,8 @@
       "index": 100004,
       "name": "TESTMODEL_VariableOne_value",
       "parsed": "101",
-      "id": 100004
+      "id": 100004,
+      "fflname": "VariableOne_value"
     },
     {
       "type": "noCacheLocked",
@@ -81,7 +85,8 @@
       "index": 100005,
       "name": "TESTMODEL_VariableOne_title",
       "parsed": "'VariableOne'",
-      "id": 100005
+      "id": 100005,
+      "fflname": "VariableOne_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -101,7 +106,8 @@
       "index": 100006,
       "name": "TESTMODEL_VariableTwo_value",
       "parsed": "102",
-      "id": 100006
+      "id": 100006,
+      "fflname": "VariableTwo_value"
     },
     {
       "type": "noCacheLocked",
@@ -114,7 +120,8 @@
       "index": 100007,
       "name": "TESTMODEL_VariableTwo_title",
       "parsed": "'VariableTwo'",
-      "id": 100007
+      "id": 100007,
+      "fflname": "VariableTwo_title"
     },
     {
       "type": "noCacheLocked",
@@ -135,7 +142,8 @@
       "index": 100008,
       "name": "TESTMODEL_VariableTwo_visible",
       "parsed": "a100004('100004',x,y.base,z,v)!=100",
-      "id": 100008
+      "id": 100008,
+      "fflname": "VariableTwo_visible"
     },
     {
       "type": "noCacheLocked",
@@ -156,7 +164,8 @@
       "index": 100009,
       "name": "TESTMODEL_VariableTwo_required",
       "parsed": "a100010('100010',x,y.base,z,v)>1e3",
-      "id": 100009
+      "id": 100009,
+      "fflname": "VariableTwo_required"
     },
     {
       "type": "noCacheUnlocked",
@@ -195,7 +204,8 @@
       "index": 100010,
       "name": "TESTMODEL_Total_value",
       "parsed": "a100004('100004',x,y.base,z,v)+a100006('100006',x,y.base,z,v)",
-      "id": 100010
+      "id": 100010,
+      "fflname": "Total_value"
     },
     {
       "type": "noCacheLocked",
@@ -215,7 +225,8 @@
       "index": 100011,
       "name": "TESTMODEL_Total_title",
       "parsed": "'Total'",
-      "id": 100011
+      "id": 100011,
+      "fflname": "Total_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -228,7 +239,8 @@
       "index": 100012,
       "name": "TESTMODEL_OneFixedDecimal_value",
       "parsed": "100.801+100.9999999",
-      "id": 100012
+      "id": 100012,
+      "fflname": "OneFixedDecimal_value"
     },
     {
       "type": "noCacheLocked",
@@ -242,7 +254,8 @@
       "index": 100013,
       "name": "TESTMODEL_OneFixedDecimal_title",
       "parsed": "'OneFixedDecimal'",
-      "id": 100013
+      "id": 100013,
+      "fflname": "OneFixedDecimal_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -255,7 +268,8 @@
       "index": 100014,
       "name": "TESTMODEL_ZeroFixedDecimal_value",
       "parsed": "100.801+100.9999999",
-      "id": 100014
+      "id": 100014,
+      "fflname": "ZeroFixedDecimal_value"
     },
     {
       "type": "noCacheUnlocked",
@@ -277,7 +291,8 @@
       "index": 100015,
       "name": "TESTMODEL_EvaluateStringTitle_value",
       "parsed": "String(a100011('100011',x,y.base,z,v))",
-      "id": 100015
+      "id": 100015,
+      "fflname": "EvaluateStringTitle_value"
     },
     {
       "type": "noCacheUnlocked",
@@ -298,7 +313,8 @@
       "index": 100016,
       "name": "TESTMODEL_DataEntered_value",
       "parsed": "v[100010][x.hash + y.hash + z]!==undefined",
-      "id": 100016
+      "id": 100016,
+      "fflname": "DataEntered_value"
     },
     {
       "type": "noCacheLocked",
@@ -311,7 +327,8 @@
       "index": 100017,
       "name": "TESTMODEL_DataEntered_title",
       "parsed": "'DataEntered'",
-      "id": 100017
+      "id": 100017,
+      "fflname": "DataEntered_title"
     }
   ],
   "data": [

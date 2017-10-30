@@ -5,47 +5,6 @@ var fs = require('fs');
 
 function ModelListener() {
 }
-
-new Promise(function(resolve, reject) {
-    /*  fs.writeFile('finanfinancials/', '', {flag: 'wx'}, function (err) {
-          if (err) {
-              if (err.errno == -4075) {
-                  resolve("repo already created.");
-              } else {
-                  throw err;
-              }
-          } else {
-          _*/
-    resolve("repo created.");
-    /*
-    }
-        });*/
-}).then(function(message) {
-    console.log(message);
-    /*NodeGit.Repository.init('./finanfinancials/', 0).then(function (repo) {
-     console.info('init')
-     }).catch(function (err) {
-     if (err) {
-     if (err.errno == -4) {
-     console.info('Already init');
-     } else {
-     throw err;
-     }
-     } else {
-     console.info('Init Repo');
-     }
-     });*/
-}).catch(function(err) {
-    console.error(err);
-}).then(function() {
-    /*  NodeGit.Repository
-     .open("./finanfinancials").then(function (repo) {
-     console.info(repo);
-     }).catch(function (err) {
-     console.error(err);
-     })*/
-});
-
 ModelListener.prototype.initializeModels = function() {
     var modelListener = this;
     var ffls = [];
