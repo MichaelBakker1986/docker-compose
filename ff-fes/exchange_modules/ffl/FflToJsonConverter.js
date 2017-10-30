@@ -237,13 +237,6 @@ FflToJsonConverter.prototype.parseFFL = function(contents) {
                     var secondPart = split[1].trim();
                     if (firstWord === 'title') {
                         validate(node, firstWord);
-                        //transform 'thema's' into 'thema\'s'
-                       // secondPart = secondPart.replace(/'&' '&/gi, "' + ");
-                        //secondPart = secondPart.replace(/&'/gmi, " + '");//.replace(/(')/gmi, "");// secondPart.replace(/'/gm, "\\'");
-                        //TODO: move to FinFormula.js
-                        //secondPart = secondPart.replace(/(.)'(.)/gi, '$1"$2');//.replace(/(')/gmi, "");// secondPart.replace(/'/gm, "\\'");
-                        //secondPart = secondPart.replace(/'\)/gi, '")');//.replace(/(')/gmi, "");// secondPart.replace(/'/gm, "\\'");
-                        //.replace(/(')/gmi, "");// secondPart.replace(/'/gm, "\\'");
                         node[firstWord] = FinFormula.parseFormula(secondPart);
                     }
                     else if (formulaType[firstWord] !== undefined) {

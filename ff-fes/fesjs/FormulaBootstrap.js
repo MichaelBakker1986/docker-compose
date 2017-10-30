@@ -53,6 +53,8 @@ var ARRAYEXPRESSION = 'ArrayExpression'
 //so it can have a (x,T) parameter
 simplified.DataAvailable = function(formulaInfo, node) {
     //If(DataEntered(TaxOnProfitPsayable&&TaxProfitPaymentCalc!==10),TaxOnProfitsPayable-(TaxOnProfitsCum+TaxOnProfitsAssessment-TaxOnProfitsPaidAccumulated),NA)
+    //be aware here, DataEntered refences to value,trend,notrend formulasets.
+    //idea idea is all formulasets are redirected into one variable ID, so we can use 'notrend,trend,value' to redirect into value
     var refFormula = addFormulaDependency(formulaInfo, node.arguments[0].name, 'value')
     if (refFormula.ref === undefined) {
         log.warn("Can't find a variableReference for " + regenerate(node)) + " " + formulaInfo.name + ":" + formulaInfo.original;
@@ -312,11 +314,11 @@ var traverseTypes = {
                         node.type = 'Identifier';
                         //node.name =
                         buildFunc(orId, node, 0, object, '.' + node.property.name);
-                        node.object = undefined;
-                        object.refn = undefined;
-                        node.callee = undefined;
-                        node.property = undefined;
-                        node.computed = undefined;
+                        delete node.object;
+                        delete object.refn;
+                        delete node.callee
+                        delete node.property
+                        delete node.computed;
                     }
                 }
                 else {

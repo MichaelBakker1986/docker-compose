@@ -45,13 +45,23 @@ FFLParser.prototype.parseData = function(data, workbook) {
     var solution = SolutionFacade.createSolution(solutionName);
     //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
     JSVisitor.travelOne(json, null, function(keyArg, node, context) {
+
+        if (keyArg && keyArg.toLowerCase().indexOf('operationalcash') > -1) {
+            var xdas = 1;
+        }
+
         if (keyArg === null) {
         }
         else {
             var tupleDefiniton = keyArg.startsWith('tuple ');
             if ((keyArg.startsWith('variable ') || tupleDefiniton)) {
                 var refersto = node.refer;
+                if (keyArg.indexOf('OperationalCash') > -1) {
+                    var xdas = 1;
+                }
                 var nodeName = stripVariableOrtuple(keyArg, node);
+
+
                 var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
                 var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
                 if (tupleDefiniton) {
@@ -230,7 +240,9 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         log.info('NULL rowId')
         return;
     }
-
+    if (rowId == 'OperationalCash') {
+        var xdas = 1;
+    }
     var mappedDisplayType = displayAsMapping[node.displaytype];
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);

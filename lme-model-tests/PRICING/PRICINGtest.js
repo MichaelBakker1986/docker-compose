@@ -6,7 +6,6 @@ var esprima = require('esprima')
 var walk = require('esprima-walk')
 var n = require("ast-types").namedTypes;
 //some case-bugfixes
-PRICINGffl = PRICINGffl.replace(/\s*title:.*;/gmi, '')
 PRICINGffl = PRICINGffl.replace(/Startdate/gmi, 'StartDate')
 PRICINGffl = PRICINGffl.replace(/amount/gmi, 'Amount')
 PRICINGffl = PRICINGffl.replace(/Matrixlookup/gmi, 'MatrixLookup')

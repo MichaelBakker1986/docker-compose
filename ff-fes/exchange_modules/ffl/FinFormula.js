@@ -36,7 +36,7 @@ function finFormulaGeneric(buf) {
     //AND &
     buf = buf.replace(/&/gmi, '+');// convert & to &&
     buf = buf.replace(/ And /gmi, '&&');// convert & to &&
-    buf = buf.replace(/\)\s*and\s*\(/gmi, '&&');// convert )  and ( => &&
+    buf = buf.replace(/\)\s*and\s*\(/gmi, ')&&(');// convert )  and ( => &&
 
     buf = buf.replace(/\s*&&not\s*/gmi, '&& !');// convert )  and ( => &&
 
@@ -76,8 +76,6 @@ function finChoice(formula) {
      * This is bugfixing the problem
      */
     formula = formula.replace(/\\''$/g, "'")
-
-
 
     //looks like a variable reference
     if (/^[a-z0-9_ ]+$/i.test(formula)) {
