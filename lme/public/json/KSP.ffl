@@ -28,7 +28,7 @@ model MVO uses BaseModel
         formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
         data_options: unscalable;
         displaytype: select;
-        title: "Test1234";
+        title: "Test12323234";
         top_blanklines: 1;
         locked: 1;
         visible: FES_EXCHANGE_RATES = 2;
@@ -54,7 +54,7 @@ model MVO uses BaseModel
         frequency: document;
         data_options: unscalable;
         formula: "";
-        title: "Very secret232";
+        title: "FES_LAYOUfhghgfbvhgfhT123";
         visible: 1;
         options_title: locked;
       }
