@@ -10,13 +10,9 @@
     "ff-fes": "file:ff-fes",
     "ff-formulajs": "file:ff-formulajs",
     "concurrently": "^3.5.0",
-    "ff-math": "file:ff-math",
-    "jqmath": "^0.4.8",
-    "js-longest-repeated-substring": "^1.0.3",
-    "serve-favicon": "^2.4.5"
+    "ff-math": "file:ff-math"
   },
   "devDependencies": {
-    "ff-fes-xlsx": "^1.0.2",
     "pre-commit": "^1.2.2"
   },
   "pre-commit": [
