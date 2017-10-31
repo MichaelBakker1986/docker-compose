@@ -9,6 +9,7 @@
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "ff-log": "file:../ff-log",
     "ast-types": "^0.9.14",
     "concurrently": "^3.5.0",
     "esprima": "^4.0.0",
