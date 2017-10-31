@@ -4,8 +4,9 @@ MatrixLookup = function() {
 }
 require('../../ff-fes/exchange_modules/lme/lmeparser');
 require('../../ff-fes/exchange_modules/jsonvalues/jsonvalues');
-require('../../ff-math/ff-math');
-var fesjsApi = require('../../ff-fes/ff-fes').fesjs;
+require('ff-math');
+
+var fesjsApi = require('ff-fes').fesjs;
 fesjsApi.addFunctions(require("../../ff-formulajs/ff-formulajs").formulajs);
 
 function LME() {
@@ -13,6 +14,7 @@ function LME() {
     let WorkBook = require('../../ff-fes/fesjs/JSWorkBook');
     this.lme = new WorkBook(new FESContext());
 }
+
 LME.prototype.addFunctions = fesjsApi.addFunctions;
 LME.prototype.exportLME = function() {
     return this.lme.export('lme')

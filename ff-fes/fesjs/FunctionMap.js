@@ -9,8 +9,6 @@ var log = require('ff-log')
  * value = new value
  * v = entered values
  */
-
-
 function fm() {
 }
 //don't directly use this method, use JSWorkBook instead.

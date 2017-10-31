@@ -1,4 +1,3 @@
-//var NodeGit = require("nodegit");
 var glob = require('glob')
 var log = require('ff-log')
 var fs = require('fs');

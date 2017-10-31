@@ -1,16 +1,16 @@
 var Promise = require('promise')
 var log = require('ff-log')
 var DBConnector;
-var apiimpl = function (DBConnectorArg) {
+var apiimpl = function(DBConnectorArg) {
     DBConnector = DBConnectorArg;
 }
-var fesjsApi = require('../ff-fes/ff-fes').fesjs;
-var ModelListener = require('../ff-ssh-git/gitconnector').ModelListener;
+var fesjsApi = require('ff-fes').fesjs;
+var ModelListener = require('ff-ssh-git').ModelListener;
 var modelService = new ModelListener();
 var modelNames = []
 var modelName;// = modelNames[0]
 //register a listener before initializing the process
-modelService.onNewModel = function (model) {
+modelService.onNewModel = function(model) {
     modelNames.push(fesjsApi.init(model));
     modelName = modelNames[0];
 }
@@ -21,7 +21,7 @@ fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
-excelPlugin.initComplete.then(function () {
+excelPlugin.initComplete.then(function() {
     modelService.initializeModels();
 })
 fesjsApi.addFunctions(excelPlugin);
@@ -38,7 +38,8 @@ function prefixVariable(variableName) {
     }
     return modelNames[0] + '_' + variableName;
 }
-apiimpl.prototype.value = function (contextKey, variable, columncontext, value, tupleindex) {
+
+apiimpl.prototype.value = function(contextKey, variable, columncontext, value, tupleindex) {
     var context = DBConnector.getUserContext(contextKey);
     //all values are strings when entering, wen it can be parsed to a number, we will parse it.
 
@@ -52,26 +53,11 @@ apiimpl.prototype.value = function (contextKey, variable, columncontext, value, 
     var result = fesjsApi.fesGetValue(context, prefixVariable(variable), columncontext, value, tupleindex);
     return result;
 }
-apiimpl.prototype.context = function (contextKey, variable, columncontext, value) {
+apiimpl.prototype.context = function(contextKey, variable, columncontext, value) {
     var context = DBConnector.getUserContext(contextKey);
     if (variable) {
         context[variable] = value
     }
     return context;
-}
-apiimpl.prototype.getFFl = function (data) {
-    return new Promise(function (success, err) {
-        DBConnector('SELECT property,content FROM k3_files where type = "ffl" order by modified limit 1').then(function (result) {
-            var bufferBase64 = new Buffer(result.data[0].content, 'binary').toString('utf-8');
-            //result.data = undefined;
-            //result.entry = bufferBase64;
-            success({
-                entry: data,
-                data: bufferBase64
-            })
-        }).catch(function (err) {
-            info.error("ERROR", err);
-        });
-    })
 }
 module.exports = apiimpl;

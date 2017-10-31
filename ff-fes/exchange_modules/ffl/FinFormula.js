@@ -15,14 +15,24 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/\|\>/gm, '|');
     //end temp case fix
 
+    /**
+     * Generic formula fixes
+     */
+    buf = buf.replace(/EvaluateAsString/gmi, "String")
+    buf = buf.replace(/Matrixlookup/gmi, 'MatrixLookup')
+    buf = buf.replace(/Startdate/gm, 'StartDate')
+    /**
+     * Here are all time references
+     */
     buf = buf.replace(/\[1]/gm, '[doc]');
     buf = buf.replace(/\[T]/gm, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.
     buf = buf.replace(/\[GetT\(T,-1\)]/gm, '[prev]'); //Variable[T] is the same as Variable, its always in default to the corresponding time.
-
     buf = buf.replace(/\[LastT\]/gm, '');
-    buf = buf.replace(/ValueT\(1\)/gm, 'x.first.detail');
-    // buf = buf.replace(/\[GetT\(T,-1\)\]/gmi, '');//x.first.detail
-    // buf = buf.replace(/\[T-1\]/gm, '');
+    buf = buf.replace(/ValueT\(1\)/gm, 'x.firstdetail');
+    buf = buf.replace(/GetT\(T,-TsY,0,TsY\)/gm, 'x.prevbkyr');
+    buf = buf.replace(/GetT\(T,-1\)/gm, 'x.prev');
+    buf = buf.replace(/GetT(T,-1,1,1)/gm, 'x.prev');
+    buf = buf.replace(/FirstTInFormulaset\(Trend\)/gm, 'x.firsttrend');
     //-- Context dependencies
     // buf = buf.replace(/\[t-1\]|@|#/gim, ''); //[prev]   : for now, just throw it away, its .prev when using Time
     //   buf = buf.replace(/\[1\]/gm, '');    //[doc]    : requests the DocumentValue

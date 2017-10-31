@@ -1,20 +1,18 @@
 const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('./ModelFacade')
 var jslrs = require("js-longest-repeated-substring");
-let PRICINGffl = readFileSync(__dirname + '/../V05/V05.FFL');
+let PRICINGffl = readFileSync(__dirname + '/PRICING.ffl');
 var escodegen = require('escodegen')
 var esprima = require('esprima')
 var walk = require('esprima-walk')
 var n = require("ast-types").namedTypes;
 //some case-bugfixes
-PRICINGffl = PRICINGffl.replace(/Startdate/gmi, 'StartDate')
 PRICINGffl = PRICINGffl.replace(/amount/gmi, 'Amount')
-PRICINGffl = PRICINGffl.replace(/Matrixlookup/gmi, 'MatrixLookup')
 PRICINGffl = PRICINGffl.replace(/MatrixLookup\("AAB_Parameters\.xls",/gmi, "MatrixLookup(")
 PRICINGffl = PRICINGffl.replace(/MatrixLookup\("AAB_Parameters_ELMultiplier\.xls",/gmi, "MatrixLookup(")
-PRICINGffl = PRICINGffl.replace(/EvaluateAsString/gmi, "String")
 
 LME.importFFL(PRICINGffl);
 
+LME.lme.fixProblemsInImportedSolution()
 let LMEExport = LME.exportLME();
 writeFileSync(__dirname + '/PRICING.json', LMEExport);
 var subFunctions = {};

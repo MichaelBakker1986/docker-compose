@@ -2,15 +2,16 @@
   "name": "ff-ssh-git",
   "version": "0.0.1",
   "description": "ff-ssh-git",
-  "devDependencies": {
-    "nodegit": "^0.18.0",
-    "tracer": "^0.8.7"
+  "private": true,
+  "main": "gitconnector.js",
+  "dependencies": {
+    "ff-log": "file:../ff-log",
+    "glob": "^7.1.2"
   },
-  "main": "Gruntfile.js",
-  "dependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "devDependencies": {},
   "author": "Michael Bakker",
   "license": "MIT"
 }

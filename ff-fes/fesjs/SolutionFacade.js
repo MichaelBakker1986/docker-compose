@@ -10,13 +10,15 @@ var FormulaService = require('./FormulaService')
 var ParserService = require('./ParserService')
 var FormulaBootstrap = require('./FormulaBootstrap');
 var esprima = require('esprima')
+
 function SolutionFacade() {
 }
-SolutionFacade.prototype.createSolution = function (solutionName) {
+
+SolutionFacade.prototype.createSolution = function(solutionName) {
     return new Solution(PropertiesAssembler.createRootNode(solutionName).solutionName);
 }
 
-SolutionFacade.prototype.importSolutionData = function (data, parserType, workbook) {
+SolutionFacade.prototype.importSolutionData = function(data, parserType, workbook) {
     if (data === undefined) {
         log.error('No data specified')
         return;
@@ -28,15 +30,16 @@ SolutionFacade.prototype.importSolutionData = function (data, parserType, workbo
     initFormulaBootstrap(solution.formulas, false);
     return solution;
 }
-SolutionFacade.prototype.exportSolution = function (parserType, rowId, workbook) {
+SolutionFacade.prototype.exportSolution = function(parserType, rowId, workbook) {
     var parser = ParserService.findParser(parserType);
     if (parser === undefined) {
         throw Error('No such parser found:[' + parserType + ']');
     }
     return parser.deParse(rowId, workbook);
 }
+
 function initFormulaBootstrap(formulas, resetParsedFormula) {
-    formulas.forEach(function (formulaId) {
+    formulas.forEach(function(formulaId) {
         var formulaInfo = FormulaService.findFormulaByIndex(formulaId);
         if (resetParsedFormula) {
             formulaInfo.parsed = undefined;//explicitly reset parsed. (The formula-bootstrap) will skip parsed formulas
@@ -51,7 +54,7 @@ SolutionFacade.prototype.initFormulaBootstrap = initFormulaBootstrap;
 /*
  *return given properties from a formula
  */
-SolutionFacade.prototype.gatherFormulaProperties = function (modelName, properties, rowId) {
+SolutionFacade.prototype.gatherFormulaProperties = function(modelName, properties, rowId) {
     var formulaProperties = {};
     for (var property in properties) {
         var formula = FormulaService.findFormulaByIndex(PropertiesAssembler.getOrCreateProperty(modelName, rowId, property).ref);
@@ -67,7 +70,7 @@ SolutionFacade.prototype.gatherFormulaProperties = function (modelName, properti
  * Creates Formula/Property if not exists
  * Initialize Functionmap
  */
-SolutionFacade.prototype.createFormulaAndStructure = function (solutionName, formulaAsString, rowId, colId) {
+SolutionFacade.prototype.createFormulaAndStructure = function(solutionName, formulaAsString, rowId, colId) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
     //create Solution if not exists.
@@ -80,7 +83,7 @@ SolutionFacade.prototype.createFormulaAndStructure = function (solutionName, for
 /**
  * Called by parsers
  */
-SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId, body, displayAs) {
+SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, body, displayAs) {
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
     var property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
@@ -88,10 +91,10 @@ SolutionFacade.prototype.createUIFormulaLink = function (solution, rowId, colId,
     return solution.createNode(rowId, colId, formulaId, displayAs);
 };
 
-SolutionFacade.prototype.mergeFormulas = function (formulasArg) {
+SolutionFacade.prototype.mergeFormulas = function(formulasArg) {
     //so for all refs in the formula, we will switch the formulaIndex
     var changed = [];
-    formulasArg.forEach(function (formula) {
+    formulasArg.forEach(function(formula) {
         //not sure where to put this logic
         //get local formula
         //var id = formula.id === undefined ? formula.index : formula.id;
@@ -108,6 +111,7 @@ SolutionFacade.prototype.mergeFormulas = function (formulasArg) {
     //rebuild the formulas
     this.initFormulaBootstrap(changed, true);
 };
+
 function modifyFormula(old, newFormula) {
     FormulaService.moveFormula(old, newFormula);
     FunctionMap.moveFunction(old, newFormula);
@@ -118,7 +122,8 @@ function modifyFormula(old, newFormula) {
         property.formulaId = newFormula.id;
     }
 }
-SolutionFacade.prototype.addFormulaDependency = function (formulaInfo, name, propertyName) {
+
+SolutionFacade.prototype.addFormulaDependency = function(formulaInfo, name, propertyName) {
     var property = PropertiesAssembler.getOrCreateProperty(formulaInfo.name.split('_')[0], name, propertyName || 'value');
     FormulaService.addFormulaDependency(formulaInfo, property.ref, property.name);
     return property;
@@ -143,4 +148,4 @@ SolutionFacade.prototype.properties = {
 };
 SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex;
 FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
- module.exports = SolutionFacade.prototype;
+module.exports = SolutionFacade.prototype;

@@ -91,6 +91,7 @@ FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tu
         return values;
     }
 };
+
 /**
  * Given properties in workbook return all values for given columns
  * @param workbook
@@ -139,4 +140,7 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
      }*/
     return outputData;
 }
+
+exports.JSWorkbook = WorkBook;
+exports.LMEContext = WorkBook;
 exports.fesjs = FESApi.prototype;

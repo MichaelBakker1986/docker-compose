@@ -287,7 +287,7 @@
       "deps": {
         "TESTMODEL_Total_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Total))",
+      "original": "String(GetTitle(Total))",
       "index": 100015,
       "name": "TESTMODEL_EvaluateStringTitle_value",
       "parsed": "String(a100011('100011',x,y.base,z,v))",
@@ -395,7 +395,7 @@
     [
       "EvaluateStringTitle",
       null,
-      "EvaluateAsString(GetTitle(Total))",
+      "String(GetTitle(Total))",
       "",
       "",
       false,

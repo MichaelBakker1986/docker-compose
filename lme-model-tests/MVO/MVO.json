@@ -32,26 +32,7 @@
       "type": "noCacheLocked",
       "refs": {
         "MVO_RootSub1_locked": true,
-        "MVO_FES_LAYOUTNR_locked": true,
-        "MVO_FES_COLUMN_VISIBLE_notrend": true,
-        "MVO_FES_COLUMN_VISIBLE_trend": true,
-        "MVO_RootSub2_locked": true,
-        "MVO_Q_ROOT_locked": true,
-        "MVO_Q_MAP01_locked": true,
-        "MVO_Q_MAP01_WARNING_locked": true,
-        "MVO_Q_MAP01_INFO_locked": true,
-        "MVO_Q_MAP01_VALIDATION_locked": true,
-        "MVO_Q_MAP01_HINT_locked": true,
-        "MVO_Q_MAP01_VERBORGEN_locked": true,
-        "MVO_Q_MAP01_PARAGRAAF09_locked": true,
-        "MVO_Q_MAP01_PARAGRAAF09SUB1_locked": true,
-        "MVO_Q_MAP01_PARAGRAAF09SUB2_locked": true,
-        "MVO_Q_MAP01_PARAGRAAF09SUB3_locked": true,
-        "MVO_Q_MAP01_PARAGRAAF09SUB4_locked": true,
-        "MVO_Q_MAP01_PARAGRAAF09SUB5_locked": true,
-        "MVO_Q_MAP01_HULPVARIABELEN_locked": true,
-        "MVO_Q_MAP01_REQUIREDVARS_locked": true,
-        "MVO_Q_MAP01_ENTEREDREQUIREDVARS_locked": true
+        "MVO_FES_LAYOUTNR_locked": true
       },
       "formulaDependencys": [],
       "deps": {},
@@ -277,14 +258,31 @@
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "MVO_FES_COLUMN_VISIBLE_value": true
+        "MVO_FES_COLUMN_VISIBLE_value": true,
+        "MVO_RootSub2_locked": true,
+        "MVO_Q_ROOT_locked": true,
+        "MVO_Q_MAP01_locked": true,
+        "MVO_Q_MAP01_WARNING_locked": true,
+        "MVO_Q_MAP01_INFO_locked": true,
+        "MVO_Q_MAP01_VALIDATION_locked": true,
+        "MVO_Q_MAP01_HINT_locked": true,
+        "MVO_Q_MAP01_VERBORGEN_locked": true,
+        "MVO_Q_MAP01_PARAGRAAF09_locked": true,
+        "MVO_Q_MAP01_PARAGRAAF09SUB1_locked": true,
+        "MVO_Q_MAP01_PARAGRAAF09SUB2_locked": true,
+        "MVO_Q_MAP01_PARAGRAAF09SUB3_locked": true,
+        "MVO_Q_MAP01_PARAGRAAF09SUB4_locked": true,
+        "MVO_Q_MAP01_PARAGRAAF09SUB5_locked": true,
+        "MVO_Q_MAP01_HULPVARIABELEN_locked": true,
+        "MVO_Q_MAP01_REQUIREDVARS_locked": true,
+        "MVO_Q_MAP01_ENTEREDREQUIREDVARS_locked": true
       },
       "formulaDependencys": [],
       "deps": {},
-      "original": "undefined",
+      "original": "1",
       "index": 100018,
       "name": "MVO_FES_COLUMN_VISIBLE_value",
-      "parsed": "undefined",
+      "parsed": "1",
       "id": 100018,
       "fflname": "FES_COLUMN_VISIBLE_value"
     },
@@ -1225,7 +1223,7 @@
         "MVO_Q_RESTRICTIES_value": true,
         "MVO_Q_WARNING_GLOBAL_value": true
       },
-      "original": "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "index": 100080,
       "name": "MVO_Q_MAP01_WARNING_value",
       "parsed": "String(a100551('100551',x.doc,y.base,z,v)+a100545('100545',x.doc,y.base,z,v))",
@@ -1268,7 +1266,7 @@
       "deps": {
         "MVO_Q_MAP01_value": true
       },
-      "original": "EvaluateAsString(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "original": "String(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "index": 100082,
       "name": "MVO_Q_MAP01_INFO_value",
       "parsed": "String(a100078('100078',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
@@ -1809,7 +1807,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100105,
       "name": "MVO_Q_MAP01_VRAAG02_MEMO_title",
       "parsed": "String(a100099('100099',x,y.base,z,v))",
@@ -3977,7 +3975,7 @@
         "MVO_Q_RESTRICTIES_value": true,
         "MVO_Q_WARNING_GLOBAL_value": true
       },
-      "original": "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "index": 100197,
       "name": "MVO_Q_MAP02_WARNING_value",
       "parsed": "String(a100551('100551',x.doc,y.base,z,v)+a100545('100545',x.doc,y.base,z,v))",
@@ -4020,7 +4018,7 @@
       "deps": {
         "MVO_Q_MAP02_value": true
       },
-      "original": "EvaluateAsString(If(Q_MAP02[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "original": "String(If(Q_MAP02[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "index": 100199,
       "name": "MVO_Q_MAP02_INFO_value",
       "parsed": "String(a100195('100195',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
@@ -4240,7 +4238,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG07_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG07))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG07))",
       "index": 100211,
       "name": "MVO_Q_MAP02_VRAAG01_title",
       "parsed": "String(a100135('100135',x,y.base,z,v))",
@@ -4831,7 +4829,7 @@
         "MVO_Q_RESTRICTIES_value": true,
         "MVO_Q_WARNING_GLOBAL_value": true
       },
-      "original": "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "index": 100233,
       "name": "MVO_Q_MAP03_WARNING_value",
       "parsed": "String(a100551('100551',x.doc,y.base,z,v)+a100545('100545',x.doc,y.base,z,v))",
@@ -4874,7 +4872,7 @@
       "deps": {
         "MVO_Q_MAP03_value": true
       },
-      "original": "EvaluateAsString(If(Q_MAP03[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "original": "String(If(Q_MAP03[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "index": 100235,
       "name": "MVO_Q_MAP03_INFO_value",
       "parsed": "String(a100231('100231',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
@@ -7819,7 +7817,7 @@
         "MVO_Q_RESTRICTIES_value": true,
         "MVO_Q_WARNING_GLOBAL_value": true
       },
-      "original": "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "index": 100358,
       "name": "MVO_Q_MAP04_WARNING_value",
       "parsed": "String(a100551('100551',x.doc,y.base,z,v)+a100545('100545',x.doc,y.base,z,v))",
@@ -7862,7 +7860,7 @@
       "deps": {
         "MVO_Q_MAP04_value": true
       },
-      "original": "EvaluateAsString(If(Q_MAP04[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "original": "String(If(Q_MAP04[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "index": 100360,
       "name": "MVO_Q_MAP04_INFO_value",
       "parsed": "String(a100356('100356',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
@@ -9557,7 +9555,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG01))",
       "index": 100443,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_title",
       "parsed": "String(a100095('100095',x,y.base,z,v))",
@@ -9600,7 +9598,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG02_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG02))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG02))",
       "index": 100445,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG02_title",
       "parsed": "String(a100103('100103',x,y.base,z,v))",
@@ -9643,7 +9641,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG03_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG03))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG03))",
       "index": 100447,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG03_title",
       "parsed": "String(a100111('100111',x,y.base,z,v))",
@@ -9686,7 +9684,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG04_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG04))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG04))",
       "index": 100449,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG04_title",
       "parsed": "String(a100116('100116',x,y.base,z,v))",
@@ -9729,7 +9727,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG05_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG05))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG05))",
       "index": 100451,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG05_title",
       "parsed": "String(a100123('100123',x,y.base,z,v))",
@@ -9772,7 +9770,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG06_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG06))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG06))",
       "index": 100453,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG06_title",
       "parsed": "String(a100128('100128',x,y.base,z,v))",
@@ -9836,7 +9834,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG08_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG08))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG08))",
       "index": 100456,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG08_title",
       "parsed": "String(a100140('100140',x,y.base,z,v))",
@@ -9879,7 +9877,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG09_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG09))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG09))",
       "index": 100458,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG09_title",
       "parsed": "String(a100147('100147',x,y.base,z,v))",
@@ -9922,7 +9920,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG10_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG10))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG10))",
       "index": 100460,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG10_title",
       "parsed": "String(a100152('100152',x,y.base,z,v))",
@@ -9965,7 +9963,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG11_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG11))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG11))",
       "index": 100462,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG11_title",
       "parsed": "String(a100159('100159',x,y.base,z,v))",
@@ -10008,7 +10006,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG12_title": true
       },
-      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG12))",
+      "original": "String(GetTitle(Q_MAP01_VRAAG12))",
       "index": 100464,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG12_title",
       "parsed": "String(a100164('100164',x,y.base,z,v))",
@@ -10391,7 +10389,7 @@
         "MVO_Q_RESTRICTIES_value": true,
         "MVO_Q_WARNING_GLOBAL_value": true
       },
-      "original": "EvaluateAsString(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "original": "String(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "index": 100475,
       "name": "MVO_Q_RESULT_value",
       "parsed": "String((a100075('100075',x.doc,y.base,z,v)==0?'Nog niet alle vragen zijn ingevuld.[br][/br]':'Deze vragenlijst is definitief gemaakt.[br][/br]')+a100551('100551',x.doc,y.base,z,v)+a100545('100545',x.doc,y.base,z,v))",
@@ -10696,7 +10694,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG01_title": true
       },
-      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG01))",
+      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG01))",
       "index": 100487,
       "name": "MVO_Q_MAP03_SUBSCORE01_title",
       "parsed": "String('Score '+a100257('100257',x,y.base,z,v))",
@@ -10758,7 +10756,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG02_title": true
       },
-      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG02))",
+      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG02))",
       "index": 100489,
       "name": "MVO_Q_MAP03_SUBSCORE02_title",
       "parsed": "String('Score '+a100259('100259',x,y.base,z,v))",
@@ -10820,7 +10818,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG03_title": true
       },
-      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG03))",
+      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG03))",
       "index": 100491,
       "name": "MVO_Q_MAP03_SUBSCORE03_title",
       "parsed": "String('Score '+a100261('100261',x,y.base,z,v))",
@@ -10882,7 +10880,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG04_title": true
       },
-      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG04))",
+      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG04))",
       "index": 100493,
       "name": "MVO_Q_MAP03_SUBSCORE04_title",
       "parsed": "String('Score '+a100263('100263',x,y.base,z,v))",
@@ -10944,7 +10942,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_title": true
       },
-      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG05))",
+      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG05))",
       "index": 100495,
       "name": "MVO_Q_MAP03_SUBSCORE05_title",
       "parsed": "String('Score '+a100244('100244',x,y.base,z,v))",
@@ -11006,7 +11004,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_title": true
       },
-      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG06))",
+      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG06))",
       "index": 100497,
       "name": "MVO_Q_MAP03_SUBSCORE06_title",
       "parsed": "String('Score '+a100246('100246',x,y.base,z,v))",
@@ -11068,7 +11066,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG07_title": true
       },
-      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG07))",
+      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG07))",
       "index": 100499,
       "name": "MVO_Q_MAP03_SUBSCORE07_title",
       "parsed": "String('Score '+a100265('100265',x,y.base,z,v))",
@@ -11991,7 +11989,7 @@
       "deps": {
         "MVO_Q_WARNING_GLOBALTXT_value": true
       },
-      "original": "EvaluateAsString(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing, '+Q_WARNING_GLOBALTXT,''))",
+      "original": "String(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing, '+Q_WARNING_GLOBALTXT,''))",
       "index": 100545,
       "name": "MVO_Q_WARNING_GLOBAL_value",
       "parsed": "String(Length(a100549('100549',x.doc,y.base,z,v))>0?'[br][/br]Er zijn knockouts van toepassing, '+a100549('100549',x,y.base,z,v):'')",
@@ -12068,7 +12066,7 @@
       "deps": {
         "MVO_Q_WARNING_01_value": true
       },
-      "original": "EvaluateAsString(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))",
+      "original": "String(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))",
       "index": 100549,
       "name": "MVO_Q_WARNING_GLOBALTXT_value",
       "parsed": "String(Length(a100547('100547',x.doc,y.base,z,v))>0?'[br][/br]'+a100547('100547',x.doc,y.base,z,v):'')",
@@ -12134,7 +12132,7 @@
       "deps": {
         "MVO_Q_RESTRICTIESTXT_value": true
       },
-      "original": "EvaluateAsString(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld, '+Q_RESTRICTIESTXT,''))",
+      "original": "String(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld, '+Q_RESTRICTIESTXT,''))",
       "index": 100551,
       "name": "MVO_Q_RESTRICTIES_value",
       "parsed": "String(Length(a100555('100555',x.doc,y.base,z,v))>0?'[br][/br]De volgende variabelen zijn niet correct gevuld, '+a100555('100555',x,y.base,z,v):'')",
@@ -12211,7 +12209,7 @@
       "deps": {
         "MVO_Q_RESTRICTIES_01_value": true
       },
-      "original": "EvaluateAsString(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))",
+      "original": "String(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))",
       "index": 100555,
       "name": "MVO_Q_RESTRICTIESTXT_value",
       "parsed": "String(Length(a100553('100553',x.doc,y.base,z,v))>0?'[br][/br]'+a100553('100553',x.doc,y.base,z,v):'')",
@@ -12307,7 +12305,7 @@
     [
       "FES_COLUMN_VISIBLE",
       "'Column visible'",
-      "undefined",
+      "1",
       "",
       "",
       false,
@@ -12607,7 +12605,7 @@
     [
       "Q_MAP01_WARNING",
       "'Warning voor map 1'",
-      "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
       false,
@@ -12617,7 +12615,7 @@
     [
       "Q_MAP01_INFO",
       "'Info bij stap 1'",
-      "EvaluateAsString(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "String(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "",
       "",
       false,
@@ -12706,7 +12704,7 @@
     ],
     [
       "Q_MAP01_VRAAG02_MEMO",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -13127,7 +13125,7 @@
     [
       "Q_MAP02_WARNING",
       "'Warning voor map 2'",
-      "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
       false,
@@ -13137,7 +13135,7 @@
     [
       "Q_MAP02_INFO",
       "'Info bij stap 2'",
-      "EvaluateAsString(If(Q_MAP02[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "String(If(Q_MAP02[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "",
       "",
       false,
@@ -13196,7 +13194,7 @@
     ],
     [
       "Q_MAP02_VRAAG01",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG07))",
+      "String(GetTitle(Q_MAP01_VRAAG07))",
       "undefined",
       "",
       "",
@@ -13347,7 +13345,7 @@
     [
       "Q_MAP03_WARNING",
       "'Warning voor map 3'",
-      "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
       false,
@@ -13357,7 +13355,7 @@
     [
       "Q_MAP03_INFO",
       "'Info bij stap 3'",
-      "EvaluateAsString(If(Q_MAP03[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "String(If(Q_MAP03[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "",
       "",
       false,
@@ -14017,7 +14015,7 @@
     [
       "Q_MAP04_WARNING",
       "'Warning voor map 4'",
-      "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
       false,
@@ -14027,7 +14025,7 @@
     [
       "Q_MAP04_INFO",
       "'Info bij stap 4'",
-      "EvaluateAsString(If(Q_MAP04[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "String(If(Q_MAP04[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "",
       "",
       false,
@@ -14366,7 +14364,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG01",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01))",
+      "String(GetTitle(Q_MAP01_VRAAG01))",
       "10",
       "",
       "",
@@ -14376,7 +14374,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG02",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG02))",
+      "String(GetTitle(Q_MAP01_VRAAG02))",
       "30",
       "",
       "",
@@ -14386,7 +14384,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG03",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG03))",
+      "String(GetTitle(Q_MAP01_VRAAG03))",
       "20",
       "",
       "",
@@ -14396,7 +14394,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG04",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG04))",
+      "String(GetTitle(Q_MAP01_VRAAG04))",
       "40",
       "",
       "",
@@ -14406,7 +14404,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG05",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG05))",
+      "String(GetTitle(Q_MAP01_VRAAG05))",
       "10",
       "",
       "",
@@ -14416,7 +14414,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG06",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG06))",
+      "String(GetTitle(Q_MAP01_VRAAG06))",
       "30",
       "",
       "",
@@ -14436,7 +14434,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG08",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG08))",
+      "String(GetTitle(Q_MAP01_VRAAG08))",
       "40",
       "",
       "",
@@ -14446,7 +14444,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG09",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG09))",
+      "String(GetTitle(Q_MAP01_VRAAG09))",
       "10",
       "",
       "",
@@ -14456,7 +14454,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG10",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG10))",
+      "String(GetTitle(Q_MAP01_VRAAG10))",
       "30",
       "",
       "",
@@ -14466,7 +14464,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG11",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG11))",
+      "String(GetTitle(Q_MAP01_VRAAG11))",
       "20",
       "",
       "",
@@ -14476,7 +14474,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG12",
-      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG12))",
+      "String(GetTitle(Q_MAP01_VRAAG12))",
       "40",
       "",
       "",
@@ -14587,7 +14585,7 @@
     [
       "Q_RESULT",
       "'Resultaat'",
-      "EvaluateAsString(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "String(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
       false,
@@ -14656,7 +14654,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE01",
-      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG01))",
+      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG01))",
       "OnER((Q_MAP03_VRAAG01*Q_MAP03_GEWICHT_VRAAG01+Q_MAP03_VRAAG02*Q_MAP03_GEWICHT_VRAAG01)/2,NA)",
       "",
       "",
@@ -14666,7 +14664,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE02",
-      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG02))",
+      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG02))",
       "OnER((Q_MAP03_VRAAG03*Q_MAP03_GEWICHT_VRAAG02+Q_MAP03_VRAAG04*Q_MAP03_GEWICHT_VRAAG02)/2,NA)",
       "",
       "",
@@ -14676,7 +14674,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE03",
-      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG03))",
+      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG03))",
       "OnER((Q_MAP03_VRAAG05*Q_MAP03_GEWICHT_VRAAG03+Q_MAP03_VRAAG06*Q_MAP03_GEWICHT_VRAAG03)/2,NA)",
       "",
       "",
@@ -14686,7 +14684,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE04",
-      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG04))",
+      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG04))",
       "OnER((Q_MAP03_VRAAG07*Q_MAP03_GEWICHT_VRAAG04+Q_MAP03_VRAAG08*Q_MAP03_GEWICHT_VRAAG04)/2,NA)",
       "",
       "",
@@ -14696,7 +14694,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE05",
-      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG05))",
+      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG05))",
       "OnER((Q_MAP03_VRAAG09*Q_MAP03_GEWICHT_VRAAG05+Q_MAP03_VRAAG10*Q_MAP03_GEWICHT_VRAAG05)/2,NA)",
       "",
       "",
@@ -14706,7 +14704,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE06",
-      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG06))",
+      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG06))",
       "OnER((Q_MAP03_VRAAG11*Q_MAP03_GEWICHT_VRAAG06+Q_MAP03_VRAAG12*Q_MAP03_GEWICHT_VRAAG06)/2,NA)",
       "",
       "",
@@ -14716,7 +14714,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE07",
-      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG07))",
+      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG07))",
       "OnER((Q_MAP03_VRAAG13*Q_MAP03_GEWICHT_VRAAG07+Q_MAP03_VRAAG14*Q_MAP03_GEWICHT_VRAAG07)/2,NA)",
       "",
       "",
@@ -14947,7 +14945,7 @@
     [
       "Q_WARNING_GLOBAL",
       "'Knock-out(s)'",
-      "EvaluateAsString(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing, '+Q_WARNING_GLOBALTXT,''))",
+      "String(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing, '+Q_WARNING_GLOBALTXT,''))",
       "",
       "",
       false,
@@ -14967,7 +14965,7 @@
     [
       "Q_WARNING_GLOBALTXT",
       "'Knock-out tekst'",
-      "EvaluateAsString(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))",
+      "String(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))",
       "",
       "",
       false,
@@ -14977,7 +14975,7 @@
     [
       "Q_RESTRICTIES",
       "'Restricties'",
-      "EvaluateAsString(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld, '+Q_RESTRICTIESTXT,''))",
+      "String(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld, '+Q_RESTRICTIESTXT,''))",
       "",
       "",
       false,
@@ -15007,7 +15005,7 @@
     [
       "Q_RESTRICTIESTXT",
       "'Restricties tekst'",
-      "EvaluateAsString(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))",
+      "String(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))",
       "",
       "",
       false,
@@ -15351,28 +15349,6 @@
     {
       "rowId": "FES_COLUMN_VISIBLE",
       "solutionName": "MVO",
-      "colId": "notrend",
-      "name": "MVO_FES_COLUMN_VISIBLE_notrend",
-      "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "FES_COLUMN_VISIBLE",
-      "solutionName": "MVO",
-      "colId": "trend",
-      "name": "MVO_FES_COLUMN_VISIBLE_trend",
-      "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "FES_COLUMN_VISIBLE",
-      "solutionName": "MVO",
       "colId": "title",
       "name": "MVO_FES_COLUMN_VISIBLE_title",
       "nodes": [],
@@ -15657,9 +15633,9 @@
       "colId": "locked",
       "name": "MVO_RootSub2_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -16341,9 +16317,9 @@
       "colId": "locked",
       "name": "MVO_Q_ROOT_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -16472,9 +16448,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -16518,9 +16494,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_WARNING_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -16553,9 +16529,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_INFO_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -16588,9 +16564,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_VALIDATION_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -16623,9 +16599,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_HINT_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -16689,9 +16665,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_VERBORGEN_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -18397,9 +18373,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -18443,9 +18419,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB1_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -18478,9 +18454,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB2_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -18513,9 +18489,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB3_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -18548,9 +18524,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB4_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -18583,9 +18559,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB5_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -18637,9 +18613,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_HULPVARIABELEN_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -18683,9 +18659,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_REQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {
@@ -18718,9 +18694,9 @@
       "colId": "locked",
       "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
+      "ref": 100018,
+      "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
+      "refId": 100018,
       "displayAs": "PropertyType"
     },
     {

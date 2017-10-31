@@ -11,7 +11,8 @@
   ],
   "author": "michael.bakker <npm.michael.bakker@gmail.com> (http://ff-log-example.com)",
   "license": "ISC",
-  "devDependencies": {
-    "tracer": "^0.8.7"
+  "devDependencies": {},
+  "dependencies": {
+    "tracer": "^0.8.11"
   }
 }

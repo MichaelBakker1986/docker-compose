@@ -80,9 +80,8 @@ function validateImportedSolution() {
         var formulaInfo = SolutionFacade.fetchFormulaByIndex(elemId)
         //TODO: use timeout, this monte carlo is blocking UI thread
         try {
-            let resolveY2 = resolveY(workbook, 0);
-
-            FESFacade.apiGetValue(formulaInfo, resolveX(workbook, 0), resolveY2, 0, context.getValues());
+            //iterate all formula-sets to test 100%
+            FESFacade.apiGetValue(formulaInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
             validateResponse.succes.push(formulaInfo.name);
         }
         catch (e) {
@@ -137,8 +136,7 @@ function validateImportedSolution() {
                     if (dependency.association === 'deps') {
                         const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
                         try {
-                            let resolveY2 = resolveY(workbook, 0);
-                            FESFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY2, 0, context.getValues());
+                            FESFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
                         } catch (e) {
                             log.error(e)
                             //NOOP
@@ -152,15 +150,6 @@ function validateImportedSolution() {
                     canFix: false
                 }
             }
-//
-// v[113047][x.hash + y.hash + z]!==undefined
-// ||
-// TimeAggregated?v[113049][x.hash + y.hash + z]
-// !==undefined&&TimeAggregated?
-// GetValue(a113049('113049',x,y.base,z,v),x,x):GetFrac(a112974('112974',x,y.base,z,v),a113047('113047',x,y.base,z,v))*(52+1/7):
-// Math.max(GetFrac(a112974('112974',x,y.base,z,v)
-// ,a113047('113047',x,y.base,z,v)
-// -a112974('112974',x.x,y.base,z,v))*(52+1/7),a113049('113049',x,y.base,z,v))
             //filter Exceptions not worth viewing e.g. Duplicates
             if (!fix.hide) {
                 fix.formulaName = formulaInfo.name;

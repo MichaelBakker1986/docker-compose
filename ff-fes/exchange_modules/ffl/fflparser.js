@@ -37,6 +37,12 @@ FFLParser.prototype.headername = '.finance ffl';
 FFLParser.prototype.parseData = function(data, workbook) {
     var logVars = {variables: []};
     //convert FFL into JSON (Generic)
+    //This case-fix takes too long to perform
+    /* var names = data.split(/(?:(variable|tuple) (?:\=|\+|-){0,1}(\w+))/gmi);
+     for (var nameIdx = 2; nameIdx < names.length; nameIdx + 3) {
+         var name = names[nameIdx];
+         data = data.replace(new RegExp(name, 'gmi'), name)
+     }*/
     var json = FflToJsonConverter.parseFFL(data);
     //lookup  modelName, we need this in the process;
     //all nodes will be given the SolutionName member as ID of its corresponding SolutionName
@@ -45,20 +51,12 @@ FFLParser.prototype.parseData = function(data, workbook) {
     var solution = SolutionFacade.createSolution(solutionName);
     //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
     JSVisitor.travelOne(json, null, function(keyArg, node, context) {
-
-        if (keyArg && keyArg.toLowerCase().indexOf('operationalcash') > -1) {
-            var xdas = 1;
-        }
-
         if (keyArg === null) {
         }
         else {
             var tupleDefiniton = keyArg.startsWith('tuple ');
             if ((keyArg.startsWith('variable ') || tupleDefiniton)) {
                 var refersto = node.refer;
-                if (keyArg.indexOf('OperationalCash') > -1) {
-                    var xdas = 1;
-                }
                 var nodeName = stripVariableOrtuple(keyArg, node);
 
 
@@ -190,8 +188,6 @@ var displayAsMapping = {
     line: "line"
 }
 var formulaMapping = {
-    formula_notrend: 'notrend',
-    formula_trend: 'trend',
     title: 'title',
     locked: 'locked',
     visible: 'visible',
@@ -231,24 +227,42 @@ var defaultValue = {
         'Off': true
     }
 }
-
+const supportedFrequencies = {
+    document: true,
+    column: true,
+    none: true,
+    timeline: true
+}
 //this is where it is all about, the variable with his properties
 //we should make it more Generic so i can use it for fin language parser
 function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupleProperty, tupleDefinitionName, nestedTupleDepth) {
     logVars.variables.push(rowId);
     if (rowId === undefined || rowId.trim() === '') {
-        log.info('NULL rowId')
+        log.error('Invalid FFL file detected while parsing. No name declared for node [' + node + ']')
         return;
-    }
-    if (rowId == 'OperationalCash') {
-        var xdas = 1;
     }
     var mappedDisplayType = displayAsMapping[node.displaytype];
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 
-    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', node.formula ? parseFFLFormula(node.formula, 'none', rowId) : AST.UNDEFINED(), mappedDisplayType);
+    /**
+     * This is where formula-sets are combined.
+     * if the node has and trend and notrend formula, the target formula will be x.trend ? node.formula_trend : valueFormula
+     * Ofcourse this will be for every formulaset that exists in the node
+     * Document formulaset is notrend, formula = notrend
+     * This way it would also be possible to have and formulaset 'orange', 'document' and trend formulasets
+     */
+    var trendformula = node.formula_trend;
+    let valueFormula = node.formula_notrend || node.formula;//notrend is more specific than formula
+    if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
+        valueFormula = 'x.notrend ? ' + valueFormula + ':' + trendformula;
+    }
+
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', valueFormula ? parseFFLFormula(valueFormula, 'none', rowId) : AST.UNDEFINED(), mappedDisplayType);
     uiNode.displayAs = mappedDisplayType;
+    if (!supportedFrequencies[node.frequency || 'document']) {//default frequency is document
+        throw Error('Invalid frequency [' + node + ']');
+    }
     uiNode.frequency = node.frequency;
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);

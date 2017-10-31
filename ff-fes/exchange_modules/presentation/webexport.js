@@ -11,7 +11,7 @@ function WebExport() {
 WebExport.prototype.parse = function(webExport) {
     throw new Error('Not yet supported');
 }
-var counter = 0;
+var counter = 1;
 
 function LMETree(name, workbook) {
     this.name = name;
@@ -23,7 +23,8 @@ var repeats = {
     undefined: [3, 1],
     none: [1, 3],
     column: [3, 1],
-    document: [1, 3]
+    document: [1, 3],
+    timeline: [1, 3]
 }
 LMETree.prototype.addNode = function(node, columns) {
 
@@ -66,6 +67,11 @@ LMETree.prototype.addNode = function(node, columns) {
             });
         });
     }
+    /**
+     * This is duplicate of above, to support title, visible etc for now.
+     * Values are traditionally not supposed to have title and visible properties.
+     * They are arranged by the row, but it does not seem to affect performance.
+     */
     columns.forEach(function(column) {
         //temp check, seems to proxy multiple times.
         let rval, vcount;
@@ -97,7 +103,10 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     var lmeTree = new LMETree(modelName, workbook);
     workbook.visitProperties(rootNode, function(node) {
         if (node !== rootNode) {
-            lmeTree.addNode(node, ['title', 'value', 'visible', 'entered', 'locked', 'required'])
+            lmeTree.addNode(
+                node,
+                ['title', 'value', 'visible', 'entered', 'locked', 'required']
+            )
         }
     })
     return lmeTree;

@@ -11,6 +11,9 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "fes-js": "file:../ff-fes",
+    "ff-math": "file:../ff-math",
+    "ff-log": "file:../ff-log",
     "bitbucket-server-nodejs": "^2.11.4",
     "body-parser": "^1.17.2",
     "browserify": "^14.4.0",
@@ -22,7 +25,6 @@
     "exceljs": "^0.6.2",
     "express": "^4.16.2",
     "express-favicon": "^2.0.0",
-    "ff-log": "^1.0.20",
     "fs-writefile-promise": "^2.0.0",
     "github-auth": "^1.0.1",
     "http-proxy": "^1.16.2",

@@ -2,12 +2,7 @@
   "name": "ff-fes",
   "version": "1.0.7",
   "description": "ff-fes",
-  "devDependencies": {
-    "ff-log": "^1.0.20",
-    "jsdom": "^8.1.0",
-    "json-stringify": "^1.0.0",
-    "jsonml-stringify": "^1.0.1"
-  },
+  "devDependencies": {},
   "main": "ff-fes.js",
   "dependencies": {
     "escodegen": "^1.8.0",

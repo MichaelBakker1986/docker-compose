@@ -63,6 +63,7 @@ FormulaInfo.prototype.addFormula = function(formula) {
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
 }
+
 function variableName(name) {
     return name.replace(/^[^_]+_([\w]*_\w+)$/gmi, '$1');
 }
@@ -103,3 +104,4 @@ LMEParser.prototype.deParse = function(rowId, workbook) {
     }, 2);
 }
 SolutionFacade.addParser(LMEParser.prototype);
+exports.LMEParser = LMEParser.prototype

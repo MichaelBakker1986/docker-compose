@@ -6,6 +6,7 @@ var apiimpl = require('./apiimpl');
 var DBConn = require('./DBConnector')
 var Promise = require('promise')
 var Respond = new apiimpl(DBConn);
+var astu = require('ast-node-utils')
 
 /**
  * server:port to -> @apiimpl  Generic pass-through REST-api
@@ -35,6 +36,7 @@ function respond(req, res, next) {
     //not part of the Async pattern
     next();
 }
+
 var server = restify.createServer({
     formatters: {
         'application/json': function(req, res, body, cb) {
@@ -81,5 +83,23 @@ server.listen(port, function() {
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildGender/0/1/Girl')
 });
 
+'use strict';
 
+var SwaggerExpress = require('swagger-express-mw');
+module.exports = server; // for testing
+
+var config = {
+    appRoot: __dirname // required config
+};
+SwaggerExpress.create(config, function(err, swaggerExpress) {
+    if (err) {
+        throw err;
+    }
+    // install middleware
+    swaggerExpress.register(server);
+
+    if (swaggerExpress.runner.swagger.paths['/hello']) {
+        console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
+    }
+});
 //variable/QRoot/tuple/0/column/2017

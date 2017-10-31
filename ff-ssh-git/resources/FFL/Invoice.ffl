@@ -19,7 +19,7 @@ model Invoice uses BaseModel
             datatype: choice;
             frequency: document;
             choices:  "€:Euro (€)|$:US Dollar ($)|£:British Pound (£)|CAD $:Canadian Dollar ($)|₹:Indian Rupee (₹)|kr:Norwegian krone (kr)";
-            formula: '€';
+            formula: "€";
         }
         tuple items
         {
@@ -35,7 +35,7 @@ model Invoice uses BaseModel
             {
                 datatype: string;
                 frequency: document;
-                formula: 'Beschrijving';
+                formula: "Beschrijving";
             }
             variable cost
             {
@@ -52,20 +52,20 @@ model Invoice uses BaseModel
         {
             datatype: string;
             frequency: document;
-            formula: '€';
+            formula: "€";
         }
         variable tax
         {
             datatype: string;
             frequency: document;
-            title: 'Tax(\u0025)\u003A';
+            title: "Tax(\u0025)\u003A";
             formula: 13.00;
         }
         variable invoice_number
         {
             datatype: number;
             frequency: document;
-            title: 'Invoice';
+            title: "Invoice";
             formula: 10;
         }
         variable customer_info
@@ -76,31 +76,31 @@ model Invoice uses BaseModel
             {
                 datatype: string;
                 frequency: document;
-                formula: 'Mr. John Doe';
+                formula: "Mr. John Doe";
             }
             variable web_link
             {
                 datatype: string;
                 frequency: document;
-                formula: 'John Doe Designs Inc.';
+                formula: "John Doe Designs Inc.";
             }
             variable address1
             {
                 datatype: string;
                 frequency: document;
-                formula: '1 Infinite Loop';
+                formula: "1 Infinite Loop";
             }
             variable address2
             {
                 datatype: string;
                 frequency: document;
-                formula: 'Cupertino, California, US';
+                formula: "Cupertino, California, US";
             }
             variable postal
             {
                 datatype: string;
                 frequency: document;
-                formula:  '90210';
+                formula:  "90210";
             }
         }
         variable company_info
@@ -111,44 +111,44 @@ model Invoice uses BaseModel
             {
                 datatype: string;
                 frequency: document;
-                formula: 'Mr. John Doe';
+                formula: "Mr. John Doe";
             }
             variable company_web_link
             {
                 datatype: string;
                 frequency: document;
-                formula: 'John Doe Designs Inc.';
+                formula: "John Doe Designs Inc.";
             }
             variable company_address1
             {
                 datatype: string;
                 frequency: document;
-                formula: '1 Infinite Loop';
+                formula: "1 Infinite Loop";
             }
             variable company_address2
             {
                 datatype: string;
                 frequency: document;
-                formula: 'Cupertino, California, US';
+                formula: "Cupertino, California, US";
             }
             variable company_postal
             {
                 datatype: string;
                 frequency: document;
-                formula:  '90210';
+                formula:  "90210";
             }
         }
         variable invoiceSubTotal
         {
             datatype: string;
-            title: 'Sub Total';
+            title: "Sub Total";
             frequency: document;
             formula: TupleSum(qrtTax);
         }
         variable calculateGrandTotal
         {
             datatype: string;
-            title: 'Grand Total:';
+            title: "Grand Total:";
             frequency: document;
             formula: calculateTax + invoiceSubTotal;
         }

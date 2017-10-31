@@ -6,12 +6,12 @@
   "main": "index.js",
   "dependencies": {
     "ast-node-utils": "file:ast-node-utils",
+    "ff-log": "file:ff-log",
+    "ff-fes": "file:ff-fes",
+    "ff-formulajs": "file:ff-formulajs",
     "concurrently": "^3.5.0",
     "escodegen": "^1.9.0",
     "esprima": "^4.0.0",
-    "ff-fes": "^1.0.1",
-    "ff-formulajs": "^1.0.1",
-    "ff-log": "file:ff-log",
     "ff-math": "file:ff-math",
     "jqmath": "^0.4.8",
     "js-longest-repeated-substring": "^1.0.3",
@@ -19,16 +19,13 @@
   },
   "devDependencies": {
     "ff-fes-xlsx": "^1.0.2",
-    "pre-commit": "^1.2.2",
-    "promise": "^7.3.1",
-    "tracer": "^0.8.11",
-    "xlsx": "^0.9.3"
+    "pre-commit": "^1.2.2"
   },
   "pre-commit": [
     "test"
   ],
   "scripts": {
-    "install": "concurrently \"cd ff-fes-xlsx && npm install\" \"cd ff-fes && npm install\" \"cd lme && npm install\" \"cd ff-formulajs && npm install\" \"cd demo-apps/angular-demo && npm install\" \"cd demo-apps/adminlte && npm install\" \"cd ff-ssh-git && npm install\" \"cd restapi && npm install\"",
+    "install": "concurrently \"cd ff-fes-xlsx && npm install\" \"cd ff-fes && npm install\" \"cd lme && npm install\" \"cd ff-formulajs && npm install\" \"cd demo-apps/angular-demo && npm install\" \"cd demo-apps/adminlte && npm install\" \"cd ff-ssh-git && npm install\" \"cd lme-api && npm install\"",
     "test": "concurrently \"cd ff-fes-xlsx && npm test\" \"cd ff-fes && npm test\" \"cd lme-model-tests && npm test\" \"cd lme && npm test\"",
     "start": "node lme/update.js"
   },
@@ -37,7 +34,7 @@
     "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
   },
   "keywords": [
-    "fesjs"
+    "lme"
   ],
   "author": "michael.bakker",
   "license": "ISC"

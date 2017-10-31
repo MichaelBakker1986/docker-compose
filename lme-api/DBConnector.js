@@ -1,7 +1,7 @@
 //simple database mock.
 var storedValues = {}
 module.exports = {
-    getUserContext: function (contextId) {
+    getUserContext: function(contextId) {
         if (storedValues[contextId] == undefined) {
             storedValues[contextId] = {
                 contextId: contextId,

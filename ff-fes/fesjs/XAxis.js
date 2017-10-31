@@ -45,6 +45,7 @@ var headers = {
         title: 'document'
     }
 }
+
 function calculateCalculationDocument(data) {
     // console.time('initialize_xAxis');
     this.tContext = data;
@@ -83,13 +84,13 @@ function calculateCalculationDocument(data) {
      // i will pass trouhg the engine as scope..
      return variable.evaluated[(formulasetsCount * fIndex) + this.f](variable, vars, hIndex, this);
      }*/
-    var dummyColumn = {
+    var infinitColumn = {
         hash: 0,
         prevTl: undefined,
     };
-    dummyColumn.f = 0;
-    dummyColumn.prev = dummyColumn;
-    // dummyColumn.prevTl = dummyColumn;
+    infinitColumn.f = 0;
+    infinitColumn.prev = infinitColumn;
+    // infinitColumn.prevTl = infinitColumn;
     var timelineSize = data.time.timelineSize;
     var timelineMultiplier = data.time.timelineMultiplier;
     var columnMultiplier = data.time.columnMultiplier;
@@ -131,9 +132,10 @@ function calculateCalculationDocument(data) {
         };
         layout = layout.children[0];
     }
+
     // tricky recursion here, just debug it.. too many to explain
     function nestRecursive(parent, object, offset, func) {
-        object.forEach(function (child) {
+        object.forEach(function(child) {
             child.parent = parent;
             var tempincrease = child.size;
             var no = 0;
@@ -151,7 +153,7 @@ function calculateCalculationDocument(data) {
     }
 
     function extractBaseChildren(child, array) {
-        child.sibling.forEach(function (innerchild) {
+        child.sibling.forEach(function(innerchild) {
             var foundChild = templateindexed[innerchild];
             if (foundChild.sibling == undefined) {
                 array.push(innerchild);
@@ -166,7 +168,7 @@ function calculateCalculationDocument(data) {
     // make new column objects
     // be aware the values from child in here are temporally from transitive nature. U cannot keep references since
     // they will change in future. Presumably to the last one...
-    nestRecursive(data.layout, data.layout.children, 0, function (child) {
+    nestRecursive(data.layout, data.layout.children, 0, function(child) {
         // console.info(child.no);
         // actual element
         var newElement = {
@@ -215,6 +217,7 @@ function calculateCalculationDocument(data) {
         viewmodes[child.name].cols.push(newElement);
         templateindexed[newElement.hash] = newElement;
     });
+
     // convert template column index into real index
     function calculateIndex(timelineId, columnId) {
         var columnId = (columnId * columnMultiplier);
@@ -247,7 +250,7 @@ function calculateCalculationDocument(data) {
                 var columnEntriesForTimeline = currentviewmode.columns[tId];
                 var metadata = currentviewmode.cols[cId];
                 var columnId = calculateIndex(tId, metadata.hash);
-                var previousColumn = (cId == 0 ? dummyColumn : columnEntriesForTimeline[columnEntriesForTimeline.length - 1]);
+                var previousColumn = (cId == 0 ? infinitColumn : columnEntriesForTimeline[columnEntriesForTimeline.length - 1]);
                 var previousTimelineColumn = (tId == 0 ? undefined : columnEntries[tId - 1][columnEntriesForTimeline.length]);
                 var columnElement = {
                     header: headers.columns,
@@ -283,7 +286,7 @@ function calculateCalculationDocument(data) {
                 var entree = currentviewmode.columns[tId][cId];
                 entree.last = columnEntriesForTimeline[columnEntriesForTimeline.length - 1];
                 entree.first = columnEntriesForTimeline[0];
-                entree.next = (cId == (columnslength - 1)) ? dummyColumn : columnEntriesForTimeline[cId + 1];
+                entree.next = (cId == (columnslength - 1)) ? infinitColumn : columnEntriesForTimeline[cId + 1];
                 var metadata = currentviewmode.cols[cId];
                 entree.formula = metadata.period;
                 if (metadata.agg != undefined) {
@@ -296,7 +299,7 @@ function calculateCalculationDocument(data) {
                         title: 'timelineAgg'
                     };
                     entree.aggcols = [];
-                    metadata.sibling.forEach(function (childid) {
+                    metadata.sibling.forEach(function(childid) {
                         var childColId = calculateIndex(tId, childid);
                         entree.aggcols.push(indexed[childColId]);
                     });
@@ -348,12 +351,12 @@ function calculateCalculationDocument(data) {
                         var tempatechilds = template.allchildren;
                         var aggentree = indexed[calculateIndex(tId, template.hash)];
                         entree[aggtype] = aggentree;
-                        entree['prev' + aggtype] = aggentree.prev == undefined ? dummyColumn : aggentree.prev;
-                        entree['previn' + aggtype] = agg.prevme == undefined ? dummyColumn : indexed[calculateIndex(tId, agg.prevme)];
+                        entree['prev' + aggtype] = aggentree.prev == undefined ? infinitColumn : aggentree.prev;
+                        entree['previn' + aggtype] = agg.prevme == undefined ? infinitColumn : indexed[calculateIndex(tId, agg.prevme)];
                         entree['isinfirst' + aggtype] = agg.prevme == undefined;
                         var prevagg = aggentree.prev;
-                        entree['lastinprev' + aggtype] = (prevagg.hash == 0) ? dummyColumn : prevagg.lastchild;
-                        entree['firstinprev' + aggtype] = (prevagg.hash == 0) ? dummyColumn : prevagg.firstchild;
+                        entree['lastinprev' + aggtype] = (prevagg.hash == 0) ? infinitColumn : prevagg.lastchild;
+                        entree['firstinprev' + aggtype] = (prevagg.hash == 0) ? infinitColumn : prevagg.firstchild;
                         entree['lastin' + aggtype] = prevagg;
                         var firstEntree = indexed[calculateIndex(tId, tempatechilds[0])];
                         entree['first' + aggtype] = firstEntree;
@@ -376,11 +379,17 @@ function calculateCalculationDocument(data) {
     this.indexed = indexed;
     templateindexed = undefined;
     tracer.debug('Created Xaxis for ' + data.time.columnSize + ' columns on ' + timelineSize + ' timelines ');
-    //console.timeEnd('initialize_xAxis');
+
+    /**
+     * Assign references to the infinit column
+     */
+    infinitColumn.doc = entree.doc;
     return viewmodes;
 }
+
 function CalculationDocument() {
 }
+
 CalculationDocument.prototype = calculateCalculationDocument(importData);
 // NodeJS support..
 // 25ms for 134col/5timelines
