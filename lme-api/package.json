@@ -11,6 +11,7 @@
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
+    "esprima": "^4.0.0",
     "express": "~4.14.1",
     "ff-fes": "file:../ff-fes",
     "ff-ssh-git": "file:../ff-ssh-git",
@@ -21,7 +22,8 @@
     "promise": "^7.1.1",
     "restify": "^6.2.3",
     "serve-favicon": "~2.3.2",
-    "swagger-express-mw": "^0.7.0"
+    "swaggerize-express": "^4.0.5",
+    "swaggerize-ui": "^1.0.1"
   },
   "devDependencies": {},
   "license": "MIT"

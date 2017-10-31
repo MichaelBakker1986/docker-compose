@@ -1,18 +1,39 @@
 process.loglevel = 'info'
+var http = require('http');
 var log = require('ff-log');
 log.info('Startup ff-restapi')
-var restify = require('restify');
+var express = require('express');
 var apiimpl = require('./apiimpl');
 var DBConn = require('./DBConnector')
+var swaggerize = require('swaggerize-express');
 var Promise = require('promise')
 var Respond = new apiimpl(DBConn);
-var astu = require('ast-node-utils')
+var app = express();
+var server = http.createServer(app);
+var swaggerUi = require('swaggerize-ui');
 
 /**
- * server:port to -> @apiimpl  Generic pass-through REST-api
- * Generic error handling
- * Generic request logging
- * Generic async pattern
+ * @swagger
+ * path: /login
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Login with username and password
+ *      notes: Returns a user based on username
+ *      responseClass: User
+ *      nickname: login
+ *      consumes:
+ *        - text/html
+ *      parameters:
+ *        - name: username
+ *          description: Your username
+ *          paramType: query
+ *          required: true
+ *          dataType: string
+ *        - name: password
+ *          description: Your password
+ *          paramType: query
+ *          required: true
+ *          dataType: string
  */
 function respond(req, res, next) {
     //handle request Async by default, create Promise, result when done.
@@ -37,21 +58,31 @@ function respond(req, res, next) {
     next();
 }
 
-var server = restify.createServer({
-    formatters: {
+app.use('/docs', swaggerUi({
+    docs: '/api-docs' // from the express route above.
+}));
+/**
+ * server:port to -> @apiimpl  Generic pass-through REST-api
+ * Generic error handling
+ * Generic request logging
+ * Generic async pattern
+ */
+
+/*var server = restify.createServer({
+    /!*formatters: {
         'application/json': function(req, res, body, cb) {
             res.setHeader('Content-Type', 'application/json');
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Length");
             res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             res.header("Access-Control-Allow-Credentials", "true");
-            var stringify = JSON.stringify(body, null, 2);
-            res.setHeader('Content-Length', Buffer.byteLength(stringify));
-            return cb(null, stringify);
+            //var stringify = JSON.stringify(body, null, 2);
+            // res.setHeader('Content-Length', Buffer.byteLength(stringify));
+            // return cb(null, stringify);
         }
-    },
+    },*!/
     name: 'ff-restapi'
-});
+});*/
 /**
  * UserName/value/MaxNrCompensatedHoursOutofSchoolCare/101
  * @:context       - (any context to identify the process  username/processid/requestId
@@ -62,15 +93,15 @@ var server = restify.createServer({
  * @:value         - (new user value)
  */
 //Adana Twins - Strange (Acid Pauli & NU Remix) (Official Video) | Exploited
-server.get('/:context/:function/:variable', respond);
-server.get('/:context/:function', respond);
-server.get('/:context/:function/:variable/:value', respond);
-server.get('/:context/:function/:variable/:columncontext/:value', respond);
-server.get('/:context/:function/:variable/:columncontext/:tupleindex/:value', respond);
+app.get('/:context/:function/:variable', respond);
+app.get('/:context/:function', respond);
+app.get('/:context/:function/:variable/:value', respond);
+app.get('/:context/:function/:variable/:columncontext/:value', respond);
+app.get('/:context/:function/:variable/:columncontext/:tupleindex/:value', respond);
 var port = 8085;
-server.pre(restify.pre.userAgentConnection());
+//server.pre(restify.pre.userAgentConnection());
 server.listen(port, function() {
-    log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
+    //log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/?var=KSP_Q_ROOT&Incomplete')
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Q_ROOT/Complete')
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user2/value/KSP_Q_ROOT/110')
@@ -83,23 +114,13 @@ server.listen(port, function() {
     log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildGender/0/1/Girl')
 });
 
-'use strict';
+app.use(swaggerize({
+    api: require('./api.yml'),
+    docspath: '/api-docs',
+    handlers: './api'
+}));
 
-var SwaggerExpress = require('swagger-express-mw');
-module.exports = server; // for testing
-
-var config = {
-    appRoot: __dirname // required config
-};
-SwaggerExpress.create(config, function(err, swaggerExpress) {
-    if (err) {
-        throw err;
-    }
-    // install middleware
-    swaggerExpress.register(server);
-
-    if (swaggerExpress.runner.swagger.paths['/hello']) {
-        console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
-    }
+server.listen(port, 'localhost', function() {
+    app.swagger.api.host = server.address().address + ':' + server.address().port;
 });
-//variable/QRoot/tuple/0/column/2017
+

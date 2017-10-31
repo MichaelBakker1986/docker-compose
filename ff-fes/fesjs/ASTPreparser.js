@@ -88,7 +88,9 @@ var simplified = {
         //look into delete and undefined, we better use undefined since its quicker.
         node.callee = undefined;
         node.arguments = undefined;
-        log.debug('[%s] CASE parsed into: [%s]', formulaInfo.name, escodegen.generate(node));
+        if (log.DEBUG) {
+            log.debug('[%s] CASE parsed into: [%s]', formulaInfo.name, escodegen.generate(node));
+        }
     },
     //convert traditional If(q,a,b) into q?a:b, skip the entire Callee
     If: function(formulaInfo, node) {
