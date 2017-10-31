@@ -5,12 +5,7 @@
   "description": "fesjs",
   "main": "index.js",
   "dependencies": {
-    "ast-node-utils": "file:ast-node-utils",
-    "ff-log": "file:ff-log",
-    "ff-fes": "file:ff-fes",
-    "ff-formulajs": "file:ff-formulajs",
-    "concurrently": "^3.5.0",
-    "ff-math": "file:ff-math"
+    "concurrently": "^3.5.0"
   },
   "devDependencies": {
     "pre-commit": "^1.2.2"
