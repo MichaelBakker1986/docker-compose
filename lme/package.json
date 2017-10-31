@@ -11,7 +11,7 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "fes-js": "file:../ff-fes",
+    "ff-fes": "file:../ff-fes",
     "ff-math": "file:../ff-math",
     "ff-log": "file:../ff-log",
     "bitbucket-server-nodejs": "^2.11.4",
