@@ -7,6 +7,7 @@
     "start": "node ff-fes-app.js"
   },
   "dependencies": {
+    "ff-log": "file:../ff-log",
     "ast-node-utils": "file:../ast-node-utils",
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
