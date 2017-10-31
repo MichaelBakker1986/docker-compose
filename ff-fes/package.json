@@ -5,10 +5,12 @@
   "devDependencies": {},
   "main": "ff-fes.js",
   "dependencies": {
-    "escodegen": "^1.8.0",
-    "esprima": "^2.7.2",
+    "bessel": "^1.0.2",
+    "escodegen": "^1.9.0",
+    "esprima": "^4.0.0",
     "formulajs": "^1.0.8",
-    "stack-adt": "^0.2.3"
+    "stack-adt": "^0.2.3",
+    "voc": "^1.0.0"
   },
   "repository": {},
   "scripts": {
