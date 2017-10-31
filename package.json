@@ -10,8 +10,6 @@
     "ff-fes": "file:ff-fes",
     "ff-formulajs": "file:ff-formulajs",
     "concurrently": "^3.5.0",
-    "esprima": "^4.0.0",
-    "escodegen": "^1.9.0",
     "ff-math": "file:ff-math",
     "jqmath": "^0.4.8",
     "js-longest-repeated-substring": "^1.0.3",
