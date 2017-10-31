@@ -5,6 +5,7 @@
   "devDependencies": {},
   "main": "ff-fes.js",
   "dependencies": {
+    "ff-log": "file:../ff-log",
     "bessel": "^1.0.2",
     "escodegen": "^1.9.0",
     "esprima": "^4.0.0",
