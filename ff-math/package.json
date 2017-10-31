@@ -4,6 +4,9 @@
   "private": true,
   "description": "finan math",
   "main": "ff-math.js",
+  "dependencies": {
+    "ff-log": "^1.0.20"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
