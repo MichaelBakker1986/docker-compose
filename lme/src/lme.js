@@ -4,9 +4,9 @@ MatrixLookup = function() {
 }
 require('../../ff-fes/exchange_modules/lme/lmeparser');
 require('../../ff-fes/exchange_modules/jsonvalues/jsonvalues');
-require('ff-math');
+require('../../ff-math');
 
-var fesjsApi = require('ff-fes').fesjs;
+var fesjsApi = require('../../ff-fes').fesjs;
 fesjsApi.addFunctions(require("../../ff-formulajs/ff-formulajs").formulajs);
 
 function LME() {

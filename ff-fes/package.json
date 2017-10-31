@@ -11,8 +11,7 @@
     "esprima": "^4.0.0",
     "ff-log": "^1.0.20",
     "formulajs": "^1.0.8",
-    "stack-adt": "^0.2.3",
-    "voc": "^1.0.0"
+    "stack-adt": "^0.2.3"
   },
   "repository": {},
   "scripts": {

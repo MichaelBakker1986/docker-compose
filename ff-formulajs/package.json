@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "formulajs": "^1.0.8",
-    "ff-log": "file:../ff-log"
+    "ff-log": "^1.0.21"
   }
 }

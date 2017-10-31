@@ -222,8 +222,4 @@ function testVariable(variableName, level, column) {
 for (var i = 0; i < 18; i++) {
     testVariable('ActualChildCareCosts', 1, i);
 }
-//CostsForSecondaryEducation,CostsYearFiveSixSeven,CostsYearOneFour
 log.info('done')
-//require('./totalyearlycosttest')
-//test core functionality
-// require('../ff-fes/test/RunAllTest')

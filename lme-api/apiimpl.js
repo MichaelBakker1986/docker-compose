@@ -4,7 +4,7 @@ var DBConnector;
 var apiimpl = function(DBConnectorArg) {
     DBConnector = DBConnectorArg;
 }
-var fesjsApi = require('ff-fes').fesjs;
+var fesjsApi = require('../ff-fes').fesjs;
 var ModelListener = require('ff-ssh-git').ModelListener;
 var modelService = new ModelListener();
 var modelNames = []

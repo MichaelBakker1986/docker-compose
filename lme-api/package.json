@@ -7,21 +7,19 @@
     "start": "node ff-fes-app.js"
   },
   "dependencies": {
-    "ff-log": "file:../ff-log",
+    "ff-log": "^1.0.21",
     "ast-node-utils": "file:../ast-node-utils",
+    "ff-ssh-git": "file:../ff-ssh-git",
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
     "esprima": "^4.0.0",
     "express": "~4.14.1",
-    "ff-fes": "file:../ff-fes",
-    "ff-ssh-git": "file:../ff-ssh-git",
     "glob": "^7.1.2",
     "jade": "~1.11.0",
     "morgan": "~1.7.0",
     "mysql": "^2.13.0",
     "promise": "^7.1.1",
-    "restify": "^6.2.3",
     "serve-favicon": "~2.3.2",
     "swaggerize-express": "^4.0.5",
     "swaggerize-ui": "^1.0.1"

@@ -11,9 +11,7 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "ff-fes": "file:../ff-fes",
-    "ff-math": "file:../ff-math",
-    "ff-log": "file:../ff-log",
+    "ff-log": "^1.0.21",
     "bitbucket-server-nodejs": "^2.11.4",
     "body-parser": "^1.17.2",
     "browserify": "^14.4.0",
