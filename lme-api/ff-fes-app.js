@@ -8,7 +8,6 @@ var log = require('ff-log');
 var fs = require('fs')
 var Promise = require('promise')
 var bodyParser = require('body-parser');
-var static = require('static-nocase')
 app.use(bodyParser.json()); // To support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ // To support URL-encoded bodies
     extended: true,
