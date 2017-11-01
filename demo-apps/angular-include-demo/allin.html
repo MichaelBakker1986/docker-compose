@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lmeapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular-include-demo</title>
+</head>
+<body ng-controller="lmeController">
+<div>
+    <h1>Show all titles in model {{this.MODEL.name}}</h1>
+    <div ng-repeat="figure in this">
+        <span>{{figure.title}}</span>
+    </div>
+</div>
+<script type="application/javascript" src="../../lme/public/json/ai_KSP.js"></script>
+</body>
+</html>

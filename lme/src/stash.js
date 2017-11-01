@@ -13,10 +13,11 @@ const write = require('fs-writefile-promise/lib/node7')
 
 class Stash {
 
+
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
         write('./public/json/' + name + '.ffl', data).then(write('./public/json/' + name + '_canvas.json', lme)).then(function(filename) {
-            exec('node src/exportLME_FFL.js ' + name).then((result) => {
+            exec('node src/exportLME_FFL.js ' + name).then(exec('node src/exportLME_FFL_angular.js ' + name)).then((result) => {
                 if (develop) {
                     log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                     return "develop mode";

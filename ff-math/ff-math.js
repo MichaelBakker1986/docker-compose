@@ -1,4 +1,4 @@
-var logger = require('ff-log')
+var logger = require('../ff-log')
 var jsMath = require('./jsMath.json')
 var entries = {};
 

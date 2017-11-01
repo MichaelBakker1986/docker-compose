@@ -3,12 +3,10 @@ const app = require('express')();
 const swaggerUi = require('swaggerize-ui');
 var swaggerJSDoc = require('swagger-jsdoc');
 var pretty = require('express-prettify');
-
 const port = 8085;
 app.set('json spaces', 4);
 var log = require('ff-log');
 var fs = require('fs')
-log.info('Startup ff-restapi')
 var apiimpl = require('./apiimpl');
 var Promise = require('promise')
 var bodyParser = require('body-parser');
