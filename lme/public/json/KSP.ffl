@@ -54,7 +54,7 @@ model MVO uses BaseModel
         frequency: document;
         data_options: unscalable;
         formula: "";
-        title: "FES_LAYOUfhghgf321321321321312bvhgfhT123";
+        title: "FES_LAYOUT";
         visible: 1;
         options_title: locked;
       }
