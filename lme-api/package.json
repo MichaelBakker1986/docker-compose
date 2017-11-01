@@ -22,6 +22,7 @@
     "promise": "^7.1.1",
     "restify": "^6.2.3",
     "serve-favicon": "~2.3.2",
+    "static-nocase": "0.0.3",
     "swagger-jsdoc": "^1.9.7",
     "swagger-restify": "^1.0.1",
     "swaggerize-express": "^4.0.5",
