@@ -161,7 +161,7 @@
         <table ng-click="clicked($event)" class="lmetable">
             <tr ng-repeat="f in LME_MODEL.nodes" ng-if="f.visible">
                 <td><i class="fa fa-caret-right"></i></td>
-                <td class="txttd"><span contenteditable="true" class="text" ng-bind="f.title"></span></td>
+           <td class="txttd"><span contenteditable="true" class="text" ng-bind="f.title"></span></td>
                 <td ng-click="goto(f)"><i class="fa fa-info"></i></td>
                 <td ng-click="goto(f)"><i class="fa fa-link"></i></td>
                 <td ng-repeat="cv in f.cols" colspan="{{f.colspan}}">
