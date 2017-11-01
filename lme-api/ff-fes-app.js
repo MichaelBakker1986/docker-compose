@@ -33,6 +33,6 @@ app.get('/api-docs', function(req, res) {
 app.listen(port, function() {
     require('dns').lookup(hostname, (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
-        console.info('<a href="' + domain + '/docs/?url=%2Fapi-docs#!/default/value">Swagger API docs</a><span> up.</span></br>\n');
+        console.info('<a href="' + domain + 'docs/?url=%2Fapi-docs#!/default/value">Swagger API docs</a><span> up.</span></br>\n');
     })
 });
