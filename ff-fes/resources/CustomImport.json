@@ -2,11 +2,11 @@
   "formulasets": [
     {
       "formulasetId": 0,
-      "name": "title"
+      "name": "notrend"
     },
     {
       "formulasetId": 1,
-      "name": "sector"
+      "name": "trend"
     },
     {
       "formulasetId": 2,
@@ -14,11 +14,11 @@
     },
     {
       "formulasetId": 3,
-      "name": "trend"
+      "name": "sector"
     },
     {
       "formulasetId": 4,
-      "name": "notrend"
+      "name": "title"
     },
     {
       "formulasetId": 5,

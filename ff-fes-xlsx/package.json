@@ -13,7 +13,8 @@
   "dependencies": {
     "deasync": "^0.1.10",
     "exceljs": "^0.6.2",
-    "ff-log": "^1.0.20",
-    "promise": "^8.0.1"
+    "ff-log": "^1.0.21",
+    "promise": "^8.0.1",
+    "tracer": "^0.8.11"
   }
 }

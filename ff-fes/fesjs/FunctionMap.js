@@ -60,13 +60,15 @@ var formulaDecorators = {
         //y,x,z dimensions Tuple,Column,Layer
         //v = enteredValues
         return function(f, x, y, z, v) {
-            //console.info('calling formula ;' + varName)
+            var fname = varName;
+            if (x.dummy){
+                return NA;
+            }
             var hash = x.hash + y.hash + z;
             //check if user entered a value
             if (v[f][hash] === undefined) {
                 var valueOfFunction = innerFunction(f, x, y, z, v);
                 //return function value;
-                //console.info('called:[' + varName + '][' + valueOfFunction + ']')
                 return valueOfFunction;
             }
             //return entered value

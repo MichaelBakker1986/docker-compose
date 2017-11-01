@@ -68,6 +68,8 @@ function fixAll() {
  * returns a FeedBack object
  * TODO: extract validator.
  */
+var mostcommon = {}
+
 function validateImportedSolution() {
     var validateResponse = {
         succes: [],
@@ -119,6 +121,17 @@ function validateImportedSolution() {
                     fix: function() {
                         var deps = Object.keys(formulaInfo.deps);
                         var refs = Object.keys(formulaInfo.refs);
+
+                        formulaInfo.formulaDependencys.forEach(function(dependency) {
+                            const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
+                            try {
+                                FESFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+                            } catch (e) {
+                                // log.error(e)
+                                //NOOP
+                                mostcommon[formulaInfo.name] = isNaN(mostcommon[formulaInfo.name]) ? 1 : mostcommon[formulaInfo.name] + 1
+                            }
+                        })
                         log.warn('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
                             + "DEPS[" + deps.length + "][" + deps + "]\nREFS[" + refs.length + "]:[" + refs + "]"
                         )
@@ -161,6 +174,7 @@ function validateImportedSolution() {
     this.visitSolutionFormulas(formulaFixer);
     validateResponse.valid = validateResponse.error.length === 0;
     validateResponse.fixProblemsInImportedSolution = fixAll;
+    validateResponse.more = mostcommon;
     return validateResponse;
 };
 /**

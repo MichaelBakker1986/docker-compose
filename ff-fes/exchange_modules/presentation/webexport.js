@@ -105,7 +105,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
         if (node !== rootNode) {
             lmeTree.addNode(
                 node,
-                ['title', 'value', 'visible', 'entered', 'locked', 'required']
+                ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint']
             )
         }
     })

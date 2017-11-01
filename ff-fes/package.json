@@ -9,9 +9,10 @@
     "bessel": "^1.0.2",
     "escodegen": "^1.9.0",
     "esprima": "^4.0.0",
-    "ff-log": "^1.0.20",
+    "ff-log": "^1.0.21",
     "formulajs": "^1.0.8",
-    "stack-adt": "^0.2.3"
+    "stack-adt": "^0.2.3",
+    "tracer": "^0.8.11"
   },
   "repository": {},
   "scripts": {

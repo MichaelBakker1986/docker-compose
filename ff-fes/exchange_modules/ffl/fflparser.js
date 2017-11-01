@@ -255,7 +255,7 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
     var trendformula = node.formula_trend;
     let valueFormula = node.formula_notrend || node.formula;//notrend is more specific than formula
     if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
-        valueFormula = 'x.notrend ? ' + valueFormula + ':' + trendformula;
+        valueFormula = 'x.istrend ? ' + trendformula + ':' + valueFormula;
     }
 
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', valueFormula ? parseFFLFormula(valueFormula, 'none', rowId) : AST.UNDEFINED(), mappedDisplayType);

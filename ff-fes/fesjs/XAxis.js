@@ -87,6 +87,7 @@ function calculateCalculationDocument(data) {
     var infinitColumn = {
         hash: 0,
         prevTl: undefined,
+        dummy: true
     };
     infinitColumn.f = 0;
     infinitColumn.prev = infinitColumn;

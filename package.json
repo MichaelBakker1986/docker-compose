@@ -1,8 +1,8 @@
 {
-  "name": "fesjs",
+  "name": "lme-all",
   "private": true,
-  "version": "1.0.0",
-  "description": "fesjs",
+  "version": "2.0.0",
+  "description": "lme-all",
   "main": "index.js",
   "dependencies": {
     "concurrently": "^3.5.0"
@@ -14,7 +14,7 @@
     "test"
   ],
   "scripts": {
-    "install": "concurrently \"cd ff-fes-xlsx && npm install\" \"cd ff-fes && npm install\" \"cd lme && npm install\" \"cd ff-formulajs && npm install\" \"cd demo-apps/angular-demo && npm install\" \"cd demo-apps/adminlte && npm install\" \"cd ff-ssh-git && npm install\" \"cd lme-api && npm install\"",
+    "install": "concurrently \"cd ff-log && npm install\" \"cd lme-api && npm install\" \"cd ff-fes-xlsx && npm install\" \"cd ff-fes && npm install\" \"cd lme && npm install\" \"cd ff-formulajs && npm install\" \"cd demo-apps/angular-demo && npm install\" \"cd demo-apps/adminlte && npm install\" \"cd ff-ssh-git && npm install\" \"cd lme-api && npm install\" \"cd ff-math && npm install\" \"cd lme-model-tests && npm install\"",
     "test": "concurrently \"cd ff-fes-xlsx && npm test\" \"cd ff-fes && npm test\" \"cd lme-model-tests && npm test\" \"cd lme && npm test\"",
     "start": "node lme/update.js"
   },
