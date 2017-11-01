@@ -161,7 +161,10 @@
         <table ng-click="clicked($event)" class="lmetable">
             <tr ng-repeat="f in LME_MODEL.nodes" ng-if="f.visible">
                 <td><i class="fa fa-caret-right"></i></td>
-<td>
+           <td class="txttd"><span contenteditable="true" class="text" ng-bind="f.title"></span></td>
+                <td ng-click="goto(f)"><i class="fa fa-info"></i></td>
+                <td ng-click="goto(f)"><i class="fa fa-link"></i></td>
+                <td ng-repeat="cv in f.cols" colspan="{{f.colspan}}">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
                         <input type="text" class="form-control" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder="">
