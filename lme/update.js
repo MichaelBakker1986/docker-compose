@@ -93,7 +93,7 @@ httpServer.listen(port, () => {
 
 function testAndDeploy() {
     log('Running tests.', 'info')
-    const command = 'cd .. && npm test'
+    const command = 'cd .. && npm install && npm test'
     exec(command).then(function(result) {
         log('Tests passed deploying stack ');
         //start sub processes

@@ -1,40 +1,27 @@
-process.loglevel = 'info'
 var http = require('http');
-var log = require('ff-log');
-log.info('Startup ff-restapi')
-var express = require('express');
-var apiimpl = require('./apiimpl');
-var DBConn = require('./DBConnector')
-var swaggerize = require('swaggerize-express');
-var Promise = require('promise')
-var Respond = new apiimpl(DBConn);
-var app = express();
-var server = http.createServer(app);
-var swaggerUi = require('swaggerize-ui');
+const app = require('express')();
+const swaggerUi = require('swaggerize-ui');
+var swaggerJSDoc = require('swagger-jsdoc');
+var pretty = require('express-prettify');
 
-/**
- * @swagger
- * path: /login
- * operations:
- *   -  httpMethod: POST
- *      summary: Login with username and password
- *      notes: Returns a user based on username
- *      responseClass: User
- *      nickname: login
- *      consumes:
- *        - text/html
- *      parameters:
- *        - name: username
- *          description: Your username
- *          paramType: query
- *          required: true
- *          dataType: string
- *        - name: password
- *          description: Your password
- *          paramType: query
- *          required: true
- *          dataType: string
- */
+const port = 8085;
+app.set('json spaces', 4);
+var log = require('ff-log');
+var fs = require('fs')
+log.info('Startup ff-restapi')
+var apiimpl = require('./apiimpl');
+var Promise = require('promise')
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json()); // To support JSON-encoded bodies
+app.use(bodyParser.urlencoded({ // To support URL-encoded bodies
+    extended: true,
+}));
+require('./api/store').setup(app)
+app.use('/docs', swaggerUi({
+    docs: '/api-docs' // from the express route above.
+}));
+
 function respond(req, res, next) {
     //handle request Async by default, create Promise, result when done.
     log.info('Call context:[%s] function[%s] variable[%s] columncontext[%s] data[%s]', req.params.context, req.params.function, req.params.variable, req.params.columncontext, req.params.value, req.params.tupleindex)
@@ -58,15 +45,6 @@ function respond(req, res, next) {
     next();
 }
 
-app.use('/docs', swaggerUi({
-    docs: '/api-docs' // from the express route above.
-}));
-/**
- * server:port to -> @apiimpl  Generic pass-through REST-api
- * Generic error handling
- * Generic request logging
- * Generic async pattern
- */
 
 /*var server = restify.createServer({
     /!*formatters: {
@@ -83,6 +61,34 @@ app.use('/docs', swaggerUi({
     },*!/
     name: 'ff-restapi'
 });*/
+
+
+// swagger definition
+var swaggerDefinition = {
+    info: {
+        title: 'Node Swagger API',
+        version: '1.0.0',
+        description: 'Demonstrating how to describe a RESTful API with Swagger',
+    },
+    host: 'localhost:' + port,
+    basePath: '/',
+};
+
+// options for the swagger docs
+var options = {
+    // import swaggerDefinitions
+    swaggerDefinition: swaggerDefinition,
+    // path to the API docs
+    apis: ['./api/*.js'],
+};
+// initialize swagger-jsdoc
+var swaggerSpec = swaggerJSDoc(options);
+// serve swagger
+app.get('/api-docs', function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.json(swaggerSpec);
+});
+
 /**
  * UserName/value/MaxNrCompensatedHoursOutofSchoolCare/101
  * @:context       - (any context to identify the process  username/processid/requestId
@@ -92,35 +98,45 @@ app.use('/docs', swaggerUi({
  * @:tupleindex    - (string name of tuple object)
  * @:value         - (new user value)
  */
-//Adana Twins - Strange (Acid Pauli & NU Remix) (Official Video) | Exploited
+/**
+ * @swagger
+ * /:context/:function/:variable:
+ *   get:
+ *     tags:
+ *       - Puppies
+ *     description: Returns all puppies
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: An array of puppies
+ *         schema:
+ *           $ref: '#/definitions/Puppy'
+ */
 app.get('/:context/:function/:variable', respond);
 app.get('/:context/:function', respond);
 app.get('/:context/:function/:variable/:value', respond);
 app.get('/:context/:function/:variable/:columncontext/:value', respond);
 app.get('/:context/:function/:variable/:columncontext/:tupleindex/:value', respond);
-var port = 8085;
 //server.pre(restify.pre.userAgentConnection());
-server.listen(port, function() {
+app.use(pretty({query: 'pretty'}));
+app.listen(port, function() {
+    require('dns').lookup(require('os').hostname(), (err, add, fam) => {
+        let domain = 'http://' + add + ':' + port + '/';
+        console.info('<a href="' + domain + 'docs">Swagger API docs</a><span> up.</span></br>\n')
+    })
+    //app.swagger.api.host = 'localhost:' + port;
     //log.info('Server startup [' + server.name + ']' + server.server._connectionKey);
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/?var=KSP_Q_ROOT&Incomplete')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Q_ROOT/Complete')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user2/value/KSP_Q_ROOT/110')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildcareContribution/1/200')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildcareContribution')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/context')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Child/0/0/Jip')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildGender/0/0/Boy')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Child/0/1/Janneke')
-    log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildGender/0/1/Girl')
+    /*    log.info('Test path: [%s]', 'http://localhost:' + port + '/docs')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/api-docs')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/?var=KSP_Q_ROOT&Incomplete')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Q_ROOT/Complete')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/user2/value/KSP_Q_ROOT/110')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildcareContribution/1/200')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildcareContribution')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/context')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Child/0/0/Jip')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildGender/0/0/Boy')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_Child/0/1/Janneke')
+        log.info('Test path: [%s]', 'http://localhost:' + port + '/user1/value/KSP_ChildGender/0/1/Girl')*/
 });
-
-app.use(swaggerize({
-    api: require('./api.yml'),
-    docspath: '/api-docs',
-    handlers: './api'
-}));
-
-server.listen(port, 'localhost', function() {
-    app.swagger.api.host = server.address().address + ':' + server.address().port;
-});
-
