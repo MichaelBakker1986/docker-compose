@@ -11,10 +11,10 @@
   "produces": [
     "application/json"
   ],
-  "host": "localhost:8085",
+  "host": "::8085",
   "basePath": "/",
   "paths": {
-    "/{context}/value/": {
+    "/{context}/value/{variable}": {
       "get": {
         "operationId": "value",
         "produces": [
@@ -25,6 +25,12 @@
             "name": "context",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "variable",
+            "in": "path",
+            "required": false,
             "type": "string"
           }
         ],

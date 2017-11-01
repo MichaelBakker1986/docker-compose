@@ -2,26 +2,11 @@ const MatrixStore = require('../MatrixStore').MatrixStore;
 const log = require('ff-log')
 const lmeAPI = require('../LMEImpl').lmeAPI
 
+
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
 
-    /**
-     * UserName/value/MaxNrCompensatedHoursOutofSchoolCare/101
-     * @:context       - (any context to identify the process  username/processid/requestId
-     * @:function      - (value to get and set values)
-     * @:variable      - (account e.g. CREDIT / DEBIT / Q_ROOT)
-     * @:columncontext - (index in a range for corresponding request)
-     * @:tupleindex    - (string name of tuple object)
-     * @:value         - (new user value)
-     */
-    /*app.get('/:context/value', respond);*/
-
-    /*app.get('/:context/:function/:variable', respond);
-    app.get('/:context/:function', respond);
-    app.get('/:context/:function/:variable/:value', respond);
-    app.get('/:context/:function/:variable/:columncontext/:value', respond);
-    app.get('/:context/:function/:variable/:columncontext/:tupleindex/:value', respond);*/
-    app.get('/:contextid/value', function(req, res) {
+    function defaultResponse(req, res) {
         var context = ds.getOrCreate(req.params.contextid);
         res.header("Access-Control-Allow-Origin", "*");
         //handle request Async by default, create Promise, result when done.
@@ -30,7 +15,8 @@ module.exports.setup = function(app) {
                 //resolve context key to stored values
                 var columncontext = parseInt(req.params.columncontext || "0");
                 var tupleindex = req.params.tupleindex;
-                success(lmeAPI.fesGetValue(context, 'KSP_Q_ROOT', columncontext, undefined, undefined))
+                var variablename = req.params.variable === '{variable}' ? undefined : req.params.variable;
+                success(lmeAPI.fesGetValue(context, variablename, columncontext, undefined, undefined))
                 //req.params.variable, parseInt(columncontext), req.params.value ));
             } catch (err) {
                 fail(err);
@@ -55,7 +41,26 @@ module.exports.setup = function(app) {
              return result;
          }*/
         /*  res.json(context)*/
-    });
+    }
+
+    /**
+     * UserName/value/MaxNrCompensatedHoursOutofSchoolCare/101
+     * @:context       - (any context to identify the process  username/processid/requestId
+     * @:function      - (value to get and set values)
+     * @:variable      - (account e.g. CREDIT / DEBIT / Q_ROOT)
+     * @:columncontext - (index in a range for corresponding request)
+     * @:tupleindex    - (string name of tuple object)
+     * @:value         - (new user value)
+     */
+    /*app.get('/:context/value', respond);*/
+
+    /*app.get('/:context/:function/:variable', respond);
+    app.get('/:context/:function', respond);
+    app.get('/:context/:function/:variable/:value', respond);
+    app.get('/:context/:function/:variable/:columncontext/:value', respond);
+    app.get('/:context/:function/:variable/:columncontext/:tupleindex/:value', respond);*/
+    app.get('/:contextid/value/:variable', defaultResponse);
+    app.get('/:contextid/value', defaultResponse);
 };
 
 function prefixVariable(variableName) {
