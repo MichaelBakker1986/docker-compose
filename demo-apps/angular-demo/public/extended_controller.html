@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lmeapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular-include-extended-demo</title>
+</head>
+<body ng-controller="extendedController">
+<div ng-controller="lmeController">
+    <h1>Show all titles in model {{MODEL.name}}</h1>
+    <span>{{TEST}}</span>
+    <div ng-repeat="figure in this">
+        <button ng-click="showTitle(figure)">Button</button>
+        <span>{{figure.title}}</span>
+
+    </div>
+</div>
+<script type="application/javascript" src="http://blfif-tv-tr03.finance.lab:8080/json/ai_KSP.js"></script>
+<script>
+    angular.module('lmeapp').controller('extendedController', function($scope) {
+        $scope.showTitle = function(figure) {
+            alert(figure.title)
+        }
+        $scope.TEST = "Extended Controller"
+    });
+</script>
+</body>
+</html>
