@@ -52,18 +52,18 @@ function update() {
         if (busy) {
             reject('Busy restarting.');
         } else {
-            var startRedeploy = now()
+            var start = now();
             busy = true;
             //npm install && bower install
             var command = developer ? 'echo a' : 'git reset --hard origin/master && git pull && cd .. && npm test';
             exec(command).then((result) => {
                 reDeploy()
-                fulfill('Succesfull redeploy stack in [' + (start-end).toFixed(3) + ']ms');
+                fulfill('Successful redeploy stack in [' + (start - now()).toFixed(3) + ']ms');
             }).catch((err) => {
                 log('Tests failed, reinstalling modules and try again.', 'green');
                 exec('cd .. && npm install && npm test').then(function(result) {
                     reDeploy()
-                    fulfill('Succesfull redeploy stack in [' + (start-end).toFixed(3) + ']ms');
+                    fulfill('Successful redeploy stack in [' + (start - now()).toFixed(3) + ']ms');
                 }).catch((err) => {
                     busy = false;
                     log(err.toString(), 'red');
@@ -104,9 +104,10 @@ httpServer.listen(port, () => {
 
 function testAndDeploy() {
     log('Running tests.', 'info')
+    var start = now();
     const command = 'cd .. && npm install && npm test'
     exec(command).then(function(result) {
-        log('Tests passed deploying stack ');
+        log('Successful deploy stack in [' + (start - now()).toFixed(3) + ']ms');
         //start sub processes
         spawnChild('../demo-apps/angular-demo/angularapp')
         spawnChild('../demo-apps/adminlte/ltelite')
