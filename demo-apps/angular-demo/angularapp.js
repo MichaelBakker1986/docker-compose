@@ -9,6 +9,7 @@ var app = express();
 app.use(require('express-favicon')());
 app.use(compression())
 app.use(serveStatic(__dirname + "/public/"));
+app.use('/showcase', serveStatic(__dirname + "/../showcase/"));
 app.use(serveStatic(__dirname + "/CONFIGURATION/"));
 app.use(serveStatic(__dirname + "/bower_components/"));
 app.use(serveStatic(__dirname + "/../adminlte/dist/"));
@@ -27,6 +28,7 @@ app.listen(port, function() {
         console.info(
             '<a href="http://' + add + ':' + port + '/#model=KSP">Angular Grid example</a><span>|</span>\n' +
             '<a href="http://' + add + ':' + port + '/basic_example.html">Most Basic Angular example</a><span>|</span>\n' +
+            '<a href="http://' + add + ':' + port + '/showcase/">Showcase example</a><span>|</span>\n' +
             '<a href="http://' + add + ':' + port + '/basic_example.html">Extended controller Angular example</a>'
         )
     })
