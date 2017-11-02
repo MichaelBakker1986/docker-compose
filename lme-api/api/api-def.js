@@ -1,3 +1,5 @@
+const swaggerUi = require('swaggerize-ui');
+
 module.exports.setup = function(app) {
     //swagger
     app.use('/docs', swaggerUi({

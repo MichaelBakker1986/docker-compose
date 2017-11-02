@@ -1,6 +1,5 @@
 let express = require('express');
 const app = express();
-const swaggerUi = require('swaggerize-ui');
 var pretty = require('express-prettify');
 const port = 8085;
 var log = require('ff-log');

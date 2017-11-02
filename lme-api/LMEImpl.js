@@ -33,5 +33,4 @@ excelPlugin.initComplete.then(function() {
     modelService.initializeModels();
 })
 fesjsApi.addFunctions(excelPlugin);
-
 exports.lmeAPI = fesjsApi
