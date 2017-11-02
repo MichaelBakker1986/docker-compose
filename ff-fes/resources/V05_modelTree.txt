@@ -1,5 +1,0 @@
-digraph G { 
-rankdir="LR"
-root [shape=record, label="root"];
-undefined -> root;
-}
