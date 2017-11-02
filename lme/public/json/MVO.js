@@ -1252,6 +1252,7 @@ LMETree.prototype.addNode = function(node, columns, treePath) {
     var colspan = repeats[node.frequency][1];
     var rv = {
         id: rowId,
+        type: node.displayAs,
         path: treePath.join('.'),
         ammount: amount,
         colspan: colspan,
