@@ -8,6 +8,7 @@ module.exports.setup = function(app) {
     }));
     // swagger definition
     app.get('/api-docs', function(req, res) {
+        let port = app.get('port');
         let swaggerData = require(__dirname + '/swaggerDef.json');
         require('dns').lookup(hostname, (err, add, fam) => {
             swaggerData.host = add + ':' + port;
