@@ -1273,9 +1273,6 @@ LMETree.prototype.addNode = function(node, columns, treePath) {
                     if (counter !== vcount) {
                         vcount = counter;
                         rval = workbook.get(rowId, column, ammount, 0);
-                        if (typeof(rval) === 'object') {
-                            rval = null;
-                        }
                     }
                     return rval;
                 },
@@ -1301,9 +1298,6 @@ LMETree.prototype.addNode = function(node, columns, treePath) {
                 if (counter !== vcount) {
                     vcount = counter;
                     rval = workbook.get(rowId, column, 0, 0);
-                    if (typeof(rval) === 'object') {
-                        rval = null;
-                    }
                 }
                 return rval;
             },
