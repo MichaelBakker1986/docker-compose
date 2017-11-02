@@ -11,5 +11,7 @@ MVO.importFFL("" + fs.readFileSync(__dirname + '/MVO.ffl'));
 fs.writeFileSync(__dirname + '/MVO.json', MVO.exportLME());
 const nodes = MVO.exportWebModel().nodes;
 
-const [Q_Map03] = [nodes.Q_Map03];
-
+const [Q_MAP01_VRAAG10_MEMO, FES_LAYOUTNR] = [nodes.Q_MAP01_VRAAG10_MEMO, nodes.FES_LAYOUTNR];
+Q_MAP01_VRAAG10_MEMO.value = '1'
+FES_LAYOUTNR.choices;
+var x = FES_LAYOUTNR;
