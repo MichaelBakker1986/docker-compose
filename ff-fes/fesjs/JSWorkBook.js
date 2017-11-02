@@ -254,7 +254,7 @@ JSWorkBook.prototype.tupleIndexForName = function(node, name) {
         return 0;
     }
     var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.tupleDefinitionName)
-    FESFacade.visit(tupleDefinition, function(child) {
+    FESFacade.visit(tupleDefinition, function(child, depth) {
         if (child.tuple) {
             maxTupleCount = Math.max(maxTupleCount, TINSTANCECOUNT(wb.context.values, child.ref));
         }
@@ -267,13 +267,13 @@ JSWorkBook.prototype.tupleIndexForName = function(node, name) {
 JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
     var yax = resolveY(this, y)
     var wb = this;
-    FESFacade.visit(startProperty, function(node) {
+    FESFacade.visit(startProperty, function(node, treeDepth) {
         //find out how many of nodes there are in current yas
         //given y
         //for max tuplecount in current node loop visitor node
         var maxTupleCountForTupleDefinition = maxTupleCountForRow(wb, node);
         for (var tupleCounter = 0; tupleCounter <= maxTupleCountForTupleDefinition; tupleCounter++) {
-            visitor(node, resolveY(wb, tupleCounter))
+            visitor(node, resolveY(wb, tupleCounter), treeDepth)
         }
     });
 }

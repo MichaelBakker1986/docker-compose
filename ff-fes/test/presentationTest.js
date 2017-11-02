@@ -47,9 +47,10 @@ node.update({title: true})
 var names = new Set();
 //get all recursive childnames
 names.add(uitree.rowId);
-uitree.visit(function (child) {
+uitree.visit(function(child, depth) {
     names.add(child.rowId);
 })
+
 function correctName(name) {
     return names.has(name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1'));
 }
@@ -75,6 +76,7 @@ function cloneTree(obj, map) {
     }
     return temp;
 }
+
 var other = cloneTree(uitree, {nodes: 'children', rowId: 'name', count: 'size'})
 log.trace(other)
 assert.ok(other.children)

@@ -1,5 +1,6 @@
 function PropertiesAssembler() {
 }
+
 var PropertiesModel = {
     NEW_root_value: {
         rowId: 'root',
@@ -14,7 +15,7 @@ var rootNodes = {
 };
 var rows = new Set();
 
-PropertiesAssembler.prototype.contains = function (name) {
+PropertiesAssembler.prototype.contains = function(name) {
     return rows.has(name);
 };
 //Don't call this method directly, business logic is within the Solution and JSWorkBook object
@@ -40,6 +41,7 @@ function createRootnode(modelName) {
     return rootNodes[newModelName];
 };
 PropertiesAssembler.prototype.createRootNode = createRootnode
+
 function getOrCreateProperty(groupName, row, col) {
     var rowId = groupName + '_' + row;
     var name = rowId + "_" + col;
@@ -57,6 +59,7 @@ function getOrCreateProperty(groupName, row, col) {
     }
     return node;
 }
+
 function hasChild(children, name) {
     for (var i = 0; i < children.nodes.length; i++) {
         if (children.nodes[i].name === name) {
@@ -65,6 +68,7 @@ function hasChild(children, name) {
     }
     return false;
 }
+
 //add element to Solution
 function addProperty(groupName, row, col, item, parentId) {
     //add to map if it not exists, else re-use the entry
@@ -91,8 +95,9 @@ function addProperty(groupName, row, col, item, parentId) {
         }
     }
 }
+
 //add elements from Solution into Map
-PropertiesAssembler.prototype.bulkInsert = function (solution) {
+PropertiesAssembler.prototype.bulkInsert = function(solution) {
     var solutionName = solution.getName();
     if (!rootNodes[solutionName]) {
         createRootnode(solutionName);
@@ -126,10 +131,12 @@ PropertiesAssembler.prototype.bulkInsert = function (solution) {
         throw Error('after ' + iteration + ' still items left, maybe too deeply nested or resursive.');
     }
 }
+
 function getRootNode(modelName) {
     return rootNodes[modelName];
 }
-PropertiesAssembler.prototype.findAllInSolution = function (modelName, visitArg) {
+
+PropertiesAssembler.prototype.findAllInSolution = function(modelName, visitArg) {
     for (var key in PropertiesModel) {
         var property = PropertiesModel[key];
         if (property.solutionName === modelName) {
@@ -147,30 +154,29 @@ PropertiesAssembler.prototype.fetch = function fetch(name) {
  * function is not thread safe, add parent and depth to function call instead of altering PropertyNode
  * As expected, problems while recursive calling this method.
  */
-PropertiesAssembler.prototype.visitProperty = function (node, func) {
+PropertiesAssembler.prototype.visitProperty = function(node, func) {
     var startingNode = node || getRootNode('NEW');
     if (startingNode !== undefined) {
-        //startingNode._depth = 0;
         visitInternal(startingNode, func, 0, undefined)
         //startingNode._depth = undefined;
         //startingNode.parentrowId = undefined;
     }
 }
+
 function visitInternal(node, func, depth) {
-    func(node);
+    func(node, depth);
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {
             var childNode = PropertiesModel[node.nodes[i].name];
             childNode.parentrowId = node.rowId;
             //childNode._index = i;
-            //childNode._depth = depth;
             visitInternal(childNode, func, depth + 1);
             //childNode.parentrowId = undefined;
             //childNode._index = undefined;
-            //childNode._depth = undefined;
         }
     }
 }
+
 PropertiesAssembler.prototype.getRootProperty = getRootNode;
 PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 module.exports = PropertiesAssembler.prototype;

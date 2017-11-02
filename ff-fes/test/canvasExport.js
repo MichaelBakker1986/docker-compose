@@ -73,11 +73,12 @@ for (var i = 0; i < fflTestModels.length; i++) {
         formulaInfo[formula.name] = formula;
     })
     createFile(wb, "_dependencies.json", JSON.stringify(formulaInfo, null, 2));
-    createFile(wb, "_canvas.json", wb.export('lme',undefined));
+    createFile(wb, "_canvas.json", wb.export('lme', undefined));
     createFile(wb, "_modelTree.txt", createGraph(graphvizModelTree));
     createFile(wb, "_dependencies.txt", createGraph(depVariableNames));
     createFile(wb, "_dependencies_with_formulas.txt", createGraph(depVariableNames_with_formulas));
 }
+
 function createFile(wb, fileName, graph) {
     var fullFileName = '../resources/' + wb.getSolutionName() + fileName;
     fs.writeFile(fullFileName, graph, function(err) {

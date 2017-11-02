@@ -13,7 +13,6 @@ const write = require('fs-writefile-promise/lib/node7')
 
 class Stash {
 
-
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
         write('./public/json/' + name + '.ffl', data).then(write('./public/json/' + name + '_canvas.json', lme)).then(function(filename) {
@@ -44,11 +43,17 @@ class Stash {
                 return result.stdout.split('\n');
             }).catch(function(err) {
                 if (err.code === 1) {
-                    log.warn('while requesting ffl-models, cannot connect to remote git')
+                    log.warn('while requesting ffl-models, cannot connect to remote git, falling back to local')
+                    return exec("git ls-files-root *." + path).then((result) => {
+                        return result.stdout.split('\n');
+                    }).catch((err) => {
+                        log.warn('Cannot list files at all')
+                        return "";
+                    })
                 } else {
                     log.error('ERROR: ', err);
+                    return "";
                 }
-                return "";
             });
     }
 
@@ -63,7 +68,15 @@ class Stash {
                 });
             }).catch(function(err) {
                 if (err.code === 128) {
-                    log.warn('while requesting remote branches, cannot connect to remote git')
+                    log.warn('while requesting remote branches, cannot connect to remote git, falling back to local')
+                    return exec('git branch').then((result) => {
+                        return result.stdout.split(/\t|\n/).filter((element, index, array) => {
+                            return (index % 2 === 0);
+                        });
+                    }).catch((err) => {
+                        log.warn('Cannot resolve branches at all')
+                        return ""
+                    });
                 } else {
                     log.error('ERROR: ', err);
                 }

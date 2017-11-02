@@ -4,7 +4,7 @@
   "description": "adminlte2",
   "main": "ltelite.js",
   "dependencies": {
-    "body-parser": "~1.17.1",
+    "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
     "bootstrap-colorpicker": "^2.5.1",
     "bootstrap-datepicker": "^1.7.0",

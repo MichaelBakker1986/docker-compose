@@ -1,31 +1,22 @@
-#install commands
-#become su
-sudo su
 mkdir .ssh
 vim id_rsa = {SSH key for Stash}
 vim id_rsa.pub = {Public SSH key for Stash}
 //git preinstalled
 
 #expose ports
+sudo firewall-cmd --zone=public --add-port=8085/tcp -permanent
+sudo firewall-cmd --zone=public --add-port=8084/tcp -permanent
 sudo firewall-cmd --zone=public --add-port=8083/tcp -permanent
 sudo firewall-cmd --zone=public --add-port=8082/tcp -permanent
 sudo firewall-cmd --zone=public --add-port=8081/tcp -permanent
 sudo firewall-cmd --zone=public --add-port=8080/tcp -permanent
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
-
-yum install
 git pull
+
+cd fesjs
+yum install
 npm install
 npm install -g bower
-bower install
-#start node app
-sudo nohup mode lme/update &
-
-#IDE page
-http://localhost:8080/
-
-#FFL IDE page
-http://localhost:8080/ide.html
-
-#Angular app
-http://localhost:8083/
+npm install -g concurrently
+cd lme
+node update.js

@@ -1,5 +1,4 @@
 var SolutionFacade = require('../../fesjs/SolutionFacade');
-var log = require('ff-log')
 
 function WebExport() {
     this.exportAsObject = true;
@@ -18,7 +17,6 @@ function LMETree(name, workbook) {
     this.workbook = workbook;
     this.nodes = {};
 }
-
 var repeats = {
     undefined: [3, 1],
     none: [1, 3],
@@ -26,19 +24,21 @@ var repeats = {
     document: [1, 3],
     timeline: [1, 3]
 }
-LMETree.prototype.addNode = function(node, columns) {
 
+LMETree.prototype.addNode = function(node, columns, treePath) {
     var workbook = this.workbook;
     var rowId = node.rowId;
     var details = repeats[node.frequency];
     var amount = repeats[node.frequency][0]
     var colspan = repeats[node.frequency][1];
     var rv = {
+        id: rowId,
+        path: treePath.join('.'),
         ammount: amount,
         colspan: colspan,
-        cols: []
+        cols: [],
+        children: []
     };
-
 
     for (var cm = 0; cm < amount; cm++) {
         var r = {}
@@ -94,22 +94,32 @@ LMETree.prototype.addNode = function(node, columns) {
             }
         });
     });
+    const parent = this.nodes[treePath[treePath.length - 1]];
+    if (parent) parent.children.push(rv);
     this.nodes[rowId] = rv;
 }
-
 WebExport.prototype.deParse = function(rowId, workbook) {
     var modelName = workbook.getSolutionName();
     var rootNode = workbook.getRootSolutionProperty(modelName);
     var lmeTree = new LMETree(modelName, workbook);
-    workbook.visitProperties(rootNode, function(node) {
+    var treePath = [];
+    var currentDepth = -1;
+    workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
         if (node !== rootNode) {
+            if (treeDepth > currentDepth) {
+                treePath.push(node.parentrowId)
+                currentDepth = treeDepth;
+            } else if (treeDepth < currentDepth) {
+                treePath.length = treeDepth;
+                currentDepth = treeDepth;
+            }
             lmeTree.addNode(
                 node,
-                ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint']
+                ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint'],
+                treePath
             )
         }
     })
     return lmeTree;
 }
-
 SolutionFacade.addParser(new WebExport())

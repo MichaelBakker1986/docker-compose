@@ -5,10 +5,34 @@ function aceEdit() {
             source: data
         });
     })
+    var windowModelName = window.location.search.split('model=')[1] || 'KSP';
+
+    function handleModelChange() {
+        var modelName = $("#models").val();
+        var xhr = new XMLHttpRequest();
+        xhr.addEventListener('progress', function(e) {
+            editor.setValue('Loading data: ' + e.loaded + ' of ' + (e.total || 'unknown') + ' bytes...');
+        });
+        xhr.addEventListener('load', function(e) {
+            editor.setValue(this.responseText);
+            editor.scrollToLine(1, true, true, function() {
+            });
+            editor.gotoLine(1, 1, true);
+        });
+
+
+        xhr.open('GET', '/json/' + modelName + '.ffl');
+        xhr.send();
+    }
+
+
     $.getJSON("/models", function(data, status, xhr) {
         $("#models").autocomplete({
-            source: data
+            source: data,
+            change: handleModelChange
         });
+        $("#models").val(windowModelName)
+        handleModelChange(windowModelName)
     })
     var editor = ace.edit("editor");
     var langTools = ace.require("ace/ext/language_tools");
@@ -22,27 +46,18 @@ function aceEdit() {
         enableLiveAutocompletion: true,
         maxLines: 40
     });
-    var xhr = new XMLHttpRequest();
-    xhr.addEventListener('progress', function(e) {
-        editor.setValue('Loading data: ' + e.loaded + ' of ' + (e.total || 'unknown') + ' bytes...');
-    });
-    xhr.addEventListener('load', function(e) {
-        editor.setValue(this.responseText);
-        editor.scrollToLine(1, true, true, function() {
-        });
-        editor.gotoLine(1, 1, true);
-    });
 
-    var modelName = window.location.search.split('model=')[1] || 'KSP';
-    xhr.open('GET', '/json/' + modelName + '.ffl');
-    xhr.send();
+    function gotoPreview() {
+        window.location = 'http://' + window.location.hostname + ':8083/#model=' + $("#models").val()
+    }
 
     function saveDocument() {
         $.post("/DEMO/saveFFL_LME", {
-            model: modelName,
+            model: $("#models").val(),
             data: editor.getSession().getValue()
         }, function(data) {
-            alert('Model [' + modelName + '] is updated');
+            alert('Model [' + windowModelName + '] is updated');
+            $('#preview-model').show()
         });
     }
 
@@ -56,7 +71,9 @@ function aceEdit() {
             }
         }
     });
-    $('#save-model').click(saveDocument)
+    $('#preview-model').click(gotoPreview);
+    $('#save-model').click(saveDocument);
+    $('#preview-model').hide()
 }
 
 if (document.addEventListener) {

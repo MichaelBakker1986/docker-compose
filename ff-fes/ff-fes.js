@@ -71,7 +71,7 @@ FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tu
         var values = [];
         var rootNode = JSWorkBook.getSolutionNode(rowId);
 
-        JSWorkBook.visitProperties(rootNode, function(node, yax) {
+        JSWorkBook.visitProperties(rootNode, function(node, yax, treeDepth) {
             values = values.concat(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
         }, 0);
         return values;
