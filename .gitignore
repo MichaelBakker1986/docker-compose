@@ -7,3 +7,4 @@ ff-questionnaire-js-web/.idea/
 package-lock.json
 restapi/dbSettings.js
 *package-lock.json
+*.scssc

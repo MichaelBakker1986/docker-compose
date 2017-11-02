@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lmeapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular-include-demo</title>
+    <link type="text/css" href="style/fresh.css" rel="stylesheet">
+    <link type="text/css" href="style/style.css" rel="stylesheet">
+    <script type="application/javascript" src="http://blfif-tv-tr03.finance.lab:8080/json/ai_MVO.js"></script>
+    <script type="application/javascript" src="scripts.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
+</head>
+<body ng-controller="lmeController">
+    
+    <div class="header">
+        <div class="header--top">
+            <div class="header--usermenu">
+                <ul>
+                    <li class="usermenu-item-search">
+                            Username
+                    </li>
+                    <li class="usermenu-item-party">
+                        <span class="usermenu-icon"></span>
+                        <span>YourBank</span>
+                    </li>
+                   
+                    <li class="usermenu-item-logout">
+                        <a>
+                            <span class="usermenu-icon"></span> Uitloggen
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {{this.Q_MAP01_VRAAG01}}    
+    <div class="column">
+        <div  class="column--item">
+            
+            <div class="panel">
+                <h1>Show all titles in model {{this.MODEL.name}}</h1>
+            </div>
+
+            <div class="panel">
+                <div ng-repeat="question in this" ng-if="question.visible">
+
+                    <div class="form-item" id="{{question.id}}">
+                        <label for="" ng-class="question.required ? 'required' : ''">{{question.type}} - {{question.title}}</label>
+                        <span class="icon"></span>
+                        <div class="answer-wrapper">
+                            <div class="answer" ng-switch on="question.type">
+
+
+                                <div ng-switch-when="select" class="radio">
+                                    {{question.choice}}
+                                    <input id="{{question.id + 'choice' + $index + 'A'}}" ng-model="question.value" type="radio" value="0" >
+                                    <label for="{{question.id + 'choice' + $index + 'A'}}">no</label>
+                                    <input id="{{question.id + 'choice' + $index + 'B'}}" ng-model="question.value" type="radio" value="1" >
+                                    <label for="{{question.id + 'choice' + $index + 'B'}}">yes</label>
+
+                                    <input ng-model="question.value" >
+                                </div>
+
+                                <div ng-switch-when="MemoAnswerType" class="input">
+                                    <textarea></textarea>
+                                </div>
+
+
+                                <div ng-switch-default class="input">
+                                    <input ng-model="question.value" type="text">
+                                </div>
+                                <span class="icon"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+
+
+    
+</body>
+</html>
