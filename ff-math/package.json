@@ -4,8 +4,7 @@
   "private": true,
   "description": "finan math",
   "main": "ff-math.js",
-  "dependencies": {
-  },
+  "dependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,4 +1,5 @@
 const express = require('express');
+var now = require("performance-now")
 const app = express();
 const httpServer = require('http').createServer(app);
 const request = require('request');
@@ -37,27 +38,37 @@ function spawnChild(appname, args) {
     });
 }
 
+function reDeploy() {
+    log('Tests passed deploying stack ');
+    for (var key in childProcesses) {
+        childProcesses[key].kill('SIGKILL')
+        spawnChild(key)
+    }
+    busy = false;
+}
 
 function update() {
     return new Promise((fulfill, reject) => {
         if (busy) {
             reject('Busy restarting.');
         } else {
+            var startRedeploy = now()
             busy = true;
             //npm install && bower install
             var command = developer ? 'echo a' : 'git reset --hard origin/master && git pull && cd .. && npm test';
             exec(command).then((result) => {
-                log('Tests passed deploying stack ');
-                for (var key in childProcesses) {
-                    childProcesses[key].kill('SIGKILL')
-                    spawnChild(key)
-                }
-                busy = false;
-                fulfill('Succes restarting');
+                reDeploy()
+                fulfill('Succesfull redeploy stack in [' + (start-end).toFixed(3) + ']ms');
             }).catch((err) => {
-                busy = false;
-                log('Tests failed NOT deploying stack, and here the very readable Error. .', 'red');
-                reject('Fail restarting ' + err)
+                log('Tests failed, reinstalling modules and try again.', 'green');
+                exec('cd .. && npm install && npm test').then(function(result) {
+                    reDeploy()
+                    fulfill('Succesfull redeploy stack in [' + (start-end).toFixed(3) + ']ms');
+                }).catch((err) => {
+                    busy = false;
+                    log(err.toString(), 'red');
+                    reject('Fail restarting ' + err)
+                });
             });
         }
     });
@@ -100,10 +111,10 @@ function testAndDeploy() {
         spawnChild('../demo-apps/angular-demo/angularapp')
         spawnChild('../demo-apps/adminlte/ltelite')
         spawnChild('app')
-        spawnChild('../lme-api/ff-fes-app')
+        spawnChild('../lme-api/lme-api')
 
     }).catch(function(err) {
-        log('Tests failed NOT deploying stack, and here the very readable Error. .', 'red');
+        log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
         log(err.toString(), 'red');
     });
 }

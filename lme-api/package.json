@@ -4,7 +4,7 @@
   "repository": "",
   "version": "0.0.2",
   "scripts": {
-    "start": "node ff-fes-app.js"
+    "start": "node lme-api.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
