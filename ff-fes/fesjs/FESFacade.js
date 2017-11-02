@@ -66,6 +66,9 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         //retrieve the 'value' formula, check if there is an entered value
         var variable = fetchSolutionNode(row, 'value');
         var localFormula = findFormula(variable);
+        if (localFormula === undefined) {
+            return false;
+        }
         var id = localFormula.id || localFormula.index;
         var hash = xas.hash + yas.hash + 0;
         return context.values[id][hash];
@@ -129,4 +132,5 @@ FESFacade.updateValueMap = function(values) {
     });
 };
 FESFacade.visit = PropertiesAssembler.visitProperty;
+FESFacade.findAllInSolution = PropertiesAssembler.findAllInSolution;
 module.exports = FESFacade;

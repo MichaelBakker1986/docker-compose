@@ -28,10 +28,7 @@
             "type": "string"
           },
           {
-            "name": "variable",
-            "in": "path",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/VariableName"
           }
         ],
         "responses": {
@@ -60,7 +57,16 @@
     }
   },
   "responses": {},
-  "parameters": {},
+  "parameters": {
+    "VariableName": {
+      "name": "variable",
+      "in": "path",
+      "required": false,
+      "type": "string",
+      "enum": [
+      ]
+    }
+  },
   "securityDefinitions": {},
   "tags": []
 }

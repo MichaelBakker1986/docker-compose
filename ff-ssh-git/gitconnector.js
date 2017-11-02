@@ -2,13 +2,18 @@ var glob = require('glob')
 var log = require('ff-log')
 var fs = require('fs');
 
+/**
+ * Prefer parsed JSON file above FFL.
+ * TODO: change into canvas_json files
+ */
 function ModelListener() {
 }
+
 ModelListener.prototype.initializeModels = function() {
     var modelListener = this;
     var ffls = [];
     var fetFileNames = function(src, callback) {
-        glob(src + '**/FFL/**', callback);
+        glob(src + '**/json/**', callback);
     };
     var modelCallback = function(err, res) {
         if (err) {
@@ -16,49 +21,27 @@ ModelListener.prototype.initializeModels = function() {
         } else {
             res.forEach(function(file) {
                 if (file.toLowerCase().endsWith('.ffl')) {
-                    //these models are not supported for unknown reasons, most involve case-sensitive constructions
-                    if (file.toLowerCase().endsWith('vbi.ffl')) {
-                        return;
-                    }
-                    if (file.toLowerCase().endsWith('aabpricing.ffl')) {
-                        return;
-                    }
-                    if (file.toLowerCase().endsWith('ingverslag.ffl')) {
-                        return;
-                    }
-                    if (file.toLowerCase().endsWith('revisie.ffl')) {
-                        return;
-                    }
-                    if (file.toLowerCase().endsWith('revisiegbi.ffl')) {
-                        return;
-                    }
-                    if (file.toLowerCase().endsWith('revisiemkb.ffl')) {
-                        return;
-                    }
-                    if (file.toLowerCase().endsWith('revisiemkb2.ffl')) {
-                        return;
-                    }
-                    if (file.toLowerCase().endsWith('ingscg3.ffl')) {
-                        return;
-                    }
-                    //manually fixed case-sensitive models
-                    /*      if (file.toLowerCase().endsWith('ingscg3rev.ffl')) {
-                     return;
-                     }*/
                     fs.readFile(file, function read(err, data) {
                         if (err) {
                             throw err;
                         }
-                        var modelData = new Buffer(data, 'binary').toString('utf-8');
-                        ffls.push("" + modelData);
+                        var modelData = "" + new Buffer(data, 'binary').toString('utf-8');
+                        modelData = modelData.replace(/amount/gmi, 'Amount');
+                        modelData = modelData.replace(/GoodWill/gmi, 'GoodWill');
+                        modelData = modelData.replace(/Bookvalue/gmi, 'BookValue');
+                        modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses');
+                        modelData = modelData.replace(/DiscountRateTaxShieldBasis/gmi, 'DiscountRateTaxShieldBasis')
+                        modelData = modelData.replace(/krWirtschaftlichesEigenKapitalRating/gmi, 'krWirtschaftlichesEigenKapitalRating')
+                        modelData = modelData.replace(/OtherTransitionalAssets/gmi, 'OtherTransitionalAssets')
+                        modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
+                        ffls.push(modelData);
                         modelListener.onNewModel(modelData)
                     });
                 }
             })
         }
     };
-    //  fetFileNames(__dirname + '\\finanfinancial\\', modelCallback);
-    fetFileNames(__dirname + '/resources/', modelCallback);
+    fetFileNames(__dirname + '/../lme/public/', modelCallback);
 }
 ModelListener.prototype.onNewModel = function(modeldata) {
     log.info(modeldata)

@@ -582,18 +582,6 @@ model KSP uses BaseModel
                 fixed_decimals: 1;
                 title: "Nr. of days childcare per week";
                 options_title: locked;
-                tuple test12
-                {
-                    datatype: number;
-                    formula: NA;
-                    title: "test12 Nr. of hours childcare per month";
-                    variable test13
-                    {
-                        datatype: number;
-                        formula: NA;
-                        title: "test13 Nr. of hours childcare per month";
-                    }
-                }
             }
             variable NrOfDaysChildcareMonth
             {
@@ -1662,11 +1650,6 @@ model KSP uses BaseModel
                 options_notrend: locked;
                 options_trend: locked;
               }
-            }
-            variable TestT
-            {
-             title: "TestT";
-                 formula: ValueT(T);
             }
             variable Furniture
             {
