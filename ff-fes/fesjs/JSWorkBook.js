@@ -132,7 +132,7 @@ function validateImportedSolution() {
                                 mostcommon[formulaInfo.name] = isNaN(mostcommon[formulaInfo.name]) ? 1 : mostcommon[formulaInfo.name] + 1
                             }
                         })
-                        log.warn('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
+                        log.debug('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
                             + "DEPS[" + deps.length + "][" + deps + "]\nREFS[" + refs.length + "]:[" + refs + "]"
                         )
                         formulaInfo.parsed = undefined;

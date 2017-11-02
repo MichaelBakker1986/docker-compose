@@ -96,7 +96,7 @@ var simplified = {
     If: function(formulaInfo, node) {
         //could be replaced with the default property value..
         if (node.arguments.length === 2) {
-            log.warn('Strange formuala setup IF(q,a,b) without b) Using NA as b. [' + formulaInfo.original + ']')
+            log.debug('Strange formuala setup IF(q,a,b) without b) Using NA as b. [' + formulaInfo.original + ']')
             node.arguments.push(AST.IDENTIFIER('NA'));
         }
         assert.equal(node.arguments.length, 3, formulaInfo.original);
