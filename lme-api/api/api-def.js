@@ -1,4 +1,5 @@
 const swaggerUi = require('swaggerize-ui');
+const hostname = require('os').hostname();
 
 module.exports.setup = function(app) {
     //swagger
