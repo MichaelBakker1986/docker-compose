@@ -14,6 +14,56 @@
   "host": "::8085",
   "basePath": "/",
   "paths": {
+    "/id/{id}": {
+      "get": {
+        "summary": "Retrieve all values identified by {id}.",
+        "operationId": "idRetrieveFigures",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ContextId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Value"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Store all values identified by {id}.",
+        "operationId": "idStoreFigures",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ContextId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Value"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/id/{id}/figure/{figureName}": {
       "get": {
         "summary": "Get all values traversing down the Figure tree from given {figureName} in context {id}.",
