@@ -5,7 +5,7 @@ function aceEdit() {
             source: data
         });
     })
-    var windowModelName = window.location.search.split('model=')[1] || 'KSP';
+    var windowModelName = window.location.href.split('#model=')[1] || 'KSP';
 
     function handleModelChange() {
         var modelName = $("#models").val();
@@ -25,7 +25,6 @@ function aceEdit() {
         xhr.send();
     }
 
-
     $.getJSON("/models", function(data, status, xhr) {
         $("#models").autocomplete({
             source: data,
@@ -39,7 +38,7 @@ function aceEdit() {
     editor.session.setMode("ace/mode/ffl");
     editor.setTheme("ace/theme/tomorrow");
     editor.resize(true)
-// enable autocompletion and snippets
+    // enable autocompletion and snippets
     editor.setOptions({
         enableBasicAutocompletion: true,
         /*   enableSnippets: true,*/
