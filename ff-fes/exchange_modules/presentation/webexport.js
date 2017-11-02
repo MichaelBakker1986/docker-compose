@@ -17,6 +17,7 @@ function LMETree(name, workbook) {
     this.workbook = workbook;
     this.nodes = {};
 }
+
 var repeats = {
     undefined: [3, 1],
     none: [1, 3],
@@ -116,7 +117,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
             }
             lmeTree.addNode(
                 node,
-                ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint'],
+                ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices'],
                 treePath
             )
         }
