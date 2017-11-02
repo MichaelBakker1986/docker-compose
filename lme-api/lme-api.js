@@ -14,19 +14,9 @@ app.use(pretty({query: 'pretty'}));
 //routes
 require('./api/store').setup(app)
 require('./api/value').setup(app)
+require('./api/api-def').setup(app)
 
-//swagger
-app.use('/docs', swaggerUi({
-    docs: '/api-docs?abc=1' // from the express route above.
-}));
-// swagger definition
-app.get('/api-docs', function(req, res) {
-    let swaggerData = require(__dirname + '/swaggerDef.json');
-    require('dns').lookup(hostname, (err, add, fam) => {
-        swaggerData.host = add + ':' + port;
-        res.json(swaggerData)
-    })
-});
+
 app.listen(port, function() {
     require('dns').lookup(hostname, (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';

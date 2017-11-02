@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LME API",
+    "version": "1.0.0",
+    "description": "REST LME API"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "::8085",
+  "basePath": "/",
+  "paths": {
+    "/id/{id}/figure/{figureName}": {
+      "get": {
+        "summary": "Get all values traversing down the Figure tree from given {figureName} in context {id}.",
+        "operationId": "figure",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ContextId"
+          },
+          {
+            "$ref": "#/parameters/FigureName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Value"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/id/{id}/figure/{figureName}/value/{value}": {
+      "post": {
+        "summary": "Set a value given {figureName} in context {context}.",
+        "operationId": "value",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ContextId"
+          },
+          {
+            "$ref": "#/parameters/FigureName"
+          },
+          {
+            "$ref": "#/parameters/Value"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Value"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Value": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "responses": {},
+  "parameters": {
+    "ContextId": {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "Value": {
+      "name": "value",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "FigureName": {
+      "name": "figureName",
+      "in": "path",
+      "required": false,
+      "type": "string",
+      "enum": [
+      ]
+    }
+  },
+  "securityDefinitions": {},
+  "tags": []
+}
