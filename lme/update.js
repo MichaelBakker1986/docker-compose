@@ -58,12 +58,12 @@ function update() {
             var command = developer ? 'echo a' : 'git reset --hard origin/master && git pull && cd .. && npm test';
             exec(command).then((result) => {
                 reDeploy()
-                fulfill('Successful redeploy stack in [' + (start - now()).toFixed(3) + ']ms');
+                fulfill('Successful redeploy stack in [' + (now() - start).toFixed(3) + ']ms');
             }).catch((err) => {
                 log('Tests failed, reinstalling modules and try again.', 'green');
                 exec('cd .. && npm install && npm test').then(function(result) {
                     reDeploy()
-                    fulfill('Successful redeploy stack in [' + (start - now()).toFixed(3) + ']ms');
+                    fulfill('Successful redeploy stack in [' + (now() - start).toFixed(3) + ']ms');
                 }).catch((err) => {
                     busy = false;
                     log(err.toString(), 'red');
@@ -107,7 +107,7 @@ function testAndDeploy() {
     var start = now();
     const command = 'cd .. && npm install && npm test'
     exec(command).then(function(result) {
-        log('Successful deploy stack in [' + (start - now()).toFixed(3) + ']ms');
+        log('Successful deploy stack in [' + (now() - start).toFixed(3) + ']ms');
         //start sub processes
         spawnChild('../demo-apps/angular-demo/angularapp')
         spawnChild('../demo-apps/adminlte/ltelite')
