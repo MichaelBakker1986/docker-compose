@@ -1443,7 +1443,7 @@ var simplified = {
     If: function(formulaInfo, node) {
         //could be replaced with the default property value..
         if (node.arguments.length === 2) {
-            log.warn('Strange formuala setup IF(q,a,b) without b) Using NA as b. [' + formulaInfo.original + ']')
+            log.debug('Strange formuala setup IF(q,a,b) without b) Using NA as b. [' + formulaInfo.original + ']')
             node.arguments.push(AST.IDENTIFIER('NA'));
         }
         assert.equal(node.arguments.length, 3, formulaInfo.original);
@@ -1626,6 +1626,9 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         //retrieve the 'value' formula, check if there is an entered value
         var variable = fetchSolutionNode(row, 'value');
         var localFormula = findFormula(variable);
+        if (localFormula === undefined) {
+            return false;
+        }
         var id = localFormula.id || localFormula.index;
         var hash = xas.hash + yas.hash + 0;
         return context.values[id][hash];
@@ -1689,6 +1692,7 @@ FESFacade.updateValueMap = function(values) {
     });
 };
 FESFacade.visit = PropertiesAssembler.visitProperty;
+FESFacade.findAllInSolution = PropertiesAssembler.findAllInSolution;
 module.exports = FESFacade;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/FESFacade.js","/../ff-fes/fesjs",undefined)
 },{"./FormulaService":14,"./FunctionMap":15,"./PropertiesAssembler":19,"_process":100,"buffer":97,"ff-log":47}],13:[function(require,module,exports){
@@ -2766,7 +2770,7 @@ function validateImportedSolution() {
                                 mostcommon[formulaInfo.name] = isNaN(mostcommon[formulaInfo.name]) ? 1 : mostcommon[formulaInfo.name] + 1
                             }
                         })
-                        log.warn('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
+                        log.debug('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
                             + "DEPS[" + deps.length + "][" + deps + "]\nREFS[" + refs.length + "]:[" + refs + "]"
                         )
                         formulaInfo.parsed = undefined;
