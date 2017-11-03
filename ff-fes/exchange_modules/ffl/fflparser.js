@@ -248,6 +248,9 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
             if (log.DEBUG) log.debug('[' + rowId + '] ' + node.choices)
         }
     }
+    if (parentId && parentId.match(/Q_MAP[0-9]{2}/)) {
+        //   mappedDisplayType = "";
+    }
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 

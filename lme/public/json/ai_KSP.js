@@ -370,7 +370,7 @@ function parseRegex(contents) {
     //{
     //some lines end with a ',' they are concerning about the same thing.
     var data = contents.replace(/,\s*\n/gm, ',');
-    data = data.replace(/\/\/.*\n?$/gm, '');
+    data = data.replace(/;\s*\/\/.*\n?$/gm, ';');
     data = FinFormula.fixCasing(data);
     //==> variable x
     //==> {
@@ -386,8 +386,11 @@ function parseRegex(contents) {
     data = data.replace(/^(\s+)((?:variable|tuple)\s*)?([\-\=\+]{1})\s*([\w]+)\s*\{'/gmi).replace("$1$2$4$1{$1  modifier: $3;");
 
     //remove tabs,remove line-breaks, replace " with '
-    data = data.replace(/\t/gm, '').replace(/^\s*root\s*$/gmi, ' Root ;').replace(/([^;])[\r?\n]+/gm, '$1').replace(/\r?\n|\r/gm, ';').replace(/\s\s+/gm, ' ')
-    //.replace(/\"(.*)'(.*)\"/gm, '"$1 $2"')
+    data = data.replace(/\t/gm, '')
+        .replace(/^\s*root\s*$/gmi, ' Root ;')
+        .replace(/([^;])[\r?\n]+/gm, '$1')
+        .replace(/\r?\n|\r/gm, ';')
+        .replace(/\s\s+/gm, ' ')
         .replace(/'/gm, '@')
         .replace(/"/gm, '\'');
 
@@ -582,7 +585,10 @@ module.exports = FflToJsonConverter.prototype;
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //http://excelformulabeautifier.com/
 function finFormulaGeneric(buf) {
-    //choices fix
+    /**
+     * Choices fix, this is a problem for titles and hints containing ":" chars.
+     * TODO: move to choice specific logic.
+     */
     var buf = buf.replace(/:/gm, ', ');
     buf = buf.replace(/(\$p|@|#|%|\.\.)/gmi, '');
 
@@ -906,21 +912,16 @@ function StartWithVariableOrTuplePredicate(node) {
 }
 
 var displayAsMapping = {
-    default: 'StringAnswerType',
+    default: 'string',
     select: 'select',
-    undefined: 'StringAnswerType',
-    currency: 'AmountAnswerType',
-    //date: 'DateAnswerType',//requires a converter to work
-    date: 'TextAnswerType',
-    percentage: 'PercentageAnswerType',
-    memo: 'MemoAnswerType',
+    radio: 'select',//reversed, back to original
+    undefined: 'string',
+    currency: 'currency',
+    date: 'date',//requires a converter to work
+    percentage: 'percentage',
+    memo: 'memo',
     //reversed
-    StringAnswerType: "StringAnswerType",
-    select: "select",
-    AmountAnswerType: "currency",
-    TextAnswerType: "default",
-    PercentageAnswerType: "percentage",
-    MemoAnswerType: "memo",
+    string: "string",
     chart: "chart",
     line: "line"
 }
@@ -981,6 +982,18 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         return;
     }
     var mappedDisplayType = displayAsMapping[node.displaytype];
+    if (mappedDisplayType == 'select') {
+        if (!node.choices) {
+            if (log.DEBUG) log.warn('Row [' + rowId + '] is type [select], but does not have choices')
+        } else if (JSON.parse(node.choices).length == 2) {
+            mappedDisplayType = 'radio'
+        } else {
+            if (log.DEBUG) log.debug('[' + rowId + '] ' + node.choices)
+        }
+    }
+    if (parentId && parentId.match(/Q_MAP[0-9]{2}/)) {
+        //   mappedDisplayType = "";
+    }
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 
@@ -1020,6 +1033,16 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         log.debug('Found tupleProperty [%s]', rowId)
         uiNode.tupleProperty = true;
     }
+    /**
+     * Add hierarchy in visibility
+     */
+    if (node.visible && parentId) {
+        if (defaultValue.visible[node.visible]) {
+            node.visible = parentId + '.visible';
+        } else {
+            node.visible = parentId + '.visible && ' + node.visible
+        }
+    }
     for (var key in formulaMapping) {
         if (node[key] !== undefined) {
             //use the ASTCache for this later on
@@ -1043,7 +1066,7 @@ function parseFFLFormula(formula, node, row) {
         }
     }
     catch (e) {
-        log.error('unable to parse [' + formula + '] returning it as String value [' + node + "] : " + row, e);
+        log.debug('unable to parse [' + formula + '] returning it as String value [' + node + "] : " + row, e);
         formulaReturn = AST.STRING(formula);
     }
     return formulaReturn;
@@ -1078,18 +1101,26 @@ var jsonValues = {
     name: 'jsonvalues',
     extension: 'json',
     headername: 'JSON Values',
-    parse: function(values, workbook) {
+    parseData: function(values, workbook) {
         updateValues(JSON.parse(values), workbook.context.values);
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
     deParse: function(rowId, workbook) {
         let allValues = workbook.getAllValues();
         allValues.forEach(function(el) {
-            el.varName = correctFileName(el.varName)
+            if (el.varName.endsWith('_title')) {
+                el.varName = correctPropertyName(el.varName)
+            } else {
+                el.varName = correctFileName(el.varName)
+            }
         })
         return allValues;
     }
 };
+
+function correctPropertyName(name) {
+    return name.replace(/^[^_]+_([\w]*_\w+)$/gmi, '$1');
+}
 
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
@@ -1256,7 +1287,7 @@ function noChange(workbook, rowId, col, index) {
 
 function changeAble(workbook, rowId, col, index) {
     let r;//return value
-    let c;//calculation counter
+    let c = -1;//calculation counter
     return {
         get: function() {
             if (counter !== c) {
@@ -1328,7 +1359,12 @@ LMETree.prototype.addNode = function(node, treePath) {
      * Proxy properties to the column objects
      */
     for (var index = 0; index < amount; index++) {
-        var r = {}
+        var r = {
+            value: null,
+            visible: null,
+            entered: null,
+            required: null
+        }
         rv.cols[index] = r;
         Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index));
         Object.defineProperty(r, 'visible', properties.visible.prox(workbook, rowId, 'visible', index));
@@ -1667,12 +1703,17 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     else {
         returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values);
     }
-    //TODO: should be added to the UI element or Formula
     //formatter, for fixed decimals is a part of the UI, frequency is a part of the Formula.
-    if (variable && colType === 'value' && variable.delegate && variable.delegate.fixed_decimals) {
-        if (!isNaN(returnValue)) {
-            var level = Math.pow(10, parseInt(variable.delegate.fixed_decimals));
-            returnValue = (Math.round(returnValue * level) / level)
+    if (variable) {
+        if (colType === 'value') {
+            if (variable.delegate && variable.delegate.fixed_decimals) {
+                if (!isNaN(returnValue)) {
+                    var level = Math.pow(10, parseInt(variable.delegate.fixed_decimals));
+                    returnValue = (Math.round(returnValue * level) / level)
+                }
+            }
+        } else if (colType == 'locked') {
+            return Boolean(returnValue)
         }
     }
     return returnValue;
@@ -1709,7 +1750,7 @@ FESFacade.updateValueMap = function(values) {
         //later will add values['_'+key] for the cache
         //for unlocked add values[key] here will user entered values stay
         if (formula.type === 'noCacheUnlocked') {
-            var id = formula.id === undefined ? formula.index : formula.id;
+            var id = formula.id || formula.index;
             if (!values[id]) {
                 values[id] = {};
             }
@@ -2394,6 +2435,7 @@ module.exports = FormulaService.prototype;
 },{"../../ast-node-utils/index":3,"_process":102,"assert":96,"buffer":99,"escodegen":38,"ff-log":47}],15:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var log = require('ff-log')
+
 /**
  * The map that contains parsed model-functions
  * * FormulaId '0' is not a valid ID!
@@ -2406,6 +2448,7 @@ var log = require('ff-log')
  */
 function fm() {
 }
+
 //don't directly use this method, use JSWorkBook instead.
 fm.prototype.apiGet = function(formula, x, y, z, v) {
     // console.info('API call for formula: ' + formula.name);
@@ -2415,7 +2458,7 @@ fm.prototype.apiGet = function(formula, x, y, z, v) {
     return global['a' + id](id, x, y, z, v);
 }
 fm.prototype.apiSet = function(formula, x, y, z, value, v) {
-    var id = formula.id === undefined ? formula.index : formula.id;
+    var id = formula.id || formula.index;
     if (v[id] !== undefined) {
         var hash = x.hash + y.hash + z;
         var newValue = value;
@@ -2456,7 +2499,7 @@ var formulaDecorators = {
         //v = enteredValues
         return function(f, x, y, z, v) {
             var fname = varName;
-            if (x.dummy){
+            if (x.dummy) {
                 return NA;
             }
             var hash = x.hash + y.hash + z;
@@ -2855,6 +2898,7 @@ JSWorkBook.prototype.getNode = function(name) {
 JSWorkBook.prototype.getSolutionNode = function(name) {
     return FESFacade.fetchSolutionNode(name, 'value')
 };
+JSWorkBook.prototype.fetchSolutionNode = FESFacade.fetchSolutionNode
 
 function resolveX(wb, x) {
     return x ? wb.xaxis[x] : wb.xaxis[0];
@@ -3392,7 +3436,7 @@ SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, 
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
     var property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
-    var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, colId !== 'value', body);
+    var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) == -1, body);
     return solution.createNode(rowId, colId, formulaId, displayAs);
 };
 
@@ -4059,8 +4103,7 @@ FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tu
     //setvalue
     if (value !== undefined) {
         //choice(select) requests
-        var variable = JSWorkBook.getSolutionNode(rowId, 'value');
-        if (variable && variable.displayAs === 'select') {
+        if (JSWorkBook.fetchSolutionNode(rowId, 'choices')) {
             var choices = JSWorkBook.getSolutionPropertyValue(rowId, 'choices');
             var choiceValue = choices.lookup('value', value);
             if (choiceValue === undefined) {
@@ -74170,6 +74213,7 @@ require('../../ff-fes/exchange_modules/presentation/webexport');
 var LmeModel = require('./lme')
 var model = new LmeModel()
 model.importLME(JSON_MODEL);
+LMEMETA = model;
 LME = model.exportWebModel();
 angular.module('lmeapp', []).controller('lmeController', function($scope) {
     $scope.MODEL = LME;
@@ -74195,7 +74239,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "RootSub1_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_RootSub1_title": true
       },
@@ -74227,10 +74271,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "type": "noCacheLocked",
       "refs": {
         "KSP_RootSub1_visible": true,
-        "KSP_RootSub2_visible": true,
-        "KSP_Q_MAP01_HULPVARIABELEN_visible": true,
-        "KSP_Q_MAP02_HULPVARIABELEN_visible": true,
-        "KSP_Q_MAP06_HULPVARIABELEN_visible": true
+        "KSP_RootSub2_visible": true
       },
       "formulaDependencys": [],
       "deps": {},
@@ -74264,7 +74305,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_LAYOUTNR_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_LAYOUTNR_title": true
       },
@@ -74306,7 +74347,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_EXCHANGE_RATES_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_EXCHANGE_RATES_title": true
       },
@@ -74341,7 +74382,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_LAYOUT_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_LAYOUT_title": true
       },
@@ -74369,7 +74410,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_FLATINPUT_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_FLATINPUT_title": true
       },
@@ -74397,7 +74438,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_PROJECTION_PROFILE_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_PROJECTION_PROFILE_title": true
       },
@@ -74425,7 +74466,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_COLUMN_ORDER_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_COLUMN_ORDER_title": true
       },
@@ -74455,7 +74496,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_COLUMN_VISIBLE_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_COLUMN_VISIBLE_title": true
       },
@@ -74483,7 +74524,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_STARTDATEPERIOD_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_STARTDATEPERIOD_title": true
       },
@@ -74511,7 +74552,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_ENDDATEPERIOD_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_ENDDATEPERIOD_title": true
       },
@@ -74539,7 +74580,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_BASECURRENCYPERIOD_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_BASECURRENCYPERIOD_title": true
       },
@@ -74567,7 +74608,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_VIEWCURRENCYPERIOD_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_VIEWCURRENCYPERIOD_title": true
       },
@@ -74595,7 +74636,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FES_COLUMNTYPE_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FES_COLUMNTYPE_title": true
       },
@@ -74637,7 +74678,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "RootSub2_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_RootSub2_title": true
       },
@@ -74665,7 +74706,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Naam_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Naam_title": true
       },
@@ -74693,7 +74734,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Relatienummer_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Relatienummer_title": true
       },
@@ -74721,7 +74762,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_KVKnr_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_KVKnr_title": true
       },
@@ -74749,7 +74790,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Rechtsvorm_nr_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Rechtsvorm_nr_title": true
       },
@@ -74777,7 +74818,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Rechtsvorm_omschr_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Rechtsvorm_omschr_title": true
       },
@@ -74805,7 +74846,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_BIK_CODE_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_BIK_CODE_title": true
       },
@@ -74833,7 +74874,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_BIK_Omschr_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_BIK_Omschr_title": true
       },
@@ -74861,7 +74902,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_GridId_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_GridId_title": true
       },
@@ -74889,7 +74930,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Accountmanager_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Accountmanager_title": true
       },
@@ -74917,7 +74958,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Kantoor_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Kantoor_title": true
       },
@@ -74945,7 +74986,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Straat_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Straat_title": true
       },
@@ -74973,7 +75014,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Housenumber_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Housenumber_title": true
       },
@@ -75001,7 +75042,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Postcode_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Postcode_title": true
       },
@@ -75029,7 +75070,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Woonplaats_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Woonplaats_title": true
       },
@@ -75057,7 +75098,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Provincie_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Provincie_title": true
       },
@@ -75085,7 +75126,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Land_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Land_title": true
       },
@@ -75113,7 +75154,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_BvDID_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_BvDID_title": true
       },
@@ -75141,7 +75182,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Telefoon_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Telefoon_title": true
       },
@@ -75169,7 +75210,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_VAR_Emailadres_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_VAR_Emailadres_title": true
       },
@@ -75197,7 +75238,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_FINAN_USER_ROLES_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_FINAN_USER_ROLES_title": true
       },
@@ -75225,7 +75266,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "FPS_FINAN_USER_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FPS_FINAN_USER_title": true
       },
@@ -75249,22 +75290,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_value",
           "association": "deps",
-          "refId": 100093
+          "refId": 100095
         },
         {
           "name": "KSP_Q_WARNING_GLOBALTXT_value",
           "association": "deps",
-          "refId": 100399
+          "refId": 100441
         },
         {
           "name": "KSP_Q_MAP06_visible",
           "association": "refs",
-          "refId": 100275
+          "refId": 100299
         },
         {
           "name": "KSP_Q_RESULT_value",
           "association": "refs",
-          "refId": 100356
+          "refId": 100396
         }
       ],
       "deps": {
@@ -75274,12 +75315,12 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "original": "If(Q_MAP01[doc]==1||Length(Q_WARNING_GLOBALTXT[doc])>0,1,0)",
       "index": 100075,
       "name": "KSP_Q_ROOT_value",
-      "parsed": "a100093('100093',x.doc,y.base,z,v)==1||Length(a100399('100399',x.doc,y.base,z,v))>0?1:0",
+      "parsed": "a100095('100095',x.doc,y.base,z,v)==1||Length(a100441('100441',x.doc,y.base,z,v))>0?1:0",
       "id": 100075,
       "fflname": "Q_ROOT_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_ROOT_title": true
       },
@@ -75364,10 +75405,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "Q_MAP00_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP00_title": true,
-        "KSP_Q_MAP00_INTRO_title": true
+        "KSP_Q_MAP00_title": true
       },
       "formulaDependencys": [],
       "deps": {},
@@ -75393,12 +75433,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "fflname": "Q_MAP00_WARNING_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP00_WARNING_title": true,
-        "KSP_Q_MAP00_TEST_title": true,
-        "KSP_Q_MAP01_WARNING_title": true,
-        "KSP_Q_MAP01_PARAGRAAF09SUB2_title": true
+        "KSP_Q_MAP00_WARNING_title": true
       },
       "formulaDependencys": [],
       "deps": {},
@@ -75426,31 +75463,43 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     {
       "type": "noCacheUnlocked",
       "refs": {
+        "KSP_Q_MAP00_TEST_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Warning voor map 1'",
+      "index": 100084,
+      "name": "KSP_Q_MAP00_TEST_title",
+      "parsed": "'Warning voor map 1'",
+      "id": 100084,
+      "fflname": "Q_MAP00_TEST_title"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
         "KSP_Q_MAP00_INFO_value": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100084,
+      "index": 100085,
       "name": "KSP_Q_MAP00_INFO_value",
       "parsed": "undefined",
-      "id": 100084,
+      "id": 100085,
       "fflname": "Q_MAP00_INFO_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP00_INFO_title": true,
-        "KSP_Q_MAP01_INFO_title": true,
-        "KSP_Q_MAP01_PARAGRAAF09SUB3_title": true
+        "KSP_Q_MAP00_INFO_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Info bij stap 1'",
-      "index": 100085,
+      "index": 100086,
       "name": "KSP_Q_MAP00_INFO_title",
       "parsed": "'Info bij stap 1'",
-      "id": 100085,
+      "id": 100086,
       "fflname": "Q_MAP00_INFO_title"
     },
     {
@@ -75461,26 +75510,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100086,
+      "index": 100087,
       "name": "KSP_Q_MAP00_VALIDATION_value",
       "parsed": "undefined",
-      "id": 100086,
+      "id": 100087,
       "fflname": "Q_MAP00_VALIDATION_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP00_VALIDATION_title": true,
-        "KSP_Q_MAP01_VALIDATION_title": true,
-        "KSP_Q_MAP01_PARAGRAAF09SUB4_title": true
+        "KSP_Q_MAP00_VALIDATION_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Validatie stap 1'",
-      "index": 100087,
+      "index": 100088,
       "name": "KSP_Q_MAP00_VALIDATION_title",
       "parsed": "'Validatie stap 1'",
-      "id": 100087,
+      "id": 100088,
       "fflname": "Q_MAP00_VALIDATION_title"
     },
     {
@@ -75491,25 +75538,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100088,
+      "index": 100089,
       "name": "KSP_Q_MAP00_HINT_value",
       "parsed": "undefined",
-      "id": 100088,
+      "id": 100089,
       "fflname": "Q_MAP00_HINT_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP00_HINT_title": true,
-        "KSP_Q_MAP01_HINT_title": true
+        "KSP_Q_MAP00_HINT_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hinttekst stap 1'",
-      "index": 100089,
+      "index": 100090,
       "name": "KSP_Q_MAP00_HINT_title",
       "parsed": "'Hinttekst stap 1'",
-      "id": 100089,
+      "id": 100090,
       "fflname": "Q_MAP00_HINT_title"
     },
     {
@@ -75520,11 +75566,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100090,
+      "index": 100091,
       "name": "KSP_Q_MAP00_INTRO_value",
       "parsed": "undefined",
-      "id": 100090,
+      "id": 100091,
       "fflname": "Q_MAP00_INTRO_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP00_INTRO_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Intro'",
+      "index": 100092,
+      "name": "KSP_Q_MAP00_INTRO_title",
+      "parsed": "'Intro'",
+      "id": 100092,
+      "fflname": "Q_MAP00_INTRO_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -75534,24 +75594,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "'Why do we use it\\r\\n\\r\\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages&&web page editors now use Lorem Ipsum as their default model text,&&a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour&&the like).\\r\\n\\r\\n\\r\\nWhy do we use it\\r\\n\\r\\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages&&web page editors now use Lorem Ipsum as their default model text,&&a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour&&the like).'",
-      "index": 100091,
+      "index": 100093,
       "name": "KSP_Q_MAP00_INTROMEMO_value",
       "parsed": "'Why do we use it\\r\\n\\r\\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages&&web page editors now use Lorem Ipsum as their default model text,&&a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour&&the like).\\r\\n\\r\\n\\r\\nWhy do we use it\\r\\n\\r\\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages&&web page editors now use Lorem Ipsum as their default model text,&&a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour&&the like).'",
-      "id": 100091,
+      "id": 100093,
       "fflname": "Q_MAP00_INTROMEMO_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP00_INTROMEMO_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'[b]Intro[/b]'",
-      "index": 100092,
+      "index": 100094,
       "name": "KSP_Q_MAP00_INTROMEMO_title",
       "parsed": "'[b]Intro[/b]'",
-      "id": 100092,
+      "id": 100094,
       "fflname": "Q_MAP00_INTROMEMO_title"
     },
     {
@@ -75572,27 +75632,27 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "deps",
-          "refId": 100160
+          "refId": 100171
         },
         {
           "name": "KSP_Q_MAP01_REQUIREDVARS_value",
           "association": "deps",
-          "refId": 100159
+          "refId": 100169
         },
         {
           "name": "KSP_Q_MAP01_INFO_value",
           "association": "refs",
-          "refId": 100096
+          "refId": 100099
         },
         {
           "name": "KSP_Q_MAP01_VALIDATION_value",
           "association": "refs",
-          "refId": 100097
+          "refId": 100101
         },
         {
           "name": "KSP_Q_MAP01_STATUS_value",
           "association": "refs",
-          "refId": 100147
+          "refId": 100153
         }
       ],
       "deps": {
@@ -75600,24 +75660,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_MAP01_REQUIREDVARS_value": true
       },
       "original": "Q_MAP01_ENTEREDREQUIREDVARS==Q_MAP01_REQUIREDVARS",
-      "index": 100093,
+      "index": 100095,
       "name": "KSP_Q_MAP01_value",
-      "parsed": "a100160('100160',x,y.base,z,v)==a100159('100159',x,y.base,z,v)",
-      "id": 100093,
+      "parsed": "a100171('100171',x,y.base,z,v)==a100169('100169',x,y.base,z,v)",
+      "id": 100095,
       "fflname": "Q_MAP01_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP01_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Basic Information'",
-      "index": 100094,
+      "index": 100096,
       "name": "KSP_Q_MAP01_title",
       "parsed": "'Basic Information'",
-      "id": 100094,
+      "id": 100096,
       "fflname": "Q_MAP01_title"
     },
     {
@@ -75630,17 +75690,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_RESTRICTIES_value",
           "association": "deps",
-          "refId": 100401
+          "refId": 100443
         },
         {
           "name": "KSP_Q_WARNING_GLOBAL_value",
           "association": "deps",
-          "refId": 100395
+          "refId": 100437
         },
         {
           "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100160
+          "refId": 100171
         }
       ],
       "deps": {
@@ -75648,11 +75708,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_WARNING_GLOBAL_value": true
       },
       "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
-      "index": 100095,
+      "index": 100097,
       "name": "KSP_Q_MAP01_WARNING_value",
-      "parsed": "String(a100401('100401',x.doc,y.base,z,v)+a100395('100395',x.doc,y.base,z,v))",
-      "id": 100095,
+      "parsed": "String(a100443('100443',x.doc,y.base,z,v)+a100437('100437',x.doc,y.base,z,v))",
+      "id": 100097,
       "fflname": "Q_MAP01_WARNING_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP01_WARNING_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Warning voor map 1'",
+      "index": 100098,
+      "name": "KSP_Q_MAP01_WARNING_title",
+      "parsed": "'Warning voor map 1'",
+      "id": 100098,
+      "fflname": "Q_MAP01_WARNING_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -75664,23 +75738,37 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_value",
           "association": "deps",
-          "refId": 100093
+          "refId": 100095
         },
         {
           "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100160
+          "refId": 100171
         }
       ],
       "deps": {
         "KSP_Q_MAP01_value": true
       },
       "original": "String(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
-      "index": 100096,
+      "index": 100099,
       "name": "KSP_Q_MAP01_INFO_value",
-      "parsed": "String(a100093('100093',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
-      "id": 100096,
+      "parsed": "String(a100095('100095',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
+      "id": 100099,
       "fflname": "Q_MAP01_INFO_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP01_INFO_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Info bij stap 1'",
+      "index": 100100,
+      "name": "KSP_Q_MAP01_INFO_title",
+      "parsed": "'Info bij stap 1'",
+      "id": 100100,
+      "fflname": "Q_MAP01_INFO_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -75692,22 +75780,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_value",
           "association": "deps",
-          "refId": 100093
+          "refId": 100095
         },
         {
           "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "deps",
-          "refId": 100160
+          "refId": 100171
         },
         {
           "name": "KSP_Q_MAP01_REQUIREDVARS_value",
           "association": "deps",
-          "refId": 100159
+          "refId": 100169
         },
         {
           "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100160
+          "refId": 100171
         }
       ],
       "deps": {
@@ -75716,11 +75804,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_MAP01_REQUIREDVARS_value": true
       },
       "original": "String(If(Q_MAP01[doc]==0,'Er zijn '+Str(Q_MAP01_ENTEREDREQUIREDVARS,0,0)+' van de '+Str(Q_MAP01_REQUIREDVARS,0,0)+' verplichte vragen in deze stap ingevuld.',''))",
-      "index": 100097,
+      "index": 100101,
       "name": "KSP_Q_MAP01_VALIDATION_value",
-      "parsed": "String(a100093('100093',x.doc,y.base,z,v)==0?'Er zijn '+Str(a100160('100160',x,y.base,z,v),0,0)+' van de '+Str(a100159('100159',x,y.base,z,v),0,0)+' verplichte vragen in deze stap ingevuld.':'')",
-      "id": 100097,
+      "parsed": "String(a100095('100095',x.doc,y.base,z,v)==0?'Er zijn '+Str(a100171('100171',x,y.base,z,v),0,0)+' van de '+Str(a100169('100169',x,y.base,z,v),0,0)+' verplichte vragen in deze stap ingevuld.':'')",
+      "id": 100101,
       "fflname": "Q_MAP01_VALIDATION_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP01_VALIDATION_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Validatie stap 1'",
+      "index": 100102,
+      "name": "KSP_Q_MAP01_VALIDATION_title",
+      "parsed": "'Validatie stap 1'",
+      "id": 100102,
+      "fflname": "Q_MAP01_VALIDATION_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -75732,16 +75834,30 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100160
+          "refId": 100171
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100098,
+      "index": 100103,
       "name": "KSP_Q_MAP01_HINT_value",
       "parsed": "undefined",
-      "id": 100098,
+      "id": 100103,
       "fflname": "Q_MAP01_HINT_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP01_HINT_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Hinttekst stap 1'",
+      "index": 100104,
+      "name": "KSP_Q_MAP01_HINT_title",
+      "parsed": "'Hinttekst stap 1'",
+      "id": 100104,
+      "fflname": "Q_MAP01_HINT_title"
     },
     {
       "type": "noCacheLocked",
@@ -75751,10 +75867,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "'Dit is de hinttekst van de variable Q_MAP01_HINT (DEZE REGEL WORDT NIET GEBRUIKT!)'",
-      "index": 100099,
+      "index": 100105,
       "name": "KSP_Q_MAP01_HINT_hint",
       "parsed": "'Dit is de hinttekst van de variable Q_MAP01_HINT (DEZE REGEL WORDT NIET GEBRUIKT!)'",
-      "id": 100099,
+      "id": 100105,
       "fflname": "Q_MAP01_HINT_hint"
     },
     {
@@ -75767,29 +75883,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100160
+          "refId": 100171
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100100,
+      "index": 100106,
       "name": "KSP_Situation_value",
       "parsed": "undefined",
-      "id": 100100,
+      "id": 100106,
       "fflname": "Situation_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Situation_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Situation'",
-      "index": 100101,
+      "index": 100107,
       "name": "KSP_Situation_title",
       "parsed": "'Situation'",
-      "id": 100101,
+      "id": 100107,
       "fflname": "Situation_title"
     },
     {
@@ -75800,24 +75916,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100102,
+      "index": 100108,
       "name": "KSP_IncomeSection_value",
       "parsed": "undefined",
-      "id": 100102,
+      "id": 100108,
       "fflname": "IncomeSection_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_IncomeSection_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'[b]Income[/b]'",
-      "index": 100103,
+      "index": 100109,
       "name": "KSP_IncomeSection_title",
       "parsed": "'[b]Income[/b]'",
-      "id": 100103,
+      "id": 100109,
       "fflname": "IncomeSection_title"
     },
     {
@@ -75831,34 +75947,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalIncome_value",
           "association": "refs",
-          "refId": 100231
+          "refId": 100244
         },
         {
           "name": "KSP_CombinationDiscountLowestIncome_value",
           "association": "refs",
-          "refId": 100259
+          "refId": 100273
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100104,
+      "index": 100110,
       "name": "KSP_IncomeParent01_value",
       "parsed": "undefined",
-      "id": 100104,
+      "id": 100110,
       "fflname": "IncomeParent01_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_IncomeParent01_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Gross Income Parent 1'",
-      "index": 100105,
+      "index": 100111,
       "name": "KSP_IncomeParent01_title",
       "parsed": "'Gross Income Parent 1'",
-      "id": 100105,
+      "id": 100111,
       "fflname": "IncomeParent01_title"
     },
     {
@@ -75872,34 +75988,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalIncome_value",
           "association": "refs",
-          "refId": 100231
+          "refId": 100244
         },
         {
           "name": "KSP_CombinationDiscountLowestIncome_value",
           "association": "refs",
-          "refId": 100259
+          "refId": 100273
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100106,
+      "index": 100112,
       "name": "KSP_IncomeParent02_value",
       "parsed": "undefined",
-      "id": 100106,
+      "id": 100112,
       "fflname": "IncomeParent02_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_IncomeParent02_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Gross Income Parent 2'",
-      "index": 100107,
+      "index": 100113,
       "name": "KSP_IncomeParent02_title",
       "parsed": "'Gross Income Parent 2'",
-      "id": 100107,
+      "id": 100113,
       "fflname": "IncomeParent02_title"
     },
     {
@@ -75912,29 +76028,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_value",
           "association": "refs",
-          "refId": 100112
+          "refId": 100118
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100108,
+      "index": 100114,
       "name": "KSP_WorkingHoursWeeklyParent01_value",
       "parsed": "undefined",
-      "id": 100108,
+      "id": 100114,
       "fflname": "WorkingHoursWeeklyParent01_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_WorkingHoursWeeklyParent01_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Working hours parent 1'",
-      "index": 100109,
+      "index": 100115,
       "name": "KSP_WorkingHoursWeeklyParent01_title",
       "parsed": "'Working hours parent 1'",
-      "id": 100109,
+      "id": 100115,
       "fflname": "WorkingHoursWeeklyParent01_title"
     },
     {
@@ -75947,29 +76063,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_value",
           "association": "refs",
-          "refId": 100112
+          "refId": 100118
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100110,
+      "index": 100116,
       "name": "KSP_WorkingHoursWeeklyParent02_value",
       "parsed": "undefined",
-      "id": 100110,
+      "id": 100116,
       "fflname": "WorkingHoursWeeklyParent02_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_WorkingHoursWeeklyParent02_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Working hours parent 2'",
-      "index": 100111,
+      "index": 100117,
       "name": "KSP_WorkingHoursWeeklyParent02_title",
       "parsed": "'Working hours parent 2'",
-      "id": 100111,
+      "id": 100117,
       "fflname": "WorkingHoursWeeklyParent02_title"
     },
     {
@@ -75983,22 +76099,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_WorkingHoursWeeklyParent01_value",
           "association": "deps",
-          "refId": 100108
+          "refId": 100114
         },
         {
           "name": "KSP_WorkingHoursWeeklyParent02_value",
           "association": "deps",
-          "refId": 100110
+          "refId": 100116
         },
         {
           "name": "KSP_MaxNrCompensatedHoursChildcare_value",
           "association": "refs",
-          "refId": 100216
+          "refId": 100229
         },
         {
           "name": "KSP_MaxNrCompensatedHoursOutofSchoolCare_value",
           "association": "refs",
-          "refId": 100218
+          "refId": 100231
         }
       ],
       "deps": {
@@ -76006,24 +76122,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_WorkingHoursWeeklyParent02_value": true
       },
       "original": "Min(WorkingHoursWeeklyParent01,WorkingHoursWeeklyParent02)",
-      "index": 100112,
+      "index": 100118,
       "name": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_value",
-      "parsed": "Math.min(a100108('100108',x,y.base,z,v),a100110('100110',x,y.base,z,v))",
-      "id": 100112,
+      "parsed": "Math.min(a100114('100114',x,y.base,z,v),a100116('100116',x,y.base,z,v))",
+      "id": 100118,
       "fflname": "WorkingHoursWeeklyOfLeastWorkingParent_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_WorkingHoursWeeklyOfLeastWorkingParent_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Working hours (weekly) of least working Parent'",
-      "index": 100113,
+      "index": 100119,
       "name": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_title",
       "parsed": "'Working hours (weekly) of least working Parent'",
-      "id": 100113,
+      "id": 100119,
       "fflname": "WorkingHoursWeeklyOfLeastWorkingParent_title"
     },
     {
@@ -76034,10 +76150,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "'Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed'",
-      "index": 100114,
+      "index": 100120,
       "name": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_hint",
       "parsed": "'Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed'",
-      "id": 100114,
+      "id": 100120,
       "fflname": "WorkingHoursWeeklyOfLeastWorkingParent_hint"
     },
     {
@@ -76048,24 +76164,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100115,
+      "index": 100121,
       "name": "KSP_Child_value",
       "parsed": "undefined",
-      "id": 100115,
+      "id": 100121,
       "fflname": "Child_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Child_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Child'",
-      "index": 100116,
+      "index": 100122,
       "name": "KSP_Child_title",
       "parsed": "'Child'",
-      "id": 100116,
+      "id": 100122,
       "fflname": "Child_title"
     },
     {
@@ -76078,29 +76194,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_ActualFood_value",
           "association": "refs",
-          "refId": 100301
+          "refId": 100325
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100117,
+      "index": 100123,
       "name": "KSP_ChildGender_value",
       "parsed": "undefined",
-      "id": 100117,
+      "id": 100123,
       "fflname": "ChildGender_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ChildGender_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Gender'",
-      "index": 100118,
+      "index": 100124,
       "name": "KSP_ChildGender_title",
       "parsed": "'Gender'",
-      "id": 100118,
+      "id": 100124,
       "fflname": "ChildGender_title"
     },
     {
@@ -76111,10 +76227,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Boy'},{'name':'1','value':'Girl'}]",
-      "index": 100119,
+      "index": 100125,
       "name": "KSP_ChildGender_choices",
       "parsed": "[{'name':' 0','value':'Boy'},{'name':'1','value':'Girl'}]",
-      "id": 100119,
+      "id": 100125,
       "fflname": "ChildGender_choices"
     },
     {
@@ -76128,34 +76244,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_NrOfDaysChildcareMonth_value",
           "association": "refs",
-          "refId": 100122
+          "refId": 100128
         },
         {
           "name": "KSP_TupleSumTest_value",
           "association": "refs",
-          "refId": 100141
+          "refId": 100147
         }
       ],
       "deps": {},
       "original": "NA",
-      "index": 100120,
+      "index": 100126,
       "name": "KSP_NrOfDaysChildcareWeek_value",
       "parsed": "NA",
-      "id": 100120,
+      "id": 100126,
       "fflname": "NrOfDaysChildcareWeek_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_NrOfDaysChildcareWeek_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Nr. of days childcare per week'",
-      "index": 100121,
+      "index": 100127,
       "name": "KSP_NrOfDaysChildcareWeek_title",
       "parsed": "'Nr. of days childcare per week'",
-      "id": 100121,
+      "id": 100127,
       "fflname": "NrOfDaysChildcareWeek_title"
     },
     {
@@ -76169,41 +76285,41 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_NrOfDaysChildcareWeek_value",
           "association": "deps",
-          "refId": 100120
+          "refId": 100126
         },
         {
           "name": "KSP_NrCompensatedHoursChildcare_value",
           "association": "refs",
-          "refId": 100221
+          "refId": 100234
         },
         {
           "name": "KSP_ChildCareCosts_value",
           "association": "refs",
-          "refId": 100345
+          "refId": 100372
         }
       ],
       "deps": {
         "KSP_NrOfDaysChildcareWeek_value": true
       },
       "original": "OnER(10.5*NrOfDaysChildcareWeek[doc]*4,NA)",
-      "index": 100122,
+      "index": 100128,
       "name": "KSP_NrOfDaysChildcareMonth_value",
-      "parsed": "OnER(10.5*a100120('100120',x.doc,y,z,v)*4,NA)",
-      "id": 100122,
+      "parsed": "OnER(10.5*a100126('100126',x.doc,y,z,v)*4,NA)",
+      "id": 100128,
       "fflname": "NrOfDaysChildcareMonth_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_NrOfDaysChildcareMonth_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Nr. of hours childcare per month'",
-      "index": 100123,
+      "index": 100129,
       "name": "KSP_NrOfDaysChildcareMonth_title",
       "parsed": "'Nr. of hours childcare per month'",
-      "id": 100123,
+      "id": 100129,
       "fflname": "NrOfDaysChildcareMonth_title"
     },
     {
@@ -76216,29 +76332,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
           "association": "refs",
-          "refId": 100126
+          "refId": 100132
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100124,
+      "index": 100130,
       "name": "KSP_NrOfDaysOutOfSchoolCareWeek_value",
       "parsed": "undefined",
-      "id": 100124,
+      "id": 100130,
       "fflname": "NrOfDaysOutOfSchoolCareWeek_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_NrOfDaysOutOfSchoolCareWeek_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Nr. of days out-of-school care per week'",
-      "index": 100125,
+      "index": 100131,
       "name": "KSP_NrOfDaysOutOfSchoolCareWeek_title",
       "parsed": "'Nr. of days out-of-school care per week'",
-      "id": 100125,
+      "id": 100131,
       "fflname": "NrOfDaysOutOfSchoolCareWeek_title"
     },
     {
@@ -76252,41 +76368,41 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_NrOfDaysOutOfSchoolCareWeek_value",
           "association": "deps",
-          "refId": 100124
+          "refId": 100130
         },
         {
           "name": "KSP_NrCompensatedHoursOutofSchoolCare_value",
           "association": "refs",
-          "refId": 100223
+          "refId": 100236
         },
         {
           "name": "KSP_CostsForOutOfSchoolCare_value",
           "association": "refs",
-          "refId": 100321
+          "refId": 100345
         }
       ],
       "deps": {
         "KSP_NrOfDaysOutOfSchoolCareWeek_value": true
       },
       "original": "OnER(4*NrOfDaysOutOfSchoolCareWeek*4.5,NA)",
-      "index": 100126,
+      "index": 100132,
       "name": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
-      "parsed": "OnER(4*a100124('100124',x,y,z,v)*4.5,NA)",
-      "id": 100126,
+      "parsed": "OnER(4*a100130('100130',x,y,z,v)*4.5,NA)",
+      "id": 100132,
       "fflname": "NrOfDaysOutOfSchoolCareMonth_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_NrOfDaysOutOfSchoolCareMonth_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Nr. of hours out-of-school care per month'",
-      "index": 100127,
+      "index": 100133,
       "name": "KSP_NrOfDaysOutOfSchoolCareMonth_title",
       "parsed": "'Nr. of hours out-of-school care per month'",
-      "id": 100127,
+      "id": 100133,
       "fflname": "NrOfDaysOutOfSchoolCareMonth_title"
     },
     {
@@ -76300,34 +76416,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_MaxCompensatedAmountChildcare_value",
           "association": "refs",
-          "refId": 100226
+          "refId": 100239
         },
         {
           "name": "KSP_ChildCareCosts_value",
           "association": "refs",
-          "refId": 100345
+          "refId": 100372
         }
       ],
       "deps": {},
       "original": "6.8",
-      "index": 100128,
+      "index": 100134,
       "name": "KSP_HourlyFeeChildCare_value",
       "parsed": "6.8",
-      "id": 100128,
+      "id": 100134,
       "fflname": "HourlyFeeChildCare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_HourlyFeeChildCare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hourly fee childcare'",
-      "index": 100129,
+      "index": 100135,
       "name": "KSP_HourlyFeeChildCare_title",
       "parsed": "'Hourly fee childcare'",
-      "id": 100129,
+      "id": 100135,
       "fflname": "HourlyFeeChildCare_title"
     },
     {
@@ -76341,34 +76457,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_MaxCompensatedAmountOutofSchoolCare_value",
           "association": "refs",
-          "refId": 100228
+          "refId": 100241
         },
         {
           "name": "KSP_CostsForOutOfSchoolCare_value",
           "association": "refs",
-          "refId": 100321
+          "refId": 100345
         }
       ],
       "deps": {},
       "original": "6.8",
-      "index": 100130,
+      "index": 100136,
       "name": "KSP_HourlyFeeOutOfSchoolCare_value",
       "parsed": "6.8",
-      "id": 100130,
+      "id": 100136,
       "fflname": "HourlyFeeOutOfSchoolCare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_HourlyFeeOutOfSchoolCare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hourly fee out-of-school care'",
-      "index": 100131,
+      "index": 100137,
       "name": "KSP_HourlyFeeOutOfSchoolCare_title",
       "parsed": "'Hourly fee out-of-school care'",
-      "id": 100131,
+      "id": 100137,
       "fflname": "HourlyFeeOutOfSchoolCare_title"
     },
     {
@@ -76381,29 +76497,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_CostsForPrimaryEducation_value",
           "association": "refs",
-          "refId": 100323
+          "refId": 100347
         }
       ],
       "deps": {},
       "original": "80",
-      "index": 100132,
+      "index": 100138,
       "name": "KSP_ParentalContributionPrimaryEducation_value",
       "parsed": "80",
-      "id": 100132,
+      "id": 100138,
       "fflname": "ParentalContributionPrimaryEducation_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ParentalContributionPrimaryEducation_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Parental contribution primary education'",
-      "index": 100133,
+      "index": 100139,
       "name": "KSP_ParentalContributionPrimaryEducation_title",
       "parsed": "'Parental contribution primary education'",
-      "id": 100133,
+      "id": 100139,
       "fflname": "ParentalContributionPrimaryEducation_title"
     },
     {
@@ -76416,29 +76532,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_CostsUnspecifiedOverview_value",
           "association": "refs",
-          "refId": 100327
+          "refId": 100351
         }
       ],
       "deps": {},
       "original": "180",
-      "index": 100134,
+      "index": 100140,
       "name": "KSP_CostsUnspecified_value",
       "parsed": "180",
-      "id": 100134,
+      "id": 100140,
       "fflname": "CostsUnspecified_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CostsUnspecified_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Costs unspecified per month'",
-      "index": 100135,
+      "index": 100141,
       "name": "KSP_CostsUnspecified_title",
       "parsed": "'Costs unspecified per month'",
-      "id": 100135,
+      "id": 100141,
       "fflname": "CostsUnspecified_title"
     },
     {
@@ -76563,34 +76679,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_CostsYearOneFour_value",
           "association": "refs",
-          "refId": 100242
+          "refId": 100255
         },
         {
           "name": "KSP_CostsYearFiveSixSeven_value",
           "association": "refs",
-          "refId": 100244
+          "refId": 100257
         }
       ],
       "deps": {},
       "original": "1",
-      "index": 100136,
+      "index": 100142,
       "name": "KSP_SecondaryEducationProfile_value",
       "parsed": "1",
-      "id": 100136,
+      "id": 100142,
       "fflname": "SecondaryEducationProfile_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_SecondaryEducationProfile_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'secondary education (profile)'",
-      "index": 100137,
+      "index": 100143,
       "name": "KSP_SecondaryEducationProfile_title",
       "parsed": "'secondary education (profile)'",
-      "id": 100137,
+      "id": 100143,
       "fflname": "SecondaryEducationProfile_title"
     },
     {
@@ -76601,10 +76717,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'VWO'},{'name':'1','value':'VMBO-MBO'},{'name':'2','value':'VMBO-HAVO'},{'name':'3','value':'HAVO'}]",
-      "index": 100138,
+      "index": 100144,
       "name": "KSP_SecondaryEducationProfile_choices",
       "parsed": "[{'name':' 0','value':'VWO'},{'name':'1','value':'VMBO-MBO'},{'name':'2','value':'VMBO-HAVO'},{'name':'3','value':'HAVO'}]",
-      "id": 100138,
+      "id": 100144,
       "fflname": "SecondaryEducationProfile_choices"
     },
     {
@@ -76616,87 +76732,87 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Furniture_value",
           "association": "deps",
-          "refId": 100295
+          "refId": 100319
         },
         {
           "name": "KSP_ActualChildCareCosts_value",
           "association": "deps",
-          "refId": 100297
+          "refId": 100321
         },
         {
           "name": "KSP_ActualDiapers_value",
           "association": "deps",
-          "refId": 100299
+          "refId": 100323
         },
         {
           "name": "KSP_ActualFood_value",
           "association": "deps",
-          "refId": 100301
+          "refId": 100325
         },
         {
           "name": "KSP_ActualClothingCosts_value",
           "association": "deps",
-          "refId": 100303
+          "refId": 100327
         },
         {
           "name": "KSP_ActualPersonalCareCosts_value",
           "association": "deps",
-          "refId": 100305
+          "refId": 100329
         },
         {
           "name": "KSP_Hairdresser_value",
           "association": "deps",
-          "refId": 100307
+          "refId": 100331
         },
         {
           "name": "KSP_Inventory_value",
           "association": "deps",
-          "refId": 100309
+          "refId": 100333
         },
         {
           "name": "KSP_Allowance_value",
           "association": "deps",
-          "refId": 100311
+          "refId": 100335
         },
         {
           "name": "KSP_Contributions_value",
           "association": "deps",
-          "refId": 100313
+          "refId": 100337
         },
         {
           "name": "KSP_Transport_value",
           "association": "deps",
-          "refId": 100315
+          "refId": 100339
         },
         {
           "name": "KSP_MobilePhone_value",
           "association": "deps",
-          "refId": 100317
+          "refId": 100341
         },
         {
           "name": "KSP_DrivingLicense_value",
           "association": "deps",
-          "refId": 100319
+          "refId": 100343
         },
         {
           "name": "KSP_CostsForOutOfSchoolCare_value",
           "association": "deps",
-          "refId": 100321
+          "refId": 100345
         },
         {
           "name": "KSP_CostsForPrimaryEducation_value",
           "association": "deps",
-          "refId": 100323
+          "refId": 100347
         },
         {
           "name": "KSP_CostsForSecondaryEducation_value",
           "association": "deps",
-          "refId": 100325
+          "refId": 100349
         },
         {
           "name": "KSP_CostsUnspecifiedOverview_value",
           "association": "deps",
-          "refId": 100327
+          "refId": 100351
         }
       ],
       "deps": {
@@ -76719,24 +76835,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_CostsUnspecifiedOverview_value": true
       },
       "original": "Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview",
-      "index": 100139,
+      "index": 100145,
       "name": "KSP_TotalyYearlyCostsChild_value",
-      "parsed": "a100295('100295',x,y.base,z,v)+a100297('100297',x,y.base,z,v)+a100299('100299',x,y.base,z,v)+a100301('100301',x,y.base,z,v)+a100303('100303',x,y.base,z,v)+a100305('100305',x,y.base,z,v)+a100307('100307',x,y.base,z,v)+a100309('100309',x,y.base,z,v)+a100311('100311',x,y.base,z,v)+a100313('100313',x,y.base,z,v)+a100315('100315',x,y.base,z,v)+a100317('100317',x,y.base,z,v)+a100319('100319',x,y.base,z,v)+a100321('100321',x,y.base,z,v)+a100323('100323',x,y.base,z,v)+a100325('100325',x,y.base,z,v)+a100327('100327',x,y.base,z,v)",
-      "id": 100139,
+      "parsed": "a100319('100319',x,y.base,z,v)+a100321('100321',x,y.base,z,v)+a100323('100323',x,y.base,z,v)+a100325('100325',x,y.base,z,v)+a100327('100327',x,y.base,z,v)+a100329('100329',x,y.base,z,v)+a100331('100331',x,y.base,z,v)+a100333('100333',x,y.base,z,v)+a100335('100335',x,y.base,z,v)+a100337('100337',x,y.base,z,v)+a100339('100339',x,y.base,z,v)+a100341('100341',x,y.base,z,v)+a100343('100343',x,y.base,z,v)+a100345('100345',x,y.base,z,v)+a100347('100347',x,y.base,z,v)+a100349('100349',x,y.base,z,v)+a100351('100351',x,y.base,z,v)",
+      "id": 100145,
       "fflname": "TotalyYearlyCostsChild_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_TotalyYearlyCostsChild_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Total (yearly) costs regarding child'",
-      "index": 100140,
+      "index": 100146,
       "name": "KSP_TotalyYearlyCostsChild_title",
       "parsed": "'Total (yearly) costs regarding child'",
-      "id": 100140,
+      "id": 100146,
       "fflname": "TotalyYearlyCostsChild_title"
     },
     {
@@ -76748,17 +76864,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_NrOfDaysChildcareWeek_value",
           "association": "deps",
-          "refId": 100120
+          "refId": 100126
         }
       ],
       "deps": {
         "KSP_NrOfDaysChildcareWeek_value": true
       },
       "original": "TSUM(NrOfDaysChildcareWeek)",
-      "index": 100141,
+      "index": 100147,
       "name": "KSP_TupleSumTest_value",
-      "parsed": "SUM(TVALUES([100120,100117,100120,100122,100124,100126,100128,100130,100132,100134,100136,100139],a100120,'100120',x,y,z,v))",
-      "id": 100141,
+      "parsed": "SUM(TVALUES([100126,100123,100126,100128,100130,100132,100134,100136,100138,100140,100142,100145],a100126,'100126',x,y,z,v))",
+      "id": 100147,
       "fflname": "TupleSumTest_value"
     },
     {
@@ -76771,29 +76887,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_DEBUG_value",
           "association": "refs",
-          "refId": 100161
+          "refId": 100173
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100142,
+      "index": 100148,
       "name": "KSP_Memo1_value",
       "parsed": "undefined",
-      "id": 100142,
+      "id": 100148,
       "fflname": "Memo1_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Memo1_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Toelichting'",
-      "index": 100143,
+      "index": 100149,
       "name": "KSP_Memo1_title",
       "parsed": "'Toelichting'",
-      "id": 100143,
+      "id": 100149,
       "fflname": "Memo1_title"
     },
     {
@@ -76806,55 +76922,56 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100160
+          "refId": 100171
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100144,
+      "index": 100150,
       "name": "KSP_Q_MAP01_PARAGRAAF09_value",
       "parsed": "undefined",
-      "id": 100144,
+      "id": 100150,
       "fflname": "Q_MAP01_PARAGRAAF09_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP01_PARAGRAAF09_title": true,
-        "KSP_Q_MAP02_PARAGRAAF09_title": true,
-        "KSP_Q_MAP06_PARAGRAAF09_title": true
+        "KSP_Q_MAP01_PARAGRAAF09_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Eigenschappen van de stap'",
-      "index": 100145,
+      "index": 100151,
       "name": "KSP_Q_MAP01_PARAGRAAF09_title",
       "parsed": "'Eigenschappen van de stap'",
-      "id": 100145,
+      "id": 100151,
       "fflname": "Q_MAP01_PARAGRAAF09_title"
     },
     {
       "type": "noCacheLocked",
       "refs": {
-        "KSP_Q_MAP01_PARAGRAAF09_visible": true,
-        "KSP_Q_MAP02_visible": true,
-        "KSP_Q_MAP06_PARAGRAAF09_visible": true
+        "KSP_Q_MAP01_PARAGRAAF09_visible": true
       },
       "formulaDependencys": [
         {
+          "name": "KSP_Q_MAP01_visible",
+          "association": "deps"
+        },
+        {
           "name": "KSP_DEBUG_value",
           "association": "deps",
-          "refId": 100161
+          "refId": 100173
         }
       ],
       "deps": {
+        "KSP_Q_MAP01_visible": true,
         "KSP_DEBUG_value": true
       },
-      "original": "DEBUG==1",
-      "index": 100146,
+      "original": "Q_MAP01.visible&&DEBUG==1",
+      "index": 100152,
       "name": "KSP_Q_MAP01_PARAGRAAF09_visible",
-      "parsed": "a100161('100161',x,y.base,z,v)==1",
-      "id": 100146,
+      "parsed": "true&&a100173('100173',x,y.base,z,v)==1",
+      "id": 100152,
       "fflname": "Q_MAP01_PARAGRAAF09_visible"
     },
     {
@@ -76866,33 +76983,31 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_value",
           "association": "deps",
-          "refId": 100093
+          "refId": 100095
         }
       ],
       "deps": {
         "KSP_Q_MAP01_value": true
       },
       "original": "Q_MAP01",
-      "index": 100147,
+      "index": 100153,
       "name": "KSP_Q_MAP01_STATUS_value",
-      "parsed": "a100093('100093',x,y.base,z,v)",
-      "id": 100147,
+      "parsed": "a100095('100095',x,y.base,z,v)",
+      "id": 100153,
       "fflname": "Q_MAP01_STATUS_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP01_STATUS_title": true,
-        "KSP_Q_MAP02_STATUS_title": true,
-        "KSP_Q_MAP06_STATUS_title": true
+        "KSP_Q_MAP01_STATUS_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Status van de stap'",
-      "index": 100148,
+      "index": 100154,
       "name": "KSP_Q_MAP01_STATUS_title",
       "parsed": "'Status van de stap'",
-      "id": 100148,
+      "id": 100154,
       "fflname": "Q_MAP01_STATUS_title"
     },
     {
@@ -76905,10 +77020,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Deze stap is volledig ingevuld (vinkje aanwezig)'},{'name':'1','value':'Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)'}]",
-      "index": 100149,
+      "index": 100155,
       "name": "KSP_Q_MAP01_STATUS_choices",
       "parsed": "[{'name':' 0','value':'Deze stap is volledig ingevuld (vinkje aanwezig)'},{'name':'1','value':'Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)'}]",
-      "id": 100149,
+      "id": 100155,
       "fflname": "Q_MAP01_STATUS_choices"
     },
     {
@@ -76919,11 +77034,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100150,
+      "index": 100156,
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB2_value",
       "parsed": "undefined",
-      "id": 100150,
+      "id": 100156,
       "fflname": "Q_MAP01_PARAGRAAF09SUB2_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP01_PARAGRAAF09SUB2_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Warning voor map 1'",
+      "index": 100157,
+      "name": "KSP_Q_MAP01_PARAGRAAF09SUB2_title",
+      "parsed": "'Warning voor map 1'",
+      "id": 100157,
+      "fflname": "Q_MAP01_PARAGRAAF09SUB2_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -76933,11 +77062,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100151,
+      "index": 100158,
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB3_value",
       "parsed": "undefined",
-      "id": 100151,
+      "id": 100158,
       "fflname": "Q_MAP01_PARAGRAAF09SUB3_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP01_PARAGRAAF09SUB3_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Info bij stap 1'",
+      "index": 100159,
+      "name": "KSP_Q_MAP01_PARAGRAAF09SUB3_title",
+      "parsed": "'Info bij stap 1'",
+      "id": 100159,
+      "fflname": "Q_MAP01_PARAGRAAF09SUB3_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -76947,11 +77090,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100152,
+      "index": 100160,
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB4_value",
       "parsed": "undefined",
-      "id": 100152,
+      "id": 100160,
       "fflname": "Q_MAP01_PARAGRAAF09SUB4_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP01_PARAGRAAF09SUB4_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Validatie stap 1'",
+      "index": 100161,
+      "name": "KSP_Q_MAP01_PARAGRAAF09SUB4_title",
+      "parsed": "'Validatie stap 1'",
+      "id": 100161,
+      "fflname": "Q_MAP01_PARAGRAAF09SUB4_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -76961,29 +77118,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100153,
+      "index": 100162,
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB5_value",
       "parsed": "undefined",
-      "id": 100153,
+      "id": 100162,
       "fflname": "Q_MAP01_PARAGRAAF09SUB5_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP01_PARAGRAAF09SUB5_title": true,
-        "KSP_Q_MAP01_REQUIREDVARS_title": true,
-        "KSP_Q_MAP02_PARAGRAAF09SUB5_title": true,
-        "KSP_Q_MAP02_REQUIREDVARS_title": true,
-        "KSP_Q_MAP06_PARAGRAAF09SUB5_title": true,
-        "KSP_Q_MAP06_REQUIREDVARS_title": true
+        "KSP_Q_MAP01_PARAGRAAF09SUB5_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Aantal verplichte velden (1)'",
-      "index": 100154,
+      "index": 100163,
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB5_title",
       "parsed": "'Aantal verplichte velden (1)'",
-      "id": 100154,
+      "id": 100163,
       "fflname": "Q_MAP01_PARAGRAAF09SUB5_title"
     },
     {
@@ -76994,29 +77146,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100155,
+      "index": 100164,
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB6_value",
       "parsed": "undefined",
-      "id": 100155,
+      "id": 100164,
       "fflname": "Q_MAP01_PARAGRAAF09SUB6_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP01_PARAGRAAF09SUB6_title": true,
-        "KSP_Q_MAP01_ENTEREDREQUIREDVARS_title": true,
-        "KSP_Q_MAP02_PARAGRAAF09SUB6_title": true,
-        "KSP_Q_MAP02_ENTEREDREQUIREDVARS_title": true,
-        "KSP_Q_MAP06_PARAGRAAF09SUB6_title": true,
-        "KSP_Q_MAP06_ENTEREDREQUIREDVARS_title": true
+        "KSP_Q_MAP01_PARAGRAAF09SUB6_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Aantal ingevulde verplichte velden (1)'",
-      "index": 100156,
+      "index": 100165,
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB6_title",
       "parsed": "'Aantal ingevulde verplichte velden (1)'",
-      "id": 100156,
+      "id": 100165,
       "fflname": "Q_MAP01_PARAGRAAF09SUB6_title"
     },
     {
@@ -77027,28 +77174,46 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100157,
+      "index": 100166,
       "name": "KSP_Q_MAP01_HULPVARIABELEN_value",
       "parsed": "undefined",
-      "id": 100157,
+      "id": 100166,
       "fflname": "Q_MAP01_HULPVARIABELEN_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP01_HULPVARIABELEN_title": true,
-        "KSP_Q_MAP02_HULPVARIABELEN_title": true,
-        "KSP_Q_MAP06_HULPVARIABELEN_title": true,
-        "KSP_HULPVARS_title": true
+        "KSP_Q_MAP01_HULPVARIABELEN_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hulpvariabelen'",
-      "index": 100158,
+      "index": 100167,
       "name": "KSP_Q_MAP01_HULPVARIABELEN_title",
       "parsed": "'Hulpvariabelen'",
-      "id": 100158,
+      "id": 100167,
       "fflname": "Q_MAP01_HULPVARIABELEN_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_Q_MAP01_HULPVARIABELEN_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Q_MAP01_visible",
+          "association": "deps"
+        }
+      ],
+      "deps": {
+        "KSP_Q_MAP01_visible": true
+      },
+      "original": "Q_MAP01.visible&&0",
+      "index": 100168,
+      "name": "KSP_Q_MAP01_HULPVARIABELEN_visible",
+      "parsed": "true&&0",
+      "id": 100168,
+      "fflname": "Q_MAP01_HULPVARIABELEN_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -77061,12 +77226,12 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_value",
           "association": "refs",
-          "refId": 100093
+          "refId": 100095
         },
         {
           "name": "KSP_Q_MAP01_VALIDATION_value",
           "association": "refs",
-          "refId": 100097
+          "refId": 100101
         },
         {
           "name": "KSP_Q_MAP01_WARNING_required",
@@ -77102,11 +77267,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_MAP01_PARAGRAAF09_required": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP01,Q_MAP01_HULPVARIABELEN),InputRequired(X))",
-      "index": 100159,
+      "index": 100169,
       "name": "KSP_Q_MAP01_REQUIREDVARS_value",
       "parsed": "Count([false,false,false,false,false,false])",
-      "id": 100159,
+      "id": 100169,
       "fflname": "Q_MAP01_REQUIREDVARS_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP01_REQUIREDVARS_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Aantal verplichte velden (1)'",
+      "index": 100170,
+      "name": "KSP_Q_MAP01_REQUIREDVARS_title",
+      "parsed": "'Aantal verplichte velden (1)'",
+      "id": 100170,
+      "fflname": "Q_MAP01_REQUIREDVARS_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -77119,12 +77298,12 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_value",
           "association": "refs",
-          "refId": 100093
+          "refId": 100095
         },
         {
           "name": "KSP_Q_MAP01_VALIDATION_value",
           "association": "refs",
-          "refId": 100097
+          "refId": 100101
         },
         {
           "name": "KSP_Q_MAP01_WARNING_required",
@@ -77133,7 +77312,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_WARNING_value",
           "association": "deps",
-          "refId": 100095
+          "refId": 100097
         },
         {
           "name": "KSP_Q_MAP01_INFO_required",
@@ -77142,7 +77321,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_INFO_value",
           "association": "deps",
-          "refId": 100096
+          "refId": 100099
         },
         {
           "name": "KSP_Q_MAP01_VALIDATION_required",
@@ -77151,7 +77330,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_VALIDATION_value",
           "association": "deps",
-          "refId": 100097
+          "refId": 100101
         },
         {
           "name": "KSP_Q_MAP01_HINT_required",
@@ -77160,7 +77339,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_HINT_value",
           "association": "deps",
-          "refId": 100098
+          "refId": 100103
         },
         {
           "name": "KSP_Situation_required",
@@ -77169,7 +77348,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Situation_value",
           "association": "deps",
-          "refId": 100100
+          "refId": 100106
         },
         {
           "name": "KSP_Q_MAP01_PARAGRAAF09_required",
@@ -77178,7 +77357,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_PARAGRAAF09_value",
           "association": "deps",
-          "refId": 100144
+          "refId": 100150
         }
       ],
       "deps": {
@@ -77196,52 +77375,78 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_MAP01_PARAGRAAF09_value": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP01,Q_MAP01_HULPVARIABELEN),InputRequired(X)&&DataAvailable(X))",
-      "index": 100160,
+      "index": 100171,
       "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
-      "parsed": "Count([false&&v[100095][x.hash + y.hash + z]!==undefined,false&&v[100096][x.hash + y.hash + z]!==undefined,false&&v[100097][x.hash + y.hash + z]!==undefined,false&&v[100098][x.hash + y.hash + z]!==undefined,false&&v[100100][x.hash + y.hash + z]!==undefined,false&&v[100144][x.hash + y.hash + z]!==undefined])",
-      "id": 100160,
+      "parsed": "Count([false&&v[100097][x.hash + y.hash + z]!==undefined,false&&v[100099][x.hash + y.hash + z]!==undefined,false&&v[100101][x.hash + y.hash + z]!==undefined,false&&v[100103][x.hash + y.hash + z]!==undefined,false&&v[100106][x.hash + y.hash + z]!==undefined,false&&v[100150][x.hash + y.hash + z]!==undefined])",
+      "id": 100171,
       "fflname": "Q_MAP01_ENTEREDREQUIREDVARS_value"
     },
     {
       "type": "noCacheUnlocked",
       "refs": {
+        "KSP_Q_MAP01_ENTEREDREQUIREDVARS_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Aantal ingevulde verplichte velden (1)'",
+      "index": 100172,
+      "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_title",
+      "parsed": "'Aantal ingevulde verplichte velden (1)'",
+      "id": 100172,
+      "fflname": "Q_MAP01_ENTEREDREQUIREDVARS_title"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
         "KSP_DEBUG_value": true,
-        "KSP_Q_MAP01_PARAGRAAF09_visible": true
+        "KSP_Q_MAP01_PARAGRAAF09_visible": true,
+        "KSP_Q_MAP02_visible": true,
+        "KSP_Q_MAP06_PARAGRAAF09_visible": true
       },
       "formulaDependencys": [
         {
           "name": "KSP_Q_MAP01_PARAGRAAF09_visible",
           "association": "refs",
-          "refId": 100146
+          "refId": 100152
         },
         {
           "name": "KSP_Memo1_value",
           "association": "deps",
-          "refId": 100142
+          "refId": 100148
+        },
+        {
+          "name": "KSP_Q_MAP02_visible",
+          "association": "refs",
+          "refId": 100177
+        },
+        {
+          "name": "KSP_Q_MAP06_PARAGRAAF09_visible",
+          "association": "refs",
+          "refId": 100376
         }
       ],
       "deps": {
         "KSP_Memo1_value": true
       },
       "original": "If(Pos('Negro',Memo1[doc])>0,1,0)",
-      "index": 100161,
+      "index": 100173,
       "name": "KSP_DEBUG_value",
-      "parsed": "Pos('Negro',a100142('100142',x.doc,y.base,z,v))>0?1:0",
-      "id": 100161,
+      "parsed": "Pos('Negro',a100148('100148',x.doc,y.base,z,v))>0?1:0",
+      "id": 100173,
       "fflname": "DEBUG_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_DEBUG_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Debug'",
-      "index": 100162,
+      "index": 100174,
       "name": "KSP_DEBUG_title",
       "parsed": "'Debug'",
-      "id": 100162,
+      "id": 100174,
       "fflname": "DEBUG_title"
     },
     {
@@ -77255,22 +77460,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "deps",
-          "refId": 100272
+          "refId": 100295
         },
         {
           "name": "KSP_Q_MAP02_REQUIREDVARS_value",
           "association": "deps",
-          "refId": 100271
+          "refId": 100293
         },
         {
           "name": "KSP_Q_MAP02_INFO_value",
           "association": "refs",
-          "refId": 100167
+          "refId": 100180
         },
         {
           "name": "KSP_Q_MAP02_STATUS_value",
           "association": "refs",
-          "refId": 100264
+          "refId": 100279
         }
       ],
       "deps": {
@@ -77278,25 +77483,58 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_MAP02_REQUIREDVARS_value": true
       },
       "original": "Q_MAP02_ENTEREDREQUIREDVARS==Q_MAP02_REQUIREDVARS",
-      "index": 100163,
+      "index": 100175,
       "name": "KSP_Q_MAP02_value",
-      "parsed": "a100272('100272',x,y.base,z,v)==a100271('100271',x,y.base,z,v)",
-      "id": 100163,
+      "parsed": "a100295('100295',x,y.base,z,v)==a100293('100293',x,y.base,z,v)",
+      "id": 100175,
       "fflname": "Q_MAP02_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP02_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Calculations Care'",
-      "index": 100164,
+      "index": 100176,
       "name": "KSP_Q_MAP02_title",
       "parsed": "'Calculations Care'",
-      "id": 100164,
+      "id": 100176,
       "fflname": "Q_MAP02_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_Q_MAP02_visible": true,
+        "KSP_Q_MAP02_HULPVARIABELEN_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Q_ROOT_visible",
+          "association": "deps"
+        },
+        {
+          "name": "KSP_DEBUG_value",
+          "association": "deps",
+          "refId": 100173
+        },
+        {
+          "name": "KSP_Q_MAP02_HULPVARIABELEN_visible",
+          "association": "refs",
+          "refId": 100292
+        }
+      ],
+      "deps": {
+        "KSP_Q_ROOT_visible": true,
+        "KSP_DEBUG_value": true
+      },
+      "original": "Q_ROOT.visible&&DEBUG==1",
+      "index": 100177,
+      "name": "KSP_Q_MAP02_visible",
+      "parsed": "true&&a100173('100173',x,y.base,z,v)==1",
+      "id": 100177,
+      "fflname": "Q_MAP02_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -77308,17 +77546,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_RESTRICTIES_value",
           "association": "deps",
-          "refId": 100401
+          "refId": 100443
         },
         {
           "name": "KSP_Q_WARNING_GLOBAL_value",
           "association": "deps",
-          "refId": 100395
+          "refId": 100437
         },
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {
@@ -77326,25 +77564,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_WARNING_GLOBAL_value": true
       },
       "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
-      "index": 100165,
+      "index": 100178,
       "name": "KSP_Q_MAP02_WARNING_value",
-      "parsed": "String(a100401('100401',x.doc,y.base,z,v)+a100395('100395',x.doc,y.base,z,v))",
-      "id": 100165,
+      "parsed": "String(a100443('100443',x.doc,y.base,z,v)+a100437('100437',x.doc,y.base,z,v))",
+      "id": 100178,
       "fflname": "Q_MAP02_WARNING_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP02_WARNING_title": true,
-        "KSP_Q_MAP02_PARAGRAAF09SUB2_title": true
+        "KSP_Q_MAP02_WARNING_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Warning voor map 2'",
-      "index": 100166,
+      "index": 100179,
       "name": "KSP_Q_MAP02_WARNING_title",
       "parsed": "'Warning voor map 2'",
-      "id": 100166,
+      "id": 100179,
       "fflname": "Q_MAP02_WARNING_title"
     },
     {
@@ -77357,36 +77594,36 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_value",
           "association": "deps",
-          "refId": 100163
+          "refId": 100175
         },
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {
         "KSP_Q_MAP02_value": true
       },
       "original": "String(If(Q_MAP02[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
-      "index": 100167,
+      "index": 100180,
       "name": "KSP_Q_MAP02_INFO_value",
-      "parsed": "String(a100163('100163',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
-      "id": 100167,
+      "parsed": "String(a100175('100175',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
+      "id": 100180,
       "fflname": "Q_MAP02_INFO_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP02_INFO_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Info bij stap 2'",
-      "index": 100168,
+      "index": 100181,
       "name": "KSP_Q_MAP02_INFO_title",
       "parsed": "'Info bij stap 2'",
-      "id": 100168,
+      "id": 100181,
       "fflname": "Q_MAP02_INFO_title"
     },
     {
@@ -77399,30 +77636,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100169,
+      "index": 100182,
       "name": "KSP_Q_MAP02_VALIDATION_value",
       "parsed": "undefined",
-      "id": 100169,
+      "id": 100182,
       "fflname": "Q_MAP02_VALIDATION_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP02_VALIDATION_title": true,
-        "KSP_Q_MAP02_PARAGRAAF09SUB4_title": true
+        "KSP_Q_MAP02_VALIDATION_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Validatie stap 2'",
-      "index": 100170,
+      "index": 100183,
       "name": "KSP_Q_MAP02_VALIDATION_title",
       "parsed": "'Validatie stap 2'",
-      "id": 100170,
+      "id": 100183,
       "fflname": "Q_MAP02_VALIDATION_title"
     },
     {
@@ -77435,29 +77671,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100171,
+      "index": 100184,
       "name": "KSP_Q_MAP02_HINT_value",
       "parsed": "undefined",
-      "id": 100171,
+      "id": 100184,
       "fflname": "Q_MAP02_HINT_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP02_HINT_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hinttekst stap 2'",
-      "index": 100172,
+      "index": 100185,
       "name": "KSP_Q_MAP02_HINT_title",
       "parsed": "'Hinttekst stap 2'",
-      "id": 100172,
+      "id": 100185,
       "fflname": "Q_MAP02_HINT_title"
     },
     {
@@ -77468,10 +77704,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "'Dit is de hinttekst van de variable Q_MAP02_HINT (DEZE REGEL WORDT NIET GEBRUIKT!)'",
-      "index": 100173,
+      "index": 100186,
       "name": "KSP_Q_MAP02_HINT_hint",
       "parsed": "'Dit is de hinttekst van de variable Q_MAP02_HINT (DEZE REGEL WORDT NIET GEBRUIKT!)'",
-      "id": 100173,
+      "id": 100186,
       "fflname": "Q_MAP02_HINT_hint"
     },
     {
@@ -77484,29 +77720,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100174,
+      "index": 100187,
       "name": "KSP_FiscalParameters_value",
       "parsed": "undefined",
-      "id": 100174,
+      "id": 100187,
       "fflname": "FiscalParameters_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_FiscalParameters_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Fiscal parameters'",
-      "index": 100175,
+      "index": 100188,
       "name": "KSP_FiscalParameters_title",
       "parsed": "'Fiscal parameters'",
-      "id": 100175,
+      "id": 100188,
       "fflname": "FiscalParameters_title"
     },
     {
@@ -77517,24 +77753,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100176,
+      "index": 100189,
       "name": "KSP_ChildcareContribution_value",
       "parsed": "undefined",
-      "id": 100176,
+      "id": 100189,
       "fflname": "ChildcareContribution_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ChildcareContribution_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Childcare Contribution'",
-      "index": 100177,
+      "index": 100190,
       "name": "KSP_ChildcareContribution_title",
       "parsed": "'Childcare Contribution'",
-      "id": 100177,
+      "id": 100190,
       "fflname": "ChildcareContribution_title"
     },
     {
@@ -77548,34 +77784,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_MaxNrCompensatedHoursChildcare_value",
           "association": "refs",
-          "refId": 100216
+          "refId": 100229
         },
         {
           "name": "KSP_MaxNrCompensatedHoursOutofSchoolCare_value",
           "association": "refs",
-          "refId": 100218
+          "refId": 100231
         }
       ],
       "deps": {},
       "original": "230",
-      "index": 100178,
+      "index": 100191,
       "name": "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_value",
       "parsed": "230",
-      "id": 100178,
+      "id": 100191,
       "fflname": "MaximumNrOfHoursOfChildcareAllowancePerMonth_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Maximum nr of hours of childcare allowance per month'",
-      "index": 100179,
+      "index": 100192,
       "name": "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_title",
       "parsed": "'Maximum nr of hours of childcare allowance per month'",
-      "id": 100179,
+      "id": 100192,
       "fflname": "MaximumNrOfHoursOfChildcareAllowancePerMonth_title"
     },
     {
@@ -77588,29 +77824,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_MaxNrCompensatedHoursChildcare_value",
           "association": "refs",
-          "refId": 100216
+          "refId": 100229
         }
       ],
       "deps": {},
       "original": "1.4",
-      "index": 100180,
+      "index": 100193,
       "name": "KSP_MultiplierDaycare_value",
       "parsed": "1.4",
-      "id": 100180,
+      "id": 100193,
       "fflname": "MultiplierDaycare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MultiplierDaycare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Multiplier daycare'",
-      "index": 100181,
+      "index": 100194,
       "name": "KSP_MultiplierDaycare_title",
       "parsed": "'Multiplier daycare'",
-      "id": 100181,
+      "id": 100194,
       "fflname": "MultiplierDaycare_title"
     },
     {
@@ -77623,29 +77859,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_MaxNrCompensatedHoursOutofSchoolCare_value",
           "association": "refs",
-          "refId": 100218
+          "refId": 100231
         }
       ],
       "deps": {},
       "original": ".7",
-      "index": 100182,
+      "index": 100195,
       "name": "KSP_MultiplierOutOfSchoolCare_value",
       "parsed": ".7",
-      "id": 100182,
+      "id": 100195,
       "fflname": "MultiplierOutOfSchoolCare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MultiplierOutOfSchoolCare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Multiplier out-of-school care'",
-      "index": 100183,
+      "index": 100196,
       "name": "KSP_MultiplierOutOfSchoolCare_title",
       "parsed": "'Multiplier out-of-school care'",
-      "id": 100183,
+      "id": 100196,
       "fflname": "MultiplierOutOfSchoolCare_title"
     },
     {
@@ -77658,29 +77894,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_MaxCompensatedAmountChildcare_value",
           "association": "refs",
-          "refId": 100226
+          "refId": 100239
         }
       ],
       "deps": {},
       "original": "7.18",
-      "index": 100184,
+      "index": 100197,
       "name": "KSP_MaxHourlyRateChildcare_value",
       "parsed": "7.18",
-      "id": 100184,
+      "id": 100197,
       "fflname": "MaxHourlyRateChildcare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxHourlyRateChildcare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max. hourly rate childcare'",
-      "index": 100185,
+      "index": 100198,
       "name": "KSP_MaxHourlyRateChildcare_title",
       "parsed": "'Max. hourly rate childcare'",
-      "id": 100185,
+      "id": 100198,
       "fflname": "MaxHourlyRateChildcare_title"
     },
     {
@@ -77693,29 +77929,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_MaxCompensatedAmountOutofSchoolCare_value",
           "association": "refs",
-          "refId": 100228
+          "refId": 100241
         }
       ],
       "deps": {},
       "original": "6.69",
-      "index": 100186,
+      "index": 100199,
       "name": "KSP_MaxHourlyRateOutOfSchoolCare_value",
       "parsed": "6.69",
-      "id": 100186,
+      "id": 100199,
       "fflname": "MaxHourlyRateOutOfSchoolCare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxHourlyRateOutOfSchoolCare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max. hourly rate out-of-school care'",
-      "index": 100187,
+      "index": 100200,
       "name": "KSP_MaxHourlyRateOutOfSchoolCare_title",
       "parsed": "'Max. hourly rate out-of-school care'",
-      "id": 100187,
+      "id": 100200,
       "fflname": "MaxHourlyRateOutOfSchoolCare_title"
     },
     {
@@ -77726,24 +77962,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "5.75",
-      "index": 100188,
+      "index": 100201,
       "name": "KSP_MaxHourlyRateGuestParent_value",
       "parsed": "5.75",
-      "id": 100188,
+      "id": 100201,
       "fflname": "MaxHourlyRateGuestParent_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxHourlyRateGuestParent_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max. hourly rate guest parent'",
-      "index": 100189,
+      "index": 100202,
       "name": "KSP_MaxHourlyRateGuestParent_title",
       "parsed": "'Max. hourly rate guest parent'",
-      "id": 100189,
+      "id": 100202,
       "fflname": "MaxHourlyRateGuestParent_title"
     },
     {
@@ -77754,24 +77990,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "5.75",
-      "index": 100190,
+      "index": 100203,
       "name": "KSP_MaxHourlyRateGuestParentOutOfSchoolCare_value",
       "parsed": "5.75",
-      "id": 100190,
+      "id": 100203,
       "fflname": "MaxHourlyRateGuestParentOutOfSchoolCare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxHourlyRateGuestParentOutOfSchoolCare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max. hourly rate guest parent out-of-school care'",
-      "index": 100191,
+      "index": 100204,
       "name": "KSP_MaxHourlyRateGuestParentOutOfSchoolCare_title",
       "parsed": "'Max. hourly rate guest parent out-of-school care'",
-      "id": 100191,
+      "id": 100204,
       "fflname": "MaxHourlyRateGuestParentOutOfSchoolCare_title"
     },
     {
@@ -77784,31 +78020,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100192,
+      "index": 100205,
       "name": "KSP_CombinationDiscount_value",
       "parsed": "undefined",
-      "id": 100192,
+      "id": 100205,
       "fflname": "CombinationDiscount_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_CombinationDiscount_title": true,
-        "KSP_Q_MAP02SUB11_title": true,
-        "KSP_CombinationDiscountOverview_title": true
+        "KSP_CombinationDiscount_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Combination Discount'",
-      "index": 100193,
+      "index": 100206,
       "name": "KSP_CombinationDiscount_title",
       "parsed": "'Combination Discount'",
-      "id": 100193,
+      "id": 100206,
       "fflname": "CombinationDiscount_title"
     },
     {
@@ -77821,29 +78055,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_CombinationDiscountTotal_value",
           "association": "refs",
-          "refId": 100261
+          "refId": 100275
         }
       ],
       "deps": {},
       "original": "4895",
-      "index": 100194,
+      "index": 100207,
       "name": "KSP_LowerBoundaryIncome_value",
       "parsed": "4895",
-      "id": 100194,
+      "id": 100207,
       "fflname": "LowerBoundaryIncome_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_LowerBoundaryIncome_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Lower boundary Income'",
-      "index": 100195,
+      "index": 100208,
       "name": "KSP_LowerBoundaryIncome_title",
       "parsed": "'Lower boundary Income'",
-      "id": 100195,
+      "id": 100208,
       "fflname": "LowerBoundaryIncome_title"
     },
     {
@@ -77856,29 +78090,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_CombinationDiscountTotal_value",
           "association": "refs",
-          "refId": 100261
+          "refId": 100275
         }
       ],
       "deps": {},
       "original": "1043",
-      "index": 100196,
+      "index": 100209,
       "name": "KSP_Base_value",
       "parsed": "1043",
-      "id": 100196,
+      "id": 100209,
       "fflname": "Base_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Base_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Base'",
-      "index": 100197,
+      "index": 100210,
       "name": "KSP_Base_title",
       "parsed": "'Base'",
-      "id": 100197,
+      "id": 100210,
       "fflname": "Base_title"
     },
     {
@@ -77891,29 +78125,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_CombinationDiscountTotal_value",
           "association": "refs",
-          "refId": 100261
+          "refId": 100275
         }
       ],
       "deps": {},
       "original": ".06159",
-      "index": 100198,
+      "index": 100211,
       "name": "KSP_CombinationDiscountPercentage_value",
       "parsed": ".06159",
-      "id": 100198,
+      "id": 100211,
       "fflname": "CombinationDiscountPercentage_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CombinationDiscountPercentage_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Combination Discount Percentage'",
-      "index": 100199,
+      "index": 100212,
       "name": "KSP_CombinationDiscountPercentage_title",
       "parsed": "'Combination Discount Percentage'",
-      "id": 100199,
+      "id": 100212,
       "fflname": "CombinationDiscountPercentage_title"
     },
     {
@@ -77924,24 +78158,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "2778",
-      "index": 100200,
+      "index": 100213,
       "name": "KSP_MaximumDiscount_value",
       "parsed": "2778",
-      "id": 100200,
+      "id": 100213,
       "fflname": "MaximumDiscount_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaximumDiscount_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Maximum Discount'",
-      "index": 100201,
+      "index": 100214,
       "name": "KSP_MaximumDiscount_title",
       "parsed": "'Maximum Discount'",
-      "id": 100201,
+      "id": 100214,
       "fflname": "MaximumDiscount_title"
     },
     {
@@ -77954,29 +78188,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100202,
+      "index": 100215,
       "name": "KSP_ChildRelatedBudget_value",
       "parsed": "undefined",
-      "id": 100202,
+      "id": 100215,
       "fflname": "ChildRelatedBudget_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ChildRelatedBudget_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Child-related budget'",
-      "index": 100203,
+      "index": 100216,
       "name": "KSP_ChildRelatedBudget_title",
       "parsed": "'Child-related budget'",
-      "id": 100203,
+      "id": 100216,
       "fflname": "ChildRelatedBudget_title"
     },
     {
@@ -77989,29 +78223,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_ChildRelatedBudgetUpToTwelve_value",
           "association": "refs",
-          "refId": 100252
+          "refId": 100265
         }
       ],
       "deps": {},
       "original": "1142",
-      "index": 100204,
+      "index": 100217,
       "name": "KSP_MaxBudgetOneToTwelveYears_value",
       "parsed": "1142",
-      "id": 100204,
+      "id": 100217,
       "fflname": "MaxBudgetOneToTwelveYears_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxBudgetOneToTwelveYears_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max Budget (1 - 12 yrs)'",
-      "index": 100205,
+      "index": 100218,
       "name": "KSP_MaxBudgetOneToTwelveYears_title",
       "parsed": "'Max Budget (1 - 12 yrs)'",
-      "id": 100205,
+      "id": 100218,
       "fflname": "MaxBudgetOneToTwelveYears_title"
     },
     {
@@ -78024,29 +78258,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_value",
           "association": "refs",
-          "refId": 100254
+          "refId": 100267
         }
       ],
       "deps": {},
       "original": "1376",
-      "index": 100206,
+      "index": 100219,
       "name": "KSP_MaxBudgetTwelveToFifteenYears_value",
       "parsed": "1376",
-      "id": 100206,
+      "id": 100219,
       "fflname": "MaxBudgetTwelveToFifteenYears_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxBudgetTwelveToFifteenYears_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max Budget (12 - 15 yrs)'",
-      "index": 100207,
+      "index": 100220,
       "name": "KSP_MaxBudgetTwelveToFifteenYears_title",
       "parsed": "'Max Budget (12 - 15 yrs)'",
-      "id": 100207,
+      "id": 100220,
       "fflname": "MaxBudgetTwelveToFifteenYears_title"
     },
     {
@@ -78059,29 +78293,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_value",
           "association": "refs",
-          "refId": 100256
+          "refId": 100269
         }
       ],
       "deps": {},
       "original": "1559",
-      "index": 100208,
+      "index": 100221,
       "name": "KSP_MaxBudgetSixteenToSeventeenYears_value",
       "parsed": "1559",
-      "id": 100208,
+      "id": 100221,
       "fflname": "MaxBudgetSixteenToSeventeenYears_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxBudgetSixteenToSeventeenYears_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max Budget (16 - 17 yrs)'",
-      "index": 100209,
+      "index": 100222,
       "name": "KSP_MaxBudgetSixteenToSeventeenYears_title",
       "parsed": "'Max Budget (16 - 17 yrs)'",
-      "id": 100209,
+      "id": 100222,
       "fflname": "MaxBudgetSixteenToSeventeenYears_title"
     },
     {
@@ -78095,34 +78329,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_ChildRelatedBudgetDecrease_value",
           "association": "refs",
-          "refId": 100250
+          "refId": 100263
         },
         {
           "name": "KSP_CombinationDiscountTotal_value",
           "association": "refs",
-          "refId": 100261
+          "refId": 100275
         }
       ],
       "deps": {},
       "original": "20109",
-      "index": 100210,
+      "index": 100223,
       "name": "KSP_UpperBoundaryIncome_value",
       "parsed": "20109",
-      "id": 100210,
+      "id": 100223,
       "fflname": "UpperBoundaryIncome_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_UpperBoundaryIncome_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Upper boundary Income'",
-      "index": 100211,
+      "index": 100224,
       "name": "KSP_UpperBoundaryIncome_title",
       "parsed": "'Upper boundary Income'",
-      "id": 100211,
+      "id": 100224,
       "fflname": "UpperBoundaryIncome_title"
     },
     {
@@ -78135,29 +78369,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_ChildRelatedBudgetDecrease_value",
           "association": "refs",
-          "refId": 100250
+          "refId": 100263
         }
       ],
       "deps": {},
       "original": ".0675",
-      "index": 100212,
+      "index": 100225,
       "name": "KSP_DecreasingPercentage_value",
       "parsed": ".0675",
-      "id": 100212,
+      "id": 100225,
       "fflname": "DecreasingPercentage_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_DecreasingPercentage_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Decreasing Percentage'",
-      "index": 100213,
+      "index": 100226,
       "name": "KSP_DecreasingPercentage_title",
       "parsed": "'Decreasing Percentage'",
-      "id": 100213,
+      "id": 100226,
       "fflname": "DecreasingPercentage_title"
     },
     {
@@ -78170,29 +78404,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100214,
+      "index": 100227,
       "name": "KSP_Fees_value",
       "parsed": "undefined",
-      "id": 100214,
+      "id": 100227,
       "fflname": "Fees_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Fees_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Fees'",
-      "index": 100215,
+      "index": 100228,
       "name": "KSP_Fees_title",
       "parsed": "'Fees'",
-      "id": 100215,
+      "id": 100228,
       "fflname": "Fees_title"
     },
     {
@@ -78205,22 +78439,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_value",
           "association": "deps",
-          "refId": 100112
+          "refId": 100118
         },
         {
           "name": "KSP_MultiplierDaycare_value",
           "association": "deps",
-          "refId": 100180
+          "refId": 100193
         },
         {
           "name": "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_value",
           "association": "deps",
-          "refId": 100178
+          "refId": 100191
         },
         {
           "name": "KSP_NrCompensatedHoursChildcare_value",
           "association": "refs",
-          "refId": 100221
+          "refId": 100234
         }
       ],
       "deps": {
@@ -78229,24 +78463,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_value": true
       },
       "original": "OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierDaycare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA)",
-      "index": 100216,
+      "index": 100229,
       "name": "KSP_MaxNrCompensatedHoursChildcare_value",
-      "parsed": "OnER(Math.min(Round(a100112('100112',x,y.base,z,v)*a100180('100180',x,y.base,z,v)*(52/12),0),a100178('100178',x,y.base,z,v)),NA)",
-      "id": 100216,
+      "parsed": "OnER(Math.min(Round(a100118('100118',x,y.base,z,v)*a100193('100193',x,y.base,z,v)*(52/12),0),a100191('100191',x,y.base,z,v)),NA)",
+      "id": 100229,
       "fflname": "MaxNrCompensatedHoursChildcare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxNrCompensatedHoursChildcare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max. nr of compensated hours childcare '",
-      "index": 100217,
+      "index": 100230,
       "name": "KSP_MaxNrCompensatedHoursChildcare_title",
       "parsed": "'Max. nr of compensated hours childcare '",
-      "id": 100217,
+      "id": 100230,
       "fflname": "MaxNrCompensatedHoursChildcare_title"
     },
     {
@@ -78259,22 +78493,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_value",
           "association": "deps",
-          "refId": 100112
+          "refId": 100118
         },
         {
           "name": "KSP_MultiplierOutOfSchoolCare_value",
           "association": "deps",
-          "refId": 100182
+          "refId": 100195
         },
         {
           "name": "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_value",
           "association": "deps",
-          "refId": 100178
+          "refId": 100191
         },
         {
           "name": "KSP_NrCompensatedHoursOutofSchoolCare_value",
           "association": "refs",
-          "refId": 100223
+          "refId": 100236
         }
       ],
       "deps": {
@@ -78283,24 +78517,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_value": true
       },
       "original": "OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierOutOfSchoolCare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA)",
-      "index": 100218,
+      "index": 100231,
       "name": "KSP_MaxNrCompensatedHoursOutofSchoolCare_value",
-      "parsed": "OnER(Math.min(Round(a100112('100112',x,y.base,z,v)*a100182('100182',x,y.base,z,v)*(52/12),0),a100178('100178',x,y.base,z,v)),NA)",
-      "id": 100218,
+      "parsed": "OnER(Math.min(Round(a100118('100118',x,y.base,z,v)*a100195('100195',x,y.base,z,v)*(52/12),0),a100191('100191',x,y.base,z,v)),NA)",
+      "id": 100231,
       "fflname": "MaxNrCompensatedHoursOutofSchoolCare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxNrCompensatedHoursOutofSchoolCare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max. nr of compensated hours out-of-school care '",
-      "index": 100219,
+      "index": 100232,
       "name": "KSP_MaxNrCompensatedHoursOutofSchoolCare_title",
       "parsed": "'Max. nr of compensated hours out-of-school care '",
-      "id": 100219,
+      "id": 100232,
       "fflname": "MaxNrCompensatedHoursOutofSchoolCare_title"
     },
     {
@@ -78311,10 +78545,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100220,
+      "index": 100233,
       "name": "KSP_FeesSub3_value",
       "parsed": "undefined",
-      "id": 100220,
+      "id": 100233,
       "fflname": "FeesSub3_value"
     },
     {
@@ -78327,17 +78561,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_NrOfDaysChildcareMonth_value",
           "association": "deps",
-          "refId": 100122
+          "refId": 100128
         },
         {
           "name": "KSP_MaxNrCompensatedHoursChildcare_value",
           "association": "deps",
-          "refId": 100216
+          "refId": 100229
         },
         {
           "name": "KSP_PremiumForChildcare_value",
           "association": "refs",
-          "refId": 100236
+          "refId": 100249
         }
       ],
       "deps": {
@@ -78345,24 +78579,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_MaxNrCompensatedHoursChildcare_value": true
       },
       "original": "OnER(Min(NrOfDaysChildcareMonth,MaxNrCompensatedHoursChildcare),NA)",
-      "index": 100221,
+      "index": 100234,
       "name": "KSP_NrCompensatedHoursChildcare_value",
-      "parsed": "OnER(Math.min(a100122('100122',x,y,z,v),a100216('100216',x,y.base,z,v)),NA)",
-      "id": 100221,
+      "parsed": "OnER(Math.min(a100128('100128',x,y,z,v),a100229('100229',x,y.base,z,v)),NA)",
+      "id": 100234,
       "fflname": "NrCompensatedHoursChildcare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_NrCompensatedHoursChildcare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Nr. of compensated hours childcare '",
-      "index": 100222,
+      "index": 100235,
       "name": "KSP_NrCompensatedHoursChildcare_title",
       "parsed": "'Nr. of compensated hours childcare '",
-      "id": 100222,
+      "id": 100235,
       "fflname": "NrCompensatedHoursChildcare_title"
     },
     {
@@ -78375,17 +78609,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
           "association": "deps",
-          "refId": 100126
+          "refId": 100132
         },
         {
           "name": "KSP_MaxNrCompensatedHoursOutofSchoolCare_value",
           "association": "deps",
-          "refId": 100218
+          "refId": 100231
         },
         {
           "name": "KSP_PremiumForOutofSchoolCare_value",
           "association": "refs",
-          "refId": 100238
+          "refId": 100251
         }
       ],
       "deps": {
@@ -78393,24 +78627,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_MaxNrCompensatedHoursOutofSchoolCare_value": true
       },
       "original": "OnER(Min(NrOfDaysOutOfSchoolCareMonth,MaxNrCompensatedHoursOutofSchoolCare),NA)",
-      "index": 100223,
+      "index": 100236,
       "name": "KSP_NrCompensatedHoursOutofSchoolCare_value",
-      "parsed": "OnER(Math.min(a100126('100126',x,y,z,v),a100218('100218',x,y.base,z,v)),NA)",
-      "id": 100223,
+      "parsed": "OnER(Math.min(a100132('100132',x,y,z,v),a100231('100231',x,y.base,z,v)),NA)",
+      "id": 100236,
       "fflname": "NrCompensatedHoursOutofSchoolCare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_NrCompensatedHoursOutofSchoolCare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Nr. of compensated hours out-of-school care '",
-      "index": 100224,
+      "index": 100237,
       "name": "KSP_NrCompensatedHoursOutofSchoolCare_title",
       "parsed": "'Nr. of compensated hours out-of-school care '",
-      "id": 100224,
+      "id": 100237,
       "fflname": "NrCompensatedHoursOutofSchoolCare_title"
     },
     {
@@ -78421,10 +78655,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100225,
+      "index": 100238,
       "name": "KSP_FeesSub6_value",
       "parsed": "undefined",
-      "id": 100225,
+      "id": 100238,
       "fflname": "FeesSub6_value"
     },
     {
@@ -78437,17 +78671,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_HourlyFeeChildCare_value",
           "association": "deps",
-          "refId": 100128
+          "refId": 100134
         },
         {
           "name": "KSP_MaxHourlyRateChildcare_value",
           "association": "deps",
-          "refId": 100184
+          "refId": 100197
         },
         {
           "name": "KSP_PremiumForChildcare_value",
           "association": "refs",
-          "refId": 100236
+          "refId": 100249
         }
       ],
       "deps": {
@@ -78455,24 +78689,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_MaxHourlyRateChildcare_value": true
       },
       "original": "OnER(Min(HourlyFeeChildCare,MaxHourlyRateChildcare),NA)",
-      "index": 100226,
+      "index": 100239,
       "name": "KSP_MaxCompensatedAmountChildcare_value",
-      "parsed": "OnER(Math.min(a100128('100128',x,y,z,v),a100184('100184',x,y.base,z,v)),NA)",
-      "id": 100226,
+      "parsed": "OnER(Math.min(a100134('100134',x,y,z,v),a100197('100197',x,y.base,z,v)),NA)",
+      "id": 100239,
       "fflname": "MaxCompensatedAmountChildcare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxCompensatedAmountChildcare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max. compensated amount childcare'",
-      "index": 100227,
+      "index": 100240,
       "name": "KSP_MaxCompensatedAmountChildcare_title",
       "parsed": "'Max. compensated amount childcare'",
-      "id": 100227,
+      "id": 100240,
       "fflname": "MaxCompensatedAmountChildcare_title"
     },
     {
@@ -78485,17 +78719,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_HourlyFeeOutOfSchoolCare_value",
           "association": "deps",
-          "refId": 100130
+          "refId": 100136
         },
         {
           "name": "KSP_MaxHourlyRateOutOfSchoolCare_value",
           "association": "deps",
-          "refId": 100186
+          "refId": 100199
         },
         {
           "name": "KSP_PremiumForOutofSchoolCare_value",
           "association": "refs",
-          "refId": 100238
+          "refId": 100251
         }
       ],
       "deps": {
@@ -78503,24 +78737,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_MaxHourlyRateOutOfSchoolCare_value": true
       },
       "original": "OnER(Min(HourlyFeeOutOfSchoolCare,MaxHourlyRateOutOfSchoolCare),NA)",
-      "index": 100228,
+      "index": 100241,
       "name": "KSP_MaxCompensatedAmountOutofSchoolCare_value",
-      "parsed": "OnER(Math.min(a100130('100130',x,y,z,v),a100186('100186',x,y.base,z,v)),NA)",
-      "id": 100228,
+      "parsed": "OnER(Math.min(a100136('100136',x,y,z,v),a100199('100199',x,y.base,z,v)),NA)",
+      "id": 100241,
       "fflname": "MaxCompensatedAmountOutofSchoolCare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MaxCompensatedAmountOutofSchoolCare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Max. compensated amount out-of-school care '",
-      "index": 100229,
+      "index": 100242,
       "name": "KSP_MaxCompensatedAmountOutofSchoolCare_title",
       "parsed": "'Max. compensated amount out-of-school care '",
-      "id": 100229,
+      "id": 100242,
       "fflname": "MaxCompensatedAmountOutofSchoolCare_title"
     },
     {
@@ -78531,10 +78765,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100230,
+      "index": 100243,
       "name": "KSP_FeesSub9_value",
       "parsed": "undefined",
-      "id": 100230,
+      "id": 100243,
       "fflname": "FeesSub9_value"
     },
     {
@@ -78548,22 +78782,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_IncomeParent01_value",
           "association": "deps",
-          "refId": 100104
+          "refId": 100110
         },
         {
           "name": "KSP_IncomeParent02_value",
           "association": "deps",
-          "refId": 100106
+          "refId": 100112
         },
         {
           "name": "KSP_PercentagePremiumFirstChild_value",
           "association": "refs",
-          "refId": 100233
+          "refId": 100246
         },
         {
           "name": "KSP_ChildRelatedBudgetDecrease_value",
           "association": "refs",
-          "refId": 100250
+          "refId": 100263
         }
       ],
       "deps": {
@@ -78571,24 +78805,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_IncomeParent02_value": true
       },
       "original": "OnER(IncomeParent01+IncomeParent02,NA)",
-      "index": 100231,
+      "index": 100244,
       "name": "KSP_TotalIncome_value",
-      "parsed": "OnER(a100104('100104',x,y.base,z,v)+a100106('100106',x,y.base,z,v),NA)",
-      "id": 100231,
+      "parsed": "OnER(a100110('100110',x,y.base,z,v)+a100112('100112',x,y.base,z,v),NA)",
+      "id": 100244,
       "fflname": "TotalIncome_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_TotalIncome_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Total Income'",
-      "index": 100232,
+      "index": 100245,
       "name": "KSP_TotalIncome_title",
       "parsed": "'Total Income'",
-      "id": 100232,
+      "id": 100245,
       "fflname": "TotalIncome_title"
     },
     {
@@ -78602,41 +78836,41 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalIncome_value",
           "association": "deps",
-          "refId": 100231
+          "refId": 100244
         },
         {
           "name": "KSP_PremiumForChildcare_value",
           "association": "refs",
-          "refId": 100236
+          "refId": 100249
         },
         {
           "name": "KSP_PremiumForOutofSchoolCare_value",
           "association": "refs",
-          "refId": 100238
+          "refId": 100251
         }
       ],
       "deps": {
         "KSP_TotalIncome_value": true
       },
       "original": "MatrixLookup('ScorecardKSP.xls','Opvangtoeslaginkomenstabel',TotalIncome,1)",
-      "index": 100233,
+      "index": 100246,
       "name": "KSP_PercentagePremiumFirstChild_value",
-      "parsed": "MatrixLookup('ScorecardKSP.xls','Opvangtoeslaginkomenstabel',a100231('100231',x,y.base,z,v),1)",
-      "id": 100233,
+      "parsed": "MatrixLookup('ScorecardKSP.xls','Opvangtoeslaginkomenstabel',a100244('100244',x,y.base,z,v),1)",
+      "id": 100246,
       "fflname": "PercentagePremiumFirstChild_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_PercentagePremiumFirstChild_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Percentage premium first child '",
-      "index": 100234,
+      "index": 100247,
       "name": "KSP_PercentagePremiumFirstChild_title",
       "parsed": "'Percentage premium first child '",
-      "id": 100234,
+      "id": 100247,
       "fflname": "PercentagePremiumFirstChild_title"
     },
     {
@@ -78647,10 +78881,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100235,
+      "index": 100248,
       "name": "KSP_FeesSub12_value",
       "parsed": "undefined",
-      "id": 100235,
+      "id": 100248,
       "fflname": "FeesSub12_value"
     },
     {
@@ -78663,22 +78897,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_NrCompensatedHoursChildcare_value",
           "association": "deps",
-          "refId": 100221
+          "refId": 100234
         },
         {
           "name": "KSP_MaxCompensatedAmountChildcare_value",
           "association": "deps",
-          "refId": 100226
+          "refId": 100239
         },
         {
           "name": "KSP_PercentagePremiumFirstChild_value",
           "association": "deps",
-          "refId": 100233
+          "refId": 100246
         },
         {
           "name": "KSP_ChildCarePremiumOverview_value",
           "association": "refs",
-          "refId": 100335
+          "refId": 100360
         }
       ],
       "deps": {
@@ -78687,24 +78921,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_PercentagePremiumFirstChild_value": true
       },
       "original": "NrCompensatedHoursChildcare*MaxCompensatedAmountChildcare*PercentagePremiumFirstChild",
-      "index": 100236,
+      "index": 100249,
       "name": "KSP_PremiumForChildcare_value",
-      "parsed": "a100221('100221',x,y.base,z,v)*a100226('100226',x,y.base,z,v)*a100233('100233',x,y.base,z,v)",
-      "id": 100236,
+      "parsed": "a100234('100234',x,y.base,z,v)*a100239('100239',x,y.base,z,v)*a100246('100246',x,y.base,z,v)",
+      "id": 100249,
       "fflname": "PremiumForChildcare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_PremiumForChildcare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Premium for childcare'",
-      "index": 100237,
+      "index": 100250,
       "name": "KSP_PremiumForChildcare_title",
       "parsed": "'Premium for childcare'",
-      "id": 100237,
+      "id": 100250,
       "fflname": "PremiumForChildcare_title"
     },
     {
@@ -78717,22 +78951,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_NrCompensatedHoursOutofSchoolCare_value",
           "association": "deps",
-          "refId": 100223
+          "refId": 100236
         },
         {
           "name": "KSP_MaxCompensatedAmountOutofSchoolCare_value",
           "association": "deps",
-          "refId": 100228
+          "refId": 100241
         },
         {
           "name": "KSP_PercentagePremiumFirstChild_value",
           "association": "deps",
-          "refId": 100233
+          "refId": 100246
         },
         {
           "name": "KSP_ChildCarePremiumOverview_value",
           "association": "refs",
-          "refId": 100335
+          "refId": 100360
         }
       ],
       "deps": {
@@ -78741,24 +78975,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_PercentagePremiumFirstChild_value": true
       },
       "original": "NrCompensatedHoursOutofSchoolCare*MaxCompensatedAmountOutofSchoolCare*PercentagePremiumFirstChild",
-      "index": 100238,
+      "index": 100251,
       "name": "KSP_PremiumForOutofSchoolCare_value",
-      "parsed": "a100223('100223',x,y.base,z,v)*a100228('100228',x,y.base,z,v)*a100233('100233',x,y.base,z,v)",
-      "id": 100238,
+      "parsed": "a100236('100236',x,y.base,z,v)*a100241('100241',x,y.base,z,v)*a100246('100246',x,y.base,z,v)",
+      "id": 100251,
       "fflname": "PremiumForOutofSchoolCare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_PremiumForOutofSchoolCare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Premium for out-of-school care'",
-      "index": 100239,
+      "index": 100252,
       "name": "KSP_PremiumForOutofSchoolCare_title",
       "parsed": "'Premium for out-of-school care'",
-      "id": 100239,
+      "id": 100252,
       "fflname": "PremiumForOutofSchoolCare_title"
     },
     {
@@ -78771,29 +79005,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100240,
+      "index": 100253,
       "name": "KSP_CostsSecondaryEducation_value",
       "parsed": "undefined",
-      "id": 100240,
+      "id": 100253,
       "fflname": "CostsSecondaryEducation_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CostsSecondaryEducation_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Costs (Secondary Education)'",
-      "index": 100241,
+      "index": 100254,
       "name": "KSP_CostsSecondaryEducation_title",
       "parsed": "'Costs (Secondary Education)'",
-      "id": 100241,
+      "id": 100254,
       "fflname": "CostsSecondaryEducation_title"
     },
     {
@@ -78806,36 +79040,36 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_SecondaryEducationProfile_value",
           "association": "deps",
-          "refId": 100136
+          "refId": 100142
         },
         {
           "name": "KSP_CostsForSecondaryEducation_value",
           "association": "refs",
-          "refId": 100325
+          "refId": 100349
         }
       ],
       "deps": {
         "KSP_SecondaryEducationProfile_value": true
       },
       "original": "Case(SecondaryEducationProfile,[0,576||1,906||2,535||3,535])",
-      "index": 100242,
+      "index": 100255,
       "name": "KSP_CostsYearOneFour_value",
-      "parsed": "__c0s0=a100136('100136',x,y,z,v),__c0s0 === 0?576:__c0s0 === 1?906:__c0s0 === 2?535:__c0s0 === 3?535:NA",
-      "id": 100242,
+      "parsed": "__c0s0=a100142('100142',x,y,z,v),__c0s0 === 0?576:__c0s0 === 1?906:__c0s0 === 2?535:__c0s0 === 3?535:NA",
+      "id": 100255,
       "fflname": "CostsYearOneFour_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CostsYearOneFour_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Costs year 1 - 4'",
-      "index": 100243,
+      "index": 100256,
       "name": "KSP_CostsYearOneFour_title",
       "parsed": "'Costs year 1 - 4'",
-      "id": 100243,
+      "id": 100256,
       "fflname": "CostsYearOneFour_title"
     },
     {
@@ -78848,36 +79082,36 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_SecondaryEducationProfile_value",
           "association": "deps",
-          "refId": 100136
+          "refId": 100142
         },
         {
           "name": "KSP_CostsForSecondaryEducation_value",
           "association": "refs",
-          "refId": 100325
+          "refId": 100349
         }
       ],
       "deps": {
         "KSP_SecondaryEducationProfile_value": true
       },
       "original": "Case(SecondaryEducationProfile,[0,576||1,906||2,535||3,535])",
-      "index": 100244,
+      "index": 100257,
       "name": "KSP_CostsYearFiveSixSeven_value",
-      "parsed": "__c0s1=a100136('100136',x,y,z,v),__c0s1 === 0?576:__c0s1 === 1?906:__c0s1 === 2?535:__c0s1 === 3?535:NA",
-      "id": 100244,
+      "parsed": "__c0s1=a100142('100142',x,y,z,v),__c0s1 === 0?576:__c0s1 === 1?906:__c0s1 === 2?535:__c0s1 === 3?535:NA",
+      "id": 100257,
       "fflname": "CostsYearFiveSixSeven_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CostsYearFiveSixSeven_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Costs year 5, 6, 7'",
-      "index": 100245,
+      "index": 100258,
       "name": "KSP_CostsYearFiveSixSeven_title",
       "parsed": "'Costs year 5, 6, 7'",
-      "id": 100245,
+      "id": 100258,
       "fflname": "CostsYearFiveSixSeven_title"
     },
     {
@@ -78890,29 +79124,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100246,
+      "index": 100259,
       "name": "KSP_Q_MAP02SUB10_value",
       "parsed": "undefined",
-      "id": 100246,
+      "id": 100259,
       "fflname": "Q_MAP02SUB10_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP02SUB10_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Budget'",
-      "index": 100247,
+      "index": 100260,
       "name": "KSP_Q_MAP02SUB10_title",
       "parsed": "'Budget'",
-      "id": 100247,
+      "id": 100260,
       "fflname": "Q_MAP02SUB10_title"
     },
     {
@@ -78923,24 +79157,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100248,
+      "index": 100261,
       "name": "KSP_Q_MAP02SUB10SUB1_value",
       "parsed": "undefined",
-      "id": 100248,
+      "id": 100261,
       "fflname": "Q_MAP02SUB10SUB1_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP02SUB10SUB1_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Income'",
-      "index": 100249,
+      "index": 100262,
       "name": "KSP_Q_MAP02SUB10SUB1_title",
       "parsed": "'Income'",
-      "id": 100249,
+      "id": 100262,
       "fflname": "Q_MAP02SUB10SUB1_title"
     },
     {
@@ -78955,32 +79189,32 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalIncome_value",
           "association": "deps",
-          "refId": 100231
+          "refId": 100244
         },
         {
           "name": "KSP_UpperBoundaryIncome_value",
           "association": "deps",
-          "refId": 100210
+          "refId": 100223
         },
         {
           "name": "KSP_DecreasingPercentage_value",
           "association": "deps",
-          "refId": 100212
+          "refId": 100225
         },
         {
           "name": "KSP_ChildRelatedBudgetUpToTwelve_value",
           "association": "refs",
-          "refId": 100252
+          "refId": 100265
         },
         {
           "name": "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_value",
           "association": "refs",
-          "refId": 100254
+          "refId": 100267
         },
         {
           "name": "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_value",
           "association": "refs",
-          "refId": 100256
+          "refId": 100269
         }
       ],
       "deps": {
@@ -78989,24 +79223,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_DecreasingPercentage_value": true
       },
       "original": "Max(0,DecreasingPercentage*(TotalIncome-UpperBoundaryIncome))",
-      "index": 100250,
+      "index": 100263,
       "name": "KSP_ChildRelatedBudgetDecrease_value",
-      "parsed": "Math.max(0,a100212('100212',x,y.base,z,v)*(a100231('100231',x,y.base,z,v)-a100210('100210',x,y.base,z,v)))",
-      "id": 100250,
+      "parsed": "Math.max(0,a100225('100225',x,y.base,z,v)*(a100244('100244',x,y.base,z,v)-a100223('100223',x,y.base,z,v)))",
+      "id": 100263,
       "fflname": "ChildRelatedBudgetDecrease_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ChildRelatedBudgetDecrease_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Decrease'",
-      "index": 100251,
+      "index": 100264,
       "name": "KSP_ChildRelatedBudgetDecrease_title",
       "parsed": "'Decrease'",
-      "id": 100251,
+      "id": 100264,
       "fflname": "ChildRelatedBudgetDecrease_title"
     },
     {
@@ -79019,17 +79253,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_MaxBudgetOneToTwelveYears_value",
           "association": "deps",
-          "refId": 100204
+          "refId": 100217
         },
         {
           "name": "KSP_ChildRelatedBudgetDecrease_value",
           "association": "deps",
-          "refId": 100250
+          "refId": 100263
         },
         {
           "name": "KSP_ChildcareBudgetOverview_value",
           "association": "refs",
-          "refId": 100337
+          "refId": 100362
         }
       ],
       "deps": {
@@ -79037,24 +79271,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_ChildRelatedBudgetDecrease_value": true
       },
       "original": "Max(0,MaxBudgetOneToTwelveYears-ChildRelatedBudgetDecrease)/12",
-      "index": 100252,
+      "index": 100265,
       "name": "KSP_ChildRelatedBudgetUpToTwelve_value",
-      "parsed": "Math.max(0,a100204('100204',x,y.base,z,v)-a100250('100250',x,y.base,z,v))/12",
-      "id": 100252,
+      "parsed": "Math.max(0,a100217('100217',x,y.base,z,v)-a100263('100263',x,y.base,z,v))/12",
+      "id": 100265,
       "fflname": "ChildRelatedBudgetUpToTwelve_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ChildRelatedBudgetUpToTwelve_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Childrelated budget (per month, up to yr 12)'",
-      "index": 100253,
+      "index": 100266,
       "name": "KSP_ChildRelatedBudgetUpToTwelve_title",
       "parsed": "'Childrelated budget (per month, up to yr 12)'",
-      "id": 100253,
+      "id": 100266,
       "fflname": "ChildRelatedBudgetUpToTwelve_title"
     },
     {
@@ -79067,17 +79301,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_MaxBudgetTwelveToFifteenYears_value",
           "association": "deps",
-          "refId": 100206
+          "refId": 100219
         },
         {
           "name": "KSP_ChildRelatedBudgetDecrease_value",
           "association": "deps",
-          "refId": 100250
+          "refId": 100263
         },
         {
           "name": "KSP_ChildcareBudgetOverview_value",
           "association": "refs",
-          "refId": 100337
+          "refId": 100362
         }
       ],
       "deps": {
@@ -79085,24 +79319,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_ChildRelatedBudgetDecrease_value": true
       },
       "original": "Max(0,MaxBudgetTwelveToFifteenYears-ChildRelatedBudgetDecrease)/12",
-      "index": 100254,
+      "index": 100267,
       "name": "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_value",
-      "parsed": "Math.max(0,a100206('100206',x,y.base,z,v)-a100250('100250',x,y.base,z,v))/12",
-      "id": 100254,
+      "parsed": "Math.max(0,a100219('100219',x,y.base,z,v)-a100263('100263',x,y.base,z,v))/12",
+      "id": 100267,
       "fflname": "ChildRelatedBudgetTwelveUpToAndInclFifteen_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Childrelated budget (per month, 12 up to&&incl yr 15)'",
-      "index": 100255,
+      "index": 100268,
       "name": "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_title",
       "parsed": "'Childrelated budget (per month, 12 up to&&incl yr 15)'",
-      "id": 100255,
+      "id": 100268,
       "fflname": "ChildRelatedBudgetTwelveUpToAndInclFifteen_title"
     },
     {
@@ -79115,17 +79349,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_MaxBudgetSixteenToSeventeenYears_value",
           "association": "deps",
-          "refId": 100208
+          "refId": 100221
         },
         {
           "name": "KSP_ChildRelatedBudgetDecrease_value",
           "association": "deps",
-          "refId": 100250
+          "refId": 100263
         },
         {
           "name": "KSP_ChildcareBudgetOverview_value",
           "association": "refs",
-          "refId": 100337
+          "refId": 100362
         }
       ],
       "deps": {
@@ -79133,24 +79367,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_ChildRelatedBudgetDecrease_value": true
       },
       "original": "Max(0,MaxBudgetSixteenToSeventeenYears-ChildRelatedBudgetDecrease)/12",
-      "index": 100256,
+      "index": 100269,
       "name": "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_value",
-      "parsed": "Math.max(0,a100208('100208',x,y.base,z,v)-a100250('100250',x,y.base,z,v))/12",
-      "id": 100256,
+      "parsed": "Math.max(0,a100221('100221',x,y.base,z,v)-a100263('100263',x,y.base,z,v))/12",
+      "id": 100269,
       "fflname": "ChildRelatedBudgetSixteenUpToAndIncSeventeen_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Childrelated budget (per month, 16 up to&&incl yr 17)'",
-      "index": 100257,
+      "index": 100270,
       "name": "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_title",
       "parsed": "'Childrelated budget (per month, 16 up to&&incl yr 17)'",
-      "id": 100257,
+      "id": 100270,
       "fflname": "ChildRelatedBudgetSixteenUpToAndIncSeventeen_title"
     },
     {
@@ -79163,16 +79397,30 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100258,
+      "index": 100271,
       "name": "KSP_Q_MAP02SUB11_value",
       "parsed": "undefined",
-      "id": 100258,
+      "id": 100271,
       "fflname": "Q_MAP02SUB11_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP02SUB11_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Combination Discount'",
+      "index": 100272,
+      "name": "KSP_Q_MAP02SUB11_title",
+      "parsed": "'Combination Discount'",
+      "id": 100272,
+      "fflname": "Q_MAP02SUB11_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -79184,17 +79432,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_IncomeParent01_value",
           "association": "deps",
-          "refId": 100104
+          "refId": 100110
         },
         {
           "name": "KSP_IncomeParent02_value",
           "association": "deps",
-          "refId": 100106
+          "refId": 100112
         },
         {
           "name": "KSP_CombinationDiscountTotal_value",
           "association": "refs",
-          "refId": 100261
+          "refId": 100275
         }
       ],
       "deps": {
@@ -79202,24 +79450,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_IncomeParent02_value": true
       },
       "original": "Min(IncomeParent01,IncomeParent02)",
-      "index": 100259,
+      "index": 100273,
       "name": "KSP_CombinationDiscountLowestIncome_value",
-      "parsed": "Math.min(a100104('100104',x,y.base,z,v),a100106('100106',x,y.base,z,v))",
-      "id": 100259,
+      "parsed": "Math.min(a100110('100110',x,y.base,z,v),a100112('100112',x,y.base,z,v))",
+      "id": 100273,
       "fflname": "CombinationDiscountLowestIncome_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CombinationDiscountLowestIncome_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'LowestIncome'",
-      "index": 100260,
+      "index": 100274,
       "name": "KSP_CombinationDiscountLowestIncome_title",
       "parsed": "'LowestIncome'",
-      "id": 100260,
+      "id": 100274,
       "fflname": "CombinationDiscountLowestIncome_title"
     },
     {
@@ -79232,32 +79480,32 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_CombinationDiscountLowestIncome_value",
           "association": "deps",
-          "refId": 100259
+          "refId": 100273
         },
         {
           "name": "KSP_LowerBoundaryIncome_value",
           "association": "deps",
-          "refId": 100194
+          "refId": 100207
         },
         {
           "name": "KSP_CombinationDiscountPercentage_value",
           "association": "deps",
-          "refId": 100198
+          "refId": 100211
         },
         {
           "name": "KSP_Base_value",
           "association": "deps",
-          "refId": 100196
+          "refId": 100209
         },
         {
           "name": "KSP_UpperBoundaryIncome_value",
           "association": "deps",
-          "refId": 100210
+          "refId": 100223
         },
         {
           "name": "KSP_CombinationDiscountOverview_value",
           "association": "refs",
-          "refId": 100339
+          "refId": 100364
         }
       ],
       "deps": {
@@ -79268,24 +79516,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_UpperBoundaryIncome_value": true
       },
       "original": "If(CombinationDiscountLowestIncome>=LowerBoundaryIncome,Min(UpperBoundaryIncome,Base+CombinationDiscountPercentage*(CombinationDiscountLowestIncome-LowerBoundaryIncome)),0)",
-      "index": 100261,
+      "index": 100275,
       "name": "KSP_CombinationDiscountTotal_value",
-      "parsed": "a100259('100259',x,y.base,z,v)>=a100194('100194',x,y.base,z,v)?Math.min(a100210('100210',x,y.base,z,v),a100196('100196',x,y.base,z,v)+a100198('100198',x,y.base,z,v)*(a100259('100259',x,y.base,z,v)-a100194('100194',x,y.base,z,v))):0",
-      "id": 100261,
+      "parsed": "a100273('100273',x,y.base,z,v)>=a100207('100207',x,y.base,z,v)?Math.min(a100223('100223',x,y.base,z,v),a100209('100209',x,y.base,z,v)+a100211('100211',x,y.base,z,v)*(a100273('100273',x,y.base,z,v)-a100207('100207',x,y.base,z,v))):0",
+      "id": 100275,
       "fflname": "CombinationDiscountTotal_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CombinationDiscountTotal_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'CombinationDiscountTotal'",
-      "index": 100262,
+      "index": 100276,
       "name": "KSP_CombinationDiscountTotal_title",
       "parsed": "'CombinationDiscountTotal'",
-      "id": 100262,
+      "id": 100276,
       "fflname": "CombinationDiscountTotal_title"
     },
     {
@@ -79298,16 +79546,30 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100272
+          "refId": 100295
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100263,
+      "index": 100277,
       "name": "KSP_Q_MAP02_PARAGRAAF09_value",
       "parsed": "undefined",
-      "id": 100263,
+      "id": 100277,
       "fflname": "Q_MAP02_PARAGRAAF09_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP02_PARAGRAAF09_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Eigenschappen van de stap'",
+      "index": 100278,
+      "name": "KSP_Q_MAP02_PARAGRAAF09_title",
+      "parsed": "'Eigenschappen van de stap'",
+      "id": 100278,
+      "fflname": "Q_MAP02_PARAGRAAF09_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -79318,18 +79580,32 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_value",
           "association": "deps",
-          "refId": 100163
+          "refId": 100175
         }
       ],
       "deps": {
         "KSP_Q_MAP02_value": true
       },
       "original": "Q_MAP02",
-      "index": 100264,
+      "index": 100279,
       "name": "KSP_Q_MAP02_STATUS_value",
-      "parsed": "a100163('100163',x,y.base,z,v)",
-      "id": 100264,
+      "parsed": "a100175('100175',x,y.base,z,v)",
+      "id": 100279,
       "fflname": "Q_MAP02_STATUS_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP02_STATUS_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Status van de stap'",
+      "index": 100280,
+      "name": "KSP_Q_MAP02_STATUS_title",
+      "parsed": "'Status van de stap'",
+      "id": 100280,
+      "fflname": "Q_MAP02_STATUS_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -79339,11 +79615,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100265,
+      "index": 100281,
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB2_value",
       "parsed": "undefined",
-      "id": 100265,
+      "id": 100281,
       "fflname": "Q_MAP02_PARAGRAAF09SUB2_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP02_PARAGRAAF09SUB2_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Warning voor map 2'",
+      "index": 100282,
+      "name": "KSP_Q_MAP02_PARAGRAAF09SUB2_title",
+      "parsed": "'Warning voor map 2'",
+      "id": 100282,
+      "fflname": "Q_MAP02_PARAGRAAF09SUB2_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -79353,10 +79643,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100266,
+      "index": 100283,
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB3_value",
       "parsed": "undefined",
-      "id": 100266,
+      "id": 100283,
       "fflname": "Q_MAP02_PARAGRAAF09SUB3_value"
     },
     {
@@ -79367,11 +79657,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100267,
+      "index": 100284,
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB4_value",
       "parsed": "undefined",
-      "id": 100267,
+      "id": 100284,
       "fflname": "Q_MAP02_PARAGRAAF09SUB4_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP02_PARAGRAAF09SUB4_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Validatie stap 2'",
+      "index": 100285,
+      "name": "KSP_Q_MAP02_PARAGRAAF09SUB4_title",
+      "parsed": "'Validatie stap 2'",
+      "id": 100285,
+      "fflname": "Q_MAP02_PARAGRAAF09SUB4_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -79381,11 +79685,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100268,
+      "index": 100286,
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB5_value",
       "parsed": "undefined",
-      "id": 100268,
+      "id": 100286,
       "fflname": "Q_MAP02_PARAGRAAF09SUB5_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP02_PARAGRAAF09SUB5_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Aantal verplichte velden (1)'",
+      "index": 100287,
+      "name": "KSP_Q_MAP02_PARAGRAAF09SUB5_title",
+      "parsed": "'Aantal verplichte velden (1)'",
+      "id": 100287,
+      "fflname": "Q_MAP02_PARAGRAAF09SUB5_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -79395,11 +79713,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100269,
+      "index": 100288,
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB6_value",
       "parsed": "undefined",
-      "id": 100269,
+      "id": 100288,
       "fflname": "Q_MAP02_PARAGRAAF09SUB6_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP02_PARAGRAAF09SUB6_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Aantal ingevulde verplichte velden (1)'",
+      "index": 100289,
+      "name": "KSP_Q_MAP02_PARAGRAAF09SUB6_title",
+      "parsed": "'Aantal ingevulde verplichte velden (1)'",
+      "id": 100289,
+      "fflname": "Q_MAP02_PARAGRAAF09SUB6_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -79409,11 +79741,47 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100270,
+      "index": 100290,
       "name": "KSP_Q_MAP02_HULPVARIABELEN_value",
       "parsed": "undefined",
-      "id": 100270,
+      "id": 100290,
       "fflname": "Q_MAP02_HULPVARIABELEN_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP02_HULPVARIABELEN_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Hulpvariabelen'",
+      "index": 100291,
+      "name": "KSP_Q_MAP02_HULPVARIABELEN_title",
+      "parsed": "'Hulpvariabelen'",
+      "id": 100291,
+      "fflname": "Q_MAP02_HULPVARIABELEN_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_Q_MAP02_HULPVARIABELEN_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Q_MAP02_visible",
+          "association": "deps",
+          "refId": 100177
+        }
+      ],
+      "deps": {
+        "KSP_Q_MAP02_visible": true
+      },
+      "original": "Q_MAP02.visible&&0",
+      "index": 100292,
+      "name": "KSP_Q_MAP02_HULPVARIABELEN_visible",
+      "parsed": "a100177('100177',x,y.base,z,v)&&0",
+      "id": 100292,
+      "fflname": "Q_MAP02_HULPVARIABELEN_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -79425,7 +79793,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_value",
           "association": "refs",
-          "refId": 100163
+          "refId": 100175
         },
         {
           "name": "KSP_Q_MAP02_WARNING_required",
@@ -79491,11 +79859,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_MAP02_PARAGRAAF09_required": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP02,Q_MAP02_HULPVARIABELEN),InputRequired(X))",
-      "index": 100271,
+      "index": 100293,
       "name": "KSP_Q_MAP02_REQUIREDVARS_value",
       "parsed": "Count([false,false,false,false,false,false,false,false,false,false,false,false])",
-      "id": 100271,
+      "id": 100293,
       "fflname": "Q_MAP02_REQUIREDVARS_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP02_REQUIREDVARS_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Aantal verplichte velden (1)'",
+      "index": 100294,
+      "name": "KSP_Q_MAP02_REQUIREDVARS_title",
+      "parsed": "'Aantal verplichte velden (1)'",
+      "id": 100294,
+      "fflname": "Q_MAP02_REQUIREDVARS_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -79507,7 +79889,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_value",
           "association": "refs",
-          "refId": 100163
+          "refId": 100175
         },
         {
           "name": "KSP_Q_MAP02_WARNING_required",
@@ -79516,7 +79898,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_WARNING_value",
           "association": "deps",
-          "refId": 100165
+          "refId": 100178
         },
         {
           "name": "KSP_Q_MAP02_INFO_required",
@@ -79525,7 +79907,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_INFO_value",
           "association": "deps",
-          "refId": 100167
+          "refId": 100180
         },
         {
           "name": "KSP_Q_MAP02_VALIDATION_required",
@@ -79534,7 +79916,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_VALIDATION_value",
           "association": "deps",
-          "refId": 100169
+          "refId": 100182
         },
         {
           "name": "KSP_Q_MAP02_HINT_required",
@@ -79543,7 +79925,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_HINT_value",
           "association": "deps",
-          "refId": 100171
+          "refId": 100184
         },
         {
           "name": "KSP_FiscalParameters_required",
@@ -79552,7 +79934,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_FiscalParameters_value",
           "association": "deps",
-          "refId": 100174
+          "refId": 100187
         },
         {
           "name": "KSP_CombinationDiscount_required",
@@ -79561,7 +79943,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_CombinationDiscount_value",
           "association": "deps",
-          "refId": 100192
+          "refId": 100205
         },
         {
           "name": "KSP_ChildRelatedBudget_required",
@@ -79570,7 +79952,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_ChildRelatedBudget_value",
           "association": "deps",
-          "refId": 100202
+          "refId": 100215
         },
         {
           "name": "KSP_Fees_required",
@@ -79579,7 +79961,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Fees_value",
           "association": "deps",
-          "refId": 100214
+          "refId": 100227
         },
         {
           "name": "KSP_CostsSecondaryEducation_required",
@@ -79588,7 +79970,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_CostsSecondaryEducation_value",
           "association": "deps",
-          "refId": 100240
+          "refId": 100253
         },
         {
           "name": "KSP_Q_MAP02SUB10_required",
@@ -79597,7 +79979,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02SUB10_value",
           "association": "deps",
-          "refId": 100246
+          "refId": 100259
         },
         {
           "name": "KSP_Q_MAP02SUB11_required",
@@ -79606,7 +79988,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02SUB11_value",
           "association": "deps",
-          "refId": 100258
+          "refId": 100271
         },
         {
           "name": "KSP_Q_MAP02_PARAGRAAF09_required",
@@ -79615,7 +79997,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP02_PARAGRAAF09_value",
           "association": "deps",
-          "refId": 100263
+          "refId": 100277
         }
       ],
       "deps": {
@@ -79645,11 +80027,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_MAP02_PARAGRAAF09_value": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP02,Q_MAP02_HULPVARIABELEN),InputRequired(X)&&DataAvailable(X))",
-      "index": 100272,
+      "index": 100295,
       "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
-      "parsed": "Count([false&&v[100165][x.hash + y.hash + z]!==undefined,false&&v[100167][x.hash + y.hash + z]!==undefined,false&&v[100169][x.hash + y.hash + z]!==undefined,false&&v[100171][x.hash + y.hash + z]!==undefined,false&&v[100174][x.hash + y.hash + z]!==undefined,false&&v[100192][x.hash + y.hash + z]!==undefined,false&&v[100202][x.hash + y.hash + z]!==undefined,false&&v[100214][x.hash + y.hash + z]!==undefined,false&&v[100240][x.hash + y.hash + z]!==undefined,false&&v[100246][x.hash + y.hash + z]!==undefined,false&&v[100258][x.hash + y.hash + z]!==undefined,false&&v[100263][x.hash + y.hash + z]!==undefined])",
-      "id": 100272,
+      "parsed": "Count([false&&v[100178][x.hash + y.hash + z]!==undefined,false&&v[100180][x.hash + y.hash + z]!==undefined,false&&v[100182][x.hash + y.hash + z]!==undefined,false&&v[100184][x.hash + y.hash + z]!==undefined,false&&v[100187][x.hash + y.hash + z]!==undefined,false&&v[100205][x.hash + y.hash + z]!==undefined,false&&v[100215][x.hash + y.hash + z]!==undefined,false&&v[100227][x.hash + y.hash + z]!==undefined,false&&v[100253][x.hash + y.hash + z]!==undefined,false&&v[100259][x.hash + y.hash + z]!==undefined,false&&v[100271][x.hash + y.hash + z]!==undefined,false&&v[100277][x.hash + y.hash + z]!==undefined])",
+      "id": 100295,
       "fflname": "Q_MAP02_ENTEREDREQUIREDVARS_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP02_ENTEREDREQUIREDVARS_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Aantal ingevulde verplichte velden (1)'",
+      "index": 100296,
+      "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_title",
+      "parsed": "'Aantal ingevulde verplichte velden (1)'",
+      "id": 100296,
+      "fflname": "Q_MAP02_ENTEREDREQUIREDVARS_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -79662,22 +80058,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_value",
           "association": "deps",
-          "refId": 100355
+          "refId": 100394
         },
         {
           "name": "KSP_Q_MAP06_REQUIREDVARS_value",
           "association": "deps",
-          "refId": 100354
+          "refId": 100392
         },
         {
           "name": "KSP_Q_MAP06_INFO_value",
           "association": "refs",
-          "refId": 100278
+          "refId": 100302
         },
         {
           "name": "KSP_Q_MAP06_STATUS_value",
           "association": "refs",
-          "refId": 100347
+          "refId": 100377
         }
       ],
       "deps": {
@@ -79685,46 +80081,63 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_MAP06_REQUIREDVARS_value": true
       },
       "original": "Q_MAP06_ENTEREDREQUIREDVARS==Q_MAP06_REQUIREDVARS",
-      "index": 100273,
+      "index": 100297,
       "name": "KSP_Q_MAP06_value",
-      "parsed": "a100355('100355',x,y.base,z,v)==a100354('100354',x,y.base,z,v)",
-      "id": 100273,
+      "parsed": "a100394('100394',x,y.base,z,v)==a100392('100392',x,y.base,z,v)",
+      "id": 100297,
       "fflname": "Q_MAP06_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP06_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Your Personal situation'",
-      "index": 100274,
+      "index": 100298,
       "name": "KSP_Q_MAP06_title",
       "parsed": "'Your Personal situation'",
-      "id": 100274,
+      "id": 100298,
       "fflname": "Q_MAP06_title"
     },
     {
       "type": "noCacheLocked",
       "refs": {
-        "KSP_Q_MAP06_visible": true
+        "KSP_Q_MAP06_visible": true,
+        "KSP_Q_MAP06_PARAGRAAF09_visible": true,
+        "KSP_Q_MAP06_HULPVARIABELEN_visible": true
       },
       "formulaDependencys": [
+        {
+          "name": "KSP_Q_ROOT_visible",
+          "association": "deps"
+        },
         {
           "name": "KSP_Q_ROOT_value",
           "association": "deps",
           "refId": 100075
+        },
+        {
+          "name": "KSP_Q_MAP06_PARAGRAAF09_visible",
+          "association": "refs",
+          "refId": 100376
+        },
+        {
+          "name": "KSP_Q_MAP06_HULPVARIABELEN_visible",
+          "association": "refs",
+          "refId": 100391
         }
       ],
       "deps": {
+        "KSP_Q_ROOT_visible": true,
         "KSP_Q_ROOT_value": true
       },
-      "original": "Q_ROOT==1",
-      "index": 100275,
+      "original": "Q_ROOT.visible&&Q_ROOT==1",
+      "index": 100299,
       "name": "KSP_Q_MAP06_visible",
-      "parsed": "a100075('100075',x,y.base,z,v)==1",
-      "id": 100275,
+      "parsed": "true&&a100075('100075',x,y.base,z,v)==1",
+      "id": 100299,
       "fflname": "Q_MAP06_visible"
     },
     {
@@ -79737,17 +80150,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_RESTRICTIES_value",
           "association": "deps",
-          "refId": 100401
+          "refId": 100443
         },
         {
           "name": "KSP_Q_WARNING_GLOBAL_value",
           "association": "deps",
-          "refId": 100395
+          "refId": 100437
         },
         {
           "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100355
+          "refId": 100394
         }
       ],
       "deps": {
@@ -79755,25 +80168,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_WARNING_GLOBAL_value": true
       },
       "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
-      "index": 100276,
+      "index": 100300,
       "name": "KSP_Q_MAP06_WARNING_value",
-      "parsed": "String(a100401('100401',x.doc,y.base,z,v)+a100395('100395',x.doc,y.base,z,v))",
-      "id": 100276,
+      "parsed": "String(a100443('100443',x.doc,y.base,z,v)+a100437('100437',x.doc,y.base,z,v))",
+      "id": 100300,
       "fflname": "Q_MAP06_WARNING_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP06_WARNING_title": true,
-        "KSP_Q_MAP06_PARAGRAAF09SUB2_title": true
+        "KSP_Q_MAP06_WARNING_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Warning voor map 6'",
-      "index": 100277,
+      "index": 100301,
       "name": "KSP_Q_MAP06_WARNING_title",
       "parsed": "'Warning voor map 6'",
-      "id": 100277,
+      "id": 100301,
       "fflname": "Q_MAP06_WARNING_title"
     },
     {
@@ -79786,37 +80198,36 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_value",
           "association": "deps",
-          "refId": 100273
+          "refId": 100297
         },
         {
           "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100355
+          "refId": 100394
         }
       ],
       "deps": {
         "KSP_Q_MAP06_value": true
       },
       "original": "String(If(Q_MAP06[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
-      "index": 100278,
+      "index": 100302,
       "name": "KSP_Q_MAP06_INFO_value",
-      "parsed": "String(a100273('100273',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
-      "id": 100278,
+      "parsed": "String(a100297('100297',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
+      "id": 100302,
       "fflname": "Q_MAP06_INFO_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP06_INFO_title": true,
-        "KSP_Q_MAP06_PARAGRAAF09SUB3_title": true
+        "KSP_Q_MAP06_INFO_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Info bij stap 6'",
-      "index": 100279,
+      "index": 100303,
       "name": "KSP_Q_MAP06_INFO_title",
       "parsed": "'Info bij stap 6'",
-      "id": 100279,
+      "id": 100303,
       "fflname": "Q_MAP06_INFO_title"
     },
     {
@@ -79829,30 +80240,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100355
+          "refId": 100394
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100280,
+      "index": 100304,
       "name": "KSP_Q_MAP06_VALIDATION_value",
       "parsed": "undefined",
-      "id": 100280,
+      "id": 100304,
       "fflname": "Q_MAP06_VALIDATION_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP06_VALIDATION_title": true,
-        "KSP_Q_MAP06_PARAGRAAF09SUB4_title": true
+        "KSP_Q_MAP06_VALIDATION_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Validatie stap 6'",
-      "index": 100281,
+      "index": 100305,
       "name": "KSP_Q_MAP06_VALIDATION_title",
       "parsed": "'Validatie stap 6'",
-      "id": 100281,
+      "id": 100305,
       "fflname": "Q_MAP06_VALIDATION_title"
     },
     {
@@ -79865,29 +80275,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100355
+          "refId": 100394
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100282,
+      "index": 100306,
       "name": "KSP_Q_MAP06_HINT_value",
       "parsed": "undefined",
-      "id": 100282,
+      "id": 100306,
       "fflname": "Q_MAP06_HINT_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP06_HINT_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hinttekst stap 6'",
-      "index": 100283,
+      "index": 100307,
       "name": "KSP_Q_MAP06_HINT_title",
       "parsed": "'Hinttekst stap 6'",
-      "id": 100283,
+      "id": 100307,
       "fflname": "Q_MAP06_HINT_title"
     },
     {
@@ -79898,10 +80308,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "'Dit is de hinttekst van de variable Q_MAP06_HINT (DEZE REGEL WORDT NIET GEBRUIKT!)'",
-      "index": 100284,
+      "index": 100308,
       "name": "KSP_Q_MAP06_HINT_hint",
       "parsed": "'Dit is de hinttekst van de variable Q_MAP06_HINT (DEZE REGEL WORDT NIET GEBRUIKT!)'",
-      "id": 100284,
+      "id": 100308,
       "fflname": "Q_MAP06_HINT_hint"
     },
     {
@@ -79914,29 +80324,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100355
+          "refId": 100394
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100285,
+      "index": 100309,
       "name": "KSP_Q_MAP06SUB5_value",
       "parsed": "undefined",
-      "id": 100285,
+      "id": 100309,
       "fflname": "Q_MAP06SUB5_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP06SUB5_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Your Personal Situation'",
-      "index": 100286,
+      "index": 100310,
       "name": "KSP_Q_MAP06SUB5_title",
       "parsed": "'Your Personal Situation'",
-      "id": 100286,
+      "id": 100310,
       "fflname": "Q_MAP06SUB5_title"
     },
     {
@@ -79948,32 +80358,31 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalYearlyBalance_value",
           "association": "deps",
-          "refId": 100342
+          "refId": 100368
         }
       ],
       "deps": {
         "KSP_TotalYearlyBalance_value": true
       },
       "original": "TotalYearlyBalance",
-      "index": 100287,
+      "index": 100311,
       "name": "KSP_GraphResRek1_value",
-      "parsed": "a100342('100342',x,y.base,z,v)",
-      "id": 100287,
+      "parsed": "a100368('100368',x,y.base,z,v)",
+      "id": 100311,
       "fflname": "GraphResRek1_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_GraphResRek1_title": true,
-        "KSP_TotalYearlyBalance_title": true
+        "KSP_GraphResRek1_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Total Net Costs (-)'",
-      "index": 100288,
+      "index": 100312,
       "name": "KSP_GraphResRek1_title",
       "parsed": "'Total Net Costs (-)'",
-      "id": 100288,
+      "id": 100312,
       "fflname": "GraphResRek1_title"
     },
     {
@@ -79984,25 +80393,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100289,
+      "index": 100313,
       "name": "KSP_Q_MAP06SUB5SUB2_value",
       "parsed": "undefined",
-      "id": 100289,
+      "id": 100313,
       "fflname": "Q_MAP06SUB5SUB2_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_MAP06SUB5SUB2_title": true,
-        "KSP_TotalYearlyCosts_title": true
+        "KSP_Q_MAP06SUB5SUB2_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Total (yearly) costs'",
-      "index": 100290,
+      "index": 100314,
       "name": "KSP_Q_MAP06SUB5SUB2_title",
       "parsed": "'Total (yearly) costs'",
-      "id": 100290,
+      "id": 100314,
       "fflname": "Q_MAP06SUB5SUB2_title"
     },
     {
@@ -80020,54 +80428,54 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_CostsForOutOfSchoolCare_value",
           "association": "refs",
-          "refId": 100321
+          "refId": 100345
         },
         {
           "name": "KSP_CostsForPrimaryEducation_value",
           "association": "refs",
-          "refId": 100323
+          "refId": 100347
         },
         {
           "name": "KSP_CostsForSecondaryEducation_value",
           "association": "refs",
-          "refId": 100325
+          "refId": 100349
         },
         {
           "name": "KSP_ChildCarePremiumOverview_value",
           "association": "refs",
-          "refId": 100335
+          "refId": 100360
         },
         {
           "name": "KSP_ChildcareBudgetOverview_value",
           "association": "refs",
-          "refId": 100337
+          "refId": 100362
         },
         {
           "name": "KSP_CombinationDiscountOverview_value",
           "association": "refs",
-          "refId": 100339
+          "refId": 100364
         }
       ],
       "deps": {},
       "original": "ValueT(T)-1",
-      "index": 100291,
+      "index": 100315,
       "name": "KSP_Age_value",
       "parsed": "ValueT(x)-1",
-      "id": 100291,
+      "id": 100315,
       "fflname": "Age_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Age_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Age'",
-      "index": 100292,
+      "index": 100316,
       "name": "KSP_Age_title",
       "parsed": "'Age'",
-      "id": 100292,
+      "id": 100316,
       "fflname": "Age_title"
     },
     {
@@ -80078,24 +80486,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "ValueT(T)",
-      "index": 100293,
+      "index": 100317,
       "name": "KSP_PeriodeInFormulaset_value",
       "parsed": "ValueT(x)",
-      "id": 100293,
+      "id": 100317,
       "fflname": "PeriodeInFormulaset_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_PeriodeInFormulaset_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'PeriodeInFormulaset'",
-      "index": 100294,
+      "index": 100318,
       "name": "KSP_PeriodeInFormulaset_title",
       "parsed": "'PeriodeInFormulaset'",
-      "id": 100294,
+      "id": 100318,
       "fflname": "PeriodeInFormulaset_title"
     },
     {
@@ -80109,34 +80517,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "If(ValueT(T)==1,1800,0)",
-      "index": 100295,
+      "index": 100319,
       "name": "KSP_Furniture_value",
       "parsed": "ValueT(x)==1?1800:0",
-      "id": 100295,
+      "id": 100319,
       "fflname": "Furniture_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Furniture_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Furniture'",
-      "index": 100296,
+      "index": 100320,
       "name": "KSP_Furniture_title",
       "parsed": "'Furniture'",
-      "id": 100296,
+      "id": 100320,
       "fflname": "Furniture_title"
     },
     {
@@ -80150,35 +80558,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "If(ValueT(T)<=4,1,0)",
-      "index": 100297,
+      "index": 100321,
       "name": "KSP_ActualChildCareCosts_value",
       "parsed": "ValueT(x)<=4?1:0",
-      "id": 100297,
+      "id": 100321,
       "fflname": "ActualChildCareCosts_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_ActualChildCareCosts_title": true,
-        "KSP_ChildCareCosts_title": true
+        "KSP_ActualChildCareCosts_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Childcare costs'",
-      "index": 100298,
+      "index": 100322,
       "name": "KSP_ActualChildCareCosts_title",
       "parsed": "'Childcare costs'",
-      "id": 100298,
+      "id": 100322,
       "fflname": "ActualChildCareCosts_title"
     },
     {
@@ -80192,34 +80599,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Diapers',ValueT(T))",
-      "index": 100299,
+      "index": 100323,
       "name": "KSP_ActualDiapers_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Diapers',ValueT(x))",
-      "id": 100299,
+      "id": 100323,
       "fflname": "ActualDiapers_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ActualDiapers_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Diapers'",
-      "index": 100300,
+      "index": 100324,
       "name": "KSP_ActualDiapers_title",
       "parsed": "'Diapers'",
-      "id": 100300,
+      "id": 100324,
       "fflname": "ActualDiapers_title"
     },
     {
@@ -80233,41 +80640,41 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_ChildGender_value",
           "association": "deps",
-          "refId": 100117
+          "refId": 100123
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {
         "KSP_ChildGender_value": true
       },
       "original": "If(ChildGender==0,MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','FoodCostsBoy',ValueT(T)),MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','FoodCostsGirl',ValueT(T)))",
-      "index": 100301,
+      "index": 100325,
       "name": "KSP_ActualFood_value",
-      "parsed": "a100117('100117',x,y,z,v)==0?MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','FoodCostsBoy',ValueT(x)):MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','FoodCostsGirl',ValueT(x))",
-      "id": 100301,
+      "parsed": "a100123('100123',x,y,z,v)==0?MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','FoodCostsBoy',ValueT(x)):MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','FoodCostsGirl',ValueT(x))",
+      "id": 100325,
       "fflname": "ActualFood_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ActualFood_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Food'",
-      "index": 100302,
+      "index": 100326,
       "name": "KSP_ActualFood_title",
       "parsed": "'Food'",
-      "id": 100302,
+      "id": 100326,
       "fflname": "ActualFood_title"
     },
     {
@@ -80281,34 +80688,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','ClothingCosts',ValueT(T))",
-      "index": 100303,
+      "index": 100327,
       "name": "KSP_ActualClothingCosts_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','ClothingCosts',ValueT(x))",
-      "id": 100303,
+      "id": 100327,
       "fflname": "ActualClothingCosts_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ActualClothingCosts_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Clothing'",
-      "index": 100304,
+      "index": 100328,
       "name": "KSP_ActualClothingCosts_title",
       "parsed": "'Clothing'",
-      "id": 100304,
+      "id": 100328,
       "fflname": "ActualClothingCosts_title"
     },
     {
@@ -80322,34 +80729,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','PersonalCare',ValueT(T))",
-      "index": 100305,
+      "index": 100329,
       "name": "KSP_ActualPersonalCareCosts_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','PersonalCare',ValueT(x))",
-      "id": 100305,
+      "id": 100329,
       "fflname": "ActualPersonalCareCosts_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ActualPersonalCareCosts_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Personal care'",
-      "index": 100306,
+      "index": 100330,
       "name": "KSP_ActualPersonalCareCosts_title",
       "parsed": "'Personal care'",
-      "id": 100306,
+      "id": 100330,
       "fflname": "ActualPersonalCareCosts_title"
     },
     {
@@ -80363,34 +80770,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Hairdresser',ValueT(T))",
-      "index": 100307,
+      "index": 100331,
       "name": "KSP_Hairdresser_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Hairdresser',ValueT(x))",
-      "id": 100307,
+      "id": 100331,
       "fflname": "Hairdresser_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Hairdresser_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hairdresser'",
-      "index": 100308,
+      "index": 100332,
       "name": "KSP_Hairdresser_title",
       "parsed": "'Hairdresser'",
-      "id": 100308,
+      "id": 100332,
       "fflname": "Hairdresser_title"
     },
     {
@@ -80404,34 +80811,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Inventory',ValueT(T))",
-      "index": 100309,
+      "index": 100333,
       "name": "KSP_Inventory_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Inventory',ValueT(x))",
-      "id": 100309,
+      "id": 100333,
       "fflname": "Inventory_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Inventory_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Inventory'",
-      "index": 100310,
+      "index": 100334,
       "name": "KSP_Inventory_title",
       "parsed": "'Inventory'",
-      "id": 100310,
+      "id": 100334,
       "fflname": "Inventory_title"
     },
     {
@@ -80445,34 +80852,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Allowance',ValueT(T))",
-      "index": 100311,
+      "index": 100335,
       "name": "KSP_Allowance_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Allowance',ValueT(x))",
-      "id": 100311,
+      "id": 100335,
       "fflname": "Allowance_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Allowance_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Allowance'",
-      "index": 100312,
+      "index": 100336,
       "name": "KSP_Allowance_title",
       "parsed": "'Allowance'",
-      "id": 100312,
+      "id": 100336,
       "fflname": "Allowance_title"
     },
     {
@@ -80486,34 +80893,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Contributions',ValueT(T))",
-      "index": 100313,
+      "index": 100337,
       "name": "KSP_Contributions_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Contributions',ValueT(x))",
-      "id": 100313,
+      "id": 100337,
       "fflname": "Contributions_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Contributions_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Contributions'",
-      "index": 100314,
+      "index": 100338,
       "name": "KSP_Contributions_title",
       "parsed": "'Contributions'",
-      "id": 100314,
+      "id": 100338,
       "fflname": "Contributions_title"
     },
     {
@@ -80527,34 +80934,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Transport',ValueT(T))",
-      "index": 100315,
+      "index": 100339,
       "name": "KSP_Transport_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','Transport',ValueT(x))",
-      "id": 100315,
+      "id": 100339,
       "fflname": "Transport_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Transport_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Transport'",
-      "index": 100316,
+      "index": 100340,
       "name": "KSP_Transport_title",
       "parsed": "'Transport'",
-      "id": 100316,
+      "id": 100340,
       "fflname": "Transport_title"
     },
     {
@@ -80568,34 +80975,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','MobilePhone',ValueT(T))",
-      "index": 100317,
+      "index": 100341,
       "name": "KSP_MobilePhone_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','MobilePhone',ValueT(x))",
-      "id": 100317,
+      "id": 100341,
       "fflname": "MobilePhone_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MobilePhone_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'MobilePhone'",
-      "index": 100318,
+      "index": 100342,
       "name": "KSP_MobilePhone_title",
       "parsed": "'MobilePhone'",
-      "id": 100318,
+      "id": 100342,
       "fflname": "MobilePhone_title"
     },
     {
@@ -80609,34 +81016,34 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','DrivingLicense',ValueT(T))",
-      "index": 100319,
+      "index": 100343,
       "name": "KSP_DrivingLicense_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','DrivingLicense',ValueT(x))",
-      "id": 100319,
+      "id": 100343,
       "fflname": "DrivingLicense_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_DrivingLicense_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'DrivingLicense'",
-      "index": 100320,
+      "index": 100344,
       "name": "KSP_DrivingLicense_title",
       "parsed": "'DrivingLicense'",
-      "id": 100320,
+      "id": 100344,
       "fflname": "DrivingLicense_title"
     },
     {
@@ -80650,27 +81057,27 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_Age_value",
           "association": "deps",
-          "refId": 100291
+          "refId": 100315
         },
         {
           "name": "KSP_HourlyFeeOutOfSchoolCare_value",
           "association": "deps",
-          "refId": 100130
+          "refId": 100136
         },
         {
           "name": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
           "association": "deps",
-          "refId": 100126
+          "refId": 100132
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {
@@ -80679,24 +81086,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_NrOfDaysOutOfSchoolCareMonth_value": true
       },
       "original": "If(Age>=4&&Age<11,HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth*12,NA)",
-      "index": 100321,
+      "index": 100345,
       "name": "KSP_CostsForOutOfSchoolCare_value",
-      "parsed": "a100291('100291',x,y.base,z,v)>=4&&a100291('100291',x,y.base,z,v)<11?a100130('100130',x,y,z,v)*a100126('100126',x,y,z,v)*12:NA",
-      "id": 100321,
+      "parsed": "a100315('100315',x,y.base,z,v)>=4&&a100315('100315',x,y.base,z,v)<11?a100136('100136',x,y,z,v)*a100132('100132',x,y,z,v)*12:NA",
+      "id": 100345,
       "fflname": "CostsForOutOfSchoolCare_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CostsForOutOfSchoolCare_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Kosten BSO'",
-      "index": 100322,
+      "index": 100346,
       "name": "KSP_CostsForOutOfSchoolCare_title",
       "parsed": "'Kosten BSO'",
-      "id": 100322,
+      "id": 100346,
       "fflname": "CostsForOutOfSchoolCare_title"
     },
     {
@@ -80710,22 +81117,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_Age_value",
           "association": "deps",
-          "refId": 100291
+          "refId": 100315
         },
         {
           "name": "KSP_ParentalContributionPrimaryEducation_value",
           "association": "deps",
-          "refId": 100132
+          "refId": 100138
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {
@@ -80733,24 +81140,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_ParentalContributionPrimaryEducation_value": true
       },
       "original": "If(Age>=4&&Age<=11,ParentalContributionPrimaryEducation,0)",
-      "index": 100323,
+      "index": 100347,
       "name": "KSP_CostsForPrimaryEducation_value",
-      "parsed": "a100291('100291',x,y.base,z,v)>=4&&a100291('100291',x,y.base,z,v)<=11?a100132('100132',x,y,z,v):0",
-      "id": 100323,
+      "parsed": "a100315('100315',x,y.base,z,v)>=4&&a100315('100315',x,y.base,z,v)<=11?a100138('100138',x,y,z,v):0",
+      "id": 100347,
       "fflname": "CostsForPrimaryEducation_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CostsForPrimaryEducation_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Costs for Primary Education'",
-      "index": 100324,
+      "index": 100348,
       "name": "KSP_CostsForPrimaryEducation_title",
       "parsed": "'Costs for Primary Education'",
-      "id": 100324,
+      "id": 100348,
       "fflname": "CostsForPrimaryEducation_title"
     },
     {
@@ -80764,27 +81171,27 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_Age_value",
           "association": "deps",
-          "refId": 100291
+          "refId": 100315
         },
         {
           "name": "KSP_CostsYearFiveSixSeven_value",
           "association": "deps",
-          "refId": 100244
+          "refId": 100257
         },
         {
           "name": "KSP_CostsYearOneFour_value",
           "association": "deps",
-          "refId": 100242
+          "refId": 100255
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {
@@ -80793,24 +81200,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_CostsYearOneFour_value": true
       },
       "original": "If(Age>=12&&Age<16,CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0))",
-      "index": 100325,
+      "index": 100349,
       "name": "KSP_CostsForSecondaryEducation_value",
-      "parsed": "a100291('100291',x,y.base,z,v)>=12&&a100291('100291',x,y.base,z,v)<16?a100242('100242',x,y.base,z,v):a100291('100291',x,y.base,z,v)>=16?a100244('100244',x,y.base,z,v):0",
-      "id": 100325,
+      "parsed": "a100315('100315',x,y.base,z,v)>=12&&a100315('100315',x,y.base,z,v)<16?a100255('100255',x,y.base,z,v):a100315('100315',x,y.base,z,v)>=16?a100257('100257',x,y.base,z,v):0",
+      "id": 100349,
       "fflname": "CostsForSecondaryEducation_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CostsForSecondaryEducation_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Costs for Secondary Education'",
-      "index": 100326,
+      "index": 100350,
       "name": "KSP_CostsForSecondaryEducation_title",
       "parsed": "'Costs for Secondary Education'",
-      "id": 100326,
+      "id": 100350,
       "fflname": "CostsForSecondaryEducation_title"
     },
     {
@@ -80824,41 +81231,41 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalyYearlyCostsChild_value",
           "association": "refs",
-          "refId": 100139
+          "refId": 100145
         },
         {
           "name": "KSP_CostsUnspecified_value",
           "association": "deps",
-          "refId": 100134
+          "refId": 100140
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "refs",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {
         "KSP_CostsUnspecified_value": true
       },
       "original": "CostsUnspecified*12",
-      "index": 100327,
+      "index": 100351,
       "name": "KSP_CostsUnspecifiedOverview_value",
-      "parsed": "a100134('100134',x,y,z,v)*12",
-      "id": 100327,
+      "parsed": "a100140('100140',x,y,z,v)*12",
+      "id": 100351,
       "fflname": "CostsUnspecifiedOverview_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_CostsUnspecifiedOverview_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Costs unspecified'",
-      "index": 100328,
+      "index": 100352,
       "name": "KSP_CostsUnspecifiedOverview_title",
       "parsed": "'Costs unspecified'",
-      "id": 100328,
+      "id": 100352,
       "fflname": "CostsUnspecifiedOverview_title"
     },
     {
@@ -80872,97 +81279,97 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Furniture_value",
           "association": "deps",
-          "refId": 100295
+          "refId": 100319
         },
         {
           "name": "KSP_ActualChildCareCosts_value",
           "association": "deps",
-          "refId": 100297
+          "refId": 100321
         },
         {
           "name": "KSP_ActualDiapers_value",
           "association": "deps",
-          "refId": 100299
+          "refId": 100323
         },
         {
           "name": "KSP_ActualFood_value",
           "association": "deps",
-          "refId": 100301
+          "refId": 100325
         },
         {
           "name": "KSP_ActualClothingCosts_value",
           "association": "deps",
-          "refId": 100303
+          "refId": 100327
         },
         {
           "name": "KSP_ActualPersonalCareCosts_value",
           "association": "deps",
-          "refId": 100305
+          "refId": 100329
         },
         {
           "name": "KSP_Hairdresser_value",
           "association": "deps",
-          "refId": 100307
+          "refId": 100331
         },
         {
           "name": "KSP_Inventory_value",
           "association": "deps",
-          "refId": 100309
+          "refId": 100333
         },
         {
           "name": "KSP_Allowance_value",
           "association": "deps",
-          "refId": 100311
+          "refId": 100335
         },
         {
           "name": "KSP_Contributions_value",
           "association": "deps",
-          "refId": 100313
+          "refId": 100337
         },
         {
           "name": "KSP_Transport_value",
           "association": "deps",
-          "refId": 100315
+          "refId": 100339
         },
         {
           "name": "KSP_MobilePhone_value",
           "association": "deps",
-          "refId": 100317
+          "refId": 100341
         },
         {
           "name": "KSP_DrivingLicense_value",
           "association": "deps",
-          "refId": 100319
+          "refId": 100343
         },
         {
           "name": "KSP_CostsForOutOfSchoolCare_value",
           "association": "deps",
-          "refId": 100321
+          "refId": 100345
         },
         {
           "name": "KSP_CostsForPrimaryEducation_value",
           "association": "deps",
-          "refId": 100323
+          "refId": 100347
         },
         {
           "name": "KSP_CostsForSecondaryEducation_value",
           "association": "deps",
-          "refId": 100325
+          "refId": 100349
         },
         {
           "name": "KSP_CostsUnspecifiedOverview_value",
           "association": "deps",
-          "refId": 100327
+          "refId": 100351
         },
         {
           "name": "KSP_TotalYearlyCostTSUM_value",
           "association": "refs",
-          "refId": 100330
+          "refId": 100355
         },
         {
           "name": "KSP_TotalYearlyBalance_value",
           "association": "refs",
-          "refId": 100342
+          "refId": 100368
         }
       ],
       "deps": {
@@ -80985,11 +81392,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_CostsUnspecifiedOverview_value": true
       },
       "original": "Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview",
-      "index": 100329,
+      "index": 100353,
       "name": "KSP_TotalYearlyCosts_value",
-      "parsed": "a100295('100295',x,y.base,z,v)+a100297('100297',x,y.base,z,v)+a100299('100299',x,y.base,z,v)+a100301('100301',x,y.base,z,v)+a100303('100303',x,y.base,z,v)+a100305('100305',x,y.base,z,v)+a100307('100307',x,y.base,z,v)+a100309('100309',x,y.base,z,v)+a100311('100311',x,y.base,z,v)+a100313('100313',x,y.base,z,v)+a100315('100315',x,y.base,z,v)+a100317('100317',x,y.base,z,v)+a100319('100319',x,y.base,z,v)+a100321('100321',x,y.base,z,v)+a100323('100323',x,y.base,z,v)+a100325('100325',x,y.base,z,v)+a100327('100327',x,y.base,z,v)",
-      "id": 100329,
+      "parsed": "a100319('100319',x,y.base,z,v)+a100321('100321',x,y.base,z,v)+a100323('100323',x,y.base,z,v)+a100325('100325',x,y.base,z,v)+a100327('100327',x,y.base,z,v)+a100329('100329',x,y.base,z,v)+a100331('100331',x,y.base,z,v)+a100333('100333',x,y.base,z,v)+a100335('100335',x,y.base,z,v)+a100337('100337',x,y.base,z,v)+a100339('100339',x,y.base,z,v)+a100341('100341',x,y.base,z,v)+a100343('100343',x,y.base,z,v)+a100345('100345',x,y.base,z,v)+a100347('100347',x,y.base,z,v)+a100349('100349',x,y.base,z,v)+a100351('100351',x,y.base,z,v)",
+      "id": 100353,
       "fflname": "TotalYearlyCosts_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_TotalYearlyCosts_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Total (yearly) costs'",
+      "index": 100354,
+      "name": "KSP_TotalYearlyCosts_title",
+      "parsed": "'Total (yearly) costs'",
+      "id": 100354,
+      "fflname": "TotalYearlyCosts_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81000,17 +81421,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "deps",
-          "refId": 100329
+          "refId": 100353
         }
       ],
       "deps": {
         "KSP_TotalYearlyCosts_value": true
       },
       "original": "TSUM(TotalYearlyCosts)",
-      "index": 100330,
+      "index": 100355,
       "name": "KSP_TotalYearlyCostTSUM_value",
-      "parsed": "SUM(TVALUES([100329],a100329,'100329',x,y.base,z,v))",
-      "id": 100330,
+      "parsed": "SUM(TVALUES([100353],a100353,'100353',x,y.base,z,v))",
+      "id": 100355,
       "fflname": "TotalYearlyCostTSUM_value"
     },
     {
@@ -81021,24 +81442,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100331,
+      "index": 100356,
       "name": "KSP_Q_MAP06SUB5SUB3_value",
       "parsed": "undefined",
-      "id": 100331,
+      "id": 100356,
       "fflname": "Q_MAP06SUB5SUB3_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAP06SUB5SUB3_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'[b]Child-related Income[/b]'",
-      "index": 100332,
+      "index": 100357,
       "name": "KSP_Q_MAP06SUB5SUB3_title",
       "parsed": "'[b]Child-related Income[/b]'",
-      "id": 100332,
+      "id": 100357,
       "fflname": "Q_MAP06SUB5SUB3_title"
     },
     {
@@ -81051,29 +81472,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalYearlyIncome_value",
           "association": "refs",
-          "refId": 100340
+          "refId": 100366
         }
       ],
       "deps": {},
       "original": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','ChildBenefits',ValueT(T))",
-      "index": 100333,
+      "index": 100358,
       "name": "KSP_ChildBenefits_value",
       "parsed": "MatrixLookup('ScorecardKSP.xls','LeeftijdGeslachtGebondenKosten','ChildBenefits',ValueT(x))",
-      "id": 100333,
+      "id": 100358,
       "fflname": "ChildBenefits_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ChildBenefits_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Child benefits'",
-      "index": 100334,
+      "index": 100359,
       "name": "KSP_ChildBenefits_title",
       "parsed": "'Child benefits'",
-      "id": 100334,
+      "id": 100359,
       "fflname": "ChildBenefits_title"
     },
     {
@@ -81086,22 +81507,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Age_value",
           "association": "deps",
-          "refId": 100291
+          "refId": 100315
         },
         {
           "name": "KSP_PremiumForChildcare_value",
           "association": "deps",
-          "refId": 100236
+          "refId": 100249
         },
         {
           "name": "KSP_PremiumForOutofSchoolCare_value",
           "association": "deps",
-          "refId": 100238
+          "refId": 100251
         },
         {
           "name": "KSP_TotalYearlyIncome_value",
           "association": "refs",
-          "refId": 100340
+          "refId": 100366
         }
       ],
       "deps": {
@@ -81110,24 +81531,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_PremiumForOutofSchoolCare_value": true
       },
       "original": "If(Age<4,PremiumForChildcare*12,If(Age<11,PremiumForOutofSchoolCare*12,0))",
-      "index": 100335,
+      "index": 100360,
       "name": "KSP_ChildCarePremiumOverview_value",
-      "parsed": "a100291('100291',x,y.base,z,v)<4?a100236('100236',x,y.base,z,v)*12:a100291('100291',x,y.base,z,v)<11?a100238('100238',x,y.base,z,v)*12:0",
-      "id": 100335,
+      "parsed": "a100315('100315',x,y.base,z,v)<4?a100249('100249',x,y.base,z,v)*12:a100315('100315',x,y.base,z,v)<11?a100251('100251',x,y.base,z,v)*12:0",
+      "id": 100360,
       "fflname": "ChildCarePremiumOverview_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ChildCarePremiumOverview_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Childcare premium'",
-      "index": 100336,
+      "index": 100361,
       "name": "KSP_ChildCarePremiumOverview_title",
       "parsed": "'Childcare premium'",
-      "id": 100336,
+      "id": 100361,
       "fflname": "ChildCarePremiumOverview_title"
     },
     {
@@ -81140,27 +81561,27 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Age_value",
           "association": "deps",
-          "refId": 100291
+          "refId": 100315
         },
         {
           "name": "KSP_ChildRelatedBudgetUpToTwelve_value",
           "association": "deps",
-          "refId": 100252
+          "refId": 100265
         },
         {
           "name": "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_value",
           "association": "deps",
-          "refId": 100254
+          "refId": 100267
         },
         {
           "name": "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_value",
           "association": "deps",
-          "refId": 100256
+          "refId": 100269
         },
         {
           "name": "KSP_TotalYearlyIncome_value",
           "association": "refs",
-          "refId": 100340
+          "refId": 100366
         }
       ],
       "deps": {
@@ -81170,24 +81591,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_value": true
       },
       "original": "If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)))",
-      "index": 100337,
+      "index": 100362,
       "name": "KSP_ChildcareBudgetOverview_value",
-      "parsed": "a100291('100291',x,y.base,z,v)<12?a100252('100252',x,y.base,z,v)*12:a100291('100291',x,y.base,z,v)<16?a100254('100254',x,y.base,z,v)*12:a100291('100291',x,y.base,z,v)<18?a100256('100256',x,y.base,z,v)*12:0",
-      "id": 100337,
+      "parsed": "a100315('100315',x,y.base,z,v)<12?a100265('100265',x,y.base,z,v)*12:a100315('100315',x,y.base,z,v)<16?a100267('100267',x,y.base,z,v)*12:a100315('100315',x,y.base,z,v)<18?a100269('100269',x,y.base,z,v)*12:0",
+      "id": 100362,
       "fflname": "ChildcareBudgetOverview_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ChildcareBudgetOverview_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Childcare budget'",
-      "index": 100338,
+      "index": 100363,
       "name": "KSP_ChildcareBudgetOverview_title",
       "parsed": "'Childcare budget'",
-      "id": 100338,
+      "id": 100363,
       "fflname": "ChildcareBudgetOverview_title"
     },
     {
@@ -81200,17 +81621,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Age_value",
           "association": "deps",
-          "refId": 100291
+          "refId": 100315
         },
         {
           "name": "KSP_CombinationDiscountTotal_value",
           "association": "deps",
-          "refId": 100261
+          "refId": 100275
         },
         {
           "name": "KSP_TotalYearlyIncome_value",
           "association": "refs",
-          "refId": 100340
+          "refId": 100366
         }
       ],
       "deps": {
@@ -81218,11 +81639,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_CombinationDiscountTotal_value": true
       },
       "original": "If(Age<12,CombinationDiscountTotal,0)",
-      "index": 100339,
+      "index": 100364,
       "name": "KSP_CombinationDiscountOverview_value",
-      "parsed": "a100291('100291',x,y.base,z,v)<12?a100261('100261',x,y.base,z,v):0",
-      "id": 100339,
+      "parsed": "a100315('100315',x,y.base,z,v)<12?a100275('100275',x,y.base,z,v):0",
+      "id": 100364,
       "fflname": "CombinationDiscountOverview_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_CombinationDiscountOverview_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Combination Discount'",
+      "index": 100365,
+      "name": "KSP_CombinationDiscountOverview_title",
+      "parsed": "'Combination Discount'",
+      "id": 100365,
+      "fflname": "CombinationDiscountOverview_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81234,27 +81669,27 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_ChildBenefits_value",
           "association": "deps",
-          "refId": 100333
+          "refId": 100358
         },
         {
           "name": "KSP_ChildCarePremiumOverview_value",
           "association": "deps",
-          "refId": 100335
+          "refId": 100360
         },
         {
           "name": "KSP_ChildcareBudgetOverview_value",
           "association": "deps",
-          "refId": 100337
+          "refId": 100362
         },
         {
           "name": "KSP_CombinationDiscountOverview_value",
           "association": "deps",
-          "refId": 100339
+          "refId": 100364
         },
         {
           "name": "KSP_TotalYearlyBalance_value",
           "association": "refs",
-          "refId": 100342
+          "refId": 100368
         }
       ],
       "deps": {
@@ -81264,24 +81699,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_CombinationDiscountOverview_value": true
       },
       "original": "ChildBenefits+ChildCarePremiumOverview+ChildcareBudgetOverview+CombinationDiscountOverview",
-      "index": 100340,
+      "index": 100366,
       "name": "KSP_TotalYearlyIncome_value",
-      "parsed": "a100333('100333',x,y.base,z,v)+a100335('100335',x,y.base,z,v)+a100337('100337',x,y.base,z,v)+a100339('100339',x,y.base,z,v)",
-      "id": 100340,
+      "parsed": "a100358('100358',x,y.base,z,v)+a100360('100360',x,y.base,z,v)+a100362('100362',x,y.base,z,v)+a100364('100364',x,y.base,z,v)",
+      "id": 100366,
       "fflname": "TotalYearlyIncome_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_TotalYearlyIncome_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Total (yearly) Income'",
-      "index": 100341,
+      "index": 100367,
       "name": "KSP_TotalYearlyIncome_title",
       "parsed": "'Total (yearly) Income'",
-      "id": 100341,
+      "id": 100367,
       "fflname": "TotalYearlyIncome_title"
     },
     {
@@ -81295,22 +81730,22 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_GraphResRek1_value",
           "association": "refs",
-          "refId": 100287
+          "refId": 100311
         },
         {
           "name": "KSP_TotalYearlyCosts_value",
           "association": "deps",
-          "refId": 100329
+          "refId": 100353
         },
         {
           "name": "KSP_TotalYearlyIncome_value",
           "association": "deps",
-          "refId": 100340
+          "refId": 100366
         },
         {
           "name": "KSP_TotalMonthlyBalanceAverage_value",
           "association": "refs",
-          "refId": 100343
+          "refId": 100370
         }
       ],
       "deps": {
@@ -81318,11 +81753,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_TotalYearlyIncome_value": true
       },
       "original": "TotalYearlyCosts-TotalYearlyIncome",
-      "index": 100342,
+      "index": 100368,
       "name": "KSP_TotalYearlyBalance_value",
-      "parsed": "a100329('100329',x,y.base,z,v)-a100340('100340',x,y.base,z,v)",
-      "id": 100342,
+      "parsed": "a100353('100353',x,y.base,z,v)-a100366('100366',x,y.base,z,v)",
+      "id": 100368,
       "fflname": "TotalYearlyBalance_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_TotalYearlyBalance_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Total Net Costs (-)'",
+      "index": 100369,
+      "name": "KSP_TotalYearlyBalance_title",
+      "parsed": "'Total Net Costs (-)'",
+      "id": 100369,
+      "fflname": "TotalYearlyBalance_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81333,31 +81782,31 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_TotalYearlyBalance_value",
           "association": "deps",
-          "refId": 100342
+          "refId": 100368
         }
       ],
       "deps": {
         "KSP_TotalYearlyBalance_value": true
       },
       "original": "TotalYearlyBalance/12",
-      "index": 100343,
+      "index": 100370,
       "name": "KSP_TotalMonthlyBalanceAverage_value",
-      "parsed": "a100342('100342',x,y.base,z,v)/12",
-      "id": 100343,
+      "parsed": "a100368('100368',x,y.base,z,v)/12",
+      "id": 100370,
       "fflname": "TotalMonthlyBalanceAverage_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_TotalMonthlyBalanceAverage_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Total monthly Net Costs, monthly()'",
-      "index": 100344,
+      "index": 100371,
       "name": "KSP_TotalMonthlyBalanceAverage_title",
       "parsed": "'Total monthly Net Costs, monthly()'",
-      "id": 100344,
+      "id": 100371,
       "fflname": "TotalMonthlyBalanceAverage_title"
     },
     {
@@ -81369,12 +81818,12 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_NrOfDaysChildcareMonth_value",
           "association": "deps",
-          "refId": 100122
+          "refId": 100128
         },
         {
           "name": "KSP_HourlyFeeChildCare_value",
           "association": "deps",
-          "refId": 100128
+          "refId": 100134
         }
       ],
       "deps": {
@@ -81382,11 +81831,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_HourlyFeeChildCare_value": true
       },
       "original": "NrOfDaysChildcareMonth*HourlyFeeChildCare*12",
-      "index": 100345,
+      "index": 100372,
       "name": "KSP_ChildCareCosts_value",
-      "parsed": "a100122('100122',x,y,z,v)*a100128('100128',x,y,z,v)*12",
-      "id": 100345,
+      "parsed": "a100128('100128',x,y,z,v)*a100134('100134',x,y,z,v)*12",
+      "id": 100372,
       "fflname": "ChildCareCosts_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_ChildCareCosts_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Childcare costs'",
+      "index": 100373,
+      "name": "KSP_ChildCareCosts_title",
+      "parsed": "'Childcare costs'",
+      "id": 100373,
+      "fflname": "ChildCareCosts_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81398,16 +81861,58 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100355
+          "refId": 100394
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100346,
+      "index": 100374,
       "name": "KSP_Q_MAP06_PARAGRAAF09_value",
       "parsed": "undefined",
-      "id": 100346,
+      "id": 100374,
       "fflname": "Q_MAP06_PARAGRAAF09_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP06_PARAGRAAF09_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Eigenschappen van de stap'",
+      "index": 100375,
+      "name": "KSP_Q_MAP06_PARAGRAAF09_title",
+      "parsed": "'Eigenschappen van de stap'",
+      "id": 100375,
+      "fflname": "Q_MAP06_PARAGRAAF09_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_Q_MAP06_PARAGRAAF09_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Q_MAP06_visible",
+          "association": "deps",
+          "refId": 100299
+        },
+        {
+          "name": "KSP_DEBUG_value",
+          "association": "deps",
+          "refId": 100173
+        }
+      ],
+      "deps": {
+        "KSP_Q_MAP06_visible": true,
+        "KSP_DEBUG_value": true
+      },
+      "original": "Q_MAP06.visible&&DEBUG==1",
+      "index": 100376,
+      "name": "KSP_Q_MAP06_PARAGRAAF09_visible",
+      "parsed": "a100299('100299',x,y.base,z,v)&&a100173('100173',x,y.base,z,v)==1",
+      "id": 100376,
+      "fflname": "Q_MAP06_PARAGRAAF09_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -81418,18 +81923,32 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_value",
           "association": "deps",
-          "refId": 100273
+          "refId": 100297
         }
       ],
       "deps": {
         "KSP_Q_MAP06_value": true
       },
       "original": "Q_MAP06",
-      "index": 100347,
+      "index": 100377,
       "name": "KSP_Q_MAP06_STATUS_value",
-      "parsed": "a100273('100273',x,y.base,z,v)",
-      "id": 100347,
+      "parsed": "a100297('100297',x,y.base,z,v)",
+      "id": 100377,
       "fflname": "Q_MAP06_STATUS_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP06_STATUS_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Status van de stap'",
+      "index": 100378,
+      "name": "KSP_Q_MAP06_STATUS_title",
+      "parsed": "'Status van de stap'",
+      "id": 100378,
+      "fflname": "Q_MAP06_STATUS_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81439,11 +81958,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100348,
+      "index": 100379,
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB2_value",
       "parsed": "undefined",
-      "id": 100348,
+      "id": 100379,
       "fflname": "Q_MAP06_PARAGRAAF09SUB2_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP06_PARAGRAAF09SUB2_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Warning voor map 6'",
+      "index": 100380,
+      "name": "KSP_Q_MAP06_PARAGRAAF09SUB2_title",
+      "parsed": "'Warning voor map 6'",
+      "id": 100380,
+      "fflname": "Q_MAP06_PARAGRAAF09SUB2_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81453,11 +81986,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100349,
+      "index": 100381,
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB3_value",
       "parsed": "undefined",
-      "id": 100349,
+      "id": 100381,
       "fflname": "Q_MAP06_PARAGRAAF09SUB3_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP06_PARAGRAAF09SUB3_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Info bij stap 6'",
+      "index": 100382,
+      "name": "KSP_Q_MAP06_PARAGRAAF09SUB3_title",
+      "parsed": "'Info bij stap 6'",
+      "id": 100382,
+      "fflname": "Q_MAP06_PARAGRAAF09SUB3_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81467,11 +82014,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100350,
+      "index": 100383,
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB4_value",
       "parsed": "undefined",
-      "id": 100350,
+      "id": 100383,
       "fflname": "Q_MAP06_PARAGRAAF09SUB4_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP06_PARAGRAAF09SUB4_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Validatie stap 6'",
+      "index": 100384,
+      "name": "KSP_Q_MAP06_PARAGRAAF09SUB4_title",
+      "parsed": "'Validatie stap 6'",
+      "id": 100384,
+      "fflname": "Q_MAP06_PARAGRAAF09SUB4_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81481,11 +82042,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100351,
+      "index": 100385,
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB5_value",
       "parsed": "undefined",
-      "id": 100351,
+      "id": 100385,
       "fflname": "Q_MAP06_PARAGRAAF09SUB5_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP06_PARAGRAAF09SUB5_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Aantal verplichte velden (1)'",
+      "index": 100386,
+      "name": "KSP_Q_MAP06_PARAGRAAF09SUB5_title",
+      "parsed": "'Aantal verplichte velden (1)'",
+      "id": 100386,
+      "fflname": "Q_MAP06_PARAGRAAF09SUB5_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81495,11 +82070,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100352,
+      "index": 100387,
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB6_value",
       "parsed": "undefined",
-      "id": 100352,
+      "id": 100387,
       "fflname": "Q_MAP06_PARAGRAAF09SUB6_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP06_PARAGRAAF09SUB6_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Aantal ingevulde verplichte velden (1)'",
+      "index": 100388,
+      "name": "KSP_Q_MAP06_PARAGRAAF09SUB6_title",
+      "parsed": "'Aantal ingevulde verplichte velden (1)'",
+      "id": 100388,
+      "fflname": "Q_MAP06_PARAGRAAF09SUB6_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81509,11 +82098,47 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100353,
+      "index": 100389,
       "name": "KSP_Q_MAP06_HULPVARIABELEN_value",
       "parsed": "undefined",
-      "id": 100353,
+      "id": 100389,
       "fflname": "Q_MAP06_HULPVARIABELEN_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP06_HULPVARIABELEN_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Hulpvariabelen'",
+      "index": 100390,
+      "name": "KSP_Q_MAP06_HULPVARIABELEN_title",
+      "parsed": "'Hulpvariabelen'",
+      "id": 100390,
+      "fflname": "Q_MAP06_HULPVARIABELEN_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "KSP_Q_MAP06_HULPVARIABELEN_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "KSP_Q_MAP06_visible",
+          "association": "deps",
+          "refId": 100299
+        }
+      ],
+      "deps": {
+        "KSP_Q_MAP06_visible": true
+      },
+      "original": "Q_MAP06.visible&&0",
+      "index": 100391,
+      "name": "KSP_Q_MAP06_HULPVARIABELEN_visible",
+      "parsed": "a100299('100299',x,y.base,z,v)&&0",
+      "id": 100391,
+      "fflname": "Q_MAP06_HULPVARIABELEN_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -81525,7 +82150,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_value",
           "association": "refs",
-          "refId": 100273
+          "refId": 100297
         },
         {
           "name": "KSP_Q_MAP06_WARNING_required",
@@ -81561,11 +82186,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_MAP06_PARAGRAAF09_required": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP06,Q_MAP06_HULPVARIABELEN),InputRequired(X))",
-      "index": 100354,
+      "index": 100392,
       "name": "KSP_Q_MAP06_REQUIREDVARS_value",
       "parsed": "Count([false,false,false,false,false,false])",
-      "id": 100354,
+      "id": 100392,
       "fflname": "Q_MAP06_REQUIREDVARS_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP06_REQUIREDVARS_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Aantal verplichte velden (1)'",
+      "index": 100393,
+      "name": "KSP_Q_MAP06_REQUIREDVARS_title",
+      "parsed": "'Aantal verplichte velden (1)'",
+      "id": 100393,
+      "fflname": "Q_MAP06_REQUIREDVARS_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81577,7 +82216,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_value",
           "association": "refs",
-          "refId": 100273
+          "refId": 100297
         },
         {
           "name": "KSP_Q_MAP06_WARNING_required",
@@ -81586,7 +82225,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_WARNING_value",
           "association": "deps",
-          "refId": 100276
+          "refId": 100300
         },
         {
           "name": "KSP_Q_MAP06_INFO_required",
@@ -81595,7 +82234,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_INFO_value",
           "association": "deps",
-          "refId": 100278
+          "refId": 100302
         },
         {
           "name": "KSP_Q_MAP06_VALIDATION_required",
@@ -81604,7 +82243,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_VALIDATION_value",
           "association": "deps",
-          "refId": 100280
+          "refId": 100304
         },
         {
           "name": "KSP_Q_MAP06_HINT_required",
@@ -81613,7 +82252,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_HINT_value",
           "association": "deps",
-          "refId": 100282
+          "refId": 100306
         },
         {
           "name": "KSP_Q_MAP06SUB5_required",
@@ -81622,7 +82261,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06SUB5_value",
           "association": "deps",
-          "refId": 100285
+          "refId": 100309
         },
         {
           "name": "KSP_Q_MAP06_PARAGRAAF09_required",
@@ -81631,7 +82270,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP06_PARAGRAAF09_value",
           "association": "deps",
-          "refId": 100346
+          "refId": 100374
         }
       ],
       "deps": {
@@ -81649,11 +82288,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_MAP06_PARAGRAAF09_value": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP06,Q_MAP06_HULPVARIABELEN),InputRequired(X)&&DataAvailable(X))",
-      "index": 100355,
+      "index": 100394,
       "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_value",
-      "parsed": "Count([false&&v[100276][x.hash + y.hash + z]!==undefined,false&&v[100278][x.hash + y.hash + z]!==undefined,false&&v[100280][x.hash + y.hash + z]!==undefined,false&&v[100282][x.hash + y.hash + z]!==undefined,false&&v[100285][x.hash + y.hash + z]!==undefined,false&&v[100346][x.hash + y.hash + z]!==undefined])",
-      "id": 100355,
+      "parsed": "Count([false&&v[100300][x.hash + y.hash + z]!==undefined,false&&v[100302][x.hash + y.hash + z]!==undefined,false&&v[100304][x.hash + y.hash + z]!==undefined,false&&v[100306][x.hash + y.hash + z]!==undefined,false&&v[100309][x.hash + y.hash + z]!==undefined,false&&v[100374][x.hash + y.hash + z]!==undefined])",
+      "id": 100394,
       "fflname": "Q_MAP06_ENTEREDREQUIREDVARS_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_MAP06_ENTEREDREQUIREDVARS_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Aantal ingevulde verplichte velden (1)'",
+      "index": 100395,
+      "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_title",
+      "parsed": "'Aantal ingevulde verplichte velden (1)'",
+      "id": 100395,
+      "fflname": "Q_MAP06_ENTEREDREQUIREDVARS_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81669,12 +82322,12 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_RESTRICTIES_value",
           "association": "deps",
-          "refId": 100401
+          "refId": 100443
         },
         {
           "name": "KSP_Q_WARNING_GLOBAL_value",
           "association": "deps",
-          "refId": 100395
+          "refId": 100437
         }
       ],
       "deps": {
@@ -81683,25 +82336,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "KSP_Q_WARNING_GLOBAL_value": true
       },
       "original": "String(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
-      "index": 100356,
+      "index": 100396,
       "name": "KSP_Q_RESULT_value",
-      "parsed": "String((a100075('100075',x.doc,y.base,z,v)==0?'Nog niet alle vragen zijn ingevuld.[br][/br]':'Deze vragenlijst is definitief gemaakt.[br][/br]')+a100401('100401',x.doc,y.base,z,v)+a100395('100395',x.doc,y.base,z,v))",
-      "id": 100356,
+      "parsed": "String((a100075('100075',x.doc,y.base,z,v)==0?'Nog niet alle vragen zijn ingevuld.[br][/br]':'Deze vragenlijst is definitief gemaakt.[br][/br]')+a100443('100443',x.doc,y.base,z,v)+a100437('100437',x.doc,y.base,z,v))",
+      "id": 100396,
       "fflname": "Q_RESULT_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
-        "KSP_Q_RESULT_title": true,
-        "KSP_Q_RESULTSUB1_title": true
+        "KSP_Q_RESULT_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Resultaat'",
-      "index": 100357,
+      "index": 100397,
       "name": "KSP_Q_RESULT_title",
       "parsed": "'Resultaat'",
-      "id": 100357,
+      "id": 100397,
       "fflname": "Q_RESULT_title"
     },
     {
@@ -81712,11 +82364,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100358,
+      "index": 100398,
       "name": "KSP_Q_RESULTSUB1_value",
       "parsed": "undefined",
-      "id": 100358,
+      "id": 100398,
       "fflname": "Q_RESULTSUB1_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_Q_RESULTSUB1_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Resultaat'",
+      "index": 100399,
+      "name": "KSP_Q_RESULTSUB1_title",
+      "parsed": "'Resultaat'",
+      "id": 100399,
+      "fflname": "Q_RESULTSUB1_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -81726,24 +82392,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "0",
-      "index": 100359,
+      "index": 100400,
       "name": "KSP_Q_STATUS_value",
       "parsed": "0",
-      "id": 100359,
+      "id": 100400,
       "fflname": "Q_STATUS_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_STATUS_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Status'",
-      "index": 100360,
+      "index": 100401,
       "name": "KSP_Q_STATUS_title",
       "parsed": "'Status'",
-      "id": 100360,
+      "id": 100401,
       "fflname": "Q_STATUS_title"
     },
     {
@@ -81754,10 +82420,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Actief'},{'name':'1','value':'Defintief'}]",
-      "index": 100361,
+      "index": 100402,
       "name": "KSP_Q_STATUS_choices",
       "parsed": "[{'name':' 0','value':'Actief'},{'name':'1','value':'Defintief'}]",
-      "id": 100361,
+      "id": 100402,
       "fflname": "Q_STATUS_choices"
     },
     {
@@ -81768,24 +82434,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100362,
+      "index": 100403,
       "name": "KSP_Q_STATUS_FINAL_ON_value",
       "parsed": "undefined",
-      "id": 100362,
+      "id": 100403,
       "fflname": "Q_STATUS_FINAL_ON_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_STATUS_FINAL_ON_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Definitief gemaakt op'",
-      "index": 100363,
+      "index": 100404,
       "name": "KSP_Q_STATUS_FINAL_ON_title",
       "parsed": "'Definitief gemaakt op'",
-      "id": 100363,
+      "id": 100404,
       "fflname": "Q_STATUS_FINAL_ON_title"
     },
     {
@@ -81796,24 +82462,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100364,
+      "index": 100405,
       "name": "KSP_Q_STATUS_FINAL_BY_value",
       "parsed": "undefined",
-      "id": 100364,
+      "id": 100405,
       "fflname": "Q_STATUS_FINAL_BY_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_STATUS_FINAL_BY_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Definitief gemaakt door (gebruikersnaam)'",
-      "index": 100365,
+      "index": 100406,
       "name": "KSP_Q_STATUS_FINAL_BY_title",
       "parsed": "'Definitief gemaakt door (gebruikersnaam)'",
-      "id": 100365,
+      "id": 100406,
       "fflname": "Q_STATUS_FINAL_BY_title"
     },
     {
@@ -81824,24 +82490,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100366,
+      "index": 100407,
       "name": "KSP_Q_STATUS_FINAL_BY_NAME_value",
       "parsed": "undefined",
-      "id": 100366,
+      "id": 100407,
       "fflname": "Q_STATUS_FINAL_BY_NAME_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_STATUS_FINAL_BY_NAME_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Definitief gemaakt door (volledige naam)'",
-      "index": 100367,
+      "index": 100408,
       "name": "KSP_Q_STATUS_FINAL_BY_NAME_title",
       "parsed": "'Definitief gemaakt door (volledige naam)'",
-      "id": 100367,
+      "id": 100408,
       "fflname": "Q_STATUS_FINAL_BY_NAME_title"
     },
     {
@@ -81852,24 +82518,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100368,
+      "index": 100409,
       "name": "KSP_Q_STATUS_STARTED_ON_value",
       "parsed": "undefined",
-      "id": 100368,
+      "id": 100409,
       "fflname": "Q_STATUS_STARTED_ON_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_STATUS_STARTED_ON_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Aangemaakt op'",
-      "index": 100369,
+      "index": 100410,
       "name": "KSP_Q_STATUS_STARTED_ON_title",
       "parsed": "'Aangemaakt op'",
-      "id": 100369,
+      "id": 100410,
       "fflname": "Q_STATUS_STARTED_ON_title"
     },
     {
@@ -81880,24 +82546,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100370,
+      "index": 100411,
       "name": "KSP_Q_STATUS_STARTED_BY_value",
       "parsed": "undefined",
-      "id": 100370,
+      "id": 100411,
       "fflname": "Q_STATUS_STARTED_BY_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_STATUS_STARTED_BY_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Aangemaakt door (gebruikersnaam)'",
-      "index": 100371,
+      "index": 100412,
       "name": "KSP_Q_STATUS_STARTED_BY_title",
       "parsed": "'Aangemaakt door (gebruikersnaam)'",
-      "id": 100371,
+      "id": 100412,
       "fflname": "Q_STATUS_STARTED_BY_title"
     },
     {
@@ -81908,24 +82574,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100372,
+      "index": 100413,
       "name": "KSP_Q_STATUS_STARTED_BY_NAME_value",
       "parsed": "undefined",
-      "id": 100372,
+      "id": 100413,
       "fflname": "Q_STATUS_STARTED_BY_NAME_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_STATUS_STARTED_BY_NAME_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Aangemaakt door (volledige naam)'",
-      "index": 100373,
+      "index": 100414,
       "name": "KSP_Q_STATUS_STARTED_BY_NAME_title",
       "parsed": "'Aangemaakt door (volledige naam)'",
-      "id": 100373,
+      "id": 100414,
       "fflname": "Q_STATUS_STARTED_BY_NAME_title"
     },
     {
@@ -81936,24 +82602,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "'01.27.000.000'",
-      "index": 100374,
+      "index": 100415,
       "name": "KSP_ModelVersion_value",
       "parsed": "'01.27.000.000'",
-      "id": 100374,
+      "id": 100415,
       "fflname": "ModelVersion_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ModelVersion_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Modelversie'",
-      "index": 100375,
+      "index": 100416,
       "name": "KSP_ModelVersion_title",
       "parsed": "'Modelversie'",
-      "id": 100375,
+      "id": 100416,
       "fflname": "ModelVersion_title"
     },
     {
@@ -81964,24 +82630,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "'TEST'",
-      "index": 100376,
+      "index": 100417,
       "name": "KSP_ModelType_value",
       "parsed": "'TEST'",
-      "id": 100376,
+      "id": 100417,
       "fflname": "ModelType_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_ModelType_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Modeltype'",
-      "index": 100377,
+      "index": 100418,
       "name": "KSP_ModelType_title",
       "parsed": "'Modeltype'",
-      "id": 100377,
+      "id": 100418,
       "fflname": "ModelType_title"
     },
     {
@@ -81992,24 +82658,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "'None'",
-      "index": 100378,
+      "index": 100419,
       "name": "KSP_MatrixVersion_value",
       "parsed": "'None'",
-      "id": 100378,
+      "id": 100419,
       "fflname": "MatrixVersion_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_MatrixVersion_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Parametersversie'",
-      "index": 100379,
+      "index": 100420,
       "name": "KSP_MatrixVersion_title",
       "parsed": "'Parametersversie'",
-      "id": 100379,
+      "id": 100420,
       "fflname": "MatrixVersion_title"
     },
     {
@@ -82020,10 +82686,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "'Bij het definitief maken wordt de waarde vastgezet.'",
-      "index": 100380,
+      "index": 100421,
       "name": "KSP_MatrixVersion_hint",
       "parsed": "'Bij het definitief maken wordt de waarde vastgezet.'",
-      "id": 100380,
+      "id": 100421,
       "fflname": "MatrixVersion_hint"
     },
     {
@@ -82034,24 +82700,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "2",
-      "index": 100381,
+      "index": 100422,
       "name": "KSP_Q_PREVIOUS_BUTTON_VISIBLE_value",
       "parsed": "2",
-      "id": 100381,
+      "id": 100422,
       "fflname": "Q_PREVIOUS_BUTTON_VISIBLE_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_PREVIOUS_BUTTON_VISIBLE_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Vorige'",
-      "index": 100382,
+      "index": 100423,
       "name": "KSP_Q_PREVIOUS_BUTTON_VISIBLE_title",
       "parsed": "'Vorige'",
-      "id": 100382,
+      "id": 100423,
       "fflname": "Q_PREVIOUS_BUTTON_VISIBLE_title"
     },
     {
@@ -82062,10 +82728,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Nooit'},{'name':'2','value':'Altijd'}]",
-      "index": 100383,
+      "index": 100424,
       "name": "KSP_Q_PREVIOUS_BUTTON_VISIBLE_choices",
       "parsed": "[{'name':' 0','value':'Nooit'},{'name':'2','value':'Altijd'}]",
-      "id": 100383,
+      "id": 100424,
       "fflname": "Q_PREVIOUS_BUTTON_VISIBLE_choices"
     },
     {
@@ -82076,24 +82742,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "2",
-      "index": 100384,
+      "index": 100425,
       "name": "KSP_Q_NEXT_BUTTON_VISIBLE_value",
       "parsed": "2",
-      "id": 100384,
+      "id": 100425,
       "fflname": "Q_NEXT_BUTTON_VISIBLE_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_NEXT_BUTTON_VISIBLE_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Volgende'",
-      "index": 100385,
+      "index": 100426,
       "name": "KSP_Q_NEXT_BUTTON_VISIBLE_title",
       "parsed": "'Volgende'",
-      "id": 100385,
+      "id": 100426,
       "fflname": "Q_NEXT_BUTTON_VISIBLE_title"
     },
     {
@@ -82104,10 +82770,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Nooit'},{'name':'1','value':'Alleen wanneer stap volledig is'},{'name':'2','value':'Altijd'}]",
-      "index": 100386,
+      "index": 100427,
       "name": "KSP_Q_NEXT_BUTTON_VISIBLE_choices",
       "parsed": "[{'name':' 0','value':'Nooit'},{'name':'1','value':'Alleen wanneer stap volledig is'},{'name':'2','value':'Altijd'}]",
-      "id": 100386,
+      "id": 100427,
       "fflname": "Q_NEXT_BUTTON_VISIBLE_choices"
     },
     {
@@ -82126,24 +82792,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "1",
-      "index": 100387,
+      "index": 100428,
       "name": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
       "parsed": "1",
-      "id": 100387,
+      "id": 100428,
       "fflname": "Q_CONCEPT_REPORT_VISIBLE_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_CONCEPT_REPORT_VISIBLE_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Concept rapport'",
-      "index": 100388,
+      "index": 100429,
       "name": "KSP_Q_CONCEPT_REPORT_VISIBLE_title",
       "parsed": "'Concept rapport'",
-      "id": 100388,
+      "id": 100429,
       "fflname": "Q_CONCEPT_REPORT_VISIBLE_title"
     },
     {
@@ -82156,10 +82822,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Nee'},{'name':'1','value':'Ja'}]",
-      "index": 100389,
+      "index": 100430,
       "name": "KSP_Q_CONCEPT_REPORT_VISIBLE_choices",
       "parsed": "[{'name':' 0','value':'Nee'},{'name':'1','value':'Ja'}]",
-      "id": 100389,
+      "id": 100430,
       "fflname": "Q_CONCEPT_REPORT_VISIBLE_choices"
     },
     {
@@ -82170,24 +82836,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "0",
-      "index": 100390,
+      "index": 100431,
       "name": "KSP_Q_MAKE_FINAL_VISIBLE_value",
       "parsed": "0",
-      "id": 100390,
+      "id": 100431,
       "fflname": "Q_MAKE_FINAL_VISIBLE_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_MAKE_FINAL_VISIBLE_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Definitief maken'",
-      "index": 100391,
+      "index": 100432,
       "name": "KSP_Q_MAKE_FINAL_VISIBLE_title",
       "parsed": "'Definitief maken'",
-      "id": 100391,
+      "id": 100432,
       "fflname": "Q_MAKE_FINAL_VISIBLE_title"
     },
     {
@@ -82198,24 +82864,24 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "0",
-      "index": 100392,
+      "index": 100433,
       "name": "KSP_Q_FINAL_REPORT_VISIBLE_value",
       "parsed": "0",
-      "id": 100392,
+      "id": 100433,
       "fflname": "Q_FINAL_REPORT_VISIBLE_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_FINAL_REPORT_VISIBLE_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Definitief rapport'",
-      "index": 100393,
+      "index": 100434,
       "name": "KSP_Q_FINAL_REPORT_VISIBLE_title",
       "parsed": "'Definitief rapport'",
-      "id": 100393,
+      "id": 100434,
       "fflname": "Q_FINAL_REPORT_VISIBLE_title"
     },
     {
@@ -82226,11 +82892,25 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100394,
+      "index": 100435,
       "name": "KSP_HULPVARS_value",
       "parsed": "undefined",
-      "id": 100394,
+      "id": 100435,
       "fflname": "HULPVARS_value"
+    },
+    {
+      "type": "noCacheUnlocked",
+      "refs": {
+        "KSP_HULPVARS_title": true
+      },
+      "formulaDependencys": [],
+      "deps": {},
+      "original": "'Hulpvariabelen'",
+      "index": 100436,
+      "name": "KSP_HULPVARS_title",
+      "parsed": "'Hulpvariabelen'",
+      "id": 100436,
+      "fflname": "HULPVARS_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -82245,51 +82925,51 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_WARNING_value",
           "association": "refs",
-          "refId": 100095
+          "refId": 100097
         },
         {
           "name": "KSP_Q_MAP02_WARNING_value",
           "association": "refs",
-          "refId": 100165
+          "refId": 100178
         },
         {
           "name": "KSP_Q_MAP06_WARNING_value",
           "association": "refs",
-          "refId": 100276
+          "refId": 100300
         },
         {
           "name": "KSP_Q_RESULT_value",
           "association": "refs",
-          "refId": 100356
+          "refId": 100396
         },
         {
           "name": "KSP_Q_WARNING_GLOBALTXT_value",
           "association": "deps",
-          "refId": 100399
+          "refId": 100441
         }
       ],
       "deps": {
         "KSP_Q_WARNING_GLOBALTXT_value": true
       },
       "original": "String(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing'+Q_WARNING_GLOBALTXT,''))",
-      "index": 100395,
+      "index": 100437,
       "name": "KSP_Q_WARNING_GLOBAL_value",
-      "parsed": "String(Length(a100399('100399',x.doc,y.base,z,v))>0?'[br][/br]Er zijn knockouts van toepassing'+a100399('100399',x,y.base,z,v):'')",
-      "id": 100395,
+      "parsed": "String(Length(a100441('100441',x.doc,y.base,z,v))>0?'[br][/br]Er zijn knockouts van toepassing'+a100441('100441',x,y.base,z,v):'')",
+      "id": 100437,
       "fflname": "Q_WARNING_GLOBAL_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_WARNING_GLOBAL_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Knock-out(s)'",
-      "index": 100396,
+      "index": 100438,
       "name": "KSP_Q_WARNING_GLOBAL_title",
       "parsed": "'Knock-out(s)'",
-      "id": 100396,
+      "id": 100438,
       "fflname": "Q_WARNING_GLOBAL_title"
     },
     {
@@ -82302,29 +82982,29 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_WARNING_GLOBALTXT_value",
           "association": "refs",
-          "refId": 100399
+          "refId": 100441
         }
       ],
       "deps": {},
       "original": "String('')",
-      "index": 100397,
+      "index": 100439,
       "name": "KSP_Q_WARNING_01_value",
       "parsed": "String('')",
-      "id": 100397,
+      "id": 100439,
       "fflname": "Q_WARNING_01_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_WARNING_01_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Map6 - Vraag 6'",
-      "index": 100398,
+      "index": 100440,
       "name": "KSP_Q_WARNING_01_title",
       "parsed": "'Map6 - Vraag 6'",
-      "id": 100398,
+      "id": 100440,
       "fflname": "Q_WARNING_01_title"
     },
     {
@@ -82343,36 +83023,36 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_WARNING_GLOBAL_value",
           "association": "refs",
-          "refId": 100395
+          "refId": 100437
         },
         {
           "name": "KSP_Q_WARNING_01_value",
           "association": "deps",
-          "refId": 100397
+          "refId": 100439
         }
       ],
       "deps": {
         "KSP_Q_WARNING_01_value": true
       },
       "original": "String(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))",
-      "index": 100399,
+      "index": 100441,
       "name": "KSP_Q_WARNING_GLOBALTXT_value",
-      "parsed": "String(Length(a100397('100397',x.doc,y.base,z,v))>0?'[br][/br]'+a100397('100397',x.doc,y.base,z,v):'')",
-      "id": 100399,
+      "parsed": "String(Length(a100439('100439',x.doc,y.base,z,v))>0?'[br][/br]'+a100439('100439',x.doc,y.base,z,v):'')",
+      "id": 100441,
       "fflname": "Q_WARNING_GLOBALTXT_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_WARNING_GLOBALTXT_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Knock-out tekst'",
-      "index": 100400,
+      "index": 100442,
       "name": "KSP_Q_WARNING_GLOBALTXT_title",
       "parsed": "'Knock-out tekst'",
-      "id": 100400,
+      "id": 100442,
       "fflname": "Q_WARNING_GLOBALTXT_title"
     },
     {
@@ -82388,51 +83068,51 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_MAP01_WARNING_value",
           "association": "refs",
-          "refId": 100095
+          "refId": 100097
         },
         {
           "name": "KSP_Q_MAP02_WARNING_value",
           "association": "refs",
-          "refId": 100165
+          "refId": 100178
         },
         {
           "name": "KSP_Q_MAP06_WARNING_value",
           "association": "refs",
-          "refId": 100276
+          "refId": 100300
         },
         {
           "name": "KSP_Q_RESULT_value",
           "association": "refs",
-          "refId": 100356
+          "refId": 100396
         },
         {
           "name": "KSP_Q_RESTRICTIESTXT_value",
           "association": "deps",
-          "refId": 100405
+          "refId": 100447
         }
       ],
       "deps": {
         "KSP_Q_RESTRICTIESTXT_value": true
       },
       "original": "String(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld'+Q_RESTRICTIESTXT,''))",
-      "index": 100401,
+      "index": 100443,
       "name": "KSP_Q_RESTRICTIES_value",
-      "parsed": "String(Length(a100405('100405',x.doc,y.base,z,v))>0?'[br][/br]De volgende variabelen zijn niet correct gevuld'+a100405('100405',x,y.base,z,v):'')",
-      "id": 100401,
+      "parsed": "String(Length(a100447('100447',x.doc,y.base,z,v))>0?'[br][/br]De volgende variabelen zijn niet correct gevuld'+a100447('100447',x,y.base,z,v):'')",
+      "id": 100443,
       "fflname": "Q_RESTRICTIES_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_RESTRICTIES_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Restricties'",
-      "index": 100402,
+      "index": 100444,
       "name": "KSP_Q_RESTRICTIES_title",
       "parsed": "'Restricties'",
-      "id": 100402,
+      "id": 100444,
       "fflname": "Q_RESTRICTIES_title"
     },
     {
@@ -82445,15 +83125,15 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_RESTRICTIESTXT_value",
           "association": "refs",
-          "refId": 100405
+          "refId": 100447
         }
       ],
       "deps": {},
       "original": "String('')",
-      "index": 100403,
+      "index": 100445,
       "name": "KSP_Q_RESTRICTIES_01_value",
       "parsed": "String('')",
-      "id": 100403,
+      "id": 100445,
       "fflname": "Q_RESTRICTIES_01_value"
     },
     {
@@ -82464,10 +83144,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100404,
+      "index": 100446,
       "name": "KSP_Q_RESTRICTIES_02_value",
       "parsed": "undefined",
-      "id": 100404,
+      "id": 100446,
       "fflname": "Q_RESTRICTIES_02_value"
     },
     {
@@ -82480,36 +83160,36 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         {
           "name": "KSP_Q_RESTRICTIES_value",
           "association": "refs",
-          "refId": 100401
+          "refId": 100443
         },
         {
           "name": "KSP_Q_RESTRICTIES_01_value",
           "association": "deps",
-          "refId": 100403
+          "refId": 100445
         }
       ],
       "deps": {
         "KSP_Q_RESTRICTIES_01_value": true
       },
       "original": "String(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))",
-      "index": 100405,
+      "index": 100447,
       "name": "KSP_Q_RESTRICTIESTXT_value",
-      "parsed": "String(Length(a100403('100403',x.doc,y.base,z,v))>0?'[br][/br]'+a100403('100403',x.doc,y.base,z,v):'')",
-      "id": 100405,
+      "parsed": "String(Length(a100445('100445',x.doc,y.base,z,v))>0?'[br][/br]'+a100445('100445',x.doc,y.base,z,v):'')",
+      "id": 100447,
       "fflname": "Q_RESTRICTIESTXT_value"
     },
     {
-      "type": "noCacheLocked",
+      "type": "noCacheUnlocked",
       "refs": {
         "KSP_Q_RESTRICTIESTXT_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Restricties tekst'",
-      "index": 100406,
+      "index": 100448,
       "name": "KSP_Q_RESTRICTIESTXT_title",
       "parsed": "'Restricties tekst'",
-      "id": 100406,
+      "id": 100448,
       "fflname": "Q_RESTRICTIESTXT_title"
     }
   ],
@@ -82896,7 +83576,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP00_TEST",
-      null,
+      "'Warning voor map 1'",
       "undefined",
       "",
       "",
@@ -82936,7 +83616,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP00_INTRO",
-      null,
+      "'Intro'",
       "undefined",
       "",
       "",
@@ -82966,7 +83646,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP01_WARNING",
-      null,
+      "'Warning voor map 1'",
       "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
@@ -82976,7 +83656,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP01_INFO",
-      null,
+      "'Info bij stap 1'",
       "String(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "",
       "",
@@ -82986,7 +83666,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP01_VALIDATION",
-      null,
+      "'Validatie stap 1'",
       "String(If(Q_MAP01[doc]==0,'Er zijn '+Str(Q_MAP01_ENTEREDREQUIREDVARS,0,0)+' van de '+Str(Q_MAP01_REQUIREDVARS,0,0)+' verplichte vragen in deze stap ingevuld.',''))",
       "",
       "",
@@ -82996,7 +83676,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP01_HINT",
-      null,
+      "'Hinttekst stap 1'",
       "undefined",
       "",
       "",
@@ -83220,7 +83900,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "undefined",
       "",
       "",
-      "DEBUG==1",
+      "Q_MAP01.visible&&DEBUG==1",
       false,
       null
     ],
@@ -83236,7 +83916,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP01_PARAGRAAF09SUB2",
-      null,
+      "'Warning voor map 1'",
       "undefined",
       "",
       "",
@@ -83246,7 +83926,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP01_PARAGRAAF09SUB3",
-      null,
+      "'Info bij stap 1'",
       "undefined",
       "",
       "",
@@ -83256,7 +83936,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP01_PARAGRAAF09SUB4",
-      null,
+      "'Validatie stap 1'",
       "undefined",
       "",
       "",
@@ -83290,13 +83970,13 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01.visible&&0",
       false,
       null
     ],
     [
       "Q_MAP01_REQUIREDVARS",
-      null,
+      "'Aantal verplichte velden (1)'",
       "Count(X,SelectDescendants(Q_MAP01,Q_MAP01_HULPVARIABELEN),InputRequired(X))",
       "",
       "",
@@ -83306,7 +83986,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP01_ENTEREDREQUIREDVARS",
-      null,
+      "'Aantal ingevulde verplichte velden (1)'",
       "Count(X,SelectDescendants(Q_MAP01,Q_MAP01_HULPVARIABELEN),InputRequired(X)&&DataAvailable(X))",
       "",
       "",
@@ -83330,7 +84010,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "Q_MAP02_ENTEREDREQUIREDVARS==Q_MAP02_REQUIREDVARS",
       "",
       "",
-      false,
+      "Q_ROOT.visible&&DEBUG==1",
       false,
       null
     ],
@@ -83816,7 +84496,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP02SUB11",
-      null,
+      "'Combination Discount'",
       "undefined",
       "",
       "",
@@ -83846,7 +84526,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP02_PARAGRAAF09",
-      null,
+      "'Eigenschappen van de stap'",
       "undefined",
       "",
       "",
@@ -83856,7 +84536,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP02_STATUS",
-      null,
+      "'Status van de stap'",
       "Q_MAP02",
       "",
       "",
@@ -83866,7 +84546,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP02_PARAGRAAF09SUB2",
-      null,
+      "'Warning voor map 2'",
       "undefined",
       "",
       "",
@@ -83886,7 +84566,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP02_PARAGRAAF09SUB4",
-      null,
+      "'Validatie stap 2'",
       "undefined",
       "",
       "",
@@ -83896,7 +84576,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP02_PARAGRAAF09SUB5",
-      null,
+      "'Aantal verplichte velden (1)'",
       "undefined",
       "",
       "",
@@ -83906,7 +84586,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP02_PARAGRAAF09SUB6",
-      null,
+      "'Aantal ingevulde verplichte velden (1)'",
       "undefined",
       "",
       "",
@@ -83916,17 +84596,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP02_HULPVARIABELEN",
-      null,
+      "'Hulpvariabelen'",
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP02.visible&&0",
       false,
       null
     ],
     [
       "Q_MAP02_REQUIREDVARS",
-      null,
+      "'Aantal verplichte velden (1)'",
       "Count(X,SelectDescendants(Q_MAP02,Q_MAP02_HULPVARIABELEN),InputRequired(X))",
       "",
       "",
@@ -83936,7 +84616,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP02_ENTEREDREQUIREDVARS",
-      null,
+      "'Aantal ingevulde verplichte velden (1)'",
       "Count(X,SelectDescendants(Q_MAP02,Q_MAP02_HULPVARIABELEN),InputRequired(X)&&DataAvailable(X))",
       "",
       "",
@@ -83950,7 +84630,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "Q_MAP06_ENTEREDREQUIREDVARS==Q_MAP06_REQUIREDVARS",
       "",
       "",
-      "Q_ROOT==1",
+      "Q_ROOT.visible&&Q_ROOT==1",
       false,
       null
     ],
@@ -84216,7 +84896,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "TotalYearlyCosts",
-      null,
+      "'Total (yearly) costs'",
       "Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview",
       "",
       "",
@@ -84276,7 +84956,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "CombinationDiscountOverview",
-      null,
+      "'Combination Discount'",
       "If(Age<12,CombinationDiscountTotal,0)",
       "",
       "",
@@ -84296,7 +84976,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "TotalYearlyBalance",
-      null,
+      "'Total Net Costs (-)'",
       "TotalYearlyCosts-TotalYearlyIncome",
       "",
       "",
@@ -84316,7 +84996,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "ChildCareCosts",
-      null,
+      "'Childcare costs'",
       "NrOfDaysChildcareMonth*HourlyFeeChildCare*12",
       "",
       "",
@@ -84326,17 +85006,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP06_PARAGRAAF09",
-      null,
+      "'Eigenschappen van de stap'",
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP06.visible&&DEBUG==1",
       false,
       null
     ],
     [
       "Q_MAP06_STATUS",
-      null,
+      "'Status van de stap'",
       "Q_MAP06",
       "",
       "",
@@ -84346,7 +85026,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP06_PARAGRAAF09SUB2",
-      null,
+      "'Warning voor map 6'",
       "undefined",
       "",
       "",
@@ -84356,7 +85036,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP06_PARAGRAAF09SUB3",
-      null,
+      "'Info bij stap 6'",
       "undefined",
       "",
       "",
@@ -84366,7 +85046,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP06_PARAGRAAF09SUB4",
-      null,
+      "'Validatie stap 6'",
       "undefined",
       "",
       "",
@@ -84376,7 +85056,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP06_PARAGRAAF09SUB5",
-      null,
+      "'Aantal verplichte velden (1)'",
       "undefined",
       "",
       "",
@@ -84386,7 +85066,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP06_PARAGRAAF09SUB6",
-      null,
+      "'Aantal ingevulde verplichte velden (1)'",
       "undefined",
       "",
       "",
@@ -84396,17 +85076,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP06_HULPVARIABELEN",
-      null,
+      "'Hulpvariabelen'",
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP06.visible&&0",
       false,
       null
     ],
     [
       "Q_MAP06_REQUIREDVARS",
-      null,
+      "'Aantal verplichte velden (1)'",
       "Count(X,SelectDescendants(Q_MAP06,Q_MAP06_HULPVARIABELEN),InputRequired(X))",
       "",
       "",
@@ -84416,7 +85096,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_MAP06_ENTEREDREQUIREDVARS",
-      null,
+      "'Aantal ingevulde verplichte velden (1)'",
       "Count(X,SelectDescendants(Q_MAP06,Q_MAP06_HULPVARIABELEN),InputRequired(X)&&DataAvailable(X))",
       "",
       "",
@@ -84436,7 +85116,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "Q_RESULTSUB1",
-      null,
+      "'Resultaat'",
       "undefined",
       "",
       "",
@@ -84596,7 +85276,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     ],
     [
       "HULPVARS",
-      null,
+      "'Hulpvariabelen'",
       "undefined",
       "",
       "",
@@ -84792,7 +85472,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100001,
       "formulaName": "KSP_RootSub1_value",
       "refId": 100001,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "parentName": "root_value"
     },
     {
@@ -84883,7 +85563,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100008,
       "formulaName": "KSP_FES_EXCHANGE_RATES_value",
       "refId": 100008,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -84907,7 +85587,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100010,
       "formulaName": "KSP_FES_LAYOUT_value",
       "refId": 100010,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -84931,7 +85611,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100012,
       "formulaName": "KSP_FES_FLATINPUT_value",
       "refId": 100012,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -84955,7 +85635,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100014,
       "formulaName": "KSP_FES_PROJECTION_PROFILE_value",
       "refId": 100014,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -84979,7 +85659,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100016,
       "formulaName": "KSP_FES_COLUMN_ORDER_value",
       "refId": 100016,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -85003,7 +85683,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100018,
       "formulaName": "KSP_FES_COLUMN_VISIBLE_value",
       "refId": 100018,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -85027,7 +85707,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100020,
       "formulaName": "KSP_FES_STARTDATEPERIOD_value",
       "refId": 100020,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -85051,7 +85731,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100022,
       "formulaName": "KSP_FES_ENDDATEPERIOD_value",
       "refId": 100022,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -85075,7 +85755,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100024,
       "formulaName": "KSP_FES_BASECURRENCYPERIOD_value",
       "refId": 100024,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -85099,7 +85779,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100026,
       "formulaName": "KSP_FES_VIEWCURRENCYPERIOD_value",
       "refId": 100026,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -85123,7 +85803,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100028,
       "formulaName": "KSP_FES_COLUMNTYPE_value",
       "refId": 100028,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -85273,7 +85953,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100031,
       "formulaName": "KSP_RootSub2_value",
       "refId": 100031,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "parentName": "root_value"
     },
     {
@@ -85318,7 +85998,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100033,
       "formulaName": "KSP_FPS_VAR_Naam_value",
       "refId": 100033,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85342,7 +86022,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100035,
       "formulaName": "KSP_FPS_VAR_Relatienummer_value",
       "refId": 100035,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85366,7 +86046,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100037,
       "formulaName": "KSP_FPS_VAR_KVKnr_value",
       "refId": 100037,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85390,7 +86070,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100039,
       "formulaName": "KSP_FPS_VAR_Rechtsvorm_nr_value",
       "refId": 100039,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85414,7 +86094,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100041,
       "formulaName": "KSP_FPS_VAR_Rechtsvorm_omschr_value",
       "refId": 100041,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85438,7 +86118,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100043,
       "formulaName": "KSP_FPS_VAR_BIK_CODE_value",
       "refId": 100043,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85462,7 +86142,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100045,
       "formulaName": "KSP_FPS_VAR_BIK_Omschr_value",
       "refId": 100045,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85486,7 +86166,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100047,
       "formulaName": "KSP_FPS_VAR_GridId_value",
       "refId": 100047,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85510,7 +86190,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100049,
       "formulaName": "KSP_FPS_VAR_Accountmanager_value",
       "refId": 100049,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85534,7 +86214,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100051,
       "formulaName": "KSP_FPS_VAR_Kantoor_value",
       "refId": 100051,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85558,7 +86238,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100053,
       "formulaName": "KSP_FPS_VAR_Straat_value",
       "refId": 100053,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85582,7 +86262,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100055,
       "formulaName": "KSP_FPS_VAR_Housenumber_value",
       "refId": 100055,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85606,7 +86286,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100057,
       "formulaName": "KSP_FPS_VAR_Postcode_value",
       "refId": 100057,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85630,7 +86310,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100059,
       "formulaName": "KSP_FPS_VAR_Woonplaats_value",
       "refId": 100059,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85654,7 +86334,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100061,
       "formulaName": "KSP_FPS_VAR_Provincie_value",
       "refId": 100061,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85678,7 +86358,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100063,
       "formulaName": "KSP_FPS_VAR_Land_value",
       "refId": 100063,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85702,7 +86382,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100065,
       "formulaName": "KSP_FPS_VAR_BvDID_value",
       "refId": 100065,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85726,7 +86406,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100067,
       "formulaName": "KSP_FPS_VAR_Telefoon_value",
       "refId": 100067,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85763,7 +86443,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100069,
       "formulaName": "KSP_FPS_VAR_Emailadres_value",
       "refId": 100069,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -85787,7 +86467,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100071,
       "formulaName": "KSP_FPS_FINAN_USER_ROLES_value",
       "refId": 100071,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FPS_VAR_Emailadres_value"
     },
@@ -85811,7 +86491,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100073,
       "formulaName": "KSP_FPS_FINAN_USER_value",
       "refId": 100073,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FPS_VAR_Emailadres_value"
     },
@@ -85956,7 +86636,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100075,
       "formulaName": "KSP_Q_ROOT_value",
       "refId": 100075,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -86050,7 +86730,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100079,
       "formulaName": "KSP_Q_MAP00_value",
       "refId": 100079,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -86085,7 +86765,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100081,
       "formulaName": "KSP_Q_MAP00_WARNING_value",
       "refId": 100081,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP00_value"
     },
@@ -86120,7 +86800,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100083,
       "formulaName": "KSP_Q_MAP00_TEST_value",
       "refId": 100083,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP00_value"
     },
@@ -86130,9 +86810,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP00_TEST_title",
       "nodes": [],
-      "ref": 100082,
-      "formulaName": "KSP_Q_MAP00_WARNING_title",
-      "refId": 100082,
+      "ref": 100084,
+      "formulaName": "KSP_Q_MAP00_TEST_title",
+      "refId": 100084,
       "displayAs": "PropertyType"
     },
     {
@@ -86152,10 +86832,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP00_INFO_value",
       "nodes": [],
-      "ref": 100084,
+      "ref": 100085,
       "formulaName": "KSP_Q_MAP00_INFO_value",
-      "refId": 100084,
-      "displayAs": "StringAnswerType",
+      "refId": 100085,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP00_value"
     },
@@ -86165,9 +86845,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP00_INFO_title",
       "nodes": [],
-      "ref": 100085,
+      "ref": 100086,
       "formulaName": "KSP_Q_MAP00_INFO_title",
-      "refId": 100085,
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -86187,10 +86867,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP00_VALIDATION_value",
       "nodes": [],
-      "ref": 100086,
+      "ref": 100087,
       "formulaName": "KSP_Q_MAP00_VALIDATION_value",
-      "refId": 100086,
-      "displayAs": "StringAnswerType",
+      "refId": 100087,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP00_value"
     },
@@ -86200,9 +86880,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP00_VALIDATION_title",
       "nodes": [],
-      "ref": 100087,
+      "ref": 100088,
       "formulaName": "KSP_Q_MAP00_VALIDATION_title",
-      "refId": 100087,
+      "refId": 100088,
       "displayAs": "PropertyType"
     },
     {
@@ -86222,10 +86902,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP00_HINT_value",
       "nodes": [],
-      "ref": 100088,
+      "ref": 100089,
       "formulaName": "KSP_Q_MAP00_HINT_value",
-      "refId": 100088,
-      "displayAs": "StringAnswerType",
+      "refId": 100089,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP00_value"
     },
@@ -86235,9 +86915,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP00_HINT_title",
       "nodes": [],
-      "ref": 100089,
+      "ref": 100090,
       "formulaName": "KSP_Q_MAP00_HINT_title",
-      "refId": 100089,
+      "refId": 100090,
       "displayAs": "PropertyType"
     },
     {
@@ -86264,10 +86944,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP00_INTRO_value"
         }
       ],
-      "ref": 100090,
+      "ref": 100091,
       "formulaName": "KSP_Q_MAP00_INTRO_value",
-      "refId": 100090,
-      "displayAs": "AmountAnswerType",
+      "refId": 100091,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP00_value"
     },
@@ -86277,9 +86957,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP00_INTRO_title",
       "nodes": [],
-      "ref": 100080,
-      "formulaName": "KSP_Q_MAP00_title",
-      "refId": 100080,
+      "ref": 100092,
+      "formulaName": "KSP_Q_MAP00_INTRO_title",
+      "refId": 100092,
       "displayAs": "PropertyType"
     },
     {
@@ -86299,10 +86979,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP00_INTROMEMO_value",
       "nodes": [],
-      "ref": 100091,
+      "ref": 100093,
       "formulaName": "KSP_Q_MAP00_INTROMEMO_value",
-      "refId": 100091,
-      "displayAs": "MemoAnswerType",
+      "refId": 100093,
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP00_INTRO_value"
     },
@@ -86312,9 +86992,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP00_INTROMEMO_title",
       "nodes": [],
-      "ref": 100092,
+      "ref": 100094,
       "formulaName": "KSP_Q_MAP00_INTROMEMO_title",
-      "refId": 100092,
+      "refId": 100094,
       "displayAs": "PropertyType"
     },
     {
@@ -86377,10 +87057,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP01_value"
         }
       ],
-      "ref": 100093,
+      "ref": 100095,
       "formulaName": "KSP_Q_MAP01_value",
-      "refId": 100093,
-      "displayAs": "select",
+      "refId": 100095,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -86390,9 +87070,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_title",
       "nodes": [],
-      "ref": 100094,
+      "ref": 100096,
       "formulaName": "KSP_Q_MAP01_title",
-      "refId": 100094,
+      "refId": 100096,
       "displayAs": "PropertyType"
     },
     {
@@ -86423,10 +87103,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_WARNING_value",
       "nodes": [],
-      "ref": 100095,
+      "ref": 100097,
       "formulaName": "KSP_Q_MAP01_WARNING_value",
-      "refId": 100095,
-      "displayAs": "StringAnswerType",
+      "refId": 100097,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -86436,9 +87116,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_WARNING_title",
       "nodes": [],
-      "ref": 100082,
-      "formulaName": "KSP_Q_MAP00_WARNING_title",
-      "refId": 100082,
+      "ref": 100098,
+      "formulaName": "KSP_Q_MAP01_WARNING_title",
+      "refId": 100098,
       "displayAs": "PropertyType"
     },
     {
@@ -86458,10 +87138,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_INFO_value",
       "nodes": [],
-      "ref": 100096,
+      "ref": 100099,
       "formulaName": "KSP_Q_MAP01_INFO_value",
-      "refId": 100096,
-      "displayAs": "StringAnswerType",
+      "refId": 100099,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -86471,9 +87151,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_INFO_title",
       "nodes": [],
-      "ref": 100085,
-      "formulaName": "KSP_Q_MAP00_INFO_title",
-      "refId": 100085,
+      "ref": 100100,
+      "formulaName": "KSP_Q_MAP01_INFO_title",
+      "refId": 100100,
       "displayAs": "PropertyType"
     },
     {
@@ -86493,10 +87173,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_VALIDATION_value",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100101,
       "formulaName": "KSP_Q_MAP01_VALIDATION_value",
-      "refId": 100097,
-      "displayAs": "StringAnswerType",
+      "refId": 100101,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -86506,9 +87186,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_VALIDATION_title",
       "nodes": [],
-      "ref": 100087,
-      "formulaName": "KSP_Q_MAP00_VALIDATION_title",
-      "refId": 100087,
+      "ref": 100102,
+      "formulaName": "KSP_Q_MAP01_VALIDATION_title",
+      "refId": 100102,
       "displayAs": "PropertyType"
     },
     {
@@ -86528,10 +87208,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_HINT_value",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100103,
       "formulaName": "KSP_Q_MAP01_HINT_value",
-      "refId": 100098,
-      "displayAs": "StringAnswerType",
+      "refId": 100103,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -86541,9 +87221,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_HINT_title",
       "nodes": [],
-      "ref": 100089,
-      "formulaName": "KSP_Q_MAP00_HINT_title",
-      "refId": 100089,
+      "ref": 100104,
+      "formulaName": "KSP_Q_MAP01_HINT_title",
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -86552,9 +87232,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "hint",
       "name": "KSP_Q_MAP01_HINT_hint",
       "nodes": [],
-      "ref": 100099,
+      "ref": 100105,
       "formulaName": "KSP_Q_MAP01_HINT_hint",
-      "refId": 100099,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -86629,10 +87309,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Situation_value"
         }
       ],
-      "ref": 100100,
+      "ref": 100106,
       "formulaName": "KSP_Situation_value",
-      "refId": 100100,
-      "displayAs": "AmountAnswerType",
+      "refId": 100106,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -86642,9 +87322,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Situation_title",
       "nodes": [],
-      "ref": 100101,
+      "ref": 100107,
       "formulaName": "KSP_Situation_title",
-      "refId": 100101,
+      "refId": 100107,
       "displayAs": "PropertyType"
     },
     {
@@ -86664,10 +87344,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_IncomeSection_value",
       "nodes": [],
-      "ref": 100102,
+      "ref": 100108,
       "formulaName": "KSP_IncomeSection_value",
-      "refId": 100102,
-      "displayAs": "AmountAnswerType",
+      "refId": 100108,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Situation_value"
     },
@@ -86677,9 +87357,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_IncomeSection_title",
       "nodes": [],
-      "ref": 100103,
+      "ref": 100109,
       "formulaName": "KSP_IncomeSection_title",
-      "refId": 100103,
+      "refId": 100109,
       "displayAs": "PropertyType"
     },
     {
@@ -86699,10 +87379,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_IncomeParent01_value",
       "nodes": [],
-      "ref": 100104,
+      "ref": 100110,
       "formulaName": "KSP_IncomeParent01_value",
-      "refId": 100104,
-      "displayAs": "StringAnswerType",
+      "refId": 100110,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Situation_value"
     },
@@ -86712,9 +87392,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_IncomeParent01_title",
       "nodes": [],
-      "ref": 100105,
+      "ref": 100111,
       "formulaName": "KSP_IncomeParent01_title",
-      "refId": 100105,
+      "refId": 100111,
       "displayAs": "PropertyType"
     },
     {
@@ -86734,10 +87414,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_IncomeParent02_value",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100112,
       "formulaName": "KSP_IncomeParent02_value",
-      "refId": 100106,
-      "displayAs": "StringAnswerType",
+      "refId": 100112,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Situation_value"
     },
@@ -86747,9 +87427,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_IncomeParent02_title",
       "nodes": [],
-      "ref": 100107,
+      "ref": 100113,
       "formulaName": "KSP_IncomeParent02_title",
-      "refId": 100107,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -86769,10 +87449,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_WorkingHoursWeeklyParent01_value",
       "nodes": [],
-      "ref": 100108,
+      "ref": 100114,
       "formulaName": "KSP_WorkingHoursWeeklyParent01_value",
-      "refId": 100108,
-      "displayAs": "StringAnswerType",
+      "refId": 100114,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Situation_value"
     },
@@ -86782,9 +87462,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_WorkingHoursWeeklyParent01_title",
       "nodes": [],
-      "ref": 100109,
+      "ref": 100115,
       "formulaName": "KSP_WorkingHoursWeeklyParent01_title",
-      "refId": 100109,
+      "refId": 100115,
       "displayAs": "PropertyType"
     },
     {
@@ -86804,10 +87484,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_WorkingHoursWeeklyParent02_value",
       "nodes": [],
-      "ref": 100110,
+      "ref": 100116,
       "formulaName": "KSP_WorkingHoursWeeklyParent02_value",
-      "refId": 100110,
-      "displayAs": "StringAnswerType",
+      "refId": 100116,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Situation_value"
     },
@@ -86817,9 +87497,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_WorkingHoursWeeklyParent02_title",
       "nodes": [],
-      "ref": 100111,
+      "ref": 100117,
       "formulaName": "KSP_WorkingHoursWeeklyParent02_title",
-      "refId": 100111,
+      "refId": 100117,
       "displayAs": "PropertyType"
     },
     {
@@ -86839,10 +87519,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_value",
       "nodes": [],
-      "ref": 100112,
+      "ref": 100118,
       "formulaName": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_value",
-      "refId": 100112,
-      "displayAs": "StringAnswerType",
+      "refId": 100118,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Situation_value"
     },
@@ -86852,9 +87532,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_title",
       "nodes": [],
-      "ref": 100113,
+      "ref": 100119,
       "formulaName": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_title",
-      "refId": 100113,
+      "refId": 100119,
       "displayAs": "PropertyType"
     },
     {
@@ -86863,9 +87543,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "hint",
       "name": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_hint",
       "nodes": [],
-      "ref": 100114,
+      "ref": 100120,
       "formulaName": "KSP_WorkingHoursWeeklyOfLeastWorkingParent_hint",
-      "refId": 100114,
+      "refId": 100120,
       "displayAs": "PropertyType"
     },
     {
@@ -86952,10 +87632,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Child_value"
         }
       ],
-      "ref": 100115,
+      "ref": 100121,
       "formulaName": "KSP_Child_value",
-      "refId": 100115,
-      "displayAs": "AmountAnswerType",
+      "refId": 100121,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Situation_value",
       "tuple": true,
@@ -86968,9 +87648,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Child_title",
       "nodes": [],
-      "ref": 100116,
+      "ref": 100122,
       "formulaName": "KSP_Child_title",
-      "refId": 100116,
+      "refId": 100122,
       "displayAs": "PropertyType"
     },
     {
@@ -86990,10 +87670,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ChildGender_value",
       "nodes": [],
-      "ref": 100117,
+      "ref": 100123,
       "formulaName": "KSP_ChildGender_value",
-      "refId": 100117,
-      "displayAs": "select",
+      "refId": 100123,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Child_value",
       "tuple": true,
@@ -87007,9 +87687,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildGender_title",
       "nodes": [],
-      "ref": 100118,
+      "ref": 100124,
       "formulaName": "KSP_ChildGender_title",
-      "refId": 100118,
+      "refId": 100124,
       "displayAs": "PropertyType"
     },
     {
@@ -87029,9 +87709,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_ChildGender_choices",
       "nodes": [],
-      "ref": 100119,
+      "ref": 100125,
       "formulaName": "KSP_ChildGender_choices",
-      "refId": 100119,
+      "refId": 100125,
       "displayAs": "PropertyType"
     },
     {
@@ -87040,10 +87720,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_NrOfDaysChildcareWeek_value",
       "nodes": [],
-      "ref": 100120,
+      "ref": 100126,
       "formulaName": "KSP_NrOfDaysChildcareWeek_value",
-      "refId": 100120,
-      "displayAs": "StringAnswerType",
+      "refId": 100126,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Child_value",
       "tuple": true,
@@ -87057,9 +87737,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_NrOfDaysChildcareWeek_title",
       "nodes": [],
-      "ref": 100121,
+      "ref": 100127,
       "formulaName": "KSP_NrOfDaysChildcareWeek_title",
-      "refId": 100121,
+      "refId": 100127,
       "displayAs": "PropertyType"
     },
     {
@@ -87079,10 +87759,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_NrOfDaysChildcareMonth_value",
       "nodes": [],
-      "ref": 100122,
+      "ref": 100128,
       "formulaName": "KSP_NrOfDaysChildcareMonth_value",
-      "refId": 100122,
-      "displayAs": "StringAnswerType",
+      "refId": 100128,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Child_value",
       "tuple": true,
@@ -87096,9 +87776,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_NrOfDaysChildcareMonth_title",
       "nodes": [],
-      "ref": 100123,
+      "ref": 100129,
       "formulaName": "KSP_NrOfDaysChildcareMonth_title",
-      "refId": 100123,
+      "refId": 100129,
       "displayAs": "PropertyType"
     },
     {
@@ -87118,10 +87798,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_NrOfDaysOutOfSchoolCareWeek_value",
       "nodes": [],
-      "ref": 100124,
+      "ref": 100130,
       "formulaName": "KSP_NrOfDaysOutOfSchoolCareWeek_value",
-      "refId": 100124,
-      "displayAs": "StringAnswerType",
+      "refId": 100130,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Child_value",
       "tuple": true,
@@ -87135,9 +87815,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_NrOfDaysOutOfSchoolCareWeek_title",
       "nodes": [],
-      "ref": 100125,
+      "ref": 100131,
       "formulaName": "KSP_NrOfDaysOutOfSchoolCareWeek_title",
-      "refId": 100125,
+      "refId": 100131,
       "displayAs": "PropertyType"
     },
     {
@@ -87157,10 +87837,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
       "nodes": [],
-      "ref": 100126,
+      "ref": 100132,
       "formulaName": "KSP_NrOfDaysOutOfSchoolCareMonth_value",
-      "refId": 100126,
-      "displayAs": "StringAnswerType",
+      "refId": 100132,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Child_value",
       "tuple": true,
@@ -87174,9 +87854,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_NrOfDaysOutOfSchoolCareMonth_title",
       "nodes": [],
-      "ref": 100127,
+      "ref": 100133,
       "formulaName": "KSP_NrOfDaysOutOfSchoolCareMonth_title",
-      "refId": 100127,
+      "refId": 100133,
       "displayAs": "PropertyType"
     },
     {
@@ -87196,10 +87876,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_HourlyFeeChildCare_value",
       "nodes": [],
-      "ref": 100128,
+      "ref": 100134,
       "formulaName": "KSP_HourlyFeeChildCare_value",
-      "refId": 100128,
-      "displayAs": "StringAnswerType",
+      "refId": 100134,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Child_value",
       "tuple": true,
@@ -87213,9 +87893,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_HourlyFeeChildCare_title",
       "nodes": [],
-      "ref": 100129,
+      "ref": 100135,
       "formulaName": "KSP_HourlyFeeChildCare_title",
-      "refId": 100129,
+      "refId": 100135,
       "displayAs": "PropertyType"
     },
     {
@@ -87224,10 +87904,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_HourlyFeeOutOfSchoolCare_value",
       "nodes": [],
-      "ref": 100130,
+      "ref": 100136,
       "formulaName": "KSP_HourlyFeeOutOfSchoolCare_value",
-      "refId": 100130,
-      "displayAs": "StringAnswerType",
+      "refId": 100136,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Child_value",
       "tuple": true,
@@ -87241,9 +87921,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_HourlyFeeOutOfSchoolCare_title",
       "nodes": [],
-      "ref": 100131,
+      "ref": 100137,
       "formulaName": "KSP_HourlyFeeOutOfSchoolCare_title",
-      "refId": 100131,
+      "refId": 100137,
       "displayAs": "PropertyType"
     },
     {
@@ -87252,10 +87932,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ParentalContributionPrimaryEducation_value",
       "nodes": [],
-      "ref": 100132,
+      "ref": 100138,
       "formulaName": "KSP_ParentalContributionPrimaryEducation_value",
-      "refId": 100132,
-      "displayAs": "StringAnswerType",
+      "refId": 100138,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Child_value",
       "tuple": true,
@@ -87269,9 +87949,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ParentalContributionPrimaryEducation_title",
       "nodes": [],
-      "ref": 100133,
+      "ref": 100139,
       "formulaName": "KSP_ParentalContributionPrimaryEducation_title",
-      "refId": 100133,
+      "refId": 100139,
       "displayAs": "PropertyType"
     },
     {
@@ -87280,10 +87960,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CostsUnspecified_value",
       "nodes": [],
-      "ref": 100134,
+      "ref": 100140,
       "formulaName": "KSP_CostsUnspecified_value",
-      "refId": 100134,
-      "displayAs": "StringAnswerType",
+      "refId": 100140,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Child_value",
       "tuple": true,
@@ -87297,9 +87977,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CostsUnspecified_title",
       "nodes": [],
-      "ref": 100135,
+      "ref": 100141,
       "formulaName": "KSP_CostsUnspecified_title",
-      "refId": 100135,
+      "refId": 100141,
       "displayAs": "PropertyType"
     },
     {
@@ -87308,9 +87988,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_SecondaryEducationProfile_value",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "select",
       "frequency": "document",
       "parentName": "Child_value",
@@ -87325,9 +88005,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_SecondaryEducationProfile_title",
       "nodes": [],
-      "ref": 100137,
+      "ref": 100143,
       "formulaName": "KSP_SecondaryEducationProfile_title",
-      "refId": 100137,
+      "refId": 100143,
       "displayAs": "PropertyType"
     },
     {
@@ -87336,9 +88016,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "required",
       "name": "KSP_SecondaryEducationProfile_required",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87347,9 +88027,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_SecondaryEducationProfile_choices",
       "nodes": [],
-      "ref": 100138,
+      "ref": 100144,
       "formulaName": "KSP_SecondaryEducationProfile_choices",
-      "refId": 100138,
+      "refId": 100144,
       "displayAs": "PropertyType"
     },
     {
@@ -87358,10 +88038,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_TotalyYearlyCostsChild_value",
       "nodes": [],
-      "ref": 100139,
+      "ref": 100145,
       "formulaName": "KSP_TotalyYearlyCostsChild_value",
-      "refId": 100139,
-      "displayAs": "StringAnswerType",
+      "refId": 100145,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Child_value",
       "tuple": true,
@@ -87375,9 +88055,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_TotalyYearlyCostsChild_title",
       "nodes": [],
-      "ref": 100140,
+      "ref": 100146,
       "formulaName": "KSP_TotalyYearlyCostsChild_title",
-      "refId": 100140,
+      "refId": 100146,
       "displayAs": "PropertyType"
     },
     {
@@ -87386,9 +88066,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_TotalyYearlyCostsChild_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87397,10 +88077,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_TupleSumTest_value",
       "nodes": [],
-      "ref": 100141,
+      "ref": 100147,
       "formulaName": "KSP_TupleSumTest_value",
-      "refId": 100141,
-      "displayAs": "StringAnswerType",
+      "refId": 100147,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Situation_value"
     },
@@ -87410,10 +88090,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Memo1_value",
       "nodes": [],
-      "ref": 100142,
+      "ref": 100148,
       "formulaName": "KSP_Memo1_value",
-      "refId": 100142,
-      "displayAs": "MemoAnswerType",
+      "refId": 100148,
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Situation_value"
     },
@@ -87423,9 +88103,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Memo1_title",
       "nodes": [],
-      "ref": 100143,
+      "ref": 100149,
       "formulaName": "KSP_Memo1_title",
-      "refId": 100143,
+      "refId": 100149,
       "displayAs": "PropertyType"
     },
     {
@@ -87471,10 +88151,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP01_PARAGRAAF09_value"
         }
       ],
-      "ref": 100144,
+      "ref": 100150,
       "formulaName": "KSP_Q_MAP01_PARAGRAAF09_value",
-      "refId": 100144,
-      "displayAs": "AmountAnswerType",
+      "refId": 100150,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -87484,9 +88164,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_PARAGRAAF09_title",
       "nodes": [],
-      "ref": 100145,
+      "ref": 100151,
       "formulaName": "KSP_Q_MAP01_PARAGRAAF09_title",
-      "refId": 100145,
+      "refId": 100151,
       "displayAs": "PropertyType"
     },
     {
@@ -87495,9 +88175,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP01_PARAGRAAF09_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87506,9 +88186,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "visible",
       "name": "KSP_Q_MAP01_PARAGRAAF09_visible",
       "nodes": [],
-      "ref": 100146,
+      "ref": 100152,
       "formulaName": "KSP_Q_MAP01_PARAGRAAF09_visible",
-      "refId": 100146,
+      "refId": 100152,
       "displayAs": "PropertyType"
     },
     {
@@ -87517,10 +88197,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_STATUS_value",
       "nodes": [],
-      "ref": 100147,
+      "ref": 100153,
       "formulaName": "KSP_Q_MAP01_STATUS_value",
-      "refId": 100147,
-      "displayAs": "select",
+      "refId": 100153,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -87530,9 +88210,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_STATUS_title",
       "nodes": [],
-      "ref": 100148,
+      "ref": 100154,
       "formulaName": "KSP_Q_MAP01_STATUS_title",
-      "refId": 100148,
+      "refId": 100154,
       "displayAs": "PropertyType"
     },
     {
@@ -87541,9 +88221,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP01_STATUS_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87552,9 +88232,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_Q_MAP01_STATUS_choices",
       "nodes": [],
-      "ref": 100149,
+      "ref": 100155,
       "formulaName": "KSP_Q_MAP01_STATUS_choices",
-      "refId": 100149,
+      "refId": 100155,
       "displayAs": "PropertyType"
     },
     {
@@ -87563,10 +88243,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB2_value",
       "nodes": [],
-      "ref": 100150,
+      "ref": 100156,
       "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB2_value",
-      "refId": 100150,
-      "displayAs": "StringAnswerType",
+      "refId": 100156,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -87576,9 +88256,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB2_title",
       "nodes": [],
-      "ref": 100082,
-      "formulaName": "KSP_Q_MAP00_WARNING_title",
-      "refId": 100082,
+      "ref": 100157,
+      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB2_title",
+      "refId": 100157,
       "displayAs": "PropertyType"
     },
     {
@@ -87587,9 +88267,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB2_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87598,10 +88278,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB3_value",
       "nodes": [],
-      "ref": 100151,
+      "ref": 100158,
       "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB3_value",
-      "refId": 100151,
-      "displayAs": "StringAnswerType",
+      "refId": 100158,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -87611,9 +88291,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB3_title",
       "nodes": [],
-      "ref": 100085,
-      "formulaName": "KSP_Q_MAP00_INFO_title",
-      "refId": 100085,
+      "ref": 100159,
+      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB3_title",
+      "refId": 100159,
       "displayAs": "PropertyType"
     },
     {
@@ -87622,9 +88302,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB3_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87633,10 +88313,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB4_value",
       "nodes": [],
-      "ref": 100152,
+      "ref": 100160,
       "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB4_value",
-      "refId": 100152,
-      "displayAs": "StringAnswerType",
+      "refId": 100160,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -87646,9 +88326,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB4_title",
       "nodes": [],
-      "ref": 100087,
-      "formulaName": "KSP_Q_MAP00_VALIDATION_title",
-      "refId": 100087,
+      "ref": 100161,
+      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB4_title",
+      "refId": 100161,
       "displayAs": "PropertyType"
     },
     {
@@ -87657,9 +88337,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB4_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87668,10 +88348,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB5_value",
       "nodes": [],
-      "ref": 100153,
+      "ref": 100162,
       "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB5_value",
-      "refId": 100153,
-      "displayAs": "StringAnswerType",
+      "refId": 100162,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -87681,9 +88361,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB5_title",
       "nodes": [],
-      "ref": 100154,
+      "ref": 100163,
       "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100154,
+      "refId": 100163,
       "displayAs": "PropertyType"
     },
     {
@@ -87692,9 +88372,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB5_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87703,10 +88383,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB6_value",
       "nodes": [],
-      "ref": 100155,
+      "ref": 100164,
       "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB6_value",
-      "refId": 100155,
-      "displayAs": "StringAnswerType",
+      "refId": 100164,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -87716,9 +88396,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB6_title",
       "nodes": [],
-      "ref": 100156,
+      "ref": 100165,
       "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB6_title",
-      "refId": 100156,
+      "refId": 100165,
       "displayAs": "PropertyType"
     },
     {
@@ -87727,9 +88407,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP01_PARAGRAAF09SUB6_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87757,10 +88437,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP01_HULPVARIABELEN_value"
         }
       ],
-      "ref": 100157,
+      "ref": 100166,
       "formulaName": "KSP_Q_MAP01_HULPVARIABELEN_value",
-      "refId": 100157,
-      "displayAs": "AmountAnswerType",
+      "refId": 100166,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -87770,9 +88450,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_HULPVARIABELEN_title",
       "nodes": [],
-      "ref": 100158,
+      "ref": 100167,
       "formulaName": "KSP_Q_MAP01_HULPVARIABELEN_title",
-      "refId": 100158,
+      "refId": 100167,
       "displayAs": "PropertyType"
     },
     {
@@ -87781,9 +88461,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP01_HULPVARIABELEN_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87792,9 +88472,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "visible",
       "name": "KSP_Q_MAP01_HULPVARIABELEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "KSP_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100168,
+      "formulaName": "KSP_Q_MAP01_HULPVARIABELEN_visible",
+      "refId": 100168,
       "displayAs": "PropertyType"
     },
     {
@@ -87803,10 +88483,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_REQUIREDVARS_value",
       "nodes": [],
-      "ref": 100159,
+      "ref": 100169,
       "formulaName": "KSP_Q_MAP01_REQUIREDVARS_value",
-      "refId": 100159,
-      "displayAs": "StringAnswerType",
+      "refId": 100169,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
     },
@@ -87816,9 +88496,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_REQUIREDVARS_title",
       "nodes": [],
-      "ref": 100154,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100154,
+      "ref": 100170,
+      "formulaName": "KSP_Q_MAP01_REQUIREDVARS_title",
+      "refId": 100170,
       "displayAs": "PropertyType"
     },
     {
@@ -87827,9 +88507,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP01_REQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87838,10 +88518,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
       "nodes": [],
-      "ref": 100160,
+      "ref": 100171,
       "formulaName": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_value",
-      "refId": 100160,
-      "displayAs": "StringAnswerType",
+      "refId": 100171,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
     },
@@ -87851,9 +88531,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_title",
       "nodes": [],
-      "ref": 100156,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB6_title",
-      "refId": 100156,
+      "ref": 100172,
+      "formulaName": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_title",
+      "refId": 100172,
       "displayAs": "PropertyType"
     },
     {
@@ -87862,9 +88542,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP01_ENTEREDREQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87873,10 +88553,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_DEBUG_value",
       "nodes": [],
-      "ref": 100161,
+      "ref": 100173,
       "formulaName": "KSP_DEBUG_value",
-      "refId": 100161,
-      "displayAs": "StringAnswerType",
+      "refId": 100173,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
     },
@@ -87886,9 +88566,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_DEBUG_title",
       "nodes": [],
-      "ref": 100162,
+      "ref": 100174,
       "formulaName": "KSP_DEBUG_title",
-      "refId": 100162,
+      "refId": 100174,
       "displayAs": "PropertyType"
     },
     {
@@ -87897,9 +88577,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_DEBUG_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -87987,10 +88667,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP02_value"
         }
       ],
-      "ref": 100163,
+      "ref": 100175,
       "formulaName": "KSP_Q_MAP02_value",
-      "refId": 100163,
-      "displayAs": "select",
+      "refId": 100175,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -88000,9 +88680,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_title",
       "nodes": [],
-      "ref": 100164,
+      "ref": 100176,
       "formulaName": "KSP_Q_MAP02_title",
-      "refId": 100164,
+      "refId": 100176,
       "displayAs": "PropertyType"
     },
     {
@@ -88011,9 +88691,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88022,9 +88702,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "visible",
       "name": "KSP_Q_MAP02_visible",
       "nodes": [],
-      "ref": 100146,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09_visible",
-      "refId": 100146,
+      "ref": 100177,
+      "formulaName": "KSP_Q_MAP02_visible",
+      "refId": 100177,
       "displayAs": "PropertyType"
     },
     {
@@ -88044,10 +88724,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_WARNING_value",
       "nodes": [],
-      "ref": 100165,
+      "ref": 100178,
       "formulaName": "KSP_Q_MAP02_WARNING_value",
-      "refId": 100165,
-      "displayAs": "StringAnswerType",
+      "refId": 100178,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -88057,9 +88737,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_WARNING_title",
       "nodes": [],
-      "ref": 100166,
+      "ref": 100179,
       "formulaName": "KSP_Q_MAP02_WARNING_title",
-      "refId": 100166,
+      "refId": 100179,
       "displayAs": "PropertyType"
     },
     {
@@ -88068,9 +88748,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_WARNING_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88079,10 +88759,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_INFO_value",
       "nodes": [],
-      "ref": 100167,
+      "ref": 100180,
       "formulaName": "KSP_Q_MAP02_INFO_value",
-      "refId": 100167,
-      "displayAs": "StringAnswerType",
+      "refId": 100180,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -88092,9 +88772,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_INFO_title",
       "nodes": [],
-      "ref": 100168,
+      "ref": 100181,
       "formulaName": "KSP_Q_MAP02_INFO_title",
-      "refId": 100168,
+      "refId": 100181,
       "displayAs": "PropertyType"
     },
     {
@@ -88103,9 +88783,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_INFO_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88114,10 +88794,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_VALIDATION_value",
       "nodes": [],
-      "ref": 100169,
+      "ref": 100182,
       "formulaName": "KSP_Q_MAP02_VALIDATION_value",
-      "refId": 100169,
-      "displayAs": "StringAnswerType",
+      "refId": 100182,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -88127,9 +88807,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_VALIDATION_title",
       "nodes": [],
-      "ref": 100170,
+      "ref": 100183,
       "formulaName": "KSP_Q_MAP02_VALIDATION_title",
-      "refId": 100170,
+      "refId": 100183,
       "displayAs": "PropertyType"
     },
     {
@@ -88138,9 +88818,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_VALIDATION_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88149,10 +88829,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_HINT_value",
       "nodes": [],
-      "ref": 100171,
+      "ref": 100184,
       "formulaName": "KSP_Q_MAP02_HINT_value",
-      "refId": 100171,
-      "displayAs": "StringAnswerType",
+      "refId": 100184,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -88162,9 +88842,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_HINT_title",
       "nodes": [],
-      "ref": 100172,
+      "ref": 100185,
       "formulaName": "KSP_Q_MAP02_HINT_title",
-      "refId": 100172,
+      "refId": 100185,
       "displayAs": "PropertyType"
     },
     {
@@ -88173,9 +88853,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "hint",
       "name": "KSP_Q_MAP02_HINT_hint",
       "nodes": [],
-      "ref": 100173,
+      "ref": 100186,
       "formulaName": "KSP_Q_MAP02_HINT_hint",
-      "refId": 100173,
+      "refId": 100186,
       "displayAs": "PropertyType"
     },
     {
@@ -88184,9 +88864,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_HINT_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88244,10 +88924,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_FiscalParameters_value"
         }
       ],
-      "ref": 100174,
+      "ref": 100187,
       "formulaName": "KSP_FiscalParameters_value",
-      "refId": 100174,
-      "displayAs": "AmountAnswerType",
+      "refId": 100187,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -88257,9 +88937,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_FiscalParameters_title",
       "nodes": [],
-      "ref": 100175,
+      "ref": 100188,
       "formulaName": "KSP_FiscalParameters_title",
-      "refId": 100175,
+      "refId": 100188,
       "displayAs": "PropertyType"
     },
     {
@@ -88268,9 +88948,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_FiscalParameters_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88279,10 +88959,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ChildcareContribution_value",
       "nodes": [],
-      "ref": 100176,
+      "ref": 100189,
       "formulaName": "KSP_ChildcareContribution_value",
-      "refId": 100176,
-      "displayAs": "StringAnswerType",
+      "refId": 100189,
+      "displayAs": "string",
       "parentName": "FiscalParameters_value"
     },
     {
@@ -88291,9 +88971,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildcareContribution_title",
       "nodes": [],
-      "ref": 100177,
+      "ref": 100190,
       "formulaName": "KSP_ChildcareContribution_title",
-      "refId": 100177,
+      "refId": 100190,
       "displayAs": "PropertyType"
     },
     {
@@ -88302,9 +88982,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ChildcareContribution_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88313,10 +88993,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_value",
       "nodes": [],
-      "ref": 100178,
+      "ref": 100191,
       "formulaName": "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_value",
-      "refId": 100178,
-      "displayAs": "StringAnswerType",
+      "refId": 100191,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FiscalParameters_value"
     },
@@ -88326,9 +89006,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_title",
       "nodes": [],
-      "ref": 100179,
+      "ref": 100192,
       "formulaName": "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_title",
-      "refId": 100179,
+      "refId": 100192,
       "displayAs": "PropertyType"
     },
     {
@@ -88337,9 +89017,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaximumNrOfHoursOfChildcareAllowancePerMonth_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88348,10 +89028,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MultiplierDaycare_value",
       "nodes": [],
-      "ref": 100180,
+      "ref": 100193,
       "formulaName": "KSP_MultiplierDaycare_value",
-      "refId": 100180,
-      "displayAs": "PercentageAnswerType",
+      "refId": 100193,
+      "displayAs": "percentage",
       "frequency": "document",
       "parentName": "FiscalParameters_value"
     },
@@ -88361,9 +89041,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MultiplierDaycare_title",
       "nodes": [],
-      "ref": 100181,
+      "ref": 100194,
       "formulaName": "KSP_MultiplierDaycare_title",
-      "refId": 100181,
+      "refId": 100194,
       "displayAs": "PropertyType"
     },
     {
@@ -88372,9 +89052,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MultiplierDaycare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88383,10 +89063,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MultiplierOutOfSchoolCare_value",
       "nodes": [],
-      "ref": 100182,
+      "ref": 100195,
       "formulaName": "KSP_MultiplierOutOfSchoolCare_value",
-      "refId": 100182,
-      "displayAs": "PercentageAnswerType",
+      "refId": 100195,
+      "displayAs": "percentage",
       "frequency": "document",
       "parentName": "FiscalParameters_value"
     },
@@ -88396,9 +89076,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MultiplierOutOfSchoolCare_title",
       "nodes": [],
-      "ref": 100183,
+      "ref": 100196,
       "formulaName": "KSP_MultiplierOutOfSchoolCare_title",
-      "refId": 100183,
+      "refId": 100196,
       "displayAs": "PropertyType"
     },
     {
@@ -88407,9 +89087,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MultiplierOutOfSchoolCare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88418,10 +89098,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxHourlyRateChildcare_value",
       "nodes": [],
-      "ref": 100184,
+      "ref": 100197,
       "formulaName": "KSP_MaxHourlyRateChildcare_value",
-      "refId": 100184,
-      "displayAs": "StringAnswerType",
+      "refId": 100197,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FiscalParameters_value"
     },
@@ -88431,9 +89111,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxHourlyRateChildcare_title",
       "nodes": [],
-      "ref": 100185,
+      "ref": 100198,
       "formulaName": "KSP_MaxHourlyRateChildcare_title",
-      "refId": 100185,
+      "refId": 100198,
       "displayAs": "PropertyType"
     },
     {
@@ -88442,9 +89122,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxHourlyRateChildcare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88453,10 +89133,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxHourlyRateOutOfSchoolCare_value",
       "nodes": [],
-      "ref": 100186,
+      "ref": 100199,
       "formulaName": "KSP_MaxHourlyRateOutOfSchoolCare_value",
-      "refId": 100186,
-      "displayAs": "StringAnswerType",
+      "refId": 100199,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FiscalParameters_value"
     },
@@ -88466,9 +89146,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxHourlyRateOutOfSchoolCare_title",
       "nodes": [],
-      "ref": 100187,
+      "ref": 100200,
       "formulaName": "KSP_MaxHourlyRateOutOfSchoolCare_title",
-      "refId": 100187,
+      "refId": 100200,
       "displayAs": "PropertyType"
     },
     {
@@ -88477,9 +89157,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxHourlyRateOutOfSchoolCare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88488,10 +89168,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxHourlyRateGuestParent_value",
       "nodes": [],
-      "ref": 100188,
+      "ref": 100201,
       "formulaName": "KSP_MaxHourlyRateGuestParent_value",
-      "refId": 100188,
-      "displayAs": "StringAnswerType",
+      "refId": 100201,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FiscalParameters_value"
     },
@@ -88501,9 +89181,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxHourlyRateGuestParent_title",
       "nodes": [],
-      "ref": 100189,
+      "ref": 100202,
       "formulaName": "KSP_MaxHourlyRateGuestParent_title",
-      "refId": 100189,
+      "refId": 100202,
       "displayAs": "PropertyType"
     },
     {
@@ -88512,9 +89192,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxHourlyRateGuestParent_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88523,10 +89203,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxHourlyRateGuestParentOutOfSchoolCare_value",
       "nodes": [],
-      "ref": 100190,
+      "ref": 100203,
       "formulaName": "KSP_MaxHourlyRateGuestParentOutOfSchoolCare_value",
-      "refId": 100190,
-      "displayAs": "StringAnswerType",
+      "refId": 100203,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FiscalParameters_value"
     },
@@ -88536,9 +89216,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxHourlyRateGuestParentOutOfSchoolCare_title",
       "nodes": [],
-      "ref": 100191,
+      "ref": 100204,
       "formulaName": "KSP_MaxHourlyRateGuestParentOutOfSchoolCare_title",
-      "refId": 100191,
+      "refId": 100204,
       "displayAs": "PropertyType"
     },
     {
@@ -88547,9 +89227,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxHourlyRateGuestParentOutOfSchoolCare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88583,10 +89263,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_CombinationDiscount_value"
         }
       ],
-      "ref": 100192,
+      "ref": 100205,
       "formulaName": "KSP_CombinationDiscount_value",
-      "refId": 100192,
-      "displayAs": "AmountAnswerType",
+      "refId": 100205,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -88596,9 +89276,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CombinationDiscount_title",
       "nodes": [],
-      "ref": 100193,
+      "ref": 100206,
       "formulaName": "KSP_CombinationDiscount_title",
-      "refId": 100193,
+      "refId": 100206,
       "displayAs": "PropertyType"
     },
     {
@@ -88607,9 +89287,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_CombinationDiscount_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88618,10 +89298,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_LowerBoundaryIncome_value",
       "nodes": [],
-      "ref": 100194,
+      "ref": 100207,
       "formulaName": "KSP_LowerBoundaryIncome_value",
-      "refId": 100194,
-      "displayAs": "StringAnswerType",
+      "refId": 100207,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "CombinationDiscount_value"
     },
@@ -88631,9 +89311,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_LowerBoundaryIncome_title",
       "nodes": [],
-      "ref": 100195,
+      "ref": 100208,
       "formulaName": "KSP_LowerBoundaryIncome_title",
-      "refId": 100195,
+      "refId": 100208,
       "displayAs": "PropertyType"
     },
     {
@@ -88642,9 +89322,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_LowerBoundaryIncome_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88653,10 +89333,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Base_value",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100209,
       "formulaName": "KSP_Base_value",
-      "refId": 100196,
-      "displayAs": "StringAnswerType",
+      "refId": 100209,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "CombinationDiscount_value"
     },
@@ -88666,9 +89346,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Base_title",
       "nodes": [],
-      "ref": 100197,
+      "ref": 100210,
       "formulaName": "KSP_Base_title",
-      "refId": 100197,
+      "refId": 100210,
       "displayAs": "PropertyType"
     },
     {
@@ -88677,9 +89357,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Base_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88688,10 +89368,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CombinationDiscountPercentage_value",
       "nodes": [],
-      "ref": 100198,
+      "ref": 100211,
       "formulaName": "KSP_CombinationDiscountPercentage_value",
-      "refId": 100198,
-      "displayAs": "PercentageAnswerType",
+      "refId": 100211,
+      "displayAs": "percentage",
       "frequency": "document",
       "parentName": "CombinationDiscount_value"
     },
@@ -88701,9 +89381,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CombinationDiscountPercentage_title",
       "nodes": [],
-      "ref": 100199,
+      "ref": 100212,
       "formulaName": "KSP_CombinationDiscountPercentage_title",
-      "refId": 100199,
+      "refId": 100212,
       "displayAs": "PropertyType"
     },
     {
@@ -88712,9 +89392,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_CombinationDiscountPercentage_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88723,10 +89403,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaximumDiscount_value",
       "nodes": [],
-      "ref": 100200,
+      "ref": 100213,
       "formulaName": "KSP_MaximumDiscount_value",
-      "refId": 100200,
-      "displayAs": "StringAnswerType",
+      "refId": 100213,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "CombinationDiscount_value"
     },
@@ -88736,9 +89416,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaximumDiscount_title",
       "nodes": [],
-      "ref": 100201,
+      "ref": 100214,
       "formulaName": "KSP_MaximumDiscount_title",
-      "refId": 100201,
+      "refId": 100214,
       "displayAs": "PropertyType"
     },
     {
@@ -88747,9 +89427,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaximumDiscount_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88789,10 +89469,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_ChildRelatedBudget_value"
         }
       ],
-      "ref": 100202,
+      "ref": 100215,
       "formulaName": "KSP_ChildRelatedBudget_value",
-      "refId": 100202,
-      "displayAs": "AmountAnswerType",
+      "refId": 100215,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -88802,9 +89482,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildRelatedBudget_title",
       "nodes": [],
-      "ref": 100203,
+      "ref": 100216,
       "formulaName": "KSP_ChildRelatedBudget_title",
-      "refId": 100203,
+      "refId": 100216,
       "displayAs": "PropertyType"
     },
     {
@@ -88813,9 +89493,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ChildRelatedBudget_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88824,10 +89504,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxBudgetOneToTwelveYears_value",
       "nodes": [],
-      "ref": 100204,
+      "ref": 100217,
       "formulaName": "KSP_MaxBudgetOneToTwelveYears_value",
-      "refId": 100204,
-      "displayAs": "StringAnswerType",
+      "refId": 100217,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "ChildRelatedBudget_value"
     },
@@ -88837,9 +89517,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxBudgetOneToTwelveYears_title",
       "nodes": [],
-      "ref": 100205,
+      "ref": 100218,
       "formulaName": "KSP_MaxBudgetOneToTwelveYears_title",
-      "refId": 100205,
+      "refId": 100218,
       "displayAs": "PropertyType"
     },
     {
@@ -88848,9 +89528,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxBudgetOneToTwelveYears_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88859,10 +89539,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxBudgetTwelveToFifteenYears_value",
       "nodes": [],
-      "ref": 100206,
+      "ref": 100219,
       "formulaName": "KSP_MaxBudgetTwelveToFifteenYears_value",
-      "refId": 100206,
-      "displayAs": "StringAnswerType",
+      "refId": 100219,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "ChildRelatedBudget_value"
     },
@@ -88872,9 +89552,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxBudgetTwelveToFifteenYears_title",
       "nodes": [],
-      "ref": 100207,
+      "ref": 100220,
       "formulaName": "KSP_MaxBudgetTwelveToFifteenYears_title",
-      "refId": 100207,
+      "refId": 100220,
       "displayAs": "PropertyType"
     },
     {
@@ -88883,9 +89563,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxBudgetTwelveToFifteenYears_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88894,10 +89574,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxBudgetSixteenToSeventeenYears_value",
       "nodes": [],
-      "ref": 100208,
+      "ref": 100221,
       "formulaName": "KSP_MaxBudgetSixteenToSeventeenYears_value",
-      "refId": 100208,
-      "displayAs": "StringAnswerType",
+      "refId": 100221,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "ChildRelatedBudget_value"
     },
@@ -88907,9 +89587,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxBudgetSixteenToSeventeenYears_title",
       "nodes": [],
-      "ref": 100209,
+      "ref": 100222,
       "formulaName": "KSP_MaxBudgetSixteenToSeventeenYears_title",
-      "refId": 100209,
+      "refId": 100222,
       "displayAs": "PropertyType"
     },
     {
@@ -88918,9 +89598,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxBudgetSixteenToSeventeenYears_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88929,10 +89609,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_UpperBoundaryIncome_value",
       "nodes": [],
-      "ref": 100210,
+      "ref": 100223,
       "formulaName": "KSP_UpperBoundaryIncome_value",
-      "refId": 100210,
-      "displayAs": "StringAnswerType",
+      "refId": 100223,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "ChildRelatedBudget_value"
     },
@@ -88942,9 +89622,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_UpperBoundaryIncome_title",
       "nodes": [],
-      "ref": 100211,
+      "ref": 100224,
       "formulaName": "KSP_UpperBoundaryIncome_title",
-      "refId": 100211,
+      "refId": 100224,
       "displayAs": "PropertyType"
     },
     {
@@ -88953,9 +89633,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_UpperBoundaryIncome_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -88964,10 +89644,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_DecreasingPercentage_value",
       "nodes": [],
-      "ref": 100212,
+      "ref": 100225,
       "formulaName": "KSP_DecreasingPercentage_value",
-      "refId": 100212,
-      "displayAs": "PercentageAnswerType",
+      "refId": 100225,
+      "displayAs": "percentage",
       "frequency": "document",
       "parentName": "ChildRelatedBudget_value"
     },
@@ -88977,9 +89657,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_DecreasingPercentage_title",
       "nodes": [],
-      "ref": 100213,
+      "ref": 100226,
       "formulaName": "KSP_DecreasingPercentage_title",
-      "refId": 100213,
+      "refId": 100226,
       "displayAs": "PropertyType"
     },
     {
@@ -88988,9 +89668,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_DecreasingPercentage_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89084,10 +89764,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Fees_value"
         }
       ],
-      "ref": 100214,
+      "ref": 100227,
       "formulaName": "KSP_Fees_value",
-      "refId": 100214,
-      "displayAs": "AmountAnswerType",
+      "refId": 100227,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -89097,9 +89777,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Fees_title",
       "nodes": [],
-      "ref": 100215,
+      "ref": 100228,
       "formulaName": "KSP_Fees_title",
-      "refId": 100215,
+      "refId": 100228,
       "displayAs": "PropertyType"
     },
     {
@@ -89108,9 +89788,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Fees_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89119,10 +89799,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxNrCompensatedHoursChildcare_value",
       "nodes": [],
-      "ref": 100216,
+      "ref": 100229,
       "formulaName": "KSP_MaxNrCompensatedHoursChildcare_value",
-      "refId": 100216,
-      "displayAs": "AmountAnswerType",
+      "refId": 100229,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Fees_value"
     },
@@ -89132,9 +89812,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxNrCompensatedHoursChildcare_title",
       "nodes": [],
-      "ref": 100217,
+      "ref": 100230,
       "formulaName": "KSP_MaxNrCompensatedHoursChildcare_title",
-      "refId": 100217,
+      "refId": 100230,
       "displayAs": "PropertyType"
     },
     {
@@ -89143,9 +89823,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxNrCompensatedHoursChildcare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89154,10 +89834,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxNrCompensatedHoursOutofSchoolCare_value",
       "nodes": [],
-      "ref": 100218,
+      "ref": 100231,
       "formulaName": "KSP_MaxNrCompensatedHoursOutofSchoolCare_value",
-      "refId": 100218,
-      "displayAs": "AmountAnswerType",
+      "refId": 100231,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Fees_value"
     },
@@ -89167,9 +89847,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxNrCompensatedHoursOutofSchoolCare_title",
       "nodes": [],
-      "ref": 100219,
+      "ref": 100232,
       "formulaName": "KSP_MaxNrCompensatedHoursOutofSchoolCare_title",
-      "refId": 100219,
+      "refId": 100232,
       "displayAs": "PropertyType"
     },
     {
@@ -89178,9 +89858,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxNrCompensatedHoursOutofSchoolCare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89189,10 +89869,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_FeesSub3_value",
       "nodes": [],
-      "ref": 100220,
+      "ref": 100233,
       "formulaName": "KSP_FeesSub3_value",
-      "refId": 100220,
-      "displayAs": "StringAnswerType",
+      "refId": 100233,
+      "displayAs": "string",
       "parentName": "Fees_value"
     },
     {
@@ -89201,9 +89881,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_FeesSub3_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89212,10 +89892,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_NrCompensatedHoursChildcare_value",
       "nodes": [],
-      "ref": 100221,
+      "ref": 100234,
       "formulaName": "KSP_NrCompensatedHoursChildcare_value",
-      "refId": 100221,
-      "displayAs": "AmountAnswerType",
+      "refId": 100234,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Fees_value"
     },
@@ -89225,9 +89905,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_NrCompensatedHoursChildcare_title",
       "nodes": [],
-      "ref": 100222,
+      "ref": 100235,
       "formulaName": "KSP_NrCompensatedHoursChildcare_title",
-      "refId": 100222,
+      "refId": 100235,
       "displayAs": "PropertyType"
     },
     {
@@ -89236,9 +89916,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_NrCompensatedHoursChildcare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89247,10 +89927,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_NrCompensatedHoursOutofSchoolCare_value",
       "nodes": [],
-      "ref": 100223,
+      "ref": 100236,
       "formulaName": "KSP_NrCompensatedHoursOutofSchoolCare_value",
-      "refId": 100223,
-      "displayAs": "AmountAnswerType",
+      "refId": 100236,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Fees_value"
     },
@@ -89260,9 +89940,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_NrCompensatedHoursOutofSchoolCare_title",
       "nodes": [],
-      "ref": 100224,
+      "ref": 100237,
       "formulaName": "KSP_NrCompensatedHoursOutofSchoolCare_title",
-      "refId": 100224,
+      "refId": 100237,
       "displayAs": "PropertyType"
     },
     {
@@ -89271,9 +89951,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_NrCompensatedHoursOutofSchoolCare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89282,10 +89962,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_FeesSub6_value",
       "nodes": [],
-      "ref": 100225,
+      "ref": 100238,
       "formulaName": "KSP_FeesSub6_value",
-      "refId": 100225,
-      "displayAs": "StringAnswerType",
+      "refId": 100238,
+      "displayAs": "string",
       "parentName": "Fees_value"
     },
     {
@@ -89294,9 +89974,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_FeesSub6_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89305,10 +89985,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxCompensatedAmountChildcare_value",
       "nodes": [],
-      "ref": 100226,
+      "ref": 100239,
       "formulaName": "KSP_MaxCompensatedAmountChildcare_value",
-      "refId": 100226,
-      "displayAs": "StringAnswerType",
+      "refId": 100239,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Fees_value"
     },
@@ -89318,9 +89998,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxCompensatedAmountChildcare_title",
       "nodes": [],
-      "ref": 100227,
+      "ref": 100240,
       "formulaName": "KSP_MaxCompensatedAmountChildcare_title",
-      "refId": 100227,
+      "refId": 100240,
       "displayAs": "PropertyType"
     },
     {
@@ -89329,9 +90009,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxCompensatedAmountChildcare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89340,10 +90020,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MaxCompensatedAmountOutofSchoolCare_value",
       "nodes": [],
-      "ref": 100228,
+      "ref": 100241,
       "formulaName": "KSP_MaxCompensatedAmountOutofSchoolCare_value",
-      "refId": 100228,
-      "displayAs": "StringAnswerType",
+      "refId": 100241,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Fees_value"
     },
@@ -89353,9 +90033,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MaxCompensatedAmountOutofSchoolCare_title",
       "nodes": [],
-      "ref": 100229,
+      "ref": 100242,
       "formulaName": "KSP_MaxCompensatedAmountOutofSchoolCare_title",
-      "refId": 100229,
+      "refId": 100242,
       "displayAs": "PropertyType"
     },
     {
@@ -89364,9 +90044,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_MaxCompensatedAmountOutofSchoolCare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89375,10 +90055,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_FeesSub9_value",
       "nodes": [],
-      "ref": 100230,
+      "ref": 100243,
       "formulaName": "KSP_FeesSub9_value",
-      "refId": 100230,
-      "displayAs": "StringAnswerType",
+      "refId": 100243,
+      "displayAs": "string",
       "parentName": "Fees_value"
     },
     {
@@ -89387,9 +90067,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_FeesSub9_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89398,10 +90078,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_TotalIncome_value",
       "nodes": [],
-      "ref": 100231,
+      "ref": 100244,
       "formulaName": "KSP_TotalIncome_value",
-      "refId": 100231,
-      "displayAs": "AmountAnswerType",
+      "refId": 100244,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Fees_value"
     },
@@ -89411,9 +90091,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_TotalIncome_title",
       "nodes": [],
-      "ref": 100232,
+      "ref": 100245,
       "formulaName": "KSP_TotalIncome_title",
-      "refId": 100232,
+      "refId": 100245,
       "displayAs": "PropertyType"
     },
     {
@@ -89422,9 +90102,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_TotalIncome_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89433,10 +90113,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_PercentagePremiumFirstChild_value",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100246,
       "formulaName": "KSP_PercentagePremiumFirstChild_value",
-      "refId": 100233,
-      "displayAs": "PercentageAnswerType",
+      "refId": 100246,
+      "displayAs": "percentage",
       "frequency": "document",
       "parentName": "Fees_value"
     },
@@ -89446,9 +90126,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_PercentagePremiumFirstChild_title",
       "nodes": [],
-      "ref": 100234,
+      "ref": 100247,
       "formulaName": "KSP_PercentagePremiumFirstChild_title",
-      "refId": 100234,
+      "refId": 100247,
       "displayAs": "PropertyType"
     },
     {
@@ -89457,9 +90137,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_PercentagePremiumFirstChild_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89468,10 +90148,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_FeesSub12_value",
       "nodes": [],
-      "ref": 100235,
+      "ref": 100248,
       "formulaName": "KSP_FeesSub12_value",
-      "refId": 100235,
-      "displayAs": "StringAnswerType",
+      "refId": 100248,
+      "displayAs": "string",
       "parentName": "Fees_value"
     },
     {
@@ -89480,9 +90160,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_FeesSub12_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89491,10 +90171,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_PremiumForChildcare_value",
       "nodes": [],
-      "ref": 100236,
+      "ref": 100249,
       "formulaName": "KSP_PremiumForChildcare_value",
-      "refId": 100236,
-      "displayAs": "StringAnswerType",
+      "refId": 100249,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Fees_value"
     },
@@ -89504,9 +90184,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_PremiumForChildcare_title",
       "nodes": [],
-      "ref": 100237,
+      "ref": 100250,
       "formulaName": "KSP_PremiumForChildcare_title",
-      "refId": 100237,
+      "refId": 100250,
       "displayAs": "PropertyType"
     },
     {
@@ -89515,9 +90195,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_PremiumForChildcare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89526,10 +90206,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_PremiumForOutofSchoolCare_value",
       "nodes": [],
-      "ref": 100238,
+      "ref": 100251,
       "formulaName": "KSP_PremiumForOutofSchoolCare_value",
-      "refId": 100238,
-      "displayAs": "StringAnswerType",
+      "refId": 100251,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Fees_value"
     },
@@ -89539,9 +90219,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_PremiumForOutofSchoolCare_title",
       "nodes": [],
-      "ref": 100239,
+      "ref": 100252,
       "formulaName": "KSP_PremiumForOutofSchoolCare_title",
-      "refId": 100239,
+      "refId": 100252,
       "displayAs": "PropertyType"
     },
     {
@@ -89550,9 +90230,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_PremiumForOutofSchoolCare_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89574,10 +90254,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_CostsSecondaryEducation_value"
         }
       ],
-      "ref": 100240,
+      "ref": 100253,
       "formulaName": "KSP_CostsSecondaryEducation_value",
-      "refId": 100240,
-      "displayAs": "AmountAnswerType",
+      "refId": 100253,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -89587,9 +90267,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CostsSecondaryEducation_title",
       "nodes": [],
-      "ref": 100241,
+      "ref": 100254,
       "formulaName": "KSP_CostsSecondaryEducation_title",
-      "refId": 100241,
+      "refId": 100254,
       "displayAs": "PropertyType"
     },
     {
@@ -89598,9 +90278,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_CostsSecondaryEducation_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89609,10 +90289,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CostsYearOneFour_value",
       "nodes": [],
-      "ref": 100242,
+      "ref": 100255,
       "formulaName": "KSP_CostsYearOneFour_value",
-      "refId": 100242,
-      "displayAs": "StringAnswerType",
+      "refId": 100255,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "CostsSecondaryEducation_value"
     },
@@ -89622,9 +90302,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CostsYearOneFour_title",
       "nodes": [],
-      "ref": 100243,
+      "ref": 100256,
       "formulaName": "KSP_CostsYearOneFour_title",
-      "refId": 100243,
+      "refId": 100256,
       "displayAs": "PropertyType"
     },
     {
@@ -89633,9 +90313,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_CostsYearOneFour_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89644,10 +90324,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CostsYearFiveSixSeven_value",
       "nodes": [],
-      "ref": 100244,
+      "ref": 100257,
       "formulaName": "KSP_CostsYearFiveSixSeven_value",
-      "refId": 100244,
-      "displayAs": "StringAnswerType",
+      "refId": 100257,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "CostsSecondaryEducation_value"
     },
@@ -89657,9 +90337,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CostsYearFiveSixSeven_title",
       "nodes": [],
-      "ref": 100245,
+      "ref": 100258,
       "formulaName": "KSP_CostsYearFiveSixSeven_title",
-      "refId": 100245,
+      "refId": 100258,
       "displayAs": "PropertyType"
     },
     {
@@ -89668,9 +90348,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_CostsYearFiveSixSeven_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89710,10 +90390,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP02SUB10_value"
         }
       ],
-      "ref": 100246,
+      "ref": 100259,
       "formulaName": "KSP_Q_MAP02SUB10_value",
-      "refId": 100246,
-      "displayAs": "AmountAnswerType",
+      "refId": 100259,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -89723,9 +90403,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02SUB10_title",
       "nodes": [],
-      "ref": 100247,
+      "ref": 100260,
       "formulaName": "KSP_Q_MAP02SUB10_title",
-      "refId": 100247,
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -89734,9 +90414,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02SUB10_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89745,10 +90425,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02SUB10SUB1_value",
       "nodes": [],
-      "ref": 100248,
+      "ref": 100261,
       "formulaName": "KSP_Q_MAP02SUB10SUB1_value",
-      "refId": 100248,
-      "displayAs": "AmountAnswerType",
+      "refId": 100261,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02SUB10_value"
     },
@@ -89758,9 +90438,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02SUB10SUB1_title",
       "nodes": [],
-      "ref": 100249,
+      "ref": 100262,
       "formulaName": "KSP_Q_MAP02SUB10SUB1_title",
-      "refId": 100249,
+      "refId": 100262,
       "displayAs": "PropertyType"
     },
     {
@@ -89769,9 +90449,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02SUB10SUB1_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89780,10 +90460,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ChildRelatedBudgetDecrease_value",
       "nodes": [],
-      "ref": 100250,
+      "ref": 100263,
       "formulaName": "KSP_ChildRelatedBudgetDecrease_value",
-      "refId": 100250,
-      "displayAs": "AmountAnswerType",
+      "refId": 100263,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02SUB10_value"
     },
@@ -89793,9 +90473,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildRelatedBudgetDecrease_title",
       "nodes": [],
-      "ref": 100251,
+      "ref": 100264,
       "formulaName": "KSP_ChildRelatedBudgetDecrease_title",
-      "refId": 100251,
+      "refId": 100264,
       "displayAs": "PropertyType"
     },
     {
@@ -89804,9 +90484,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ChildRelatedBudgetDecrease_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89815,10 +90495,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ChildRelatedBudgetUpToTwelve_value",
       "nodes": [],
-      "ref": 100252,
+      "ref": 100265,
       "formulaName": "KSP_ChildRelatedBudgetUpToTwelve_value",
-      "refId": 100252,
-      "displayAs": "StringAnswerType",
+      "refId": 100265,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02SUB10_value"
     },
@@ -89828,9 +90508,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildRelatedBudgetUpToTwelve_title",
       "nodes": [],
-      "ref": 100253,
+      "ref": 100266,
       "formulaName": "KSP_ChildRelatedBudgetUpToTwelve_title",
-      "refId": 100253,
+      "refId": 100266,
       "displayAs": "PropertyType"
     },
     {
@@ -89839,9 +90519,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ChildRelatedBudgetUpToTwelve_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89850,10 +90530,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_value",
       "nodes": [],
-      "ref": 100254,
+      "ref": 100267,
       "formulaName": "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_value",
-      "refId": 100254,
-      "displayAs": "StringAnswerType",
+      "refId": 100267,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02SUB10_value"
     },
@@ -89863,9 +90543,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_title",
       "nodes": [],
-      "ref": 100255,
+      "ref": 100268,
       "formulaName": "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_title",
-      "refId": 100255,
+      "refId": 100268,
       "displayAs": "PropertyType"
     },
     {
@@ -89874,9 +90554,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ChildRelatedBudgetTwelveUpToAndInclFifteen_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89885,10 +90565,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_value",
       "nodes": [],
-      "ref": 100256,
+      "ref": 100269,
       "formulaName": "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_value",
-      "refId": 100256,
-      "displayAs": "StringAnswerType",
+      "refId": 100269,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02SUB10_value"
     },
@@ -89898,9 +90578,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_title",
       "nodes": [],
-      "ref": 100257,
+      "ref": 100270,
       "formulaName": "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_title",
-      "refId": 100257,
+      "refId": 100270,
       "displayAs": "PropertyType"
     },
     {
@@ -89909,9 +90589,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ChildRelatedBudgetSixteenUpToAndIncSeventeen_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89933,10 +90613,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP02SUB11_value"
         }
       ],
-      "ref": 100258,
+      "ref": 100271,
       "formulaName": "KSP_Q_MAP02SUB11_value",
-      "refId": 100258,
-      "displayAs": "AmountAnswerType",
+      "refId": 100271,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -89946,9 +90626,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02SUB11_title",
       "nodes": [],
-      "ref": 100193,
-      "formulaName": "KSP_CombinationDiscount_title",
-      "refId": 100193,
+      "ref": 100272,
+      "formulaName": "KSP_Q_MAP02SUB11_title",
+      "refId": 100272,
       "displayAs": "PropertyType"
     },
     {
@@ -89957,9 +90637,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02SUB11_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -89968,10 +90648,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CombinationDiscountLowestIncome_value",
       "nodes": [],
-      "ref": 100259,
+      "ref": 100273,
       "formulaName": "KSP_CombinationDiscountLowestIncome_value",
-      "refId": 100259,
-      "displayAs": "StringAnswerType",
+      "refId": 100273,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02SUB11_value"
     },
@@ -89981,9 +90661,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CombinationDiscountLowestIncome_title",
       "nodes": [],
-      "ref": 100260,
+      "ref": 100274,
       "formulaName": "KSP_CombinationDiscountLowestIncome_title",
-      "refId": 100260,
+      "refId": 100274,
       "displayAs": "PropertyType"
     },
     {
@@ -89992,9 +90672,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_CombinationDiscountLowestIncome_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90003,10 +90683,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CombinationDiscountTotal_value",
       "nodes": [],
-      "ref": 100261,
+      "ref": 100275,
       "formulaName": "KSP_CombinationDiscountTotal_value",
-      "refId": 100261,
-      "displayAs": "StringAnswerType",
+      "refId": 100275,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02SUB11_value"
     },
@@ -90016,9 +90696,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CombinationDiscountTotal_title",
       "nodes": [],
-      "ref": 100262,
+      "ref": 100276,
       "formulaName": "KSP_CombinationDiscountTotal_title",
-      "refId": 100262,
+      "refId": 100276,
       "displayAs": "PropertyType"
     },
     {
@@ -90027,9 +90707,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_CombinationDiscountTotal_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90075,10 +90755,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP02_PARAGRAAF09_value"
         }
       ],
-      "ref": 100263,
+      "ref": 100277,
       "formulaName": "KSP_Q_MAP02_PARAGRAAF09_value",
-      "refId": 100263,
-      "displayAs": "AmountAnswerType",
+      "refId": 100277,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -90088,9 +90768,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_PARAGRAAF09_title",
       "nodes": [],
-      "ref": 100145,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09_title",
-      "refId": 100145,
+      "ref": 100278,
+      "formulaName": "KSP_Q_MAP02_PARAGRAAF09_title",
+      "refId": 100278,
       "displayAs": "PropertyType"
     },
     {
@@ -90099,9 +90779,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_PARAGRAAF09_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90110,10 +90790,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_STATUS_value",
       "nodes": [],
-      "ref": 100264,
+      "ref": 100279,
       "formulaName": "KSP_Q_MAP02_STATUS_value",
-      "refId": 100264,
-      "displayAs": "select",
+      "refId": 100279,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -90123,9 +90803,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_STATUS_title",
       "nodes": [],
-      "ref": 100148,
-      "formulaName": "KSP_Q_MAP01_STATUS_title",
-      "refId": 100148,
+      "ref": 100280,
+      "formulaName": "KSP_Q_MAP02_STATUS_title",
+      "refId": 100280,
       "displayAs": "PropertyType"
     },
     {
@@ -90134,9 +90814,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_STATUS_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90145,9 +90825,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_Q_MAP02_STATUS_choices",
       "nodes": [],
-      "ref": 100149,
+      "ref": 100155,
       "formulaName": "KSP_Q_MAP01_STATUS_choices",
-      "refId": 100149,
+      "refId": 100155,
       "displayAs": "PropertyType"
     },
     {
@@ -90156,10 +90836,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB2_value",
       "nodes": [],
-      "ref": 100265,
+      "ref": 100281,
       "formulaName": "KSP_Q_MAP02_PARAGRAAF09SUB2_value",
-      "refId": 100265,
-      "displayAs": "StringAnswerType",
+      "refId": 100281,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -90169,9 +90849,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB2_title",
       "nodes": [],
-      "ref": 100166,
-      "formulaName": "KSP_Q_MAP02_WARNING_title",
-      "refId": 100166,
+      "ref": 100282,
+      "formulaName": "KSP_Q_MAP02_PARAGRAAF09SUB2_title",
+      "refId": 100282,
       "displayAs": "PropertyType"
     },
     {
@@ -90180,9 +90860,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB2_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90191,10 +90871,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB3_value",
       "nodes": [],
-      "ref": 100266,
+      "ref": 100283,
       "formulaName": "KSP_Q_MAP02_PARAGRAAF09SUB3_value",
-      "refId": 100266,
-      "displayAs": "StringAnswerType",
+      "refId": 100283,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -90204,9 +90884,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB3_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90215,10 +90895,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB4_value",
       "nodes": [],
-      "ref": 100267,
+      "ref": 100284,
       "formulaName": "KSP_Q_MAP02_PARAGRAAF09SUB4_value",
-      "refId": 100267,
-      "displayAs": "StringAnswerType",
+      "refId": 100284,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -90228,9 +90908,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB4_title",
       "nodes": [],
-      "ref": 100170,
-      "formulaName": "KSP_Q_MAP02_VALIDATION_title",
-      "refId": 100170,
+      "ref": 100285,
+      "formulaName": "KSP_Q_MAP02_PARAGRAAF09SUB4_title",
+      "refId": 100285,
       "displayAs": "PropertyType"
     },
     {
@@ -90239,9 +90919,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB4_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90250,10 +90930,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB5_value",
       "nodes": [],
-      "ref": 100268,
+      "ref": 100286,
       "formulaName": "KSP_Q_MAP02_PARAGRAAF09SUB5_value",
-      "refId": 100268,
-      "displayAs": "StringAnswerType",
+      "refId": 100286,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -90263,9 +90943,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB5_title",
       "nodes": [],
-      "ref": 100154,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100154,
+      "ref": 100287,
+      "formulaName": "KSP_Q_MAP02_PARAGRAAF09SUB5_title",
+      "refId": 100287,
       "displayAs": "PropertyType"
     },
     {
@@ -90274,9 +90954,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB5_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90285,10 +90965,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB6_value",
       "nodes": [],
-      "ref": 100269,
+      "ref": 100288,
       "formulaName": "KSP_Q_MAP02_PARAGRAAF09SUB6_value",
-      "refId": 100269,
-      "displayAs": "StringAnswerType",
+      "refId": 100288,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -90298,9 +90978,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB6_title",
       "nodes": [],
-      "ref": 100156,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB6_title",
-      "refId": 100156,
+      "ref": 100289,
+      "formulaName": "KSP_Q_MAP02_PARAGRAAF09SUB6_title",
+      "refId": 100289,
       "displayAs": "PropertyType"
     },
     {
@@ -90309,9 +90989,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_PARAGRAAF09SUB6_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90333,10 +91013,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP02_HULPVARIABELEN_value"
         }
       ],
-      "ref": 100270,
+      "ref": 100290,
       "formulaName": "KSP_Q_MAP02_HULPVARIABELEN_value",
-      "refId": 100270,
-      "displayAs": "AmountAnswerType",
+      "refId": 100290,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -90346,9 +91026,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_HULPVARIABELEN_title",
       "nodes": [],
-      "ref": 100158,
-      "formulaName": "KSP_Q_MAP01_HULPVARIABELEN_title",
-      "refId": 100158,
+      "ref": 100291,
+      "formulaName": "KSP_Q_MAP02_HULPVARIABELEN_title",
+      "refId": 100291,
       "displayAs": "PropertyType"
     },
     {
@@ -90357,9 +91037,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_HULPVARIABELEN_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90368,9 +91048,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "visible",
       "name": "KSP_Q_MAP02_HULPVARIABELEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "KSP_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100292,
+      "formulaName": "KSP_Q_MAP02_HULPVARIABELEN_visible",
+      "refId": 100292,
       "displayAs": "PropertyType"
     },
     {
@@ -90379,10 +91059,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_REQUIREDVARS_value",
       "nodes": [],
-      "ref": 100271,
+      "ref": 100293,
       "formulaName": "KSP_Q_MAP02_REQUIREDVARS_value",
-      "refId": 100271,
-      "displayAs": "StringAnswerType",
+      "refId": 100293,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
     },
@@ -90392,9 +91072,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_REQUIREDVARS_title",
       "nodes": [],
-      "ref": 100154,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100154,
+      "ref": 100294,
+      "formulaName": "KSP_Q_MAP02_REQUIREDVARS_title",
+      "refId": 100294,
       "displayAs": "PropertyType"
     },
     {
@@ -90403,9 +91083,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_REQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90414,10 +91094,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
       "nodes": [],
-      "ref": 100272,
+      "ref": 100295,
       "formulaName": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_value",
-      "refId": 100272,
-      "displayAs": "StringAnswerType",
+      "refId": 100295,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
     },
@@ -90427,9 +91107,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_title",
       "nodes": [],
-      "ref": 100156,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB6_title",
-      "refId": 100156,
+      "ref": 100296,
+      "formulaName": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_title",
+      "refId": 100296,
       "displayAs": "PropertyType"
     },
     {
@@ -90438,9 +91118,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP02_ENTEREDREQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90492,10 +91172,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP06_value"
         }
       ],
-      "ref": 100273,
+      "ref": 100297,
       "formulaName": "KSP_Q_MAP06_value",
-      "refId": 100273,
-      "displayAs": "select",
+      "refId": 100297,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -90505,9 +91185,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_title",
       "nodes": [],
-      "ref": 100274,
+      "ref": 100298,
       "formulaName": "KSP_Q_MAP06_title",
-      "refId": 100274,
+      "refId": 100298,
       "displayAs": "PropertyType"
     },
     {
@@ -90516,9 +91196,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90527,9 +91207,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "visible",
       "name": "KSP_Q_MAP06_visible",
       "nodes": [],
-      "ref": 100275,
+      "ref": 100299,
       "formulaName": "KSP_Q_MAP06_visible",
-      "refId": 100275,
+      "refId": 100299,
       "displayAs": "PropertyType"
     },
     {
@@ -90549,10 +91229,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_WARNING_value",
       "nodes": [],
-      "ref": 100276,
+      "ref": 100300,
       "formulaName": "KSP_Q_MAP06_WARNING_value",
-      "refId": 100276,
-      "displayAs": "StringAnswerType",
+      "refId": 100300,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_value"
     },
@@ -90562,9 +91242,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_WARNING_title",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100301,
       "formulaName": "KSP_Q_MAP06_WARNING_title",
-      "refId": 100277,
+      "refId": 100301,
       "displayAs": "PropertyType"
     },
     {
@@ -90573,9 +91253,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_WARNING_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90584,10 +91264,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_INFO_value",
       "nodes": [],
-      "ref": 100278,
+      "ref": 100302,
       "formulaName": "KSP_Q_MAP06_INFO_value",
-      "refId": 100278,
-      "displayAs": "StringAnswerType",
+      "refId": 100302,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_value"
     },
@@ -90597,9 +91277,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_INFO_title",
       "nodes": [],
-      "ref": 100279,
+      "ref": 100303,
       "formulaName": "KSP_Q_MAP06_INFO_title",
-      "refId": 100279,
+      "refId": 100303,
       "displayAs": "PropertyType"
     },
     {
@@ -90608,9 +91288,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_INFO_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90619,10 +91299,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_VALIDATION_value",
       "nodes": [],
-      "ref": 100280,
+      "ref": 100304,
       "formulaName": "KSP_Q_MAP06_VALIDATION_value",
-      "refId": 100280,
-      "displayAs": "StringAnswerType",
+      "refId": 100304,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_value"
     },
@@ -90632,9 +91312,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_VALIDATION_title",
       "nodes": [],
-      "ref": 100281,
+      "ref": 100305,
       "formulaName": "KSP_Q_MAP06_VALIDATION_title",
-      "refId": 100281,
+      "refId": 100305,
       "displayAs": "PropertyType"
     },
     {
@@ -90643,9 +91323,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_VALIDATION_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90654,10 +91334,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_HINT_value",
       "nodes": [],
-      "ref": 100282,
+      "ref": 100306,
       "formulaName": "KSP_Q_MAP06_HINT_value",
-      "refId": 100282,
-      "displayAs": "StringAnswerType",
+      "refId": 100306,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_value"
     },
@@ -90667,9 +91347,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_HINT_title",
       "nodes": [],
-      "ref": 100283,
+      "ref": 100307,
       "formulaName": "KSP_Q_MAP06_HINT_title",
-      "refId": 100283,
+      "refId": 100307,
       "displayAs": "PropertyType"
     },
     {
@@ -90678,9 +91358,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "hint",
       "name": "KSP_Q_MAP06_HINT_hint",
       "nodes": [],
-      "ref": 100284,
+      "ref": 100308,
       "formulaName": "KSP_Q_MAP06_HINT_hint",
-      "refId": 100284,
+      "refId": 100308,
       "displayAs": "PropertyType"
     },
     {
@@ -90689,9 +91369,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_HINT_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90731,10 +91411,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP06SUB5_value"
         }
       ],
-      "ref": 100285,
+      "ref": 100309,
       "formulaName": "KSP_Q_MAP06SUB5_value",
-      "refId": 100285,
-      "displayAs": "AmountAnswerType",
+      "refId": 100309,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP06_value"
     },
@@ -90744,9 +91424,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06SUB5_title",
       "nodes": [],
-      "ref": 100286,
+      "ref": 100310,
       "formulaName": "KSP_Q_MAP06SUB5_title",
-      "refId": 100286,
+      "refId": 100310,
       "displayAs": "PropertyType"
     },
     {
@@ -90755,9 +91435,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06SUB5_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90766,10 +91446,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_GraphResRek1_value",
       "nodes": [],
-      "ref": 100287,
+      "ref": 100311,
       "formulaName": "KSP_GraphResRek1_value",
-      "refId": 100287,
-      "displayAs": "StringAnswerType",
+      "refId": 100311,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5_value"
     },
@@ -90779,9 +91459,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_GraphResRek1_title",
       "nodes": [],
-      "ref": 100288,
+      "ref": 100312,
       "formulaName": "KSP_GraphResRek1_title",
-      "refId": 100288,
+      "refId": 100312,
       "displayAs": "PropertyType"
     },
     {
@@ -90790,9 +91470,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_GraphResRek1_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90922,10 +91602,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP06SUB5SUB2_value"
         }
       ],
-      "ref": 100289,
+      "ref": 100313,
       "formulaName": "KSP_Q_MAP06SUB5SUB2_value",
-      "refId": 100289,
-      "displayAs": "StringAnswerType",
+      "refId": 100313,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5_value"
     },
@@ -90935,9 +91615,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06SUB5SUB2_title",
       "nodes": [],
-      "ref": 100290,
+      "ref": 100314,
       "formulaName": "KSP_Q_MAP06SUB5SUB2_title",
-      "refId": 100290,
+      "refId": 100314,
       "displayAs": "PropertyType"
     },
     {
@@ -90946,9 +91626,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06SUB5SUB2_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90964,10 +91644,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Age_value"
         }
       ],
-      "ref": 100291,
+      "ref": 100315,
       "formulaName": "KSP_Age_value",
-      "refId": 100291,
-      "displayAs": "StringAnswerType",
+      "refId": 100315,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -90977,9 +91657,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Age_title",
       "nodes": [],
-      "ref": 100292,
+      "ref": 100316,
       "formulaName": "KSP_Age_title",
-      "refId": 100292,
+      "refId": 100316,
       "displayAs": "PropertyType"
     },
     {
@@ -90988,9 +91668,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Age_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -90999,10 +91679,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_PeriodeInFormulaset_value",
       "nodes": [],
-      "ref": 100293,
+      "ref": 100317,
       "formulaName": "KSP_PeriodeInFormulaset_value",
-      "refId": 100293,
-      "displayAs": "StringAnswerType",
+      "refId": 100317,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Age_value"
     },
@@ -91012,9 +91692,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_PeriodeInFormulaset_title",
       "nodes": [],
-      "ref": 100294,
+      "ref": 100318,
       "formulaName": "KSP_PeriodeInFormulaset_title",
-      "refId": 100294,
+      "refId": 100318,
       "displayAs": "PropertyType"
     },
     {
@@ -91023,9 +91703,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_PeriodeInFormulaset_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91034,10 +91714,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Furniture_value",
       "nodes": [],
-      "ref": 100295,
+      "ref": 100319,
       "formulaName": "KSP_Furniture_value",
-      "refId": 100295,
-      "displayAs": "StringAnswerType",
+      "refId": 100319,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91047,9 +91727,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Furniture_title",
       "nodes": [],
-      "ref": 100296,
+      "ref": 100320,
       "formulaName": "KSP_Furniture_title",
-      "refId": 100296,
+      "refId": 100320,
       "displayAs": "PropertyType"
     },
     {
@@ -91058,9 +91738,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Furniture_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91069,10 +91749,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ActualChildCareCosts_value",
       "nodes": [],
-      "ref": 100297,
+      "ref": 100321,
       "formulaName": "KSP_ActualChildCareCosts_value",
-      "refId": 100297,
-      "displayAs": "StringAnswerType",
+      "refId": 100321,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91082,9 +91762,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ActualChildCareCosts_title",
       "nodes": [],
-      "ref": 100298,
+      "ref": 100322,
       "formulaName": "KSP_ActualChildCareCosts_title",
-      "refId": 100298,
+      "refId": 100322,
       "displayAs": "PropertyType"
     },
     {
@@ -91093,9 +91773,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ActualChildCareCosts_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91104,10 +91784,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ActualDiapers_value",
       "nodes": [],
-      "ref": 100299,
+      "ref": 100323,
       "formulaName": "KSP_ActualDiapers_value",
-      "refId": 100299,
-      "displayAs": "StringAnswerType",
+      "refId": 100323,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91117,9 +91797,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ActualDiapers_title",
       "nodes": [],
-      "ref": 100300,
+      "ref": 100324,
       "formulaName": "KSP_ActualDiapers_title",
-      "refId": 100300,
+      "refId": 100324,
       "displayAs": "PropertyType"
     },
     {
@@ -91128,10 +91808,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ActualFood_value",
       "nodes": [],
-      "ref": 100301,
+      "ref": 100325,
       "formulaName": "KSP_ActualFood_value",
-      "refId": 100301,
-      "displayAs": "StringAnswerType",
+      "refId": 100325,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91141,9 +91821,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ActualFood_title",
       "nodes": [],
-      "ref": 100302,
+      "ref": 100326,
       "formulaName": "KSP_ActualFood_title",
-      "refId": 100302,
+      "refId": 100326,
       "displayAs": "PropertyType"
     },
     {
@@ -91152,10 +91832,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ActualClothingCosts_value",
       "nodes": [],
-      "ref": 100303,
+      "ref": 100327,
       "formulaName": "KSP_ActualClothingCosts_value",
-      "refId": 100303,
-      "displayAs": "StringAnswerType",
+      "refId": 100327,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91165,9 +91845,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ActualClothingCosts_title",
       "nodes": [],
-      "ref": 100304,
+      "ref": 100328,
       "formulaName": "KSP_ActualClothingCosts_title",
-      "refId": 100304,
+      "refId": 100328,
       "displayAs": "PropertyType"
     },
     {
@@ -91176,10 +91856,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ActualPersonalCareCosts_value",
       "nodes": [],
-      "ref": 100305,
+      "ref": 100329,
       "formulaName": "KSP_ActualPersonalCareCosts_value",
-      "refId": 100305,
-      "displayAs": "StringAnswerType",
+      "refId": 100329,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91189,9 +91869,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ActualPersonalCareCosts_title",
       "nodes": [],
-      "ref": 100306,
+      "ref": 100330,
       "formulaName": "KSP_ActualPersonalCareCosts_title",
-      "refId": 100306,
+      "refId": 100330,
       "displayAs": "PropertyType"
     },
     {
@@ -91200,10 +91880,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Hairdresser_value",
       "nodes": [],
-      "ref": 100307,
+      "ref": 100331,
       "formulaName": "KSP_Hairdresser_value",
-      "refId": 100307,
-      "displayAs": "StringAnswerType",
+      "refId": 100331,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91213,9 +91893,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Hairdresser_title",
       "nodes": [],
-      "ref": 100308,
+      "ref": 100332,
       "formulaName": "KSP_Hairdresser_title",
-      "refId": 100308,
+      "refId": 100332,
       "displayAs": "PropertyType"
     },
     {
@@ -91224,10 +91904,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Inventory_value",
       "nodes": [],
-      "ref": 100309,
+      "ref": 100333,
       "formulaName": "KSP_Inventory_value",
-      "refId": 100309,
-      "displayAs": "StringAnswerType",
+      "refId": 100333,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91237,9 +91917,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Inventory_title",
       "nodes": [],
-      "ref": 100310,
+      "ref": 100334,
       "formulaName": "KSP_Inventory_title",
-      "refId": 100310,
+      "refId": 100334,
       "displayAs": "PropertyType"
     },
     {
@@ -91248,10 +91928,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Allowance_value",
       "nodes": [],
-      "ref": 100311,
+      "ref": 100335,
       "formulaName": "KSP_Allowance_value",
-      "refId": 100311,
-      "displayAs": "StringAnswerType",
+      "refId": 100335,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91261,9 +91941,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Allowance_title",
       "nodes": [],
-      "ref": 100312,
+      "ref": 100336,
       "formulaName": "KSP_Allowance_title",
-      "refId": 100312,
+      "refId": 100336,
       "displayAs": "PropertyType"
     },
     {
@@ -91272,10 +91952,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Contributions_value",
       "nodes": [],
-      "ref": 100313,
+      "ref": 100337,
       "formulaName": "KSP_Contributions_value",
-      "refId": 100313,
-      "displayAs": "StringAnswerType",
+      "refId": 100337,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91285,9 +91965,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Contributions_title",
       "nodes": [],
-      "ref": 100314,
+      "ref": 100338,
       "formulaName": "KSP_Contributions_title",
-      "refId": 100314,
+      "refId": 100338,
       "displayAs": "PropertyType"
     },
     {
@@ -91296,10 +91976,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Transport_value",
       "nodes": [],
-      "ref": 100315,
+      "ref": 100339,
       "formulaName": "KSP_Transport_value",
-      "refId": 100315,
-      "displayAs": "StringAnswerType",
+      "refId": 100339,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91309,9 +91989,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Transport_title",
       "nodes": [],
-      "ref": 100316,
+      "ref": 100340,
       "formulaName": "KSP_Transport_title",
-      "refId": 100316,
+      "refId": 100340,
       "displayAs": "PropertyType"
     },
     {
@@ -91320,10 +92000,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MobilePhone_value",
       "nodes": [],
-      "ref": 100317,
+      "ref": 100341,
       "formulaName": "KSP_MobilePhone_value",
-      "refId": 100317,
-      "displayAs": "StringAnswerType",
+      "refId": 100341,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91333,9 +92013,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MobilePhone_title",
       "nodes": [],
-      "ref": 100318,
+      "ref": 100342,
       "formulaName": "KSP_MobilePhone_title",
-      "refId": 100318,
+      "refId": 100342,
       "displayAs": "PropertyType"
     },
     {
@@ -91344,10 +92024,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_DrivingLicense_value",
       "nodes": [],
-      "ref": 100319,
+      "ref": 100343,
       "formulaName": "KSP_DrivingLicense_value",
-      "refId": 100319,
-      "displayAs": "StringAnswerType",
+      "refId": 100343,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91357,9 +92037,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_DrivingLicense_title",
       "nodes": [],
-      "ref": 100320,
+      "ref": 100344,
       "formulaName": "KSP_DrivingLicense_title",
-      "refId": 100320,
+      "refId": 100344,
       "displayAs": "PropertyType"
     },
     {
@@ -91368,10 +92048,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CostsForOutOfSchoolCare_value",
       "nodes": [],
-      "ref": 100321,
+      "ref": 100345,
       "formulaName": "KSP_CostsForOutOfSchoolCare_value",
-      "refId": 100321,
-      "displayAs": "StringAnswerType",
+      "refId": 100345,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91381,9 +92061,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CostsForOutOfSchoolCare_title",
       "nodes": [],
-      "ref": 100322,
+      "ref": 100346,
       "formulaName": "KSP_CostsForOutOfSchoolCare_title",
-      "refId": 100322,
+      "refId": 100346,
       "displayAs": "PropertyType"
     },
     {
@@ -91392,10 +92072,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CostsForPrimaryEducation_value",
       "nodes": [],
-      "ref": 100323,
+      "ref": 100347,
       "formulaName": "KSP_CostsForPrimaryEducation_value",
-      "refId": 100323,
-      "displayAs": "StringAnswerType",
+      "refId": 100347,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91405,9 +92085,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CostsForPrimaryEducation_title",
       "nodes": [],
-      "ref": 100324,
+      "ref": 100348,
       "formulaName": "KSP_CostsForPrimaryEducation_title",
-      "refId": 100324,
+      "refId": 100348,
       "displayAs": "PropertyType"
     },
     {
@@ -91416,10 +92096,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CostsForSecondaryEducation_value",
       "nodes": [],
-      "ref": 100325,
+      "ref": 100349,
       "formulaName": "KSP_CostsForSecondaryEducation_value",
-      "refId": 100325,
-      "displayAs": "StringAnswerType",
+      "refId": 100349,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91429,9 +92109,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CostsForSecondaryEducation_title",
       "nodes": [],
-      "ref": 100326,
+      "ref": 100350,
       "formulaName": "KSP_CostsForSecondaryEducation_title",
-      "refId": 100326,
+      "refId": 100350,
       "displayAs": "PropertyType"
     },
     {
@@ -91440,10 +92120,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CostsUnspecifiedOverview_value",
       "nodes": [],
-      "ref": 100327,
+      "ref": 100351,
       "formulaName": "KSP_CostsUnspecifiedOverview_value",
-      "refId": 100327,
-      "displayAs": "StringAnswerType",
+      "refId": 100351,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91453,9 +92133,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CostsUnspecifiedOverview_title",
       "nodes": [],
-      "ref": 100328,
+      "ref": 100352,
       "formulaName": "KSP_CostsUnspecifiedOverview_title",
-      "refId": 100328,
+      "refId": 100352,
       "displayAs": "PropertyType"
     },
     {
@@ -91464,9 +92144,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_CostsUnspecifiedOverview_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91475,10 +92155,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_TotalYearlyCosts_value",
       "nodes": [],
-      "ref": 100329,
+      "ref": 100353,
       "formulaName": "KSP_TotalYearlyCosts_value",
-      "refId": 100329,
-      "displayAs": "StringAnswerType",
+      "refId": 100353,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
@@ -91488,9 +92168,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_TotalYearlyCosts_title",
       "nodes": [],
-      "ref": 100290,
-      "formulaName": "KSP_Q_MAP06SUB5SUB2_title",
-      "refId": 100290,
+      "ref": 100354,
+      "formulaName": "KSP_TotalYearlyCosts_title",
+      "refId": 100354,
       "displayAs": "PropertyType"
     },
     {
@@ -91499,9 +92179,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_TotalYearlyCosts_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91510,10 +92190,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_TotalYearlyCostTSUM_value",
       "nodes": [],
-      "ref": 100330,
+      "ref": 100355,
       "formulaName": "KSP_TotalYearlyCostTSUM_value",
-      "refId": 100330,
-      "displayAs": "StringAnswerType",
+      "refId": 100355,
+      "displayAs": "string",
       "parentName": "Q_MAP06SUB5SUB2_value"
     },
     {
@@ -91553,10 +92233,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP06SUB5SUB3_value"
         }
       ],
-      "ref": 100331,
+      "ref": 100356,
       "formulaName": "KSP_Q_MAP06SUB5SUB3_value",
-      "refId": 100331,
-      "displayAs": "StringAnswerType",
+      "refId": 100356,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5_value"
     },
@@ -91566,9 +92246,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06SUB5SUB3_title",
       "nodes": [],
-      "ref": 100332,
+      "ref": 100357,
       "formulaName": "KSP_Q_MAP06SUB5SUB3_title",
-      "refId": 100332,
+      "refId": 100357,
       "displayAs": "PropertyType"
     },
     {
@@ -91577,9 +92257,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06SUB5SUB3_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91588,10 +92268,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ChildBenefits_value",
       "nodes": [],
-      "ref": 100333,
+      "ref": 100358,
       "formulaName": "KSP_ChildBenefits_value",
-      "refId": 100333,
-      "displayAs": "StringAnswerType",
+      "refId": 100358,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB3_value"
     },
@@ -91601,9 +92281,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildBenefits_title",
       "nodes": [],
-      "ref": 100334,
+      "ref": 100359,
       "formulaName": "KSP_ChildBenefits_title",
-      "refId": 100334,
+      "refId": 100359,
       "displayAs": "PropertyType"
     },
     {
@@ -91612,9 +92292,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ChildBenefits_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91623,10 +92303,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ChildCarePremiumOverview_value",
       "nodes": [],
-      "ref": 100335,
+      "ref": 100360,
       "formulaName": "KSP_ChildCarePremiumOverview_value",
-      "refId": 100335,
-      "displayAs": "StringAnswerType",
+      "refId": 100360,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB3_value"
     },
@@ -91636,9 +92316,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildCarePremiumOverview_title",
       "nodes": [],
-      "ref": 100336,
+      "ref": 100361,
       "formulaName": "KSP_ChildCarePremiumOverview_title",
-      "refId": 100336,
+      "refId": 100361,
       "displayAs": "PropertyType"
     },
     {
@@ -91647,9 +92327,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ChildCarePremiumOverview_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91658,10 +92338,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ChildcareBudgetOverview_value",
       "nodes": [],
-      "ref": 100337,
+      "ref": 100362,
       "formulaName": "KSP_ChildcareBudgetOverview_value",
-      "refId": 100337,
-      "displayAs": "StringAnswerType",
+      "refId": 100362,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB3_value"
     },
@@ -91671,9 +92351,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildcareBudgetOverview_title",
       "nodes": [],
-      "ref": 100338,
+      "ref": 100363,
       "formulaName": "KSP_ChildcareBudgetOverview_title",
-      "refId": 100338,
+      "refId": 100363,
       "displayAs": "PropertyType"
     },
     {
@@ -91682,9 +92362,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ChildcareBudgetOverview_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91693,10 +92373,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_CombinationDiscountOverview_value",
       "nodes": [],
-      "ref": 100339,
+      "ref": 100364,
       "formulaName": "KSP_CombinationDiscountOverview_value",
-      "refId": 100339,
-      "displayAs": "StringAnswerType",
+      "refId": 100364,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB3_value"
     },
@@ -91706,9 +92386,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_CombinationDiscountOverview_title",
       "nodes": [],
-      "ref": 100193,
-      "formulaName": "KSP_CombinationDiscount_title",
-      "refId": 100193,
+      "ref": 100365,
+      "formulaName": "KSP_CombinationDiscountOverview_title",
+      "refId": 100365,
       "displayAs": "PropertyType"
     },
     {
@@ -91717,9 +92397,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_CombinationDiscountOverview_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91728,10 +92408,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_TotalYearlyIncome_value",
       "nodes": [],
-      "ref": 100340,
+      "ref": 100366,
       "formulaName": "KSP_TotalYearlyIncome_value",
-      "refId": 100340,
-      "displayAs": "StringAnswerType",
+      "refId": 100366,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5SUB3_value"
     },
@@ -91741,9 +92421,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_TotalYearlyIncome_title",
       "nodes": [],
-      "ref": 100341,
+      "ref": 100367,
       "formulaName": "KSP_TotalYearlyIncome_title",
-      "refId": 100341,
+      "refId": 100367,
       "displayAs": "PropertyType"
     },
     {
@@ -91752,9 +92432,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_TotalYearlyIncome_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91770,10 +92450,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_TotalYearlyBalance_value"
         }
       ],
-      "ref": 100342,
+      "ref": 100368,
       "formulaName": "KSP_TotalYearlyBalance_value",
-      "refId": 100342,
-      "displayAs": "StringAnswerType",
+      "refId": 100368,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5_value"
     },
@@ -91783,9 +92463,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_TotalYearlyBalance_title",
       "nodes": [],
-      "ref": 100288,
-      "formulaName": "KSP_GraphResRek1_title",
-      "refId": 100288,
+      "ref": 100369,
+      "formulaName": "KSP_TotalYearlyBalance_title",
+      "refId": 100369,
       "displayAs": "PropertyType"
     },
     {
@@ -91794,9 +92474,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_TotalYearlyBalance_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91805,10 +92485,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_TotalMonthlyBalanceAverage_value",
       "nodes": [],
-      "ref": 100343,
+      "ref": 100370,
       "formulaName": "KSP_TotalMonthlyBalanceAverage_value",
-      "refId": 100343,
-      "displayAs": "StringAnswerType",
+      "refId": 100370,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "TotalYearlyBalance_value"
     },
@@ -91818,9 +92498,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_TotalMonthlyBalanceAverage_title",
       "nodes": [],
-      "ref": 100344,
+      "ref": 100371,
       "formulaName": "KSP_TotalMonthlyBalanceAverage_title",
-      "refId": 100344,
+      "refId": 100371,
       "displayAs": "PropertyType"
     },
     {
@@ -91829,9 +92509,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_TotalMonthlyBalanceAverage_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91840,10 +92520,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ChildCareCosts_value",
       "nodes": [],
-      "ref": 100345,
+      "ref": 100372,
       "formulaName": "KSP_ChildCareCosts_value",
-      "refId": 100345,
-      "displayAs": "StringAnswerType",
+      "refId": 100372,
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "Q_MAP06SUB5_value"
     },
@@ -91853,9 +92533,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ChildCareCosts_title",
       "nodes": [],
-      "ref": 100298,
-      "formulaName": "KSP_ActualChildCareCosts_title",
-      "refId": 100298,
+      "ref": 100373,
+      "formulaName": "KSP_ChildCareCosts_title",
+      "refId": 100373,
       "displayAs": "PropertyType"
     },
     {
@@ -91901,10 +92581,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP06_PARAGRAAF09_value"
         }
       ],
-      "ref": 100346,
+      "ref": 100374,
       "formulaName": "KSP_Q_MAP06_PARAGRAAF09_value",
-      "refId": 100346,
-      "displayAs": "AmountAnswerType",
+      "refId": 100374,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP06_value"
     },
@@ -91914,9 +92594,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_PARAGRAAF09_title",
       "nodes": [],
-      "ref": 100145,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09_title",
-      "refId": 100145,
+      "ref": 100375,
+      "formulaName": "KSP_Q_MAP06_PARAGRAAF09_title",
+      "refId": 100375,
       "displayAs": "PropertyType"
     },
     {
@@ -91925,9 +92605,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_PARAGRAAF09_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91936,9 +92616,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "visible",
       "name": "KSP_Q_MAP06_PARAGRAAF09_visible",
       "nodes": [],
-      "ref": 100146,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09_visible",
-      "refId": 100146,
+      "ref": 100376,
+      "formulaName": "KSP_Q_MAP06_PARAGRAAF09_visible",
+      "refId": 100376,
       "displayAs": "PropertyType"
     },
     {
@@ -91947,10 +92627,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_STATUS_value",
       "nodes": [],
-      "ref": 100347,
+      "ref": 100377,
       "formulaName": "KSP_Q_MAP06_STATUS_value",
-      "refId": 100347,
-      "displayAs": "select",
+      "refId": 100377,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP06_PARAGRAAF09_value"
     },
@@ -91960,9 +92640,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_STATUS_title",
       "nodes": [],
-      "ref": 100148,
-      "formulaName": "KSP_Q_MAP01_STATUS_title",
-      "refId": 100148,
+      "ref": 100378,
+      "formulaName": "KSP_Q_MAP06_STATUS_title",
+      "refId": 100378,
       "displayAs": "PropertyType"
     },
     {
@@ -91971,9 +92651,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_STATUS_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -91982,9 +92662,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_Q_MAP06_STATUS_choices",
       "nodes": [],
-      "ref": 100149,
+      "ref": 100155,
       "formulaName": "KSP_Q_MAP01_STATUS_choices",
-      "refId": 100149,
+      "refId": 100155,
       "displayAs": "PropertyType"
     },
     {
@@ -91993,10 +92673,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB2_value",
       "nodes": [],
-      "ref": 100348,
+      "ref": 100379,
       "formulaName": "KSP_Q_MAP06_PARAGRAAF09SUB2_value",
-      "refId": 100348,
-      "displayAs": "StringAnswerType",
+      "refId": 100379,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_PARAGRAAF09_value"
     },
@@ -92006,9 +92686,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB2_title",
       "nodes": [],
-      "ref": 100277,
-      "formulaName": "KSP_Q_MAP06_WARNING_title",
-      "refId": 100277,
+      "ref": 100380,
+      "formulaName": "KSP_Q_MAP06_PARAGRAAF09SUB2_title",
+      "refId": 100380,
       "displayAs": "PropertyType"
     },
     {
@@ -92017,9 +92697,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB2_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92028,10 +92708,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB3_value",
       "nodes": [],
-      "ref": 100349,
+      "ref": 100381,
       "formulaName": "KSP_Q_MAP06_PARAGRAAF09SUB3_value",
-      "refId": 100349,
-      "displayAs": "StringAnswerType",
+      "refId": 100381,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_PARAGRAAF09_value"
     },
@@ -92041,9 +92721,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB3_title",
       "nodes": [],
-      "ref": 100279,
-      "formulaName": "KSP_Q_MAP06_INFO_title",
-      "refId": 100279,
+      "ref": 100382,
+      "formulaName": "KSP_Q_MAP06_PARAGRAAF09SUB3_title",
+      "refId": 100382,
       "displayAs": "PropertyType"
     },
     {
@@ -92052,9 +92732,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB3_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92063,10 +92743,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB4_value",
       "nodes": [],
-      "ref": 100350,
+      "ref": 100383,
       "formulaName": "KSP_Q_MAP06_PARAGRAAF09SUB4_value",
-      "refId": 100350,
-      "displayAs": "StringAnswerType",
+      "refId": 100383,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_PARAGRAAF09_value"
     },
@@ -92076,9 +92756,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB4_title",
       "nodes": [],
-      "ref": 100281,
-      "formulaName": "KSP_Q_MAP06_VALIDATION_title",
-      "refId": 100281,
+      "ref": 100384,
+      "formulaName": "KSP_Q_MAP06_PARAGRAAF09SUB4_title",
+      "refId": 100384,
       "displayAs": "PropertyType"
     },
     {
@@ -92087,9 +92767,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB4_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92098,10 +92778,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB5_value",
       "nodes": [],
-      "ref": 100351,
+      "ref": 100385,
       "formulaName": "KSP_Q_MAP06_PARAGRAAF09SUB5_value",
-      "refId": 100351,
-      "displayAs": "StringAnswerType",
+      "refId": 100385,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_PARAGRAAF09_value"
     },
@@ -92111,9 +92791,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB5_title",
       "nodes": [],
-      "ref": 100154,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100154,
+      "ref": 100386,
+      "formulaName": "KSP_Q_MAP06_PARAGRAAF09SUB5_title",
+      "refId": 100386,
       "displayAs": "PropertyType"
     },
     {
@@ -92122,9 +92802,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB5_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92133,10 +92813,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB6_value",
       "nodes": [],
-      "ref": 100352,
+      "ref": 100387,
       "formulaName": "KSP_Q_MAP06_PARAGRAAF09SUB6_value",
-      "refId": 100352,
-      "displayAs": "StringAnswerType",
+      "refId": 100387,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_PARAGRAAF09_value"
     },
@@ -92146,9 +92826,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB6_title",
       "nodes": [],
-      "ref": 100156,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB6_title",
-      "refId": 100156,
+      "ref": 100388,
+      "formulaName": "KSP_Q_MAP06_PARAGRAAF09SUB6_title",
+      "refId": 100388,
       "displayAs": "PropertyType"
     },
     {
@@ -92157,9 +92837,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_PARAGRAAF09SUB6_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92181,10 +92861,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_MAP06_HULPVARIABELEN_value"
         }
       ],
-      "ref": 100353,
+      "ref": 100389,
       "formulaName": "KSP_Q_MAP06_HULPVARIABELEN_value",
-      "refId": 100353,
-      "displayAs": "AmountAnswerType",
+      "refId": 100389,
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP06_value"
     },
@@ -92194,9 +92874,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_HULPVARIABELEN_title",
       "nodes": [],
-      "ref": 100158,
-      "formulaName": "KSP_Q_MAP01_HULPVARIABELEN_title",
-      "refId": 100158,
+      "ref": 100390,
+      "formulaName": "KSP_Q_MAP06_HULPVARIABELEN_title",
+      "refId": 100390,
       "displayAs": "PropertyType"
     },
     {
@@ -92205,9 +92885,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_HULPVARIABELEN_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92216,9 +92896,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "visible",
       "name": "KSP_Q_MAP06_HULPVARIABELEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "KSP_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100391,
+      "formulaName": "KSP_Q_MAP06_HULPVARIABELEN_visible",
+      "refId": 100391,
       "displayAs": "PropertyType"
     },
     {
@@ -92227,10 +92907,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_REQUIREDVARS_value",
       "nodes": [],
-      "ref": 100354,
+      "ref": 100392,
       "formulaName": "KSP_Q_MAP06_REQUIREDVARS_value",
-      "refId": 100354,
-      "displayAs": "StringAnswerType",
+      "refId": 100392,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_HULPVARIABELEN_value"
     },
@@ -92240,9 +92920,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_REQUIREDVARS_title",
       "nodes": [],
-      "ref": 100154,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100154,
+      "ref": 100393,
+      "formulaName": "KSP_Q_MAP06_REQUIREDVARS_title",
+      "refId": 100393,
       "displayAs": "PropertyType"
     },
     {
@@ -92251,9 +92931,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_REQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92262,10 +92942,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_value",
       "nodes": [],
-      "ref": 100355,
+      "ref": 100394,
       "formulaName": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_value",
-      "refId": 100355,
-      "displayAs": "StringAnswerType",
+      "refId": 100394,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP06_HULPVARIABELEN_value"
     },
@@ -92275,9 +92955,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_title",
       "nodes": [],
-      "ref": 100156,
-      "formulaName": "KSP_Q_MAP01_PARAGRAAF09SUB6_title",
-      "refId": 100156,
+      "ref": 100395,
+      "formulaName": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_title",
+      "refId": 100395,
       "displayAs": "PropertyType"
     },
     {
@@ -92286,9 +92966,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_MAP06_ENTEREDREQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92304,10 +92984,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_RESULT_value"
         }
       ],
-      "ref": 100356,
+      "ref": 100396,
       "formulaName": "KSP_Q_RESULT_value",
-      "refId": 100356,
-      "displayAs": "StringAnswerType",
+      "refId": 100396,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92317,9 +92997,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_RESULT_title",
       "nodes": [],
-      "ref": 100357,
+      "ref": 100397,
       "formulaName": "KSP_Q_RESULT_title",
-      "refId": 100357,
+      "refId": 100397,
       "displayAs": "PropertyType"
     },
     {
@@ -92328,9 +93008,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_RESULT_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92339,10 +93019,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_RESULTSUB1_value",
       "nodes": [],
-      "ref": 100358,
+      "ref": 100398,
       "formulaName": "KSP_Q_RESULTSUB1_value",
-      "refId": 100358,
-      "displayAs": "StringAnswerType",
+      "refId": 100398,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -92352,9 +93032,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_RESULTSUB1_title",
       "nodes": [],
-      "ref": 100357,
-      "formulaName": "KSP_Q_RESULT_title",
-      "refId": 100357,
+      "ref": 100399,
+      "formulaName": "KSP_Q_RESULTSUB1_title",
+      "refId": 100399,
       "displayAs": "PropertyType"
     },
     {
@@ -92363,9 +93043,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_RESULTSUB1_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92374,10 +93054,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_STATUS_value",
       "nodes": [],
-      "ref": 100359,
+      "ref": 100400,
       "formulaName": "KSP_Q_STATUS_value",
-      "refId": 100359,
-      "displayAs": "select",
+      "refId": 100400,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92387,9 +93067,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_STATUS_title",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100401,
       "formulaName": "KSP_Q_STATUS_title",
-      "refId": 100360,
+      "refId": 100401,
       "displayAs": "PropertyType"
     },
     {
@@ -92398,9 +93078,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_Q_STATUS_choices",
       "nodes": [],
-      "ref": 100361,
+      "ref": 100402,
       "formulaName": "KSP_Q_STATUS_choices",
-      "refId": 100361,
+      "refId": 100402,
       "displayAs": "PropertyType"
     },
     {
@@ -92409,10 +93089,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_STATUS_FINAL_ON_value",
       "nodes": [],
-      "ref": 100362,
+      "ref": 100403,
       "formulaName": "KSP_Q_STATUS_FINAL_ON_value",
-      "refId": 100362,
-      "displayAs": "TextAnswerType",
+      "refId": 100403,
+      "displayAs": "date",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92422,9 +93102,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_STATUS_FINAL_ON_title",
       "nodes": [],
-      "ref": 100363,
+      "ref": 100404,
       "formulaName": "KSP_Q_STATUS_FINAL_ON_title",
-      "refId": 100363,
+      "refId": 100404,
       "displayAs": "PropertyType"
     },
     {
@@ -92433,10 +93113,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_STATUS_FINAL_BY_value",
       "nodes": [],
-      "ref": 100364,
+      "ref": 100405,
       "formulaName": "KSP_Q_STATUS_FINAL_BY_value",
-      "refId": 100364,
-      "displayAs": "StringAnswerType",
+      "refId": 100405,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92446,9 +93126,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_STATUS_FINAL_BY_title",
       "nodes": [],
-      "ref": 100365,
+      "ref": 100406,
       "formulaName": "KSP_Q_STATUS_FINAL_BY_title",
-      "refId": 100365,
+      "refId": 100406,
       "displayAs": "PropertyType"
     },
     {
@@ -92457,10 +93137,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_STATUS_FINAL_BY_NAME_value",
       "nodes": [],
-      "ref": 100366,
+      "ref": 100407,
       "formulaName": "KSP_Q_STATUS_FINAL_BY_NAME_value",
-      "refId": 100366,
-      "displayAs": "StringAnswerType",
+      "refId": 100407,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92470,9 +93150,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_STATUS_FINAL_BY_NAME_title",
       "nodes": [],
-      "ref": 100367,
+      "ref": 100408,
       "formulaName": "KSP_Q_STATUS_FINAL_BY_NAME_title",
-      "refId": 100367,
+      "refId": 100408,
       "displayAs": "PropertyType"
     },
     {
@@ -92481,10 +93161,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_STATUS_STARTED_ON_value",
       "nodes": [],
-      "ref": 100368,
+      "ref": 100409,
       "formulaName": "KSP_Q_STATUS_STARTED_ON_value",
-      "refId": 100368,
-      "displayAs": "TextAnswerType",
+      "refId": 100409,
+      "displayAs": "date",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92494,9 +93174,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_STATUS_STARTED_ON_title",
       "nodes": [],
-      "ref": 100369,
+      "ref": 100410,
       "formulaName": "KSP_Q_STATUS_STARTED_ON_title",
-      "refId": 100369,
+      "refId": 100410,
       "displayAs": "PropertyType"
     },
     {
@@ -92505,10 +93185,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_STATUS_STARTED_BY_value",
       "nodes": [],
-      "ref": 100370,
+      "ref": 100411,
       "formulaName": "KSP_Q_STATUS_STARTED_BY_value",
-      "refId": 100370,
-      "displayAs": "StringAnswerType",
+      "refId": 100411,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92518,9 +93198,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_STATUS_STARTED_BY_title",
       "nodes": [],
-      "ref": 100371,
+      "ref": 100412,
       "formulaName": "KSP_Q_STATUS_STARTED_BY_title",
-      "refId": 100371,
+      "refId": 100412,
       "displayAs": "PropertyType"
     },
     {
@@ -92529,10 +93209,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_STATUS_STARTED_BY_NAME_value",
       "nodes": [],
-      "ref": 100372,
+      "ref": 100413,
       "formulaName": "KSP_Q_STATUS_STARTED_BY_NAME_value",
-      "refId": 100372,
-      "displayAs": "StringAnswerType",
+      "refId": 100413,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92542,9 +93222,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_STATUS_STARTED_BY_NAME_title",
       "nodes": [],
-      "ref": 100373,
+      "ref": 100414,
       "formulaName": "KSP_Q_STATUS_STARTED_BY_NAME_title",
-      "refId": 100373,
+      "refId": 100414,
       "displayAs": "PropertyType"
     },
     {
@@ -92553,10 +93233,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ModelVersion_value",
       "nodes": [],
-      "ref": 100374,
+      "ref": 100415,
       "formulaName": "KSP_ModelVersion_value",
-      "refId": 100374,
-      "displayAs": "StringAnswerType",
+      "refId": 100415,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92566,9 +93246,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ModelVersion_title",
       "nodes": [],
-      "ref": 100375,
+      "ref": 100416,
       "formulaName": "KSP_ModelVersion_title",
-      "refId": 100375,
+      "refId": 100416,
       "displayAs": "PropertyType"
     },
     {
@@ -92577,9 +93257,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ModelVersion_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92588,10 +93268,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_ModelType_value",
       "nodes": [],
-      "ref": 100376,
+      "ref": 100417,
       "formulaName": "KSP_ModelType_value",
-      "refId": 100376,
-      "displayAs": "StringAnswerType",
+      "refId": 100417,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92601,9 +93281,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_ModelType_title",
       "nodes": [],
-      "ref": 100377,
+      "ref": 100418,
       "formulaName": "KSP_ModelType_title",
-      "refId": 100377,
+      "refId": 100418,
       "displayAs": "PropertyType"
     },
     {
@@ -92612,9 +93292,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_ModelType_locked",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100142,
       "formulaName": "KSP_SecondaryEducationProfile_value",
-      "refId": 100136,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -92623,10 +93303,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_MatrixVersion_value",
       "nodes": [],
-      "ref": 100378,
+      "ref": 100419,
       "formulaName": "KSP_MatrixVersion_value",
-      "refId": 100378,
-      "displayAs": "StringAnswerType",
+      "refId": 100419,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92636,9 +93316,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_MatrixVersion_title",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100420,
       "formulaName": "KSP_MatrixVersion_title",
-      "refId": 100379,
+      "refId": 100420,
       "displayAs": "PropertyType"
     },
     {
@@ -92647,9 +93327,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "hint",
       "name": "KSP_MatrixVersion_hint",
       "nodes": [],
-      "ref": 100380,
+      "ref": 100421,
       "formulaName": "KSP_MatrixVersion_hint",
-      "refId": 100380,
+      "refId": 100421,
       "displayAs": "PropertyType"
     },
     {
@@ -92658,10 +93338,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_PREVIOUS_BUTTON_VISIBLE_value",
       "nodes": [],
-      "ref": 100381,
+      "ref": 100422,
       "formulaName": "KSP_Q_PREVIOUS_BUTTON_VISIBLE_value",
-      "refId": 100381,
-      "displayAs": "select",
+      "refId": 100422,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92671,9 +93351,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_PREVIOUS_BUTTON_VISIBLE_title",
       "nodes": [],
-      "ref": 100382,
+      "ref": 100423,
       "formulaName": "KSP_Q_PREVIOUS_BUTTON_VISIBLE_title",
-      "refId": 100382,
+      "refId": 100423,
       "displayAs": "PropertyType"
     },
     {
@@ -92682,9 +93362,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_Q_PREVIOUS_BUTTON_VISIBLE_choices",
       "nodes": [],
-      "ref": 100383,
+      "ref": 100424,
       "formulaName": "KSP_Q_PREVIOUS_BUTTON_VISIBLE_choices",
-      "refId": 100383,
+      "refId": 100424,
       "displayAs": "PropertyType"
     },
     {
@@ -92693,9 +93373,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_NEXT_BUTTON_VISIBLE_value",
       "nodes": [],
-      "ref": 100384,
+      "ref": 100425,
       "formulaName": "KSP_Q_NEXT_BUTTON_VISIBLE_value",
-      "refId": 100384,
+      "refId": 100425,
       "displayAs": "select",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -92706,9 +93386,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_NEXT_BUTTON_VISIBLE_title",
       "nodes": [],
-      "ref": 100385,
+      "ref": 100426,
       "formulaName": "KSP_Q_NEXT_BUTTON_VISIBLE_title",
-      "refId": 100385,
+      "refId": 100426,
       "displayAs": "PropertyType"
     },
     {
@@ -92717,9 +93397,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_Q_NEXT_BUTTON_VISIBLE_choices",
       "nodes": [],
-      "ref": 100386,
+      "ref": 100427,
       "formulaName": "KSP_Q_NEXT_BUTTON_VISIBLE_choices",
-      "refId": 100386,
+      "refId": 100427,
       "displayAs": "PropertyType"
     },
     {
@@ -92728,10 +93408,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
       "nodes": [],
-      "ref": 100387,
+      "ref": 100428,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
-      "refId": 100387,
-      "displayAs": "select",
+      "refId": 100428,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92741,9 +93421,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_CONCEPT_REPORT_VISIBLE_title",
       "nodes": [],
-      "ref": 100388,
+      "ref": 100429,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_title",
-      "refId": 100388,
+      "refId": 100429,
       "displayAs": "PropertyType"
     },
     {
@@ -92752,9 +93432,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_Q_CONCEPT_REPORT_VISIBLE_choices",
       "nodes": [],
-      "ref": 100389,
+      "ref": 100430,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_choices",
-      "refId": 100389,
+      "refId": 100430,
       "displayAs": "PropertyType"
     },
     {
@@ -92763,10 +93443,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_MAKE_FINAL_VISIBLE_value",
       "nodes": [],
-      "ref": 100390,
+      "ref": 100431,
       "formulaName": "KSP_Q_MAKE_FINAL_VISIBLE_value",
-      "refId": 100390,
-      "displayAs": "select",
+      "refId": 100431,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92776,9 +93456,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_MAKE_FINAL_VISIBLE_title",
       "nodes": [],
-      "ref": 100391,
+      "ref": 100432,
       "formulaName": "KSP_Q_MAKE_FINAL_VISIBLE_title",
-      "refId": 100391,
+      "refId": 100432,
       "displayAs": "PropertyType"
     },
     {
@@ -92787,9 +93467,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_Q_MAKE_FINAL_VISIBLE_choices",
       "nodes": [],
-      "ref": 100389,
+      "ref": 100430,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_choices",
-      "refId": 100389,
+      "refId": 100430,
       "displayAs": "PropertyType"
     },
     {
@@ -92798,10 +93478,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_FINAL_REPORT_VISIBLE_value",
       "nodes": [],
-      "ref": 100392,
+      "ref": 100433,
       "formulaName": "KSP_Q_FINAL_REPORT_VISIBLE_value",
-      "refId": 100392,
-      "displayAs": "select",
+      "refId": 100433,
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -92811,9 +93491,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_FINAL_REPORT_VISIBLE_title",
       "nodes": [],
-      "ref": 100393,
+      "ref": 100434,
       "formulaName": "KSP_Q_FINAL_REPORT_VISIBLE_title",
-      "refId": 100393,
+      "refId": 100434,
       "displayAs": "PropertyType"
     },
     {
@@ -92822,9 +93502,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "choices",
       "name": "KSP_Q_FINAL_REPORT_VISIBLE_choices",
       "nodes": [],
-      "ref": 100389,
+      "ref": 100430,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_choices",
-      "refId": 100389,
+      "refId": 100430,
       "displayAs": "PropertyType"
     },
     {
@@ -92846,10 +93526,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_HULPVARS_value"
         }
       ],
-      "ref": 100394,
+      "ref": 100435,
       "formulaName": "KSP_HULPVARS_value",
-      "refId": 100394,
-      "displayAs": "StringAnswerType",
+      "refId": 100435,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -92859,9 +93539,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_HULPVARS_title",
       "nodes": [],
-      "ref": 100158,
-      "formulaName": "KSP_Q_MAP01_HULPVARIABELEN_title",
-      "refId": 100158,
+      "ref": 100436,
+      "formulaName": "KSP_HULPVARS_title",
+      "refId": 100436,
       "displayAs": "PropertyType"
     },
     {
@@ -92870,9 +93550,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_HULPVARS_locked",
       "nodes": [],
-      "ref": 100387,
+      "ref": 100428,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
-      "refId": 100387,
+      "refId": 100428,
       "displayAs": "PropertyType"
     },
     {
@@ -92894,10 +93574,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_WARNING_GLOBAL_value"
         }
       ],
-      "ref": 100395,
+      "ref": 100437,
       "formulaName": "KSP_Q_WARNING_GLOBAL_value",
-      "refId": 100395,
-      "displayAs": "MemoAnswerType",
+      "refId": 100437,
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "HULPVARS_value"
     },
@@ -92907,9 +93587,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_WARNING_GLOBAL_title",
       "nodes": [],
-      "ref": 100396,
+      "ref": 100438,
       "formulaName": "KSP_Q_WARNING_GLOBAL_title",
-      "refId": 100396,
+      "refId": 100438,
       "displayAs": "PropertyType"
     },
     {
@@ -92918,9 +93598,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_WARNING_GLOBAL_locked",
       "nodes": [],
-      "ref": 100387,
+      "ref": 100428,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
-      "refId": 100387,
+      "refId": 100428,
       "displayAs": "PropertyType"
     },
     {
@@ -92929,10 +93609,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_WARNING_01_value",
       "nodes": [],
-      "ref": 100397,
+      "ref": 100439,
       "formulaName": "KSP_Q_WARNING_01_value",
-      "refId": 100397,
-      "displayAs": "StringAnswerType",
+      "refId": 100439,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_WARNING_GLOBAL_value"
     },
@@ -92942,9 +93622,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_WARNING_01_title",
       "nodes": [],
-      "ref": 100398,
+      "ref": 100440,
       "formulaName": "KSP_Q_WARNING_01_title",
-      "refId": 100398,
+      "refId": 100440,
       "displayAs": "PropertyType"
     },
     {
@@ -92953,9 +93633,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_WARNING_01_locked",
       "nodes": [],
-      "ref": 100387,
+      "ref": 100428,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
-      "refId": 100387,
+      "refId": 100428,
       "displayAs": "PropertyType"
     },
     {
@@ -92964,10 +93644,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_WARNING_GLOBALTXT_value",
       "nodes": [],
-      "ref": 100399,
+      "ref": 100441,
       "formulaName": "KSP_Q_WARNING_GLOBALTXT_value",
-      "refId": 100399,
-      "displayAs": "MemoAnswerType",
+      "refId": 100441,
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_WARNING_GLOBAL_value"
     },
@@ -92977,9 +93657,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_WARNING_GLOBALTXT_title",
       "nodes": [],
-      "ref": 100400,
+      "ref": 100442,
       "formulaName": "KSP_Q_WARNING_GLOBALTXT_title",
-      "refId": 100400,
+      "refId": 100442,
       "displayAs": "PropertyType"
     },
     {
@@ -92988,9 +93668,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_WARNING_GLOBALTXT_locked",
       "nodes": [],
-      "ref": 100387,
+      "ref": 100428,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
-      "refId": 100387,
+      "refId": 100428,
       "displayAs": "PropertyType"
     },
     {
@@ -93018,10 +93698,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_Q_RESTRICTIES_value"
         }
       ],
-      "ref": 100401,
+      "ref": 100443,
       "formulaName": "KSP_Q_RESTRICTIES_value",
-      "refId": 100401,
-      "displayAs": "MemoAnswerType",
+      "refId": 100443,
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "HULPVARS_value"
     },
@@ -93031,9 +93711,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_RESTRICTIES_title",
       "nodes": [],
-      "ref": 100402,
+      "ref": 100444,
       "formulaName": "KSP_Q_RESTRICTIES_title",
-      "refId": 100402,
+      "refId": 100444,
       "displayAs": "PropertyType"
     },
     {
@@ -93042,9 +93722,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_RESTRICTIES_locked",
       "nodes": [],
-      "ref": 100387,
+      "ref": 100428,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
-      "refId": 100387,
+      "refId": 100428,
       "displayAs": "PropertyType"
     },
     {
@@ -93053,10 +93733,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_RESTRICTIES_01_value",
       "nodes": [],
-      "ref": 100403,
+      "ref": 100445,
       "formulaName": "KSP_Q_RESTRICTIES_01_value",
-      "refId": 100403,
-      "displayAs": "StringAnswerType",
+      "refId": 100445,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
     },
@@ -93066,9 +93746,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_RESTRICTIES_01_locked",
       "nodes": [],
-      "ref": 100387,
+      "ref": 100428,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
-      "refId": 100387,
+      "refId": 100428,
       "displayAs": "PropertyType"
     },
     {
@@ -93077,10 +93757,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_RESTRICTIES_02_value",
       "nodes": [],
-      "ref": 100404,
+      "ref": 100446,
       "formulaName": "KSP_Q_RESTRICTIES_02_value",
-      "refId": 100404,
-      "displayAs": "StringAnswerType",
+      "refId": 100446,
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
     },
@@ -93090,9 +93770,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_RESTRICTIES_02_locked",
       "nodes": [],
-      "ref": 100387,
+      "ref": 100428,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
-      "refId": 100387,
+      "refId": 100428,
       "displayAs": "PropertyType"
     },
     {
@@ -93101,10 +93781,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "value",
       "name": "KSP_Q_RESTRICTIESTXT_value",
       "nodes": [],
-      "ref": 100405,
+      "ref": 100447,
       "formulaName": "KSP_Q_RESTRICTIESTXT_value",
-      "refId": 100405,
-      "displayAs": "MemoAnswerType",
+      "refId": 100447,
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
     },
@@ -93114,9 +93794,9 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "title",
       "name": "KSP_Q_RESTRICTIESTXT_title",
       "nodes": [],
-      "ref": 100406,
+      "ref": 100448,
       "formulaName": "KSP_Q_RESTRICTIESTXT_title",
-      "refId": 100406,
+      "refId": 100448,
       "displayAs": "PropertyType"
     },
     {
@@ -93125,10 +93805,17 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "colId": "locked",
       "name": "KSP_Q_RESTRICTIESTXT_locked",
       "nodes": [],
-      "ref": 100387,
+      "ref": 100428,
       "formulaName": "KSP_Q_CONCEPT_REPORT_VISIBLE_value",
-      "refId": 100387,
+      "refId": 100428,
       "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01",
+      "solutionName": "KSP",
+      "colId": "visible",
+      "name": "KSP_Q_MAP01_visible",
+      "nodes": []
     },
     {
       "rowId": "Q_MAP01_WARNING",
@@ -93170,6 +93857,13 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "solutionName": "KSP",
       "colId": "required",
       "name": "KSP_Q_MAP01_PARAGRAAF09_required",
+      "nodes": []
+    },
+    {
+      "rowId": "Q_ROOT",
+      "solutionName": "KSP",
+      "colId": "visible",
+      "name": "KSP_Q_ROOT_visible",
       "nodes": []
     },
     {
@@ -93418,6 +94112,9 @@ LME.prototype.exportWebModel = function() {
 }
 LME.prototype.exportData = function() {
     return this.lme.export('jsonvalues')
+}
+LME.prototype.importData = function(valuesAsString) {
+    return this.lme.importSolution(valuesAsString, 'jsonvalues')
 }
 module.exports = LME;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\lme.js","/src",undefined)

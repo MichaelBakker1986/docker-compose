@@ -107,7 +107,13 @@ LMETree.prototype.addNode = function(node, treePath) {
      * Proxy properties to the column objects
      */
     for (var index = 0; index < amount; index++) {
-        var r = {}
+        var r = {
+            value: null,
+            visible: null,
+            entered: null,
+            required: null,
+            locked: null
+        }
         rv.cols[index] = r;
         Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index));
         Object.defineProperty(r, 'visible', properties.visible.prox(workbook, rowId, 'visible', index));
