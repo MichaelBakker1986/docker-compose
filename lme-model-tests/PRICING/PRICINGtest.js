@@ -1,4 +1,4 @@
-const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('./ModelFacade')
+const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../ModelFacade')
 var jslrs = require("js-longest-repeated-substring");
 let PRICINGffl = readFileSync(__dirname + '/PRICING.ffl');
 var escodegen = require('escodegen')
@@ -90,4 +90,4 @@ extractedFunction.forEach((elem) => {
 })
 writeFileSync(__dirname + '/plainFFLformulas.js', tempOutput);
 var longestRepeat = jslrs.lrs(tempOutput);
-log.info(tempOutput.length)
+log.debug(tempOutput.length)

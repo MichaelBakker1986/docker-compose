@@ -1,4 +1,4 @@
-const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../PRICING/ModelFacade')
+const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../ModelFacade')
 let V05ffl = readFileSync(__dirname + '/../V05/V05.FFL');
 
 //some case-bugfixes

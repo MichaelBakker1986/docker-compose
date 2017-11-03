@@ -192,6 +192,7 @@ JSWorkBook.prototype.getNode = function(name) {
 JSWorkBook.prototype.getSolutionNode = function(name) {
     return FESFacade.fetchSolutionNode(name, 'value')
 };
+JSWorkBook.prototype.fetchSolutionNode = FESFacade.fetchSolutionNode
 
 function resolveX(wb, x) {
     return x ? wb.xaxis[x] : wb.xaxis[0];

@@ -40,4 +40,7 @@ LME.prototype.exportWebModel = function() {
 LME.prototype.exportData = function() {
     return this.lme.export('jsonvalues')
 }
+LME.prototype.importData = function(valuesAsString) {
+    return this.lme.importSolution(valuesAsString, 'jsonvalues')
+}
 module.exports = LME;

@@ -1,4 +1,3 @@
-//default test message
 var browserify = require('browserify-middleware');
 var express = require('express');
 var port = 8080;
@@ -11,6 +10,11 @@ var app = express();
 app.use(require('express-favicon')());
 var fs = require('fs')
 var bodyParser = require('body-parser')
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(bodyParser.json({limit: '50mb'}));       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true,
@@ -45,7 +49,6 @@ app.get('/:id/transformFFL_LME/*', (req, res) => {
     var fflReadStream = fs.createReadStream(__dirname + '/public/json/' + modelName + '.js')
     // This will wait until we know the readable stream is actually valid before piping
     fflReadStream.on('open', function() {
-        res.header("Access-Control-Allow-Origin", "*");
         // This just pipes the read stream to the response object (which goes to the client)
         fflReadStream.pipe(res);
     });
@@ -82,9 +85,8 @@ app.use(serveStatic(__dirname + "/bower_components/"));
 app.listen(port, () => {
     require('dns').lookup(require('os').hostname(), (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
-        console.info('<a href="' + domain + '">DEMO application</a><span>|</span>\n' +
-            '<a href="' + domain + 'DEMO/transformFFL_LME/KSP">JS API</a><span>|</span>\n' +
-            '<a href="' + domain + 'branches">JSON API (branches)</a><span>|</span>\n' +
+        console.info('<a href="' + domain + '">DEMO application</a><span> | </span>\n' +
+            '<a href="' + domain + 'branches">JSON API (branches)</a><span> | </span>\n' +
             '<a href="' + domain + 'models">JSON API (models)</a>');
     })
 });

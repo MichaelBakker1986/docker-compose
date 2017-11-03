@@ -169,26 +169,22 @@ function StartWithVariableOrTuplePredicate(node) {
 }
 
 var displayAsMapping = {
-    default: 'StringAnswerType',
+    default: 'string',
     select: 'select',
-    undefined: 'StringAnswerType',
-    currency: 'AmountAnswerType',
-    //date: 'DateAnswerType',//requires a converter to work
-    date: 'TextAnswerType',
-    percentage: 'PercentageAnswerType',
-    memo: 'MemoAnswerType',
+    radio: 'select',//reversed, back to original
+    undefined: 'string',
+    currency: 'currency',
+    date: 'date',//requires a converter to work
+    percentage: 'percentage',
+    memo: 'memo',
     //reversed
-    StringAnswerType: "StringAnswerType",
-    select: "select",
-    AmountAnswerType: "currency",
-    TextAnswerType: "default",
-    PercentageAnswerType: "percentage",
-    MemoAnswerType: "memo",
+    string: "string",
     chart: "chart",
     line: "line"
 }
 var formulaMapping = {
     title: 'title',
+    hint: 'hint',
     locked: 'locked',
     visible: 'visible',
     inputRequired: 'required',
@@ -196,6 +192,7 @@ var formulaMapping = {
 }
 var reversedFormulaMapping = {
     title: 'title',
+    hint: 'hint',
     locked: 'locked',
     visible: 'visible',
     required: 'inputRequired',
@@ -242,6 +239,15 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         return;
     }
     var mappedDisplayType = displayAsMapping[node.displaytype];
+    if (mappedDisplayType == 'select') {
+        if (!node.choices) {
+            if (log.DEBUG) log.warn('Row [' + rowId + '] is type [select], but does not have choices')
+        } else if (JSON.parse(node.choices).length == 2) {
+            mappedDisplayType = 'radio'
+        } else {
+            if (log.DEBUG) log.debug('[' + rowId + '] ' + node.choices)
+        }
+    }
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 
@@ -281,6 +287,16 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         log.debug('Found tupleProperty [%s]', rowId)
         uiNode.tupleProperty = true;
     }
+    /**
+     * Add hierarchy in visibility
+     */
+    if (node.visible && parentId) {
+        if (defaultValue.visible[node.visible]) {
+            node.visible = parentId + '.visible';
+        } else {
+            node.visible = parentId + '.visible && ' + node.visible
+        }
+    }
     for (var key in formulaMapping) {
         if (node[key] !== undefined) {
             //use the ASTCache for this later on
@@ -304,7 +320,7 @@ function parseFFLFormula(formula, node, row) {
         }
     }
     catch (e) {
-        log.error('unable to parse [' + formula + '] returning it as String value' + node + " : " + row, e);
+        log.debug('unable to parse [' + formula + '] returning it as String value [' + node + "] : " + row, e);
         formulaReturn = AST.STRING(formula);
     }
     return formulaReturn;

@@ -87,7 +87,7 @@ SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, 
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
     var property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
-    var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, colId !== 'value', body);
+    var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) == -1, body);
     return solution.createNode(rowId, colId, formulaId, displayAs);
 };
 

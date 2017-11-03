@@ -1,14 +1,13 @@
 /*
  * There is no way to clear State, every doImport will contribute to static state
  */
-process.loglevel = 'info'
 process.alltest = true;
 var log = require('ff-log')
 var performceTestStartTime = new Date().getTime();
 console.time('performance')
 var tests = [
     './MathTest',
-    './brackParsingTest',
+    './FflToJsonConverterTest',
     './fflexportTest',//.FFL Language
     './fflImportTest',//.FFL Language
     './screendefinitionTest',//.screen definition

@@ -3,6 +3,7 @@ require('../../ff-fes/exchange_modules/presentation/webexport');
 var LmeModel = require('./lme')
 var model = new LmeModel()
 model.importLME(JSON_MODEL);
+LMEMETA = model;
 LME = model.exportWebModel();
 angular.module('lmeapp', []).controller('lmeController', function($scope) {
     $scope.MODEL = LME;

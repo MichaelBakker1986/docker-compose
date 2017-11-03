@@ -56,8 +56,7 @@ FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tu
     //setvalue
     if (value !== undefined) {
         //choice(select) requests
-        var variable = JSWorkBook.getSolutionNode(rowId, 'value');
-        if (variable && variable.displayAs === 'select') {
+        if (JSWorkBook.fetchSolutionNode(rowId, 'choices')) {
             var choices = JSWorkBook.getSolutionPropertyValue(rowId, 'choices');
             var choiceValue = choices.lookup('value', value);
             if (choiceValue === undefined) {
