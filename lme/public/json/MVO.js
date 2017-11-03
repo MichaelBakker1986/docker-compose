@@ -1030,6 +1030,9 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         log.debug('Found tupleProperty [%s]', rowId)
         uiNode.tupleProperty = true;
     }
+    /**
+     * Add hierarchy in visibility
+     */
     if (node.visible && parentId) {
         if (defaultValue.visible[node.visible]) {
             node.visible = parentId + '.visible';
@@ -1095,7 +1098,7 @@ var jsonValues = {
     name: 'jsonvalues',
     extension: 'json',
     headername: 'JSON Values',
-    parse: function(values, workbook) {
+    parseData: function(values, workbook) {
         updateValues(JSON.parse(values), workbook.context.values);
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
@@ -40330,6 +40333,9 @@ LME.prototype.exportWebModel = function() {
 }
 LME.prototype.exportData = function() {
     return this.lme.export('jsonvalues')
+}
+LME.prototype.importData = function(valuesAsString) {
+    return this.lme.importSolution(valuesAsString, 'jsonvalues')
 }
 module.exports = LME;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\lme.js","/src",undefined)
