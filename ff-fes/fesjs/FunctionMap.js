@@ -1,4 +1,5 @@
 var log = require('ff-log')
+
 /**
  * The map that contains parsed model-functions
  * * FormulaId '0' is not a valid ID!
@@ -11,6 +12,7 @@ var log = require('ff-log')
  */
 function fm() {
 }
+
 //don't directly use this method, use JSWorkBook instead.
 fm.prototype.apiGet = function(formula, x, y, z, v) {
     // console.info('API call for formula: ' + formula.name);
@@ -20,7 +22,7 @@ fm.prototype.apiGet = function(formula, x, y, z, v) {
     return global['a' + id](id, x, y, z, v);
 }
 fm.prototype.apiSet = function(formula, x, y, z, value, v) {
-    var id = formula.id === undefined ? formula.index : formula.id;
+    var id = formula.id || formula.index;
     if (v[id] !== undefined) {
         var hash = x.hash + y.hash + z;
         var newValue = value;
@@ -61,7 +63,7 @@ var formulaDecorators = {
         //v = enteredValues
         return function(f, x, y, z, v) {
             var fname = varName;
-            if (x.dummy){
+            if (x.dummy) {
                 return NA;
             }
             var hash = x.hash + y.hash + z;

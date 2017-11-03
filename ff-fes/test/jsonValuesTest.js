@@ -7,7 +7,15 @@ var wb = new JSWorkBook(new FESContext());
 wb.createFormula('1+1', 'AB');
 assert.equal(wb.get('AB'), 2);
 wb.set('AB', 'anything')
-var exportValues = wb.export('jsonvalues')
+
+let exportValues = wb.export('jsonvalues')
 assert.equal(exportValues.length, 1, JSON.stringify(exportValues));
+
+wb.createFormula('1+2', 'AB', 'title');
+wb.set('AB', 'anythingTitle', 'title')
+
+exportValues = wb.export('jsonvalues')
+assert.equal(exportValues.length, 2, JSON.stringify(exportValues));
+
 wb.importSolution(JSON.stringify(exportValues), 'jsonvalues')
 

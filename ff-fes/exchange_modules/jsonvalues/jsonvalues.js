@@ -14,12 +14,20 @@ var jsonValues = {
     deParse: function(rowId, workbook) {
         let allValues = workbook.getAllValues();
         allValues.forEach(function(el) {
-            el.varName = correctFileName(el.varName)
+            if (el.varName.endsWith('_title')) {
+                el.varName = correctPropertyName(el.varName)
+            } else {
+                el.varName = correctFileName(el.varName)
+            }
             delete el.formulaId
         })
         return allValues;
     }
 };
+
+function correctPropertyName(name) {
+    return name.replace(/^[^_]+_([\w]*_\w+)$/gmi, '$1');
+}
 
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');

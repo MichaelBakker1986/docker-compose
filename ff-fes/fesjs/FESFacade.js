@@ -129,7 +129,7 @@ FESFacade.updateValueMap = function(values) {
         //later will add values['_'+key] for the cache
         //for unlocked add values[key] here will user entered values stay
         if (formula.type === 'noCacheUnlocked') {
-            var id = formula.id === undefined ? formula.index : formula.id;
+            var id = formula.id || formula.index;
             if (!values[id]) {
                 values[id] = {};
             }
