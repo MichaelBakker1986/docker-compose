@@ -13,12 +13,14 @@ app.use('/showcase', serveStatic(__dirname + "/../showcase/"));
 app.use(serveStatic(__dirname + "/CONFIGURATION/"));
 app.use(serveStatic(__dirname + "/bower_components/"));
 app.use(serveStatic(__dirname + "/../adminlte/dist/"));
-/**
- * Just a file system cache
- */
+
+app.get('/id/:id', function(req, res) {
+    request.get('http://' + require('os').hostname() + ':8085/' + req.params.id).on('error', (err) => {
+        res.send(err.toString())
+    }).pipe(res)
+});
 app.get('/:id/transformFFL_LME/*', function(req, res) {
     let modelName = req.originalUrl.substring(req.originalUrl.indexOf('transformFFL_LME/') + 17);
-    var path = __dirname + '/CONFIGURATION/DEMO/' + modelName;
     request.get('http://' + require('os').hostname() + ':8080/DEMO/transformFFL_LME/' + modelName).on('error', (err) => {
         res.send(err.toString())
     }).pipe(res)

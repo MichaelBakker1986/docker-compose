@@ -6,6 +6,7 @@ var log = require('ff-log');
 var bodyParser = require('body-parser');
 const hostname = require('os').hostname();
 app.set('port', port)
+app.use(require('cors')())
 app.use(bodyParser.json()); // To support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ // To support URL-encoded bodies
     extended: true,

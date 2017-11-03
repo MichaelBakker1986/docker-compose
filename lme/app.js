@@ -10,6 +10,7 @@ var app = express();
 app.use(require('express-favicon')());
 var fs = require('fs')
 var bodyParser = require('body-parser')
+app.use(require('cors')())
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

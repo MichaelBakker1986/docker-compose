@@ -30,6 +30,7 @@
                 liveUrl = '/' + userID + '/transformFFL_LME/' + modelName
             }
             $scope.sendData = function(e) {
+                //send data to server to store
                 alert(JSON.stringify(LME.exportData(), null, 2))
             }
             $scope.clicked = function(e) {
@@ -45,8 +46,15 @@
 
             $http.get(liveUrl).then(function(data) {
                 eval(data.data)
+                //after this we can import the user-data....
                 $scope.LME_MODEL = LME.exportWebModel()
-
+                let dataEndPoint = result + ':8085' + '/id/' + userID;
+                $http.get(dataEndPoint).then(function(data) {
+                    //LME.importData()
+                    alert(JSON.stringify(data))
+                }).catch(function(err) {
+                    alert('Cannot connect to ' + dataEndPoint)
+                })
             }).catch(function(err) {
                 console.info(err);
             });
