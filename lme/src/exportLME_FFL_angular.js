@@ -5,9 +5,9 @@ var fs = require('fs')
 var name = process.argv[2];
 var ffl = fs.readFileSync(__dirname + '/../public/json/' + name + '.ffl')
 var lmeAPI = require('./lme')
-LME = new lmeAPI()
-LME.importFFL('' + ffl);
-var lmeExport = LME.exportLME();
+const lmeApi = new lmeAPI()
+lmeApi.importFFL('' + ffl);
+var lmeExport = lmeApi.exportLME();
 let options = {
     insertGlobals: true,
     insertGlobalVars: {

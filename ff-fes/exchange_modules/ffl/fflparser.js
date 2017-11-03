@@ -287,6 +287,16 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         log.debug('Found tupleProperty [%s]', rowId)
         uiNode.tupleProperty = true;
     }
+    /**
+     * Add hierarchy in visibility
+     */
+    if (node.visible && parentId) {
+        if (defaultValue.visible[node.visible]) {
+            node.visible = parentId + '.visible';
+        } else {
+            node.visible = parentId + '.visible && ' + node.visible
+        }
+    }
     for (var key in formulaMapping) {
         if (node[key] !== undefined) {
             //use the ASTCache for this later on

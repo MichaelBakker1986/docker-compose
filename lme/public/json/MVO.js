@@ -1030,6 +1030,13 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         log.debug('Found tupleProperty [%s]', rowId)
         uiNode.tupleProperty = true;
     }
+    if (node.visible && parentId) {
+        if (defaultValue.visible[node.visible]) {
+            node.visible = parentId + '.visible';
+        } else {
+            node.visible = parentId + '.visible && ' + node.visible
+        }
+    }
     for (var key in formulaMapping) {
         if (node[key] !== undefined) {
             //use the ASTCache for this later on
@@ -1266,7 +1273,7 @@ function noChange(workbook, rowId, col, index) {
 
 function changeAble(workbook, rowId, col, index) {
     let r;//return value
-    let c;//calculation counter
+    let c = -1;//calculation counter
     return {
         get: function() {
             if (counter !== c) {
@@ -1677,12 +1684,17 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     else {
         returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values);
     }
-    //TODO: should be added to the UI element or Formula
     //formatter, for fixed decimals is a part of the UI, frequency is a part of the Formula.
-    if (variable && colType === 'value' && variable.delegate && variable.delegate.fixed_decimals) {
-        if (!isNaN(returnValue)) {
-            var level = Math.pow(10, parseInt(variable.delegate.fixed_decimals));
-            returnValue = (Math.round(returnValue * level) / level)
+    if (variable) {
+        if (colType === 'value') {
+            if (variable.delegate && variable.delegate.fixed_decimals) {
+                if (!isNaN(returnValue)) {
+                    var level = Math.pow(10, parseInt(variable.delegate.fixed_decimals));
+                    returnValue = (Math.round(returnValue * level) / level)
+                }
+            }
+        } else if (colType == 'locked') {
+            return Boolean(returnValue)
         }
     }
     return returnValue;
@@ -40360,7 +40372,8 @@ LME.importLME(JSON_MODEL);
     {
       "type": "noCacheLocked",
       "refs": {
-        "MVO_RootSub1_locked": true
+        "MVO_RootSub1_locked": true,
+        "MVO_FES_LAYOUTNR_locked": true
       },
       "formulaDependencys": [],
       "deps": {},
@@ -40376,23 +40389,21 @@ LME.importLME(JSON_MODEL);
       "refs": {
         "MVO_RootSub1_visible": true,
         "MVO_RootSub2_visible": true,
-        "MVO_Q_MAP01_VERBORGEN_visible": true,
-        "MVO_Q_MAP01_PARAGRAAF09_visible": true,
-        "MVO_Q_MAP01_HULPVARIABELEN_visible": true,
-        "MVO_Q_MAP02_VERBORGEN_visible": true,
-        "MVO_Q_MAP02_PARAGRAAF09_visible": true,
-        "MVO_Q_MAP02_HULPVARIABELEN_visible": true,
-        "MVO_Q_MAP03_PARAGRAAF11_visible": true,
-        "MVO_Q_MAP03_PARAGRAAF10_visible": true,
-        "MVO_Q_MAP03_VERBORGEN_visible": true,
-        "MVO_Q_MAP03_PARAGRAAF09_visible": true,
-        "MVO_Q_MAP03_HULPVARIABELEN_visible": true,
-        "MVO_Q_MAP04_VERBORGEN_visible": true,
-        "MVO_Q_MAP04_PARAGRAAF10_visible": true,
-        "MVO_Q_MAP04_PARAGRAAF09_visible": true,
-        "MVO_Q_MAP04_HULPVARIABELEN_visible": true
+        "MVO_FES_LAYOUTNR_visible": true,
+        "MVO_FPS_VAR_Naam_visible": true
       },
-      "formulaDependencys": [],
+      "formulaDependencys": [
+        {
+          "name": "MVO_FES_LAYOUTNR_visible",
+          "association": "refs",
+          "refId": 100007
+        },
+        {
+          "name": "MVO_FPS_VAR_Naam_visible",
+          "association": "refs",
+          "refId": 100036
+        }
+      ],
       "deps": {},
       "original": "0",
       "index": 100004,
@@ -40432,15 +40443,48 @@ LME.importLME(JSON_MODEL);
     {
       "type": "noCacheLocked",
       "refs": {
+        "MVO_FES_LAYOUTNR_visible": true,
+        "MVO_FES_EXCHANGE_RATES_visible": true,
+        "MVO_FES_LAYOUT_visible": true,
+        "MVO_FES_FLATINPUT_visible": true,
+        "MVO_FES_PROJECTION_PROFILE_visible": true,
+        "MVO_FES_COLUMN_ORDER_visible": true,
+        "MVO_FES_COLUMN_VISIBLE_visible": true,
+        "MVO_FES_STARTDATEPERIOD_visible": true,
+        "MVO_FES_ENDDATEPERIOD_visible": true,
+        "MVO_FES_BASECURRENCYPERIOD_visible": true,
+        "MVO_FES_VIEWCURRENCYPERIOD_visible": true,
+        "MVO_FES_COLUMNTYPE_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_RootSub1_visible",
+          "association": "deps",
+          "refId": 100004
+        }
+      ],
+      "deps": {
+        "MVO_RootSub1_visible": true
+      },
+      "original": "RootSub1.visible",
+      "index": 100007,
+      "name": "MVO_FES_LAYOUTNR_visible",
+      "parsed": "a100004('100004',x,y.base,z,v)",
+      "id": 100007,
+      "fflname": "FES_LAYOUTNR_visible"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
         "MVO_FES_LAYOUTNR_choices": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':' NA'},{'name':'1','value':' IFRS-EU'},{'name':'2','value':' IFRS'},{'name':'48','value':' Polish'}]",
-      "index": 100007,
+      "index": 100008,
       "name": "MVO_FES_LAYOUTNR_choices",
       "parsed": "[{'name':' 0','value':' NA'},{'name':'1','value':' IFRS-EU'},{'name':'2','value':' IFRS'},{'name':'48','value':' Polish'}]",
-      "id": 100007,
+      "id": 100008,
       "fflname": "FES_LAYOUTNR_choices"
     },
     {
@@ -40451,10 +40495,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100008,
+      "index": 100009,
       "name": "MVO_FES_EXCHANGE_RATES_value",
       "parsed": "undefined",
-      "id": 100008,
+      "id": 100009,
       "fflname": "FES_EXCHANGE_RATES_value"
     },
     {
@@ -40465,10 +40509,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Exchange Rates'",
-      "index": 100009,
+      "index": 100010,
       "name": "MVO_FES_EXCHANGE_RATES_title",
       "parsed": "'Exchange Rates'",
-      "id": 100009,
+      "id": 100010,
       "fflname": "FES_EXCHANGE_RATES_title"
     },
     {
@@ -40479,10 +40523,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "''",
-      "index": 100010,
+      "index": 100011,
       "name": "MVO_FES_LAYOUT_value",
       "parsed": "''",
-      "id": 100010,
+      "id": 100011,
       "fflname": "FES_LAYOUT_value"
     },
     {
@@ -40493,10 +40537,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Layout'",
-      "index": 100011,
+      "index": 100012,
       "name": "MVO_FES_LAYOUT_title",
       "parsed": "'Layout'",
-      "id": 100011,
+      "id": 100012,
       "fflname": "FES_LAYOUT_title"
     },
     {
@@ -40507,10 +40551,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100012,
+      "index": 100013,
       "name": "MVO_FES_FLATINPUT_value",
       "parsed": "undefined",
-      "id": 100012,
+      "id": 100013,
       "fflname": "FES_FLATINPUT_value"
     },
     {
@@ -40521,10 +40565,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Is flat input used (1==yes)'",
-      "index": 100013,
+      "index": 100014,
       "name": "MVO_FES_FLATINPUT_title",
       "parsed": "'Is flat input used (1==yes)'",
-      "id": 100013,
+      "id": 100014,
       "fflname": "FES_FLATINPUT_title"
     },
     {
@@ -40535,10 +40579,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100014,
+      "index": 100015,
       "name": "MVO_FES_PROJECTION_PROFILE_value",
       "parsed": "undefined",
-      "id": 100014,
+      "id": 100015,
       "fflname": "FES_PROJECTION_PROFILE_value"
     },
     {
@@ -40549,10 +40593,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Projection Profile'",
-      "index": 100015,
+      "index": 100016,
       "name": "MVO_FES_PROJECTION_PROFILE_title",
       "parsed": "'Projection Profile'",
-      "id": 100015,
+      "id": 100016,
       "fflname": "FES_PROJECTION_PROFILE_title"
     },
     {
@@ -40563,10 +40607,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100016,
+      "index": 100017,
       "name": "MVO_FES_COLUMN_ORDER_value",
       "parsed": "undefined",
-      "id": 100016,
+      "id": 100017,
       "fflname": "FES_COLUMN_ORDER_value"
     },
     {
@@ -40577,10 +40621,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Column order'",
-      "index": 100017,
+      "index": 100018,
       "name": "MVO_FES_COLUMN_ORDER_title",
       "parsed": "'Column order'",
-      "id": 100017,
+      "id": 100018,
       "fflname": "FES_COLUMN_ORDER_title"
     },
     {
@@ -40608,10 +40652,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "1",
-      "index": 100018,
+      "index": 100019,
       "name": "MVO_FES_COLUMN_VISIBLE_value",
       "parsed": "1",
-      "id": 100018,
+      "id": 100019,
       "fflname": "FES_COLUMN_VISIBLE_value"
     },
     {
@@ -40622,10 +40666,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Column visible'",
-      "index": 100019,
+      "index": 100020,
       "name": "MVO_FES_COLUMN_VISIBLE_title",
       "parsed": "'Column visible'",
-      "id": 100019,
+      "id": 100020,
       "fflname": "FES_COLUMN_VISIBLE_title"
     },
     {
@@ -40636,10 +40680,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100020,
+      "index": 100021,
       "name": "MVO_FES_STARTDATEPERIOD_value",
       "parsed": "undefined",
-      "id": 100020,
+      "id": 100021,
       "fflname": "FES_STARTDATEPERIOD_value"
     },
     {
@@ -40650,10 +40694,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Start Date Period'",
-      "index": 100021,
+      "index": 100022,
       "name": "MVO_FES_STARTDATEPERIOD_title",
       "parsed": "'Start Date Period'",
-      "id": 100021,
+      "id": 100022,
       "fflname": "FES_STARTDATEPERIOD_title"
     },
     {
@@ -40664,10 +40708,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100022,
+      "index": 100023,
       "name": "MVO_FES_ENDDATEPERIOD_value",
       "parsed": "undefined",
-      "id": 100022,
+      "id": 100023,
       "fflname": "FES_ENDDATEPERIOD_value"
     },
     {
@@ -40678,10 +40722,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'End Date Period'",
-      "index": 100023,
+      "index": 100024,
       "name": "MVO_FES_ENDDATEPERIOD_title",
       "parsed": "'End Date Period'",
-      "id": 100023,
+      "id": 100024,
       "fflname": "FES_ENDDATEPERIOD_title"
     },
     {
@@ -40692,10 +40736,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100024,
+      "index": 100025,
       "name": "MVO_FES_BASECURRENCYPERIOD_value",
       "parsed": "undefined",
-      "id": 100024,
+      "id": 100025,
       "fflname": "FES_BASECURRENCYPERIOD_value"
     },
     {
@@ -40706,10 +40750,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Base Currency Period'",
-      "index": 100025,
+      "index": 100026,
       "name": "MVO_FES_BASECURRENCYPERIOD_title",
       "parsed": "'Base Currency Period'",
-      "id": 100025,
+      "id": 100026,
       "fflname": "FES_BASECURRENCYPERIOD_title"
     },
     {
@@ -40720,10 +40764,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100026,
+      "index": 100027,
       "name": "MVO_FES_VIEWCURRENCYPERIOD_value",
       "parsed": "undefined",
-      "id": 100026,
+      "id": 100027,
       "fflname": "FES_VIEWCURRENCYPERIOD_value"
     },
     {
@@ -40734,10 +40778,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'View Currency Period'",
-      "index": 100027,
+      "index": 100028,
       "name": "MVO_FES_VIEWCURRENCYPERIOD_title",
       "parsed": "'View Currency Period'",
-      "id": 100027,
+      "id": 100028,
       "fflname": "FES_VIEWCURRENCYPERIOD_title"
     },
     {
@@ -40748,10 +40792,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100028,
+      "index": 100029,
       "name": "MVO_FES_COLUMNTYPE_value",
       "parsed": "undefined",
-      "id": 100028,
+      "id": 100029,
       "fflname": "FES_COLUMNTYPE_value"
     },
     {
@@ -40762,10 +40806,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Column Type'",
-      "index": 100029,
+      "index": 100030,
       "name": "MVO_FES_COLUMNTYPE_title",
       "parsed": "'Column Type'",
-      "id": 100029,
+      "id": 100030,
       "fflname": "FES_COLUMNTYPE_title"
     },
     {
@@ -40776,10 +40820,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'History'},{'name':'1','value':'Projection'}]",
-      "index": 100030,
+      "index": 100031,
       "name": "MVO_FES_COLUMNTYPE_choices",
       "parsed": "[{'name':' 0','value':'History'},{'name':'1','value':'Projection'}]",
-      "id": 100030,
+      "id": 100031,
       "fflname": "FES_COLUMNTYPE_choices"
     },
     {
@@ -40790,10 +40834,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100031,
+      "index": 100032,
       "name": "MVO_RootSub2_value",
       "parsed": "undefined",
-      "id": 100031,
+      "id": 100032,
       "fflname": "RootSub2_value"
     },
     {
@@ -40804,10 +40848,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'General variables for FPS database'",
-      "index": 100032,
+      "index": 100033,
       "name": "MVO_RootSub2_title",
       "parsed": "'General variables for FPS database'",
-      "id": 100032,
+      "id": 100033,
       "fflname": "RootSub2_title"
     },
     {
@@ -40818,10 +40862,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100033,
+      "index": 100034,
       "name": "MVO_FPS_VAR_Naam_value",
       "parsed": "undefined",
-      "id": 100033,
+      "id": 100034,
       "fflname": "FPS_VAR_Naam_value"
     },
     {
@@ -40832,11 +40876,57 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'NAME'",
-      "index": 100034,
+      "index": 100035,
       "name": "MVO_FPS_VAR_Naam_title",
       "parsed": "'NAME'",
-      "id": 100034,
+      "id": 100035,
       "fflname": "FPS_VAR_Naam_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_FPS_VAR_Naam_visible": true,
+        "MVO_FPS_VAR_Relatienummer_visible": true,
+        "MVO_FPS_VAR_KVKnr_visible": true,
+        "MVO_FPS_VAR_Rechtsvorm_nr_visible": true,
+        "MVO_FPS_VAR_Rechtsvorm_omschr_visible": true,
+        "MVO_FPS_VAR_BIK_CODE_visible": true,
+        "MVO_FPS_VAR_BIK_Omschr_visible": true,
+        "MVO_FPS_VAR_GridId_visible": true,
+        "MVO_FPS_VAR_Accountmanager_visible": true,
+        "MVO_FPS_VAR_Kantoor_visible": true,
+        "MVO_FPS_VAR_Straat_visible": true,
+        "MVO_FPS_VAR_Housenumber_visible": true,
+        "MVO_FPS_VAR_Postcode_visible": true,
+        "MVO_FPS_VAR_Woonplaats_visible": true,
+        "MVO_FPS_VAR_Provincie_visible": true,
+        "MVO_FPS_VAR_Land_visible": true,
+        "MVO_FPS_VAR_BvDID_visible": true,
+        "MVO_FPS_VAR_Telefoon_visible": true,
+        "MVO_FPS_VAR_Emailadres_visible": true,
+        "MVO_FPS_FINAN_USER_ROLES_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_RootSub1_visible",
+          "association": "deps",
+          "refId": 100004
+        },
+        {
+          "name": "MVO_FPS_FINAN_USER_ROLES_visible",
+          "association": "refs",
+          "refId": 100075
+        }
+      ],
+      "deps": {
+        "MVO_RootSub1_visible": true
+      },
+      "original": "RootSub2.visible",
+      "index": 100036,
+      "name": "MVO_FPS_VAR_Naam_visible",
+      "parsed": "a100004('100004',x,y.base,z,v)",
+      "id": 100036,
+      "fflname": "FPS_VAR_Naam_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -40846,10 +40936,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100035,
+      "index": 100037,
       "name": "MVO_FPS_VAR_Relatienummer_value",
       "parsed": "undefined",
-      "id": 100035,
+      "id": 100037,
       "fflname": "FPS_VAR_Relatienummer_value"
     },
     {
@@ -40860,10 +40950,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'CUSTOMERNUMBER'",
-      "index": 100036,
+      "index": 100038,
       "name": "MVO_FPS_VAR_Relatienummer_title",
       "parsed": "'CUSTOMERNUMBER'",
-      "id": 100036,
+      "id": 100038,
       "fflname": "FPS_VAR_Relatienummer_title"
     },
     {
@@ -40874,10 +40964,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100037,
+      "index": 100039,
       "name": "MVO_FPS_VAR_KVKnr_value",
       "parsed": "undefined",
-      "id": 100037,
+      "id": 100039,
       "fflname": "FPS_VAR_KVKnr_value"
     },
     {
@@ -40888,10 +40978,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'CHAMBEROFCOMMERCENUMBER'",
-      "index": 100038,
+      "index": 100040,
       "name": "MVO_FPS_VAR_KVKnr_title",
       "parsed": "'CHAMBEROFCOMMERCENUMBER'",
-      "id": 100038,
+      "id": 100040,
       "fflname": "FPS_VAR_KVKnr_title"
     },
     {
@@ -40902,10 +40992,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100039,
+      "index": 100041,
       "name": "MVO_FPS_VAR_Rechtsvorm_nr_value",
       "parsed": "undefined",
-      "id": 100039,
+      "id": 100041,
       "fflname": "FPS_VAR_Rechtsvorm_nr_value"
     },
     {
@@ -40916,10 +41006,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'LEGALSTATUSCODE'",
-      "index": 100040,
+      "index": 100042,
       "name": "MVO_FPS_VAR_Rechtsvorm_nr_title",
       "parsed": "'LEGALSTATUSCODE'",
-      "id": 100040,
+      "id": 100042,
       "fflname": "FPS_VAR_Rechtsvorm_nr_title"
     },
     {
@@ -40930,10 +41020,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100041,
+      "index": 100043,
       "name": "MVO_FPS_VAR_Rechtsvorm_omschr_value",
       "parsed": "undefined",
-      "id": 100041,
+      "id": 100043,
       "fflname": "FPS_VAR_Rechtsvorm_omschr_value"
     },
     {
@@ -40944,10 +41034,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'LEGALSTATUSDESCRIPTION'",
-      "index": 100042,
+      "index": 100044,
       "name": "MVO_FPS_VAR_Rechtsvorm_omschr_title",
       "parsed": "'LEGALSTATUSDESCRIPTION'",
-      "id": 100042,
+      "id": 100044,
       "fflname": "FPS_VAR_Rechtsvorm_omschr_title"
     },
     {
@@ -40958,10 +41048,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100043,
+      "index": 100045,
       "name": "MVO_FPS_VAR_BIK_CODE_value",
       "parsed": "undefined",
-      "id": 100043,
+      "id": 100045,
       "fflname": "FPS_VAR_BIK_CODE_value"
     },
     {
@@ -40972,10 +41062,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'SECTOROFINDUSTRYCODE'",
-      "index": 100044,
+      "index": 100046,
       "name": "MVO_FPS_VAR_BIK_CODE_title",
       "parsed": "'SECTOROFINDUSTRYCODE'",
-      "id": 100044,
+      "id": 100046,
       "fflname": "FPS_VAR_BIK_CODE_title"
     },
     {
@@ -40986,10 +41076,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100045,
+      "index": 100047,
       "name": "MVO_FPS_VAR_BIK_Omschr_value",
       "parsed": "undefined",
-      "id": 100045,
+      "id": 100047,
       "fflname": "FPS_VAR_BIK_Omschr_value"
     },
     {
@@ -41000,10 +41090,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'SECTOROFINDUSTRYDESCRIPTION'",
-      "index": 100046,
+      "index": 100048,
       "name": "MVO_FPS_VAR_BIK_Omschr_title",
       "parsed": "'SECTOROFINDUSTRYDESCRIPTION'",
-      "id": 100046,
+      "id": 100048,
       "fflname": "FPS_VAR_BIK_Omschr_title"
     },
     {
@@ -41014,10 +41104,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100047,
+      "index": 100049,
       "name": "MVO_FPS_VAR_GridId_value",
       "parsed": "undefined",
-      "id": 100047,
+      "id": 100049,
       "fflname": "FPS_VAR_GridId_value"
     },
     {
@@ -41028,10 +41118,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'GRIDID'",
-      "index": 100048,
+      "index": 100050,
       "name": "MVO_FPS_VAR_GridId_title",
       "parsed": "'GRIDID'",
-      "id": 100048,
+      "id": 100050,
       "fflname": "FPS_VAR_GridId_title"
     },
     {
@@ -41042,10 +41132,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100049,
+      "index": 100051,
       "name": "MVO_FPS_VAR_Accountmanager_value",
       "parsed": "undefined",
-      "id": 100049,
+      "id": 100051,
       "fflname": "FPS_VAR_Accountmanager_value"
     },
     {
@@ -41056,10 +41146,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'ACCOUNTMANAGER'",
-      "index": 100050,
+      "index": 100052,
       "name": "MVO_FPS_VAR_Accountmanager_title",
       "parsed": "'ACCOUNTMANAGER'",
-      "id": 100050,
+      "id": 100052,
       "fflname": "FPS_VAR_Accountmanager_title"
     },
     {
@@ -41070,10 +41160,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100051,
+      "index": 100053,
       "name": "MVO_FPS_VAR_Kantoor_value",
       "parsed": "undefined",
-      "id": 100051,
+      "id": 100053,
       "fflname": "FPS_VAR_Kantoor_value"
     },
     {
@@ -41084,10 +41174,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'OFFICENUMBER'",
-      "index": 100052,
+      "index": 100054,
       "name": "MVO_FPS_VAR_Kantoor_title",
       "parsed": "'OFFICENUMBER'",
-      "id": 100052,
+      "id": 100054,
       "fflname": "FPS_VAR_Kantoor_title"
     },
     {
@@ -41098,10 +41188,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100053,
+      "index": 100055,
       "name": "MVO_FPS_VAR_Straat_value",
       "parsed": "undefined",
-      "id": 100053,
+      "id": 100055,
       "fflname": "FPS_VAR_Straat_value"
     },
     {
@@ -41112,10 +41202,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'STREET'",
-      "index": 100054,
+      "index": 100056,
       "name": "MVO_FPS_VAR_Straat_title",
       "parsed": "'STREET'",
-      "id": 100054,
+      "id": 100056,
       "fflname": "FPS_VAR_Straat_title"
     },
     {
@@ -41126,10 +41216,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100055,
+      "index": 100057,
       "name": "MVO_FPS_VAR_Housenumber_value",
       "parsed": "undefined",
-      "id": 100055,
+      "id": 100057,
       "fflname": "FPS_VAR_Housenumber_value"
     },
     {
@@ -41140,10 +41230,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'HOUSENUMBER'",
-      "index": 100056,
+      "index": 100058,
       "name": "MVO_FPS_VAR_Housenumber_title",
       "parsed": "'HOUSENUMBER'",
-      "id": 100056,
+      "id": 100058,
       "fflname": "FPS_VAR_Housenumber_title"
     },
     {
@@ -41154,10 +41244,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100057,
+      "index": 100059,
       "name": "MVO_FPS_VAR_Postcode_value",
       "parsed": "undefined",
-      "id": 100057,
+      "id": 100059,
       "fflname": "FPS_VAR_Postcode_value"
     },
     {
@@ -41168,10 +41258,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'ZIPCODE'",
-      "index": 100058,
+      "index": 100060,
       "name": "MVO_FPS_VAR_Postcode_title",
       "parsed": "'ZIPCODE'",
-      "id": 100058,
+      "id": 100060,
       "fflname": "FPS_VAR_Postcode_title"
     },
     {
@@ -41182,10 +41272,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100059,
+      "index": 100061,
       "name": "MVO_FPS_VAR_Woonplaats_value",
       "parsed": "undefined",
-      "id": 100059,
+      "id": 100061,
       "fflname": "FPS_VAR_Woonplaats_value"
     },
     {
@@ -41196,10 +41286,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'CITY'",
-      "index": 100060,
+      "index": 100062,
       "name": "MVO_FPS_VAR_Woonplaats_title",
       "parsed": "'CITY'",
-      "id": 100060,
+      "id": 100062,
       "fflname": "FPS_VAR_Woonplaats_title"
     },
     {
@@ -41210,10 +41300,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100061,
+      "index": 100063,
       "name": "MVO_FPS_VAR_Provincie_value",
       "parsed": "undefined",
-      "id": 100061,
+      "id": 100063,
       "fflname": "FPS_VAR_Provincie_value"
     },
     {
@@ -41224,10 +41314,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'STATEORPROVINCE'",
-      "index": 100062,
+      "index": 100064,
       "name": "MVO_FPS_VAR_Provincie_title",
       "parsed": "'STATEORPROVINCE'",
-      "id": 100062,
+      "id": 100064,
       "fflname": "FPS_VAR_Provincie_title"
     },
     {
@@ -41238,10 +41328,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100063,
+      "index": 100065,
       "name": "MVO_FPS_VAR_Land_value",
       "parsed": "undefined",
-      "id": 100063,
+      "id": 100065,
       "fflname": "FPS_VAR_Land_value"
     },
     {
@@ -41252,10 +41342,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'COUNTRY'",
-      "index": 100064,
+      "index": 100066,
       "name": "MVO_FPS_VAR_Land_title",
       "parsed": "'COUNTRY'",
-      "id": 100064,
+      "id": 100066,
       "fflname": "FPS_VAR_Land_title"
     },
     {
@@ -41266,10 +41356,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100065,
+      "index": 100067,
       "name": "MVO_FPS_VAR_BvDID_value",
       "parsed": "undefined",
-      "id": 100065,
+      "id": 100067,
       "fflname": "FPS_VAR_BvDID_value"
     },
     {
@@ -41280,10 +41370,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Bureau van Dijk ID'",
-      "index": 100066,
+      "index": 100068,
       "name": "MVO_FPS_VAR_BvDID_title",
       "parsed": "'Bureau van Dijk ID'",
-      "id": 100066,
+      "id": 100068,
       "fflname": "FPS_VAR_BvDID_title"
     },
     {
@@ -41294,10 +41384,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100067,
+      "index": 100069,
       "name": "MVO_FPS_VAR_Telefoon_value",
       "parsed": "undefined",
-      "id": 100067,
+      "id": 100069,
       "fflname": "FPS_VAR_Telefoon_value"
     },
     {
@@ -41308,10 +41398,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Telefoonnummer'",
-      "index": 100068,
+      "index": 100070,
       "name": "MVO_FPS_VAR_Telefoon_title",
       "parsed": "'Telefoonnummer'",
-      "id": 100068,
+      "id": 100070,
       "fflname": "FPS_VAR_Telefoon_title"
     },
     {
@@ -41322,10 +41412,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100069,
+      "index": 100071,
       "name": "MVO_FPS_VAR_Emailadres_value",
       "parsed": "undefined",
-      "id": 100069,
+      "id": 100071,
       "fflname": "FPS_VAR_Emailadres_value"
     },
     {
@@ -41336,10 +41426,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Emailadres'",
-      "index": 100070,
+      "index": 100072,
       "name": "MVO_FPS_VAR_Emailadres_title",
       "parsed": "'Emailadres'",
-      "id": 100070,
+      "id": 100072,
       "fflname": "FPS_VAR_Emailadres_title"
     },
     {
@@ -41350,10 +41440,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100071,
+      "index": 100073,
       "name": "MVO_FPS_FINAN_USER_ROLES_value",
       "parsed": "undefined",
-      "id": 100071,
+      "id": 100073,
       "fflname": "FPS_FINAN_USER_ROLES_value"
     },
     {
@@ -41364,11 +41454,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'FPS_FINAN_USER_ROLES'",
-      "index": 100072,
+      "index": 100074,
       "name": "MVO_FPS_FINAN_USER_ROLES_title",
       "parsed": "'FPS_FINAN_USER_ROLES'",
-      "id": 100072,
+      "id": 100074,
       "fflname": "FPS_FINAN_USER_ROLES_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_FPS_FINAN_USER_ROLES_visible": true,
+        "MVO_FPS_FINAN_USER_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_FPS_VAR_Naam_visible",
+          "association": "deps",
+          "refId": 100036
+        }
+      ],
+      "deps": {
+        "MVO_FPS_VAR_Naam_visible": true
+      },
+      "original": "FPS_VAR_Emailadres.visible",
+      "index": 100075,
+      "name": "MVO_FPS_FINAN_USER_ROLES_visible",
+      "parsed": "a100036('100036',x,y.base,z,v)",
+      "id": 100075,
+      "fflname": "FPS_FINAN_USER_ROLES_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -41378,10 +41491,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100073,
+      "index": 100076,
       "name": "MVO_FPS_FINAN_USER_value",
       "parsed": "undefined",
-      "id": 100073,
+      "id": 100076,
       "fflname": "FPS_FINAN_USER_value"
     },
     {
@@ -41392,10 +41505,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'FPS_FINAN_USER'",
-      "index": 100074,
+      "index": 100077,
       "name": "MVO_FPS_FINAN_USER_title",
       "parsed": "'FPS_FINAN_USER'",
-      "id": 100074,
+      "id": 100077,
       "fflname": "FPS_FINAN_USER_title"
     },
     {
@@ -41408,22 +41521,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_value",
           "association": "deps",
-          "refId": 100078
+          "refId": 100081
         },
         {
           "name": "MVO_Q_MAP02_value",
           "association": "deps",
-          "refId": 100198
+          "refId": 100214
         },
         {
           "name": "MVO_Q_MAP03_value",
           "association": "deps",
-          "refId": 100234
+          "refId": 100256
         },
         {
           "name": "MVO_Q_RESULT_value",
           "association": "refs",
-          "refId": 100483
+          "refId": 100529
         }
       ],
       "deps": {
@@ -41432,10 +41545,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_value": true
       },
       "original": "If(Q_MAP01[doc]==1&&Q_MAP02[doc]==1&&Q_MAP03[doc]==1,1,0)",
-      "index": 100075,
+      "index": 100078,
       "name": "MVO_Q_ROOT_value",
-      "parsed": "a100078('100078',x.doc,y.base,z,v)==1&&a100198('100198',x.doc,y.base,z,v)==1&&a100234('100234',x.doc,y.base,z,v)==1?1:0",
-      "id": 100075,
+      "parsed": "a100081('100081',x.doc,y.base,z,v)==1&&a100214('100214',x.doc,y.base,z,v)==1&&a100256('100256',x.doc,y.base,z,v)==1?1:0",
+      "id": 100078,
       "fflname": "Q_ROOT_value"
     },
     {
@@ -41446,10 +41559,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Maatschappelijk Verantwoord Ondernemen'",
-      "index": 100076,
+      "index": 100079,
       "name": "MVO_Q_ROOT_title",
       "parsed": "'Maatschappelijk Verantwoord Ondernemen'",
-      "id": 100076,
+      "id": 100079,
       "fflname": "Q_ROOT_title"
     },
     {
@@ -41464,10 +41577,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Onvolledig ingevuld.'},{'name':'1','value':'Volledig ingevuld.'}]",
-      "index": 100077,
+      "index": 100080,
       "name": "MVO_Q_ROOT_choices",
       "parsed": "[{'name':' 0','value':'Onvolledig ingevuld.'},{'name':'1','value':'Volledig ingevuld.'}]",
-      "id": 100077,
+      "id": 100080,
       "fflname": "Q_ROOT_choices"
     },
     {
@@ -41481,22 +41594,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_ROOT_value",
           "association": "refs",
-          "refId": 100075
+          "refId": 100078
         },
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "deps",
-          "refId": 100195
+          "refId": 100211
         },
         {
           "name": "MVO_Q_MAP01_REQUIREDVARS_value",
           "association": "deps",
-          "refId": 100194
+          "refId": 100209
         },
         {
           "name": "MVO_Q_MAP01_INFO_value",
           "association": "refs",
-          "refId": 100082
+          "refId": 100087
         }
       ],
       "deps": {
@@ -41504,10 +41617,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP01_REQUIREDVARS_value": true
       },
       "original": "Q_MAP01_ENTEREDREQUIREDVARS==Q_MAP01_REQUIREDVARS",
-      "index": 100078,
+      "index": 100081,
       "name": "MVO_Q_MAP01_value",
-      "parsed": "a100195('100195',x,y.base,z,v)==a100194('100194',x,y.base,z,v)",
-      "id": 100078,
+      "parsed": "a100211('100211',x,y.base,z,v)==a100209('100209',x,y.base,z,v)",
+      "id": 100081,
       "fflname": "Q_MAP01_value"
     },
     {
@@ -41518,11 +41631,105 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Principes'",
-      "index": 100079,
+      "index": 100082,
       "name": "MVO_Q_MAP01_title",
       "parsed": "'Principes'",
-      "id": 100079,
+      "id": 100082,
       "fflname": "Q_MAP01_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_visible": true,
+        "MVO_Q_MAP02_visible": true,
+        "MVO_Q_MAP03_visible": true,
+        "MVO_Q_MAP04_visible": true,
+        "MVO_Q_RESULT_visible": true,
+        "MVO_Q_STATUS_visible": true,
+        "MVO_Q_STATUS_FINAL_ON_visible": true,
+        "MVO_Q_STATUS_FINAL_BY_visible": true,
+        "MVO_Q_STATUS_FINAL_BY_NAME_visible": true,
+        "MVO_Q_STATUS_STARTED_ON_visible": true,
+        "MVO_Q_STATUS_STARTED_BY_visible": true,
+        "MVO_Q_STATUS_STARTED_BY_NAME_visible": true,
+        "MVO_ModelVersion_visible": true,
+        "MVO_ModelType_visible": true,
+        "MVO_MatrixVersion_visible": true,
+        "MVO_Q_PREVIOUS_BUTTON_VISIBLE_visible": true,
+        "MVO_Q_NEXT_BUTTON_VISIBLE_visible": true,
+        "MVO_Q_CONCEPT_REPORT_VISIBLE_visible": true,
+        "MVO_Q_MAKE_FINAL_VISIBLE_visible": true,
+        "MVO_Q_FINAL_REPORT_VISIBLE_visible": true,
+        "MVO_Q_MAP01_WARNING_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF09_visible": true,
+        "MVO_Q_MAP02_WARNING_visible": true,
+        "MVO_Q_MAP02_PARAGRAAF09_visible": true,
+        "MVO_Q_MAP03_WARNING_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF11_visible": true,
+        "MVO_Q_MAP04_WARNING_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF10_visible": true,
+        "MVO_Q_RESULTSUB1_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_ROOT_visible",
+          "association": "deps"
+        },
+        {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "refs",
+          "refId": 100086
+        },
+        {
+          "name": "MVO_Q_MAP01_PARAGRAAF09_visible",
+          "association": "refs",
+          "refId": 100198
+        },
+        {
+          "name": "MVO_Q_MAP02_WARNING_visible",
+          "association": "refs",
+          "refId": 100218
+        },
+        {
+          "name": "MVO_Q_MAP02_PARAGRAAF09_visible",
+          "association": "refs",
+          "refId": 100244
+        },
+        {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "refs",
+          "refId": 100260
+        },
+        {
+          "name": "MVO_Q_MAP03_PARAGRAAF11_visible",
+          "association": "refs",
+          "refId": 100279
+        },
+        {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "refs",
+          "refId": 100402
+        },
+        {
+          "name": "MVO_Q_MAP04_PARAGRAAF10_visible",
+          "association": "refs",
+          "refId": 100492
+        },
+        {
+          "name": "MVO_Q_RESULTSUB1_visible",
+          "association": "refs",
+          "refId": 100532
+        }
+      ],
+      "deps": {
+        "MVO_Q_ROOT_visible": true
+      },
+      "original": "Q_ROOT.visible",
+      "index": 100083,
+      "name": "MVO_Q_MAP01_visible",
+      "parsed": "true",
+      "id": 100083,
+      "fflname": "Q_MAP01_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -41534,17 +41741,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_RESTRICTIES_value",
           "association": "deps",
-          "refId": 100564
+          "refId": 100617
         },
         {
           "name": "MVO_Q_WARNING_GLOBAL_value",
           "association": "deps",
-          "refId": 100558
+          "refId": 100609
         },
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {
@@ -41552,10 +41759,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_WARNING_GLOBAL_value": true
       },
       "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
-      "index": 100080,
+      "index": 100084,
       "name": "MVO_Q_MAP01_WARNING_value",
-      "parsed": "String(a100564('100564',x.doc,y.base,z,v)+a100558('100558',x.doc,y.base,z,v))",
-      "id": 100080,
+      "parsed": "String(a100617('100617',x.doc,y.base,z,v)+a100609('100609',x.doc,y.base,z,v))",
+      "id": 100084,
       "fflname": "Q_MAP01_WARNING_value"
     },
     {
@@ -41567,11 +41774,176 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Warning voor map 1'",
-      "index": 100081,
+      "index": 100085,
       "name": "MVO_Q_MAP01_WARNING_title",
       "parsed": "'Warning voor map 1'",
-      "id": 100081,
+      "id": 100085,
       "fflname": "Q_MAP01_WARNING_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_WARNING_visible": true,
+        "MVO_Q_MAP01_INFO_visible": true,
+        "MVO_Q_MAP01_VALIDATION_visible": true,
+        "MVO_Q_MAP01_HINT_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF00_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF01_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF02_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF03_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF04_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF05_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF06_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF07_visible": true,
+        "MVO_Q_MAP01_VERBORGEN_visible": true,
+        "MVO_Q_MAP01_VRAAG01_visible": true,
+        "MVO_Q_MAP01_VRAAG01_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG02_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG03_visible": true,
+        "MVO_Q_MAP01_VRAAG03_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG04_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG05_visible": true,
+        "MVO_Q_MAP01_VRAAG05_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG06_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG07_visible": true,
+        "MVO_Q_MAP01_VRAAG07_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG08_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG09_visible": true,
+        "MVO_Q_MAP01_VRAAG09_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG10_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG11_visible": true,
+        "MVO_Q_MAP01_VRAAG11_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG12_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG13_visible": true,
+        "MVO_Q_MAP01_VRAAG13_MEMO_visible": true,
+        "MVO_Q_MAP01_VRAAG14_MEMO_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_visible",
+          "association": "deps",
+          "refId": 100083
+        },
+        {
+          "name": "MVO_Q_MAP01_VERBORGEN_visible",
+          "association": "refs",
+          "refId": 100098
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG01_visible",
+          "association": "refs",
+          "refId": 100103
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG01_MEMO_visible",
+          "association": "refs",
+          "refId": 100108
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG02_MEMO_visible",
+          "association": "refs",
+          "refId": 100114
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG03_visible",
+          "association": "refs",
+          "refId": 100121
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG03_MEMO_visible",
+          "association": "refs",
+          "refId": 100123
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG04_MEMO_visible",
+          "association": "refs",
+          "refId": 100128
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG05_visible",
+          "association": "refs",
+          "refId": 100134
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG05_MEMO_visible",
+          "association": "refs",
+          "refId": 100136
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG06_MEMO_visible",
+          "association": "refs",
+          "refId": 100141
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG07_visible",
+          "association": "refs",
+          "refId": 100147
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG07_MEMO_visible",
+          "association": "refs",
+          "refId": 100149
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG08_MEMO_visible",
+          "association": "refs",
+          "refId": 100154
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG09_visible",
+          "association": "refs",
+          "refId": 100161
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG09_MEMO_visible",
+          "association": "refs",
+          "refId": 100163
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG10_MEMO_visible",
+          "association": "refs",
+          "refId": 100168
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG11_visible",
+          "association": "refs",
+          "refId": 100174
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG11_MEMO_visible",
+          "association": "refs",
+          "refId": 100176
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG12_MEMO_visible",
+          "association": "refs",
+          "refId": 100181
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG13_visible",
+          "association": "refs",
+          "refId": 100187
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG13_MEMO_visible",
+          "association": "refs",
+          "refId": 100189
+        },
+        {
+          "name": "MVO_Q_MAP01_VRAAG14_MEMO_visible",
+          "association": "refs",
+          "refId": 100194
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_visible": true
+      },
+      "original": "Q_MAP01.visible",
+      "index": 100086,
+      "name": "MVO_Q_MAP01_WARNING_visible",
+      "parsed": "a100083('100083',x,y.base,z,v)",
+      "id": 100086,
+      "fflname": "Q_MAP01_WARNING_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -41583,22 +41955,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_value",
           "association": "deps",
-          "refId": 100078
+          "refId": 100081
         },
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {
         "MVO_Q_MAP01_value": true
       },
       "original": "String(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
-      "index": 100082,
+      "index": 100087,
       "name": "MVO_Q_MAP01_INFO_value",
-      "parsed": "String(a100078('100078',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
-      "id": 100082,
+      "parsed": "String(a100081('100081',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
+      "id": 100087,
       "fflname": "Q_MAP01_INFO_value"
     },
     {
@@ -41610,10 +41982,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Info bij stap 1'",
-      "index": 100083,
+      "index": 100088,
       "name": "MVO_Q_MAP01_INFO_title",
       "parsed": "'Info bij stap 1'",
-      "id": 100083,
+      "id": 100088,
       "fflname": "Q_MAP01_INFO_title"
     },
     {
@@ -41626,15 +41998,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100084,
+      "index": 100089,
       "name": "MVO_Q_MAP01_VALIDATION_value",
       "parsed": "undefined",
-      "id": 100084,
+      "id": 100089,
       "fflname": "Q_MAP01_VALIDATION_value"
     },
     {
@@ -41646,10 +42018,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Validatie stap 1'",
-      "index": 100085,
+      "index": 100090,
       "name": "MVO_Q_MAP01_VALIDATION_title",
       "parsed": "'Validatie stap 1'",
-      "id": 100085,
+      "id": 100090,
       "fflname": "Q_MAP01_VALIDATION_title"
     },
     {
@@ -41662,15 +42034,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100086,
+      "index": 100091,
       "name": "MVO_Q_MAP01_HINT_value",
       "parsed": "undefined",
-      "id": 100086,
+      "id": 100091,
       "fflname": "Q_MAP01_HINT_value"
     },
     {
@@ -41681,10 +42053,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hinttekst stap 1'",
-      "index": 100087,
+      "index": 100092,
       "name": "MVO_Q_MAP01_HINT_title",
       "parsed": "'Hinttekst stap 1'",
-      "id": 100087,
+      "id": 100092,
       "fflname": "Q_MAP01_HINT_title"
     },
     {
@@ -41697,15 +42069,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100088,
+      "index": 100093,
       "name": "MVO_Q_MAP01_PARAGRAAF00_value",
       "parsed": "undefined",
-      "id": 100088,
+      "id": 100093,
       "fflname": "Q_MAP01_PARAGRAAF00_value"
     },
     {
@@ -41716,10 +42088,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Toelichting principes'",
-      "index": 100089,
+      "index": 100094,
       "name": "MVO_Q_MAP01_PARAGRAAF00_title",
       "parsed": "'Toelichting principes'",
-      "id": 100089,
+      "id": 100094,
       "fflname": "Q_MAP01_PARAGRAAF00_title"
     },
     {
@@ -41734,10 +42106,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'www.google.nl'",
-      "index": 100090,
+      "index": 100095,
       "name": "MVO_Q_MAP01_PARAGRAAF00_hint",
       "parsed": "'www.google.nl'",
-      "id": 100090,
+      "id": 100095,
       "fflname": "Q_MAP01_PARAGRAAF00_hint"
     },
     {
@@ -41748,10 +42120,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100091,
+      "index": 100096,
       "name": "MVO_Q_MAP01_VERBORGEN_value",
       "parsed": "undefined",
-      "id": 100091,
+      "id": 100096,
       "fflname": "Q_MAP01_VERBORGEN_value"
     },
     {
@@ -41765,11 +42137,33 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Verborgen variabele'",
-      "index": 100092,
+      "index": 100097,
       "name": "MVO_Q_MAP01_VERBORGEN_title",
       "parsed": "'Verborgen variabele'",
-      "id": 100092,
+      "id": 100097,
       "fflname": "Q_MAP01_VERBORGEN_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_VERBORGEN_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true
+      },
+      "original": "Q_MAP01_PARAGRAAF00.visible&&0",
+      "index": 100098,
+      "name": "MVO_Q_MAP01_VERBORGEN_visible",
+      "parsed": "a100086('100086',x,y.base,z,v)&&0",
+      "id": 100098,
+      "fflname": "Q_MAP01_VERBORGEN_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -41781,15 +42175,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100093,
+      "index": 100099,
       "name": "MVO_Q_MAP01_PARAGRAAF01_value",
       "parsed": "undefined",
-      "id": 100093,
+      "id": 100099,
       "fflname": "Q_MAP01_PARAGRAAF01_value"
     },
     {
@@ -41800,10 +42194,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Verantwoordelijkheid en verantwoording'",
-      "index": 100094,
+      "index": 100100,
       "name": "MVO_Q_MAP01_PARAGRAAF01_title",
       "parsed": "'Verantwoordelijkheid en verantwoording'",
-      "id": 100094,
+      "id": 100100,
       "fflname": "Q_MAP01_PARAGRAAF01_title"
     },
     {
@@ -41817,20 +42211,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG01_MEMO_visible",
           "association": "refs",
-          "refId": 100101
+          "refId": 100108
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100095,
+      "index": 100101,
       "name": "MVO_Q_MAP01_VRAAG01_value",
       "parsed": "undefined",
-      "id": 100095,
+      "id": 100101,
       "fflname": "Q_MAP01_VRAAG01_value"
     },
     {
@@ -41843,16 +42237,39 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_title",
           "association": "refs",
-          "refId": 100451
+          "refId": 100494
         }
       ],
       "deps": {},
       "original": "'U voelt zich verantwoordelijk voor de effecten van beslissingen en activiteiten, ook als deze gevolgen onbedoeld of onvoorzien zijn'",
-      "index": 100096,
+      "index": 100102,
       "name": "MVO_Q_MAP01_VRAAG01_title",
       "parsed": "'U voelt zich verantwoordelijk voor de effecten van beslissingen en activiteiten, ook als deze gevolgen onbedoeld of onvoorzien zijn'",
-      "id": 100096,
+      "id": 100102,
       "fflname": "Q_MAP01_VRAAG01_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_VRAAG01_visible": true,
+        "MVO_Q_MAP01_VRAAG02_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true
+      },
+      "original": "Q_MAP01_PARAGRAAF01.visible",
+      "index": 100103,
+      "name": "MVO_Q_MAP01_VRAAG01_visible",
+      "parsed": "a100086('100086',x,y.base,z,v)",
+      "id": 100103,
+      "fflname": "Q_MAP01_VRAAG01_visible"
     },
     {
       "type": "noCacheLocked",
@@ -41876,17 +42293,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VERPLICHT_value",
           "association": "deps",
-          "refId": 100196
+          "refId": 100212
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VERPLICHT_value": true
       },
       "original": "Q_MAP01_VERPLICHT[doc]==1",
-      "index": 100097,
+      "index": 100104,
       "name": "MVO_Q_MAP01_VRAAG01_required",
-      "parsed": "a100196('100196',x.doc,y.base,z,v)==1",
-      "id": 100097,
+      "parsed": "a100212('100212',x.doc,y.base,z,v)==1",
+      "id": 100104,
       "fflname": "Q_MAP01_VRAAG01_required"
     },
     {
@@ -41945,10 +42362,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Nee'},{'name':'1','value':'Ja'}]",
-      "index": 100098,
+      "index": 100105,
       "name": "MVO_Q_MAP01_VRAAG01_choices",
       "parsed": "[{'name':' 0','value':'Nee'},{'name':'1','value':'Ja'}]",
-      "id": 100098,
+      "id": 100105,
       "fflname": "Q_MAP01_VRAAG01_choices"
     },
     {
@@ -41959,10 +42376,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100099,
+      "index": 100106,
       "name": "MVO_Q_MAP01_VRAAG01_MEMO_value",
       "parsed": "undefined",
-      "id": 100099,
+      "id": 100106,
       "fflname": "Q_MAP01_VRAAG01_MEMO_value"
     },
     {
@@ -41975,15 +42392,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG02_MEMO_title",
           "association": "refs",
-          "refId": 100106
+          "refId": 100113
         }
       ],
       "deps": {},
       "original": "'Geef hier uw toelichting of relevante voorbeelden m.b.t. bovenstaande vraag'",
-      "index": 100100,
+      "index": 100107,
       "name": "MVO_Q_MAP01_VRAAG01_MEMO_title",
       "parsed": "'Geef hier uw toelichting of relevante voorbeelden m.b.t. bovenstaande vraag'",
-      "id": 100100,
+      "id": 100107,
       "fflname": "Q_MAP01_VRAAG01_MEMO_title"
     },
     {
@@ -41994,24 +42411,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG01_value",
           "association": "deps",
-          "refId": 100095
+          "refId": 100101
         },
         {
           "name": "MVO_Q_MAP01_VRAAG01_MEMO_required",
           "association": "refs",
-          "refId": 100102
+          "refId": 100109
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG01_value": true
       },
-      "original": "Q_MAP01_VRAAG01==1",
-      "index": 100101,
+      "original": "Q_MAP01_PARAGRAAF01.visible&&Q_MAP01_VRAAG01==1",
+      "index": 100108,
       "name": "MVO_Q_MAP01_VRAAG01_MEMO_visible",
-      "parsed": "a100095('100095',x,y.base,z,v)==1",
-      "id": 100101,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100101('100101',x,y.base,z,v)==1",
+      "id": 100108,
       "fflname": "Q_MAP01_VRAAG01_MEMO_visible"
     },
     {
@@ -42023,17 +42446,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG01_MEMO_visible",
           "association": "deps",
-          "refId": 100101
+          "refId": 100108
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG01_MEMO)",
-      "index": 100102,
+      "index": 100109,
       "name": "MVO_Q_MAP01_VRAAG01_MEMO_required",
-      "parsed": "a100101('100101',x,y.base,z,v)",
-      "id": 100102,
+      "parsed": "a100108('100108',x,y.base,z,v)",
+      "id": 100109,
       "fflname": "Q_MAP01_VRAAG01_MEMO_required"
     },
     {
@@ -42047,20 +42470,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG02_MEMO_visible",
           "association": "refs",
-          "refId": 100107
+          "refId": 100114
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100103,
+      "index": 100110,
       "name": "MVO_Q_MAP01_VRAAG02_value",
       "parsed": "undefined",
-      "id": 100103,
+      "id": 100110,
       "fflname": "Q_MAP01_VRAAG02_value"
     },
     {
@@ -42073,15 +42496,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG02_title",
           "association": "refs",
-          "refId": 100453
+          "refId": 100497
         }
       ],
       "deps": {},
       "original": "'U bent bereid verantwoording af te leggen over gemaakte keuzes'",
-      "index": 100104,
+      "index": 100111,
       "name": "MVO_Q_MAP01_VRAAG02_title",
       "parsed": "'U bent bereid verantwoording af te leggen over gemaakte keuzes'",
-      "id": 100104,
+      "id": 100111,
       "fflname": "Q_MAP01_VRAAG02_title"
     },
     {
@@ -42092,10 +42515,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100105,
+      "index": 100112,
       "name": "MVO_Q_MAP01_VRAAG02_MEMO_value",
       "parsed": "undefined",
-      "id": 100105,
+      "id": 100112,
       "fflname": "Q_MAP01_VRAAG02_MEMO_value"
     },
     {
@@ -42147,17 +42570,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG01_MEMO_title",
           "association": "deps",
-          "refId": 100100
+          "refId": 100107
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
-      "index": 100106,
+      "index": 100113,
       "name": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "parsed": "String(a100100('100100',x,y.base,z,v))",
-      "id": 100106,
+      "parsed": "String(a100107('100107',x,y.base,z,v))",
+      "id": 100113,
       "fflname": "Q_MAP01_VRAAG02_MEMO_title"
     },
     {
@@ -42168,24 +42591,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG02_value",
           "association": "deps",
-          "refId": 100103
+          "refId": 100110
         },
         {
           "name": "MVO_Q_MAP01_VRAAG02_MEMO_required",
           "association": "refs",
-          "refId": 100108
+          "refId": 100115
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG02_value": true
       },
-      "original": "Q_MAP01_VRAAG02==1",
-      "index": 100107,
+      "original": "Q_MAP01_PARAGRAAF01.visible&&Q_MAP01_VRAAG02==1",
+      "index": 100114,
       "name": "MVO_Q_MAP01_VRAAG02_MEMO_visible",
-      "parsed": "a100103('100103',x,y.base,z,v)==1",
-      "id": 100107,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100110('100110',x,y.base,z,v)==1",
+      "id": 100114,
       "fflname": "Q_MAP01_VRAAG02_MEMO_visible"
     },
     {
@@ -42197,17 +42626,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG02_MEMO_visible",
           "association": "deps",
-          "refId": 100107
+          "refId": 100114
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG02_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG02_MEMO)",
-      "index": 100108,
+      "index": 100115,
       "name": "MVO_Q_MAP01_VRAAG02_MEMO_required",
-      "parsed": "a100107('100107',x,y.base,z,v)",
-      "id": 100108,
+      "parsed": "a100114('100114',x,y.base,z,v)",
+      "id": 100115,
       "fflname": "Q_MAP01_VRAAG02_MEMO_required"
     },
     {
@@ -42220,15 +42649,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100109,
+      "index": 100116,
       "name": "MVO_Q_MAP01_PARAGRAAF02_value",
       "parsed": "undefined",
-      "id": 100109,
+      "id": 100116,
       "fflname": "Q_MAP01_PARAGRAAF02_value"
     },
     {
@@ -42239,10 +42668,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Transparantie'",
-      "index": 100110,
+      "index": 100117,
       "name": "MVO_Q_MAP01_PARAGRAAF02_title",
       "parsed": "'Transparantie'",
-      "id": 100110,
+      "id": 100117,
       "fflname": "Q_MAP01_PARAGRAAF02_title"
     },
     {
@@ -42256,20 +42685,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG03_MEMO_visible",
           "association": "refs",
-          "refId": 100115
+          "refId": 100123
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100111,
+      "index": 100118,
       "name": "MVO_Q_MAP01_VRAAG03_value",
       "parsed": "undefined",
-      "id": 100111,
+      "id": 100118,
       "fflname": "Q_MAP01_VRAAG03_value"
     },
     {
@@ -42282,15 +42711,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG03_title",
           "association": "refs",
-          "refId": 100455
+          "refId": 100499
         }
       ],
       "deps": {},
       "original": "'U geeft openheid aan stakeholders over activiteiten die invloed hebben op de maatschappij'",
-      "index": 100112,
+      "index": 100119,
       "name": "MVO_Q_MAP01_VRAAG03_title",
       "parsed": "'U geeft openheid aan stakeholders over activiteiten die invloed hebben op de maatschappij'",
-      "id": 100112,
+      "id": 100119,
       "fflname": "Q_MAP01_VRAAG03_title"
     },
     {
@@ -42303,11 +42732,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Stakeholders zijn personen of organisaties die (positief of negatief) kunnen worden beinvloed door uw activiteiten. De meest bekende voorbeelden van stakeholders zijn aandeelhouders, werknemers, leveranciers, banken / kredietgevers en omwonenden.'",
-      "index": 100113,
+      "index": 100120,
       "name": "MVO_Q_MAP01_VRAAG03_hint",
       "parsed": "'Stakeholders zijn personen of organisaties die (positief of negatief) kunnen worden beinvloed door uw activiteiten. De meest bekende voorbeelden van stakeholders zijn aandeelhouders, werknemers, leveranciers, banken / kredietgevers en omwonenden.'",
-      "id": 100113,
+      "id": 100120,
       "fflname": "Q_MAP01_VRAAG03_hint"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_VRAAG03_visible": true,
+        "MVO_Q_MAP01_VRAAG04_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true
+      },
+      "original": "Q_MAP01_PARAGRAAF02.visible",
+      "index": 100121,
+      "name": "MVO_Q_MAP01_VRAAG03_visible",
+      "parsed": "a100086('100086',x,y.base,z,v)",
+      "id": 100121,
+      "fflname": "Q_MAP01_VRAAG03_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -42317,10 +42769,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100114,
+      "index": 100122,
       "name": "MVO_Q_MAP01_VRAAG03_MEMO_value",
       "parsed": "undefined",
-      "id": 100114,
+      "id": 100122,
       "fflname": "Q_MAP01_VRAAG03_MEMO_value"
     },
     {
@@ -42331,24 +42783,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG03_value",
           "association": "deps",
-          "refId": 100111
+          "refId": 100118
         },
         {
           "name": "MVO_Q_MAP01_VRAAG03_MEMO_required",
           "association": "refs",
-          "refId": 100116
+          "refId": 100124
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG03_value": true
       },
-      "original": "Q_MAP01_VRAAG03==1",
-      "index": 100115,
+      "original": "Q_MAP01_PARAGRAAF02.visible&&Q_MAP01_VRAAG03==1",
+      "index": 100123,
       "name": "MVO_Q_MAP01_VRAAG03_MEMO_visible",
-      "parsed": "a100111('100111',x,y.base,z,v)==1",
-      "id": 100115,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100118('100118',x,y.base,z,v)==1",
+      "id": 100123,
       "fflname": "Q_MAP01_VRAAG03_MEMO_visible"
     },
     {
@@ -42360,17 +42818,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG03_MEMO_visible",
           "association": "deps",
-          "refId": 100115
+          "refId": 100123
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG03_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG03_MEMO)",
-      "index": 100116,
+      "index": 100124,
       "name": "MVO_Q_MAP01_VRAAG03_MEMO_required",
-      "parsed": "a100115('100115',x,y.base,z,v)",
-      "id": 100116,
+      "parsed": "a100123('100123',x,y.base,z,v)",
+      "id": 100124,
       "fflname": "Q_MAP01_VRAAG03_MEMO_required"
     },
     {
@@ -42384,20 +42842,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG04_MEMO_visible",
           "association": "refs",
-          "refId": 100120
+          "refId": 100128
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100117,
+      "index": 100125,
       "name": "MVO_Q_MAP01_VRAAG04_value",
       "parsed": "undefined",
-      "id": 100117,
+      "id": 100125,
       "fflname": "Q_MAP01_VRAAG04_value"
     },
     {
@@ -42410,15 +42868,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG04_title",
           "association": "refs",
-          "refId": 100457
+          "refId": 100501
         }
       ],
       "deps": {},
       "original": "'U heeft openlijk beschikbaar hoe u uw eigen bedrijf beoordeeld op het gebied van MVO'",
-      "index": 100118,
+      "index": 100126,
       "name": "MVO_Q_MAP01_VRAAG04_title",
       "parsed": "'U heeft openlijk beschikbaar hoe u uw eigen bedrijf beoordeeld op het gebied van MVO'",
-      "id": 100118,
+      "id": 100126,
       "fflname": "Q_MAP01_VRAAG04_title"
     },
     {
@@ -42429,10 +42887,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100119,
+      "index": 100127,
       "name": "MVO_Q_MAP01_VRAAG04_MEMO_value",
       "parsed": "undefined",
-      "id": 100119,
+      "id": 100127,
       "fflname": "Q_MAP01_VRAAG04_MEMO_value"
     },
     {
@@ -42443,24 +42901,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG04_value",
           "association": "deps",
-          "refId": 100117
+          "refId": 100125
         },
         {
           "name": "MVO_Q_MAP01_VRAAG04_MEMO_required",
           "association": "refs",
-          "refId": 100121
+          "refId": 100129
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG04_value": true
       },
-      "original": "Q_MAP01_VRAAG04==1",
-      "index": 100120,
+      "original": "Q_MAP01_PARAGRAAF02.visible&&Q_MAP01_VRAAG04==1",
+      "index": 100128,
       "name": "MVO_Q_MAP01_VRAAG04_MEMO_visible",
-      "parsed": "a100117('100117',x,y.base,z,v)==1",
-      "id": 100120,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100125('100125',x,y.base,z,v)==1",
+      "id": 100128,
       "fflname": "Q_MAP01_VRAAG04_MEMO_visible"
     },
     {
@@ -42472,17 +42936,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG04_MEMO_visible",
           "association": "deps",
-          "refId": 100120
+          "refId": 100128
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG04_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG04_MEMO)",
-      "index": 100121,
+      "index": 100129,
       "name": "MVO_Q_MAP01_VRAAG04_MEMO_required",
-      "parsed": "a100120('100120',x,y.base,z,v)",
-      "id": 100121,
+      "parsed": "a100128('100128',x,y.base,z,v)",
+      "id": 100129,
       "fflname": "Q_MAP01_VRAAG04_MEMO_required"
     },
     {
@@ -42495,15 +42959,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100122,
+      "index": 100130,
       "name": "MVO_Q_MAP01_PARAGRAAF03_value",
       "parsed": "undefined",
-      "id": 100122,
+      "id": 100130,
       "fflname": "Q_MAP01_PARAGRAAF03_value"
     },
     {
@@ -42514,10 +42978,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Ethisch gedrag'",
-      "index": 100123,
+      "index": 100131,
       "name": "MVO_Q_MAP01_PARAGRAAF03_title",
       "parsed": "'Ethisch gedrag'",
-      "id": 100123,
+      "id": 100131,
       "fflname": "Q_MAP01_PARAGRAAF03_title"
     },
     {
@@ -42531,20 +42995,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG05_MEMO_visible",
           "association": "refs",
-          "refId": 100127
+          "refId": 100136
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100124,
+      "index": 100132,
       "name": "MVO_Q_MAP01_VRAAG05_value",
       "parsed": "undefined",
-      "id": 100124,
+      "id": 100132,
       "fflname": "Q_MAP01_VRAAG05_value"
     },
     {
@@ -42557,16 +43021,39 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG05_title",
           "association": "refs",
-          "refId": 100459
+          "refId": 100503
         }
       ],
       "deps": {},
       "original": "'U heeft respect voor mens, dier en milieu'",
-      "index": 100125,
+      "index": 100133,
       "name": "MVO_Q_MAP01_VRAAG05_title",
       "parsed": "'U heeft respect voor mens, dier en milieu'",
-      "id": 100125,
+      "id": 100133,
       "fflname": "Q_MAP01_VRAAG05_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_VRAAG05_visible": true,
+        "MVO_Q_MAP01_VRAAG06_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true
+      },
+      "original": "Q_MAP01_PARAGRAAF03.visible",
+      "index": 100134,
+      "name": "MVO_Q_MAP01_VRAAG05_visible",
+      "parsed": "a100086('100086',x,y.base,z,v)",
+      "id": 100134,
+      "fflname": "Q_MAP01_VRAAG05_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -42576,10 +43063,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100126,
+      "index": 100135,
       "name": "MVO_Q_MAP01_VRAAG05_MEMO_value",
       "parsed": "undefined",
-      "id": 100126,
+      "id": 100135,
       "fflname": "Q_MAP01_VRAAG05_MEMO_value"
     },
     {
@@ -42590,24 +43077,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG05_value",
           "association": "deps",
-          "refId": 100124
+          "refId": 100132
         },
         {
           "name": "MVO_Q_MAP01_VRAAG05_MEMO_required",
           "association": "refs",
-          "refId": 100128
+          "refId": 100137
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG05_value": true
       },
-      "original": "Q_MAP01_VRAAG05==1",
-      "index": 100127,
+      "original": "Q_MAP01_PARAGRAAF03.visible&&Q_MAP01_VRAAG05==1",
+      "index": 100136,
       "name": "MVO_Q_MAP01_VRAAG05_MEMO_visible",
-      "parsed": "a100124('100124',x,y.base,z,v)==1",
-      "id": 100127,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100132('100132',x,y.base,z,v)==1",
+      "id": 100136,
       "fflname": "Q_MAP01_VRAAG05_MEMO_visible"
     },
     {
@@ -42619,17 +43112,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG05_MEMO_visible",
           "association": "deps",
-          "refId": 100127
+          "refId": 100136
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG05_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG05_MEMO)",
-      "index": 100128,
+      "index": 100137,
       "name": "MVO_Q_MAP01_VRAAG05_MEMO_required",
-      "parsed": "a100127('100127',x,y.base,z,v)",
-      "id": 100128,
+      "parsed": "a100136('100136',x,y.base,z,v)",
+      "id": 100137,
       "fflname": "Q_MAP01_VRAAG05_MEMO_required"
     },
     {
@@ -42643,20 +43136,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG06_MEMO_visible",
           "association": "refs",
-          "refId": 100132
+          "refId": 100141
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100129,
+      "index": 100138,
       "name": "MVO_Q_MAP01_VRAAG06_value",
       "parsed": "undefined",
-      "id": 100129,
+      "id": 100138,
       "fflname": "Q_MAP01_VRAAG06_value"
     },
     {
@@ -42669,15 +43162,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG06_title",
           "association": "refs",
-          "refId": 100461
+          "refId": 100505
         }
       ],
       "deps": {},
       "original": "'U heeft schriftelijk (gedrags)regels opgesteld, die aan alle medewerkers worden gecommuniceerd'",
-      "index": 100130,
+      "index": 100139,
       "name": "MVO_Q_MAP01_VRAAG06_title",
       "parsed": "'U heeft schriftelijk (gedrags)regels opgesteld, die aan alle medewerkers worden gecommuniceerd'",
-      "id": 100130,
+      "id": 100139,
       "fflname": "Q_MAP01_VRAAG06_title"
     },
     {
@@ -42688,10 +43181,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100131,
+      "index": 100140,
       "name": "MVO_Q_MAP01_VRAAG06_MEMO_value",
       "parsed": "undefined",
-      "id": 100131,
+      "id": 100140,
       "fflname": "Q_MAP01_VRAAG06_MEMO_value"
     },
     {
@@ -42702,24 +43195,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG06_value",
           "association": "deps",
-          "refId": 100129
+          "refId": 100138
         },
         {
           "name": "MVO_Q_MAP01_VRAAG06_MEMO_required",
           "association": "refs",
-          "refId": 100133
+          "refId": 100142
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG06_value": true
       },
-      "original": "Q_MAP01_VRAAG06==1",
-      "index": 100132,
+      "original": "Q_MAP01_PARAGRAAF03.visible&&Q_MAP01_VRAAG06==1",
+      "index": 100141,
       "name": "MVO_Q_MAP01_VRAAG06_MEMO_visible",
-      "parsed": "a100129('100129',x,y.base,z,v)==1",
-      "id": 100132,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100138('100138',x,y.base,z,v)==1",
+      "id": 100141,
       "fflname": "Q_MAP01_VRAAG06_MEMO_visible"
     },
     {
@@ -42731,17 +43230,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG06_MEMO_visible",
           "association": "deps",
-          "refId": 100132
+          "refId": 100141
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG06_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG06_MEMO)",
-      "index": 100133,
+      "index": 100142,
       "name": "MVO_Q_MAP01_VRAAG06_MEMO_required",
-      "parsed": "a100132('100132',x,y.base,z,v)",
-      "id": 100133,
+      "parsed": "a100141('100141',x,y.base,z,v)",
+      "id": 100142,
       "fflname": "Q_MAP01_VRAAG06_MEMO_required"
     },
     {
@@ -42754,15 +43253,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100134,
+      "index": 100143,
       "name": "MVO_Q_MAP01_PARAGRAAF04_value",
       "parsed": "undefined",
-      "id": 100134,
+      "id": 100143,
       "fflname": "Q_MAP01_PARAGRAAF04_value"
     },
     {
@@ -42773,10 +43272,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Respect voor belangen van stakeholders'",
-      "index": 100135,
+      "index": 100144,
       "name": "MVO_Q_MAP01_PARAGRAAF04_title",
       "parsed": "'Respect voor belangen van stakeholders'",
-      "id": 100135,
+      "id": 100144,
       "fflname": "Q_MAP01_PARAGRAAF04_title"
     },
     {
@@ -42790,20 +43289,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG07_MEMO_visible",
           "association": "refs",
-          "refId": 100139
+          "refId": 100149
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100136,
+      "index": 100145,
       "name": "MVO_Q_MAP01_VRAAG07_value",
       "parsed": "undefined",
-      "id": 100136,
+      "id": 100145,
       "fflname": "Q_MAP01_VRAAG07_value"
     },
     {
@@ -42816,16 +43315,39 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_VRAAG01_title",
           "association": "refs",
-          "refId": 100214
+          "refId": 100232
         }
       ],
       "deps": {},
       "original": "'U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.'",
-      "index": 100137,
+      "index": 100146,
       "name": "MVO_Q_MAP01_VRAAG07_title",
       "parsed": "'U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.'",
-      "id": 100137,
+      "id": 100146,
       "fflname": "Q_MAP01_VRAAG07_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_VRAAG07_visible": true,
+        "MVO_Q_MAP01_VRAAG08_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true
+      },
+      "original": "Q_MAP01_PARAGRAAF04.visible",
+      "index": 100147,
+      "name": "MVO_Q_MAP01_VRAAG07_visible",
+      "parsed": "a100086('100086',x,y.base,z,v)",
+      "id": 100147,
+      "fflname": "Q_MAP01_VRAAG07_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -42835,10 +43357,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100138,
+      "index": 100148,
       "name": "MVO_Q_MAP01_VRAAG07_MEMO_value",
       "parsed": "undefined",
-      "id": 100138,
+      "id": 100148,
       "fflname": "Q_MAP01_VRAAG07_MEMO_value"
     },
     {
@@ -42849,24 +43371,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG07_value",
           "association": "deps",
-          "refId": 100136
+          "refId": 100145
         },
         {
           "name": "MVO_Q_MAP01_VRAAG07_MEMO_required",
           "association": "refs",
-          "refId": 100140
+          "refId": 100150
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG07_value": true
       },
-      "original": "Q_MAP01_VRAAG07==1",
-      "index": 100139,
+      "original": "Q_MAP01_PARAGRAAF04.visible&&Q_MAP01_VRAAG07==1",
+      "index": 100149,
       "name": "MVO_Q_MAP01_VRAAG07_MEMO_visible",
-      "parsed": "a100136('100136',x,y.base,z,v)==1",
-      "id": 100139,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100145('100145',x,y.base,z,v)==1",
+      "id": 100149,
       "fflname": "Q_MAP01_VRAAG07_MEMO_visible"
     },
     {
@@ -42878,17 +43406,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG07_MEMO_visible",
           "association": "deps",
-          "refId": 100139
+          "refId": 100149
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG07_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG07_MEMO)",
-      "index": 100140,
+      "index": 100150,
       "name": "MVO_Q_MAP01_VRAAG07_MEMO_required",
-      "parsed": "a100139('100139',x,y.base,z,v)",
-      "id": 100140,
+      "parsed": "a100149('100149',x,y.base,z,v)",
+      "id": 100150,
       "fflname": "Q_MAP01_VRAAG07_MEMO_required"
     },
     {
@@ -42902,20 +43430,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG08_MEMO_visible",
           "association": "refs",
-          "refId": 100144
+          "refId": 100154
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100141,
+      "index": 100151,
       "name": "MVO_Q_MAP01_VRAAG08_value",
       "parsed": "undefined",
-      "id": 100141,
+      "id": 100151,
       "fflname": "Q_MAP01_VRAAG08_value"
     },
     {
@@ -42928,15 +43456,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG08_title",
           "association": "refs",
-          "refId": 100464
+          "refId": 100508
         }
       ],
       "deps": {},
       "original": "'U heeft respect voor de belangen van de stakeholders'",
-      "index": 100142,
+      "index": 100152,
       "name": "MVO_Q_MAP01_VRAAG08_title",
       "parsed": "'U heeft respect voor de belangen van de stakeholders'",
-      "id": 100142,
+      "id": 100152,
       "fflname": "Q_MAP01_VRAAG08_title"
     },
     {
@@ -42947,10 +43475,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100143,
+      "index": 100153,
       "name": "MVO_Q_MAP01_VRAAG08_MEMO_value",
       "parsed": "undefined",
-      "id": 100143,
+      "id": 100153,
       "fflname": "Q_MAP01_VRAAG08_MEMO_value"
     },
     {
@@ -42961,24 +43489,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG08_value",
           "association": "deps",
-          "refId": 100141
+          "refId": 100151
         },
         {
           "name": "MVO_Q_MAP01_VRAAG08_MEMO_required",
           "association": "refs",
-          "refId": 100145
+          "refId": 100155
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG08_value": true
       },
-      "original": "Q_MAP01_VRAAG08==1",
-      "index": 100144,
+      "original": "Q_MAP01_PARAGRAAF04.visible&&Q_MAP01_VRAAG08==1",
+      "index": 100154,
       "name": "MVO_Q_MAP01_VRAAG08_MEMO_visible",
-      "parsed": "a100141('100141',x,y.base,z,v)==1",
-      "id": 100144,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100151('100151',x,y.base,z,v)==1",
+      "id": 100154,
       "fflname": "Q_MAP01_VRAAG08_MEMO_visible"
     },
     {
@@ -42990,17 +43524,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG08_MEMO_visible",
           "association": "deps",
-          "refId": 100144
+          "refId": 100154
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG08_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG08_MEMO)",
-      "index": 100145,
+      "index": 100155,
       "name": "MVO_Q_MAP01_VRAAG08_MEMO_required",
-      "parsed": "a100144('100144',x,y.base,z,v)",
-      "id": 100145,
+      "parsed": "a100154('100154',x,y.base,z,v)",
+      "id": 100155,
       "fflname": "Q_MAP01_VRAAG08_MEMO_required"
     },
     {
@@ -43013,15 +43547,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100146,
+      "index": 100156,
       "name": "MVO_Q_MAP01_PARAGRAAF05_value",
       "parsed": "undefined",
-      "id": 100146,
+      "id": 100156,
       "fflname": "Q_MAP01_PARAGRAAF05_value"
     },
     {
@@ -43032,10 +43566,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Respect voor de wet'",
-      "index": 100147,
+      "index": 100157,
       "name": "MVO_Q_MAP01_PARAGRAAF05_title",
       "parsed": "'Respect voor de wet'",
-      "id": 100147,
+      "id": 100157,
       "fflname": "Q_MAP01_PARAGRAAF05_title"
     },
     {
@@ -43049,20 +43583,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG09_MEMO_visible",
           "association": "refs",
-          "refId": 100152
+          "refId": 100163
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100148,
+      "index": 100158,
       "name": "MVO_Q_MAP01_VRAAG09_value",
       "parsed": "undefined",
-      "id": 100148,
+      "id": 100158,
       "fflname": "Q_MAP01_VRAAG09_value"
     },
     {
@@ -43075,15 +43609,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG09_title",
           "association": "refs",
-          "refId": 100466
+          "refId": 100510
         }
       ],
       "deps": {},
       "original": "'U ziet de letter van de wet als bindend'",
-      "index": 100149,
+      "index": 100159,
       "name": "MVO_Q_MAP01_VRAAG09_title",
       "parsed": "'U ziet de letter van de wet als bindend'",
-      "id": 100149,
+      "id": 100159,
       "fflname": "Q_MAP01_VRAAG09_title"
     },
     {
@@ -43094,11 +43628,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Tegenstellende wetten (bv. deuren die volgens het Bouwbesluit naar buiten moeten opendraaien maar volgens de gemeente naar binnen) kunt u buiten beschouwing laten bij het beoordelen van deze vraag.'",
-      "index": 100150,
+      "index": 100160,
       "name": "MVO_Q_MAP01_VRAAG09_hint",
       "parsed": "'Tegenstellende wetten (bv. deuren die volgens het Bouwbesluit naar buiten moeten opendraaien maar volgens de gemeente naar binnen) kunt u buiten beschouwing laten bij het beoordelen van deze vraag.'",
-      "id": 100150,
+      "id": 100160,
       "fflname": "Q_MAP01_VRAAG09_hint"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_VRAAG09_visible": true,
+        "MVO_Q_MAP01_VRAAG10_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true
+      },
+      "original": "Q_MAP01_PARAGRAAF05.visible",
+      "index": 100161,
+      "name": "MVO_Q_MAP01_VRAAG09_visible",
+      "parsed": "a100086('100086',x,y.base,z,v)",
+      "id": 100161,
+      "fflname": "Q_MAP01_VRAAG09_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -43108,10 +43665,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100151,
+      "index": 100162,
       "name": "MVO_Q_MAP01_VRAAG09_MEMO_value",
       "parsed": "undefined",
-      "id": 100151,
+      "id": 100162,
       "fflname": "Q_MAP01_VRAAG09_MEMO_value"
     },
     {
@@ -43122,24 +43679,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG09_value",
           "association": "deps",
-          "refId": 100148
+          "refId": 100158
         },
         {
           "name": "MVO_Q_MAP01_VRAAG09_MEMO_required",
           "association": "refs",
-          "refId": 100153
+          "refId": 100164
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG09_value": true
       },
-      "original": "Q_MAP01_VRAAG09==1",
-      "index": 100152,
+      "original": "Q_MAP01_PARAGRAAF05.visible&&Q_MAP01_VRAAG09==1",
+      "index": 100163,
       "name": "MVO_Q_MAP01_VRAAG09_MEMO_visible",
-      "parsed": "a100148('100148',x,y.base,z,v)==1",
-      "id": 100152,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100158('100158',x,y.base,z,v)==1",
+      "id": 100163,
       "fflname": "Q_MAP01_VRAAG09_MEMO_visible"
     },
     {
@@ -43151,17 +43714,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG09_MEMO_visible",
           "association": "deps",
-          "refId": 100152
+          "refId": 100163
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG09_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG09_MEMO)",
-      "index": 100153,
+      "index": 100164,
       "name": "MVO_Q_MAP01_VRAAG09_MEMO_required",
-      "parsed": "a100152('100152',x,y.base,z,v)",
-      "id": 100153,
+      "parsed": "a100163('100163',x,y.base,z,v)",
+      "id": 100164,
       "fflname": "Q_MAP01_VRAAG09_MEMO_required"
     },
     {
@@ -43175,20 +43738,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG10_MEMO_visible",
           "association": "refs",
-          "refId": 100157
+          "refId": 100168
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100154,
+      "index": 100165,
       "name": "MVO_Q_MAP01_VRAAG10_value",
       "parsed": "undefined",
-      "id": 100154,
+      "id": 100165,
       "fflname": "Q_MAP01_VRAAG10_value"
     },
     {
@@ -43201,15 +43764,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG10_title",
           "association": "refs",
-          "refId": 100468
+          "refId": 100512
         }
       ],
       "deps": {},
       "original": "'U bent op de hoogte van wettelijke veranderingen'",
-      "index": 100155,
+      "index": 100166,
       "name": "MVO_Q_MAP01_VRAAG10_title",
       "parsed": "'U bent op de hoogte van wettelijke veranderingen'",
-      "id": 100155,
+      "id": 100166,
       "fflname": "Q_MAP01_VRAAG10_title"
     },
     {
@@ -43220,10 +43783,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100156,
+      "index": 100167,
       "name": "MVO_Q_MAP01_VRAAG10_MEMO_value",
       "parsed": "undefined",
-      "id": 100156,
+      "id": 100167,
       "fflname": "Q_MAP01_VRAAG10_MEMO_value"
     },
     {
@@ -43234,24 +43797,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG10_value",
           "association": "deps",
-          "refId": 100154
+          "refId": 100165
         },
         {
           "name": "MVO_Q_MAP01_VRAAG10_MEMO_required",
           "association": "refs",
-          "refId": 100158
+          "refId": 100169
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG10_value": true
       },
-      "original": "Q_MAP01_VRAAG10==1",
-      "index": 100157,
+      "original": "Q_MAP01_PARAGRAAF05.visible&&Q_MAP01_VRAAG10==1",
+      "index": 100168,
       "name": "MVO_Q_MAP01_VRAAG10_MEMO_visible",
-      "parsed": "a100154('100154',x,y.base,z,v)==1",
-      "id": 100157,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100165('100165',x,y.base,z,v)==1",
+      "id": 100168,
       "fflname": "Q_MAP01_VRAAG10_MEMO_visible"
     },
     {
@@ -43263,17 +43832,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG10_MEMO_visible",
           "association": "deps",
-          "refId": 100157
+          "refId": 100168
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG10_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG10_MEMO)",
-      "index": 100158,
+      "index": 100169,
       "name": "MVO_Q_MAP01_VRAAG10_MEMO_required",
-      "parsed": "a100157('100157',x,y.base,z,v)",
-      "id": 100158,
+      "parsed": "a100168('100168',x,y.base,z,v)",
+      "id": 100169,
       "fflname": "Q_MAP01_VRAAG10_MEMO_required"
     },
     {
@@ -43286,15 +43855,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100159,
+      "index": 100170,
       "name": "MVO_Q_MAP01_PARAGRAAF06_value",
       "parsed": "undefined",
-      "id": 100159,
+      "id": 100170,
       "fflname": "Q_MAP01_PARAGRAAF06_value"
     },
     {
@@ -43305,10 +43874,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Respect voor internationale gedragsvormen'",
-      "index": 100160,
+      "index": 100171,
       "name": "MVO_Q_MAP01_PARAGRAAF06_title",
       "parsed": "'Respect voor internationale gedragsvormen'",
-      "id": 100160,
+      "id": 100171,
       "fflname": "Q_MAP01_PARAGRAAF06_title"
     },
     {
@@ -43322,20 +43891,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG11_MEMO_visible",
           "association": "refs",
-          "refId": 100164
+          "refId": 100176
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100161,
+      "index": 100172,
       "name": "MVO_Q_MAP01_VRAAG11_value",
       "parsed": "undefined",
-      "id": 100161,
+      "id": 100172,
       "fflname": "Q_MAP01_VRAAG11_value"
     },
     {
@@ -43348,16 +43917,39 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG11_title",
           "association": "refs",
-          "refId": 100470
+          "refId": 100514
         }
       ],
       "deps": {},
       "original": "'U bent op de hoogte van internationale gedragsvormen'",
-      "index": 100162,
+      "index": 100173,
       "name": "MVO_Q_MAP01_VRAAG11_title",
       "parsed": "'U bent op de hoogte van internationale gedragsvormen'",
-      "id": 100162,
+      "id": 100173,
       "fflname": "Q_MAP01_VRAAG11_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_VRAAG11_visible": true,
+        "MVO_Q_MAP01_VRAAG12_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true
+      },
+      "original": "Q_MAP01_PARAGRAAF06.visible",
+      "index": 100174,
+      "name": "MVO_Q_MAP01_VRAAG11_visible",
+      "parsed": "a100086('100086',x,y.base,z,v)",
+      "id": 100174,
+      "fflname": "Q_MAP01_VRAAG11_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -43367,10 +43959,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100163,
+      "index": 100175,
       "name": "MVO_Q_MAP01_VRAAG11_MEMO_value",
       "parsed": "undefined",
-      "id": 100163,
+      "id": 100175,
       "fflname": "Q_MAP01_VRAAG11_MEMO_value"
     },
     {
@@ -43381,24 +43973,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG11_value",
           "association": "deps",
-          "refId": 100161
+          "refId": 100172
         },
         {
           "name": "MVO_Q_MAP01_VRAAG11_MEMO_required",
           "association": "refs",
-          "refId": 100165
+          "refId": 100177
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG11_value": true
       },
-      "original": "Q_MAP01_VRAAG11==1",
-      "index": 100164,
+      "original": "Q_MAP01_PARAGRAAF06.visible&&Q_MAP01_VRAAG11==1",
+      "index": 100176,
       "name": "MVO_Q_MAP01_VRAAG11_MEMO_visible",
-      "parsed": "a100161('100161',x,y.base,z,v)==1",
-      "id": 100164,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100172('100172',x,y.base,z,v)==1",
+      "id": 100176,
       "fflname": "Q_MAP01_VRAAG11_MEMO_visible"
     },
     {
@@ -43410,17 +44008,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG11_MEMO_visible",
           "association": "deps",
-          "refId": 100164
+          "refId": 100176
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG11_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG11_MEMO)",
-      "index": 100165,
+      "index": 100177,
       "name": "MVO_Q_MAP01_VRAAG11_MEMO_required",
-      "parsed": "a100164('100164',x,y.base,z,v)",
-      "id": 100165,
+      "parsed": "a100176('100176',x,y.base,z,v)",
+      "id": 100177,
       "fflname": "Q_MAP01_VRAAG11_MEMO_required"
     },
     {
@@ -43434,20 +44032,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG12_MEMO_visible",
           "association": "refs",
-          "refId": 100169
+          "refId": 100181
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100166,
+      "index": 100178,
       "name": "MVO_Q_MAP01_VRAAG12_value",
       "parsed": "undefined",
-      "id": 100166,
+      "id": 100178,
       "fflname": "Q_MAP01_VRAAG12_value"
     },
     {
@@ -43460,15 +44058,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG12_title",
           "association": "refs",
-          "refId": 100472
+          "refId": 100516
         }
       ],
       "deps": {},
       "original": "'Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties de internationale gedragsvormen opvolgen'",
-      "index": 100167,
+      "index": 100179,
       "name": "MVO_Q_MAP01_VRAAG12_title",
       "parsed": "'Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties de internationale gedragsvormen opvolgen'",
-      "id": 100167,
+      "id": 100179,
       "fflname": "Q_MAP01_VRAAG12_title"
     },
     {
@@ -43479,10 +44077,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100168,
+      "index": 100180,
       "name": "MVO_Q_MAP01_VRAAG12_MEMO_value",
       "parsed": "undefined",
-      "id": 100168,
+      "id": 100180,
       "fflname": "Q_MAP01_VRAAG12_MEMO_value"
     },
     {
@@ -43493,24 +44091,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG12_value",
           "association": "deps",
-          "refId": 100166
+          "refId": 100178
         },
         {
           "name": "MVO_Q_MAP01_VRAAG12_MEMO_required",
           "association": "refs",
-          "refId": 100170
+          "refId": 100182
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG12_value": true
       },
-      "original": "Q_MAP01_VRAAG12==1",
-      "index": 100169,
+      "original": "Q_MAP01_PARAGRAAF06.visible&&Q_MAP01_VRAAG12==1",
+      "index": 100181,
       "name": "MVO_Q_MAP01_VRAAG12_MEMO_visible",
-      "parsed": "a100166('100166',x,y.base,z,v)==1",
-      "id": 100169,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100178('100178',x,y.base,z,v)==1",
+      "id": 100181,
       "fflname": "Q_MAP01_VRAAG12_MEMO_visible"
     },
     {
@@ -43522,17 +44126,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG12_MEMO_visible",
           "association": "deps",
-          "refId": 100169
+          "refId": 100181
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG12_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG12_MEMO)",
-      "index": 100170,
+      "index": 100182,
       "name": "MVO_Q_MAP01_VRAAG12_MEMO_required",
-      "parsed": "a100169('100169',x,y.base,z,v)",
-      "id": 100170,
+      "parsed": "a100181('100181',x,y.base,z,v)",
+      "id": 100182,
       "fflname": "Q_MAP01_VRAAG12_MEMO_required"
     },
     {
@@ -43545,15 +44149,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100171,
+      "index": 100183,
       "name": "MVO_Q_MAP01_PARAGRAAF07_value",
       "parsed": "undefined",
-      "id": 100171,
+      "id": 100183,
       "fflname": "Q_MAP01_PARAGRAAF07_value"
     },
     {
@@ -43564,10 +44168,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Respect voor mensenrechten'",
-      "index": 100172,
+      "index": 100184,
       "name": "MVO_Q_MAP01_PARAGRAAF07_title",
       "parsed": "'Respect voor mensenrechten'",
-      "id": 100172,
+      "id": 100184,
       "fflname": "Q_MAP01_PARAGRAAF07_title"
     },
     {
@@ -43581,20 +44185,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG13_MEMO_visible",
           "association": "refs",
-          "refId": 100176
+          "refId": 100189
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100173,
+      "index": 100185,
       "name": "MVO_Q_MAP01_VRAAG13_value",
       "parsed": "undefined",
-      "id": 100173,
+      "id": 100185,
       "fflname": "Q_MAP01_VRAAG13_value"
     },
     {
@@ -43606,11 +44210,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U bent op de hoogte van mensenrechten'",
-      "index": 100174,
+      "index": 100186,
       "name": "MVO_Q_MAP01_VRAAG13_title",
       "parsed": "'U bent op de hoogte van mensenrechten'",
-      "id": 100174,
+      "id": 100186,
       "fflname": "Q_MAP01_VRAAG13_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_VRAAG13_visible": true,
+        "MVO_Q_MAP01_VRAAG14_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true
+      },
+      "original": "Q_MAP01_PARAGRAAF07.visible",
+      "index": 100187,
+      "name": "MVO_Q_MAP01_VRAAG13_visible",
+      "parsed": "a100086('100086',x,y.base,z,v)",
+      "id": 100187,
+      "fflname": "Q_MAP01_VRAAG13_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -43620,10 +44247,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100175,
+      "index": 100188,
       "name": "MVO_Q_MAP01_VRAAG13_MEMO_value",
       "parsed": "undefined",
-      "id": 100175,
+      "id": 100188,
       "fflname": "Q_MAP01_VRAAG13_MEMO_value"
     },
     {
@@ -43634,24 +44261,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG13_value",
           "association": "deps",
-          "refId": 100173
+          "refId": 100185
         },
         {
           "name": "MVO_Q_MAP01_VRAAG13_MEMO_required",
           "association": "refs",
-          "refId": 100177
+          "refId": 100190
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG13_value": true
       },
-      "original": "Q_MAP01_VRAAG13==1",
-      "index": 100176,
+      "original": "Q_MAP01_PARAGRAAF07.visible&&Q_MAP01_VRAAG13==1",
+      "index": 100189,
       "name": "MVO_Q_MAP01_VRAAG13_MEMO_visible",
-      "parsed": "a100173('100173',x,y.base,z,v)==1",
-      "id": 100176,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100185('100185',x,y.base,z,v)==1",
+      "id": 100189,
       "fflname": "Q_MAP01_VRAAG13_MEMO_visible"
     },
     {
@@ -43663,17 +44296,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG13_MEMO_visible",
           "association": "deps",
-          "refId": 100176
+          "refId": 100189
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG13_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG13_MEMO)",
-      "index": 100177,
+      "index": 100190,
       "name": "MVO_Q_MAP01_VRAAG13_MEMO_required",
-      "parsed": "a100176('100176',x,y.base,z,v)",
-      "id": 100177,
+      "parsed": "a100189('100189',x,y.base,z,v)",
+      "id": 100190,
       "fflname": "Q_MAP01_VRAAG13_MEMO_required"
     },
     {
@@ -43687,20 +44320,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG14_MEMO_visible",
           "association": "refs",
-          "refId": 100181
+          "refId": 100194
         },
         {
           "name": "MVO_Q_MAP01_SCORE01_value",
           "association": "refs",
-          "refId": 100489
+          "refId": 100536
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100178,
+      "index": 100191,
       "name": "MVO_Q_MAP01_VRAAG14_value",
       "parsed": "undefined",
-      "id": 100178,
+      "id": 100191,
       "fflname": "Q_MAP01_VRAAG14_value"
     },
     {
@@ -43712,10 +44345,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties de mensenrechten opvolgen'",
-      "index": 100179,
+      "index": 100192,
       "name": "MVO_Q_MAP01_VRAAG14_title",
       "parsed": "'Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties de mensenrechten opvolgen'",
-      "id": 100179,
+      "id": 100192,
       "fflname": "Q_MAP01_VRAAG14_title"
     },
     {
@@ -43726,10 +44359,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100180,
+      "index": 100193,
       "name": "MVO_Q_MAP01_VRAAG14_MEMO_value",
       "parsed": "undefined",
-      "id": 100180,
+      "id": 100193,
       "fflname": "Q_MAP01_VRAAG14_MEMO_value"
     },
     {
@@ -43740,24 +44373,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP01_WARNING_visible",
+          "association": "deps",
+          "refId": 100086
+        },
+        {
           "name": "MVO_Q_MAP01_VRAAG14_value",
           "association": "deps",
-          "refId": 100178
+          "refId": 100191
         },
         {
           "name": "MVO_Q_MAP01_VRAAG14_MEMO_required",
           "association": "refs",
-          "refId": 100182
+          "refId": 100195
         }
       ],
       "deps": {
+        "MVO_Q_MAP01_WARNING_visible": true,
         "MVO_Q_MAP01_VRAAG14_value": true
       },
-      "original": "Q_MAP01_VRAAG14==1",
-      "index": 100181,
+      "original": "Q_MAP01_PARAGRAAF07.visible&&Q_MAP01_VRAAG14==1",
+      "index": 100194,
       "name": "MVO_Q_MAP01_VRAAG14_MEMO_visible",
-      "parsed": "a100178('100178',x,y.base,z,v)==1",
-      "id": 100181,
+      "parsed": "a100086('100086',x,y.base,z,v)&&a100191('100191',x,y.base,z,v)==1",
+      "id": 100194,
       "fflname": "Q_MAP01_VRAAG14_MEMO_visible"
     },
     {
@@ -43769,17 +44408,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG14_MEMO_visible",
           "association": "deps",
-          "refId": 100181
+          "refId": 100194
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG14_MEMO_visible": true
       },
       "original": "Visible(Q_MAP01_VRAAG14_MEMO)",
-      "index": 100182,
+      "index": 100195,
       "name": "MVO_Q_MAP01_VRAAG14_MEMO_required",
-      "parsed": "a100181('100181',x,y.base,z,v)",
-      "id": 100182,
+      "parsed": "a100194('100194',x,y.base,z,v)",
+      "id": 100195,
       "fflname": "Q_MAP01_VRAAG14_MEMO_required"
     },
     {
@@ -43792,15 +44431,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100195
+          "refId": 100211
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100183,
+      "index": 100196,
       "name": "MVO_Q_MAP01_PARAGRAAF09_value",
       "parsed": "undefined",
-      "id": 100183,
+      "id": 100196,
       "fflname": "Q_MAP01_PARAGRAAF09_value"
     },
     {
@@ -43814,11 +44453,46 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Eigenschappen van de stap'",
-      "index": 100184,
+      "index": 100197,
       "name": "MVO_Q_MAP01_PARAGRAAF09_title",
       "parsed": "'Eigenschappen van de stap'",
-      "id": 100184,
+      "id": 100197,
       "fflname": "Q_MAP01_PARAGRAAF09_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_PARAGRAAF09_visible": true,
+        "MVO_Q_MAP01_HULPVARIABELEN_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF09SUB1_visible": true,
+        "MVO_Q_MAP01_REQUIREDVARS_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_visible",
+          "association": "deps",
+          "refId": 100083
+        },
+        {
+          "name": "MVO_Q_MAP01_PARAGRAAF09SUB1_visible",
+          "association": "refs",
+          "refId": 100200
+        },
+        {
+          "name": "MVO_Q_MAP01_REQUIREDVARS_visible",
+          "association": "refs",
+          "refId": 100210
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_visible": true
+      },
+      "original": "Q_MAP01.visible&&0",
+      "index": 100198,
+      "name": "MVO_Q_MAP01_PARAGRAAF09_visible",
+      "parsed": "a100083('100083',x,y.base,z,v)&&0",
+      "id": 100198,
+      "fflname": "Q_MAP01_PARAGRAAF09_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -43828,11 +44502,37 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100185,
+      "index": 100199,
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB1_value",
       "parsed": "undefined",
-      "id": 100185,
+      "id": 100199,
       "fflname": "Q_MAP01_PARAGRAAF09SUB1_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_PARAGRAAF09SUB1_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF09SUB2_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF09SUB3_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF09SUB4_visible": true,
+        "MVO_Q_MAP01_PARAGRAAF09SUB5_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_PARAGRAAF09_visible",
+          "association": "deps",
+          "refId": 100198
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_PARAGRAAF09_visible": true
+      },
+      "original": "Q_MAP01_PARAGRAAF09.visible",
+      "index": 100200,
+      "name": "MVO_Q_MAP01_PARAGRAAF09SUB1_visible",
+      "parsed": "a100198('100198',x,y.base,z,v)",
+      "id": 100200,
+      "fflname": "Q_MAP01_PARAGRAAF09SUB1_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -43842,10 +44542,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100186,
+      "index": 100201,
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB2_value",
       "parsed": "undefined",
-      "id": 100186,
+      "id": 100201,
       "fflname": "Q_MAP01_PARAGRAAF09SUB2_value"
     },
     {
@@ -43856,10 +44556,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100187,
+      "index": 100202,
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB3_value",
       "parsed": "undefined",
-      "id": 100187,
+      "id": 100202,
       "fflname": "Q_MAP01_PARAGRAAF09SUB3_value"
     },
     {
@@ -43870,10 +44570,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100188,
+      "index": 100203,
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB4_value",
       "parsed": "undefined",
-      "id": 100188,
+      "id": 100203,
       "fflname": "Q_MAP01_PARAGRAAF09SUB4_value"
     },
     {
@@ -43891,10 +44591,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Aantal verplichte velden (1)'",
-      "index": 100189,
+      "index": 100204,
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB4_title",
       "parsed": "'Aantal verplichte velden (1)'",
-      "id": 100189,
+      "id": 100204,
       "fflname": "Q_MAP01_PARAGRAAF09SUB4_title"
     },
     {
@@ -43905,10 +44605,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100190,
+      "index": 100205,
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB5_value",
       "parsed": "undefined",
-      "id": 100190,
+      "id": 100205,
       "fflname": "Q_MAP01_PARAGRAAF09SUB5_value"
     },
     {
@@ -43926,10 +44626,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Aantal ingevulde verplichte velden (1)'",
-      "index": 100191,
+      "index": 100206,
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB5_title",
       "parsed": "'Aantal ingevulde verplichte velden (1)'",
-      "id": 100191,
+      "id": 100206,
       "fflname": "Q_MAP01_PARAGRAAF09SUB5_title"
     },
     {
@@ -43940,10 +44640,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100192,
+      "index": 100207,
       "name": "MVO_Q_MAP01_HULPVARIABELEN_value",
       "parsed": "undefined",
-      "id": 100192,
+      "id": 100207,
       "fflname": "Q_MAP01_HULPVARIABELEN_value"
     },
     {
@@ -43958,10 +44658,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hulpvariabelen'",
-      "index": 100193,
+      "index": 100208,
       "name": "MVO_Q_MAP01_HULPVARIABELEN_title",
       "parsed": "'Hulpvariabelen'",
-      "id": 100193,
+      "id": 100208,
       "fflname": "Q_MAP01_HULPVARIABELEN_title"
     },
     {
@@ -43974,7 +44674,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_value",
           "association": "refs",
-          "refId": 100078
+          "refId": 100081
         },
         {
           "name": "MVO_Q_MAP01_WARNING_required",
@@ -44045,11 +44745,35 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP01_PARAGRAAF09_required": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP01,Q_MAP01_HULPVARIABELEN),InputRequired(X))",
-      "index": 100194,
+      "index": 100209,
       "name": "MVO_Q_MAP01_REQUIREDVARS_value",
       "parsed": "Count([false,false,false,false,false,false,false,false,false,false,false,false,false])",
-      "id": 100194,
+      "id": 100209,
       "fflname": "Q_MAP01_REQUIREDVARS_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_REQUIREDVARS_visible": true,
+        "MVO_Q_MAP01_ENTEREDREQUIREDVARS_visible": true,
+        "MVO_Q_MAP01_VERPLICHT_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_PARAGRAAF09_visible",
+          "association": "deps",
+          "refId": 100198
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_PARAGRAAF09_visible": true
+      },
+      "original": "Q_MAP01_HULPVARIABELEN.visible",
+      "index": 100210,
+      "name": "MVO_Q_MAP01_REQUIREDVARS_visible",
+      "parsed": "a100198('100198',x,y.base,z,v)",
+      "id": 100210,
+      "fflname": "Q_MAP01_REQUIREDVARS_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -44061,7 +44785,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_value",
           "association": "refs",
-          "refId": 100078
+          "refId": 100081
         },
         {
           "name": "MVO_Q_MAP01_WARNING_required",
@@ -44070,7 +44794,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_WARNING_value",
           "association": "deps",
-          "refId": 100080
+          "refId": 100084
         },
         {
           "name": "MVO_Q_MAP01_INFO_required",
@@ -44079,7 +44803,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_INFO_value",
           "association": "deps",
-          "refId": 100082
+          "refId": 100087
         },
         {
           "name": "MVO_Q_MAP01_VALIDATION_required",
@@ -44088,7 +44812,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VALIDATION_value",
           "association": "deps",
-          "refId": 100084
+          "refId": 100089
         },
         {
           "name": "MVO_Q_MAP01_HINT_required",
@@ -44097,7 +44821,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_HINT_value",
           "association": "deps",
-          "refId": 100086
+          "refId": 100091
         },
         {
           "name": "MVO_Q_MAP01_PARAGRAAF00_required",
@@ -44106,7 +44830,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_PARAGRAAF00_value",
           "association": "deps",
-          "refId": 100088
+          "refId": 100093
         },
         {
           "name": "MVO_Q_MAP01_PARAGRAAF01_required",
@@ -44115,7 +44839,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_PARAGRAAF01_value",
           "association": "deps",
-          "refId": 100093
+          "refId": 100099
         },
         {
           "name": "MVO_Q_MAP01_PARAGRAAF02_required",
@@ -44124,7 +44848,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_PARAGRAAF02_value",
           "association": "deps",
-          "refId": 100109
+          "refId": 100116
         },
         {
           "name": "MVO_Q_MAP01_PARAGRAAF03_required",
@@ -44133,7 +44857,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_PARAGRAAF03_value",
           "association": "deps",
-          "refId": 100122
+          "refId": 100130
         },
         {
           "name": "MVO_Q_MAP01_PARAGRAAF04_required",
@@ -44142,7 +44866,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_PARAGRAAF04_value",
           "association": "deps",
-          "refId": 100134
+          "refId": 100143
         },
         {
           "name": "MVO_Q_MAP01_PARAGRAAF05_required",
@@ -44151,7 +44875,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_PARAGRAAF05_value",
           "association": "deps",
-          "refId": 100146
+          "refId": 100156
         },
         {
           "name": "MVO_Q_MAP01_PARAGRAAF06_required",
@@ -44160,7 +44884,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_PARAGRAAF06_value",
           "association": "deps",
-          "refId": 100159
+          "refId": 100170
         },
         {
           "name": "MVO_Q_MAP01_PARAGRAAF07_required",
@@ -44169,7 +44893,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_PARAGRAAF07_value",
           "association": "deps",
-          "refId": 100171
+          "refId": 100183
         },
         {
           "name": "MVO_Q_MAP01_PARAGRAAF09_required",
@@ -44178,7 +44902,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_PARAGRAAF09_value",
           "association": "deps",
-          "refId": 100183
+          "refId": 100196
         }
       ],
       "deps": {
@@ -44210,10 +44934,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP01_PARAGRAAF09_value": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP01,Q_MAP01_HULPVARIABELEN),InputRequired(X)&&DataAvailable(X))",
-      "index": 100195,
+      "index": 100211,
       "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
-      "parsed": "Count([false&&v[100080][x.hash + y.hash + z]!==undefined,false&&v[100082][x.hash + y.hash + z]!==undefined,false&&v[100084][x.hash + y.hash + z]!==undefined,false&&v[100086][x.hash + y.hash + z]!==undefined,false&&v[100088][x.hash + y.hash + z]!==undefined,false&&v[100093][x.hash + y.hash + z]!==undefined,false&&v[100109][x.hash + y.hash + z]!==undefined,false&&v[100122][x.hash + y.hash + z]!==undefined,false&&v[100134][x.hash + y.hash + z]!==undefined,false&&v[100146][x.hash + y.hash + z]!==undefined,false&&v[100159][x.hash + y.hash + z]!==undefined,false&&v[100171][x.hash + y.hash + z]!==undefined,false&&v[100183][x.hash + y.hash + z]!==undefined])",
-      "id": 100195,
+      "parsed": "Count([false&&v[100084][x.hash + y.hash + z]!==undefined,false&&v[100087][x.hash + y.hash + z]!==undefined,false&&v[100089][x.hash + y.hash + z]!==undefined,false&&v[100091][x.hash + y.hash + z]!==undefined,false&&v[100093][x.hash + y.hash + z]!==undefined,false&&v[100099][x.hash + y.hash + z]!==undefined,false&&v[100116][x.hash + y.hash + z]!==undefined,false&&v[100130][x.hash + y.hash + z]!==undefined,false&&v[100143][x.hash + y.hash + z]!==undefined,false&&v[100156][x.hash + y.hash + z]!==undefined,false&&v[100170][x.hash + y.hash + z]!==undefined,false&&v[100183][x.hash + y.hash + z]!==undefined,false&&v[100196][x.hash + y.hash + z]!==undefined])",
+      "id": 100211,
       "fflname": "Q_MAP01_ENTEREDREQUIREDVARS_value"
     },
     {
@@ -44242,15 +44966,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG01_required",
           "association": "refs",
-          "refId": 100097
+          "refId": 100104
         }
       ],
       "deps": {},
       "original": "1",
-      "index": 100196,
+      "index": 100212,
       "name": "MVO_Q_MAP01_VERPLICHT_value",
       "parsed": "1",
-      "id": 100196,
+      "id": 100212,
       "fflname": "Q_MAP01_VERPLICHT_value"
     },
     {
@@ -44264,10 +44988,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Zijn de vragen in deze stap verplicht'",
-      "index": 100197,
+      "index": 100213,
       "name": "MVO_Q_MAP01_VERPLICHT_title",
       "parsed": "'Zijn de vragen in deze stap verplicht'",
-      "id": 100197,
+      "id": 100213,
       "fflname": "Q_MAP01_VERPLICHT_title"
     },
     {
@@ -44281,22 +45005,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_ROOT_value",
           "association": "refs",
-          "refId": 100075
+          "refId": 100078
         },
         {
           "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "deps",
-          "refId": 100232
+          "refId": 100254
         },
         {
           "name": "MVO_Q_MAP02_REQUIREDVARS_value",
           "association": "deps",
-          "refId": 100231
+          "refId": 100252
         },
         {
           "name": "MVO_Q_MAP02_INFO_value",
           "association": "refs",
-          "refId": 100202
+          "refId": 100219
         }
       ],
       "deps": {
@@ -44304,10 +45028,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP02_REQUIREDVARS_value": true
       },
       "original": "Q_MAP02_ENTEREDREQUIREDVARS==Q_MAP02_REQUIREDVARS",
-      "index": 100198,
+      "index": 100214,
       "name": "MVO_Q_MAP02_value",
-      "parsed": "a100232('100232',x,y.base,z,v)==a100231('100231',x,y.base,z,v)",
-      "id": 100198,
+      "parsed": "a100254('100254',x,y.base,z,v)==a100252('100252',x,y.base,z,v)",
+      "id": 100214,
       "fflname": "Q_MAP02_value"
     },
     {
@@ -44318,10 +45042,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Omgeving'",
-      "index": 100199,
+      "index": 100215,
       "name": "MVO_Q_MAP02_title",
       "parsed": "'Omgeving'",
-      "id": 100199,
+      "id": 100215,
       "fflname": "Q_MAP02_title"
     },
     {
@@ -44334,17 +45058,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_RESTRICTIES_value",
           "association": "deps",
-          "refId": 100564
+          "refId": 100617
         },
         {
           "name": "MVO_Q_WARNING_GLOBAL_value",
           "association": "deps",
-          "refId": 100558
+          "refId": 100609
         },
         {
           "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100232
+          "refId": 100254
         }
       ],
       "deps": {
@@ -44352,10 +45076,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_WARNING_GLOBAL_value": true
       },
       "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
-      "index": 100200,
+      "index": 100216,
       "name": "MVO_Q_MAP02_WARNING_value",
-      "parsed": "String(a100564('100564',x.doc,y.base,z,v)+a100558('100558',x.doc,y.base,z,v))",
-      "id": 100200,
+      "parsed": "String(a100617('100617',x.doc,y.base,z,v)+a100609('100609',x.doc,y.base,z,v))",
+      "id": 100216,
       "fflname": "Q_MAP02_WARNING_value"
     },
     {
@@ -44367,11 +45091,62 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Warning voor map 2'",
-      "index": 100201,
+      "index": 100217,
       "name": "MVO_Q_MAP02_WARNING_title",
       "parsed": "'Warning voor map 2'",
-      "id": 100201,
+      "id": 100217,
       "fflname": "Q_MAP02_WARNING_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP02_WARNING_visible": true,
+        "MVO_Q_MAP02_INFO_visible": true,
+        "MVO_Q_MAP02_VALIDATION_visible": true,
+        "MVO_Q_MAP02_HINT_visible": true,
+        "MVO_Q_MAP02_PARAGRAAF00_visible": true,
+        "MVO_Q_MAP02_PARAGRAAF01_visible": true,
+        "MVO_Q_MAP02_VERBORGEN_visible": true,
+        "MVO_Q_MAP02_VRAAG01_visible": true,
+        "MVO_Q_MAP02_VRAAG01_MEMO_visible": true,
+        "MVO_Q_MAP02_VRAAG02_MEMO_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_visible",
+          "association": "deps",
+          "refId": 100083
+        },
+        {
+          "name": "MVO_Q_MAP02_VERBORGEN_visible",
+          "association": "refs",
+          "refId": 100228
+        },
+        {
+          "name": "MVO_Q_MAP02_VRAAG01_visible",
+          "association": "refs",
+          "refId": 100233
+        },
+        {
+          "name": "MVO_Q_MAP02_VRAAG01_MEMO_visible",
+          "association": "refs",
+          "refId": 100236
+        },
+        {
+          "name": "MVO_Q_MAP02_VRAAG02_MEMO_visible",
+          "association": "refs",
+          "refId": 100241
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_visible": true
+      },
+      "original": "Q_MAP02.visible",
+      "index": 100218,
+      "name": "MVO_Q_MAP02_WARNING_visible",
+      "parsed": "a100083('100083',x,y.base,z,v)",
+      "id": 100218,
+      "fflname": "Q_MAP02_WARNING_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -44383,22 +45158,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_value",
           "association": "deps",
-          "refId": 100198
+          "refId": 100214
         },
         {
           "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100232
+          "refId": 100254
         }
       ],
       "deps": {
         "MVO_Q_MAP02_value": true
       },
       "original": "String(If(Q_MAP02[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
-      "index": 100202,
+      "index": 100219,
       "name": "MVO_Q_MAP02_INFO_value",
-      "parsed": "String(a100198('100198',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
-      "id": 100202,
+      "parsed": "String(a100214('100214',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
+      "id": 100219,
       "fflname": "Q_MAP02_INFO_value"
     },
     {
@@ -44410,10 +45185,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Info bij stap 2'",
-      "index": 100203,
+      "index": 100220,
       "name": "MVO_Q_MAP02_INFO_title",
       "parsed": "'Info bij stap 2'",
-      "id": 100203,
+      "id": 100220,
       "fflname": "Q_MAP02_INFO_title"
     },
     {
@@ -44426,15 +45201,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100232
+          "refId": 100254
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100204,
+      "index": 100221,
       "name": "MVO_Q_MAP02_VALIDATION_value",
       "parsed": "undefined",
-      "id": 100204,
+      "id": 100221,
       "fflname": "Q_MAP02_VALIDATION_value"
     },
     {
@@ -44446,10 +45221,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Validatie stap 2'",
-      "index": 100205,
+      "index": 100222,
       "name": "MVO_Q_MAP02_VALIDATION_title",
       "parsed": "'Validatie stap 2'",
-      "id": 100205,
+      "id": 100222,
       "fflname": "Q_MAP02_VALIDATION_title"
     },
     {
@@ -44462,15 +45237,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100232
+          "refId": 100254
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100206,
+      "index": 100223,
       "name": "MVO_Q_MAP02_HINT_value",
       "parsed": "undefined",
-      "id": 100206,
+      "id": 100223,
       "fflname": "Q_MAP02_HINT_value"
     },
     {
@@ -44481,10 +45256,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hinttekst stap 2'",
-      "index": 100207,
+      "index": 100224,
       "name": "MVO_Q_MAP02_HINT_title",
       "parsed": "'Hinttekst stap 2'",
-      "id": 100207,
+      "id": 100224,
       "fflname": "Q_MAP02_HINT_title"
     },
     {
@@ -44497,15 +45272,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100232
+          "refId": 100254
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100208,
+      "index": 100225,
       "name": "MVO_Q_MAP02_PARAGRAAF00_value",
       "parsed": "undefined",
-      "id": 100208,
+      "id": 100225,
       "fflname": "Q_MAP02_PARAGRAAF00_value"
     },
     {
@@ -44516,10 +45291,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Toelichting omgeving'",
-      "index": 100209,
+      "index": 100226,
       "name": "MVO_Q_MAP02_PARAGRAAF00_title",
       "parsed": "'Toelichting omgeving'",
-      "id": 100209,
+      "id": 100226,
       "fflname": "Q_MAP02_PARAGRAAF00_title"
     },
     {
@@ -44530,11 +45305,33 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100210,
+      "index": 100227,
       "name": "MVO_Q_MAP02_VERBORGEN_value",
       "parsed": "undefined",
-      "id": 100210,
+      "id": 100227,
       "fflname": "Q_MAP02_VERBORGEN_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP02_VERBORGEN_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP02_WARNING_visible",
+          "association": "deps",
+          "refId": 100218
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP02_WARNING_visible": true
+      },
+      "original": "Q_MAP02_PARAGRAAF00.visible&&0",
+      "index": 100228,
+      "name": "MVO_Q_MAP02_VERBORGEN_visible",
+      "parsed": "a100218('100218',x,y.base,z,v)&&0",
+      "id": 100228,
+      "fflname": "Q_MAP02_VERBORGEN_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -44546,15 +45343,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100232
+          "refId": 100254
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100211,
+      "index": 100229,
       "name": "MVO_Q_MAP02_PARAGRAAF01_value",
       "parsed": "undefined",
-      "id": 100211,
+      "id": 100229,
       "fflname": "Q_MAP02_PARAGRAAF01_value"
     },
     {
@@ -44565,10 +45362,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Stakeholders'",
-      "index": 100212,
+      "index": 100230,
       "name": "MVO_Q_MAP02_PARAGRAAF01_title",
       "parsed": "'Stakeholders'",
-      "id": 100212,
+      "id": 100230,
       "fflname": "Q_MAP02_PARAGRAAF01_title"
     },
     {
@@ -44582,20 +45379,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_VRAAG01_MEMO_visible",
           "association": "refs",
-          "refId": 100217
+          "refId": 100236
         },
         {
           "name": "MVO_Q_MAP02_SCORE01_value",
           "association": "refs",
-          "refId": 100493
+          "refId": 100541
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100213,
+      "index": 100231,
       "name": "MVO_Q_MAP02_VRAAG01_value",
       "parsed": "undefined",
-      "id": 100213,
+      "id": 100231,
       "fflname": "Q_MAP02_VRAAG01_value"
     },
     {
@@ -44608,18 +45405,41 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG07_title",
           "association": "deps",
-          "refId": 100137
+          "refId": 100146
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG07_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG07))",
-      "index": 100214,
+      "index": 100232,
       "name": "MVO_Q_MAP02_VRAAG01_title",
-      "parsed": "String(a100137('100137',x,y.base,z,v))",
-      "id": 100214,
+      "parsed": "String(a100146('100146',x,y.base,z,v))",
+      "id": 100232,
       "fflname": "Q_MAP02_VRAAG01_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP02_VRAAG01_visible": true,
+        "MVO_Q_MAP02_VRAAG02_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP02_WARNING_visible",
+          "association": "deps",
+          "refId": 100218
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP02_WARNING_visible": true
+      },
+      "original": "Q_MAP02_PARAGRAAF01.visible",
+      "index": 100233,
+      "name": "MVO_Q_MAP02_VRAAG01_visible",
+      "parsed": "a100218('100218',x,y.base,z,v)",
+      "id": 100233,
+      "fflname": "Q_MAP02_VRAAG01_visible"
     },
     {
       "type": "noCacheLocked",
@@ -44631,17 +45451,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_VERPLICHT_value",
           "association": "deps",
-          "refId": 100233
+          "refId": 100255
         }
       ],
       "deps": {
         "MVO_Q_MAP02_VERPLICHT_value": true
       },
       "original": "Q_MAP02_VERPLICHT[doc]==1",
-      "index": 100215,
+      "index": 100234,
       "name": "MVO_Q_MAP02_VRAAG01_required",
-      "parsed": "a100233('100233',x.doc,y.base,z,v)==1",
-      "id": 100215,
+      "parsed": "a100255('100255',x.doc,y.base,z,v)==1",
+      "id": 100234,
       "fflname": "Q_MAP02_VRAAG01_required"
     },
     {
@@ -44652,10 +45472,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100216,
+      "index": 100235,
       "name": "MVO_Q_MAP02_VRAAG01_MEMO_value",
       "parsed": "undefined",
-      "id": 100216,
+      "id": 100235,
       "fflname": "Q_MAP02_VRAAG01_MEMO_value"
     },
     {
@@ -44666,24 +45486,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP02_WARNING_visible",
+          "association": "deps",
+          "refId": 100218
+        },
+        {
           "name": "MVO_Q_MAP02_VRAAG01_value",
           "association": "deps",
-          "refId": 100213
+          "refId": 100231
         },
         {
           "name": "MVO_Q_MAP02_VRAAG01_MEMO_required",
           "association": "refs",
-          "refId": 100218
+          "refId": 100237
         }
       ],
       "deps": {
+        "MVO_Q_MAP02_WARNING_visible": true,
         "MVO_Q_MAP02_VRAAG01_value": true
       },
-      "original": "Q_MAP02_VRAAG01==1",
-      "index": 100217,
+      "original": "Q_MAP02_PARAGRAAF01.visible&&Q_MAP02_VRAAG01==1",
+      "index": 100236,
       "name": "MVO_Q_MAP02_VRAAG01_MEMO_visible",
-      "parsed": "a100213('100213',x,y.base,z,v)==1",
-      "id": 100217,
+      "parsed": "a100218('100218',x,y.base,z,v)&&a100231('100231',x,y.base,z,v)==1",
+      "id": 100236,
       "fflname": "Q_MAP02_VRAAG01_MEMO_visible"
     },
     {
@@ -44695,17 +45521,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_VRAAG01_MEMO_visible",
           "association": "deps",
-          "refId": 100217
+          "refId": 100236
         }
       ],
       "deps": {
         "MVO_Q_MAP02_VRAAG01_MEMO_visible": true
       },
       "original": "Visible(Q_MAP02_VRAAG01_MEMO)",
-      "index": 100218,
+      "index": 100237,
       "name": "MVO_Q_MAP02_VRAAG01_MEMO_required",
-      "parsed": "a100217('100217',x,y.base,z,v)",
-      "id": 100218,
+      "parsed": "a100236('100236',x,y.base,z,v)",
+      "id": 100237,
       "fflname": "Q_MAP02_VRAAG01_MEMO_required"
     },
     {
@@ -44719,20 +45545,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_VRAAG02_MEMO_visible",
           "association": "refs",
-          "refId": 100222
+          "refId": 100241
         },
         {
           "name": "MVO_Q_MAP02_SCORE01_value",
           "association": "refs",
-          "refId": 100493
+          "refId": 100541
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100219,
+      "index": 100238,
       "name": "MVO_Q_MAP02_VRAAG02_value",
       "parsed": "undefined",
-      "id": 100219,
+      "id": 100238,
       "fflname": "Q_MAP02_VRAAG02_value"
     },
     {
@@ -44743,10 +45569,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U betrekt de stakeholders bij relevante veranderingen'",
-      "index": 100220,
+      "index": 100239,
       "name": "MVO_Q_MAP02_VRAAG02_title",
       "parsed": "'U betrekt de stakeholders bij relevante veranderingen'",
-      "id": 100220,
+      "id": 100239,
       "fflname": "Q_MAP02_VRAAG02_title"
     },
     {
@@ -44757,10 +45583,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100221,
+      "index": 100240,
       "name": "MVO_Q_MAP02_VRAAG02_MEMO_value",
       "parsed": "undefined",
-      "id": 100221,
+      "id": 100240,
       "fflname": "Q_MAP02_VRAAG02_MEMO_value"
     },
     {
@@ -44771,24 +45597,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP02_WARNING_visible",
+          "association": "deps",
+          "refId": 100218
+        },
+        {
           "name": "MVO_Q_MAP02_VRAAG02_value",
           "association": "deps",
-          "refId": 100219
+          "refId": 100238
         },
         {
           "name": "MVO_Q_MAP02_VRAAG02_MEMO_required",
           "association": "refs",
-          "refId": 100223
+          "refId": 100242
         }
       ],
       "deps": {
+        "MVO_Q_MAP02_WARNING_visible": true,
         "MVO_Q_MAP02_VRAAG02_value": true
       },
-      "original": "Q_MAP02_VRAAG02==1",
-      "index": 100222,
+      "original": "Q_MAP02_PARAGRAAF01.visible&&Q_MAP02_VRAAG02==1",
+      "index": 100241,
       "name": "MVO_Q_MAP02_VRAAG02_MEMO_visible",
-      "parsed": "a100219('100219',x,y.base,z,v)==1",
-      "id": 100222,
+      "parsed": "a100218('100218',x,y.base,z,v)&&a100238('100238',x,y.base,z,v)==1",
+      "id": 100241,
       "fflname": "Q_MAP02_VRAAG02_MEMO_visible"
     },
     {
@@ -44800,17 +45632,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_VRAAG02_MEMO_visible",
           "association": "deps",
-          "refId": 100222
+          "refId": 100241
         }
       ],
       "deps": {
         "MVO_Q_MAP02_VRAAG02_MEMO_visible": true
       },
       "original": "Visible(Q_MAP02_VRAAG02_MEMO)",
-      "index": 100223,
+      "index": 100242,
       "name": "MVO_Q_MAP02_VRAAG02_MEMO_required",
-      "parsed": "a100222('100222',x,y.base,z,v)",
-      "id": 100223,
+      "parsed": "a100241('100241',x,y.base,z,v)",
+      "id": 100242,
       "fflname": "Q_MAP02_VRAAG02_MEMO_required"
     },
     {
@@ -44823,16 +45655,51 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100232
+          "refId": 100254
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100224,
+      "index": 100243,
       "name": "MVO_Q_MAP02_PARAGRAAF09_value",
       "parsed": "undefined",
-      "id": 100224,
+      "id": 100243,
       "fflname": "Q_MAP02_PARAGRAAF09_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP02_PARAGRAAF09_visible": true,
+        "MVO_Q_MAP02_HULPVARIABELEN_visible": true,
+        "MVO_Q_MAP02_PARAGRAAF09SUB1_visible": true,
+        "MVO_Q_MAP02_REQUIREDVARS_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_visible",
+          "association": "deps",
+          "refId": 100083
+        },
+        {
+          "name": "MVO_Q_MAP02_PARAGRAAF09SUB1_visible",
+          "association": "refs",
+          "refId": 100246
+        },
+        {
+          "name": "MVO_Q_MAP02_REQUIREDVARS_visible",
+          "association": "refs",
+          "refId": 100253
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_visible": true
+      },
+      "original": "Q_MAP02.visible&&0",
+      "index": 100244,
+      "name": "MVO_Q_MAP02_PARAGRAAF09_visible",
+      "parsed": "a100083('100083',x,y.base,z,v)&&0",
+      "id": 100244,
+      "fflname": "Q_MAP02_PARAGRAAF09_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -44842,11 +45709,37 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100225,
+      "index": 100245,
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB1_value",
       "parsed": "undefined",
-      "id": 100225,
+      "id": 100245,
       "fflname": "Q_MAP02_PARAGRAAF09SUB1_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP02_PARAGRAAF09SUB1_visible": true,
+        "MVO_Q_MAP02_PARAGRAAF09SUB2_visible": true,
+        "MVO_Q_MAP02_PARAGRAAF09SUB3_visible": true,
+        "MVO_Q_MAP02_PARAGRAAF09SUB4_visible": true,
+        "MVO_Q_MAP02_PARAGRAAF09SUB5_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP02_PARAGRAAF09_visible",
+          "association": "deps",
+          "refId": 100244
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP02_PARAGRAAF09_visible": true
+      },
+      "original": "Q_MAP02_PARAGRAAF09.visible",
+      "index": 100246,
+      "name": "MVO_Q_MAP02_PARAGRAAF09SUB1_visible",
+      "parsed": "a100244('100244',x,y.base,z,v)",
+      "id": 100246,
+      "fflname": "Q_MAP02_PARAGRAAF09SUB1_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -44856,10 +45749,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100226,
+      "index": 100247,
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB2_value",
       "parsed": "undefined",
-      "id": 100226,
+      "id": 100247,
       "fflname": "Q_MAP02_PARAGRAAF09SUB2_value"
     },
     {
@@ -44870,10 +45763,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100227,
+      "index": 100248,
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB3_value",
       "parsed": "undefined",
-      "id": 100227,
+      "id": 100248,
       "fflname": "Q_MAP02_PARAGRAAF09SUB3_value"
     },
     {
@@ -44884,10 +45777,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100228,
+      "index": 100249,
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB4_value",
       "parsed": "undefined",
-      "id": 100228,
+      "id": 100249,
       "fflname": "Q_MAP02_PARAGRAAF09SUB4_value"
     },
     {
@@ -44898,10 +45791,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100229,
+      "index": 100250,
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB5_value",
       "parsed": "undefined",
-      "id": 100229,
+      "id": 100250,
       "fflname": "Q_MAP02_PARAGRAAF09SUB5_value"
     },
     {
@@ -44912,10 +45805,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100230,
+      "index": 100251,
       "name": "MVO_Q_MAP02_HULPVARIABELEN_value",
       "parsed": "undefined",
-      "id": 100230,
+      "id": 100251,
       "fflname": "Q_MAP02_HULPVARIABELEN_value"
     },
     {
@@ -44928,7 +45821,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_value",
           "association": "refs",
-          "refId": 100198
+          "refId": 100214
         },
         {
           "name": "MVO_Q_MAP02_WARNING_required",
@@ -44969,11 +45862,35 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP02_PARAGRAAF09_required": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP02,Q_MAP02_HULPVARIABELEN),InputRequired(X))",
-      "index": 100231,
+      "index": 100252,
       "name": "MVO_Q_MAP02_REQUIREDVARS_value",
       "parsed": "Count([false,false,false,false,false,false,false])",
-      "id": 100231,
+      "id": 100252,
       "fflname": "Q_MAP02_REQUIREDVARS_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP02_REQUIREDVARS_visible": true,
+        "MVO_Q_MAP02_ENTEREDREQUIREDVARS_visible": true,
+        "MVO_Q_MAP02_VERPLICHT_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP02_PARAGRAAF09_visible",
+          "association": "deps",
+          "refId": 100244
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP02_PARAGRAAF09_visible": true
+      },
+      "original": "Q_MAP02_HULPVARIABELEN.visible",
+      "index": 100253,
+      "name": "MVO_Q_MAP02_REQUIREDVARS_visible",
+      "parsed": "a100244('100244',x,y.base,z,v)",
+      "id": 100253,
+      "fflname": "Q_MAP02_REQUIREDVARS_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -44985,7 +45902,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_value",
           "association": "refs",
-          "refId": 100198
+          "refId": 100214
         },
         {
           "name": "MVO_Q_MAP02_WARNING_required",
@@ -44994,7 +45911,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_WARNING_value",
           "association": "deps",
-          "refId": 100200
+          "refId": 100216
         },
         {
           "name": "MVO_Q_MAP02_INFO_required",
@@ -45003,7 +45920,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_INFO_value",
           "association": "deps",
-          "refId": 100202
+          "refId": 100219
         },
         {
           "name": "MVO_Q_MAP02_VALIDATION_required",
@@ -45012,7 +45929,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_VALIDATION_value",
           "association": "deps",
-          "refId": 100204
+          "refId": 100221
         },
         {
           "name": "MVO_Q_MAP02_HINT_required",
@@ -45021,7 +45938,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_HINT_value",
           "association": "deps",
-          "refId": 100206
+          "refId": 100223
         },
         {
           "name": "MVO_Q_MAP02_PARAGRAAF00_required",
@@ -45030,7 +45947,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_PARAGRAAF00_value",
           "association": "deps",
-          "refId": 100208
+          "refId": 100225
         },
         {
           "name": "MVO_Q_MAP02_PARAGRAAF01_required",
@@ -45039,7 +45956,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_PARAGRAAF01_value",
           "association": "deps",
-          "refId": 100211
+          "refId": 100229
         },
         {
           "name": "MVO_Q_MAP02_PARAGRAAF09_required",
@@ -45048,7 +45965,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_PARAGRAAF09_value",
           "association": "deps",
-          "refId": 100224
+          "refId": 100243
         }
       ],
       "deps": {
@@ -45068,10 +45985,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP02_PARAGRAAF09_value": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP02,Q_MAP02_HULPVARIABELEN),InputRequired(X)&&DataAvailable(X))",
-      "index": 100232,
+      "index": 100254,
       "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
-      "parsed": "Count([false&&v[100200][x.hash + y.hash + z]!==undefined,false&&v[100202][x.hash + y.hash + z]!==undefined,false&&v[100204][x.hash + y.hash + z]!==undefined,false&&v[100206][x.hash + y.hash + z]!==undefined,false&&v[100208][x.hash + y.hash + z]!==undefined,false&&v[100211][x.hash + y.hash + z]!==undefined,false&&v[100224][x.hash + y.hash + z]!==undefined])",
-      "id": 100232,
+      "parsed": "Count([false&&v[100216][x.hash + y.hash + z]!==undefined,false&&v[100219][x.hash + y.hash + z]!==undefined,false&&v[100221][x.hash + y.hash + z]!==undefined,false&&v[100223][x.hash + y.hash + z]!==undefined,false&&v[100225][x.hash + y.hash + z]!==undefined,false&&v[100229][x.hash + y.hash + z]!==undefined,false&&v[100243][x.hash + y.hash + z]!==undefined])",
+      "id": 100254,
       "fflname": "Q_MAP02_ENTEREDREQUIREDVARS_value"
     },
     {
@@ -45113,15 +46030,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_VRAAG01_required",
           "association": "refs",
-          "refId": 100215
+          "refId": 100234
         }
       ],
       "deps": {},
       "original": "1",
-      "index": 100233,
+      "index": 100255,
       "name": "MVO_Q_MAP02_VERPLICHT_value",
       "parsed": "1",
-      "id": 100233,
+      "id": 100255,
       "fflname": "Q_MAP02_VERPLICHT_value"
     },
     {
@@ -45135,22 +46052,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_ROOT_value",
           "association": "refs",
-          "refId": 100075
+          "refId": 100078
         },
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "deps",
-          "refId": 100359
+          "refId": 100396
         },
         {
           "name": "MVO_Q_MAP03_REQUIREDVARS_value",
           "association": "deps",
-          "refId": 100358
+          "refId": 100394
         },
         {
           "name": "MVO_Q_MAP03_INFO_value",
           "association": "refs",
-          "refId": 100238
+          "refId": 100261
         }
       ],
       "deps": {
@@ -45158,10 +46075,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_REQUIREDVARS_value": true
       },
       "original": "Q_MAP03_ENTEREDREQUIREDVARS==Q_MAP03_REQUIREDVARS",
-      "index": 100234,
+      "index": 100256,
       "name": "MVO_Q_MAP03_value",
-      "parsed": "a100359('100359',x,y.base,z,v)==a100358('100358',x,y.base,z,v)",
-      "id": 100234,
+      "parsed": "a100396('100396',x,y.base,z,v)==a100394('100394',x,y.base,z,v)",
+      "id": 100256,
       "fflname": "Q_MAP03_value"
     },
     {
@@ -45172,10 +46089,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Themas'",
-      "index": 100235,
+      "index": 100257,
       "name": "MVO_Q_MAP03_title",
       "parsed": "'Themas'",
-      "id": 100235,
+      "id": 100257,
       "fflname": "Q_MAP03_title"
     },
     {
@@ -45188,17 +46105,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_RESTRICTIES_value",
           "association": "deps",
-          "refId": 100564
+          "refId": 100617
         },
         {
           "name": "MVO_Q_WARNING_GLOBAL_value",
           "association": "deps",
-          "refId": 100558
+          "refId": 100609
         },
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {
@@ -45206,10 +46123,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_WARNING_GLOBAL_value": true
       },
       "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
-      "index": 100236,
+      "index": 100258,
       "name": "MVO_Q_MAP03_WARNING_value",
-      "parsed": "String(a100564('100564',x.doc,y.base,z,v)+a100558('100558',x.doc,y.base,z,v))",
-      "id": 100236,
+      "parsed": "String(a100617('100617',x.doc,y.base,z,v)+a100609('100609',x.doc,y.base,z,v))",
+      "id": 100258,
       "fflname": "Q_MAP03_WARNING_value"
     },
     {
@@ -45221,11 +46138,183 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Warning voor map 3'",
-      "index": 100237,
+      "index": 100259,
       "name": "MVO_Q_MAP03_WARNING_title",
       "parsed": "'Warning voor map 3'",
-      "id": 100237,
+      "id": 100259,
       "fflname": "Q_MAP03_WARNING_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_WARNING_visible": true,
+        "MVO_Q_MAP03_INFO_visible": true,
+        "MVO_Q_MAP03_VALIDATION_visible": true,
+        "MVO_Q_MAP03_HINT_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF01_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF00_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF02_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF03_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF04_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF05_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF06_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF07_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF08_visible": true,
+        "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_visible": true,
+        "MVO_Q_MAP03_VERBORGEN_visible": true,
+        "MVO_Q_MAP03_VRAAG01_visible": true,
+        "MVO_Q_MAP03_VRAAG01_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG02_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG03_visible": true,
+        "MVO_Q_MAP03_VRAAG03_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG04_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG05_visible": true,
+        "MVO_Q_MAP03_VRAAG05_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG06_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG07_visible": true,
+        "MVO_Q_MAP03_VRAAG07_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG08_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG09_visible": true,
+        "MVO_Q_MAP03_VRAAG09_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG10_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG11_visible": true,
+        "MVO_Q_MAP03_VRAAG11_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG12_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG13_visible": true,
+        "MVO_Q_MAP03_VRAAG13_MEMO_visible": true,
+        "MVO_Q_MAP03_VRAAG14_MEMO_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_visible",
+          "association": "deps",
+          "refId": 100083
+        },
+        {
+          "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_visible",
+          "association": "refs",
+          "refId": 100272
+        },
+        {
+          "name": "MVO_Q_MAP03_VERBORGEN_visible",
+          "association": "refs",
+          "refId": 100301
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG01_visible",
+          "association": "refs",
+          "refId": 100305
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG01_MEMO_visible",
+          "association": "refs",
+          "refId": 100308
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG02_MEMO_visible",
+          "association": "refs",
+          "refId": 100313
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG03_visible",
+          "association": "refs",
+          "refId": 100317
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG03_MEMO_visible",
+          "association": "refs",
+          "refId": 100319
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG04_MEMO_visible",
+          "association": "refs",
+          "refId": 100323
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG05_visible",
+          "association": "refs",
+          "refId": 100329
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG05_MEMO_visible",
+          "association": "refs",
+          "refId": 100331
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG06_MEMO_visible",
+          "association": "refs",
+          "refId": 100336
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG07_visible",
+          "association": "refs",
+          "refId": 100341
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG07_MEMO_visible",
+          "association": "refs",
+          "refId": 100343
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG08_MEMO_visible",
+          "association": "refs",
+          "refId": 100348
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG09_visible",
+          "association": "refs",
+          "refId": 100353
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG09_MEMO_visible",
+          "association": "refs",
+          "refId": 100355
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG10_MEMO_visible",
+          "association": "refs",
+          "refId": 100360
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG11_visible",
+          "association": "refs",
+          "refId": 100365
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG11_MEMO_visible",
+          "association": "refs",
+          "refId": 100367
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG12_MEMO_visible",
+          "association": "refs",
+          "refId": 100372
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG13_visible",
+          "association": "refs",
+          "refId": 100377
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG13_MEMO_visible",
+          "association": "refs",
+          "refId": 100379
+        },
+        {
+          "name": "MVO_Q_MAP03_VRAAG14_MEMO_visible",
+          "association": "refs",
+          "refId": 100384
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_visible": true
+      },
+      "original": "Q_MAP03.visible",
+      "index": 100260,
+      "name": "MVO_Q_MAP03_WARNING_visible",
+      "parsed": "a100083('100083',x,y.base,z,v)",
+      "id": 100260,
+      "fflname": "Q_MAP03_WARNING_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -45237,22 +46326,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_value",
           "association": "deps",
-          "refId": 100234
+          "refId": 100256
         },
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {
         "MVO_Q_MAP03_value": true
       },
       "original": "String(If(Q_MAP03[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
-      "index": 100238,
+      "index": 100261,
       "name": "MVO_Q_MAP03_INFO_value",
-      "parsed": "String(a100234('100234',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
-      "id": 100238,
+      "parsed": "String(a100256('100256',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
+      "id": 100261,
       "fflname": "Q_MAP03_INFO_value"
     },
     {
@@ -45264,10 +46353,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Info bij stap 3'",
-      "index": 100239,
+      "index": 100262,
       "name": "MVO_Q_MAP03_INFO_title",
       "parsed": "'Info bij stap 3'",
-      "id": 100239,
+      "id": 100262,
       "fflname": "Q_MAP03_INFO_title"
     },
     {
@@ -45280,15 +46369,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100240,
+      "index": 100263,
       "name": "MVO_Q_MAP03_VALIDATION_value",
       "parsed": "undefined",
-      "id": 100240,
+      "id": 100263,
       "fflname": "Q_MAP03_VALIDATION_value"
     },
     {
@@ -45300,10 +46389,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Validatie stap 3'",
-      "index": 100241,
+      "index": 100264,
       "name": "MVO_Q_MAP03_VALIDATION_title",
       "parsed": "'Validatie stap 3'",
-      "id": 100241,
+      "id": 100264,
       "fflname": "Q_MAP03_VALIDATION_title"
     },
     {
@@ -45316,15 +46405,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100242,
+      "index": 100265,
       "name": "MVO_Q_MAP03_HINT_value",
       "parsed": "undefined",
-      "id": 100242,
+      "id": 100265,
       "fflname": "Q_MAP03_HINT_value"
     },
     {
@@ -45335,10 +46424,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hinttekst stap 3'",
-      "index": 100243,
+      "index": 100266,
       "name": "MVO_Q_MAP03_HINT_title",
       "parsed": "'Hinttekst stap 3'",
-      "id": 100243,
+      "id": 100266,
       "fflname": "Q_MAP03_HINT_title"
     },
     {
@@ -45351,15 +46440,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100244,
+      "index": 100267,
       "name": "MVO_Q_MAP03_PARAGRAAF01_value",
       "parsed": "undefined",
-      "id": 100244,
+      "id": 100267,
       "fflname": "Q_MAP03_PARAGRAAF01_value"
     },
     {
@@ -45370,10 +46459,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Relevantie themas'",
-      "index": 100245,
+      "index": 100268,
       "name": "MVO_Q_MAP03_PARAGRAAF01_title",
       "parsed": "'Relevantie themas'",
-      "id": 100245,
+      "id": 100268,
       "fflname": "Q_MAP03_PARAGRAAF01_title"
     },
     {
@@ -45384,10 +46473,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Specificeer de mate waarin u zaken doet via B2B (ten opzichte van B2C). 0 punten op B2B betekent 100 punten op B2C en dat betekent dat u 100 zaken doet met consumenten. Voor de scores betekent dit dat uw antwoorden op de vragen over B2B niet meetellen.'",
-      "index": 100246,
+      "index": 100269,
       "name": "MVO_Q_MAP03_PARAGRAAF01_hint",
       "parsed": "'Specificeer de mate waarin u zaken doet via B2B (ten opzichte van B2C). 0 punten op B2B betekent 100 punten op B2C en dat betekent dat u 100 zaken doet met consumenten. Voor de scores betekent dit dat uw antwoorden op de vragen over B2B niet meetellen.'",
-      "id": 100246,
+      "id": 100269,
       "fflname": "Q_MAP03_PARAGRAAF01_hint"
     },
     {
@@ -45402,25 +46491,25 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_value",
           "association": "refs",
-          "refId": 100249
+          "refId": 100273
         },
         {
           "name": "MVO_Q_MAP03_GEWICHTTOTAAL_value",
           "association": "refs",
-          "refId": 100251
+          "refId": 100275
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_value",
           "association": "refs",
-          "refId": 100255
+          "refId": 100280
         }
       ],
       "deps": {},
       "original": "50",
-      "index": 100247,
+      "index": 100270,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_value",
       "parsed": "50",
-      "id": 100247,
+      "id": 100270,
       "fflname": "Q_MAP03_GEWICHT_VRAAG05_INPUT_value"
     },
     {
@@ -45435,16 +46524,40 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_SUBSCORE05_title",
           "association": "refs",
-          "refId": 100506
+          "refId": 100556
         }
       ],
       "deps": {},
       "original": "'Zaken doen (B2B)'",
-      "index": 100248,
+      "index": 100271,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_title",
       "parsed": "'Zaken doen (B2B)'",
-      "id": 100248,
+      "id": 100271,
       "fflname": "Q_MAP03_GEWICHT_VRAAG05_INPUT_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_visible": true,
+        "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_visible": true,
+        "MVO_Q_MAP03_GEWICHTTOTAAL_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF01.visible",
+      "index": 100272,
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_visible",
+      "parsed": "a100260('100260',x,y.base,z,v)",
+      "id": 100272,
+      "fflname": "Q_MAP03_GEWICHT_VRAAG05_INPUT_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -45457,27 +46570,27 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_value",
           "association": "deps",
-          "refId": 100247
+          "refId": 100270
         },
         {
           "name": "MVO_Q_MAP03_GEWICHTTOTAAL_value",
           "association": "refs",
-          "refId": 100251
+          "refId": 100275
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_value",
           "association": "refs",
-          "refId": 100256
+          "refId": 100282
         }
       ],
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_value": true
       },
       "original": "OnER(100-Q_MAP03_GEWICHT_VRAAG05_INPUT,NA)",
-      "index": 100249,
+      "index": 100273,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_value",
-      "parsed": "OnER(100-a100247('100247',x,y.base,z,v),NA)",
-      "id": 100249,
+      "parsed": "OnER(100-a100270('100270',x,y.base,z,v),NA)",
+      "id": 100273,
       "fflname": "Q_MAP03_GEWICHT_VRAAG06_INPUT_value"
     },
     {
@@ -45492,15 +46605,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_SUBSCORE06_title",
           "association": "refs",
-          "refId": 100508
+          "refId": 100558
         }
       ],
       "deps": {},
       "original": "'Omgang met consumenten (B2C)'",
-      "index": 100250,
+      "index": 100274,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_title",
       "parsed": "'Omgang met consumenten (B2C)'",
-      "id": 100250,
+      "id": 100274,
       "fflname": "Q_MAP03_GEWICHT_VRAAG06_INPUT_title"
     },
     {
@@ -45512,12 +46625,12 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_value",
           "association": "deps",
-          "refId": 100247
+          "refId": 100270
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_value",
           "association": "deps",
-          "refId": 100249
+          "refId": 100273
         }
       ],
       "deps": {
@@ -45525,10 +46638,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_value": true
       },
       "original": "Q_MAP03_GEWICHT_VRAAG05_INPUT+Q_MAP03_GEWICHT_VRAAG06_INPUT",
-      "index": 100251,
+      "index": 100275,
       "name": "MVO_Q_MAP03_GEWICHTTOTAAL_value",
-      "parsed": "a100247('100247',x,y.base,z,v)+a100249('100249',x,y.base,z,v)",
-      "id": 100251,
+      "parsed": "a100270('100270',x,y.base,z,v)+a100273('100273',x,y.base,z,v)",
+      "id": 100275,
       "fflname": "Q_MAP03_GEWICHTTOTAAL_value"
     },
     {
@@ -45541,10 +46654,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Totaal aantal punten'",
-      "index": 100252,
+      "index": 100276,
       "name": "MVO_Q_MAP03_GEWICHTTOTAAL_title",
       "parsed": "'Totaal aantal punten'",
-      "id": 100252,
+      "id": 100276,
       "fflname": "Q_MAP03_GEWICHTTOTAAL_title"
     },
     {
@@ -45557,15 +46670,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100253,
+      "index": 100277,
       "name": "MVO_Q_MAP03_PARAGRAAF11_value",
       "parsed": "undefined",
-      "id": 100253,
+      "id": 100277,
       "fflname": "Q_MAP03_PARAGRAAF11_value"
     },
     {
@@ -45576,11 +46689,60 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Omgerekende relevantie themas'",
-      "index": 100254,
+      "index": 100278,
       "name": "MVO_Q_MAP03_PARAGRAAF11_title",
       "parsed": "'Omgerekende relevantie themas'",
-      "id": 100254,
+      "id": 100278,
       "fflname": "Q_MAP03_PARAGRAAF11_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_PARAGRAAF11_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF10_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF09_visible": true,
+        "MVO_Q_MAP03_HULPVARIABELEN_visible": true,
+        "MVO_Q_MAP03_GEWICHT_VRAAG05_visible": true,
+        "MVO_Q_MAP03_GEWICHT_VRAAG01_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF09SUB1_visible": true,
+        "MVO_Q_MAP03_REQUIREDVARS_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_visible",
+          "association": "deps",
+          "refId": 100083
+        },
+        {
+          "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_visible",
+          "association": "refs",
+          "refId": 100281
+        },
+        {
+          "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_visible",
+          "association": "refs",
+          "refId": 100288
+        },
+        {
+          "name": "MVO_Q_MAP03_PARAGRAAF09SUB1_visible",
+          "association": "refs",
+          "refId": 100388
+        },
+        {
+          "name": "MVO_Q_MAP03_REQUIREDVARS_visible",
+          "association": "refs",
+          "refId": 100395
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_visible": true
+      },
+      "original": "Q_MAP03.visible&&0",
+      "index": 100279,
+      "name": "MVO_Q_MAP03_PARAGRAAF11_visible",
+      "parsed": "a100083('100083',x,y.base,z,v)&&0",
+      "id": 100279,
+      "fflname": "Q_MAP03_PARAGRAAF11_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -45593,28 +46755,52 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_value",
           "association": "deps",
-          "refId": 100247
+          "refId": 100270
         },
         {
           "name": "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_value",
           "association": "refs",
-          "refId": 100257
+          "refId": 100283
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE05_value",
           "association": "refs",
-          "refId": 100505
+          "refId": 100555
         }
       ],
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_value": true
       },
       "original": "OnER(1/6*Q_MAP03_GEWICHT_VRAAG05_INPUT,NA)",
-      "index": 100255,
+      "index": 100280,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_value",
-      "parsed": "OnER(1/6*a100247('100247',x,y.base,z,v),NA)",
-      "id": 100255,
+      "parsed": "OnER(1/6*a100270('100270',x,y.base,z,v),NA)",
+      "id": 100280,
       "fflname": "Q_MAP03_GEWICHT_VRAAG05_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_GEWICHT_VRAAG05_visible": true,
+        "MVO_Q_MAP03_GEWICHT_VRAAG06_visible": true,
+        "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_PARAGRAAF11_visible",
+          "association": "deps",
+          "refId": 100279
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_PARAGRAAF11_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF11.visible",
+      "index": 100281,
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_visible",
+      "parsed": "a100279('100279',x,y.base,z,v)",
+      "id": 100281,
+      "fflname": "Q_MAP03_GEWICHT_VRAAG05_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -45627,27 +46813,27 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_value",
           "association": "deps",
-          "refId": 100249
+          "refId": 100273
         },
         {
           "name": "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_value",
           "association": "refs",
-          "refId": 100257
+          "refId": 100283
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE06_value",
           "association": "refs",
-          "refId": 100507
+          "refId": 100557
         }
       ],
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_value": true
       },
       "original": "OnER(1/6*Q_MAP03_GEWICHT_VRAAG06_INPUT,NA)",
-      "index": 100256,
+      "index": 100282,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_value",
-      "parsed": "OnER(1/6*a100249('100249',x,y.base,z,v),NA)",
-      "id": 100256,
+      "parsed": "OnER(1/6*a100273('100273',x,y.base,z,v),NA)",
+      "id": 100282,
       "fflname": "Q_MAP03_GEWICHT_VRAAG06_value"
     },
     {
@@ -45659,12 +46845,12 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_value",
           "association": "deps",
-          "refId": 100255
+          "refId": 100280
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_value",
           "association": "deps",
-          "refId": 100256
+          "refId": 100282
         }
       ],
       "deps": {
@@ -45672,10 +46858,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_GEWICHT_VRAAG06_value": true
       },
       "original": "Q_MAP03_GEWICHT_VRAAG05+Q_MAP03_GEWICHT_VRAAG06",
-      "index": 100257,
+      "index": 100283,
       "name": "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_value",
-      "parsed": "a100255('100255',x,y.base,z,v)+a100256('100256',x,y.base,z,v)",
-      "id": 100257,
+      "parsed": "a100280('100280',x,y.base,z,v)+a100282('100282',x,y.base,z,v)",
+      "id": 100283,
       "fflname": "Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_value"
     },
     {
@@ -45688,15 +46874,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100258,
+      "index": 100284,
       "name": "MVO_Q_MAP03_PARAGRAAF10_value",
       "parsed": "undefined",
-      "id": 100258,
+      "id": 100284,
       "fflname": "Q_MAP03_PARAGRAAF10_value"
     },
     {
@@ -45707,10 +46893,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Verborgen mapje met vastgezette gewichten voor de 5 overige themas'",
-      "index": 100259,
+      "index": 100285,
       "name": "MVO_Q_MAP03_PARAGRAAF10_title",
       "parsed": "'Verborgen mapje met vastgezette gewichten voor de 5 overige themas'",
-      "id": 100259,
+      "id": 100285,
       "fflname": "Q_MAP03_PARAGRAAF10_title"
     },
     {
@@ -45724,20 +46910,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_value",
           "association": "refs",
-          "refId": 100270
+          "refId": 100297
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100497
+          "refId": 100546
         }
       ],
       "deps": {},
       "original": "OnER(1/6*100,NA)",
-      "index": 100260,
+      "index": 100286,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_value",
       "parsed": "OnER(1/6*100,NA)",
-      "id": 100260,
+      "id": 100286,
       "fflname": "Q_MAP03_GEWICHT_VRAAG01_value"
     },
     {
@@ -45751,16 +46937,43 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_SUBSCORE01_title",
           "association": "refs",
-          "refId": 100498
+          "refId": 100547
         }
       ],
       "deps": {},
       "original": "'Bestuur'",
-      "index": 100261,
+      "index": 100287,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_title",
       "parsed": "'Bestuur'",
-      "id": 100261,
+      "id": 100287,
       "fflname": "Q_MAP03_GEWICHT_VRAAG01_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_GEWICHT_VRAAG01_visible": true,
+        "MVO_Q_MAP03_GEWICHT_VRAAG02_visible": true,
+        "MVO_Q_MAP03_GEWICHT_VRAAG03_visible": true,
+        "MVO_Q_MAP03_GEWICHT_VRAAG04_visible": true,
+        "MVO_Q_MAP03_GEWICHT_VRAAG07_visible": true,
+        "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_PARAGRAAF11_visible",
+          "association": "deps",
+          "refId": 100279
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_PARAGRAAF11_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF10.visible",
+      "index": 100288,
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_visible",
+      "parsed": "a100279('100279',x,y.base,z,v)",
+      "id": 100288,
+      "fflname": "Q_MAP03_GEWICHT_VRAAG01_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -45773,20 +46986,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_value",
           "association": "refs",
-          "refId": 100270
+          "refId": 100297
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100499
+          "refId": 100549
         }
       ],
       "deps": {},
       "original": "OnER(1/6*100,NA)",
-      "index": 100262,
+      "index": 100289,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG02_value",
       "parsed": "OnER(1/6*100,NA)",
-      "id": 100262,
+      "id": 100289,
       "fflname": "Q_MAP03_GEWICHT_VRAAG02_value"
     },
     {
@@ -45800,15 +47013,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_SUBSCORE02_title",
           "association": "refs",
-          "refId": 100500
+          "refId": 100550
         }
       ],
       "deps": {},
       "original": "'Mensenrechten'",
-      "index": 100263,
+      "index": 100290,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG02_title",
       "parsed": "'Mensenrechten'",
-      "id": 100263,
+      "id": 100290,
       "fflname": "Q_MAP03_GEWICHT_VRAAG02_title"
     },
     {
@@ -45822,20 +47035,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_value",
           "association": "refs",
-          "refId": 100270
+          "refId": 100297
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100501
+          "refId": 100551
         }
       ],
       "deps": {},
       "original": "OnER(1/6*100,NA)",
-      "index": 100264,
+      "index": 100291,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG03_value",
       "parsed": "OnER(1/6*100,NA)",
-      "id": 100264,
+      "id": 100291,
       "fflname": "Q_MAP03_GEWICHT_VRAAG03_value"
     },
     {
@@ -45849,15 +47062,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_SUBSCORE03_title",
           "association": "refs",
-          "refId": 100502
+          "refId": 100552
         }
       ],
       "deps": {},
       "original": "'Werknemers / arbeid'",
-      "index": 100265,
+      "index": 100292,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG03_title",
       "parsed": "'Werknemers / arbeid'",
-      "id": 100265,
+      "id": 100292,
       "fflname": "Q_MAP03_GEWICHT_VRAAG03_title"
     },
     {
@@ -45871,20 +47084,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_value",
           "association": "refs",
-          "refId": 100270
+          "refId": 100297
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE04_value",
           "association": "refs",
-          "refId": 100503
+          "refId": 100553
         }
       ],
       "deps": {},
       "original": "OnER(1/6*100,NA)",
-      "index": 100266,
+      "index": 100293,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG04_value",
       "parsed": "OnER(1/6*100,NA)",
-      "id": 100266,
+      "id": 100293,
       "fflname": "Q_MAP03_GEWICHT_VRAAG04_value"
     },
     {
@@ -45898,15 +47111,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_SUBSCORE04_title",
           "association": "refs",
-          "refId": 100504
+          "refId": 100554
         }
       ],
       "deps": {},
       "original": "'Milieu / omgeving'",
-      "index": 100267,
+      "index": 100294,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG04_title",
       "parsed": "'Milieu / omgeving'",
-      "id": 100267,
+      "id": 100294,
       "fflname": "Q_MAP03_GEWICHT_VRAAG04_title"
     },
     {
@@ -45920,20 +47133,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_value",
           "association": "refs",
-          "refId": 100270
+          "refId": 100297
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE07_value",
           "association": "refs",
-          "refId": 100509
+          "refId": 100559
         }
       ],
       "deps": {},
       "original": "OnER(1/6*100,NA)",
-      "index": 100268,
+      "index": 100295,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG07_value",
       "parsed": "OnER(1/6*100,NA)",
-      "id": 100268,
+      "id": 100295,
       "fflname": "Q_MAP03_GEWICHT_VRAAG07_value"
     },
     {
@@ -45947,15 +47160,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_SUBSCORE07_title",
           "association": "refs",
-          "refId": 100510
+          "refId": 100560
         }
       ],
       "deps": {},
       "original": "'Maatschappelijke betrokkenheid'",
-      "index": 100269,
+      "index": 100296,
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG07_title",
       "parsed": "'Maatschappelijke betrokkenheid'",
-      "id": 100269,
+      "id": 100296,
       "fflname": "Q_MAP03_GEWICHT_VRAAG07_title"
     },
     {
@@ -45967,27 +47180,27 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_value",
           "association": "deps",
-          "refId": 100260
+          "refId": 100286
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG02_value",
           "association": "deps",
-          "refId": 100262
+          "refId": 100289
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG03_value",
           "association": "deps",
-          "refId": 100264
+          "refId": 100291
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG04_value",
           "association": "deps",
-          "refId": 100266
+          "refId": 100293
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG07_value",
           "association": "deps",
-          "refId": 100268
+          "refId": 100295
         }
       ],
       "deps": {
@@ -45998,10 +47211,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_GEWICHT_VRAAG07_value": true
       },
       "original": "Q_MAP03_GEWICHT_VRAAG01+Q_MAP03_GEWICHT_VRAAG02+Q_MAP03_GEWICHT_VRAAG03+Q_MAP03_GEWICHT_VRAAG04+Q_MAP03_GEWICHT_VRAAG07",
-      "index": 100270,
+      "index": 100297,
       "name": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_value",
-      "parsed": "a100260('100260',x,y.base,z,v)+a100262('100262',x,y.base,z,v)+a100264('100264',x,y.base,z,v)+a100266('100266',x,y.base,z,v)+a100268('100268',x,y.base,z,v)",
-      "id": 100270,
+      "parsed": "a100286('100286',x,y.base,z,v)+a100289('100289',x,y.base,z,v)+a100291('100291',x,y.base,z,v)+a100293('100293',x,y.base,z,v)+a100295('100295',x,y.base,z,v)",
+      "id": 100297,
       "fflname": "Q_MAP03_GEWICHTTOTAALOVERIG_value"
     },
     {
@@ -46014,15 +47227,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100271,
+      "index": 100298,
       "name": "MVO_Q_MAP03_PARAGRAAF00_value",
       "parsed": "undefined",
-      "id": 100271,
+      "id": 100298,
       "fflname": "Q_MAP03_PARAGRAAF00_value"
     },
     {
@@ -46033,10 +47246,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Toelichting themas'",
-      "index": 100272,
+      "index": 100299,
       "name": "MVO_Q_MAP03_PARAGRAAF00_title",
       "parsed": "'Toelichting themas'",
-      "id": 100272,
+      "id": 100299,
       "fflname": "Q_MAP03_PARAGRAAF00_title"
     },
     {
@@ -46047,11 +47260,33 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100273,
+      "index": 100300,
       "name": "MVO_Q_MAP03_VERBORGEN_value",
       "parsed": "undefined",
-      "id": 100273,
+      "id": 100300,
       "fflname": "Q_MAP03_VERBORGEN_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_VERBORGEN_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF00.visible&&0",
+      "index": 100301,
+      "name": "MVO_Q_MAP03_VERBORGEN_visible",
+      "parsed": "a100260('100260',x,y.base,z,v)&&0",
+      "id": 100301,
+      "fflname": "Q_MAP03_VERBORGEN_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -46063,15 +47298,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100274,
+      "index": 100302,
       "name": "MVO_Q_MAP03_PARAGRAAF02_value",
       "parsed": "undefined",
-      "id": 100274,
+      "id": 100302,
       "fflname": "Q_MAP03_PARAGRAAF02_value"
     },
     {
@@ -46085,20 +47320,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG01_MEMO_visible",
           "association": "refs",
-          "refId": 100279
+          "refId": 100308
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100497
+          "refId": 100546
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100275,
+      "index": 100303,
       "name": "MVO_Q_MAP03_VRAAG01_value",
       "parsed": "undefined",
-      "id": 100275,
+      "id": 100303,
       "fflname": "Q_MAP03_VRAAG01_value"
     },
     {
@@ -46109,11 +47344,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'MVO is een onderdeel van uw strategie(plannen)'",
-      "index": 100276,
+      "index": 100304,
       "name": "MVO_Q_MAP03_VRAAG01_title",
       "parsed": "'MVO is een onderdeel van uw strategie(plannen)'",
-      "id": 100276,
+      "id": 100304,
       "fflname": "Q_MAP03_VRAAG01_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_VRAAG01_visible": true,
+        "MVO_Q_MAP03_VRAAG02_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF02.visible",
+      "index": 100305,
+      "name": "MVO_Q_MAP03_VRAAG01_visible",
+      "parsed": "a100260('100260',x,y.base,z,v)",
+      "id": 100305,
+      "fflname": "Q_MAP03_VRAAG01_visible"
     },
     {
       "type": "noCacheLocked",
@@ -46137,17 +47395,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VERPLICHT_value",
           "association": "deps",
-          "refId": 100360
+          "refId": 100397
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VERPLICHT_value": true
       },
       "original": "Q_MAP03_VERPLICHT[doc]==1",
-      "index": 100277,
+      "index": 100306,
       "name": "MVO_Q_MAP03_VRAAG01_required",
-      "parsed": "a100360('100360',x.doc,y.base,z,v)==1",
-      "id": 100277,
+      "parsed": "a100397('100397',x.doc,y.base,z,v)==1",
+      "id": 100306,
       "fflname": "Q_MAP03_VRAAG01_required"
     },
     {
@@ -46158,10 +47416,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100278,
+      "index": 100307,
       "name": "MVO_Q_MAP03_VRAAG01_MEMO_value",
       "parsed": "undefined",
-      "id": 100278,
+      "id": 100307,
       "fflname": "Q_MAP03_VRAAG01_MEMO_value"
     },
     {
@@ -46172,24 +47430,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG01_value",
           "association": "deps",
-          "refId": 100275
+          "refId": 100303
         },
         {
           "name": "MVO_Q_MAP03_VRAAG01_MEMO_required",
           "association": "refs",
-          "refId": 100280
+          "refId": 100309
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG01_value": true
       },
-      "original": "Q_MAP03_VRAAG01==1",
-      "index": 100279,
+      "original": "Q_MAP03_PARAGRAAF02.visible&&Q_MAP03_VRAAG01==1",
+      "index": 100308,
       "name": "MVO_Q_MAP03_VRAAG01_MEMO_visible",
-      "parsed": "a100275('100275',x,y.base,z,v)==1",
-      "id": 100279,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100303('100303',x,y.base,z,v)==1",
+      "id": 100308,
       "fflname": "Q_MAP03_VRAAG01_MEMO_visible"
     },
     {
@@ -46201,17 +47465,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG01_MEMO_visible",
           "association": "deps",
-          "refId": 100279
+          "refId": 100308
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG01_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG01_MEMO)",
-      "index": 100280,
+      "index": 100309,
       "name": "MVO_Q_MAP03_VRAAG01_MEMO_required",
-      "parsed": "a100279('100279',x,y.base,z,v)",
-      "id": 100280,
+      "parsed": "a100308('100308',x,y.base,z,v)",
+      "id": 100309,
       "fflname": "Q_MAP03_VRAAG01_MEMO_required"
     },
     {
@@ -46225,20 +47489,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG02_MEMO_visible",
           "association": "refs",
-          "refId": 100284
+          "refId": 100313
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100497
+          "refId": 100546
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100281,
+      "index": 100310,
       "name": "MVO_Q_MAP03_VRAAG02_value",
       "parsed": "undefined",
-      "id": 100281,
+      "id": 100310,
       "fflname": "Q_MAP03_VRAAG02_value"
     },
     {
@@ -46249,10 +47513,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U neemt het effect op MVO onderwerpen mee in het maken van belangrijke beslissingen'",
-      "index": 100282,
+      "index": 100311,
       "name": "MVO_Q_MAP03_VRAAG02_title",
       "parsed": "'U neemt het effect op MVO onderwerpen mee in het maken van belangrijke beslissingen'",
-      "id": 100282,
+      "id": 100311,
       "fflname": "Q_MAP03_VRAAG02_title"
     },
     {
@@ -46263,10 +47527,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100283,
+      "index": 100312,
       "name": "MVO_Q_MAP03_VRAAG02_MEMO_value",
       "parsed": "undefined",
-      "id": 100283,
+      "id": 100312,
       "fflname": "Q_MAP03_VRAAG02_MEMO_value"
     },
     {
@@ -46277,24 +47541,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG02_value",
           "association": "deps",
-          "refId": 100281
+          "refId": 100310
         },
         {
           "name": "MVO_Q_MAP03_VRAAG02_MEMO_required",
           "association": "refs",
-          "refId": 100285
+          "refId": 100314
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG02_value": true
       },
-      "original": "Q_MAP03_VRAAG02==1",
-      "index": 100284,
+      "original": "Q_MAP03_PARAGRAAF02.visible&&Q_MAP03_VRAAG02==1",
+      "index": 100313,
       "name": "MVO_Q_MAP03_VRAAG02_MEMO_visible",
-      "parsed": "a100281('100281',x,y.base,z,v)==1",
-      "id": 100284,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100310('100310',x,y.base,z,v)==1",
+      "id": 100313,
       "fflname": "Q_MAP03_VRAAG02_MEMO_visible"
     },
     {
@@ -46306,17 +47576,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG02_MEMO_visible",
           "association": "deps",
-          "refId": 100284
+          "refId": 100313
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG02_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG02_MEMO)",
-      "index": 100285,
+      "index": 100314,
       "name": "MVO_Q_MAP03_VRAAG02_MEMO_required",
-      "parsed": "a100284('100284',x,y.base,z,v)",
-      "id": 100285,
+      "parsed": "a100313('100313',x,y.base,z,v)",
+      "id": 100314,
       "fflname": "Q_MAP03_VRAAG02_MEMO_required"
     },
     {
@@ -46329,15 +47599,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100286,
+      "index": 100315,
       "name": "MVO_Q_MAP03_PARAGRAAF03_value",
       "parsed": "undefined",
-      "id": 100286,
+      "id": 100315,
       "fflname": "Q_MAP03_PARAGRAAF03_value"
     },
     {
@@ -46351,21 +47621,44 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG03_MEMO_visible",
           "association": "refs",
-          "refId": 100289
+          "refId": 100319
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100499
+          "refId": 100549
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100287,
+      "index": 100316,
       "name": "MVO_Q_MAP03_VRAAG03_value",
       "parsed": "undefined",
-      "id": 100287,
+      "id": 100316,
       "fflname": "Q_MAP03_VRAAG03_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_VRAAG03_visible": true,
+        "MVO_Q_MAP03_VRAAG04_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF03.visible",
+      "index": 100317,
+      "name": "MVO_Q_MAP03_VRAAG03_visible",
+      "parsed": "a100260('100260',x,y.base,z,v)",
+      "id": 100317,
+      "fflname": "Q_MAP03_VRAAG03_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -46375,10 +47668,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100288,
+      "index": 100318,
       "name": "MVO_Q_MAP03_VRAAG03_MEMO_value",
       "parsed": "undefined",
-      "id": 100288,
+      "id": 100318,
       "fflname": "Q_MAP03_VRAAG03_MEMO_value"
     },
     {
@@ -46389,24 +47682,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG03_value",
           "association": "deps",
-          "refId": 100287
+          "refId": 100316
         },
         {
           "name": "MVO_Q_MAP03_VRAAG03_MEMO_required",
           "association": "refs",
-          "refId": 100290
+          "refId": 100320
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG03_value": true
       },
-      "original": "Q_MAP03_VRAAG03==1",
-      "index": 100289,
+      "original": "Q_MAP03_PARAGRAAF03.visible&&Q_MAP03_VRAAG03==1",
+      "index": 100319,
       "name": "MVO_Q_MAP03_VRAAG03_MEMO_visible",
-      "parsed": "a100287('100287',x,y.base,z,v)==1",
-      "id": 100289,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100316('100316',x,y.base,z,v)==1",
+      "id": 100319,
       "fflname": "Q_MAP03_VRAAG03_MEMO_visible"
     },
     {
@@ -46418,17 +47717,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG03_MEMO_visible",
           "association": "deps",
-          "refId": 100289
+          "refId": 100319
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG03_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG03_MEMO)",
-      "index": 100290,
+      "index": 100320,
       "name": "MVO_Q_MAP03_VRAAG03_MEMO_required",
-      "parsed": "a100289('100289',x,y.base,z,v)",
-      "id": 100290,
+      "parsed": "a100319('100319',x,y.base,z,v)",
+      "id": 100320,
       "fflname": "Q_MAP03_VRAAG03_MEMO_required"
     },
     {
@@ -46442,20 +47741,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG04_MEMO_visible",
           "association": "refs",
-          "refId": 100293
+          "refId": 100323
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100499
+          "refId": 100549
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100291,
+      "index": 100321,
       "name": "MVO_Q_MAP03_VRAAG04_value",
       "parsed": "undefined",
-      "id": 100291,
+      "id": 100321,
       "fflname": "Q_MAP03_VRAAG04_value"
     },
     {
@@ -46466,10 +47765,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100292,
+      "index": 100322,
       "name": "MVO_Q_MAP03_VRAAG04_MEMO_value",
       "parsed": "undefined",
-      "id": 100292,
+      "id": 100322,
       "fflname": "Q_MAP03_VRAAG04_MEMO_value"
     },
     {
@@ -46480,24 +47779,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG04_value",
           "association": "deps",
-          "refId": 100291
+          "refId": 100321
         },
         {
           "name": "MVO_Q_MAP03_VRAAG04_MEMO_required",
           "association": "refs",
-          "refId": 100294
+          "refId": 100324
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG04_value": true
       },
-      "original": "Q_MAP03_VRAAG04==1",
-      "index": 100293,
+      "original": "Q_MAP03_PARAGRAAF03.visible&&Q_MAP03_VRAAG04==1",
+      "index": 100323,
       "name": "MVO_Q_MAP03_VRAAG04_MEMO_visible",
-      "parsed": "a100291('100291',x,y.base,z,v)==1",
-      "id": 100293,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100321('100321',x,y.base,z,v)==1",
+      "id": 100323,
       "fflname": "Q_MAP03_VRAAG04_MEMO_visible"
     },
     {
@@ -46509,17 +47814,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG04_MEMO_visible",
           "association": "deps",
-          "refId": 100293
+          "refId": 100323
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG04_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG04_MEMO)",
-      "index": 100294,
+      "index": 100324,
       "name": "MVO_Q_MAP03_VRAAG04_MEMO_required",
-      "parsed": "a100293('100293',x,y.base,z,v)",
-      "id": 100294,
+      "parsed": "a100323('100323',x,y.base,z,v)",
+      "id": 100324,
       "fflname": "Q_MAP03_VRAAG04_MEMO_required"
     },
     {
@@ -46532,15 +47837,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100295,
+      "index": 100325,
       "name": "MVO_Q_MAP03_PARAGRAAF04_value",
       "parsed": "undefined",
-      "id": 100295,
+      "id": 100325,
       "fflname": "Q_MAP03_PARAGRAAF04_value"
     },
     {
@@ -46551,10 +47856,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Dit MVO thema wordt in de volgende stap concreter uitgewerkt, met vragen betreffende de implementatie ervan.'",
-      "index": 100296,
+      "index": 100326,
       "name": "MVO_Q_MAP03_PARAGRAAF04_hint",
       "parsed": "'Dit MVO thema wordt in de volgende stap concreter uitgewerkt, met vragen betreffende de implementatie ervan.'",
-      "id": 100296,
+      "id": 100326,
       "fflname": "Q_MAP03_PARAGRAAF04_hint"
     },
     {
@@ -46568,20 +47873,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG05_MEMO_visible",
           "association": "refs",
-          "refId": 100300
+          "refId": 100331
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100501
+          "refId": 100551
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100297,
+      "index": 100327,
       "name": "MVO_Q_MAP03_VRAAG05_value",
       "parsed": "undefined",
-      "id": 100297,
+      "id": 100327,
       "fflname": "Q_MAP03_VRAAG05_value"
     },
     {
@@ -46592,11 +47897,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Het welzijn van werknemers is onderdeel van het beleid'",
-      "index": 100298,
+      "index": 100328,
       "name": "MVO_Q_MAP03_VRAAG05_title",
       "parsed": "'Het welzijn van werknemers is onderdeel van het beleid'",
-      "id": 100298,
+      "id": 100328,
       "fflname": "Q_MAP03_VRAAG05_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_VRAAG05_visible": true,
+        "MVO_Q_MAP03_VRAAG06_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF04.visible",
+      "index": 100329,
+      "name": "MVO_Q_MAP03_VRAAG05_visible",
+      "parsed": "a100260('100260',x,y.base,z,v)",
+      "id": 100329,
+      "fflname": "Q_MAP03_VRAAG05_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -46606,10 +47934,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100299,
+      "index": 100330,
       "name": "MVO_Q_MAP03_VRAAG05_MEMO_value",
       "parsed": "undefined",
-      "id": 100299,
+      "id": 100330,
       "fflname": "Q_MAP03_VRAAG05_MEMO_value"
     },
     {
@@ -46620,24 +47948,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG05_value",
           "association": "deps",
-          "refId": 100297
+          "refId": 100327
         },
         {
           "name": "MVO_Q_MAP03_VRAAG05_MEMO_required",
           "association": "refs",
-          "refId": 100301
+          "refId": 100332
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG05_value": true
       },
-      "original": "Q_MAP03_VRAAG05==1",
-      "index": 100300,
+      "original": "Q_MAP03_PARAGRAAF04.visible&&Q_MAP03_VRAAG05==1",
+      "index": 100331,
       "name": "MVO_Q_MAP03_VRAAG05_MEMO_visible",
-      "parsed": "a100297('100297',x,y.base,z,v)==1",
-      "id": 100300,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100327('100327',x,y.base,z,v)==1",
+      "id": 100331,
       "fflname": "Q_MAP03_VRAAG05_MEMO_visible"
     },
     {
@@ -46649,17 +47983,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG05_MEMO_visible",
           "association": "deps",
-          "refId": 100300
+          "refId": 100331
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG05_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG05_MEMO)",
-      "index": 100301,
+      "index": 100332,
       "name": "MVO_Q_MAP03_VRAAG05_MEMO_required",
-      "parsed": "a100300('100300',x,y.base,z,v)",
-      "id": 100301,
+      "parsed": "a100331('100331',x,y.base,z,v)",
+      "id": 100332,
       "fflname": "Q_MAP03_VRAAG05_MEMO_required"
     },
     {
@@ -46673,20 +48007,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG06_MEMO_visible",
           "association": "refs",
-          "refId": 100305
+          "refId": 100336
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100501
+          "refId": 100551
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100302,
+      "index": 100333,
       "name": "MVO_Q_MAP03_VRAAG06_value",
       "parsed": "undefined",
-      "id": 100302,
+      "id": 100333,
       "fflname": "Q_MAP03_VRAAG06_value"
     },
     {
@@ -46697,10 +48031,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties werknemerswelzijn relevant vinden'",
-      "index": 100303,
+      "index": 100334,
       "name": "MVO_Q_MAP03_VRAAG06_title",
       "parsed": "'Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties werknemerswelzijn relevant vinden'",
-      "id": 100303,
+      "id": 100334,
       "fflname": "Q_MAP03_VRAAG06_title"
     },
     {
@@ -46711,10 +48045,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100304,
+      "index": 100335,
       "name": "MVO_Q_MAP03_VRAAG06_MEMO_value",
       "parsed": "undefined",
-      "id": 100304,
+      "id": 100335,
       "fflname": "Q_MAP03_VRAAG06_MEMO_value"
     },
     {
@@ -46725,24 +48059,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG06_value",
           "association": "deps",
-          "refId": 100302
+          "refId": 100333
         },
         {
           "name": "MVO_Q_MAP03_VRAAG06_MEMO_required",
           "association": "refs",
-          "refId": 100306
+          "refId": 100337
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG06_value": true
       },
-      "original": "Q_MAP03_VRAAG06==1",
-      "index": 100305,
+      "original": "Q_MAP03_PARAGRAAF04.visible&&Q_MAP03_VRAAG06==1",
+      "index": 100336,
       "name": "MVO_Q_MAP03_VRAAG06_MEMO_visible",
-      "parsed": "a100302('100302',x,y.base,z,v)==1",
-      "id": 100305,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100333('100333',x,y.base,z,v)==1",
+      "id": 100336,
       "fflname": "Q_MAP03_VRAAG06_MEMO_visible"
     },
     {
@@ -46754,17 +48094,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG06_MEMO_visible",
           "association": "deps",
-          "refId": 100305
+          "refId": 100336
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG06_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG06_MEMO)",
-      "index": 100306,
+      "index": 100337,
       "name": "MVO_Q_MAP03_VRAAG06_MEMO_required",
-      "parsed": "a100305('100305',x,y.base,z,v)",
-      "id": 100306,
+      "parsed": "a100336('100336',x,y.base,z,v)",
+      "id": 100337,
       "fflname": "Q_MAP03_VRAAG06_MEMO_required"
     },
     {
@@ -46777,15 +48117,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100307,
+      "index": 100338,
       "name": "MVO_Q_MAP03_PARAGRAAF05_value",
       "parsed": "undefined",
-      "id": 100307,
+      "id": 100338,
       "fflname": "Q_MAP03_PARAGRAAF05_value"
     },
     {
@@ -46799,20 +48139,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG07_MEMO_visible",
           "association": "refs",
-          "refId": 100311
+          "refId": 100343
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE04_value",
           "association": "refs",
-          "refId": 100503
+          "refId": 100553
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100308,
+      "index": 100339,
       "name": "MVO_Q_MAP03_VRAAG07_value",
       "parsed": "undefined",
-      "id": 100308,
+      "id": 100339,
       "fflname": "Q_MAP03_VRAAG07_value"
     },
     {
@@ -46823,11 +48163,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U heeft schriftelijk (gedrags)regels opgesteld over milieuvervuiling, die aan alle medewerkers worden gecommuniceerd'",
-      "index": 100309,
+      "index": 100340,
       "name": "MVO_Q_MAP03_VRAAG07_title",
       "parsed": "'U heeft schriftelijk (gedrags)regels opgesteld over milieuvervuiling, die aan alle medewerkers worden gecommuniceerd'",
-      "id": 100309,
+      "id": 100340,
       "fflname": "Q_MAP03_VRAAG07_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_VRAAG07_visible": true,
+        "MVO_Q_MAP03_VRAAG08_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF05.visible",
+      "index": 100341,
+      "name": "MVO_Q_MAP03_VRAAG07_visible",
+      "parsed": "a100260('100260',x,y.base,z,v)",
+      "id": 100341,
+      "fflname": "Q_MAP03_VRAAG07_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -46837,10 +48200,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100310,
+      "index": 100342,
       "name": "MVO_Q_MAP03_VRAAG07_MEMO_value",
       "parsed": "undefined",
-      "id": 100310,
+      "id": 100342,
       "fflname": "Q_MAP03_VRAAG07_MEMO_value"
     },
     {
@@ -46851,24 +48214,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG07_value",
           "association": "deps",
-          "refId": 100308
+          "refId": 100339
         },
         {
           "name": "MVO_Q_MAP03_VRAAG07_MEMO_required",
           "association": "refs",
-          "refId": 100312
+          "refId": 100344
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG07_value": true
       },
-      "original": "Q_MAP03_VRAAG07==1",
-      "index": 100311,
+      "original": "Q_MAP03_PARAGRAAF05.visible&&Q_MAP03_VRAAG07==1",
+      "index": 100343,
       "name": "MVO_Q_MAP03_VRAAG07_MEMO_visible",
-      "parsed": "a100308('100308',x,y.base,z,v)==1",
-      "id": 100311,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100339('100339',x,y.base,z,v)==1",
+      "id": 100343,
       "fflname": "Q_MAP03_VRAAG07_MEMO_visible"
     },
     {
@@ -46880,17 +48249,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG07_MEMO_visible",
           "association": "deps",
-          "refId": 100311
+          "refId": 100343
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG07_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG07_MEMO)",
-      "index": 100312,
+      "index": 100344,
       "name": "MVO_Q_MAP03_VRAAG07_MEMO_required",
-      "parsed": "a100311('100311',x,y.base,z,v)",
-      "id": 100312,
+      "parsed": "a100343('100343',x,y.base,z,v)",
+      "id": 100344,
       "fflname": "Q_MAP03_VRAAG07_MEMO_required"
     },
     {
@@ -46904,20 +48273,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG08_MEMO_visible",
           "association": "refs",
-          "refId": 100316
+          "refId": 100348
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE04_value",
           "association": "refs",
-          "refId": 100503
+          "refId": 100553
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100313,
+      "index": 100345,
       "name": "MVO_Q_MAP03_VRAAG08_value",
       "parsed": "undefined",
-      "id": 100313,
+      "id": 100345,
       "fflname": "Q_MAP03_VRAAG08_value"
     },
     {
@@ -46928,10 +48297,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U neemt de mate van milieuvervuiling mee in het maken van belangrijke beslissingen'",
-      "index": 100314,
+      "index": 100346,
       "name": "MVO_Q_MAP03_VRAAG08_title",
       "parsed": "'U neemt de mate van milieuvervuiling mee in het maken van belangrijke beslissingen'",
-      "id": 100314,
+      "id": 100346,
       "fflname": "Q_MAP03_VRAAG08_title"
     },
     {
@@ -46942,10 +48311,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100315,
+      "index": 100347,
       "name": "MVO_Q_MAP03_VRAAG08_MEMO_value",
       "parsed": "undefined",
-      "id": 100315,
+      "id": 100347,
       "fflname": "Q_MAP03_VRAAG08_MEMO_value"
     },
     {
@@ -46956,24 +48325,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG08_value",
           "association": "deps",
-          "refId": 100313
+          "refId": 100345
         },
         {
           "name": "MVO_Q_MAP03_VRAAG08_MEMO_required",
           "association": "refs",
-          "refId": 100317
+          "refId": 100349
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG08_value": true
       },
-      "original": "Q_MAP03_VRAAG08==1",
-      "index": 100316,
+      "original": "Q_MAP03_PARAGRAAF05.visible&&Q_MAP03_VRAAG08==1",
+      "index": 100348,
       "name": "MVO_Q_MAP03_VRAAG08_MEMO_visible",
-      "parsed": "a100313('100313',x,y.base,z,v)==1",
-      "id": 100316,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100345('100345',x,y.base,z,v)==1",
+      "id": 100348,
       "fflname": "Q_MAP03_VRAAG08_MEMO_visible"
     },
     {
@@ -46985,17 +48360,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG08_MEMO_visible",
           "association": "deps",
-          "refId": 100316
+          "refId": 100348
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG08_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG08_MEMO)",
-      "index": 100317,
+      "index": 100349,
       "name": "MVO_Q_MAP03_VRAAG08_MEMO_required",
-      "parsed": "a100316('100316',x,y.base,z,v)",
-      "id": 100317,
+      "parsed": "a100348('100348',x,y.base,z,v)",
+      "id": 100349,
       "fflname": "Q_MAP03_VRAAG08_MEMO_required"
     },
     {
@@ -47008,15 +48383,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100318,
+      "index": 100350,
       "name": "MVO_Q_MAP03_PARAGRAAF06_value",
       "parsed": "undefined",
-      "id": 100318,
+      "id": 100350,
       "fflname": "Q_MAP03_PARAGRAAF06_value"
     },
     {
@@ -47030,20 +48405,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG09_MEMO_visible",
           "association": "refs",
-          "refId": 100322
+          "refId": 100355
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE05_value",
           "association": "refs",
-          "refId": 100505
+          "refId": 100555
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100319,
+      "index": 100351,
       "name": "MVO_Q_MAP03_VRAAG09_value",
       "parsed": "undefined",
-      "id": 100319,
+      "id": 100351,
       "fflname": "Q_MAP03_VRAAG09_value"
     },
     {
@@ -47054,11 +48429,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U heeft schriftelijk (gedrags)regels opgesteld over eerlijk zakendoen, die aan alle relevante medewerkers worden gecommuniceerd'",
-      "index": 100320,
+      "index": 100352,
       "name": "MVO_Q_MAP03_VRAAG09_title",
       "parsed": "'U heeft schriftelijk (gedrags)regels opgesteld over eerlijk zakendoen, die aan alle relevante medewerkers worden gecommuniceerd'",
-      "id": 100320,
+      "id": 100352,
       "fflname": "Q_MAP03_VRAAG09_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_VRAAG09_visible": true,
+        "MVO_Q_MAP03_VRAAG10_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF06.visible",
+      "index": 100353,
+      "name": "MVO_Q_MAP03_VRAAG09_visible",
+      "parsed": "a100260('100260',x,y.base,z,v)",
+      "id": 100353,
+      "fflname": "Q_MAP03_VRAAG09_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -47068,10 +48466,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100321,
+      "index": 100354,
       "name": "MVO_Q_MAP03_VRAAG09_MEMO_value",
       "parsed": "undefined",
-      "id": 100321,
+      "id": 100354,
       "fflname": "Q_MAP03_VRAAG09_MEMO_value"
     },
     {
@@ -47082,24 +48480,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG09_value",
           "association": "deps",
-          "refId": 100319
+          "refId": 100351
         },
         {
           "name": "MVO_Q_MAP03_VRAAG09_MEMO_required",
           "association": "refs",
-          "refId": 100323
+          "refId": 100356
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG09_value": true
       },
-      "original": "Q_MAP03_VRAAG09==1",
-      "index": 100322,
+      "original": "Q_MAP03_PARAGRAAF06.visible&&Q_MAP03_VRAAG09==1",
+      "index": 100355,
       "name": "MVO_Q_MAP03_VRAAG09_MEMO_visible",
-      "parsed": "a100319('100319',x,y.base,z,v)==1",
-      "id": 100322,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100351('100351',x,y.base,z,v)==1",
+      "id": 100355,
       "fflname": "Q_MAP03_VRAAG09_MEMO_visible"
     },
     {
@@ -47111,17 +48515,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG09_MEMO_visible",
           "association": "deps",
-          "refId": 100322
+          "refId": 100355
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG09_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG09_MEMO)",
-      "index": 100323,
+      "index": 100356,
       "name": "MVO_Q_MAP03_VRAAG09_MEMO_required",
-      "parsed": "a100322('100322',x,y.base,z,v)",
-      "id": 100323,
+      "parsed": "a100355('100355',x,y.base,z,v)",
+      "id": 100356,
       "fflname": "Q_MAP03_VRAAG09_MEMO_required"
     },
     {
@@ -47135,20 +48539,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG10_MEMO_visible",
           "association": "refs",
-          "refId": 100327
+          "refId": 100360
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE05_value",
           "association": "refs",
-          "refId": 100505
+          "refId": 100555
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100324,
+      "index": 100357,
       "name": "MVO_Q_MAP03_VRAAG10_value",
       "parsed": "undefined",
-      "id": 100324,
+      "id": 100357,
       "fflname": "Q_MAP03_VRAAG10_value"
     },
     {
@@ -47159,10 +48563,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U neemt de mate van het eerlijk zakendoen (B2B) mee in het maken van belangrijke beslissingen'",
-      "index": 100325,
+      "index": 100358,
       "name": "MVO_Q_MAP03_VRAAG10_title",
       "parsed": "'U neemt de mate van het eerlijk zakendoen (B2B) mee in het maken van belangrijke beslissingen'",
-      "id": 100325,
+      "id": 100358,
       "fflname": "Q_MAP03_VRAAG10_title"
     },
     {
@@ -47173,10 +48577,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100326,
+      "index": 100359,
       "name": "MVO_Q_MAP03_VRAAG10_MEMO_value",
       "parsed": "undefined",
-      "id": 100326,
+      "id": 100359,
       "fflname": "Q_MAP03_VRAAG10_MEMO_value"
     },
     {
@@ -47187,24 +48591,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG10_value",
           "association": "deps",
-          "refId": 100324
+          "refId": 100357
         },
         {
           "name": "MVO_Q_MAP03_VRAAG10_MEMO_required",
           "association": "refs",
-          "refId": 100328
+          "refId": 100361
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG10_value": true
       },
-      "original": "Q_MAP03_VRAAG10==1",
-      "index": 100327,
+      "original": "Q_MAP03_PARAGRAAF06.visible&&Q_MAP03_VRAAG10==1",
+      "index": 100360,
       "name": "MVO_Q_MAP03_VRAAG10_MEMO_visible",
-      "parsed": "a100324('100324',x,y.base,z,v)==1",
-      "id": 100327,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100357('100357',x,y.base,z,v)==1",
+      "id": 100360,
       "fflname": "Q_MAP03_VRAAG10_MEMO_visible"
     },
     {
@@ -47216,17 +48626,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG10_MEMO_visible",
           "association": "deps",
-          "refId": 100327
+          "refId": 100360
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG10_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG10_MEMO)",
-      "index": 100328,
+      "index": 100361,
       "name": "MVO_Q_MAP03_VRAAG10_MEMO_required",
-      "parsed": "a100327('100327',x,y.base,z,v)",
-      "id": 100328,
+      "parsed": "a100360('100360',x,y.base,z,v)",
+      "id": 100361,
       "fflname": "Q_MAP03_VRAAG10_MEMO_required"
     },
     {
@@ -47239,15 +48649,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100329,
+      "index": 100362,
       "name": "MVO_Q_MAP03_PARAGRAAF07_value",
       "parsed": "undefined",
-      "id": 100329,
+      "id": 100362,
       "fflname": "Q_MAP03_PARAGRAAF07_value"
     },
     {
@@ -47261,20 +48671,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG11_MEMO_visible",
           "association": "refs",
-          "refId": 100333
+          "refId": 100367
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE06_value",
           "association": "refs",
-          "refId": 100507
+          "refId": 100557
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100330,
+      "index": 100363,
       "name": "MVO_Q_MAP03_VRAAG11_value",
       "parsed": "undefined",
-      "id": 100330,
+      "id": 100363,
       "fflname": "Q_MAP03_VRAAG11_value"
     },
     {
@@ -47285,11 +48695,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U heeft schriftelijk (gedrags)regels opgesteld over eerlijk zakendoen met consumenten, die aan alle relevante medewerkers worden gecommuniceerd'",
-      "index": 100331,
+      "index": 100364,
       "name": "MVO_Q_MAP03_VRAAG11_title",
       "parsed": "'U heeft schriftelijk (gedrags)regels opgesteld over eerlijk zakendoen met consumenten, die aan alle relevante medewerkers worden gecommuniceerd'",
-      "id": 100331,
+      "id": 100364,
       "fflname": "Q_MAP03_VRAAG11_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_VRAAG11_visible": true,
+        "MVO_Q_MAP03_VRAAG12_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF07.visible",
+      "index": 100365,
+      "name": "MVO_Q_MAP03_VRAAG11_visible",
+      "parsed": "a100260('100260',x,y.base,z,v)",
+      "id": 100365,
+      "fflname": "Q_MAP03_VRAAG11_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -47299,10 +48732,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100332,
+      "index": 100366,
       "name": "MVO_Q_MAP03_VRAAG11_MEMO_value",
       "parsed": "undefined",
-      "id": 100332,
+      "id": 100366,
       "fflname": "Q_MAP03_VRAAG11_MEMO_value"
     },
     {
@@ -47313,24 +48746,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG11_value",
           "association": "deps",
-          "refId": 100330
+          "refId": 100363
         },
         {
           "name": "MVO_Q_MAP03_VRAAG11_MEMO_required",
           "association": "refs",
-          "refId": 100334
+          "refId": 100368
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG11_value": true
       },
-      "original": "Q_MAP03_VRAAG11==1",
-      "index": 100333,
+      "original": "Q_MAP03_PARAGRAAF07.visible&&Q_MAP03_VRAAG11==1",
+      "index": 100367,
       "name": "MVO_Q_MAP03_VRAAG11_MEMO_visible",
-      "parsed": "a100330('100330',x,y.base,z,v)==1",
-      "id": 100333,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100363('100363',x,y.base,z,v)==1",
+      "id": 100367,
       "fflname": "Q_MAP03_VRAAG11_MEMO_visible"
     },
     {
@@ -47342,17 +48781,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG11_MEMO_visible",
           "association": "deps",
-          "refId": 100333
+          "refId": 100367
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG11_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG11_MEMO)",
-      "index": 100334,
+      "index": 100368,
       "name": "MVO_Q_MAP03_VRAAG11_MEMO_required",
-      "parsed": "a100333('100333',x,y.base,z,v)",
-      "id": 100334,
+      "parsed": "a100367('100367',x,y.base,z,v)",
+      "id": 100368,
       "fflname": "Q_MAP03_VRAAG11_MEMO_required"
     },
     {
@@ -47366,20 +48805,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG12_MEMO_visible",
           "association": "refs",
-          "refId": 100338
+          "refId": 100372
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE06_value",
           "association": "refs",
-          "refId": 100507
+          "refId": 100557
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100335,
+      "index": 100369,
       "name": "MVO_Q_MAP03_VRAAG12_value",
       "parsed": "undefined",
-      "id": 100335,
+      "id": 100369,
       "fflname": "Q_MAP03_VRAAG12_value"
     },
     {
@@ -47390,10 +48829,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U neemt de mate van het eerlijk behandelen van consumenten mee in het maken van belangrijke beslissingen'",
-      "index": 100336,
+      "index": 100370,
       "name": "MVO_Q_MAP03_VRAAG12_title",
       "parsed": "'U neemt de mate van het eerlijk behandelen van consumenten mee in het maken van belangrijke beslissingen'",
-      "id": 100336,
+      "id": 100370,
       "fflname": "Q_MAP03_VRAAG12_title"
     },
     {
@@ -47404,10 +48843,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100337,
+      "index": 100371,
       "name": "MVO_Q_MAP03_VRAAG12_MEMO_value",
       "parsed": "undefined",
-      "id": 100337,
+      "id": 100371,
       "fflname": "Q_MAP03_VRAAG12_MEMO_value"
     },
     {
@@ -47418,24 +48857,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG12_value",
           "association": "deps",
-          "refId": 100335
+          "refId": 100369
         },
         {
           "name": "MVO_Q_MAP03_VRAAG12_MEMO_required",
           "association": "refs",
-          "refId": 100339
+          "refId": 100373
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG12_value": true
       },
-      "original": "Q_MAP03_VRAAG12==1",
-      "index": 100338,
+      "original": "Q_MAP03_PARAGRAAF07.visible&&Q_MAP03_VRAAG12==1",
+      "index": 100372,
       "name": "MVO_Q_MAP03_VRAAG12_MEMO_visible",
-      "parsed": "a100335('100335',x,y.base,z,v)==1",
-      "id": 100338,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100369('100369',x,y.base,z,v)==1",
+      "id": 100372,
       "fflname": "Q_MAP03_VRAAG12_MEMO_visible"
     },
     {
@@ -47447,17 +48892,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG12_MEMO_visible",
           "association": "deps",
-          "refId": 100338
+          "refId": 100372
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG12_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG12_MEMO)",
-      "index": 100339,
+      "index": 100373,
       "name": "MVO_Q_MAP03_VRAAG12_MEMO_required",
-      "parsed": "a100338('100338',x,y.base,z,v)",
-      "id": 100339,
+      "parsed": "a100372('100372',x,y.base,z,v)",
+      "id": 100373,
       "fflname": "Q_MAP03_VRAAG12_MEMO_required"
     },
     {
@@ -47470,15 +48915,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100340,
+      "index": 100374,
       "name": "MVO_Q_MAP03_PARAGRAAF08_value",
       "parsed": "undefined",
-      "id": 100340,
+      "id": 100374,
       "fflname": "Q_MAP03_PARAGRAAF08_value"
     },
     {
@@ -47492,20 +48937,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG13_MEMO_visible",
           "association": "refs",
-          "refId": 100344
+          "refId": 100379
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE07_value",
           "association": "refs",
-          "refId": 100509
+          "refId": 100559
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100341,
+      "index": 100375,
       "name": "MVO_Q_MAP03_VRAAG13_value",
       "parsed": "undefined",
-      "id": 100341,
+      "id": 100375,
       "fflname": "Q_MAP03_VRAAG13_value"
     },
     {
@@ -47516,11 +48961,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Maatschappelijke betrokkenheid is onderdeel van uw strategie(plannen)'",
-      "index": 100342,
+      "index": 100376,
       "name": "MVO_Q_MAP03_VRAAG13_title",
       "parsed": "'Maatschappelijke betrokkenheid is onderdeel van uw strategie(plannen)'",
-      "id": 100342,
+      "id": 100376,
       "fflname": "Q_MAP03_VRAAG13_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_VRAAG13_visible": true,
+        "MVO_Q_MAP03_VRAAG14_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF08.visible",
+      "index": 100377,
+      "name": "MVO_Q_MAP03_VRAAG13_visible",
+      "parsed": "a100260('100260',x,y.base,z,v)",
+      "id": 100377,
+      "fflname": "Q_MAP03_VRAAG13_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -47530,10 +48998,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100343,
+      "index": 100378,
       "name": "MVO_Q_MAP03_VRAAG13_MEMO_value",
       "parsed": "undefined",
-      "id": 100343,
+      "id": 100378,
       "fflname": "Q_MAP03_VRAAG13_MEMO_value"
     },
     {
@@ -47544,24 +49012,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG13_value",
           "association": "deps",
-          "refId": 100341
+          "refId": 100375
         },
         {
           "name": "MVO_Q_MAP03_VRAAG13_MEMO_required",
           "association": "refs",
-          "refId": 100345
+          "refId": 100380
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG13_value": true
       },
-      "original": "Q_MAP03_VRAAG13==1",
-      "index": 100344,
+      "original": "Q_MAP03_PARAGRAAF08.visible&&Q_MAP03_VRAAG13==1",
+      "index": 100379,
       "name": "MVO_Q_MAP03_VRAAG13_MEMO_visible",
-      "parsed": "a100341('100341',x,y.base,z,v)==1",
-      "id": 100344,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100375('100375',x,y.base,z,v)==1",
+      "id": 100379,
       "fflname": "Q_MAP03_VRAAG13_MEMO_visible"
     },
     {
@@ -47573,17 +49047,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG13_MEMO_visible",
           "association": "deps",
-          "refId": 100344
+          "refId": 100379
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG13_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG13_MEMO)",
-      "index": 100345,
+      "index": 100380,
       "name": "MVO_Q_MAP03_VRAAG13_MEMO_required",
-      "parsed": "a100344('100344',x,y.base,z,v)",
-      "id": 100345,
+      "parsed": "a100379('100379',x,y.base,z,v)",
+      "id": 100380,
       "fflname": "Q_MAP03_VRAAG13_MEMO_required"
     },
     {
@@ -47597,20 +49071,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG14_MEMO_visible",
           "association": "refs",
-          "refId": 100349
+          "refId": 100384
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE07_value",
           "association": "refs",
-          "refId": 100509
+          "refId": 100559
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100346,
+      "index": 100381,
       "name": "MVO_Q_MAP03_VRAAG14_value",
       "parsed": "undefined",
-      "id": 100346,
+      "id": 100381,
       "fflname": "Q_MAP03_VRAAG14_value"
     },
     {
@@ -47621,10 +49095,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties maatschappelijke betrokkenheid relevant vinden'",
-      "index": 100347,
+      "index": 100382,
       "name": "MVO_Q_MAP03_VRAAG14_title",
       "parsed": "'Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties maatschappelijke betrokkenheid relevant vinden'",
-      "id": 100347,
+      "id": 100382,
       "fflname": "Q_MAP03_VRAAG14_title"
     },
     {
@@ -47635,10 +49109,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100348,
+      "index": 100383,
       "name": "MVO_Q_MAP03_VRAAG14_MEMO_value",
       "parsed": "undefined",
-      "id": 100348,
+      "id": 100383,
       "fflname": "Q_MAP03_VRAAG14_MEMO_value"
     },
     {
@@ -47649,24 +49123,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP03_WARNING_visible",
+          "association": "deps",
+          "refId": 100260
+        },
+        {
           "name": "MVO_Q_MAP03_VRAAG14_value",
           "association": "deps",
-          "refId": 100346
+          "refId": 100381
         },
         {
           "name": "MVO_Q_MAP03_VRAAG14_MEMO_required",
           "association": "refs",
-          "refId": 100350
+          "refId": 100385
         }
       ],
       "deps": {
+        "MVO_Q_MAP03_WARNING_visible": true,
         "MVO_Q_MAP03_VRAAG14_value": true
       },
-      "original": "Q_MAP03_VRAAG14==1",
-      "index": 100349,
+      "original": "Q_MAP03_PARAGRAAF08.visible&&Q_MAP03_VRAAG14==1",
+      "index": 100384,
       "name": "MVO_Q_MAP03_VRAAG14_MEMO_visible",
-      "parsed": "a100346('100346',x,y.base,z,v)==1",
-      "id": 100349,
+      "parsed": "a100260('100260',x,y.base,z,v)&&a100381('100381',x,y.base,z,v)==1",
+      "id": 100384,
       "fflname": "Q_MAP03_VRAAG14_MEMO_visible"
     },
     {
@@ -47678,17 +49158,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG14_MEMO_visible",
           "association": "deps",
-          "refId": 100349
+          "refId": 100384
         }
       ],
       "deps": {
         "MVO_Q_MAP03_VRAAG14_MEMO_visible": true
       },
       "original": "Visible(Q_MAP03_VRAAG14_MEMO)",
-      "index": 100350,
+      "index": 100385,
       "name": "MVO_Q_MAP03_VRAAG14_MEMO_required",
-      "parsed": "a100349('100349',x,y.base,z,v)",
-      "id": 100350,
+      "parsed": "a100384('100384',x,y.base,z,v)",
+      "id": 100385,
       "fflname": "Q_MAP03_VRAAG14_MEMO_required"
     },
     {
@@ -47701,15 +49181,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100359
+          "refId": 100396
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100351,
+      "index": 100386,
       "name": "MVO_Q_MAP03_PARAGRAAF09_value",
       "parsed": "undefined",
-      "id": 100351,
+      "id": 100386,
       "fflname": "Q_MAP03_PARAGRAAF09_value"
     },
     {
@@ -47720,11 +49200,37 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100352,
+      "index": 100387,
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB1_value",
       "parsed": "undefined",
-      "id": 100352,
+      "id": 100387,
       "fflname": "Q_MAP03_PARAGRAAF09SUB1_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_PARAGRAAF09SUB1_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF09SUB2_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF09SUB3_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF09SUB4_visible": true,
+        "MVO_Q_MAP03_PARAGRAAF09SUB5_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_PARAGRAAF11_visible",
+          "association": "deps",
+          "refId": 100279
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_PARAGRAAF11_visible": true
+      },
+      "original": "Q_MAP03_PARAGRAAF09.visible",
+      "index": 100388,
+      "name": "MVO_Q_MAP03_PARAGRAAF09SUB1_visible",
+      "parsed": "a100279('100279',x,y.base,z,v)",
+      "id": 100388,
+      "fflname": "Q_MAP03_PARAGRAAF09SUB1_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -47734,10 +49240,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100353,
+      "index": 100389,
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB2_value",
       "parsed": "undefined",
-      "id": 100353,
+      "id": 100389,
       "fflname": "Q_MAP03_PARAGRAAF09SUB2_value"
     },
     {
@@ -47748,10 +49254,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100354,
+      "index": 100390,
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB3_value",
       "parsed": "undefined",
-      "id": 100354,
+      "id": 100390,
       "fflname": "Q_MAP03_PARAGRAAF09SUB3_value"
     },
     {
@@ -47762,10 +49268,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100355,
+      "index": 100391,
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB4_value",
       "parsed": "undefined",
-      "id": 100355,
+      "id": 100391,
       "fflname": "Q_MAP03_PARAGRAAF09SUB4_value"
     },
     {
@@ -47776,10 +49282,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100356,
+      "index": 100392,
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB5_value",
       "parsed": "undefined",
-      "id": 100356,
+      "id": 100392,
       "fflname": "Q_MAP03_PARAGRAAF09SUB5_value"
     },
     {
@@ -47790,10 +49296,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100357,
+      "index": 100393,
       "name": "MVO_Q_MAP03_HULPVARIABELEN_value",
       "parsed": "undefined",
-      "id": 100357,
+      "id": 100393,
       "fflname": "Q_MAP03_HULPVARIABELEN_value"
     },
     {
@@ -47806,7 +49312,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_value",
           "association": "refs",
-          "refId": 100234
+          "refId": 100256
         },
         {
           "name": "MVO_Q_MAP03_WARNING_required",
@@ -47892,11 +49398,35 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_PARAGRAAF09_required": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP03,Q_MAP03_HULPVARIABELEN),InputRequired(X))",
-      "index": 100358,
+      "index": 100394,
       "name": "MVO_Q_MAP03_REQUIREDVARS_value",
       "parsed": "Count([false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false])",
-      "id": 100358,
+      "id": 100394,
       "fflname": "Q_MAP03_REQUIREDVARS_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_REQUIREDVARS_visible": true,
+        "MVO_Q_MAP03_ENTEREDREQUIREDVARS_visible": true,
+        "MVO_Q_MAP03_VERPLICHT_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP03_PARAGRAAF11_visible",
+          "association": "deps",
+          "refId": 100279
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP03_PARAGRAAF11_visible": true
+      },
+      "original": "Q_MAP03_HULPVARIABELEN.visible",
+      "index": 100395,
+      "name": "MVO_Q_MAP03_REQUIREDVARS_visible",
+      "parsed": "a100279('100279',x,y.base,z,v)",
+      "id": 100395,
+      "fflname": "Q_MAP03_REQUIREDVARS_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -47908,7 +49438,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_value",
           "association": "refs",
-          "refId": 100234
+          "refId": 100256
         },
         {
           "name": "MVO_Q_MAP03_WARNING_required",
@@ -47917,7 +49447,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_WARNING_value",
           "association": "deps",
-          "refId": 100236
+          "refId": 100258
         },
         {
           "name": "MVO_Q_MAP03_INFO_required",
@@ -47926,7 +49456,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_INFO_value",
           "association": "deps",
-          "refId": 100238
+          "refId": 100261
         },
         {
           "name": "MVO_Q_MAP03_VALIDATION_required",
@@ -47935,7 +49465,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VALIDATION_value",
           "association": "deps",
-          "refId": 100240
+          "refId": 100263
         },
         {
           "name": "MVO_Q_MAP03_HINT_required",
@@ -47944,7 +49474,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_HINT_value",
           "association": "deps",
-          "refId": 100242
+          "refId": 100265
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF01_required",
@@ -47953,7 +49483,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF01_value",
           "association": "deps",
-          "refId": 100244
+          "refId": 100267
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF11_required",
@@ -47962,7 +49492,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF11_value",
           "association": "deps",
-          "refId": 100253
+          "refId": 100277
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF10_required",
@@ -47971,7 +49501,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF10_value",
           "association": "deps",
-          "refId": 100258
+          "refId": 100284
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF00_required",
@@ -47980,7 +49510,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF00_value",
           "association": "deps",
-          "refId": 100271
+          "refId": 100298
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF02_required",
@@ -47989,7 +49519,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF02_value",
           "association": "deps",
-          "refId": 100274
+          "refId": 100302
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF03_required",
@@ -47998,7 +49528,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF03_value",
           "association": "deps",
-          "refId": 100286
+          "refId": 100315
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF04_required",
@@ -48007,7 +49537,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF04_value",
           "association": "deps",
-          "refId": 100295
+          "refId": 100325
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF05_required",
@@ -48016,7 +49546,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF05_value",
           "association": "deps",
-          "refId": 100307
+          "refId": 100338
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF06_required",
@@ -48025,7 +49555,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF06_value",
           "association": "deps",
-          "refId": 100318
+          "refId": 100350
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF07_required",
@@ -48034,7 +49564,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF07_value",
           "association": "deps",
-          "refId": 100329
+          "refId": 100362
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF08_required",
@@ -48043,7 +49573,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF08_value",
           "association": "deps",
-          "refId": 100340
+          "refId": 100374
         },
         {
           "name": "MVO_Q_MAP03_PARAGRAAF09_required",
@@ -48052,7 +49582,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_PARAGRAAF09_value",
           "association": "deps",
-          "refId": 100351
+          "refId": 100386
         }
       ],
       "deps": {
@@ -48090,10 +49620,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_PARAGRAAF09_value": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP03,Q_MAP03_HULPVARIABELEN),InputRequired(X)&&DataAvailable(X))",
-      "index": 100359,
+      "index": 100396,
       "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
-      "parsed": "Count([false&&v[100236][x.hash + y.hash + z]!==undefined,false&&v[100238][x.hash + y.hash + z]!==undefined,false&&v[100240][x.hash + y.hash + z]!==undefined,false&&v[100242][x.hash + y.hash + z]!==undefined,false&&v[100244][x.hash + y.hash + z]!==undefined,false&&v[100253][x.hash + y.hash + z]!==undefined,false&&v[100258][x.hash + y.hash + z]!==undefined,false&&v[100271][x.hash + y.hash + z]!==undefined,false&&v[100274][x.hash + y.hash + z]!==undefined,false&&v[100286][x.hash + y.hash + z]!==undefined,false&&v[100295][x.hash + y.hash + z]!==undefined,false&&v[100307][x.hash + y.hash + z]!==undefined,false&&v[100318][x.hash + y.hash + z]!==undefined,false&&v[100329][x.hash + y.hash + z]!==undefined,false&&v[100340][x.hash + y.hash + z]!==undefined,false&&v[100351][x.hash + y.hash + z]!==undefined])",
-      "id": 100359,
+      "parsed": "Count([false&&v[100258][x.hash + y.hash + z]!==undefined,false&&v[100261][x.hash + y.hash + z]!==undefined,false&&v[100263][x.hash + y.hash + z]!==undefined,false&&v[100265][x.hash + y.hash + z]!==undefined,false&&v[100267][x.hash + y.hash + z]!==undefined,false&&v[100277][x.hash + y.hash + z]!==undefined,false&&v[100284][x.hash + y.hash + z]!==undefined,false&&v[100298][x.hash + y.hash + z]!==undefined,false&&v[100302][x.hash + y.hash + z]!==undefined,false&&v[100315][x.hash + y.hash + z]!==undefined,false&&v[100325][x.hash + y.hash + z]!==undefined,false&&v[100338][x.hash + y.hash + z]!==undefined,false&&v[100350][x.hash + y.hash + z]!==undefined,false&&v[100362][x.hash + y.hash + z]!==undefined,false&&v[100374][x.hash + y.hash + z]!==undefined,false&&v[100386][x.hash + y.hash + z]!==undefined])",
+      "id": 100396,
       "fflname": "Q_MAP03_ENTEREDREQUIREDVARS_value"
     },
     {
@@ -48135,15 +49665,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG01_required",
           "association": "refs",
-          "refId": 100277
+          "refId": 100306
         }
       ],
       "deps": {},
       "original": "1",
-      "index": 100360,
+      "index": 100397,
       "name": "MVO_Q_MAP03_VERPLICHT_value",
       "parsed": "1",
-      "id": 100360,
+      "id": 100397,
       "fflname": "Q_MAP03_VERPLICHT_value"
     },
     {
@@ -48156,17 +49686,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "deps",
-          "refId": 100481
+          "refId": 100527
         },
         {
           "name": "MVO_Q_MAP04_REQUIREDVARS_value",
           "association": "deps",
-          "refId": 100480
+          "refId": 100525
         },
         {
           "name": "MVO_Q_MAP04_INFO_value",
           "association": "refs",
-          "refId": 100365
+          "refId": 100403
         }
       ],
       "deps": {
@@ -48174,10 +49704,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP04_REQUIREDVARS_value": true
       },
       "original": "Q_MAP04_ENTEREDREQUIREDVARS==Q_MAP04_REQUIREDVARS",
-      "index": 100361,
+      "index": 100398,
       "name": "MVO_Q_MAP04_value",
-      "parsed": "a100481('100481',x,y.base,z,v)==a100480('100480',x,y.base,z,v)",
-      "id": 100361,
+      "parsed": "a100527('100527',x,y.base,z,v)==a100525('100525',x,y.base,z,v)",
+      "id": 100398,
       "fflname": "Q_MAP04_value"
     },
     {
@@ -48188,10 +49718,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Implementatie thema Werknemers'",
-      "index": 100362,
+      "index": 100399,
       "name": "MVO_Q_MAP04_title",
       "parsed": "'Implementatie thema Werknemers'",
-      "id": 100362,
+      "id": 100399,
       "fflname": "Q_MAP04_title"
     },
     {
@@ -48204,17 +49734,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_RESTRICTIES_value",
           "association": "deps",
-          "refId": 100564
+          "refId": 100617
         },
         {
           "name": "MVO_Q_WARNING_GLOBAL_value",
           "association": "deps",
-          "refId": 100558
+          "refId": 100609
         },
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100481
+          "refId": 100527
         }
       ],
       "deps": {
@@ -48222,10 +49752,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_WARNING_GLOBAL_value": true
       },
       "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
-      "index": 100363,
+      "index": 100400,
       "name": "MVO_Q_MAP04_WARNING_value",
-      "parsed": "String(a100564('100564',x.doc,y.base,z,v)+a100558('100558',x.doc,y.base,z,v))",
-      "id": 100363,
+      "parsed": "String(a100617('100617',x.doc,y.base,z,v)+a100609('100609',x.doc,y.base,z,v))",
+      "id": 100400,
       "fflname": "Q_MAP04_WARNING_value"
     },
     {
@@ -48237,11 +49767,142 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Warning voor map 4'",
-      "index": 100364,
+      "index": 100401,
       "name": "MVO_Q_MAP04_WARNING_title",
       "parsed": "'Warning voor map 4'",
-      "id": 100364,
+      "id": 100401,
       "fflname": "Q_MAP04_WARNING_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP04_WARNING_visible": true,
+        "MVO_Q_MAP04_INFO_visible": true,
+        "MVO_Q_MAP04_VALIDATION_visible": true,
+        "MVO_Q_MAP04_HINT_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF00_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF01_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF02_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF03_visible": true,
+        "MVO_Q_MAP04_VERBORGEN_visible": true,
+        "MVO_Q_MAP04_VRAAG01_visible": true,
+        "MVO_Q_MAP04_VRAAG01_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG02_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG03_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG04_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_visible": true,
+        "MVO_Q_MAP04_VRAAG05_visible": true,
+        "MVO_Q_MAP04_VRAAG05_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG06_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG07_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG08_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG09_visible": true,
+        "MVO_Q_MAP04_VRAAG09_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG10_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG11_MEMO_visible": true,
+        "MVO_Q_MAP04_VRAAG12_MEMO_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_visible",
+          "association": "deps",
+          "refId": 100083
+        },
+        {
+          "name": "MVO_Q_MAP04_VERBORGEN_visible",
+          "association": "refs",
+          "refId": 100412
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG01_visible",
+          "association": "refs",
+          "refId": 100418
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG01_MEMO_visible",
+          "association": "refs",
+          "refId": 100421
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG02_MEMO_visible",
+          "association": "refs",
+          "refId": 100426
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG03_MEMO_visible",
+          "association": "refs",
+          "refId": 100431
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG04_MEMO_visible",
+          "association": "refs",
+          "refId": 100436
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_visible",
+          "association": "refs",
+          "refId": 100440
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG05_visible",
+          "association": "refs",
+          "refId": 100447
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG05_MEMO_visible",
+          "association": "refs",
+          "refId": 100449
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG06_MEMO_visible",
+          "association": "refs",
+          "refId": 100454
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG07_MEMO_visible",
+          "association": "refs",
+          "refId": 100459
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG08_MEMO_visible",
+          "association": "refs",
+          "refId": 100464
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG09_visible",
+          "association": "refs",
+          "refId": 100471
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG09_MEMO_visible",
+          "association": "refs",
+          "refId": 100473
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG10_MEMO_visible",
+          "association": "refs",
+          "refId": 100478
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG11_MEMO_visible",
+          "association": "refs",
+          "refId": 100483
+        },
+        {
+          "name": "MVO_Q_MAP04_VRAAG12_MEMO_visible",
+          "association": "refs",
+          "refId": 100488
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_visible": true
+      },
+      "original": "Q_MAP04.visible",
+      "index": 100402,
+      "name": "MVO_Q_MAP04_WARNING_visible",
+      "parsed": "a100083('100083',x,y.base,z,v)",
+      "id": 100402,
+      "fflname": "Q_MAP04_WARNING_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -48253,22 +49914,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_value",
           "association": "deps",
-          "refId": 100361
+          "refId": 100398
         },
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100481
+          "refId": 100527
         }
       ],
       "deps": {
         "MVO_Q_MAP04_value": true
       },
       "original": "String(If(Q_MAP04[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
-      "index": 100365,
+      "index": 100403,
       "name": "MVO_Q_MAP04_INFO_value",
-      "parsed": "String(a100361('100361',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
-      "id": 100365,
+      "parsed": "String(a100398('100398',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
+      "id": 100403,
       "fflname": "Q_MAP04_INFO_value"
     },
     {
@@ -48280,10 +49941,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Info bij stap 4'",
-      "index": 100366,
+      "index": 100404,
       "name": "MVO_Q_MAP04_INFO_title",
       "parsed": "'Info bij stap 4'",
-      "id": 100366,
+      "id": 100404,
       "fflname": "Q_MAP04_INFO_title"
     },
     {
@@ -48296,15 +49957,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100481
+          "refId": 100527
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100367,
+      "index": 100405,
       "name": "MVO_Q_MAP04_VALIDATION_value",
       "parsed": "undefined",
-      "id": 100367,
+      "id": 100405,
       "fflname": "Q_MAP04_VALIDATION_value"
     },
     {
@@ -48316,10 +49977,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Validatie stap 4'",
-      "index": 100368,
+      "index": 100406,
       "name": "MVO_Q_MAP04_VALIDATION_title",
       "parsed": "'Validatie stap 4'",
-      "id": 100368,
+      "id": 100406,
       "fflname": "Q_MAP04_VALIDATION_title"
     },
     {
@@ -48332,15 +49993,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100481
+          "refId": 100527
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100369,
+      "index": 100407,
       "name": "MVO_Q_MAP04_HINT_value",
       "parsed": "undefined",
-      "id": 100369,
+      "id": 100407,
       "fflname": "Q_MAP04_HINT_value"
     },
     {
@@ -48351,10 +50012,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Hinttekst stap 4'",
-      "index": 100370,
+      "index": 100408,
       "name": "MVO_Q_MAP04_HINT_title",
       "parsed": "'Hinttekst stap 4'",
-      "id": 100370,
+      "id": 100408,
       "fflname": "Q_MAP04_HINT_title"
     },
     {
@@ -48367,15 +50028,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100481
+          "refId": 100527
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100371,
+      "index": 100409,
       "name": "MVO_Q_MAP04_PARAGRAAF00_value",
       "parsed": "undefined",
-      "id": 100371,
+      "id": 100409,
       "fflname": "Q_MAP04_PARAGRAAF00_value"
     },
     {
@@ -48386,10 +50047,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Toelichting implementatie'",
-      "index": 100372,
+      "index": 100410,
       "name": "MVO_Q_MAP04_PARAGRAAF00_title",
       "parsed": "'Toelichting implementatie'",
-      "id": 100372,
+      "id": 100410,
       "fflname": "Q_MAP04_PARAGRAAF00_title"
     },
     {
@@ -48400,11 +50061,33 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100373,
+      "index": 100411,
       "name": "MVO_Q_MAP04_VERBORGEN_value",
       "parsed": "undefined",
-      "id": 100373,
+      "id": 100411,
       "fflname": "Q_MAP04_VERBORGEN_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP04_VERBORGEN_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true
+      },
+      "original": "Q_MAP04_PARAGRAAF00.visible&&0",
+      "index": 100412,
+      "name": "MVO_Q_MAP04_VERBORGEN_visible",
+      "parsed": "a100402('100402',x,y.base,z,v)&&0",
+      "id": 100412,
+      "fflname": "Q_MAP04_VERBORGEN_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -48416,15 +50099,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100481
+          "refId": 100527
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100374,
+      "index": 100413,
       "name": "MVO_Q_MAP04_PARAGRAAF01_value",
       "parsed": "undefined",
-      "id": 100374,
+      "id": 100413,
       "fflname": "Q_MAP04_PARAGRAAF01_value"
     },
     {
@@ -48435,10 +50118,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Arbeidsomstandigheden'",
-      "index": 100375,
+      "index": 100414,
       "name": "MVO_Q_MAP04_PARAGRAAF01_title",
       "parsed": "'Arbeidsomstandigheden'",
-      "id": 100375,
+      "id": 100414,
       "fflname": "Q_MAP04_PARAGRAAF01_title"
     },
     {
@@ -48449,10 +50132,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'ISO 26000 - hoofdstuk 6.4.4'",
-      "index": 100376,
+      "index": 100415,
       "name": "MVO_Q_MAP04_PARAGRAAF01_hint",
       "parsed": "'ISO 26000 - hoofdstuk 6.4.4'",
-      "id": 100376,
+      "id": 100415,
       "fflname": "Q_MAP04_PARAGRAAF01_hint"
     },
     {
@@ -48466,20 +50149,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG01_MEMO_visible",
           "association": "refs",
-          "refId": 100381
+          "refId": 100421
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100516
+          "refId": 100566
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100377,
+      "index": 100416,
       "name": "MVO_Q_MAP04_VRAAG01_value",
       "parsed": "undefined",
-      "id": 100377,
+      "id": 100416,
       "fflname": "Q_MAP04_VRAAG01_value"
     },
     {
@@ -48490,11 +50173,36 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Ons beleid is niet in strijd met de CAO(s)'",
-      "index": 100378,
+      "index": 100417,
       "name": "MVO_Q_MAP04_VRAAG01_title",
       "parsed": "'Ons beleid is niet in strijd met de CAO(s)'",
-      "id": 100378,
+      "id": 100417,
       "fflname": "Q_MAP04_VRAAG01_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP04_VRAAG01_visible": true,
+        "MVO_Q_MAP04_VRAAG02_visible": true,
+        "MVO_Q_MAP04_VRAAG03_visible": true,
+        "MVO_Q_MAP04_VRAAG04_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true
+      },
+      "original": "Q_MAP04_PARAGRAAF01.visible",
+      "index": 100418,
+      "name": "MVO_Q_MAP04_VRAAG01_visible",
+      "parsed": "a100402('100402',x,y.base,z,v)",
+      "id": 100418,
+      "fflname": "Q_MAP04_VRAAG01_visible"
     },
     {
       "type": "noCacheLocked",
@@ -48516,17 +50224,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VERPLICHT_value",
           "association": "deps",
-          "refId": 100482
+          "refId": 100528
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VERPLICHT_value": true
       },
       "original": "Q_MAP04_VERPLICHT[doc]==1",
-      "index": 100379,
+      "index": 100419,
       "name": "MVO_Q_MAP04_VRAAG01_required",
-      "parsed": "a100482('100482',x.doc,y.base,z,v)==1",
-      "id": 100379,
+      "parsed": "a100528('100528',x.doc,y.base,z,v)==1",
+      "id": 100419,
       "fflname": "Q_MAP04_VRAAG01_required"
     },
     {
@@ -48537,10 +50245,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100380,
+      "index": 100420,
       "name": "MVO_Q_MAP04_VRAAG01_MEMO_value",
       "parsed": "undefined",
-      "id": 100380,
+      "id": 100420,
       "fflname": "Q_MAP04_VRAAG01_MEMO_value"
     },
     {
@@ -48551,24 +50259,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG01_value",
           "association": "deps",
-          "refId": 100377
+          "refId": 100416
         },
         {
           "name": "MVO_Q_MAP04_VRAAG01_MEMO_required",
           "association": "refs",
-          "refId": 100382
+          "refId": 100422
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG01_value": true
       },
-      "original": "Q_MAP04_VRAAG01==1",
-      "index": 100381,
+      "original": "Q_MAP04_PARAGRAAF01.visible&&Q_MAP04_VRAAG01==1",
+      "index": 100421,
       "name": "MVO_Q_MAP04_VRAAG01_MEMO_visible",
-      "parsed": "a100377('100377',x,y.base,z,v)==1",
-      "id": 100381,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100416('100416',x,y.base,z,v)==1",
+      "id": 100421,
       "fflname": "Q_MAP04_VRAAG01_MEMO_visible"
     },
     {
@@ -48580,17 +50294,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG01_MEMO_visible",
           "association": "deps",
-          "refId": 100381
+          "refId": 100421
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG01_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG01_MEMO)",
-      "index": 100382,
+      "index": 100422,
       "name": "MVO_Q_MAP04_VRAAG01_MEMO_required",
-      "parsed": "a100381('100381',x,y.base,z,v)",
-      "id": 100382,
+      "parsed": "a100421('100421',x,y.base,z,v)",
+      "id": 100422,
       "fflname": "Q_MAP04_VRAAG01_MEMO_required"
     },
     {
@@ -48604,20 +50318,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG02_MEMO_visible",
           "association": "refs",
-          "refId": 100386
+          "refId": 100426
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100516
+          "refId": 100566
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100383,
+      "index": 100423,
       "name": "MVO_Q_MAP04_VRAAG02_value",
       "parsed": "undefined",
-      "id": 100383,
+      "id": 100423,
       "fflname": "Q_MAP04_VRAAG02_value"
     },
     {
@@ -48628,10 +50342,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Voert u wijzigingen in de CAO door in uw arbeidscontracten, ook wanneer dit voor u als werkgever substantiele nadelige financiele consequenties heeft'",
-      "index": 100384,
+      "index": 100424,
       "name": "MVO_Q_MAP04_VRAAG02_title",
       "parsed": "'Voert u wijzigingen in de CAO door in uw arbeidscontracten, ook wanneer dit voor u als werkgever substantiele nadelige financiele consequenties heeft'",
-      "id": 100384,
+      "id": 100424,
       "fflname": "Q_MAP04_VRAAG02_title"
     },
     {
@@ -48642,10 +50356,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100385,
+      "index": 100425,
       "name": "MVO_Q_MAP04_VRAAG02_MEMO_value",
       "parsed": "undefined",
-      "id": 100385,
+      "id": 100425,
       "fflname": "Q_MAP04_VRAAG02_MEMO_value"
     },
     {
@@ -48656,24 +50370,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG02_value",
           "association": "deps",
-          "refId": 100383
+          "refId": 100423
         },
         {
           "name": "MVO_Q_MAP04_VRAAG02_MEMO_required",
           "association": "refs",
-          "refId": 100387
+          "refId": 100427
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG02_value": true
       },
-      "original": "Q_MAP04_VRAAG02==1",
-      "index": 100386,
+      "original": "Q_MAP04_PARAGRAAF01.visible&&Q_MAP04_VRAAG02==1",
+      "index": 100426,
       "name": "MVO_Q_MAP04_VRAAG02_MEMO_visible",
-      "parsed": "a100383('100383',x,y.base,z,v)==1",
-      "id": 100386,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100423('100423',x,y.base,z,v)==1",
+      "id": 100426,
       "fflname": "Q_MAP04_VRAAG02_MEMO_visible"
     },
     {
@@ -48685,17 +50405,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG02_MEMO_visible",
           "association": "deps",
-          "refId": 100386
+          "refId": 100426
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG02_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG02_MEMO)",
-      "index": 100387,
+      "index": 100427,
       "name": "MVO_Q_MAP04_VRAAG02_MEMO_required",
-      "parsed": "a100386('100386',x,y.base,z,v)",
-      "id": 100387,
+      "parsed": "a100426('100426',x,y.base,z,v)",
+      "id": 100427,
       "fflname": "Q_MAP04_VRAAG02_MEMO_required"
     },
     {
@@ -48709,20 +50429,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG03_MEMO_visible",
           "association": "refs",
-          "refId": 100391
+          "refId": 100431
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100516
+          "refId": 100566
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100388,
+      "index": 100428,
       "name": "MVO_Q_MAP04_VRAAG03_value",
       "parsed": "undefined",
-      "id": 100388,
+      "id": 100428,
       "fflname": "Q_MAP04_VRAAG03_value"
     },
     {
@@ -48733,10 +50453,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U zorgt ervoor dat u tijdig op de hoogte bent van wijzigingen in CAO(s)'",
-      "index": 100389,
+      "index": 100429,
       "name": "MVO_Q_MAP04_VRAAG03_title",
       "parsed": "'U zorgt ervoor dat u tijdig op de hoogte bent van wijzigingen in CAO(s)'",
-      "id": 100389,
+      "id": 100429,
       "fflname": "Q_MAP04_VRAAG03_title"
     },
     {
@@ -48747,10 +50467,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100390,
+      "index": 100430,
       "name": "MVO_Q_MAP04_VRAAG03_MEMO_value",
       "parsed": "undefined",
-      "id": 100390,
+      "id": 100430,
       "fflname": "Q_MAP04_VRAAG03_MEMO_value"
     },
     {
@@ -48761,24 +50481,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG03_value",
           "association": "deps",
-          "refId": 100388
+          "refId": 100428
         },
         {
           "name": "MVO_Q_MAP04_VRAAG03_MEMO_required",
           "association": "refs",
-          "refId": 100392
+          "refId": 100432
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG03_value": true
       },
-      "original": "Q_MAP04_VRAAG03==1",
-      "index": 100391,
+      "original": "Q_MAP04_PARAGRAAF01.visible&&Q_MAP04_VRAAG03==1",
+      "index": 100431,
       "name": "MVO_Q_MAP04_VRAAG03_MEMO_visible",
-      "parsed": "a100388('100388',x,y.base,z,v)==1",
-      "id": 100391,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100428('100428',x,y.base,z,v)==1",
+      "id": 100431,
       "fflname": "Q_MAP04_VRAAG03_MEMO_visible"
     },
     {
@@ -48790,17 +50516,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG03_MEMO_visible",
           "association": "deps",
-          "refId": 100391
+          "refId": 100431
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG03_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG03_MEMO)",
-      "index": 100392,
+      "index": 100432,
       "name": "MVO_Q_MAP04_VRAAG03_MEMO_required",
-      "parsed": "a100391('100391',x,y.base,z,v)",
-      "id": 100392,
+      "parsed": "a100431('100431',x,y.base,z,v)",
+      "id": 100432,
       "fflname": "Q_MAP04_VRAAG03_MEMO_required"
     },
     {
@@ -48815,25 +50541,25 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG04_MEMO_visible",
           "association": "refs",
-          "refId": 100396
+          "refId": 100436
         },
         {
           "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_visible",
           "association": "refs",
-          "refId": 100400
+          "refId": 100440
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100516
+          "refId": 100566
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100393,
+      "index": 100433,
       "name": "MVO_Q_MAP04_VRAAG04_value",
       "parsed": "undefined",
-      "id": 100393,
+      "id": 100433,
       "fflname": "Q_MAP04_VRAAG04_value"
     },
     {
@@ -48844,10 +50570,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de potentiele klant in zijn arbeidscontractens salarissen hanteert die in strijd zijn met de geldende CAO'",
-      "index": 100394,
+      "index": 100434,
       "name": "MVO_Q_MAP04_VRAAG04_title",
       "parsed": "'Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de potentiele klant in zijn arbeidscontractens salarissen hanteert die in strijd zijn met de geldende CAO'",
-      "id": 100394,
+      "id": 100434,
       "fflname": "Q_MAP04_VRAAG04_title"
     },
     {
@@ -48858,10 +50584,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100395,
+      "index": 100435,
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_value",
       "parsed": "undefined",
-      "id": 100395,
+      "id": 100435,
       "fflname": "Q_MAP04_VRAAG04_MEMO_value"
     },
     {
@@ -48872,24 +50598,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG04_value",
           "association": "deps",
-          "refId": 100393
+          "refId": 100433
         },
         {
           "name": "MVO_Q_MAP04_VRAAG04_MEMO_required",
           "association": "refs",
-          "refId": 100397
+          "refId": 100437
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG04_value": true
       },
-      "original": "Q_MAP04_VRAAG04==1",
-      "index": 100396,
+      "original": "Q_MAP04_PARAGRAAF01.visible&&Q_MAP04_VRAAG04==1",
+      "index": 100436,
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_visible",
-      "parsed": "a100393('100393',x,y.base,z,v)==1",
-      "id": 100396,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100433('100433',x,y.base,z,v)==1",
+      "id": 100436,
       "fflname": "Q_MAP04_VRAAG04_MEMO_visible"
     },
     {
@@ -48901,17 +50633,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG04_MEMO_visible",
           "association": "deps",
-          "refId": 100396
+          "refId": 100436
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG04_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG04_MEMO)",
-      "index": 100397,
+      "index": 100437,
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_required",
-      "parsed": "a100396('100396',x,y.base,z,v)",
-      "id": 100397,
+      "parsed": "a100436('100436',x,y.base,z,v)",
+      "id": 100437,
       "fflname": "Q_MAP04_VRAAG04_MEMO_required"
     },
     {
@@ -48922,10 +50654,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100398,
+      "index": 100438,
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_value",
       "parsed": "undefined",
-      "id": 100398,
+      "id": 100438,
       "fflname": "Q_MAP04_VRAAG04_MEMO_EXTRA_value"
     },
     {
@@ -48936,10 +50668,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Welk onderwerp / onderwerpen van de CAO zou voor u eventueel wel een reden zijn om bovenstaande deal af te slaan'",
-      "index": 100399,
+      "index": 100439,
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_title",
       "parsed": "'Welk onderwerp / onderwerpen van de CAO zou voor u eventueel wel een reden zijn om bovenstaande deal af te slaan'",
-      "id": 100399,
+      "id": 100439,
       "fflname": "Q_MAP04_VRAAG04_MEMO_EXTRA_title"
     },
     {
@@ -48950,24 +50682,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG04_value",
           "association": "deps",
-          "refId": 100393
+          "refId": 100433
         },
         {
           "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_required",
           "association": "refs",
-          "refId": 100401
+          "refId": 100441
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG04_value": true
       },
-      "original": "Q_MAP04_VRAAG04==0",
-      "index": 100400,
+      "original": "Q_MAP04_PARAGRAAF01.visible&&Q_MAP04_VRAAG04==0",
+      "index": 100440,
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_visible",
-      "parsed": "a100393('100393',x,y.base,z,v)==0",
-      "id": 100400,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100433('100433',x,y.base,z,v)==0",
+      "id": 100440,
       "fflname": "Q_MAP04_VRAAG04_MEMO_EXTRA_visible"
     },
     {
@@ -48979,17 +50717,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_visible",
           "association": "deps",
-          "refId": 100400
+          "refId": 100440
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG04_MEMO_EXTRA)",
-      "index": 100401,
+      "index": 100441,
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_required",
-      "parsed": "a100400('100400',x,y.base,z,v)",
-      "id": 100401,
+      "parsed": "a100440('100440',x,y.base,z,v)",
+      "id": 100441,
       "fflname": "Q_MAP04_VRAAG04_MEMO_EXTRA_required"
     },
     {
@@ -49002,15 +50740,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100481
+          "refId": 100527
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100402,
+      "index": 100442,
       "name": "MVO_Q_MAP04_PARAGRAAF02_value",
       "parsed": "undefined",
-      "id": 100402,
+      "id": 100442,
       "fflname": "Q_MAP04_PARAGRAAF02_value"
     },
     {
@@ -49021,10 +50759,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Gezondheid en veiligheid'",
-      "index": 100403,
+      "index": 100443,
       "name": "MVO_Q_MAP04_PARAGRAAF02_title",
       "parsed": "'Gezondheid en veiligheid'",
-      "id": 100403,
+      "id": 100443,
       "fflname": "Q_MAP04_PARAGRAAF02_title"
     },
     {
@@ -49035,10 +50773,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'ISO 26000 - hoofdstuk 6.4.6'",
-      "index": 100404,
+      "index": 100444,
       "name": "MVO_Q_MAP04_PARAGRAAF02_hint",
       "parsed": "'ISO 26000 - hoofdstuk 6.4.6'",
-      "id": 100404,
+      "id": 100444,
       "fflname": "Q_MAP04_PARAGRAAF02_hint"
     },
     {
@@ -49052,20 +50790,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG05_MEMO_visible",
           "association": "refs",
-          "refId": 100408
+          "refId": 100449
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100518
+          "refId": 100569
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100405,
+      "index": 100445,
       "name": "MVO_Q_MAP04_VRAAG05_value",
       "parsed": "undefined",
-      "id": 100405,
+      "id": 100445,
       "fflname": "Q_MAP04_VRAAG05_value"
     },
     {
@@ -49076,11 +50814,36 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Wij hebben een gezondheids- en veiligheidsbeleid'",
-      "index": 100406,
+      "index": 100446,
       "name": "MVO_Q_MAP04_VRAAG05_title",
       "parsed": "'Wij hebben een gezondheids- en veiligheidsbeleid'",
-      "id": 100406,
+      "id": 100446,
       "fflname": "Q_MAP04_VRAAG05_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP04_VRAAG05_visible": true,
+        "MVO_Q_MAP04_VRAAG06_visible": true,
+        "MVO_Q_MAP04_VRAAG07_visible": true,
+        "MVO_Q_MAP04_VRAAG08_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true
+      },
+      "original": "Q_MAP04_PARAGRAAF02.visible",
+      "index": 100447,
+      "name": "MVO_Q_MAP04_VRAAG05_visible",
+      "parsed": "a100402('100402',x,y.base,z,v)",
+      "id": 100447,
+      "fflname": "Q_MAP04_VRAAG05_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -49090,10 +50853,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100407,
+      "index": 100448,
       "name": "MVO_Q_MAP04_VRAAG05_MEMO_value",
       "parsed": "undefined",
-      "id": 100407,
+      "id": 100448,
       "fflname": "Q_MAP04_VRAAG05_MEMO_value"
     },
     {
@@ -49104,24 +50867,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG05_value",
           "association": "deps",
-          "refId": 100405
+          "refId": 100445
         },
         {
           "name": "MVO_Q_MAP04_VRAAG05_MEMO_required",
           "association": "refs",
-          "refId": 100409
+          "refId": 100450
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG05_value": true
       },
-      "original": "Q_MAP04_VRAAG05==1",
-      "index": 100408,
+      "original": "Q_MAP04_PARAGRAAF02.visible&&Q_MAP04_VRAAG05==1",
+      "index": 100449,
       "name": "MVO_Q_MAP04_VRAAG05_MEMO_visible",
-      "parsed": "a100405('100405',x,y.base,z,v)==1",
-      "id": 100408,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100445('100445',x,y.base,z,v)==1",
+      "id": 100449,
       "fflname": "Q_MAP04_VRAAG05_MEMO_visible"
     },
     {
@@ -49133,17 +50902,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG05_MEMO_visible",
           "association": "deps",
-          "refId": 100408
+          "refId": 100449
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG05_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG05_MEMO)",
-      "index": 100409,
+      "index": 100450,
       "name": "MVO_Q_MAP04_VRAAG05_MEMO_required",
-      "parsed": "a100408('100408',x,y.base,z,v)",
-      "id": 100409,
+      "parsed": "a100449('100449',x,y.base,z,v)",
+      "id": 100450,
       "fflname": "Q_MAP04_VRAAG05_MEMO_required"
     },
     {
@@ -49157,20 +50926,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG06_MEMO_visible",
           "association": "refs",
-          "refId": 100413
+          "refId": 100454
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100518
+          "refId": 100569
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100410,
+      "index": 100451,
       "name": "MVO_Q_MAP04_VRAAG06_value",
       "parsed": "undefined",
-      "id": 100410,
+      "id": 100451,
       "fflname": "Q_MAP04_VRAAG06_value"
     },
     {
@@ -49181,10 +50950,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Zorgt u ervoor dat procedures en veilige werkwijzen altijd worden gevolgd, ook wanneer dit voor u als werkgever substantiele nadelige financiele consequenties heeft'",
-      "index": 100411,
+      "index": 100452,
       "name": "MVO_Q_MAP04_VRAAG06_title",
       "parsed": "'Zorgt u ervoor dat procedures en veilige werkwijzen altijd worden gevolgd, ook wanneer dit voor u als werkgever substantiele nadelige financiele consequenties heeft'",
-      "id": 100411,
+      "id": 100452,
       "fflname": "Q_MAP04_VRAAG06_title"
     },
     {
@@ -49195,10 +50964,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100412,
+      "index": 100453,
       "name": "MVO_Q_MAP04_VRAAG06_MEMO_value",
       "parsed": "undefined",
-      "id": 100412,
+      "id": 100453,
       "fflname": "Q_MAP04_VRAAG06_MEMO_value"
     },
     {
@@ -49209,24 +50978,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG06_value",
           "association": "deps",
-          "refId": 100410
+          "refId": 100451
         },
         {
           "name": "MVO_Q_MAP04_VRAAG06_MEMO_required",
           "association": "refs",
-          "refId": 100414
+          "refId": 100455
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG06_value": true
       },
-      "original": "Q_MAP04_VRAAG06==1",
-      "index": 100413,
+      "original": "Q_MAP04_PARAGRAAF02.visible&&Q_MAP04_VRAAG06==1",
+      "index": 100454,
       "name": "MVO_Q_MAP04_VRAAG06_MEMO_visible",
-      "parsed": "a100410('100410',x,y.base,z,v)==1",
-      "id": 100413,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100451('100451',x,y.base,z,v)==1",
+      "id": 100454,
       "fflname": "Q_MAP04_VRAAG06_MEMO_visible"
     },
     {
@@ -49238,17 +51013,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG06_MEMO_visible",
           "association": "deps",
-          "refId": 100413
+          "refId": 100454
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG06_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG06_MEMO)",
-      "index": 100414,
+      "index": 100455,
       "name": "MVO_Q_MAP04_VRAAG06_MEMO_required",
-      "parsed": "a100413('100413',x,y.base,z,v)",
-      "id": 100414,
+      "parsed": "a100454('100454',x,y.base,z,v)",
+      "id": 100455,
       "fflname": "Q_MAP04_VRAAG06_MEMO_required"
     },
     {
@@ -49262,20 +51037,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG07_MEMO_visible",
           "association": "refs",
-          "refId": 100418
+          "refId": 100459
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100518
+          "refId": 100569
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100415,
+      "index": 100456,
       "name": "MVO_Q_MAP04_VRAAG07_value",
       "parsed": "undefined",
-      "id": 100415,
+      "id": 100456,
       "fflname": "Q_MAP04_VRAAG07_value"
     },
     {
@@ -49286,10 +51061,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'U zorgt ervoor dat het calamiteitenplan minstens jaarlijks wordt doorlopen'",
-      "index": 100416,
+      "index": 100457,
       "name": "MVO_Q_MAP04_VRAAG07_title",
       "parsed": "'U zorgt ervoor dat het calamiteitenplan minstens jaarlijks wordt doorlopen'",
-      "id": 100416,
+      "id": 100457,
       "fflname": "Q_MAP04_VRAAG07_title"
     },
     {
@@ -49300,10 +51075,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100417,
+      "index": 100458,
       "name": "MVO_Q_MAP04_VRAAG07_MEMO_value",
       "parsed": "undefined",
-      "id": 100417,
+      "id": 100458,
       "fflname": "Q_MAP04_VRAAG07_MEMO_value"
     },
     {
@@ -49314,24 +51089,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG07_value",
           "association": "deps",
-          "refId": 100415
+          "refId": 100456
         },
         {
           "name": "MVO_Q_MAP04_VRAAG07_MEMO_required",
           "association": "refs",
-          "refId": 100419
+          "refId": 100460
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG07_value": true
       },
-      "original": "Q_MAP04_VRAAG07==1",
-      "index": 100418,
+      "original": "Q_MAP04_PARAGRAAF02.visible&&Q_MAP04_VRAAG07==1",
+      "index": 100459,
       "name": "MVO_Q_MAP04_VRAAG07_MEMO_visible",
-      "parsed": "a100415('100415',x,y.base,z,v)==1",
-      "id": 100418,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100456('100456',x,y.base,z,v)==1",
+      "id": 100459,
       "fflname": "Q_MAP04_VRAAG07_MEMO_visible"
     },
     {
@@ -49343,17 +51124,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG07_MEMO_visible",
           "association": "deps",
-          "refId": 100418
+          "refId": 100459
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG07_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG07_MEMO)",
-      "index": 100419,
+      "index": 100460,
       "name": "MVO_Q_MAP04_VRAAG07_MEMO_required",
-      "parsed": "a100418('100418',x,y.base,z,v)",
-      "id": 100419,
+      "parsed": "a100459('100459',x,y.base,z,v)",
+      "id": 100460,
       "fflname": "Q_MAP04_VRAAG07_MEMO_required"
     },
     {
@@ -49367,20 +51148,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG08_MEMO_visible",
           "association": "refs",
-          "refId": 100423
+          "refId": 100464
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100518
+          "refId": 100569
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100420,
+      "index": 100461,
       "name": "MVO_Q_MAP04_VRAAG08_value",
       "parsed": "undefined",
-      "id": 100420,
+      "id": 100461,
       "fflname": "Q_MAP04_VRAAG08_value"
     },
     {
@@ -49391,10 +51172,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de werknemers van de potentiele klant in onveilige omstandigheden werken'",
-      "index": 100421,
+      "index": 100462,
       "name": "MVO_Q_MAP04_VRAAG08_title",
       "parsed": "'Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de werknemers van de potentiele klant in onveilige omstandigheden werken'",
-      "id": 100421,
+      "id": 100462,
       "fflname": "Q_MAP04_VRAAG08_title"
     },
     {
@@ -49405,10 +51186,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100422,
+      "index": 100463,
       "name": "MVO_Q_MAP04_VRAAG08_MEMO_value",
       "parsed": "undefined",
-      "id": 100422,
+      "id": 100463,
       "fflname": "Q_MAP04_VRAAG08_MEMO_value"
     },
     {
@@ -49419,24 +51200,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG08_value",
           "association": "deps",
-          "refId": 100420
+          "refId": 100461
         },
         {
           "name": "MVO_Q_MAP04_VRAAG08_MEMO_required",
           "association": "refs",
-          "refId": 100424
+          "refId": 100465
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG08_value": true
       },
-      "original": "Q_MAP04_VRAAG08==1",
-      "index": 100423,
+      "original": "Q_MAP04_PARAGRAAF02.visible&&Q_MAP04_VRAAG08==1",
+      "index": 100464,
       "name": "MVO_Q_MAP04_VRAAG08_MEMO_visible",
-      "parsed": "a100420('100420',x,y.base,z,v)==1",
-      "id": 100423,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100461('100461',x,y.base,z,v)==1",
+      "id": 100464,
       "fflname": "Q_MAP04_VRAAG08_MEMO_visible"
     },
     {
@@ -49448,17 +51235,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG08_MEMO_visible",
           "association": "deps",
-          "refId": 100423
+          "refId": 100464
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG08_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG08_MEMO)",
-      "index": 100424,
+      "index": 100465,
       "name": "MVO_Q_MAP04_VRAAG08_MEMO_required",
-      "parsed": "a100423('100423',x,y.base,z,v)",
-      "id": 100424,
+      "parsed": "a100464('100464',x,y.base,z,v)",
+      "id": 100465,
       "fflname": "Q_MAP04_VRAAG08_MEMO_required"
     },
     {
@@ -49471,15 +51258,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100481
+          "refId": 100527
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100425,
+      "index": 100466,
       "name": "MVO_Q_MAP04_PARAGRAAF03_value",
       "parsed": "undefined",
-      "id": 100425,
+      "id": 100466,
       "fflname": "Q_MAP04_PARAGRAAF03_value"
     },
     {
@@ -49490,10 +51277,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Persoonlijke ontwikkeling en opleiding'",
-      "index": 100426,
+      "index": 100467,
       "name": "MVO_Q_MAP04_PARAGRAAF03_title",
       "parsed": "'Persoonlijke ontwikkeling en opleiding'",
-      "id": 100426,
+      "id": 100467,
       "fflname": "Q_MAP04_PARAGRAAF03_title"
     },
     {
@@ -49504,10 +51291,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'ISO 26000 - hoofdstuk 6.4.7'",
-      "index": 100427,
+      "index": 100468,
       "name": "MVO_Q_MAP04_PARAGRAAF03_hint",
       "parsed": "'ISO 26000 - hoofdstuk 6.4.7'",
-      "id": 100427,
+      "id": 100468,
       "fflname": "Q_MAP04_PARAGRAAF03_hint"
     },
     {
@@ -49521,20 +51308,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG09_MEMO_visible",
           "association": "refs",
-          "refId": 100431
+          "refId": 100473
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100520
+          "refId": 100571
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100428,
+      "index": 100469,
       "name": "MVO_Q_MAP04_VRAAG09_value",
       "parsed": "undefined",
-      "id": 100428,
+      "id": 100469,
       "fflname": "Q_MAP04_VRAAG09_value"
     },
     {
@@ -49545,11 +51332,36 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Ons HRM beleid moedigt opleidingen voor werknemers aan'",
-      "index": 100429,
+      "index": 100470,
       "name": "MVO_Q_MAP04_VRAAG09_title",
       "parsed": "'Ons HRM beleid moedigt opleidingen voor werknemers aan'",
-      "id": 100429,
+      "id": 100470,
       "fflname": "Q_MAP04_VRAAG09_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP04_VRAAG09_visible": true,
+        "MVO_Q_MAP04_VRAAG10_visible": true,
+        "MVO_Q_MAP04_VRAAG11_visible": true,
+        "MVO_Q_MAP04_VRAAG12_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true
+      },
+      "original": "Q_MAP04_PARAGRAAF03.visible",
+      "index": 100471,
+      "name": "MVO_Q_MAP04_VRAAG09_visible",
+      "parsed": "a100402('100402',x,y.base,z,v)",
+      "id": 100471,
+      "fflname": "Q_MAP04_VRAAG09_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -49559,10 +51371,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100430,
+      "index": 100472,
       "name": "MVO_Q_MAP04_VRAAG09_MEMO_value",
       "parsed": "undefined",
-      "id": 100430,
+      "id": 100472,
       "fflname": "Q_MAP04_VRAAG09_MEMO_value"
     },
     {
@@ -49573,24 +51385,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG09_value",
           "association": "deps",
-          "refId": 100428
+          "refId": 100469
         },
         {
           "name": "MVO_Q_MAP04_VRAAG09_MEMO_required",
           "association": "refs",
-          "refId": 100432
+          "refId": 100474
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG09_value": true
       },
-      "original": "Q_MAP04_VRAAG09==1",
-      "index": 100431,
+      "original": "Q_MAP04_PARAGRAAF03.visible&&Q_MAP04_VRAAG09==1",
+      "index": 100473,
       "name": "MVO_Q_MAP04_VRAAG09_MEMO_visible",
-      "parsed": "a100428('100428',x,y.base,z,v)==1",
-      "id": 100431,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100469('100469',x,y.base,z,v)==1",
+      "id": 100473,
       "fflname": "Q_MAP04_VRAAG09_MEMO_visible"
     },
     {
@@ -49602,17 +51420,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG09_MEMO_visible",
           "association": "deps",
-          "refId": 100431
+          "refId": 100473
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG09_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG09_MEMO)",
-      "index": 100432,
+      "index": 100474,
       "name": "MVO_Q_MAP04_VRAAG09_MEMO_required",
-      "parsed": "a100431('100431',x,y.base,z,v)",
-      "id": 100432,
+      "parsed": "a100473('100473',x,y.base,z,v)",
+      "id": 100474,
       "fflname": "Q_MAP04_VRAAG09_MEMO_required"
     },
     {
@@ -49626,20 +51444,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG10_MEMO_visible",
           "association": "refs",
-          "refId": 100436
+          "refId": 100478
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100520
+          "refId": 100571
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100433,
+      "index": 100475,
       "name": "MVO_Q_MAP04_VRAAG10_value",
       "parsed": "undefined",
-      "id": 100433,
+      "id": 100475,
       "fflname": "Q_MAP04_VRAAG10_value"
     },
     {
@@ -49650,10 +51468,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Moedigt u aan dat ingeplande opleidingen worden gevolgd, ook al brengt dit deadlines in gevaar'",
-      "index": 100434,
+      "index": 100476,
       "name": "MVO_Q_MAP04_VRAAG10_title",
       "parsed": "'Moedigt u aan dat ingeplande opleidingen worden gevolgd, ook al brengt dit deadlines in gevaar'",
-      "id": 100434,
+      "id": 100476,
       "fflname": "Q_MAP04_VRAAG10_title"
     },
     {
@@ -49664,10 +51482,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100435,
+      "index": 100477,
       "name": "MVO_Q_MAP04_VRAAG10_MEMO_value",
       "parsed": "undefined",
-      "id": 100435,
+      "id": 100477,
       "fflname": "Q_MAP04_VRAAG10_MEMO_value"
     },
     {
@@ -49678,24 +51496,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG10_value",
           "association": "deps",
-          "refId": 100433
+          "refId": 100475
         },
         {
           "name": "MVO_Q_MAP04_VRAAG10_MEMO_required",
           "association": "refs",
-          "refId": 100437
+          "refId": 100479
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG10_value": true
       },
-      "original": "Q_MAP04_VRAAG10==1",
-      "index": 100436,
+      "original": "Q_MAP04_PARAGRAAF03.visible&&Q_MAP04_VRAAG10==1",
+      "index": 100478,
       "name": "MVO_Q_MAP04_VRAAG10_MEMO_visible",
-      "parsed": "a100433('100433',x,y.base,z,v)==1",
-      "id": 100436,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100475('100475',x,y.base,z,v)==1",
+      "id": 100478,
       "fflname": "Q_MAP04_VRAAG10_MEMO_visible"
     },
     {
@@ -49707,17 +51531,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG10_MEMO_visible",
           "association": "deps",
-          "refId": 100436
+          "refId": 100478
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG10_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG10_MEMO)",
-      "index": 100437,
+      "index": 100479,
       "name": "MVO_Q_MAP04_VRAAG10_MEMO_required",
-      "parsed": "a100436('100436',x,y.base,z,v)",
-      "id": 100437,
+      "parsed": "a100478('100478',x,y.base,z,v)",
+      "id": 100479,
       "fflname": "Q_MAP04_VRAAG10_MEMO_required"
     },
     {
@@ -49731,20 +51555,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG11_MEMO_visible",
           "association": "refs",
-          "refId": 100441
+          "refId": 100483
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100520
+          "refId": 100571
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100438,
+      "index": 100480,
       "name": "MVO_Q_MAP04_VRAAG11_value",
       "parsed": "undefined",
-      "id": 100438,
+      "id": 100480,
       "fflname": "Q_MAP04_VRAAG11_value"
     },
     {
@@ -49755,10 +51579,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Bij de jaarlijkse gesprekken wordt met de werknemer overlegd welke opleiding passend is'",
-      "index": 100439,
+      "index": 100481,
       "name": "MVO_Q_MAP04_VRAAG11_title",
       "parsed": "'Bij de jaarlijkse gesprekken wordt met de werknemer overlegd welke opleiding passend is'",
-      "id": 100439,
+      "id": 100481,
       "fflname": "Q_MAP04_VRAAG11_title"
     },
     {
@@ -49769,10 +51593,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100440,
+      "index": 100482,
       "name": "MVO_Q_MAP04_VRAAG11_MEMO_value",
       "parsed": "undefined",
-      "id": 100440,
+      "id": 100482,
       "fflname": "Q_MAP04_VRAAG11_MEMO_value"
     },
     {
@@ -49783,24 +51607,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG11_value",
           "association": "deps",
-          "refId": 100438
+          "refId": 100480
         },
         {
           "name": "MVO_Q_MAP04_VRAAG11_MEMO_required",
           "association": "refs",
-          "refId": 100442
+          "refId": 100484
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG11_value": true
       },
-      "original": "Q_MAP04_VRAAG11==1",
-      "index": 100441,
+      "original": "Q_MAP04_PARAGRAAF03.visible&&Q_MAP04_VRAAG11==1",
+      "index": 100483,
       "name": "MVO_Q_MAP04_VRAAG11_MEMO_visible",
-      "parsed": "a100438('100438',x,y.base,z,v)==1",
-      "id": 100441,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100480('100480',x,y.base,z,v)==1",
+      "id": 100483,
       "fflname": "Q_MAP04_VRAAG11_MEMO_visible"
     },
     {
@@ -49812,17 +51642,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG11_MEMO_visible",
           "association": "deps",
-          "refId": 100441
+          "refId": 100483
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG11_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG11_MEMO)",
-      "index": 100442,
+      "index": 100484,
       "name": "MVO_Q_MAP04_VRAAG11_MEMO_required",
-      "parsed": "a100441('100441',x,y.base,z,v)",
-      "id": 100442,
+      "parsed": "a100483('100483',x,y.base,z,v)",
+      "id": 100484,
       "fflname": "Q_MAP04_VRAAG11_MEMO_required"
     },
     {
@@ -49836,20 +51666,20 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG12_MEMO_visible",
           "association": "refs",
-          "refId": 100446
+          "refId": 100488
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100520
+          "refId": 100571
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100443,
+      "index": 100485,
       "name": "MVO_Q_MAP04_VRAAG12_value",
       "parsed": "undefined",
-      "id": 100443,
+      "id": 100485,
       "fflname": "Q_MAP04_VRAAG12_value"
     },
     {
@@ -49860,10 +51690,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de potentiele klant persoonlijke ontwikkeling van zijn werknemers ontmoedigt'",
-      "index": 100444,
+      "index": 100486,
       "name": "MVO_Q_MAP04_VRAAG12_title",
       "parsed": "'Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de potentiele klant persoonlijke ontwikkeling van zijn werknemers ontmoedigt'",
-      "id": 100444,
+      "id": 100486,
       "fflname": "Q_MAP04_VRAAG12_title"
     },
     {
@@ -49874,10 +51704,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100445,
+      "index": 100487,
       "name": "MVO_Q_MAP04_VRAAG12_MEMO_value",
       "parsed": "undefined",
-      "id": 100445,
+      "id": 100487,
       "fflname": "Q_MAP04_VRAAG12_MEMO_value"
     },
     {
@@ -49888,24 +51718,30 @@ LME.importLME(JSON_MODEL);
       },
       "formulaDependencys": [
         {
+          "name": "MVO_Q_MAP04_WARNING_visible",
+          "association": "deps",
+          "refId": 100402
+        },
+        {
           "name": "MVO_Q_MAP04_VRAAG12_value",
           "association": "deps",
-          "refId": 100443
+          "refId": 100485
         },
         {
           "name": "MVO_Q_MAP04_VRAAG12_MEMO_required",
           "association": "refs",
-          "refId": 100447
+          "refId": 100489
         }
       ],
       "deps": {
+        "MVO_Q_MAP04_WARNING_visible": true,
         "MVO_Q_MAP04_VRAAG12_value": true
       },
-      "original": "Q_MAP04_VRAAG12==1",
-      "index": 100446,
+      "original": "Q_MAP04_PARAGRAAF03.visible&&Q_MAP04_VRAAG12==1",
+      "index": 100488,
       "name": "MVO_Q_MAP04_VRAAG12_MEMO_visible",
-      "parsed": "a100443('100443',x,y.base,z,v)==1",
-      "id": 100446,
+      "parsed": "a100402('100402',x,y.base,z,v)&&a100485('100485',x,y.base,z,v)==1",
+      "id": 100488,
       "fflname": "Q_MAP04_VRAAG12_MEMO_visible"
     },
     {
@@ -49917,17 +51753,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG12_MEMO_visible",
           "association": "deps",
-          "refId": 100446
+          "refId": 100488
         }
       ],
       "deps": {
         "MVO_Q_MAP04_VRAAG12_MEMO_visible": true
       },
       "original": "Visible(Q_MAP04_VRAAG12_MEMO)",
-      "index": 100447,
+      "index": 100489,
       "name": "MVO_Q_MAP04_VRAAG12_MEMO_required",
-      "parsed": "a100446('100446',x,y.base,z,v)",
-      "id": 100447,
+      "parsed": "a100488('100488',x,y.base,z,v)",
+      "id": 100489,
       "fflname": "Q_MAP04_VRAAG12_MEMO_required"
     },
     {
@@ -49940,15 +51776,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100481
+          "refId": 100527
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100448,
+      "index": 100490,
       "name": "MVO_Q_MAP04_PARAGRAAF10_value",
       "parsed": "undefined",
-      "id": 100448,
+      "id": 100490,
       "fflname": "Q_MAP04_PARAGRAAF10_value"
     },
     {
@@ -49959,11 +51795,53 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Verborgen mapje met gewichten voor deze stap'",
-      "index": 100449,
+      "index": 100491,
       "name": "MVO_Q_MAP04_PARAGRAAF10_title",
       "parsed": "'Verborgen mapje met gewichten voor deze stap'",
-      "id": 100449,
+      "id": 100491,
       "fflname": "Q_MAP04_PARAGRAAF10_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP04_PARAGRAAF10_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF09_visible": true,
+        "MVO_Q_MAP04_HULPVARIABELEN_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG01_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF09SUB1_visible": true,
+        "MVO_Q_MAP04_REQUIREDVARS_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_visible",
+          "association": "deps",
+          "refId": 100083
+        },
+        {
+          "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+          "association": "refs",
+          "refId": 100495
+        },
+        {
+          "name": "MVO_Q_MAP04_PARAGRAAF09SUB1_visible",
+          "association": "refs",
+          "refId": 100519
+        },
+        {
+          "name": "MVO_Q_MAP04_REQUIREDVARS_visible",
+          "association": "refs",
+          "refId": 100526
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_visible": true
+      },
+      "original": "Q_MAP04.visible&&0",
+      "index": 100492,
+      "name": "MVO_Q_MAP04_PARAGRAAF10_visible",
+      "parsed": "a100083('100083',x,y.base,z,v)&&0",
+      "id": 100492,
+      "fflname": "Q_MAP04_PARAGRAAF10_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -49975,15 +51853,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100516
+          "refId": 100566
         }
       ],
       "deps": {},
       "original": "10",
-      "index": 100450,
+      "index": 100493,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_value",
       "parsed": "10",
-      "id": 100450,
+      "id": 100493,
       "fflname": "Q_MAP04_GEWICHT_VRAAG01_value"
     },
     {
@@ -49995,18 +51873,51 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG01_title",
           "association": "deps",
-          "refId": 100096
+          "refId": 100102
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG01_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG01))",
-      "index": 100451,
+      "index": 100494,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_title",
-      "parsed": "String(a100096('100096',x,y.base,z,v))",
-      "id": 100451,
+      "parsed": "String(a100102('100102',x,y.base,z,v))",
+      "id": 100494,
       "fflname": "Q_MAP04_GEWICHT_VRAAG01_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP04_GEWICHT_VRAAG01_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG02_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG03_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG04_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG05_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG06_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG07_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG08_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG09_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG10_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG11_visible": true,
+        "MVO_Q_MAP04_GEWICHT_VRAAG12_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP04_PARAGRAAF10_visible",
+          "association": "deps",
+          "refId": 100492
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP04_PARAGRAAF10_visible": true
+      },
+      "original": "Q_MAP04_PARAGRAAF10.visible",
+      "index": 100495,
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "parsed": "a100492('100492',x,y.base,z,v)",
+      "id": 100495,
+      "fflname": "Q_MAP04_GEWICHT_VRAAG01_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -50018,15 +51929,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100516
+          "refId": 100566
         }
       ],
       "deps": {},
       "original": "30",
-      "index": 100452,
+      "index": 100496,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG02_value",
       "parsed": "30",
-      "id": 100452,
+      "id": 100496,
       "fflname": "Q_MAP04_GEWICHT_VRAAG02_value"
     },
     {
@@ -50038,17 +51949,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG02_title",
           "association": "deps",
-          "refId": 100104
+          "refId": 100111
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG02_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG02))",
-      "index": 100453,
+      "index": 100497,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG02_title",
-      "parsed": "String(a100104('100104',x,y.base,z,v))",
-      "id": 100453,
+      "parsed": "String(a100111('100111',x,y.base,z,v))",
+      "id": 100497,
       "fflname": "Q_MAP04_GEWICHT_VRAAG02_title"
     },
     {
@@ -50061,15 +51972,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100516
+          "refId": 100566
         }
       ],
       "deps": {},
       "original": "20",
-      "index": 100454,
+      "index": 100498,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG03_value",
       "parsed": "20",
-      "id": 100454,
+      "id": 100498,
       "fflname": "Q_MAP04_GEWICHT_VRAAG03_value"
     },
     {
@@ -50081,17 +51992,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG03_title",
           "association": "deps",
-          "refId": 100112
+          "refId": 100119
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG03_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG03))",
-      "index": 100455,
+      "index": 100499,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG03_title",
-      "parsed": "String(a100112('100112',x,y.base,z,v))",
-      "id": 100455,
+      "parsed": "String(a100119('100119',x,y.base,z,v))",
+      "id": 100499,
       "fflname": "Q_MAP04_GEWICHT_VRAAG03_title"
     },
     {
@@ -50104,15 +52015,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE01_value",
           "association": "refs",
-          "refId": 100516
+          "refId": 100566
         }
       ],
       "deps": {},
       "original": "40",
-      "index": 100456,
+      "index": 100500,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG04_value",
       "parsed": "40",
-      "id": 100456,
+      "id": 100500,
       "fflname": "Q_MAP04_GEWICHT_VRAAG04_value"
     },
     {
@@ -50124,17 +52035,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG04_title",
           "association": "deps",
-          "refId": 100118
+          "refId": 100126
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG04_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG04))",
-      "index": 100457,
+      "index": 100501,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG04_title",
-      "parsed": "String(a100118('100118',x,y.base,z,v))",
-      "id": 100457,
+      "parsed": "String(a100126('100126',x,y.base,z,v))",
+      "id": 100501,
       "fflname": "Q_MAP04_GEWICHT_VRAAG04_title"
     },
     {
@@ -50147,15 +52058,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100518
+          "refId": 100569
         }
       ],
       "deps": {},
       "original": "10",
-      "index": 100458,
+      "index": 100502,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG05_value",
       "parsed": "10",
-      "id": 100458,
+      "id": 100502,
       "fflname": "Q_MAP04_GEWICHT_VRAAG05_value"
     },
     {
@@ -50167,17 +52078,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG05_title",
           "association": "deps",
-          "refId": 100125
+          "refId": 100133
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG05_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG05))",
-      "index": 100459,
+      "index": 100503,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG05_title",
-      "parsed": "String(a100125('100125',x,y.base,z,v))",
-      "id": 100459,
+      "parsed": "String(a100133('100133',x,y.base,z,v))",
+      "id": 100503,
       "fflname": "Q_MAP04_GEWICHT_VRAAG05_title"
     },
     {
@@ -50190,15 +52101,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100518
+          "refId": 100569
         }
       ],
       "deps": {},
       "original": "30",
-      "index": 100460,
+      "index": 100504,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG06_value",
       "parsed": "30",
-      "id": 100460,
+      "id": 100504,
       "fflname": "Q_MAP04_GEWICHT_VRAAG06_value"
     },
     {
@@ -50210,17 +52121,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG06_title",
           "association": "deps",
-          "refId": 100130
+          "refId": 100139
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG06_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG06))",
-      "index": 100461,
+      "index": 100505,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG06_title",
-      "parsed": "String(a100130('100130',x,y.base,z,v))",
-      "id": 100461,
+      "parsed": "String(a100139('100139',x,y.base,z,v))",
+      "id": 100505,
       "fflname": "Q_MAP04_GEWICHT_VRAAG06_title"
     },
     {
@@ -50233,15 +52144,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100518
+          "refId": 100569
         }
       ],
       "deps": {},
       "original": "20",
-      "index": 100462,
+      "index": 100506,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG07_value",
       "parsed": "20",
-      "id": 100462,
+      "id": 100506,
       "fflname": "Q_MAP04_GEWICHT_VRAAG07_value"
     },
     {
@@ -50254,15 +52165,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE02_value",
           "association": "refs",
-          "refId": 100518
+          "refId": 100569
         }
       ],
       "deps": {},
       "original": "40",
-      "index": 100463,
+      "index": 100507,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG08_value",
       "parsed": "40",
-      "id": 100463,
+      "id": 100507,
       "fflname": "Q_MAP04_GEWICHT_VRAAG08_value"
     },
     {
@@ -50274,17 +52185,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG08_title",
           "association": "deps",
-          "refId": 100142
+          "refId": 100152
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG08_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG08))",
-      "index": 100464,
+      "index": 100508,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG08_title",
-      "parsed": "String(a100142('100142',x,y.base,z,v))",
-      "id": 100464,
+      "parsed": "String(a100152('100152',x,y.base,z,v))",
+      "id": 100508,
       "fflname": "Q_MAP04_GEWICHT_VRAAG08_title"
     },
     {
@@ -50297,15 +52208,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100520
+          "refId": 100571
         }
       ],
       "deps": {},
       "original": "10",
-      "index": 100465,
+      "index": 100509,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG09_value",
       "parsed": "10",
-      "id": 100465,
+      "id": 100509,
       "fflname": "Q_MAP04_GEWICHT_VRAAG09_value"
     },
     {
@@ -50317,17 +52228,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG09_title",
           "association": "deps",
-          "refId": 100149
+          "refId": 100159
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG09_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG09))",
-      "index": 100466,
+      "index": 100510,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG09_title",
-      "parsed": "String(a100149('100149',x,y.base,z,v))",
-      "id": 100466,
+      "parsed": "String(a100159('100159',x,y.base,z,v))",
+      "id": 100510,
       "fflname": "Q_MAP04_GEWICHT_VRAAG09_title"
     },
     {
@@ -50340,15 +52251,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100520
+          "refId": 100571
         }
       ],
       "deps": {},
       "original": "30",
-      "index": 100467,
+      "index": 100511,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG10_value",
       "parsed": "30",
-      "id": 100467,
+      "id": 100511,
       "fflname": "Q_MAP04_GEWICHT_VRAAG10_value"
     },
     {
@@ -50360,17 +52271,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG10_title",
           "association": "deps",
-          "refId": 100155
+          "refId": 100166
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG10_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG10))",
-      "index": 100468,
+      "index": 100512,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG10_title",
-      "parsed": "String(a100155('100155',x,y.base,z,v))",
-      "id": 100468,
+      "parsed": "String(a100166('100166',x,y.base,z,v))",
+      "id": 100512,
       "fflname": "Q_MAP04_GEWICHT_VRAAG10_title"
     },
     {
@@ -50383,15 +52294,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100520
+          "refId": 100571
         }
       ],
       "deps": {},
       "original": "20",
-      "index": 100469,
+      "index": 100513,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG11_value",
       "parsed": "20",
-      "id": 100469,
+      "id": 100513,
       "fflname": "Q_MAP04_GEWICHT_VRAAG11_value"
     },
     {
@@ -50403,17 +52314,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG11_title",
           "association": "deps",
-          "refId": 100162
+          "refId": 100173
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG11_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG11))",
-      "index": 100470,
+      "index": 100514,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG11_title",
-      "parsed": "String(a100162('100162',x,y.base,z,v))",
-      "id": 100470,
+      "parsed": "String(a100173('100173',x,y.base,z,v))",
+      "id": 100514,
       "fflname": "Q_MAP04_GEWICHT_VRAAG11_title"
     },
     {
@@ -50426,15 +52337,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE03_value",
           "association": "refs",
-          "refId": 100520
+          "refId": 100571
         }
       ],
       "deps": {},
       "original": "40",
-      "index": 100471,
+      "index": 100515,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG12_value",
       "parsed": "40",
-      "id": 100471,
+      "id": 100515,
       "fflname": "Q_MAP04_GEWICHT_VRAAG12_value"
     },
     {
@@ -50446,17 +52357,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG12_title",
           "association": "deps",
-          "refId": 100167
+          "refId": 100179
         }
       ],
       "deps": {
         "MVO_Q_MAP01_VRAAG12_title": true
       },
       "original": "String(GetTitle(Q_MAP01_VRAAG12))",
-      "index": 100472,
+      "index": 100516,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG12_title",
-      "parsed": "String(a100167('100167',x,y.base,z,v))",
-      "id": 100472,
+      "parsed": "String(a100179('100179',x,y.base,z,v))",
+      "id": 100516,
       "fflname": "Q_MAP04_GEWICHT_VRAAG12_title"
     },
     {
@@ -50469,15 +52380,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
           "association": "refs",
-          "refId": 100481
+          "refId": 100527
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100473,
+      "index": 100517,
       "name": "MVO_Q_MAP04_PARAGRAAF09_value",
       "parsed": "undefined",
-      "id": 100473,
+      "id": 100517,
       "fflname": "Q_MAP04_PARAGRAAF09_value"
     },
     {
@@ -50488,11 +52399,37 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100474,
+      "index": 100518,
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB1_value",
       "parsed": "undefined",
-      "id": 100474,
+      "id": 100518,
       "fflname": "Q_MAP04_PARAGRAAF09SUB1_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP04_PARAGRAAF09SUB1_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF09SUB2_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF09SUB3_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF09SUB4_visible": true,
+        "MVO_Q_MAP04_PARAGRAAF09SUB5_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP04_PARAGRAAF10_visible",
+          "association": "deps",
+          "refId": 100492
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP04_PARAGRAAF10_visible": true
+      },
+      "original": "Q_MAP04_PARAGRAAF09.visible",
+      "index": 100519,
+      "name": "MVO_Q_MAP04_PARAGRAAF09SUB1_visible",
+      "parsed": "a100492('100492',x,y.base,z,v)",
+      "id": 100519,
+      "fflname": "Q_MAP04_PARAGRAAF09SUB1_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -50502,10 +52439,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100475,
+      "index": 100520,
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB2_value",
       "parsed": "undefined",
-      "id": 100475,
+      "id": 100520,
       "fflname": "Q_MAP04_PARAGRAAF09SUB2_value"
     },
     {
@@ -50516,10 +52453,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100476,
+      "index": 100521,
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB3_value",
       "parsed": "undefined",
-      "id": 100476,
+      "id": 100521,
       "fflname": "Q_MAP04_PARAGRAAF09SUB3_value"
     },
     {
@@ -50530,10 +52467,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100477,
+      "index": 100522,
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB4_value",
       "parsed": "undefined",
-      "id": 100477,
+      "id": 100522,
       "fflname": "Q_MAP04_PARAGRAAF09SUB4_value"
     },
     {
@@ -50544,10 +52481,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100478,
+      "index": 100523,
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB5_value",
       "parsed": "undefined",
-      "id": 100478,
+      "id": 100523,
       "fflname": "Q_MAP04_PARAGRAAF09SUB5_value"
     },
     {
@@ -50558,10 +52495,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100479,
+      "index": 100524,
       "name": "MVO_Q_MAP04_HULPVARIABELEN_value",
       "parsed": "undefined",
-      "id": 100479,
+      "id": 100524,
       "fflname": "Q_MAP04_HULPVARIABELEN_value"
     },
     {
@@ -50574,7 +52511,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_value",
           "association": "refs",
-          "refId": 100361
+          "refId": 100398
         },
         {
           "name": "MVO_Q_MAP04_WARNING_required",
@@ -50630,11 +52567,35 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP04_PARAGRAAF09_required": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP04,Q_MAP04_HULPVARIABELEN),InputRequired(X))",
-      "index": 100480,
+      "index": 100525,
       "name": "MVO_Q_MAP04_REQUIREDVARS_value",
       "parsed": "Count([false,false,false,false,false,false,false,false,false,false])",
-      "id": 100480,
+      "id": 100525,
       "fflname": "Q_MAP04_REQUIREDVARS_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP04_REQUIREDVARS_visible": true,
+        "MVO_Q_MAP04_ENTEREDREQUIREDVARS_visible": true,
+        "MVO_Q_MAP04_VERPLICHT_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP04_PARAGRAAF10_visible",
+          "association": "deps",
+          "refId": 100492
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP04_PARAGRAAF10_visible": true
+      },
+      "original": "Q_MAP04_HULPVARIABELEN.visible",
+      "index": 100526,
+      "name": "MVO_Q_MAP04_REQUIREDVARS_visible",
+      "parsed": "a100492('100492',x,y.base,z,v)",
+      "id": 100526,
+      "fflname": "Q_MAP04_REQUIREDVARS_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -50646,7 +52607,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_value",
           "association": "refs",
-          "refId": 100361
+          "refId": 100398
         },
         {
           "name": "MVO_Q_MAP04_WARNING_required",
@@ -50655,7 +52616,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_WARNING_value",
           "association": "deps",
-          "refId": 100363
+          "refId": 100400
         },
         {
           "name": "MVO_Q_MAP04_INFO_required",
@@ -50664,7 +52625,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_INFO_value",
           "association": "deps",
-          "refId": 100365
+          "refId": 100403
         },
         {
           "name": "MVO_Q_MAP04_VALIDATION_required",
@@ -50673,7 +52634,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VALIDATION_value",
           "association": "deps",
-          "refId": 100367
+          "refId": 100405
         },
         {
           "name": "MVO_Q_MAP04_HINT_required",
@@ -50682,7 +52643,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_HINT_value",
           "association": "deps",
-          "refId": 100369
+          "refId": 100407
         },
         {
           "name": "MVO_Q_MAP04_PARAGRAAF00_required",
@@ -50691,7 +52652,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_PARAGRAAF00_value",
           "association": "deps",
-          "refId": 100371
+          "refId": 100409
         },
         {
           "name": "MVO_Q_MAP04_PARAGRAAF01_required",
@@ -50700,7 +52661,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_PARAGRAAF01_value",
           "association": "deps",
-          "refId": 100374
+          "refId": 100413
         },
         {
           "name": "MVO_Q_MAP04_PARAGRAAF02_required",
@@ -50709,7 +52670,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_PARAGRAAF02_value",
           "association": "deps",
-          "refId": 100402
+          "refId": 100442
         },
         {
           "name": "MVO_Q_MAP04_PARAGRAAF03_required",
@@ -50718,7 +52679,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_PARAGRAAF03_value",
           "association": "deps",
-          "refId": 100425
+          "refId": 100466
         },
         {
           "name": "MVO_Q_MAP04_PARAGRAAF10_required",
@@ -50727,7 +52688,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_PARAGRAAF10_value",
           "association": "deps",
-          "refId": 100448
+          "refId": 100490
         },
         {
           "name": "MVO_Q_MAP04_PARAGRAAF09_required",
@@ -50736,7 +52697,7 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_PARAGRAAF09_value",
           "association": "deps",
-          "refId": 100473
+          "refId": 100517
         }
       ],
       "deps": {
@@ -50762,10 +52723,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP04_PARAGRAAF09_value": true
       },
       "original": "Count(X,SelectDescendants(Q_MAP04,Q_MAP04_HULPVARIABELEN),InputRequired(X)&&DataAvailable(X))",
-      "index": 100481,
+      "index": 100527,
       "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
-      "parsed": "Count([false&&v[100363][x.hash + y.hash + z]!==undefined,false&&v[100365][x.hash + y.hash + z]!==undefined,false&&v[100367][x.hash + y.hash + z]!==undefined,false&&v[100369][x.hash + y.hash + z]!==undefined,false&&v[100371][x.hash + y.hash + z]!==undefined,false&&v[100374][x.hash + y.hash + z]!==undefined,false&&v[100402][x.hash + y.hash + z]!==undefined,false&&v[100425][x.hash + y.hash + z]!==undefined,false&&v[100448][x.hash + y.hash + z]!==undefined,false&&v[100473][x.hash + y.hash + z]!==undefined])",
-      "id": 100481,
+      "parsed": "Count([false&&v[100400][x.hash + y.hash + z]!==undefined,false&&v[100403][x.hash + y.hash + z]!==undefined,false&&v[100405][x.hash + y.hash + z]!==undefined,false&&v[100407][x.hash + y.hash + z]!==undefined,false&&v[100409][x.hash + y.hash + z]!==undefined,false&&v[100413][x.hash + y.hash + z]!==undefined,false&&v[100442][x.hash + y.hash + z]!==undefined,false&&v[100466][x.hash + y.hash + z]!==undefined,false&&v[100490][x.hash + y.hash + z]!==undefined,false&&v[100517][x.hash + y.hash + z]!==undefined])",
+      "id": 100527,
       "fflname": "Q_MAP04_ENTEREDREQUIREDVARS_value"
     },
     {
@@ -50797,15 +52758,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_VRAAG01_required",
           "association": "refs",
-          "refId": 100379
+          "refId": 100419
         }
       ],
       "deps": {},
       "original": "1",
-      "index": 100482,
+      "index": 100528,
       "name": "MVO_Q_MAP04_VERPLICHT_value",
       "parsed": "1",
-      "id": 100482,
+      "id": 100528,
       "fflname": "Q_MAP04_VERPLICHT_value"
     },
     {
@@ -50817,17 +52778,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_ROOT_value",
           "association": "deps",
-          "refId": 100075
+          "refId": 100078
         },
         {
           "name": "MVO_Q_RESTRICTIES_value",
           "association": "deps",
-          "refId": 100564
+          "refId": 100617
         },
         {
           "name": "MVO_Q_WARNING_GLOBAL_value",
           "association": "deps",
-          "refId": 100558
+          "refId": 100609
         }
       ],
       "deps": {
@@ -50836,10 +52797,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_WARNING_GLOBAL_value": true
       },
       "original": "String(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
-      "index": 100483,
+      "index": 100529,
       "name": "MVO_Q_RESULT_value",
-      "parsed": "String((a100075('100075',x.doc,y.base,z,v)==0?'Nog niet alle vragen zijn ingevuld.[br][/br]':'Deze vragenlijst is definitief gemaakt.[br][/br]')+a100564('100564',x.doc,y.base,z,v)+a100558('100558',x.doc,y.base,z,v))",
-      "id": 100483,
+      "parsed": "String((a100078('100078',x.doc,y.base,z,v)==0?'Nog niet alle vragen zijn ingevuld.[br][/br]':'Deze vragenlijst is definitief gemaakt.[br][/br]')+a100617('100617',x.doc,y.base,z,v)+a100609('100609',x.doc,y.base,z,v))",
+      "id": 100529,
       "fflname": "Q_RESULT_value"
     },
     {
@@ -50851,10 +52812,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Resultaat'",
-      "index": 100484,
+      "index": 100530,
       "name": "MVO_Q_RESULT_title",
       "parsed": "'Resultaat'",
-      "id": 100484,
+      "id": 100530,
       "fflname": "Q_RESULT_title"
     },
     {
@@ -50865,11 +52826,61 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100485,
+      "index": 100531,
       "name": "MVO_Q_RESULTSUB1_value",
       "parsed": "undefined",
-      "id": 100485,
+      "id": 100531,
       "fflname": "Q_RESULTSUB1_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_RESULTSUB1_visible": true,
+        "MVO_Q_MAPRESULT_PARAGRAAF01_visible": true,
+        "MVO_Q_MAPRESULT_PARAGRAAF02_visible": true,
+        "MVO_Q_MAPRESULT_PARAGRAAF03_visible": true,
+        "MVO_Q_MAPRESULT_PARAGRAAF04_visible": true,
+        "MVO_Q_MAP01_SCORE01_visible": true,
+        "MVO_Q_MAP02_SCORE01_visible": true,
+        "MVO_Q_MAP03_SUBSCORE01_visible": true,
+        "MVO_Q_MAP04_SUBSCORE01_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_MAP01_visible",
+          "association": "deps",
+          "refId": 100083
+        },
+        {
+          "name": "MVO_Q_MAP01_SCORE01_visible",
+          "association": "refs",
+          "refId": 100537
+        },
+        {
+          "name": "MVO_Q_MAP02_SCORE01_visible",
+          "association": "refs",
+          "refId": 100542
+        },
+        {
+          "name": "MVO_Q_MAP03_SUBSCORE01_visible",
+          "association": "refs",
+          "refId": 100548
+        },
+        {
+          "name": "MVO_Q_MAP04_SUBSCORE01_visible",
+          "association": "refs",
+          "refId": 100568
+        }
+      ],
+      "deps": {
+        "MVO_Q_MAP01_visible": true
+      },
+      "original": "Q_RESULT.visible",
+      "index": 100532,
+      "name": "MVO_Q_RESULTSUB1_visible",
+      "parsed": "a100083('100083',x,y.base,z,v)",
+      "id": 100532,
+      "fflname": "Q_RESULTSUB1_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -50879,10 +52890,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100486,
+      "index": 100533,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF01_value",
       "parsed": "undefined",
-      "id": 100486,
+      "id": 100533,
       "fflname": "Q_MAPRESULT_PARAGRAAF01_value"
     },
     {
@@ -50894,10 +52905,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Score Principes'",
-      "index": 100487,
+      "index": 100534,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF01_title",
       "parsed": "'Score Principes'",
-      "id": 100487,
+      "id": 100534,
       "fflname": "Q_MAPRESULT_PARAGRAAF01_title"
     },
     {
@@ -50908,10 +52919,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Een score van 100 punten betekent dat u het 100 eens bent met de stellingen over de 7 principes van de ISO 26000 MVO richtlijn'",
-      "index": 100488,
+      "index": 100535,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF01_hint",
       "parsed": "'Een score van 100 punten betekent dat u het 100 eens bent met de stellingen over de 7 principes van de ISO 26000 MVO richtlijn'",
-      "id": 100488,
+      "id": 100535,
       "fflname": "Q_MAPRESULT_PARAGRAAF01_hint"
     },
     {
@@ -50923,72 +52934,72 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_VRAAG01_value",
           "association": "deps",
-          "refId": 100095
+          "refId": 100101
         },
         {
           "name": "MVO_Q_MAP01_VRAAG02_value",
           "association": "deps",
-          "refId": 100103
+          "refId": 100110
         },
         {
           "name": "MVO_Q_MAP01_VRAAG03_value",
           "association": "deps",
-          "refId": 100111
+          "refId": 100118
         },
         {
           "name": "MVO_Q_MAP01_VRAAG04_value",
           "association": "deps",
-          "refId": 100117
+          "refId": 100125
         },
         {
           "name": "MVO_Q_MAP01_VRAAG05_value",
           "association": "deps",
-          "refId": 100124
+          "refId": 100132
         },
         {
           "name": "MVO_Q_MAP01_VRAAG06_value",
           "association": "deps",
-          "refId": 100129
+          "refId": 100138
         },
         {
           "name": "MVO_Q_MAP01_VRAAG07_value",
           "association": "deps",
-          "refId": 100136
+          "refId": 100145
         },
         {
           "name": "MVO_Q_MAP01_VRAAG08_value",
           "association": "deps",
-          "refId": 100141
+          "refId": 100151
         },
         {
           "name": "MVO_Q_MAP01_VRAAG09_value",
           "association": "deps",
-          "refId": 100148
+          "refId": 100158
         },
         {
           "name": "MVO_Q_MAP01_VRAAG10_value",
           "association": "deps",
-          "refId": 100154
+          "refId": 100165
         },
         {
           "name": "MVO_Q_MAP01_VRAAG11_value",
           "association": "deps",
-          "refId": 100161
+          "refId": 100172
         },
         {
           "name": "MVO_Q_MAP01_VRAAG12_value",
           "association": "deps",
-          "refId": 100166
+          "refId": 100178
         },
         {
           "name": "MVO_Q_MAP01_VRAAG13_value",
           "association": "deps",
-          "refId": 100173
+          "refId": 100185
         },
         {
           "name": "MVO_Q_MAP01_VRAAG14_value",
           "association": "deps",
-          "refId": 100178
+          "refId": 100191
         }
       ],
       "deps": {
@@ -51008,11 +53019,33 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP01_VRAAG14_value": true
       },
       "original": "OnER((Q_MAP01_VRAAG01+Q_MAP01_VRAAG02+Q_MAP01_VRAAG03+Q_MAP01_VRAAG04+Q_MAP01_VRAAG05+Q_MAP01_VRAAG06+Q_MAP01_VRAAG07+Q_MAP01_VRAAG08+Q_MAP01_VRAAG09+Q_MAP01_VRAAG10+Q_MAP01_VRAAG11+Q_MAP01_VRAAG12+Q_MAP01_VRAAG13+Q_MAP01_VRAAG14)/14*100,NA)",
-      "index": 100489,
+      "index": 100536,
       "name": "MVO_Q_MAP01_SCORE01_value",
-      "parsed": "OnER((a100095('100095',x,y.base,z,v)+a100103('100103',x,y.base,z,v)+a100111('100111',x,y.base,z,v)+a100117('100117',x,y.base,z,v)+a100124('100124',x,y.base,z,v)+a100129('100129',x,y.base,z,v)+a100136('100136',x,y.base,z,v)+a100141('100141',x,y.base,z,v)+a100148('100148',x,y.base,z,v)+a100154('100154',x,y.base,z,v)+a100161('100161',x,y.base,z,v)+a100166('100166',x,y.base,z,v)+a100173('100173',x,y.base,z,v)+a100178('100178',x,y.base,z,v))/14*100,NA)",
-      "id": 100489,
+      "parsed": "OnER((a100101('100101',x,y.base,z,v)+a100110('100110',x,y.base,z,v)+a100118('100118',x,y.base,z,v)+a100125('100125',x,y.base,z,v)+a100132('100132',x,y.base,z,v)+a100138('100138',x,y.base,z,v)+a100145('100145',x,y.base,z,v)+a100151('100151',x,y.base,z,v)+a100158('100158',x,y.base,z,v)+a100165('100165',x,y.base,z,v)+a100172('100172',x,y.base,z,v)+a100178('100178',x,y.base,z,v)+a100185('100185',x,y.base,z,v)+a100191('100191',x,y.base,z,v))/14*100,NA)",
+      "id": 100536,
       "fflname": "Q_MAP01_SCORE01_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP01_SCORE01_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_RESULTSUB1_visible",
+          "association": "deps",
+          "refId": 100532
+        }
+      ],
+      "deps": {
+        "MVO_Q_RESULTSUB1_visible": true
+      },
+      "original": "Q_MAPRESULT_PARAGRAAF01.visible",
+      "index": 100537,
+      "name": "MVO_Q_MAP01_SCORE01_visible",
+      "parsed": "a100532('100532',x,y.base,z,v)",
+      "id": 100537,
+      "fflname": "Q_MAP01_SCORE01_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -51022,10 +53055,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100490,
+      "index": 100538,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF02_value",
       "parsed": "undefined",
-      "id": 100490,
+      "id": 100538,
       "fflname": "Q_MAPRESULT_PARAGRAAF02_value"
     },
     {
@@ -51037,10 +53070,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Score Omgeving'",
-      "index": 100491,
+      "index": 100539,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF02_title",
       "parsed": "'Score Omgeving'",
-      "id": 100491,
+      "id": 100539,
       "fflname": "Q_MAPRESULT_PARAGRAAF02_title"
     },
     {
@@ -51051,10 +53084,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Een score van 100 punten betekent dat u voor 100 de stakeholders relevant vindt en bij veranderingen betrekt'",
-      "index": 100492,
+      "index": 100540,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF02_hint",
       "parsed": "'Een score van 100 punten betekent dat u voor 100 de stakeholders relevant vindt en bij veranderingen betrekt'",
-      "id": 100492,
+      "id": 100540,
       "fflname": "Q_MAPRESULT_PARAGRAAF02_hint"
     },
     {
@@ -51066,12 +53099,12 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP02_VRAAG01_value",
           "association": "deps",
-          "refId": 100213
+          "refId": 100231
         },
         {
           "name": "MVO_Q_MAP02_VRAAG02_value",
           "association": "deps",
-          "refId": 100219
+          "refId": 100238
         }
       ],
       "deps": {
@@ -51079,11 +53112,33 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP02_VRAAG02_value": true
       },
       "original": "OnER((Q_MAP02_VRAAG01+Q_MAP02_VRAAG02)/2*100,NA)",
-      "index": 100493,
+      "index": 100541,
       "name": "MVO_Q_MAP02_SCORE01_value",
-      "parsed": "OnER((a100213('100213',x,y.base,z,v)+a100219('100219',x,y.base,z,v))/2*100,NA)",
-      "id": 100493,
+      "parsed": "OnER((a100231('100231',x,y.base,z,v)+a100238('100238',x,y.base,z,v))/2*100,NA)",
+      "id": 100541,
       "fflname": "Q_MAP02_SCORE01_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP02_SCORE01_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_RESULTSUB1_visible",
+          "association": "deps",
+          "refId": 100532
+        }
+      ],
+      "deps": {
+        "MVO_Q_RESULTSUB1_visible": true
+      },
+      "original": "Q_MAPRESULT_PARAGRAAF02.visible",
+      "index": 100542,
+      "name": "MVO_Q_MAP02_SCORE01_visible",
+      "parsed": "a100532('100532',x,y.base,z,v)",
+      "id": 100542,
+      "fflname": "Q_MAP02_SCORE01_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -51093,10 +53148,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100494,
+      "index": 100543,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF03_value",
       "parsed": "undefined",
-      "id": 100494,
+      "id": 100543,
       "fflname": "Q_MAPRESULT_PARAGRAAF03_value"
     },
     {
@@ -51107,10 +53162,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Score Themas'",
-      "index": 100495,
+      "index": 100544,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF03_title",
       "parsed": "'Score Themas'",
-      "id": 100495,
+      "id": 100544,
       "fflname": "Q_MAPRESULT_PARAGRAAF03_title"
     },
     {
@@ -51121,10 +53176,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Een score van 100 punten betekent dat u het 100 eens bent met de stellingen over de 7 themas van de ISO 26000 MVO richtlijn'",
-      "index": 100496,
+      "index": 100545,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF03_hint",
       "parsed": "'Een score van 100 punten betekent dat u het 100 eens bent met de stellingen over de 7 themas van de ISO 26000 MVO richtlijn'",
-      "id": 100496,
+      "id": 100545,
       "fflname": "Q_MAPRESULT_PARAGRAAF03_hint"
     },
     {
@@ -51137,22 +53192,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG01_value",
           "association": "deps",
-          "refId": 100275
+          "refId": 100303
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_value",
           "association": "deps",
-          "refId": 100260
+          "refId": 100286
         },
         {
           "name": "MVO_Q_MAP03_VRAAG02_value",
           "association": "deps",
-          "refId": 100281
+          "refId": 100310
         },
         {
           "name": "MVO_Q_MAP03_SCORE01_value",
           "association": "refs",
-          "refId": 100511
+          "refId": 100561
         }
       ],
       "deps": {
@@ -51161,10 +53216,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_VRAAG02_value": true
       },
       "original": "OnER((Q_MAP03_VRAAG01*Q_MAP03_GEWICHT_VRAAG01+Q_MAP03_VRAAG02*Q_MAP03_GEWICHT_VRAAG01)/2,NA)",
-      "index": 100497,
+      "index": 100546,
       "name": "MVO_Q_MAP03_SUBSCORE01_value",
-      "parsed": "OnER((a100275('100275',x,y.base,z,v)*a100260('100260',x,y.base,z,v)+a100281('100281',x,y.base,z,v)*a100260('100260',x,y.base,z,v))/2,NA)",
-      "id": 100497,
+      "parsed": "OnER((a100303('100303',x,y.base,z,v)*a100286('100286',x,y.base,z,v)+a100310('100310',x,y.base,z,v)*a100286('100286',x,y.base,z,v))/2,NA)",
+      "id": 100546,
       "fflname": "Q_MAP03_SUBSCORE01_value"
     },
     {
@@ -51176,18 +53231,47 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_title",
           "association": "deps",
-          "refId": 100261
+          "refId": 100287
         }
       ],
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG01_title": true
       },
       "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG01))",
-      "index": 100498,
+      "index": 100547,
       "name": "MVO_Q_MAP03_SUBSCORE01_title",
-      "parsed": "String('Score '+a100261('100261',x,y.base,z,v))",
-      "id": 100498,
+      "parsed": "String('Score '+a100287('100287',x,y.base,z,v))",
+      "id": 100547,
       "fflname": "Q_MAP03_SUBSCORE01_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP03_SUBSCORE01_visible": true,
+        "MVO_Q_MAP03_SUBSCORE02_visible": true,
+        "MVO_Q_MAP03_SUBSCORE03_visible": true,
+        "MVO_Q_MAP03_SUBSCORE04_visible": true,
+        "MVO_Q_MAP03_SUBSCORE05_visible": true,
+        "MVO_Q_MAP03_SUBSCORE06_visible": true,
+        "MVO_Q_MAP03_SUBSCORE07_visible": true,
+        "MVO_Q_MAP03_SCORE01_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_RESULTSUB1_visible",
+          "association": "deps",
+          "refId": 100532
+        }
+      ],
+      "deps": {
+        "MVO_Q_RESULTSUB1_visible": true
+      },
+      "original": "Q_MAPRESULT_PARAGRAAF03.visible",
+      "index": 100548,
+      "name": "MVO_Q_MAP03_SUBSCORE01_visible",
+      "parsed": "a100532('100532',x,y.base,z,v)",
+      "id": 100548,
+      "fflname": "Q_MAP03_SUBSCORE01_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -51199,22 +53283,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG03_value",
           "association": "deps",
-          "refId": 100287
+          "refId": 100316
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG02_value",
           "association": "deps",
-          "refId": 100262
+          "refId": 100289
         },
         {
           "name": "MVO_Q_MAP03_VRAAG04_value",
           "association": "deps",
-          "refId": 100291
+          "refId": 100321
         },
         {
           "name": "MVO_Q_MAP03_SCORE01_value",
           "association": "refs",
-          "refId": 100511
+          "refId": 100561
         }
       ],
       "deps": {
@@ -51223,10 +53307,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_VRAAG04_value": true
       },
       "original": "OnER((Q_MAP03_VRAAG03*Q_MAP03_GEWICHT_VRAAG02+Q_MAP03_VRAAG04*Q_MAP03_GEWICHT_VRAAG02)/2,NA)",
-      "index": 100499,
+      "index": 100549,
       "name": "MVO_Q_MAP03_SUBSCORE02_value",
-      "parsed": "OnER((a100287('100287',x,y.base,z,v)*a100262('100262',x,y.base,z,v)+a100291('100291',x,y.base,z,v)*a100262('100262',x,y.base,z,v))/2,NA)",
-      "id": 100499,
+      "parsed": "OnER((a100316('100316',x,y.base,z,v)*a100289('100289',x,y.base,z,v)+a100321('100321',x,y.base,z,v)*a100289('100289',x,y.base,z,v))/2,NA)",
+      "id": 100549,
       "fflname": "Q_MAP03_SUBSCORE02_value"
     },
     {
@@ -51238,17 +53322,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG02_title",
           "association": "deps",
-          "refId": 100263
+          "refId": 100290
         }
       ],
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG02_title": true
       },
       "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG02))",
-      "index": 100500,
+      "index": 100550,
       "name": "MVO_Q_MAP03_SUBSCORE02_title",
-      "parsed": "String('Score '+a100263('100263',x,y.base,z,v))",
-      "id": 100500,
+      "parsed": "String('Score '+a100290('100290',x,y.base,z,v))",
+      "id": 100550,
       "fflname": "Q_MAP03_SUBSCORE02_title"
     },
     {
@@ -51261,22 +53345,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG05_value",
           "association": "deps",
-          "refId": 100297
+          "refId": 100327
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG03_value",
           "association": "deps",
-          "refId": 100264
+          "refId": 100291
         },
         {
           "name": "MVO_Q_MAP03_VRAAG06_value",
           "association": "deps",
-          "refId": 100302
+          "refId": 100333
         },
         {
           "name": "MVO_Q_MAP03_SCORE01_value",
           "association": "refs",
-          "refId": 100511
+          "refId": 100561
         }
       ],
       "deps": {
@@ -51285,10 +53369,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_VRAAG06_value": true
       },
       "original": "OnER((Q_MAP03_VRAAG05*Q_MAP03_GEWICHT_VRAAG03+Q_MAP03_VRAAG06*Q_MAP03_GEWICHT_VRAAG03)/2,NA)",
-      "index": 100501,
+      "index": 100551,
       "name": "MVO_Q_MAP03_SUBSCORE03_value",
-      "parsed": "OnER((a100297('100297',x,y.base,z,v)*a100264('100264',x,y.base,z,v)+a100302('100302',x,y.base,z,v)*a100264('100264',x,y.base,z,v))/2,NA)",
-      "id": 100501,
+      "parsed": "OnER((a100327('100327',x,y.base,z,v)*a100291('100291',x,y.base,z,v)+a100333('100333',x,y.base,z,v)*a100291('100291',x,y.base,z,v))/2,NA)",
+      "id": 100551,
       "fflname": "Q_MAP03_SUBSCORE03_value"
     },
     {
@@ -51300,17 +53384,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG03_title",
           "association": "deps",
-          "refId": 100265
+          "refId": 100292
         }
       ],
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG03_title": true
       },
       "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG03))",
-      "index": 100502,
+      "index": 100552,
       "name": "MVO_Q_MAP03_SUBSCORE03_title",
-      "parsed": "String('Score '+a100265('100265',x,y.base,z,v))",
-      "id": 100502,
+      "parsed": "String('Score '+a100292('100292',x,y.base,z,v))",
+      "id": 100552,
       "fflname": "Q_MAP03_SUBSCORE03_title"
     },
     {
@@ -51323,22 +53407,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG07_value",
           "association": "deps",
-          "refId": 100308
+          "refId": 100339
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG04_value",
           "association": "deps",
-          "refId": 100266
+          "refId": 100293
         },
         {
           "name": "MVO_Q_MAP03_VRAAG08_value",
           "association": "deps",
-          "refId": 100313
+          "refId": 100345
         },
         {
           "name": "MVO_Q_MAP03_SCORE01_value",
           "association": "refs",
-          "refId": 100511
+          "refId": 100561
         }
       ],
       "deps": {
@@ -51347,10 +53431,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_VRAAG08_value": true
       },
       "original": "OnER((Q_MAP03_VRAAG07*Q_MAP03_GEWICHT_VRAAG04+Q_MAP03_VRAAG08*Q_MAP03_GEWICHT_VRAAG04)/2,NA)",
-      "index": 100503,
+      "index": 100553,
       "name": "MVO_Q_MAP03_SUBSCORE04_value",
-      "parsed": "OnER((a100308('100308',x,y.base,z,v)*a100266('100266',x,y.base,z,v)+a100313('100313',x,y.base,z,v)*a100266('100266',x,y.base,z,v))/2,NA)",
-      "id": 100503,
+      "parsed": "OnER((a100339('100339',x,y.base,z,v)*a100293('100293',x,y.base,z,v)+a100345('100345',x,y.base,z,v)*a100293('100293',x,y.base,z,v))/2,NA)",
+      "id": 100553,
       "fflname": "Q_MAP03_SUBSCORE04_value"
     },
     {
@@ -51362,17 +53446,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG04_title",
           "association": "deps",
-          "refId": 100267
+          "refId": 100294
         }
       ],
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG04_title": true
       },
       "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG04))",
-      "index": 100504,
+      "index": 100554,
       "name": "MVO_Q_MAP03_SUBSCORE04_title",
-      "parsed": "String('Score '+a100267('100267',x,y.base,z,v))",
-      "id": 100504,
+      "parsed": "String('Score '+a100294('100294',x,y.base,z,v))",
+      "id": 100554,
       "fflname": "Q_MAP03_SUBSCORE04_title"
     },
     {
@@ -51385,22 +53469,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG09_value",
           "association": "deps",
-          "refId": 100319
+          "refId": 100351
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_value",
           "association": "deps",
-          "refId": 100255
+          "refId": 100280
         },
         {
           "name": "MVO_Q_MAP03_VRAAG10_value",
           "association": "deps",
-          "refId": 100324
+          "refId": 100357
         },
         {
           "name": "MVO_Q_MAP03_SCORE01_value",
           "association": "refs",
-          "refId": 100511
+          "refId": 100561
         }
       ],
       "deps": {
@@ -51409,10 +53493,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_VRAAG10_value": true
       },
       "original": "OnER((Q_MAP03_VRAAG09*Q_MAP03_GEWICHT_VRAAG05+Q_MAP03_VRAAG10*Q_MAP03_GEWICHT_VRAAG05)/2,NA)",
-      "index": 100505,
+      "index": 100555,
       "name": "MVO_Q_MAP03_SUBSCORE05_value",
-      "parsed": "OnER((a100319('100319',x,y.base,z,v)*a100255('100255',x,y.base,z,v)+a100324('100324',x,y.base,z,v)*a100255('100255',x,y.base,z,v))/2,NA)",
-      "id": 100505,
+      "parsed": "OnER((a100351('100351',x,y.base,z,v)*a100280('100280',x,y.base,z,v)+a100357('100357',x,y.base,z,v)*a100280('100280',x,y.base,z,v))/2,NA)",
+      "id": 100555,
       "fflname": "Q_MAP03_SUBSCORE05_value"
     },
     {
@@ -51424,17 +53508,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_title",
           "association": "deps",
-          "refId": 100248
+          "refId": 100271
         }
       ],
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_title": true
       },
       "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG05))",
-      "index": 100506,
+      "index": 100556,
       "name": "MVO_Q_MAP03_SUBSCORE05_title",
-      "parsed": "String('Score '+a100248('100248',x,y.base,z,v))",
-      "id": 100506,
+      "parsed": "String('Score '+a100271('100271',x,y.base,z,v))",
+      "id": 100556,
       "fflname": "Q_MAP03_SUBSCORE05_title"
     },
     {
@@ -51447,22 +53531,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG11_value",
           "association": "deps",
-          "refId": 100330
+          "refId": 100363
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_value",
           "association": "deps",
-          "refId": 100256
+          "refId": 100282
         },
         {
           "name": "MVO_Q_MAP03_VRAAG12_value",
           "association": "deps",
-          "refId": 100335
+          "refId": 100369
         },
         {
           "name": "MVO_Q_MAP03_SCORE01_value",
           "association": "refs",
-          "refId": 100511
+          "refId": 100561
         }
       ],
       "deps": {
@@ -51471,10 +53555,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_VRAAG12_value": true
       },
       "original": "OnER((Q_MAP03_VRAAG11*Q_MAP03_GEWICHT_VRAAG06+Q_MAP03_VRAAG12*Q_MAP03_GEWICHT_VRAAG06)/2,NA)",
-      "index": 100507,
+      "index": 100557,
       "name": "MVO_Q_MAP03_SUBSCORE06_value",
-      "parsed": "OnER((a100330('100330',x,y.base,z,v)*a100256('100256',x,y.base,z,v)+a100335('100335',x,y.base,z,v)*a100256('100256',x,y.base,z,v))/2,NA)",
-      "id": 100507,
+      "parsed": "OnER((a100363('100363',x,y.base,z,v)*a100282('100282',x,y.base,z,v)+a100369('100369',x,y.base,z,v)*a100282('100282',x,y.base,z,v))/2,NA)",
+      "id": 100557,
       "fflname": "Q_MAP03_SUBSCORE06_value"
     },
     {
@@ -51486,17 +53570,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_title",
           "association": "deps",
-          "refId": 100250
+          "refId": 100274
         }
       ],
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_title": true
       },
       "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG06))",
-      "index": 100508,
+      "index": 100558,
       "name": "MVO_Q_MAP03_SUBSCORE06_title",
-      "parsed": "String('Score '+a100250('100250',x,y.base,z,v))",
-      "id": 100508,
+      "parsed": "String('Score '+a100274('100274',x,y.base,z,v))",
+      "id": 100558,
       "fflname": "Q_MAP03_SUBSCORE06_title"
     },
     {
@@ -51509,22 +53593,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_VRAAG13_value",
           "association": "deps",
-          "refId": 100341
+          "refId": 100375
         },
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG07_value",
           "association": "deps",
-          "refId": 100268
+          "refId": 100295
         },
         {
           "name": "MVO_Q_MAP03_VRAAG14_value",
           "association": "deps",
-          "refId": 100346
+          "refId": 100381
         },
         {
           "name": "MVO_Q_MAP03_SCORE01_value",
           "association": "refs",
-          "refId": 100511
+          "refId": 100561
         }
       ],
       "deps": {
@@ -51533,10 +53617,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_VRAAG14_value": true
       },
       "original": "OnER((Q_MAP03_VRAAG13*Q_MAP03_GEWICHT_VRAAG07+Q_MAP03_VRAAG14*Q_MAP03_GEWICHT_VRAAG07)/2,NA)",
-      "index": 100509,
+      "index": 100559,
       "name": "MVO_Q_MAP03_SUBSCORE07_value",
-      "parsed": "OnER((a100341('100341',x,y.base,z,v)*a100268('100268',x,y.base,z,v)+a100346('100346',x,y.base,z,v)*a100268('100268',x,y.base,z,v))/2,NA)",
-      "id": 100509,
+      "parsed": "OnER((a100375('100375',x,y.base,z,v)*a100295('100295',x,y.base,z,v)+a100381('100381',x,y.base,z,v)*a100295('100295',x,y.base,z,v))/2,NA)",
+      "id": 100559,
       "fflname": "Q_MAP03_SUBSCORE07_value"
     },
     {
@@ -51548,17 +53632,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_GEWICHT_VRAAG07_title",
           "association": "deps",
-          "refId": 100269
+          "refId": 100296
         }
       ],
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG07_title": true
       },
       "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG07))",
-      "index": 100510,
+      "index": 100560,
       "name": "MVO_Q_MAP03_SUBSCORE07_title",
-      "parsed": "String('Score '+a100269('100269',x,y.base,z,v))",
-      "id": 100510,
+      "parsed": "String('Score '+a100296('100296',x,y.base,z,v))",
+      "id": 100560,
       "fflname": "Q_MAP03_SUBSCORE07_title"
     },
     {
@@ -51570,37 +53654,37 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP03_SUBSCORE01_value",
           "association": "deps",
-          "refId": 100497
+          "refId": 100546
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE02_value",
           "association": "deps",
-          "refId": 100499
+          "refId": 100549
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE03_value",
           "association": "deps",
-          "refId": 100501
+          "refId": 100551
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE04_value",
           "association": "deps",
-          "refId": 100503
+          "refId": 100553
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE05_value",
           "association": "deps",
-          "refId": 100505
+          "refId": 100555
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE06_value",
           "association": "deps",
-          "refId": 100507
+          "refId": 100557
         },
         {
           "name": "MVO_Q_MAP03_SUBSCORE07_value",
           "association": "deps",
-          "refId": 100509
+          "refId": 100559
         }
       ],
       "deps": {
@@ -51613,10 +53697,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP03_SUBSCORE07_value": true
       },
       "original": "Q_MAP03_SUBSCORE01+Q_MAP03_SUBSCORE02+Q_MAP03_SUBSCORE03+Q_MAP03_SUBSCORE04+Q_MAP03_SUBSCORE05+Q_MAP03_SUBSCORE06+Q_MAP03_SUBSCORE07",
-      "index": 100511,
+      "index": 100561,
       "name": "MVO_Q_MAP03_SCORE01_value",
-      "parsed": "a100497('100497',x,y.base,z,v)+a100499('100499',x,y.base,z,v)+a100501('100501',x,y.base,z,v)+a100503('100503',x,y.base,z,v)+a100505('100505',x,y.base,z,v)+a100507('100507',x,y.base,z,v)+a100509('100509',x,y.base,z,v)",
-      "id": 100511,
+      "parsed": "a100546('100546',x,y.base,z,v)+a100549('100549',x,y.base,z,v)+a100551('100551',x,y.base,z,v)+a100553('100553',x,y.base,z,v)+a100555('100555',x,y.base,z,v)+a100557('100557',x,y.base,z,v)+a100559('100559',x,y.base,z,v)",
+      "id": 100561,
       "fflname": "Q_MAP03_SCORE01_value"
     },
     {
@@ -51627,10 +53711,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Score themas'",
-      "index": 100512,
+      "index": 100562,
       "name": "MVO_Q_MAP03_SCORE01_title",
       "parsed": "'Score themas'",
-      "id": 100512,
+      "id": 100562,
       "fflname": "Q_MAP03_SCORE01_title"
     },
     {
@@ -51641,10 +53725,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100513,
+      "index": 100563,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF04_value",
       "parsed": "undefined",
-      "id": 100513,
+      "id": 100563,
       "fflname": "Q_MAPRESULT_PARAGRAAF04_value"
     },
     {
@@ -51656,10 +53740,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Score Werknemers'",
-      "index": 100514,
+      "index": 100564,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF04_title",
       "parsed": "'Score Werknemers'",
-      "id": 100514,
+      "id": 100564,
       "fflname": "Q_MAPRESULT_PARAGRAAF04_title"
     },
     {
@@ -51670,10 +53754,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Deze score geeft een indicatie in hoeverre u handelt volgens de richtlijnen van drie van de vijf subthemas van het thema Werknemers (100 is de maximale score)'",
-      "index": 100515,
+      "index": 100565,
       "name": "MVO_Q_MAPRESULT_PARAGRAAF04_hint",
       "parsed": "'Deze score geeft een indicatie in hoeverre u handelt volgens de richtlijnen van drie van de vijf subthemas van het thema Werknemers (100 is de maximale score)'",
-      "id": 100515,
+      "id": 100565,
       "fflname": "Q_MAPRESULT_PARAGRAAF04_hint"
     },
     {
@@ -51686,47 +53770,47 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_value",
           "association": "deps",
-          "refId": 100450
+          "refId": 100493
         },
         {
           "name": "MVO_Q_MAP04_VRAAG01_value",
           "association": "deps",
-          "refId": 100377
+          "refId": 100416
         },
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG02_value",
           "association": "deps",
-          "refId": 100452
+          "refId": 100496
         },
         {
           "name": "MVO_Q_MAP04_VRAAG02_value",
           "association": "deps",
-          "refId": 100383
+          "refId": 100423
         },
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG03_value",
           "association": "deps",
-          "refId": 100454
+          "refId": 100498
         },
         {
           "name": "MVO_Q_MAP04_VRAAG03_value",
           "association": "deps",
-          "refId": 100388
+          "refId": 100428
         },
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG04_value",
           "association": "deps",
-          "refId": 100456
+          "refId": 100500
         },
         {
           "name": "MVO_Q_MAP04_VRAAG04_value",
           "association": "deps",
-          "refId": 100393
+          "refId": 100433
         },
         {
           "name": "MVO_Q_MAP04_SCORE01_value",
           "association": "refs",
-          "refId": 100522
+          "refId": 100573
         }
       ],
       "deps": {
@@ -51740,10 +53824,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP04_VRAAG04_value": true
       },
       "original": "OnER(Q_MAP04_GEWICHT_VRAAG01*Q_MAP04_VRAAG01+Q_MAP04_GEWICHT_VRAAG02*Q_MAP04_VRAAG02+Q_MAP04_GEWICHT_VRAAG03*Q_MAP04_VRAAG03+Q_MAP04_GEWICHT_VRAAG04*Q_MAP04_VRAAG04,NA)",
-      "index": 100516,
+      "index": 100566,
       "name": "MVO_Q_MAP04_SUBSCORE01_value",
-      "parsed": "OnER(a100450('100450',x,y.base,z,v)*a100377('100377',x,y.base,z,v)+a100452('100452',x,y.base,z,v)*a100383('100383',x,y.base,z,v)+a100454('100454',x,y.base,z,v)*a100388('100388',x,y.base,z,v)+a100456('100456',x,y.base,z,v)*a100393('100393',x,y.base,z,v),NA)",
-      "id": 100516,
+      "parsed": "OnER(a100493('100493',x,y.base,z,v)*a100416('100416',x,y.base,z,v)+a100496('100496',x,y.base,z,v)*a100423('100423',x,y.base,z,v)+a100498('100498',x,y.base,z,v)*a100428('100428',x,y.base,z,v)+a100500('100500',x,y.base,z,v)*a100433('100433',x,y.base,z,v),NA)",
+      "id": 100566,
       "fflname": "Q_MAP04_SUBSCORE01_value"
     },
     {
@@ -51754,11 +53838,36 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Score Arbeidsomstandigheden'",
-      "index": 100517,
+      "index": 100567,
       "name": "MVO_Q_MAP04_SUBSCORE01_title",
       "parsed": "'Score Arbeidsomstandigheden'",
-      "id": 100517,
+      "id": 100567,
       "fflname": "Q_MAP04_SUBSCORE01_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_MAP04_SUBSCORE01_visible": true,
+        "MVO_Q_MAP04_SUBSCORE02_visible": true,
+        "MVO_Q_MAP04_SUBSCORE03_visible": true,
+        "MVO_Q_MAP04_SCORE01_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_RESULTSUB1_visible",
+          "association": "deps",
+          "refId": 100532
+        }
+      ],
+      "deps": {
+        "MVO_Q_RESULTSUB1_visible": true
+      },
+      "original": "Q_MAPRESULT_PARAGRAAF04.visible",
+      "index": 100568,
+      "name": "MVO_Q_MAP04_SUBSCORE01_visible",
+      "parsed": "a100532('100532',x,y.base,z,v)",
+      "id": 100568,
+      "fflname": "Q_MAP04_SUBSCORE01_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -51770,47 +53879,47 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG05_value",
           "association": "deps",
-          "refId": 100458
+          "refId": 100502
         },
         {
           "name": "MVO_Q_MAP04_VRAAG05_value",
           "association": "deps",
-          "refId": 100405
+          "refId": 100445
         },
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG06_value",
           "association": "deps",
-          "refId": 100460
+          "refId": 100504
         },
         {
           "name": "MVO_Q_MAP04_VRAAG06_value",
           "association": "deps",
-          "refId": 100410
+          "refId": 100451
         },
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG07_value",
           "association": "deps",
-          "refId": 100462
+          "refId": 100506
         },
         {
           "name": "MVO_Q_MAP04_VRAAG07_value",
           "association": "deps",
-          "refId": 100415
+          "refId": 100456
         },
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG08_value",
           "association": "deps",
-          "refId": 100463
+          "refId": 100507
         },
         {
           "name": "MVO_Q_MAP04_VRAAG08_value",
           "association": "deps",
-          "refId": 100420
+          "refId": 100461
         },
         {
           "name": "MVO_Q_MAP04_SCORE01_value",
           "association": "refs",
-          "refId": 100522
+          "refId": 100573
         }
       ],
       "deps": {
@@ -51824,10 +53933,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP04_VRAAG08_value": true
       },
       "original": "OnER(Q_MAP04_GEWICHT_VRAAG05*Q_MAP04_VRAAG05+Q_MAP04_GEWICHT_VRAAG06*Q_MAP04_VRAAG06+Q_MAP04_GEWICHT_VRAAG07*Q_MAP04_VRAAG07+Q_MAP04_GEWICHT_VRAAG08*Q_MAP04_VRAAG08,NA)",
-      "index": 100518,
+      "index": 100569,
       "name": "MVO_Q_MAP04_SUBSCORE02_value",
-      "parsed": "OnER(a100458('100458',x,y.base,z,v)*a100405('100405',x,y.base,z,v)+a100460('100460',x,y.base,z,v)*a100410('100410',x,y.base,z,v)+a100462('100462',x,y.base,z,v)*a100415('100415',x,y.base,z,v)+a100463('100463',x,y.base,z,v)*a100420('100420',x,y.base,z,v),NA)",
-      "id": 100518,
+      "parsed": "OnER(a100502('100502',x,y.base,z,v)*a100445('100445',x,y.base,z,v)+a100504('100504',x,y.base,z,v)*a100451('100451',x,y.base,z,v)+a100506('100506',x,y.base,z,v)*a100456('100456',x,y.base,z,v)+a100507('100507',x,y.base,z,v)*a100461('100461',x,y.base,z,v),NA)",
+      "id": 100569,
       "fflname": "Q_MAP04_SUBSCORE02_value"
     },
     {
@@ -51838,10 +53947,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Score Gezondheid en veiligheid'",
-      "index": 100519,
+      "index": 100570,
       "name": "MVO_Q_MAP04_SUBSCORE02_title",
       "parsed": "'Score Gezondheid en veiligheid'",
-      "id": 100519,
+      "id": 100570,
       "fflname": "Q_MAP04_SUBSCORE02_title"
     },
     {
@@ -51854,47 +53963,47 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG09_value",
           "association": "deps",
-          "refId": 100465
+          "refId": 100509
         },
         {
           "name": "MVO_Q_MAP04_VRAAG09_value",
           "association": "deps",
-          "refId": 100428
+          "refId": 100469
         },
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG10_value",
           "association": "deps",
-          "refId": 100467
+          "refId": 100511
         },
         {
           "name": "MVO_Q_MAP04_VRAAG10_value",
           "association": "deps",
-          "refId": 100433
+          "refId": 100475
         },
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG11_value",
           "association": "deps",
-          "refId": 100469
+          "refId": 100513
         },
         {
           "name": "MVO_Q_MAP04_VRAAG11_value",
           "association": "deps",
-          "refId": 100438
+          "refId": 100480
         },
         {
           "name": "MVO_Q_MAP04_GEWICHT_VRAAG12_value",
           "association": "deps",
-          "refId": 100471
+          "refId": 100515
         },
         {
           "name": "MVO_Q_MAP04_VRAAG12_value",
           "association": "deps",
-          "refId": 100443
+          "refId": 100485
         },
         {
           "name": "MVO_Q_MAP04_SCORE01_value",
           "association": "refs",
-          "refId": 100522
+          "refId": 100573
         }
       ],
       "deps": {
@@ -51908,10 +54017,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP04_VRAAG12_value": true
       },
       "original": "OnER(Q_MAP04_GEWICHT_VRAAG09*Q_MAP04_VRAAG09+Q_MAP04_GEWICHT_VRAAG10*Q_MAP04_VRAAG10+Q_MAP04_GEWICHT_VRAAG11*Q_MAP04_VRAAG11+Q_MAP04_GEWICHT_VRAAG12*Q_MAP04_VRAAG12,NA)",
-      "index": 100520,
+      "index": 100571,
       "name": "MVO_Q_MAP04_SUBSCORE03_value",
-      "parsed": "OnER(a100465('100465',x,y.base,z,v)*a100428('100428',x,y.base,z,v)+a100467('100467',x,y.base,z,v)*a100433('100433',x,y.base,z,v)+a100469('100469',x,y.base,z,v)*a100438('100438',x,y.base,z,v)+a100471('100471',x,y.base,z,v)*a100443('100443',x,y.base,z,v),NA)",
-      "id": 100520,
+      "parsed": "OnER(a100509('100509',x,y.base,z,v)*a100469('100469',x,y.base,z,v)+a100511('100511',x,y.base,z,v)*a100475('100475',x,y.base,z,v)+a100513('100513',x,y.base,z,v)*a100480('100480',x,y.base,z,v)+a100515('100515',x,y.base,z,v)*a100485('100485',x,y.base,z,v),NA)",
+      "id": 100571,
       "fflname": "Q_MAP04_SUBSCORE03_value"
     },
     {
@@ -51922,10 +54031,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Score Ontwikkeling en opleiding'",
-      "index": 100521,
+      "index": 100572,
       "name": "MVO_Q_MAP04_SUBSCORE03_title",
       "parsed": "'Score Ontwikkeling en opleiding'",
-      "id": 100521,
+      "id": 100572,
       "fflname": "Q_MAP04_SUBSCORE03_title"
     },
     {
@@ -51937,17 +54046,17 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP04_SUBSCORE01_value",
           "association": "deps",
-          "refId": 100516
+          "refId": 100566
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE02_value",
           "association": "deps",
-          "refId": 100518
+          "refId": 100569
         },
         {
           "name": "MVO_Q_MAP04_SUBSCORE03_value",
           "association": "deps",
-          "refId": 100520
+          "refId": 100571
         }
       ],
       "deps": {
@@ -51956,10 +54065,10 @@ LME.importLME(JSON_MODEL);
         "MVO_Q_MAP04_SUBSCORE03_value": true
       },
       "original": "OnER((Q_MAP04_SUBSCORE01+Q_MAP04_SUBSCORE02+Q_MAP04_SUBSCORE03)/3,NA)",
-      "index": 100522,
+      "index": 100573,
       "name": "MVO_Q_MAP04_SCORE01_value",
-      "parsed": "OnER((a100516('100516',x,y.base,z,v)+a100518('100518',x,y.base,z,v)+a100520('100520',x,y.base,z,v))/3,NA)",
-      "id": 100522,
+      "parsed": "OnER((a100566('100566',x,y.base,z,v)+a100569('100569',x,y.base,z,v)+a100571('100571',x,y.base,z,v))/3,NA)",
+      "id": 100573,
       "fflname": "Q_MAP04_SCORE01_value"
     },
     {
@@ -51970,10 +54079,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "0",
-      "index": 100523,
+      "index": 100574,
       "name": "MVO_Q_STATUS_value",
       "parsed": "0",
-      "id": 100523,
+      "id": 100574,
       "fflname": "Q_STATUS_value"
     },
     {
@@ -51984,10 +54093,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Status'",
-      "index": 100524,
+      "index": 100575,
       "name": "MVO_Q_STATUS_title",
       "parsed": "'Status'",
-      "id": 100524,
+      "id": 100575,
       "fflname": "Q_STATUS_title"
     },
     {
@@ -51998,10 +54107,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Actief'},{'name':'1','value':'Defintief'}]",
-      "index": 100525,
+      "index": 100576,
       "name": "MVO_Q_STATUS_choices",
       "parsed": "[{'name':' 0','value':'Actief'},{'name':'1','value':'Defintief'}]",
-      "id": 100525,
+      "id": 100576,
       "fflname": "Q_STATUS_choices"
     },
     {
@@ -52012,10 +54121,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100526,
+      "index": 100577,
       "name": "MVO_Q_STATUS_FINAL_ON_value",
       "parsed": "undefined",
-      "id": 100526,
+      "id": 100577,
       "fflname": "Q_STATUS_FINAL_ON_value"
     },
     {
@@ -52026,10 +54135,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Definitief gemaakt op, '",
-      "index": 100527,
+      "index": 100578,
       "name": "MVO_Q_STATUS_FINAL_ON_title",
       "parsed": "'Definitief gemaakt op, '",
-      "id": 100527,
+      "id": 100578,
       "fflname": "Q_STATUS_FINAL_ON_title"
     },
     {
@@ -52040,10 +54149,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100528,
+      "index": 100579,
       "name": "MVO_Q_STATUS_FINAL_BY_value",
       "parsed": "undefined",
-      "id": 100528,
+      "id": 100579,
       "fflname": "Q_STATUS_FINAL_BY_value"
     },
     {
@@ -52054,10 +54163,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Definitief gemaakt door (gebruikersnaam), '",
-      "index": 100529,
+      "index": 100580,
       "name": "MVO_Q_STATUS_FINAL_BY_title",
       "parsed": "'Definitief gemaakt door (gebruikersnaam), '",
-      "id": 100529,
+      "id": 100580,
       "fflname": "Q_STATUS_FINAL_BY_title"
     },
     {
@@ -52068,10 +54177,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100530,
+      "index": 100581,
       "name": "MVO_Q_STATUS_FINAL_BY_NAME_value",
       "parsed": "undefined",
-      "id": 100530,
+      "id": 100581,
       "fflname": "Q_STATUS_FINAL_BY_NAME_value"
     },
     {
@@ -52082,10 +54191,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Definitief gemaakt door (volledige naam), '",
-      "index": 100531,
+      "index": 100582,
       "name": "MVO_Q_STATUS_FINAL_BY_NAME_title",
       "parsed": "'Definitief gemaakt door (volledige naam), '",
-      "id": 100531,
+      "id": 100582,
       "fflname": "Q_STATUS_FINAL_BY_NAME_title"
     },
     {
@@ -52096,10 +54205,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100532,
+      "index": 100583,
       "name": "MVO_Q_STATUS_STARTED_ON_value",
       "parsed": "undefined",
-      "id": 100532,
+      "id": 100583,
       "fflname": "Q_STATUS_STARTED_ON_value"
     },
     {
@@ -52110,10 +54219,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Aangemaakt op, '",
-      "index": 100533,
+      "index": 100584,
       "name": "MVO_Q_STATUS_STARTED_ON_title",
       "parsed": "'Aangemaakt op, '",
-      "id": 100533,
+      "id": 100584,
       "fflname": "Q_STATUS_STARTED_ON_title"
     },
     {
@@ -52124,10 +54233,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100534,
+      "index": 100585,
       "name": "MVO_Q_STATUS_STARTED_BY_value",
       "parsed": "undefined",
-      "id": 100534,
+      "id": 100585,
       "fflname": "Q_STATUS_STARTED_BY_value"
     },
     {
@@ -52138,10 +54247,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Aangemaakt door (gebruikersnaam), '",
-      "index": 100535,
+      "index": 100586,
       "name": "MVO_Q_STATUS_STARTED_BY_title",
       "parsed": "'Aangemaakt door (gebruikersnaam), '",
-      "id": 100535,
+      "id": 100586,
       "fflname": "Q_STATUS_STARTED_BY_title"
     },
     {
@@ -52152,10 +54261,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100536,
+      "index": 100587,
       "name": "MVO_Q_STATUS_STARTED_BY_NAME_value",
       "parsed": "undefined",
-      "id": 100536,
+      "id": 100587,
       "fflname": "Q_STATUS_STARTED_BY_NAME_value"
     },
     {
@@ -52166,10 +54275,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Aangemaakt door (volledige naam), '",
-      "index": 100537,
+      "index": 100588,
       "name": "MVO_Q_STATUS_STARTED_BY_NAME_title",
       "parsed": "'Aangemaakt door (volledige naam), '",
-      "id": 100537,
+      "id": 100588,
       "fflname": "Q_STATUS_STARTED_BY_NAME_title"
     },
     {
@@ -52180,10 +54289,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'00.01.000.000'",
-      "index": 100538,
+      "index": 100589,
       "name": "MVO_ModelVersion_value",
       "parsed": "'00.01.000.000'",
-      "id": 100538,
+      "id": 100589,
       "fflname": "ModelVersion_value"
     },
     {
@@ -52194,10 +54303,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Modelversie'",
-      "index": 100539,
+      "index": 100590,
       "name": "MVO_ModelVersion_title",
       "parsed": "'Modelversie'",
-      "id": 100539,
+      "id": 100590,
       "fflname": "ModelVersion_title"
     },
     {
@@ -52208,10 +54317,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'TEST'",
-      "index": 100540,
+      "index": 100591,
       "name": "MVO_ModelType_value",
       "parsed": "'TEST'",
-      "id": 100540,
+      "id": 100591,
       "fflname": "ModelType_value"
     },
     {
@@ -52222,10 +54331,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Modeltype'",
-      "index": 100541,
+      "index": 100592,
       "name": "MVO_ModelType_title",
       "parsed": "'Modeltype'",
-      "id": 100541,
+      "id": 100592,
       "fflname": "ModelType_title"
     },
     {
@@ -52236,10 +54345,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'None'",
-      "index": 100542,
+      "index": 100593,
       "name": "MVO_MatrixVersion_value",
       "parsed": "'None'",
-      "id": 100542,
+      "id": 100593,
       "fflname": "MatrixVersion_value"
     },
     {
@@ -52250,10 +54359,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Parametersversie'",
-      "index": 100543,
+      "index": 100594,
       "name": "MVO_MatrixVersion_title",
       "parsed": "'Parametersversie'",
-      "id": 100543,
+      "id": 100594,
       "fflname": "MatrixVersion_title"
     },
     {
@@ -52264,10 +54373,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Bij het definitief maken wordt de waarde vastgezet.'",
-      "index": 100544,
+      "index": 100595,
       "name": "MVO_MatrixVersion_hint",
       "parsed": "'Bij het definitief maken wordt de waarde vastgezet.'",
-      "id": 100544,
+      "id": 100595,
       "fflname": "MatrixVersion_hint"
     },
     {
@@ -52278,10 +54387,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "2",
-      "index": 100545,
+      "index": 100596,
       "name": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_value",
       "parsed": "2",
-      "id": 100545,
+      "id": 100596,
       "fflname": "Q_PREVIOUS_BUTTON_VISIBLE_value"
     },
     {
@@ -52292,10 +54401,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Vorige'",
-      "index": 100546,
+      "index": 100597,
       "name": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_title",
       "parsed": "'Vorige'",
-      "id": 100546,
+      "id": 100597,
       "fflname": "Q_PREVIOUS_BUTTON_VISIBLE_title"
     },
     {
@@ -52306,10 +54415,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Nooit'},{'name':'2','value':'Altijd'}]",
-      "index": 100547,
+      "index": 100598,
       "name": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_choices",
       "parsed": "[{'name':' 0','value':'Nooit'},{'name':'2','value':'Altijd'}]",
-      "id": 100547,
+      "id": 100598,
       "fflname": "Q_PREVIOUS_BUTTON_VISIBLE_choices"
     },
     {
@@ -52320,10 +54429,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "2",
-      "index": 100548,
+      "index": 100599,
       "name": "MVO_Q_NEXT_BUTTON_VISIBLE_value",
       "parsed": "2",
-      "id": 100548,
+      "id": 100599,
       "fflname": "Q_NEXT_BUTTON_VISIBLE_value"
     },
     {
@@ -52334,10 +54443,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Volgende'",
-      "index": 100549,
+      "index": 100600,
       "name": "MVO_Q_NEXT_BUTTON_VISIBLE_title",
       "parsed": "'Volgende'",
-      "id": 100549,
+      "id": 100600,
       "fflname": "Q_NEXT_BUTTON_VISIBLE_title"
     },
     {
@@ -52348,10 +54457,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "[{'name':' 0','value':'Nooit'},{'name':'1','value':'Alleen wanneer stap volledig is'},{'name':'2','value':'Altijd'}]",
-      "index": 100550,
+      "index": 100601,
       "name": "MVO_Q_NEXT_BUTTON_VISIBLE_choices",
       "parsed": "[{'name':' 0','value':'Nooit'},{'name':'1','value':'Alleen wanneer stap volledig is'},{'name':'2','value':'Altijd'}]",
-      "id": 100550,
+      "id": 100601,
       "fflname": "Q_NEXT_BUTTON_VISIBLE_choices"
     },
     {
@@ -52362,10 +54471,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "1",
-      "index": 100551,
+      "index": 100602,
       "name": "MVO_Q_CONCEPT_REPORT_VISIBLE_value",
       "parsed": "1",
-      "id": 100551,
+      "id": 100602,
       "fflname": "Q_CONCEPT_REPORT_VISIBLE_value"
     },
     {
@@ -52376,10 +54485,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Concept rapport'",
-      "index": 100552,
+      "index": 100603,
       "name": "MVO_Q_CONCEPT_REPORT_VISIBLE_title",
       "parsed": "'Concept rapport'",
-      "id": 100552,
+      "id": 100603,
       "fflname": "Q_CONCEPT_REPORT_VISIBLE_title"
     },
     {
@@ -52390,10 +54499,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "1",
-      "index": 100553,
+      "index": 100604,
       "name": "MVO_Q_MAKE_FINAL_VISIBLE_value",
       "parsed": "1",
-      "id": 100553,
+      "id": 100604,
       "fflname": "Q_MAKE_FINAL_VISIBLE_value"
     },
     {
@@ -52404,10 +54513,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Definitief maken'",
-      "index": 100554,
+      "index": 100605,
       "name": "MVO_Q_MAKE_FINAL_VISIBLE_title",
       "parsed": "'Definitief maken'",
-      "id": 100554,
+      "id": 100605,
       "fflname": "Q_MAKE_FINAL_VISIBLE_title"
     },
     {
@@ -52426,10 +54535,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "1",
-      "index": 100555,
+      "index": 100606,
       "name": "MVO_Q_FINAL_REPORT_VISIBLE_value",
       "parsed": "1",
-      "id": 100555,
+      "id": 100606,
       "fflname": "Q_FINAL_REPORT_VISIBLE_value"
     },
     {
@@ -52440,10 +54549,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Definitief rapport'",
-      "index": 100556,
+      "index": 100607,
       "name": "MVO_Q_FINAL_REPORT_VISIBLE_title",
       "parsed": "'Definitief rapport'",
-      "id": 100556,
+      "id": 100607,
       "fflname": "Q_FINAL_REPORT_VISIBLE_title"
     },
     {
@@ -52454,10 +54563,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100557,
+      "index": 100608,
       "name": "MVO_HULPVARS_value",
       "parsed": "undefined",
-      "id": 100557,
+      "id": 100608,
       "fflname": "HULPVARS_value"
     },
     {
@@ -52474,42 +54583,42 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_WARNING_value",
           "association": "refs",
-          "refId": 100080
+          "refId": 100084
         },
         {
           "name": "MVO_Q_MAP02_WARNING_value",
           "association": "refs",
-          "refId": 100200
+          "refId": 100216
         },
         {
           "name": "MVO_Q_MAP03_WARNING_value",
           "association": "refs",
-          "refId": 100236
+          "refId": 100258
         },
         {
           "name": "MVO_Q_MAP04_WARNING_value",
           "association": "refs",
-          "refId": 100363
+          "refId": 100400
         },
         {
           "name": "MVO_Q_RESULT_value",
           "association": "refs",
-          "refId": 100483
+          "refId": 100529
         },
         {
           "name": "MVO_Q_WARNING_GLOBALTXT_value",
           "association": "deps",
-          "refId": 100562
+          "refId": 100615
         }
       ],
       "deps": {
         "MVO_Q_WARNING_GLOBALTXT_value": true
       },
       "original": "String(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing, '+Q_WARNING_GLOBALTXT,''))",
-      "index": 100558,
+      "index": 100609,
       "name": "MVO_Q_WARNING_GLOBAL_value",
-      "parsed": "String(Length(a100562('100562',x.doc,y.base,z,v))>0?'[br][/br]Er zijn knockouts van toepassing, '+a100562('100562',x,y.base,z,v):'')",
-      "id": 100558,
+      "parsed": "String(Length(a100615('100615',x.doc,y.base,z,v))>0?'[br][/br]Er zijn knockouts van toepassing, '+a100615('100615',x,y.base,z,v):'')",
+      "id": 100609,
       "fflname": "Q_WARNING_GLOBAL_value"
     },
     {
@@ -52520,11 +54629,45 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Knock-out(s)'",
-      "index": 100559,
+      "index": 100610,
       "name": "MVO_Q_WARNING_GLOBAL_title",
       "parsed": "'Knock-out(s)'",
-      "id": 100559,
+      "id": 100610,
       "fflname": "Q_WARNING_GLOBAL_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_WARNING_GLOBAL_visible": true,
+        "MVO_Q_RESTRICTIES_visible": true,
+        "MVO_Q_WARNING_01_visible": true,
+        "MVO_Q_RESTRICTIES_01_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_HULPVARS_visible",
+          "association": "deps"
+        },
+        {
+          "name": "MVO_Q_WARNING_01_visible",
+          "association": "refs",
+          "refId": 100614
+        },
+        {
+          "name": "MVO_Q_RESTRICTIES_01_visible",
+          "association": "refs",
+          "refId": 100620
+        }
+      ],
+      "deps": {
+        "MVO_HULPVARS_visible": true
+      },
+      "original": "HULPVARS.visible",
+      "index": 100611,
+      "name": "MVO_Q_WARNING_GLOBAL_visible",
+      "parsed": "true",
+      "id": 100611,
+      "fflname": "Q_WARNING_GLOBAL_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -52536,15 +54679,15 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_WARNING_GLOBALTXT_value",
           "association": "refs",
-          "refId": 100562
+          "refId": 100615
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100560,
+      "index": 100612,
       "name": "MVO_Q_WARNING_01_value",
       "parsed": "undefined",
-      "id": 100560,
+      "id": 100612,
       "fflname": "Q_WARNING_01_value"
     },
     {
@@ -52555,11 +54698,34 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Map6 - Vraag 6'",
-      "index": 100561,
+      "index": 100613,
       "name": "MVO_Q_WARNING_01_title",
       "parsed": "'Map6 - Vraag 6'",
-      "id": 100561,
+      "id": 100613,
       "fflname": "Q_WARNING_01_title"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_WARNING_01_visible": true,
+        "MVO_Q_WARNING_GLOBALTXT_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_WARNING_GLOBAL_visible",
+          "association": "deps",
+          "refId": 100611
+        }
+      ],
+      "deps": {
+        "MVO_Q_WARNING_GLOBAL_visible": true
+      },
+      "original": "Q_WARNING_GLOBAL.visible",
+      "index": 100614,
+      "name": "MVO_Q_WARNING_01_visible",
+      "parsed": "a100611('100611',x,y.base,z,v)",
+      "id": 100614,
+      "fflname": "Q_WARNING_01_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -52571,22 +54737,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_WARNING_GLOBAL_value",
           "association": "refs",
-          "refId": 100558
+          "refId": 100609
         },
         {
           "name": "MVO_Q_WARNING_01_value",
           "association": "deps",
-          "refId": 100560
+          "refId": 100612
         }
       ],
       "deps": {
         "MVO_Q_WARNING_01_value": true
       },
       "original": "String(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))",
-      "index": 100562,
+      "index": 100615,
       "name": "MVO_Q_WARNING_GLOBALTXT_value",
-      "parsed": "String(Length(a100560('100560',x.doc,y.base,z,v))>0?'[br][/br]'+a100560('100560',x.doc,y.base,z,v):'')",
-      "id": 100562,
+      "parsed": "String(Length(a100612('100612',x.doc,y.base,z,v))>0?'[br][/br]'+a100612('100612',x.doc,y.base,z,v):'')",
+      "id": 100615,
       "fflname": "Q_WARNING_GLOBALTXT_value"
     },
     {
@@ -52597,10 +54763,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Knock-out tekst'",
-      "index": 100563,
+      "index": 100616,
       "name": "MVO_Q_WARNING_GLOBALTXT_title",
       "parsed": "'Knock-out tekst'",
-      "id": 100563,
+      "id": 100616,
       "fflname": "Q_WARNING_GLOBALTXT_title"
     },
     {
@@ -52617,42 +54783,42 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_MAP01_WARNING_value",
           "association": "refs",
-          "refId": 100080
+          "refId": 100084
         },
         {
           "name": "MVO_Q_MAP02_WARNING_value",
           "association": "refs",
-          "refId": 100200
+          "refId": 100216
         },
         {
           "name": "MVO_Q_MAP03_WARNING_value",
           "association": "refs",
-          "refId": 100236
+          "refId": 100258
         },
         {
           "name": "MVO_Q_MAP04_WARNING_value",
           "association": "refs",
-          "refId": 100363
+          "refId": 100400
         },
         {
           "name": "MVO_Q_RESULT_value",
           "association": "refs",
-          "refId": 100483
+          "refId": 100529
         },
         {
           "name": "MVO_Q_RESTRICTIESTXT_value",
           "association": "deps",
-          "refId": 100568
+          "refId": 100622
         }
       ],
       "deps": {
         "MVO_Q_RESTRICTIESTXT_value": true
       },
       "original": "String(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld, '+Q_RESTRICTIESTXT,''))",
-      "index": 100564,
+      "index": 100617,
       "name": "MVO_Q_RESTRICTIES_value",
-      "parsed": "String(Length(a100568('100568',x.doc,y.base,z,v))>0?'[br][/br]De volgende variabelen zijn niet correct gevuld, '+a100568('100568',x,y.base,z,v):'')",
-      "id": 100564,
+      "parsed": "String(Length(a100622('100622',x.doc,y.base,z,v))>0?'[br][/br]De volgende variabelen zijn niet correct gevuld, '+a100622('100622',x,y.base,z,v):'')",
+      "id": 100617,
       "fflname": "Q_RESTRICTIES_value"
     },
     {
@@ -52663,10 +54829,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Restricties'",
-      "index": 100565,
+      "index": 100618,
       "name": "MVO_Q_RESTRICTIES_title",
       "parsed": "'Restricties'",
-      "id": 100565,
+      "id": 100618,
       "fflname": "Q_RESTRICTIES_title"
     },
     {
@@ -52679,16 +54845,40 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_RESTRICTIESTXT_value",
           "association": "refs",
-          "refId": 100568
+          "refId": 100622
         }
       ],
       "deps": {},
       "original": "undefined",
-      "index": 100566,
+      "index": 100619,
       "name": "MVO_Q_RESTRICTIES_01_value",
       "parsed": "undefined",
-      "id": 100566,
+      "id": 100619,
       "fflname": "Q_RESTRICTIES_01_value"
+    },
+    {
+      "type": "noCacheLocked",
+      "refs": {
+        "MVO_Q_RESTRICTIES_01_visible": true,
+        "MVO_Q_RESTRICTIES_02_visible": true,
+        "MVO_Q_RESTRICTIESTXT_visible": true
+      },
+      "formulaDependencys": [
+        {
+          "name": "MVO_Q_WARNING_GLOBAL_visible",
+          "association": "deps",
+          "refId": 100611
+        }
+      ],
+      "deps": {
+        "MVO_Q_WARNING_GLOBAL_visible": true
+      },
+      "original": "Q_RESTRICTIES.visible",
+      "index": 100620,
+      "name": "MVO_Q_RESTRICTIES_01_visible",
+      "parsed": "a100611('100611',x,y.base,z,v)",
+      "id": 100620,
+      "fflname": "Q_RESTRICTIES_01_visible"
     },
     {
       "type": "noCacheUnlocked",
@@ -52698,10 +54888,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
-      "index": 100567,
+      "index": 100621,
       "name": "MVO_Q_RESTRICTIES_02_value",
       "parsed": "undefined",
-      "id": 100567,
+      "id": 100621,
       "fflname": "Q_RESTRICTIES_02_value"
     },
     {
@@ -52714,22 +54904,22 @@ LME.importLME(JSON_MODEL);
         {
           "name": "MVO_Q_RESTRICTIES_value",
           "association": "refs",
-          "refId": 100564
+          "refId": 100617
         },
         {
           "name": "MVO_Q_RESTRICTIES_01_value",
           "association": "deps",
-          "refId": 100566
+          "refId": 100619
         }
       ],
       "deps": {
         "MVO_Q_RESTRICTIES_01_value": true
       },
       "original": "String(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))",
-      "index": 100568,
+      "index": 100622,
       "name": "MVO_Q_RESTRICTIESTXT_value",
-      "parsed": "String(Length(a100566('100566',x.doc,y.base,z,v))>0?'[br][/br]'+a100566('100566',x.doc,y.base,z,v):'')",
-      "id": 100568,
+      "parsed": "String(Length(a100619('100619',x.doc,y.base,z,v))>0?'[br][/br]'+a100619('100619',x.doc,y.base,z,v):'')",
+      "id": 100622,
       "fflname": "Q_RESTRICTIESTXT_value"
     },
     {
@@ -52740,10 +54930,10 @@ LME.importLME(JSON_MODEL);
       "formulaDependencys": [],
       "deps": {},
       "original": "'Restricties tekst'",
-      "index": 100569,
+      "index": 100623,
       "name": "MVO_Q_RESTRICTIESTXT_title",
       "parsed": "'Restricties tekst'",
-      "id": 100569,
+      "id": 100623,
       "fflname": "Q_RESTRICTIESTXT_title"
     }
   ],
@@ -52764,7 +54954,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "RootSub1.visible",
       false,
       "[{'name':' 0','value':' NA'},{'name':'1','value':' IFRS-EU'},{'name':'2','value':' IFRS'},{'name':'48','value':' Polish'}]"
     ],
@@ -52894,7 +55084,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "RootSub2.visible",
       false,
       null
     ],
@@ -53084,7 +55274,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "FPS_VAR_Emailadres.visible",
       false,
       null
     ],
@@ -53114,7 +55304,7 @@ LME.importLME(JSON_MODEL);
       "Q_MAP01_ENTEREDREQUIREDVARS==Q_MAP01_REQUIREDVARS",
       "",
       "",
-      false,
+      "Q_ROOT.visible",
       false,
       null
     ],
@@ -53124,7 +55314,7 @@ LME.importLME(JSON_MODEL);
       "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
-      false,
+      "Q_MAP01.visible",
       false,
       null
     ],
@@ -53174,7 +55364,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01_PARAGRAAF00.visible&&0",
       false,
       null
     ],
@@ -53194,7 +55384,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01_PARAGRAAF01.visible",
       false,
       "[{'name':' 0','value':'Nee'},{'name':'1','value':'Ja'}]"
     ],
@@ -53204,7 +55394,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG01==1",
+      "Q_MAP01_PARAGRAAF01.visible&&Q_MAP01_VRAAG01==1",
       false,
       null
     ],
@@ -53224,7 +55414,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG02==1",
+      "Q_MAP01_PARAGRAAF01.visible&&Q_MAP01_VRAAG02==1",
       false,
       null
     ],
@@ -53244,7 +55434,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01_PARAGRAAF02.visible",
       false,
       null
     ],
@@ -53254,7 +55444,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG03==1",
+      "Q_MAP01_PARAGRAAF02.visible&&Q_MAP01_VRAAG03==1",
       false,
       null
     ],
@@ -53274,7 +55464,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG04==1",
+      "Q_MAP01_PARAGRAAF02.visible&&Q_MAP01_VRAAG04==1",
       false,
       null
     ],
@@ -53294,7 +55484,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01_PARAGRAAF03.visible",
       false,
       null
     ],
@@ -53304,7 +55494,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG05==1",
+      "Q_MAP01_PARAGRAAF03.visible&&Q_MAP01_VRAAG05==1",
       false,
       null
     ],
@@ -53324,7 +55514,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG06==1",
+      "Q_MAP01_PARAGRAAF03.visible&&Q_MAP01_VRAAG06==1",
       false,
       null
     ],
@@ -53344,7 +55534,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01_PARAGRAAF04.visible",
       false,
       null
     ],
@@ -53354,7 +55544,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG07==1",
+      "Q_MAP01_PARAGRAAF04.visible&&Q_MAP01_VRAAG07==1",
       false,
       null
     ],
@@ -53374,7 +55564,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG08==1",
+      "Q_MAP01_PARAGRAAF04.visible&&Q_MAP01_VRAAG08==1",
       false,
       null
     ],
@@ -53394,7 +55584,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01_PARAGRAAF05.visible",
       false,
       null
     ],
@@ -53404,7 +55594,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG09==1",
+      "Q_MAP01_PARAGRAAF05.visible&&Q_MAP01_VRAAG09==1",
       false,
       null
     ],
@@ -53424,7 +55614,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG10==1",
+      "Q_MAP01_PARAGRAAF05.visible&&Q_MAP01_VRAAG10==1",
       false,
       null
     ],
@@ -53444,7 +55634,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01_PARAGRAAF06.visible",
       false,
       null
     ],
@@ -53454,7 +55644,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG11==1",
+      "Q_MAP01_PARAGRAAF06.visible&&Q_MAP01_VRAAG11==1",
       false,
       null
     ],
@@ -53474,7 +55664,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG12==1",
+      "Q_MAP01_PARAGRAAF06.visible&&Q_MAP01_VRAAG12==1",
       false,
       null
     ],
@@ -53494,7 +55684,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01_PARAGRAAF07.visible",
       false,
       null
     ],
@@ -53504,7 +55694,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG13==1",
+      "Q_MAP01_PARAGRAAF07.visible&&Q_MAP01_VRAAG13==1",
       false,
       null
     ],
@@ -53524,7 +55714,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP01_VRAAG14==1",
+      "Q_MAP01_PARAGRAAF07.visible&&Q_MAP01_VRAAG14==1",
       false,
       null
     ],
@@ -53534,7 +55724,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01.visible&&0",
       false,
       null
     ],
@@ -53544,7 +55734,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP01_PARAGRAAF09.visible",
       false,
       null
     ],
@@ -53604,7 +55794,7 @@ LME.importLME(JSON_MODEL);
       "Count(X,SelectDescendants(Q_MAP01,Q_MAP01_HULPVARIABELEN),InputRequired(X))",
       "",
       "",
-      false,
+      "Q_MAP01_HULPVARIABELEN.visible",
       false,
       null
     ],
@@ -53644,7 +55834,7 @@ LME.importLME(JSON_MODEL);
       "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
-      false,
+      "Q_MAP02.visible",
       false,
       null
     ],
@@ -53694,7 +55884,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP02_PARAGRAAF00.visible&&0",
       false,
       null
     ],
@@ -53714,7 +55904,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP02_PARAGRAAF01.visible",
       false,
       null
     ],
@@ -53724,7 +55914,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP02_VRAAG01==1",
+      "Q_MAP02_PARAGRAAF01.visible&&Q_MAP02_VRAAG01==1",
       false,
       null
     ],
@@ -53744,7 +55934,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP02_VRAAG02==1",
+      "Q_MAP02_PARAGRAAF01.visible&&Q_MAP02_VRAAG02==1",
       false,
       null
     ],
@@ -53754,7 +55944,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP02.visible&&0",
       false,
       null
     ],
@@ -53764,7 +55954,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP02_PARAGRAAF09.visible",
       false,
       null
     ],
@@ -53824,7 +56014,7 @@ LME.importLME(JSON_MODEL);
       "Count(X,SelectDescendants(Q_MAP02,Q_MAP02_HULPVARIABELEN),InputRequired(X))",
       "",
       "",
-      false,
+      "Q_MAP02_HULPVARIABELEN.visible",
       false,
       null
     ],
@@ -53864,7 +56054,7 @@ LME.importLME(JSON_MODEL);
       "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
-      false,
+      "Q_MAP03.visible",
       false,
       null
     ],
@@ -53914,7 +56104,7 @@ LME.importLME(JSON_MODEL);
       "50",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF01.visible",
       false,
       null
     ],
@@ -53944,7 +56134,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP03.visible&&0",
       false,
       null
     ],
@@ -53954,7 +56144,7 @@ LME.importLME(JSON_MODEL);
       "OnER(1/6*Q_MAP03_GEWICHT_VRAAG05_INPUT,NA)",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF11.visible",
       false,
       null
     ],
@@ -53994,7 +56184,7 @@ LME.importLME(JSON_MODEL);
       "OnER(1/6*100,NA)",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF10.visible",
       false,
       null
     ],
@@ -54064,7 +56254,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF00.visible&&0",
       false,
       null
     ],
@@ -54084,7 +56274,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF02.visible",
       false,
       null
     ],
@@ -54094,7 +56284,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG01==1",
+      "Q_MAP03_PARAGRAAF02.visible&&Q_MAP03_VRAAG01==1",
       false,
       null
     ],
@@ -54114,7 +56304,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG02==1",
+      "Q_MAP03_PARAGRAAF02.visible&&Q_MAP03_VRAAG02==1",
       false,
       null
     ],
@@ -54134,7 +56324,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF03.visible",
       false,
       null
     ],
@@ -54144,7 +56334,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG03==1",
+      "Q_MAP03_PARAGRAAF03.visible&&Q_MAP03_VRAAG03==1",
       false,
       null
     ],
@@ -54164,7 +56354,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG04==1",
+      "Q_MAP03_PARAGRAAF03.visible&&Q_MAP03_VRAAG04==1",
       false,
       null
     ],
@@ -54184,7 +56374,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF04.visible",
       false,
       null
     ],
@@ -54194,7 +56384,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG05==1",
+      "Q_MAP03_PARAGRAAF04.visible&&Q_MAP03_VRAAG05==1",
       false,
       null
     ],
@@ -54214,7 +56404,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG06==1",
+      "Q_MAP03_PARAGRAAF04.visible&&Q_MAP03_VRAAG06==1",
       false,
       null
     ],
@@ -54234,7 +56424,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF05.visible",
       false,
       null
     ],
@@ -54244,7 +56434,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG07==1",
+      "Q_MAP03_PARAGRAAF05.visible&&Q_MAP03_VRAAG07==1",
       false,
       null
     ],
@@ -54264,7 +56454,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG08==1",
+      "Q_MAP03_PARAGRAAF05.visible&&Q_MAP03_VRAAG08==1",
       false,
       null
     ],
@@ -54284,7 +56474,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF06.visible",
       false,
       null
     ],
@@ -54294,7 +56484,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG09==1",
+      "Q_MAP03_PARAGRAAF06.visible&&Q_MAP03_VRAAG09==1",
       false,
       null
     ],
@@ -54314,7 +56504,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG10==1",
+      "Q_MAP03_PARAGRAAF06.visible&&Q_MAP03_VRAAG10==1",
       false,
       null
     ],
@@ -54334,7 +56524,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF07.visible",
       false,
       null
     ],
@@ -54344,7 +56534,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG11==1",
+      "Q_MAP03_PARAGRAAF07.visible&&Q_MAP03_VRAAG11==1",
       false,
       null
     ],
@@ -54364,7 +56554,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG12==1",
+      "Q_MAP03_PARAGRAAF07.visible&&Q_MAP03_VRAAG12==1",
       false,
       null
     ],
@@ -54384,7 +56574,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF08.visible",
       false,
       null
     ],
@@ -54394,7 +56584,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG13==1",
+      "Q_MAP03_PARAGRAAF08.visible&&Q_MAP03_VRAAG13==1",
       false,
       null
     ],
@@ -54414,7 +56604,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP03_VRAAG14==1",
+      "Q_MAP03_PARAGRAAF08.visible&&Q_MAP03_VRAAG14==1",
       false,
       null
     ],
@@ -54434,7 +56624,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP03_PARAGRAAF09.visible",
       false,
       null
     ],
@@ -54494,7 +56684,7 @@ LME.importLME(JSON_MODEL);
       "Count(X,SelectDescendants(Q_MAP03,Q_MAP03_HULPVARIABELEN),InputRequired(X))",
       "",
       "",
-      false,
+      "Q_MAP03_HULPVARIABELEN.visible",
       false,
       null
     ],
@@ -54534,7 +56724,7 @@ LME.importLME(JSON_MODEL);
       "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
-      false,
+      "Q_MAP04.visible",
       false,
       null
     ],
@@ -54584,7 +56774,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP04_PARAGRAAF00.visible&&0",
       false,
       null
     ],
@@ -54604,7 +56794,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP04_PARAGRAAF01.visible",
       false,
       null
     ],
@@ -54614,7 +56804,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG01==1",
+      "Q_MAP04_PARAGRAAF01.visible&&Q_MAP04_VRAAG01==1",
       false,
       null
     ],
@@ -54634,7 +56824,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG02==1",
+      "Q_MAP04_PARAGRAAF01.visible&&Q_MAP04_VRAAG02==1",
       false,
       null
     ],
@@ -54654,7 +56844,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG03==1",
+      "Q_MAP04_PARAGRAAF01.visible&&Q_MAP04_VRAAG03==1",
       false,
       null
     ],
@@ -54674,7 +56864,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG04==1",
+      "Q_MAP04_PARAGRAAF01.visible&&Q_MAP04_VRAAG04==1",
       false,
       null
     ],
@@ -54684,7 +56874,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG04==0",
+      "Q_MAP04_PARAGRAAF01.visible&&Q_MAP04_VRAAG04==0",
       false,
       null
     ],
@@ -54704,7 +56894,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP04_PARAGRAAF02.visible",
       false,
       null
     ],
@@ -54714,7 +56904,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG05==1",
+      "Q_MAP04_PARAGRAAF02.visible&&Q_MAP04_VRAAG05==1",
       false,
       null
     ],
@@ -54734,7 +56924,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG06==1",
+      "Q_MAP04_PARAGRAAF02.visible&&Q_MAP04_VRAAG06==1",
       false,
       null
     ],
@@ -54754,7 +56944,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG07==1",
+      "Q_MAP04_PARAGRAAF02.visible&&Q_MAP04_VRAAG07==1",
       false,
       null
     ],
@@ -54774,7 +56964,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG08==1",
+      "Q_MAP04_PARAGRAAF02.visible&&Q_MAP04_VRAAG08==1",
       false,
       null
     ],
@@ -54794,7 +56984,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP04_PARAGRAAF03.visible",
       false,
       null
     ],
@@ -54804,7 +56994,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG09==1",
+      "Q_MAP04_PARAGRAAF03.visible&&Q_MAP04_VRAAG09==1",
       false,
       null
     ],
@@ -54824,7 +57014,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG10==1",
+      "Q_MAP04_PARAGRAAF03.visible&&Q_MAP04_VRAAG10==1",
       false,
       null
     ],
@@ -54844,7 +57034,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG11==1",
+      "Q_MAP04_PARAGRAAF03.visible&&Q_MAP04_VRAAG11==1",
       false,
       null
     ],
@@ -54864,7 +57054,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      "Q_MAP04_VRAAG12==1",
+      "Q_MAP04_PARAGRAAF03.visible&&Q_MAP04_VRAAG12==1",
       false,
       null
     ],
@@ -54874,7 +57064,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP04.visible&&0",
       false,
       null
     ],
@@ -54884,7 +57074,7 @@ LME.importLME(JSON_MODEL);
       "10",
       "",
       "",
-      false,
+      "Q_MAP04_PARAGRAAF10.visible",
       false,
       null
     ],
@@ -55014,7 +57204,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_MAP04_PARAGRAAF09.visible",
       false,
       null
     ],
@@ -55074,7 +57264,7 @@ LME.importLME(JSON_MODEL);
       "Count(X,SelectDescendants(Q_MAP04,Q_MAP04_HULPVARIABELEN),InputRequired(X))",
       "",
       "",
-      false,
+      "Q_MAP04_HULPVARIABELEN.visible",
       false,
       null
     ],
@@ -55114,7 +57304,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_RESULT.visible",
       false,
       null
     ],
@@ -55134,7 +57324,7 @@ LME.importLME(JSON_MODEL);
       "OnER((Q_MAP01_VRAAG01+Q_MAP01_VRAAG02+Q_MAP01_VRAAG03+Q_MAP01_VRAAG04+Q_MAP01_VRAAG05+Q_MAP01_VRAAG06+Q_MAP01_VRAAG07+Q_MAP01_VRAAG08+Q_MAP01_VRAAG09+Q_MAP01_VRAAG10+Q_MAP01_VRAAG11+Q_MAP01_VRAAG12+Q_MAP01_VRAAG13+Q_MAP01_VRAAG14)/14*100,NA)",
       "",
       "",
-      false,
+      "Q_MAPRESULT_PARAGRAAF01.visible",
       false,
       null
     ],
@@ -55154,7 +57344,7 @@ LME.importLME(JSON_MODEL);
       "OnER((Q_MAP02_VRAAG01+Q_MAP02_VRAAG02)/2*100,NA)",
       "",
       "",
-      false,
+      "Q_MAPRESULT_PARAGRAAF02.visible",
       false,
       null
     ],
@@ -55174,7 +57364,7 @@ LME.importLME(JSON_MODEL);
       "OnER((Q_MAP03_VRAAG01*Q_MAP03_GEWICHT_VRAAG01+Q_MAP03_VRAAG02*Q_MAP03_GEWICHT_VRAAG01)/2,NA)",
       "",
       "",
-      false,
+      "Q_MAPRESULT_PARAGRAAF03.visible",
       false,
       null
     ],
@@ -55264,7 +57454,7 @@ LME.importLME(JSON_MODEL);
       "OnER(Q_MAP04_GEWICHT_VRAAG01*Q_MAP04_VRAAG01+Q_MAP04_GEWICHT_VRAAG02*Q_MAP04_VRAAG02+Q_MAP04_GEWICHT_VRAAG03*Q_MAP04_VRAAG03+Q_MAP04_GEWICHT_VRAAG04*Q_MAP04_VRAAG04,NA)",
       "",
       "",
-      false,
+      "Q_MAPRESULT_PARAGRAAF04.visible",
       false,
       null
     ],
@@ -55464,7 +57654,7 @@ LME.importLME(JSON_MODEL);
       "String(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing, '+Q_WARNING_GLOBALTXT,''))",
       "",
       "",
-      false,
+      "HULPVARS.visible",
       false,
       null
     ],
@@ -55474,7 +57664,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_WARNING_GLOBAL.visible",
       false,
       null
     ],
@@ -55504,7 +57694,7 @@ LME.importLME(JSON_MODEL);
       "undefined",
       "",
       "",
-      false,
+      "Q_RESTRICTIES.visible",
       false,
       null
     ],
@@ -55710,12 +57900,34 @@ LME.importLME(JSON_MODEL);
     {
       "rowId": "FES_LAYOUTNR",
       "solutionName": "MVO",
+      "colId": "locked",
+      "name": "MVO_FES_LAYOUTNR_locked",
+      "nodes": [],
+      "ref": 100003,
+      "formulaName": "MVO_RootSub1_locked",
+      "refId": 100003,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_LAYOUTNR",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_LAYOUTNR_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_LAYOUTNR",
+      "solutionName": "MVO",
       "colId": "choices",
       "name": "MVO_FES_LAYOUTNR_choices",
       "nodes": [],
-      "ref": 100007,
+      "ref": 100008,
       "formulaName": "MVO_FES_LAYOUTNR_choices",
-      "refId": 100007,
+      "refId": 100008,
       "displayAs": "PropertyType"
     },
     {
@@ -55724,9 +57936,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_EXCHANGE_RATES_value",
       "nodes": [],
-      "ref": 100008,
+      "ref": 100009,
       "formulaName": "MVO_FES_EXCHANGE_RATES_value",
-      "refId": 100008,
+      "refId": 100009,
       "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
@@ -55737,9 +57949,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_EXCHANGE_RATES_title",
       "nodes": [],
-      "ref": 100009,
+      "ref": 100010,
       "formulaName": "MVO_FES_EXCHANGE_RATES_title",
-      "refId": 100009,
+      "refId": 100010,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_EXCHANGE_RATES",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_EXCHANGE_RATES_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55748,9 +57971,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_LAYOUT_value",
       "nodes": [],
-      "ref": 100010,
+      "ref": 100011,
       "formulaName": "MVO_FES_LAYOUT_value",
-      "refId": 100010,
+      "refId": 100011,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
@@ -55761,9 +57984,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_LAYOUT_title",
       "nodes": [],
-      "ref": 100011,
+      "ref": 100012,
       "formulaName": "MVO_FES_LAYOUT_title",
-      "refId": 100011,
+      "refId": 100012,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_LAYOUT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_LAYOUT_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55772,9 +58006,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_FLATINPUT_value",
       "nodes": [],
-      "ref": 100012,
+      "ref": 100013,
       "formulaName": "MVO_FES_FLATINPUT_value",
-      "refId": 100012,
+      "refId": 100013,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
@@ -55785,9 +58019,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_FLATINPUT_title",
       "nodes": [],
-      "ref": 100013,
+      "ref": 100014,
       "formulaName": "MVO_FES_FLATINPUT_title",
-      "refId": 100013,
+      "refId": 100014,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_FLATINPUT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_FLATINPUT_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55796,9 +58041,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_PROJECTION_PROFILE_value",
       "nodes": [],
-      "ref": 100014,
+      "ref": 100015,
       "formulaName": "MVO_FES_PROJECTION_PROFILE_value",
-      "refId": 100014,
+      "refId": 100015,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
@@ -55809,9 +58054,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_PROJECTION_PROFILE_title",
       "nodes": [],
-      "ref": 100015,
+      "ref": 100016,
       "formulaName": "MVO_FES_PROJECTION_PROFILE_title",
-      "refId": 100015,
+      "refId": 100016,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_PROJECTION_PROFILE",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_PROJECTION_PROFILE_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55820,9 +58076,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_COLUMN_ORDER_value",
       "nodes": [],
-      "ref": 100016,
+      "ref": 100017,
       "formulaName": "MVO_FES_COLUMN_ORDER_value",
-      "refId": 100016,
+      "refId": 100017,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
@@ -55833,9 +58089,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_COLUMN_ORDER_title",
       "nodes": [],
-      "ref": 100017,
+      "ref": 100018,
       "formulaName": "MVO_FES_COLUMN_ORDER_title",
-      "refId": 100017,
+      "refId": 100018,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_COLUMN_ORDER",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_COLUMN_ORDER_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55844,9 +58111,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_COLUMN_VISIBLE_value",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
       "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
@@ -55857,9 +58124,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_COLUMN_VISIBLE_title",
       "nodes": [],
-      "ref": 100019,
+      "ref": 100020,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_title",
-      "refId": 100019,
+      "refId": 100020,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_COLUMN_VISIBLE",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_COLUMN_VISIBLE_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55868,9 +58146,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_STARTDATEPERIOD_value",
       "nodes": [],
-      "ref": 100020,
+      "ref": 100021,
       "formulaName": "MVO_FES_STARTDATEPERIOD_value",
-      "refId": 100020,
+      "refId": 100021,
       "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
@@ -55881,9 +58159,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_STARTDATEPERIOD_title",
       "nodes": [],
-      "ref": 100021,
+      "ref": 100022,
       "formulaName": "MVO_FES_STARTDATEPERIOD_title",
-      "refId": 100021,
+      "refId": 100022,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_STARTDATEPERIOD",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_STARTDATEPERIOD_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55892,9 +58181,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_ENDDATEPERIOD_value",
       "nodes": [],
-      "ref": 100022,
+      "ref": 100023,
       "formulaName": "MVO_FES_ENDDATEPERIOD_value",
-      "refId": 100022,
+      "refId": 100023,
       "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
@@ -55905,9 +58194,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_ENDDATEPERIOD_title",
       "nodes": [],
-      "ref": 100023,
+      "ref": 100024,
       "formulaName": "MVO_FES_ENDDATEPERIOD_title",
-      "refId": 100023,
+      "refId": 100024,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_ENDDATEPERIOD",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_ENDDATEPERIOD_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55916,9 +58216,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_BASECURRENCYPERIOD_value",
       "nodes": [],
-      "ref": 100024,
+      "ref": 100025,
       "formulaName": "MVO_FES_BASECURRENCYPERIOD_value",
-      "refId": 100024,
+      "refId": 100025,
       "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
@@ -55929,9 +58229,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_BASECURRENCYPERIOD_title",
       "nodes": [],
-      "ref": 100025,
+      "ref": 100026,
       "formulaName": "MVO_FES_BASECURRENCYPERIOD_title",
-      "refId": 100025,
+      "refId": 100026,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_BASECURRENCYPERIOD",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_BASECURRENCYPERIOD_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55940,9 +58251,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_VIEWCURRENCYPERIOD_value",
       "nodes": [],
-      "ref": 100026,
+      "ref": 100027,
       "formulaName": "MVO_FES_VIEWCURRENCYPERIOD_value",
-      "refId": 100026,
+      "refId": 100027,
       "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
@@ -55953,9 +58264,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_VIEWCURRENCYPERIOD_title",
       "nodes": [],
-      "ref": 100027,
+      "ref": 100028,
       "formulaName": "MVO_FES_VIEWCURRENCYPERIOD_title",
-      "refId": 100027,
+      "refId": 100028,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_VIEWCURRENCYPERIOD",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_VIEWCURRENCYPERIOD_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55964,9 +58286,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FES_COLUMNTYPE_value",
       "nodes": [],
-      "ref": 100028,
+      "ref": 100029,
       "formulaName": "MVO_FES_COLUMNTYPE_value",
-      "refId": 100028,
+      "refId": 100029,
       "displayAs": "radio",
       "frequency": "column",
       "parentName": "RootSub1_value"
@@ -55977,9 +58299,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FES_COLUMNTYPE_title",
       "nodes": [],
-      "ref": 100029,
+      "ref": 100030,
       "formulaName": "MVO_FES_COLUMNTYPE_title",
-      "refId": 100029,
+      "refId": 100030,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FES_COLUMNTYPE",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FES_COLUMNTYPE_visible",
+      "nodes": [],
+      "ref": 100007,
+      "formulaName": "MVO_FES_LAYOUTNR_visible",
+      "refId": 100007,
       "displayAs": "PropertyType"
     },
     {
@@ -55988,9 +58321,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_FES_COLUMNTYPE_choices",
       "nodes": [],
-      "ref": 100030,
+      "ref": 100031,
       "formulaName": "MVO_FES_COLUMNTYPE_choices",
-      "refId": 100030,
+      "refId": 100031,
       "displayAs": "PropertyType"
     },
     {
@@ -56114,9 +58447,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_RootSub2_value"
         }
       ],
-      "ref": 100031,
+      "ref": 100032,
       "formulaName": "MVO_RootSub2_value",
-      "refId": 100031,
+      "refId": 100032,
       "displayAs": "string",
       "frequency": "none",
       "parentName": "root_value"
@@ -56127,9 +58460,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_RootSub2_title",
       "nodes": [],
-      "ref": 100032,
+      "ref": 100033,
       "formulaName": "MVO_RootSub2_title",
-      "refId": 100032,
+      "refId": 100033,
       "displayAs": "PropertyType"
     },
     {
@@ -56138,9 +58471,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_RootSub2_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
       "displayAs": "PropertyType"
     },
     {
@@ -56160,9 +58493,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Naam_value",
       "nodes": [],
-      "ref": 100033,
+      "ref": 100034,
       "formulaName": "MVO_FPS_VAR_Naam_value",
-      "refId": 100033,
+      "refId": 100034,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56173,9 +58506,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Naam_title",
       "nodes": [],
-      "ref": 100034,
+      "ref": 100035,
       "formulaName": "MVO_FPS_VAR_Naam_title",
-      "refId": 100034,
+      "refId": 100035,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Naam",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Naam_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56184,9 +58528,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Relatienummer_value",
       "nodes": [],
-      "ref": 100035,
+      "ref": 100037,
       "formulaName": "MVO_FPS_VAR_Relatienummer_value",
-      "refId": 100035,
+      "refId": 100037,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56197,8 +58541,19 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Relatienummer_title",
       "nodes": [],
-      "ref": 100036,
+      "ref": 100038,
       "formulaName": "MVO_FPS_VAR_Relatienummer_title",
+      "refId": 100038,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Relatienummer",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Relatienummer_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
       "refId": 100036,
       "displayAs": "PropertyType"
     },
@@ -56208,9 +58563,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_KVKnr_value",
       "nodes": [],
-      "ref": 100037,
+      "ref": 100039,
       "formulaName": "MVO_FPS_VAR_KVKnr_value",
-      "refId": 100037,
+      "refId": 100039,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56221,9 +58576,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_KVKnr_title",
       "nodes": [],
-      "ref": 100038,
+      "ref": 100040,
       "formulaName": "MVO_FPS_VAR_KVKnr_title",
-      "refId": 100038,
+      "refId": 100040,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_KVKnr",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_KVKnr_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56232,9 +58598,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Rechtsvorm_nr_value",
       "nodes": [],
-      "ref": 100039,
+      "ref": 100041,
       "formulaName": "MVO_FPS_VAR_Rechtsvorm_nr_value",
-      "refId": 100039,
+      "refId": 100041,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56245,9 +58611,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Rechtsvorm_nr_title",
       "nodes": [],
-      "ref": 100040,
+      "ref": 100042,
       "formulaName": "MVO_FPS_VAR_Rechtsvorm_nr_title",
-      "refId": 100040,
+      "refId": 100042,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Rechtsvorm_nr",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Rechtsvorm_nr_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56256,9 +58633,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Rechtsvorm_omschr_value",
       "nodes": [],
-      "ref": 100041,
+      "ref": 100043,
       "formulaName": "MVO_FPS_VAR_Rechtsvorm_omschr_value",
-      "refId": 100041,
+      "refId": 100043,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56269,9 +58646,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Rechtsvorm_omschr_title",
       "nodes": [],
-      "ref": 100042,
+      "ref": 100044,
       "formulaName": "MVO_FPS_VAR_Rechtsvorm_omschr_title",
-      "refId": 100042,
+      "refId": 100044,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Rechtsvorm_omschr",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Rechtsvorm_omschr_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56280,9 +58668,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_BIK_CODE_value",
       "nodes": [],
-      "ref": 100043,
+      "ref": 100045,
       "formulaName": "MVO_FPS_VAR_BIK_CODE_value",
-      "refId": 100043,
+      "refId": 100045,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56293,9 +58681,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_BIK_CODE_title",
       "nodes": [],
-      "ref": 100044,
+      "ref": 100046,
       "formulaName": "MVO_FPS_VAR_BIK_CODE_title",
-      "refId": 100044,
+      "refId": 100046,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_BIK_CODE",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_BIK_CODE_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56304,9 +58703,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_BIK_Omschr_value",
       "nodes": [],
-      "ref": 100045,
+      "ref": 100047,
       "formulaName": "MVO_FPS_VAR_BIK_Omschr_value",
-      "refId": 100045,
+      "refId": 100047,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56317,9 +58716,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_BIK_Omschr_title",
       "nodes": [],
-      "ref": 100046,
+      "ref": 100048,
       "formulaName": "MVO_FPS_VAR_BIK_Omschr_title",
-      "refId": 100046,
+      "refId": 100048,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_BIK_Omschr",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_BIK_Omschr_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56328,9 +58738,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_GridId_value",
       "nodes": [],
-      "ref": 100047,
+      "ref": 100049,
       "formulaName": "MVO_FPS_VAR_GridId_value",
-      "refId": 100047,
+      "refId": 100049,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56341,9 +58751,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_GridId_title",
       "nodes": [],
-      "ref": 100048,
+      "ref": 100050,
       "formulaName": "MVO_FPS_VAR_GridId_title",
-      "refId": 100048,
+      "refId": 100050,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_GridId",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_GridId_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56352,9 +58773,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Accountmanager_value",
       "nodes": [],
-      "ref": 100049,
+      "ref": 100051,
       "formulaName": "MVO_FPS_VAR_Accountmanager_value",
-      "refId": 100049,
+      "refId": 100051,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56365,9 +58786,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Accountmanager_title",
       "nodes": [],
-      "ref": 100050,
+      "ref": 100052,
       "formulaName": "MVO_FPS_VAR_Accountmanager_title",
-      "refId": 100050,
+      "refId": 100052,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Accountmanager",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Accountmanager_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56376,9 +58808,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Kantoor_value",
       "nodes": [],
-      "ref": 100051,
+      "ref": 100053,
       "formulaName": "MVO_FPS_VAR_Kantoor_value",
-      "refId": 100051,
+      "refId": 100053,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56389,9 +58821,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Kantoor_title",
       "nodes": [],
-      "ref": 100052,
+      "ref": 100054,
       "formulaName": "MVO_FPS_VAR_Kantoor_title",
-      "refId": 100052,
+      "refId": 100054,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Kantoor",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Kantoor_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56400,9 +58843,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Straat_value",
       "nodes": [],
-      "ref": 100053,
+      "ref": 100055,
       "formulaName": "MVO_FPS_VAR_Straat_value",
-      "refId": 100053,
+      "refId": 100055,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56413,9 +58856,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Straat_title",
       "nodes": [],
-      "ref": 100054,
+      "ref": 100056,
       "formulaName": "MVO_FPS_VAR_Straat_title",
-      "refId": 100054,
+      "refId": 100056,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Straat",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Straat_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56424,9 +58878,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Housenumber_value",
       "nodes": [],
-      "ref": 100055,
+      "ref": 100057,
       "formulaName": "MVO_FPS_VAR_Housenumber_value",
-      "refId": 100055,
+      "refId": 100057,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56437,9 +58891,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Housenumber_title",
       "nodes": [],
-      "ref": 100056,
+      "ref": 100058,
       "formulaName": "MVO_FPS_VAR_Housenumber_title",
-      "refId": 100056,
+      "refId": 100058,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Housenumber",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Housenumber_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56448,9 +58913,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Postcode_value",
       "nodes": [],
-      "ref": 100057,
+      "ref": 100059,
       "formulaName": "MVO_FPS_VAR_Postcode_value",
-      "refId": 100057,
+      "refId": 100059,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56461,9 +58926,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Postcode_title",
       "nodes": [],
-      "ref": 100058,
+      "ref": 100060,
       "formulaName": "MVO_FPS_VAR_Postcode_title",
-      "refId": 100058,
+      "refId": 100060,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Postcode",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Postcode_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56472,9 +58948,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Woonplaats_value",
       "nodes": [],
-      "ref": 100059,
+      "ref": 100061,
       "formulaName": "MVO_FPS_VAR_Woonplaats_value",
-      "refId": 100059,
+      "refId": 100061,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56485,9 +58961,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Woonplaats_title",
       "nodes": [],
-      "ref": 100060,
+      "ref": 100062,
       "formulaName": "MVO_FPS_VAR_Woonplaats_title",
-      "refId": 100060,
+      "refId": 100062,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Woonplaats",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Woonplaats_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56496,9 +58983,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Provincie_value",
       "nodes": [],
-      "ref": 100061,
+      "ref": 100063,
       "formulaName": "MVO_FPS_VAR_Provincie_value",
-      "refId": 100061,
+      "refId": 100063,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56509,9 +58996,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Provincie_title",
       "nodes": [],
-      "ref": 100062,
+      "ref": 100064,
       "formulaName": "MVO_FPS_VAR_Provincie_title",
-      "refId": 100062,
+      "refId": 100064,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Provincie",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Provincie_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56520,9 +59018,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Land_value",
       "nodes": [],
-      "ref": 100063,
+      "ref": 100065,
       "formulaName": "MVO_FPS_VAR_Land_value",
-      "refId": 100063,
+      "refId": 100065,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56533,9 +59031,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Land_title",
       "nodes": [],
-      "ref": 100064,
+      "ref": 100066,
       "formulaName": "MVO_FPS_VAR_Land_title",
-      "refId": 100064,
+      "refId": 100066,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Land",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Land_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56544,9 +59053,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_BvDID_value",
       "nodes": [],
-      "ref": 100065,
+      "ref": 100067,
       "formulaName": "MVO_FPS_VAR_BvDID_value",
-      "refId": 100065,
+      "refId": 100067,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56557,9 +59066,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_BvDID_title",
       "nodes": [],
-      "ref": 100066,
+      "ref": 100068,
       "formulaName": "MVO_FPS_VAR_BvDID_title",
-      "refId": 100066,
+      "refId": 100068,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_BvDID",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_BvDID_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56568,9 +59088,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_VAR_Telefoon_value",
       "nodes": [],
-      "ref": 100067,
+      "ref": 100069,
       "formulaName": "MVO_FPS_VAR_Telefoon_value",
-      "refId": 100067,
+      "refId": 100069,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56581,9 +59101,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Telefoon_title",
       "nodes": [],
-      "ref": 100068,
+      "ref": 100070,
       "formulaName": "MVO_FPS_VAR_Telefoon_title",
-      "refId": 100068,
+      "refId": 100070,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Telefoon",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Telefoon_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56605,9 +59136,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_FPS_VAR_Emailadres_value"
         }
       ],
-      "ref": 100069,
+      "ref": 100071,
       "formulaName": "MVO_FPS_VAR_Emailadres_value",
-      "refId": 100069,
+      "refId": 100071,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
@@ -56618,9 +59149,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_VAR_Emailadres_title",
       "nodes": [],
-      "ref": 100070,
+      "ref": 100072,
       "formulaName": "MVO_FPS_VAR_Emailadres_title",
-      "refId": 100070,
+      "refId": 100072,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_VAR_Emailadres",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_VAR_Emailadres_visible",
+      "nodes": [],
+      "ref": 100036,
+      "formulaName": "MVO_FPS_VAR_Naam_visible",
+      "refId": 100036,
       "displayAs": "PropertyType"
     },
     {
@@ -56629,9 +59171,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_FINAN_USER_ROLES_value",
       "nodes": [],
-      "ref": 100071,
+      "ref": 100073,
       "formulaName": "MVO_FPS_FINAN_USER_ROLES_value",
-      "refId": 100071,
+      "refId": 100073,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "FPS_VAR_Emailadres_value"
@@ -56642,9 +59184,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_FINAN_USER_ROLES_title",
       "nodes": [],
-      "ref": 100072,
+      "ref": 100074,
       "formulaName": "MVO_FPS_FINAN_USER_ROLES_title",
-      "refId": 100072,
+      "refId": 100074,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_FINAN_USER_ROLES",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_FINAN_USER_ROLES_visible",
+      "nodes": [],
+      "ref": 100075,
+      "formulaName": "MVO_FPS_FINAN_USER_ROLES_visible",
+      "refId": 100075,
       "displayAs": "PropertyType"
     },
     {
@@ -56653,9 +59206,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_FPS_FINAN_USER_value",
       "nodes": [],
-      "ref": 100073,
+      "ref": 100076,
       "formulaName": "MVO_FPS_FINAN_USER_value",
-      "refId": 100073,
+      "refId": 100076,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "FPS_VAR_Emailadres_value"
@@ -56666,9 +59219,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_FPS_FINAN_USER_title",
       "nodes": [],
-      "ref": 100074,
+      "ref": 100077,
       "formulaName": "MVO_FPS_FINAN_USER_title",
-      "refId": 100074,
+      "refId": 100077,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "FPS_FINAN_USER",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_FPS_FINAN_USER_visible",
+      "nodes": [],
+      "ref": 100075,
+      "formulaName": "MVO_FPS_FINAN_USER_ROLES_visible",
+      "refId": 100075,
       "displayAs": "PropertyType"
     },
     {
@@ -56798,9 +59362,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_ROOT_value"
         }
       ],
-      "ref": 100075,
+      "ref": 100078,
       "formulaName": "MVO_Q_ROOT_value",
-      "refId": 100075,
+      "refId": 100078,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "root_value"
@@ -56811,9 +59375,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_ROOT_title",
       "nodes": [],
-      "ref": 100076,
+      "ref": 100079,
       "formulaName": "MVO_Q_ROOT_title",
-      "refId": 100076,
+      "refId": 100079,
       "displayAs": "PropertyType"
     },
     {
@@ -56822,9 +59386,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_ROOT_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
       "displayAs": "PropertyType"
     },
     {
@@ -56833,9 +59397,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_ROOT_choices",
       "nodes": [],
-      "ref": 100077,
+      "ref": 100080,
       "formulaName": "MVO_Q_ROOT_choices",
-      "refId": 100077,
+      "refId": 100080,
       "displayAs": "PropertyType"
     },
     {
@@ -56929,9 +59493,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_value"
         }
       ],
-      "ref": 100078,
+      "ref": 100081,
       "formulaName": "MVO_Q_MAP01_value",
-      "refId": 100078,
+      "refId": 100081,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -56942,9 +59506,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_title",
       "nodes": [],
-      "ref": 100079,
+      "ref": 100082,
       "formulaName": "MVO_Q_MAP01_title",
-      "refId": 100079,
+      "refId": 100082,
       "displayAs": "PropertyType"
     },
     {
@@ -56953,9 +59517,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -56964,9 +59539,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_choices",
       "nodes": [],
-      "ref": 100077,
+      "ref": 100080,
       "formulaName": "MVO_Q_ROOT_choices",
-      "refId": 100077,
+      "refId": 100080,
       "displayAs": "PropertyType"
     },
     {
@@ -56975,9 +59550,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_WARNING_value",
       "nodes": [],
-      "ref": 100080,
+      "ref": 100084,
       "formulaName": "MVO_Q_MAP01_WARNING_value",
-      "refId": 100080,
+      "refId": 100084,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -56988,9 +59563,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_WARNING_title",
       "nodes": [],
-      "ref": 100081,
+      "ref": 100085,
       "formulaName": "MVO_Q_MAP01_WARNING_title",
-      "refId": 100081,
+      "refId": 100085,
       "displayAs": "PropertyType"
     },
     {
@@ -56999,9 +59574,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_WARNING_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_WARNING",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_WARNING_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -57010,9 +59596,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_INFO_value",
       "nodes": [],
-      "ref": 100082,
+      "ref": 100087,
       "formulaName": "MVO_Q_MAP01_INFO_value",
-      "refId": 100082,
+      "refId": 100087,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -57023,9 +59609,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_INFO_title",
       "nodes": [],
-      "ref": 100083,
+      "ref": 100088,
       "formulaName": "MVO_Q_MAP01_INFO_title",
-      "refId": 100083,
+      "refId": 100088,
       "displayAs": "PropertyType"
     },
     {
@@ -57034,9 +59620,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_INFO_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_INFO",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_INFO_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -57045,9 +59642,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VALIDATION_value",
       "nodes": [],
-      "ref": 100084,
+      "ref": 100089,
       "formulaName": "MVO_Q_MAP01_VALIDATION_value",
-      "refId": 100084,
+      "refId": 100089,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -57058,9 +59655,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VALIDATION_title",
       "nodes": [],
-      "ref": 100085,
+      "ref": 100090,
       "formulaName": "MVO_Q_MAP01_VALIDATION_title",
-      "refId": 100085,
+      "refId": 100090,
       "displayAs": "PropertyType"
     },
     {
@@ -57069,9 +59666,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_VALIDATION_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VALIDATION",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VALIDATION_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -57080,9 +59688,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_HINT_value",
       "nodes": [],
-      "ref": 100086,
+      "ref": 100091,
       "formulaName": "MVO_Q_MAP01_HINT_value",
-      "refId": 100086,
+      "refId": 100091,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -57093,9 +59701,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_HINT_title",
       "nodes": [],
-      "ref": 100087,
+      "ref": 100092,
       "formulaName": "MVO_Q_MAP01_HINT_title",
-      "refId": 100087,
+      "refId": 100092,
       "displayAs": "PropertyType"
     },
     {
@@ -57104,9 +59712,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_HINT_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_HINT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_HINT_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -57122,9 +59741,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_PARAGRAAF00_value"
         }
       ],
-      "ref": 100088,
+      "ref": 100093,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF00_value",
-      "refId": 100088,
+      "refId": 100093,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -57135,9 +59754,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF00_title",
       "nodes": [],
-      "ref": 100089,
+      "ref": 100094,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF00_title",
-      "refId": 100089,
+      "refId": 100094,
       "displayAs": "PropertyType"
     },
     {
@@ -57146,9 +59765,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP01_PARAGRAAF00_hint",
       "nodes": [],
-      "ref": 100090,
+      "ref": 100095,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF00_hint",
-      "refId": 100090,
+      "refId": 100095,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF00",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF00_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -57157,9 +59787,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VERBORGEN_value",
       "nodes": [],
-      "ref": 100091,
+      "ref": 100096,
       "formulaName": "MVO_Q_MAP01_VERBORGEN_value",
-      "refId": 100091,
+      "refId": 100096,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF00_value"
@@ -57170,9 +59800,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VERBORGEN_title",
       "nodes": [],
-      "ref": 100092,
+      "ref": 100097,
       "formulaName": "MVO_Q_MAP01_VERBORGEN_title",
-      "refId": 100092,
+      "refId": 100097,
       "displayAs": "PropertyType"
     },
     {
@@ -57181,9 +59811,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_VERBORGEN_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
       "displayAs": "PropertyType"
     },
     {
@@ -57192,9 +59822,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VERBORGEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100098,
+      "formulaName": "MVO_Q_MAP01_VERBORGEN_visible",
+      "refId": 100098,
       "displayAs": "PropertyType"
     },
     {
@@ -57228,9 +59858,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_PARAGRAAF01_value"
         }
       ],
-      "ref": 100093,
+      "ref": 100099,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF01_value",
-      "refId": 100093,
+      "refId": 100099,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -57241,9 +59871,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF01_title",
       "nodes": [],
-      "ref": 100094,
+      "ref": 100100,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF01_title",
-      "refId": 100094,
+      "refId": 100100,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF01_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -57252,9 +59893,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG01_value",
       "nodes": [],
-      "ref": 100095,
+      "ref": 100101,
       "formulaName": "MVO_Q_MAP01_VRAAG01_value",
-      "refId": 100095,
+      "refId": 100101,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
@@ -57265,9 +59906,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG01_title",
       "nodes": [],
-      "ref": 100096,
+      "ref": 100102,
       "formulaName": "MVO_Q_MAP01_VRAAG01_title",
-      "refId": 100096,
+      "refId": 100102,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG01_visible",
+      "nodes": [],
+      "ref": 100103,
+      "formulaName": "MVO_Q_MAP01_VRAAG01_visible",
+      "refId": 100103,
       "displayAs": "PropertyType"
     },
     {
@@ -57276,9 +59928,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG01_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -57287,9 +59939,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG01_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -57298,9 +59950,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG01_MEMO_value",
       "nodes": [],
-      "ref": 100099,
+      "ref": 100106,
       "formulaName": "MVO_Q_MAP01_VRAAG01_MEMO_value",
-      "refId": 100099,
+      "refId": 100106,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
@@ -57311,9 +59963,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG01_MEMO_title",
       "nodes": [],
-      "ref": 100100,
+      "ref": 100107,
       "formulaName": "MVO_Q_MAP01_VRAAG01_MEMO_title",
-      "refId": 100100,
+      "refId": 100107,
       "displayAs": "PropertyType"
     },
     {
@@ -57322,9 +59974,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG01_MEMO_visible",
       "nodes": [],
-      "ref": 100101,
+      "ref": 100108,
       "formulaName": "MVO_Q_MAP01_VRAAG01_MEMO_visible",
-      "refId": 100101,
+      "refId": 100108,
       "displayAs": "PropertyType"
     },
     {
@@ -57333,9 +59985,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG01_MEMO_required",
       "nodes": [],
-      "ref": 100102,
+      "ref": 100109,
       "formulaName": "MVO_Q_MAP01_VRAAG01_MEMO_required",
-      "refId": 100102,
+      "refId": 100109,
       "displayAs": "PropertyType"
     },
     {
@@ -57344,9 +59996,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG02_value",
       "nodes": [],
-      "ref": 100103,
+      "ref": 100110,
       "formulaName": "MVO_Q_MAP01_VRAAG02_value",
-      "refId": 100103,
+      "refId": 100110,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
@@ -57357,9 +60009,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG02_title",
       "nodes": [],
-      "ref": 100104,
+      "ref": 100111,
       "formulaName": "MVO_Q_MAP01_VRAAG02_title",
-      "refId": 100104,
+      "refId": 100111,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG02_visible",
+      "nodes": [],
+      "ref": 100103,
+      "formulaName": "MVO_Q_MAP01_VRAAG01_visible",
+      "refId": 100103,
       "displayAs": "PropertyType"
     },
     {
@@ -57368,9 +60031,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG02_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -57379,9 +60042,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG02_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -57390,9 +60053,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG02_MEMO_value",
       "nodes": [],
-      "ref": 100105,
+      "ref": 100112,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_value",
-      "refId": 100105,
+      "refId": 100112,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
@@ -57403,9 +60066,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG02_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -57414,9 +60077,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG02_MEMO_visible",
       "nodes": [],
-      "ref": 100107,
+      "ref": 100114,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_visible",
-      "refId": 100107,
+      "refId": 100114,
       "displayAs": "PropertyType"
     },
     {
@@ -57425,9 +60088,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG02_MEMO_required",
       "nodes": [],
-      "ref": 100108,
+      "ref": 100115,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_required",
-      "refId": 100108,
+      "refId": 100115,
       "displayAs": "PropertyType"
     },
     {
@@ -57461,9 +60124,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_PARAGRAAF02_value"
         }
       ],
-      "ref": 100109,
+      "ref": 100116,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF02_value",
-      "refId": 100109,
+      "refId": 100116,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -57474,9 +60137,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF02_title",
       "nodes": [],
-      "ref": 100110,
+      "ref": 100117,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF02_title",
-      "refId": 100110,
+      "refId": 100117,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF02_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -57485,9 +60159,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG03_value",
       "nodes": [],
-      "ref": 100111,
+      "ref": 100118,
       "formulaName": "MVO_Q_MAP01_VRAAG03_value",
-      "refId": 100111,
+      "refId": 100118,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
@@ -57498,9 +60172,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG03_title",
       "nodes": [],
-      "ref": 100112,
+      "ref": 100119,
       "formulaName": "MVO_Q_MAP01_VRAAG03_title",
-      "refId": 100112,
+      "refId": 100119,
       "displayAs": "PropertyType"
     },
     {
@@ -57509,9 +60183,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP01_VRAAG03_hint",
       "nodes": [],
-      "ref": 100113,
+      "ref": 100120,
       "formulaName": "MVO_Q_MAP01_VRAAG03_hint",
-      "refId": 100113,
+      "refId": 100120,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG03_visible",
+      "nodes": [],
+      "ref": 100121,
+      "formulaName": "MVO_Q_MAP01_VRAAG03_visible",
+      "refId": 100121,
       "displayAs": "PropertyType"
     },
     {
@@ -57520,9 +60205,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG03_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -57531,9 +60216,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG03_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -57542,9 +60227,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG03_MEMO_value",
       "nodes": [],
-      "ref": 100114,
+      "ref": 100122,
       "formulaName": "MVO_Q_MAP01_VRAAG03_MEMO_value",
-      "refId": 100114,
+      "refId": 100122,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
@@ -57555,9 +60240,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG03_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -57566,9 +60251,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG03_MEMO_visible",
       "nodes": [],
-      "ref": 100115,
+      "ref": 100123,
       "formulaName": "MVO_Q_MAP01_VRAAG03_MEMO_visible",
-      "refId": 100115,
+      "refId": 100123,
       "displayAs": "PropertyType"
     },
     {
@@ -57577,9 +60262,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG03_MEMO_required",
       "nodes": [],
-      "ref": 100116,
+      "ref": 100124,
       "formulaName": "MVO_Q_MAP01_VRAAG03_MEMO_required",
-      "refId": 100116,
+      "refId": 100124,
       "displayAs": "PropertyType"
     },
     {
@@ -57588,9 +60273,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG04_value",
       "nodes": [],
-      "ref": 100117,
+      "ref": 100125,
       "formulaName": "MVO_Q_MAP01_VRAAG04_value",
-      "refId": 100117,
+      "refId": 100125,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
@@ -57601,9 +60286,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG04_title",
       "nodes": [],
-      "ref": 100118,
+      "ref": 100126,
       "formulaName": "MVO_Q_MAP01_VRAAG04_title",
-      "refId": 100118,
+      "refId": 100126,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG04",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG04_visible",
+      "nodes": [],
+      "ref": 100121,
+      "formulaName": "MVO_Q_MAP01_VRAAG03_visible",
+      "refId": 100121,
       "displayAs": "PropertyType"
     },
     {
@@ -57612,9 +60308,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG04_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -57623,9 +60319,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG04_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -57634,9 +60330,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG04_MEMO_value",
       "nodes": [],
-      "ref": 100119,
+      "ref": 100127,
       "formulaName": "MVO_Q_MAP01_VRAAG04_MEMO_value",
-      "refId": 100119,
+      "refId": 100127,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
@@ -57647,9 +60343,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG04_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -57658,9 +60354,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG04_MEMO_visible",
       "nodes": [],
-      "ref": 100120,
+      "ref": 100128,
       "formulaName": "MVO_Q_MAP01_VRAAG04_MEMO_visible",
-      "refId": 100120,
+      "refId": 100128,
       "displayAs": "PropertyType"
     },
     {
@@ -57669,9 +60365,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG04_MEMO_required",
       "nodes": [],
-      "ref": 100121,
+      "ref": 100129,
       "formulaName": "MVO_Q_MAP01_VRAAG04_MEMO_required",
-      "refId": 100121,
+      "refId": 100129,
       "displayAs": "PropertyType"
     },
     {
@@ -57705,9 +60401,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_PARAGRAAF03_value"
         }
       ],
-      "ref": 100122,
+      "ref": 100130,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF03_value",
-      "refId": 100122,
+      "refId": 100130,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -57718,9 +60414,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF03_title",
       "nodes": [],
-      "ref": 100123,
+      "ref": 100131,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF03_title",
-      "refId": 100123,
+      "refId": 100131,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF03_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -57729,9 +60436,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG05_value",
       "nodes": [],
-      "ref": 100124,
+      "ref": 100132,
       "formulaName": "MVO_Q_MAP01_VRAAG05_value",
-      "refId": 100124,
+      "refId": 100132,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
@@ -57742,9 +60449,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG05_title",
       "nodes": [],
-      "ref": 100125,
+      "ref": 100133,
       "formulaName": "MVO_Q_MAP01_VRAAG05_title",
-      "refId": 100125,
+      "refId": 100133,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG05",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG05_visible",
+      "nodes": [],
+      "ref": 100134,
+      "formulaName": "MVO_Q_MAP01_VRAAG05_visible",
+      "refId": 100134,
       "displayAs": "PropertyType"
     },
     {
@@ -57753,9 +60471,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG05_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -57764,9 +60482,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG05_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -57775,9 +60493,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG05_MEMO_value",
       "nodes": [],
-      "ref": 100126,
+      "ref": 100135,
       "formulaName": "MVO_Q_MAP01_VRAAG05_MEMO_value",
-      "refId": 100126,
+      "refId": 100135,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
@@ -57788,9 +60506,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG05_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -57799,9 +60517,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG05_MEMO_visible",
       "nodes": [],
-      "ref": 100127,
+      "ref": 100136,
       "formulaName": "MVO_Q_MAP01_VRAAG05_MEMO_visible",
-      "refId": 100127,
+      "refId": 100136,
       "displayAs": "PropertyType"
     },
     {
@@ -57810,9 +60528,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG05_MEMO_required",
       "nodes": [],
-      "ref": 100128,
+      "ref": 100137,
       "formulaName": "MVO_Q_MAP01_VRAAG05_MEMO_required",
-      "refId": 100128,
+      "refId": 100137,
       "displayAs": "PropertyType"
     },
     {
@@ -57821,9 +60539,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG06_value",
       "nodes": [],
-      "ref": 100129,
+      "ref": 100138,
       "formulaName": "MVO_Q_MAP01_VRAAG06_value",
-      "refId": 100129,
+      "refId": 100138,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
@@ -57834,9 +60552,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG06_title",
       "nodes": [],
-      "ref": 100130,
+      "ref": 100139,
       "formulaName": "MVO_Q_MAP01_VRAAG06_title",
-      "refId": 100130,
+      "refId": 100139,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG06",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG06_visible",
+      "nodes": [],
+      "ref": 100134,
+      "formulaName": "MVO_Q_MAP01_VRAAG05_visible",
+      "refId": 100134,
       "displayAs": "PropertyType"
     },
     {
@@ -57845,9 +60574,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG06_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -57856,9 +60585,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG06_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -57867,9 +60596,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG06_MEMO_value",
       "nodes": [],
-      "ref": 100131,
+      "ref": 100140,
       "formulaName": "MVO_Q_MAP01_VRAAG06_MEMO_value",
-      "refId": 100131,
+      "refId": 100140,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
@@ -57880,9 +60609,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG06_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -57891,9 +60620,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG06_MEMO_visible",
       "nodes": [],
-      "ref": 100132,
+      "ref": 100141,
       "formulaName": "MVO_Q_MAP01_VRAAG06_MEMO_visible",
-      "refId": 100132,
+      "refId": 100141,
       "displayAs": "PropertyType"
     },
     {
@@ -57902,9 +60631,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG06_MEMO_required",
       "nodes": [],
-      "ref": 100133,
+      "ref": 100142,
       "formulaName": "MVO_Q_MAP01_VRAAG06_MEMO_required",
-      "refId": 100133,
+      "refId": 100142,
       "displayAs": "PropertyType"
     },
     {
@@ -57938,9 +60667,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_PARAGRAAF04_value"
         }
       ],
-      "ref": 100134,
+      "ref": 100143,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF04_value",
-      "refId": 100134,
+      "refId": 100143,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -57951,9 +60680,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF04_title",
       "nodes": [],
-      "ref": 100135,
+      "ref": 100144,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF04_title",
-      "refId": 100135,
+      "refId": 100144,
       "displayAs": "PropertyType"
     },
     {
@@ -57962,9 +60691,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP01_PARAGRAAF04_hint",
       "nodes": [],
-      "ref": 100113,
+      "ref": 100120,
       "formulaName": "MVO_Q_MAP01_VRAAG03_hint",
-      "refId": 100113,
+      "refId": 100120,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF04",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF04_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -57973,9 +60713,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG07_value",
       "nodes": [],
-      "ref": 100136,
+      "ref": 100145,
       "formulaName": "MVO_Q_MAP01_VRAAG07_value",
-      "refId": 100136,
+      "refId": 100145,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
@@ -57986,9 +60726,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG07_title",
       "nodes": [],
-      "ref": 100137,
+      "ref": 100146,
       "formulaName": "MVO_Q_MAP01_VRAAG07_title",
-      "refId": 100137,
+      "refId": 100146,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG07",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG07_visible",
+      "nodes": [],
+      "ref": 100147,
+      "formulaName": "MVO_Q_MAP01_VRAAG07_visible",
+      "refId": 100147,
       "displayAs": "PropertyType"
     },
     {
@@ -57997,9 +60748,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG07_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -58008,9 +60759,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG07_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -58019,9 +60770,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG07_MEMO_value",
       "nodes": [],
-      "ref": 100138,
+      "ref": 100148,
       "formulaName": "MVO_Q_MAP01_VRAAG07_MEMO_value",
-      "refId": 100138,
+      "refId": 100148,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
@@ -58032,9 +60783,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG07_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -58043,9 +60794,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG07_MEMO_visible",
       "nodes": [],
-      "ref": 100139,
+      "ref": 100149,
       "formulaName": "MVO_Q_MAP01_VRAAG07_MEMO_visible",
-      "refId": 100139,
+      "refId": 100149,
       "displayAs": "PropertyType"
     },
     {
@@ -58054,9 +60805,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG07_MEMO_required",
       "nodes": [],
-      "ref": 100140,
+      "ref": 100150,
       "formulaName": "MVO_Q_MAP01_VRAAG07_MEMO_required",
-      "refId": 100140,
+      "refId": 100150,
       "displayAs": "PropertyType"
     },
     {
@@ -58065,9 +60816,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG08_value",
       "nodes": [],
-      "ref": 100141,
+      "ref": 100151,
       "formulaName": "MVO_Q_MAP01_VRAAG08_value",
-      "refId": 100141,
+      "refId": 100151,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
@@ -58078,9 +60829,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG08_title",
       "nodes": [],
-      "ref": 100142,
+      "ref": 100152,
       "formulaName": "MVO_Q_MAP01_VRAAG08_title",
-      "refId": 100142,
+      "refId": 100152,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG08",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG08_visible",
+      "nodes": [],
+      "ref": 100147,
+      "formulaName": "MVO_Q_MAP01_VRAAG07_visible",
+      "refId": 100147,
       "displayAs": "PropertyType"
     },
     {
@@ -58089,9 +60851,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG08_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -58100,9 +60862,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG08_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -58111,9 +60873,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG08_MEMO_value",
       "nodes": [],
-      "ref": 100143,
+      "ref": 100153,
       "formulaName": "MVO_Q_MAP01_VRAAG08_MEMO_value",
-      "refId": 100143,
+      "refId": 100153,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
@@ -58124,9 +60886,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG08_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -58135,9 +60897,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG08_MEMO_visible",
       "nodes": [],
-      "ref": 100144,
+      "ref": 100154,
       "formulaName": "MVO_Q_MAP01_VRAAG08_MEMO_visible",
-      "refId": 100144,
+      "refId": 100154,
       "displayAs": "PropertyType"
     },
     {
@@ -58146,9 +60908,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG08_MEMO_required",
       "nodes": [],
-      "ref": 100145,
+      "ref": 100155,
       "formulaName": "MVO_Q_MAP01_VRAAG08_MEMO_required",
-      "refId": 100145,
+      "refId": 100155,
       "displayAs": "PropertyType"
     },
     {
@@ -58182,9 +60944,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_PARAGRAAF05_value"
         }
       ],
-      "ref": 100146,
+      "ref": 100156,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF05_value",
-      "refId": 100146,
+      "refId": 100156,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -58195,9 +60957,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF05_title",
       "nodes": [],
-      "ref": 100147,
+      "ref": 100157,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF05_title",
-      "refId": 100147,
+      "refId": 100157,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF05",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF05_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -58206,9 +60979,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG09_value",
       "nodes": [],
-      "ref": 100148,
+      "ref": 100158,
       "formulaName": "MVO_Q_MAP01_VRAAG09_value",
-      "refId": 100148,
+      "refId": 100158,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
@@ -58219,9 +60992,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG09_title",
       "nodes": [],
-      "ref": 100149,
+      "ref": 100159,
       "formulaName": "MVO_Q_MAP01_VRAAG09_title",
-      "refId": 100149,
+      "refId": 100159,
       "displayAs": "PropertyType"
     },
     {
@@ -58230,9 +61003,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP01_VRAAG09_hint",
       "nodes": [],
-      "ref": 100150,
+      "ref": 100160,
       "formulaName": "MVO_Q_MAP01_VRAAG09_hint",
-      "refId": 100150,
+      "refId": 100160,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG09",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG09_visible",
+      "nodes": [],
+      "ref": 100161,
+      "formulaName": "MVO_Q_MAP01_VRAAG09_visible",
+      "refId": 100161,
       "displayAs": "PropertyType"
     },
     {
@@ -58241,9 +61025,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG09_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -58252,9 +61036,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG09_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -58263,9 +61047,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG09_MEMO_value",
       "nodes": [],
-      "ref": 100151,
+      "ref": 100162,
       "formulaName": "MVO_Q_MAP01_VRAAG09_MEMO_value",
-      "refId": 100151,
+      "refId": 100162,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
@@ -58276,9 +61060,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG09_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -58287,9 +61071,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG09_MEMO_visible",
       "nodes": [],
-      "ref": 100152,
+      "ref": 100163,
       "formulaName": "MVO_Q_MAP01_VRAAG09_MEMO_visible",
-      "refId": 100152,
+      "refId": 100163,
       "displayAs": "PropertyType"
     },
     {
@@ -58298,9 +61082,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG09_MEMO_required",
       "nodes": [],
-      "ref": 100153,
+      "ref": 100164,
       "formulaName": "MVO_Q_MAP01_VRAAG09_MEMO_required",
-      "refId": 100153,
+      "refId": 100164,
       "displayAs": "PropertyType"
     },
     {
@@ -58309,9 +61093,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG10_value",
       "nodes": [],
-      "ref": 100154,
+      "ref": 100165,
       "formulaName": "MVO_Q_MAP01_VRAAG10_value",
-      "refId": 100154,
+      "refId": 100165,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
@@ -58322,9 +61106,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG10_title",
       "nodes": [],
-      "ref": 100155,
+      "ref": 100166,
       "formulaName": "MVO_Q_MAP01_VRAAG10_title",
-      "refId": 100155,
+      "refId": 100166,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG10",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG10_visible",
+      "nodes": [],
+      "ref": 100161,
+      "formulaName": "MVO_Q_MAP01_VRAAG09_visible",
+      "refId": 100161,
       "displayAs": "PropertyType"
     },
     {
@@ -58333,9 +61128,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG10_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -58344,9 +61139,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG10_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -58355,9 +61150,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG10_MEMO_value",
       "nodes": [],
-      "ref": 100156,
+      "ref": 100167,
       "formulaName": "MVO_Q_MAP01_VRAAG10_MEMO_value",
-      "refId": 100156,
+      "refId": 100167,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
@@ -58368,9 +61163,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG10_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -58379,9 +61174,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG10_MEMO_visible",
       "nodes": [],
-      "ref": 100157,
+      "ref": 100168,
       "formulaName": "MVO_Q_MAP01_VRAAG10_MEMO_visible",
-      "refId": 100157,
+      "refId": 100168,
       "displayAs": "PropertyType"
     },
     {
@@ -58390,9 +61185,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG10_MEMO_required",
       "nodes": [],
-      "ref": 100158,
+      "ref": 100169,
       "formulaName": "MVO_Q_MAP01_VRAAG10_MEMO_required",
-      "refId": 100158,
+      "refId": 100169,
       "displayAs": "PropertyType"
     },
     {
@@ -58426,9 +61221,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_PARAGRAAF06_value"
         }
       ],
-      "ref": 100159,
+      "ref": 100170,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF06_value",
-      "refId": 100159,
+      "refId": 100170,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -58439,9 +61234,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF06_title",
       "nodes": [],
-      "ref": 100160,
+      "ref": 100171,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF06_title",
-      "refId": 100160,
+      "refId": 100171,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF06",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF06_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -58450,9 +61256,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG11_value",
       "nodes": [],
-      "ref": 100161,
+      "ref": 100172,
       "formulaName": "MVO_Q_MAP01_VRAAG11_value",
-      "refId": 100161,
+      "refId": 100172,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
@@ -58463,9 +61269,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG11_title",
       "nodes": [],
-      "ref": 100162,
+      "ref": 100173,
       "formulaName": "MVO_Q_MAP01_VRAAG11_title",
-      "refId": 100162,
+      "refId": 100173,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG11",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG11_visible",
+      "nodes": [],
+      "ref": 100174,
+      "formulaName": "MVO_Q_MAP01_VRAAG11_visible",
+      "refId": 100174,
       "displayAs": "PropertyType"
     },
     {
@@ -58474,9 +61291,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG11_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -58485,9 +61302,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG11_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -58496,9 +61313,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG11_MEMO_value",
       "nodes": [],
-      "ref": 100163,
+      "ref": 100175,
       "formulaName": "MVO_Q_MAP01_VRAAG11_MEMO_value",
-      "refId": 100163,
+      "refId": 100175,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
@@ -58509,9 +61326,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG11_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -58520,9 +61337,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG11_MEMO_visible",
       "nodes": [],
-      "ref": 100164,
+      "ref": 100176,
       "formulaName": "MVO_Q_MAP01_VRAAG11_MEMO_visible",
-      "refId": 100164,
+      "refId": 100176,
       "displayAs": "PropertyType"
     },
     {
@@ -58531,9 +61348,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG11_MEMO_required",
       "nodes": [],
-      "ref": 100165,
+      "ref": 100177,
       "formulaName": "MVO_Q_MAP01_VRAAG11_MEMO_required",
-      "refId": 100165,
+      "refId": 100177,
       "displayAs": "PropertyType"
     },
     {
@@ -58542,9 +61359,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG12_value",
       "nodes": [],
-      "ref": 100166,
+      "ref": 100178,
       "formulaName": "MVO_Q_MAP01_VRAAG12_value",
-      "refId": 100166,
+      "refId": 100178,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
@@ -58555,9 +61372,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG12_title",
       "nodes": [],
-      "ref": 100167,
+      "ref": 100179,
       "formulaName": "MVO_Q_MAP01_VRAAG12_title",
-      "refId": 100167,
+      "refId": 100179,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG12",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG12_visible",
+      "nodes": [],
+      "ref": 100174,
+      "formulaName": "MVO_Q_MAP01_VRAAG11_visible",
+      "refId": 100174,
       "displayAs": "PropertyType"
     },
     {
@@ -58566,9 +61394,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG12_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -58577,9 +61405,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG12_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -58588,9 +61416,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG12_MEMO_value",
       "nodes": [],
-      "ref": 100168,
+      "ref": 100180,
       "formulaName": "MVO_Q_MAP01_VRAAG12_MEMO_value",
-      "refId": 100168,
+      "refId": 100180,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
@@ -58601,9 +61429,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG12_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -58612,9 +61440,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG12_MEMO_visible",
       "nodes": [],
-      "ref": 100169,
+      "ref": 100181,
       "formulaName": "MVO_Q_MAP01_VRAAG12_MEMO_visible",
-      "refId": 100169,
+      "refId": 100181,
       "displayAs": "PropertyType"
     },
     {
@@ -58623,9 +61451,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG12_MEMO_required",
       "nodes": [],
-      "ref": 100170,
+      "ref": 100182,
       "formulaName": "MVO_Q_MAP01_VRAAG12_MEMO_required",
-      "refId": 100170,
+      "refId": 100182,
       "displayAs": "PropertyType"
     },
     {
@@ -58659,9 +61487,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_PARAGRAAF07_value"
         }
       ],
-      "ref": 100171,
+      "ref": 100183,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF07_value",
-      "refId": 100171,
+      "refId": 100183,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -58672,9 +61500,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF07_title",
       "nodes": [],
-      "ref": 100172,
+      "ref": 100184,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF07_title",
-      "refId": 100172,
+      "refId": 100184,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF07",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF07_visible",
+      "nodes": [],
+      "ref": 100086,
+      "formulaName": "MVO_Q_MAP01_WARNING_visible",
+      "refId": 100086,
       "displayAs": "PropertyType"
     },
     {
@@ -58683,9 +61522,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG13_value",
       "nodes": [],
-      "ref": 100173,
+      "ref": 100185,
       "formulaName": "MVO_Q_MAP01_VRAAG13_value",
-      "refId": 100173,
+      "refId": 100185,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
@@ -58696,9 +61535,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG13_title",
       "nodes": [],
-      "ref": 100174,
+      "ref": 100186,
       "formulaName": "MVO_Q_MAP01_VRAAG13_title",
-      "refId": 100174,
+      "refId": 100186,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG13",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG13_visible",
+      "nodes": [],
+      "ref": 100187,
+      "formulaName": "MVO_Q_MAP01_VRAAG13_visible",
+      "refId": 100187,
       "displayAs": "PropertyType"
     },
     {
@@ -58707,9 +61557,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG13_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -58718,9 +61568,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG13_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -58729,9 +61579,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG13_MEMO_value",
       "nodes": [],
-      "ref": 100175,
+      "ref": 100188,
       "formulaName": "MVO_Q_MAP01_VRAAG13_MEMO_value",
-      "refId": 100175,
+      "refId": 100188,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
@@ -58742,9 +61592,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG13_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -58753,9 +61603,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG13_MEMO_visible",
       "nodes": [],
-      "ref": 100176,
+      "ref": 100189,
       "formulaName": "MVO_Q_MAP01_VRAAG13_MEMO_visible",
-      "refId": 100176,
+      "refId": 100189,
       "displayAs": "PropertyType"
     },
     {
@@ -58764,9 +61614,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG13_MEMO_required",
       "nodes": [],
-      "ref": 100177,
+      "ref": 100190,
       "formulaName": "MVO_Q_MAP01_VRAAG13_MEMO_required",
-      "refId": 100177,
+      "refId": 100190,
       "displayAs": "PropertyType"
     },
     {
@@ -58775,9 +61625,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG14_value",
       "nodes": [],
-      "ref": 100178,
+      "ref": 100191,
       "formulaName": "MVO_Q_MAP01_VRAAG14_value",
-      "refId": 100178,
+      "refId": 100191,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
@@ -58788,9 +61638,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG14_title",
       "nodes": [],
-      "ref": 100179,
+      "ref": 100192,
       "formulaName": "MVO_Q_MAP01_VRAAG14_title",
-      "refId": 100179,
+      "refId": 100192,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VRAAG14",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VRAAG14_visible",
+      "nodes": [],
+      "ref": 100187,
+      "formulaName": "MVO_Q_MAP01_VRAAG13_visible",
+      "refId": 100187,
       "displayAs": "PropertyType"
     },
     {
@@ -58799,9 +61660,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG14_required",
       "nodes": [],
-      "ref": 100097,
+      "ref": 100104,
       "formulaName": "MVO_Q_MAP01_VRAAG01_required",
-      "refId": 100097,
+      "refId": 100104,
       "displayAs": "PropertyType"
     },
     {
@@ -58810,9 +61671,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VRAAG14_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -58821,9 +61682,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VRAAG14_MEMO_value",
       "nodes": [],
-      "ref": 100180,
+      "ref": 100193,
       "formulaName": "MVO_Q_MAP01_VRAAG14_MEMO_value",
-      "refId": 100180,
+      "refId": 100193,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
@@ -58834,9 +61695,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VRAAG14_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -58845,9 +61706,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_VRAAG14_MEMO_visible",
       "nodes": [],
-      "ref": 100181,
+      "ref": 100194,
       "formulaName": "MVO_Q_MAP01_VRAAG14_MEMO_visible",
-      "refId": 100181,
+      "refId": 100194,
       "displayAs": "PropertyType"
     },
     {
@@ -58856,9 +61717,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP01_VRAAG14_MEMO_required",
       "nodes": [],
-      "ref": 100182,
+      "ref": 100195,
       "formulaName": "MVO_Q_MAP01_VRAAG14_MEMO_required",
-      "refId": 100182,
+      "refId": 100195,
       "displayAs": "PropertyType"
     },
     {
@@ -58898,9 +61759,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_PARAGRAAF09_value"
         }
       ],
-      "ref": 100183,
+      "ref": 100196,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09_value",
-      "refId": 100183,
+      "refId": 100196,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -58911,9 +61772,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF09_title",
       "nodes": [],
-      "ref": 100184,
+      "ref": 100197,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09_title",
-      "refId": 100184,
+      "refId": 100197,
       "displayAs": "PropertyType"
     },
     {
@@ -58922,9 +61783,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
       "displayAs": "PropertyType"
     },
     {
@@ -58933,9 +61794,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_PARAGRAAF09_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100198,
+      "formulaName": "MVO_Q_MAP01_PARAGRAAF09_visible",
+      "refId": 100198,
       "displayAs": "PropertyType"
     },
     {
@@ -58944,9 +61805,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB1_value",
       "nodes": [],
-      "ref": 100185,
+      "ref": 100199,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB1_value",
-      "refId": 100185,
+      "refId": 100199,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
@@ -58957,9 +61818,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB1_title",
       "nodes": [],
-      "ref": 100081,
+      "ref": 100085,
       "formulaName": "MVO_Q_MAP01_WARNING_title",
-      "refId": 100081,
+      "refId": 100085,
       "displayAs": "PropertyType"
     },
     {
@@ -58968,9 +61829,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB1_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF09SUB1",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF09SUB1_visible",
+      "nodes": [],
+      "ref": 100200,
+      "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB1_visible",
+      "refId": 100200,
       "displayAs": "PropertyType"
     },
     {
@@ -58979,9 +61851,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB2_value",
       "nodes": [],
-      "ref": 100186,
+      "ref": 100201,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB2_value",
-      "refId": 100186,
+      "refId": 100201,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
@@ -58992,9 +61864,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB2_title",
       "nodes": [],
-      "ref": 100083,
+      "ref": 100088,
       "formulaName": "MVO_Q_MAP01_INFO_title",
-      "refId": 100083,
+      "refId": 100088,
       "displayAs": "PropertyType"
     },
     {
@@ -59003,9 +61875,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB2_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF09SUB2",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF09SUB2_visible",
+      "nodes": [],
+      "ref": 100200,
+      "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB1_visible",
+      "refId": 100200,
       "displayAs": "PropertyType"
     },
     {
@@ -59014,9 +61897,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB3_value",
       "nodes": [],
-      "ref": 100187,
+      "ref": 100202,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB3_value",
-      "refId": 100187,
+      "refId": 100202,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
@@ -59027,9 +61910,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB3_title",
       "nodes": [],
-      "ref": 100085,
+      "ref": 100090,
       "formulaName": "MVO_Q_MAP01_VALIDATION_title",
-      "refId": 100085,
+      "refId": 100090,
       "displayAs": "PropertyType"
     },
     {
@@ -59038,9 +61921,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB3_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF09SUB3",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF09SUB3_visible",
+      "nodes": [],
+      "ref": 100200,
+      "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB1_visible",
+      "refId": 100200,
       "displayAs": "PropertyType"
     },
     {
@@ -59049,9 +61943,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB4_value",
       "nodes": [],
-      "ref": 100188,
+      "ref": 100203,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_value",
-      "refId": 100188,
+      "refId": 100203,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
@@ -59062,9 +61956,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB4_title",
       "nodes": [],
-      "ref": 100189,
+      "ref": 100204,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_title",
-      "refId": 100189,
+      "refId": 100204,
       "displayAs": "PropertyType"
     },
     {
@@ -59073,9 +61967,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB4_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF09SUB4",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF09SUB4_visible",
+      "nodes": [],
+      "ref": 100200,
+      "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB1_visible",
+      "refId": 100200,
       "displayAs": "PropertyType"
     },
     {
@@ -59084,9 +61989,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB5_value",
       "nodes": [],
-      "ref": 100190,
+      "ref": 100205,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_value",
-      "refId": 100190,
+      "refId": 100205,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
@@ -59097,9 +62002,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB5_title",
       "nodes": [],
-      "ref": 100191,
+      "ref": 100206,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100191,
+      "refId": 100206,
       "displayAs": "PropertyType"
     },
     {
@@ -59108,9 +62013,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_PARAGRAAF09SUB5_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_PARAGRAAF09SUB5",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_PARAGRAAF09SUB5_visible",
+      "nodes": [],
+      "ref": 100200,
+      "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB1_visible",
+      "refId": 100200,
       "displayAs": "PropertyType"
     },
     {
@@ -59138,9 +62054,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP01_HULPVARIABELEN_value"
         }
       ],
-      "ref": 100192,
+      "ref": 100207,
       "formulaName": "MVO_Q_MAP01_HULPVARIABELEN_value",
-      "refId": 100192,
+      "refId": 100207,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
@@ -59151,9 +62067,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_HULPVARIABELEN_title",
       "nodes": [],
-      "ref": 100193,
+      "ref": 100208,
       "formulaName": "MVO_Q_MAP01_HULPVARIABELEN_title",
-      "refId": 100193,
+      "refId": 100208,
       "displayAs": "PropertyType"
     },
     {
@@ -59162,9 +62078,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_HULPVARIABELEN_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
       "displayAs": "PropertyType"
     },
     {
@@ -59173,9 +62089,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP01_HULPVARIABELEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100198,
+      "formulaName": "MVO_Q_MAP01_PARAGRAAF09_visible",
+      "refId": 100198,
       "displayAs": "PropertyType"
     },
     {
@@ -59184,9 +62100,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_REQUIREDVARS_value",
       "nodes": [],
-      "ref": 100194,
+      "ref": 100209,
       "formulaName": "MVO_Q_MAP01_REQUIREDVARS_value",
-      "refId": 100194,
+      "refId": 100209,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
@@ -59197,9 +62113,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_REQUIREDVARS_title",
       "nodes": [],
-      "ref": 100189,
+      "ref": 100204,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_title",
-      "refId": 100189,
+      "refId": 100204,
       "displayAs": "PropertyType"
     },
     {
@@ -59208,9 +62124,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_REQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_REQUIREDVARS",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_REQUIREDVARS_visible",
+      "nodes": [],
+      "ref": 100210,
+      "formulaName": "MVO_Q_MAP01_REQUIREDVARS_visible",
+      "refId": 100210,
       "displayAs": "PropertyType"
     },
     {
@@ -59219,9 +62146,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
       "nodes": [],
-      "ref": 100195,
+      "ref": 100211,
       "formulaName": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
-      "refId": 100195,
+      "refId": 100211,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
@@ -59232,9 +62159,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_title",
       "nodes": [],
-      "ref": 100191,
+      "ref": 100206,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100191,
+      "refId": 100206,
       "displayAs": "PropertyType"
     },
     {
@@ -59243,9 +62170,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100018,
+      "ref": 100019,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
-      "refId": 100018,
+      "refId": 100019,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_ENTEREDREQUIREDVARS",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_visible",
+      "nodes": [],
+      "ref": 100210,
+      "formulaName": "MVO_Q_MAP01_REQUIREDVARS_visible",
+      "refId": 100210,
       "displayAs": "PropertyType"
     },
     {
@@ -59254,9 +62192,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_VERPLICHT_value",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
@@ -59267,9 +62205,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_VERPLICHT_title",
       "nodes": [],
-      "ref": 100197,
+      "ref": 100213,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_title",
-      "refId": 100197,
+      "refId": 100213,
       "displayAs": "PropertyType"
     },
     {
@@ -59278,9 +62216,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_VERPLICHT_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_VERPLICHT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_VERPLICHT_visible",
+      "nodes": [],
+      "ref": 100210,
+      "formulaName": "MVO_Q_MAP01_REQUIREDVARS_visible",
+      "refId": 100210,
       "displayAs": "PropertyType"
     },
     {
@@ -59289,9 +62238,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP01_VERPLICHT_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -59349,9 +62298,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP02_value"
         }
       ],
-      "ref": 100198,
+      "ref": 100214,
       "formulaName": "MVO_Q_MAP02_value",
-      "refId": 100198,
+      "refId": 100214,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -59362,9 +62311,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_title",
       "nodes": [],
-      "ref": 100199,
+      "ref": 100215,
       "formulaName": "MVO_Q_MAP02_title",
-      "refId": 100199,
+      "refId": 100215,
       "displayAs": "PropertyType"
     },
     {
@@ -59373,9 +62322,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -59384,9 +62344,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP02_choices",
       "nodes": [],
-      "ref": 100077,
+      "ref": 100080,
       "formulaName": "MVO_Q_ROOT_choices",
-      "refId": 100077,
+      "refId": 100080,
       "displayAs": "PropertyType"
     },
     {
@@ -59395,9 +62355,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_WARNING_value",
       "nodes": [],
-      "ref": 100200,
+      "ref": 100216,
       "formulaName": "MVO_Q_MAP02_WARNING_value",
-      "refId": 100200,
+      "refId": 100216,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
@@ -59408,9 +62368,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_WARNING_title",
       "nodes": [],
-      "ref": 100201,
+      "ref": 100217,
       "formulaName": "MVO_Q_MAP02_WARNING_title",
-      "refId": 100201,
+      "refId": 100217,
       "displayAs": "PropertyType"
     },
     {
@@ -59419,9 +62379,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_WARNING_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_WARNING",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_WARNING_visible",
+      "nodes": [],
+      "ref": 100218,
+      "formulaName": "MVO_Q_MAP02_WARNING_visible",
+      "refId": 100218,
       "displayAs": "PropertyType"
     },
     {
@@ -59430,9 +62401,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_INFO_value",
       "nodes": [],
-      "ref": 100202,
+      "ref": 100219,
       "formulaName": "MVO_Q_MAP02_INFO_value",
-      "refId": 100202,
+      "refId": 100219,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
@@ -59443,9 +62414,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_INFO_title",
       "nodes": [],
-      "ref": 100203,
+      "ref": 100220,
       "formulaName": "MVO_Q_MAP02_INFO_title",
-      "refId": 100203,
+      "refId": 100220,
       "displayAs": "PropertyType"
     },
     {
@@ -59454,9 +62425,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_INFO_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_INFO",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_INFO_visible",
+      "nodes": [],
+      "ref": 100218,
+      "formulaName": "MVO_Q_MAP02_WARNING_visible",
+      "refId": 100218,
       "displayAs": "PropertyType"
     },
     {
@@ -59465,9 +62447,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_VALIDATION_value",
       "nodes": [],
-      "ref": 100204,
+      "ref": 100221,
       "formulaName": "MVO_Q_MAP02_VALIDATION_value",
-      "refId": 100204,
+      "refId": 100221,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
@@ -59478,9 +62460,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_VALIDATION_title",
       "nodes": [],
-      "ref": 100205,
+      "ref": 100222,
       "formulaName": "MVO_Q_MAP02_VALIDATION_title",
-      "refId": 100205,
+      "refId": 100222,
       "displayAs": "PropertyType"
     },
     {
@@ -59489,9 +62471,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_VALIDATION_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_VALIDATION",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_VALIDATION_visible",
+      "nodes": [],
+      "ref": 100218,
+      "formulaName": "MVO_Q_MAP02_WARNING_visible",
+      "refId": 100218,
       "displayAs": "PropertyType"
     },
     {
@@ -59500,9 +62493,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_HINT_value",
       "nodes": [],
-      "ref": 100206,
+      "ref": 100223,
       "formulaName": "MVO_Q_MAP02_HINT_value",
-      "refId": 100206,
+      "refId": 100223,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
@@ -59513,9 +62506,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_HINT_title",
       "nodes": [],
-      "ref": 100207,
+      "ref": 100224,
       "formulaName": "MVO_Q_MAP02_HINT_title",
-      "refId": 100207,
+      "refId": 100224,
       "displayAs": "PropertyType"
     },
     {
@@ -59524,9 +62517,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_HINT_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_HINT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_HINT_visible",
+      "nodes": [],
+      "ref": 100218,
+      "formulaName": "MVO_Q_MAP02_WARNING_visible",
+      "refId": 100218,
       "displayAs": "PropertyType"
     },
     {
@@ -59542,9 +62546,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP02_PARAGRAAF00_value"
         }
       ],
-      "ref": 100208,
+      "ref": 100225,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF00_value",
-      "refId": 100208,
+      "refId": 100225,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
@@ -59555,9 +62559,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_PARAGRAAF00_title",
       "nodes": [],
-      "ref": 100209,
+      "ref": 100226,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF00_title",
-      "refId": 100209,
+      "refId": 100226,
       "displayAs": "PropertyType"
     },
     {
@@ -59566,9 +62570,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP02_PARAGRAAF00_hint",
       "nodes": [],
-      "ref": 100090,
+      "ref": 100095,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF00_hint",
-      "refId": 100090,
+      "refId": 100095,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_PARAGRAAF00",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_PARAGRAAF00_visible",
+      "nodes": [],
+      "ref": 100218,
+      "formulaName": "MVO_Q_MAP02_WARNING_visible",
+      "refId": 100218,
       "displayAs": "PropertyType"
     },
     {
@@ -59577,9 +62592,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_VERBORGEN_value",
       "nodes": [],
-      "ref": 100210,
+      "ref": 100227,
       "formulaName": "MVO_Q_MAP02_VERBORGEN_value",
-      "refId": 100210,
+      "refId": 100227,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF00_value"
@@ -59590,9 +62605,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_VERBORGEN_title",
       "nodes": [],
-      "ref": 100092,
+      "ref": 100097,
       "formulaName": "MVO_Q_MAP01_VERBORGEN_title",
-      "refId": 100092,
+      "refId": 100097,
       "displayAs": "PropertyType"
     },
     {
@@ -59601,9 +62616,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_VERBORGEN_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
       "displayAs": "PropertyType"
     },
     {
@@ -59612,9 +62627,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP02_VERBORGEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100228,
+      "formulaName": "MVO_Q_MAP02_VERBORGEN_visible",
+      "refId": 100228,
       "displayAs": "PropertyType"
     },
     {
@@ -59648,9 +62663,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP02_PARAGRAAF01_value"
         }
       ],
-      "ref": 100211,
+      "ref": 100229,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF01_value",
-      "refId": 100211,
+      "refId": 100229,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
@@ -59661,9 +62676,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_PARAGRAAF01_title",
       "nodes": [],
-      "ref": 100212,
+      "ref": 100230,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF01_title",
-      "refId": 100212,
+      "refId": 100230,
       "displayAs": "PropertyType"
     },
     {
@@ -59672,9 +62687,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP02_PARAGRAAF01_hint",
       "nodes": [],
-      "ref": 100113,
+      "ref": 100120,
       "formulaName": "MVO_Q_MAP01_VRAAG03_hint",
-      "refId": 100113,
+      "refId": 100120,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_PARAGRAAF01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_PARAGRAAF01_visible",
+      "nodes": [],
+      "ref": 100218,
+      "formulaName": "MVO_Q_MAP02_WARNING_visible",
+      "refId": 100218,
       "displayAs": "PropertyType"
     },
     {
@@ -59683,9 +62709,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_VRAAG01_value",
       "nodes": [],
-      "ref": 100213,
+      "ref": 100231,
       "formulaName": "MVO_Q_MAP02_VRAAG01_value",
-      "refId": 100213,
+      "refId": 100231,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
@@ -59696,9 +62722,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_VRAAG01_title",
       "nodes": [],
-      "ref": 100214,
+      "ref": 100232,
       "formulaName": "MVO_Q_MAP02_VRAAG01_title",
-      "refId": 100214,
+      "refId": 100232,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_VRAAG01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_VRAAG01_visible",
+      "nodes": [],
+      "ref": 100233,
+      "formulaName": "MVO_Q_MAP02_VRAAG01_visible",
+      "refId": 100233,
       "displayAs": "PropertyType"
     },
     {
@@ -59707,9 +62744,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP02_VRAAG01_required",
       "nodes": [],
-      "ref": 100215,
+      "ref": 100234,
       "formulaName": "MVO_Q_MAP02_VRAAG01_required",
-      "refId": 100215,
+      "refId": 100234,
       "displayAs": "PropertyType"
     },
     {
@@ -59718,9 +62755,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP02_VRAAG01_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -59729,9 +62766,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_VRAAG01_MEMO_value",
       "nodes": [],
-      "ref": 100216,
+      "ref": 100235,
       "formulaName": "MVO_Q_MAP02_VRAAG01_MEMO_value",
-      "refId": 100216,
+      "refId": 100235,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
@@ -59742,9 +62779,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_VRAAG01_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -59753,9 +62790,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP02_VRAAG01_MEMO_visible",
       "nodes": [],
-      "ref": 100217,
+      "ref": 100236,
       "formulaName": "MVO_Q_MAP02_VRAAG01_MEMO_visible",
-      "refId": 100217,
+      "refId": 100236,
       "displayAs": "PropertyType"
     },
     {
@@ -59764,9 +62801,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP02_VRAAG01_MEMO_required",
       "nodes": [],
-      "ref": 100218,
+      "ref": 100237,
       "formulaName": "MVO_Q_MAP02_VRAAG01_MEMO_required",
-      "refId": 100218,
+      "refId": 100237,
       "displayAs": "PropertyType"
     },
     {
@@ -59775,9 +62812,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_VRAAG02_value",
       "nodes": [],
-      "ref": 100219,
+      "ref": 100238,
       "formulaName": "MVO_Q_MAP02_VRAAG02_value",
-      "refId": 100219,
+      "refId": 100238,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
@@ -59788,9 +62825,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_VRAAG02_title",
       "nodes": [],
-      "ref": 100220,
+      "ref": 100239,
       "formulaName": "MVO_Q_MAP02_VRAAG02_title",
-      "refId": 100220,
+      "refId": 100239,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_VRAAG02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_VRAAG02_visible",
+      "nodes": [],
+      "ref": 100233,
+      "formulaName": "MVO_Q_MAP02_VRAAG01_visible",
+      "refId": 100233,
       "displayAs": "PropertyType"
     },
     {
@@ -59799,9 +62847,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP02_VRAAG02_required",
       "nodes": [],
-      "ref": 100215,
+      "ref": 100234,
       "formulaName": "MVO_Q_MAP02_VRAAG01_required",
-      "refId": 100215,
+      "refId": 100234,
       "displayAs": "PropertyType"
     },
     {
@@ -59810,9 +62858,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP02_VRAAG02_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -59821,9 +62869,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_VRAAG02_MEMO_value",
       "nodes": [],
-      "ref": 100221,
+      "ref": 100240,
       "formulaName": "MVO_Q_MAP02_VRAAG02_MEMO_value",
-      "refId": 100221,
+      "refId": 100240,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
@@ -59834,9 +62882,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_VRAAG02_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -59845,9 +62893,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP02_VRAAG02_MEMO_visible",
       "nodes": [],
-      "ref": 100222,
+      "ref": 100241,
       "formulaName": "MVO_Q_MAP02_VRAAG02_MEMO_visible",
-      "refId": 100222,
+      "refId": 100241,
       "displayAs": "PropertyType"
     },
     {
@@ -59856,9 +62904,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP02_VRAAG02_MEMO_required",
       "nodes": [],
-      "ref": 100223,
+      "ref": 100242,
       "formulaName": "MVO_Q_MAP02_VRAAG02_MEMO_required",
-      "refId": 100223,
+      "refId": 100242,
       "displayAs": "PropertyType"
     },
     {
@@ -59898,9 +62946,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP02_PARAGRAAF09_value"
         }
       ],
-      "ref": 100224,
+      "ref": 100243,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09_value",
-      "refId": 100224,
+      "refId": 100243,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
@@ -59911,9 +62959,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_PARAGRAAF09_title",
       "nodes": [],
-      "ref": 100184,
+      "ref": 100197,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09_title",
-      "refId": 100184,
+      "refId": 100197,
       "displayAs": "PropertyType"
     },
     {
@@ -59922,9 +62970,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_PARAGRAAF09_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
       "displayAs": "PropertyType"
     },
     {
@@ -59933,9 +62981,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP02_PARAGRAAF09_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100244,
+      "formulaName": "MVO_Q_MAP02_PARAGRAAF09_visible",
+      "refId": 100244,
       "displayAs": "PropertyType"
     },
     {
@@ -59944,9 +62992,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB1_value",
       "nodes": [],
-      "ref": 100225,
+      "ref": 100245,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB1_value",
-      "refId": 100225,
+      "refId": 100245,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
@@ -59957,9 +63005,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB1_title",
       "nodes": [],
-      "ref": 100201,
+      "ref": 100217,
       "formulaName": "MVO_Q_MAP02_WARNING_title",
-      "refId": 100201,
+      "refId": 100217,
       "displayAs": "PropertyType"
     },
     {
@@ -59968,9 +63016,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB1_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_PARAGRAAF09SUB1",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_PARAGRAAF09SUB1_visible",
+      "nodes": [],
+      "ref": 100246,
+      "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB1_visible",
+      "refId": 100246,
       "displayAs": "PropertyType"
     },
     {
@@ -59979,9 +63038,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB2_value",
       "nodes": [],
-      "ref": 100226,
+      "ref": 100247,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB2_value",
-      "refId": 100226,
+      "refId": 100247,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
@@ -59992,9 +63051,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB2_title",
       "nodes": [],
-      "ref": 100203,
+      "ref": 100220,
       "formulaName": "MVO_Q_MAP02_INFO_title",
-      "refId": 100203,
+      "refId": 100220,
       "displayAs": "PropertyType"
     },
     {
@@ -60003,9 +63062,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB2_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_PARAGRAAF09SUB2",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_PARAGRAAF09SUB2_visible",
+      "nodes": [],
+      "ref": 100246,
+      "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB1_visible",
+      "refId": 100246,
       "displayAs": "PropertyType"
     },
     {
@@ -60014,9 +63084,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB3_value",
       "nodes": [],
-      "ref": 100227,
+      "ref": 100248,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB3_value",
-      "refId": 100227,
+      "refId": 100248,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
@@ -60027,9 +63097,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB3_title",
       "nodes": [],
-      "ref": 100205,
+      "ref": 100222,
       "formulaName": "MVO_Q_MAP02_VALIDATION_title",
-      "refId": 100205,
+      "refId": 100222,
       "displayAs": "PropertyType"
     },
     {
@@ -60038,9 +63108,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB3_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_PARAGRAAF09SUB3",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_PARAGRAAF09SUB3_visible",
+      "nodes": [],
+      "ref": 100246,
+      "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB1_visible",
+      "refId": 100246,
       "displayAs": "PropertyType"
     },
     {
@@ -60049,9 +63130,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB4_value",
       "nodes": [],
-      "ref": 100228,
+      "ref": 100249,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB4_value",
-      "refId": 100228,
+      "refId": 100249,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
@@ -60062,9 +63143,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB4_title",
       "nodes": [],
-      "ref": 100189,
+      "ref": 100204,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_title",
-      "refId": 100189,
+      "refId": 100204,
       "displayAs": "PropertyType"
     },
     {
@@ -60073,9 +63154,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB4_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_PARAGRAAF09SUB4",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_PARAGRAAF09SUB4_visible",
+      "nodes": [],
+      "ref": 100246,
+      "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB1_visible",
+      "refId": 100246,
       "displayAs": "PropertyType"
     },
     {
@@ -60084,9 +63176,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB5_value",
       "nodes": [],
-      "ref": 100229,
+      "ref": 100250,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB5_value",
-      "refId": 100229,
+      "refId": 100250,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
@@ -60097,9 +63189,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB5_title",
       "nodes": [],
-      "ref": 100191,
+      "ref": 100206,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100191,
+      "refId": 100206,
       "displayAs": "PropertyType"
     },
     {
@@ -60108,9 +63200,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_PARAGRAAF09SUB5_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_PARAGRAAF09SUB5",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_PARAGRAAF09SUB5_visible",
+      "nodes": [],
+      "ref": 100246,
+      "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB1_visible",
+      "refId": 100246,
       "displayAs": "PropertyType"
     },
     {
@@ -60138,9 +63241,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP02_HULPVARIABELEN_value"
         }
       ],
-      "ref": 100230,
+      "ref": 100251,
       "formulaName": "MVO_Q_MAP02_HULPVARIABELEN_value",
-      "refId": 100230,
+      "refId": 100251,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
@@ -60151,9 +63254,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_HULPVARIABELEN_title",
       "nodes": [],
-      "ref": 100193,
+      "ref": 100208,
       "formulaName": "MVO_Q_MAP01_HULPVARIABELEN_title",
-      "refId": 100193,
+      "refId": 100208,
       "displayAs": "PropertyType"
     },
     {
@@ -60162,9 +63265,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_HULPVARIABELEN_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
       "displayAs": "PropertyType"
     },
     {
@@ -60173,9 +63276,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP02_HULPVARIABELEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100244,
+      "formulaName": "MVO_Q_MAP02_PARAGRAAF09_visible",
+      "refId": 100244,
       "displayAs": "PropertyType"
     },
     {
@@ -60184,9 +63287,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_REQUIREDVARS_value",
       "nodes": [],
-      "ref": 100231,
+      "ref": 100252,
       "formulaName": "MVO_Q_MAP02_REQUIREDVARS_value",
-      "refId": 100231,
+      "refId": 100252,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
@@ -60197,9 +63300,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_REQUIREDVARS_title",
       "nodes": [],
-      "ref": 100189,
+      "ref": 100204,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_title",
-      "refId": 100189,
+      "refId": 100204,
       "displayAs": "PropertyType"
     },
     {
@@ -60208,9 +63311,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_REQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_REQUIREDVARS",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_REQUIREDVARS_visible",
+      "nodes": [],
+      "ref": 100253,
+      "formulaName": "MVO_Q_MAP02_REQUIREDVARS_visible",
+      "refId": 100253,
       "displayAs": "PropertyType"
     },
     {
@@ -60219,9 +63333,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
       "nodes": [],
-      "ref": 100232,
+      "ref": 100254,
       "formulaName": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
-      "refId": 100232,
+      "refId": 100254,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
@@ -60232,9 +63346,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_title",
       "nodes": [],
-      "ref": 100191,
+      "ref": 100206,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100191,
+      "refId": 100206,
       "displayAs": "PropertyType"
     },
     {
@@ -60243,9 +63357,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100196,
+      "ref": 100212,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
-      "refId": 100196,
+      "refId": 100212,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_ENTEREDREQUIREDVARS",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_visible",
+      "nodes": [],
+      "ref": 100253,
+      "formulaName": "MVO_Q_MAP02_REQUIREDVARS_visible",
+      "refId": 100253,
       "displayAs": "PropertyType"
     },
     {
@@ -60254,9 +63379,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_VERPLICHT_value",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
@@ -60267,9 +63392,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_VERPLICHT_title",
       "nodes": [],
-      "ref": 100197,
+      "ref": 100213,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_title",
-      "refId": 100197,
+      "refId": 100213,
       "displayAs": "PropertyType"
     },
     {
@@ -60278,9 +63403,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_VERPLICHT_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_VERPLICHT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_VERPLICHT_visible",
+      "nodes": [],
+      "ref": 100253,
+      "formulaName": "MVO_Q_MAP02_REQUIREDVARS_visible",
+      "refId": 100253,
       "displayAs": "PropertyType"
     },
     {
@@ -60289,9 +63425,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP02_VERPLICHT_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -60403,9 +63539,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_value"
         }
       ],
-      "ref": 100234,
+      "ref": 100256,
       "formulaName": "MVO_Q_MAP03_value",
-      "refId": 100234,
+      "refId": 100256,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -60416,9 +63552,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_title",
       "nodes": [],
-      "ref": 100235,
+      "ref": 100257,
       "formulaName": "MVO_Q_MAP03_title",
-      "refId": 100235,
+      "refId": 100257,
       "displayAs": "PropertyType"
     },
     {
@@ -60427,9 +63563,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -60438,9 +63585,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_choices",
       "nodes": [],
-      "ref": 100077,
+      "ref": 100080,
       "formulaName": "MVO_Q_ROOT_choices",
-      "refId": 100077,
+      "refId": 100080,
       "displayAs": "PropertyType"
     },
     {
@@ -60449,9 +63596,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_WARNING_value",
       "nodes": [],
-      "ref": 100236,
+      "ref": 100258,
       "formulaName": "MVO_Q_MAP03_WARNING_value",
-      "refId": 100236,
+      "refId": 100258,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -60462,9 +63609,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_WARNING_title",
       "nodes": [],
-      "ref": 100237,
+      "ref": 100259,
       "formulaName": "MVO_Q_MAP03_WARNING_title",
-      "refId": 100237,
+      "refId": 100259,
       "displayAs": "PropertyType"
     },
     {
@@ -60473,9 +63620,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_WARNING_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_WARNING",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_WARNING_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -60484,9 +63642,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_INFO_value",
       "nodes": [],
-      "ref": 100238,
+      "ref": 100261,
       "formulaName": "MVO_Q_MAP03_INFO_value",
-      "refId": 100238,
+      "refId": 100261,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -60497,9 +63655,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_INFO_title",
       "nodes": [],
-      "ref": 100239,
+      "ref": 100262,
       "formulaName": "MVO_Q_MAP03_INFO_title",
-      "refId": 100239,
+      "refId": 100262,
       "displayAs": "PropertyType"
     },
     {
@@ -60508,9 +63666,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_INFO_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_INFO",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_INFO_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -60519,9 +63688,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VALIDATION_value",
       "nodes": [],
-      "ref": 100240,
+      "ref": 100263,
       "formulaName": "MVO_Q_MAP03_VALIDATION_value",
-      "refId": 100240,
+      "refId": 100263,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -60532,9 +63701,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VALIDATION_title",
       "nodes": [],
-      "ref": 100241,
+      "ref": 100264,
       "formulaName": "MVO_Q_MAP03_VALIDATION_title",
-      "refId": 100241,
+      "refId": 100264,
       "displayAs": "PropertyType"
     },
     {
@@ -60543,9 +63712,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_VALIDATION_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VALIDATION",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VALIDATION_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -60554,9 +63734,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_HINT_value",
       "nodes": [],
-      "ref": 100242,
+      "ref": 100265,
       "formulaName": "MVO_Q_MAP03_HINT_value",
-      "refId": 100242,
+      "refId": 100265,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -60567,9 +63747,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_HINT_title",
       "nodes": [],
-      "ref": 100243,
+      "ref": 100266,
       "formulaName": "MVO_Q_MAP03_HINT_title",
-      "refId": 100243,
+      "refId": 100266,
       "displayAs": "PropertyType"
     },
     {
@@ -60578,9 +63758,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_HINT_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_HINT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_HINT_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -60608,9 +63799,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF01_value"
         }
       ],
-      "ref": 100244,
+      "ref": 100267,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF01_value",
-      "refId": 100244,
+      "refId": 100267,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -60621,9 +63812,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF01_title",
       "nodes": [],
-      "ref": 100245,
+      "ref": 100268,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF01_title",
-      "refId": 100245,
+      "refId": 100268,
       "displayAs": "PropertyType"
     },
     {
@@ -60632,9 +63823,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP03_PARAGRAAF01_hint",
       "nodes": [],
-      "ref": 100246,
+      "ref": 100269,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF01_hint",
-      "refId": 100246,
+      "refId": 100269,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF01_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -60643,9 +63845,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_value",
       "nodes": [],
-      "ref": 100247,
+      "ref": 100270,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_value",
-      "refId": 100247,
+      "refId": 100270,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF01_value"
@@ -60656,9 +63858,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_title",
       "nodes": [],
-      "ref": 100248,
+      "ref": 100271,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_title",
-      "refId": 100248,
+      "refId": 100271,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHT_VRAAG05_INPUT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_visible",
+      "nodes": [],
+      "ref": 100272,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_visible",
+      "refId": 100272,
       "displayAs": "PropertyType"
     },
     {
@@ -60667,9 +63880,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_value",
       "nodes": [],
-      "ref": 100249,
+      "ref": 100273,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_value",
-      "refId": 100249,
+      "refId": 100273,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF01_value"
@@ -60680,9 +63893,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_title",
       "nodes": [],
-      "ref": 100250,
+      "ref": 100274,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_title",
-      "refId": 100250,
+      "refId": 100274,
       "displayAs": "PropertyType"
     },
     {
@@ -60691,9 +63904,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHT_VRAAG06_INPUT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_visible",
+      "nodes": [],
+      "ref": 100272,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_visible",
+      "refId": 100272,
       "displayAs": "PropertyType"
     },
     {
@@ -60702,9 +63926,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHTTOTAAL_value",
       "nodes": [],
-      "ref": 100251,
+      "ref": 100275,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAAL_value",
-      "refId": 100251,
+      "refId": 100275,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF01_value"
@@ -60715,9 +63939,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHTTOTAAL_title",
       "nodes": [],
-      "ref": 100252,
+      "ref": 100276,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAAL_title",
-      "refId": 100252,
+      "refId": 100276,
       "displayAs": "PropertyType"
     },
     {
@@ -60726,9 +63950,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHTTOTAAL_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHTTOTAAL",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHTTOTAAL_visible",
+      "nodes": [],
+      "ref": 100272,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_visible",
+      "refId": 100272,
       "displayAs": "PropertyType"
     },
     {
@@ -60756,9 +63991,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF11_value"
         }
       ],
-      "ref": 100253,
+      "ref": 100277,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF11_value",
-      "refId": 100253,
+      "refId": 100277,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -60769,9 +64004,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF11_title",
       "nodes": [],
-      "ref": 100254,
+      "ref": 100278,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF11_title",
-      "refId": 100254,
+      "refId": 100278,
       "displayAs": "PropertyType"
     },
     {
@@ -60780,9 +64015,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_PARAGRAAF11_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
       "displayAs": "PropertyType"
     },
     {
@@ -60791,9 +64026,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_PARAGRAAF11_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100279,
+      "formulaName": "MVO_Q_MAP03_PARAGRAAF11_visible",
+      "refId": 100279,
       "displayAs": "PropertyType"
     },
     {
@@ -60802,9 +64037,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_value",
       "nodes": [],
-      "ref": 100255,
+      "ref": 100280,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_value",
-      "refId": 100255,
+      "refId": 100280,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF11_value"
@@ -60815,9 +64050,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_title",
       "nodes": [],
-      "ref": 100248,
+      "ref": 100271,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_title",
-      "refId": 100248,
+      "refId": 100271,
       "displayAs": "PropertyType"
     },
     {
@@ -60826,9 +64061,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHT_VRAAG05",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG05_visible",
+      "nodes": [],
+      "ref": 100281,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_visible",
+      "refId": 100281,
       "displayAs": "PropertyType"
     },
     {
@@ -60837,9 +64083,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_value",
       "nodes": [],
-      "ref": 100256,
+      "ref": 100282,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG06_value",
-      "refId": 100256,
+      "refId": 100282,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF11_value"
@@ -60850,9 +64096,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_title",
       "nodes": [],
-      "ref": 100250,
+      "ref": 100274,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_title",
-      "refId": 100250,
+      "refId": 100274,
       "displayAs": "PropertyType"
     },
     {
@@ -60861,9 +64107,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHT_VRAAG06",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG06_visible",
+      "nodes": [],
+      "ref": 100281,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_visible",
+      "refId": 100281,
       "displayAs": "PropertyType"
     },
     {
@@ -60872,9 +64129,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_value",
       "nodes": [],
-      "ref": 100257,
+      "ref": 100283,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_value",
-      "refId": 100257,
+      "refId": 100283,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF11_value"
@@ -60885,9 +64142,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_title",
       "nodes": [],
-      "ref": 100252,
+      "ref": 100276,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAAL_title",
-      "refId": 100252,
+      "refId": 100276,
       "displayAs": "PropertyType"
     },
     {
@@ -60896,9 +64153,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHTTOTAAL_OMGEREKEND",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_visible",
+      "nodes": [],
+      "ref": 100281,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_visible",
+      "refId": 100281,
       "displayAs": "PropertyType"
     },
     {
@@ -60944,9 +64212,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF10_value"
         }
       ],
-      "ref": 100258,
+      "ref": 100284,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF10_value",
-      "refId": 100258,
+      "refId": 100284,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -60957,9 +64225,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF10_title",
       "nodes": [],
-      "ref": 100259,
+      "ref": 100285,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF10_title",
-      "refId": 100259,
+      "refId": 100285,
       "displayAs": "PropertyType"
     },
     {
@@ -60968,9 +64236,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_PARAGRAAF10_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
       "displayAs": "PropertyType"
     },
     {
@@ -60979,9 +64247,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_PARAGRAAF10_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100279,
+      "formulaName": "MVO_Q_MAP03_PARAGRAAF11_visible",
+      "refId": 100279,
       "displayAs": "PropertyType"
     },
     {
@@ -60990,9 +64258,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_value",
       "nodes": [],
-      "ref": 100260,
+      "ref": 100286,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_value",
-      "refId": 100260,
+      "refId": 100286,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
@@ -61003,9 +64271,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_title",
       "nodes": [],
-      "ref": 100261,
+      "ref": 100287,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_title",
-      "refId": 100261,
+      "refId": 100287,
       "displayAs": "PropertyType"
     },
     {
@@ -61014,9 +64282,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHT_VRAAG01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG01_visible",
+      "nodes": [],
+      "ref": 100288,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_visible",
+      "refId": 100288,
       "displayAs": "PropertyType"
     },
     {
@@ -61025,9 +64304,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG02_value",
       "nodes": [],
-      "ref": 100262,
+      "ref": 100289,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG02_value",
-      "refId": 100262,
+      "refId": 100289,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
@@ -61038,9 +64317,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG02_title",
       "nodes": [],
-      "ref": 100263,
+      "ref": 100290,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG02_title",
-      "refId": 100263,
+      "refId": 100290,
       "displayAs": "PropertyType"
     },
     {
@@ -61049,9 +64328,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG02_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHT_VRAAG02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG02_visible",
+      "nodes": [],
+      "ref": 100288,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_visible",
+      "refId": 100288,
       "displayAs": "PropertyType"
     },
     {
@@ -61060,9 +64350,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG03_value",
       "nodes": [],
-      "ref": 100264,
+      "ref": 100291,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG03_value",
-      "refId": 100264,
+      "refId": 100291,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
@@ -61073,9 +64363,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG03_title",
       "nodes": [],
-      "ref": 100265,
+      "ref": 100292,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG03_title",
-      "refId": 100265,
+      "refId": 100292,
       "displayAs": "PropertyType"
     },
     {
@@ -61084,9 +64374,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG03_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHT_VRAAG03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG03_visible",
+      "nodes": [],
+      "ref": 100288,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_visible",
+      "refId": 100288,
       "displayAs": "PropertyType"
     },
     {
@@ -61095,9 +64396,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG04_value",
       "nodes": [],
-      "ref": 100266,
+      "ref": 100293,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG04_value",
-      "refId": 100266,
+      "refId": 100293,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
@@ -61108,9 +64409,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG04_title",
       "nodes": [],
-      "ref": 100267,
+      "ref": 100294,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG04_title",
-      "refId": 100267,
+      "refId": 100294,
       "displayAs": "PropertyType"
     },
     {
@@ -61119,9 +64420,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG04_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHT_VRAAG04",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG04_visible",
+      "nodes": [],
+      "ref": 100288,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_visible",
+      "refId": 100288,
       "displayAs": "PropertyType"
     },
     {
@@ -61130,9 +64442,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG07_value",
       "nodes": [],
-      "ref": 100268,
+      "ref": 100295,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG07_value",
-      "refId": 100268,
+      "refId": 100295,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
@@ -61143,9 +64455,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG07_title",
       "nodes": [],
-      "ref": 100269,
+      "ref": 100296,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG07_title",
-      "refId": 100269,
+      "refId": 100296,
       "displayAs": "PropertyType"
     },
     {
@@ -61154,9 +64466,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHT_VRAAG07_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHT_VRAAG07",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHT_VRAAG07_visible",
+      "nodes": [],
+      "ref": 100288,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_visible",
+      "refId": 100288,
       "displayAs": "PropertyType"
     },
     {
@@ -61165,9 +64488,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_value",
       "nodes": [],
-      "ref": 100270,
+      "ref": 100297,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_value",
-      "refId": 100270,
+      "refId": 100297,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
@@ -61178,9 +64501,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_title",
       "nodes": [],
-      "ref": 100252,
+      "ref": 100276,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAAL_title",
-      "refId": 100252,
+      "refId": 100276,
       "displayAs": "PropertyType"
     },
     {
@@ -61189,9 +64512,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_GEWICHTTOTAALOVERIG",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_visible",
+      "nodes": [],
+      "ref": 100288,
+      "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_visible",
+      "refId": 100288,
       "displayAs": "PropertyType"
     },
     {
@@ -61207,9 +64541,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF00_value"
         }
       ],
-      "ref": 100271,
+      "ref": 100298,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF00_value",
-      "refId": 100271,
+      "refId": 100298,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -61220,9 +64554,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF00_title",
       "nodes": [],
-      "ref": 100272,
+      "ref": 100299,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF00_title",
-      "refId": 100272,
+      "refId": 100299,
       "displayAs": "PropertyType"
     },
     {
@@ -61231,9 +64565,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP03_PARAGRAAF00_hint",
       "nodes": [],
-      "ref": 100090,
+      "ref": 100095,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF00_hint",
-      "refId": 100090,
+      "refId": 100095,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF00",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF00_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -61242,9 +64587,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VERBORGEN_value",
       "nodes": [],
-      "ref": 100273,
+      "ref": 100300,
       "formulaName": "MVO_Q_MAP03_VERBORGEN_value",
-      "refId": 100273,
+      "refId": 100300,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF00_value"
@@ -61255,9 +64600,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VERBORGEN_title",
       "nodes": [],
-      "ref": 100092,
+      "ref": 100097,
       "formulaName": "MVO_Q_MAP01_VERBORGEN_title",
-      "refId": 100092,
+      "refId": 100097,
       "displayAs": "PropertyType"
     },
     {
@@ -61266,9 +64611,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_VERBORGEN_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
       "displayAs": "PropertyType"
     },
     {
@@ -61277,9 +64622,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VERBORGEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100301,
+      "formulaName": "MVO_Q_MAP03_VERBORGEN_visible",
+      "refId": 100301,
       "displayAs": "PropertyType"
     },
     {
@@ -61313,9 +64658,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF02_value"
         }
       ],
-      "ref": 100274,
+      "ref": 100302,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF02_value",
-      "refId": 100274,
+      "refId": 100302,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -61326,9 +64671,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF02_title",
       "nodes": [],
-      "ref": 100261,
+      "ref": 100287,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_title",
-      "refId": 100261,
+      "refId": 100287,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF02_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -61337,9 +64693,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG01_value",
       "nodes": [],
-      "ref": 100275,
+      "ref": 100303,
       "formulaName": "MVO_Q_MAP03_VRAAG01_value",
-      "refId": 100275,
+      "refId": 100303,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
@@ -61350,9 +64706,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG01_title",
       "nodes": [],
-      "ref": 100276,
+      "ref": 100304,
       "formulaName": "MVO_Q_MAP03_VRAAG01_title",
-      "refId": 100276,
+      "refId": 100304,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG01_visible",
+      "nodes": [],
+      "ref": 100305,
+      "formulaName": "MVO_Q_MAP03_VRAAG01_visible",
+      "refId": 100305,
       "displayAs": "PropertyType"
     },
     {
@@ -61361,9 +64728,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG01_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -61372,9 +64739,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG01_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -61383,9 +64750,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG01_MEMO_value",
       "nodes": [],
-      "ref": 100278,
+      "ref": 100307,
       "formulaName": "MVO_Q_MAP03_VRAAG01_MEMO_value",
-      "refId": 100278,
+      "refId": 100307,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
@@ -61396,9 +64763,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG01_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -61407,9 +64774,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG01_MEMO_visible",
       "nodes": [],
-      "ref": 100279,
+      "ref": 100308,
       "formulaName": "MVO_Q_MAP03_VRAAG01_MEMO_visible",
-      "refId": 100279,
+      "refId": 100308,
       "displayAs": "PropertyType"
     },
     {
@@ -61418,9 +64785,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG01_MEMO_required",
       "nodes": [],
-      "ref": 100280,
+      "ref": 100309,
       "formulaName": "MVO_Q_MAP03_VRAAG01_MEMO_required",
-      "refId": 100280,
+      "refId": 100309,
       "displayAs": "PropertyType"
     },
     {
@@ -61429,9 +64796,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG02_value",
       "nodes": [],
-      "ref": 100281,
+      "ref": 100310,
       "formulaName": "MVO_Q_MAP03_VRAAG02_value",
-      "refId": 100281,
+      "refId": 100310,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
@@ -61442,9 +64809,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG02_title",
       "nodes": [],
-      "ref": 100282,
+      "ref": 100311,
       "formulaName": "MVO_Q_MAP03_VRAAG02_title",
-      "refId": 100282,
+      "refId": 100311,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG02_visible",
+      "nodes": [],
+      "ref": 100305,
+      "formulaName": "MVO_Q_MAP03_VRAAG01_visible",
+      "refId": 100305,
       "displayAs": "PropertyType"
     },
     {
@@ -61453,9 +64831,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG02_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -61464,9 +64842,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG02_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -61475,9 +64853,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG02_MEMO_value",
       "nodes": [],
-      "ref": 100283,
+      "ref": 100312,
       "formulaName": "MVO_Q_MAP03_VRAAG02_MEMO_value",
-      "refId": 100283,
+      "refId": 100312,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
@@ -61488,9 +64866,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG02_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -61499,9 +64877,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG02_MEMO_visible",
       "nodes": [],
-      "ref": 100284,
+      "ref": 100313,
       "formulaName": "MVO_Q_MAP03_VRAAG02_MEMO_visible",
-      "refId": 100284,
+      "refId": 100313,
       "displayAs": "PropertyType"
     },
     {
@@ -61510,9 +64888,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG02_MEMO_required",
       "nodes": [],
-      "ref": 100285,
+      "ref": 100314,
       "formulaName": "MVO_Q_MAP03_VRAAG02_MEMO_required",
-      "refId": 100285,
+      "refId": 100314,
       "displayAs": "PropertyType"
     },
     {
@@ -61546,9 +64924,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF03_value"
         }
       ],
-      "ref": 100286,
+      "ref": 100315,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF03_value",
-      "refId": 100286,
+      "refId": 100315,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -61559,9 +64937,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF03_title",
       "nodes": [],
-      "ref": 100263,
+      "ref": 100290,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG02_title",
-      "refId": 100263,
+      "refId": 100290,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF03_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -61570,9 +64959,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG03_value",
       "nodes": [],
-      "ref": 100287,
+      "ref": 100316,
       "formulaName": "MVO_Q_MAP03_VRAAG03_value",
-      "refId": 100287,
+      "refId": 100316,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
@@ -61583,9 +64972,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG03_title",
       "nodes": [],
-      "ref": 100174,
+      "ref": 100186,
       "formulaName": "MVO_Q_MAP01_VRAAG13_title",
-      "refId": 100174,
+      "refId": 100186,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG03_visible",
+      "nodes": [],
+      "ref": 100317,
+      "formulaName": "MVO_Q_MAP03_VRAAG03_visible",
+      "refId": 100317,
       "displayAs": "PropertyType"
     },
     {
@@ -61594,9 +64994,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG03_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -61605,9 +65005,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG03_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -61616,9 +65016,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG03_MEMO_value",
       "nodes": [],
-      "ref": 100288,
+      "ref": 100318,
       "formulaName": "MVO_Q_MAP03_VRAAG03_MEMO_value",
-      "refId": 100288,
+      "refId": 100318,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
@@ -61629,9 +65029,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG03_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -61640,9 +65040,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG03_MEMO_visible",
       "nodes": [],
-      "ref": 100289,
+      "ref": 100319,
       "formulaName": "MVO_Q_MAP03_VRAAG03_MEMO_visible",
-      "refId": 100289,
+      "refId": 100319,
       "displayAs": "PropertyType"
     },
     {
@@ -61651,9 +65051,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG03_MEMO_required",
       "nodes": [],
-      "ref": 100290,
+      "ref": 100320,
       "formulaName": "MVO_Q_MAP03_VRAAG03_MEMO_required",
-      "refId": 100290,
+      "refId": 100320,
       "displayAs": "PropertyType"
     },
     {
@@ -61662,9 +65062,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG04_value",
       "nodes": [],
-      "ref": 100291,
+      "ref": 100321,
       "formulaName": "MVO_Q_MAP03_VRAAG04_value",
-      "refId": 100291,
+      "refId": 100321,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
@@ -61675,9 +65075,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG04_title",
       "nodes": [],
-      "ref": 100179,
+      "ref": 100192,
       "formulaName": "MVO_Q_MAP01_VRAAG14_title",
-      "refId": 100179,
+      "refId": 100192,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG04",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG04_visible",
+      "nodes": [],
+      "ref": 100317,
+      "formulaName": "MVO_Q_MAP03_VRAAG03_visible",
+      "refId": 100317,
       "displayAs": "PropertyType"
     },
     {
@@ -61686,9 +65097,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG04_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -61697,9 +65108,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG04_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -61708,9 +65119,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG04_MEMO_value",
       "nodes": [],
-      "ref": 100292,
+      "ref": 100322,
       "formulaName": "MVO_Q_MAP03_VRAAG04_MEMO_value",
-      "refId": 100292,
+      "refId": 100322,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
@@ -61721,9 +65132,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG04_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -61732,9 +65143,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG04_MEMO_visible",
       "nodes": [],
-      "ref": 100293,
+      "ref": 100323,
       "formulaName": "MVO_Q_MAP03_VRAAG04_MEMO_visible",
-      "refId": 100293,
+      "refId": 100323,
       "displayAs": "PropertyType"
     },
     {
@@ -61743,9 +65154,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG04_MEMO_required",
       "nodes": [],
-      "ref": 100294,
+      "ref": 100324,
       "formulaName": "MVO_Q_MAP03_VRAAG04_MEMO_required",
-      "refId": 100294,
+      "refId": 100324,
       "displayAs": "PropertyType"
     },
     {
@@ -61779,9 +65190,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF04_value"
         }
       ],
-      "ref": 100295,
+      "ref": 100325,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF04_value",
-      "refId": 100295,
+      "refId": 100325,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -61792,9 +65203,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF04_title",
       "nodes": [],
-      "ref": 100265,
+      "ref": 100292,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG03_title",
-      "refId": 100265,
+      "refId": 100292,
       "displayAs": "PropertyType"
     },
     {
@@ -61803,9 +65214,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP03_PARAGRAAF04_hint",
       "nodes": [],
-      "ref": 100296,
+      "ref": 100326,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF04_hint",
-      "refId": 100296,
+      "refId": 100326,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF04",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF04_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -61814,9 +65236,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG05_value",
       "nodes": [],
-      "ref": 100297,
+      "ref": 100327,
       "formulaName": "MVO_Q_MAP03_VRAAG05_value",
-      "refId": 100297,
+      "refId": 100327,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
@@ -61827,9 +65249,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG05_title",
       "nodes": [],
-      "ref": 100298,
+      "ref": 100328,
       "formulaName": "MVO_Q_MAP03_VRAAG05_title",
-      "refId": 100298,
+      "refId": 100328,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG05",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG05_visible",
+      "nodes": [],
+      "ref": 100329,
+      "formulaName": "MVO_Q_MAP03_VRAAG05_visible",
+      "refId": 100329,
       "displayAs": "PropertyType"
     },
     {
@@ -61838,9 +65271,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG05_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -61849,9 +65282,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG05_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -61860,9 +65293,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG05_MEMO_value",
       "nodes": [],
-      "ref": 100299,
+      "ref": 100330,
       "formulaName": "MVO_Q_MAP03_VRAAG05_MEMO_value",
-      "refId": 100299,
+      "refId": 100330,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
@@ -61873,9 +65306,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG05_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -61884,9 +65317,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG05_MEMO_visible",
       "nodes": [],
-      "ref": 100300,
+      "ref": 100331,
       "formulaName": "MVO_Q_MAP03_VRAAG05_MEMO_visible",
-      "refId": 100300,
+      "refId": 100331,
       "displayAs": "PropertyType"
     },
     {
@@ -61895,9 +65328,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG05_MEMO_required",
       "nodes": [],
-      "ref": 100301,
+      "ref": 100332,
       "formulaName": "MVO_Q_MAP03_VRAAG05_MEMO_required",
-      "refId": 100301,
+      "refId": 100332,
       "displayAs": "PropertyType"
     },
     {
@@ -61906,9 +65339,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG06_value",
       "nodes": [],
-      "ref": 100302,
+      "ref": 100333,
       "formulaName": "MVO_Q_MAP03_VRAAG06_value",
-      "refId": 100302,
+      "refId": 100333,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
@@ -61919,9 +65352,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG06_title",
       "nodes": [],
-      "ref": 100303,
+      "ref": 100334,
       "formulaName": "MVO_Q_MAP03_VRAAG06_title",
-      "refId": 100303,
+      "refId": 100334,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG06",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG06_visible",
+      "nodes": [],
+      "ref": 100329,
+      "formulaName": "MVO_Q_MAP03_VRAAG05_visible",
+      "refId": 100329,
       "displayAs": "PropertyType"
     },
     {
@@ -61930,9 +65374,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG06_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -61941,9 +65385,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG06_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -61952,9 +65396,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG06_MEMO_value",
       "nodes": [],
-      "ref": 100304,
+      "ref": 100335,
       "formulaName": "MVO_Q_MAP03_VRAAG06_MEMO_value",
-      "refId": 100304,
+      "refId": 100335,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
@@ -61965,9 +65409,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG06_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -61976,9 +65420,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG06_MEMO_visible",
       "nodes": [],
-      "ref": 100305,
+      "ref": 100336,
       "formulaName": "MVO_Q_MAP03_VRAAG06_MEMO_visible",
-      "refId": 100305,
+      "refId": 100336,
       "displayAs": "PropertyType"
     },
     {
@@ -61987,9 +65431,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG06_MEMO_required",
       "nodes": [],
-      "ref": 100306,
+      "ref": 100337,
       "formulaName": "MVO_Q_MAP03_VRAAG06_MEMO_required",
-      "refId": 100306,
+      "refId": 100337,
       "displayAs": "PropertyType"
     },
     {
@@ -62023,9 +65467,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF05_value"
         }
       ],
-      "ref": 100307,
+      "ref": 100338,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF05_value",
-      "refId": 100307,
+      "refId": 100338,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -62036,9 +65480,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF05_title",
       "nodes": [],
-      "ref": 100267,
+      "ref": 100294,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG04_title",
-      "refId": 100267,
+      "refId": 100294,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF05",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF05_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -62047,9 +65502,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG07_value",
       "nodes": [],
-      "ref": 100308,
+      "ref": 100339,
       "formulaName": "MVO_Q_MAP03_VRAAG07_value",
-      "refId": 100308,
+      "refId": 100339,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
@@ -62060,9 +65515,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG07_title",
       "nodes": [],
-      "ref": 100309,
+      "ref": 100340,
       "formulaName": "MVO_Q_MAP03_VRAAG07_title",
-      "refId": 100309,
+      "refId": 100340,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG07",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG07_visible",
+      "nodes": [],
+      "ref": 100341,
+      "formulaName": "MVO_Q_MAP03_VRAAG07_visible",
+      "refId": 100341,
       "displayAs": "PropertyType"
     },
     {
@@ -62071,9 +65537,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG07_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -62082,9 +65548,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG07_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -62093,9 +65559,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG07_MEMO_value",
       "nodes": [],
-      "ref": 100310,
+      "ref": 100342,
       "formulaName": "MVO_Q_MAP03_VRAAG07_MEMO_value",
-      "refId": 100310,
+      "refId": 100342,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
@@ -62106,9 +65572,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG07_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -62117,9 +65583,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG07_MEMO_visible",
       "nodes": [],
-      "ref": 100311,
+      "ref": 100343,
       "formulaName": "MVO_Q_MAP03_VRAAG07_MEMO_visible",
-      "refId": 100311,
+      "refId": 100343,
       "displayAs": "PropertyType"
     },
     {
@@ -62128,9 +65594,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG07_MEMO_required",
       "nodes": [],
-      "ref": 100312,
+      "ref": 100344,
       "formulaName": "MVO_Q_MAP03_VRAAG07_MEMO_required",
-      "refId": 100312,
+      "refId": 100344,
       "displayAs": "PropertyType"
     },
     {
@@ -62139,9 +65605,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG08_value",
       "nodes": [],
-      "ref": 100313,
+      "ref": 100345,
       "formulaName": "MVO_Q_MAP03_VRAAG08_value",
-      "refId": 100313,
+      "refId": 100345,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
@@ -62152,9 +65618,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG08_title",
       "nodes": [],
-      "ref": 100314,
+      "ref": 100346,
       "formulaName": "MVO_Q_MAP03_VRAAG08_title",
-      "refId": 100314,
+      "refId": 100346,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG08",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG08_visible",
+      "nodes": [],
+      "ref": 100341,
+      "formulaName": "MVO_Q_MAP03_VRAAG07_visible",
+      "refId": 100341,
       "displayAs": "PropertyType"
     },
     {
@@ -62163,9 +65640,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG08_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -62174,9 +65651,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG08_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -62185,9 +65662,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG08_MEMO_value",
       "nodes": [],
-      "ref": 100315,
+      "ref": 100347,
       "formulaName": "MVO_Q_MAP03_VRAAG08_MEMO_value",
-      "refId": 100315,
+      "refId": 100347,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
@@ -62198,9 +65675,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG08_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -62209,9 +65686,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG08_MEMO_visible",
       "nodes": [],
-      "ref": 100316,
+      "ref": 100348,
       "formulaName": "MVO_Q_MAP03_VRAAG08_MEMO_visible",
-      "refId": 100316,
+      "refId": 100348,
       "displayAs": "PropertyType"
     },
     {
@@ -62220,9 +65697,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG08_MEMO_required",
       "nodes": [],
-      "ref": 100317,
+      "ref": 100349,
       "formulaName": "MVO_Q_MAP03_VRAAG08_MEMO_required",
-      "refId": 100317,
+      "refId": 100349,
       "displayAs": "PropertyType"
     },
     {
@@ -62256,9 +65733,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF06_value"
         }
       ],
-      "ref": 100318,
+      "ref": 100350,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF06_value",
-      "refId": 100318,
+      "refId": 100350,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -62269,9 +65746,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF06_title",
       "nodes": [],
-      "ref": 100248,
+      "ref": 100271,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_title",
-      "refId": 100248,
+      "refId": 100271,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF06",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF06_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -62280,9 +65768,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG09_value",
       "nodes": [],
-      "ref": 100319,
+      "ref": 100351,
       "formulaName": "MVO_Q_MAP03_VRAAG09_value",
-      "refId": 100319,
+      "refId": 100351,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
@@ -62293,9 +65781,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG09_title",
       "nodes": [],
-      "ref": 100320,
+      "ref": 100352,
       "formulaName": "MVO_Q_MAP03_VRAAG09_title",
-      "refId": 100320,
+      "refId": 100352,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG09",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG09_visible",
+      "nodes": [],
+      "ref": 100353,
+      "formulaName": "MVO_Q_MAP03_VRAAG09_visible",
+      "refId": 100353,
       "displayAs": "PropertyType"
     },
     {
@@ -62304,9 +65803,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG09_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -62315,9 +65814,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG09_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -62326,9 +65825,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG09_MEMO_value",
       "nodes": [],
-      "ref": 100321,
+      "ref": 100354,
       "formulaName": "MVO_Q_MAP03_VRAAG09_MEMO_value",
-      "refId": 100321,
+      "refId": 100354,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
@@ -62339,9 +65838,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG09_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -62350,9 +65849,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG09_MEMO_visible",
       "nodes": [],
-      "ref": 100322,
+      "ref": 100355,
       "formulaName": "MVO_Q_MAP03_VRAAG09_MEMO_visible",
-      "refId": 100322,
+      "refId": 100355,
       "displayAs": "PropertyType"
     },
     {
@@ -62361,9 +65860,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG09_MEMO_required",
       "nodes": [],
-      "ref": 100323,
+      "ref": 100356,
       "formulaName": "MVO_Q_MAP03_VRAAG09_MEMO_required",
-      "refId": 100323,
+      "refId": 100356,
       "displayAs": "PropertyType"
     },
     {
@@ -62372,9 +65871,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG10_value",
       "nodes": [],
-      "ref": 100324,
+      "ref": 100357,
       "formulaName": "MVO_Q_MAP03_VRAAG10_value",
-      "refId": 100324,
+      "refId": 100357,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
@@ -62385,9 +65884,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG10_title",
       "nodes": [],
-      "ref": 100325,
+      "ref": 100358,
       "formulaName": "MVO_Q_MAP03_VRAAG10_title",
-      "refId": 100325,
+      "refId": 100358,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG10",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG10_visible",
+      "nodes": [],
+      "ref": 100353,
+      "formulaName": "MVO_Q_MAP03_VRAAG09_visible",
+      "refId": 100353,
       "displayAs": "PropertyType"
     },
     {
@@ -62396,9 +65906,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG10_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -62407,9 +65917,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG10_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -62418,9 +65928,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG10_MEMO_value",
       "nodes": [],
-      "ref": 100326,
+      "ref": 100359,
       "formulaName": "MVO_Q_MAP03_VRAAG10_MEMO_value",
-      "refId": 100326,
+      "refId": 100359,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
@@ -62431,9 +65941,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG10_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -62442,9 +65952,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG10_MEMO_visible",
       "nodes": [],
-      "ref": 100327,
+      "ref": 100360,
       "formulaName": "MVO_Q_MAP03_VRAAG10_MEMO_visible",
-      "refId": 100327,
+      "refId": 100360,
       "displayAs": "PropertyType"
     },
     {
@@ -62453,9 +65963,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG10_MEMO_required",
       "nodes": [],
-      "ref": 100328,
+      "ref": 100361,
       "formulaName": "MVO_Q_MAP03_VRAAG10_MEMO_required",
-      "refId": 100328,
+      "refId": 100361,
       "displayAs": "PropertyType"
     },
     {
@@ -62489,9 +65999,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF07_value"
         }
       ],
-      "ref": 100329,
+      "ref": 100362,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF07_value",
-      "refId": 100329,
+      "refId": 100362,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -62502,9 +66012,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF07_title",
       "nodes": [],
-      "ref": 100250,
+      "ref": 100274,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_title",
-      "refId": 100250,
+      "refId": 100274,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF07",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF07_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -62513,9 +66034,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG11_value",
       "nodes": [],
-      "ref": 100330,
+      "ref": 100363,
       "formulaName": "MVO_Q_MAP03_VRAAG11_value",
-      "refId": 100330,
+      "refId": 100363,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
@@ -62526,9 +66047,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG11_title",
       "nodes": [],
-      "ref": 100331,
+      "ref": 100364,
       "formulaName": "MVO_Q_MAP03_VRAAG11_title",
-      "refId": 100331,
+      "refId": 100364,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG11",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG11_visible",
+      "nodes": [],
+      "ref": 100365,
+      "formulaName": "MVO_Q_MAP03_VRAAG11_visible",
+      "refId": 100365,
       "displayAs": "PropertyType"
     },
     {
@@ -62537,9 +66069,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG11_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -62548,9 +66080,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG11_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -62559,9 +66091,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG11_MEMO_value",
       "nodes": [],
-      "ref": 100332,
+      "ref": 100366,
       "formulaName": "MVO_Q_MAP03_VRAAG11_MEMO_value",
-      "refId": 100332,
+      "refId": 100366,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
@@ -62572,9 +66104,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG11_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -62583,9 +66115,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG11_MEMO_visible",
       "nodes": [],
-      "ref": 100333,
+      "ref": 100367,
       "formulaName": "MVO_Q_MAP03_VRAAG11_MEMO_visible",
-      "refId": 100333,
+      "refId": 100367,
       "displayAs": "PropertyType"
     },
     {
@@ -62594,9 +66126,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG11_MEMO_required",
       "nodes": [],
-      "ref": 100334,
+      "ref": 100368,
       "formulaName": "MVO_Q_MAP03_VRAAG11_MEMO_required",
-      "refId": 100334,
+      "refId": 100368,
       "displayAs": "PropertyType"
     },
     {
@@ -62605,9 +66137,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG12_value",
       "nodes": [],
-      "ref": 100335,
+      "ref": 100369,
       "formulaName": "MVO_Q_MAP03_VRAAG12_value",
-      "refId": 100335,
+      "refId": 100369,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
@@ -62618,9 +66150,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG12_title",
       "nodes": [],
-      "ref": 100336,
+      "ref": 100370,
       "formulaName": "MVO_Q_MAP03_VRAAG12_title",
-      "refId": 100336,
+      "refId": 100370,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG12",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG12_visible",
+      "nodes": [],
+      "ref": 100365,
+      "formulaName": "MVO_Q_MAP03_VRAAG11_visible",
+      "refId": 100365,
       "displayAs": "PropertyType"
     },
     {
@@ -62629,9 +66172,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG12_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -62640,9 +66183,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG12_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -62651,9 +66194,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG12_MEMO_value",
       "nodes": [],
-      "ref": 100337,
+      "ref": 100371,
       "formulaName": "MVO_Q_MAP03_VRAAG12_MEMO_value",
-      "refId": 100337,
+      "refId": 100371,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
@@ -62664,9 +66207,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG12_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -62675,9 +66218,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG12_MEMO_visible",
       "nodes": [],
-      "ref": 100338,
+      "ref": 100372,
       "formulaName": "MVO_Q_MAP03_VRAAG12_MEMO_visible",
-      "refId": 100338,
+      "refId": 100372,
       "displayAs": "PropertyType"
     },
     {
@@ -62686,9 +66229,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG12_MEMO_required",
       "nodes": [],
-      "ref": 100339,
+      "ref": 100373,
       "formulaName": "MVO_Q_MAP03_VRAAG12_MEMO_required",
-      "refId": 100339,
+      "refId": 100373,
       "displayAs": "PropertyType"
     },
     {
@@ -62722,9 +66265,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF08_value"
         }
       ],
-      "ref": 100340,
+      "ref": 100374,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF08_value",
-      "refId": 100340,
+      "refId": 100374,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -62735,9 +66278,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF08_title",
       "nodes": [],
-      "ref": 100269,
+      "ref": 100296,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG07_title",
-      "refId": 100269,
+      "refId": 100296,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF08",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF08_visible",
+      "nodes": [],
+      "ref": 100260,
+      "formulaName": "MVO_Q_MAP03_WARNING_visible",
+      "refId": 100260,
       "displayAs": "PropertyType"
     },
     {
@@ -62746,9 +66300,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG13_value",
       "nodes": [],
-      "ref": 100341,
+      "ref": 100375,
       "formulaName": "MVO_Q_MAP03_VRAAG13_value",
-      "refId": 100341,
+      "refId": 100375,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
@@ -62759,9 +66313,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG13_title",
       "nodes": [],
-      "ref": 100342,
+      "ref": 100376,
       "formulaName": "MVO_Q_MAP03_VRAAG13_title",
-      "refId": 100342,
+      "refId": 100376,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG13",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG13_visible",
+      "nodes": [],
+      "ref": 100377,
+      "formulaName": "MVO_Q_MAP03_VRAAG13_visible",
+      "refId": 100377,
       "displayAs": "PropertyType"
     },
     {
@@ -62770,9 +66335,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG13_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -62781,9 +66346,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG13_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -62792,9 +66357,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG13_MEMO_value",
       "nodes": [],
-      "ref": 100343,
+      "ref": 100378,
       "formulaName": "MVO_Q_MAP03_VRAAG13_MEMO_value",
-      "refId": 100343,
+      "refId": 100378,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
@@ -62805,9 +66370,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG13_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -62816,9 +66381,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG13_MEMO_visible",
       "nodes": [],
-      "ref": 100344,
+      "ref": 100379,
       "formulaName": "MVO_Q_MAP03_VRAAG13_MEMO_visible",
-      "refId": 100344,
+      "refId": 100379,
       "displayAs": "PropertyType"
     },
     {
@@ -62827,9 +66392,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG13_MEMO_required",
       "nodes": [],
-      "ref": 100345,
+      "ref": 100380,
       "formulaName": "MVO_Q_MAP03_VRAAG13_MEMO_required",
-      "refId": 100345,
+      "refId": 100380,
       "displayAs": "PropertyType"
     },
     {
@@ -62838,9 +66403,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG14_value",
       "nodes": [],
-      "ref": 100346,
+      "ref": 100381,
       "formulaName": "MVO_Q_MAP03_VRAAG14_value",
-      "refId": 100346,
+      "refId": 100381,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
@@ -62851,9 +66416,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG14_title",
       "nodes": [],
-      "ref": 100347,
+      "ref": 100382,
       "formulaName": "MVO_Q_MAP03_VRAAG14_title",
-      "refId": 100347,
+      "refId": 100382,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VRAAG14",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VRAAG14_visible",
+      "nodes": [],
+      "ref": 100377,
+      "formulaName": "MVO_Q_MAP03_VRAAG13_visible",
+      "refId": 100377,
       "displayAs": "PropertyType"
     },
     {
@@ -62862,9 +66438,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG14_required",
       "nodes": [],
-      "ref": 100277,
+      "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG01_required",
-      "refId": 100277,
+      "refId": 100306,
       "displayAs": "PropertyType"
     },
     {
@@ -62873,9 +66449,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VRAAG14_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -62884,9 +66460,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VRAAG14_MEMO_value",
       "nodes": [],
-      "ref": 100348,
+      "ref": 100383,
       "formulaName": "MVO_Q_MAP03_VRAAG14_MEMO_value",
-      "refId": 100348,
+      "refId": 100383,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
@@ -62897,9 +66473,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VRAAG14_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -62908,9 +66484,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_VRAAG14_MEMO_visible",
       "nodes": [],
-      "ref": 100349,
+      "ref": 100384,
       "formulaName": "MVO_Q_MAP03_VRAAG14_MEMO_visible",
-      "refId": 100349,
+      "refId": 100384,
       "displayAs": "PropertyType"
     },
     {
@@ -62919,9 +66495,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP03_VRAAG14_MEMO_required",
       "nodes": [],
-      "ref": 100350,
+      "ref": 100385,
       "formulaName": "MVO_Q_MAP03_VRAAG14_MEMO_required",
-      "refId": 100350,
+      "refId": 100385,
       "displayAs": "PropertyType"
     },
     {
@@ -62961,9 +66537,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_PARAGRAAF09_value"
         }
       ],
-      "ref": 100351,
+      "ref": 100386,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09_value",
-      "refId": 100351,
+      "refId": 100386,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -62974,9 +66550,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF09_title",
       "nodes": [],
-      "ref": 100184,
+      "ref": 100197,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09_title",
-      "refId": 100184,
+      "refId": 100197,
       "displayAs": "PropertyType"
     },
     {
@@ -62985,9 +66561,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_PARAGRAAF09_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
       "displayAs": "PropertyType"
     },
     {
@@ -62996,9 +66572,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_PARAGRAAF09_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100279,
+      "formulaName": "MVO_Q_MAP03_PARAGRAAF11_visible",
+      "refId": 100279,
       "displayAs": "PropertyType"
     },
     {
@@ -63007,9 +66583,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB1_value",
       "nodes": [],
-      "ref": 100352,
+      "ref": 100387,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB1_value",
-      "refId": 100352,
+      "refId": 100387,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
@@ -63020,9 +66596,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB1_title",
       "nodes": [],
-      "ref": 100237,
+      "ref": 100259,
       "formulaName": "MVO_Q_MAP03_WARNING_title",
-      "refId": 100237,
+      "refId": 100259,
       "displayAs": "PropertyType"
     },
     {
@@ -63031,9 +66607,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB1_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF09SUB1",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF09SUB1_visible",
+      "nodes": [],
+      "ref": 100388,
+      "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB1_visible",
+      "refId": 100388,
       "displayAs": "PropertyType"
     },
     {
@@ -63042,9 +66629,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB2_value",
       "nodes": [],
-      "ref": 100353,
+      "ref": 100389,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB2_value",
-      "refId": 100353,
+      "refId": 100389,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
@@ -63055,9 +66642,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB2_title",
       "nodes": [],
-      "ref": 100239,
+      "ref": 100262,
       "formulaName": "MVO_Q_MAP03_INFO_title",
-      "refId": 100239,
+      "refId": 100262,
       "displayAs": "PropertyType"
     },
     {
@@ -63066,9 +66653,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB2_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF09SUB2",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF09SUB2_visible",
+      "nodes": [],
+      "ref": 100388,
+      "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB1_visible",
+      "refId": 100388,
       "displayAs": "PropertyType"
     },
     {
@@ -63077,9 +66675,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB3_value",
       "nodes": [],
-      "ref": 100354,
+      "ref": 100390,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB3_value",
-      "refId": 100354,
+      "refId": 100390,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
@@ -63090,9 +66688,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB3_title",
       "nodes": [],
-      "ref": 100241,
+      "ref": 100264,
       "formulaName": "MVO_Q_MAP03_VALIDATION_title",
-      "refId": 100241,
+      "refId": 100264,
       "displayAs": "PropertyType"
     },
     {
@@ -63101,9 +66699,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB3_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF09SUB3",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF09SUB3_visible",
+      "nodes": [],
+      "ref": 100388,
+      "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB1_visible",
+      "refId": 100388,
       "displayAs": "PropertyType"
     },
     {
@@ -63112,9 +66721,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB4_value",
       "nodes": [],
-      "ref": 100355,
+      "ref": 100391,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB4_value",
-      "refId": 100355,
+      "refId": 100391,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
@@ -63125,9 +66734,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB4_title",
       "nodes": [],
-      "ref": 100189,
+      "ref": 100204,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_title",
-      "refId": 100189,
+      "refId": 100204,
       "displayAs": "PropertyType"
     },
     {
@@ -63136,9 +66745,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB4_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF09SUB4",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF09SUB4_visible",
+      "nodes": [],
+      "ref": 100388,
+      "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB1_visible",
+      "refId": 100388,
       "displayAs": "PropertyType"
     },
     {
@@ -63147,9 +66767,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB5_value",
       "nodes": [],
-      "ref": 100356,
+      "ref": 100392,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB5_value",
-      "refId": 100356,
+      "refId": 100392,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
@@ -63160,9 +66780,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB5_title",
       "nodes": [],
-      "ref": 100191,
+      "ref": 100206,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100191,
+      "refId": 100206,
       "displayAs": "PropertyType"
     },
     {
@@ -63171,9 +66791,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_PARAGRAAF09SUB5_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_PARAGRAAF09SUB5",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_PARAGRAAF09SUB5_visible",
+      "nodes": [],
+      "ref": 100388,
+      "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB1_visible",
+      "refId": 100388,
       "displayAs": "PropertyType"
     },
     {
@@ -63201,9 +66832,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP03_HULPVARIABELEN_value"
         }
       ],
-      "ref": 100357,
+      "ref": 100393,
       "formulaName": "MVO_Q_MAP03_HULPVARIABELEN_value",
-      "refId": 100357,
+      "refId": 100393,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
@@ -63214,9 +66845,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_HULPVARIABELEN_title",
       "nodes": [],
-      "ref": 100193,
+      "ref": 100208,
       "formulaName": "MVO_Q_MAP01_HULPVARIABELEN_title",
-      "refId": 100193,
+      "refId": 100208,
       "displayAs": "PropertyType"
     },
     {
@@ -63225,9 +66856,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_HULPVARIABELEN_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
       "displayAs": "PropertyType"
     },
     {
@@ -63236,9 +66867,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP03_HULPVARIABELEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100279,
+      "formulaName": "MVO_Q_MAP03_PARAGRAAF11_visible",
+      "refId": 100279,
       "displayAs": "PropertyType"
     },
     {
@@ -63247,9 +66878,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_REQUIREDVARS_value",
       "nodes": [],
-      "ref": 100358,
+      "ref": 100394,
       "formulaName": "MVO_Q_MAP03_REQUIREDVARS_value",
-      "refId": 100358,
+      "refId": 100394,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_HULPVARIABELEN_value"
@@ -63260,9 +66891,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_REQUIREDVARS_title",
       "nodes": [],
-      "ref": 100189,
+      "ref": 100204,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_title",
-      "refId": 100189,
+      "refId": 100204,
       "displayAs": "PropertyType"
     },
     {
@@ -63271,9 +66902,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_REQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_REQUIREDVARS",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_REQUIREDVARS_visible",
+      "nodes": [],
+      "ref": 100395,
+      "formulaName": "MVO_Q_MAP03_REQUIREDVARS_visible",
+      "refId": 100395,
       "displayAs": "PropertyType"
     },
     {
@@ -63282,9 +66924,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
       "nodes": [],
-      "ref": 100359,
+      "ref": 100396,
       "formulaName": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
-      "refId": 100359,
+      "refId": 100396,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_HULPVARIABELEN_value"
@@ -63295,9 +66937,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_title",
       "nodes": [],
-      "ref": 100191,
+      "ref": 100206,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100191,
+      "refId": 100206,
       "displayAs": "PropertyType"
     },
     {
@@ -63306,9 +66948,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100233,
+      "ref": 100255,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
-      "refId": 100233,
+      "refId": 100255,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_ENTEREDREQUIREDVARS",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_visible",
+      "nodes": [],
+      "ref": 100395,
+      "formulaName": "MVO_Q_MAP03_REQUIREDVARS_visible",
+      "refId": 100395,
       "displayAs": "PropertyType"
     },
     {
@@ -63317,9 +66970,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_VERPLICHT_value",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_HULPVARIABELEN_value"
@@ -63330,9 +66983,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_VERPLICHT_title",
       "nodes": [],
-      "ref": 100197,
+      "ref": 100213,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_title",
-      "refId": 100197,
+      "refId": 100213,
       "displayAs": "PropertyType"
     },
     {
@@ -63341,9 +66994,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_VERPLICHT_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_VERPLICHT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_VERPLICHT_visible",
+      "nodes": [],
+      "ref": 100395,
+      "formulaName": "MVO_Q_MAP03_REQUIREDVARS_visible",
+      "refId": 100395,
       "displayAs": "PropertyType"
     },
     {
@@ -63352,9 +67016,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP03_VERPLICHT_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -63430,9 +67094,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP04_value"
         }
       ],
-      "ref": 100361,
+      "ref": 100398,
       "formulaName": "MVO_Q_MAP04_value",
-      "refId": 100361,
+      "refId": 100398,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -63443,9 +67107,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_title",
       "nodes": [],
-      "ref": 100362,
+      "ref": 100399,
       "formulaName": "MVO_Q_MAP04_title",
-      "refId": 100362,
+      "refId": 100399,
       "displayAs": "PropertyType"
     },
     {
@@ -63454,9 +67118,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -63465,9 +67140,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_choices",
       "nodes": [],
-      "ref": 100077,
+      "ref": 100080,
       "formulaName": "MVO_Q_ROOT_choices",
-      "refId": 100077,
+      "refId": 100080,
       "displayAs": "PropertyType"
     },
     {
@@ -63476,9 +67151,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_WARNING_value",
       "nodes": [],
-      "ref": 100363,
+      "ref": 100400,
       "formulaName": "MVO_Q_MAP04_WARNING_value",
-      "refId": 100363,
+      "refId": 100400,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -63489,9 +67164,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_WARNING_title",
       "nodes": [],
-      "ref": 100364,
+      "ref": 100401,
       "formulaName": "MVO_Q_MAP04_WARNING_title",
-      "refId": 100364,
+      "refId": 100401,
       "displayAs": "PropertyType"
     },
     {
@@ -63500,9 +67175,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_WARNING_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_WARNING",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_WARNING_visible",
+      "nodes": [],
+      "ref": 100402,
+      "formulaName": "MVO_Q_MAP04_WARNING_visible",
+      "refId": 100402,
       "displayAs": "PropertyType"
     },
     {
@@ -63511,9 +67197,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_INFO_value",
       "nodes": [],
-      "ref": 100365,
+      "ref": 100403,
       "formulaName": "MVO_Q_MAP04_INFO_value",
-      "refId": 100365,
+      "refId": 100403,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -63524,9 +67210,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_INFO_title",
       "nodes": [],
-      "ref": 100366,
+      "ref": 100404,
       "formulaName": "MVO_Q_MAP04_INFO_title",
-      "refId": 100366,
+      "refId": 100404,
       "displayAs": "PropertyType"
     },
     {
@@ -63535,9 +67221,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_INFO_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_INFO",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_INFO_visible",
+      "nodes": [],
+      "ref": 100402,
+      "formulaName": "MVO_Q_MAP04_WARNING_visible",
+      "refId": 100402,
       "displayAs": "PropertyType"
     },
     {
@@ -63546,9 +67243,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VALIDATION_value",
       "nodes": [],
-      "ref": 100367,
+      "ref": 100405,
       "formulaName": "MVO_Q_MAP04_VALIDATION_value",
-      "refId": 100367,
+      "refId": 100405,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -63559,9 +67256,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VALIDATION_title",
       "nodes": [],
-      "ref": 100368,
+      "ref": 100406,
       "formulaName": "MVO_Q_MAP04_VALIDATION_title",
-      "refId": 100368,
+      "refId": 100406,
       "displayAs": "PropertyType"
     },
     {
@@ -63570,9 +67267,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_VALIDATION_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VALIDATION",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VALIDATION_visible",
+      "nodes": [],
+      "ref": 100402,
+      "formulaName": "MVO_Q_MAP04_WARNING_visible",
+      "refId": 100402,
       "displayAs": "PropertyType"
     },
     {
@@ -63581,9 +67289,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_HINT_value",
       "nodes": [],
-      "ref": 100369,
+      "ref": 100407,
       "formulaName": "MVO_Q_MAP04_HINT_value",
-      "refId": 100369,
+      "refId": 100407,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -63594,9 +67302,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_HINT_title",
       "nodes": [],
-      "ref": 100370,
+      "ref": 100408,
       "formulaName": "MVO_Q_MAP04_HINT_title",
-      "refId": 100370,
+      "refId": 100408,
       "displayAs": "PropertyType"
     },
     {
@@ -63605,9 +67313,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_HINT_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_HINT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_HINT_visible",
+      "nodes": [],
+      "ref": 100402,
+      "formulaName": "MVO_Q_MAP04_WARNING_visible",
+      "refId": 100402,
       "displayAs": "PropertyType"
     },
     {
@@ -63623,9 +67342,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP04_PARAGRAAF00_value"
         }
       ],
-      "ref": 100371,
+      "ref": 100409,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF00_value",
-      "refId": 100371,
+      "refId": 100409,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -63636,9 +67355,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF00_title",
       "nodes": [],
-      "ref": 100372,
+      "ref": 100410,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF00_title",
-      "refId": 100372,
+      "refId": 100410,
       "displayAs": "PropertyType"
     },
     {
@@ -63647,9 +67366,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP04_PARAGRAAF00_hint",
       "nodes": [],
-      "ref": 100090,
+      "ref": 100095,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF00_hint",
-      "refId": 100090,
+      "refId": 100095,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_PARAGRAAF00",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_PARAGRAAF00_visible",
+      "nodes": [],
+      "ref": 100402,
+      "formulaName": "MVO_Q_MAP04_WARNING_visible",
+      "refId": 100402,
       "displayAs": "PropertyType"
     },
     {
@@ -63658,9 +67388,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VERBORGEN_value",
       "nodes": [],
-      "ref": 100373,
+      "ref": 100411,
       "formulaName": "MVO_Q_MAP04_VERBORGEN_value",
-      "refId": 100373,
+      "refId": 100411,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF00_value"
@@ -63671,9 +67401,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VERBORGEN_title",
       "nodes": [],
-      "ref": 100092,
+      "ref": 100097,
       "formulaName": "MVO_Q_MAP01_VERBORGEN_title",
-      "refId": 100092,
+      "refId": 100097,
       "displayAs": "PropertyType"
     },
     {
@@ -63682,9 +67412,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_VERBORGEN_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
       "displayAs": "PropertyType"
     },
     {
@@ -63693,9 +67423,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VERBORGEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100412,
+      "formulaName": "MVO_Q_MAP04_VERBORGEN_visible",
+      "refId": 100412,
       "displayAs": "PropertyType"
     },
     {
@@ -63759,9 +67489,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP04_PARAGRAAF01_value"
         }
       ],
-      "ref": 100374,
+      "ref": 100413,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF01_value",
-      "refId": 100374,
+      "refId": 100413,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -63772,9 +67502,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF01_title",
       "nodes": [],
-      "ref": 100375,
+      "ref": 100414,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF01_title",
-      "refId": 100375,
+      "refId": 100414,
       "displayAs": "PropertyType"
     },
     {
@@ -63783,9 +67513,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP04_PARAGRAAF01_hint",
       "nodes": [],
-      "ref": 100376,
+      "ref": 100415,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF01_hint",
-      "refId": 100376,
+      "refId": 100415,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_PARAGRAAF01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_PARAGRAAF01_visible",
+      "nodes": [],
+      "ref": 100402,
+      "formulaName": "MVO_Q_MAP04_WARNING_visible",
+      "refId": 100402,
       "displayAs": "PropertyType"
     },
     {
@@ -63794,9 +67535,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG01_value",
       "nodes": [],
-      "ref": 100377,
+      "ref": 100416,
       "formulaName": "MVO_Q_MAP04_VRAAG01_value",
-      "refId": 100377,
+      "refId": 100416,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
@@ -63807,9 +67548,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG01_title",
       "nodes": [],
-      "ref": 100378,
+      "ref": 100417,
       "formulaName": "MVO_Q_MAP04_VRAAG01_title",
-      "refId": 100378,
+      "refId": 100417,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG01_visible",
+      "nodes": [],
+      "ref": 100418,
+      "formulaName": "MVO_Q_MAP04_VRAAG01_visible",
+      "refId": 100418,
       "displayAs": "PropertyType"
     },
     {
@@ -63818,9 +67570,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG01_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -63829,9 +67581,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG01_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -63840,9 +67592,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG01_MEMO_value",
       "nodes": [],
-      "ref": 100380,
+      "ref": 100420,
       "formulaName": "MVO_Q_MAP04_VRAAG01_MEMO_value",
-      "refId": 100380,
+      "refId": 100420,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
@@ -63853,9 +67605,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG01_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -63864,9 +67616,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG01_MEMO_visible",
       "nodes": [],
-      "ref": 100381,
+      "ref": 100421,
       "formulaName": "MVO_Q_MAP04_VRAAG01_MEMO_visible",
-      "refId": 100381,
+      "refId": 100421,
       "displayAs": "PropertyType"
     },
     {
@@ -63875,9 +67627,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG01_MEMO_required",
       "nodes": [],
-      "ref": 100382,
+      "ref": 100422,
       "formulaName": "MVO_Q_MAP04_VRAAG01_MEMO_required",
-      "refId": 100382,
+      "refId": 100422,
       "displayAs": "PropertyType"
     },
     {
@@ -63886,9 +67638,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG02_value",
       "nodes": [],
-      "ref": 100383,
+      "ref": 100423,
       "formulaName": "MVO_Q_MAP04_VRAAG02_value",
-      "refId": 100383,
+      "refId": 100423,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
@@ -63899,9 +67651,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG02_title",
       "nodes": [],
-      "ref": 100384,
+      "ref": 100424,
       "formulaName": "MVO_Q_MAP04_VRAAG02_title",
-      "refId": 100384,
+      "refId": 100424,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG02_visible",
+      "nodes": [],
+      "ref": 100418,
+      "formulaName": "MVO_Q_MAP04_VRAAG01_visible",
+      "refId": 100418,
       "displayAs": "PropertyType"
     },
     {
@@ -63910,9 +67673,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG02_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -63921,9 +67684,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG02_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -63932,9 +67695,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG02_MEMO_value",
       "nodes": [],
-      "ref": 100385,
+      "ref": 100425,
       "formulaName": "MVO_Q_MAP04_VRAAG02_MEMO_value",
-      "refId": 100385,
+      "refId": 100425,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
@@ -63945,9 +67708,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG02_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -63956,9 +67719,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG02_MEMO_visible",
       "nodes": [],
-      "ref": 100386,
+      "ref": 100426,
       "formulaName": "MVO_Q_MAP04_VRAAG02_MEMO_visible",
-      "refId": 100386,
+      "refId": 100426,
       "displayAs": "PropertyType"
     },
     {
@@ -63967,9 +67730,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG02_MEMO_required",
       "nodes": [],
-      "ref": 100387,
+      "ref": 100427,
       "formulaName": "MVO_Q_MAP04_VRAAG02_MEMO_required",
-      "refId": 100387,
+      "refId": 100427,
       "displayAs": "PropertyType"
     },
     {
@@ -63978,9 +67741,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG03_value",
       "nodes": [],
-      "ref": 100388,
+      "ref": 100428,
       "formulaName": "MVO_Q_MAP04_VRAAG03_value",
-      "refId": 100388,
+      "refId": 100428,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
@@ -63991,9 +67754,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG03_title",
       "nodes": [],
-      "ref": 100389,
+      "ref": 100429,
       "formulaName": "MVO_Q_MAP04_VRAAG03_title",
-      "refId": 100389,
+      "refId": 100429,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG03_visible",
+      "nodes": [],
+      "ref": 100418,
+      "formulaName": "MVO_Q_MAP04_VRAAG01_visible",
+      "refId": 100418,
       "displayAs": "PropertyType"
     },
     {
@@ -64002,9 +67776,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG03_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -64013,9 +67787,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG03_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -64024,9 +67798,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG03_MEMO_value",
       "nodes": [],
-      "ref": 100390,
+      "ref": 100430,
       "formulaName": "MVO_Q_MAP04_VRAAG03_MEMO_value",
-      "refId": 100390,
+      "refId": 100430,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
@@ -64037,9 +67811,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG03_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -64048,9 +67822,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG03_MEMO_visible",
       "nodes": [],
-      "ref": 100391,
+      "ref": 100431,
       "formulaName": "MVO_Q_MAP04_VRAAG03_MEMO_visible",
-      "refId": 100391,
+      "refId": 100431,
       "displayAs": "PropertyType"
     },
     {
@@ -64059,9 +67833,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG03_MEMO_required",
       "nodes": [],
-      "ref": 100392,
+      "ref": 100432,
       "formulaName": "MVO_Q_MAP04_VRAAG03_MEMO_required",
-      "refId": 100392,
+      "refId": 100432,
       "displayAs": "PropertyType"
     },
     {
@@ -64070,9 +67844,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG04_value",
       "nodes": [],
-      "ref": 100393,
+      "ref": 100433,
       "formulaName": "MVO_Q_MAP04_VRAAG04_value",
-      "refId": 100393,
+      "refId": 100433,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
@@ -64083,9 +67857,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG04_title",
       "nodes": [],
-      "ref": 100394,
+      "ref": 100434,
       "formulaName": "MVO_Q_MAP04_VRAAG04_title",
-      "refId": 100394,
+      "refId": 100434,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG04",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG04_visible",
+      "nodes": [],
+      "ref": 100418,
+      "formulaName": "MVO_Q_MAP04_VRAAG01_visible",
+      "refId": 100418,
       "displayAs": "PropertyType"
     },
     {
@@ -64094,9 +67879,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG04_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -64105,9 +67890,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG04_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -64116,9 +67901,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_value",
       "nodes": [],
-      "ref": 100395,
+      "ref": 100435,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_value",
-      "refId": 100395,
+      "refId": 100435,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
@@ -64129,9 +67914,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -64140,9 +67925,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_visible",
       "nodes": [],
-      "ref": 100396,
+      "ref": 100436,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_visible",
-      "refId": 100396,
+      "refId": 100436,
       "displayAs": "PropertyType"
     },
     {
@@ -64151,9 +67936,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_required",
       "nodes": [],
-      "ref": 100397,
+      "ref": 100437,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_required",
-      "refId": 100397,
+      "refId": 100437,
       "displayAs": "PropertyType"
     },
     {
@@ -64162,9 +67947,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_value",
       "nodes": [],
-      "ref": 100398,
+      "ref": 100438,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_value",
-      "refId": 100398,
+      "refId": 100438,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
@@ -64175,9 +67960,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_title",
       "nodes": [],
-      "ref": 100399,
+      "ref": 100439,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_title",
-      "refId": 100399,
+      "refId": 100439,
       "displayAs": "PropertyType"
     },
     {
@@ -64186,9 +67971,9 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_hint",
       "nodes": [],
-      "ref": 100090,
+      "ref": 100095,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF00_hint",
-      "refId": 100090,
+      "refId": 100095,
       "displayAs": "PropertyType"
     },
     {
@@ -64197,9 +67982,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_visible",
       "nodes": [],
-      "ref": 100400,
+      "ref": 100440,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_visible",
-      "refId": 100400,
+      "refId": 100440,
       "displayAs": "PropertyType"
     },
     {
@@ -64208,9 +67993,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_required",
       "nodes": [],
-      "ref": 100401,
+      "ref": 100441,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_required",
-      "refId": 100401,
+      "refId": 100441,
       "displayAs": "PropertyType"
     },
     {
@@ -64268,9 +68053,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP04_PARAGRAAF02_value"
         }
       ],
-      "ref": 100402,
+      "ref": 100442,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF02_value",
-      "refId": 100402,
+      "refId": 100442,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -64281,9 +68066,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF02_title",
       "nodes": [],
-      "ref": 100403,
+      "ref": 100443,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF02_title",
-      "refId": 100403,
+      "refId": 100443,
       "displayAs": "PropertyType"
     },
     {
@@ -64292,9 +68077,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP04_PARAGRAAF02_hint",
       "nodes": [],
-      "ref": 100404,
+      "ref": 100444,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF02_hint",
-      "refId": 100404,
+      "refId": 100444,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_PARAGRAAF02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_PARAGRAAF02_visible",
+      "nodes": [],
+      "ref": 100402,
+      "formulaName": "MVO_Q_MAP04_WARNING_visible",
+      "refId": 100402,
       "displayAs": "PropertyType"
     },
     {
@@ -64303,9 +68099,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG05_value",
       "nodes": [],
-      "ref": 100405,
+      "ref": 100445,
       "formulaName": "MVO_Q_MAP04_VRAAG05_value",
-      "refId": 100405,
+      "refId": 100445,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
@@ -64316,9 +68112,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG05_title",
       "nodes": [],
-      "ref": 100406,
+      "ref": 100446,
       "formulaName": "MVO_Q_MAP04_VRAAG05_title",
-      "refId": 100406,
+      "refId": 100446,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG05",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG05_visible",
+      "nodes": [],
+      "ref": 100447,
+      "formulaName": "MVO_Q_MAP04_VRAAG05_visible",
+      "refId": 100447,
       "displayAs": "PropertyType"
     },
     {
@@ -64327,9 +68134,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG05_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -64338,9 +68145,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG05_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -64349,9 +68156,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG05_MEMO_value",
       "nodes": [],
-      "ref": 100407,
+      "ref": 100448,
       "formulaName": "MVO_Q_MAP04_VRAAG05_MEMO_value",
-      "refId": 100407,
+      "refId": 100448,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
@@ -64362,9 +68169,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG05_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -64373,9 +68180,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG05_MEMO_visible",
       "nodes": [],
-      "ref": 100408,
+      "ref": 100449,
       "formulaName": "MVO_Q_MAP04_VRAAG05_MEMO_visible",
-      "refId": 100408,
+      "refId": 100449,
       "displayAs": "PropertyType"
     },
     {
@@ -64384,9 +68191,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG05_MEMO_required",
       "nodes": [],
-      "ref": 100409,
+      "ref": 100450,
       "formulaName": "MVO_Q_MAP04_VRAAG05_MEMO_required",
-      "refId": 100409,
+      "refId": 100450,
       "displayAs": "PropertyType"
     },
     {
@@ -64395,9 +68202,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG06_value",
       "nodes": [],
-      "ref": 100410,
+      "ref": 100451,
       "formulaName": "MVO_Q_MAP04_VRAAG06_value",
-      "refId": 100410,
+      "refId": 100451,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
@@ -64408,9 +68215,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG06_title",
       "nodes": [],
-      "ref": 100411,
+      "ref": 100452,
       "formulaName": "MVO_Q_MAP04_VRAAG06_title",
-      "refId": 100411,
+      "refId": 100452,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG06",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG06_visible",
+      "nodes": [],
+      "ref": 100447,
+      "formulaName": "MVO_Q_MAP04_VRAAG05_visible",
+      "refId": 100447,
       "displayAs": "PropertyType"
     },
     {
@@ -64419,9 +68237,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG06_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -64430,9 +68248,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG06_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -64441,9 +68259,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG06_MEMO_value",
       "nodes": [],
-      "ref": 100412,
+      "ref": 100453,
       "formulaName": "MVO_Q_MAP04_VRAAG06_MEMO_value",
-      "refId": 100412,
+      "refId": 100453,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
@@ -64454,9 +68272,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG06_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -64465,9 +68283,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG06_MEMO_visible",
       "nodes": [],
-      "ref": 100413,
+      "ref": 100454,
       "formulaName": "MVO_Q_MAP04_VRAAG06_MEMO_visible",
-      "refId": 100413,
+      "refId": 100454,
       "displayAs": "PropertyType"
     },
     {
@@ -64476,9 +68294,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG06_MEMO_required",
       "nodes": [],
-      "ref": 100414,
+      "ref": 100455,
       "formulaName": "MVO_Q_MAP04_VRAAG06_MEMO_required",
-      "refId": 100414,
+      "refId": 100455,
       "displayAs": "PropertyType"
     },
     {
@@ -64487,9 +68305,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG07_value",
       "nodes": [],
-      "ref": 100415,
+      "ref": 100456,
       "formulaName": "MVO_Q_MAP04_VRAAG07_value",
-      "refId": 100415,
+      "refId": 100456,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
@@ -64500,9 +68318,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG07_title",
       "nodes": [],
-      "ref": 100416,
+      "ref": 100457,
       "formulaName": "MVO_Q_MAP04_VRAAG07_title",
-      "refId": 100416,
+      "refId": 100457,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG07",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG07_visible",
+      "nodes": [],
+      "ref": 100447,
+      "formulaName": "MVO_Q_MAP04_VRAAG05_visible",
+      "refId": 100447,
       "displayAs": "PropertyType"
     },
     {
@@ -64511,9 +68340,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG07_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -64522,9 +68351,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG07_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -64533,9 +68362,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG07_MEMO_value",
       "nodes": [],
-      "ref": 100417,
+      "ref": 100458,
       "formulaName": "MVO_Q_MAP04_VRAAG07_MEMO_value",
-      "refId": 100417,
+      "refId": 100458,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
@@ -64546,9 +68375,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG07_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -64557,9 +68386,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG07_MEMO_visible",
       "nodes": [],
-      "ref": 100418,
+      "ref": 100459,
       "formulaName": "MVO_Q_MAP04_VRAAG07_MEMO_visible",
-      "refId": 100418,
+      "refId": 100459,
       "displayAs": "PropertyType"
     },
     {
@@ -64568,9 +68397,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG07_MEMO_required",
       "nodes": [],
-      "ref": 100419,
+      "ref": 100460,
       "formulaName": "MVO_Q_MAP04_VRAAG07_MEMO_required",
-      "refId": 100419,
+      "refId": 100460,
       "displayAs": "PropertyType"
     },
     {
@@ -64579,9 +68408,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG08_value",
       "nodes": [],
-      "ref": 100420,
+      "ref": 100461,
       "formulaName": "MVO_Q_MAP04_VRAAG08_value",
-      "refId": 100420,
+      "refId": 100461,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
@@ -64592,9 +68421,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG08_title",
       "nodes": [],
-      "ref": 100421,
+      "ref": 100462,
       "formulaName": "MVO_Q_MAP04_VRAAG08_title",
-      "refId": 100421,
+      "refId": 100462,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG08",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG08_visible",
+      "nodes": [],
+      "ref": 100447,
+      "formulaName": "MVO_Q_MAP04_VRAAG05_visible",
+      "refId": 100447,
       "displayAs": "PropertyType"
     },
     {
@@ -64603,9 +68443,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG08_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -64614,9 +68454,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG08_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -64625,9 +68465,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG08_MEMO_value",
       "nodes": [],
-      "ref": 100422,
+      "ref": 100463,
       "formulaName": "MVO_Q_MAP04_VRAAG08_MEMO_value",
-      "refId": 100422,
+      "refId": 100463,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
@@ -64638,9 +68478,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG08_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -64649,9 +68489,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG08_MEMO_visible",
       "nodes": [],
-      "ref": 100423,
+      "ref": 100464,
       "formulaName": "MVO_Q_MAP04_VRAAG08_MEMO_visible",
-      "refId": 100423,
+      "refId": 100464,
       "displayAs": "PropertyType"
     },
     {
@@ -64660,9 +68500,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG08_MEMO_required",
       "nodes": [],
-      "ref": 100424,
+      "ref": 100465,
       "formulaName": "MVO_Q_MAP04_VRAAG08_MEMO_required",
-      "refId": 100424,
+      "refId": 100465,
       "displayAs": "PropertyType"
     },
     {
@@ -64720,9 +68560,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP04_PARAGRAAF03_value"
         }
       ],
-      "ref": 100425,
+      "ref": 100466,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF03_value",
-      "refId": 100425,
+      "refId": 100466,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -64733,9 +68573,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF03_title",
       "nodes": [],
-      "ref": 100426,
+      "ref": 100467,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF03_title",
-      "refId": 100426,
+      "refId": 100467,
       "displayAs": "PropertyType"
     },
     {
@@ -64744,9 +68584,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAP04_PARAGRAAF03_hint",
       "nodes": [],
-      "ref": 100427,
+      "ref": 100468,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF03_hint",
-      "refId": 100427,
+      "refId": 100468,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_PARAGRAAF03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_PARAGRAAF03_visible",
+      "nodes": [],
+      "ref": 100402,
+      "formulaName": "MVO_Q_MAP04_WARNING_visible",
+      "refId": 100402,
       "displayAs": "PropertyType"
     },
     {
@@ -64755,9 +68606,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG09_value",
       "nodes": [],
-      "ref": 100428,
+      "ref": 100469,
       "formulaName": "MVO_Q_MAP04_VRAAG09_value",
-      "refId": 100428,
+      "refId": 100469,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
@@ -64768,9 +68619,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG09_title",
       "nodes": [],
-      "ref": 100429,
+      "ref": 100470,
       "formulaName": "MVO_Q_MAP04_VRAAG09_title",
-      "refId": 100429,
+      "refId": 100470,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG09",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG09_visible",
+      "nodes": [],
+      "ref": 100471,
+      "formulaName": "MVO_Q_MAP04_VRAAG09_visible",
+      "refId": 100471,
       "displayAs": "PropertyType"
     },
     {
@@ -64779,9 +68641,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG09_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -64790,9 +68652,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG09_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -64801,9 +68663,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG09_MEMO_value",
       "nodes": [],
-      "ref": 100430,
+      "ref": 100472,
       "formulaName": "MVO_Q_MAP04_VRAAG09_MEMO_value",
-      "refId": 100430,
+      "refId": 100472,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
@@ -64814,9 +68676,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG09_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -64825,9 +68687,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG09_MEMO_visible",
       "nodes": [],
-      "ref": 100431,
+      "ref": 100473,
       "formulaName": "MVO_Q_MAP04_VRAAG09_MEMO_visible",
-      "refId": 100431,
+      "refId": 100473,
       "displayAs": "PropertyType"
     },
     {
@@ -64836,9 +68698,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG09_MEMO_required",
       "nodes": [],
-      "ref": 100432,
+      "ref": 100474,
       "formulaName": "MVO_Q_MAP04_VRAAG09_MEMO_required",
-      "refId": 100432,
+      "refId": 100474,
       "displayAs": "PropertyType"
     },
     {
@@ -64847,9 +68709,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG10_value",
       "nodes": [],
-      "ref": 100433,
+      "ref": 100475,
       "formulaName": "MVO_Q_MAP04_VRAAG10_value",
-      "refId": 100433,
+      "refId": 100475,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
@@ -64860,9 +68722,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG10_title",
       "nodes": [],
-      "ref": 100434,
+      "ref": 100476,
       "formulaName": "MVO_Q_MAP04_VRAAG10_title",
-      "refId": 100434,
+      "refId": 100476,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG10",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG10_visible",
+      "nodes": [],
+      "ref": 100471,
+      "formulaName": "MVO_Q_MAP04_VRAAG09_visible",
+      "refId": 100471,
       "displayAs": "PropertyType"
     },
     {
@@ -64871,9 +68744,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG10_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -64882,9 +68755,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG10_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -64893,9 +68766,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG10_MEMO_value",
       "nodes": [],
-      "ref": 100435,
+      "ref": 100477,
       "formulaName": "MVO_Q_MAP04_VRAAG10_MEMO_value",
-      "refId": 100435,
+      "refId": 100477,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
@@ -64906,9 +68779,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG10_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -64917,9 +68790,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG10_MEMO_visible",
       "nodes": [],
-      "ref": 100436,
+      "ref": 100478,
       "formulaName": "MVO_Q_MAP04_VRAAG10_MEMO_visible",
-      "refId": 100436,
+      "refId": 100478,
       "displayAs": "PropertyType"
     },
     {
@@ -64928,9 +68801,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG10_MEMO_required",
       "nodes": [],
-      "ref": 100437,
+      "ref": 100479,
       "formulaName": "MVO_Q_MAP04_VRAAG10_MEMO_required",
-      "refId": 100437,
+      "refId": 100479,
       "displayAs": "PropertyType"
     },
     {
@@ -64939,9 +68812,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG11_value",
       "nodes": [],
-      "ref": 100438,
+      "ref": 100480,
       "formulaName": "MVO_Q_MAP04_VRAAG11_value",
-      "refId": 100438,
+      "refId": 100480,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
@@ -64952,9 +68825,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG11_title",
       "nodes": [],
-      "ref": 100439,
+      "ref": 100481,
       "formulaName": "MVO_Q_MAP04_VRAAG11_title",
-      "refId": 100439,
+      "refId": 100481,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG11",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG11_visible",
+      "nodes": [],
+      "ref": 100471,
+      "formulaName": "MVO_Q_MAP04_VRAAG09_visible",
+      "refId": 100471,
       "displayAs": "PropertyType"
     },
     {
@@ -64963,9 +68847,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG11_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -64974,9 +68858,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG11_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -64985,9 +68869,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG11_MEMO_value",
       "nodes": [],
-      "ref": 100440,
+      "ref": 100482,
       "formulaName": "MVO_Q_MAP04_VRAAG11_MEMO_value",
-      "refId": 100440,
+      "refId": 100482,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
@@ -64998,9 +68882,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG11_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -65009,9 +68893,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG11_MEMO_visible",
       "nodes": [],
-      "ref": 100441,
+      "ref": 100483,
       "formulaName": "MVO_Q_MAP04_VRAAG11_MEMO_visible",
-      "refId": 100441,
+      "refId": 100483,
       "displayAs": "PropertyType"
     },
     {
@@ -65020,9 +68904,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG11_MEMO_required",
       "nodes": [],
-      "ref": 100442,
+      "ref": 100484,
       "formulaName": "MVO_Q_MAP04_VRAAG11_MEMO_required",
-      "refId": 100442,
+      "refId": 100484,
       "displayAs": "PropertyType"
     },
     {
@@ -65031,9 +68915,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG12_value",
       "nodes": [],
-      "ref": 100443,
+      "ref": 100485,
       "formulaName": "MVO_Q_MAP04_VRAAG12_value",
-      "refId": 100443,
+      "refId": 100485,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
@@ -65044,9 +68928,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG12_title",
       "nodes": [],
-      "ref": 100444,
+      "ref": 100486,
       "formulaName": "MVO_Q_MAP04_VRAAG12_title",
-      "refId": 100444,
+      "refId": 100486,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VRAAG12",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VRAAG12_visible",
+      "nodes": [],
+      "ref": 100471,
+      "formulaName": "MVO_Q_MAP04_VRAAG09_visible",
+      "refId": 100471,
       "displayAs": "PropertyType"
     },
     {
@@ -65055,9 +68950,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG12_required",
       "nodes": [],
-      "ref": 100379,
+      "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG01_required",
-      "refId": 100379,
+      "refId": 100419,
       "displayAs": "PropertyType"
     },
     {
@@ -65066,9 +68961,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VRAAG12_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -65077,9 +68972,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VRAAG12_MEMO_value",
       "nodes": [],
-      "ref": 100445,
+      "ref": 100487,
       "formulaName": "MVO_Q_MAP04_VRAAG12_MEMO_value",
-      "refId": 100445,
+      "refId": 100487,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
@@ -65090,9 +68985,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VRAAG12_MEMO_title",
       "nodes": [],
-      "ref": 100106,
+      "ref": 100113,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_title",
-      "refId": 100106,
+      "refId": 100113,
       "displayAs": "PropertyType"
     },
     {
@@ -65101,9 +68996,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_VRAAG12_MEMO_visible",
       "nodes": [],
-      "ref": 100446,
+      "ref": 100488,
       "formulaName": "MVO_Q_MAP04_VRAAG12_MEMO_visible",
-      "refId": 100446,
+      "refId": 100488,
       "displayAs": "PropertyType"
     },
     {
@@ -65112,9 +69007,9 @@ LME.importLME(JSON_MODEL);
       "colId": "required",
       "name": "MVO_Q_MAP04_VRAAG12_MEMO_required",
       "nodes": [],
-      "ref": 100447,
+      "ref": 100489,
       "formulaName": "MVO_Q_MAP04_VRAAG12_MEMO_required",
-      "refId": 100447,
+      "refId": 100489,
       "displayAs": "PropertyType"
     },
     {
@@ -65196,9 +69091,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP04_PARAGRAAF10_value"
         }
       ],
-      "ref": 100448,
+      "ref": 100490,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF10_value",
-      "refId": 100448,
+      "refId": 100490,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -65209,9 +69104,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF10_title",
       "nodes": [],
-      "ref": 100449,
+      "ref": 100491,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF10_title",
-      "refId": 100449,
+      "refId": 100491,
       "displayAs": "PropertyType"
     },
     {
@@ -65220,9 +69115,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_PARAGRAAF10_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
       "displayAs": "PropertyType"
     },
     {
@@ -65231,9 +69126,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_PARAGRAAF10_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100492,
+      "formulaName": "MVO_Q_MAP04_PARAGRAAF10_visible",
+      "refId": 100492,
       "displayAs": "PropertyType"
     },
     {
@@ -65242,9 +69137,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_value",
       "nodes": [],
-      "ref": 100450,
+      "ref": 100493,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_value",
-      "refId": 100450,
+      "refId": 100493,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65255,9 +69150,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_title",
       "nodes": [],
-      "ref": 100451,
+      "ref": 100494,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_title",
-      "refId": 100451,
+      "refId": 100494,
       "displayAs": "PropertyType"
     },
     {
@@ -65266,9 +69161,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65277,9 +69183,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG02_value",
       "nodes": [],
-      "ref": 100452,
+      "ref": 100496,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG02_value",
-      "refId": 100452,
+      "refId": 100496,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65290,9 +69196,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG02_title",
       "nodes": [],
-      "ref": 100453,
+      "ref": 100497,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG02_title",
-      "refId": 100453,
+      "refId": 100497,
       "displayAs": "PropertyType"
     },
     {
@@ -65301,9 +69207,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG02_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG02_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65312,9 +69229,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG03_value",
       "nodes": [],
-      "ref": 100454,
+      "ref": 100498,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG03_value",
-      "refId": 100454,
+      "refId": 100498,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65325,9 +69242,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG03_title",
       "nodes": [],
-      "ref": 100455,
+      "ref": 100499,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG03_title",
-      "refId": 100455,
+      "refId": 100499,
       "displayAs": "PropertyType"
     },
     {
@@ -65336,9 +69253,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG03_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG03_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65347,9 +69275,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG04_value",
       "nodes": [],
-      "ref": 100456,
+      "ref": 100500,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG04_value",
-      "refId": 100456,
+      "refId": 100500,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65360,9 +69288,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG04_title",
       "nodes": [],
-      "ref": 100457,
+      "ref": 100501,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG04_title",
-      "refId": 100457,
+      "refId": 100501,
       "displayAs": "PropertyType"
     },
     {
@@ -65371,9 +69299,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG04_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG04",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG04_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65382,9 +69321,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG05_value",
       "nodes": [],
-      "ref": 100458,
+      "ref": 100502,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG05_value",
-      "refId": 100458,
+      "refId": 100502,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65395,9 +69334,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG05_title",
       "nodes": [],
-      "ref": 100459,
+      "ref": 100503,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG05_title",
-      "refId": 100459,
+      "refId": 100503,
       "displayAs": "PropertyType"
     },
     {
@@ -65406,9 +69345,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG05_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG05",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG05_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65417,9 +69367,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG06_value",
       "nodes": [],
-      "ref": 100460,
+      "ref": 100504,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG06_value",
-      "refId": 100460,
+      "refId": 100504,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65430,9 +69380,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG06_title",
       "nodes": [],
-      "ref": 100461,
+      "ref": 100505,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG06_title",
-      "refId": 100461,
+      "refId": 100505,
       "displayAs": "PropertyType"
     },
     {
@@ -65441,9 +69391,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG06_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG06",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG06_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65452,9 +69413,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG07_value",
       "nodes": [],
-      "ref": 100462,
+      "ref": 100506,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG07_value",
-      "refId": 100462,
+      "refId": 100506,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65465,9 +69426,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG07_title",
       "nodes": [],
-      "ref": 100214,
+      "ref": 100232,
       "formulaName": "MVO_Q_MAP02_VRAAG01_title",
-      "refId": 100214,
+      "refId": 100232,
       "displayAs": "PropertyType"
     },
     {
@@ -65476,9 +69437,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG07_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG07",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG07_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65487,9 +69459,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG08_value",
       "nodes": [],
-      "ref": 100463,
+      "ref": 100507,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG08_value",
-      "refId": 100463,
+      "refId": 100507,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65500,9 +69472,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG08_title",
       "nodes": [],
-      "ref": 100464,
+      "ref": 100508,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG08_title",
-      "refId": 100464,
+      "refId": 100508,
       "displayAs": "PropertyType"
     },
     {
@@ -65511,9 +69483,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG08_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG08",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG08_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65522,9 +69505,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG09_value",
       "nodes": [],
-      "ref": 100465,
+      "ref": 100509,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG09_value",
-      "refId": 100465,
+      "refId": 100509,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65535,9 +69518,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG09_title",
       "nodes": [],
-      "ref": 100466,
+      "ref": 100510,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG09_title",
-      "refId": 100466,
+      "refId": 100510,
       "displayAs": "PropertyType"
     },
     {
@@ -65546,9 +69529,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG09_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG09",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG09_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65557,9 +69551,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG10_value",
       "nodes": [],
-      "ref": 100467,
+      "ref": 100511,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG10_value",
-      "refId": 100467,
+      "refId": 100511,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65570,9 +69564,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG10_title",
       "nodes": [],
-      "ref": 100468,
+      "ref": 100512,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG10_title",
-      "refId": 100468,
+      "refId": 100512,
       "displayAs": "PropertyType"
     },
     {
@@ -65581,9 +69575,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG10_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG10",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG10_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65592,9 +69597,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG11_value",
       "nodes": [],
-      "ref": 100469,
+      "ref": 100513,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG11_value",
-      "refId": 100469,
+      "refId": 100513,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65605,9 +69610,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG11_title",
       "nodes": [],
-      "ref": 100470,
+      "ref": 100514,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG11_title",
-      "refId": 100470,
+      "refId": 100514,
       "displayAs": "PropertyType"
     },
     {
@@ -65616,9 +69621,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG11_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG11",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG11_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65627,9 +69643,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG12_value",
       "nodes": [],
-      "ref": 100471,
+      "ref": 100515,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG12_value",
-      "refId": 100471,
+      "refId": 100515,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
@@ -65640,9 +69656,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG12_title",
       "nodes": [],
-      "ref": 100472,
+      "ref": 100516,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG12_title",
-      "refId": 100472,
+      "refId": 100516,
       "displayAs": "PropertyType"
     },
     {
@@ -65651,9 +69667,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG12_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_GEWICHT_VRAAG12",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_GEWICHT_VRAAG12_visible",
+      "nodes": [],
+      "ref": 100495,
+      "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_visible",
+      "refId": 100495,
       "displayAs": "PropertyType"
     },
     {
@@ -65693,9 +69720,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP04_PARAGRAAF09_value"
         }
       ],
-      "ref": 100473,
+      "ref": 100517,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09_value",
-      "refId": 100473,
+      "refId": 100517,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -65706,9 +69733,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF09_title",
       "nodes": [],
-      "ref": 100184,
+      "ref": 100197,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09_title",
-      "refId": 100184,
+      "refId": 100197,
       "displayAs": "PropertyType"
     },
     {
@@ -65717,9 +69744,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_PARAGRAAF09_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
       "displayAs": "PropertyType"
     },
     {
@@ -65728,9 +69755,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_PARAGRAAF09_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100492,
+      "formulaName": "MVO_Q_MAP04_PARAGRAAF10_visible",
+      "refId": 100492,
       "displayAs": "PropertyType"
     },
     {
@@ -65739,9 +69766,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB1_value",
       "nodes": [],
-      "ref": 100474,
+      "ref": 100518,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB1_value",
-      "refId": 100474,
+      "refId": 100518,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
@@ -65752,9 +69779,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB1_title",
       "nodes": [],
-      "ref": 100364,
+      "ref": 100401,
       "formulaName": "MVO_Q_MAP04_WARNING_title",
-      "refId": 100364,
+      "refId": 100401,
       "displayAs": "PropertyType"
     },
     {
@@ -65763,9 +69790,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB1_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_PARAGRAAF09SUB1",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_PARAGRAAF09SUB1_visible",
+      "nodes": [],
+      "ref": 100519,
+      "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB1_visible",
+      "refId": 100519,
       "displayAs": "PropertyType"
     },
     {
@@ -65774,9 +69812,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB2_value",
       "nodes": [],
-      "ref": 100475,
+      "ref": 100520,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB2_value",
-      "refId": 100475,
+      "refId": 100520,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
@@ -65787,9 +69825,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB2_title",
       "nodes": [],
-      "ref": 100366,
+      "ref": 100404,
       "formulaName": "MVO_Q_MAP04_INFO_title",
-      "refId": 100366,
+      "refId": 100404,
       "displayAs": "PropertyType"
     },
     {
@@ -65798,9 +69836,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB2_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_PARAGRAAF09SUB2",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_PARAGRAAF09SUB2_visible",
+      "nodes": [],
+      "ref": 100519,
+      "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB1_visible",
+      "refId": 100519,
       "displayAs": "PropertyType"
     },
     {
@@ -65809,9 +69858,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB3_value",
       "nodes": [],
-      "ref": 100476,
+      "ref": 100521,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB3_value",
-      "refId": 100476,
+      "refId": 100521,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
@@ -65822,9 +69871,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB3_title",
       "nodes": [],
-      "ref": 100368,
+      "ref": 100406,
       "formulaName": "MVO_Q_MAP04_VALIDATION_title",
-      "refId": 100368,
+      "refId": 100406,
       "displayAs": "PropertyType"
     },
     {
@@ -65833,9 +69882,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB3_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_PARAGRAAF09SUB3",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_PARAGRAAF09SUB3_visible",
+      "nodes": [],
+      "ref": 100519,
+      "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB1_visible",
+      "refId": 100519,
       "displayAs": "PropertyType"
     },
     {
@@ -65844,9 +69904,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB4_value",
       "nodes": [],
-      "ref": 100477,
+      "ref": 100522,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB4_value",
-      "refId": 100477,
+      "refId": 100522,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
@@ -65857,9 +69917,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB4_title",
       "nodes": [],
-      "ref": 100189,
+      "ref": 100204,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_title",
-      "refId": 100189,
+      "refId": 100204,
       "displayAs": "PropertyType"
     },
     {
@@ -65868,9 +69928,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB4_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_PARAGRAAF09SUB4",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_PARAGRAAF09SUB4_visible",
+      "nodes": [],
+      "ref": 100519,
+      "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB1_visible",
+      "refId": 100519,
       "displayAs": "PropertyType"
     },
     {
@@ -65879,9 +69950,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB5_value",
       "nodes": [],
-      "ref": 100478,
+      "ref": 100523,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB5_value",
-      "refId": 100478,
+      "refId": 100523,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
@@ -65892,9 +69963,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB5_title",
       "nodes": [],
-      "ref": 100191,
+      "ref": 100206,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100191,
+      "refId": 100206,
       "displayAs": "PropertyType"
     },
     {
@@ -65903,9 +69974,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_PARAGRAAF09SUB5_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_PARAGRAAF09SUB5",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_PARAGRAAF09SUB5_visible",
+      "nodes": [],
+      "ref": 100519,
+      "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB1_visible",
+      "refId": 100519,
       "displayAs": "PropertyType"
     },
     {
@@ -65933,9 +70015,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAP04_HULPVARIABELEN_value"
         }
       ],
-      "ref": 100479,
+      "ref": 100524,
       "formulaName": "MVO_Q_MAP04_HULPVARIABELEN_value",
-      "refId": 100479,
+      "refId": 100524,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
@@ -65946,9 +70028,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_HULPVARIABELEN_title",
       "nodes": [],
-      "ref": 100193,
+      "ref": 100208,
       "formulaName": "MVO_Q_MAP01_HULPVARIABELEN_title",
-      "refId": 100193,
+      "refId": 100208,
       "displayAs": "PropertyType"
     },
     {
@@ -65957,9 +70039,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_HULPVARIABELEN_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
       "displayAs": "PropertyType"
     },
     {
@@ -65968,9 +70050,9 @@ LME.importLME(JSON_MODEL);
       "colId": "visible",
       "name": "MVO_Q_MAP04_HULPVARIABELEN_visible",
       "nodes": [],
-      "ref": 100004,
-      "formulaName": "MVO_RootSub1_visible",
-      "refId": 100004,
+      "ref": 100492,
+      "formulaName": "MVO_Q_MAP04_PARAGRAAF10_visible",
+      "refId": 100492,
       "displayAs": "PropertyType"
     },
     {
@@ -65979,9 +70061,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_REQUIREDVARS_value",
       "nodes": [],
-      "ref": 100480,
+      "ref": 100525,
       "formulaName": "MVO_Q_MAP04_REQUIREDVARS_value",
-      "refId": 100480,
+      "refId": 100525,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_HULPVARIABELEN_value"
@@ -65992,9 +70074,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_REQUIREDVARS_title",
       "nodes": [],
-      "ref": 100189,
+      "ref": 100204,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_title",
-      "refId": 100189,
+      "refId": 100204,
       "displayAs": "PropertyType"
     },
     {
@@ -66003,9 +70085,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_REQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_REQUIREDVARS",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_REQUIREDVARS_visible",
+      "nodes": [],
+      "ref": 100526,
+      "formulaName": "MVO_Q_MAP04_REQUIREDVARS_visible",
+      "refId": 100526,
       "displayAs": "PropertyType"
     },
     {
@@ -66014,9 +70107,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
       "nodes": [],
-      "ref": 100481,
+      "ref": 100527,
       "formulaName": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
-      "refId": 100481,
+      "refId": 100527,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_HULPVARIABELEN_value"
@@ -66027,9 +70120,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_title",
       "nodes": [],
-      "ref": 100191,
+      "ref": 100206,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_title",
-      "refId": 100191,
+      "refId": 100206,
       "displayAs": "PropertyType"
     },
     {
@@ -66038,9 +70131,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_locked",
       "nodes": [],
-      "ref": 100360,
+      "ref": 100397,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
-      "refId": 100360,
+      "refId": 100397,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_ENTEREDREQUIREDVARS",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_visible",
+      "nodes": [],
+      "ref": 100526,
+      "formulaName": "MVO_Q_MAP04_REQUIREDVARS_visible",
+      "refId": 100526,
       "displayAs": "PropertyType"
     },
     {
@@ -66049,9 +70153,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_VERPLICHT_value",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_HULPVARIABELEN_value"
@@ -66062,9 +70166,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_VERPLICHT_title",
       "nodes": [],
-      "ref": 100197,
+      "ref": 100213,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_title",
-      "refId": 100197,
+      "refId": 100213,
       "displayAs": "PropertyType"
     },
     {
@@ -66073,9 +70177,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_VERPLICHT_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_VERPLICHT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_VERPLICHT_visible",
+      "nodes": [],
+      "ref": 100526,
+      "formulaName": "MVO_Q_MAP04_REQUIREDVARS_visible",
+      "refId": 100526,
       "displayAs": "PropertyType"
     },
     {
@@ -66084,9 +70199,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAP04_VERPLICHT_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -66126,9 +70241,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_RESULT_value"
         }
       ],
-      "ref": 100483,
+      "ref": 100529,
       "formulaName": "MVO_Q_RESULT_value",
-      "refId": 100483,
+      "refId": 100529,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -66139,9 +70254,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_RESULT_title",
       "nodes": [],
-      "ref": 100484,
+      "ref": 100530,
       "formulaName": "MVO_Q_RESULT_title",
-      "refId": 100484,
+      "refId": 100530,
       "displayAs": "PropertyType"
     },
     {
@@ -66150,9 +70265,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_RESULT_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_RESULT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_RESULT_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -66161,9 +70287,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_RESULTSUB1_value",
       "nodes": [],
-      "ref": 100485,
+      "ref": 100531,
       "formulaName": "MVO_Q_RESULTSUB1_value",
-      "refId": 100485,
+      "refId": 100531,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
@@ -66174,9 +70300,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_RESULTSUB1_title",
       "nodes": [],
-      "ref": 100484,
+      "ref": 100530,
       "formulaName": "MVO_Q_RESULT_title",
-      "refId": 100484,
+      "refId": 100530,
       "displayAs": "PropertyType"
     },
     {
@@ -66185,9 +70311,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_RESULTSUB1_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_RESULTSUB1",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_RESULTSUB1_visible",
+      "nodes": [],
+      "ref": 100532,
+      "formulaName": "MVO_Q_RESULTSUB1_visible",
+      "refId": 100532,
       "displayAs": "PropertyType"
     },
     {
@@ -66203,9 +70340,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAPRESULT_PARAGRAAF01_value"
         }
       ],
-      "ref": 100486,
+      "ref": 100533,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF01_value",
-      "refId": 100486,
+      "refId": 100533,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
@@ -66216,9 +70353,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAPRESULT_PARAGRAAF01_title",
       "nodes": [],
-      "ref": 100487,
+      "ref": 100534,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF01_title",
-      "refId": 100487,
+      "refId": 100534,
       "displayAs": "PropertyType"
     },
     {
@@ -66227,9 +70364,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAPRESULT_PARAGRAAF01_hint",
       "nodes": [],
-      "ref": 100488,
+      "ref": 100535,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF01_hint",
-      "refId": 100488,
+      "refId": 100535,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAPRESULT_PARAGRAAF01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAPRESULT_PARAGRAAF01_visible",
+      "nodes": [],
+      "ref": 100532,
+      "formulaName": "MVO_Q_RESULTSUB1_visible",
+      "refId": 100532,
       "displayAs": "PropertyType"
     },
     {
@@ -66238,9 +70386,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP01_SCORE01_value",
       "nodes": [],
-      "ref": 100489,
+      "ref": 100536,
       "formulaName": "MVO_Q_MAP01_SCORE01_value",
-      "refId": 100489,
+      "refId": 100536,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF01_value"
@@ -66251,9 +70399,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP01_SCORE01_title",
       "nodes": [],
-      "ref": 100487,
+      "ref": 100534,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF01_title",
-      "refId": 100487,
+      "refId": 100534,
       "displayAs": "PropertyType"
     },
     {
@@ -66262,9 +70410,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP01_SCORE01_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP01_SCORE01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP01_SCORE01_visible",
+      "nodes": [],
+      "ref": 100537,
+      "formulaName": "MVO_Q_MAP01_SCORE01_visible",
+      "refId": 100537,
       "displayAs": "PropertyType"
     },
     {
@@ -66280,9 +70439,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAPRESULT_PARAGRAAF02_value"
         }
       ],
-      "ref": 100490,
+      "ref": 100538,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF02_value",
-      "refId": 100490,
+      "refId": 100538,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
@@ -66293,9 +70452,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAPRESULT_PARAGRAAF02_title",
       "nodes": [],
-      "ref": 100491,
+      "ref": 100539,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF02_title",
-      "refId": 100491,
+      "refId": 100539,
       "displayAs": "PropertyType"
     },
     {
@@ -66304,9 +70463,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAPRESULT_PARAGRAAF02_hint",
       "nodes": [],
-      "ref": 100492,
+      "ref": 100540,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF02_hint",
-      "refId": 100492,
+      "refId": 100540,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAPRESULT_PARAGRAAF02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAPRESULT_PARAGRAAF02_visible",
+      "nodes": [],
+      "ref": 100532,
+      "formulaName": "MVO_Q_RESULTSUB1_visible",
+      "refId": 100532,
       "displayAs": "PropertyType"
     },
     {
@@ -66315,9 +70485,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP02_SCORE01_value",
       "nodes": [],
-      "ref": 100493,
+      "ref": 100541,
       "formulaName": "MVO_Q_MAP02_SCORE01_value",
-      "refId": 100493,
+      "refId": 100541,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF02_value"
@@ -66328,9 +70498,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP02_SCORE01_title",
       "nodes": [],
-      "ref": 100491,
+      "ref": 100539,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF02_title",
-      "refId": 100491,
+      "refId": 100539,
       "displayAs": "PropertyType"
     },
     {
@@ -66339,9 +70509,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP02_SCORE01_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP02_SCORE01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP02_SCORE01_visible",
+      "nodes": [],
+      "ref": 100542,
+      "formulaName": "MVO_Q_MAP02_SCORE01_visible",
+      "refId": 100542,
       "displayAs": "PropertyType"
     },
     {
@@ -66399,9 +70580,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAPRESULT_PARAGRAAF03_value"
         }
       ],
-      "ref": 100494,
+      "ref": 100543,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF03_value",
-      "refId": 100494,
+      "refId": 100543,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
@@ -66412,9 +70593,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAPRESULT_PARAGRAAF03_title",
       "nodes": [],
-      "ref": 100495,
+      "ref": 100544,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF03_title",
-      "refId": 100495,
+      "refId": 100544,
       "displayAs": "PropertyType"
     },
     {
@@ -66423,9 +70604,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAPRESULT_PARAGRAAF03_hint",
       "nodes": [],
-      "ref": 100496,
+      "ref": 100545,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF03_hint",
-      "refId": 100496,
+      "refId": 100545,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAPRESULT_PARAGRAAF03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAPRESULT_PARAGRAAF03_visible",
+      "nodes": [],
+      "ref": 100532,
+      "formulaName": "MVO_Q_RESULTSUB1_visible",
+      "refId": 100532,
       "displayAs": "PropertyType"
     },
     {
@@ -66434,9 +70626,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_SUBSCORE01_value",
       "nodes": [],
-      "ref": 100497,
+      "ref": 100546,
       "formulaName": "MVO_Q_MAP03_SUBSCORE01_value",
-      "refId": 100497,
+      "refId": 100546,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
@@ -66447,9 +70639,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_SUBSCORE01_title",
       "nodes": [],
-      "ref": 100498,
+      "ref": 100547,
       "formulaName": "MVO_Q_MAP03_SUBSCORE01_title",
-      "refId": 100498,
+      "refId": 100547,
       "displayAs": "PropertyType"
     },
     {
@@ -66458,9 +70650,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_SUBSCORE01_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_SUBSCORE01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_SUBSCORE01_visible",
+      "nodes": [],
+      "ref": 100548,
+      "formulaName": "MVO_Q_MAP03_SUBSCORE01_visible",
+      "refId": 100548,
       "displayAs": "PropertyType"
     },
     {
@@ -66469,9 +70672,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_SUBSCORE02_value",
       "nodes": [],
-      "ref": 100499,
+      "ref": 100549,
       "formulaName": "MVO_Q_MAP03_SUBSCORE02_value",
-      "refId": 100499,
+      "refId": 100549,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
@@ -66482,9 +70685,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_SUBSCORE02_title",
       "nodes": [],
-      "ref": 100500,
+      "ref": 100550,
       "formulaName": "MVO_Q_MAP03_SUBSCORE02_title",
-      "refId": 100500,
+      "refId": 100550,
       "displayAs": "PropertyType"
     },
     {
@@ -66493,9 +70696,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_SUBSCORE02_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_SUBSCORE02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_SUBSCORE02_visible",
+      "nodes": [],
+      "ref": 100548,
+      "formulaName": "MVO_Q_MAP03_SUBSCORE01_visible",
+      "refId": 100548,
       "displayAs": "PropertyType"
     },
     {
@@ -66504,9 +70718,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_SUBSCORE03_value",
       "nodes": [],
-      "ref": 100501,
+      "ref": 100551,
       "formulaName": "MVO_Q_MAP03_SUBSCORE03_value",
-      "refId": 100501,
+      "refId": 100551,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
@@ -66517,9 +70731,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_SUBSCORE03_title",
       "nodes": [],
-      "ref": 100502,
+      "ref": 100552,
       "formulaName": "MVO_Q_MAP03_SUBSCORE03_title",
-      "refId": 100502,
+      "refId": 100552,
       "displayAs": "PropertyType"
     },
     {
@@ -66528,9 +70742,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_SUBSCORE03_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_SUBSCORE03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_SUBSCORE03_visible",
+      "nodes": [],
+      "ref": 100548,
+      "formulaName": "MVO_Q_MAP03_SUBSCORE01_visible",
+      "refId": 100548,
       "displayAs": "PropertyType"
     },
     {
@@ -66539,9 +70764,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_SUBSCORE04_value",
       "nodes": [],
-      "ref": 100503,
+      "ref": 100553,
       "formulaName": "MVO_Q_MAP03_SUBSCORE04_value",
-      "refId": 100503,
+      "refId": 100553,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
@@ -66552,9 +70777,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_SUBSCORE04_title",
       "nodes": [],
-      "ref": 100504,
+      "ref": 100554,
       "formulaName": "MVO_Q_MAP03_SUBSCORE04_title",
-      "refId": 100504,
+      "refId": 100554,
       "displayAs": "PropertyType"
     },
     {
@@ -66563,9 +70788,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_SUBSCORE04_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_SUBSCORE04",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_SUBSCORE04_visible",
+      "nodes": [],
+      "ref": 100548,
+      "formulaName": "MVO_Q_MAP03_SUBSCORE01_visible",
+      "refId": 100548,
       "displayAs": "PropertyType"
     },
     {
@@ -66574,9 +70810,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_SUBSCORE05_value",
       "nodes": [],
-      "ref": 100505,
+      "ref": 100555,
       "formulaName": "MVO_Q_MAP03_SUBSCORE05_value",
-      "refId": 100505,
+      "refId": 100555,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
@@ -66587,9 +70823,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_SUBSCORE05_title",
       "nodes": [],
-      "ref": 100506,
+      "ref": 100556,
       "formulaName": "MVO_Q_MAP03_SUBSCORE05_title",
-      "refId": 100506,
+      "refId": 100556,
       "displayAs": "PropertyType"
     },
     {
@@ -66598,9 +70834,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_SUBSCORE05_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_SUBSCORE05",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_SUBSCORE05_visible",
+      "nodes": [],
+      "ref": 100548,
+      "formulaName": "MVO_Q_MAP03_SUBSCORE01_visible",
+      "refId": 100548,
       "displayAs": "PropertyType"
     },
     {
@@ -66609,9 +70856,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_SUBSCORE06_value",
       "nodes": [],
-      "ref": 100507,
+      "ref": 100557,
       "formulaName": "MVO_Q_MAP03_SUBSCORE06_value",
-      "refId": 100507,
+      "refId": 100557,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
@@ -66622,9 +70869,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_SUBSCORE06_title",
       "nodes": [],
-      "ref": 100508,
+      "ref": 100558,
       "formulaName": "MVO_Q_MAP03_SUBSCORE06_title",
-      "refId": 100508,
+      "refId": 100558,
       "displayAs": "PropertyType"
     },
     {
@@ -66633,9 +70880,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_SUBSCORE06_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_SUBSCORE06",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_SUBSCORE06_visible",
+      "nodes": [],
+      "ref": 100548,
+      "formulaName": "MVO_Q_MAP03_SUBSCORE01_visible",
+      "refId": 100548,
       "displayAs": "PropertyType"
     },
     {
@@ -66644,9 +70902,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_SUBSCORE07_value",
       "nodes": [],
-      "ref": 100509,
+      "ref": 100559,
       "formulaName": "MVO_Q_MAP03_SUBSCORE07_value",
-      "refId": 100509,
+      "refId": 100559,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
@@ -66657,9 +70915,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_SUBSCORE07_title",
       "nodes": [],
-      "ref": 100510,
+      "ref": 100560,
       "formulaName": "MVO_Q_MAP03_SUBSCORE07_title",
-      "refId": 100510,
+      "refId": 100560,
       "displayAs": "PropertyType"
     },
     {
@@ -66668,9 +70926,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_SUBSCORE07_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_SUBSCORE07",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_SUBSCORE07_visible",
+      "nodes": [],
+      "ref": 100548,
+      "formulaName": "MVO_Q_MAP03_SUBSCORE01_visible",
+      "refId": 100548,
       "displayAs": "PropertyType"
     },
     {
@@ -66679,9 +70948,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP03_SCORE01_value",
       "nodes": [],
-      "ref": 100511,
+      "ref": 100561,
       "formulaName": "MVO_Q_MAP03_SCORE01_value",
-      "refId": 100511,
+      "refId": 100561,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
@@ -66692,9 +70961,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP03_SCORE01_title",
       "nodes": [],
-      "ref": 100512,
+      "ref": 100562,
       "formulaName": "MVO_Q_MAP03_SCORE01_title",
-      "refId": 100512,
+      "refId": 100562,
       "displayAs": "PropertyType"
     },
     {
@@ -66703,9 +70972,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP03_SCORE01_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP03_SCORE01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP03_SCORE01_visible",
+      "nodes": [],
+      "ref": 100548,
+      "formulaName": "MVO_Q_MAP03_SUBSCORE01_visible",
+      "refId": 100548,
       "displayAs": "PropertyType"
     },
     {
@@ -66739,9 +71019,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_MAPRESULT_PARAGRAAF04_value"
         }
       ],
-      "ref": 100513,
+      "ref": 100563,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF04_value",
-      "refId": 100513,
+      "refId": 100563,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
@@ -66752,9 +71032,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAPRESULT_PARAGRAAF04_title",
       "nodes": [],
-      "ref": 100514,
+      "ref": 100564,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF04_title",
-      "refId": 100514,
+      "refId": 100564,
       "displayAs": "PropertyType"
     },
     {
@@ -66763,9 +71043,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_Q_MAPRESULT_PARAGRAAF04_hint",
       "nodes": [],
-      "ref": 100515,
+      "ref": 100565,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF04_hint",
-      "refId": 100515,
+      "refId": 100565,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAPRESULT_PARAGRAAF04",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAPRESULT_PARAGRAAF04_visible",
+      "nodes": [],
+      "ref": 100532,
+      "formulaName": "MVO_Q_RESULTSUB1_visible",
+      "refId": 100532,
       "displayAs": "PropertyType"
     },
     {
@@ -66774,9 +71065,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_SUBSCORE01_value",
       "nodes": [],
-      "ref": 100516,
+      "ref": 100566,
       "formulaName": "MVO_Q_MAP04_SUBSCORE01_value",
-      "refId": 100516,
+      "refId": 100566,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
@@ -66787,9 +71078,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_SUBSCORE01_title",
       "nodes": [],
-      "ref": 100517,
+      "ref": 100567,
       "formulaName": "MVO_Q_MAP04_SUBSCORE01_title",
-      "refId": 100517,
+      "refId": 100567,
       "displayAs": "PropertyType"
     },
     {
@@ -66798,9 +71089,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_SUBSCORE01_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_SUBSCORE01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_SUBSCORE01_visible",
+      "nodes": [],
+      "ref": 100568,
+      "formulaName": "MVO_Q_MAP04_SUBSCORE01_visible",
+      "refId": 100568,
       "displayAs": "PropertyType"
     },
     {
@@ -66809,9 +71111,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_SUBSCORE02_value",
       "nodes": [],
-      "ref": 100518,
+      "ref": 100569,
       "formulaName": "MVO_Q_MAP04_SUBSCORE02_value",
-      "refId": 100518,
+      "refId": 100569,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
@@ -66822,9 +71124,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_SUBSCORE02_title",
       "nodes": [],
-      "ref": 100519,
+      "ref": 100570,
       "formulaName": "MVO_Q_MAP04_SUBSCORE02_title",
-      "refId": 100519,
+      "refId": 100570,
       "displayAs": "PropertyType"
     },
     {
@@ -66833,9 +71135,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_SUBSCORE02_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_SUBSCORE02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_SUBSCORE02_visible",
+      "nodes": [],
+      "ref": 100568,
+      "formulaName": "MVO_Q_MAP04_SUBSCORE01_visible",
+      "refId": 100568,
       "displayAs": "PropertyType"
     },
     {
@@ -66844,9 +71157,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_SUBSCORE03_value",
       "nodes": [],
-      "ref": 100520,
+      "ref": 100571,
       "formulaName": "MVO_Q_MAP04_SUBSCORE03_value",
-      "refId": 100520,
+      "refId": 100571,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
@@ -66857,9 +71170,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_SUBSCORE03_title",
       "nodes": [],
-      "ref": 100521,
+      "ref": 100572,
       "formulaName": "MVO_Q_MAP04_SUBSCORE03_title",
-      "refId": 100521,
+      "refId": 100572,
       "displayAs": "PropertyType"
     },
     {
@@ -66868,9 +71181,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_SUBSCORE03_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_SUBSCORE03",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_SUBSCORE03_visible",
+      "nodes": [],
+      "ref": 100568,
+      "formulaName": "MVO_Q_MAP04_SUBSCORE01_visible",
+      "refId": 100568,
       "displayAs": "PropertyType"
     },
     {
@@ -66879,9 +71203,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAP04_SCORE01_value",
       "nodes": [],
-      "ref": 100522,
+      "ref": 100573,
       "formulaName": "MVO_Q_MAP04_SCORE01_value",
-      "refId": 100522,
+      "refId": 100573,
       "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
@@ -66892,9 +71216,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAP04_SCORE01_title",
       "nodes": [],
-      "ref": 100514,
+      "ref": 100564,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF04_title",
-      "refId": 100514,
+      "refId": 100564,
       "displayAs": "PropertyType"
     },
     {
@@ -66903,9 +71227,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_MAP04_SCORE01_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAP04_SCORE01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAP04_SCORE01_visible",
+      "nodes": [],
+      "ref": 100568,
+      "formulaName": "MVO_Q_MAP04_SUBSCORE01_visible",
+      "refId": 100568,
       "displayAs": "PropertyType"
     },
     {
@@ -66914,9 +71249,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_STATUS_value",
       "nodes": [],
-      "ref": 100523,
+      "ref": 100574,
       "formulaName": "MVO_Q_STATUS_value",
-      "refId": 100523,
+      "refId": 100574,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -66927,9 +71262,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_STATUS_title",
       "nodes": [],
-      "ref": 100524,
+      "ref": 100575,
       "formulaName": "MVO_Q_STATUS_title",
-      "refId": 100524,
+      "refId": 100575,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_STATUS",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_STATUS_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -66938,9 +71284,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_STATUS_choices",
       "nodes": [],
-      "ref": 100525,
+      "ref": 100576,
       "formulaName": "MVO_Q_STATUS_choices",
-      "refId": 100525,
+      "refId": 100576,
       "displayAs": "PropertyType"
     },
     {
@@ -66949,9 +71295,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_STATUS_FINAL_ON_value",
       "nodes": [],
-      "ref": 100526,
+      "ref": 100577,
       "formulaName": "MVO_Q_STATUS_FINAL_ON_value",
-      "refId": 100526,
+      "refId": 100577,
       "displayAs": "date",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -66962,9 +71308,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_STATUS_FINAL_ON_title",
       "nodes": [],
-      "ref": 100527,
+      "ref": 100578,
       "formulaName": "MVO_Q_STATUS_FINAL_ON_title",
-      "refId": 100527,
+      "refId": 100578,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_STATUS_FINAL_ON",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_STATUS_FINAL_ON_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -66973,9 +71330,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_STATUS_FINAL_BY_value",
       "nodes": [],
-      "ref": 100528,
+      "ref": 100579,
       "formulaName": "MVO_Q_STATUS_FINAL_BY_value",
-      "refId": 100528,
+      "refId": 100579,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -66986,9 +71343,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_STATUS_FINAL_BY_title",
       "nodes": [],
-      "ref": 100529,
+      "ref": 100580,
       "formulaName": "MVO_Q_STATUS_FINAL_BY_title",
-      "refId": 100529,
+      "refId": 100580,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_STATUS_FINAL_BY",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_STATUS_FINAL_BY_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -66997,9 +71365,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_STATUS_FINAL_BY_NAME_value",
       "nodes": [],
-      "ref": 100530,
+      "ref": 100581,
       "formulaName": "MVO_Q_STATUS_FINAL_BY_NAME_value",
-      "refId": 100530,
+      "refId": 100581,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67010,9 +71378,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_STATUS_FINAL_BY_NAME_title",
       "nodes": [],
-      "ref": 100531,
+      "ref": 100582,
       "formulaName": "MVO_Q_STATUS_FINAL_BY_NAME_title",
-      "refId": 100531,
+      "refId": 100582,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_STATUS_FINAL_BY_NAME",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_STATUS_FINAL_BY_NAME_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67021,9 +71400,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_STATUS_STARTED_ON_value",
       "nodes": [],
-      "ref": 100532,
+      "ref": 100583,
       "formulaName": "MVO_Q_STATUS_STARTED_ON_value",
-      "refId": 100532,
+      "refId": 100583,
       "displayAs": "date",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67034,9 +71413,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_STATUS_STARTED_ON_title",
       "nodes": [],
-      "ref": 100533,
+      "ref": 100584,
       "formulaName": "MVO_Q_STATUS_STARTED_ON_title",
-      "refId": 100533,
+      "refId": 100584,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_STATUS_STARTED_ON",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_STATUS_STARTED_ON_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67045,9 +71435,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_STATUS_STARTED_BY_value",
       "nodes": [],
-      "ref": 100534,
+      "ref": 100585,
       "formulaName": "MVO_Q_STATUS_STARTED_BY_value",
-      "refId": 100534,
+      "refId": 100585,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67058,9 +71448,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_STATUS_STARTED_BY_title",
       "nodes": [],
-      "ref": 100535,
+      "ref": 100586,
       "formulaName": "MVO_Q_STATUS_STARTED_BY_title",
-      "refId": 100535,
+      "refId": 100586,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_STATUS_STARTED_BY",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_STATUS_STARTED_BY_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67069,9 +71470,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_STATUS_STARTED_BY_NAME_value",
       "nodes": [],
-      "ref": 100536,
+      "ref": 100587,
       "formulaName": "MVO_Q_STATUS_STARTED_BY_NAME_value",
-      "refId": 100536,
+      "refId": 100587,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67082,9 +71483,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_STATUS_STARTED_BY_NAME_title",
       "nodes": [],
-      "ref": 100537,
+      "ref": 100588,
       "formulaName": "MVO_Q_STATUS_STARTED_BY_NAME_title",
-      "refId": 100537,
+      "refId": 100588,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_STATUS_STARTED_BY_NAME",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_STATUS_STARTED_BY_NAME_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67093,9 +71505,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_ModelVersion_value",
       "nodes": [],
-      "ref": 100538,
+      "ref": 100589,
       "formulaName": "MVO_ModelVersion_value",
-      "refId": 100538,
+      "refId": 100589,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67106,9 +71518,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_ModelVersion_title",
       "nodes": [],
-      "ref": 100539,
+      "ref": 100590,
       "formulaName": "MVO_ModelVersion_title",
-      "refId": 100539,
+      "refId": 100590,
       "displayAs": "PropertyType"
     },
     {
@@ -67117,9 +71529,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_ModelVersion_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "ModelVersion",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_ModelVersion_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67128,9 +71551,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_ModelType_value",
       "nodes": [],
-      "ref": 100540,
+      "ref": 100591,
       "formulaName": "MVO_ModelType_value",
-      "refId": 100540,
+      "refId": 100591,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67141,9 +71564,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_ModelType_title",
       "nodes": [],
-      "ref": 100541,
+      "ref": 100592,
       "formulaName": "MVO_ModelType_title",
-      "refId": 100541,
+      "refId": 100592,
       "displayAs": "PropertyType"
     },
     {
@@ -67152,9 +71575,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_ModelType_locked",
       "nodes": [],
-      "ref": 100482,
+      "ref": 100528,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
-      "refId": 100482,
+      "refId": 100528,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "ModelType",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_ModelType_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67163,9 +71597,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_MatrixVersion_value",
       "nodes": [],
-      "ref": 100542,
+      "ref": 100593,
       "formulaName": "MVO_MatrixVersion_value",
-      "refId": 100542,
+      "refId": 100593,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67176,9 +71610,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_MatrixVersion_title",
       "nodes": [],
-      "ref": 100543,
+      "ref": 100594,
       "formulaName": "MVO_MatrixVersion_title",
-      "refId": 100543,
+      "refId": 100594,
       "displayAs": "PropertyType"
     },
     {
@@ -67187,9 +71621,20 @@ LME.importLME(JSON_MODEL);
       "colId": "hint",
       "name": "MVO_MatrixVersion_hint",
       "nodes": [],
-      "ref": 100544,
+      "ref": 100595,
       "formulaName": "MVO_MatrixVersion_hint",
-      "refId": 100544,
+      "refId": 100595,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "MatrixVersion",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_MatrixVersion_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67198,9 +71643,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_value",
       "nodes": [],
-      "ref": 100545,
+      "ref": 100596,
       "formulaName": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_value",
-      "refId": 100545,
+      "refId": 100596,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67211,9 +71656,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_title",
       "nodes": [],
-      "ref": 100546,
+      "ref": 100597,
       "formulaName": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_title",
-      "refId": 100546,
+      "refId": 100597,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_PREVIOUS_BUTTON_VISIBLE",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67222,9 +71678,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_choices",
       "nodes": [],
-      "ref": 100547,
+      "ref": 100598,
       "formulaName": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_choices",
-      "refId": 100547,
+      "refId": 100598,
       "displayAs": "PropertyType"
     },
     {
@@ -67233,9 +71689,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_NEXT_BUTTON_VISIBLE_value",
       "nodes": [],
-      "ref": 100548,
+      "ref": 100599,
       "formulaName": "MVO_Q_NEXT_BUTTON_VISIBLE_value",
-      "refId": 100548,
+      "refId": 100599,
       "displayAs": "select",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67246,9 +71702,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_NEXT_BUTTON_VISIBLE_title",
       "nodes": [],
-      "ref": 100549,
+      "ref": 100600,
       "formulaName": "MVO_Q_NEXT_BUTTON_VISIBLE_title",
-      "refId": 100549,
+      "refId": 100600,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_NEXT_BUTTON_VISIBLE",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_NEXT_BUTTON_VISIBLE_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67257,9 +71724,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_NEXT_BUTTON_VISIBLE_choices",
       "nodes": [],
-      "ref": 100550,
+      "ref": 100601,
       "formulaName": "MVO_Q_NEXT_BUTTON_VISIBLE_choices",
-      "refId": 100550,
+      "refId": 100601,
       "displayAs": "PropertyType"
     },
     {
@@ -67268,9 +71735,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_CONCEPT_REPORT_VISIBLE_value",
       "nodes": [],
-      "ref": 100551,
+      "ref": 100602,
       "formulaName": "MVO_Q_CONCEPT_REPORT_VISIBLE_value",
-      "refId": 100551,
+      "refId": 100602,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67281,9 +71748,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_CONCEPT_REPORT_VISIBLE_title",
       "nodes": [],
-      "ref": 100552,
+      "ref": 100603,
       "formulaName": "MVO_Q_CONCEPT_REPORT_VISIBLE_title",
-      "refId": 100552,
+      "refId": 100603,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_CONCEPT_REPORT_VISIBLE",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_CONCEPT_REPORT_VISIBLE_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67292,9 +71770,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_CONCEPT_REPORT_VISIBLE_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -67303,9 +71781,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_MAKE_FINAL_VISIBLE_value",
       "nodes": [],
-      "ref": 100553,
+      "ref": 100604,
       "formulaName": "MVO_Q_MAKE_FINAL_VISIBLE_value",
-      "refId": 100553,
+      "refId": 100604,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67316,9 +71794,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_MAKE_FINAL_VISIBLE_title",
       "nodes": [],
-      "ref": 100554,
+      "ref": 100605,
       "formulaName": "MVO_Q_MAKE_FINAL_VISIBLE_title",
-      "refId": 100554,
+      "refId": 100605,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_MAKE_FINAL_VISIBLE",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_MAKE_FINAL_VISIBLE_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67327,9 +71816,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_MAKE_FINAL_VISIBLE_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -67338,9 +71827,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_FINAL_REPORT_VISIBLE_value",
       "nodes": [],
-      "ref": 100555,
+      "ref": 100606,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
-      "refId": 100555,
+      "refId": 100606,
       "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
@@ -67351,9 +71840,20 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_FINAL_REPORT_VISIBLE_title",
       "nodes": [],
-      "ref": 100556,
+      "ref": 100607,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_title",
-      "refId": 100556,
+      "refId": 100607,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_FINAL_REPORT_VISIBLE",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_FINAL_REPORT_VISIBLE_visible",
+      "nodes": [],
+      "ref": 100083,
+      "formulaName": "MVO_Q_MAP01_visible",
+      "refId": 100083,
       "displayAs": "PropertyType"
     },
     {
@@ -67362,9 +71862,9 @@ LME.importLME(JSON_MODEL);
       "colId": "choices",
       "name": "MVO_Q_FINAL_REPORT_VISIBLE_choices",
       "nodes": [],
-      "ref": 100098,
+      "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG01_choices",
-      "refId": 100098,
+      "refId": 100105,
       "displayAs": "PropertyType"
     },
     {
@@ -67386,9 +71886,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_HULPVARS_value"
         }
       ],
-      "ref": 100557,
+      "ref": 100608,
       "formulaName": "MVO_HULPVARS_value",
-      "refId": 100557,
+      "refId": 100608,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
@@ -67399,9 +71899,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_HULPVARS_title",
       "nodes": [],
-      "ref": 100193,
+      "ref": 100208,
       "formulaName": "MVO_Q_MAP01_HULPVARIABELEN_title",
-      "refId": 100193,
+      "refId": 100208,
       "displayAs": "PropertyType"
     },
     {
@@ -67410,9 +71910,9 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_HULPVARS_locked",
       "nodes": [],
-      "ref": 100555,
+      "ref": 100606,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
-      "refId": 100555,
+      "refId": 100606,
       "displayAs": "PropertyType"
     },
     {
@@ -67434,9 +71934,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_WARNING_GLOBAL_value"
         }
       ],
-      "ref": 100558,
+      "ref": 100609,
       "formulaName": "MVO_Q_WARNING_GLOBAL_value",
-      "refId": 100558,
+      "refId": 100609,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "HULPVARS_value"
@@ -67447,9 +71947,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_WARNING_GLOBAL_title",
       "nodes": [],
-      "ref": 100559,
+      "ref": 100610,
       "formulaName": "MVO_Q_WARNING_GLOBAL_title",
-      "refId": 100559,
+      "refId": 100610,
       "displayAs": "PropertyType"
     },
     {
@@ -67458,9 +71958,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_WARNING_GLOBAL_locked",
       "nodes": [],
-      "ref": 100555,
+      "ref": 100606,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
-      "refId": 100555,
+      "refId": 100606,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_WARNING_GLOBAL",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_WARNING_GLOBAL_visible",
+      "nodes": [],
+      "ref": 100611,
+      "formulaName": "MVO_Q_WARNING_GLOBAL_visible",
+      "refId": 100611,
       "displayAs": "PropertyType"
     },
     {
@@ -67469,9 +71980,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_WARNING_01_value",
       "nodes": [],
-      "ref": 100560,
+      "ref": 100612,
       "formulaName": "MVO_Q_WARNING_01_value",
-      "refId": 100560,
+      "refId": 100612,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_WARNING_GLOBAL_value"
@@ -67482,9 +71993,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_WARNING_01_title",
       "nodes": [],
-      "ref": 100561,
+      "ref": 100613,
       "formulaName": "MVO_Q_WARNING_01_title",
-      "refId": 100561,
+      "refId": 100613,
       "displayAs": "PropertyType"
     },
     {
@@ -67493,9 +72004,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_WARNING_01_locked",
       "nodes": [],
-      "ref": 100555,
+      "ref": 100606,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
-      "refId": 100555,
+      "refId": 100606,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_WARNING_01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_WARNING_01_visible",
+      "nodes": [],
+      "ref": 100614,
+      "formulaName": "MVO_Q_WARNING_01_visible",
+      "refId": 100614,
       "displayAs": "PropertyType"
     },
     {
@@ -67504,9 +72026,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_WARNING_GLOBALTXT_value",
       "nodes": [],
-      "ref": 100562,
+      "ref": 100615,
       "formulaName": "MVO_Q_WARNING_GLOBALTXT_value",
-      "refId": 100562,
+      "refId": 100615,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_WARNING_GLOBAL_value"
@@ -67517,9 +72039,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_WARNING_GLOBALTXT_title",
       "nodes": [],
-      "ref": 100563,
+      "ref": 100616,
       "formulaName": "MVO_Q_WARNING_GLOBALTXT_title",
-      "refId": 100563,
+      "refId": 100616,
       "displayAs": "PropertyType"
     },
     {
@@ -67528,9 +72050,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_WARNING_GLOBALTXT_locked",
       "nodes": [],
-      "ref": 100555,
+      "ref": 100606,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
-      "refId": 100555,
+      "refId": 100606,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_WARNING_GLOBALTXT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_WARNING_GLOBALTXT_visible",
+      "nodes": [],
+      "ref": 100614,
+      "formulaName": "MVO_Q_WARNING_01_visible",
+      "refId": 100614,
       "displayAs": "PropertyType"
     },
     {
@@ -67558,9 +72091,9 @@ LME.importLME(JSON_MODEL);
           "identifier": "MVO_Q_RESTRICTIES_value"
         }
       ],
-      "ref": 100564,
+      "ref": 100617,
       "formulaName": "MVO_Q_RESTRICTIES_value",
-      "refId": 100564,
+      "refId": 100617,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "HULPVARS_value"
@@ -67571,9 +72104,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_RESTRICTIES_title",
       "nodes": [],
-      "ref": 100565,
+      "ref": 100618,
       "formulaName": "MVO_Q_RESTRICTIES_title",
-      "refId": 100565,
+      "refId": 100618,
       "displayAs": "PropertyType"
     },
     {
@@ -67582,9 +72115,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_RESTRICTIES_locked",
       "nodes": [],
-      "ref": 100555,
+      "ref": 100606,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
-      "refId": 100555,
+      "refId": 100606,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_RESTRICTIES",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_RESTRICTIES_visible",
+      "nodes": [],
+      "ref": 100611,
+      "formulaName": "MVO_Q_WARNING_GLOBAL_visible",
+      "refId": 100611,
       "displayAs": "PropertyType"
     },
     {
@@ -67593,9 +72137,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_RESTRICTIES_01_value",
       "nodes": [],
-      "ref": 100566,
+      "ref": 100619,
       "formulaName": "MVO_Q_RESTRICTIES_01_value",
-      "refId": 100566,
+      "refId": 100619,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
@@ -67606,9 +72150,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_RESTRICTIES_01_locked",
       "nodes": [],
-      "ref": 100555,
+      "ref": 100606,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
-      "refId": 100555,
+      "refId": 100606,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_RESTRICTIES_01",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_RESTRICTIES_01_visible",
+      "nodes": [],
+      "ref": 100620,
+      "formulaName": "MVO_Q_RESTRICTIES_01_visible",
+      "refId": 100620,
       "displayAs": "PropertyType"
     },
     {
@@ -67617,9 +72172,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_RESTRICTIES_02_value",
       "nodes": [],
-      "ref": 100567,
+      "ref": 100621,
       "formulaName": "MVO_Q_RESTRICTIES_02_value",
-      "refId": 100567,
+      "refId": 100621,
       "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
@@ -67630,9 +72185,20 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_RESTRICTIES_02_locked",
       "nodes": [],
-      "ref": 100555,
+      "ref": 100606,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
-      "refId": 100555,
+      "refId": 100606,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_RESTRICTIES_02",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_RESTRICTIES_02_visible",
+      "nodes": [],
+      "ref": 100620,
+      "formulaName": "MVO_Q_RESTRICTIES_01_visible",
+      "refId": 100620,
       "displayAs": "PropertyType"
     },
     {
@@ -67641,9 +72207,9 @@ LME.importLME(JSON_MODEL);
       "colId": "value",
       "name": "MVO_Q_RESTRICTIESTXT_value",
       "nodes": [],
-      "ref": 100568,
+      "ref": 100622,
       "formulaName": "MVO_Q_RESTRICTIESTXT_value",
-      "refId": 100568,
+      "refId": 100622,
       "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
@@ -67654,9 +72220,9 @@ LME.importLME(JSON_MODEL);
       "colId": "title",
       "name": "MVO_Q_RESTRICTIESTXT_title",
       "nodes": [],
-      "ref": 100569,
+      "ref": 100623,
       "formulaName": "MVO_Q_RESTRICTIESTXT_title",
-      "refId": 100569,
+      "refId": 100623,
       "displayAs": "PropertyType"
     },
     {
@@ -67665,10 +72231,28 @@ LME.importLME(JSON_MODEL);
       "colId": "locked",
       "name": "MVO_Q_RESTRICTIESTXT_locked",
       "nodes": [],
-      "ref": 100555,
+      "ref": 100606,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
-      "refId": 100555,
+      "refId": 100606,
       "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_RESTRICTIESTXT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_RESTRICTIESTXT_visible",
+      "nodes": [],
+      "ref": 100620,
+      "formulaName": "MVO_Q_RESTRICTIES_01_visible",
+      "refId": 100620,
+      "displayAs": "PropertyType"
+    },
+    {
+      "rowId": "Q_ROOT",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_Q_ROOT_visible",
+      "nodes": []
     },
     {
       "rowId": "Q_MAP01_WARNING",
@@ -67990,6 +72574,13 @@ LME.importLME(JSON_MODEL);
       "solutionName": "MVO",
       "colId": "required",
       "name": "MVO_Q_MAP04_PARAGRAAF09_required",
+      "nodes": []
+    },
+    {
+      "rowId": "HULPVARS",
+      "solutionName": "MVO",
+      "colId": "visible",
+      "name": "MVO_HULPVARS_visible",
       "nodes": []
     }
   ],

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lmeapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular-include-demo</title>
+    <script type="application/javascript" src="/DEMO/transformFFL_LME/ai_MVO"></script>
+</head>
+<body>
+<div ng-controller="lmeController">
+hoi
+    {{this.Q_MAP01_VRAAG07}}
+    <div ng-init="f = this.Q_MAP01_VRAAG07" class="input-group">
+        <input ng-repeat="choice in f.choices"
+               ng-readonly="cv.locked"
+               ng-disabled="cv.locked"
+               ng-required="cv.required"
+               class="form-control"
+               name="{{f.id + '-' + pid}}"
+               type="radio"
+               ng-model="cv.value"
+               value="{{choice.value}}"
+        >
+    </div>
+</div>
+</body>
+</html>
