@@ -8,8 +8,6 @@ wb.createFormula('1+1', 'AB');
 assert.equal(wb.get('AB'), 2);
 wb.set('AB', 'anything')
 var exportValues = wb.export('jsonvalues')
-
 assert.equal(exportValues.length, 1, JSON.stringify(exportValues));
-
-var explain = wb.importSolution(JSON.stringify(exportValues), 'jsonvalues')
+wb.importSolution(JSON.stringify(exportValues), 'jsonvalues')
 

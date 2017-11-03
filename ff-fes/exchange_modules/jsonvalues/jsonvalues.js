@@ -15,6 +15,7 @@ var jsonValues = {
         let allValues = workbook.getAllValues();
         allValues.forEach(function(el) {
             el.varName = correctFileName(el.varName)
+            delete el.formulaId
         })
         return allValues;
     }
