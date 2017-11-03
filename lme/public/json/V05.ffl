@@ -58175,7 +58175,7 @@ model V05 uses BaseModel
           frequency: document;
           data_options: unscalable;
           displaytype: select;
-          title: "5-minuten-wizard";
+          title: "5-minuten-wizard321321321";
           hint: "In 5 minuten langs de belangrijkste stuurvariabelen voor de prognose.";
           top_blanklines: 1;
           locked: 1;

@@ -1,3 +1,17 @@
-.header { position: fixed; width: 100%; top: 0px; }
+.header { position: fixed; width: 100%; top: 0px; z-index: 1000; }
 
 body { padding-top: 60px; }
+
+.answer .radio label.checked::after { border-radius: 25px; content: ''; position: absolute; top: .65rem; line-height: 0; height: 16px; width: 16px; left: 0px; background: #444; border: 5px solid white; padding: 0; z-index: 0; }
+
+.form-item .icon.icon-info { cursor: pointer; }
+
+.hint-popover { padding: 1rem; display: inline-block; position: absolute; z-index: 100; max-width: 350px; background: #fff; box-shadow: 1px 1px 3px #333; }
+
+.json-container { position: fixed; top: 0px; right: 0px; width: 400px; height: 500px; background-color: antiquewhite; }
+.json-container pre { outline: 1px solid #ccc; padding: 5px; margin: 5px; max-height: 500xp; }
+.json-container .string { color: green; }
+.json-container .number { color: darkorange; }
+.json-container .boolean { color: blue; }
+.json-container .null { color: magenta; }
+.json-container .key { color: red; }
