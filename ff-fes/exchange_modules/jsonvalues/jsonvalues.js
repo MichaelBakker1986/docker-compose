@@ -19,7 +19,6 @@ var jsonValues = {
             } else {
                 el.varName = correctFileName(el.varName)
             }
-            delete el.formulaId
         })
         return allValues;
     }
