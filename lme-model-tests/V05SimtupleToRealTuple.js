@@ -2,7 +2,7 @@
  * Convert generated tuples into tuples.
  */
 const figureName = 'V05';
-const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../PRICING/ModelFacade')
+const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../ModelFacade')
 
 var linecounter = 0;
 var simtuples = []

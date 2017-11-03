@@ -2,12 +2,12 @@
  * Never include this in frond-end-dist for evaluation purpose
  * lme.js is the front-end opponent
  */
-require('../../ff-fes/exchange_modules/presentation/webexport');
-const FormulaService = require('../../ff-fes/fesjs/FormulaService');
+require('../ff-fes/exchange_modules/presentation/webexport');
+const FormulaService = require('../ff-fes/fesjs/FormulaService');
 var esprima = require('esprima')
 var escodegen = require('escodegen')
-var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
-const LME = require('../../lme/src/lme');
+var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
+const LME = require('../lme/src/lme');
 const log = require('ff-log');
 const fs = require('fs');
 const assert = require('assert');
@@ -27,7 +27,7 @@ LME.prototype.maxDependencies = function() {
         var depsSize = Object.keys(formula.deps).length;
         if (max < depsSize) {
             max = depsSize;
-            log.info(formula.name + ":" + depsSize)
+            log.debug(formula.name + ":" + depsSize)
             bestMatchingDependency = formula;
         }
     })

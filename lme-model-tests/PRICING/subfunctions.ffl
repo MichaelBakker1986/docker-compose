@@ -833,7 +833,7 @@
     }
   },
   "DateToMonth(Facility_tpStartDate)": {
-    "count": 6,
+    "count": 5,
     "argumentValues": {}
   },
   "DateToMonth(Facility_tpEndDate - 1)": {
@@ -841,7 +841,7 @@
     "argumentValues": {}
   },
   "DateToYear(Facility_tpStartDate)": {
-    "count": 6,
+    "count": 5,
     "argumentValues": {}
   },
   "DateToYear(Facility_tpEndDate - 1)": {
@@ -1254,151 +1254,6 @@
       "If(Facility_tpRepaymentChoice == 3, Facility_tpLimitScheme, Facility_tpPrincipalLimit)": true
     }
   },
-  "MinMax(Facility_tpAnnuityPPMTRATTotalPeriods, 1, Facility_tpRepaymentFrequency, NA)": {
-    "count": 4,
-    "argumentValues": {}
-  },
-  "MinMax('*', 1, Facility_tpRepaymentFrequency, NA)": {
-    "count": 6,
-    "argumentValues": {
-      "Facility_tpAnnuityPPMTRATTotalPeriods": true,
-      "Facility_tpNumberOfPeriods - Facility_tpAnnuityMonthsSinceStartDate": true,
-      "Facility_tpRemainingTenor": true
-    }
-  },
-  "MinMax(Facility_tpAnnuityPPMTRATTotalPeriods, '*', Facility_tpRepaymentFrequency, NA)": {
-    "count": 5,
-    "argumentValues": {
-      "0": true,
-      "1": true
-    }
-  },
-  "MinMax(Facility_tpAnnuityPPMTRATTotalPeriods, 1, '*', NA)": {
-    "count": 4,
-    "argumentValues": {
-      "Facility_tpRepaymentFrequency": true
-    }
-  },
-  "MinMax(Facility_tpAnnuityPPMTRATTotalPeriods, 1, Facility_tpRepaymentFrequency, '*')": {
-    "count": 4,
-    "argumentValues": {
-      "NA": true
-    }
-  },
-  "SumFor('*', Facility_tpPeriodDifferenceGrace + 1, Facility_tpNumberOfPeriodsNoGrace, 1, Facility_tpLinear * Round(MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - X, 0, Facility_tpRepaymentFrequency), 0))": {
-    "count": 3,
-    "argumentValues": {
-      "X": true
-    }
-  },
-  "SumFor(X, '*', Facility_tpNumberOfPeriodsNoGrace, 1, Facility_tpLinear * Round(MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - X, 0, Facility_tpRepaymentFrequency), 0))": {
-    "count": 3,
-    "argumentValues": {
-      "Facility_tpPeriodDifferenceGrace + 1": true
-    }
-  },
-  "SumFor(X, Facility_tpPeriodDifferenceGrace + 1, '*', 1, Facility_tpLinear * Round(MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - X, 0, Facility_tpRepaymentFrequency), 0))": {
-    "count": 3,
-    "argumentValues": {
-      "Facility_tpNumberOfPeriodsNoGrace": true
-    }
-  },
-  "SumFor(X, Facility_tpPeriodDifferenceGrace + 1, Facility_tpNumberOfPeriodsNoGrace, '*', Facility_tpLinear * Round(MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - X, 0, Facility_tpRepaymentFrequency), 0))": {
-    "count": 3,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "SumFor(X, Facility_tpPeriodDifferenceGrace + 1, Facility_tpNumberOfPeriodsNoGrace, 1, '*')": {
-    "count": 8,
-    "argumentValues": {
-      "Facility_tpLinear * Round(MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - X, 0, Facility_tpRepaymentFrequency), 0)": true,
-      "Facility_tpLinear * Round(MinMax((Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - X) * If(Facility_tpWithdrawalChoice == 3, Facility_tpAnnuityRepaymentFreqHelpVar, 1), 0, If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency), 0), 0)": true
-    }
-  },
-  "Round(MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - X, 0, Facility_tpRepaymentFrequency), '*')": {
-    "count": 2,
-    "argumentValues": {
-      "0": true
-    }
-  },
-  "SumFor('*', 1, Facility_tpNumberOfPeriods, 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X, 0, Facility_tpRepaymentFrequency, 0))": {
-    "count": 3,
-    "argumentValues": {
-      "X": true
-    }
-  },
-  "SumFor(X, '*', Facility_tpNumberOfPeriods, 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X, 0, Facility_tpRepaymentFrequency, 0))": {
-    "count": 3,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "SumFor(X, 1, '*', 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X, 0, Facility_tpRepaymentFrequency, 0))": {
-    "count": 3,
-    "argumentValues": {
-      "Facility_tpNumberOfPeriods": true
-    }
-  },
-  "SumFor(X, 1, Facility_tpNumberOfPeriods, '*', PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X, 0, Facility_tpRepaymentFrequency, 0))": {
-    "count": 3,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "SumFor(X, 1, Facility_tpNumberOfPeriods, 1, '*')": {
-    "count": 6,
-    "argumentValues": {
-      "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * MinMax(Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X, 0, Facility_tpRepaymentFrequency, 0)": true,
-      "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * MinMax(Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X, 0, Facility_tpRepaymentFrequency, 0)": true
-    }
-  },
-  "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon)": {
-    "count": 3,
-    "argumentValues": {}
-  },
-  "PPMT('*', X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon)": {
-    "count": 3,
-    "argumentValues": {
-      "Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency": true
-    }
-  },
-  "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, '*', Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon)": {
-    "count": 10,
-    "argumentValues": {
-      "X": true,
-      "Facility_tpAnnuityMonthsSinceStartDate": true,
-      "X - (Facility_tpNumberOfPeriodsNoGrace - Facility_tpNumberOfPeriods + 1) + 1": true,
-      "Facility_tpPeriodForRATGrace - 1 + X": true,
-      "Facility_tpHulpVarRepayment": true,
-      "X - Facility_tpGracePeriodInPeriods": true
-    }
-  },
-  "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, '*', -Facility_tpPrincipalLimit, Facility_tpBalloon)": {
-    "count": 3,
-    "argumentValues": {
-      "Facility_tpNumberOfPeriods": true
-    }
-  },
-  "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, '*', Facility_tpBalloon)": {
-    "count": 3,
-    "argumentValues": {
-      "-Facility_tpPrincipalLimit": true
-    }
-  },
-  "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, '*')": {
-    "count": 3,
-    "argumentValues": {
-      "Facility_tpBalloon": true
-    }
-  },
-  "MinMax('*', 0, Facility_tpRepaymentFrequency, 0)": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpAnnuityMonthsSinceStartDate + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X": true,
-      "Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X": true
-    }
-  },
   "If('*', 1, OnER(RoundUp((DateToYear(Facility_tpEndDate - 1) * 12 + DateToMonth(Facility_tpEndDate - 1) + If(DateToDay(Facility_tpEndDate) > DateToDay(Facility_tpStartDate) || DateToDay(Facility_tpEndDate) == 1, 1, 0) - (DateToYear(Facility_tpStartDate) * 12 + DateToMonth(Facility_tpStartDate)) - Facility_tpGracePeriod) * (Facility_tpRepaymentFrequency / 12), 0), NA))": {
     "count": 11,
     "argumentValues": {
@@ -1772,11 +1627,11 @@
     "argumentValues": {}
   },
   "DateToMonth(Facility_tpCurrentDate)": {
-    "count": 6,
+    "count": 5,
     "argumentValues": {}
   },
   "DateToYear(Facility_tpCurrentDate)": {
-    "count": 6,
+    "count": 5,
     "argumentValues": {}
   },
   "If('*', 0, If(Facility_tpManual_tpMonthsSinceCurrentDate == NA, 0, 1))": {
@@ -1947,60 +1802,6 @@
       "(DateToYear(Facility_tpEndDate) - DateToYear(Facility_tpCurrentDate)) * 12 + DateToMonth(Facility_tpEndDate) - DateToMonth(Facility_tpCurrentDate)": true
     }
   },
-  "OnZero(RoundUp(OnNeg(If(Facility_tpStartDate == NA, NA, (DateToYear(Facility_tpCurrentDate) - DateToYear(Facility_tpStartDate)) * 12 + DateToMonth(Facility_tpCurrentDate) - DateToMonth(Facility_tpStartDate)) + If(Facility_tpAnnuityMonthsSinceStartDate == NA, NA, 1), 0) / Facility_tpAnnuityRepaymentFreqHelpVar, 0), '*')": {
-    "count": 9,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "RoundUp(OnNeg(If(Facility_tpStartDate == NA, NA, (DateToYear(Facility_tpCurrentDate) - DateToYear(Facility_tpStartDate)) * 12 + DateToMonth(Facility_tpCurrentDate) - DateToMonth(Facility_tpStartDate)) + If(Facility_tpAnnuityMonthsSinceStartDate == NA, NA, 1), 0) / Facility_tpAnnuityRepaymentFreqHelpVar, '*')": {
-    "count": 8,
-    "argumentValues": {
-      "0": true
-    }
-  },
-  "OnNeg(If(Facility_tpStartDate == NA, NA, (DateToYear(Facility_tpCurrentDate) - DateToYear(Facility_tpStartDate)) * 12 + DateToMonth(Facility_tpCurrentDate) - DateToMonth(Facility_tpStartDate)) + If(Facility_tpAnnuityMonthsSinceStartDate == NA, NA, 1), '*')": {
-    "count": 7,
-    "argumentValues": {
-      "0": true
-    }
-  },
-  "If('*', NA, (DateToYear(Facility_tpCurrentDate) - DateToYear(Facility_tpStartDate)) * 12 + DateToMonth(Facility_tpCurrentDate) - DateToMonth(Facility_tpStartDate))": {
-    "count": 5,
-    "argumentValues": {
-      "Facility_tpStartDate == NA": true
-    }
-  },
-  "If(Facility_tpStartDate == NA, '*', (DateToYear(Facility_tpCurrentDate) - DateToYear(Facility_tpStartDate)) * 12 + DateToMonth(Facility_tpCurrentDate) - DateToMonth(Facility_tpStartDate))": {
-    "count": 5,
-    "argumentValues": {
-      "NA": true
-    }
-  },
-  "If(Facility_tpStartDate == NA, NA, '*')": {
-    "count": 5,
-    "argumentValues": {
-      "(DateToYear(Facility_tpCurrentDate) - DateToYear(Facility_tpStartDate)) * 12 + DateToMonth(Facility_tpCurrentDate) - DateToMonth(Facility_tpStartDate)": true
-    }
-  },
-  "If('*', 0, If(Facility_tpAnnuityMonthsSinceCurrentDate == NA, 0, 1))": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpAnnuityMonthsSinceCurrentDate > 12": true
-    }
-  },
-  "If(Facility_tpAnnuityMonthsSinceCurrentDate > 12, '*', If(Facility_tpAnnuityMonthsSinceCurrentDate == NA, 0, 1))": {
-    "count": 2,
-    "argumentValues": {
-      "0": true
-    }
-  },
-  "If(Facility_tpAnnuityMonthsSinceCurrentDate > 12, 0, '*')": {
-    "count": 2,
-    "argumentValues": {
-      "If(Facility_tpAnnuityMonthsSinceCurrentDate == NA, 0, 1)": true
-    }
-  },
   "RoundUp(If(DMYtoDate(1, DateToMonth(Facility_tpAnnuityFirstDayMonth), DateToYear(Facility_tpAnnuityFirstDayMonth)) < DMYtoDate(1, DateToMonth(Facility_tpCurrentDate), DateToYear(Facility_tpCurrentDate)), NA, (DateToYear(Facility_tpAnnuityFirstDayMonth) - DateToYear(Facility_tpCurrentDate)) * 12 + DateToMonth(Facility_tpAnnuityFirstDayMonth) - DateToMonth(Facility_tpCurrentDate) + 1) / Facility_tpAnnuityRepaymentFreqHelpVar, '*')": {
     "count": 12,
     "argumentValues": {
@@ -2082,238 +1883,12 @@
       "X * Facility_tpLinear * Facility_tpAnnuityRepaymentFreqHelpVar": true
     }
   },
-  "SumFor('*', 1, Facility_tpNumberOfPeriods - (Facility_tpAnnuityMonthsSinceCurrentDate - Facility_tpPeriodDifferenceGrace), 1, X * PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * Facility_tpAnnuityRepaymentFreqHelpVar)": {
-    "count": 2,
-    "argumentValues": {
-      "X": true
-    }
-  },
-  "SumFor(X, '*', Facility_tpNumberOfPeriods - (Facility_tpAnnuityMonthsSinceCurrentDate - Facility_tpPeriodDifferenceGrace), 1, X * PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * Facility_tpAnnuityRepaymentFreqHelpVar)": {
-    "count": 2,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "SumFor(X, 1, '*', 1, X * PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * Facility_tpAnnuityRepaymentFreqHelpVar)": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpNumberOfPeriods - (Facility_tpAnnuityMonthsSinceCurrentDate - Facility_tpPeriodDifferenceGrace)": true
-    }
-  },
-  "SumFor(X, 1, Facility_tpNumberOfPeriods - (Facility_tpAnnuityMonthsSinceCurrentDate - Facility_tpPeriodDifferenceGrace), '*', X * PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * Facility_tpAnnuityRepaymentFreqHelpVar)": {
-    "count": 2,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "SumFor(X, 1, Facility_tpNumberOfPeriods - (Facility_tpAnnuityMonthsSinceCurrentDate - Facility_tpPeriodDifferenceGrace), 1, '*')": {
+  "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, '*', Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon)": {
     "count": 4,
     "argumentValues": {
-      "X * PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * Facility_tpAnnuityRepaymentFreqHelpVar": true,
-      "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon)": true
-    }
-  },
-  "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon)": {
-    "count": 2,
-    "argumentValues": {}
-  },
-  "PPMT('*', Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon)": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency": true
-    }
-  },
-  "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, '*', -Facility_tpPrincipalLimit, Facility_tpBalloon)": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpNumberOfPeriods": true
-    }
-  },
-  "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, '*', Facility_tpBalloon)": {
-    "count": 2,
-    "argumentValues": {
-      "-Facility_tpPrincipalLimit": true
-    }
-  },
-  "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, '*')": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpBalloon": true
-    }
-  },
-  "SumFor('*', 1, Facility_tpNumberOfPeriods - (Facility_tpAnnuityMonthsSinceCurrentDate - Facility_tpPeriodDifferenceGrace), 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon))": {
-    "count": 2,
-    "argumentValues": {
-      "X": true
-    }
-  },
-  "SumFor(X, '*', Facility_tpNumberOfPeriods - (Facility_tpAnnuityMonthsSinceCurrentDate - Facility_tpPeriodDifferenceGrace), 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon))": {
-    "count": 2,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "SumFor(X, 1, '*', 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon))": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpNumberOfPeriods - (Facility_tpAnnuityMonthsSinceCurrentDate - Facility_tpPeriodDifferenceGrace)": true
-    }
-  },
-  "SumFor(X, 1, Facility_tpNumberOfPeriods - (Facility_tpAnnuityMonthsSinceCurrentDate - Facility_tpPeriodDifferenceGrace), '*', PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, Facility_tpPeriodForRATGrace - 1 + X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon))": {
-    "count": 2,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "SumFor('*', 0, Facility_tpAnnuityMonthsSinceStartDate - 1, 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon))": {
-    "count": 2,
-    "argumentValues": {
-      "X": true
-    }
-  },
-  "SumFor(X, '*', Facility_tpAnnuityMonthsSinceStartDate - 1, 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon))": {
-    "count": 2,
-    "argumentValues": {
-      "0": true
-    }
-  },
-  "SumFor(X, 0, '*', 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon))": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpAnnuityMonthsSinceStartDate - 1": true
-    }
-  },
-  "SumFor(X, 0, Facility_tpAnnuityMonthsSinceStartDate - 1, '*', PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon))": {
-    "count": 2,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "SumFor(X, 0, Facility_tpAnnuityMonthsSinceStartDate - 1, 1, '*')": {
-    "count": 2,
-    "argumentValues": {
-      "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon)": true
-    }
-  },
-  "SumFor('*', 1, Facility_tpNumberOfPeriods, 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * MinMax(Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X, 0, Facility_tpRepaymentFrequency, 0))": {
-    "count": 3,
-    "argumentValues": {
-      "X": true
-    }
-  },
-  "SumFor(X, '*', Facility_tpNumberOfPeriods, 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * MinMax(Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X, 0, Facility_tpRepaymentFrequency, 0))": {
-    "count": 3,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "SumFor(X, 1, '*', 1, PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * MinMax(Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X, 0, Facility_tpRepaymentFrequency, 0))": {
-    "count": 3,
-    "argumentValues": {
-      "Facility_tpNumberOfPeriods": true
-    }
-  },
-  "SumFor(X, 1, Facility_tpNumberOfPeriods, '*', PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * MinMax(Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - Facility_tpPeriodDifferenceGrace - X, 0, Facility_tpRepaymentFrequency, 0))": {
-    "count": 3,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "SumFor(X, 1, Facility_tpAnnuityPPMTRATTotalPeriods, 1, '*')": {
-    "count": 2,
-    "argumentValues": {
-      "X * Facility_tpLinear * Facility_tpAnnuityRepaymentFreqHelpVar": true,
-      "Facility_tpLinear * (X - X + 1)": true
-    }
-  },
-  "MinMax(Facility_tpRemainingTenor, 1, '*', NA)": {
-    "count": 2,
-    "argumentValues": {
-      "12": true,
-      "Facility_tpRepaymentFrequency": true
-    }
-  },
-  "SumFor('*', Facility_tpPeriodDifferenceGrace + 1, Facility_tpNumberOfPeriodsNoGrace, 1, Facility_tpLinear * Round(MinMax((Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - X) * If(Facility_tpWithdrawalChoice == 3, Facility_tpAnnuityRepaymentFreqHelpVar, 1), 0, If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency), 0), 0))": {
-    "count": 5,
-    "argumentValues": {
-      "X": true
-    }
-  },
-  "SumFor(X, '*', Facility_tpNumberOfPeriodsNoGrace, 1, Facility_tpLinear * Round(MinMax((Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - X) * If(Facility_tpWithdrawalChoice == 3, Facility_tpAnnuityRepaymentFreqHelpVar, 1), 0, If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency), 0), 0))": {
-    "count": 5,
-    "argumentValues": {
-      "Facility_tpPeriodDifferenceGrace + 1": true
-    }
-  },
-  "SumFor(X, Facility_tpPeriodDifferenceGrace + 1, '*', 1, Facility_tpLinear * Round(MinMax((Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - X) * If(Facility_tpWithdrawalChoice == 3, Facility_tpAnnuityRepaymentFreqHelpVar, 1), 0, If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency), 0), 0))": {
-    "count": 5,
-    "argumentValues": {
-      "Facility_tpNumberOfPeriodsNoGrace": true
-    }
-  },
-  "SumFor(X, Facility_tpPeriodDifferenceGrace + 1, Facility_tpNumberOfPeriodsNoGrace, '*', Facility_tpLinear * Round(MinMax((Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - X) * If(Facility_tpWithdrawalChoice == 3, Facility_tpAnnuityRepaymentFreqHelpVar, 1), 0, If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency), 0), 0))": {
-    "count": 5,
-    "argumentValues": {
-      "1": true
-    }
-  },
-  "Round(MinMax((Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - X) * If(Facility_tpWithdrawalChoice == 3, Facility_tpAnnuityRepaymentFreqHelpVar, 1), 0, If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency), 0), '*')": {
-    "count": 4,
-    "argumentValues": {
-      "0": true
-    }
-  },
-  "MinMax('*', 0, If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency), 0)": {
-    "count": 3,
-    "argumentValues": {
-      "(Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - X) * If(Facility_tpWithdrawalChoice == 3, Facility_tpAnnuityRepaymentFreqHelpVar, 1)": true
-    }
-  },
-  "MinMax((Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - X) * If(Facility_tpWithdrawalChoice == 3, Facility_tpAnnuityRepaymentFreqHelpVar, 1), '*', If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency), 0)": {
-    "count": 3,
-    "argumentValues": {
-      "0": true
-    }
-  },
-  "MinMax((Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - X) * If(Facility_tpWithdrawalChoice == 3, Facility_tpAnnuityRepaymentFreqHelpVar, 1), 0, '*', 0)": {
-    "count": 3,
-    "argumentValues": {
-      "If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency)": true
-    }
-  },
-  "MinMax((Facility_tpAnnuityMonthsSinceStartDate - 1 + Facility_tpRepaymentFrequency - X) * If(Facility_tpWithdrawalChoice == 3, Facility_tpAnnuityRepaymentFreqHelpVar, 1), 0, If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency), '*')": {
-    "count": 3,
-    "argumentValues": {
-      "0": true
-    }
-  },
-  "If(Facility_tpWithdrawalChoice == 3, 12, Facility_tpRepaymentFrequency)": {
-    "count": 2,
-    "argumentValues": {}
-  },
-  "If('*', 12, Facility_tpRepaymentFrequency)": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpWithdrawalChoice == 3": true
-    }
-  },
-  "If(Facility_tpWithdrawalChoice == 3, '*', Facility_tpRepaymentFrequency)": {
-    "count": 2,
-    "argumentValues": {
-      "12": true
-    }
-  },
-  "If(Facility_tpWithdrawalChoice == 3, 12, '*')": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpRepaymentFrequency": true
-    }
-  },
-  "If(Facility_tpWithdrawalChoice == 3, '*', 1)": {
-    "count": 2,
-    "argumentValues": {
-      "Facility_tpAnnuityRepaymentFreqHelpVar": true,
-      "12 / Facility_tpRepaymentFrequency": true
+      "X - (Facility_tpNumberOfPeriodsNoGrace - Facility_tpNumberOfPeriods + 1) + 1": true,
+      "Facility_tpHulpVarRepayment": true,
+      "X - Facility_tpGracePeriodInPeriods": true
     }
   },
   "SumFor('*', 12 / Facility_tpRepaymentFrequency + Facility_tpGracePeriod, Facility_tpOriginalTenor, 12 / Facility_tpRepaymentFrequency, Facility_tpLinear * MinMax(12 - (X - (Facility_tpOriginalTenor - Facility_tpRemainingTenor)), 0, 12))": {

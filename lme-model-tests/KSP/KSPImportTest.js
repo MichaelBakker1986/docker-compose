@@ -16,6 +16,5 @@ fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
-log.info('excel done')
 var wb = new WorkBook(new FESContext());
 wb.importSolution("" + fs.readFileSync(__dirname + '/KSP.ffl'), 'ffl')
