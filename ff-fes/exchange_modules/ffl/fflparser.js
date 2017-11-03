@@ -306,7 +306,7 @@ function parseFFLFormula(formula, node, row) {
         }
     }
     catch (e) {
-        log.error('unable to parse [' + formula + '] returning it as String value [' + node + "] : " + row, e);
+        log.debug('unable to parse [' + formula + '] returning it as String value [' + node + "] : " + row, e);
         formulaReturn = AST.STRING(formula);
     }
     return formulaReturn;

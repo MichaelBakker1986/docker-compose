@@ -28,5 +28,5 @@ assert(Array.isArray(FES_LAYOUTNR.choices));
 assert(RootSub1.locked == 1)
 assert(RootSub1.title == "General variables for webclient")
 assert(RootSub1.visible == 0)
-assert(Q_MAP01_PARAGRAAF00.hint == "https")
+assert(Q_MAP01_PARAGRAAF00.hint == "Op https, //www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https, //www.iso.org/obp/ui/iso, std, iso, 26000, ed-1, v1, en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 4 van de ISO 26000 richtlijn. Het MVO-beleid van de organisatie is gebaseerd op onder andere deze zeven principes.")
 var x = FES_LAYOUTNR;

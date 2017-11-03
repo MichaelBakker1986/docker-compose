@@ -94,6 +94,7 @@ assert.equal(wb.get('DATAAVAILABLE'), false);
 wb.set('abc12', 'anyValue');
 assert.equal(wb.get('DATAAVAILABLE'), true);
 
+
 /*wb.createFormula("Count(x,String(x),x)", "TestCount")
 log.info(wb.get("TestCount"))*/
 /**

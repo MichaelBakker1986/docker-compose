@@ -60,7 +60,7 @@ function parseRegex(contents) {
     //{
     //some lines end with a ',' they are concerning about the same thing.
     var data = contents.replace(/,\s*\n/gm, ',');
-    data = data.replace(/\/\/.*\n?$/gm, '');
+    data = data.replace(/;\s*\/\/.*\n?$/gm, ';');
     data = FinFormula.fixCasing(data);
     //==> variable x
     //==> {
@@ -76,8 +76,11 @@ function parseRegex(contents) {
     data = data.replace(/^(\s+)((?:variable|tuple)\s*)?([\-\=\+]{1})\s*([\w]+)\s*\{'/gmi).replace("$1$2$4$1{$1  modifier: $3;");
 
     //remove tabs,remove line-breaks, replace " with '
-    data = data.replace(/\t/gm, '').replace(/^\s*root\s*$/gmi, ' Root ;').replace(/([^;])[\r?\n]+/gm, '$1').replace(/\r?\n|\r/gm, ';').replace(/\s\s+/gm, ' ')
-    //.replace(/\"(.*)'(.*)\"/gm, '"$1 $2"')
+    data = data.replace(/\t/gm, '')
+        .replace(/^\s*root\s*$/gmi, ' Root ;')
+        .replace(/([^;])[\r?\n]+/gm, '$1')
+        .replace(/\r?\n|\r/gm, ';')
+        .replace(/\s\s+/gm, ' ')
         .replace(/'/gm, '@')
         .replace(/"/gm, '\'');
 

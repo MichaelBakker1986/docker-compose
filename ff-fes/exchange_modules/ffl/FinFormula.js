@@ -1,6 +1,9 @@
 //http://excelformulabeautifier.com/
 function finFormulaGeneric(buf) {
-    //choices fix
+    /**
+     * Choices fix, this is a problem for titles and hints containing ":" chars.
+     * TODO: move to choice specific logic.
+     */
     var buf = buf.replace(/:/gm, ', ');
     buf = buf.replace(/(\$p|@|#|%|\.\.)/gmi, '');
 
