@@ -10,6 +10,11 @@ var app = express();
 app.use(require('express-favicon')());
 var fs = require('fs')
 var bodyParser = require('body-parser')
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(bodyParser.json({limit: '50mb'}));       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true,
@@ -44,7 +49,6 @@ app.get('/:id/transformFFL_LME/*', (req, res) => {
     var fflReadStream = fs.createReadStream(__dirname + '/public/json/' + modelName + '.js')
     // This will wait until we know the readable stream is actually valid before piping
     fflReadStream.on('open', function() {
-        res.header("Access-Control-Allow-Origin", "*");
         // This just pipes the read stream to the response object (which goes to the client)
         fflReadStream.pipe(res);
     });
