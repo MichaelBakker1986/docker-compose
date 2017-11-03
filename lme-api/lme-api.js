@@ -16,10 +16,9 @@ require('./api/store').setup(app)
 require('./api/value').setup(app)
 require('./api/api-def').setup(app)
 
-
 app.listen(port, function() {
     require('dns').lookup(hostname, (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
-        console.info('<a href="' + domain + 'docs/?url=%2Fapi-docs#!/default/value">Swagger API docs</a>\n');
+        console.info('<a href="' + domain + 'docs/?url=%2Fapi-docs#!/default/value">Swagger API</a>\n');
     })
 });

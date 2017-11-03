@@ -14,6 +14,8 @@
     <script>
         angular.module('angapp', ['angular.filter']).controller('kspController', function($scope, $http) {
 
+            var userID = 'DEMO'
+
             var url = window.location.href.split("/")
             var result = url[0] + "//" + url[2].split(':')[0]
             var modelName = window.location.href.split('model=')[1];
@@ -23,9 +25,9 @@
             $scope.goto = function(data) {
                 alert(data)
             }
-            let liveUrl = '/DEMO/transformFFL_LME/KSP';
+            let liveUrl = '/' + userID + '/transformFFL_LME/KSP';
             if (modelName) {
-                liveUrl = '/DEMO/transformFFL_LME/' + modelName
+                liveUrl = '/' + userID + '/transformFFL_LME/' + modelName
             }
             $scope.sendData = function(e) {
                 alert(JSON.stringify(LME.exportData(), null, 2))
@@ -178,12 +180,26 @@
                             <td class="txttd"><span contenteditable="true" class="text" ng-bind="f.title"></span></td>
                             <td ng-click="goto(f)"><i class="fa fa-info"></i></td>
                             <td ng-click="goto(f)"><i class="fa fa-link"></i></td>
-                            <td ng-repeat="cv in f.cols" colspan="{{f.colspan}}">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                                    <input type="text" class="form-control" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder="">
+                            <td ng-repeat="cv in f.cols" colspan="{{f.colspan}}" ng-switch="f.type">
+                                <div class="input-group" ng-init="pid = $index">
+                                    <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
+                                    <select ng-switch-when="select" class="form-control" ng-model="cv.value" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" placeholder="Pick value">
+                                        <option ng-repeat="choice in f.choices" ng-selected="choice.name == cv.value">{{choice.value}}</option>
+                                    </select>
+                                    <input ng-repeat="choice in f.choices"
+                                           ng-readonly="cv.locked"
+                                           ng-disabled="cv.locked"
+                                           ng-required="cv.required"
+                                           ng-switch-when="radio"
+                                           class="form-control"
+                                           name="{{f.id + '-' + pid}}"
+                                           type="radio"
+                                           ng-model="cv.value"
+                                           value="{{choice.value}}"
+                                    >
+                                    <input ng-switch-default type="text" class="form-control" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder="">
                                     <span class="input-group-addon"><i ng-if="cv.required" class="fa fa-asterisk"></i></span>
-                                    <span ng-if="$last" class="input-group-addon"><i class="fa fa-plus"></i></span>
+                                    <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
                                 </div>
                             </td>
                         </tr>

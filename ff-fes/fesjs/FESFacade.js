@@ -82,12 +82,17 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     else {
         returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values);
     }
-    //TODO: should be added to the UI element or Formula
     //formatter, for fixed decimals is a part of the UI, frequency is a part of the Formula.
-    if (variable && colType === 'value' && variable.delegate && variable.delegate.fixed_decimals) {
-        if (!isNaN(returnValue)) {
-            var level = Math.pow(10, parseInt(variable.delegate.fixed_decimals));
-            returnValue = (Math.round(returnValue * level) / level)
+    if (variable) {
+        if (colType === 'value') {
+            if (variable.delegate && variable.delegate.fixed_decimals) {
+                if (!isNaN(returnValue)) {
+                    var level = Math.pow(10, parseInt(variable.delegate.fixed_decimals));
+                    returnValue = (Math.round(returnValue * level) / level)
+                }
+            }
+        } else if (colType == 'locked') {
+            return Boolean(returnValue)
         }
     }
     return returnValue;

@@ -15370,7 +15370,7 @@
       "ref": 100001,
       "formulaName": "MVO_RootSub1_value",
       "refId": 100001,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "none",
       "parentName": "root_value"
     },
@@ -15462,7 +15462,7 @@
       "ref": 100008,
       "formulaName": "MVO_FES_EXCHANGE_RATES_value",
       "refId": 100008,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -15486,7 +15486,7 @@
       "ref": 100010,
       "formulaName": "MVO_FES_LAYOUT_value",
       "refId": 100010,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -15510,7 +15510,7 @@
       "ref": 100012,
       "formulaName": "MVO_FES_FLATINPUT_value",
       "refId": 100012,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -15534,7 +15534,7 @@
       "ref": 100014,
       "formulaName": "MVO_FES_PROJECTION_PROFILE_value",
       "refId": 100014,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -15558,7 +15558,7 @@
       "ref": 100016,
       "formulaName": "MVO_FES_COLUMN_ORDER_value",
       "refId": 100016,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -15582,7 +15582,7 @@
       "ref": 100018,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
       "refId": 100018,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -15606,7 +15606,7 @@
       "ref": 100020,
       "formulaName": "MVO_FES_STARTDATEPERIOD_value",
       "refId": 100020,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -15630,7 +15630,7 @@
       "ref": 100022,
       "formulaName": "MVO_FES_ENDDATEPERIOD_value",
       "refId": 100022,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -15654,7 +15654,7 @@
       "ref": 100024,
       "formulaName": "MVO_FES_BASECURRENCYPERIOD_value",
       "refId": 100024,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -15678,7 +15678,7 @@
       "ref": 100026,
       "formulaName": "MVO_FES_VIEWCURRENCYPERIOD_value",
       "refId": 100026,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -15702,7 +15702,7 @@
       "ref": 100028,
       "formulaName": "MVO_FES_COLUMNTYPE_value",
       "refId": 100028,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -15852,7 +15852,7 @@
       "ref": 100031,
       "formulaName": "MVO_RootSub2_value",
       "refId": 100031,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "none",
       "parentName": "root_value"
     },
@@ -15898,7 +15898,7 @@
       "ref": 100033,
       "formulaName": "MVO_FPS_VAR_Naam_value",
       "refId": 100033,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -15922,7 +15922,7 @@
       "ref": 100035,
       "formulaName": "MVO_FPS_VAR_Relatienummer_value",
       "refId": 100035,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -15946,7 +15946,7 @@
       "ref": 100037,
       "formulaName": "MVO_FPS_VAR_KVKnr_value",
       "refId": 100037,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -15970,7 +15970,7 @@
       "ref": 100039,
       "formulaName": "MVO_FPS_VAR_Rechtsvorm_nr_value",
       "refId": 100039,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -15994,7 +15994,7 @@
       "ref": 100041,
       "formulaName": "MVO_FPS_VAR_Rechtsvorm_omschr_value",
       "refId": 100041,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16018,7 +16018,7 @@
       "ref": 100043,
       "formulaName": "MVO_FPS_VAR_BIK_CODE_value",
       "refId": 100043,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16042,7 +16042,7 @@
       "ref": 100045,
       "formulaName": "MVO_FPS_VAR_BIK_Omschr_value",
       "refId": 100045,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16066,7 +16066,7 @@
       "ref": 100047,
       "formulaName": "MVO_FPS_VAR_GridId_value",
       "refId": 100047,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16090,7 +16090,7 @@
       "ref": 100049,
       "formulaName": "MVO_FPS_VAR_Accountmanager_value",
       "refId": 100049,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16114,7 +16114,7 @@
       "ref": 100051,
       "formulaName": "MVO_FPS_VAR_Kantoor_value",
       "refId": 100051,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16138,7 +16138,7 @@
       "ref": 100053,
       "formulaName": "MVO_FPS_VAR_Straat_value",
       "refId": 100053,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16162,7 +16162,7 @@
       "ref": 100055,
       "formulaName": "MVO_FPS_VAR_Housenumber_value",
       "refId": 100055,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16186,7 +16186,7 @@
       "ref": 100057,
       "formulaName": "MVO_FPS_VAR_Postcode_value",
       "refId": 100057,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16210,7 +16210,7 @@
       "ref": 100059,
       "formulaName": "MVO_FPS_VAR_Woonplaats_value",
       "refId": 100059,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16234,7 +16234,7 @@
       "ref": 100061,
       "formulaName": "MVO_FPS_VAR_Provincie_value",
       "refId": 100061,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16258,7 +16258,7 @@
       "ref": 100063,
       "formulaName": "MVO_FPS_VAR_Land_value",
       "refId": 100063,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16282,7 +16282,7 @@
       "ref": 100065,
       "formulaName": "MVO_FPS_VAR_BvDID_value",
       "refId": 100065,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16306,7 +16306,7 @@
       "ref": 100067,
       "formulaName": "MVO_FPS_VAR_Telefoon_value",
       "refId": 100067,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16343,7 +16343,7 @@
       "ref": 100069,
       "formulaName": "MVO_FPS_VAR_Emailadres_value",
       "refId": 100069,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -16367,7 +16367,7 @@
       "ref": 100071,
       "formulaName": "MVO_FPS_FINAN_USER_ROLES_value",
       "refId": 100071,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FPS_VAR_Emailadres_value"
     },
@@ -16391,7 +16391,7 @@
       "ref": 100073,
       "formulaName": "MVO_FPS_FINAN_USER_value",
       "refId": 100073,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FPS_VAR_Emailadres_value"
     },
@@ -16536,7 +16536,7 @@
       "ref": 100075,
       "formulaName": "MVO_Q_ROOT_value",
       "refId": 100075,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -16667,7 +16667,7 @@
       "ref": 100078,
       "formulaName": "MVO_Q_MAP01_value",
       "refId": 100078,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -16713,7 +16713,7 @@
       "ref": 100080,
       "formulaName": "MVO_Q_MAP01_WARNING_value",
       "refId": 100080,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -16748,7 +16748,7 @@
       "ref": 100082,
       "formulaName": "MVO_Q_MAP01_INFO_value",
       "refId": 100082,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -16783,7 +16783,7 @@
       "ref": 100084,
       "formulaName": "MVO_Q_MAP01_VALIDATION_value",
       "refId": 100084,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -16818,7 +16818,7 @@
       "ref": 100086,
       "formulaName": "MVO_Q_MAP01_HINT_value",
       "refId": 100086,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -16860,7 +16860,7 @@
       "ref": 100088,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF00_value",
       "refId": 100088,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -16895,7 +16895,7 @@
       "ref": 100091,
       "formulaName": "MVO_Q_MAP01_VERBORGEN_value",
       "refId": 100091,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF00_value"
     },
@@ -16966,7 +16966,7 @@
       "ref": 100093,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF01_value",
       "refId": 100093,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -16990,7 +16990,7 @@
       "ref": 100095,
       "formulaName": "MVO_Q_MAP01_VRAAG01_value",
       "refId": 100095,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
     },
@@ -17036,7 +17036,7 @@
       "ref": 100099,
       "formulaName": "MVO_Q_MAP01_VRAAG01_MEMO_value",
       "refId": 100099,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
     },
@@ -17082,7 +17082,7 @@
       "ref": 100103,
       "formulaName": "MVO_Q_MAP01_VRAAG02_value",
       "refId": 100103,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
     },
@@ -17128,7 +17128,7 @@
       "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_value",
       "refId": 100105,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
     },
@@ -17199,7 +17199,7 @@
       "ref": 100109,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF02_value",
       "refId": 100109,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -17223,7 +17223,7 @@
       "ref": 100111,
       "formulaName": "MVO_Q_MAP01_VRAAG03_value",
       "refId": 100111,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
     },
@@ -17280,7 +17280,7 @@
       "ref": 100114,
       "formulaName": "MVO_Q_MAP01_VRAAG03_MEMO_value",
       "refId": 100114,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
     },
@@ -17326,7 +17326,7 @@
       "ref": 100117,
       "formulaName": "MVO_Q_MAP01_VRAAG04_value",
       "refId": 100117,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
     },
@@ -17372,7 +17372,7 @@
       "ref": 100119,
       "formulaName": "MVO_Q_MAP01_VRAAG04_MEMO_value",
       "refId": 100119,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
     },
@@ -17443,7 +17443,7 @@
       "ref": 100122,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF03_value",
       "refId": 100122,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -17467,7 +17467,7 @@
       "ref": 100124,
       "formulaName": "MVO_Q_MAP01_VRAAG05_value",
       "refId": 100124,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
     },
@@ -17513,7 +17513,7 @@
       "ref": 100126,
       "formulaName": "MVO_Q_MAP01_VRAAG05_MEMO_value",
       "refId": 100126,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
     },
@@ -17559,7 +17559,7 @@
       "ref": 100129,
       "formulaName": "MVO_Q_MAP01_VRAAG06_value",
       "refId": 100129,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
     },
@@ -17605,7 +17605,7 @@
       "ref": 100131,
       "formulaName": "MVO_Q_MAP01_VRAAG06_MEMO_value",
       "refId": 100131,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
     },
@@ -17676,7 +17676,7 @@
       "ref": 100134,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF04_value",
       "refId": 100134,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -17711,7 +17711,7 @@
       "ref": 100136,
       "formulaName": "MVO_Q_MAP01_VRAAG07_value",
       "refId": 100136,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
     },
@@ -17757,7 +17757,7 @@
       "ref": 100138,
       "formulaName": "MVO_Q_MAP01_VRAAG07_MEMO_value",
       "refId": 100138,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
     },
@@ -17803,7 +17803,7 @@
       "ref": 100141,
       "formulaName": "MVO_Q_MAP01_VRAAG08_value",
       "refId": 100141,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
     },
@@ -17849,7 +17849,7 @@
       "ref": 100143,
       "formulaName": "MVO_Q_MAP01_VRAAG08_MEMO_value",
       "refId": 100143,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
     },
@@ -17920,7 +17920,7 @@
       "ref": 100146,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF05_value",
       "refId": 100146,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -17944,7 +17944,7 @@
       "ref": 100148,
       "formulaName": "MVO_Q_MAP01_VRAAG09_value",
       "refId": 100148,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
     },
@@ -18001,7 +18001,7 @@
       "ref": 100151,
       "formulaName": "MVO_Q_MAP01_VRAAG09_MEMO_value",
       "refId": 100151,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
     },
@@ -18047,7 +18047,7 @@
       "ref": 100154,
       "formulaName": "MVO_Q_MAP01_VRAAG10_value",
       "refId": 100154,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
     },
@@ -18093,7 +18093,7 @@
       "ref": 100156,
       "formulaName": "MVO_Q_MAP01_VRAAG10_MEMO_value",
       "refId": 100156,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
     },
@@ -18164,7 +18164,7 @@
       "ref": 100159,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF06_value",
       "refId": 100159,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -18188,7 +18188,7 @@
       "ref": 100161,
       "formulaName": "MVO_Q_MAP01_VRAAG11_value",
       "refId": 100161,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
     },
@@ -18234,7 +18234,7 @@
       "ref": 100163,
       "formulaName": "MVO_Q_MAP01_VRAAG11_MEMO_value",
       "refId": 100163,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
     },
@@ -18280,7 +18280,7 @@
       "ref": 100166,
       "formulaName": "MVO_Q_MAP01_VRAAG12_value",
       "refId": 100166,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
     },
@@ -18326,7 +18326,7 @@
       "ref": 100168,
       "formulaName": "MVO_Q_MAP01_VRAAG12_MEMO_value",
       "refId": 100168,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
     },
@@ -18397,7 +18397,7 @@
       "ref": 100171,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF07_value",
       "refId": 100171,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -18421,7 +18421,7 @@
       "ref": 100173,
       "formulaName": "MVO_Q_MAP01_VRAAG13_value",
       "refId": 100173,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
     },
@@ -18467,7 +18467,7 @@
       "ref": 100175,
       "formulaName": "MVO_Q_MAP01_VRAAG13_MEMO_value",
       "refId": 100175,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
     },
@@ -18513,7 +18513,7 @@
       "ref": 100178,
       "formulaName": "MVO_Q_MAP01_VRAAG14_value",
       "refId": 100178,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
     },
@@ -18559,7 +18559,7 @@
       "ref": 100180,
       "formulaName": "MVO_Q_MAP01_VRAAG14_MEMO_value",
       "refId": 100180,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
     },
@@ -18636,7 +18636,7 @@
       "ref": 100183,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09_value",
       "refId": 100183,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -18682,7 +18682,7 @@
       "ref": 100185,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB1_value",
       "refId": 100185,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -18717,7 +18717,7 @@
       "ref": 100186,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB2_value",
       "refId": 100186,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -18752,7 +18752,7 @@
       "ref": 100187,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB3_value",
       "refId": 100187,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -18787,7 +18787,7 @@
       "ref": 100188,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_value",
       "refId": 100188,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -18822,7 +18822,7 @@
       "ref": 100190,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_value",
       "refId": 100190,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -18876,7 +18876,7 @@
       "ref": 100192,
       "formulaName": "MVO_Q_MAP01_HULPVARIABELEN_value",
       "refId": 100192,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -18922,7 +18922,7 @@
       "ref": 100194,
       "formulaName": "MVO_Q_MAP01_REQUIREDVARS_value",
       "refId": 100194,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
     },
@@ -18957,7 +18957,7 @@
       "ref": 100195,
       "formulaName": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
       "refId": 100195,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
     },
@@ -18992,7 +18992,7 @@
       "ref": 100196,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
       "refId": 100196,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
     },
@@ -19087,7 +19087,7 @@
       "ref": 100198,
       "formulaName": "MVO_Q_MAP02_value",
       "refId": 100198,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -19133,7 +19133,7 @@
       "ref": 100200,
       "formulaName": "MVO_Q_MAP02_WARNING_value",
       "refId": 100200,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -19168,7 +19168,7 @@
       "ref": 100202,
       "formulaName": "MVO_Q_MAP02_INFO_value",
       "refId": 100202,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -19203,7 +19203,7 @@
       "ref": 100204,
       "formulaName": "MVO_Q_MAP02_VALIDATION_value",
       "refId": 100204,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -19238,7 +19238,7 @@
       "ref": 100206,
       "formulaName": "MVO_Q_MAP02_HINT_value",
       "refId": 100206,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -19280,7 +19280,7 @@
       "ref": 100208,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF00_value",
       "refId": 100208,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -19315,7 +19315,7 @@
       "ref": 100211,
       "formulaName": "MVO_Q_MAP02_VERBORGEN_value",
       "refId": 100211,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF00_value"
     },
@@ -19386,7 +19386,7 @@
       "ref": 100212,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF01_value",
       "refId": 100212,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -19421,7 +19421,7 @@
       "ref": 100214,
       "formulaName": "MVO_Q_MAP02_VRAAG01_value",
       "refId": 100214,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
     },
@@ -19467,7 +19467,7 @@
       "ref": 100217,
       "formulaName": "MVO_Q_MAP02_VRAAG01_MEMO_value",
       "refId": 100217,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
     },
@@ -19513,7 +19513,7 @@
       "ref": 100220,
       "formulaName": "MVO_Q_MAP02_VRAAG02_value",
       "refId": 100220,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
     },
@@ -19559,7 +19559,7 @@
       "ref": 100222,
       "formulaName": "MVO_Q_MAP02_VRAAG02_MEMO_value",
       "refId": 100222,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
     },
@@ -19636,7 +19636,7 @@
       "ref": 100225,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09_value",
       "refId": 100225,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -19682,7 +19682,7 @@
       "ref": 100226,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB1_value",
       "refId": 100226,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -19717,7 +19717,7 @@
       "ref": 100227,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB2_value",
       "refId": 100227,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -19752,7 +19752,7 @@
       "ref": 100228,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB3_value",
       "refId": 100228,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -19787,7 +19787,7 @@
       "ref": 100229,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB4_value",
       "refId": 100229,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -19822,7 +19822,7 @@
       "ref": 100230,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB5_value",
       "refId": 100230,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -19876,7 +19876,7 @@
       "ref": 100231,
       "formulaName": "MVO_Q_MAP02_HULPVARIABELEN_value",
       "refId": 100231,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -19922,7 +19922,7 @@
       "ref": 100232,
       "formulaName": "MVO_Q_MAP02_REQUIREDVARS_value",
       "refId": 100232,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
     },
@@ -19957,7 +19957,7 @@
       "ref": 100233,
       "formulaName": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
       "refId": 100233,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
     },
@@ -19992,7 +19992,7 @@
       "ref": 100234,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
       "refId": 100234,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
     },
@@ -20141,7 +20141,7 @@
       "ref": 100235,
       "formulaName": "MVO_Q_MAP03_value",
       "refId": 100235,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -20187,7 +20187,7 @@
       "ref": 100237,
       "formulaName": "MVO_Q_MAP03_WARNING_value",
       "refId": 100237,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -20222,7 +20222,7 @@
       "ref": 100239,
       "formulaName": "MVO_Q_MAP03_INFO_value",
       "refId": 100239,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -20257,7 +20257,7 @@
       "ref": 100241,
       "formulaName": "MVO_Q_MAP03_VALIDATION_value",
       "refId": 100241,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -20292,7 +20292,7 @@
       "ref": 100243,
       "formulaName": "MVO_Q_MAP03_HINT_value",
       "refId": 100243,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -20346,7 +20346,7 @@
       "ref": 100245,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF01_value",
       "refId": 100245,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -20381,7 +20381,7 @@
       "ref": 100248,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_value",
       "refId": 100248,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF01_value"
     },
@@ -20405,7 +20405,7 @@
       "ref": 100250,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_value",
       "refId": 100250,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF01_value"
     },
@@ -20440,7 +20440,7 @@
       "ref": 100252,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAAL_value",
       "refId": 100252,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF01_value"
     },
@@ -20494,7 +20494,7 @@
       "ref": 100254,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF11_value",
       "refId": 100254,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -20540,7 +20540,7 @@
       "ref": 100256,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_value",
       "refId": 100256,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF11_value"
     },
@@ -20575,7 +20575,7 @@
       "ref": 100257,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG06_value",
       "refId": 100257,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF11_value"
     },
@@ -20610,7 +20610,7 @@
       "ref": 100258,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_value",
       "refId": 100258,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF11_value"
     },
@@ -20682,7 +20682,7 @@
       "ref": 100259,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF10_value",
       "refId": 100259,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -20728,7 +20728,7 @@
       "ref": 100261,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_value",
       "refId": 100261,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -20763,7 +20763,7 @@
       "ref": 100263,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG02_value",
       "refId": 100263,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -20798,7 +20798,7 @@
       "ref": 100265,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG03_value",
       "refId": 100265,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -20833,7 +20833,7 @@
       "ref": 100267,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG04_value",
       "refId": 100267,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -20868,7 +20868,7 @@
       "ref": 100269,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG07_value",
       "refId": 100269,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -20903,7 +20903,7 @@
       "ref": 100271,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_value",
       "refId": 100271,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -20945,7 +20945,7 @@
       "ref": 100272,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF00_value",
       "refId": 100272,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -20980,7 +20980,7 @@
       "ref": 100275,
       "formulaName": "MVO_Q_MAP03_VERBORGEN_value",
       "refId": 100275,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF00_value"
     },
@@ -21051,7 +21051,7 @@
       "ref": 100276,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF02_value",
       "refId": 100276,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -21075,7 +21075,7 @@
       "ref": 100277,
       "formulaName": "MVO_Q_MAP03_VRAAG01_value",
       "refId": 100277,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
     },
@@ -21121,7 +21121,7 @@
       "ref": 100280,
       "formulaName": "MVO_Q_MAP03_VRAAG01_MEMO_value",
       "refId": 100280,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
     },
@@ -21167,7 +21167,7 @@
       "ref": 100283,
       "formulaName": "MVO_Q_MAP03_VRAAG02_value",
       "refId": 100283,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
     },
@@ -21213,7 +21213,7 @@
       "ref": 100285,
       "formulaName": "MVO_Q_MAP03_VRAAG02_MEMO_value",
       "refId": 100285,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
     },
@@ -21284,7 +21284,7 @@
       "ref": 100288,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF03_value",
       "refId": 100288,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -21308,7 +21308,7 @@
       "ref": 100289,
       "formulaName": "MVO_Q_MAP03_VRAAG03_value",
       "refId": 100289,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
     },
@@ -21354,7 +21354,7 @@
       "ref": 100290,
       "formulaName": "MVO_Q_MAP03_VRAAG03_MEMO_value",
       "refId": 100290,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
     },
@@ -21400,7 +21400,7 @@
       "ref": 100293,
       "formulaName": "MVO_Q_MAP03_VRAAG04_value",
       "refId": 100293,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
     },
@@ -21446,7 +21446,7 @@
       "ref": 100294,
       "formulaName": "MVO_Q_MAP03_VRAAG04_MEMO_value",
       "refId": 100294,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
     },
@@ -21517,7 +21517,7 @@
       "ref": 100297,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF04_value",
       "refId": 100297,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -21552,7 +21552,7 @@
       "ref": 100299,
       "formulaName": "MVO_Q_MAP03_VRAAG05_value",
       "refId": 100299,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
     },
@@ -21598,7 +21598,7 @@
       "ref": 100301,
       "formulaName": "MVO_Q_MAP03_VRAAG05_MEMO_value",
       "refId": 100301,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
     },
@@ -21644,7 +21644,7 @@
       "ref": 100304,
       "formulaName": "MVO_Q_MAP03_VRAAG06_value",
       "refId": 100304,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
     },
@@ -21690,7 +21690,7 @@
       "ref": 100306,
       "formulaName": "MVO_Q_MAP03_VRAAG06_MEMO_value",
       "refId": 100306,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
     },
@@ -21761,7 +21761,7 @@
       "ref": 100309,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF05_value",
       "refId": 100309,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -21785,7 +21785,7 @@
       "ref": 100310,
       "formulaName": "MVO_Q_MAP03_VRAAG07_value",
       "refId": 100310,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
     },
@@ -21831,7 +21831,7 @@
       "ref": 100312,
       "formulaName": "MVO_Q_MAP03_VRAAG07_MEMO_value",
       "refId": 100312,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
     },
@@ -21877,7 +21877,7 @@
       "ref": 100315,
       "formulaName": "MVO_Q_MAP03_VRAAG08_value",
       "refId": 100315,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
     },
@@ -21923,7 +21923,7 @@
       "ref": 100317,
       "formulaName": "MVO_Q_MAP03_VRAAG08_MEMO_value",
       "refId": 100317,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
     },
@@ -21994,7 +21994,7 @@
       "ref": 100320,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF06_value",
       "refId": 100320,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -22018,7 +22018,7 @@
       "ref": 100321,
       "formulaName": "MVO_Q_MAP03_VRAAG09_value",
       "refId": 100321,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
     },
@@ -22064,7 +22064,7 @@
       "ref": 100323,
       "formulaName": "MVO_Q_MAP03_VRAAG09_MEMO_value",
       "refId": 100323,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
     },
@@ -22110,7 +22110,7 @@
       "ref": 100326,
       "formulaName": "MVO_Q_MAP03_VRAAG10_value",
       "refId": 100326,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
     },
@@ -22156,7 +22156,7 @@
       "ref": 100328,
       "formulaName": "MVO_Q_MAP03_VRAAG10_MEMO_value",
       "refId": 100328,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
     },
@@ -22227,7 +22227,7 @@
       "ref": 100331,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF07_value",
       "refId": 100331,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -22251,7 +22251,7 @@
       "ref": 100332,
       "formulaName": "MVO_Q_MAP03_VRAAG11_value",
       "refId": 100332,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
     },
@@ -22297,7 +22297,7 @@
       "ref": 100334,
       "formulaName": "MVO_Q_MAP03_VRAAG11_MEMO_value",
       "refId": 100334,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
     },
@@ -22343,7 +22343,7 @@
       "ref": 100337,
       "formulaName": "MVO_Q_MAP03_VRAAG12_value",
       "refId": 100337,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
     },
@@ -22389,7 +22389,7 @@
       "ref": 100339,
       "formulaName": "MVO_Q_MAP03_VRAAG12_MEMO_value",
       "refId": 100339,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
     },
@@ -22460,7 +22460,7 @@
       "ref": 100342,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF08_value",
       "refId": 100342,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -22484,7 +22484,7 @@
       "ref": 100343,
       "formulaName": "MVO_Q_MAP03_VRAAG13_value",
       "refId": 100343,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
     },
@@ -22530,7 +22530,7 @@
       "ref": 100345,
       "formulaName": "MVO_Q_MAP03_VRAAG13_MEMO_value",
       "refId": 100345,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
     },
@@ -22576,7 +22576,7 @@
       "ref": 100348,
       "formulaName": "MVO_Q_MAP03_VRAAG14_value",
       "refId": 100348,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
     },
@@ -22622,7 +22622,7 @@
       "ref": 100350,
       "formulaName": "MVO_Q_MAP03_VRAAG14_MEMO_value",
       "refId": 100350,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
     },
@@ -22699,7 +22699,7 @@
       "ref": 100353,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09_value",
       "refId": 100353,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -22745,7 +22745,7 @@
       "ref": 100354,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB1_value",
       "refId": 100354,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
     },
@@ -22780,7 +22780,7 @@
       "ref": 100355,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB2_value",
       "refId": 100355,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
     },
@@ -22815,7 +22815,7 @@
       "ref": 100356,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB3_value",
       "refId": 100356,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
     },
@@ -22850,7 +22850,7 @@
       "ref": 100357,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB4_value",
       "refId": 100357,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
     },
@@ -22885,7 +22885,7 @@
       "ref": 100358,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB5_value",
       "refId": 100358,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
     },
@@ -22939,7 +22939,7 @@
       "ref": 100359,
       "formulaName": "MVO_Q_MAP03_HULPVARIABELEN_value",
       "refId": 100359,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -22985,7 +22985,7 @@
       "ref": 100360,
       "formulaName": "MVO_Q_MAP03_REQUIREDVARS_value",
       "refId": 100360,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_HULPVARIABELEN_value"
     },
@@ -23020,7 +23020,7 @@
       "ref": 100361,
       "formulaName": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
       "refId": 100361,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_HULPVARIABELEN_value"
     },
@@ -23055,7 +23055,7 @@
       "ref": 100362,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
       "refId": 100362,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_HULPVARIABELEN_value"
     },
@@ -23168,7 +23168,7 @@
       "ref": 100363,
       "formulaName": "MVO_Q_MAP04_value",
       "refId": 100363,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -23214,7 +23214,7 @@
       "ref": 100365,
       "formulaName": "MVO_Q_MAP04_WARNING_value",
       "refId": 100365,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -23249,7 +23249,7 @@
       "ref": 100367,
       "formulaName": "MVO_Q_MAP04_INFO_value",
       "refId": 100367,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -23284,7 +23284,7 @@
       "ref": 100369,
       "formulaName": "MVO_Q_MAP04_VALIDATION_value",
       "refId": 100369,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -23319,7 +23319,7 @@
       "ref": 100371,
       "formulaName": "MVO_Q_MAP04_HINT_value",
       "refId": 100371,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -23361,7 +23361,7 @@
       "ref": 100373,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF00_value",
       "refId": 100373,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -23396,7 +23396,7 @@
       "ref": 100376,
       "formulaName": "MVO_Q_MAP04_VERBORGEN_value",
       "refId": 100376,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF00_value"
     },
@@ -23497,7 +23497,7 @@
       "ref": 100377,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF01_value",
       "refId": 100377,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -23532,7 +23532,7 @@
       "ref": 100380,
       "formulaName": "MVO_Q_MAP04_VRAAG01_value",
       "refId": 100380,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -23578,7 +23578,7 @@
       "ref": 100383,
       "formulaName": "MVO_Q_MAP04_VRAAG01_MEMO_value",
       "refId": 100383,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -23624,7 +23624,7 @@
       "ref": 100386,
       "formulaName": "MVO_Q_MAP04_VRAAG02_value",
       "refId": 100386,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -23670,7 +23670,7 @@
       "ref": 100388,
       "formulaName": "MVO_Q_MAP04_VRAAG02_MEMO_value",
       "refId": 100388,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -23716,7 +23716,7 @@
       "ref": 100391,
       "formulaName": "MVO_Q_MAP04_VRAAG03_value",
       "refId": 100391,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -23762,7 +23762,7 @@
       "ref": 100393,
       "formulaName": "MVO_Q_MAP04_VRAAG03_MEMO_value",
       "refId": 100393,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -23808,7 +23808,7 @@
       "ref": 100396,
       "formulaName": "MVO_Q_MAP04_VRAAG04_value",
       "refId": 100396,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -23854,7 +23854,7 @@
       "ref": 100398,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_value",
       "refId": 100398,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -23900,7 +23900,7 @@
       "ref": 100401,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_value",
       "refId": 100401,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -24006,7 +24006,7 @@
       "ref": 100406,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF02_value",
       "refId": 100406,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -24041,7 +24041,7 @@
       "ref": 100409,
       "formulaName": "MVO_Q_MAP04_VRAAG05_value",
       "refId": 100409,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -24087,7 +24087,7 @@
       "ref": 100411,
       "formulaName": "MVO_Q_MAP04_VRAAG05_MEMO_value",
       "refId": 100411,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -24133,7 +24133,7 @@
       "ref": 100414,
       "formulaName": "MVO_Q_MAP04_VRAAG06_value",
       "refId": 100414,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -24179,7 +24179,7 @@
       "ref": 100416,
       "formulaName": "MVO_Q_MAP04_VRAAG06_MEMO_value",
       "refId": 100416,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -24225,7 +24225,7 @@
       "ref": 100419,
       "formulaName": "MVO_Q_MAP04_VRAAG07_value",
       "refId": 100419,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -24271,7 +24271,7 @@
       "ref": 100421,
       "formulaName": "MVO_Q_MAP04_VRAAG07_MEMO_value",
       "refId": 100421,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -24317,7 +24317,7 @@
       "ref": 100424,
       "formulaName": "MVO_Q_MAP04_VRAAG08_value",
       "refId": 100424,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -24363,7 +24363,7 @@
       "ref": 100426,
       "formulaName": "MVO_Q_MAP04_VRAAG08_MEMO_value",
       "refId": 100426,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -24458,7 +24458,7 @@
       "ref": 100429,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF03_value",
       "refId": 100429,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -24493,7 +24493,7 @@
       "ref": 100432,
       "formulaName": "MVO_Q_MAP04_VRAAG09_value",
       "refId": 100432,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -24539,7 +24539,7 @@
       "ref": 100434,
       "formulaName": "MVO_Q_MAP04_VRAAG09_MEMO_value",
       "refId": 100434,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -24585,7 +24585,7 @@
       "ref": 100437,
       "formulaName": "MVO_Q_MAP04_VRAAG10_value",
       "refId": 100437,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -24631,7 +24631,7 @@
       "ref": 100439,
       "formulaName": "MVO_Q_MAP04_VRAAG10_MEMO_value",
       "refId": 100439,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -24677,7 +24677,7 @@
       "ref": 100442,
       "formulaName": "MVO_Q_MAP04_VRAAG11_value",
       "refId": 100442,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -24723,7 +24723,7 @@
       "ref": 100444,
       "formulaName": "MVO_Q_MAP04_VRAAG11_MEMO_value",
       "refId": 100444,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -24769,7 +24769,7 @@
       "ref": 100447,
       "formulaName": "MVO_Q_MAP04_VRAAG12_value",
       "refId": 100447,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -24815,7 +24815,7 @@
       "ref": 100449,
       "formulaName": "MVO_Q_MAP04_VRAAG12_MEMO_value",
       "refId": 100449,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -24934,7 +24934,7 @@
       "ref": 100452,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF10_value",
       "refId": 100452,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -24980,7 +24980,7 @@
       "ref": 100454,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_value",
       "refId": 100454,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25015,7 +25015,7 @@
       "ref": 100456,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG02_value",
       "refId": 100456,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25050,7 +25050,7 @@
       "ref": 100458,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG03_value",
       "refId": 100458,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25085,7 +25085,7 @@
       "ref": 100460,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG04_value",
       "refId": 100460,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25120,7 +25120,7 @@
       "ref": 100462,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG05_value",
       "refId": 100462,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25155,7 +25155,7 @@
       "ref": 100464,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG06_value",
       "refId": 100464,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25190,7 +25190,7 @@
       "ref": 100466,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG07_value",
       "refId": 100466,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25225,7 +25225,7 @@
       "ref": 100467,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG08_value",
       "refId": 100467,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25260,7 +25260,7 @@
       "ref": 100469,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG09_value",
       "refId": 100469,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25295,7 +25295,7 @@
       "ref": 100471,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG10_value",
       "refId": 100471,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25330,7 +25330,7 @@
       "ref": 100473,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG11_value",
       "refId": 100473,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25365,7 +25365,7 @@
       "ref": 100475,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG12_value",
       "refId": 100475,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -25431,7 +25431,7 @@
       "ref": 100477,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09_value",
       "refId": 100477,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -25477,7 +25477,7 @@
       "ref": 100478,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB1_value",
       "refId": 100478,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
     },
@@ -25512,7 +25512,7 @@
       "ref": 100479,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB2_value",
       "refId": 100479,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
     },
@@ -25547,7 +25547,7 @@
       "ref": 100480,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB3_value",
       "refId": 100480,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
     },
@@ -25582,7 +25582,7 @@
       "ref": 100481,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB4_value",
       "refId": 100481,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
     },
@@ -25617,7 +25617,7 @@
       "ref": 100482,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB5_value",
       "refId": 100482,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
     },
@@ -25671,7 +25671,7 @@
       "ref": 100483,
       "formulaName": "MVO_Q_MAP04_HULPVARIABELEN_value",
       "refId": 100483,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -25717,7 +25717,7 @@
       "ref": 100484,
       "formulaName": "MVO_Q_MAP04_REQUIREDVARS_value",
       "refId": 100484,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_HULPVARIABELEN_value"
     },
@@ -25752,7 +25752,7 @@
       "ref": 100485,
       "formulaName": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
       "refId": 100485,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_HULPVARIABELEN_value"
     },
@@ -25787,7 +25787,7 @@
       "ref": 100486,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
       "refId": 100486,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_HULPVARIABELEN_value"
     },
@@ -25864,7 +25864,7 @@
       "ref": 100487,
       "formulaName": "MVO_Q_RESULT_value",
       "refId": 100487,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -25899,7 +25899,7 @@
       "ref": 100489,
       "formulaName": "MVO_Q_RESULTSUB1_value",
       "refId": 100489,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -25941,7 +25941,7 @@
       "ref": 100490,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF01_value",
       "refId": 100490,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -25976,7 +25976,7 @@
       "ref": 100493,
       "formulaName": "MVO_Q_MAP01_SCORE01_value",
       "refId": 100493,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF01_value"
     },
@@ -26018,7 +26018,7 @@
       "ref": 100494,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF02_value",
       "refId": 100494,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -26053,7 +26053,7 @@
       "ref": 100497,
       "formulaName": "MVO_Q_MAP02_SCORE01_value",
       "refId": 100497,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF02_value"
     },
@@ -26137,7 +26137,7 @@
       "ref": 100498,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF03_value",
       "refId": 100498,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -26172,7 +26172,7 @@
       "ref": 100501,
       "formulaName": "MVO_Q_MAP03_SUBSCORE01_value",
       "refId": 100501,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -26207,7 +26207,7 @@
       "ref": 100503,
       "formulaName": "MVO_Q_MAP03_SUBSCORE02_value",
       "refId": 100503,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -26242,7 +26242,7 @@
       "ref": 100505,
       "formulaName": "MVO_Q_MAP03_SUBSCORE03_value",
       "refId": 100505,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -26277,7 +26277,7 @@
       "ref": 100507,
       "formulaName": "MVO_Q_MAP03_SUBSCORE04_value",
       "refId": 100507,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -26312,7 +26312,7 @@
       "ref": 100509,
       "formulaName": "MVO_Q_MAP03_SUBSCORE05_value",
       "refId": 100509,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -26347,7 +26347,7 @@
       "ref": 100511,
       "formulaName": "MVO_Q_MAP03_SUBSCORE06_value",
       "refId": 100511,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -26382,7 +26382,7 @@
       "ref": 100513,
       "formulaName": "MVO_Q_MAP03_SUBSCORE07_value",
       "refId": 100513,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -26417,7 +26417,7 @@
       "ref": 100515,
       "formulaName": "MVO_Q_MAP03_SCORE01_value",
       "refId": 100515,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -26477,7 +26477,7 @@
       "ref": 100517,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF04_value",
       "refId": 100517,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -26512,7 +26512,7 @@
       "ref": 100520,
       "formulaName": "MVO_Q_MAP04_SUBSCORE01_value",
       "refId": 100520,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
     },
@@ -26547,7 +26547,7 @@
       "ref": 100522,
       "formulaName": "MVO_Q_MAP04_SUBSCORE02_value",
       "refId": 100522,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
     },
@@ -26582,7 +26582,7 @@
       "ref": 100524,
       "formulaName": "MVO_Q_MAP04_SUBSCORE03_value",
       "refId": 100524,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
     },
@@ -26617,7 +26617,7 @@
       "ref": 100526,
       "formulaName": "MVO_Q_MAP04_SCORE01_value",
       "refId": 100526,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
     },
@@ -26652,7 +26652,7 @@
       "ref": 100527,
       "formulaName": "MVO_Q_STATUS_value",
       "refId": 100527,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -26687,7 +26687,7 @@
       "ref": 100530,
       "formulaName": "MVO_Q_STATUS_FINAL_ON_value",
       "refId": 100530,
-      "displayAs": "TextAnswerType",
+      "displayAs": "date",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -26711,7 +26711,7 @@
       "ref": 100532,
       "formulaName": "MVO_Q_STATUS_FINAL_BY_value",
       "refId": 100532,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -26735,7 +26735,7 @@
       "ref": 100534,
       "formulaName": "MVO_Q_STATUS_FINAL_BY_NAME_value",
       "refId": 100534,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -26759,7 +26759,7 @@
       "ref": 100536,
       "formulaName": "MVO_Q_STATUS_STARTED_ON_value",
       "refId": 100536,
-      "displayAs": "TextAnswerType",
+      "displayAs": "date",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -26783,7 +26783,7 @@
       "ref": 100538,
       "formulaName": "MVO_Q_STATUS_STARTED_BY_value",
       "refId": 100538,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -26807,7 +26807,7 @@
       "ref": 100540,
       "formulaName": "MVO_Q_STATUS_STARTED_BY_NAME_value",
       "refId": 100540,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -26831,7 +26831,7 @@
       "ref": 100542,
       "formulaName": "MVO_ModelVersion_value",
       "refId": 100542,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -26866,7 +26866,7 @@
       "ref": 100544,
       "formulaName": "MVO_ModelType_value",
       "refId": 100544,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -26901,7 +26901,7 @@
       "ref": 100546,
       "formulaName": "MVO_MatrixVersion_value",
       "refId": 100546,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -26936,7 +26936,7 @@
       "ref": 100549,
       "formulaName": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_value",
       "refId": 100549,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -27006,7 +27006,7 @@
       "ref": 100555,
       "formulaName": "MVO_Q_CONCEPT_REPORT_VISIBLE_value",
       "refId": 100555,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -27041,7 +27041,7 @@
       "ref": 100557,
       "formulaName": "MVO_Q_MAKE_FINAL_VISIBLE_value",
       "refId": 100557,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -27076,7 +27076,7 @@
       "ref": 100559,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
       "refId": 100559,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -27124,7 +27124,7 @@
       "ref": 100561,
       "formulaName": "MVO_HULPVARS_value",
       "refId": 100561,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -27172,7 +27172,7 @@
       "ref": 100562,
       "formulaName": "MVO_Q_WARNING_GLOBAL_value",
       "refId": 100562,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "HULPVARS_value"
     },
@@ -27207,7 +27207,7 @@
       "ref": 100564,
       "formulaName": "MVO_Q_WARNING_01_value",
       "refId": 100564,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_WARNING_GLOBAL_value"
     },
@@ -27242,7 +27242,7 @@
       "ref": 100566,
       "formulaName": "MVO_Q_WARNING_GLOBALTXT_value",
       "refId": 100566,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_WARNING_GLOBAL_value"
     },
@@ -27296,7 +27296,7 @@
       "ref": 100568,
       "formulaName": "MVO_Q_RESTRICTIES_value",
       "refId": 100568,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "HULPVARS_value"
     },
@@ -27331,7 +27331,7 @@
       "ref": 100570,
       "formulaName": "MVO_Q_RESTRICTIES_01_value",
       "refId": 100570,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
     },
@@ -27355,7 +27355,7 @@
       "ref": 100571,
       "formulaName": "MVO_Q_RESTRICTIES_02_value",
       "refId": 100571,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
     },
@@ -27379,7 +27379,7 @@
       "ref": 100572,
       "formulaName": "MVO_Q_RESTRICTIESTXT_value",
       "refId": 100572,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
     },

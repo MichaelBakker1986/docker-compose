@@ -169,21 +169,16 @@ function StartWithVariableOrTuplePredicate(node) {
 }
 
 var displayAsMapping = {
-    default: 'StringAnswerType',
+    default: 'string',
     select: 'select',
-    undefined: 'StringAnswerType',
-    currency: 'AmountAnswerType',
-    //date: 'DateAnswerType',//requires a converter to work
-    date: 'TextAnswerType',
-    percentage: 'PercentageAnswerType',
-    memo: 'MemoAnswerType',
+    radio: 'select',//reversed, back to original
+    undefined: 'string',
+    currency: 'currency',
+    date: 'date',//requires a converter to work
+    percentage: 'percentage',
+    memo: 'memo',
     //reversed
-    StringAnswerType: "StringAnswerType",
-    select: "select",
-    AmountAnswerType: "currency",
-    TextAnswerType: "default",
-    PercentageAnswerType: "percentage",
-    MemoAnswerType: "memo",
+    string: "string",
     chart: "chart",
     line: "line"
 }
@@ -244,6 +239,15 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         return;
     }
     var mappedDisplayType = displayAsMapping[node.displaytype];
+    if (mappedDisplayType == 'select') {
+        if (!node.choices) {
+            if (log.DEBUG) log.warn('Row [' + rowId + '] is type [select], but does not have choices')
+        } else if (JSON.parse(node.choices).length == 2) {
+            mappedDisplayType = 'radio'
+        } else {
+            if (log.DEBUG) log.debug('[' + rowId + '] ' + node.choices)
+        }
+    }
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 

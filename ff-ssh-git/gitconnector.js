@@ -4,7 +4,7 @@ var fs = require('fs');
 
 /**
  * Prefer parsed JSON file above FFL.
- * TODO: change into canvas_json files
+ * TODO: change into canvas_json files which is way faster to parse.
  */
 function ModelListener() {
 }
@@ -17,7 +17,7 @@ ModelListener.prototype.initializeModels = function() {
     };
     var modelCallback = function(err, res) {
         if (err) {
-            console.log('Error', err);
+            log.warn('Error', err);
         } else {
             res.forEach(function(file) {
                 if (file.toLowerCase().endsWith('.ffl')) {

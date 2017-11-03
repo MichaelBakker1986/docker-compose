@@ -481,7 +481,7 @@
       "ref": 100001,
       "formulaName": "TESTMODEL_TotalConfusedMore_value",
       "refId": 100001,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -516,7 +516,7 @@
       "ref": 100004,
       "formulaName": "TESTMODEL_VariableOne_value",
       "refId": 100004,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -551,7 +551,7 @@
       "ref": 100006,
       "formulaName": "TESTMODEL_VariableTwo_value",
       "refId": 100006,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -597,7 +597,7 @@
       "ref": 100010,
       "formulaName": "TESTMODEL_Total_value",
       "refId": 100010,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -643,7 +643,7 @@
       "ref": 100012,
       "formulaName": "TESTMODEL_OneFixedDecimal_value",
       "refId": 100012,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -667,7 +667,7 @@
       "ref": 100014,
       "formulaName": "TESTMODEL_ZeroFixedDecimal_value",
       "refId": 100014,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -691,7 +691,7 @@
       "ref": 100015,
       "formulaName": "TESTMODEL_EvaluateStringTitle_value",
       "refId": 100015,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -737,7 +737,7 @@
       "ref": 100016,
       "formulaName": "TESTMODEL_DataEntered_value",
       "refId": 100016,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },

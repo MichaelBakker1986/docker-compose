@@ -35,7 +35,7 @@ function noChange(workbook, rowId, col, index) {
 
 function changeAble(workbook, rowId, col, index) {
     let r;//return value
-    let c;//calculation counter
+    let c = -1;//calculation counter
     return {
         get: function() {
             if (counter !== c) {

@@ -912,21 +912,16 @@ function StartWithVariableOrTuplePredicate(node) {
 }
 
 var displayAsMapping = {
-    default: 'StringAnswerType',
+    default: 'string',
     select: 'select',
-    undefined: 'StringAnswerType',
-    currency: 'AmountAnswerType',
-    //date: 'DateAnswerType',//requires a converter to work
-    date: 'TextAnswerType',
-    percentage: 'PercentageAnswerType',
-    memo: 'MemoAnswerType',
+    radio: 'select',//reversed, back to original
+    undefined: 'string',
+    currency: 'currency',
+    date: 'date',//requires a converter to work
+    percentage: 'percentage',
+    memo: 'memo',
     //reversed
-    StringAnswerType: "StringAnswerType",
-    select: "select",
-    AmountAnswerType: "currency",
-    TextAnswerType: "default",
-    PercentageAnswerType: "percentage",
-    MemoAnswerType: "memo",
+    string: "string",
     chart: "chart",
     line: "line"
 }
@@ -987,6 +982,15 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         return;
     }
     var mappedDisplayType = displayAsMapping[node.displaytype];
+    if (mappedDisplayType == 'select') {
+        if (!node.choices) {
+            if (log.DEBUG) log.warn('Row [' + rowId + '] is type [select], but does not have choices')
+        } else if (JSON.parse(node.choices).length == 2) {
+            mappedDisplayType = 'radio'
+        } else {
+            if (log.DEBUG) log.debug('[' + rowId + '] ' + node.choices)
+        }
+    }
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 
@@ -2861,6 +2865,7 @@ JSWorkBook.prototype.getNode = function(name) {
 JSWorkBook.prototype.getSolutionNode = function(name) {
     return FESFacade.fetchSolutionNode(name, 'value')
 };
+JSWorkBook.prototype.fetchSolutionNode = FESFacade.fetchSolutionNode
 
 function resolveX(wb, x) {
     return x ? wb.xaxis[x] : wb.xaxis[0];
@@ -4065,8 +4070,7 @@ FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tu
     //setvalue
     if (value !== undefined) {
         //choice(select) requests
-        var variable = JSWorkBook.getSolutionNode(rowId, 'value');
-        if (variable && variable.displayAs === 'select') {
+        if (JSWorkBook.fetchSolutionNode(rowId, 'choices')) {
             var choices = JSWorkBook.getSolutionPropertyValue(rowId, 'choices');
             var choiceValue = choices.lookup('value', value);
             if (choiceValue === undefined) {
@@ -74217,8 +74221,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     {
       "type": "noCacheLocked",
       "refs": {
-        "MVO_RootSub1_locked": true,
-        "MVO_FES_LAYOUTNR_locked": true
+        "MVO_RootSub1_locked": true
       },
       "formulaDependencys": [],
       "deps": {},
@@ -89504,7 +89507,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100001,
       "formulaName": "MVO_RootSub1_value",
       "refId": 100001,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "none",
       "parentName": "root_value"
     },
@@ -89568,17 +89571,6 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     {
       "rowId": "FES_LAYOUTNR",
       "solutionName": "MVO",
-      "colId": "locked",
-      "name": "MVO_FES_LAYOUTNR_locked",
-      "nodes": [],
-      "ref": 100003,
-      "formulaName": "MVO_RootSub1_locked",
-      "refId": 100003,
-      "displayAs": "PropertyType"
-    },
-    {
-      "rowId": "FES_LAYOUTNR",
-      "solutionName": "MVO",
       "colId": "choices",
       "name": "MVO_FES_LAYOUTNR_choices",
       "nodes": [],
@@ -89596,7 +89588,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100008,
       "formulaName": "MVO_FES_EXCHANGE_RATES_value",
       "refId": 100008,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -89620,7 +89612,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100010,
       "formulaName": "MVO_FES_LAYOUT_value",
       "refId": 100010,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -89644,7 +89636,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100012,
       "formulaName": "MVO_FES_FLATINPUT_value",
       "refId": 100012,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -89668,7 +89660,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100014,
       "formulaName": "MVO_FES_PROJECTION_PROFILE_value",
       "refId": 100014,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -89692,7 +89684,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100016,
       "formulaName": "MVO_FES_COLUMN_ORDER_value",
       "refId": 100016,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub1_value"
     },
@@ -89716,7 +89708,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100018,
       "formulaName": "MVO_FES_COLUMN_VISIBLE_value",
       "refId": 100018,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -89740,7 +89732,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100020,
       "formulaName": "MVO_FES_STARTDATEPERIOD_value",
       "refId": 100020,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -89764,7 +89756,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100022,
       "formulaName": "MVO_FES_ENDDATEPERIOD_value",
       "refId": 100022,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -89788,7 +89780,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100024,
       "formulaName": "MVO_FES_BASECURRENCYPERIOD_value",
       "refId": 100024,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -89812,7 +89804,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100026,
       "formulaName": "MVO_FES_VIEWCURRENCYPERIOD_value",
       "refId": 100026,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -89836,7 +89828,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100028,
       "formulaName": "MVO_FES_COLUMNTYPE_value",
       "refId": 100028,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
@@ -89986,7 +89978,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100031,
       "formulaName": "MVO_RootSub2_value",
       "refId": 100031,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "none",
       "parentName": "root_value"
     },
@@ -90032,7 +90024,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100033,
       "formulaName": "MVO_FPS_VAR_Naam_value",
       "refId": 100033,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90056,7 +90048,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100035,
       "formulaName": "MVO_FPS_VAR_Relatienummer_value",
       "refId": 100035,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90080,7 +90072,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100037,
       "formulaName": "MVO_FPS_VAR_KVKnr_value",
       "refId": 100037,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90104,7 +90096,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100039,
       "formulaName": "MVO_FPS_VAR_Rechtsvorm_nr_value",
       "refId": 100039,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90128,7 +90120,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100041,
       "formulaName": "MVO_FPS_VAR_Rechtsvorm_omschr_value",
       "refId": 100041,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90152,7 +90144,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100043,
       "formulaName": "MVO_FPS_VAR_BIK_CODE_value",
       "refId": 100043,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90176,7 +90168,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100045,
       "formulaName": "MVO_FPS_VAR_BIK_Omschr_value",
       "refId": 100045,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90200,7 +90192,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100047,
       "formulaName": "MVO_FPS_VAR_GridId_value",
       "refId": 100047,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90224,7 +90216,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100049,
       "formulaName": "MVO_FPS_VAR_Accountmanager_value",
       "refId": 100049,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90248,7 +90240,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100051,
       "formulaName": "MVO_FPS_VAR_Kantoor_value",
       "refId": 100051,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90272,7 +90264,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100053,
       "formulaName": "MVO_FPS_VAR_Straat_value",
       "refId": 100053,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90296,7 +90288,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100055,
       "formulaName": "MVO_FPS_VAR_Housenumber_value",
       "refId": 100055,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90320,7 +90312,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100057,
       "formulaName": "MVO_FPS_VAR_Postcode_value",
       "refId": 100057,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90344,7 +90336,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100059,
       "formulaName": "MVO_FPS_VAR_Woonplaats_value",
       "refId": 100059,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90368,7 +90360,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100061,
       "formulaName": "MVO_FPS_VAR_Provincie_value",
       "refId": 100061,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90392,7 +90384,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100063,
       "formulaName": "MVO_FPS_VAR_Land_value",
       "refId": 100063,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90416,7 +90408,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100065,
       "formulaName": "MVO_FPS_VAR_BvDID_value",
       "refId": 100065,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90440,7 +90432,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100067,
       "formulaName": "MVO_FPS_VAR_Telefoon_value",
       "refId": 100067,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90477,7 +90469,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100069,
       "formulaName": "MVO_FPS_VAR_Emailadres_value",
       "refId": 100069,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "RootSub2_value"
     },
@@ -90501,7 +90493,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100071,
       "formulaName": "MVO_FPS_FINAN_USER_ROLES_value",
       "refId": 100071,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FPS_VAR_Emailadres_value"
     },
@@ -90525,7 +90517,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100073,
       "formulaName": "MVO_FPS_FINAN_USER_value",
       "refId": 100073,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "FPS_VAR_Emailadres_value"
     },
@@ -90670,7 +90662,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100075,
       "formulaName": "MVO_Q_ROOT_value",
       "refId": 100075,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -90801,7 +90793,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100078,
       "formulaName": "MVO_Q_MAP01_value",
       "refId": 100078,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -90847,7 +90839,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100080,
       "formulaName": "MVO_Q_MAP01_WARNING_value",
       "refId": 100080,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -90882,7 +90874,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100082,
       "formulaName": "MVO_Q_MAP01_INFO_value",
       "refId": 100082,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -90917,7 +90909,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100084,
       "formulaName": "MVO_Q_MAP01_VALIDATION_value",
       "refId": 100084,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -90952,7 +90944,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100086,
       "formulaName": "MVO_Q_MAP01_HINT_value",
       "refId": 100086,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -90994,7 +90986,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100088,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF00_value",
       "refId": 100088,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -91029,7 +91021,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100091,
       "formulaName": "MVO_Q_MAP01_VERBORGEN_value",
       "refId": 100091,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF00_value"
     },
@@ -91100,7 +91092,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100093,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF01_value",
       "refId": 100093,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -91124,7 +91116,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100095,
       "formulaName": "MVO_Q_MAP01_VRAAG01_value",
       "refId": 100095,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
     },
@@ -91170,7 +91162,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100099,
       "formulaName": "MVO_Q_MAP01_VRAAG01_MEMO_value",
       "refId": 100099,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
     },
@@ -91216,7 +91208,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100103,
       "formulaName": "MVO_Q_MAP01_VRAAG02_value",
       "refId": 100103,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
     },
@@ -91262,7 +91254,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100105,
       "formulaName": "MVO_Q_MAP01_VRAAG02_MEMO_value",
       "refId": 100105,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF01_value"
     },
@@ -91333,7 +91325,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100109,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF02_value",
       "refId": 100109,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -91357,7 +91349,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100111,
       "formulaName": "MVO_Q_MAP01_VRAAG03_value",
       "refId": 100111,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
     },
@@ -91414,7 +91406,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100114,
       "formulaName": "MVO_Q_MAP01_VRAAG03_MEMO_value",
       "refId": 100114,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
     },
@@ -91460,7 +91452,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100117,
       "formulaName": "MVO_Q_MAP01_VRAAG04_value",
       "refId": 100117,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
     },
@@ -91506,7 +91498,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100119,
       "formulaName": "MVO_Q_MAP01_VRAAG04_MEMO_value",
       "refId": 100119,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF02_value"
     },
@@ -91577,7 +91569,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100122,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF03_value",
       "refId": 100122,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -91601,7 +91593,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100124,
       "formulaName": "MVO_Q_MAP01_VRAAG05_value",
       "refId": 100124,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
     },
@@ -91647,7 +91639,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100126,
       "formulaName": "MVO_Q_MAP01_VRAAG05_MEMO_value",
       "refId": 100126,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
     },
@@ -91693,7 +91685,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100129,
       "formulaName": "MVO_Q_MAP01_VRAAG06_value",
       "refId": 100129,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
     },
@@ -91739,7 +91731,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100131,
       "formulaName": "MVO_Q_MAP01_VRAAG06_MEMO_value",
       "refId": 100131,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF03_value"
     },
@@ -91810,7 +91802,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100134,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF04_value",
       "refId": 100134,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -91845,7 +91837,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100136,
       "formulaName": "MVO_Q_MAP01_VRAAG07_value",
       "refId": 100136,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
     },
@@ -91891,7 +91883,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100138,
       "formulaName": "MVO_Q_MAP01_VRAAG07_MEMO_value",
       "refId": 100138,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
     },
@@ -91937,7 +91929,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100141,
       "formulaName": "MVO_Q_MAP01_VRAAG08_value",
       "refId": 100141,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
     },
@@ -91983,7 +91975,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100143,
       "formulaName": "MVO_Q_MAP01_VRAAG08_MEMO_value",
       "refId": 100143,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF04_value"
     },
@@ -92054,7 +92046,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100146,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF05_value",
       "refId": 100146,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -92078,7 +92070,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100148,
       "formulaName": "MVO_Q_MAP01_VRAAG09_value",
       "refId": 100148,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
     },
@@ -92135,7 +92127,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100151,
       "formulaName": "MVO_Q_MAP01_VRAAG09_MEMO_value",
       "refId": 100151,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
     },
@@ -92181,7 +92173,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100154,
       "formulaName": "MVO_Q_MAP01_VRAAG10_value",
       "refId": 100154,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
     },
@@ -92227,7 +92219,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100156,
       "formulaName": "MVO_Q_MAP01_VRAAG10_MEMO_value",
       "refId": 100156,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF05_value"
     },
@@ -92298,7 +92290,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100159,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF06_value",
       "refId": 100159,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -92322,7 +92314,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100161,
       "formulaName": "MVO_Q_MAP01_VRAAG11_value",
       "refId": 100161,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
     },
@@ -92368,7 +92360,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100163,
       "formulaName": "MVO_Q_MAP01_VRAAG11_MEMO_value",
       "refId": 100163,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
     },
@@ -92414,7 +92406,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100166,
       "formulaName": "MVO_Q_MAP01_VRAAG12_value",
       "refId": 100166,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
     },
@@ -92460,7 +92452,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100168,
       "formulaName": "MVO_Q_MAP01_VRAAG12_MEMO_value",
       "refId": 100168,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF06_value"
     },
@@ -92531,7 +92523,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100171,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF07_value",
       "refId": 100171,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -92555,7 +92547,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100173,
       "formulaName": "MVO_Q_MAP01_VRAAG13_value",
       "refId": 100173,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
     },
@@ -92601,7 +92593,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100175,
       "formulaName": "MVO_Q_MAP01_VRAAG13_MEMO_value",
       "refId": 100175,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
     },
@@ -92647,7 +92639,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100178,
       "formulaName": "MVO_Q_MAP01_VRAAG14_value",
       "refId": 100178,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
     },
@@ -92693,7 +92685,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100180,
       "formulaName": "MVO_Q_MAP01_VRAAG14_MEMO_value",
       "refId": 100180,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF07_value"
     },
@@ -92770,7 +92762,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100183,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09_value",
       "refId": 100183,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -92816,7 +92808,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100185,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB1_value",
       "refId": 100185,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -92851,7 +92843,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100186,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB2_value",
       "refId": 100186,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -92886,7 +92878,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100187,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB3_value",
       "refId": 100187,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -92921,7 +92913,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100188,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB4_value",
       "refId": 100188,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -92956,7 +92948,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100190,
       "formulaName": "MVO_Q_MAP01_PARAGRAAF09SUB5_value",
       "refId": 100190,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_PARAGRAAF09_value"
     },
@@ -93010,7 +93002,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100192,
       "formulaName": "MVO_Q_MAP01_HULPVARIABELEN_value",
       "refId": 100192,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP01_value"
     },
@@ -93056,7 +93048,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100194,
       "formulaName": "MVO_Q_MAP01_REQUIREDVARS_value",
       "refId": 100194,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
     },
@@ -93091,7 +93083,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100195,
       "formulaName": "MVO_Q_MAP01_ENTEREDREQUIREDVARS_value",
       "refId": 100195,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
     },
@@ -93126,7 +93118,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100196,
       "formulaName": "MVO_Q_MAP01_VERPLICHT_value",
       "refId": 100196,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP01_HULPVARIABELEN_value"
     },
@@ -93221,7 +93213,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100198,
       "formulaName": "MVO_Q_MAP02_value",
       "refId": 100198,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -93267,7 +93259,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100200,
       "formulaName": "MVO_Q_MAP02_WARNING_value",
       "refId": 100200,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -93302,7 +93294,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100202,
       "formulaName": "MVO_Q_MAP02_INFO_value",
       "refId": 100202,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -93337,7 +93329,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100204,
       "formulaName": "MVO_Q_MAP02_VALIDATION_value",
       "refId": 100204,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -93372,7 +93364,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100206,
       "formulaName": "MVO_Q_MAP02_HINT_value",
       "refId": 100206,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -93414,7 +93406,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100208,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF00_value",
       "refId": 100208,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -93449,7 +93441,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100210,
       "formulaName": "MVO_Q_MAP02_VERBORGEN_value",
       "refId": 100210,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF00_value"
     },
@@ -93520,7 +93512,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100211,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF01_value",
       "refId": 100211,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -93555,7 +93547,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100213,
       "formulaName": "MVO_Q_MAP02_VRAAG01_value",
       "refId": 100213,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
     },
@@ -93601,7 +93593,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100216,
       "formulaName": "MVO_Q_MAP02_VRAAG01_MEMO_value",
       "refId": 100216,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
     },
@@ -93647,7 +93639,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100219,
       "formulaName": "MVO_Q_MAP02_VRAAG02_value",
       "refId": 100219,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
     },
@@ -93693,7 +93685,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100221,
       "formulaName": "MVO_Q_MAP02_VRAAG02_MEMO_value",
       "refId": 100221,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF01_value"
     },
@@ -93770,7 +93762,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100224,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09_value",
       "refId": 100224,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -93816,7 +93808,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100225,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB1_value",
       "refId": 100225,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -93851,7 +93843,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100226,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB2_value",
       "refId": 100226,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -93886,7 +93878,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100227,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB3_value",
       "refId": 100227,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -93921,7 +93913,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100228,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB4_value",
       "refId": 100228,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -93956,7 +93948,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100229,
       "formulaName": "MVO_Q_MAP02_PARAGRAAF09SUB5_value",
       "refId": 100229,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_PARAGRAAF09_value"
     },
@@ -94010,7 +94002,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100230,
       "formulaName": "MVO_Q_MAP02_HULPVARIABELEN_value",
       "refId": 100230,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP02_value"
     },
@@ -94056,7 +94048,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100231,
       "formulaName": "MVO_Q_MAP02_REQUIREDVARS_value",
       "refId": 100231,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
     },
@@ -94091,7 +94083,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100232,
       "formulaName": "MVO_Q_MAP02_ENTEREDREQUIREDVARS_value",
       "refId": 100232,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
     },
@@ -94126,7 +94118,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100233,
       "formulaName": "MVO_Q_MAP02_VERPLICHT_value",
       "refId": 100233,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP02_HULPVARIABELEN_value"
     },
@@ -94275,7 +94267,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100234,
       "formulaName": "MVO_Q_MAP03_value",
       "refId": 100234,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -94321,7 +94313,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100236,
       "formulaName": "MVO_Q_MAP03_WARNING_value",
       "refId": 100236,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -94356,7 +94348,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100238,
       "formulaName": "MVO_Q_MAP03_INFO_value",
       "refId": 100238,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -94391,7 +94383,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100240,
       "formulaName": "MVO_Q_MAP03_VALIDATION_value",
       "refId": 100240,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -94426,7 +94418,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100242,
       "formulaName": "MVO_Q_MAP03_HINT_value",
       "refId": 100242,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -94480,7 +94472,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100244,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF01_value",
       "refId": 100244,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -94515,7 +94507,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100247,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_INPUT_value",
       "refId": 100247,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF01_value"
     },
@@ -94539,7 +94531,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100249,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG06_INPUT_value",
       "refId": 100249,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF01_value"
     },
@@ -94574,7 +94566,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100251,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAAL_value",
       "refId": 100251,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF01_value"
     },
@@ -94628,7 +94620,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100253,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF11_value",
       "refId": 100253,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -94674,7 +94666,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100255,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG05_value",
       "refId": 100255,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF11_value"
     },
@@ -94709,7 +94701,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100256,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG06_value",
       "refId": 100256,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF11_value"
     },
@@ -94744,7 +94736,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100257,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAAL_OMGEREKEND_value",
       "refId": 100257,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF11_value"
     },
@@ -94816,7 +94808,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100258,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF10_value",
       "refId": 100258,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -94862,7 +94854,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100260,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG01_value",
       "refId": 100260,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -94897,7 +94889,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100262,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG02_value",
       "refId": 100262,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -94932,7 +94924,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100264,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG03_value",
       "refId": 100264,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -94967,7 +94959,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100266,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG04_value",
       "refId": 100266,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -95002,7 +94994,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100268,
       "formulaName": "MVO_Q_MAP03_GEWICHT_VRAAG07_value",
       "refId": 100268,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -95037,7 +95029,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100270,
       "formulaName": "MVO_Q_MAP03_GEWICHTTOTAALOVERIG_value",
       "refId": 100270,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF10_value"
     },
@@ -95079,7 +95071,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100271,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF00_value",
       "refId": 100271,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -95114,7 +95106,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100273,
       "formulaName": "MVO_Q_MAP03_VERBORGEN_value",
       "refId": 100273,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF00_value"
     },
@@ -95185,7 +95177,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100274,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF02_value",
       "refId": 100274,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -95209,7 +95201,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100275,
       "formulaName": "MVO_Q_MAP03_VRAAG01_value",
       "refId": 100275,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
     },
@@ -95255,7 +95247,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100278,
       "formulaName": "MVO_Q_MAP03_VRAAG01_MEMO_value",
       "refId": 100278,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
     },
@@ -95301,7 +95293,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100281,
       "formulaName": "MVO_Q_MAP03_VRAAG02_value",
       "refId": 100281,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
     },
@@ -95347,7 +95339,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100283,
       "formulaName": "MVO_Q_MAP03_VRAAG02_MEMO_value",
       "refId": 100283,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF02_value"
     },
@@ -95418,7 +95410,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100286,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF03_value",
       "refId": 100286,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -95442,7 +95434,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100287,
       "formulaName": "MVO_Q_MAP03_VRAAG03_value",
       "refId": 100287,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
     },
@@ -95488,7 +95480,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100288,
       "formulaName": "MVO_Q_MAP03_VRAAG03_MEMO_value",
       "refId": 100288,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
     },
@@ -95534,7 +95526,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100291,
       "formulaName": "MVO_Q_MAP03_VRAAG04_value",
       "refId": 100291,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
     },
@@ -95580,7 +95572,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100292,
       "formulaName": "MVO_Q_MAP03_VRAAG04_MEMO_value",
       "refId": 100292,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF03_value"
     },
@@ -95651,7 +95643,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100295,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF04_value",
       "refId": 100295,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -95686,7 +95678,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100297,
       "formulaName": "MVO_Q_MAP03_VRAAG05_value",
       "refId": 100297,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
     },
@@ -95732,7 +95724,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100299,
       "formulaName": "MVO_Q_MAP03_VRAAG05_MEMO_value",
       "refId": 100299,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
     },
@@ -95778,7 +95770,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100302,
       "formulaName": "MVO_Q_MAP03_VRAAG06_value",
       "refId": 100302,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
     },
@@ -95824,7 +95816,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100304,
       "formulaName": "MVO_Q_MAP03_VRAAG06_MEMO_value",
       "refId": 100304,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF04_value"
     },
@@ -95895,7 +95887,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100307,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF05_value",
       "refId": 100307,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -95919,7 +95911,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100308,
       "formulaName": "MVO_Q_MAP03_VRAAG07_value",
       "refId": 100308,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
     },
@@ -95965,7 +95957,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100310,
       "formulaName": "MVO_Q_MAP03_VRAAG07_MEMO_value",
       "refId": 100310,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
     },
@@ -96011,7 +96003,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100313,
       "formulaName": "MVO_Q_MAP03_VRAAG08_value",
       "refId": 100313,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
     },
@@ -96057,7 +96049,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100315,
       "formulaName": "MVO_Q_MAP03_VRAAG08_MEMO_value",
       "refId": 100315,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF05_value"
     },
@@ -96128,7 +96120,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100318,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF06_value",
       "refId": 100318,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -96152,7 +96144,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100319,
       "formulaName": "MVO_Q_MAP03_VRAAG09_value",
       "refId": 100319,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
     },
@@ -96198,7 +96190,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100321,
       "formulaName": "MVO_Q_MAP03_VRAAG09_MEMO_value",
       "refId": 100321,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
     },
@@ -96244,7 +96236,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100324,
       "formulaName": "MVO_Q_MAP03_VRAAG10_value",
       "refId": 100324,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
     },
@@ -96290,7 +96282,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100326,
       "formulaName": "MVO_Q_MAP03_VRAAG10_MEMO_value",
       "refId": 100326,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF06_value"
     },
@@ -96361,7 +96353,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100329,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF07_value",
       "refId": 100329,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -96385,7 +96377,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100330,
       "formulaName": "MVO_Q_MAP03_VRAAG11_value",
       "refId": 100330,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
     },
@@ -96431,7 +96423,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100332,
       "formulaName": "MVO_Q_MAP03_VRAAG11_MEMO_value",
       "refId": 100332,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
     },
@@ -96477,7 +96469,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100335,
       "formulaName": "MVO_Q_MAP03_VRAAG12_value",
       "refId": 100335,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
     },
@@ -96523,7 +96515,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100337,
       "formulaName": "MVO_Q_MAP03_VRAAG12_MEMO_value",
       "refId": 100337,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF07_value"
     },
@@ -96594,7 +96586,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100340,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF08_value",
       "refId": 100340,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -96618,7 +96610,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100341,
       "formulaName": "MVO_Q_MAP03_VRAAG13_value",
       "refId": 100341,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
     },
@@ -96664,7 +96656,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100343,
       "formulaName": "MVO_Q_MAP03_VRAAG13_MEMO_value",
       "refId": 100343,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
     },
@@ -96710,7 +96702,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100346,
       "formulaName": "MVO_Q_MAP03_VRAAG14_value",
       "refId": 100346,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
     },
@@ -96756,7 +96748,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100348,
       "formulaName": "MVO_Q_MAP03_VRAAG14_MEMO_value",
       "refId": 100348,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF08_value"
     },
@@ -96833,7 +96825,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100351,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09_value",
       "refId": 100351,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -96879,7 +96871,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100352,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB1_value",
       "refId": 100352,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
     },
@@ -96914,7 +96906,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100353,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB2_value",
       "refId": 100353,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
     },
@@ -96949,7 +96941,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100354,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB3_value",
       "refId": 100354,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
     },
@@ -96984,7 +96976,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100355,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB4_value",
       "refId": 100355,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
     },
@@ -97019,7 +97011,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100356,
       "formulaName": "MVO_Q_MAP03_PARAGRAAF09SUB5_value",
       "refId": 100356,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_PARAGRAAF09_value"
     },
@@ -97073,7 +97065,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100357,
       "formulaName": "MVO_Q_MAP03_HULPVARIABELEN_value",
       "refId": 100357,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP03_value"
     },
@@ -97119,7 +97111,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100358,
       "formulaName": "MVO_Q_MAP03_REQUIREDVARS_value",
       "refId": 100358,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_HULPVARIABELEN_value"
     },
@@ -97154,7 +97146,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100359,
       "formulaName": "MVO_Q_MAP03_ENTEREDREQUIREDVARS_value",
       "refId": 100359,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP03_HULPVARIABELEN_value"
     },
@@ -97189,7 +97181,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100360,
       "formulaName": "MVO_Q_MAP03_VERPLICHT_value",
       "refId": 100360,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP03_HULPVARIABELEN_value"
     },
@@ -97302,7 +97294,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100361,
       "formulaName": "MVO_Q_MAP04_value",
       "refId": 100361,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -97348,7 +97340,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100363,
       "formulaName": "MVO_Q_MAP04_WARNING_value",
       "refId": 100363,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -97383,7 +97375,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100365,
       "formulaName": "MVO_Q_MAP04_INFO_value",
       "refId": 100365,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -97418,7 +97410,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100367,
       "formulaName": "MVO_Q_MAP04_VALIDATION_value",
       "refId": 100367,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -97453,7 +97445,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100369,
       "formulaName": "MVO_Q_MAP04_HINT_value",
       "refId": 100369,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -97495,7 +97487,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100371,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF00_value",
       "refId": 100371,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -97530,7 +97522,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100373,
       "formulaName": "MVO_Q_MAP04_VERBORGEN_value",
       "refId": 100373,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF00_value"
     },
@@ -97631,7 +97623,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100374,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF01_value",
       "refId": 100374,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -97666,7 +97658,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100377,
       "formulaName": "MVO_Q_MAP04_VRAAG01_value",
       "refId": 100377,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -97712,7 +97704,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100380,
       "formulaName": "MVO_Q_MAP04_VRAAG01_MEMO_value",
       "refId": 100380,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -97758,7 +97750,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100383,
       "formulaName": "MVO_Q_MAP04_VRAAG02_value",
       "refId": 100383,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -97804,7 +97796,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100385,
       "formulaName": "MVO_Q_MAP04_VRAAG02_MEMO_value",
       "refId": 100385,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -97850,7 +97842,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100388,
       "formulaName": "MVO_Q_MAP04_VRAAG03_value",
       "refId": 100388,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -97896,7 +97888,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100390,
       "formulaName": "MVO_Q_MAP04_VRAAG03_MEMO_value",
       "refId": 100390,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -97942,7 +97934,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100393,
       "formulaName": "MVO_Q_MAP04_VRAAG04_value",
       "refId": 100393,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -97988,7 +97980,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100395,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_value",
       "refId": 100395,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -98034,7 +98026,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100398,
       "formulaName": "MVO_Q_MAP04_VRAAG04_MEMO_EXTRA_value",
       "refId": 100398,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF01_value"
     },
@@ -98140,7 +98132,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100402,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF02_value",
       "refId": 100402,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -98175,7 +98167,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100405,
       "formulaName": "MVO_Q_MAP04_VRAAG05_value",
       "refId": 100405,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -98221,7 +98213,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100407,
       "formulaName": "MVO_Q_MAP04_VRAAG05_MEMO_value",
       "refId": 100407,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -98267,7 +98259,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100410,
       "formulaName": "MVO_Q_MAP04_VRAAG06_value",
       "refId": 100410,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -98313,7 +98305,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100412,
       "formulaName": "MVO_Q_MAP04_VRAAG06_MEMO_value",
       "refId": 100412,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -98359,7 +98351,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100415,
       "formulaName": "MVO_Q_MAP04_VRAAG07_value",
       "refId": 100415,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -98405,7 +98397,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100417,
       "formulaName": "MVO_Q_MAP04_VRAAG07_MEMO_value",
       "refId": 100417,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -98451,7 +98443,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100420,
       "formulaName": "MVO_Q_MAP04_VRAAG08_value",
       "refId": 100420,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -98497,7 +98489,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100422,
       "formulaName": "MVO_Q_MAP04_VRAAG08_MEMO_value",
       "refId": 100422,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF02_value"
     },
@@ -98592,7 +98584,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100425,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF03_value",
       "refId": 100425,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -98627,7 +98619,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100428,
       "formulaName": "MVO_Q_MAP04_VRAAG09_value",
       "refId": 100428,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -98673,7 +98665,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100430,
       "formulaName": "MVO_Q_MAP04_VRAAG09_MEMO_value",
       "refId": 100430,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -98719,7 +98711,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100433,
       "formulaName": "MVO_Q_MAP04_VRAAG10_value",
       "refId": 100433,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -98765,7 +98757,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100435,
       "formulaName": "MVO_Q_MAP04_VRAAG10_MEMO_value",
       "refId": 100435,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -98811,7 +98803,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100438,
       "formulaName": "MVO_Q_MAP04_VRAAG11_value",
       "refId": 100438,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -98857,7 +98849,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100440,
       "formulaName": "MVO_Q_MAP04_VRAAG11_MEMO_value",
       "refId": 100440,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -98903,7 +98895,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100443,
       "formulaName": "MVO_Q_MAP04_VRAAG12_value",
       "refId": 100443,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -98949,7 +98941,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100445,
       "formulaName": "MVO_Q_MAP04_VRAAG12_MEMO_value",
       "refId": 100445,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF03_value"
     },
@@ -99068,7 +99060,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100448,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF10_value",
       "refId": 100448,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -99114,7 +99106,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100450,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG01_value",
       "refId": 100450,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99149,7 +99141,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100452,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG02_value",
       "refId": 100452,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99184,7 +99176,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100454,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG03_value",
       "refId": 100454,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99219,7 +99211,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100456,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG04_value",
       "refId": 100456,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99254,7 +99246,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100458,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG05_value",
       "refId": 100458,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99289,7 +99281,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100460,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG06_value",
       "refId": 100460,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99324,7 +99316,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100462,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG07_value",
       "refId": 100462,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99359,7 +99351,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100463,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG08_value",
       "refId": 100463,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99394,7 +99386,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100465,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG09_value",
       "refId": 100465,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99429,7 +99421,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100467,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG10_value",
       "refId": 100467,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99464,7 +99456,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100469,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG11_value",
       "refId": 100469,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99499,7 +99491,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100471,
       "formulaName": "MVO_Q_MAP04_GEWICHT_VRAAG12_value",
       "refId": 100471,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF10_value"
     },
@@ -99565,7 +99557,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100473,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09_value",
       "refId": 100473,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -99611,7 +99603,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100474,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB1_value",
       "refId": 100474,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
     },
@@ -99646,7 +99638,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100475,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB2_value",
       "refId": 100475,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
     },
@@ -99681,7 +99673,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100476,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB3_value",
       "refId": 100476,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
     },
@@ -99716,7 +99708,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100477,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB4_value",
       "refId": 100477,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
     },
@@ -99751,7 +99743,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100478,
       "formulaName": "MVO_Q_MAP04_PARAGRAAF09SUB5_value",
       "refId": 100478,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_PARAGRAAF09_value"
     },
@@ -99805,7 +99797,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100479,
       "formulaName": "MVO_Q_MAP04_HULPVARIABELEN_value",
       "refId": 100479,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAP04_value"
     },
@@ -99851,7 +99843,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100480,
       "formulaName": "MVO_Q_MAP04_REQUIREDVARS_value",
       "refId": 100480,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_HULPVARIABELEN_value"
     },
@@ -99886,7 +99878,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100481,
       "formulaName": "MVO_Q_MAP04_ENTEREDREQUIREDVARS_value",
       "refId": 100481,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_MAP04_HULPVARIABELEN_value"
     },
@@ -99921,7 +99913,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100482,
       "formulaName": "MVO_Q_MAP04_VERPLICHT_value",
       "refId": 100482,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_MAP04_HULPVARIABELEN_value"
     },
@@ -99998,7 +99990,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100483,
       "formulaName": "MVO_Q_RESULT_value",
       "refId": 100483,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -100033,7 +100025,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100485,
       "formulaName": "MVO_Q_RESULTSUB1_value",
       "refId": 100485,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -100075,7 +100067,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100486,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF01_value",
       "refId": 100486,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -100110,7 +100102,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100489,
       "formulaName": "MVO_Q_MAP01_SCORE01_value",
       "refId": 100489,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF01_value"
     },
@@ -100152,7 +100144,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100490,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF02_value",
       "refId": 100490,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -100187,7 +100179,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100493,
       "formulaName": "MVO_Q_MAP02_SCORE01_value",
       "refId": 100493,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF02_value"
     },
@@ -100271,7 +100263,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100494,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF03_value",
       "refId": 100494,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -100306,7 +100298,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100497,
       "formulaName": "MVO_Q_MAP03_SUBSCORE01_value",
       "refId": 100497,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -100341,7 +100333,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100499,
       "formulaName": "MVO_Q_MAP03_SUBSCORE02_value",
       "refId": 100499,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -100376,7 +100368,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100501,
       "formulaName": "MVO_Q_MAP03_SUBSCORE03_value",
       "refId": 100501,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -100411,7 +100403,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100503,
       "formulaName": "MVO_Q_MAP03_SUBSCORE04_value",
       "refId": 100503,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -100446,7 +100438,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100505,
       "formulaName": "MVO_Q_MAP03_SUBSCORE05_value",
       "refId": 100505,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -100481,7 +100473,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100507,
       "formulaName": "MVO_Q_MAP03_SUBSCORE06_value",
       "refId": 100507,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -100516,7 +100508,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100509,
       "formulaName": "MVO_Q_MAP03_SUBSCORE07_value",
       "refId": 100509,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -100551,7 +100543,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100511,
       "formulaName": "MVO_Q_MAP03_SCORE01_value",
       "refId": 100511,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF03_value"
     },
@@ -100611,7 +100603,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100513,
       "formulaName": "MVO_Q_MAPRESULT_PARAGRAAF04_value",
       "refId": 100513,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_RESULT_value"
     },
@@ -100646,7 +100638,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100516,
       "formulaName": "MVO_Q_MAP04_SUBSCORE01_value",
       "refId": 100516,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
     },
@@ -100681,7 +100673,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100518,
       "formulaName": "MVO_Q_MAP04_SUBSCORE02_value",
       "refId": 100518,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
     },
@@ -100716,7 +100708,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100520,
       "formulaName": "MVO_Q_MAP04_SUBSCORE03_value",
       "refId": 100520,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
     },
@@ -100751,7 +100743,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100522,
       "formulaName": "MVO_Q_MAP04_SCORE01_value",
       "refId": 100522,
-      "displayAs": "AmountAnswerType",
+      "displayAs": "currency",
       "frequency": "document",
       "parentName": "Q_MAPRESULT_PARAGRAAF04_value"
     },
@@ -100786,7 +100778,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100523,
       "formulaName": "MVO_Q_STATUS_value",
       "refId": 100523,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -100821,7 +100813,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100526,
       "formulaName": "MVO_Q_STATUS_FINAL_ON_value",
       "refId": 100526,
-      "displayAs": "TextAnswerType",
+      "displayAs": "date",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -100845,7 +100837,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100528,
       "formulaName": "MVO_Q_STATUS_FINAL_BY_value",
       "refId": 100528,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -100869,7 +100861,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100530,
       "formulaName": "MVO_Q_STATUS_FINAL_BY_NAME_value",
       "refId": 100530,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -100893,7 +100885,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100532,
       "formulaName": "MVO_Q_STATUS_STARTED_ON_value",
       "refId": 100532,
-      "displayAs": "TextAnswerType",
+      "displayAs": "date",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -100917,7 +100909,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100534,
       "formulaName": "MVO_Q_STATUS_STARTED_BY_value",
       "refId": 100534,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -100941,7 +100933,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100536,
       "formulaName": "MVO_Q_STATUS_STARTED_BY_NAME_value",
       "refId": 100536,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -100965,7 +100957,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100538,
       "formulaName": "MVO_ModelVersion_value",
       "refId": 100538,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -101000,7 +100992,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100540,
       "formulaName": "MVO_ModelType_value",
       "refId": 100540,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -101035,7 +101027,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100542,
       "formulaName": "MVO_MatrixVersion_value",
       "refId": 100542,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -101070,7 +101062,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100545,
       "formulaName": "MVO_Q_PREVIOUS_BUTTON_VISIBLE_value",
       "refId": 100545,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -101140,7 +101132,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100551,
       "formulaName": "MVO_Q_CONCEPT_REPORT_VISIBLE_value",
       "refId": 100551,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -101175,7 +101167,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100553,
       "formulaName": "MVO_Q_MAKE_FINAL_VISIBLE_value",
       "refId": 100553,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -101210,7 +101202,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100555,
       "formulaName": "MVO_Q_FINAL_REPORT_VISIBLE_value",
       "refId": 100555,
-      "displayAs": "select",
+      "displayAs": "radio",
       "frequency": "document",
       "parentName": "Q_ROOT_value"
     },
@@ -101258,7 +101250,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100557,
       "formulaName": "MVO_HULPVARS_value",
       "refId": 100557,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "root_value"
     },
@@ -101306,7 +101298,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100558,
       "formulaName": "MVO_Q_WARNING_GLOBAL_value",
       "refId": 100558,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "HULPVARS_value"
     },
@@ -101341,7 +101333,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100560,
       "formulaName": "MVO_Q_WARNING_01_value",
       "refId": 100560,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_WARNING_GLOBAL_value"
     },
@@ -101376,7 +101368,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100562,
       "formulaName": "MVO_Q_WARNING_GLOBALTXT_value",
       "refId": 100562,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_WARNING_GLOBAL_value"
     },
@@ -101430,7 +101422,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100564,
       "formulaName": "MVO_Q_RESTRICTIES_value",
       "refId": 100564,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "HULPVARS_value"
     },
@@ -101465,7 +101457,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100566,
       "formulaName": "MVO_Q_RESTRICTIES_01_value",
       "refId": 100566,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
     },
@@ -101489,7 +101481,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100567,
       "formulaName": "MVO_Q_RESTRICTIES_02_value",
       "refId": 100567,
-      "displayAs": "StringAnswerType",
+      "displayAs": "string",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
     },
@@ -101513,7 +101505,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "ref": 100568,
       "formulaName": "MVO_Q_RESTRICTIESTXT_value",
       "refId": 100568,
-      "displayAs": "MemoAnswerType",
+      "displayAs": "memo",
       "frequency": "document",
       "parentName": "Q_RESTRICTIES_value"
     },
