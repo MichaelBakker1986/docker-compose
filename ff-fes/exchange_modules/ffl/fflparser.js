@@ -189,6 +189,7 @@ var displayAsMapping = {
 }
 var formulaMapping = {
     title: 'title',
+    hint: 'hint',
     locked: 'locked',
     visible: 'visible',
     inputRequired: 'required',
@@ -196,6 +197,7 @@ var formulaMapping = {
 }
 var reversedFormulaMapping = {
     title: 'title',
+    hint: 'hint',
     locked: 'locked',
     visible: 'visible',
     required: 'inputRequired',
@@ -304,7 +306,7 @@ function parseFFLFormula(formula, node, row) {
         }
     }
     catch (e) {
-        log.error('unable to parse [' + formula + '] returning it as String value' + node + " : " + row, e);
+        log.error('unable to parse [' + formula + '] returning it as String value [' + node + "] : " + row, e);
         formulaReturn = AST.STRING(formula);
     }
     return formulaReturn;

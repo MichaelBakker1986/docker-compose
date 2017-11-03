@@ -1,4 +1,5 @@
 var SolutionFacade = require('../../fesjs/SolutionFacade');
+var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices']
 
 function WebExport() {
     this.exportAsObject = true;
@@ -10,7 +11,7 @@ function WebExport() {
 WebExport.prototype.parse = function(webExport) {
     throw new Error('Not yet supported');
 }
-var counter = 1;
+var counter = 0;
 
 function LMETree(name, workbook) {
     this.name = name;
@@ -18,6 +19,67 @@ function LMETree(name, workbook) {
     this.nodes = {};
 }
 
+function noChange(workbook, rowId, col, index) {
+    let r;//return value
+    let c = -1;//calculation counter
+    return {
+        get: function() {
+            if (counter !== c && c < 0) {
+                c = counter;
+                r = workbook.get(rowId, col, index, 0);
+            }
+            return r;
+        }
+    }
+}
+
+function changeAble(workbook, rowId, col, index) {
+    let r;//return value
+    let c;//calculation counter
+    return {
+        get: function() {
+            if (counter !== c) {
+                c = counter;
+                r = workbook.get(rowId, col, index, 0);
+            }
+            return r;
+        }
+    }
+}
+
+function changeAndCache(workbook, rowId, col, index) {
+    let r;//return value
+    let c;//calculation counter
+    return {
+        get: function() {
+            if (counter !== c) {
+                c = counter;
+                r = workbook.get(rowId, col, index, 0);
+            }
+            return r;
+        },
+        set: function(v) {
+            counter++;
+            var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
+            workbook.set(rowId, value, col, index, 0);
+        }
+    }
+}
+
+/**
+ * Cache means only resolve once
+ * Change means user can modify the value
+ */
+var properties = {
+    title: {change: true, prox: changeAndCache},
+    value: {change: true, prox: changeAndCache},
+    visible: {prox: changeAble},
+    entered: {prox: changeAble},
+    locked: {prox: changeAble},
+    required: {prox: changeAble},
+    hint: {cache: true, prox: noChange},
+    choices: {cache: true, prox: noChange}
+}
 var repeats = {
     undefined: [3, 1],
     none: [1, 3],
@@ -26,7 +88,7 @@ var repeats = {
     timeline: [1, 3]
 }
 
-LMETree.prototype.addNode = function(node, columns, treePath) {
+LMETree.prototype.addNode = function(node, treePath) {
     var workbook = this.workbook;
     var rowId = node.rowId;
     var details = repeats[node.frequency];
@@ -41,54 +103,23 @@ LMETree.prototype.addNode = function(node, columns, treePath) {
         cols: [],
         children: []
     };
-
-    for (var cm = 0; cm < amount; cm++) {
+    /**
+     * Proxy properties to the column objects
+     */
+    for (var index = 0; index < amount; index++) {
         var r = {}
-        rv.cols[cm] = r;
-        columns.forEach(function(column) {
-            //temp check, seems to proxy multiple times.
-            const ammount = cm;
-            let rval, vcount;
-            Object.defineProperty(r, column, {
-                get: function() {
-                    if (counter !== vcount) {
-                        vcount = counter;
-                        rval = workbook.get(rowId, column, ammount, 0);
-                    }
-                    return rval;
-                },
-                set: function(v) {
-                    //only for 'value,formula_trend,...'
-                    counter++;
-                    var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
-                    workbook.set(rowId, value, column, ammount, 0);
-                }
-            });
-        });
+        rv.cols[index] = r;
+        Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index));
+        Object.defineProperty(r, 'visible', properties.visible.prox(workbook, rowId, 'visible', index));
+        Object.defineProperty(r, 'entered', properties.entered.prox(workbook, rowId, 'entered', index));
+        Object.defineProperty(r, 'required', properties.required.prox(workbook, rowId, 'required', index));
+        Object.defineProperty(r, 'locked', properties.locked.prox(workbook, rowId, 'locked', index));
     }
     /**
-     * This is duplicate of above, to support title, visible etc for now.
-     * Values are traditionally not supposed to have title and visible properties.
-     * They are arranged by the row, but it does not seem to affect performance.
+     * Proxy properties to the row object
      */
-    columns.forEach(function(column) {
-        //temp check, seems to proxy multiple times.
-        let rval, vcount;
-        Object.defineProperty(rv, column, {
-            get: function() {
-                if (counter !== vcount) {
-                    vcount = counter;
-                    rval = workbook.get(rowId, column, 0, 0);
-                }
-                return rval;
-            },
-            set: function(v) {
-                //only for 'value,formula_trend,...'
-                counter++;
-                var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
-                workbook.set(rowId, value, column, 0, 0);
-            }
-        });
+    columns.forEach(function(col) {
+        Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0));
     });
     const parent = this.nodes[treePath[treePath.length - 1]];
     if (parent) parent.children.push(rv);
@@ -109,11 +140,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
                 treePath.length = treeDepth;
                 currentDepth = treeDepth;
             }
-            lmeTree.addNode(
-                node,
-                ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices'],
-                treePath
-            )
+            lmeTree.addNode(node, treePath)
         }
     })
     return lmeTree;

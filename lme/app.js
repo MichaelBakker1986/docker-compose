@@ -1,4 +1,3 @@
-//default test message
 var browserify = require('browserify-middleware');
 var express = require('express');
 var port = 8080;
@@ -82,9 +81,8 @@ app.use(serveStatic(__dirname + "/bower_components/"));
 app.listen(port, () => {
     require('dns').lookup(require('os').hostname(), (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
-        console.info('<a href="' + domain + '">DEMO application</a><span>|</span>\n' +
-            '<a href="' + domain + 'DEMO/transformFFL_LME/KSP">JS API</a><span>|</span>\n' +
-            '<a href="' + domain + 'branches">JSON API (branches)</a><span>|</span>\n' +
+        console.info('<a href="' + domain + '">DEMO application</a><span> |</span>\n' +
+            '<a href="' + domain + 'branches">JSON API (branches)</a><span> |</span>\n' +
             '<a href="' + domain + 'models">JSON API (models)</a>');
     })
 });

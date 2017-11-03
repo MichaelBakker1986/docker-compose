@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Angular-include-extended-demo</title>
+    <script type="application/javascript" src="/DEMO/transformFFL_LME/ai_KSP"></script>
+    <script>
+        angular.module('lmeapp').controller('extendedController', function($scope) {
+            $scope.showTitle = function(figure) {
+                alert(figure.title)
+            }
+            $scope.TEST = "Extended Controller"
+        });
+    </script>
 </head>
 <body ng-controller="extendedController">
 <div ng-controller="lmeController">
@@ -14,14 +23,5 @@
 
     </div>
 </div>
-<script type="application/javascript" src="http://blfif-tv-tr03.finance.lab:8080/json/ai_KSP.js"></script>
-<script>
-    angular.module('lmeapp').controller('extendedController', function($scope) {
-        $scope.showTitle = function(figure) {
-            alert(figure.title)
-        }
-        $scope.TEST = "Extended Controller"
-    });
-</script>
 </body>
 </html>

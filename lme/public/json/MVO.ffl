@@ -441,7 +441,7 @@ model MVO uses BaseModel
           frequency: document;
           displaytype: currency;
           title: "Toelichting principes";
-          hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 4 van de ISO 26000 richtlijn. Het MVO-beleid van de organisatie is gebaseerd op onder andere deze zeven principes.";
+          hint: "www.google.nl";
           visible: 1;
           options_title: locked;
           variable Q_Map01_Verborgen
@@ -1040,7 +1040,7 @@ model MVO uses BaseModel
           frequency: document;
           displaytype: currency;
           title: "Toelichting omgeving";
-          hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 5 van de ISO 26000 richtlijn. Dit hoofdstuk gaat in op het erkennen en betrekken van stakeholders bij het MVO-beleid.";
+          hint: "www.google.nl";
           visible: 1;
           options_title: locked;
           variable Q_Map02_Verborgen
@@ -1496,7 +1496,7 @@ model MVO uses BaseModel
           frequency: document;
           displaytype: currency;
           title: "Toelichting thema's";
-          hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 6 van de ISO 26000 richtlijn. Hoofdstuk 4 (principes) en hoofdstuk 6 (thema's) zijn een gezamenlijke basis voor het MVO-beleid.";
+          hint: "www.google.nl";
           visible: 1;
           options_title: locked;
           variable Q_Map03_Verborgen
@@ -2093,7 +2093,7 @@ model MVO uses BaseModel
           frequency: document;
           displaytype: currency;
           title: "Toelichting implementatie";
-          hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Hoofdstuk 7 van de ISO 26000 richtlijn gaat in op de implementatie van het MVO-beleid. In deze stap van de MVO Scan worden voor het thema Werknemers stelling en vragen gepresenteerd die in een indicatie geven van de daadwerkelijke implementatie van dit thema.";
+          hint: "www.google.nl";
           visible: 1;
           options_title: locked;
           variable Q_Map04_Verborgen
@@ -2219,7 +2219,7 @@ model MVO uses BaseModel
             data_options: unscalable;
             displaytype: memo;
             title: "Welk onderwerp / onderwerpen van de CAO zou voor u eventueel wel een reden zijn om bovenstaande deal af te slaan?";
-            hint: "Mogelijke andere onderwerpen van een CAO zijn: werktijden, opzegtermijn en pensioenregeling. Over arbeidsomstandigheden wordt overigens op deze stap een aparte vraag gesteld.";
+            hint: "www.google.nl";
             visible: (Q_Map04_Vraag04=0);
             options_title: locked;
           }
