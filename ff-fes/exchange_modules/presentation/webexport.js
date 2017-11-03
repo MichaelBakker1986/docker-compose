@@ -49,7 +49,7 @@ function changeAble(workbook, rowId, col, index) {
 
 function changeAndCache(workbook, rowId, col, index) {
     let r;//return value
-    let c;//calculation counter
+    let c = -1;//calculation counter
     return {
         get: function() {
             if (counter !== c) {
@@ -125,6 +125,7 @@ LMETree.prototype.addNode = function(node, treePath) {
      * Proxy properties to the row object
      */
     columns.forEach(function(col) {
+        rv[col] = null;
         Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0));
     });
     const parent = this.nodes[treePath[treePath.length - 1]];
