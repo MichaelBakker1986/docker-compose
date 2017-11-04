@@ -8,9 +8,22 @@ exports.MatrixStore = class {
     getOrCreate(id) {
         storedValues[id] = storedValues[id] || {
             id: id,
-            values: {}
+            values: {},
+            create_date: new Date().getTime()
             // properties: { column: true,  variable: true,  value: true }
         };
         return storedValues[id];
+    }
+
+    loadParents(entry, total) {
+        if (entry.parent) {
+            const parententry = this.getOrCreate(entry.parent)
+            for (var key in parententry.values) {
+                if (total[key] == undefined) {
+                    total[key] = parententry[key]
+                }
+            }
+            this.loadParents(parententry, total)
+        }
     }
 }

@@ -84,9 +84,6 @@ function parseRegex(contents) {
         .replace(/'/gm, '@')
         .replace(/"/gm, '\'');
 
-    //in ffl some variables are just prepended with &, for some reason i don't understand
-    //EvaluateAsString(If(Q_Map13 = 0.0, && "Nog niet alle vragen zijn beantwoord.", && "") && scRestricties && Q_WARNING_GLOBAL)
-    //becomes EvaluateAsString(If(Q_Map13 = 0.0, "Nog niet alle vragen zijn beantwoord.", "") + scRestricties + Q_WARNING_GLOBAL)
     return data;
 }
 

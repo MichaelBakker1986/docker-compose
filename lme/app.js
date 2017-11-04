@@ -10,35 +10,22 @@ var app = express();
 app.use(require('express-favicon')());
 var fs = require('fs')
 var bodyParser = require('body-parser')
+var expressStaticGzip = require("express-static-gzip");
+app.use(expressStaticGzip("public/"));
+app.use(compression())
 app.use(require('cors')())
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 app.use(bodyParser.json({limit: '50mb'}));       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true,
     limit: '50mb'
 }));
-
-
 var stash = require('./src/stash');
 browserify.settings({
     transform: [fastjson]
 })
-app.use(compression())
-/**
- * Create identified compiled js file.
- */
 app.post('/:id/saveFFL_LME', (req, res) => {
     try {
-        let lmeAPiImpl = new lmeAPI();
-        lmeAPiImpl.importFFL(req.body.data);
-        var lme = lmeAPiImpl.exportLME();
-
-        stash.commit(req.body.model, req.body.data, lme)
-
+        stash.commit(req.body.model, req.body.data)
         res.end('done');
     } catch (err) {
         console.error(err)
@@ -81,7 +68,11 @@ app.use('/:id/web.js', browserify(__dirname + '/src/main.js', {
     minify: true,
     precompile: true
 }));
-app.use(static(__dirname + '/public/'))
+app.use('/:id/ide.js', browserify(__dirname + '/src/ide.js', {
+    gzip: true,
+    insertGlobals: true,
+    debug: false
+}));
 app.use(serveStatic(__dirname + "/bower_components/"));
 app.listen(port, () => {
     require('dns').lookup(require('os').hostname(), (err, add, fam) => {

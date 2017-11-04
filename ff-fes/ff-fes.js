@@ -133,10 +133,6 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
     if (columnStart == columnEnd) {
         outputData = outputData[0];
     }
-    /*
-     if (variable && variable.frequency === 'document') {
-     outputData = outputData[0];
-     }*/
     return outputData;
 }
 

@@ -1057,7 +1057,6 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         }
     }
 }
-
 function parseFFLFormula(formula, node, row) {
     var formulaReturn = 'undefined';
     try {
@@ -1102,7 +1101,7 @@ var jsonValues = {
     extension: 'json',
     headername: 'JSON Values',
     parseData: function(values, workbook) {
-        updateValues(JSON.parse(values), workbook.context.values);
+        updateValues(values, workbook.context.values);
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
     deParse: function(rowId, workbook) {
@@ -1301,7 +1300,7 @@ function changeAble(workbook, rowId, col, index) {
 
 function changeAndCache(workbook, rowId, col, index) {
     let r;//return value
-    let c;//calculation counter
+    let c = -1;//calculation counter
     return {
         get: function() {
             if (counter !== c) {
@@ -1363,7 +1362,8 @@ LMETree.prototype.addNode = function(node, treePath) {
             value: null,
             visible: null,
             entered: null,
-            required: null
+            required: null,
+            locked: null
         }
         rv.cols[index] = r;
         Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index));
@@ -1376,6 +1376,7 @@ LMETree.prototype.addNode = function(node, treePath) {
      * Proxy properties to the row object
      */
     columns.forEach(function(col) {
+        rv[col] = null;
         Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0));
     });
     const parent = this.nodes[treePath[treePath.length - 1]];
@@ -74211,12 +74212,11 @@ function hasOwnProperty(obj, prop) {
 var angular = require('angular')
 require('../../ff-fes/exchange_modules/presentation/webexport');
 var LmeModel = require('./lme')
-var model = new LmeModel()
-model.importLME(JSON_MODEL);
-LMEMETA = model;
-LME = model.exportWebModel();
+LMEMETA = new LmeModel()
+LMEMETA.importLME(JSON_MODEL);
+LME = LMEMETA.exportWebModel();
 angular.module('lmeapp', []).controller('lmeController', function($scope) {
-    $scope.MODEL = LME;
+    $scope.MODEL = LMEMETA;
     var nodes = LME.nodes;
     for (var n in nodes) {
         $scope[n] = nodes[n];
@@ -94113,8 +94113,8 @@ LME.prototype.exportWebModel = function() {
 LME.prototype.exportData = function() {
     return this.lme.export('jsonvalues')
 }
-LME.prototype.importData = function(valuesAsString) {
-    return this.lme.importSolution(valuesAsString, 'jsonvalues')
+LME.prototype.importData = function(valueAsJSON) {
+    return this.lme.importSolution(valueAsJSON, 'jsonvalues')
 }
 module.exports = LME;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\lme.js","/src",undefined)

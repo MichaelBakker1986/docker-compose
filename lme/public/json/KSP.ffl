@@ -22,7 +22,7 @@ model KSP uses BaseModel
       {
         datatype: number;
         frequency: document;
-        formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        formula: If(Pos("IFRS-EU" , FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL" , FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl" , FES_LAYOUT[1])>0,2,0)));
         data_options: unscalable;
         displaytype: select;
         title: "Layout";
@@ -326,7 +326,7 @@ model KSP uses BaseModel
     {
       datatype: number;
       frequency: document;
-      formula: If( (Q_Map01[1]=1) Or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
+      formula: If( (Q_Map01[1]=1) Or (Length ( Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
       data_options: unscalable;
       displaytype: select;
       title: "Costs of child raising (v1.27)";
@@ -438,7 +438,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 1";
           top_blanklines: 1;
@@ -450,7 +450,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_Map01[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 1";
           locked: 1;
@@ -461,7 +461,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Er zijn "&Str(Q_Map01_ENTEREDREQUIREDVARS,0,0)&" van de "&Str(Q_Map01_REQUIREDVARS,0,0)&" verplichte vragen in deze stap ingevuld.",&""));
+          formula: String(If(Q_Map01[1]=0 , "Er zijn "&Str(Q_Map01_ENTEREDREQUIREDVARS,0,0)&" van de "&Str(Q_Map01_REQUIREDVARS,0,0)&" verplichte vragen in deze stap ingevuld." , ""));
           data_options: unscalable;
           title: "Validatie stap 1";
           locked: 1;
@@ -818,7 +818,7 @@ model KSP uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: If(Pos("Negro",&Memo1[1])>0,1,0);
+            formula: If(Pos("Negro" , Memo1[1])>0,1,0);
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Debug";
@@ -845,7 +845,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 2";
           top_blanklines: 1;
@@ -857,7 +857,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_Map02[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 2";
           locked: 1;
@@ -1545,7 +1545,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 6";
           top_blanklines: 1;
@@ -1557,7 +1557,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map06[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_Map06[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 6";
           locked: 1;
@@ -1865,9 +1865,8 @@ model KSP uses BaseModel
             }
             variable TotalYearlyCostTSUM
             {
-                formula: TSUM(TotalYearlyCosts)
+              formula: TSUM(TotalYearlyCosts);
             }
-
           }
           variable Q_Map06Sub5Sub3 refers to TotalYearlyIncome
           {
@@ -2113,7 +2112,7 @@ model KSP uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If(Q_ROOT[1]=0,&"Nog niet alle vragen zijn ingevuld.[br][/br]",&"Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+        formula: String(If(Q_ROOT[1]=0 , "Nog niet alle vragen zijn ingevuld.[br][/br]" , "Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
         data_options: unscalable;
         title: "Resultaat";
         top_blanklines: 1;
@@ -2297,7 +2296,7 @@ model KSP uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"[br][/br]Er zijn knockouts van toepassing"&Q_WARNING_GLOBALTXT ,&""));
+        formula: String(If( Length ( Q_WARNING_GLOBALTXT[1])>0  , "[br][/br]Er zijn knockouts van toepassing"&Q_WARNING_GLOBALTXT  , ""));
         data_options: unscalable;
         displaytype: memo;
         title: "Knock-out(s)?";
@@ -2309,7 +2308,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString("");
+          formula: String("");
           data_options: unscalable;
           title: "Map6 - Vraag 6";
           top_blanklines: 1;
@@ -2321,7 +2320,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If( Length(&Q_WARNING_01[1])>0,&"[br][/br]"&Q_WARNING_01[1],""));
+          formula: String(If( Length ( Q_WARNING_01[1])>0 , "[br][/br]"&Q_WARNING_01[1],""));
           data_options: unscalable;
           displaytype: memo;
           title: "Knock-out tekst";
@@ -2334,7 +2333,7 @@ model KSP uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld"&Q_RESTRICTIESTXT ,&""));
+        formula: String(If( Length ( Q_RESTRICTIESTXT[1])>0  , "[br][/br]De volgende variabelen zijn niet correct gevuld"&Q_RESTRICTIESTXT  , ""));
         data_options: unscalable;
         displaytype: memo;
         title: "Restricties";
@@ -2345,7 +2344,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString("");
+          formula: String("");
           data_options: unscalable;
           top_blanklines: 1;
           locked: 1;
@@ -2365,7 +2364,7 @@ model KSP uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If( Length(&Q_RESTRICTIES_01[1])>0,&"[br][/br]"&Q_RESTRICTIES_01[1],""));
+          formula: String(If( Length ( Q_RESTRICTIES_01[1])>0 , "[br][/br]"&Q_RESTRICTIES_01[1],""));
           data_options: unscalable;
           displaytype: memo;
           title: "Restricties tekst";

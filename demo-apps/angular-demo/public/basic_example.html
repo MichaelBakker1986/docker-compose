@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Angular-include-demo</title>
-    <script type="application/javascript" src="/DEMO/transformFFL_LME/ai_KSP"></script>
+
 </head>
 <body>
 <div ng-controller="lmeController">
-    <h1>Show all titles in model {{MODEL.name}}</h1>
+    <h1>Show all titles in model {{LMEMETA.name}}</h1>
     <div ng-repeat="figure in this">
         <span>{{figure.title}}</span>
     </div>
+    <script type="application/javascript" src="/DEMO/transformFFL_LME/ai_KSP"></script>
 </div>
 </body>
 </html>

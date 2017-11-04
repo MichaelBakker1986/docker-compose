@@ -2,6 +2,7 @@
  * While calculating in front-end.
  * There is a need to store/retrieve values entered by the client
  */
+var counter = 0;
 const MatrixStore = require('../MatrixStore').MatrixStore;
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
@@ -9,15 +10,27 @@ module.exports.setup = function(app) {
      * Retrieve entered values supplied by the client
      */
     app.get('/id/:id', function(req, res) {
-        res.json(ds.getOrCreate(req.params.id))
+        let entry = ds.getOrCreate(req.params.id);
+        if (entry.parent) {
+            ds.loadParents(ds.getOrCreate(entry.parent), entry)
+        }
+        res.json(entry)
     });
     /**
      * Store entered values supplied by the client
      */
     app.post('/id/:id', function(req, res) {
         //resolve all entered values
+        var parent = ds.getOrCreate(req.params.id)
+        var newID = counter++;
+        let newChild = ds.getOrCreate(newID);
+        newChild.parent = parent.id;
+        for (var i = 0; i < req.body.data.length; i++) {
+            var entry = req.body.data[i]
+            newChild[entry.varName] = entry
+        }
         res.json({
-            saveToken: 1234
+            saveToken: newID
         })
     });
 };

@@ -1,6 +1,3 @@
-dist.js
-PropertiesAssembler.js
-De applicatie always has one "Solution"  state.
 While Solutions are Dynamic, when there is a need to show from multiple Solution, wrap a Solution around it.
 A Solution is a collection of UINodes, Because your Solution was for a reason Combine multiple Solutions into one.
 A Solution is a thin layer of Pointers to formula's

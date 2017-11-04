@@ -11,10 +11,7 @@ var tests = [
     './fflexportTest',//.FFL Language
     './fflImportTest',//.FFL Language
     './screendefinitionTest',//.screen definition
-    './uimodelTest',//internal logic test, uimodel.js is somewhat unstable, since developed mainly for UI
-    './NodeTest',
     './jsonValuesTest',
-    './presentationTest',
     './tupleTest',
     './apiTest',
     './totalYearlyCostsTSUMTest'

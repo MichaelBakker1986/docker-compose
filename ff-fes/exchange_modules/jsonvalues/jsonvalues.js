@@ -8,7 +8,7 @@ var jsonValues = {
     extension: 'json',
     headername: 'JSON Values',
     parseData: function(values, workbook) {
-        updateValues(JSON.parse(values), workbook.context.values);
+        updateValues(values, workbook.context.values);
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
     deParse: function(rowId, workbook) {

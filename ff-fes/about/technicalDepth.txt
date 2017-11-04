@@ -1,23 +1,8 @@
 2)  //keyArg !== null &&  is a hack, prevents RootNode from being added;
 1)colId is wrong term in the interface, should be 'property', internal colId is fine; columns are internal defined as 'x'
-5)FESFacade (Just a container of technical depth)
-1)JSWorkBook (Import) has a ABN if
 2)formula-bootstrap parseAsFormula, contains some if to resolve the string to parse
-1)questjs.js, also contains pages (Should be injected.)
-3)JSVisitor, couple of visitors. Should just contain one Visitor.
-1)While fixing found errors in the Import, it has to call updateValueMap and rebuildFormula twice.
 2)dbTest is not working. Could even affect mergeFormula's which is refactored.
-
-4)multiple documents, how does this work in here? mutli-model virual-doc work.
-   DiffDocument would require a merged X-axis to get a new index (interesting)
-1)While created sub-pages, the lookupByName only looks for first level in the hierarchy. Refresh while being on a subPage will result in undefined exception
-
-1)switchModel method on scope and FESFacade are used in very common way, most of them are setting current Rows on scope after
-1)Case insensitive, variablss are declared in other case
-1)DataEntered
-1)TupleMax,TupleMin
 2)All "T" functions. They are the X-axis.
-
   LastTInFormulaSet  t.lastInFormulaSet
   FirstTinFormulaSet t.firstInFormulaSet
   FirstTinPeriod     t.firstInPeriod

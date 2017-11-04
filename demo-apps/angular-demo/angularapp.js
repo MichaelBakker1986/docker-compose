@@ -7,6 +7,7 @@ var serveStatic = require('serve-static');
 var compression = require('compression')
 var app = express();
 app.use(require('express-favicon')());
+app.use(require('cors')());
 app.use(compression())
 app.use(serveStatic(__dirname + "/public/"));
 app.use('/showcase', serveStatic(__dirname + "/../showcase/"));
@@ -15,7 +16,7 @@ app.use(serveStatic(__dirname + "/bower_components/"));
 app.use(serveStatic(__dirname + "/../adminlte/dist/"));
 
 app.get('/id/:id', function(req, res) {
-    request.get('http://' + require('os').hostname() + ':8085/' + req.params.id).on('error', (err) => {
+    request.get('http://' + require('os').hostname() + ':8085/id/' + req.params.id).on('error', (err) => {
         res.send(err.toString())
     }).pipe(res)
 });

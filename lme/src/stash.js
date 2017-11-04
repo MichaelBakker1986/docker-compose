@@ -15,22 +15,23 @@ class Stash {
 
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
-        write('./public/json/' + name + '.ffl', data).then(write('./public/json/' + name + '_canvas.json', lme)).then(function(filename) {
-            exec('node src/exportLME_FFL.js ' + name).then(exec('node src/exportLME_FFL_angular.js ' + name)).then((result) => {
-                if (develop) {
-                    log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
-                    return "develop mode";
-                }
-                let command = "git pull &&  git add . && git commit -m changeByDEMO && git push";
-                return exec(command).then((ok) => {
-                    log.info("GIT commit success while pushing file to repository: " + filename)
+        Promise.all([write('./public/json/' + name + '.ffl', data)])
+            .then(function(filename) {
+                Promise.all([exec('node src/exportLME_FFL.js ' + name), exec('node src/exportLME_FFL_angular.js ' + name)]).then((result) => {
+                    if (develop) {
+                        log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
+                        return "develop mode";
+                    }
+                    let command = "git pull &&  git add . && git commit -m changeByDEMO && git push";
+                    return exec(command).then((ok) => {
+                        log.info("GIT commit success while pushing file to repository: " + filename)
+                    }).catch((err) => {
+                        log.error("GIT commit failed while pushing file to repository: [" + err + "]")
+                    })
                 }).catch((err) => {
-                    log.error("GIT commit failed while pushing file to repository: [" + err + "]")
+                    console.error('fail' + err.toString())
                 })
-            }).catch((err) => {
-                console.error('fail' + err.toString())
-            })
-        }).catch(function(err) {
+            }).catch(function(err) {
             log.error(err)
         })
     }

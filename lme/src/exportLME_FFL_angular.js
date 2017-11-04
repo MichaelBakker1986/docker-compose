@@ -1,18 +1,24 @@
 var browser = require('browserify');
 var fastjson = require('browserify-fastjson');
-
 var fs = require('fs')
 var name = process.argv[2];
-var ffl = fs.readFileSync(__dirname + '/../public/json/' + name + '.ffl')
 var lmeAPI = require('./lme')
 const lmeApi = new lmeAPI()
-lmeApi.importFFL('' + ffl);
+lmeApi.importFFL(fs.readFileSync(__dirname + '/../public/json/' + name + '.ffl', 'utf8'));
 var lmeExport = lmeApi.exportLME();
+let done = false;
 let options = {
     insertGlobals: true,
     insertGlobalVars: {
         JSON_MODEL: (file, dir) => {
-            return (file.endsWith('angularController.js')) ? lmeExport : 'undefined';
+            if (file.endsWith('angularController.js')) {
+                if (done) {
+                    throw Error('Should not be exported twice')
+                }
+                done = true;
+                return lmeExport;
+            }
+            return 'undefined';
         }
     },
     gzip: true,

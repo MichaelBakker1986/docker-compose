@@ -14,10 +14,13 @@ app.post('/:id/saveFFL_LME', proxy('http://' + require('os').hostname() + ':8080
     limit: '50mb'
 }));
 app.get('/branches', proxy('http://' + require('os').hostname() + ':8080/branches'));
+app.get('/:id/ide.js', proxy('http://' + require('os').hostname() + ':8080/:id/ide.js'));
+app.get('/:id/transformFFL_LME/:model', proxy('http://' + require('os').hostname() + ':8080/:id/transformFFL_LME/:model'));
 app.use(compression())
 app.use(serveStatic(__dirname + "/"));
 app.use(serveStatic(__dirname + "/../../lme/bower_components/"));
 app.use(serveStatic(__dirname + "/../../lme/public/"));
+app.use(serveStatic(__dirname + "/../../lme-model-tests/plugins/"));
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
         console.info('<a href="http://' + add + ':' + port + '/ideplus.html">IDE DEMO Application</a><span> up.</span>');
