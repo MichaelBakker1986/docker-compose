@@ -1417,7 +1417,7 @@
         "MVO_Q_RESTRICTIES_value": true,
         "MVO_Q_WARNING_GLOBAL_value": true
       },
-      "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "original": "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "index": 100084,
       "name": "MVO_Q_MAP01_WARNING_value",
       "parsed": "String(a100718('100718',x.doc,y.base,z,v)+a100710('100710',x.doc,y.base,z,v))",
@@ -1624,7 +1624,7 @@
       "deps": {
         "MVO_Q_MAP01_value": true
       },
-      "original": "String(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "original": "EvaluateAsString(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "index": 100087,
       "name": "MVO_Q_MAP01_INFO_value",
       "parsed": "String(a100081('100081',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
@@ -2425,7 +2425,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100113,
       "name": "MVO_Q_MAP01_VRAAG02_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -2639,7 +2639,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100123,
       "name": "MVO_Q_MAP01_VRAAG03_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -2779,7 +2779,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100129,
       "name": "MVO_Q_MAP01_VRAAG04_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -2977,7 +2977,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100138,
       "name": "MVO_Q_MAP01_VRAAG05_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -3117,7 +3117,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100144,
       "name": "MVO_Q_MAP01_VRAAG06_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -3321,7 +3321,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100153,
       "name": "MVO_Q_MAP01_VRAAG07_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -3461,7 +3461,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100159,
       "name": "MVO_Q_MAP01_VRAAG08_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -3673,7 +3673,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100169,
       "name": "MVO_Q_MAP01_VRAAG09_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -3813,7 +3813,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100175,
       "name": "MVO_Q_MAP01_VRAAG10_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -4011,7 +4011,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100184,
       "name": "MVO_Q_MAP01_VRAAG11_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -4151,7 +4151,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100190,
       "name": "MVO_Q_MAP01_VRAAG12_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -4342,7 +4342,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100199,
       "name": "MVO_Q_MAP01_VRAAG13_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -4475,7 +4475,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100205,
       "name": "MVO_Q_MAP01_VRAAG14_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -5238,7 +5238,7 @@
         "MVO_Q_RESTRICTIES_value": true,
         "MVO_Q_WARNING_GLOBAL_value": true
       },
-      "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "original": "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "index": 100233,
       "name": "MVO_Q_MAP02_WARNING_value",
       "parsed": "String(a100718('100718',x.doc,y.base,z,v)+a100710('100710',x.doc,y.base,z,v))",
@@ -5331,7 +5331,7 @@
       "deps": {
         "MVO_Q_MAP02_value": true
       },
-      "original": "String(If(Q_MAP02[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "original": "EvaluateAsString(If(Q_MAP02[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "index": 100236,
       "name": "MVO_Q_MAP02_INFO_value",
       "parsed": "String(a100231('100231',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
@@ -5598,7 +5598,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG07_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG07))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG07))",
       "index": 100251,
       "name": "MVO_Q_MAP02_VRAAG01_title",
       "parsed": "String(a100150('100150',x,y.base,z,v))",
@@ -5680,7 +5680,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100255,
       "name": "MVO_Q_MAP02_VRAAG01_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -5813,7 +5813,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100261,
       "name": "MVO_Q_MAP02_VRAAG02_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -6493,7 +6493,7 @@
         "MVO_Q_RESTRICTIES_value": true,
         "MVO_Q_WARNING_GLOBAL_value": true
       },
-      "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "original": "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "index": 100289,
       "name": "MVO_Q_MAP03_WARNING_value",
       "parsed": "String(a100718('100718',x.doc,y.base,z,v)+a100710('100710',x.doc,y.base,z,v))",
@@ -6707,7 +6707,7 @@
       "deps": {
         "MVO_Q_MAP03_value": true
       },
-      "original": "String(If(Q_MAP03[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "original": "EvaluateAsString(If(Q_MAP03[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "index": 100292,
       "name": "MVO_Q_MAP03_INFO_value",
       "parsed": "String(a100287('100287',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
@@ -7892,7 +7892,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100346,
       "name": "MVO_Q_MAP03_VRAAG01_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -8025,7 +8025,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100352,
       "name": "MVO_Q_MAP03_VRAAG02_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -8216,7 +8216,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100361,
       "name": "MVO_Q_MAP03_VRAAG03_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -8349,7 +8349,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100367,
       "name": "MVO_Q_MAP03_VRAAG04_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -8554,7 +8554,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100377,
       "name": "MVO_Q_MAP03_VRAAG05_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -8687,7 +8687,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100383,
       "name": "MVO_Q_MAP03_VRAAG06_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -8878,7 +8878,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100392,
       "name": "MVO_Q_MAP03_VRAAG07_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -9011,7 +9011,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100398,
       "name": "MVO_Q_MAP03_VRAAG08_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -9202,7 +9202,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100407,
       "name": "MVO_Q_MAP03_VRAAG09_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -9335,7 +9335,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100413,
       "name": "MVO_Q_MAP03_VRAAG10_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -9526,7 +9526,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100422,
       "name": "MVO_Q_MAP03_VRAAG11_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -9659,7 +9659,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100428,
       "name": "MVO_Q_MAP03_VRAAG12_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -9850,7 +9850,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100437,
       "name": "MVO_Q_MAP03_VRAAG13_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -9983,7 +9983,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100443,
       "name": "MVO_Q_MAP03_VRAAG14_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -10766,7 +10766,7 @@
         "MVO_Q_RESTRICTIES_value": true,
         "MVO_Q_WARNING_GLOBAL_value": true
       },
-      "original": "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "original": "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "index": 100470,
       "name": "MVO_Q_MAP04_WARNING_value",
       "parsed": "String(a100718('100718',x.doc,y.base,z,v)+a100710('100710',x.doc,y.base,z,v))",
@@ -10939,7 +10939,7 @@
       "deps": {
         "MVO_Q_MAP04_value": true
       },
-      "original": "String(If(Q_MAP04[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "original": "EvaluateAsString(If(Q_MAP04[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "index": 100473,
       "name": "MVO_Q_MAP04_INFO_value",
       "parsed": "String(a100468('100468',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
@@ -11306,7 +11306,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100493,
       "name": "MVO_Q_MAP04_VRAAG01_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -11439,7 +11439,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100499,
       "name": "MVO_Q_MAP04_VRAAG02_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -11572,7 +11572,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100505,
       "name": "MVO_Q_MAP04_VRAAG03_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -11711,7 +11711,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100511,
       "name": "MVO_Q_MAP04_VRAAG04_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -12016,7 +12016,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100526,
       "name": "MVO_Q_MAP04_VRAAG05_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -12149,7 +12149,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100532,
       "name": "MVO_Q_MAP04_VRAAG06_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -12282,7 +12282,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100538,
       "name": "MVO_Q_MAP04_VRAAG07_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -12415,7 +12415,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100544,
       "name": "MVO_Q_MAP04_VRAAG08_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -12622,7 +12622,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100554,
       "name": "MVO_Q_MAP04_VRAAG09_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -12755,7 +12755,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100560,
       "name": "MVO_Q_MAP04_VRAAG10_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -12888,7 +12888,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100566,
       "name": "MVO_Q_MAP04_VRAAG11_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -13021,7 +13021,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_MEMO_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "index": 100572,
       "name": "MVO_Q_MAP04_VRAAG12_MEMO_title",
       "parsed": "String(a100107('100107',x,y.base,z,v))",
@@ -13197,7 +13197,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG01_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG01))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01))",
       "index": 100579,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG01_title",
       "parsed": "String(a100102('100102',x,y.base,z,v))",
@@ -13273,7 +13273,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG02_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG02))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG02))",
       "index": 100582,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG02_title",
       "parsed": "String(a100111('100111',x,y.base,z,v))",
@@ -13316,7 +13316,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG03_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG03))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG03))",
       "index": 100584,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG03_title",
       "parsed": "String(a100119('100119',x,y.base,z,v))",
@@ -13359,7 +13359,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG04_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG04))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG04))",
       "index": 100586,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG04_title",
       "parsed": "String(a100127('100127',x,y.base,z,v))",
@@ -13402,7 +13402,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG05_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG05))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG05))",
       "index": 100588,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG05_title",
       "parsed": "String(a100135('100135',x,y.base,z,v))",
@@ -13445,7 +13445,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG06_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG06))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG06))",
       "index": 100590,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG06_title",
       "parsed": "String(a100142('100142',x,y.base,z,v))",
@@ -13488,7 +13488,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG07_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG07))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG07))",
       "index": 100592,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG07_title",
       "parsed": "String(a100150('100150',x,y.base,z,v))",
@@ -13531,7 +13531,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG08_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG08))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG08))",
       "index": 100594,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG08_title",
       "parsed": "String(a100157('100157',x,y.base,z,v))",
@@ -13574,7 +13574,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG09_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG09))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG09))",
       "index": 100596,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG09_title",
       "parsed": "String(a100165('100165',x,y.base,z,v))",
@@ -13617,7 +13617,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG10_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG10))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG10))",
       "index": 100598,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG10_title",
       "parsed": "String(a100173('100173',x,y.base,z,v))",
@@ -13660,7 +13660,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG11_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG11))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG11))",
       "index": 100600,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG11_title",
       "parsed": "String(a100181('100181',x,y.base,z,v))",
@@ -13703,7 +13703,7 @@
       "deps": {
         "MVO_Q_MAP01_VRAAG12_title": true
       },
-      "original": "String(GetTitle(Q_MAP01_VRAAG12))",
+      "original": "EvaluateAsString(GetTitle(Q_MAP01_VRAAG12))",
       "index": 100602,
       "name": "MVO_Q_MAP04_GEWICHT_VRAAG12_title",
       "parsed": "String(a100188('100188',x,y.base,z,v))",
@@ -14276,7 +14276,7 @@
         "MVO_Q_RESTRICTIES_value": true,
         "MVO_Q_WARNING_GLOBAL_value": true
       },
-      "original": "String(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "original": "EvaluateAsString(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "index": 100625,
       "name": "MVO_Q_RESULT_value",
       "parsed": "String((a100078('100078',x.doc,y.base,z,v)==0?'Nog niet alle vragen zijn ingevuld.[br][/br]':'Deze vragenlijst is definitief gemaakt.[br][/br]')+a100718('100718',x.doc,y.base,z,v)+a100710('100710',x.doc,y.base,z,v))",
@@ -14756,7 +14756,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG01_title": true
       },
-      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG01))",
+      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG01))",
       "index": 100646,
       "name": "MVO_Q_MAP03_SUBSCORE01_title",
       "parsed": "String('Score '+a100321('100321',x,y.base,z,v))",
@@ -14847,7 +14847,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG02_title": true
       },
-      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG02))",
+      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG02))",
       "index": 100649,
       "name": "MVO_Q_MAP03_SUBSCORE02_title",
       "parsed": "String('Score '+a100324('100324',x,y.base,z,v))",
@@ -14909,7 +14909,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG03_title": true
       },
-      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG03))",
+      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG03))",
       "index": 100651,
       "name": "MVO_Q_MAP03_SUBSCORE03_title",
       "parsed": "String('Score '+a100326('100326',x,y.base,z,v))",
@@ -14971,7 +14971,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG04_title": true
       },
-      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG04))",
+      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG04))",
       "index": 100653,
       "name": "MVO_Q_MAP03_SUBSCORE04_title",
       "parsed": "String('Score '+a100328('100328',x,y.base,z,v))",
@@ -15033,7 +15033,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG05_title": true
       },
-      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG05))",
+      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG05))",
       "index": 100655,
       "name": "MVO_Q_MAP03_SUBSCORE05_title",
       "parsed": "String('Score '+a100312('100312',x,y.base,z,v))",
@@ -15095,7 +15095,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG06_title": true
       },
-      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG06))",
+      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG06))",
       "index": 100657,
       "name": "MVO_Q_MAP03_SUBSCORE06_title",
       "parsed": "String('Score '+a100315('100315',x,y.base,z,v))",
@@ -15157,7 +15157,7 @@
       "deps": {
         "MVO_Q_MAP03_GEWICHT_VRAAG07_title": true
       },
-      "original": "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG07))",
+      "original": "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG07))",
       "index": 100659,
       "name": "MVO_Q_MAP03_SUBSCORE07_title",
       "parsed": "String('Score '+a100330('100330',x,y.base,z,v))",
@@ -16160,7 +16160,7 @@
       "deps": {
         "MVO_Q_WARNING_GLOBALTXT_value": true
       },
-      "original": "String(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing, '+Q_WARNING_GLOBALTXT,''))",
+      "original": "EvaluateAsString(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing, '+Q_WARNING_GLOBALTXT,''))",
       "index": 100710,
       "name": "MVO_Q_WARNING_GLOBAL_value",
       "parsed": "String(Length(a100716('100716',x.doc,y.base,z,v))>0?'[br][/br]Er zijn knockouts van toepassing, '+a100716('100716',x,y.base,z,v):'')",
@@ -16294,7 +16294,7 @@
       "deps": {
         "MVO_Q_WARNING_01_value": true
       },
-      "original": "String(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))",
+      "original": "EvaluateAsString(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))",
       "index": 100716,
       "name": "MVO_Q_WARNING_GLOBALTXT_value",
       "parsed": "String(Length(a100713('100713',x.doc,y.base,z,v))>0?'[br][/br]'+a100713('100713',x.doc,y.base,z,v):'')",
@@ -16360,7 +16360,7 @@
       "deps": {
         "MVO_Q_RESTRICTIESTXT_value": true
       },
-      "original": "String(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld, '+Q_RESTRICTIESTXT,''))",
+      "original": "EvaluateAsString(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld, '+Q_RESTRICTIESTXT,''))",
       "index": 100718,
       "name": "MVO_Q_RESTRICTIES_value",
       "parsed": "String(Length(a100723('100723',x.doc,y.base,z,v))>0?'[br][/br]De volgende variabelen zijn niet correct gevuld, '+a100723('100723',x,y.base,z,v):'')",
@@ -16461,7 +16461,7 @@
       "deps": {
         "MVO_Q_RESTRICTIES_01_value": true
       },
-      "original": "String(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))",
+      "original": "EvaluateAsString(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))",
       "index": 100723,
       "name": "MVO_Q_RESTRICTIESTXT_value",
       "parsed": "String(Length(a100720('100720',x.doc,y.base,z,v))>0?'[br][/br]'+a100720('100720',x.doc,y.base,z,v):'')",
@@ -16894,7 +16894,7 @@
     [
       "Q_MAP01_WARNING",
       "'Warning voor map 1'",
-      "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
       "Q_MAP01.visible",
@@ -16905,7 +16905,7 @@
     [
       "Q_MAP01_INFO",
       "'Info bij stap 1'",
-      "String(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "EvaluateAsString(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "",
       "",
       false,
@@ -17003,7 +17003,7 @@
     ],
     [
       "Q_MAP01_VRAAG02_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17036,7 +17036,7 @@
     ],
     [
       "Q_MAP01_VRAAG03_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17058,7 +17058,7 @@
     ],
     [
       "Q_MAP01_VRAAG04_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17091,7 +17091,7 @@
     ],
     [
       "Q_MAP01_VRAAG05_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17113,7 +17113,7 @@
     ],
     [
       "Q_MAP01_VRAAG06_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17146,7 +17146,7 @@
     ],
     [
       "Q_MAP01_VRAAG07_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17168,7 +17168,7 @@
     ],
     [
       "Q_MAP01_VRAAG08_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17201,7 +17201,7 @@
     ],
     [
       "Q_MAP01_VRAAG09_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17223,7 +17223,7 @@
     ],
     [
       "Q_MAP01_VRAAG10_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17256,7 +17256,7 @@
     ],
     [
       "Q_MAP01_VRAAG11_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17278,7 +17278,7 @@
     ],
     [
       "Q_MAP01_VRAAG12_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17311,7 +17311,7 @@
     ],
     [
       "Q_MAP01_VRAAG13_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17333,7 +17333,7 @@
     ],
     [
       "Q_MAP01_VRAAG14_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17466,7 +17466,7 @@
     [
       "Q_MAP02_WARNING",
       "'Warning voor map 2'",
-      "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
       "Q_MAP02.visible",
@@ -17477,7 +17477,7 @@
     [
       "Q_MAP02_INFO",
       "'Info bij stap 2'",
-      "String(If(Q_MAP02[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "EvaluateAsString(If(Q_MAP02[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "",
       "",
       false,
@@ -17542,7 +17542,7 @@
     ],
     [
       "Q_MAP02_VRAAG01",
-      "String(GetTitle(Q_MAP01_VRAAG07))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG07))",
       "undefined",
       "",
       "",
@@ -17553,7 +17553,7 @@
     ],
     [
       "Q_MAP02_VRAAG01_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17575,7 +17575,7 @@
     ],
     [
       "Q_MAP02_VRAAG02_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17708,7 +17708,7 @@
     [
       "Q_MAP03_WARNING",
       "'Warning voor map 3'",
-      "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
       "Q_MAP03.visible",
@@ -17719,7 +17719,7 @@
     [
       "Q_MAP03_INFO",
       "'Info bij stap 3'",
-      "String(If(Q_MAP03[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "EvaluateAsString(If(Q_MAP03[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "",
       "",
       false,
@@ -17960,7 +17960,7 @@
     ],
     [
       "Q_MAP03_VRAAG01_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -17982,7 +17982,7 @@
     ],
     [
       "Q_MAP03_VRAAG02_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18015,7 +18015,7 @@
     ],
     [
       "Q_MAP03_VRAAG03_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18037,7 +18037,7 @@
     ],
     [
       "Q_MAP03_VRAAG04_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18070,7 +18070,7 @@
     ],
     [
       "Q_MAP03_VRAAG05_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18092,7 +18092,7 @@
     ],
     [
       "Q_MAP03_VRAAG06_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18125,7 +18125,7 @@
     ],
     [
       "Q_MAP03_VRAAG07_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18147,7 +18147,7 @@
     ],
     [
       "Q_MAP03_VRAAG08_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18180,7 +18180,7 @@
     ],
     [
       "Q_MAP03_VRAAG09_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18202,7 +18202,7 @@
     ],
     [
       "Q_MAP03_VRAAG10_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18235,7 +18235,7 @@
     ],
     [
       "Q_MAP03_VRAAG11_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18257,7 +18257,7 @@
     ],
     [
       "Q_MAP03_VRAAG12_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18290,7 +18290,7 @@
     ],
     [
       "Q_MAP03_VRAAG13_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18312,7 +18312,7 @@
     ],
     [
       "Q_MAP03_VRAAG14_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18445,7 +18445,7 @@
     [
       "Q_MAP04_WARNING",
       "'Warning voor map 4'",
-      "String(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "EvaluateAsString(Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
       "Q_MAP04.visible",
@@ -18456,7 +18456,7 @@
     [
       "Q_MAP04_INFO",
       "'Info bij stap 4'",
-      "String(If(Q_MAP04[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "EvaluateAsString(If(Q_MAP04[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "",
       "",
       false,
@@ -18532,7 +18532,7 @@
     ],
     [
       "Q_MAP04_VRAAG01_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18554,7 +18554,7 @@
     ],
     [
       "Q_MAP04_VRAAG02_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18576,7 +18576,7 @@
     ],
     [
       "Q_MAP04_VRAAG03_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18598,7 +18598,7 @@
     ],
     [
       "Q_MAP04_VRAAG04_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18642,7 +18642,7 @@
     ],
     [
       "Q_MAP04_VRAAG05_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18664,7 +18664,7 @@
     ],
     [
       "Q_MAP04_VRAAG06_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18686,7 +18686,7 @@
     ],
     [
       "Q_MAP04_VRAAG07_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18708,7 +18708,7 @@
     ],
     [
       "Q_MAP04_VRAAG08_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18741,7 +18741,7 @@
     ],
     [
       "Q_MAP04_VRAAG09_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18763,7 +18763,7 @@
     ],
     [
       "Q_MAP04_VRAAG10_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18785,7 +18785,7 @@
     ],
     [
       "Q_MAP04_VRAAG11_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18807,7 +18807,7 @@
     ],
     [
       "Q_MAP04_VRAAG12_MEMO",
-      "String(GetTitle(Q_MAP01_VRAAG01_MEMO))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01_MEMO))",
       "undefined",
       "",
       "",
@@ -18829,7 +18829,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG01",
-      "String(GetTitle(Q_MAP01_VRAAG01))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG01))",
       "10",
       "",
       "",
@@ -18840,7 +18840,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG02",
-      "String(GetTitle(Q_MAP01_VRAAG02))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG02))",
       "30",
       "",
       "",
@@ -18851,7 +18851,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG03",
-      "String(GetTitle(Q_MAP01_VRAAG03))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG03))",
       "20",
       "",
       "",
@@ -18862,7 +18862,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG04",
-      "String(GetTitle(Q_MAP01_VRAAG04))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG04))",
       "40",
       "",
       "",
@@ -18873,7 +18873,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG05",
-      "String(GetTitle(Q_MAP01_VRAAG05))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG05))",
       "10",
       "",
       "",
@@ -18884,7 +18884,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG06",
-      "String(GetTitle(Q_MAP01_VRAAG06))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG06))",
       "30",
       "",
       "",
@@ -18895,7 +18895,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG07",
-      "String(GetTitle(Q_MAP01_VRAAG07))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG07))",
       "20",
       "",
       "",
@@ -18906,7 +18906,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG08",
-      "String(GetTitle(Q_MAP01_VRAAG08))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG08))",
       "40",
       "",
       "",
@@ -18917,7 +18917,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG09",
-      "String(GetTitle(Q_MAP01_VRAAG09))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG09))",
       "10",
       "",
       "",
@@ -18928,7 +18928,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG10",
-      "String(GetTitle(Q_MAP01_VRAAG10))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG10))",
       "30",
       "",
       "",
@@ -18939,7 +18939,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG11",
-      "String(GetTitle(Q_MAP01_VRAAG11))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG11))",
       "20",
       "",
       "",
@@ -18950,7 +18950,7 @@
     ],
     [
       "Q_MAP04_GEWICHT_VRAAG12",
-      "String(GetTitle(Q_MAP01_VRAAG12))",
+      "EvaluateAsString(GetTitle(Q_MAP01_VRAAG12))",
       "40",
       "",
       "",
@@ -19072,7 +19072,7 @@
     [
       "Q_RESULT",
       "'Resultaat'",
-      "String(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
+      "EvaluateAsString(If(Q_ROOT[doc]==0,'Nog niet alle vragen zijn ingevuld.[br][/br]','Deze vragenlijst is definitief gemaakt.[br][/br]')+Q_RESTRICTIES[doc]+Q_WARNING_GLOBAL[doc])",
       "",
       "",
       false,
@@ -19148,7 +19148,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE01",
-      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG01))",
+      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG01))",
       "OnER((Q_MAP03_VRAAG01*Q_MAP03_GEWICHT_VRAAG01+Q_MAP03_VRAAG02*Q_MAP03_GEWICHT_VRAAG01)/2,NA)",
       "",
       "",
@@ -19159,7 +19159,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE02",
-      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG02))",
+      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG02))",
       "OnER((Q_MAP03_VRAAG03*Q_MAP03_GEWICHT_VRAAG02+Q_MAP03_VRAAG04*Q_MAP03_GEWICHT_VRAAG02)/2,NA)",
       "",
       "",
@@ -19170,7 +19170,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE03",
-      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG03))",
+      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG03))",
       "OnER((Q_MAP03_VRAAG05*Q_MAP03_GEWICHT_VRAAG03+Q_MAP03_VRAAG06*Q_MAP03_GEWICHT_VRAAG03)/2,NA)",
       "",
       "",
@@ -19181,7 +19181,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE04",
-      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG04))",
+      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG04))",
       "OnER((Q_MAP03_VRAAG07*Q_MAP03_GEWICHT_VRAAG04+Q_MAP03_VRAAG08*Q_MAP03_GEWICHT_VRAAG04)/2,NA)",
       "",
       "",
@@ -19192,7 +19192,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE05",
-      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG05))",
+      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG05))",
       "OnER((Q_MAP03_VRAAG09*Q_MAP03_GEWICHT_VRAAG05+Q_MAP03_VRAAG10*Q_MAP03_GEWICHT_VRAAG05)/2,NA)",
       "",
       "",
@@ -19203,7 +19203,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE06",
-      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG06))",
+      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG06))",
       "OnER((Q_MAP03_VRAAG11*Q_MAP03_GEWICHT_VRAAG06+Q_MAP03_VRAAG12*Q_MAP03_GEWICHT_VRAAG06)/2,NA)",
       "",
       "",
@@ -19214,7 +19214,7 @@
     ],
     [
       "Q_MAP03_SUBSCORE07",
-      "String('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG07))",
+      "EvaluateAsString('Score '+GetTitle(Q_MAP03_GEWICHT_VRAAG07))",
       "OnER((Q_MAP03_VRAAG13*Q_MAP03_GEWICHT_VRAAG07+Q_MAP03_VRAAG14*Q_MAP03_GEWICHT_VRAAG07)/2,NA)",
       "",
       "",
@@ -19468,7 +19468,7 @@
     [
       "Q_WARNING_GLOBAL",
       "'Knock-out(s)'",
-      "String(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing, '+Q_WARNING_GLOBALTXT,''))",
+      "EvaluateAsString(If(Length(Q_WARNING_GLOBALTXT[doc])>0,'[br][/br]Er zijn knockouts van toepassing, '+Q_WARNING_GLOBALTXT,''))",
       "",
       "",
       "HULPVARS.visible",
@@ -19490,7 +19490,7 @@
     [
       "Q_WARNING_GLOBALTXT",
       "'Knock-out tekst'",
-      "String(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))",
+      "EvaluateAsString(If(Length(Q_WARNING_01[doc])>0,'[br][/br]'+Q_WARNING_01[doc],''))",
       "",
       "",
       false,
@@ -19501,7 +19501,7 @@
     [
       "Q_RESTRICTIES",
       "'Restricties'",
-      "String(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld, '+Q_RESTRICTIESTXT,''))",
+      "EvaluateAsString(If(Length(Q_RESTRICTIESTXT[doc])>0,'[br][/br]De volgende variabelen zijn niet correct gevuld, '+Q_RESTRICTIESTXT,''))",
       "",
       "",
       false,
@@ -19534,7 +19534,7 @@
     [
       "Q_RESTRICTIESTXT",
       "'Restricties tekst'",
-      "String(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))",
+      "EvaluateAsString(If(Length(Q_RESTRICTIES_01[doc])>0,'[br][/br]'+Q_RESTRICTIES_01[doc],''))",
       "",
       "",
       false,

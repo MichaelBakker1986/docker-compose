@@ -305,7 +305,7 @@
       "deps": {
         "TESTMODEL_Total_title": true
       },
-      "original": "String(GetTitle(Total))",
+      "original": "EvaluateAsString(GetTitle(Total))",
       "index": 100016,
       "name": "TESTMODEL_EvaluateStringTitle_value",
       "parsed": "String(a100011('100011',x,y.base,z,v))",
@@ -327,7 +327,7 @@
       "deps": {
         "TESTMODEL_Total_title": true
       },
-      "original": "String(GetTitle(Total))",
+      "original": "EvaluateAsString(GetTitle(Total))",
       "index": 100017,
       "name": "TESTMODEL_EvaluateStringTitle_title",
       "parsed": "String(a100011('100011',x,y.base,z,v))",
@@ -440,8 +440,8 @@
     ],
     [
       "EvaluateStringTitle",
-      "String(GetTitle(Total))",
-      "String(GetTitle(Total))",
+      "EvaluateAsString(GetTitle(Total))",
+      "EvaluateAsString(GetTitle(Total))",
       "",
       "",
       false,

@@ -1,5 +1,5 @@
 function AmpersandConverter() {
-    this.on=true;
+    this.on = true;
 }
 
 AmpersandConverter.prototype.parse = function(input) {

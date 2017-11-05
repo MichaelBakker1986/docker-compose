@@ -19,11 +19,6 @@ function finFormulaGeneric(buf) {
     //end temp case fix
 
     /**
-     * Generic formula fixes
-     */
-    buf = buf.replace(/EvaluateAsString/gmi, "String")
-    buf = buf.replace(/Matrixlookup/gmi, 'MatrixLookup')
-    /**
      * Here are all time references
      */
     buf = buf.replace(/\[1]/gm, '[doc]');
