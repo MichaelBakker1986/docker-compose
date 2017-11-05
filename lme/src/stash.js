@@ -16,17 +16,17 @@ class Stash {
                         log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
                     }
-                    let command = "git pull &&  git add -A && git commit -m changeByDEMO && git push";
+                    let command = "git pull &&  git commit -a -m changeByDEMO && git push";
                     return exec(command).then((ok) => {
                         log.info("GIT commit success while pushing file to repository: " + filename)
                     }).catch((err) => {
                         log.error("GIT commit failed while pushing file to repository: [" + err + "]")
                     })
                 }).catch((err) => {
-                    log.error('fail' + err.toString())
+                    log.error('Failed to compile or write javascript. [' + err.toString() + ']')
                 })
             }).catch(function(err) {
-                log.error(err)
+                log.error('failed to write file to resources folder [' + err.toString() + ']')
             })
     }
 

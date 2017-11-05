@@ -24,6 +24,7 @@ app.post('/:id/saveFFL_LME', (req, res) => {
     stash.commit(req.body.model, req.body.data).then((data) => {
         res.json({status: 'ok'});
     }).catch((err) => {
+        console.error('Failed to write ' + req.body.model + '.ffl file.', err)
         res.json({status: 'fail'});
     })
 });
