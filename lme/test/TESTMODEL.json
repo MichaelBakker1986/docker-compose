@@ -380,7 +380,8 @@
       "",
       false,
       false,
-      null
+      null,
+      ""
     ],
     [
       "VariableOne",
@@ -390,7 +391,8 @@
       "",
       false,
       false,
-      null
+      null,
+      ""
     ],
     [
       "VariableTwo",
@@ -400,7 +402,8 @@
       "",
       "VariableOne!=100",
       false,
-      null
+      null,
+      ""
     ],
     [
       "Total",
@@ -410,7 +413,8 @@
       "",
       false,
       false,
-      null
+      null,
+      ""
     ],
     [
       "OneFixedDecimal",
@@ -420,7 +424,8 @@
       "",
       false,
       false,
-      null
+      null,
+      ""
     ],
     [
       "ZeroFixedDecimal",
@@ -430,7 +435,8 @@
       "",
       false,
       false,
-      null
+      null,
+      ""
     ],
     [
       "EvaluateStringTitle",
@@ -440,7 +446,8 @@
       "",
       false,
       false,
-      null
+      null,
+      ""
     ],
     [
       "DataEntered",
@@ -450,7 +457,8 @@
       "",
       false,
       false,
-      null
+      null,
+      ""
     ]
   ],
   "nodes": [
@@ -856,6 +864,14 @@
           "dataTypeName": "text",
           "fieldName": "choices",
           "position": 7,
+          "renderTypeName": "text"
+        },
+        {
+          "width": 50,
+          "name": "hint",
+          "dataTypeName": "text",
+          "fieldName": "hint",
+          "position": 8,
           "renderTypeName": "text"
         }
       ]

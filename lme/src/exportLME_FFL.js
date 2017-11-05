@@ -17,7 +17,7 @@ let options = {
     insertGlobals: true,
     debug: false
 };
-let b = browser(options);
+let b = browser(options).ignore('escodegen').ignore('esprima');
 b.add(__dirname + '/output.js');
 b.transform('uglifyify', {global: true})
 b.transform(require('browserify-fastjson'));

@@ -72,10 +72,10 @@ $(document).ready(function() {
             }
             editor.setValue(fflModel);
             allLines = fflModel.split('\n');
-            editor.session.removeFolds(0, true)
-            setTimeout(function() {
-                addFolds(0)
-            }, 1)
+            /* editor.session.removeFolds(0, true)
+             setTimeout(function() {
+                 addFolds(0)
+             }, 1)*/
 
             editor.scrollToLine(1, true, true, function() {
             });

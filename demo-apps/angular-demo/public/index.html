@@ -74,6 +74,7 @@
                 //after this we can import the user-data....
                 $scope.LME_MODEL = LME
                 $http.get('/id/' + userID).then(function(data) {
+                    if (!data.data) throw Error('No data in request')
                     LMEMETA.importData(data.data.values)
                 }).catch(function(err) {
                     alert('Cannot load saved data. from [' + '/id/' + userID + ']')

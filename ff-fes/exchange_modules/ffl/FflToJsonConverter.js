@@ -1,37 +1,8 @@
 var assert = require('assert');
-var fileParser = require('./fileParser');
 var FinFormula = require('./FinFormula');
 var Stack = require('stack-adt');
 var visitor = require('../../fesjs/JSVisitor');
 var log = require('ff-log');
-/*
- datatype: true,
- frequency: true,
- formula: true,
- data_options: true,
- title: true,
- displaytype: true,
- choices: true,
- top_blanklines: true,
- locked: true,
- visible: true,
- options_title: true,
- options_notrend: true,
- options_trend: true,
- aggregation: true,
- top_separator: true,
- bottom_separator: true,
- fixed_decimals: true,
- hint: true,
- refer: true,
- flipflop_trend: true,
- flipflop_notrend: true,
- formula_trend: true,
- pattern: true,
- unspecified: true,
- afterinput: true,
- */
-
 /*
  The purpose of these methods is:
  convert ffl into Javascript
@@ -252,9 +223,7 @@ FflToJsonConverter.prototype.parseFFL = function(contents) {
                     //does only happen for now with Case calls;
                     //Fails for formula's including ':' e.g. "hint: Week number: 14"
                     node[firstWord] = FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1));
-                    if (log.DEBUG) {
-                        log.debug('Found Case(..,[*:*]); change : to , in [%s] result [%s]', obj, FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1)))
-                    }
+                    if (log.DEBUG) log.debug('Found Case(..,[*:*]); change : to , in [%s] result [%s]', obj, FinFormula.parseFormula(obj.substring(obj.indexOf(":") + 1)))
                 }
             }
         }
@@ -263,7 +232,11 @@ FflToJsonConverter.prototype.parseFFL = function(contents) {
     return stack.peek();
 }
 FflToJsonConverter.prototype.deparseRegex = function(input) {
-    return fileParser.deparseRegexs(deparsers, input)
+    for (var i = 0; i < deparsers.length; i++) {
+        var obj = deparsers[i];
+        input = input.replace(obj.regex, obj.replace);
+    }
+    return input;
 }
 FflToJsonConverter.prototype.parseRegex = FinFormula.parseFormula;
 module.exports = FflToJsonConverter.prototype;

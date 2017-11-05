@@ -66,7 +66,7 @@ FFLParser.prototype.parseData = function(data, workbook) {
                     context.nestTupleDepth++;
                 }
                 if (context.tupleDefinition) {
-                    log.debug('tuple def for [%s].[%s] is [%s]', nodeName, context.nestTupleDepth, context.tupleDefinition);
+                    if (log.TRACE) log.trace('tuple def for [%s].[%s] is [%s]', nodeName, context.nestTupleDepth, context.tupleDefinition);
                 }
                 addnode(logVars, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && context.tupleDefinition, context.tupleDefinition, context.nestTupleDepth);
                 if (tupleDefiniton) {
@@ -75,7 +75,7 @@ FFLParser.prototype.parseData = function(data, workbook) {
             }
         }
     }, {nestTupleDepth: 0});
-    log.debug('Add variables [' + logVars.variables + ']')
+    if (log.TRACE) log.trace('Add variables [' + logVars.variables + ']')
     return solution;
 }
 FFLParser.prototype.deParse = function(rowId, workbook) {
@@ -314,6 +314,7 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         }
     }
 }
+
 function parseFFLFormula(formula, node, row) {
     var formulaReturn = 'undefined';
     try {

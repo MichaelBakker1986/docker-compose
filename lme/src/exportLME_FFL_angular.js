@@ -26,7 +26,7 @@ let options = {
     insertGlobals: true,
     debug: false
 };
-let b = browser(options);
+let b = browser(options).ignore('escodegen').ignore('esprima');
 b.add(__dirname + '/angularController.js');
 b.transform(fastjson);
 var res = fs.createWriteStream(__dirname + '/../public/json/ai_' + name + '.js')

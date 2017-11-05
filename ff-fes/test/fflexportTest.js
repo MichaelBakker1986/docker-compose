@@ -21,4 +21,3 @@ for (var i = 0; i < fflTestModels.length; i++) {
         log.trace(fflExport);
     }
 }
-log.info('test fflExport succeed')

@@ -23,16 +23,17 @@ function FormulaInfo(data, schema, modelName) {
         if (names[name] === undefined) {
             names[name] = true;
             var title = forms[modelNamePrefix + name + '_title'] || {original: null};
+            var hint = forms[modelNamePrefix + name + '_hint'] || {original: ''};
             var visible = forms[modelNamePrefix + name + '_visible'] || {original: false};
             var value = forms[modelNamePrefix + name + '_value'] || {original: ''};
             var formula_trend = forms[modelNamePrefix + name + '_trend'] || {original: ''};
             var formula_notrend = forms[modelNamePrefix + name + '_notrend'] || {original: ''};
             var locked = forms[modelNamePrefix + name + '_locked'] || {original: false};
             var choices = forms[modelNamePrefix + name + '_choices'] || {original: null};
-            data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original])
+            data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original, hint.original])
         }
     })
-    var types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices'];
+    var types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint'];
     //this.formulas = undefined;
     this.meta = {
         view: {
@@ -75,15 +76,14 @@ LMEParser.prototype.name = 'lme'
 LMEParser.prototype.status = 'green';
 LMEParser.prototype.headername = '.finance lme';
 LMEParser.prototype.parseData = function(data, workbook) {
-    let solution = SolutionFacade.createSolution(data.name);
-
+    const solution = SolutionFacade.createSolution(data.name);
     solution.nodes = data.nodes;
     PropertiesAssembler.bulkInsert(solution);
     FormulaService.bulkInsertFormula(data.formulas)
     data.formulas.forEach(function(formula) {
         FunctionMap.initializeFormula(formula);
     })
-    log.info('Done import ' + data.name)
+    if (log.DEBUG) log.debug('Done import ' + data.name)
     return solution;
 }
 var unwantedKeys = {

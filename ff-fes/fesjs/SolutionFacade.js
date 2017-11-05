@@ -19,13 +19,8 @@ SolutionFacade.prototype.createSolution = function(solutionName) {
 }
 
 SolutionFacade.prototype.importSolutionData = function(data, parserType, workbook) {
-    if (data === undefined) {
-        log.error('No data specified')
-        return;
-    }
     var foundParser = ParserService.findParser(parserType);
     var solution = foundParser.parseData(data, workbook);
-    log.debug('Update Solution [' + solution.getName() + ']');
     PropertiesAssembler.bulkInsert(solution);
     initFormulaBootstrap(solution.formulas, false);
     return solution;

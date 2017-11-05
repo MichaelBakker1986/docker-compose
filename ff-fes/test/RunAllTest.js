@@ -14,6 +14,7 @@ var tests = [
     './jsonValuesTest',
     './tupleTest',
     './apiTest',
+    './TupleIndexConverterTest',
     './totalYearlyCostsTSUMTest'
 ];
 var testResults = [];
@@ -46,7 +47,7 @@ testResults.push(['performceTest', 'total', totalTestTime]);
 testResults.forEach(function(testResult) {
     log.info(testResult)
 })
-if (totalTestTime > 910) {
+if (totalTestTime > 2500) {
     log.error('Total time exceeded')
 }
 console.timeEnd('performance')

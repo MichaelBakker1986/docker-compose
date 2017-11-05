@@ -1,7 +1,6 @@
 var glob = require('glob')
 var log = require('ff-log')
 var fs = require('fs');
-
 /**
  * Prefer parsed JSON file above FFL.
  * TODO: change into canvas_json files which is way faster to parse.

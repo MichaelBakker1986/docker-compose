@@ -39,13 +39,11 @@ fm.prototype.apiSet = function(formula, x, y, z, value, v) {
 }
 fm.prototype.initializeFormula = function(newFormula) {
     var id = newFormula.id || newFormula.index;
-    if (log.DEBUG) {
-        log.debug("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
-    }
+    if (log.DEBUG) log.debug("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
+
     var modelFunction = Function('f, x, y, z, v', 'return ' + newFormula.parsed).bind(global);
     global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 };
-//private
 //we do need this functions to be here, so the FormulaBootstrap can directly call the function on its map instead of
 //for now we just use static functions and user enterable function that will not cache.
 // the ApiGet. we don't need the CacheLocked and the NoCacheUnlocked they are just for further optimalizations.

@@ -17,4 +17,3 @@ var parsedR = FflToJsonConverter.parseRegex(hint);
 assert(parsedR == "https//www.iso.oriso-26000-social-responsibility.html vindt u meer ", "Should strip // for now")
 var json = FflToJsonConverter.parseFFL("variable test\n { hint: " + hint + "; //not important \n }");
 assert(json['variable test'].hint == parsedR.trim())
-console.info(json)

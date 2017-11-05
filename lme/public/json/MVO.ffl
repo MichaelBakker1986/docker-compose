@@ -374,7 +374,7 @@ model MVO uses BaseModel
       choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
       options_title: locked;
       options: locked;
-      variable Q_MAP01			//*true*//
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;
@@ -945,7 +945,7 @@ model MVO uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MAP01_ENTEREDREQUIREDVARS			//*0*//
+          variable Q_MAP01_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;

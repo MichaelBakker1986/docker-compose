@@ -60,7 +60,7 @@ FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tu
             var choices = JSWorkBook.getSolutionPropertyValue(rowId, 'choices');
             var choiceValue = choices.lookup('value', value);
             if (choiceValue === undefined) {
-                log.warn('Could not find [%s] choice [%s] in %s. using [%s] to be value', rowId, value, JSON.stringify(choices), value);
+                log.debug('Could not find [%s] choice [%s] in %s. using [%s] to be value', rowId, value, JSON.stringify(choices), value);
             } else {
                 value = isNaN(choiceValue.name) ? choiceValue.name : parseInt(choiceValue.name);
             }
