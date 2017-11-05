@@ -5,8 +5,7 @@
   "description": "lme-all",
   "main": "index.js",
   "dependencies": {
-    "concurrently": "^3.5.0",
-    "cors": "^2.8.4"
+    "concurrently": "^3.5.0"
   },
   "devDependencies": {
     "pre-commit": "^1.2.2"
