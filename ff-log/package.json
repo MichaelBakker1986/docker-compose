@@ -6,6 +6,10 @@
   "scripts": {
     "test": "node log-test.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
+  },
   "keywords": [
     "ff-log"
   ],

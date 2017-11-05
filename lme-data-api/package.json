@@ -1,31 +1,23 @@
 {
-  "name": "lme-api",
+  "name": "lme-data-app",
   "description": "REST api for lme",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
+  },
   "version": "0.0.2",
   "scripts": {
-    "start": "node lme-api.js"
+    "start": "node lme-data-app.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
-    "browserify": "^14.5.0",
-    "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
-    "debug": "~2.6.0",
     "express": "^4.14.1",
     "express-prettify": "0.0.9",
     "ff-log": "^1.0.21",
     "glob": "^7.1.2",
-    "iconv-lite": "^0.4.19",
-    "jade": "~1.11.0",
-    "morgan": "~1.7.0",
-    "mysql": "^2.13.0",
     "promise": "^7.1.1",
-    "restify": "^6.2.3",
-    "serve-favicon": "~2.3.2",
-    "static-nocase": "0.0.3",
     "swagger-jsdoc": "^1.9.7",
-    "swagger-restify": "^1.0.1",
     "swaggerize-express": "^4.0.5",
     "swaggerize-ui": "^1.0.1"
   },

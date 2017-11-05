@@ -12,7 +12,7 @@ ModelListener.prototype.initializeModels = function() {
     var modelListener = this;
     var ffls = [];
     var fetFileNames = function(src, callback) {
-        glob(src + '**/json/**', callback);
+        glob(src + '**', callback);
     };
     var modelCallback = function(err, res) {
         if (err) {
@@ -27,6 +27,8 @@ ModelListener.prototype.initializeModels = function() {
                         var modelData = "" + new Buffer(data, 'binary').toString('utf-8');
                         modelData = modelData.replace(/amount/gmi, 'Amount');
                         modelData = modelData.replace(/GoodWill/gmi, 'GoodWill');
+                        modelData = modelData.replace(/MatrixLookup/gmi, 'MatrixLookup');
+                        modelData = modelData.replace(/Startdate/gmi, 'StartDate');
                         modelData = modelData.replace(/Bookvalue/gmi, 'BookValue');
                         modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses');
                         modelData = modelData.replace(/DiscountRateTaxShieldBasis/gmi, 'DiscountRateTaxShieldBasis')
@@ -40,7 +42,7 @@ ModelListener.prototype.initializeModels = function() {
             })
         }
     };
-    fetFileNames(__dirname + '/../lme/public/', modelCallback);
+    fetFileNames(__dirname + '/resources/', modelCallback);
 }
 ModelListener.prototype.onNewModel = function(modeldata) {
     log.info(modeldata)

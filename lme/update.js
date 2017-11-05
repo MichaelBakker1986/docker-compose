@@ -112,7 +112,7 @@ function testAndDeploy() {
         spawnChild('../demo-apps/angular-demo/angularapp')
         spawnChild('../demo-apps/adminlte/ltelite')
         spawnChild('lme-model-app')
-        spawnChild('../lme-api/lme-api')
+        spawnChild('../lme-data-api/lme-data-app')
 
     }).catch(function(err) {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');

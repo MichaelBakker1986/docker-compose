@@ -6,6 +6,10 @@
   "scripts": {
     "test": "concurrently \"node lme-model-tests.js\" \"node MVO/MVOtest.js\""
   },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
+  },
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",
   "dependencies": {

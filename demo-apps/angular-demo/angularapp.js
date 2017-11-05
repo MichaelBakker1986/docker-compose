@@ -10,6 +10,7 @@ app.use(expressStaticGzip(__dirname + "/public/"));
 app.use('/showcase', expressStaticGzip(__dirname + "/../showcase/"));
 app.use(expressStaticGzip(__dirname + "/bower_components/"));
 app.use(expressStaticGzip(__dirname + "/../adminlte/dist/"));
+//proxies
 app.get('/id/:id', proxy('http://' + require('os').hostname() + ':8085/id/:id'));
 app.post('/id/:id', proxy('http://' + require('os').hostname() + ':8085/id/:id'));
 app.get('/:id/transformFFL_LME/:model', proxy('http://' + require('os').hostname() + ':8080/:id/transformFFL_LME/:model'));

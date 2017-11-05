@@ -15,7 +15,7 @@
     "test"
   ],
   "scripts": {
-    "install": "concurrently \"cd ff-log && npm install\" \"cd lme-api && npm install\" \"cd ff-fes-xlsx && npm install\" \"cd ff-fes && npm install\" \"cd lme && npm install\" \"cd ff-formulajs && npm install\" \"cd demo-apps/angular-demo && npm install\" \"cd demo-apps/adminlte && npm install\" \"cd ff-ssh-git && npm install\" \"cd lme-api && npm install\" \"cd ff-math && npm install\" \"cd lme-model-tests && npm install\"",
+    "install": "concurrently \"cd ff-log && npm install --no-optional \" \"cd lme-data-api && npm install --no-optional \" \"cd ff-fes-xlsx && npm install --no-optional \" \"cd ff-fes && npm install --no-optional \" \"cd lme && npm install --no-optional\" \"cd ff-formulajs && npm install --no-optional\" \"cd demo-apps/angular-demo && npm install --no-optional\" \"cd demo-apps/adminlte && npm install --no-optional\" \"cd ff-ssh-git && npm install --no-optional\" \"cd ff-math && npm install --no-optional\" \"cd lme-model-tests && npm install --no-optional\"",
     "test": "concurrently \"cd ff-fes-xlsx && npm test\" \"cd ff-fes && npm test\" \"cd lme-model-tests && npm test\" \"cd lme && npm test\" \"cd ff-log && npm test\"",
     "start": "node lme/update.js"
   },

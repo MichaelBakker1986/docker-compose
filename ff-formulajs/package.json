@@ -11,5 +11,9 @@
   "dependencies": {
     "formulajs": "^1.0.8",
     "ff-log": "^1.0.21"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
   }
 }
