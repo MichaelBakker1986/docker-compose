@@ -2,4 +2,4 @@ require('../../ff-fes/exchange_modules/presentation/webexport');
 var model = require('./lme')
 LMEMETA = new model()
 LMEMETA.importLME(JSON_MODEL);
-LME = LMEMETA.exportWebModel();
+LME = LMEMETA.exportWebModel().nodes;

@@ -5,6 +5,7 @@ $(document).ready(function() {
     var ConvertEvaluateAsString = require('../../lme-model-tests/plugins/ConvertEvaluateAsString').ConvertEvaluateAsString
     var AmpersandConverter = require('../../lme-model-tests/plugins/AmpersandConverter').AmpersandConverter
     var ScorecardQ_caseFix = require('../../lme-model-tests/plugins/ScorecardQ_caseFix').ScorecardQCaseFix
+    var V05CaseFix = require('../../lme-model-tests/plugins/V05CaseFix').V05CaseFix
     $.getJSON("/branches", function(data, status, xhr) {
         $("#tags").autocomplete({source: data});
     })
@@ -69,6 +70,9 @@ $(document).ready(function() {
             }
             if (ScorecardQ_caseFix.on) {
                 fflModel = ScorecardQ_caseFix.parse(fflModel);
+            }
+            if (V05CaseFix.on) {
+                fflModel = V05CaseFix.parse(fflModel);
             }
             editor.setValue(fflModel);
             allLines = fflModel.split('\n');

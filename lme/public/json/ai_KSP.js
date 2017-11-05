@@ -1174,15 +1174,14 @@ LMEParser.prototype.name = 'lme'
 LMEParser.prototype.status = 'green';
 LMEParser.prototype.headername = '.finance lme';
 LMEParser.prototype.parseData = function(data, workbook) {
-    let solution = SolutionFacade.createSolution(data.name);
-
+    const solution = SolutionFacade.createSolution(data.name);
     solution.nodes = data.nodes;
     PropertiesAssembler.bulkInsert(solution);
     FormulaService.bulkInsertFormula(data.formulas)
     data.formulas.forEach(function(formula) {
         FunctionMap.initializeFormula(formula);
     })
-    log.info('Done import ' + data.name)
+    if (log.DEBUG) log.debug('Done import ' + data.name)
     return solution;
 }
 var unwantedKeys = {

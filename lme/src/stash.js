@@ -15,9 +15,9 @@ class Stash {
 
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
-        Promise.all([write('./public/json/' + name + '.ffl', data)])
+        return Promise.all([write('./public/json/' + name + '.ffl', data)])
             .then(function(filename) {
-                Promise.all([exec('node src/exportLME_FFL.js ' + name), exec('node src/exportLME_FFL_angular.js ' + name)]).then((result) => {
+                return Promise.all([exec('node src/exportLME_FFL.js ' + name), exec('node src/exportLME_FFL_angular.js ' + name)]).then((result) => {
                     if (develop) {
                         log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
@@ -29,11 +29,11 @@ class Stash {
                         log.error("GIT commit failed while pushing file to repository: [" + err + "]")
                     })
                 }).catch((err) => {
-                    console.error('fail' + err.toString())
+                    log.error('fail' + err.toString())
                 })
             }).catch(function(err) {
-            log.error(err)
-        })
+                log.error(err)
+            })
     }
 
     models(branch, path) {

@@ -414,7 +414,7 @@ function LME(){let e=require("../../ff-fes/fesjs/fescontext"),t=require("../../f
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\lme.js","/src",undefined)
 },{"../../ff-fes":25,"../../ff-fes/exchange_modules/jsonvalues/jsonvalues":7,"../../ff-fes/exchange_modules/lme/lmeparser":8,"../../ff-fes/fesjs/JSWorkBook":16,"../../ff-fes/fesjs/fescontext":24,"../../ff-formulajs/ff-formulajs":47,"../../ff-math":72,"_process":79,"buffer":76}],84:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-require("../../ff-fes/exchange_modules/presentation/webexport");var model=require("./lme");LMEMETA=new model,LMEMETA.importLME(JSON_MODEL),LME=LMEMETA.exportWebModel();
+require("../../ff-fes/exchange_modules/presentation/webexport");var model=require("./lme");LMEMETA=new model,LMEMETA.importLME(JSON_MODEL),LME=LMEMETA.exportWebModel().nodes;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\output.js","/src",{
   "formulas": [

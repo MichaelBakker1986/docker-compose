@@ -1,5 +1,4 @@
 var browser = require('browserify');
-var fastjson = require('browserify-fastjson');
 var fs = require('fs')
 var name = process.argv[2];
 var lmeAPI = require('./lme')
@@ -28,6 +27,6 @@ let options = {
 };
 let b = browser(options).ignore('escodegen').ignore('esprima');
 b.add(__dirname + '/angularController.js');
-b.transform(fastjson);
+b.transform(require('browserify-fastjson'));
 var res = fs.createWriteStream(__dirname + '/../public/json/ai_' + name + '.js')
 b.bundle().pipe(res);

@@ -23,7 +23,6 @@ function finFormulaGeneric(buf) {
      */
     buf = buf.replace(/EvaluateAsString/gmi, "String")
     buf = buf.replace(/Matrixlookup/gmi, 'MatrixLookup')
-    buf = buf.replace(/Startdate/gm, 'StartDate')
     /**
      * Here are all time references
      */
@@ -36,10 +35,7 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/GetT\(T,-1\)/gm, 'x.prev');
     buf = buf.replace(/GetT(T,-1,1,1)/gm, 'x.prev');
     buf = buf.replace(/FirstTInFormulaset\(Trend\)/gm, 'x.firsttrend');
-    //-- Context dependencies
-    // buf = buf.replace(/\[t-1\]|@|#/gim, ''); //[prev]   : for now, just throw it away, its .prev when using Time
-    //   buf = buf.replace(/\[1\]/gm, '');    //[doc]    : requests the DocumentValue
-    buf = buf.replace(/\[0\]/gm, '.title ');    //[doc]    : Title Value
+    buf = buf.replace(/\[0\]/gm, '.title ');
 
     //(& types
     buf = buf.replace(/(=|,|\()\s{0,4}\&/gm, ' $1 ');// replace all '=   &' and '(  &'   with = or ( respectively

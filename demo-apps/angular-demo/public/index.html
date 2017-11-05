@@ -39,13 +39,13 @@
             $scope.goto = function(data) {
                 alert(data)
             }
-            let liveUrl = '/' + userID + '/transformFFL_LME/KSP';
+            let liveUrl = '/' + userID + '/transformFFL_LME/KSP.js';
             if (modelName) {
-                liveUrl = '/' + userID + '/transformFFL_LME/' + modelName
+                liveUrl = '/' + userID + '/transformFFL_LME/' + modelName + '.js'
             }
             var saveToken = userID;
             console.info(saveToken + ':' + modelName)
-            $scope.sendData = function(e) {
+            $scope.saveData = function(e) {
                 //send data to server to store
                 $http.post(result + ':8085/id/' + saveToken, {
                     data: LMEMETA.exportData()
@@ -84,7 +84,6 @@
                 console.info(err);
             });
         })
-        ;
     </script>
     <style>
 
@@ -186,6 +185,45 @@
             text-overflow: ellipsis;
             display: inline-block;
         }
+
+        label {
+            cursor: default;
+        }
+
+        span.required:after, label[required]:not(input):after {
+            content: "";
+            font-family: fontAwesome;
+            font-size: .4rem;
+            vertical-align: super;
+            margin: 0 .2rem;
+            color: #dd3333;
+        }
+
+        .icon {
+            display: table-cell;
+            width: 20px;
+            text-align: center;
+            vertical-align: top;
+            padding: .8rem 0 0 0;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        div[data-toggle="buttons"] label.active {
+            color: #7AA3CC;
+        }
+
+        div[data-toggle="buttons"] label:hover {
+            color: #7AA3CC;
+        }
+
+        div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
     </style>
 </head>
 <body ng-controller="kspController">
@@ -202,36 +240,31 @@
             <div class="row">
                 <div class="col-xs-2">
                     <input type="text" ng-model="search" placeholder="Search figure"/>
-                    <ul class="list-group" ng-repeat="f in LME_MODEL.nodes | pick:'children.length > 1 && path.endsWith(\'Q_ROOT\')'" ng-if="f.visible">
+                    <ul class="list-group" ng-repeat="f in LME_MODEL | pick:'children.length > 1 && path.endsWith(\'Q_ROOT\')'" ng-if="f.visible">
                         <li class="list-group-item" ng-click="changeSearch(f)" ng-bind="f.title"></li>
                     </ul>
                 </div>
                 <div class="col-xs-19">
                     <table ng-click="clicked($event)" class="lmetable">
-                        <tr ng-repeat="f in LME_MODEL.nodes | fuzzyBy: 'path': search | first: 200" ng-if="f.visible">
-                            <td><i class="fa fa-caret-right"></i></td>
-                            <td class="txttd"><span contenteditable="true" class="text" ng-bind="f.title"></span></td>
-                            <td ng-click="goto(f)"><i class="fa fa-info"></i></td>
-                            <td ng-click="goto(f)"><i class="fa fa-link"></i></td>
+                        <tr ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search | first: 200" ng-if="f.visible">
+                            <td><i ng-if="f.tuple" class="fa fa-caret-right"></i></td>
+                            <td class="txttd"><span contenteditable="true" ng-bind="f.title" ng-class="'text ' + (f.required?'required':'')"></span></td>
+                            <td ng-click="goto(f)"><i ng-class=" f.hint ? 'fa fa-info' : 'icon' " title="{{f.hint}}">
+                            </i></td>
                             <td ng-repeat="cv in f.cols" colspan="{{f.colspan}}" ng-switch="f.type">
                                 <div class="input-group" ng-init="pid = $index">
                                     <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
                                     <select ng-switch-when="select" class="form-control" ng-model="cv.value" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" placeholder="Pick value">
                                         <option ng-repeat="choice in f.choices" ng-selected="choice.name == cv.value">{{choice.value}}</option>
                                     </select>
-                                    <input ng-repeat="choice in f.choices"
-                                           ng-readonly="cv.locked"
-                                           ng-disabled="cv.locked"
-                                           ng-required="cv.required"
-                                           ng-switch-when="radio"
-                                           class="form-control"
-                                           name="{{f.id + '-' + pid}}"
-                                           type="radio"
-                                           ng-model="cv.value"
-                                           value="{{choice.value}}"
-                                    >
+                                    <div ng-switch-when="radio" class="btn-group" data-toggle="buttons">
+                                        <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.name == cv.value?'active':''">
+                                            <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.name">
+                                            <i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i><span>{{choice.value}}</span>
+                                        </label>
+                                    </div>
+                                    <textarea ng-switch-when="memo" rows="4" class="form-control" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder=""></textarea>
                                     <input ng-switch-default type="text" class="form-control" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder="">
-                                    <span class="input-group-addon"><i ng-if="cv.required" class="fa fa-asterisk"></i></span>
                                     <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
                                 </div>
                             </td>
@@ -243,7 +276,7 @@
     </section>
     <section class="content-header">
         <div class="row">
-            <a ng-click="sendData()" class="col-md-12 btn btn-app" data-toggle="modal" data-target="#modal-success">
+            <a ng-click="saveData()" class="col-md-12 btn btn-app" data-toggle="modal" data-target="#modal-success">
                 <i class="fa fa-save"></i>
                 Save
             </a>

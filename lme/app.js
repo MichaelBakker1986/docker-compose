@@ -1,18 +1,17 @@
-var browserify = require('browserify-middleware');
 var express = require('express');
 var port = 8080;
-var serveStatic = require('serve-static');
-var compression = require('compression')
-var fastjson = require('browserify-fastjson');
-var static = require('static-nocase')
-var lmeAPI = require('./src/lme')
 var app = express();
+var browserify = require('browserify-middleware');
 app.use(require('express-favicon')());
-var fs = require('fs')
 var bodyParser = require('body-parser')
 var expressStaticGzip = require("express-static-gzip");
 app.use(expressStaticGzip("public/"));
-app.use(compression())
+/**
+ * static re-direct hence no injection is needed.
+ */
+app.use('/:id/transformFFL_LME/', expressStaticGzip("public/json"));
+app.use(expressStaticGzip("bower_components/"));
+app.use(require('compression')())
 app.use(require('cors')())
 app.use(bodyParser.json({limit: '50mb'}));       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -21,43 +20,27 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 var stash = require('./src/stash');
 browserify.settings({
-    transform: [fastjson]
+    transform: [require('browserify-fastjson')]
 })
 app.post('/:id/saveFFL_LME', (req, res) => {
-    try {
-        stash.commit(req.body.model, req.body.data)
-        res.end('done');
-    } catch (err) {
-        console.error(err)
-        res.end('ERROR: ' + err);
-    }
+    stash.commit(req.body.model, req.body.data).then((data) => {
+        res.json({status: 'ok'});
+    }).catch((err) => {
+        res.json({status: 'fail'});
+    })
 });
-app.get('/:id/transformFFL_LME/*', (req, res) => {
-    var modelName = req.originalUrl.substring(req.originalUrl.indexOf('transformFFL_LME/') + 17);
-    var fflReadStream = fs.createReadStream(__dirname + '/public/json/' + modelName + '.js')
-    // This will wait until we know the readable stream is actually valid before piping
-    fflReadStream.on('open', function() {
-        // This just pipes the read stream to the response object (which goes to the client)
-        fflReadStream.pipe(res);
-    });
-    // This catches any errors that happen while creating the readable stream (usually invalid names)
-    fflReadStream.on('error', function(err) {
-        res.end(err.toString());
-    });
-})
-
 app.get('/branches', (req, res) => {
     stash.branches().then((data) => {
         res.json(data);
     }).catch((err) => {
-        res.end("" + err);
+        res.json({status: 'fail', reason: err.toString()});
     })
 });
 app.get('/models', (req, res) => {
     stash.models('master', 'ffl').then((data) => {
         res.json(data);
     }).catch((err) => {
-        res.end("" + err)
+        res.json({status: 'fail', reason: err.toString()});
     })
 });
 app.use('/:id/web.js', browserify(__dirname + '/src/main.js', {
@@ -73,7 +56,6 @@ app.use('/:id/ide.js', browserify(__dirname + '/src/ide.js', {
     insertGlobals: true,
     debug: false
 }));
-app.use(serveStatic(__dirname + "/bower_components/"));
 app.listen(port, () => {
     require('dns').lookup(require('os').hostname(), (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
