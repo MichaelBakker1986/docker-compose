@@ -3,7 +3,7 @@ import BaseModel;
 
 model Invoice uses BaseModel
 {
-    version: "1.00";
+    version: "1.01";
     frequency: document;
     root
     {
