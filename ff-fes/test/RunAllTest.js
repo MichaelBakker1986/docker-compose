@@ -4,7 +4,6 @@
 process.alltest = true;
 var log = require('ff-log')
 var performceTestStartTime = new Date().getTime();
-console.time('performance')
 var tests = [
     './MathTest',
     './FflToJsonConverterTest',
@@ -45,15 +44,14 @@ var totalTestTime = (new Date().getTime() - performceTestStartTime);
 testResults.push(['performceTest', 'total', totalTestTime]);
 
 testResults.forEach(function(testResult) {
-    log.info(testResult)
+    log.debug(testResult)
 })
-if (totalTestTime > 2500) {
+if (totalTestTime > 3500) {
     log.error('Total time exceeded')
 }
-console.timeEnd('performance')
 if (failure.length > 0) {
-    log.error('A test failed')
-    throw Error('A test failed');
+    log.error('A test failed' + failure)
+    throw Error('A test failed', failure);
 }
 else {
     log.info('All test success')

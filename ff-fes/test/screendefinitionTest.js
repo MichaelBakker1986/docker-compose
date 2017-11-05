@@ -20,10 +20,10 @@ assert.notStrictEqual(screenDefexport, null);
  assert.equal(node.name, 'BUDGETMODEL_Balans_value');*/
 var actual = JSON.parse(wb.export('screendefinition'));
 var expected = JSON.parse(JSON.stringify(data, null, 2));
-JUNIT.validateTree(expected, actual, 'children', 'children', function (expected, actual) {
+JUNIT.validateTree(expected, actual, 'children', 'children', function(expected, actual) {
     //since variableName is optional, but leading in screenDefinition
     return actual.name === expected.variableName || expected.name;
 })
-JUNIT.print(screenDefexport);
-log.info('succes model [' + wb.getSolutionName() + ']');
-JUNIT.print(wb.export('ffl'));
+if (log.TRACE) log.trace(screenDefexport)
+log.debug('succes model [' + wb.getSolutionName() + ']');
+if (log.TRACE) log.trace(wb.export('ffl'))

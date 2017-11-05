@@ -19,7 +19,6 @@ fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
-log.info('excel done')
 var wbTest = new WorkBook(new FESContext());
 assert('aIFRS-EUa'.indexOf('IFRS-EU') > 0)
 wbTest.createFormula("'IFRS-EU'", 'FES_LAYOUT')
@@ -168,11 +167,11 @@ FormulaService.visitFormulas(function(formula) {
     if (!testVariables[variableName]) {
         if (!testedformulas[formula.original]) {
             untestedformulas++;
-            log.info('[%s][%s][%s][%s]', variableName.replace(/(^KSP_)/gmi, ''), formula.name, formula.original, formula.parsed)
+            log.debug('[%s][%s][%s][%s]', variableName.replace(/(^KSP_)/gmi, ''), formula.name, formula.original, formula.parsed)
         }
     }
 })
-log.info('KSP untested formulas:[%s/%s]', untestedformulas, totalformulas)
+log.debug('KSP untested formulas:[%s/%s]', untestedformulas, totalformulas)
 wbKSP.set('FES_LAYOUT', 'IIFRS-PL')
 var layoutNR = wbKSP.get('FES_LAYOUTNR');
 var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices').filter(function(choice) {
@@ -222,4 +221,3 @@ function testVariable(variableName, level, column) {
 for (var i = 0; i < 18; i++) {
     testVariable('ActualChildCareCosts', 1, i);
 }
-log.info('done')
