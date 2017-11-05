@@ -1,9 +1,9 @@
+const port = 8081;
 const express = require('express');
 var now = require("performance-now")
 const app = express();
 const httpServer = require('http').createServer(app);
 const request = require('request');
-const port = 8081;
 const exec = require('child-process-promise').exec;
 const spawn = require('child-process-promise').spawn;
 let busy = false;
@@ -111,7 +111,7 @@ function testAndDeploy() {
         //start sub processes
         spawnChild('../demo-apps/angular-demo/angularapp')
         spawnChild('../demo-apps/adminlte/ltelite')
-        spawnChild('app')
+        spawnChild('lme-model-app')
         spawnChild('../lme-api/lme-api')
 
     }).catch(function(err) {

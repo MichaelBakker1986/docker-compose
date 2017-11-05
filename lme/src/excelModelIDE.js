@@ -92,7 +92,7 @@ function demo() {
         //modelengine.fixProblemsInImportedSolution();
     });
     var modelName = window.location.search.split('model=')[1] || 'V05';
-    xhr.open('GET', '/json/' + modelName + '_canvas.json');
+    xhr.open('GET', '/resources/' + modelName + '_canvas.json');
     xhr.send();
 }
 

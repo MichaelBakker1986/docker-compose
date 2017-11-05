@@ -1,11 +1,5 @@
-var request = require('request')
-var rp = require('request-promise');
-var rpJSON = require('request-promise-json');
 var exec = require('child-process-promise').exec;
 var log = require('ff-log');
-var browser = require('browserify');
-var fastjson = require('browserify-fastjson');
-var fs = require('fs')
 var develop = require('os').hostname() == 'michael';
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
@@ -15,7 +9,7 @@ class Stash {
 
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
-        return Promise.all([write('./public/json/' + name + '.ffl', data)])
+        return Promise.all([write('../ff-ssh-git/resources/' + name + '.ffl', data)])
             .then(function(filename) {
                 return Promise.all([exec('node src/exportLME_FFL.js ' + name), exec('node src/exportLME_FFL_angular.js ' + name)]).then((result) => {
                     if (develop) {

@@ -86,7 +86,7 @@ $(document).ready(function() {
             editor.gotoLine(1, 1, true);
 
         });
-        xhr.open('GET', '/json/' + modelName + '.ffl');
+        xhr.open('GET', '/resources/' + modelName + '.ffl');
         xhr.send();
     }
 

@@ -574,12 +574,6 @@ function finFormulaGeneric(buf) {
     //end temp case fix
 
     /**
-     * Generic formula fixes
-     */
-    buf = buf.replace(/EvaluateAsString/gmi, "String")
-    buf = buf.replace(/Matrixlookup/gmi, 'MatrixLookup')
-    buf = buf.replace(/Startdate/gm, 'StartDate')
-    /**
      * Here are all time references
      */
     buf = buf.replace(/\[1]/gm, '[doc]');
@@ -591,10 +585,7 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/GetT\(T,-1\)/gm, 'x.prev');
     buf = buf.replace(/GetT(T,-1,1,1)/gm, 'x.prev');
     buf = buf.replace(/FirstTInFormulaset\(Trend\)/gm, 'x.firsttrend');
-    //-- Context dependencies
-    // buf = buf.replace(/\[t-1\]|@|#/gim, ''); //[prev]   : for now, just throw it away, its .prev when using Time
-    //   buf = buf.replace(/\[1\]/gm, '');    //[doc]    : requests the DocumentValue
-    buf = buf.replace(/\[0\]/gm, '.title ');    //[doc]    : Title Value
+    buf = buf.replace(/\[0\]/gm, '.title ');
 
     //(& types
     buf = buf.replace(/(=|,|\()\s{0,4}\&/gm, ' $1 ');// replace all '=   &' and '(  &'   with = or ( respectively
@@ -60603,30 +60594,30 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "KSP_FES_STARTDATEPERIOD_value": true
+        "KSP_FES_StartDatePERIOD_value": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
       "index": 100020,
-      "name": "KSP_FES_STARTDATEPERIOD_value",
+      "name": "KSP_FES_StartDatePERIOD_value",
       "parsed": "undefined",
       "id": 100020,
-      "fflname": "FES_STARTDATEPERIOD_value"
+      "fflname": "FES_StartDatePERIOD_value"
     },
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "KSP_FES_STARTDATEPERIOD_title": true
+        "KSP_FES_StartDatePERIOD_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Start Date Period'",
       "index": 100021,
-      "name": "KSP_FES_STARTDATEPERIOD_title",
+      "name": "KSP_FES_StartDatePERIOD_title",
       "parsed": "'Start Date Period'",
       "id": 100021,
-      "fflname": "FES_STARTDATEPERIOD_title"
+      "fflname": "FES_StartDatePERIOD_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -69374,7 +69365,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       ""
     ],
     [
-      "FES_STARTDATEPERIOD",
+      "FES_StartDatePERIOD",
       "'Start Date Period'",
       "undefined",
       "",
@@ -71746,8 +71737,8 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
           "identifier": "KSP_RootSub1_value"
         },
         {
-          "name": "KSP_FES_STARTDATEPERIOD_value",
-          "rowId": "FES_STARTDATEPERIOD",
+          "name": "KSP_FES_StartDatePERIOD_value",
+          "rowId": "FES_StartDatePERIOD",
           "colId": "value",
           "identifier": "KSP_RootSub1_value"
         },
@@ -72006,26 +71997,26 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "displayAs": "PropertyType"
     },
     {
-      "rowId": "FES_STARTDATEPERIOD",
+      "rowId": "FES_StartDatePERIOD",
       "solutionName": "KSP",
       "colId": "value",
-      "name": "KSP_FES_STARTDATEPERIOD_value",
+      "name": "KSP_FES_StartDatePERIOD_value",
       "nodes": [],
       "ref": 100020,
-      "formulaName": "KSP_FES_STARTDATEPERIOD_value",
+      "formulaName": "KSP_FES_StartDatePERIOD_value",
       "refId": 100020,
       "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
     {
-      "rowId": "FES_STARTDATEPERIOD",
+      "rowId": "FES_StartDatePERIOD",
       "solutionName": "KSP",
       "colId": "title",
-      "name": "KSP_FES_STARTDATEPERIOD_title",
+      "name": "KSP_FES_StartDatePERIOD_title",
       "nodes": [],
       "ref": 100021,
-      "formulaName": "KSP_FES_STARTDATEPERIOD_title",
+      "formulaName": "KSP_FES_StartDatePERIOD_title",
       "refId": 100021,
       "displayAs": "PropertyType"
     },

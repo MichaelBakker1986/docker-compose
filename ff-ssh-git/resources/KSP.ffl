@@ -90,7 +90,7 @@ model KSP uses BaseModel
         top_separator: 1;
         options_title: locked;
       }
-      variable FES_STARTDATEPERIOD
+      variable FES_StartDatePERIOD
       {
         datatype: number;
         frequency: column;

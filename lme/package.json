@@ -8,7 +8,7 @@
   "scripts": {
     "install": "bower install",
     "test": "node test/TESTMODEL.js",
-    "start": "node app.js"
+    "start": "node lme-model-app.js"
   },
   "dependencies": {
     "angular": "^1.6.6",

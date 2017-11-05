@@ -20,7 +20,7 @@ function FflToJsonConverter(){}function parseRegex(e){var r=e.replace(/,\s*\n/gm
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\ffl\\FflToJsonConverter.js","/..\\ff-fes\\exchange_modules\\ffl",undefined)
 },{"../../fesjs/JSVisitor":15,"./FinFormula":5,"_process":79,"assert":73,"buffer":76,"ff-log":37,"stack-adt":38}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-function finFormulaGeneric(e){return e=(e=e.replace(/:/gm,", ")).replace(/(\$p|@|#|%|\.\.)/gim,""),e=e.replace(/\[\<\=/gm,"["),e=e.replace(/\[\</gm,"["),e=e.replace(/\|\</gm,"|"),e=e.replace(/\[\=/gm,"["),e=e.replace(/\|\<\=/gm,"|"),e=e.replace(/\|\=/gm,"|"),e=e.replace(/\|\>\=/gm,"|"),e=e.replace(/\|\>/gm,"|"),e=e.replace(/EvaluateAsString/gim,"String"),e=e.replace(/Matrixlookup/gim,"MatrixLookup"),e=e.replace(/Startdate/gm,"StartDate"),e=e.replace(/\[1]/gm,"[doc]"),e=e.replace(/\[T]/gm,""),e=e.replace(/\[GetT\(T,-1\)]/gm,"[prev]"),e=e.replace(/\[LastT\]/gm,""),e=e.replace(/ValueT\(1\)/gm,"x.firstdetail"),e=e.replace(/GetT\(T,-TsY,0,TsY\)/gm,"x.prevbkyr"),e=e.replace(/GetT\(T,-1\)/gm,"x.prev"),e=e.replace(/GetT(T,-1,1,1)/gm,"x.prev"),e=e.replace(/FirstTInFormulaset\(Trend\)/gm,"x.firsttrend"),e=e.replace(/\[0\]/gm,".title "),e=e.replace(/(=|,|\()\s{0,4}\&/gm," $1 "),e=e.replace(/\(\s*not /gim,"(!"),e=e.replace(/^\s*&/gm,""),e=e.replace(/&/gim,"+"),e=e.replace(/ And /gim,"&&"),e=e.replace(/\)\s*and\s*\(/gim,")&&("),e=e.replace(/\s*&&not\s*/gim,"&& !"),e=e.replace(/\||\s+or /gim," || "),e=e.replace(/ Or /gim," || "),e=e.replace(/\)\s*or\s*\(/gim,")||("),e=e.replace(/=/gm,"=="),e=e.replace(/<==/gm,"<="),e=e.replace(/>==/gm,">="),e=e.replace(/<>/gm,"!="),e=e.replace(/<->/gm,"!="),e=e.replace(/ Implies /g,"&&")}function javaScriptToFinGeneric(e){return e=(e=e.replace(/!=/gm,"<>")).replace(/==/gm,"="),e=e.replace(/\|\|/gim," | "),e=e.replace(/&&/gim," & ")}function finChoice(e){if(e=e.replace(/\\''$/g,"'"),/^[a-z0-9_ ]+$/i.test(e))return e+".choices";if(e.indexOf("|")<0&&e.indexOf(":")<0)return'[{ "name" : "'+e+'", "value" : "'+e+'" }]';if(e.indexOf(":")<0){var r=e.split("|");r[r.length-1]=r[r.length-1].slice(0,-1),r[0]=r[0].substr(r[0].indexOf("'")+1);for(var a='{ "name" : "'+r[0]+'", "value" : "'+r[0]+'" } ',i=1;i<r.length;i++){var l=r[i];a+=', { "name" : "'+l+'", "value" : "'+l+'" }'}return"["+a+"]"}return a=(a=e.replace(/'/gim,"")).replace(/:/gim,'" , "value" : "'),'[{ "name" : "'+(a=a.replace(/\|/gim,'"} , { "name" :"'))+'" }]'}function FinFormula(){}FinFormula.prototype.toJavascriptChoice=function(e){for(var r=JSON.parse(e.replace(/'/gim,'"')),a="",i=0;i<r.length;i++){var l=r[i];0!==i&&(a+="|"),a+=l.name+"|"+l.value}return a},FinFormula.prototype.finFormulaGeneric=finFormulaGeneric,FinFormula.prototype.javaScriptToFinGeneric=javaScriptToFinGeneric,FinFormula.prototype.parseFormula=finFormulaGeneric,FinFormula.prototype.finChoice=finChoice,FinFormula.prototype.fixCasing=function(e){return e.replace(/[^\w]{1}(Q_\w*)/gim,function(e){return e.toUpperCase()})},module.exports=FinFormula.prototype;
+function finFormulaGeneric(e){return e=(e=e.replace(/:/gm,", ")).replace(/(\$p|@|#|%|\.\.)/gim,""),e=e.replace(/\[\<\=/gm,"["),e=e.replace(/\[\</gm,"["),e=e.replace(/\|\</gm,"|"),e=e.replace(/\[\=/gm,"["),e=e.replace(/\|\<\=/gm,"|"),e=e.replace(/\|\=/gm,"|"),e=e.replace(/\|\>\=/gm,"|"),e=e.replace(/\|\>/gm,"|"),e=e.replace(/\[1]/gm,"[doc]"),e=e.replace(/\[T]/gm,""),e=e.replace(/\[GetT\(T,-1\)]/gm,"[prev]"),e=e.replace(/\[LastT\]/gm,""),e=e.replace(/ValueT\(1\)/gm,"x.firstdetail"),e=e.replace(/GetT\(T,-TsY,0,TsY\)/gm,"x.prevbkyr"),e=e.replace(/GetT\(T,-1\)/gm,"x.prev"),e=e.replace(/GetT(T,-1,1,1)/gm,"x.prev"),e=e.replace(/FirstTInFormulaset\(Trend\)/gm,"x.firsttrend"),e=e.replace(/\[0\]/gm,".title "),e=e.replace(/(=|,|\()\s{0,4}\&/gm," $1 "),e=e.replace(/\(\s*not /gim,"(!"),e=e.replace(/^\s*&/gm,""),e=e.replace(/&/gim,"+"),e=e.replace(/ And /gim,"&&"),e=e.replace(/\)\s*and\s*\(/gim,")&&("),e=e.replace(/\s*&&not\s*/gim,"&& !"),e=e.replace(/\||\s+or /gim," || "),e=e.replace(/ Or /gim," || "),e=e.replace(/\)\s*or\s*\(/gim,")||("),e=e.replace(/=/gm,"=="),e=e.replace(/<==/gm,"<="),e=e.replace(/>==/gm,">="),e=e.replace(/<>/gm,"!="),e=e.replace(/<->/gm,"!="),e=e.replace(/ Implies /g,"&&")}function javaScriptToFinGeneric(e){return e=(e=e.replace(/!=/gm,"<>")).replace(/==/gm,"="),e=e.replace(/\|\|/gim," | "),e=e.replace(/&&/gim," & ")}function finChoice(e){if(e=e.replace(/\\''$/g,"'"),/^[a-z0-9_ ]+$/i.test(e))return e+".choices";if(e.indexOf("|")<0&&e.indexOf(":")<0)return'[{ "name" : "'+e+'", "value" : "'+e+'" }]';if(e.indexOf(":")<0){var r=e.split("|");r[r.length-1]=r[r.length-1].slice(0,-1),r[0]=r[0].substr(r[0].indexOf("'")+1);for(var a='{ "name" : "'+r[0]+'", "value" : "'+r[0]+'" } ',l=1;l<r.length;l++){var p=r[l];a+=', { "name" : "'+p+'", "value" : "'+p+'" }'}return"["+a+"]"}return a=(a=e.replace(/'/gim,"")).replace(/:/gim,'" , "value" : "'),'[{ "name" : "'+(a=a.replace(/\|/gim,'"} , { "name" :"'))+'" }]'}function FinFormula(){}FinFormula.prototype.toJavascriptChoice=function(e){for(var r=JSON.parse(e.replace(/'/gim,'"')),a="",l=0;l<r.length;l++){var p=r[l];0!==l&&(a+="|"),a+=p.name+"|"+p.value}return a},FinFormula.prototype.finFormulaGeneric=finFormulaGeneric,FinFormula.prototype.javaScriptToFinGeneric=javaScriptToFinGeneric,FinFormula.prototype.parseFormula=finFormulaGeneric,FinFormula.prototype.finChoice=finChoice,FinFormula.prototype.fixCasing=function(e){return e.replace(/[^\w]{1}(Q_\w*)/gim,function(e){return e.toUpperCase()})},module.exports=FinFormula.prototype;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\ffl\\FinFormula.js","/..\\ff-fes\\exchange_modules\\ffl",undefined)
 },{"_process":79,"buffer":76}],6:[function(require,module,exports){
@@ -416,7 +416,7 @@ function LME(){let e=require("../../ff-fes/fesjs/fescontext"),t=require("../../f
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 require("../../ff-fes/exchange_modules/presentation/webexport");var model=require("./lme");LMEMETA=new model,LMEMETA.importLME(JSON_MODEL),LME=LMEMETA.exportWebModel().nodes;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\output.js","/src",{
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\lmeAPIWrapper.js","/src",{
   "formulas": [
     {
       "type": "noCacheUnlocked",
@@ -706,30 +706,30 @@ require("../../ff-fes/exchange_modules/presentation/webexport");var model=requir
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "KSP_FES_STARTDATEPERIOD_value": true
+        "KSP_FES_StartDatePERIOD_value": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "undefined",
       "index": 100020,
-      "name": "KSP_FES_STARTDATEPERIOD_value",
+      "name": "KSP_FES_StartDatePERIOD_value",
       "parsed": "undefined",
       "id": 100020,
-      "fflname": "FES_STARTDATEPERIOD_value"
+      "fflname": "FES_StartDatePERIOD_value"
     },
     {
       "type": "noCacheUnlocked",
       "refs": {
-        "KSP_FES_STARTDATEPERIOD_title": true
+        "KSP_FES_StartDatePERIOD_title": true
       },
       "formulaDependencys": [],
       "deps": {},
       "original": "'Start Date Period'",
       "index": 100021,
-      "name": "KSP_FES_STARTDATEPERIOD_title",
+      "name": "KSP_FES_StartDatePERIOD_title",
       "parsed": "'Start Date Period'",
       "id": 100021,
-      "fflname": "FES_STARTDATEPERIOD_title"
+      "fflname": "FES_StartDatePERIOD_title"
     },
     {
       "type": "noCacheUnlocked",
@@ -9477,7 +9477,7 @@ require("../../ff-fes/exchange_modules/presentation/webexport");var model=requir
       ""
     ],
     [
-      "FES_STARTDATEPERIOD",
+      "FES_StartDatePERIOD",
       "'Start Date Period'",
       "undefined",
       "",
@@ -11849,8 +11849,8 @@ require("../../ff-fes/exchange_modules/presentation/webexport");var model=requir
           "identifier": "KSP_RootSub1_value"
         },
         {
-          "name": "KSP_FES_STARTDATEPERIOD_value",
-          "rowId": "FES_STARTDATEPERIOD",
+          "name": "KSP_FES_StartDatePERIOD_value",
+          "rowId": "FES_StartDatePERIOD",
           "colId": "value",
           "identifier": "KSP_RootSub1_value"
         },
@@ -12109,26 +12109,26 @@ require("../../ff-fes/exchange_modules/presentation/webexport");var model=requir
       "displayAs": "PropertyType"
     },
     {
-      "rowId": "FES_STARTDATEPERIOD",
+      "rowId": "FES_StartDatePERIOD",
       "solutionName": "KSP",
       "colId": "value",
-      "name": "KSP_FES_STARTDATEPERIOD_value",
+      "name": "KSP_FES_StartDatePERIOD_value",
       "nodes": [],
       "ref": 100020,
-      "formulaName": "KSP_FES_STARTDATEPERIOD_value",
+      "formulaName": "KSP_FES_StartDatePERIOD_value",
       "refId": 100020,
       "displayAs": "string",
       "frequency": "column",
       "parentName": "RootSub1_value"
     },
     {
-      "rowId": "FES_STARTDATEPERIOD",
+      "rowId": "FES_StartDatePERIOD",
       "solutionName": "KSP",
       "colId": "title",
-      "name": "KSP_FES_STARTDATEPERIOD_title",
+      "name": "KSP_FES_StartDatePERIOD_title",
       "nodes": [],
       "ref": 100021,
-      "formulaName": "KSP_FES_STARTDATEPERIOD_title",
+      "formulaName": "KSP_FES_StartDatePERIOD_title",
       "refId": 100021,
       "displayAs": "PropertyType"
     },

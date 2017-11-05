@@ -11,6 +11,7 @@
     "bootstrap-daterangepicker": "^2.1.25",
     "bootstrap-slider": "^9.8.0",
     "bootstrap-timepicker": "^0.5.2",
+    "browserify-middleware": "^8.0.0",
     "chart.js": "1.0.*",
     "ckeditor": "^4.7.0",
     "compression": "^1.7.1",
