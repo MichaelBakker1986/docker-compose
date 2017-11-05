@@ -12,7 +12,7 @@ model KSP uses BaseModel
     variable RootSub1
     {
       datatype: none;
-      title: "General variables for webclient";
+      title: "General variables for webclient123";
       top_blanklines: 1;
       locked: 1;
       visible: 0;
