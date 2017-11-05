@@ -16,7 +16,7 @@ class Stash {
                         log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
                     }
-                    let command = "git pull &&  git add . && git commit -m changeByDEMO && git push";
+                    let command = "git pull &&  git add -A && git commit -m changeByDEMO && git push";
                     return exec(command).then((ok) => {
                         log.info("GIT commit success while pushing file to repository: " + filename)
                     }).catch((err) => {
