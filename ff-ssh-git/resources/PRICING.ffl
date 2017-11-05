@@ -6,7 +6,7 @@ import BaseModel.*;
 
 model AABPRICING uses BaseModel
 {
-  version: "1.34.2";
+  version: "1.34.5";
   root
   {
     variable RootSub1
@@ -22,7 +22,7 @@ model AABPRICING uses BaseModel
       {
         datatype: number;
         frequency: document;
-        formula: If( Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        formula: If( Pos("IFRS-EU" , FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL" , FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl" , FES_LAYOUT[1])>0,2,0)));
         data_options: unscalable;
         displaytype: select;
         title: "Layout";
@@ -91,7 +91,7 @@ model AABPRICING uses BaseModel
         top_separator: 1;
         options_title: locked;
       }
-      variable FES_STARTDATEPERIOD
+      variable FES_StartDatePERIOD
       {
         datatype: number;
         frequency: column;
@@ -335,7 +335,7 @@ model AABPRICING uses BaseModel
     {
       datatype: number;
       frequency: document;
-      formula: If( (Q_Map01[1]=1)  or (Length(&scKnockoutsCombi[1])>0),1,0);
+      formula: If( (Q_MAP01[1]=1)  or (Length ( scKnockoutsCombi[1])>0),1,0);
       data_options: unscalable;
       displaytype: select;
       title: "FiNiS Pricing";
@@ -344,11 +344,11 @@ model AABPRICING uses BaseModel
       choices: "0:Complete.|1:Not complete.";
       options_title: locked;
       options: locked;
-      variable Q_Map01
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "AAB Pricing";
@@ -357,11 +357,11 @@ model AABPRICING uses BaseModel
         choices: "0:Complete.|1:Not complete.";
         options_title: locked;
         options: locked;
-        variable Q_Map01_WARNING
+        variable Q_MAP01_WARNING
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_WARNING_GLOBAL[1]);
+          formula: String(Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map";
           top_blanklines: 1;
@@ -369,7 +369,7 @@ model AABPRICING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_INFO
+        variable Q_MAP01_INFO
         {
           datatype: string;
           frequency: document;
@@ -379,11 +379,11 @@ model AABPRICING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_VALIDATION
+        variable Q_MAP01_VALIDATION
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
+          formula: String(If(Q_MAP01[1]=0 , "Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *." , ""));
           data_options: unscalable;
           title: "Validatie stap";
           locked: 1;
@@ -541,7 +541,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: Matrixlookup("AAB_Parameters.xls","CalculationParameters","COSTOFSUBORDBP",2);
+              formula: MatrixLookup("AAB_Parameters.xls","CalculationParameters","COSTOFSUBORDBP",2);
               data_options: unscalable;
               fixed_decimals: 0;
               title: "Subordinated Debt Capital Charge - Cost of Subordination (bp)";
@@ -924,7 +924,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(FPS_VAR_Relatienummer);
+              formula: String(FPS_VAR_Relatienummer);
               data_options: unscalable;
               title: "Borrower Reference";
               top_blanklines: 1;
@@ -945,7 +945,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(Case(Borrower_tpBaseCurrencyChoice,[01:"EUR"|=02:"BRL"|=03:"CAD"|=04:"CHF"|=05:"GBP"|=06:"HKD"|=07:"INR"|=08:"MXN"|=09:"NOK"|=10:"SGD"|=11:"USD"]));
+              formula: String(Case(Borrower_tpBaseCurrencyChoice,[01:"EUR"|=02:"BRL"|=03:"CAD"|=04:"CHF"|=05:"GBP"|=06:"HKD"|=07:"INR"|=08:"MXN"|=09:"NOK"|=10:"SGD"|=11:"USD"]));
               data_options: unscalable;
               title: "Currency";
               visible: 0;
@@ -955,7 +955,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(SubStr(&Case(Borrower_tpClientGroupChoice,[01:"PAR - Particulieren/Medici"|=02:"PBN - PBNL"|=03:"PBI - PBI"|=04:"PBF - PBI - France"|=05:"PBD - PBI - Germany"|=06:"PBG - PBI - Guernsey"|=07:"PBH - PBI - Hong Kong"|=08:"PBJ - PBI - Jersey"|=09:"PBL - PBI - Luxembourg"|=10:"PBS - PBI - Singapore"|=11:"PBU - PBI - UAE"|=12:"PBB - PBI - Belgium"|=13:"IDJ - IC-D&J Clients"|=14:"YBB - Retail Banking-YBB"|=15:"BRM - Commercial Clients-REC"|=16:"CR1 - Commercial Clients-RM_A1"|=17:"CR2 - Commercial Clients-RM_A2"|=18:"CR3 - Commercial Clients-RM_A3"|=19:"CCL - Commercial Clients-CC"|=20:"PUB - Commercial Clients-PublicSector"|=21:"DDP - Commercial Clients-Deal Desk Public"|=22:"LMF - IC-FinancialInstitutions"|=23:"LMR - IC-RealEstate"|=24:"LML - IC-LargeCorporates"|=25:"LME - IC-ECT Clients"|=26:"LMD - IC-DebtSolutions"|=27:"LMC - IC-exCC Clients"]),0,3));
+              formula: String(SubStr ( Case(Borrower_tpClientGroupChoice,[01:"PAR - Particulieren/Medici"|=02:"PBN - PBNL"|=03:"PBI - PBI"|=04:"PBF - PBI - France"|=05:"PBD - PBI - Germany"|=06:"PBG - PBI - Guernsey"|=07:"PBH - PBI - Hong Kong"|=08:"PBJ - PBI - Jersey"|=09:"PBL - PBI - Luxembourg"|=10:"PBS - PBI - Singapore"|=11:"PBU - PBI - UAE"|=12:"PBB - PBI - Belgium"|=13:"IDJ - IC-D&J Clients"|=14:"YBB - Retail Banking-YBB"|=15:"BRM - Commercial Clients-REC"|=16:"CR1 - Commercial Clients-RM_A1"|=17:"CR2 - Commercial Clients-RM_A2"|=18:"CR3 - Commercial Clients-RM_A3"|=19:"CCL - Commercial Clients-CC"|=20:"PUB - Commercial Clients-PublicSector"|=21:"DDP - Commercial Clients-Deal Desk Public"|=22:"LMF - IC-FinancialInstitutions"|=23:"LMR - IC-RealEstate"|=24:"LML - IC-LargeCorporates"|=25:"LME - IC-ECT Clients"|=26:"LMD - IC-DebtSolutions"|=27:"LMC - IC-exCC Clients"]),0,3));
               data_options: unscalable;
               title: "Client Group Code";
               visible: ShowTestVariables;
@@ -976,7 +976,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: If(&Borrower_tpSectorType="AGIC",0,If(&Borrower_tpSectorType="SBI",1,NA));
+              formula: If ( Borrower_tpSectorType="AGIC",0,If ( Borrower_tpSectorType="SBI",1,NA));
               data_options: unscalable;
               displaytype: select;
               title: "Do you want to use an AGIC or SBI identification code?";
@@ -1053,7 +1053,7 @@ model AABPRICING uses BaseModel
           variable Borrower_tpDataImportedFromForce
           {
             datatype: none;
-            title: EvaluateAsString("Imported Data");
+            title: String("Imported Data");
             locked: 1;
             visible: ShowTestVariables;
             options_title: locked;
@@ -1071,7 +1071,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(FPS_VAR_Naam);
+              formula: String(FPS_VAR_Naam);
               data_options: unscalable;
               title: "Borrower Name";
               options_title: locked;
@@ -1080,7 +1080,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(If(&Borrower_tpSectorType="SBI",&Borrower_tpSectorCode,NA));
+              formula: String(If ( Borrower_tpSectorType="SBI" , Borrower_tpSectorCode,NA));
               data_options: unscalable;
               title: "SBI branche code (Geen lijst)";
               visible: Borrower_tpAGICOrSBI=1;
@@ -1107,7 +1107,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(SubStr(&Case(Borrower_tpClientGroupChoice,[01:"PAR - Particulieren/Medici"|=02:"PBN - PBNL"|=03:"PBI - PBI"|=04:"PBF - PBI - France"|=05:"PBD - PBI - Germany"|=06:"PBG - PBI - Guernsey"|=07:"PBH - PBI - Hong Kong"|=08:"PBJ - PBI - Jersey"|=09:"PBL - PBI - Luxembourg"|=10:"PBS - PBI - Singapore"|=11:"PBU - PBI - UAE"|=12:"PBB - PBI - Belgium"|=13:"IDJ - IC-D&J Clients"|=14:"YBB - Retail Banking-YBB"|=15:"BRM - Commercial Clients-REC"|=16:"CR1 - Commercial Clients-RM_A1"|=17:"CR2 - Commercial Clients-RM_A2"|=18:"CR3 - Commercial Clients-RM_A3"|=19:"CCL - Commercial Clients-CC"|=20:"PUB - Commercial Clients-PublicSector"|=21:"DDP - Commercial Clients-Deal Desk Public"|=22:"LMF - IC-FinancialInstitutions"|=23:"LMR - IC-RealEstate"|=24:"LML - IC-LargeCorporates"|=25:"LME - IC-ECT Clients"|=26:"LMD - IC-DebtSolutions"|=27:"LMC - IC-exCC Clients"]),7,99));
+              formula: String(SubStr ( Case(Borrower_tpClientGroupChoice,[01:"PAR - Particulieren/Medici"|=02:"PBN - PBNL"|=03:"PBI - PBI"|=04:"PBF - PBI - France"|=05:"PBD - PBI - Germany"|=06:"PBG - PBI - Guernsey"|=07:"PBH - PBI - Hong Kong"|=08:"PBJ - PBI - Jersey"|=09:"PBL - PBI - Luxembourg"|=10:"PBS - PBI - Singapore"|=11:"PBU - PBI - UAE"|=12:"PBB - PBI - Belgium"|=13:"IDJ - IC-D&J Clients"|=14:"YBB - Retail Banking-YBB"|=15:"BRM - Commercial Clients-REC"|=16:"CR1 - Commercial Clients-RM_A1"|=17:"CR2 - Commercial Clients-RM_A2"|=18:"CR3 - Commercial Clients-RM_A3"|=19:"CCL - Commercial Clients-CC"|=20:"PUB - Commercial Clients-PublicSector"|=21:"DDP - Commercial Clients-Deal Desk Public"|=22:"LMF - IC-FinancialInstitutions"|=23:"LMR - IC-RealEstate"|=24:"LML - IC-LargeCorporates"|=25:"LME - IC-ECT Clients"|=26:"LMD - IC-DebtSolutions"|=27:"LMC - IC-exCC Clients"]),7,99));
               data_options: unscalable;
               title: "Client Group";
               top_blanklines: 1;
@@ -1119,7 +1119,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(FPS_VAR_SECTOR_OF_INDUSTRY_CODE_TYPE);
+              formula: String(FPS_VAR_SECTOR_OF_INDUSTRY_CODE_TYPE);
               data_options: unscalable;
               title: "Sector type (SBI or AGIC)";
               options_title: locked;
@@ -1128,7 +1128,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(FPS_VAR_BIK_CODE);
+              formula: String(FPS_VAR_BIK_CODE);
               data_options: unscalable;
               title: "Sector code";
               options_title: locked;
@@ -1137,7 +1137,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(Case(Borrower_tpBookingLocationChoice,[01:"Australia"|=02:"Austria"|=03:"Belgium"|=04:"Brazil"|=05:"Canada"|=06:"China"|=07:"Czech Republic"|=08:"Denmark"|=09:"France"|=10:"Germany"|=11:"Greece"|=12:"Hong Kong"|=13:"Hungary"|=14:"Indonesia"|=15:"India"|=16:"Ireland"|=17:"Italy"|=18:"Japan"|=19:"Luxembourg"|=20:"Netherlands"|=21:"Norway"|=22:"Poland"|=23:"Portugal"|=24:"Romania"|=25:"Singapore"|=26:"South Africa"|=27:"Spain"|=28:"Sweden"|=29:"Switzerland"|=30:"Turkey"|=31:"United Arab Emirates"|=32:"United Kingdom"|=33:"United States"]));
+              formula: String(Case(Borrower_tpBookingLocationChoice,[01:"Australia"|=02:"Austria"|=03:"Belgium"|=04:"Brazil"|=05:"Canada"|=06:"China"|=07:"Czech Republic"|=08:"Denmark"|=09:"France"|=10:"Germany"|=11:"Greece"|=12:"Hong Kong"|=13:"Hungary"|=14:"Indonesia"|=15:"India"|=16:"Ireland"|=17:"Italy"|=18:"Japan"|=19:"Luxembourg"|=20:"Netherlands"|=21:"Norway"|=22:"Poland"|=23:"Portugal"|=24:"Romania"|=25:"Singapore"|=26:"South Africa"|=27:"Spain"|=28:"Sweden"|=29:"Switzerland"|=30:"Turkey"|=31:"United Arab Emirates"|=32:"United Kingdom"|=33:"United States"]));
               data_options: unscalable;
               title: "Booking location Tekst";
               options_title: locked;
@@ -1146,7 +1146,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: MatrixLookup("AAB_Parameters.xls","TaxRate",&Borrower_tpBookingLocation,1);
+              formula: MatrixLookup("AAB_Parameters.xls","TaxRate" , Borrower_tpBookingLocation,1);
               data_options: unscalable;
               displaytype: percentage;
               fixed_decimals: 2;
@@ -1157,7 +1157,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(Borrower_tpMainBorrowerLabeledRating);
+              formula: String(Borrower_tpMainBorrowerLabeledRating);
               data_options: unscalable;
               title: "UCR Rating";
               options_title: locked;
@@ -1166,7 +1166,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: MatrixLookup("AAB_Parameters.xls","PD",&Borrower_tpRating,1);
+              formula: MatrixLookup("AAB_Parameters.xls","PD" , Borrower_tpRating,1);
               data_options: unscalable;
               displaytype: percentage;
               fixed_decimals: 4;
@@ -1197,7 +1197,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(MatrixLookup("AAB_Parameters.xls","VertaaltabelPDModel",Borrower_tpPDModel,1));
+              formula: String(MatrixLookup("AAB_Parameters.xls","VertaaltabelPDModel",Borrower_tpPDModel,1));
               data_options: unscalable;
               title: "PD Model";
               options_title: locked;
@@ -1206,7 +1206,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: MatrixLookup("AAB_Parameters.xls","MOCFactorPD",&Borrower_tpPDModel,1);
+              formula: MatrixLookup("AAB_Parameters.xls","MOCFactorPD" , Borrower_tpPDModel,1);
               data_options: unscalable;
               fixed_decimals: 4;
               title: "MoC Factor";
@@ -1216,7 +1216,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: MatrixLookup("AAB_Parameters.xls","ClientGroup",&Borrower_tpClientGroup,2);
+              formula: MatrixLookup("AAB_Parameters.xls","ClientGroup" , Borrower_tpClientGroup,2);
               data_options: unscalable;
               fixed_decimals: 3;
               title: "ARC Add-on";
@@ -1256,7 +1256,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(If(Borrower_tpAGICOrSBI=0,&MatrixLookup("AAB_Parameters.xls","AGICMapping","@"&Borrower_tpAGIC,4),&MatrixLookup("AAB_Parameters.xls","SBIMapping","@"&Borrower_tpSBI,4)));
+              formula: String(If(Borrower_tpAGICOrSBI=0 , MatrixLookup("AAB_Parameters.xls","AGICMapping","@"&Borrower_tpAGIC,4) , MatrixLookup("AAB_Parameters.xls","SBIMapping","@"&Borrower_tpSBI,4)));
               data_options: unscalable;
               title: "Financial Institution Description";
               options_title: locked;
@@ -1265,7 +1265,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: MatrixLookup("AAB_Parameters.xls","CalibrationFactor",&Borrower_tpCalibrationFactorID,3);
+              formula: MatrixLookup("AAB_Parameters.xls","CalibrationFactor" , Borrower_tpCalibrationFactorID,3);
               data_options: unscalable;
               fixed_decimals: 6;
               title: "Calibration Factor";
@@ -1275,7 +1275,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(Borrower_tpRating&"_"&Borrower_tpClientGroup);
+              formula: String(Borrower_tpRating&"_"&Borrower_tpClientGroup);
               data_options: unscalable;
               title: "Calibration Factor ID";
               options_title: locked;
@@ -1320,7 +1320,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: Matrixlookup("AAB_Parameters.xls","CalculationParameters","AllocatedEquityRatio",2);
+              formula: MatrixLookup("AAB_Parameters.xls","CalculationParameters","AllocatedEquityRatio",2);
               data_options: unscalable;
               displaytype: percentage;
               fixed_decimals: 2;
@@ -1331,7 +1331,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: MatrixLookup("AAB_Parameters.xls","ClientGroup",&Borrower_tpClientGroup,6);
+              formula: MatrixLookup("AAB_Parameters.xls","ClientGroup" , Borrower_tpClientGroup,6);
               data_options: unscalable;
               displaytype: percentage;
               fixed_decimals: 2;
@@ -1353,7 +1353,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: MatrixLookup("AAB_Parameters.xls","ClientGroup",&Borrower_tpClientGroup,8);
+              formula: MatrixLookup("AAB_Parameters.xls","ClientGroup" , Borrower_tpClientGroup,8);
               data_options: unscalable;
               displaytype: percentage;
               fixed_decimals: 2;
@@ -1374,7 +1374,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: MatrixLookup("AAB_Parameters.xls","ClientGroup",&Borrower_tpClientGroup,4);
+              formula: MatrixLookup("AAB_Parameters.xls","ClientGroup" , Borrower_tpClientGroup,4);
               data_options: unscalable;
               fixed_decimals: 2;
               title: "Amount Fixed Cost Operating Concept for Client Group";
@@ -1422,7 +1422,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: MatrixLookup("AAB_Parameters.xls","ClientGroup",&Borrower_tpClientGroup,5);
+              formula: MatrixLookup("AAB_Parameters.xls","ClientGroup" , Borrower_tpClientGroup,5);
               data_options: unscalable;
               displaytype: percentage;
               fixed_decimals: 2;
@@ -1433,7 +1433,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(MatrixLookup("AAB_Parameters.xls","SBIMapping","@"&Borrower_tpSBI,1));
+              formula: String(MatrixLookup("AAB_Parameters.xls","SBIMapping","@"&Borrower_tpSBI,1));
               data_options: unscalable;
               title: "SBI branche naam";
               locked: 1;
@@ -1455,7 +1455,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: string;
                 frequency: document;
-                formula: EvaluateAsString(If(Borrower_tpAGICOrSBI=0,&Borrower_tpAGICChoiceName,&Borrower_tpSBIName));
+                formula: String(If(Borrower_tpAGICOrSBI=0 , Borrower_tpAGICChoiceName , Borrower_tpSBIName));
                 data_options: unscalable;
                 title: "AGIC/SBI Code";
                 top_blanklines: 1;
@@ -2638,7 +2638,7 @@ model AABPRICING uses BaseModel
             variable Borrower_tpNonCredit_tpDataImportedFromForce
             {
               datatype: none;
-              title: EvaluateAsString("Imported Data for Cross Sell Items");
+              title: String("Imported Data for Cross Sell Items");
               top_blanklines: 1;
               locked: 1;
               visible: ShowTestVariables;
@@ -2682,7 +2682,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(Borrower_tpNonCredit_tpCategoryName);
+              formula: String(Borrower_tpNonCredit_tpCategoryName);
               data_options: unscalable;
               title: "Item Description";
               locked: 1;
@@ -2737,7 +2737,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(SubStr(&Borrower_tpNonCredit_tpCategoryCode,0,2));
+              formula: String(SubStr ( Borrower_tpNonCredit_tpCategoryCode,0,2));
               data_options: unscalable;
               title: "ID";
               visible: ShowTestVariables;
@@ -2747,7 +2747,7 @@ model AABPRICING uses BaseModel
             {
               datatype: string;
               frequency: document;
-              formula: EvaluateAsString(Borrower_tpNonCredit_tpCategoryCode);
+              formula: String(Borrower_tpNonCredit_tpCategoryCode);
               data_options: unscalable;
               title: "ID Total";
               visible: ShowTestVariables;
@@ -2757,7 +2757,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: (MatrixLookup("AAB_Parameters.xls","NonCreditIncomeEffRatio",&Borrower_tpNonCredit_tpIncome_IDtotal,3));
+              formula: (MatrixLookup("AAB_Parameters.xls","NonCreditIncomeEffRatio" , Borrower_tpNonCredit_tpIncome_IDtotal,3));
               data_options: unscalable;
               displaytype: percentage;
               fixed_decimals: 2;
@@ -2788,7 +2788,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: MatrixLookup("AAB_Parameters.xls","NonCreditECoprECBusr",&Borrower_tpNonCredit_tpIncome_ID,3);
+                formula: MatrixLookup("AAB_Parameters.xls","NonCreditECoprECBusr" , Borrower_tpNonCredit_tpIncome_ID,3);
                 displaytype: currency;
                 title: "Risk Adjusted Return - EC Business Risk factor";
                 options_title: locked;
@@ -2806,7 +2806,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: MatrixLookup("AAB_Parameters.xls","NonCreditECoprECBusr",&Borrower_tpNonCredit_tpIncome_ID,2);
+                formula: MatrixLookup("AAB_Parameters.xls","NonCreditECoprECBusr" , Borrower_tpNonCredit_tpIncome_ID,2);
                 displaytype: currency;
                 title: "Risk Adjusted Return - EC Operational Risk factor";
                 options_title: locked;
@@ -2816,7 +2816,7 @@ model AABPRICING uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: Borrower_tpNonCredit_tpIncome_Amount*MatrixLookup("AAB_Parameters.xls","ClientGroup",&Borrower_tpClientGroup,7);
+              formula: Borrower_tpNonCredit_tpIncome_Amount*MatrixLookup("AAB_Parameters.xls","ClientGroup" , Borrower_tpClientGroup,7);
               displaytype: currency;
               title: "Risk Weighted Assets - RWA OR Non Credit";
               visible: ShowTestVariables;
@@ -2840,7 +2840,7 @@ model AABPRICING uses BaseModel
             variable Facility_tpDataForUserView
             {
               datatype: none;
-              title: EvaluateAsString("Data for UserView");
+              title: String("Data for UserView");
               top_blanklines: 1;
               locked: 1;
               visible: ShowTestVariables;
@@ -2850,9 +2850,9 @@ model AABPRICING uses BaseModel
               {
                 datatype: string;
                 frequency: document;
-                formula: EvaluateAsString("Margin "&Str((Facility_tpCustomerSpread+Facility_tpCustomerSpreadAddMargin),0,3)&"% (RaRoRaC "&Str(Facility_tpRaRoRaC,0,2)&"%)");
+                formula: String("Margin "&Str((Facility_tpCustomerSpread+Facility_tpCustomerSpreadAddMargin),0,3)&"% (RaRoRaC "&Str(Facility_tpRaRoRaC,0,2)&"%)");
                 data_options: unscalable;
-                title: EvaluateAsString(Facility_tpProductname[1]);
+                title: String(Facility_tpProductname[1]);
                 top_blanklines: 1;
                 locked: 1;
                 options_title: locked;
@@ -2862,7 +2862,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: string;
                 frequency: document;
-                formula: EvaluateAsString(If(Facility_tpPrincipalLimit<>NA,"Complete","Incomplete"));
+                formula: String(If(Facility_tpPrincipalLimit<>NA,"Complete","Incomplete"));
                 data_options: unscalable;
                 title: "Required fields";
                 locked: 1;
@@ -2970,7 +2970,7 @@ model AABPRICING uses BaseModel
             variable Facility_tpRequiredInput
             {
               datatype: none;
-              title: EvaluateAsString("Required Input");
+              title: String("Required Input");
               locked: 1;
               options_title: locked;
               options: locked;
@@ -2978,7 +2978,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: string;
                 frequency: document;
-                formula: EvaluateAsString(MatrixLookup("AAB_Parameters.xls","VertaaltabelProductType",&Facility_tpType,1));
+                formula: String(MatrixLookup("AAB_Parameters.xls","VertaaltabelProductType" , Facility_tpType,1));
                 data_options: unscalable;
                 title: "Product Name";
                 top_blanklines: 1;
@@ -3000,7 +3000,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: string;
                 frequency: document;
-                formula: EvaluateAsString(Case(Facility_tpBaseCurrencyChoice,[01:"EUR"|=02:"BRL"|=03:"CAD"|=04:"CHF"|=05:"GBP"|=06:"HKD"|=07:"INR"|=08:"MXN"|=09:"NOK"|=10:"SGD"|=11:"USD"]));
+                formula: String(Case(Facility_tpBaseCurrencyChoice,[01:"EUR"|=02:"BRL"|=03:"CAD"|=04:"CHF"|=05:"GBP"|=06:"HKD"|=07:"INR"|=08:"MXN"|=09:"NOK"|=10:"SGD"|=11:"USD"]));
                 data_options: unscalable;
                 title: "Base Currency";
                 visible: ShowTestVariables;
@@ -3010,7 +3010,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: string;
                 frequency: document;
-                formula: EvaluateAsString(MatrixLookup("AAB_Parameters.xls","VertaaltabelInterestProductType",&Facility_tpInterestProductCode,1));
+                formula: String(MatrixLookup("AAB_Parameters.xls","VertaaltabelInterestProductType" , Facility_tpInterestProductCode,1));
                 data_options: unscalable;
                 title: "Interest Product";
                 options_title: locked;
@@ -3019,7 +3019,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: Case(Val(&Facility_tpProductinterestDetailsFixedInterestPeriod),[1:2|3:3|6:4|99:1]);
+                formula: Case(Val ( Facility_tpProductinterestDetailsFixedInterestPeriod),[1:2|3:3|6:4|99:1]);
                 inputRequired: 1;
                 data_options: unscalable;
                 displaytype: select;
@@ -3076,7 +3076,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: string;
                 frequency: document;
-                formula: EvaluateAsString(Case(Facility_tpOfferPeriodChoice,[01:"0"|=02:"1D"|=03:"1W"|=04:"2W"|=05:"4W"|=06:"2M"|=07:"3M"|=08:"6M"]));
+                formula: String(Case(Facility_tpOfferPeriodChoice,[01:"0"|=02:"1D"|=03:"1W"|=04:"2W"|=05:"4W"|=06:"2M"|=07:"3M"|=08:"6M"]));
                 data_options: unscalable;
                 title: "Offer period text";
                 visible: ShowTestVariables;
@@ -3147,7 +3147,7 @@ model AABPRICING uses BaseModel
             variable Facility_tpDataImportedFromForce
             {
               datatype: none;
-              title: EvaluateAsString("Imported Data");
+              title: String("Imported Data");
               locked: 1;
               visible: ShowTestVariables;
               options_title: locked;
@@ -3197,7 +3197,7 @@ model AABPRICING uses BaseModel
                 title: "Facility Limit";
                 options_title: locked;
               }
-              variable Facility_tpProductstartDate
+              variable Facility_tpProductStartDate
               {
                 datatype: number;
                 frequency: document;
@@ -3403,7 +3403,7 @@ model AABPRICING uses BaseModel
             variable Facility_tpAutomaticInput
             {
               datatype: none;
-              title: EvaluateAsString("Automatic Input Facility");
+              title: String("Automatic Input Facility");
               locked: 1;
               visible: ShowTestVariables;
               options_title: locked;
@@ -3412,7 +3412,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: If(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,9)=0,1,0);
+                formula: If(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,9)=0,1,0);
                 data_options: unscalable;
                 displaytype: select;
                 title: "Non Revolving Product (Y/N)";
@@ -3424,7 +3424,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: If(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,9)<>0,1,0);
+                formula: If(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,9)<>0,1,0);
                 data_options: unscalable;
                 displaytype: select;
                 title: "Revolving Product (Y/N)";
@@ -3435,7 +3435,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: If(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,9)<>0,1,0);
+                formula: If(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,9)<>0,1,0);
                 data_options: unscalable;
                 displaytype: select;
                 title: "Revolving Credit (Y/N)";
@@ -3752,7 +3752,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: If(&Facility_tpProductuptakeDetailsUptakeType="OneTime",0,If(&Facility_tpProductuptakeDetailsUptakeType="FixedTerms",1,If(&Facility_tpProductuptakeDetailsUptakeType="WithdrawalRevolving",2,If(&Facility_tpProductuptakeDetailsUptakeType="IrregularWithdrawalSchedule",3,If(&Facility_tpProductuptakeDetailsUptakeType="ConditionalWithdrawalSchedule",3,NA)))));
+                formula: If ( Facility_tpProductuptakeDetailsUptakeType="OneTime",0,If ( Facility_tpProductuptakeDetailsUptakeType="FixedTerms",1,If ( Facility_tpProductuptakeDetailsUptakeType="WithdrawalRevolving",2,If ( Facility_tpProductuptakeDetailsUptakeType="IrregularWithdrawalSchedule",3,If ( Facility_tpProductuptakeDetailsUptakeType="ConditionalWithdrawalSchedule",3,NA)))));
                 inputRequired: 1;
                 data_options: unscalable;
                 displaytype: select;
@@ -3764,7 +3764,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: If(&Facility_tpProductredemptionDetailsRedemptionType="InterestOnly",0,If(&Facility_tpProductredemptionDetailsRedemptionType="Linear",1,If(&Facility_tpProductredemptionDetailsRedemptionType="Annuity",2,If(&Facility_tpProductredemptionDetailsRedemptionType="IrregularRepaymentSchedule",3,If(&Facility_tpProductredemptionDetailsRedemptionType="RepaymentRevolving",4,NA)))));
+                formula: If ( Facility_tpProductredemptionDetailsRedemptionType="InterestOnly",0,If ( Facility_tpProductredemptionDetailsRedemptionType="Linear",1,If ( Facility_tpProductredemptionDetailsRedemptionType="Annuity",2,If ( Facility_tpProductredemptionDetailsRedemptionType="IrregularRepaymentSchedule",3,If ( Facility_tpProductredemptionDetailsRedemptionType="RepaymentRevolving",4,NA)))));
                 inputRequired: 1;
                 data_options: unscalable;
                 displaytype: select;
@@ -3830,12 +3830,12 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: Facility_tpProductstartDate;
+                formula: Facility_tpProductStartDate;
                 inputRequired: 1;
                 data_options: unscalable;
                 displaytype: date;
                 title: "Start date";
-                link: Facility_tpProductstartDate;
+                link: Facility_tpProductStartDate;
                 options_title: locked;
               }
               variable Facility_tpCurrentDate
@@ -3853,7 +3853,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: If(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,9)=1,NA,Facility_tpProductEndDate);
+                formula: If(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,9)=1,NA,Facility_tpProductEndDate);
                 inputRequired: 1;
                 data_options: unscalable;
                 displaytype: date;
@@ -4059,7 +4059,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MinMax(12 - If(Facility_tpStartdate > Facility_tpCurrentDate, Facility_tpManual_tpMonthsSinceStartDate, Facility_tpManual_tpMonthsSinceCurrentDate) ,0,12,NA);
+                    formula: MinMax(12 - If(Facility_tpStartDate > Facility_tpCurrentDate, Facility_tpManual_tpMonthsSinceStartDate, Facility_tpManual_tpMonthsSinceCurrentDate) ,0,12,NA);
                     displaytype: currency;
                     title: "Outstanding Balance - Weight Repayment";
                     options_title: locked;
@@ -4068,7 +4068,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MinMax(If(Facility_tpCurrentDate > Facility_tpManual_tpFirstDayMonth ,12, 13 - If(Facility_tpStartdate > Facility_tpCurrentDate, Facility_tpManual_tpMonthsSinceStartDate, Facility_tpManual_tpMonthsSinceCurrentDate)),0,12);
+                    formula: MinMax(If(Facility_tpCurrentDate > Facility_tpManual_tpFirstDayMonth ,12, 13 - If(Facility_tpStartDate > Facility_tpCurrentDate, Facility_tpManual_tpMonthsSinceStartDate, Facility_tpManual_tpMonthsSinceCurrentDate)),0,12);
                     displaytype: currency;
                     title: "Outstanding Balance - Weight Withdrawal";
                     options_title: locked;
@@ -4086,7 +4086,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: (MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpManual_tpMonthsSinceStartDate,1),Facility_tpFixedInterestPeriod)+(MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",Facility_tpManual_tpMonthsSinceStartDate,1),Facility_tpFixedInterestPeriod)-MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpManual_tpMonthsSinceStartDate,1),Facility_tpFixedInterestPeriod))*OnER(((Facility_tpManual_tpMonthsSinceStartDate-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpManual_tpMonthsSinceStartDate,1))/(MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",Facility_tpManual_tpMonthsSinceStartDate,1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpManual_tpMonthsSinceStartDate,1))),0));
+                    formula: (MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpManual_tpMonthsSinceStartDate,1),Facility_tpFixedInterestPeriod)+(MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",Facility_tpManual_tpMonthsSinceStartDate,1),Facility_tpFixedInterestPeriod)-MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpManual_tpMonthsSinceStartDate,1),Facility_tpFixedInterestPeriod))*OnER(((Facility_tpManual_tpMonthsSinceStartDate-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpManual_tpMonthsSinceStartDate,1))/(MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",Facility_tpManual_tpMonthsSinceStartDate,1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpManual_tpMonthsSinceStartDate,1))),0));
                     displaytype: currency;
                     title: "Liquidity Spread - Liquidity Spread Interpolated Bps";
                     top_blanklines: 1;
@@ -4116,7 +4116,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: (MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1),Facility_tpFixedInterestPeriod)+(MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1),Facility_tpFixedInterestPeriod)-MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1),Facility_tpFixedInterestPeriod))*OnER((((Facility_tpManual_tpMonthsSinceStartDate-1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1))/(MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1))),0));
+                    formula: (MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1),Facility_tpFixedInterestPeriod)+(MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1),Facility_tpFixedInterestPeriod)-MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1),Facility_tpFixedInterestPeriod))*OnER((((Facility_tpManual_tpMonthsSinceStartDate-1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1))/(MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",(Facility_tpManual_tpMonthsSinceStartDate-1),1))),0));
                     displaytype: currency;
                     title: "Liquidity Spread - Liquidity Spread Interpolated Bps - Withdrawal";
                     top_blanklines: 1;
@@ -4156,7 +4156,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MinMax(13 - If(Facility_tpStartdate > Facility_tpCurrentDate, Facility_tpManual_tpMonthsSinceStartDate, Facility_tpManual_tpMonthsSinceCurrentDate) ,0,12,NA);
+                    formula: MinMax(13 - If(Facility_tpStartDate > Facility_tpCurrentDate, Facility_tpManual_tpMonthsSinceStartDate, Facility_tpManual_tpMonthsSinceCurrentDate) ,0,12,NA);
                     displaytype: currency;
                     title: "Limit - Repayment Weight";
                     top_blanklines: 1;
@@ -4958,7 +4958,7 @@ model AABPRICING uses BaseModel
                   datatype: number;
                   frequency: column;
                   aggregation: balance;
-                  formula_trend: If((T>DateToT(Facility_tpEndDateMax10,1)) or (T<DateToT(Facility_tpStartdate,1)),NA,T-DateToT(Facility_tpStartDate,1));
+                  formula_trend: If((T>DateToT(Facility_tpEndDateMax10,1)) or (T<DateToT(Facility_tpStartDate,1)),NA,T-DateToT(Facility_tpStartDate,1));
                   data_options: unscalable;
                   fixed_decimals: 0;
                   title: "Weight of repayment Original Tenor";
@@ -5064,7 +5064,7 @@ model AABPRICING uses BaseModel
             variable Facility_tpGuarantor
             {
               datatype: none;
-              title: EvaluateAsString("Third party Guarantees");
+              title: String("Third party Guarantees");
               locked: 1;
               options_title: locked;
               options: locked;
@@ -5092,7 +5092,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: string;
                 frequency: document;
-                formula: EvaluateAsString(MatrixLookup("AAB_Parameters.xls","SBIMapping","@"&Facility_tpGuarantorSBI,1));
+                formula: String(MatrixLookup("AAB_Parameters.xls","SBIMapping","@"&Facility_tpGuarantorSBI,1));
                 data_options: unscalable;
                 title: "SBI branche naam";
                 locked: 1;
@@ -5142,7 +5142,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: string;
                 frequency: document;
-                formula: EvaluateAsString(Case(Facility_tpGuarantorRatingChoice,[200:"0"|=210:"1"|=220:"2"|=221:"2-"|=222:"2+"|=230:"3"|=231:"3-"|=232:"3+"|=240:"4"|=241:"4-"|=242:"4+"|=250:"5"|=251:"5-"|=252:"5+"|=260:"6"|=261:"6+"|=270:"7"]));
+                formula: String(Case(Facility_tpGuarantorRatingChoice,[200:"0"|=210:"1"|=220:"2"|=221:"2-"|=222:"2+"|=230:"3"|=231:"3-"|=232:"3+"|=240:"4"|=241:"4-"|=242:"4+"|=250:"5"|=251:"5-"|=252:"5+"|=260:"6"|=261:"6+"|=270:"7"]));
                 data_options: unscalable;
                 title: "UCR Rating Guarantor";
                 visible: ShowTestVariables;
@@ -5161,7 +5161,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: string;
                 frequency: document;
-                formula: EvaluateAsString(SubStr(&Case(Facility_tpGuarantorPDModelChoice,[01:"PAAL - ABN AMRO Lease PD PL"|=02:"PAFI - Acquisition Finance (Leveraged) (S&P) PD"|=03:"PAIR - Airlines (Asset backed) (S&P) PD"|=04:"PBNK - Commercial Banks (S&P) PD"|=05:"PCBS - Consumer CRG model"|=06:"PCLM - Mainbrand Consumer and Business PD"|=07:"PCRE - Commercial Real Estate PD"|=08:"PDCR - DCRM PD"|=09:"PDIA - Diamond Score PD"|=10:"PFSH - Regulated Investment Funds PD (Highly Leveraged)"|=11:"PFSI - Regulated Investment Funds PD"|=12:"PFSL - Regulated Investment Funds PD (leveraged)"|=13:"PFSP - Pension Funds PD"|=14:"PFSU - Regulated Investment Funds PD (Unleveraged)"|=15:"PGCG - Global Commodities Group Int PD"|=16:"PGSM - Global SME PD"|=17:"PHCN - Health Care PD"|=18:"PIBK - Investment Banks (S&P) PD"|=19:"PINC - Insurance combined (2.1)"|=20:"PINL - Insurance Life (2.1)"|=21:"PINN - Insurance Non - Life (2.1)"|=22:"PLCR - Large Corporates Rating PD"|=23:"PMAS - Shipping (Marsoft) PD"|=24:"PMBO - MBO/MBI PD"|=25:"PNMA - No Model Available (Expert process)"|=26:"POGM - Oil & Gas (Gathering & Processing) (S&P) PD"|=27:"POGU - Oil & Gas (Exploration & Production) (S&P) PD"|=28:"POLE - Operational Leasing (Asset backed) (S&P) PD"|=29:"PPBP - Private Score PD Lombard"|=30:"PPRI - Private Score PD"|=31:"PPUB - Public Sector Entities PD"|=32:"PREG - Regulatory Rating"|=33:"PRMG - Ex-F Non-Mainbrand Mortgages PD"|=34:"PSHP - Shipping (Asset backed) (S&P) PD"|=35:"PSOV - Sovereigns PD"|=36:"PSUR - Start ups PD"|=37:"PUTI - Energy utilities PD"|=38:"PBBS - Business CRG model"|=39:"PCFP - Cash Flow PD "]),0,4));
+                formula: String(SubStr ( Case(Facility_tpGuarantorPDModelChoice,[01:"PAAL - ABN AMRO Lease PD PL"|=02:"PAFI - Acquisition Finance (Leveraged) (S&P) PD"|=03:"PAIR - Airlines (Asset backed) (S&P) PD"|=04:"PBNK - Commercial Banks (S&P) PD"|=05:"PCBS - Consumer CRG model"|=06:"PCLM - Mainbrand Consumer and Business PD"|=07:"PCRE - Commercial Real Estate PD"|=08:"PDCR - DCRM PD"|=09:"PDIA - Diamond Score PD"|=10:"PFSH - Regulated Investment Funds PD (Highly Leveraged)"|=11:"PFSI - Regulated Investment Funds PD"|=12:"PFSL - Regulated Investment Funds PD (leveraged)"|=13:"PFSP - Pension Funds PD"|=14:"PFSU - Regulated Investment Funds PD (Unleveraged)"|=15:"PGCG - Global Commodities Group Int PD"|=16:"PGSM - Global SME PD"|=17:"PHCN - Health Care PD"|=18:"PIBK - Investment Banks (S&P) PD"|=19:"PINC - Insurance combined (2.1)"|=20:"PINL - Insurance Life (2.1)"|=21:"PINN - Insurance Non - Life (2.1)"|=22:"PLCR - Large Corporates Rating PD"|=23:"PMAS - Shipping (Marsoft) PD"|=24:"PMBO - MBO/MBI PD"|=25:"PNMA - No Model Available (Expert process)"|=26:"POGM - Oil & Gas (Gathering & Processing) (S&P) PD"|=27:"POGU - Oil & Gas (Exploration & Production) (S&P) PD"|=28:"POLE - Operational Leasing (Asset backed) (S&P) PD"|=29:"PPBP - Private Score PD Lombard"|=30:"PPRI - Private Score PD"|=31:"PPUB - Public Sector Entities PD"|=32:"PREG - Regulatory Rating"|=33:"PRMG - Ex-F Non-Mainbrand Mortgages PD"|=34:"PSHP - Shipping (Asset backed) (S&P) PD"|=35:"PSOV - Sovereigns PD"|=36:"PSUR - Start ups PD"|=37:"PUTI - Energy utilities PD"|=38:"PBBS - Business CRG model"|=39:"PCFP - Cash Flow PD "]),0,4));
                 data_options: unscalable;
                 title: "PD Model Tekst";
                 visible: ShowTestVariables;
@@ -5171,7 +5171,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: MatrixLookup("AAB_Parameters.xls","PD",&Facility_tpGuarantorRating,1)*Facility_tpPDMultiplierUnder1Year;
+                formula: MatrixLookup("AAB_Parameters.xls","PD" , Facility_tpGuarantorRating,1)*Facility_tpPDMultiplierUnder1Year;
                 data_options: unscalable;
                 displaytype: percentage;
                 fixed_decimals: 4;
@@ -5709,7 +5709,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MatrixLookup("AAB_Parameters.xls","ClientGroup",&Borrower_tpClientGroup,3);
+                    formula: MatrixLookup("AAB_Parameters.xls","ClientGroup" , Borrower_tpClientGroup,3);
                     data_options: unscalable;
                     fixed_decimals: 0;
                     title: "Economic Capital - Operational Risk - OR EC";
@@ -5743,7 +5743,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MatrixLookup("AAB_Parameters.xls","ClientGroup",&Borrower_tpClientGroup,9);
+                    formula: MatrixLookup("AAB_Parameters.xls","ClientGroup" , Borrower_tpClientGroup,9);
                     data_options: unscalable;
                     fixed_decimals: 0;
                     title: "Economic Capital - Business Risk - BR EC";
@@ -5803,7 +5803,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MatrixLookup("AAB_Parameters.xls","CalibrationFactor",&Facility_tpCalibrationFactorIDGuarantor,3);
+                    formula: MatrixLookup("AAB_Parameters.xls","CalibrationFactor" , Facility_tpCalibrationFactorIDGuarantor,3);
                     data_options: unscalable;
                     fixed_decimals: 6;
                     title: "Calibration Factor Guarantor";
@@ -5813,7 +5813,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: string;
                     frequency: document;
-                    formula: EvaluateAsString(Facility_tpGuarantorRating&"_"&Borrower_tpClientGroup);
+                    formula: String(Facility_tpGuarantorRating&"_"&Borrower_tpClientGroup);
                     data_options: unscalable;
                     title: "Calibration Factor ID Guarantor";
                     options_title: locked;
@@ -5946,7 +5946,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: If(Facility_tpBorrower_tpPLorNPL=1,MatrixLookup("AAB_Parameters.xls","LEFfactors",&Facility_tpIDLEFfactors,10),MatrixLookup("AAB_Parameters.xls","LEFfactors",&Facility_tpIDLEFfactors,8));
+                    formula: If(Facility_tpBorrower_tpPLorNPL=1,MatrixLookup("AAB_Parameters.xls","LEFfactors" , Facility_tpIDLEFfactors,10),MatrixLookup("AAB_Parameters.xls","LEFfactors" , Facility_tpIDLEFfactors,8));
                     data_options: unscalable;
                     displaytype: percentage;
                     fixed_decimals: 2;
@@ -5957,7 +5957,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: If(Facility_tpHeadroom,If(Facility_tpBorrower_tpPLorNPL=1,MatrixLookup("AAB_Parameters.xls","LEFfactors",&Facility_tpIDLEFfactors,9),MatrixLookup("AAB_Parameters.xls","LEFfactors",&Facility_tpIDLEFfactors,7)),NA);
+                    formula: If(Facility_tpHeadroom,If(Facility_tpBorrower_tpPLorNPL=1,MatrixLookup("AAB_Parameters.xls","LEFfactors" , Facility_tpIDLEFfactors,9),MatrixLookup("AAB_Parameters.xls","LEFfactors" , Facility_tpIDLEFfactors,7)),NA);
                     data_options: unscalable;
                     displaytype: percentage;
                     fixed_decimals: 2;
@@ -5968,7 +5968,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: If(Facility_tpHeadroom=0,If(Facility_tpBorrower_tpPLorNPL=1,MatrixLookup("AAB_Parameters.xls","LEFfactors",&Facility_tpIDLEFfactors,9),MatrixLookup("AAB_Parameters.xls","LEFfactors",&Facility_tpIDLEFfactors,7)),NA);
+                    formula: If(Facility_tpHeadroom=0,If(Facility_tpBorrower_tpPLorNPL=1,MatrixLookup("AAB_Parameters.xls","LEFfactors" , Facility_tpIDLEFfactors,9),MatrixLookup("AAB_Parameters.xls","LEFfactors" , Facility_tpIDLEFfactors,7)),NA);
                     data_options: unscalable;
                     displaytype: percentage;
                     fixed_decimals: 2;
@@ -5998,7 +5998,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString(Facility_tpType&"_"&Facility_tpLowerlimit&"_"&Facility_tpUsageLimit&"_"&Facility_tpUGDPGO);
+                      formula: String(Facility_tpType&"_"&Facility_tpLowerlimit&"_"&Facility_tpUsageLimit&"_"&Facility_tpUGDPGO);
                       data_options: unscalable;
                       title: "Economic Capital - Credit Risk - Search ID LEFfactors";
                       top_blanklines: 1;
@@ -6008,7 +6008,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,8)=1,If(Facility_tpHeadroom,Case(Facility_tpLimit,[<=100000:0|<=350000:100000|<=1000000:350000|<=3000000:1000000|>3000000:3000000]),Case(Facility_tpPrincipalLimit,[<=70000:0|<=300000:70000|<=1000000:300000|>1000000:1000000])),0);
+                      formula: If(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,8)=1,If(Facility_tpHeadroom,Case(Facility_tpLimit,[<=100000:0|<=350000:100000|<=1000000:350000|<=3000000:1000000|>3000000:3000000]),Case(Facility_tpPrincipalLimit,[<=70000:0|<=300000:70000|<=1000000:300000|>1000000:1000000])),0);
                       data_options: unscalable;
                       fixed_decimals: 0;
                       title: "Economic Capital - Credit Risk - Search ID Lower limit";
@@ -6018,7 +6018,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,10)=1,0,If(Facility_tpHeadroom,Case((Facility_tpExpectedAverageOutstanding/Facility_tpLimit)*100,[<=80:0|>80:81]),0));
+                      formula: If(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,10)=1,0,If(Facility_tpHeadroom,Case((Facility_tpExpectedAverageOutstanding/Facility_tpLimit)*100,[<=80:0|>80:81]),0));
                       data_options: unscalable;
                       fixed_decimals: 0;
                       title: "Economic Capital - Credit Risk - Search ID Usage limit";
@@ -6028,7 +6028,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString(If(Facility_tpHeadroom,"UGD","PGO"));
+                      formula: String(If(Facility_tpHeadroom,"UGD","PGO"));
                       data_options: unscalable;
                       title: "Economic Capital - Credit Risk - Search ID UGD/PGO";
                       options_title: locked;
@@ -6058,7 +6058,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MatrixLookup("AAB_Parameters.xls","ECMultiplierTenorLowerBound",&If(Facility_tpRemainingAverageTenor<=1,1,If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),1);
+                    formula: MatrixLookup("AAB_Parameters.xls","ECMultiplierTenorLowerBound" , If(Facility_tpRemainingAverageTenor<=1,1,If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),1);
                     data_options: unscalable;
                     fixed_decimals: 2;
                     title: "Economic Capital Multiplier Lower Tenor";
@@ -6069,7 +6069,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MatrixLookup("AAB_Parameters.xls","ECMultiplierTenorUpperBound",&If(Facility_tpRemainingAverageTenor<=1,1,If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),1);
+                    formula: MatrixLookup("AAB_Parameters.xls","ECMultiplierTenorUpperBound" , If(Facility_tpRemainingAverageTenor<=1,1,If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),1);
                     data_options: unscalable;
                     fixed_decimals: 2;
                     title: "Economic Capital Multiplier Upper Tenor";
@@ -6137,7 +6137,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM>0,MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDLowerMECUnguaranteed,1)+((Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM)*(MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDUpperMECUnguaranteed,1)-MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDLowerMECUnguaranteed,1))),MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDECUnguaranteed,1));
+                      formula: If(Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM>0,MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDLowerMECUnguaranteed,1)+((Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM)*(MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDUpperMECUnguaranteed,1)-MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDLowerMECUnguaranteed,1))),MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDECUnguaranteed,1));
                       data_options: unscalable;
                       fixed_decimals: 4;
                       title: "Expected Loss Multiplier";
@@ -6166,7 +6166,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Borrower_tpRating&"_"&Str((If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
+                      formula: String("@"&Borrower_tpRating&"_"&Str((If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID Economic Capital - Unguaranteed";
                       options_title: locked;
@@ -6175,7 +6175,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Borrower_tpRating&"_"&Str((If(Facility_tpELMultiplierLowerM+1>16,16,Facility_tpELMultiplierLowerM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
+                      formula: String("@"&Borrower_tpRating&"_"&Str((If(Facility_tpELMultiplierLowerM+1>16,16,Facility_tpELMultiplierLowerM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID Economic Capital - Unguaranteed - Lower M";
                       options_title: locked;
@@ -6184,7 +6184,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Borrower_tpRating&"_"&Str((If(Facility_tpELMultiplierUpperM+1>16,16,Facility_tpELMultiplierUpperM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
+                      formula: String("@"&Borrower_tpRating&"_"&Str((If(Facility_tpELMultiplierUpperM+1>16,16,Facility_tpELMultiplierUpperM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID Economic Capital - Unguaranteed - Upper M";
                       options_title: locked;
@@ -6202,7 +6202,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM>0,MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDLowerMECGuaranteed,1)+((Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM)*(MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDUpperMECGuaranteed,1)-MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDLowerMECGuaranteed,1))),MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDECGuaranteed,1));
+                      formula: If(Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM>0,MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDLowerMECGuaranteed,1)+((Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM)*(MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDUpperMECGuaranteed,1)-MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDLowerMECGuaranteed,1))),MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDECGuaranteed,1));
                       data_options: unscalable;
                       fixed_decimals: 8;
                       title: "Expected Loss Multiplier Guaranteed";
@@ -6213,7 +6213,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
+                      formula: String("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID Economic Capital - Guaranteed";
                       options_title: locked;
@@ -6222,7 +6222,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpELMultiplierLowerM+1>16,16,Facility_tpELMultiplierLowerM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
+                      formula: String("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpELMultiplierLowerM+1>16,16,Facility_tpELMultiplierLowerM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID Economic Capital - Guaranteed - Lower M";
                       options_title: locked;
@@ -6231,7 +6231,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpELMultiplierUpperM+1>16,16,Facility_tpELMultiplierUpperM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
+                      formula: String("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpELMultiplierUpperM+1>16,16,Facility_tpELMultiplierUpperM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGDMoC,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID Economic Capital - Guaranteed - Upper M";
                       options_title: locked;
@@ -6289,7 +6289,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString(Str(Facility_tpEquityIndexBorrower)&"_"&Str(Facility_tpEquityIndexGuarantor));
+                      formula: String(Str(Facility_tpEquityIndexBorrower)&"_"&Str(Facility_tpEquityIndexGuarantor));
                       data_options: unscalable;
                       title: "Inter-sector Correlation Factor ID";
                       options_title: locked;
@@ -6298,7 +6298,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","EquityCorrelation",&Facility_tpEquityCorrelationID,1);
+                      formula: MatrixLookup("AAB_Parameters.xls","EquityCorrelation" , Facility_tpEquityCorrelationID,1);
                       data_options: unscalable;
                       fixed_decimals: 8;
                       title: "Inter-sector Correlation Factor";
@@ -6374,7 +6374,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: OnER(If(&Facility_tpType="F1",Facility_tpCreditFeeBp/10000*Facility_tpExpectedAverageOutstanding,NA),NA);
+                    formula: OnER(If ( Facility_tpType="F1",Facility_tpCreditFeeBp/10000*Facility_tpExpectedAverageOutstanding,NA),NA);
                     displaytype: currency;
                     title: "Risk Adjusted Return - Income - Credit Related Fee - Annual Fee";
                     options_title: locked;
@@ -6551,7 +6551,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MatrixLookup("AAB_Parameters.xls","CustomerSpreadAddMargin",&Facility_tpProductinterestDetailsInterestProductName,1);
+                    formula: MatrixLookup("AAB_Parameters.xls","CustomerSpreadAddMargin" , Facility_tpProductinterestDetailsInterestProductName,1);
                     data_options: unscalable;
                     fixed_decimals: 0;
                     title: "Risk Adjusted Return - Income - Interest Income - Customer Spread Additional Margin (Bps)";
@@ -6613,7 +6613,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM>0,MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDLowerMRARUnguaranteed,1)+((Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM)*(MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDUpperMRARUnguaranteed,1)-MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDLowerMRARUnguaranteed,1))),MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDRARUnguaranteed,1));
+                      formula: If(Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM>0,MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDLowerMRARUnguaranteed,1)+((Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM)*(MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDUpperMRARUnguaranteed,1)-MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDLowerMRARUnguaranteed,1))),MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDRARUnguaranteed,1));
                       displaytype: currency;
                       title: "Expected Loss Multiplier - Risk Adjusted Return - Unguaranteed";
                       top_blanklines: 1;
@@ -6623,7 +6623,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Borrower_tpRating&"_"&Str((If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
+                      formula: String("@"&Borrower_tpRating&"_"&Str((If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID - Risk Adjusted Return - Unguaranteed";
                       options_title: locked;
@@ -6632,7 +6632,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Borrower_tpRating&"_"&Str((If(Facility_tpELMultiplierLowerM+1>16,16,Facility_tpELMultiplierLowerM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
+                      formula: String("@"&Borrower_tpRating&"_"&Str((If(Facility_tpELMultiplierLowerM+1>16,16,Facility_tpELMultiplierLowerM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID - Risk Adjusted Return - Unguaranteed - Lower M";
                       options_title: locked;
@@ -6641,7 +6641,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Borrower_tpRating&"_"&Str((If(Facility_tpELMultiplierUpperM+1>16,16,Facility_tpELMultiplierUpperM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
+                      formula: String("@"&Borrower_tpRating&"_"&Str((If(Facility_tpELMultiplierUpperM+1>16,16,Facility_tpELMultiplierUpperM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID - Risk Adjusted Return - Unguaranteed - Upper M";
                       options_title: locked;
@@ -6659,7 +6659,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM>0,MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDLowerMRARGuaranteed,1)+((Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM)*(MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDUpperMRARGuaranteed,1)-MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDLowerMRARGuaranteed,1))),MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier",&Facility_tpELMultiplierIDRARGuaranteed,1));
+                      formula: If(Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM>0,MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDLowerMRARGuaranteed,1)+((Facility_tpRemainingAverageTenor-Facility_tpELMultiplierLowerM)*(MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDUpperMRARGuaranteed,1)-MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDLowerMRARGuaranteed,1))),MatrixLookup("AAB_Parameters_ELMultiplier.xls","ELMultiplier" , Facility_tpELMultiplierIDRARGuaranteed,1));
                       displaytype: currency;
                       title: "Expected Loss Multiplier - Risk Adjusted Return - Guaranteed";
                       top_blanklines: 1;
@@ -6669,7 +6669,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
+                      formula: String("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpRemainingAverageTenor+1>16,16,Facility_tpRemainingAverageTenor+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID - Risk Adjusted Return - Guaranteed";
                       options_title: locked;
@@ -6678,7 +6678,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpELMultiplierLowerM+1>16,16,Facility_tpELMultiplierLowerM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
+                      formula: String("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpELMultiplierLowerM+1>16,16,Facility_tpELMultiplierLowerM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID - Risk Adjusted Return - Guaranteed - Lower M";
                       options_title: locked;
@@ -6687,7 +6687,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpELMultiplierUpperM+1>16,16,Facility_tpELMultiplierUpperM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
+                      formula: String("@"&Facility_tpGuarantorRating&"_"&Str((If(Facility_tpELMultiplierUpperM+1>16,16,Facility_tpELMultiplierUpperM+1)),0,0)&"_"&Str(RoundUp(Facility_tpLGD,2)*100,0,0));
                       data_options: unscalable;
                       title: "Expected Loss Multiplier ID - Risk Adjusted Return - Guaranteed - Upper M";
                       options_title: locked;
@@ -6715,7 +6715,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MatrixLookup("AAB_Parameters.xls","CostPerContract",&Facility_tpCostPerContractID,5)*Facility_tpDeannualize;
+                    formula: MatrixLookup("AAB_Parameters.xls","CostPerContract" , Facility_tpCostPerContractID,5)*Facility_tpDeannualize;
                     displaytype: currency;
                     title: "Risk Adjusted Return - Other Expenses - Operational Costs - Cost per Contract";
                     hint: "The outcome will be multiplied by the fraction of the remaining average tenor when < 1 year";
@@ -6725,7 +6725,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString(Facility_tpType&"_"&Borrower_tpRating&"_"&Borrower_tpClientGroup);
+                      formula: String(Facility_tpType&"_"&Borrower_tpRating&"_"&Borrower_tpClientGroup);
                       data_options: unscalable;
                       title: "Risk Adjusted Return - Other Expenses - Operational Costs - Cost per Contract ID";
                       top_blanklines: 1;
@@ -6745,7 +6745,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","CostOverVolume",&Facility_tpType&"_"&Borrower_tpClientGroup,3);
+                      formula: MatrixLookup("AAB_Parameters.xls","CostOverVolume" , Facility_tpType&"_"&Borrower_tpClientGroup,3);
                       data_options: unscalable;
                       fixed_decimals: 2;
                       title: "Risk Adjusted Return - Other Expenses - Operational Costs - Cost over Volume (Bps)";
@@ -6815,7 +6815,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: If(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,4)=0,0,(Facility_tpExpectedAverageOutstanding*Facility_tpLiquiditySpreadBps)/10000);
+                    formula: If(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,4)=0,0,(Facility_tpExpectedAverageOutstanding*Facility_tpLiquiditySpreadBps)/10000);
                     displaytype: currency;
                     title: "Risk Adjusted Return - Interest Expenses - Funds Transfer Pricing - Direct Liquidity Premium";
                     hint: "The outcome will be multiplied by the fraction of the remaining average tenor when < 1 year";
@@ -6824,7 +6824,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,4)=0,0,If(Facility_tpOriginalTenor<12,Facility_tpLiquiditySpreadBpsUnder1year,Facility_tpLiquiditySpreadBpsGeneral));
+                      formula: If(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,4)=0,0,If(Facility_tpOriginalTenor<12,Facility_tpLiquiditySpreadBpsUnder1year,Facility_tpLiquiditySpreadBpsGeneral));
                       data_options: unscalable;
                       fixed_decimals: 2;
                       title: "Liquidity Spread (Bp)";
@@ -6835,7 +6835,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,9)=1,Facility_tpLiquiditySpreadRevolvingCredit,If((Facility_tpRepaymentChoice=0) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentBullet/Facility_tpExpectedAverageOutstanding),If((Facility_tpRepaymentChoice=1) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentLinear/Facility_tpExpectedAverageOutstanding),If((Facility_tpRepaymentChoice=2) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentAnnuity/Facility_tpExpectedAverageOutstanding),If((Facility_tpRepaymentChoice=3) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentScheme/Facility_tpExpectedAverageOutstanding),If((Facility_tpRepaymentChoice=0) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentBullet-Facility_tpLiquiditySpreadWithdrawalScheme)/Facility_tpExpectedAverageOutstanding,If((Facility_tpRepaymentChoice=1) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentLinear-Facility_tpLiquiditySpreadWithdrawalScheme)/Facility_tpExpectedAverageOutstanding,If((Facility_tpRepaymentChoice=2) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentAnnuity-Facility_tpLiquiditySpreadWithdrawalScheme)/Facility_tpExpectedAverageOutstanding,If((Facility_tpRepaymentChoice=3) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentScheme-Facility_tpLiquiditySpreadWithdrawalScheme)/Facility_tpExpectedAverageOutstanding,NA)))))))));
+                      formula: If(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,9)=1,Facility_tpLiquiditySpreadRevolvingCredit,If((Facility_tpRepaymentChoice=0) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentBullet/Facility_tpExpectedAverageOutstanding),If((Facility_tpRepaymentChoice=1) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentLinear/Facility_tpExpectedAverageOutstanding),If((Facility_tpRepaymentChoice=2) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentAnnuity/Facility_tpExpectedAverageOutstanding),If((Facility_tpRepaymentChoice=3) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentScheme/Facility_tpExpectedAverageOutstanding),If((Facility_tpRepaymentChoice=0) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentBullet-Facility_tpLiquiditySpreadWithdrawalScheme)/Facility_tpExpectedAverageOutstanding,If((Facility_tpRepaymentChoice=1) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentLinear-Facility_tpLiquiditySpreadWithdrawalScheme)/Facility_tpExpectedAverageOutstanding,If((Facility_tpRepaymentChoice=2) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentAnnuity-Facility_tpLiquiditySpreadWithdrawalScheme)/Facility_tpExpectedAverageOutstanding,If((Facility_tpRepaymentChoice=3) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentScheme-Facility_tpLiquiditySpreadWithdrawalScheme)/Facility_tpExpectedAverageOutstanding,NA)))))))));
                       data_options: unscalable;
                       fixed_decimals: 2;
                       title: "Liquidity Spread (Bp) Under 1 Year";
@@ -6845,7 +6845,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,9)=1,Facility_tpLiquiditySpreadRevolvingCredit,If((Facility_tpRepaymentChoice=0) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentBullet/Facility_tpWeightedFundingRepaymentBullet),If((Facility_tpRepaymentChoice=1) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentLinear/Facility_tpWeightedFundingRepaymentLinear),If((Facility_tpRepaymentChoice=2) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentAnnuity/Facility_tpWeightedFundingRepaymentAnnuity),If((Facility_tpRepaymentChoice=3) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentScheme/Facility_tpWeightedFundingRepaymentScheme),If((Facility_tpRepaymentChoice=0) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentBullet-Facility_tpLiquiditySpreadWithdrawalScheme)/(Facility_tpWeightedFundingRepaymentBullet-Facility_tpWeightedFundingWithdrawalScheme),If((Facility_tpRepaymentChoice=1) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentLinear-Facility_tpLiquiditySpreadWithdrawalScheme)/(Facility_tpWeightedFundingRepaymentLinear-Facility_tpWeightedFundingWithdrawalScheme),If((Facility_tpRepaymentChoice=2) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentAnnuity-Facility_tpLiquiditySpreadWithdrawalScheme)/(Facility_tpWeightedFundingRepaymentAnnuity-Facility_tpWeightedFundingWithdrawalScheme),If((Facility_tpRepaymentChoice=3) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentScheme-Facility_tpLiquiditySpreadWithdrawalScheme)/(Facility_tpWeightedFundingRepaymentScheme-Facility_tpWeightedFundingWithdrawalScheme),NA)))))))));
+                      formula: If(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,9)=1,Facility_tpLiquiditySpreadRevolvingCredit,If((Facility_tpRepaymentChoice=0) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentBullet/Facility_tpWeightedFundingRepaymentBullet),If((Facility_tpRepaymentChoice=1) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentLinear/Facility_tpWeightedFundingRepaymentLinear),If((Facility_tpRepaymentChoice=2) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentAnnuity/Facility_tpWeightedFundingRepaymentAnnuity),If((Facility_tpRepaymentChoice=3) and (Facility_tpWithdrawalChoice=0),(Facility_tpLiquiditySpreadRepaymentScheme/Facility_tpWeightedFundingRepaymentScheme),If((Facility_tpRepaymentChoice=0) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentBullet-Facility_tpLiquiditySpreadWithdrawalScheme)/(Facility_tpWeightedFundingRepaymentBullet-Facility_tpWeightedFundingWithdrawalScheme),If((Facility_tpRepaymentChoice=1) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentLinear-Facility_tpLiquiditySpreadWithdrawalScheme)/(Facility_tpWeightedFundingRepaymentLinear-Facility_tpWeightedFundingWithdrawalScheme),If((Facility_tpRepaymentChoice=2) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentAnnuity-Facility_tpLiquiditySpreadWithdrawalScheme)/(Facility_tpWeightedFundingRepaymentAnnuity-Facility_tpWeightedFundingWithdrawalScheme),If((Facility_tpRepaymentChoice=3) and (Facility_tpWithdrawalChoice=3),(Facility_tpLiquiditySpreadRepaymentScheme-Facility_tpLiquiditySpreadWithdrawalScheme)/(Facility_tpWeightedFundingRepaymentScheme-Facility_tpWeightedFundingWithdrawalScheme),NA)))))))));
                       data_options: unscalable;
                       fixed_decimals: 2;
                       title: "Liquidity Spread (Bp) On Weighted Funding Amount";
@@ -6895,7 +6895,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: Facility_tpPrincipalLimit * Facility_tpOriginalTenor/12*(MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpOriginalTenor,1),Facility_tpFixedInterestPeriod)+(MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",Facility_tpOriginalTenor,1),Facility_tpFixedInterestPeriod)-MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpOriginalTenor,1),Facility_tpFixedInterestPeriod))*OnER(((Facility_tpOriginalTenor-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpOriginalTenor,1))/(MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",Facility_tpOriginalTenor,1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpOriginalTenor,1))),0));
+                      formula: Facility_tpPrincipalLimit * Facility_tpOriginalTenor/12*(MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpOriginalTenor,1),Facility_tpFixedInterestPeriod)+(MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",Facility_tpOriginalTenor,1),Facility_tpFixedInterestPeriod)-MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpOriginalTenor,1),Facility_tpFixedInterestPeriod))*OnER(((Facility_tpOriginalTenor-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpOriginalTenor,1))/(MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",Facility_tpOriginalTenor,1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",Facility_tpOriginalTenor,1))),0));
                       data_options: unscalable;
                       fixed_decimals: 2;
                       title: "Liquidity Spread Repayment Bullet";
@@ -6915,7 +6915,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: SumFor(X,1+Facility_tpGracePeriodInPeriods,Facility_tpNumberOfPeriodsNoGrace,1,Facility_tpLinear*(X*Facility_tpConvertToMonths/Facility_tpRepaymentFrequencyLiqSpread)*(MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1),Facility_tpFixedInterestPeriod)+(MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",X*12/Facility_tpRepaymentFrequency,1),Facility_tpFixedInterestPeriod)-MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1),Facility_tpFixedInterestPeriod))*OnER(((X*12/Facility_tpRepaymentFrequency-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1))/(MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",X*12/Facility_tpRepaymentFrequency,1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1))),0)));
+                      formula: SumFor(X,1+Facility_tpGracePeriodInPeriods,Facility_tpNumberOfPeriodsNoGrace,1,Facility_tpLinear*(X*Facility_tpConvertToMonths/Facility_tpRepaymentFrequencyLiqSpread)*(MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1),Facility_tpFixedInterestPeriod)+(MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",X*12/Facility_tpRepaymentFrequency,1),Facility_tpFixedInterestPeriod)-MatrixLookup("AAB_Parameters.xls" , If ( Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR" , If ( Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP" , If ( Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))) , MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1),Facility_tpFixedInterestPeriod))*OnER(((X*12/Facility_tpRepaymentFrequency-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1))/(MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",X*12/Facility_tpRepaymentFrequency,1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1))),0)));
                       data_options: unscalable;
                       fixed_decimals: 2;
                       title: "Liquidity Spread Repayment Linear";
@@ -7081,7 +7081,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(Facility_tpInterestRateIndexBasis=1,0,MatrixLookup("AAB_Parameters.xls","LiquidityPremiumRevolvingCredit",&Facility_tpProductinterestDetailsInterestProductName,If(&Facility_tpBaseCurrency="EUR",1,If(&Facility_tpBaseCurrency="GBP",2,If(&Facility_tpBaseCurrency="USD",3,4)))));
+                      formula: If(Facility_tpInterestRateIndexBasis=1,0,MatrixLookup("AAB_Parameters.xls","LiquidityPremiumRevolvingCredit" , Facility_tpProductinterestDetailsInterestProductName,If ( Facility_tpBaseCurrency="EUR",1,If ( Facility_tpBaseCurrency="GBP",2,If ( Facility_tpBaseCurrency="USD",3,4)))));
                       data_options: unscalable;
                       fixed_decimals: 2;
                       title: "Liquidity Spread Withdrawal Scheme";
@@ -7101,7 +7101,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,1);
+                      formula: MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,1);
                       data_options: unscalable;
                       fixed_decimals: 3;
                       title: "Risk Adjusted Return - Interest Expenses - Funds Transfer Pricing - Prepayment Premium (Bps)";
@@ -7153,7 +7153,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","OfferOptionPremium",&Facility_tpOfferPeriod&"_"&Str(Facility_tpPipelineRiskLowerM,0,0),5);
+                      formula: MatrixLookup("AAB_Parameters.xls","OfferOptionPremium" , Facility_tpOfferPeriod&"_"&Str(Facility_tpPipelineRiskLowerM,0,0),5);
                       data_options: unscalable;
                       fixed_decimals: 6;
                       title: "Risk Adjusted Return - Interest Expenses - Funds Transfer Pricing - Lower Premium (Bps)";
@@ -7163,7 +7163,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","OfferOptionPremium",&Facility_tpOfferPeriod&"_"&Str(Facility_tpPipelineRiskUpperM,0,0),5);
+                      formula: MatrixLookup("AAB_Parameters.xls","OfferOptionPremium" , Facility_tpOfferPeriod&"_"&Str(Facility_tpPipelineRiskUpperM,0,0),5);
                       data_options: unscalable;
                       fixed_decimals: 6;
                       title: "Risk Adjusted Return - Interest Expenses - Funds Transfer Pricing - Upper Premium (Bps)";
@@ -7173,7 +7173,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString(Facility_tpOfferPeriod&"_"&Str(Facility_tpPipelineRiskUpperM,0,0));
+                      formula: String(Facility_tpOfferPeriod&"_"&Str(Facility_tpPipelineRiskUpperM,0,0));
                       data_options: unscalable;
                       title: "Risk Adjusted Return - Interest Expenses - Funds Transfer Pricing - Upper Premium ID";
                       options_title: locked;
@@ -7223,7 +7223,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,5);
+                      formula: MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,5);
                       data_options: unscalable;
                       displaytype: select;
                       title: "Risk Adjusted Return - Interest Expenses - Can be redrawn";
@@ -7245,7 +7245,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,2);
+                      formula: MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,2);
                       data_options: unscalable;
                       displaytype: select;
                       title: "Risk Adjusted Return - Interest Expenses - Combined";
@@ -7267,7 +7267,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: string;
                       frequency: document;
-                      formula: EvaluateAsString(MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,3));
+                      formula: String(MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,3));
                       data_options: unscalable;
                       title: "Risk Adjusted Return - Interest Expenses - Credit or liquidity facility";
                       options_title: locked;
@@ -7287,7 +7287,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercFinancialInstitutions",&Borrower_tpFinancialInstitution&"_"&Facility_tpCreditOrLiquidity,3);
+                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercFinancialInstitutions" , Borrower_tpFinancialInstitution&"_"&Facility_tpCreditOrLiquidity,3);
                       data_options: unscalable;
                       displaytype: percentage;
                       fixed_decimals: 2;
@@ -7310,7 +7310,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercCommitted",&Borrower_tpClientGroup,2);
+                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercCommitted" , Borrower_tpClientGroup,2);
                       data_options: unscalable;
                       displaytype: percentage;
                       fixed_decimals: 2;
@@ -7333,7 +7333,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercUncommitted",&Borrower_tpClientGroup,1);
+                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercUncommitted" , Borrower_tpClientGroup,1);
                       data_options: unscalable;
                       displaytype: percentage;
                       fixed_decimals: 2;
@@ -7356,7 +7356,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercCommitted",&Borrower_tpClientGroup,4);
+                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercCommitted" , Borrower_tpClientGroup,4);
                       data_options: unscalable;
                       displaytype: percentage;
                       fixed_decimals: 2;
@@ -7379,7 +7379,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercUncommitted",&Borrower_tpClientGroup,3);
+                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercUncommitted" , Borrower_tpClientGroup,3);
                       data_options: unscalable;
                       displaytype: percentage;
                       fixed_decimals: 2;
@@ -7402,7 +7402,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercCommitted",&Borrower_tpClientGroup,3);
+                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercCommitted" , Borrower_tpClientGroup,3);
                       data_options: unscalable;
                       displaytype: percentage;
                       fixed_decimals: 2;
@@ -7425,7 +7425,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercUncommitted",&Borrower_tpClientGroup,2);
+                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercUncommitted" , Borrower_tpClientGroup,2);
                       data_options: unscalable;
                       displaytype: percentage;
                       fixed_decimals: 2;
@@ -7448,7 +7448,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercCommitted",&Borrower_tpClientGroup,1);
+                      formula: MatrixLookup("AAB_Parameters.xls","OutflowPercCommitted" , Borrower_tpClientGroup,1);
                       data_options: unscalable;
                       displaytype: percentage;
                       fixed_decimals: 2;
@@ -7480,7 +7480,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: Round(If(&Facility_tpProductredemptionDetailsRedemptionType="InterestOnly",Facility_tpYearlyIndirectLiqCostsBullet,If((&Facility_tpProductredemptionDetailsRedemptionType="Linear") or (&Facility_tpProductredemptionDetailsRedemptionType="Annuity"),Facility_tpYearlyIndirectLiqCostsLinearAnnuity,If(&Facility_tpProductredemptionDetailsRedemptionType="IrregularRepaymentSchedule",Facility_tpYearlyIndirectLiqCostsScheme,NA))),0);
+                      formula: Round(If ( Facility_tpProductredemptionDetailsRedemptionType="InterestOnly",Facility_tpYearlyIndirectLiqCostsBullet,If( ( Facility_tpProductredemptionDetailsRedemptionType="Linear") or  ( Facility_tpProductredemptionDetailsRedemptionType="Annuity"),Facility_tpYearlyIndirectLiqCostsLinearAnnuity,If ( Facility_tpProductredemptionDetailsRedemptionType="IrregularRepaymentSchedule",Facility_tpYearlyIndirectLiqCostsScheme,NA))),0);
                       displaytype: currency;
                       title: "Risk Adjusted Return - Interest Expenses - Yearly Indirect Liq. Costs (Bps)";
                       options_title: locked;
@@ -7489,7 +7489,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(&Facility_tpProductredemptionDetailsRedemptionType="InterestOnly",((Facility_tpAbsoluteBufferCosts/Facility_tpOriginalTenorYears)/Facility_tpOriginalLimit)*10000,NA);
+                      formula: If ( Facility_tpProductredemptionDetailsRedemptionType="InterestOnly",((Facility_tpAbsoluteBufferCosts/Facility_tpOriginalTenorYears)/Facility_tpOriginalLimit)*10000,NA);
                       displaytype: currency;
                       title: "Risk Adjusted Return - Interest Expenses - Yearly Indirect Liq. Costs (Bps) Bullet";
                       options_title: locked;
@@ -7498,7 +7498,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If((&Facility_tpProductredemptionDetailsRedemptionType="Linear") or (&Facility_tpProductredemptionDetailsRedemptionType="Annuity"),(Facility_tpAbsoluteBufferCosts*10000)/((((Facility_tpOriginalTenor)*Facility_tpOriginalLimit)/12)-((0.5*((Facility_tpOriginalTenor-Facility_tpGracePeriod)/12)*(Facility_tpOriginalLimit-Facility_tpBalloon)))),NA);
+                      formula: If( ( Facility_tpProductredemptionDetailsRedemptionType="Linear") or  ( Facility_tpProductredemptionDetailsRedemptionType="Annuity"),(Facility_tpAbsoluteBufferCosts*10000)/((((Facility_tpOriginalTenor)*Facility_tpOriginalLimit)/12)-((0.5*((Facility_tpOriginalTenor-Facility_tpGracePeriod)/12)*(Facility_tpOriginalLimit-Facility_tpBalloon)))),NA);
                       displaytype: currency;
                       title: "Risk Adjusted Return - Interest Expenses - Yearly Indirect Liq. Costs (Bps) Lin/Annuity";
                       options_title: locked;
@@ -7507,7 +7507,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: If(&Facility_tpProductredemptionDetailsRedemptionType="IrregularRepaymentSchedule",(Facility_tpAbsoluteBufferCosts/Facility_tpWeightedLimitOutstanding)*10000,NA);
+                      formula: If ( Facility_tpProductredemptionDetailsRedemptionType="IrregularRepaymentSchedule",(Facility_tpAbsoluteBufferCosts/Facility_tpWeightedLimitOutstanding)*10000,NA);
                       displaytype: currency;
                       title: "Risk Adjusted Return - Interest Expenses - Yearly Indirect Liq. Costs (Bps) Scheme";
                       options_title: locked;
@@ -7591,7 +7591,7 @@ model AABPRICING uses BaseModel
                     {
                       datatype: number;
                       frequency: document;
-                      formula: OnEr(MatrixLookup("AAB_Parameters.xls","CustomerSpreadAddMargin",&Facility_tpProductinterestDetailsInterestProductName,2),NA);
+                      formula: OnEr(MatrixLookup("AAB_Parameters.xls","CustomerSpreadAddMargin" , Facility_tpProductinterestDetailsInterestProductName,2),NA);
                       data_options: unscalable;
                       displaytype: select;
                       title: "Risk Adjusted Return - Interest Expenses - Equity Funding Adjustment - Interest Rate Index Basis";
@@ -7674,7 +7674,7 @@ model AABPRICING uses BaseModel
                   {
                     datatype: number;
                     frequency: document;
-                    formula: MatrixLookup("AAB_Parameters.xls","ProductType",&Facility_tpType,7);
+                    formula: MatrixLookup("AAB_Parameters.xls","ProductType" , Facility_tpType,7);
                     data_options: unscalable;
                     displaytype: select;
                     title: "Risk Weighted Assets - Short Term Exception";
@@ -7869,7 +7869,7 @@ model AABPRICING uses BaseModel
                 {
                   datatype: number;
                   frequency: document;
-                  formula: MatrixLookup("AAB_Parameters.xls","ClientGroup",&Borrower_tpClientGroup,7);
+                  formula: MatrixLookup("AAB_Parameters.xls","ClientGroup" , Borrower_tpClientGroup,7);
                   data_options: unscalable;
                   displaytype: percentage;
                   fixed_decimals: 3;
@@ -7943,7 +7943,7 @@ model AABPRICING uses BaseModel
               {
                 datatype: number;
                 frequency: document;
-                formula: MatrixLookup("AAB_Parameters.xls","MarketSpread",&Facility_tpProductinterestDetailsInterestProductName,Facility_tpTypeIndex);
+                formula: MatrixLookup("AAB_Parameters.xls","MarketSpread" , Facility_tpProductinterestDetailsInterestProductName,Facility_tpTypeIndex);
                 data_options: unscalable;
                 fixed_decimals: 4;
                 title: "Required Market Spread";
@@ -7954,7 +7954,7 @@ model AABPRICING uses BaseModel
                 {
                   datatype: number;
                   frequency: document;
-                  formula: MatrixLookup("AAB_Parameters.xls","VertaaltabelProductType",&Facility_tpType,2);
+                  formula: MatrixLookup("AAB_Parameters.xls","VertaaltabelProductType" , Facility_tpType,2);
                   displaytype: currency;
                   title: "Facility Type Index";
                   top_blanklines: 1;
@@ -8003,7 +8003,7 @@ model AABPRICING uses BaseModel
           {
             datatype: string;
             frequency: document;
-            formula: EvaluateAsString(Q_ModelType&" "&Q_ModelVersion&" (Matrix "&Q_MatrixVersion&")");
+            formula: String(Q_MODELTYPE&" "&Q_MODELVERSION&" (Matrix "&Q_MATRIXVERSION&")");
             data_options: unscalable;
             title: "Versions";
             top_blanklines: 1;
@@ -8047,7 +8047,7 @@ model AABPRICING uses BaseModel
             }
           }
         }
-        variable Q_MAP01_Hulpvariabelen
+        variable Q_MAP01_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -8057,11 +8057,11 @@ model AABPRICING uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map01_REQUIREDVARS
+          variable Q_MAP01_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_MAP01_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -8069,18 +8069,18 @@ model AABPRICING uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_ENTEREDREQUIREDVARS
+          variable Q_MAP01_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_MAP01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_SUMFOR
+          variable Q_MAP01_SUMFOR
           {
             datatype: number;
             frequency: document;
@@ -8103,7 +8103,7 @@ model AABPRICING uses BaseModel
         locked: 1;
         options_title: locked;
         options: locked;
-        variable Q_RESULTSub1 refers to Q_RESULT
+        variable Q_RESULTSUB1 refers to Q_RESULT
         {
           datatype: string;
           frequency: document;
@@ -8198,7 +8198,7 @@ model AABPRICING uses BaseModel
         title: "Last modification:";
         options_title: locked;
       }
-      variable Q_ModelVersion
+      variable Q_MODELVERSION
       {
         datatype: string;
         frequency: document;
@@ -8209,7 +8209,7 @@ model AABPRICING uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_ModelType
+      variable Q_MODELTYPE
       {
         datatype: string;
         frequency: document;
@@ -8220,11 +8220,11 @@ model AABPRICING uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_MatrixVersion
+      variable Q_MATRIXVERSION
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(MatrixLookup("AAB_Parameters.xls","Version",1,3));
+        formula: String(MatrixLookup("AAB_Parameters.xls","Version",1,3));
         data_options: saveCalculatedValue,unscalable;
         title: "Matrix version";
         locked: 1;
@@ -8300,7 +8300,7 @@ model AABPRICING uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If(Length(&scKnockoutsCombi[1])>0,&"\r\nEr zijn knockouts van toepassing:"&scKnockoutsCombi,""));
+        formula: String(If(Length ( scKnockoutsCombi[1])>0 , "\r\nEr zijn knockouts van toepassing:"&scKnockoutsCombi,""));
         data_options: unscalable;
         title: "Knockout(s)?";
         top_blanklines: 1;
@@ -8323,7 +8323,7 @@ model AABPRICING uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If(Length(&scRestrictiesCombi[1])>0,&"\r\n\r\nDe volgende variabelen zijn niet correct gevuld:"&scRestrictiesCombi,""));
+        formula: String(If(Length ( scRestrictiesCombi[1])>0 , "\r\n\r\nDe volgende variabelen zijn niet correct gevuld:"&scRestrictiesCombi,""));
         data_options: unscalable;
         title: "Restricties";
         locked: 1;
