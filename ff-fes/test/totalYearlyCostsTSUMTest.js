@@ -11,7 +11,7 @@ var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 
 var wb = new WorkBook(new FESContext());
-wb.importSolution(JUNIT.getFile('../../ff-ssh-git/resources/FFL/KSP.ffl'), 'ffl');
+wb.importSolution(JUNIT.getFile('../../ff-ssh-git/resources/gyllion_KSP.ffl'), 'ffl');
 
 // List of all children to be tested
 var children = [
@@ -125,12 +125,12 @@ var fesContext = {
     values: {},
     tupleIndexList: []
 };
-var result = fesjsApi.fesGetValue(fesContext, 'KSP_ChildGender', 0, 0, 'Bob');
+var result = fesjsApi.fesGetValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 0, 'Bob');
 assert(result[0].value === 0);
-var BobEntry = fesjsApi.fesGetValue(fesContext, 'KSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
+var BobEntry = fesjsApi.fesGetValue(fesContext, 'EXPERIENCEKSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
 var bobResult = BobEntry[0];
 assert(bobResult.value === 3);
-var LisaEntry = fesjsApi.fesGetValue(fesContext, 'KSP_ChildGender', 0, 1, 'Lisa');
+var LisaEntry = fesjsApi.fesGetValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 1, 'Lisa');
 var LisaResult = LisaEntry[1];
 assert(LisaResult.value == 1);
 

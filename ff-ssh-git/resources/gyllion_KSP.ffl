@@ -4,7 +4,7 @@
 import FinanMath.*;
 import BaseModel.*;
 
-model KSP uses BaseModel
+model experienceKSP uses BaseModel
 {
   version: "1.27";
   root
