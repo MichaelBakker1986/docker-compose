@@ -6,7 +6,7 @@ import BaseModel.*;
 
 model KSP uses BaseModel
 {
-  version: "1.36";
+  version: "1.37";
   root
   {
     variable RootSub1
