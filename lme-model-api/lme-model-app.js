@@ -1,6 +1,7 @@
 var express = require('express');
 var port = 8080;
 var app = express();
+var log = require('ff-log')
 var browserify = require('browserify-middleware');
 app.use(require('express-favicon')());
 var bodyParser = require('body-parser')
@@ -25,15 +26,16 @@ app.post('/:id/saveFFL_LME', (req, res) => {
     stash.commit(req.body.model, req.body.data).then((data) => {
         res.json({status: 'ok'});
     }).catch((err) => {
-        console.error('Failed to write ' + req.body.model + '.ffl file.', err)
-        res.json({status: 'fail'});
+        log.debug('Failed to write ' + req.body.model + '.ffl file.', err)
+        res.json({status: 'fail', reason: err.toString()});
     })
 });
 app.get('/branches', (req, res) => {
     stash.branches().then((data) => {
         res.json(data);
     }).catch((err) => {
-        res.json({status: 'fail', reason: err.toString()});
+        log.debug('Failed to lookup branches:[' + err + ']')
+        res.json([]);
     })
 });
 app.get('/models', (req, res) => {

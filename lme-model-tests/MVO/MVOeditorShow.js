@@ -47,8 +47,8 @@ MVOeditorShow.prototype.parse = function(input) {
                     spaces.length = (80 - total.length) - depth;
                     let prefix = [];
                     prefix.length = depth;
-
-                    output.push(depth + " " + prefix.join(' ') + total + spaces.join(' ') + '=' + node.formula);
+//"" + depth + " "
+                    output.push( prefix.join(' ') + total + spaces.join(' ') + '=' + node.formula);
                     //output.push('value:' + spaces.join(' ') + "=" + node.formula)
                     if (hint) {
                         // output.push(' hint:' + spaces.join(' ') + "=" + node.hint)

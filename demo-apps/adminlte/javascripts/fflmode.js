@@ -3,9 +3,10 @@ define('ace/mode/ffl', function(require, exports, module) {
     var oop = require("ace/lib/oop");
     var TextMode = require("ace/mode/text").Mode;
     var ExampleHighlightRules = require("ace/mode/ffl_highlight_rules").ExampleHighlightRules;
-
+    /*var CStyleFoldMode = require("ace/mode/folding/cstyle").FoldMode;*/
     var Mode = function() {
         this.HighlightRules = ExampleHighlightRules;
+        /*this.foldingRules = new CStyleFoldMode();*/
     };
     oop.inherits(Mode, TextMode);
 

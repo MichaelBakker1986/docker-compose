@@ -8,6 +8,8 @@ $(document).ready(function() {
     var V05CaseFix = require('../../lme-model-tests/plugins/V05CaseFix').V05CaseFix
     var MVOeditorShow = require('../../lme-model-tests/MVO/MVOeditorShow').MVOeditorShow
     var fflModel;
+    var windowModelName = window.location.href.split('#model=')[1] || 'KSP';
+    $("#models").val(windowModelName)
     $.getJSON("/branches", function(data, status, xhr) {
         $("#tags").autocomplete({source: data});
     })
@@ -16,6 +18,9 @@ $(document).ready(function() {
     });
     $(".toggle-info-btn").click(function(e) {
         MVOeditorShow.on = !MVOeditorShow.on;
+
+        editor.setOption("maxLines", MVOeditorShow.on ? Infinity : 58);
+
         setValue(fflModel)
         scrollTop()
     });
@@ -38,8 +43,8 @@ $(document).ready(function() {
         var text = '\t\t\t//*' + LME.nodes[wholelinetxt.replace(/variable (\w)/, '$1').trim()].value + "*//";
         editor.session.insert(customPosition, text);
     });
-    var windowModelName = window.location.href.split('#model=')[1] || 'KSP';
-    var Range = ace.require("ace/range").Range;
+
+    Range = ace.require("ace/range").Range;
     var allLines = [];
 
     var startFold = 1;
@@ -123,21 +128,23 @@ $(document).ready(function() {
             source: data,
             change: handleModelChange
         });
-        $("#models").val(windowModelName)
-        handleModelChange(windowModelName)
     })
+    handleModelChange(windowModelName)
     editor = ace.edit("editor");
     var langTools = ace.require("ace/ext/language_tools");
     editor.session.setMode("ace/mode/ffl");
     editor.setTheme("ace/theme/tomorrow");
     editor.resize(true)
+    editor.setBehavioursEnabled(true);
     // enable autocompletion and snippets
     editor.setOptions({
         enableBasicAutocompletion: true,
         /*   enableSnippets: true,*/
         enableLiveAutocompletion: true,
+        showFoldWidgets: true,
         maxLines: 67
     });
+
 
     function gotoPreview() {
         window.location = 'http://' + window.location.hostname + ':8083/#' + $("#models").val() + '&' + 'DEMO'
@@ -166,4 +173,5 @@ $(document).ready(function() {
     $('#preview-model').click(gotoPreview);
     $('#save-model').click(saveDocument);
     $('#preview-model').hide()
+
 });
