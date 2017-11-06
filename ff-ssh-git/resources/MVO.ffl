@@ -2912,7 +2912,7 @@ model MVO uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: OnER(((Q_MAP04_GEWICHT_VRAAG01*Q_MAP04_VRAAG01)+(Q_MAP04_GEWICHT_VRAAG02*Q_MAP04_VRAAG02)+(Q_MAP04_GEWICHT_VRAAG03*Q_MAP04_VRAAG03)+(Q_MAP04_GEWICHT_VRAAG04*Q_MAP04_VRAAG04)),NA);
+            formula: OnER(((Q_MAP04_GEWICHT_VRAAG01*Q_MAP04_VRAAG01)+(Q_MAP04_GEWICHT_VRAAG02*Q_MAP04_VRAAG02)+(Q_MAP04_GEWICHT_VRAAG03*Q_MAP04_VRAAG03)+(Q_MAP04_GEWICHT_VRAAG04*Q_MAP04_VRAAG04))*100000,NA);
             displaytype: currency;
             title: "Score Arbeidsomstandigheden";
             top_blanklines: 1;

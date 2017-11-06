@@ -75595,10 +75595,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         "MVO_Q_MAP04_GEWICHT_VRAAG04_value": true,
         "MVO_Q_MAP04_VRAAG04_value": true
       },
-      "original": "OnER(Q_MAP04_GEWICHT_VRAAG01*Q_MAP04_VRAAG01+Q_MAP04_GEWICHT_VRAAG02*Q_MAP04_VRAAG02+Q_MAP04_GEWICHT_VRAAG03*Q_MAP04_VRAAG03+Q_MAP04_GEWICHT_VRAAG04*Q_MAP04_VRAAG04,NA)",
+      "original": "OnER((Q_MAP04_GEWICHT_VRAAG01*Q_MAP04_VRAAG01+Q_MAP04_GEWICHT_VRAAG02*Q_MAP04_VRAAG02+Q_MAP04_GEWICHT_VRAAG03*Q_MAP04_VRAAG03+Q_MAP04_GEWICHT_VRAAG04*Q_MAP04_VRAAG04)*1e5,NA)",
       "index": 100661,
       "name": "MVO_Q_MAP04_SUBSCORE01_value",
-      "parsed": "OnER(a100574('100574',x,y.base,z,v)*a100485('100485',x,y.base,z,v)+a100577('100577',x,y.base,z,v)*a100493('100493',x,y.base,z,v)+a100579('100579',x,y.base,z,v)*a100499('100499',x,y.base,z,v)+a100581('100581',x,y.base,z,v)*a100505('100505',x,y.base,z,v),NA)",
+      "parsed": "OnER((a100574('100574',x,y.base,z,v)*a100485('100485',x,y.base,z,v)+a100577('100577',x,y.base,z,v)*a100493('100493',x,y.base,z,v)+a100579('100579',x,y.base,z,v)*a100499('100499',x,y.base,z,v)+a100581('100581',x,y.base,z,v)*a100505('100505',x,y.base,z,v))*1e5,NA)",
       "id": 100661,
       "fflname": "Q_MAP04_SUBSCORE01_value"
     },
@@ -79502,7 +79502,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     [
       "Q_MAP04_SUBSCORE01",
       "'Score Arbeidsomstandigheden'",
-      "OnER(Q_MAP04_GEWICHT_VRAAG01*Q_MAP04_VRAAG01+Q_MAP04_GEWICHT_VRAAG02*Q_MAP04_VRAAG02+Q_MAP04_GEWICHT_VRAAG03*Q_MAP04_VRAAG03+Q_MAP04_GEWICHT_VRAAG04*Q_MAP04_VRAAG04,NA)",
+      "OnER((Q_MAP04_GEWICHT_VRAAG01*Q_MAP04_VRAAG01+Q_MAP04_GEWICHT_VRAAG02*Q_MAP04_VRAAG02+Q_MAP04_GEWICHT_VRAAG03*Q_MAP04_VRAAG03+Q_MAP04_GEWICHT_VRAAG04*Q_MAP04_VRAAG04)*1e5,NA)",
       "",
       "",
       "Q_MAPRESULT_PARAGRAAF04.visible",
