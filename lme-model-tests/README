@@ -6,7 +6,7 @@ variable namen komen niet overeen met het model white/blacklist
   -- postfix formulaId met 'x.f' a100019_agg oid (er zijn meerdere aggregatie formules dus formulaId blijft a100019 om de waarde op te slaan)
   -- is nog even een hersenbreker, kan ook een generieke aggregatie formule voor komen.
 maak testen voor tijds overgangen
-(done) introduceer jaar documenten, in de customImport.json (sneller) nadat agregratie bestaat
+(done) introduceer jaar documenten,  in de customImport.json (sneller) nadat agregratie bestaat
 reduce the boiler plate in fes-api
 
 * = optional
