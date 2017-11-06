@@ -1,0 +1,6 @@
+#LME - model -app
+#/id/{id}
+#/id/{id}/value/{figure}
+
+#install:
+npm start
