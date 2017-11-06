@@ -21,7 +21,7 @@ class Stash {
                     }
                     let command = "git pull &&  git commit -a -m 'Update " + name + " by DEMO' && git push";
                     return exec(command).then((ok) => {
-                        console.info('<span>ffl model update:</span><a href="http://' + hostname + 'finance.lab:8083/#' + name + '&' + uuid() + '">' + name + '</a><span></span>');
+                        console.info('<span>ffl model update:</span><a href="http://' + hostname + '.finance.lab:8083/#' + name + '&' + uuid() + '">' + name + '</a><span></span>');
                     }).catch((err) => {
                         log.error("GIT commit failed while pushing file to repository: [" + err + "]")
                     })
