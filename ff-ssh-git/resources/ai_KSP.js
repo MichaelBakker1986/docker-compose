@@ -585,6 +585,7 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/GetT\(T,-1\)/gm, 'x.prev');
     buf = buf.replace(/GetT(T,-1,1,1)/gm, 'x.prev');
     buf = buf.replace(/FirstTInFormulaset\(Trend\)/gm, 'x.firsttrend');
+    buf = buf.replace(/LastTinFormulaSet\(Notrend,MainPeriod\)/gm, 'x.lastnotrend');
     buf = buf.replace(/\[0\]/gm, '.title ');
 
     //(& types
@@ -2119,32 +2120,38 @@ function buildFormula(formulaInfo, parent, node) {
             node.name = 'x';
         }
         //zAxis Reference, base period, z.base
-        if (node.name === 'MainPeriod') {
+        else if (node.name === 'MainPeriod') {
             node.name = 'z';
         }
         //
-        if (node.name === 'MaxT') {
+        else if (node.name === 'MaxT') {
             node.name = 'x';
         }
-        if (node.name === 'TsY') {
+        else if (node.name === 'TsY') {
             node.name = 'x';
         }
         //xAxisReference x.trend
-        if (node.name === 'Trend') {
+        else if (node.name === 'Trend') {
             node.name = 'x';
         }
         //xAsReference x.notrend
-        if (node.name === 'NoTrend') {
+        else if (node.name === 'NoTrend') {
             node.name = 'x';
         }
         //x.trend.lastbkyr
-        if (node.name === 'LastHistYear') {
+        else if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
         //x.trend.lastbkyr
-        if (node.name === 'LastHistYear') {
+        else if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
+ /*       else if (node.name === 'lastnotrend') {
+            node.name = 'lastnotrend';
+        }
+        else if (node.name === 'lastnotrend') {
+            node.name = 'lastnotrend';
+        }*/
         //should return the x.index.
         else if (node.name === 't') {
             log.warn('invalid t parsing [%s]', formulaInfo)
