@@ -6,11 +6,17 @@ $(document).ready(function() {
     var AmpersandConverter = require('../../lme-model-tests/plugins/AmpersandConverter').AmpersandConverter
     var ScorecardQ_caseFix = require('../../lme-model-tests/plugins/ScorecardQ_caseFix').ScorecardQCaseFix
     var V05CaseFix = require('../../lme-model-tests/plugins/V05CaseFix').V05CaseFix
+    var MVOeditorShow = require('../../lme-model-tests/MVO/MVOeditorShow').MVOeditorShow
+    var fflModel;
     $.getJSON("/branches", function(data, status, xhr) {
         $("#tags").autocomplete({source: data});
     })
     $(".toggle-expand-btn").click(function(e) {
         $(this).closest('.content .box').toggleClass('panel-fullscreen');
+    });
+    $(".toggle-info-btn").click(function(e) {
+        MVOeditorShow.on = !MVOeditorShow.on;
+        setValue(fflModel)
     });
     $(".toggle-debug-btn").click(function(e) {
 
@@ -29,7 +35,7 @@ $(document).ready(function() {
     var windowModelName = window.location.href.split('#model=')[1] || 'KSP';
     var Range = ace.require("ace/range").Range;
     var allLines = [];
-    var fflModel;
+
     var startFold = 1;
     var lastFold = 1;
 
@@ -54,6 +60,29 @@ $(document).ready(function() {
         }
     }
 
+    function setValue(fflModel) {
+        if (ConvertEvaluateAsString.on) {
+            fflModel = ConvertEvaluateAsString.parse(fflModel);
+        }
+        if (AmpersandConverter.on) {
+            fflModel = AmpersandConverter.parse(fflModel);
+        }
+        if (ScorecardQ_caseFix.on) {
+            fflModel = ScorecardQ_caseFix.parse(fflModel);
+        }
+        if (V05CaseFix.on) {
+            fflModel = V05CaseFix.parse(fflModel);
+        }
+        if (MVOeditorShow.on) {
+            fflModel = MVOeditorShow.parse(fflModel);
+        }
+        /*  allLines = fflModel.split('\n');
+          var showLines = fflModel.filter(function(el, idx) {
+              return true;
+          })*/
+        editor.setValue(fflModel);
+    }
+
     function handleModelChange() {
         var modelName = $("#models").val();
         var xhr = new XMLHttpRequest();
@@ -62,25 +91,13 @@ $(document).ready(function() {
         });
         xhr.addEventListener('load', function(e) {
             fflModel = this.responseText;
-            if (ConvertEvaluateAsString.on) {
-                fflModel = ConvertEvaluateAsString.parse(fflModel);
-            }
-            if (AmpersandConverter.on) {
-                fflModel = AmpersandConverter.parse(fflModel);
-            }
-            if (ScorecardQ_caseFix.on) {
-                fflModel = ScorecardQ_caseFix.parse(fflModel);
-            }
-            if (V05CaseFix.on) {
-                fflModel = V05CaseFix.parse(fflModel);
-            }
-            editor.setValue(fflModel);
-            allLines = fflModel.split('\n');
-            /* editor.session.removeFolds(0, true)
-             setTimeout(function() {
-                 addFolds(0)
-             }, 1)*/
+            setValue(fflModel)
 
+            //editor.session.removeFolds(0, true)
+            /*  setTimeout(function() {
+                  addFolds(0)
+              }, 1)
+  */
             editor.scrollToLine(1, true, true, function() {
             });
             editor.gotoLine(1, 1, true);
