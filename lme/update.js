@@ -83,7 +83,6 @@ app.get('/update/git/notifyCommit', function(req, res) {
 });
 
 function send(text, level) {
-    //Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW
     request.post({
             url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + process.env.HIPCHAT_API_KEY,
             json: {
@@ -128,3 +127,5 @@ function log(message, levelArg) {
     }
     console.info(message);
 }
+
+exports.send = send;

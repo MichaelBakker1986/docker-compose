@@ -1,11 +1,11 @@
-var exec = require('child-process-promise').exec;
-var log = require('ff-log');
-let hostname = require('os').hostname();
-var develop = hostname == 'michael';
+const exec = require('child-process-promise').exec;
+const log = require('ff-log');
+const hostname = require('os').hostname();
+const develop = hostname == 'michael';
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
 const write = require('fs-writefile-promise/lib/node7')
-var uuid = require('uuid4');
+const uuid = require('uuid4');
 
 class Stash {
 
@@ -15,13 +15,13 @@ class Stash {
             .then(function(filename) {
                 return Promise.all([exec('node src/exportLME_FFL.js ' + name), exec('node src/exportLME_FFL_angular.js ' + name)]).then((result) => {
                     if (develop) {
-                        console.info('<span>ffl model update:</span><a hef="http://' + hostname + ':8083/#' + name + '&' + uuid() + '">' + name + "</a><span>" + filename + '</span>');
+                        console.info('<span>ffl model update:</span><a href="http://' + hostname + ':8083/#' + name + '&' + uuid() + '">' + name + "</a><span>" + name + '</span>');
                         log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
                     }
                     let command = "git pull &&  git commit -a -m 'Update " + name + " by DEMO' && git push";
                     return exec(command).then((ok) => {
-                        console.info('<span>ffl model update:</span><a hef="http://' + hostname + ':8083/#' + name + '&' + uuid() + '">' + name + "</a><span>" + filename + '</span>');
+                        console.info('<span>ffl model update:</span><a href="http://' + hostname + ':8083/#' + name + '&' + uuid() + '">' + name + "</a><span>" + name + '</span>');
                     }).catch((err) => {
                         log.error("GIT commit failed while pushing file to repository: [" + err + "]")
                     })
