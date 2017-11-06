@@ -93,4 +93,4 @@ class Stash {
     }
 }
 
-module.exports = Stash.prototype;
+exports.Stash = new Stash();

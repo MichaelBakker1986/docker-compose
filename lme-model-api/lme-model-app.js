@@ -16,7 +16,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true,
     limit: '50mb'
 }));
-var stash = require('./src/stash');
+var stash = require('./src/stash').Stash;
+
 browserify.settings({
     transform: [require('browserify-fastjson')]
 })
