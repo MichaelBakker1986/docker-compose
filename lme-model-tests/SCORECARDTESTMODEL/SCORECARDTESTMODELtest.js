@@ -1,5 +1,5 @@
 require('../../ff-fes/exchange_modules/presentation/webexport');
-const LME = require('../../lme/src/lme');
+const LME = require('../../lme-model-api/src/lme');
 const log = require('ff-log');
 const fs = require('fs');
 const assert = require('assert');
