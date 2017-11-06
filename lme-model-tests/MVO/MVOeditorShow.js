@@ -3,6 +3,7 @@
 
 function MVOeditorShow() {
     this.on = true;
+    this.properties = true;
 }
 
 function getdepth(node, depth) {
@@ -13,6 +14,7 @@ function getdepth(node, depth) {
 }
 
 MVOeditorShow.prototype.parse = function(input) {
+    var props = this.properties;
     var parser = require('../../ff-fes/exchange_modules/ffl/FflToJsonConverter')
     var JSVisitor = require('../../ff-fes/fesjs/JSVisitor')
     var result = parser.parseFFL(input)
@@ -41,7 +43,7 @@ MVOeditorShow.prototype.parse = function(input) {
                 if (formula) {
                     var spaces = [];
                     let depth = getdepth(node, 0);
-                    let total = (node.modifier || '') + nodeName + " " + (locked ? 'locked ' : ' ') + (visible ? 'visible ' : ' ') + (required ? 'required ' : ' ');
+                    let total = (node.modifier || '') + nodeName + " " + (props ? ((locked ? 'locked ' : ' ') + (visible ? 'visible ' : ' ') + (required ? 'required ' : ' ')) : '');
                     spaces.length = (80 - total.length) - depth;
                     let prefix = [];
                     prefix.length = depth;

@@ -30,6 +30,7 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/GetT\(T,-1\)/gm, 'x.prev');
     buf = buf.replace(/GetT(T,-1,1,1)/gm, 'x.prev');
     buf = buf.replace(/FirstTInFormulaset\(Trend\)/gm, 'x.firsttrend');
+    buf = buf.replace(/LastTinFormulaSet\(Notrend,MainPeriod\)/gm, 'x.lastnotrend');
     buf = buf.replace(/\[0\]/gm, '.title ');
 
     //(& types

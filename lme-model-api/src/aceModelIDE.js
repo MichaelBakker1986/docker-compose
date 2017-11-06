@@ -17,6 +17,12 @@ $(document).ready(function() {
     $(".toggle-info-btn").click(function(e) {
         MVOeditorShow.on = !MVOeditorShow.on;
         setValue(fflModel)
+        scrollTop()
+    });
+    $(".toggle-properties-btn").click(function(e) {
+        MVOeditorShow.properties = !MVOeditorShow.properties;
+        setValue(fflModel)
+        scrollTop()
     });
     $(".toggle-debug-btn").click(function(e) {
 
@@ -38,6 +44,13 @@ $(document).ready(function() {
 
     var startFold = 1;
     var lastFold = 1;
+
+    function scrollTop() {
+        editor.scrollToLine(1, true, true, function() {
+        });
+        editor.gotoLine(1, 1, true);
+        editor.selection.moveTo(0, 0)
+    }
 
     function addFolds(idx) {
         if (allLines.length > idx) {
@@ -98,9 +111,7 @@ $(document).ready(function() {
                   addFolds(0)
               }, 1)
   */
-            editor.scrollToLine(1, true, true, function() {
-            });
-            editor.gotoLine(1, 1, true);
+            scrollTop();
 
         });
         xhr.open('GET', '/resources/' + modelName + '.ffl');
@@ -125,7 +136,7 @@ $(document).ready(function() {
         enableBasicAutocompletion: true,
         /*   enableSnippets: true,*/
         enableLiveAutocompletion: true,
-        maxLines: 44
+        maxLines: 67
     });
 
     function gotoPreview() {
