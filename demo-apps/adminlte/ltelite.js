@@ -17,11 +17,11 @@ app.get('/:id/transformFFL_LME/:model', proxy('http://' + require('os').hostname
 app.use(compression())
 app.use(serveStatic(__dirname + "/"));
 app.use(serveStatic(__dirname + "/../ExcelIDE/"));
-app.use(serveStatic(__dirname + "/../../lme/bower_components/"));
-app.use(serveStatic(__dirname + "/../../lme/public/"));
+app.use(serveStatic(__dirname + "/../../lme-model-api/bower_components/"));
+app.use(serveStatic(__dirname + "/../../lme-model-api/public/"));
 app.use(serveStatic(__dirname + "/../../lme-model-tests/plugins/"));
 app.use('/resources/', serveStatic(__dirname + "/../../ff-ssh-git/resources/"));
-app.use('/:id/web.js', browserify(__dirname + '/../../lme/src/excelModelIDE.js', {
+app.use('/:id/web.js', browserify(__dirname + '/../../lme-model-api/src/excelModelIDE.js', {
     cache: true,
     gzip: true,
     insertGlobals: true,

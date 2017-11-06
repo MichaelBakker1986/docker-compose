@@ -1,27 +1,35 @@
 const exec = require('child-process-promise').exec;
 const log = require('ff-log');
+const dns = require('dns');
 const hostname = require('os').hostname();
 const develop = hostname == 'michael';
+let host;
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
 const write = require('fs-writefile-promise/lib/node7')
 const uuid = require('uuid4');
 
 class Stash {
+    constructor() {
+        dns.lookup(hostname, (err, add, fam) => {
+            host = add;
+        })
+    }
 
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
         return Promise.all([write('../ff-ssh-git/resources/' + name + '.ffl', data)])
             .then(function(filename) {
                 return Promise.all([exec('node src/exportLME_FFL.js ' + name), exec('node src/exportLME_FFL_angular.js ' + name)]).then((result) => {
-                    if (develop) {
-                        console.info('<span>ffl model update:</span><a href="http://' + hostname + ':8083/#' + name + '&' + uuid() + '">' + name + '</a><span></span>');
-                        log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
-                        return "develop mode";
-                    }
-                    let command = "git pull &&  git commit -a -m 'Update " + name + " by DEMO' && git push";
+                    /*  if (develop) {
+                          console.info('<span>ffl model update:</span><a href="http://' + host + ':8083/#' + name + '&' + uuid() + '">' + name + '</a><span></span>');
+                          log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
+                          return "develop mode";
+                      }*/
+                    let command = 'git pull &&  git commit -a -m "Update ' + name + ' by DEMO" && git push && git rev-parse HEAD';
                     return exec(command).then((ok) => {
-                        console.info('<a href="http://' + hostname + '.finance.lab:8083/#' + name + '&' + uuid() + '">' + name + '</a><span>Updated</span>');
+                        console.info(ok.stdout)
+                        console.info('<a href="http://' + host + ':8083/#' + name + '&' + uuid() + '">' + name + '</a><span>Updated</span>');
                     }).catch((err) => {
                         log.error("GIT commit failed while pushing file to repository: [" + err + "]")
                     })
