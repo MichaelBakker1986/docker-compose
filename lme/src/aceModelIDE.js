@@ -112,7 +112,7 @@ $(document).ready(function() {
     });
 
     function gotoPreview() {
-        window.location = 'http://' + window.location.hostname + ':8083/#model=' + $("#models").val()
+        window.location = 'http://' + window.location.hostname + ':8083/#' + $("#models").val() + '&' + 'DEMO'
     }
 
     function saveDocument() {

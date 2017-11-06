@@ -14,23 +14,12 @@
     <script>
         angular.module('angapp', ['angular.filter']).controller('kspController', function($scope, $http) {
 
-            var userID = window.location.href.split('#').filter(function(el) {
-                return el.indexOf('saveToken=') != -1
-            })
-            if (userID.length == 0) {
-                userID = 'DEMO'
-            } else {
-                userID = userID[0].split('=')[1]
-            }
-            var modelName;
-            var modelNameArr = window.location.href.split('#').filter(function(el) {
-                return el.indexOf('model=') != -1
-            })
-            if (modelNameArr.length == 0) {
-                modelName = 'KSP'
-            } else {
-                modelName = modelNameArr[0].split('=')[1]
-            }
+            var params = window.location.href.split('#')
+            if (params.length == 1) window.location.href = '#MVO&DEMO'
+            var params = window.location.href.split('#')[1].split('&')
+            var modelName = params[0] || 'MVO';
+            var userID = params[1] || 'DEMO'
+
             var url = window.location.href.split("/")
             var result = url[0] + "//" + url[2].split(':')[0]
             $scope.echo = function(data) {
@@ -51,7 +40,7 @@
                     data: LMEMETA.exportData()
                 }).then(function(data) {
                     saveToken = data.data.saveToken;
-                    window.location.href = '#model=' + modelName + '#saveToken=' + saveToken
+                    window.location.href = '#' + modelName + '&' + saveToken
                     alert('Success saved data' + JSON.stringify(data))
                 }).catch(function(err) {
                     alert('Cannot save data to from [' + '/id/' + saveToken + ']')
@@ -72,7 +61,9 @@
             $http.get(liveUrl).then(function(data) {
                 eval(data.data)
                 //after this we can import the user-data....
-                $scope.LME_MODEL = LME
+                $scope.LME_MODEL = LME.nodes
+                $scope.name = LME.name
+                $scope.LMEMETA = LMEMETA;
                 $http.get('/id/' + userID).then(function(data) {
                     if (!data.data) throw Error('No data in request')
                     LMEMETA.importData(data.data.values)
@@ -231,7 +222,7 @@
 
 <section class="container">
     <section class="content-header">
-        <H1>Figure {{LME_MODEL.name}}
+        <H1>Figure {{name}}
             <small>Preview page</small>
         </H1>
     </section>
