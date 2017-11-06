@@ -83,7 +83,7 @@ angularApplication.controller('myController', function($scope, $http, $interval)
             data: LMEMETA.exportData()
         }).then(function(data) {
             saveToken = data.data.saveToken;
-            window.location.href = '#model=' + modelName + '#saveToken=' + saveToken;
+            window.location.href = '#' + modelName + '&' + saveToken;
             alert('Success saved data' + JSON.stringify(data))
         }).catch(function(err) {
             alert('Cannot save data to from [' + '/id/' + saveToken + ']');
