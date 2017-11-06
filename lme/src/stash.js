@@ -15,13 +15,13 @@ class Stash {
             .then(function(filename) {
                 return Promise.all([exec('node src/exportLME_FFL.js ' + name), exec('node src/exportLME_FFL_angular.js ' + name)]).then((result) => {
                     if (develop) {
-                        console.info('<span>ffl model update:</span><a href="http://' + hostname + ':8083/#' + name + '&' + uuid() + '">' + name + "</a><span>" + name + '</span>');
+                        console.info('<span>ffl model update:</span><a href="http://' + hostname + ':8083/#' + name + '&' + uuid() + '">' + name + '</a><span></span>');
                         log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
                     }
                     let command = "git pull &&  git commit -a -m 'Update " + name + " by DEMO' && git push";
                     return exec(command).then((ok) => {
-                        console.info('<span>ffl model update:</span><a href="http://' + hostname + ':8083/#' + name + '&' + uuid() + '">' + name + "</a><span>" + name + '</span>');
+                        console.info('<span>ffl model update:</span><a href="http://' + hostname + 'finance.lab:8083/#' + name + '&' + uuid() + '">' + name + '</a><span></span>');
                     }).catch((err) => {
                         log.error("GIT commit failed while pushing file to repository: [" + err + "]")
                     })
