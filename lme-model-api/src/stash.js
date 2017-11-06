@@ -28,8 +28,10 @@ class Stash {
                       }*/
                     let command = 'git pull &&  git commit -a -m "Update ' + name + ' by DEMO" && git push && git rev-parse HEAD';
                     return exec(command).then((ok) => {
-                        console.info(ok.stdout)
-                        console.info('<a href="http://' + host + ':8083/#' + name + '&' + uuid() + '">' + name + '</a><span>Updated</span>');
+                        var output = ok.stdout.split('\n');
+                        console.info(output[output.length - 2])
+                        const stashCommit = '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '">DIFF</a>'
+                        console.info('<a href="http://' + host + ':8083/#' + name + '&' + uuid() + '">' + name + '</a><span>Updated </span>' + stashCommit);
                     }).catch((err) => {
                         log.error("GIT commit failed while pushing file to repository: [" + err + "]")
                     })
