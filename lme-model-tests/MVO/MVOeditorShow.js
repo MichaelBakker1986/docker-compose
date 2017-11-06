@@ -42,7 +42,7 @@ MVOeditorShow.prototype.parse = function(input) {
                     var spaces = [];
                     let depth = getdepth(node, 0);
                     let total = (node.modifier || '') + nodeName + " " + (locked ? 'locked ' : ' ') + (visible ? 'visible ' : ' ') + (required ? 'required ' : ' ');
-                    spaces.length = (70 - total.length) - depth;
+                    spaces.length = (80 - total.length) - depth;
                     let prefix = [];
                     prefix.length = depth;
 
