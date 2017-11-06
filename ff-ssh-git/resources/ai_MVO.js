@@ -61930,10 +61930,10 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
       "deps": {
         "MVO_Q_MAP01_value": true
       },
-      "original": "String(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "original": "String(If(Q_MAP01[doc]==0,'1Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "index": 100087,
       "name": "MVO_Q_MAP01_INFO_value",
-      "parsed": "String(a100081('100081',x.doc,y.base,z,v)==0?'Nog niet alle verplichte vragen zijn ingevuld.':'')",
+      "parsed": "String(a100081('100081',x.doc,y.base,z,v)==0?'1Nog niet alle verplichte vragen zijn ingevuld.':'')",
       "id": 100087,
       "fflname": "Q_MAP01_INFO_value"
     },
@@ -77159,7 +77159,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
     [
       "Q_MAP01_INFO",
       "'Info bij stap 1'",
-      "String(If(Q_MAP01[doc]==0,'Nog niet alle verplichte vragen zijn ingevuld.',''))",
+      "String(If(Q_MAP01[doc]==0,'1Nog niet alle verplichte vragen zijn ingevuld.',''))",
       "",
       "",
       false,
