@@ -16,4 +16,4 @@ services:
         restart: always
         network_mode: host
         ports:
-            - 8089:8080
+            - 8080:8089
