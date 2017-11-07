@@ -17,7 +17,7 @@ app.get('/:id/transformFFL_LME/:model', proxy('http://' + require('os').hostname
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
         console.info(
-            '<a href="http://' + add + ':' + port + '/#model=KSP">Angular Grid example</a><span>|</span>\n' +
+            '<a href="http://' + add + ':' + port + '/#MVO&DEMO">Angular Grid example</a><span>|</span>\n' +
             '<a href="http://' + add + ':' + port + '/basic_example.html">Most Basic Angular example</a><span>|</span>\n' +
             '<a href="http://' + add + ':' + port + '/showcase/">Showcase example</a><span>|</span>\n' +
             '<a href="http://' + add + ':' + port + '/basic_example.html">Extended controller Angular example</a>'
