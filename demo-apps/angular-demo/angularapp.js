@@ -24,7 +24,7 @@ app.post('/id/:id', proxy('http://' + require('os').hostname() + ':8085/id/:id')
 app.get('/:id/transformFFL_LME/:model', proxy('http://' + require('os').hostname() + ':8080/:id/transformFFL_LME/:model'));
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.info('DEMO apps: '
+        console.info('<span>DEMO apps: </span>' +
             '<a href="http://' + add + ':' + port + '/#MVO&DEMO">Angular Grid example</a><span>|</span>\n' +
             '<a href="http://' + add + ':' + port + '/basic_example.html">Most Basic Angular example</a><span>|</span>\n' +
             '<a href="http://' + add + ':' + port + '/showcase/">Showcase example</a><span>|</span>\n' +
