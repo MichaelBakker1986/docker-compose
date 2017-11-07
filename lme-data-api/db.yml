@@ -19,7 +19,6 @@ services:
     adminer:
         image: adminer
         restart: always
-        network_mode: proxy
         ports:
             - 8089:8080
         expose:
