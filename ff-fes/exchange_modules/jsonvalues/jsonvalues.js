@@ -27,11 +27,11 @@ var jsonValues = {
 };
 
 function correctPropertyName(name) {
-    return name.replace(/^[^_]+_([\w]*_\w+)$/gmi, '$1');
+    return name.replace(/^([^_]+_[\w]*_\w+)$/gmi, '$1');
 }
 
 function correctFileName(name) {
-    return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
+    return name.replace(/^([^_]+_[\w]*)_\w+$/gmi, '$1');
 }
 
 function updateValues(values, docValues) {
@@ -40,7 +40,7 @@ function updateValues(values, docValues) {
         if (!docValues[obj.formulaId]) {
             docValues[obj.formulaId] = [];
         }
-        docValues[obj.formulaId][obj.colId] = obj.value;
+        docValues[obj.formulaId][parseInt(obj.colId)] = obj.value;
     }
 }
 

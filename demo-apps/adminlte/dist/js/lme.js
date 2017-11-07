@@ -21,7 +21,7 @@ function loadScript(url, callback) {
 angular.module('angapp', []).controller('kspController', function($scope) {
     var url = window.location.href.split("/")
     var result = url[0] + "//" + url[2].split(':')[0]
-    let url2 = result + ':8080/DEMO/transformFFL_LME/KSP';
+    let url2 = result + ':8080/id/DEMO/transformFFL_LME/KSP';
     console.info(url2)
     loadScript(url2, function() {
         var tree = LME.exportWebModel();

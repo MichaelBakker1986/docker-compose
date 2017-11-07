@@ -26,16 +26,16 @@ module.exports.setup = function(app) {
     /**
      * Retrieve entered values supplied by the client
      */
-    app.get('/id/:id', function(req, res) {
-        /*   Figure.orm.then((data) => {
-               Figure.Figures.findAsync({}).then((data) => {
-                   log.info(JSON.stringify(data))
-               }).catch((err) => {
-                   throw Error('Fail db lookup', err)
-               })
-           }).catch((err) => {
-               throw Error('Fail db init', err)
-           })*/
+    app.get('/id/:id/data', function(req, res) {
+        Figure.orm.then((data) => {
+            Figure.Figures.findAsync({}).then((data) => {
+                log.info(JSON.stringify(data))
+            }).catch((err) => {
+                throw Error('Fail db lookup', err)
+            })
+        }).catch((err) => {
+            throw Error('Fail db init', err)
+        })
         let entry = ds.getOrCreate(req.params.id);
         if (entry.parent) {
             ds.loadParents(ds.getOrCreate(entry.parent), entry)
@@ -45,14 +45,14 @@ module.exports.setup = function(app) {
     /**
      * Store entered values supplied by the client
      */
-    app.post('/id/:id', function(req, res) {
+    app.post('/id/:id/data', function(req, res) {
         //resolve all entered values
         var parent = ds.getOrCreate(req.params.id)
         let newChild = ds.getOrCreate(uuid());
         newChild.parent = parent.id;
         for (var i = 0; i < req.body.data.length; i++) {
             var entry = req.body.data[i]
-            newChild[entry.varName] = entry
+            newChild.values[entry.varName] = entry
         }
         res.json({
             saveToken: newChild.id

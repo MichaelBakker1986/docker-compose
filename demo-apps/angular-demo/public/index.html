@@ -10,33 +10,23 @@
     <!-- <link rel="stylesheet" href="/css/AdminLTE.min.css">-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.css"/>
     <script>
-        angular.module('angapp', ['angular.filter']).controller('kspController', function($scope, $http) {
+        angular.module('angapp', ['angular.filter']).controller('lmeController', function($scope, $http) {
 
             var params = window.location.href.split('#')
             if (params.length == 1) window.location.href = '#MVO&DEMO'
             var params = window.location.href.split('#')[1].split('&')
-            var modelName = params[0] || 'MVO';
-            var userID = params[1] || 'DEMO'
+            let modelName = params[0] || 'MVO';
+            let userID = params[1] || 'DEMO'
+            let liveUrl = 'transformFFL_LME/' + modelName + '.js'
 
-            var url = window.location.href.split("/")
-            var result = url[0] + "//" + url[2].split(':')[0]
-            $scope.echo = function(data) {
-                console.info(data)
-            }
-            $scope.goto = function(data) {
-                alert(data)
-            }
-            let liveUrl = '/' + userID + '/transformFFL_LME/KSP.js';
-            if (modelName) {
-                liveUrl = '/' + userID + '/transformFFL_LME/' + modelName + '.js'
-            }
             var saveToken = userID;
             console.info(saveToken + ':' + modelName)
             $scope.saveData = function(e) {
                 //send data to server to store
-                $http.post(result + ':8085/id/' + saveToken, {
+                $http.post('/id/' + saveToken + '/data', {
                     data: LMEMETA.exportData()
                 }).then(function(data) {
                     saveToken = data.data.saveToken;
@@ -50,12 +40,12 @@
             $scope.clicked = function(e) {
                 console.info(e)
             }
-
-            $scope.cclass = function(figure) {
-                return (figure.entered ? 'isentered' : '');
-            }
             $scope.changeSearch = function(node) {
                 $scope.search = node.path + '.' + node.id
+            }
+
+            function correctFileName(name) {
+                return name.replace(/^[^_]+_*([\w]*_\w+)$/gmi, '$1');
             }
 
             $http.get(liveUrl).then(function(data) {
@@ -64,9 +54,17 @@
                 $scope.LME_MODEL = LME.nodes
                 $scope.name = LME.name
                 $scope.LMEMETA = LMEMETA;
-                $http.get('/id/' + userID).then(function(data) {
+                $http.get('data').then(function(data) {
                     if (!data.data) throw Error('No data in request')
-                    LMEMETA.importData(data.data.values)
+                    console.info(data.data.values)
+                    for (var key in data.data.values) {
+                        console.info(correctFileName(key))
+                        let dataObject = data.data.values[key];
+                        console.info(dataObject)
+                        console.info(correctFileName(key) + ":" + (parseInt(dataObject.colId) - 2))
+                        LME.nodes[correctFileName(key)].cols[parseInt(dataObject.colId) - 2].value = dataObject.value
+                    }
+                    // LMEMETA.importData(data.data.values)
                 }).catch(function(err) {
                     alert('Cannot load saved data. from [' + '/id/' + userID + ']')
                     console.error(err)
@@ -159,7 +157,7 @@
             white-space: nowrap;
         }
 
-        input.isentered {
+        .isentered input {
             border-left: 2px solid #000;
             border-right: 1px solid #ccc;
             color: #1A3485;
@@ -217,35 +215,37 @@
         }
     </style>
 </head>
-<body ng-controller="kspController">
-
-
-<section class="container">
-    <section class="content-header">
-        <H1>Figure {{name}}
-            <small>Preview page</small>
-        </H1>
-    </section>
-    <section>
-        <div class="container">
+<body ng-controller="lmeController">
+<div class="container">
+    <div class="row">
+        <section class="content-header">
+            <H1>Figure {{name}}
+                <small>Preview page</small>
+            </H1>
+        </section>
+        <div class="col-xs-1" ng-controller="graphController">
+            <canvas id="gitGraph"></canvas>
+            <script src="lmegraph.js"></script>
+        </div>
+        <div class="col-xs-11">
             <div class="row">
                 <div class="col-xs-2">
-                    <input type="text" ng-model="search" placeholder="Search figure"/>
+                    <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
                     <ul class="list-group" ng-repeat="f in LME_MODEL | pick:'children.length > 1 && path.endsWith(\'Q_ROOT\')'" ng-if="f.visible">
                         <li class="list-group-item" ng-click="changeSearch(f)" ng-bind="f.title"></li>
                     </ul>
                 </div>
-                <div class="col-xs-19">
+                <div class="col-xs-10">
                     <table ng-click="clicked($event)" class="lmetable">
                         <tr ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search | first: 200" ng-if="f.visible">
                             <td><i ng-if="f.tuple" class="fa fa-caret-right"></i></td>
                             <td class="txttd"><span contenteditable="true" ng-bind="f.title" ng-class="'text ' + (f.required?'required':'')"></span></td>
-                            <td ng-click="goto(f)"><i ng-class=" f.hint ? 'fa fa-info' : 'icon' " title="{{f.hint}}">
+                            <td><i ng-class=" f.hint ? 'fa fa-info' : 'icon' " title="{{f.hint}}">
                             </i></td>
                             <td ng-repeat="cv in f.cols" colspan="{{f.colspan}}" ng-switch="f.type">
-                                <div class="input-group" ng-init="pid = $index">
+                                <div class="input-group" ng-init="pid = $index" ng-class="cv.entered ? 'isentered' : undefined">
                                     <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
-                                    <select ng-switch-when="select" class="form-control" ng-model="cv.value" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" placeholder="Pick value">
+                                    <select ng-switch-when="select" class="form-control" ng-model="cv.value" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" placeholder="Pick value">
                                         <option ng-repeat="choice in f.choices" ng-selected="choice.name == cv.value">{{choice.value}}</option>
                                     </select>
                                     <div ng-switch-when="radio" class="btn-group" data-toggle="buttons">
@@ -254,8 +254,9 @@
                                             <i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i><span>{{choice.value}}</span>
                                         </label>
                                     </div>
-                                    <textarea ng-switch-when="memo" rows="4" class="form-control" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder=""></textarea>
-                                    <input ng-switch-default type="text" class="form-control" ng-class="cclass(cv)" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder="">
+                                    <textarea ng-switch-when="memo" rows="4" class="form-control" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value"
+                                              placeholder=""></textarea>
+                                    <input ng-switch-default type="text" class="form-control" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder="">
                                     <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
                                 </div>
                             </td>
@@ -264,15 +265,13 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="content-header">
-        <div class="row">
+        <div class="container">
             <a ng-click="saveData()" class="col-md-12 btn btn-app" data-toggle="modal" data-target="#modal-success">
                 <i class="fa fa-save"></i>
                 Save
             </a>
         </div>
-    </section>
-</section>
+    </div>
+</div>
 </body>
 </html>

@@ -50,5 +50,13 @@ assert.equal(ZeroFixedDecimal.value.countDecimals(), 0);
 assert.equal(EvaluateStringTitle.title, Total.title, 'Testing EvaluateStringTitle.title failed. ["' + EvaluateStringTitle.title + '"], it should be the same as Total.title ["' + Total.title + '"] ["' + EvaluateStringTitle.title + " == " + Total.title + '"]')
 assert.ok(VariableOne.entered)
 assert.ok(!Total.entered)
-log.debug(newModel.exportData())
+let exportData = newModel.exportData();
+log.debug(exportData)
+newModel.importData([{
+    "varName": "TESTMODEL_VariableOne",
+    "colId": "2",
+    "value": 1000,
+    "formulaId": "100004"
+}])
+let exportDataAfter = newModel.exportData();
 log.debug('Tests passed');

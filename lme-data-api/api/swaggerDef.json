@@ -14,7 +14,7 @@
   "host": "::8085",
   "basePath": "/",
   "paths": {
-    "/id/{id}": {
+    "/id/{id}/data": {
       "get": {
         "summary": "Retrieve all values identified by {id}.",
         "operationId": "idRetrieveFigures",

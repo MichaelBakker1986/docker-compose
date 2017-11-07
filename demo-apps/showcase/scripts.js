@@ -3,7 +3,7 @@ var angularApplication = angular.module('angularapp', ['angular.filter']);
 
 //create an angular controller
 angularApplication.controller('myController', function($scope, $http, $interval) {
-    var url = '/DEMO/transformFFL_LME/';
+    var url = '/id/DEMO/transformFFL_LME/';
     $http.get(url + 'MVO.js').then(function(data) {
         //load sync dynamic javascript file
         eval(data.data)

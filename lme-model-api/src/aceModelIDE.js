@@ -2,11 +2,11 @@
  * editor variable is set to the window.
  */
 $(document).ready(function() {
-    var ConvertEvaluateAsString = require('../../lme-model-tests/plugins/ConvertEvaluateAsString').ConvertEvaluateAsString
-    var AmpersandConverter = require('../../lme-model-tests/plugins/AmpersandConverter').AmpersandConverter
-    var ScorecardQ_caseFix = require('../../lme-model-tests/plugins/ScorecardQ_caseFix').ScorecardQCaseFix
-    var V05CaseFix = require('../../lme-model-tests/plugins/V05CaseFix').V05CaseFix
-    var MVOeditorShow = require('../../lme-model-tests/MVO/MVOeditorShow').MVOeditorShow
+    var ConvertEvaluateAsString = require('../../model-tests/plugins/ConvertEvaluateAsString').ConvertEvaluateAsString
+    var AmpersandConverter = require('../../model-tests/plugins/AmpersandConverter').AmpersandConverter
+    var ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix').ScorecardQCaseFix
+    var V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
+    var MVOeditorShow = require('../../model-tests/MVO/MVOeditorShow').MVOeditorShow
     var fflModel;
     var windowModelName = window.location.href.split('#model=')[1] || 'KSP';
     $("#models").val(windowModelName)
@@ -147,11 +147,11 @@ $(document).ready(function() {
 
 
     function gotoPreview() {
-        window.location = 'http://' + window.location.hostname + ':8083/#' + $("#models").val() + '&' + 'DEMO'
+        window.location = 'http://' + window.location.hostname + ':8083/id/DEMO/#' + $("#models").val() + '&' + 'DEMO'
     }
 
     function saveDocument() {
-        $.post("/DEMO/saveFFL_LME", {
+        $.post("saveFFL_LME", {
             model: $("#models").val(),
             data: editor.getSession().getValue()
         }, function(data) {

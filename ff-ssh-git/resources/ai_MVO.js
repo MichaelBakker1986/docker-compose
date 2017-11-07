@@ -278,7 +278,7 @@ var AST = {
     cloneAST: cloneAST
 }
 module.exports = AST;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ast-node-utils/AST.js","/../ast-node-utils",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ast-node-utils\\AST.js","/..\\ast-node-utils",undefined)
 },{"_process":81,"buffer":78}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 function walkAst(func, info, parent, node) {
@@ -300,12 +300,12 @@ function walkAst(func, info, parent, node) {
     }
 }
 module.exports = walkAst;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ast-node-utils/ASTVisitor.js","/../ast-node-utils",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ast-node-utils\\ASTVisitor.js","/..\\ast-node-utils",undefined)
 },{"_process":81,"buffer":78}],3:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 exports.ast = require('./AST')
 exports.astWalk = require('./ASTVisitor')
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ast-node-utils/index.js","/../ast-node-utils",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ast-node-utils\\index.js","/..\\ast-node-utils",undefined)
 },{"./AST":1,"./ASTVisitor":2,"_process":81,"buffer":78}],4:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var assert = require('assert');
@@ -550,7 +550,7 @@ FflToJsonConverter.prototype.deparseRegex = function(input) {
 }
 FflToJsonConverter.prototype.parseRegex = FinFormula.parseFormula;
 module.exports = FflToJsonConverter.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/ffl/FflToJsonConverter.js","/../ff-fes/exchange_modules/ffl",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\ffl\\FflToJsonConverter.js","/..\\ff-fes\\exchange_modules\\ffl",undefined)
 },{"../../fesjs/JSVisitor":15,"./FinFormula":5,"_process":81,"assert":75,"buffer":78,"ff-log":37,"stack-adt":38}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //http://excelformulabeautifier.com/
@@ -585,6 +585,7 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/GetT\(T,-1\)/gm, 'x.prev');
     buf = buf.replace(/GetT(T,-1,1,1)/gm, 'x.prev');
     buf = buf.replace(/FirstTInFormulaset\(Trend\)/gm, 'x.firsttrend');
+    buf = buf.replace(/LastTinFormulaSet\(Notrend,MainPeriod\)/gm, 'x.lastnotrend');
     buf = buf.replace(/\[0\]/gm, '.title ');
 
     //(& types
@@ -699,7 +700,7 @@ FinFormula.prototype.fixCasing = function(buf) {
     })
 };
 module.exports = FinFormula.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/ffl/FinFormula.js","/../ff-fes/exchange_modules/ffl",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\ffl\\FinFormula.js","/..\\ff-fes\\exchange_modules\\ffl",undefined)
 },{"_process":81,"buffer":78}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var JSVisitor = require('../../fesjs/JSVisitor');
@@ -1034,7 +1035,7 @@ function parseFFLFormula(formula, node, row) {
 }
 
 SolutionFacade.addParser(FFLParser.prototype);
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/ffl/fflparser.js","/../ff-fes/exchange_modules/ffl",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\ffl\\fflparser.js","/..\\ff-fes\\exchange_modules\\ffl",undefined)
 },{"../../../ast-node-utils/index":3,"../../fesjs/JSVisitor":15,"../../fesjs/SolutionFacade.js":20,"./FflToJsonConverter":4,"./FinFormula.js":5,"_process":81,"buffer":78,"esprima":77,"ff-log":37}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -1066,11 +1067,11 @@ var jsonValues = {
 };
 
 function correctPropertyName(name) {
-    return name.replace(/^[^_]+_([\w]*_\w+)$/gmi, '$1');
+    return name.replace(/^([^_]+_[\w]*_\w+)$/gmi, '$1');
 }
 
 function correctFileName(name) {
-    return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
+    return name.replace(/^([^_]+_[\w]*)_\w+$/gmi, '$1');
 }
 
 function updateValues(values, docValues) {
@@ -1079,12 +1080,12 @@ function updateValues(values, docValues) {
         if (!docValues[obj.formulaId]) {
             docValues[obj.formulaId] = [];
         }
-        docValues[obj.formulaId][obj.colId] = obj.value;
+        docValues[obj.formulaId][parseInt(obj.colId)] = obj.value;
     }
 }
 
 SolutionFacade.addParser(jsonValues)
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/jsonvalues/jsonvalues.js","/../ff-fes/exchange_modules/jsonvalues",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\jsonvalues\\jsonvalues.js","/..\\ff-fes\\exchange_modules\\jsonvalues",undefined)
 },{"../../fesjs/SolutionFacade":20,"_process":81,"buffer":78}],8:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var SolutionFacade = require('../../fesjs/SolutionFacade.js')
@@ -1194,7 +1195,7 @@ LMEParser.prototype.deParse = function(rowId, workbook) {
 }
 SolutionFacade.addParser(LMEParser.prototype);
 exports.LMEParser = LMEParser.prototype
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/lme/lmeparser.js","/../ff-fes/exchange_modules/lme",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\lme\\lmeparser.js","/..\\ff-fes\\exchange_modules\\lme",undefined)
 },{"../../fesjs/FormulaService.js":13,"../../fesjs/FunctionMap.js":14,"../../fesjs/PropertiesAssembler.js":18,"../../fesjs/SolutionFacade.js":20,"_process":81,"buffer":78,"ff-log":37}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var SolutionFacade = require('../../fesjs/SolutionFacade');
@@ -1352,7 +1353,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExport())
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/exchange_modules/presentation/webexport.js","/../ff-fes/exchange_modules/presentation",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\presentation\\webexport.js","/..\\ff-fes\\exchange_modules\\presentation",undefined)
 },{"../../fesjs/SolutionFacade":20,"_process":81,"buffer":78}],10:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var assert = require("assert")
@@ -1565,7 +1566,7 @@ simplified.min = simplified.Min;
 simplified.max = simplified.Max;
 simplified.ABS = simplified.Abs;
 module.exports = simplified;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/ASTPreparser.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\ASTPreparser.js","/..\\ff-fes\\fesjs",undefined)
 },{"../../ast-node-utils/index":3,"_process":81,"assert":75,"buffer":78,"escodegen":77,"ff-log":37}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -1709,7 +1710,7 @@ FESFacade.updateValueMap = function(values) {
 FESFacade.visit = PropertiesAssembler.visitProperty;
 FESFacade.findAllInSolution = PropertiesAssembler.findAllInSolution;
 module.exports = FESFacade;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/FESFacade.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\FESFacade.js","/..\\ff-fes\\fesjs",undefined)
 },{"./FormulaService":13,"./FunctionMap":14,"./PropertiesAssembler":18,"_process":81,"buffer":78,"ff-log":37}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -2119,32 +2120,38 @@ function buildFormula(formulaInfo, parent, node) {
             node.name = 'x';
         }
         //zAxis Reference, base period, z.base
-        if (node.name === 'MainPeriod') {
+        else if (node.name === 'MainPeriod') {
             node.name = 'z';
         }
         //
-        if (node.name === 'MaxT') {
+        else if (node.name === 'MaxT') {
             node.name = 'x';
         }
-        if (node.name === 'TsY') {
+        else if (node.name === 'TsY') {
             node.name = 'x';
         }
         //xAxisReference x.trend
-        if (node.name === 'Trend') {
+        else if (node.name === 'Trend') {
             node.name = 'x';
         }
         //xAsReference x.notrend
-        if (node.name === 'NoTrend') {
+        else if (node.name === 'NoTrend') {
             node.name = 'x';
         }
         //x.trend.lastbkyr
-        if (node.name === 'LastHistYear') {
+        else if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
         //x.trend.lastbkyr
-        if (node.name === 'LastHistYear') {
+        else if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
+ /*       else if (node.name === 'lastnotrend') {
+            node.name = 'lastnotrend';
+        }
+        else if (node.name === 'lastnotrend') {
+            node.name = 'lastnotrend';
+        }*/
         //should return the x.index.
         else if (node.name === 't') {
             log.warn('invalid t parsing [%s]', formulaInfo)
@@ -2215,7 +2222,7 @@ FormulaBootstrap.prototype.initStateBootstrap = function(configs) {
     }
 };
 module.exports = FormulaBootstrap.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/FormulaBootstrap.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\FormulaBootstrap.js","/..\\ff-fes\\fesjs",undefined)
 },{"../../ast-node-utils/index":3,"./ASTPreparser":10,"_process":81,"assert":75,"buffer":78,"escodegen":77,"esprima":77,"ff-log":37}],13:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var log = require('ff-log');
@@ -2380,7 +2387,7 @@ FormulaService.prototype.moveFormula = function (old, newFormula) {
     }
 }
 module.exports = FormulaService.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/FormulaService.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\FormulaService.js","/..\\ff-fes\\fesjs",undefined)
 },{"../../ast-node-utils/index":3,"_process":81,"assert":75,"buffer":78,"escodegen":77,"ff-log":37}],14:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var log = require('ff-log')
@@ -2474,7 +2481,7 @@ fm.prototype.moveFunction = function(oldFormula, newFormula) {
     }
 };
 module.exports = fm.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/FunctionMap.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\FunctionMap.js","/..\\ff-fes\\fesjs",undefined)
 },{"_process":81,"buffer":78,"ff-log":37}],15:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -2648,7 +2655,7 @@ module.exports = {
     find: find,
     findPredicate: findPredicate
 };
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/JSVisitor.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\JSVisitor.js","/..\\ff-fes\\fesjs",undefined)
 },{"_process":81,"buffer":78}],16:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -2944,7 +2951,7 @@ JSWorkBook.prototype.getAllValues = function() {
     return FESFacade.getAllValues(this.context.values);
 };
 module.exports = JSWorkBook;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/JSWorkBook.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\JSWorkBook.js","/..\\ff-fes\\fesjs",undefined)
 },{"../../ast-node-utils/index":3,"./FESFacade":11,"./SolutionFacade":20,"./XAxis":22,"./YAxis":23,"_process":81,"buffer":78,"ff-log":37}],17:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -2974,7 +2981,7 @@ ParserService.prototype.findParser = function (parserName) {
     return parsers[parserName];
 }
 module.exports = ParserService.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/ParserService.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\ParserService.js","/..\\ff-fes\\fesjs",undefined)
 },{"_process":81,"buffer":78}],18:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 function PropertiesAssembler() {
@@ -3159,7 +3166,7 @@ function visitInternal(node, func, depth) {
 PropertiesAssembler.prototype.getRootProperty = getRootNode;
 PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 module.exports = PropertiesAssembler.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/PropertiesAssembler.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\PropertiesAssembler.js","/..\\ff-fes\\fesjs",undefined)
 },{"_process":81,"buffer":78}],19:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -3291,7 +3298,7 @@ Solution.prototype.size = function () {
     return this.nodes.length;
 }
 module.exports = Solution;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/Solution.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\Solution.js","/..\\ff-fes\\fesjs",undefined)
 },{"_process":81,"buffer":78}],20:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -3440,7 +3447,7 @@ SolutionFacade.prototype.properties = {
 SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex;
 FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
 module.exports = SolutionFacade.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/SolutionFacade.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\SolutionFacade.js","/..\\ff-fes\\fesjs",undefined)
 },{"./FormulaBootstrap":12,"./FormulaService":13,"./FunctionMap":14,"./ParserService":17,"./PropertiesAssembler":18,"./Solution":19,"_process":81,"buffer":78,"esprima":77,"ff-log":37}],21:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 function TupleIndexConverter() {
@@ -3457,7 +3464,7 @@ TupleIndexConverter.prototype.getIndexNumber = function (context, tupleindex, va
 };
 module.exports = TupleIndexConverter.prototype;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/TupleIndexConverter.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\TupleIndexConverter.js","/..\\ff-fes\\fesjs",undefined)
 },{"_process":81,"buffer":78}],22:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* 
@@ -3863,7 +3870,7 @@ CalculationDocument.prototype = calculateCalculationDocument(importData);
 // tricks here.. but possible from here only prevbkyear, might consider removing *[agg*], only keep the *[top*]
 // currently we have max7 year 10timelines
 module.exports = CalculationDocument.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/XAxis.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\XAxis.js","/..\\ff-fes\\fesjs",undefined)
 },{"_process":81,"buffer":78,"ff-log":37}],23:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -3940,7 +3947,7 @@ TINSTANCEBYNAME = function(v, fId, y, name) {
 //17bit for tuples, 8*8*8*8 (16bit)
 //when entering tuple in tuple y.children should be called.
 module.exports = all;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/YAxis.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\YAxis.js","/..\\ff-fes\\fesjs",undefined)
 },{"_process":81,"buffer":78}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //app scope context
@@ -3973,7 +3980,7 @@ Context.prototype.getValues = function() {
 }
 module.exports = Context
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/fesjs/fescontext.js","/../ff-fes/fesjs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\fesjs\\fescontext.js","/..\\ff-fes\\fesjs",undefined)
 },{"_process":81,"buffer":78}],25:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* jshint node: true */
@@ -4118,7 +4125,7 @@ exports.JSWorkbook = WorkBook;
 exports.LMEContext = WorkBook;
 exports.fesjs = FESApi.prototype;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/ff-fes.js","/../ff-fes",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\ff-fes.js","/..\\ff-fes",undefined)
 },{"./exchange_modules/ffl/fflparser":6,"./fesjs/JSWorkBook":16,"./fesjs/TupleIndexConverter":21,"./fesjs/fescontext":24,"_process":81,"buffer":78,"ff-log":37}],26:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -4308,7 +4315,7 @@ for (var map in colors.maps) {
 }
 
 defineProps(colors, init());
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/colors/lib/colors.js","/../ff-fes/node_modules/colors/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\colors\\lib\\colors.js","/..\\ff-fes\\node_modules\\colors\\lib",undefined)
 },{"./custom/trap":27,"./custom/zalgo":28,"./maps/america":29,"./maps/rainbow":30,"./maps/random":31,"./maps/zebra":32,"./styles":33,"./system/supports-colors":34,"_process":81,"buffer":78}],27:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 module['exports'] = function runTheTrap (text, options) {
@@ -4357,7 +4364,7 @@ module['exports'] = function runTheTrap (text, options) {
 
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/colors/lib/custom/trap.js","/../ff-fes/node_modules/colors/lib/custom",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\colors\\lib\\custom\\trap.js","/..\\ff-fes\\node_modules\\colors\\lib\\custom",undefined)
 },{"_process":81,"buffer":78}],28:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // please no
@@ -4465,7 +4472,7 @@ module['exports'] = function zalgo(text, options) {
   return heComes(text, options);
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/colors/lib/custom/zalgo.js","/../ff-fes/node_modules/colors/lib/custom",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\colors\\lib\\custom\\zalgo.js","/..\\ff-fes\\node_modules\\colors\\lib\\custom",undefined)
 },{"_process":81,"buffer":78}],29:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
@@ -4480,7 +4487,7 @@ module['exports'] = (function() {
     }
   }
 })();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/colors/lib/maps/america.js","/../ff-fes/node_modules/colors/lib/maps",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\colors\\lib\\maps\\america.js","/..\\ff-fes\\node_modules\\colors\\lib\\maps",undefined)
 },{"../colors":26,"_process":81,"buffer":78}],30:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
@@ -4497,7 +4504,7 @@ module['exports'] = (function () {
 })();
 
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/colors/lib/maps/rainbow.js","/../ff-fes/node_modules/colors/lib/maps",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\colors\\lib\\maps\\rainbow.js","/..\\ff-fes\\node_modules\\colors\\lib\\maps",undefined)
 },{"../colors":26,"_process":81,"buffer":78}],31:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
@@ -4508,7 +4515,7 @@ module['exports'] = (function () {
     return letter === " " ? letter : colors[available[Math.round(Math.random() * (available.length - 1))]](letter);
   };
 })();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/colors/lib/maps/random.js","/../ff-fes/node_modules/colors/lib/maps",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\colors\\lib\\maps\\random.js","/..\\ff-fes\\node_modules\\colors\\lib\\maps",undefined)
 },{"../colors":26,"_process":81,"buffer":78}],32:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
@@ -4516,7 +4523,7 @@ var colors = require('../colors');
 module['exports'] = function (letter, i, exploded) {
   return i % 2 === 0 ? letter : colors.inverse(letter);
 };
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/colors/lib/maps/zebra.js","/../ff-fes/node_modules/colors/lib/maps",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\colors\\lib\\maps\\zebra.js","/..\\ff-fes\\node_modules\\colors\\lib\\maps",undefined)
 },{"../colors":26,"_process":81,"buffer":78}],33:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -4596,7 +4603,7 @@ Object.keys(codes).forEach(function (key) {
   style.open = '\u001b[' + val[0] + 'm';
   style.close = '\u001b[' + val[1] + 'm';
 });
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/colors/lib/styles.js","/../ff-fes/node_modules/colors/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\colors\\lib\\styles.js","/..\\ff-fes\\node_modules\\colors\\lib",undefined)
 },{"_process":81,"buffer":78}],34:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -4660,7 +4667,7 @@ module.exports = (function () {
 
   return false;
 })();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/colors/lib/system/supports-colors.js","/../ff-fes/node_modules/colors/lib/system",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\colors\\lib\\system\\supports-colors.js","/..\\ff-fes\\node_modules\\colors\\lib\\system",undefined)
 },{"_process":81,"buffer":78}],35:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //
@@ -4672,7 +4679,7 @@ module.exports = (function () {
 //
 var colors = require('./lib/colors');
 module['exports'] = colors;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/colors/safe.js","/../ff-fes/node_modules/colors",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\colors\\safe.js","/..\\ff-fes\\node_modules\\colors",undefined)
 },{"./lib/colors":26,"_process":81,"buffer":78}],36:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -4902,7 +4909,7 @@ function kindOf(val) {
   }
 })(this);
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/dateformat/lib/dateformat.js","/../ff-fes/node_modules/dateformat/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\dateformat\\lib\\dateformat.js","/..\\ff-fes\\node_modules\\dateformat\\lib",undefined)
 },{"_process":81,"buffer":78}],37:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var tracer = require('tracer');
@@ -4941,7 +4948,7 @@ console.INFO = levels[logLevel].INFO;
 console.TRACE = levels[logLevel].TRACE;
 module.exports = console;
 exports = console;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/ff-log/ff-log.js","/../ff-fes/node_modules/ff-log",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\ff-log\\ff-log.js","/..\\ff-fes\\node_modules\\ff-log",undefined)
 },{"_process":81,"buffer":78,"tracer":44}],38:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
@@ -5033,7 +5040,7 @@ exports = console;
     }
 })();
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/stack-adt/dist/stack-adt.js","/../ff-fes/node_modules/stack-adt/dist",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\stack-adt\\dist\\stack-adt.js","/..\\ff-fes\\node_modules\\stack-adt\\dist",undefined)
 },{"_process":81,"buffer":78}],39:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 module.exports = require('./tinytim');
@@ -5092,7 +5099,7 @@ module.exports.renderFile = function(path, vars, useCache) {
 	return module.exports.render(str, vars);
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/tinytim/lib/index.js","/../ff-fes/node_modules/tinytim/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\tinytim\\lib\\index.js","/..\\ff-fes\\node_modules\\tinytim\\lib",undefined)
 },{"./tinytim":40,"_process":81,"buffer":78,"fs":77}],40:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
@@ -5146,7 +5153,7 @@ var tim = exports.tim = (function(){
     };
 }());
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/tinytim/lib/tinytim.js","/../ff-fes/node_modules/tinytim/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\tinytim\\lib\\tinytim.js","/..\\ff-fes\\node_modules\\tinytim\\lib",undefined)
 },{"_process":81,"buffer":78}],41:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -5164,7 +5171,7 @@ module.exports = function(conf) {
 	}, conf);
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/tracer/lib/color_console.js","/../ff-fes/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\tracer\\lib\\color_console.js","/..\\ff-fes\\node_modules\\tracer\\lib",undefined)
 },{"./console":42,"_process":81,"buffer":78,"colors/safe":35}],42:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -5309,7 +5316,7 @@ module.exports = (function() {
 	return _self;
 });
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/tracer/lib/console.js","/../ff-fes/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\tracer\\lib\\console.js","/..\\ff-fes\\node_modules\\tracer\\lib",undefined)
 },{"./settings":45,"./utils":46,"_process":81,"buffer":78,"dateformat":36,"path":80,"tinytim":39}],43:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -5392,7 +5399,7 @@ module.exports = function (conf) {
     }
     return require('./console')(conf);
 };
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/tracer/lib/dailyfile.js","/../ff-fes/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\tracer\\lib\\dailyfile.js","/..\\ff-fes\\node_modules\\tracer\\lib",undefined)
 },{"./console":42,"./utils":46,"_process":81,"buffer":78,"child_process":77,"dateformat":36,"fs":77,"path":80,"tinytim":39}],44:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -5406,7 +5413,7 @@ exports.close = settings.close;
 exports.setLevel = settings.setLevel;
 exports.getLevel = settings.getLevel;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/tracer/lib/index.js","/../ff-fes/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\tracer\\lib\\index.js","/..\\ff-fes\\node_modules\\tracer\\lib",undefined)
 },{"./color_console":41,"./console":42,"./dailyfile":43,"./settings":45,"_process":81,"buffer":78}],45:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -5435,7 +5442,7 @@ exports.close = close;
 exports.setLevel = setLevel;
 exports.getLevel = getLevel;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/tracer/lib/settings.js","/../ff-fes/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\tracer\\lib\\settings.js","/..\\ff-fes\\node_modules\\tracer\\lib",undefined)
 },{"_process":81,"buffer":78}],46:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -5497,7 +5504,7 @@ exports.format = function(f) {
 	return str;
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-fes/node_modules/tracer/lib/utils.js","/../ff-fes/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\node_modules\\tracer\\lib\\utils.js","/..\\ff-fes\\node_modules\\tracer\\lib",undefined)
 },{"_process":81,"buffer":78,"util":84}],47:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -5518,7 +5525,7 @@ exports.formulajs = {
     name: 'formulaJs',
     entries: entries
 }
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/ff-formulajs.js","/../ff-formulajs",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\ff-formulajs.js","/..\\ff-formulajs",undefined)
 },{"_process":81,"buffer":78,"ff-log":52,"formulajs":48}],48:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -13230,7 +13237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/node_modules/formulajs/dist/formula.js","/../ff-formulajs/node_modules/formulajs/dist",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\node_modules\\formulajs\\dist\\formula.js","/..\\ff-formulajs\\node_modules\\formulajs\\dist",undefined)
 },{"_process":81,"buffer":78,"jStat":49,"numeral":50,"numeric":51}],49:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 this.j$ = this.jStat = (function(Math, undefined) {
@@ -16488,7 +16495,7 @@ jStat.extend(jStat.fn, {
 
 }(this.jStat, Math));
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/node_modules/jStat/dist/jstat.js","/../ff-formulajs/node_modules/jStat/dist",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\node_modules\\jStat\\dist\\jstat.js","/..\\ff-formulajs\\node_modules\\jStat\\dist",undefined)
 },{"_process":81,"buffer":78}],50:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
@@ -17171,7 +17178,7 @@ jStat.extend(jStat.fn, {
     }
 }).call(this);
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/node_modules/numeral/numeral.js","/../ff-formulajs/node_modules/numeral",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\node_modules\\numeral\\numeral.js","/..\\ff-formulajs\\node_modules\\numeral",undefined)
 },{"_process":81,"buffer":78}],51:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -21599,7 +21606,7 @@ numeric.svd= function svd(A) {
 };
 
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/node_modules/numeric/numeric-1.2.6.js","/../ff-formulajs/node_modules/numeric",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\node_modules\\numeric\\numeric-1.2.6.js","/..\\ff-formulajs\\node_modules\\numeric",undefined)
 },{"_process":81,"buffer":78}],52:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var tracer = require('tracer');
@@ -21638,7 +21645,7 @@ console.INFO = levels[logLevel].INFO;
 console.TRACE = levels[logLevel].TRACE;
 module.exports = console;
 exports = console;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-formulajs/node_modules/ff-log/ff-log.js","/../ff-formulajs/node_modules/ff-log",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-formulajs\\node_modules\\ff-log\\ff-log.js","/..\\ff-formulajs\\node_modules\\ff-log",undefined)
 },{"_process":81,"buffer":78,"tracer":69}],53:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -21828,7 +21835,7 @@ for (var map in colors.maps) {
 }
 
 defineProps(colors, init());
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/colors/lib/colors.js","/../ff-log/node_modules/colors/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\colors\\lib\\colors.js","/..\\ff-log\\node_modules\\colors\\lib",undefined)
 },{"./custom/trap":54,"./custom/zalgo":55,"./maps/america":56,"./maps/rainbow":57,"./maps/random":58,"./maps/zebra":59,"./styles":60,"./system/supports-colors":61,"_process":81,"buffer":78}],54:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 module['exports'] = function runTheTrap (text, options) {
@@ -21877,7 +21884,7 @@ module['exports'] = function runTheTrap (text, options) {
 
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/colors/lib/custom/trap.js","/../ff-log/node_modules/colors/lib/custom",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\colors\\lib\\custom\\trap.js","/..\\ff-log\\node_modules\\colors\\lib\\custom",undefined)
 },{"_process":81,"buffer":78}],55:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // please no
@@ -21985,7 +21992,7 @@ module['exports'] = function zalgo(text, options) {
   return heComes(text, options);
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/colors/lib/custom/zalgo.js","/../ff-log/node_modules/colors/lib/custom",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\colors\\lib\\custom\\zalgo.js","/..\\ff-log\\node_modules\\colors\\lib\\custom",undefined)
 },{"_process":81,"buffer":78}],56:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
@@ -22000,7 +22007,7 @@ module['exports'] = (function() {
     }
   }
 })();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/colors/lib/maps/america.js","/../ff-log/node_modules/colors/lib/maps",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\colors\\lib\\maps\\america.js","/..\\ff-log\\node_modules\\colors\\lib\\maps",undefined)
 },{"../colors":53,"_process":81,"buffer":78}],57:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
@@ -22017,7 +22024,7 @@ module['exports'] = (function () {
 })();
 
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/colors/lib/maps/rainbow.js","/../ff-log/node_modules/colors/lib/maps",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\colors\\lib\\maps\\rainbow.js","/..\\ff-log\\node_modules\\colors\\lib\\maps",undefined)
 },{"../colors":53,"_process":81,"buffer":78}],58:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
@@ -22028,7 +22035,7 @@ module['exports'] = (function () {
     return letter === " " ? letter : colors[available[Math.round(Math.random() * (available.length - 1))]](letter);
   };
 })();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/colors/lib/maps/random.js","/../ff-log/node_modules/colors/lib/maps",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\colors\\lib\\maps\\random.js","/..\\ff-log\\node_modules\\colors\\lib\\maps",undefined)
 },{"../colors":53,"_process":81,"buffer":78}],59:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var colors = require('../colors');
@@ -22036,7 +22043,7 @@ var colors = require('../colors');
 module['exports'] = function (letter, i, exploded) {
   return i % 2 === 0 ? letter : colors.inverse(letter);
 };
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/colors/lib/maps/zebra.js","/../ff-log/node_modules/colors/lib/maps",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\colors\\lib\\maps\\zebra.js","/..\\ff-log\\node_modules\\colors\\lib\\maps",undefined)
 },{"../colors":53,"_process":81,"buffer":78}],60:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -22116,7 +22123,7 @@ Object.keys(codes).forEach(function (key) {
   style.open = '\u001b[' + val[0] + 'm';
   style.close = '\u001b[' + val[1] + 'm';
 });
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/colors/lib/styles.js","/../ff-log/node_modules/colors/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\colors\\lib\\styles.js","/..\\ff-log\\node_modules\\colors\\lib",undefined)
 },{"_process":81,"buffer":78}],61:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -22180,7 +22187,7 @@ module.exports = (function () {
 
   return false;
 })();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/colors/lib/system/supports-colors.js","/../ff-log/node_modules/colors/lib/system",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\colors\\lib\\system\\supports-colors.js","/..\\ff-log\\node_modules\\colors\\lib\\system",undefined)
 },{"_process":81,"buffer":78}],62:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //
@@ -22192,7 +22199,7 @@ module.exports = (function () {
 //
 var colors = require('./lib/colors');
 module['exports'] = colors;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/colors/safe.js","/../ff-log/node_modules/colors",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\colors\\safe.js","/..\\ff-log\\node_modules\\colors",undefined)
 },{"./lib/colors":53,"_process":81,"buffer":78}],63:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
@@ -22422,7 +22429,7 @@ function kindOf(val) {
   }
 })(this);
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/dateformat/lib/dateformat.js","/../ff-log/node_modules/dateformat/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\dateformat\\lib\\dateformat.js","/..\\ff-log\\node_modules\\dateformat\\lib",undefined)
 },{"_process":81,"buffer":78}],64:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 module.exports = require('./tinytim');
@@ -22481,7 +22488,7 @@ module.exports.renderFile = function(path, vars, useCache) {
 	return module.exports.render(str, vars);
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/tinytim/lib/index.js","/../ff-log/node_modules/tinytim/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\tinytim\\lib\\index.js","/..\\ff-log\\node_modules\\tinytim\\lib",undefined)
 },{"./tinytim":65,"_process":81,"buffer":78,"fs":77}],65:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
@@ -22535,7 +22542,7 @@ var tim = exports.tim = (function(){
     };
 }());
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/tinytim/lib/tinytim.js","/../ff-log/node_modules/tinytim/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\tinytim\\lib\\tinytim.js","/..\\ff-log\\node_modules\\tinytim\\lib",undefined)
 },{"_process":81,"buffer":78}],66:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -22553,7 +22560,7 @@ module.exports = function(conf) {
 	}, conf);
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/tracer/lib/color_console.js","/../ff-log/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\tracer\\lib\\color_console.js","/..\\ff-log\\node_modules\\tracer\\lib",undefined)
 },{"./console":67,"_process":81,"buffer":78,"colors/safe":62}],67:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -22698,7 +22705,7 @@ module.exports = (function() {
 	return _self;
 });
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/tracer/lib/console.js","/../ff-log/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\tracer\\lib\\console.js","/..\\ff-log\\node_modules\\tracer\\lib",undefined)
 },{"./settings":70,"./utils":71,"_process":81,"buffer":78,"dateformat":63,"path":80,"tinytim":64}],68:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -22781,7 +22788,7 @@ module.exports = function (conf) {
     }
     return require('./console')(conf);
 };
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/tracer/lib/dailyfile.js","/../ff-log/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\tracer\\lib\\dailyfile.js","/..\\ff-log\\node_modules\\tracer\\lib",undefined)
 },{"./console":67,"./utils":71,"_process":81,"buffer":78,"child_process":77,"dateformat":63,"fs":77,"path":80,"tinytim":64}],69:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -22795,7 +22802,7 @@ exports.close = settings.close;
 exports.setLevel = settings.setLevel;
 exports.getLevel = settings.getLevel;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/tracer/lib/index.js","/../ff-log/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\tracer\\lib\\index.js","/..\\ff-log\\node_modules\\tracer\\lib",undefined)
 },{"./color_console":66,"./console":67,"./dailyfile":68,"./settings":70,"_process":81,"buffer":78}],70:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -22824,7 +22831,7 @@ exports.close = close;
 exports.setLevel = setLevel;
 exports.getLevel = getLevel;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/tracer/lib/settings.js","/../ff-log/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\tracer\\lib\\settings.js","/..\\ff-log\\node_modules\\tracer\\lib",undefined)
 },{"_process":81,"buffer":78}],71:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
@@ -22886,7 +22893,7 @@ exports.format = function(f) {
 	return str;
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-log/node_modules/tracer/lib/utils.js","/../ff-log/node_modules/tracer/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-log\\node_modules\\tracer\\lib\\utils.js","/..\\ff-log\\node_modules\\tracer\\lib",undefined)
 },{"_process":81,"buffer":78,"util":84}],72:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var logger = require('../ff-log')
@@ -22926,7 +22933,7 @@ exports.mathJs = {
     name: 'ff-math',
     entries: entries
 }
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../ff-math/ff-math.js","/../ff-math",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-math\\ff-math.js","/..\\ff-math",undefined)
 },{"../ff-log":52,"_process":81,"buffer":78}],73:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -56818,13 +56825,13 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/angular/angular.js","/node_modules/angular",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\angular\\angular.js","/node_modules\\angular",undefined)
 },{"_process":81,"buffer":78}],74:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 require('./angular');
 module.exports = angular;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/angular/index.js","/node_modules/angular",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\angular\\index.js","/node_modules\\angular",undefined)
 },{"./angular":73,"_process":81,"buffer":78}],75:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 'use strict';
@@ -57318,7 +57325,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/assert/assert.js","/node_modules/assert",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\assert\\assert.js","/node_modules\\assert",undefined)
 },{"_process":81,"buffer":78,"util/":84}],76:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 'use strict'
@@ -57436,11 +57443,11 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/base64-js/index.js","/node_modules/base64-js",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\base64-js\\index.js","/node_modules\\base64-js",undefined)
 },{"_process":81,"buffer":78}],77:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/browserify/lib/_empty.js","/node_modules/browserify/lib",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\browserify\\lib\\_empty.js","/node_modules\\browserify\\lib",undefined)
 },{"_process":81,"buffer":78}],78:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
@@ -59158,7 +59165,7 @@ function numberIsNaN (obj) {
   return obj !== obj // eslint-disable-line no-self-compare
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/buffer/index.js","/node_modules/buffer",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\buffer\\index.js","/node_modules\\buffer",undefined)
 },{"_process":81,"base64-js":76,"buffer":78,"ieee754":79}],79:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -59246,7 +59253,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/ieee754/index.js","/node_modules/ieee754",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\ieee754\\index.js","/node_modules\\ieee754",undefined)
 },{"_process":81,"buffer":78}],80:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // Copyright Joyent, Inc. and other Node contributors.
@@ -59474,7 +59481,7 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/path-browserify/index.js","/node_modules/path-browserify",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\path-browserify\\index.js","/node_modules\\path-browserify",undefined)
 },{"_process":81,"buffer":78}],81:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // shim for using process in browser
@@ -59662,7 +59669,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/process/browser.js","/node_modules/process",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\process\\browser.js","/node_modules\\process",undefined)
 },{"_process":81,"buffer":78}],82:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 if (typeof Object.create === 'function') {
@@ -59689,7 +59696,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/util/node_modules/inherits/inherits_browser.js","/node_modules/util/node_modules/inherits",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\util\\node_modules\\inherits\\inherits_browser.js","/node_modules\\util\\node_modules\\inherits",undefined)
 },{"_process":81,"buffer":78}],83:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 module.exports = function isBuffer(arg) {
@@ -59698,7 +59705,7 @@ module.exports = function isBuffer(arg) {
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/util/support/isBufferBrowser.js","/node_modules/util/support",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\util\\support\\isBufferBrowser.js","/node_modules\\util\\support",undefined)
 },{"_process":81,"buffer":78}],84:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // Copyright Joyent, Inc. and other Node contributors.
@@ -60288,7 +60295,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules/util/util.js","/node_modules/util",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/node_modules\\util\\util.js","/node_modules\\util",undefined)
 },{"./support/isBuffer":83,"_process":81,"buffer":78,"inherits":82}],85:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var angular = require('angular')
@@ -60304,7 +60311,7 @@ angular.module('lmeapp', []).controller('lmeController', function($scope) {
         $scope[n] = nodes[n];
     }
 });
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src/angularController.js","/src",{
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\angularController.js","/src",{
   "formulas": [
     {
       "type": "noCacheUnlocked",
@@ -94788,5 +94795,5 @@ LME.prototype.importData = function(valueAsJSON) {
     this.lme.importSolution(valueAsJSON, 'jsonvalues')
 }
 module.exports = LME;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src/lme.js","/src",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\lme.js","/src",undefined)
 },{"../../ff-fes":25,"../../ff-fes/exchange_modules/jsonvalues/jsonvalues":7,"../../ff-fes/exchange_modules/lme/lmeparser":8,"../../ff-fes/fesjs/JSWorkBook":16,"../../ff-fes/fesjs/fescontext":24,"../../ff-formulajs/ff-formulajs":47,"../../ff-math":72,"_process":81,"buffer":78}]},{},[85]);

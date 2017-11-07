@@ -6,7 +6,7 @@ var browserify = require('browserify-middleware');
 app.use(require('express-favicon')());
 var bodyParser = require('body-parser')
 var expressStaticGzip = require("express-static-gzip");
-app.use('/:id/transformFFL_LME/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
+app.use('/id/:id/transformFFL_LME/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
 app.use('/resources/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
 app.use(expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
 app.use(expressStaticGzip("bower_components/"));
@@ -23,7 +23,7 @@ var stash = require('./src/stash').Stash;
 browserify.settings({
     transform: [require('browserify-fastjson')]
 })
-app.post('/:id/saveFFL_LME', (req, res) => {
+app.post('/id/:id/saveFFL_LME', (req, res) => {
     stash.commit(req.body.model, req.body.data).then((data) => {
         res.json({status: 'ok'});
     }).catch((err) => {
@@ -46,7 +46,7 @@ app.get('/models', (req, res) => {
         res.json({status: 'fail', reason: err.toString()});
     })
 });
-app.use('/:id/ide.js', browserify(__dirname + '/src/aceModelIDE.js', {
+app.use('/ide.js', browserify(__dirname + '/src/aceModelIDE.js', {
     gzip: true,
     insertGlobals: true,
     debug: false

@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="angapp">
 <head>
     <meta charset="UTF-8">
     <title>Data-graph</title>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.css"/>
 
 </head>
-<body>
-<canvas id="gitGraph"></canvas>
+<body ng-controller="graphController">
+<div style="width: 300px;">
+    <canvas id="gitGraph"></canvas>
+</div>
 <script src="lmegraph.js"></script>
 </body>
 </html>
