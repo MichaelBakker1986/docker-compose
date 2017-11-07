@@ -3,6 +3,32 @@
  * There is a need to store/retrieve values entered by the client
  */
 var uuid = require('uuid4');
+var log = require('ff-log')
+//const Figure = require('./Figure');
+/**
+ * Git structure DB
+ *       |a=100     |a=300
+ *       |b=200     |
+ * dev   |_____|0___|1______________
+ * usr2  |     \       \____________   = a=300,b=200
+ *       |      \
+ * usr1  |       \__________________   = a=100,b=200
+ *
+ *
+ * parent|child
+ * dev0   |usr1
+ * dev1   |usr2
+ */
+
+Figure.orm.then((data) => {
+    Figure.Figures.findAsync({}).then((err, result) => {
+        log.info(err)
+    }).catch((err) => {
+        log.error(err)
+    })
+}).catch((err) => {
+    log.error(err)
+})
 const MatrixStore = require('../MatrixStore').MatrixStore;
 module.exports.setup = function(app) {
     var ds = new MatrixStore();

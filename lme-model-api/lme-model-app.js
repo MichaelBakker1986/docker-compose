@@ -12,6 +12,7 @@ app.use(expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
 app.use(expressStaticGzip("bower_components/"));
 app.use(require('compression')())
 app.use(require('cors')())
+app.set('port', port)
 app.use(bodyParser.json({limit: '50mb'}));       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true,
@@ -50,11 +51,12 @@ app.use('/:id/ide.js', browserify(__dirname + '/src/aceModelIDE.js', {
     insertGlobals: true,
     debug: false
 }));
+
+require('./api-def').setup(app)
+
 app.listen(port, () => {
     require('dns').lookup(require('os').hostname(), (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
-        console.info(
-            '<a href="' + domain + 'branches">JSON API (branches)</a><span> | </span>\n' +
-            '<a href="' + domain + 'models">JSON API (models)</a>');
+        console.info('<a href="' + domain + 'docs">lme-model-api</a>')
     })
 });

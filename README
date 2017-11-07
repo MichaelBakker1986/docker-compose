@@ -14,9 +14,7 @@ git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
 git pull
 
 cd fesjs
-yum install
+npm install -g bower, concurrently
 npm install
-npm install -g bower
-npm install -g concurrently
-cd lme
-node update.js
+docker run --name postgres -e POSTGRES_PASSWORD=postgres -d postgres
+npm start

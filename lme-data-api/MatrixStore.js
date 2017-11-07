@@ -9,6 +9,7 @@ exports.MatrixStore = class {
         storedValues[id] = storedValues[id] || {
             id: id,
             values: {},
+            parents: {},
             create_date: new Date().getTime()
             // properties: { column: true,  variable: true,  value: true }
         };
@@ -18,6 +19,7 @@ exports.MatrixStore = class {
     loadParents(entry, total) {
         if (entry.parent) {
             const parententry = this.getOrCreate(entry.parent)
+            total.parents[parententry.id] = parententry.create_date;
             for (var key in parententry.values) {
                 if (total[key] == undefined) {
                     total[key] = parententry[key]

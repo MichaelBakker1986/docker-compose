@@ -5,6 +5,8 @@
   "description": "angular-demo",
   "dependencies": {
     "body-parser": "~1.17.1",
+    "browserify-middleware": "^8.0.0",
+    "gitgraph.js": "^1.11.4",
     "compression": "^1.7.1",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",

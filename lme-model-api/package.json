@@ -38,6 +38,7 @@
     "serve-favicon": "~2.4.2",
     "serve-static": "^1.13.1",
     "static-nocase": "0.0.3",
+    "swaggerize-ui": "^1.0.1",
     "uglifyify": "^4.0.4",
     "uuid4": "^1.0.0"
   }

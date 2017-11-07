@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LME model-api",
+    "version": "1.0.0",
+    "description": "LME model-api"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "::8080",
+  "basePath": "/",
+  "paths": {
+    "/branches": {
+      "get": {
+        "summary": "Retrieve all branches identified.",
+        "operationId": "idRetrieveBranches",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models": {
+      "get": {
+        "summary": "Retrieve all models identified.",
+        "operationId": "idRetrieveModels",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update/git/notifyCommit": {
+      "get": {
+        "summary": "Update and restart all services.",
+        "operationId": "idUpdateService",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{id}/ide.js": {
+      "get": {
+        "summary": "Return compiled ide.js file",
+        "operationId": "idGetIde.js",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{id}/saveFFL_LME/{model}": {
+      "post": {
+        "summary": "Save FFL file to stash",
+        "operationId": "idSaveFile.js",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Value": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "responses": {},
+  "parameters": {
+    "ContextId": {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "Value": {
+      "name": "value",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "FigureName": {
+      "name": "figureName",
+      "in": "path",
+      "required": false,
+      "type": "string",
+      "enum": [
+      ]
+    }
+  },
+  "securityDefinitions": {},
+  "tags": []
+}
