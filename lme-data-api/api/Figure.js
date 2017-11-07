@@ -3,7 +3,8 @@
  */
 const dbConnectString = process.env.FIGURE_DB_STRING;
 const orm = require("orm");
-exports.orm = Promise.all([orm.connectAsync(dbConnectString).then((db) => {
+exports.orm = Promise.all([
+    orm.connectAsync(dbConnectString).then((db) => {
         db.use(require('orm-timestamps'), {
             createdProperty: 'created_at',
             modifiedProperty: 'modified_at',
@@ -40,7 +41,9 @@ exports.orm = Promise.all([orm.connectAsync(dbConnectString).then((db) => {
         }).catch((err) => {
             throw err;
         })
-    }
-).catch((err) => {
+    }).catch((err) => {
+        throw err;
+    })
+]).catch((err) => {
     throw err;
-})])
+})
