@@ -1,7 +1,7 @@
 /**
  * DB Connector
  */
-const dbConnectString = process.env.FIGURE_DB_SRTRING;
+const dbConnectString = process.env.FIGURE_DB_STRING;
 const orm = require("orm");
 exports.orm = Promise.all([orm.connectAsync(dbConnectString).then((db) => {
         db.use(require('orm-timestamps'), {
