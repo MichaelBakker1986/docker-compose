@@ -20,7 +20,7 @@ var log = require('ff-log')
  * dev1   |usr2
  */
 
-Figure.orm.then((data) => {
+/*Figure.orm.then((data) => {
     Figure.Figures.findAsync({}).then((err, result) => {
         log.info(err)
     }).catch((err) => {
@@ -28,7 +28,7 @@ Figure.orm.then((data) => {
     })
 }).catch((err) => {
     log.error(err)
-})
+})*/
 const MatrixStore = require('../MatrixStore').MatrixStore;
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
