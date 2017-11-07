@@ -33,7 +33,7 @@ app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {
         const domain = add + ':' + port;
         console.info(
-            '<a href="http://' + domain + '/ideplus.html">IDE DEMO Application</a><span> | </span>' +
+            '<span>IDE apps: </span><a href="http://' + domain + '/ideplus.html">IDE DEMO Application</a><span> | </span>' +
             '<a href="http://' + domain + '/excelIDE.html">ExcelIDE application</a>'
         );
     })

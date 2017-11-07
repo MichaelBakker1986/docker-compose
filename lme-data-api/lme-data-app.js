@@ -20,6 +20,6 @@ require('./api/api-def').setup(app)
 app.listen(port, function() {
     require('dns').lookup(hostname, (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
-        console.info('<a href="' + domain + 'docs/?url=%2Fapi-docs#!/default/value">data-api</a>\n');
+        console.info('<span>LME DATA: </span><a href="' + domain + 'docs/?url=%2Fapi-docs#!/default/value">data-api</a>\n');
     })
 });

@@ -57,6 +57,6 @@ require('./api-def').setup(app)
 app.listen(port, () => {
     require('dns').lookup(require('os').hostname(), (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
-        console.info('<a href="' + domain + 'docs">lme-model-api</a>')
+        console.info('<span>LME model: </span><a href="' + domain + 'docs">lme-model-api</a>')
     })
 });
