@@ -4,7 +4,7 @@
  */
 var uuid = require('uuid4');
 var log = require('ff-log')
-//const Figure = require('./Figure');
+const Figure = require('./Figure');
 /**
  * Git structure DB
  *       |a=100     |a=300
@@ -20,15 +20,6 @@ var log = require('ff-log')
  * dev1   |usr2
  */
 
-/*Figure.orm.then((data) => {
-    Figure.Figures.findAsync({}).then((err, result) => {
-        log.info(err)
-    }).catch((err) => {
-        log.error(err)
-    })
-}).catch((err) => {
-    log.error(err)
-})*/
 const MatrixStore = require('../MatrixStore').MatrixStore;
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
@@ -36,6 +27,15 @@ module.exports.setup = function(app) {
      * Retrieve entered values supplied by the client
      */
     app.get('/id/:id', function(req, res) {
+        /*   Figure.orm.then((data) => {
+               Figure.Figures.findAsync({}).then((data) => {
+                   log.info(JSON.stringify(data))
+               }).catch((err) => {
+                   throw Error('Fail db lookup', err)
+               })
+           }).catch((err) => {
+               throw Error('Fail db init', err)
+           })*/
         let entry = ds.getOrCreate(req.params.id);
         if (entry.parent) {
             ds.loadParents(ds.getOrCreate(entry.parent), entry)

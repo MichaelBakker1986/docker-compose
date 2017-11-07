@@ -37,6 +37,10 @@ exports.orm = Promise.all([orm.connectAsync(dbConnectString).then((db) => {
         return db.sync(async (err) => {
             if (err) throw err;
             return await "";
+        }).catch((err) => {
+            throw err;
         })
     }
-)])
+).catch((err) => {
+    throw err;
+})])
