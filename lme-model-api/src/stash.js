@@ -21,8 +21,9 @@ class Stash {
         return Promise.all([write('../ff-ssh-git/resources/' + name + '.ffl', data)])
             .then(function(filename) {
                 return Promise.all([exec('node src/exportLME_FFL.js ' + name), exec('node src/exportLME_FFL_angular.js ' + name)]).then((result) => {
+                    let userID = uuid();
                     if (develop) {
-                        console.info('<span>ffl model update:</span><a href="http://' + host + ':8083/#' + name + '&' + uuid() + '">' + name + '</a><span></span>');
+                        console.info('<span>ffl model update:</span><a href="http://' + host + ':8083/id/' + userID + '/#' + name + '&' + userID + '">' + name + '</a><span></span>');
                         log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
                     }
@@ -30,7 +31,8 @@ class Stash {
                     return exec(command).then((ok) => {
                         var output = ok.stdout.split('\n');
                         const stashCommit = '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>'
-                        console.info('<a href="http://' + host + ':8083/#' + name + '&' + uuid() + '"> ' + name + ' </a><span> Updated </span>' + stashCommit + '<span> By DEMO</span>');
+
+                        console.info('<a href="http://' + host + ':8083/id/' + userID + '#' + name + '&' + userID + '"> ' + name + ' </a><span> Updated </span>' + stashCommit + '<span> By DEMO</span>');
                     }).catch((err) => {
                         throw Error('GIT commit failed while pushing file to repository:', err)
                     })
