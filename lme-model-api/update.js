@@ -108,8 +108,7 @@ function testAndDeploy() {
     exec(command).then(function(result) {
         log('Successful deploy stack in [' + (now() - start).toFixed(3) + ']ms');
         //start sub processes
-        spawnChild('../demo-apps/angular-demo/angularapp')
-        spawnChild('../demo-apps/adminlte/ltelite')
+        spawnChild('../demo-apps/angular-demo/demoapps')
         spawnChild('lme-model-app')
         spawnChild('../lme-data-api/lme-data-app')
 

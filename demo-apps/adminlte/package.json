@@ -2,7 +2,7 @@
   "name": "adminlte",
   "version": "1.0.0",
   "description": "adminlte2",
-  "main": "ltelite.js",
+  "main": "index.js",
   "dependencies": {
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
