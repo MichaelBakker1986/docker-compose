@@ -1,7 +1,7 @@
 {
-  "name": "adminlte",
-  "version": "1.0.0",
-  "description": "adminlte2",
+  "name": "lme-ide",
+  "version": "1.0.1",
+  "description": "lme-ide",
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.17.2",

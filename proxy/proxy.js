@@ -5,6 +5,7 @@ var hostname = require('os').hostname();
 app.use(require('express-favicon')());
 var expressStaticGzip = require("express-static-gzip");
 var proxy = require('express-http-proxy');
+var httpProxy = require('http-proxy');
 var bodyParser = require('body-parser')
 app.use(require('compression')())
 app.use(require('cors')())

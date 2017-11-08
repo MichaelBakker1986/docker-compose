@@ -10,7 +10,7 @@ app.use(compression())
 app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/public/"));
 app.use('/id/:id/showcase', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/bower_components/"));
-app.use('/id/:id/', expressStaticGzip(__dirname + "/adminlte/dist/"));
+
 app.use('/id/:id/', expressStaticGzip(__dirname + "/data-graph/"));
 app.use('/id/:id/css', expressStaticGzip(__dirname + "/node_modules/gitgraph.js/build/"));
 app.use('/id/:id/lmegraph.js', browserify(__dirname + '/data-graph/datagraph.js', {
@@ -29,9 +29,9 @@ app.get('/id/:id/aceModelIDE.js', proxy('http://' + require('os').hostname() + '
 app.post('/id/:id/saveFFL_LME', proxy('http://' + require('os').hostname() + ':8080/id/:id/saveFFL_LME', {limit: '50mb'}));
 app.get('/models', proxy('http://' + require('os').hostname() + ':8080/models'));
 app.get('/branches', proxy('http://' + require('os').hostname() + ':8080/branches'));
-app.use('/id/:id/', expressStaticGzip(__dirname + "/adminlte/"));
-app.use('/id/:id/', expressStaticGzip(__dirname + "/adminlte/bower_components/"));
-app.use('/id/:id/', expressStaticGzip(__dirname + "/ExcelIDE/"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/dist/"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/bower_components/"));
 app.use('/resources/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
 
 app.listen(port, function() {
