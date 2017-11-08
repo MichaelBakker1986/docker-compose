@@ -1,0 +1,34 @@
+{
+  "name": "proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "proxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "michael.bakker@topicus.nl",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-favicon": "^2.0.0",
+    "express-http-proxy": "^1.0.7",
+    "express-session": "^1.15.6",
+    "express-sessions": "^1.0.6",
+    "express-static-gzip": "^0.3.0",
+    "ff-log": "^1.0.21",
+    "ip": "^1.1.5",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "passport-facebook-token": "^3.3.0",
+    "passport-github": "^1.1.0",
+    "passport-youtube-v3": "^2.1.0",
+    "request": "^2.83.0",
+    "social-login": "^0.2.8"
+  }
+}
