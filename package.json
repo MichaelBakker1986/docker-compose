@@ -16,7 +16,7 @@
   "scripts": {
     "install": "concurrently \"cd ff-log && npm install --no-optional \" \"cd lme-data-api && npm install --no-optional \" \"cd ff-fes-xlsx && npm install --no-optional \" \"cd ff-fes && npm install --no-optional \" \"cd lme-model-api && npm install --no-optional\" \"cd ff-formulajs && npm install --no-optional\" \"cd demo-apps/angular-demo && npm install --no-optional\" \"cd ff-ssh-git && npm install --no-optional\" \"cd ff-math && npm install --no-optional\" \"cd lme-model-tests && npm install --no-optional\"",
     "test": "concurrently \"cd ff-fes-xlsx && npm test\" \"cd ff-fes && npm test\" \"cd model-tests && npm test\" \"cd lme-model-api && npm test\" \"cd ff-log && npm test\"",
-    "start": "node lme/update.js"
+    "start": "node lme-model-api/update.js"
   },
   "repository": {
     "type": "git",

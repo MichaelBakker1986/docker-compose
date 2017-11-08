@@ -9,7 +9,6 @@ var expressStaticGzip = require("express-static-gzip");
 app.use('/id/:id/transformFFL_LME/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
 app.use('/resources/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
 app.use(expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
-app.use(expressStaticGzip("bower_components/"));
 app.use(require('compression')())
 app.use(require('cors')())
 app.set('port', port)
