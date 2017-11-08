@@ -41,6 +41,7 @@
     "swaggerize-ui": "^1.0.1",
     "uglifyify": "^4.0.4",
     "uuid4": "^1.0.0",
+    "xhr2": "^0.1.4",
     "xmlhttprequest": "^1.8.0"
   }
 }
