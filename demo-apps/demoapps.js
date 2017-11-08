@@ -24,7 +24,7 @@ app.use('/id/:id/lmegraph.js', browserify(__dirname + '/data-graph/datagraph.js'
 //proxies
 app.get('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));
 app.post('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));
-app.get('/id/:id/transformFFL_LME/:model', proxy('http://' + require('os').hostname() + ':8080/id/:id/transformFFL_LME/:model'));
+app.use('/id/:id/resources/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
 
 //IDE proxies
 app.get('/id/:id/excelIDE.js', proxy('http://' + require('os').hostname() + ':8080/id/:id/excelIDE.js', {limit: '50mb'}))
@@ -36,7 +36,7 @@ app.get('/branches', proxy('http://' + require('os').hostname() + ':8080/branche
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/dist/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/bower_components/"));
-app.use('/resources/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
+
 
 app.listen(port, function() {
     require('dns').lookup(require('os').hostname(), function(err, add, fam) {

@@ -2,39 +2,13 @@
  * editor variable is set to the window.
  */
 
-var params = window.location.href.split('#')
-if (params.length == 1) window.location.href = '#MVO&DEMO'
-var params = window.location.href.split('#')[1].split('&')
-let windowModelName = params[0] || 'MVO';
-let userID = params[1] || 'DEMO'
-var saveToken = userID;
-
 angular.module('lmeapp').controller('ideController', function($scope, $http) {
-    $http.get('data').then(function(data) {
-        if (!data.data) throw Error('No data in request')
-        for (var key in data.data.values) {
-            let dataObject = data.data.values[key];
-            LME.nodes[correctFileName(key)].cols[parseInt(dataObject.colId) - 2].value = dataObject.value
-        }
-    }).catch(function(err) {
-        alert('Cannot load saved data. from [' + '/id/' + userID + ']')
-        console.error(err)
-    })
-    //TODO: add this into the compiled JS
+    LMEMETA.loadData();
     $scope.saveData = function() {
-        //send data to server to store
-        $http.post('data', {
-            data: LMEMETA.exportData()
-        }).then(function(data) {
-            saveToken = data.data.saveToken;
-            window.location.href = '#' + windowModelName + '&' + saveToken
-            alert('Success saved data' + JSON.stringify(data))
-        }).catch(function(err) {
-            alert('Cannot save data to from [' + '/id/' + saveToken + ']')
-            console.error(err)
-        })
+        LMEMETA.persistData()
     }
 });
+//LME-Model stuff
 $(document).ready(function() {
     var ConvertEvaluateAsString = require('../../model-tests/plugins/ConvertEvaluateAsString').ConvertEvaluateAsString
     var AmpersandConverter = require('../../model-tests/plugins/AmpersandConverter').AmpersandConverter
@@ -42,6 +16,13 @@ $(document).ready(function() {
     var V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
     var MVOeditorShow = require('../../model-tests/MVO/MVOeditorShow').MVOeditorShow
     var fflModel;
+
+    var params = window.location.href.split('#')
+    if (params.length == 1) window.location.href = '#MVO&DEMO'
+    var params = window.location.href.split('#')[1].split('&')
+    let windowModelName = params[0] || 'MVO';
+    let userID = params[1] || 'DEMO'
+    var saveToken = userID;
 
     $("#models").val(windowModelName)
 
@@ -123,7 +104,7 @@ $(document).ready(function() {
 
             scrollTop();
         });
-        xhr.open('GET', '/resources/' + modelName + '.ffl');
+        xhr.open('GET', 'resources/' + modelName + '.ffl');
         xhr.send();
     }
 

@@ -2,7 +2,7 @@
 
 
 function MVOeditorShow() {
-    this.on = true;
+    this.on = false;
     this.properties = true;
 }
 

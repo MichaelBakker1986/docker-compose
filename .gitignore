@@ -10,3 +10,4 @@ restapi/dbSettings.js
 *package-lock.json
 *.scssc
 
+ff-ssh-git/resources/_tmp_*

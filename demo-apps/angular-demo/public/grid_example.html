@@ -20,24 +20,7 @@
             if (params.length == 1) window.location.href = '#MVO&DEMO'
             var params = window.location.href.split('#')[1].split('&')
             let modelName = params[0] || 'MVO';
-            let userID = params[1] || 'DEMO'
-            let liveUrl = 'transformFFL_LME/' + modelName + '.js'
 
-            var saveToken = userID;
-            console.info(saveToken + ':' + modelName)
-            $scope.saveData = function(e) {
-                //send data to server to store
-                $http.post('/id/' + saveToken + '/data', {
-                    data: LMEMETA.exportData()
-                }).then(function(data) {
-                    saveToken = data.data.saveToken;
-                    window.location.href = '#' + modelName + '&' + saveToken
-                    alert('Success saved data' + JSON.stringify(data))
-                }).catch(function(err) {
-                    alert('Cannot save data to from [' + '/id/' + saveToken + ']')
-                    console.error(err)
-                })
-            }
             $scope.clicked = function(e) {
                 console.info(e)
             }
@@ -45,31 +28,16 @@
                 $scope.search = node.path + '.' + node.id
             }
 
-            function correctFileName(name) {
-                return name.replace(/^[^_]+_*([\w]*_\w+)$/gmi, '$1');
-            }
-
-            $http.get(liveUrl).then(function(data) {
+            $http.get('resources/' + modelName + '.js').then(function(data) {
                 eval(data.data)
                 //after this we can import the user-data....
                 $scope.LME_MODEL = LME.nodes
                 $scope.name = LME.name
                 $scope.LMEMETA = LMEMETA;
-                $http.get('data').then(function(data) {
-                    if (!data.data) throw Error('No data in request')
-                    console.info(data.data.values)
-                    for (var key in data.data.values) {
-                        console.info(correctFileName(key))
-                        let dataObject = data.data.values[key];
-                        console.info(dataObject)
-                        console.info(correctFileName(key) + ":" + (parseInt(dataObject.colId) - 2))
-                        LME.nodes[correctFileName(key)].cols[parseInt(dataObject.colId) - 2].value = dataObject.value
-                    }
-                    // LMEMETA.importData(data.data.values)
-                }).catch(function(err) {
-                    alert('Cannot load saved data. from [' + '/id/' + userID + ']')
-                    console.error(err)
-                })
+                LMEMETA.loadData()
+                $scope.saveData = function() {
+                    LMEMETA.persistData()
+                }
             }).catch(function(err) {
                 console.info(err);
             });
