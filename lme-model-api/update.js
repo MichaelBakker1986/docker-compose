@@ -106,9 +106,9 @@ function testAndDeploy() {
     var start = now();
     const command = 'cd .. && npm install && npm test'
     exec(command).then(function(result) {
-        log('Successful deploy stack in [' + (now() - start).toFixed(3) + ']ms');
+        log('Successful deploy stack in ' + ((now() - start) / 1000).toFixed(3) + 's');
         //start sub processes
-        spawnChild('../demo-apps/angular-demo/demoapps')
+        spawnChild('../demo-apps/demoapps')
         spawnChild('lme-model-app')
         spawnChild('../lme-data-api/lme-data-app')
 
