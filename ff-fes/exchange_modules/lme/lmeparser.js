@@ -101,7 +101,7 @@ LMEParser.prototype.deParse = function(rowId, workbook) {
     })
     return JSON.stringify(info, function(key, value) {
         return unwantedKeys[key] ? undefined : value;
-    }, 2);
+    }, 0);
 }
 SolutionFacade.addParser(LMEParser.prototype);
 exports.LMEParser = LMEParser.prototype
