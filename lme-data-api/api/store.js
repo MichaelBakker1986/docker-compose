@@ -29,7 +29,7 @@ module.exports.setup = function(app) {
     app.get('/id/:id/data', function(req, res) {
         Figure.orm.then((data) => {
             Figure.Figures.findAsync({}).then((data) => {
-                log.info(JSON.stringify(data))
+                //log.info(JSON.stringify(data))
             }).catch((err) => {
                 throw Error('Fail db lookup', err)
             })
