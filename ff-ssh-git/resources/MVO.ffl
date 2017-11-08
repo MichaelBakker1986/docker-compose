@@ -14,7 +14,7 @@ model MVO uses BaseModel
     {
       datatype: none;
       frequency: none;
-      title: "General variables for webclient";
+      title: "General variables for webclienthoi";
       top_blanklines: 1;
       display_options: showColumnTitlesAboveSubVars;
       locked: 1;
