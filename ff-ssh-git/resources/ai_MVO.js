@@ -60417,13 +60417,11 @@ LmeAPI.prototype.persistData = function() {
     http.onreadystatechange = function() {//Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
-            alert(http.responseText);
             self.saveToken = returnData.saveToken;
             window.location.href = '#' + self.modelName + '&' + self.saveToken
         }
-    }
-    var data = JSON.stringify({data: this.exportData()});
-    http.send(data);
+    };
+    http.send(JSON.stringify({data: self.exportData()}));
 }
 module.exports = LmeAPI;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\lme.js","/src",undefined)

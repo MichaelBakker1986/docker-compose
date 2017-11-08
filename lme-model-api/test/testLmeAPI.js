@@ -24,11 +24,7 @@ class LmeApiTester {
     testSave() {
         VariableOne.value = 1000;
         VariableTwo.value = 2000;
-        newModel.persistData().then(function(result) {
-            console.info(result)
-        }).catch(((err) => {
-            console.error(err)
-        }))
+        newModel.persistData()
     }
 
     testLoad() {

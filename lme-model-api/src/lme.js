@@ -86,28 +86,25 @@ LmeAPI.prototype.loadData = function() {
 }
 LmeAPI.prototype.persistData = function() {
     var self = this;
-    return new Promise(function(succesResponse, fail) {
-        //send data to server to store
-        var params = window.location.href.split('#')
-        if (params.length == 1) window.location.href = '#MVO&DEMO'
-        var params = window.location.href.split('#')[1].split('&')
-        self.modelName = params[0] || 'MVO';
-        let userID = params[1] || 'DEMO'
-        let liveUrl = 'transformFFL_LME/' + self.modelName + '.js'
-        self.saveToken = userID;
-        var http = new XMLHttpRequest();
-        var url = self.urlPrefix + '/id/' + self.saveToken + '/data';
-        http.open("POST", url, true);
-        http.setRequestHeader("Content-type", "application/json");
-        http.onreadystatechange = function() {//Call a function when the state changes.
-            if (http.readyState == 4 && http.status == 200) {
-                let returnData = JSON.parse(http.responseText);
-                self.saveToken = returnData.saveToken;
-                window.location.href = '#' + self.modelName + '&' + self.saveToken
-                succesResponse(self.saveToken);
-            }
-        };
-        http.send(JSON.stringify({data: self.exportData()}));
-    });
+    //send data to server to store
+    var params = window.location.href.split('#')
+    if (params.length == 1) window.location.href = '#MVO&DEMO'
+    var params = window.location.href.split('#')[1].split('&')
+    self.modelName = params[0] || 'MVO';
+    let userID = params[1] || 'DEMO'
+    let liveUrl = 'transformFFL_LME/' + self.modelName + '.js'
+    self.saveToken = userID;
+    var http = new XMLHttpRequest();
+    var url = self.urlPrefix + '/id/' + self.saveToken + '/data';
+    http.open("POST", url, true);
+    http.setRequestHeader("Content-type", "application/json");
+    http.onreadystatechange = function() {//Call a function when the state changes.
+        if (http.readyState == 4 && http.status == 200) {
+            let returnData = JSON.parse(http.responseText);
+            self.saveToken = returnData.saveToken;
+            window.location.href = '#' + self.modelName + '&' + self.saveToken
+        }
+    };
+    http.send(JSON.stringify({data: self.exportData()}));
 }
 module.exports = LmeAPI;
