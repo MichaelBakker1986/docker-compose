@@ -16,6 +16,24 @@ class Stash {
         })
     }
 
+    preview(name, data, lme) {
+
+        var tempHash = '_tmp_' + uuid() + "_" + name;
+        return write('../ff-ssh-git/resources/' + tempHash + '.ffl', data)
+            .then(function(filename) {
+                return exec('node src/exportLME_FFL.js ' + tempHash).then((result) => {
+                    let userID = uuid();
+                    console.info('<span>ffl model update:</span><a href="http://' + host + ':8083/id/' + userID + '/grid_example.html#' + tempHash + '&' + userID + '">' + tempHash + '</a><span></span>');
+                    log.info("Temp file created") //=> '/tmp/foo'
+                    return tempHash;
+                }).catch((err) => {
+                    throw Error('Failed to write or compile javascript', err);
+                })
+            }).catch(function(err) {
+                throw Error('Failed to write file to resources folder', err);
+            })
+    }
+
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
         return Promise.all([write('../ff-ssh-git/resources/' + name + '.ffl', data)])

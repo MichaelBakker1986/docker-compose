@@ -35,6 +35,14 @@ app.use('/id/:id/aceModelIDE.js', browserify(__dirname + '/src/aceModelIDE.js', 
     insertGlobals: true,
     debug: false
 }));
+app.post('/id/:id/preview', (req, res) => {
+    stash.preview(req.body.model, req.body.data).then((data) => {
+        res.json({status: 'ok', link: data});
+    }).catch((err) => {
+        log.debug('Failed to write ' + req.body.model + '.ffl file.', err)
+        res.json({status: 'fail', reason: err.toString()});
+    })
+});
 app.post('/id/:id/saveFFL_LME', (req, res) => {
     stash.commit(req.body.model, req.body.data).then((data) => {
         res.json({status: 'ok'});

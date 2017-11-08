@@ -2,7 +2,6 @@
  * editor variable is set to the window.
  */
 
-
 var params = window.location.href.split('#')
 if (params.length == 1) window.location.href = '#MVO&DEMO'
 var params = window.location.href.split('#')[1].split('&')
@@ -65,7 +64,6 @@ $(document).ready(function() {
         setValue(fflModel)
         scrollTop()
     });
-
     $(".toggle-debug-btn").click(function(e) {
 
 
@@ -156,6 +154,21 @@ $(document).ready(function() {
         window.location = 'http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + $("#models").val() + '&' + userID
     }
 
+    function previewModel() {
+        $.post("preview", {
+            model: $("#models").val(),
+            data: editor.getSession().getValue()
+        }, function(data) {
+            var url = 'http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + data.link + '&' + userID;
+            window.open(url);
+        });
+    }
+
+    $(".toggle-temp_preview-btn").click(function(e) {
+
+        previewModel();
+    });
+
     function saveDocument() {
         $.post("saveFFL_LME", {
             model: $("#models").val(),
@@ -179,5 +192,4 @@ $(document).ready(function() {
     $('#preview-model').click(gotoPreview);
     $('#save-model').click(saveDocument);
     $('#preview-model').hide()
-
 });

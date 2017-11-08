@@ -8,9 +8,12 @@ app.use('/favicon.ico', require('express-favicon')(__dirname + '/favicon.png'));
 app.use(require('cors')());
 app.use(compression())
 app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/public/"));
+
+//showcase proxies
 app.use('/id/:id/showcase', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/bower_components/"));
 
+//graph
 app.use('/id/:id/', expressStaticGzip(__dirname + "/data-graph/"));
 app.use('/id/:id/css', expressStaticGzip(__dirname + "/node_modules/gitgraph.js/build/"));
 app.use('/id/:id/lmegraph.js', browserify(__dirname + '/data-graph/datagraph.js', {
@@ -27,6 +30,7 @@ app.get('/id/:id/transformFFL_LME/:model', proxy('http://' + require('os').hostn
 app.get('/id/:id/excelIDE.js', proxy('http://' + require('os').hostname() + ':8080/id/:id/excelIDE.js', {limit: '50mb'}))
 app.get('/id/:id/aceModelIDE.js', proxy('http://' + require('os').hostname() + ':8080/id/:id/aceModelIDE.js', {limit: '50mb'}))
 app.post('/id/:id/saveFFL_LME', proxy('http://' + require('os').hostname() + ':8080/id/:id/saveFFL_LME', {limit: '50mb'}));
+app.post('/id/:id/preview', proxy('http://' + require('os').hostname() + ':8080/id/:id/preview', {limit: '50mb'}));
 app.get('/models', proxy('http://' + require('os').hostname() + ':8080/models'));
 app.get('/branches', proxy('http://' + require('os').hostname() + ':8080/branches'));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/"));
