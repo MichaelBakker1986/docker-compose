@@ -23,6 +23,19 @@ var stash = require('./src/stash').Stash;
 browserify.settings({
     transform: [require('browserify-fastjson')]
 })
+app.use('/id/:id/excelIDE.js', browserify(__dirname + '/src/excelModelIDE.js', {
+    cache: true,
+    gzip: true,
+    insertGlobals: true,
+    debug: false,
+    minify: true,
+    precompile: true
+}));
+app.use('/id/:id/aceModelIDE.js', browserify(__dirname + '/src/aceModelIDE.js', {
+    gzip: true,
+    insertGlobals: true,
+    debug: false
+}));
 app.post('/id/:id/saveFFL_LME', (req, res) => {
     stash.commit(req.body.model, req.body.data).then((data) => {
         res.json({status: 'ok'});
@@ -46,11 +59,7 @@ app.get('/models', (req, res) => {
         res.json({status: 'fail', reason: err.toString()});
     })
 });
-app.use('/ide.js', browserify(__dirname + '/src/aceModelIDE.js', {
-    gzip: true,
-    insertGlobals: true,
-    debug: false
-}));
+
 
 require('./api-def').setup(app)
 

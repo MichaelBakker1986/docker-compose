@@ -1,0 +1,137 @@
+.main-header {
+    position: relative;
+    max-height: 100px;
+    z-index: 1030;
+}
+
+.main-header .navbar-custom-menu, .main-header .navbar-right {
+    float: right;
+}
+
+.main-header .navbar {
+    -webkit-transition: margin-left .3s ease-in-out;
+    -o-transition: margin-left .3s ease-in-out;
+    transition: margin-left .3s ease-in-out;
+    margin-bottom: 0;
+    margin-left: 230px;
+    border: none;
+    min-height: 50px;
+    border-radius: 0;
+}
+
+.main-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 50px;
+    min-height: 100%;
+    width: 230px;
+    z-index: 810;
+    -webkit-transition: -webkit-transform .3s ease-in-out, width .3s ease-in-out;
+    -moz-transition: -moz-transform .3s ease-in-out, width .3s ease-in-out;
+    -o-transition: -o-transform .3s ease-in-out, width .3s ease-in-out;
+    transition: transform .3s ease-in-out, width .3s ease-in-out;
+}
+
+.content-header {
+    position: relative;
+    padding: 15px 15px 0 15px;
+}
+
+section.container table {
+    display: block;
+    height: 600px;
+    overflow-y: scroll;
+}
+
+.btn-app > .fa, .btn-app > .glyphicon, .btn-app > .ion {
+    font-size: 20px;
+    display: block;
+}
+
+.btn-app {
+    border-radius: 3px;
+    position: relative;
+    padding: 15px 5px;
+    margin: 0 0 10px 10px;
+    min-width: 80px;
+    height: 60px;
+    text-align: center;
+    color: #666;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+    font-size: 12px;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.lmetable tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.lmetable tr:nth-child(even) {
+    background-color: whitesmoke;
+}
+
+.lmetable td {
+    white-space: nowrap;
+}
+
+.isentered input {
+    border-left: 2px solid #000;
+    border-right: 1px solid #ccc;
+    color: #1A3485;
+}
+
+td.txttd {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
+}
+
+span.text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+label {
+    cursor: default;
+}
+
+span.required:after, label[required]:not(input):after {
+    content: "";
+    font-family: fontAwesome;
+    font-size: .4rem;
+    vertical-align: super;
+    margin: 0 .2rem;
+    color: #dd3333;
+}
+
+.icon {
+    display: table-cell;
+    width: 20px;
+    text-align: center;
+    vertical-align: top;
+    padding: .8rem 0 0 0;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+div[data-toggle="buttons"] label.active {
+    color: #7AA3CC;
+}
+
+div[data-toggle="buttons"] label:hover {
+    color: #7AA3CC;
+}
+
+div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

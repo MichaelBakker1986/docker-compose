@@ -43,4 +43,6 @@ LME.prototype.exportData = function() {
 LME.prototype.importData = function(valueAsJSON) {
     this.lme.importSolution(valueAsJSON, 'jsonvalues')
 }
+//add saveData,loadData,
+
 module.exports = LME;

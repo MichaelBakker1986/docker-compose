@@ -1,6 +1,41 @@
 /**
  * editor variable is set to the window.
  */
+
+
+var params = window.location.href.split('#')
+if (params.length == 1) window.location.href = '#MVO&DEMO'
+var params = window.location.href.split('#')[1].split('&')
+let windowModelName = params[0] || 'MVO';
+let userID = params[1] || 'DEMO'
+var saveToken = userID;
+
+angular.module('lmeapp').controller('ideController', function($scope, $http) {
+    $http.get('data').then(function(data) {
+        if (!data.data) throw Error('No data in request')
+        for (var key in data.data.values) {
+            let dataObject = data.data.values[key];
+            LME.nodes[correctFileName(key)].cols[parseInt(dataObject.colId) - 2].value = dataObject.value
+        }
+    }).catch(function(err) {
+        alert('Cannot load saved data. from [' + '/id/' + userID + ']')
+        console.error(err)
+    })
+    //TODO: add this into the compiled JS
+    $scope.saveData = function() {
+        //send data to server to store
+        $http.post('data', {
+            data: LMEMETA.exportData()
+        }).then(function(data) {
+            saveToken = data.data.saveToken;
+            window.location.href = '#' + windowModelName + '&' + saveToken
+            alert('Success saved data' + JSON.stringify(data))
+        }).catch(function(err) {
+            alert('Cannot save data to from [' + '/id/' + saveToken + ']')
+            console.error(err)
+        })
+    }
+});
 $(document).ready(function() {
     var ConvertEvaluateAsString = require('../../model-tests/plugins/ConvertEvaluateAsString').ConvertEvaluateAsString
     var AmpersandConverter = require('../../model-tests/plugins/AmpersandConverter').AmpersandConverter
@@ -8,8 +43,9 @@ $(document).ready(function() {
     var V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
     var MVOeditorShow = require('../../model-tests/MVO/MVOeditorShow').MVOeditorShow
     var fflModel;
-    var windowModelName = window.location.href.split('#model=')[1] || 'KSP';
+
     $("#models").val(windowModelName)
+
     $.getJSON("/branches", function(data, status, xhr) {
         $("#tags").autocomplete({source: data});
     })
@@ -29,6 +65,7 @@ $(document).ready(function() {
         setValue(fflModel)
         scrollTop()
     });
+
     $(".toggle-debug-btn").click(function(e) {
 
 
@@ -57,27 +94,6 @@ $(document).ready(function() {
         editor.selection.moveTo(0, 0)
     }
 
-    function addFolds(idx) {
-        if (allLines.length > idx) {
-            var line = allLines[idx];
-            if (line.match(/^\s*formula/)) {
-                if (startFold + 1 < idx && lastFold + 1 < startFold) {
-                    editor.session.addFold("", new Range(lastFold + 1, 0, startFold, 0))
-                    editor.session.addFold("", new Range(startFold + 1, 0, idx, 0))
-                }
-                lastFold = idx
-            } else if (line.match(/^\s*(variable|tuple)/)) {
-                startFold = idx
-            }
-
-            setTimeout(function() {
-                addFolds(idx + 1)
-            }, 0)
-        } else {
-            editor.session.addFold("", new Range(startFold, 0, allLines.length, 0))
-        }
-    }
-
     function setValue(fflModel) {
         if (ConvertEvaluateAsString.on) {
             fflModel = ConvertEvaluateAsString.parse(fflModel);
@@ -94,10 +110,6 @@ $(document).ready(function() {
         if (MVOeditorShow.on) {
             fflModel = MVOeditorShow.parse(fflModel);
         }
-        /*  allLines = fflModel.split('\n');
-          var showLines = fflModel.filter(function(el, idx) {
-              return true;
-          })*/
         editor.setValue(fflModel);
     }
 
@@ -111,13 +123,7 @@ $(document).ready(function() {
             fflModel = this.responseText;
             setValue(fflModel)
 
-            //editor.session.removeFolds(0, true)
-            /*  setTimeout(function() {
-                  addFolds(0)
-              }, 1)
-  */
             scrollTop();
-
         });
         xhr.open('GET', '/resources/' + modelName + '.ffl');
         xhr.send();
@@ -147,7 +153,7 @@ $(document).ready(function() {
 
 
     function gotoPreview() {
-        window.location = 'http://' + window.location.hostname + ':8083/id/DEMO/#' + $("#models").val() + '&' + 'DEMO'
+        window.location = 'http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + $("#models").val() + '&' + userID
     }
 
     function saveDocument() {

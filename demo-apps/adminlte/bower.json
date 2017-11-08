@@ -6,7 +6,7 @@
   ],
   "description": "Admin dashboard and control panel template",
   "main": [
-    "ideplus.html",
+    "aceModelIDE.html",
     "dist/css/AdminLTE.css",
     "dist/js/app.js",
     "build/less/AdminLTE.less"
@@ -31,6 +31,9 @@
     "documentation"
   ],
   "dependencies": {
+    "materialize": "^0.100.2",
+    "canvas-datagrid": "^0.16.8",
+    "components-font-awesome": "^4.7.0",
     "ace-builds": "^1.2.8",
     "bootstrap-slider": "*",
     "chart.js": "1.0.*",
