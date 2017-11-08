@@ -59,7 +59,6 @@ app.get('/models', (req, res) => {
     })
 });
 
-
 require('./api-def').setup(app)
 
 app.listen(port, () => {
