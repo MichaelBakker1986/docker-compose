@@ -100,32 +100,29 @@
             </ul>
         </div>
         <div class="col-sm-9">
-            <table ng-click="clicked($event)" class="lmetable">
-                <tr ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search | first: 200" ng-if="f.visible">
-                    <td><i ng-if="f.tuple" class="fa fa-caret-right"></i></td>
-                    <td class="txttd" colspan="{{f.colspan==0?5 :1}}"><span contenteditable="true" ng-bind="f.cols.length==0? f.value: f.title" ng-class="'text ' + (f.required?'required':'')"></span></td>
-                    <td><i ng-class=" f.hint ? 'fa fa-info' : 'icon' " title="{{f.hint}}">
-                    </i></td>
-                    <td ng-repeat="cv in f.cols" colspan="{{f.colspan}}" ng-switch="f.type">
-                        <div class="input-group" ng-init="pid = $index" ng-class="cv.entered ? 'isentered' : undefined">
-                            <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
-                            <select ng-switch-when="select" class="form-control" ng-model="cv.value" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" placeholder="Pick value">
-                                <option ng-repeat="choice in f.choices" ng-selected="choice.name == cv.value">{{choice.value}}</option>
-                            </select>
-                            <div ng-switch-when="radio" class="btn-group" data-toggle="buttons">
-                                <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.name == cv.value?'active':''">
-                                    <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.name">
-                                    <i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i><span>{{choice.value}}</span>
-                                </label>
-                            </div>
-                            <textarea ng-switch-when="memo" rows="4" class="form-control" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value"
-                                      placeholder=""></textarea>
-                            <input ng-switch-default type="text" class="form-control" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder="">
-                            <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
+            <div class="row" ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search | first: 200" ng-if="f.visible">
+                <div><i ng-if="f.tuple" class="fa fa-caret-right"></i></div>
+                <div class="txttd" colspan="{{f.colspan==0?5 :1}}"><span contenteditable="true" ng-bind="f.cols.length==0? f.value: f.title" ng-class="'text ' + (f.required?'required':'')"></span> <i
+                        ng-class=" f.hint ? 'fa fa-info' : 'icon' " title="{{f.hint}}"></i></div>
+                <div ng-repeat="cv in f.cols" colspan="{{f.colspan}}" ng-switch="f.type">
+                    <div class="input-group" ng-init="pid = $index" ng-class="cv.entered ? 'isentered' : undefined">
+                        <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
+                        <select ng-switch-when="select" class="form-control" ng-model="cv.value" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" placeholder="Pick value">
+                            <option ng-repeat="choice in f.choices" ng-selected="choice.name == cv.value">{{choice.value}}</option>
+                        </select>
+                        <div ng-switch-when="radio" class="btn-group" data-toggle="buttons">
+                            <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.name == cv.value?'active':''">
+                                <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.name">
+                                <i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i><span>{{choice.value}}</span>
+                            </label>
                         </div>
-                    </td>
-                </tr>
-            </table>
+                        <textarea ng-switch-when="memo" rows="4" class="form-control" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value"
+                                  placeholder=""></textarea>
+                        <input ng-switch-default type="text" class="form-control" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-required="cv.required" ng-model="cv.value" placeholder="">
+                        <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
