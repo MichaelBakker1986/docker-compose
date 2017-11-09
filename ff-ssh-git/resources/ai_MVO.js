@@ -1082,8 +1082,8 @@ function correctFileName(name) {
 }
 
 function updateValues(data, docValues) {
-    for (var key in data.values) {
-        data.values[key] = {};
+    for (var key in docValues) {
+        docValues[key] = {};
     }
     for (var key in data.values) {
         var value = data.values[key];
@@ -1093,7 +1093,11 @@ function updateValues(data, docValues) {
             nodeId = nodeId + '_value'
         }
         let fetch = PropertiesAssembler.fetch(nodeId);
-        docValues[fetch.ref][parseInt(nodeColId)] = value.value;
+        if (!fetch) {
+            console.warn(nodeId + " does not exsist");
+        } else {
+            docValues[fetch.ref][parseInt(nodeColId)] = value.value;
+        }
     }
 }
 

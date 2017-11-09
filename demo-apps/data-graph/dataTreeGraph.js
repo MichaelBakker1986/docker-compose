@@ -22,6 +22,12 @@ angular.module('angapp').controller('graphController', function($scope, $http, $
             message: new Date(data.data.create_date),
             dotStrokeWidth: 10,
             author: "michael.bakker@topicus.nl",
+            message: {
+                displayAuthor: true,
+                displayBranch: false,
+                displayHash: false,
+                font: "normal 12pt Arial"
+            },
             onClick: function(commit) {
                 window.location.href = '#MVO&' + commit.sha1
                 LMEMETA.loadData(function(response) {
@@ -34,6 +40,12 @@ angular.module('angapp').controller('graphController', function($scope, $http, $
             master.commit({
                 dotColor: "white",
                 dotSize: 10,
+                message: {
+                    displayAuthor: true,
+                    displayBranch: false,
+                    displayHash: false,
+                    font: "normal 12pt Arial"
+                },
                 sha1: key,
                 message: new Date(data.data.parents[key]),
                 dotStrokeWidth: 10,
