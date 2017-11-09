@@ -1083,6 +1083,9 @@ function correctFileName(name) {
 
 function updateValues(data, docValues) {
     for (var key in data.values) {
+        data.values[key] = {};
+    }
+    for (var key in data.values) {
         var value = data.values[key];
         var nodeId = key.split('#')[0]
         var nodeColId = key.split('#')[1]
@@ -60381,7 +60384,7 @@ function correctFileName(name) {
  * use modelName from this.lme.modelName
  * use token form this.lme.context.uuid
  */
-LmeAPI.prototype.loadData = function() {
+LmeAPI.prototype.loadData = function(callBack) {
     var self = this;
     var params = window.location.href.split('#')
     if (params.length == 1) window.location.href = '#MVO&DEMO'
@@ -60402,6 +60405,10 @@ LmeAPI.prototype.loadData = function() {
             window.location.href = '#' + self.modelName + '&' + self.saveToken
         }
     }
+    http.onload = function() {
+        counter = counter + 1;
+        callBack(http.responseText)
+    };
     http.send();
     return http;
 }
@@ -60426,7 +60433,10 @@ LmeAPI.prototype.persistData = function(callBack) {
             window.location.href = '#' + self.modelName + '&' + self.saveToken
         }
     };
-    http.onload = callBack;
+    http.onload = function() {
+        counter = counter + 1;
+        callBack(http.responseText)
+    };
     http.send(JSON.stringify({data: self.exportData()}));
     return http;
 }

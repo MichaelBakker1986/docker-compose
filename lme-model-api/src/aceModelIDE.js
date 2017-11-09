@@ -3,9 +3,11 @@
  */
 
 angular.module('lmeapp').controller('ideController', function($scope, $http) {
-    LMEMETA.loadData();
+    LMEMETA.loadData(function() {
+    });
     $scope.saveData = function() {
-        LMEMETA.persistData()
+        LMEMETA.persistData(function(response) {
+        })
     }
 });
 //LME-Model stuff
@@ -134,7 +136,7 @@ $(document).ready(function() {
 
 
     function gotoPreview() {
-        window.location = 'http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + $("#models").val() + '&' + userID
+        window.open('http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + $("#models").val() + '&' + userID)
     }
 
     function previewModel() {
@@ -143,8 +145,7 @@ $(document).ready(function() {
                 model: $("#models").val(),
                 data: editor.getSession().getValue()
             }, function(data) {
-                var url = 'http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + data.link + '&' + userID;
-                window.open(url);
+                window.open('http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + data.link + '&' + userID);
             });
         });
     }

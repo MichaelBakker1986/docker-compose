@@ -27,8 +27,8 @@ class LmeApiTester {
         rp({
             uri: newModel.urlPrefix + '/id/' + id + '/data',
             json: true // Automatically parses the JSON string in the response
-        }).then(function(repos) {
-            console.log('User has %s repos', JSON.stringify(repos));
+        }).then(function(data) {
+            console.log(JSON.stringify(data, null, 2));
         }).catch(function(err) {
             console.error('Failed to complete ', err);
         });
@@ -38,11 +38,18 @@ class LmeApiTester {
         var self = this;
         VariableOne.value = 1000;
         VariableTwo.value = 2000;
-        newModel.persistData(function() {
-            let data = JSON.parse(this.responseText);
-            console.info(data)
+        newModel.persistData(function(responseText) {
+            let data = JSON.parse(responseText);
             VariableTwo.value = 3000;
-            self.testLoad()
+            newModel.persistData(function(responseText) {
+                let data = JSON.parse(responseText);
+                self.testReceive(data.saveToken)
+                newModel.loadData(function() {
+                    console.info('DONE')
+                    console.info(VariableOne.value)
+                    console.info(VariableTwo.value)
+                });
+            });
             self.testReceive(data.saveToken)
         });
     }
@@ -56,5 +63,5 @@ class LmeApiTester {
 
 let lmeApiTester = new LmeApiTester();
 lmeApiTester.testSave()
-lmeApiTester.testReceive('TEST');
+//lmeApiTester.testReceive('TEST');
 //lmeApiTester.testLoad()

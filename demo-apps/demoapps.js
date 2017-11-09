@@ -18,7 +18,7 @@ app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/bower_component
 //graph
 app.use('/id/:id/', expressStaticGzip(__dirname + "/data-graph/"));
 app.use('/id/:id/css', expressStaticGzip(__dirname + "/node_modules/gitgraph.js/build/"));
-app.use('/id/:id/lmegraph.js', browserify(__dirname + '/data-graph/datagraph.js', {
+app.use('/id/:id/dataTreeGraph.js', browserify(__dirname + '/data-graph/dataTreeGraph.js', {
     gzip: true,
     insertGlobals: true,
     debug: false

@@ -33,9 +33,9 @@
 
             function persist() {
                 Pace.start();
-                LMEMETA.persistData(function() {
-                    counter = counter + 1;
+                LMEMETA.persistData(function(response) {
                     Pace.stop()
+                    $scope.$digest()
                 });
             }
 
@@ -46,8 +46,8 @@
                 $scope.name = LME.name
                 $scope.LMEMETA = LMEMETA;
                 $scope.saveData = persist
-                LMEMETA.loadData(function() {
-                    counter = counter + 1;
+                LMEMETA.loadData(function(response) {
+                    console.info('response:' + response)
                     $scope.$digest()//TODO: move into $scope.apply to update the ID hash or something.
                 })
 
@@ -99,7 +99,7 @@
     <div class="row">
         <div class="col-sm-1" ng-controller="graphController">
             <canvas id="gitGraph"></canvas>
-            <script src="lmegraph.js"></script>
+            <script src="dataTreeGraph.js"></script>
         </div>
         <div class="col-sm-2">
             <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>

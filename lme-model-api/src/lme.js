@@ -77,7 +77,10 @@ LmeAPI.prototype.loadData = function(callBack) {
             window.location.href = '#' + self.modelName + '&' + self.saveToken
         }
     }
-    http.onload = callBack;
+    http.onload = function() {
+        counter = counter + 1;
+        callBack(http.responseText)
+    };
     http.send();
     return http;
 }
@@ -103,6 +106,7 @@ LmeAPI.prototype.persistData = function(callBack) {
         }
     };
     http.onload = function() {
+        counter = counter + 1;
         callBack(http.responseText)
     };
     http.send(JSON.stringify({data: self.exportData()}));
