@@ -58166,7 +58166,7 @@ model V05 uses BaseModel
         data_options: unscalable;
         title: "Hidden wizard";
         locked: 1;
-        visible: 0;
+        visible: 1;
         options_title: locked, invisible;
         options: locked, invisible;
         variable Q_ROOT

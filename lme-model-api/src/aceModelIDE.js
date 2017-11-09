@@ -93,19 +93,21 @@ $(document).ready(function() {
     }
 
     function handleModelChange() {
-        var modelName = $("#models").val();
-        var xhr = new XMLHttpRequest();
-        xhr.addEventListener('progress', function(e) {
-            editor.setValue('Loading data: ' + e.loaded + ' of ' + (e.total || 'unknown') + ' bytes...');
-        });
-        xhr.addEventListener('load', function(e) {
-            fflModel = this.responseText;
-            setValue(fflModel)
+        Pace.track(function() {
+            var modelName = $("#models").val();
+            var xhr = new XMLHttpRequest();
+            xhr.addEventListener('progress', function(e) {
+                editor.setValue('Loading data: ' + e.loaded + ' of ' + (e.total || 'unknown') + ' bytes...');
+            });
+            xhr.addEventListener('load', function(e) {
+                fflModel = this.responseText;
+                setValue(fflModel)
 
-            scrollTop();
+                scrollTop();
+            });
+            xhr.open('GET', 'resources/' + modelName + '.ffl');
+            return xhr.send();
         });
-        xhr.open('GET', 'resources/' + modelName + '.ffl');
-        xhr.send();
     }
 
     $.getJSON("/models", function(data, status, xhr) {
@@ -127,7 +129,7 @@ $(document).ready(function() {
         /*   enableSnippets: true,*/
         enableLiveAutocompletion: true,
         showFoldWidgets: true,
-        maxLines: 67
+        maxLines: 40
     });
 
 
@@ -136,27 +138,32 @@ $(document).ready(function() {
     }
 
     function previewModel() {
-        $.post("preview", {
-            model: $("#models").val(),
-            data: editor.getSession().getValue()
-        }, function(data) {
-            var url = 'http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + data.link + '&' + userID;
-            window.open(url);
+        Pace.track(function() {
+            $.post("preview", {
+                model: $("#models").val(),
+                data: editor.getSession().getValue()
+            }, function(data) {
+                var url = 'http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + data.link + '&' + userID;
+                window.open(url);
+            });
         });
     }
 
     $(".toggle-temp_preview-btn").click(function(e) {
-
-        previewModel();
+        Pace.track(function() {
+            previewModel();
+        });
     });
 
     function saveDocument() {
-        $.post("saveFFL_LME", {
-            model: $("#models").val(),
-            data: editor.getSession().getValue()
-        }, function(data) {
-            alert('Model [' + $("#models").val() + '] is updated');
-            $('#preview-model').show()
+        Pace.track(function() {
+            $.post("saveFFL_LME", {
+                model: $("#models").val(),
+                data: editor.getSession().getValue()
+            }, function(data) {
+                alert('Model [' + $("#models").val() + '] is updated');
+                $('#preview-model').show()
+            });
         });
     }
 

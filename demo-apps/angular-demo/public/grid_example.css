@@ -1,3 +1,47 @@
+/*
+ * Custom styles
+ */
+.navbar-brand {
+    font-size: 24px;
+}
+
+.navbar-header a {
+    color: white;
+    display: block;
+}
+
+.navbar-container {
+    padding: 8px 0 4px 0;
+}
+
+.navbar.navbar-fixed-top.fixed-theme {
+    background-color: #222;
+    border-color: #080808;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .8);
+}
+
+.navbar-brand.fixed-theme {
+    font-size: 18px;
+}
+
+.navbar-container.fixed-theme {
+    padding: 0;
+}
+
+.navbar.navbar-fixed-top {
+    background: #3c8dbc;
+}
+
+.navbar-brand.fixed-theme,
+.navbar-container.fixed-theme,
+.navbar.navbar-fixed-top.fixed-theme,
+.navbar-brand,
+.navbar-container {
+
+    transition: 0.8s;
+    -webkit-transition: 0.8s;
+}
+
 .main-header {
     position: relative;
     max-height: 100px;
@@ -67,6 +111,10 @@ section.container table {
     width: 100%;
 }
 
+.lmetable {
+    width: 100%;
+}
+
 .lmetable tr:nth-child(odd) {
     background-color: #ffffff;
 }
@@ -88,7 +136,8 @@ section.container table {
 td.txttd {
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 400px;
+    max-width: 200px;
+    min-width: 200px;
 }
 
 span.text {
@@ -134,4 +183,17 @@ div[data-toggle="buttons"] label:hover {
 div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active {
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+html,
+body {
+    overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
+body {
+    padding-top: 100px;
+}
+
+footer {
+    padding: 30px 0;
 }

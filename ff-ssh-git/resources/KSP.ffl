@@ -351,18 +351,7 @@ model KSP uses BaseModel
           datatype: string;
           frequency: document;
           data_options: unscalable;
-          title: "Warning voor map 1";
-          top_blanklines: 1;
-          locked: 1;
-          options_title: locked;
-          options: locked;
-        }
-        variable Q_MAP00_TEST
-        {
-          datatype: string;
-          frequency: document;
-          data_options: unscalable;
-          title: "Warning voor map 1";
+          title: "Warning voor map 221";
           top_blanklines: 1;
           locked: 1;
           options_title: locked;

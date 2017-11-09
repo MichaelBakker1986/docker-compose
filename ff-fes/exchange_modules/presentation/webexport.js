@@ -82,7 +82,7 @@ var properties = {
 }
 var repeats = {
     undefined: [3, 1],
-    none: [1, 3],
+    none: [0, 0],
     column: [3, 1],
     document: [1, 3],
     timeline: [1, 3]

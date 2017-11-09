@@ -62,7 +62,7 @@ class Stash {
     }
 
     models(branch, path) {
-        let command = "git checkout " + branch + " -q && git pull -q && git ls-files-root *." + path;
+        let command = develop ? "git ls-files-root *." + path : "git checkout " + branch + " -q && git pull -q && git ls-files-root *." + path;
         //log.info("Do command: [" + command + "]");
         return exec(command)
             .then(function(result) {
@@ -82,7 +82,7 @@ class Stash {
     }
 
     branches() {
-        let command = "git ls-remote --heads";
+        let command = develop ? "git branch" : "git ls-remote --heads";
         //log.info("Do command: [" + command + "]");
         return exec(command)
             .then(function(result) {
@@ -92,7 +92,7 @@ class Stash {
                 });
             }).catch(function(err) {
                 if (err.code === 128) {
-                    log.warn('while requesting remote branches, cannot connect to remote git, falling back to local')
+                    log.debug('while requesting remote branches, cannot connect to remote git, falling back to local')
                     return exec('git branch').then((result) => {
                         return result.stdout.split(/\t|\n/).filter((element, index, array) => {
                             return (index % 2 === 0);

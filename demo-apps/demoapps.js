@@ -3,11 +3,13 @@ var proxy = require('express-http-proxy');
 var compression = require('compression')
 var expressStaticGzip = require("express-static-gzip");
 var browserify = require('browserify-middleware');
+var nofavicon = require("express-no-favicons")
 var app = require('express')();
-app.use('/favicon.ico', require('express-favicon')(__dirname + '/favicon.png'));
+app.use(nofavicon());
 app.use(require('cors')());
 app.use(compression())
 app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/public/"));
+app.use('/', expressStaticGzip(__dirname + "/"));
 
 //showcase proxies
 app.use('/id/:id/showcase', expressStaticGzip(__dirname + "/showcase/"));

@@ -103,8 +103,9 @@ LmeAPI.prototype.persistData = function() {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.saveToken;
             window.location.href = '#' + self.modelName + '&' + self.saveToken
+            if (Pace) Pace.stop()
         }
     };
-    http.send(JSON.stringify({data: self.exportData()}));
+    return http.send(JSON.stringify({data: self.exportData()}));
 }
 module.exports = LmeAPI;

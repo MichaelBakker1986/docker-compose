@@ -204,6 +204,7 @@ var reversedFormulaMapping = {
 }
 var defaultValue = {
     visible: {
+        undefined: true,
         '1.0': true,
         '1': true,
         'true': true,
@@ -248,9 +249,9 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
             if (log.DEBUG) log.debug('[' + rowId + '] ' + node.choices)
         }
     }
-    if (parentId && parentId.match(/Q_MAP[0-9]{2}/)) {
+    /*if (parentId && parentId.match(/Q_MAP[0-9]{2}/)) {
         //   mappedDisplayType = "";
-    }
+    }*/
     //this should inherent work while adding a UINode to the Solution, checking if it has a valid displayType
     solution.addDisplayType(mappedDisplayType);
 
@@ -266,8 +267,15 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
     if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
         valueFormula = 'x.istrend ? ' + trendformula + ':' + valueFormula;
     }
-
-    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', valueFormula ? parseFFLFormula(valueFormula, 'none', rowId) : AST.UNDEFINED(), mappedDisplayType);
+    //TODO: quick-fix move into IDE -addon
+    if (rowId.match(/MAP[0-9]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
+        if (defaultValue.visible[node.visible]) {
+            node.visible = 'Length(' + rowId + ')'
+            //mappedDisplayType = rowId.replace(/.*_(.*)/,'$1').toLowerCase();
+            node.frequency = 'none'
+        }
+    }
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', valueFormula ? parseFFLFormula(valueFormula, 'none', rowId) : (mappedDisplayType == 'string' ? AST.STRING('') : AST.UNDEFINED()), mappedDisplayType);
     uiNode.displayAs = mappedDisplayType;
     if (!supportedFrequencies[node.frequency || 'document']) {//default frequency is document
         throw Error('Invalid frequency [' + node + ']');
