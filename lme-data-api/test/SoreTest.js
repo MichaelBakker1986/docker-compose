@@ -1,6 +1,12 @@
 const Figure = require('../api/Figure');
 const log = require('ff-log')
 const uuid = require('uuid4')
+
+var x = [[1, 2, 3], [1, 2, 3]]
+var totoal = x.map(a => {
+    return '(' + a.join(',') + ')'
+})
+console.info(totoal.join(','))
 Figure.orm.then((data) => {
     Figure.Figures.createAsync({
         uuid: uuid(),

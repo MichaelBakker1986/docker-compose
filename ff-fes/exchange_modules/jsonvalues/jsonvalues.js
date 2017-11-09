@@ -45,9 +45,8 @@ function updateValues(data, docValues) {
             nodeId = nodeId + '_value'
         }
         let fetch = PropertiesAssembler.fetch(nodeId);
-        if (!fetch) {
-            console.warn(nodeId + " does not exsist");
-        } else {
+        //we don't have to import values for variables we don't use.
+        if (fetch) {
             docValues[fetch.ref][parseInt(nodeColId)] = value.value;
         }
     }

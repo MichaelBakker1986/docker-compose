@@ -17,6 +17,7 @@
  */
 const dbConnectString = process.env.FIGURE_DB_STRING;
 const orm = require("orm");
+
 exports.orm = Promise.all([
     orm.connectAsync(dbConnectString).then(async (db) => {
         db.use(require('orm-timestamps'), {
@@ -35,7 +36,28 @@ exports.orm = Promise.all([
             col: String,
             val: String
         }, {
-            methods: {}
+            methods: {
+                getFigures: function(id) {
+                    // // SELECT lme.figure.* FROM lme.figure_tree as init join lme.figure on uuid_parent=figure.uuid where init.uuid ='adda566e-19fa-4474-b04c-fa3e6ea36056'
+                    return new Promise(function(ok, fail) {
+                        db.driver.execQuery("SELECT lme.figure.* FROM lme.figure_tree as init join lme.figure on uuid_parent=figure.uuid where init.uuid = ?", [id], function(err, result) {
+                            //var sql = db.driver.execQuery("SELECT * FROM figure where uuid = ?", [id], function(err, result) {
+                          ok(result)
+                          })
+                    });
+                },
+                insertFigures: function(id, data) {
+                    return new Promise(function(ok, fail) {
+                        var totoal = data.map(a => {
+                            return "('" + a.join("','") + "')"
+                        }).join(',')
+                        db.driver.execQuery("INSERT INTO lme.figure (uuid,var,col,val) VALUES " + totoal + "", [id], function(err, result) {
+                            //var sql = db.driver.execQuery("SELECT * FROM figure where uuid = ?", [id], function(err, result) {
+                            ok(result)
+                        })
+                    });
+                }
+            }
         }, {
             timestamp: true
         });

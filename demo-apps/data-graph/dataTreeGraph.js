@@ -11,6 +11,7 @@ function correctFileName(name) {
 angular.module('angapp').controller('graphController', function($scope, $http, $rootScope) {
 
     var params = window.location.href.split('#')[1].split('&')
+    var model = params[0] || 'MVO';
     let hash = params[1] || 'DEMO';
     $http.get('/id/' + hash + '/data').then(function(data) {
         console.info("GRAPH DATA: " + JSON.stringify(data))
@@ -29,7 +30,7 @@ angular.module('angapp').controller('graphController', function($scope, $http, $
                 font: "normal 12pt Arial"
             },
             onClick: function(commit) {
-                window.location.href = '#MVO&' + commit.sha1
+                window.location.href = '#' + model + '&' + commit.sha1
                 LMEMETA.loadData(function(response) {
                     $rootScope.$digest()
                 })
@@ -51,7 +52,7 @@ angular.module('angapp').controller('graphController', function($scope, $http, $
                 dotStrokeWidth: 10,
                 author: "michael.bakker@topicus.nl",
                 onClick: function(commit) {
-                    window.location.href = '#MVO&' + commit.sha1
+                    window.location.href = '#' + model + '&' + commit.sha1
                     LMEMETA.loadData(function(response) {
                         $rootScope.$digest()
                     })
