@@ -42,8 +42,9 @@ exports.orm = Promise.all([
                     return new Promise(function(ok, fail) {
                         db.driver.execQuery("SELECT lme.figure.* FROM lme.figure_tree as init join lme.figure on uuid_parent=figure.uuid where init.uuid = ?", [id], function(err, result) {
                             //var sql = db.driver.execQuery("SELECT * FROM figure where uuid = ?", [id], function(err, result) {
-                          ok(result)
-                          })
+                            if (err) fail(err)
+                            ok(result)
+                        })
                     });
                 },
                 insertFigures: function(id, data) {
@@ -53,6 +54,7 @@ exports.orm = Promise.all([
                         }).join(',')
                         db.driver.execQuery("INSERT INTO lme.figure (uuid,var,col,val) VALUES " + totoal + "", [id], function(err, result) {
                             //var sql = db.driver.execQuery("SELECT * FROM figure where uuid = ?", [id], function(err, result) {
+                            if (err) fail(err)
                             ok(result)
                         })
                     });
