@@ -115,8 +115,7 @@ FESFacade.getAllValues = function(docValues) {
                 values.push({
                     varName: formulaName,
                     colId: cachedValue,
-                    value: cachevalues[cachedValue],
-                    formulaId: formulaId
+                    value: cachevalues[cachedValue]
                 });
         }
     }

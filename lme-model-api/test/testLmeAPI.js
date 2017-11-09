@@ -3,12 +3,14 @@
  */
 
 XMLHttpRequest = require("xhr2").XMLHttpRequest;
+
 var modelAPI = require('../src/lme')
 require('../../ff-fes/exchange_modules/presentation/webexport');
+var rp = require('request-promise');
 var newModel = new modelAPI();
 newModel.importLME(require('./TESTMODEL.json'));
-var webModel = newModel.exportWebModel()
-var [VariableOne, VariableTwo] = [webModel.nodes.VariableOne, webModel.nodes.VariableTwo]
+LME = newModel.exportWebModel()
+var [VariableOne, VariableTwo] = [LME.nodes.VariableOne, LME.nodes.VariableTwo]
 //console.info(newModel.exportLME())
 window = {
     location: {
@@ -21,17 +23,38 @@ class LmeApiTester {
         newModel.urlPrefix = 'http://localhost:8085'
     }
 
+    testReceive(id) {
+        rp({
+            uri: newModel.urlPrefix + '/id/' + id + '/data',
+            json: true // Automatically parses the JSON string in the response
+        }).then(function(repos) {
+            console.log('User has %s repos', JSON.stringify(repos));
+        }).catch(function(err) {
+            console.error('Failed to complete ', err);
+        });
+    }
+
     testSave() {
+        var self = this;
         VariableOne.value = 1000;
         VariableTwo.value = 2000;
-        newModel.persistData()
+        newModel.persistData(function() {
+            let data = JSON.parse(this.responseText);
+            console.info(data)
+            VariableTwo.value = 3000;
+            self.testLoad()
+            self.testReceive(data.saveToken)
+        });
     }
 
     testLoad() {
-        var all = newModel.loadData();
+        newModel.loadData().onload = function() {
+            console.info(JSON.parse(this.responseText))
+        };
     }
 }
 
 let lmeApiTester = new LmeApiTester();
 lmeApiTester.testSave()
+lmeApiTester.testReceive('TEST');
 //lmeApiTester.testLoad()

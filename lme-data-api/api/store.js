@@ -5,20 +5,6 @@
 var uuid = require('uuid4');
 var log = require('ff-log')
 const Figure = require('./Figure');
-/**
- * Git structure DB
- *       |a=100     |a=300
- *       |b=200     |
- * dev   |_____|0___|1______________
- * usr2  |     \       \____________   = a=300,b=200
- *       |      \
- * usr1  |       \__________________   = a=100,b=200
- *
- *
- * parent|child
- * dev0   |usr1
- * dev1   |usr2
- */
 
 const MatrixStore = require('../MatrixStore').MatrixStore;
 module.exports.setup = function(app) {
@@ -47,12 +33,15 @@ module.exports.setup = function(app) {
      */
     app.post('/id/:id/data', function(req, res) {
         //resolve all entered values
+        var now = new Date().getTime();
+
         var parent = ds.getOrCreate(req.params.id)
         let newChild = ds.getOrCreate(uuid());
         newChild.parent = parent.id;
         for (var i = 0; i < req.body.data.length; i++) {
             var entry = req.body.data[i]
-            newChild.values[entry.varName] = entry
+            entry.savetime = now;
+            newChild.values[entry.varName + "#" + entry.colId] = entry
         }
         res.json({
             saveToken: newChild.id

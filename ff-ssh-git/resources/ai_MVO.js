@@ -1051,14 +1051,13 @@ SolutionFacade.addParser(FFLParser.prototype);
  Just calling getAllValues() internally to export
  */
 var SolutionFacade = require('../../fesjs/SolutionFacade');
+var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
 var jsonValues = {
     name: 'jsonvalues',
     extension: 'json',
     headername: 'JSON Values',
-    parseData: function(values, workbook) {
-        if (values) {
-            updateValues(values, workbook.context.values);
-        }
+    parseData: function(data, workbook) {
+        updateValues(data, workbook.context.values);
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
     deParse: function(rowId, workbook) {
@@ -1082,19 +1081,22 @@ function correctFileName(name) {
     return name.replace(/^([^_]+_[\w]*)_\w+$/gmi, '$1');
 }
 
-function updateValues(values, docValues) {
-    for (var i = 0; i < values.length; i++) {
-        var obj = values[i];
-        if (!docValues[obj.formulaId]) {
-            docValues[obj.formulaId] = [];
+function updateValues(data, docValues) {
+    for (var key in data.values) {
+        var value = data.values[key];
+        var nodeId = key.split('#')[0]
+        var nodeColId = key.split('#')[1]
+        if (!nodeId.endsWith('_value')) {
+            nodeId = nodeId + '_value'
         }
-        docValues[obj.formulaId][parseInt(obj.colId)] = obj.value;
+        let fetch = PropertiesAssembler.fetch(nodeId);
+        docValues[fetch.ref][parseInt(nodeColId)] = value.value;
     }
 }
 
 SolutionFacade.addParser(jsonValues)
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\ff-fes\\exchange_modules\\jsonvalues\\jsonvalues.js","/..\\ff-fes\\exchange_modules\\jsonvalues",undefined)
-},{"../../fesjs/SolutionFacade":20,"_process":81,"buffer":78}],8:[function(require,module,exports){
+},{"../../fesjs/PropertiesAssembler":18,"../../fesjs/SolutionFacade":20,"_process":81,"buffer":78}],8:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var SolutionFacade = require('../../fesjs/SolutionFacade.js')
 var FormulaService = require('../../fesjs/FormulaService.js')
@@ -1219,7 +1221,7 @@ function WebExport() {
 WebExport.prototype.parse = function(webExport) {
     throw new Error('Not yet supported');
 }
-var counter = 0;
+counter = 0;
 
 function LMETree(name, workbook) {
     this.name = name;
@@ -1694,8 +1696,7 @@ FESFacade.getAllValues = function(docValues) {
                 values.push({
                     varName: formulaName,
                     colId: cachedValue,
-                    value: cachevalues[cachedValue],
-                    formulaId: formulaId
+                    value: cachevalues[cachedValue]
                 });
         }
     }
@@ -60396,19 +60397,15 @@ LmeAPI.prototype.loadData = function() {
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.id;
-
-            for (var key in returnData.values) {
-                let dataObject = returnData.values[key];
-                LME.nodes[correctFileName(key)].cols[parseInt(dataObject.colId) - 2].value = dataObject.value
-            }
+            self.importData(returnData)
+            console.info('imported data')
             window.location.href = '#' + self.modelName + '&' + self.saveToken
-        } else if (http.status !== 0) {
-            console.info('State changed:' + http.status + ':' + http.readyState)
         }
     }
     http.send();
+    return http;
 }
-LmeAPI.prototype.persistData = function() {
+LmeAPI.prototype.persistData = function(callBack) {
     var self = this;
     //send data to server to store
     var params = window.location.href.split('#')
@@ -60427,10 +60424,11 @@ LmeAPI.prototype.persistData = function() {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.saveToken;
             window.location.href = '#' + self.modelName + '&' + self.saveToken
-            if (Pace) Pace.stop()
         }
     };
-    return http.send(JSON.stringify({data: self.exportData()}));
+    http.onload = callBack;
+    http.send(JSON.stringify({data: self.exportData()}));
+    return http;
 }
 module.exports = LmeAPI;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src\\lme.js","/src",undefined)

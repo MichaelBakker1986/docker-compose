@@ -21,8 +21,9 @@ exports.MatrixStore = class {
             const parententry = this.getOrCreate(entry.parent)
             total.parents[parententry.id] = parententry.create_date;
             for (var key in parententry.values) {
-                if (total[key] == undefined) {
-                    total[key] = parententry[key]
+                var hash = key + "#" + parententry.values[key].colId;
+                if (total[hash] == undefined) {
+                    total[hash] = parententry[key]
                 }
             }
             this.loadParents(parententry, total)

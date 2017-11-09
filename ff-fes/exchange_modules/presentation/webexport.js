@@ -11,7 +11,7 @@ function WebExport() {
 WebExport.prototype.parse = function(webExport) {
     throw new Error('Not yet supported');
 }
-var counter = 0;
+counter = 0;
 
 function LMETree(name, workbook) {
     this.name = name;

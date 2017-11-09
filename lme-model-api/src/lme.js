@@ -56,7 +56,7 @@ function correctFileName(name) {
  * use modelName from this.lme.modelName
  * use token form this.lme.context.uuid
  */
-LmeAPI.prototype.loadData = function() {
+LmeAPI.prototype.loadData = function(callBack) {
     var self = this;
     var params = window.location.href.split('#')
     if (params.length == 1) window.location.href = '#MVO&DEMO'
@@ -72,19 +72,16 @@ LmeAPI.prototype.loadData = function() {
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.id;
-
-            for (var key in returnData.values) {
-                let dataObject = returnData.values[key];
-                LME.nodes[correctFileName(key)].cols[parseInt(dataObject.colId) - 2].value = dataObject.value
-            }
+            self.importData(returnData)
+            console.info('imported data')
             window.location.href = '#' + self.modelName + '&' + self.saveToken
-        } else if (http.status !== 0) {
-            console.info('State changed:' + http.status + ':' + http.readyState)
         }
     }
+    http.onload = callBack;
     http.send();
+    return http;
 }
-LmeAPI.prototype.persistData = function() {
+LmeAPI.prototype.persistData = function(callBack) {
     var self = this;
     //send data to server to store
     var params = window.location.href.split('#')
@@ -103,9 +100,12 @@ LmeAPI.prototype.persistData = function() {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.saveToken;
             window.location.href = '#' + self.modelName + '&' + self.saveToken
-            if (Pace) Pace.stop()
         }
     };
-    return http.send(JSON.stringify({data: self.exportData()}));
+    http.onload = function() {
+        callBack(http.responseText)
+    };
+    http.send(JSON.stringify({data: self.exportData()}));
+    return http;
 }
 module.exports = LmeAPI;

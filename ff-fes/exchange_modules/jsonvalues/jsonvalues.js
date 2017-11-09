@@ -3,14 +3,13 @@
  Just calling getAllValues() internally to export
  */
 var SolutionFacade = require('../../fesjs/SolutionFacade');
+var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
 var jsonValues = {
     name: 'jsonvalues',
     extension: 'json',
     headername: 'JSON Values',
-    parseData: function(values, workbook) {
-        if (values) {
-            updateValues(values, workbook.context.values);
-        }
+    parseData: function(data, workbook) {
+        updateValues(data, workbook.context.values);
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
     deParse: function(rowId, workbook) {
@@ -34,13 +33,16 @@ function correctFileName(name) {
     return name.replace(/^([^_]+_[\w]*)_\w+$/gmi, '$1');
 }
 
-function updateValues(values, docValues) {
-    for (var i = 0; i < values.length; i++) {
-        var obj = values[i];
-        if (!docValues[obj.formulaId]) {
-            docValues[obj.formulaId] = [];
+function updateValues(data, docValues) {
+    for (var key in data.values) {
+        var value = data.values[key];
+        var nodeId = key.split('#')[0]
+        var nodeColId = key.split('#')[1]
+        if (!nodeId.endsWith('_value')) {
+            nodeId = nodeId + '_value'
         }
-        docValues[obj.formulaId][parseInt(obj.colId)] = obj.value;
+        let fetch = PropertiesAssembler.fetch(nodeId);
+        docValues[fetch.ref][parseInt(nodeColId)] = value.value;
     }
 }
 

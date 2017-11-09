@@ -1,6 +1,20 @@
 /**
  * DB Connector
  */
+/**
+ * Git structure DB
+ *       |a=100     |a=300
+ *       |b=200     |
+ * dev   |_____|0___|1______________
+ * usr2  |     \       \____________   = a=300,b=200
+ *       |      \
+ * usr1  |       \__________________   = a=100,b=200
+ *
+ *
+ * parent|child
+ * dev0   |usr1
+ * dev1   |usr2
+ */
 const dbConnectString = process.env.FIGURE_DB_STRING;
 const orm = require("orm");
 exports.orm = Promise.all([
