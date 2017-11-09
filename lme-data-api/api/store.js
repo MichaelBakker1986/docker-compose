@@ -20,6 +20,8 @@ module.exports.setup = function(app) {
 
         new Figure.Figures().getFigures(req.params.id).then(function(data) {
             // res.json(data)
+        }).catch((err) => {
+            console.err(err)
         })
 
         /*Figure.Figures.findAsync({}).then((data) => {
@@ -53,6 +55,8 @@ module.exports.setup = function(app) {
         new Figure.Figures().insertFigures(req.params.id, dbData).then(function(data) {
             // res.json(data)
             console.info(data)
+        }).catch((err) => {
+            console.err(err)
         })
 
         res.json({

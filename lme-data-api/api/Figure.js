@@ -40,7 +40,9 @@ exports.orm = Promise.all([
                 getFigures: function(id) {
                     // // SELECT lme.figure.* FROM lme.figure_tree as init join lme.figure on uuid_parent=figure.uuid where init.uuid ='adda566e-19fa-4474-b04c-fa3e6ea36056'
                     return new Promise(function(ok, fail) {
-                        db.driver.execQuery("SELECT lme.figure.* FROM lme.figure_tree as init join lme.figure on uuid_parent=figure.uuid where init.uuid = ?", [id], function(err, result) {
+                        let sql = "SELECT figure.* FROM figure_tree as init join figure on uuid_parent=figure.uuid where init.uuid = ?";
+                        console.info(sql)
+                        db.driver.execQuery(sql, [id], function(err, result) {
                             //var sql = db.driver.execQuery("SELECT * FROM figure where uuid = ?", [id], function(err, result) {
                             if (err) fail(err)
                             ok(result)
@@ -52,7 +54,9 @@ exports.orm = Promise.all([
                         var totoal = data.map(a => {
                             return "('" + a.join("','") + "')"
                         }).join(',')
-                        db.driver.execQuery("INSERT INTO lme.figure (uuid,var,col,val) VALUES " + totoal + "", [id], function(err, result) {
+                        let sql = "INSERT INTO figure (uuid,var,col,val) VALUES " + totoal;
+                        console.info(sql)
+                        db.driver.execQuery(sql, [id], function(err, result) {
                             //var sql = db.driver.execQuery("SELECT * FROM figure where uuid = ?", [id], function(err, result) {
                             if (err) fail(err)
                             ok(result)
