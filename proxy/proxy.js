@@ -43,6 +43,14 @@ app.listen(port, () => {
                 '/ide/': '/'
             }
         }));
+        app.use('*/ui/*', proxy({
+            toProxy: true,
+            target: 'http://' + add + ':8083',
+            changeOrigin: false,
+            pathRewrite: {
+                '/ui/': '/'
+            }
+        }));
         app.use('*/models', proxy({target: 'http://' + add + ':8080', changeOrigin: true}));
         app.use('*/branches', proxy({target: 'http://' + add + ':8080', changeOrigin: true}));
         app.use('*/data', proxy({target: 'http://' + add + ':8085', changeOrigin: true}));
