@@ -20,7 +20,7 @@ ModelListener.prototype.initializeModels = function() {
             log.warn('Error', err);
         } else {
             res.forEach(function(file) {
-                if (file.toLowerCase().endsWith('.ffl')) {
+                if (file.toLowerCase().endsWith('.ffl') && file.toLowerCase().indexOf('_tmp_') == -1) {
                     fs.readFile(file, function read(err, data) {
                         if (err) {
                             throw err;
