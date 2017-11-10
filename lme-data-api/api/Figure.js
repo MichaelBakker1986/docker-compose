@@ -38,30 +38,34 @@ exports.orm = Promise.all([
         }, {
             methods: {
                 getFigures: function(id) {
-                    // // SELECT lme.figure.* FROM lme.figure_tree as init join lme.figure on uuid_parent=figure.uuid where init.uuid ='adda566e-19fa-4474-b04c-fa3e6ea36056'
-                    return new Promise(function(ok, fail) {
-                        let sql = "SELECT figure.* FROM figure_tree as init join figure on uuid_parent=figure.uuid where init.uuid = ?";
-                        console.info(sql)
+                    return Promise.all([new Promise(function(ok, fail) {
+                        let sql = "SELECT figure.* FROM figure join ( SELECT max(figure.id) as m from figure inner join figure_tree on uuid_parent=figure.uuid where figure_tree.uuid=? group by var,col ) as best on best.m=figure.id";
                         db.driver.execQuery(sql, [id], function(err, result) {
-                            //var sql = db.driver.execQuery("SELECT * FROM figure where uuid = ?", [id], function(err, result) {
                             if (err) fail(err)
                             ok(result)
                         })
-                    });
+                    }), new Promise(function(ok, fail) {
+                        let sql = "SELECT uuid_parent from figure_tree where uuid=?";
+                        db.driver.execQuery(sql, [id], function(err, result) {
+                            if (err) fail(err)
+                            ok(result)
+                        })
+                    })]);
                 },
-                insertFigures: function(id, data) {
-                    return new Promise(function(ok, fail) {
-                        var totoal = data.map(a => {
-                            return "('" + a.join("','") + "')"
-                        }).join(',')
-                        let sql = "INSERT INTO figure (uuid,var,col,val) VALUES " + totoal;
-                        console.info(sql)
-                        db.driver.execQuery(sql, [id], function(err, result) {
-                            //var sql = db.driver.execQuery("SELECT * FROM figure where uuid = ?", [id], function(err, result) {
+                insertFigures: function(parent, own) {
+                    return Promise.all([new Promise(function(ok, fail) {
+                        db.driver.execQuery("INSERT INTO figure_tree (uuid,uuid_parent) VALUES ('" + parent + "','" + own.child + "'),('" + own.child + "','" + own.child + "');", [], function(err, result) {
                             if (err) fail(err)
                             ok(result)
                         })
-                    });
+                    }), new Promise(function(ok, fail) {
+                        db.driver.execQuery("INSERT INTO figure (uuid,var,col,val) VALUES " + own.values.map(a => {
+                            return "('" + a.join("','") + "')"
+                        }).join(','), [], function(err, result) {
+                            if (err) fail(err)
+                            ok(result)
+                        })
+                    })])
                 }
             }
         }, {

@@ -5,6 +5,7 @@
  */
 const storedValues = {}
 exports.MatrixStore = class {
+    //should call database
     getOrCreate(id) {
         storedValues[id] = storedValues[id] || {
             id: id,
@@ -14,19 +15,5 @@ exports.MatrixStore = class {
             // properties: { column: true,  variable: true,  value: true }
         };
         return storedValues[id];
-    }
-
-    loadParents(entry, total) {
-        if (entry.parent) {
-            const parententry = this.getOrCreate(entry.parent)
-            total.parents[parententry.id] = parententry.create_date;
-            for (var key in parententry.values) {
-                var hash = key + "#" + parententry.values[key].colId;
-                if (total[hash] == undefined) {
-                    total[hash] = parententry[key]
-                }
-            }
-            this.loadParents(parententry, total)
-        }
     }
 }

@@ -10,11 +10,12 @@ var rp = require('request-promise');
 var newModel = new modelAPI();
 newModel.importLME(require('./TESTMODEL.json'));
 LME = newModel.exportWebModel()
+var uuid = require('uuid')
 var [VariableOne, VariableTwo] = [LME.nodes.VariableOne, LME.nodes.VariableTwo]
 //console.info(newModel.exportLME())
 window = {
     location: {
-        href: "http://10.0.75.1:8083/id/DEMO/grid_example.html#MVO&DEMO"
+        href: "http://10.0.75.1:8083/id/DEMO/grid_example.html#MVO&" + uuid()
     }
 }
 
