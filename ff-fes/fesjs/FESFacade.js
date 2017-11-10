@@ -72,6 +72,10 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         var id = localFormula.id || localFormula.index;
         var hash = xas.hash + yas.hash + 0;
         return context.values[id][hash];
+    } else if (colType === 'original') {
+        var variable = fetchSolutionNode(row, 'value');
+        var localFormula = findFormula(variable);
+        return localFormula.original;
     }
     var variable = fetchSolutionNode(row, colType);
     var localFormula = findFormula(variable);

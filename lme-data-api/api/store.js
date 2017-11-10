@@ -51,16 +51,14 @@ module.exports.setup = function(app) {
 
         var now = new Date().getTime();
         let newChildId = uuid()
-        var dbData = {
-            child: newChildId,
-            values: []
-        }
+        var parentUuid = req.params.id;
+        var dbData = []
         for (var i = 0; i < req.body.data.length; i++) {
             var entry = req.body.data[i]
             entry.savetime = now;
-            dbData.values.push([newChildId, entry.varName, entry.colId, entry.value])
+            dbData.push([newChildId, entry.varName, entry.colId, entry.value])
         }
-        new Figure.Figures().insertFigures(req.params.id, dbData).then(function(data) {
+        new Figure.Figures().insertFigures(parentUuid, newChildId, dbData).then(function(data) {
             // res.json(data)
             console.info(data)
         }).catch((err) => {

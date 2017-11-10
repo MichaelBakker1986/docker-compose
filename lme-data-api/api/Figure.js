@@ -20,6 +20,15 @@ const orm = require("orm");
 
 exports.orm = Promise.all([
     orm.connectAsync(dbConnectString).then(async (db) => {
+        function parentUuids(id) {
+            return new Promise(function(ok, fail) {
+                db.driver.execQuery("SELECT uuid_parent from figure_tree where uuid=?", [id], function(err, result) {
+                    if (err) fail(err)
+                    ok(result)
+                })
+            })
+        }
+
         db.use(require('orm-timestamps'), {
             createdProperty: 'created_at',
             modifiedProperty: 'modified_at',
@@ -44,22 +53,16 @@ exports.orm = Promise.all([
                             if (err) fail(err)
                             ok(result)
                         })
-                    }), new Promise(function(ok, fail) {
-                        let sql = "SELECT uuid_parent from figure_tree where uuid=?";
-                        db.driver.execQuery(sql, [id], function(err, result) {
-                            if (err) fail(err)
-                            ok(result)
-                        })
-                    })]);
+                    }), parentUuids(id)]);
                 },
-                insertFigures: function(parent, own) {
+                insertFigures: function(parent, newChildId, values) {
                     return Promise.all([new Promise(function(ok, fail) {
-                        db.driver.execQuery("INSERT INTO figure_tree (uuid,uuid_parent) VALUES ('" + parent + "','" + own.child + "'),('" + own.child + "','" + own.child + "');", [], function(err, result) {
+                        db.driver.execQuery("INSERT INTO figure_tree (uuid,uuid_parent) VALUES ('" + newChildId + "','" + parent + "'),('" + newChildId + "','" + newChildId + "');", [], function(err, result) {
                             if (err) fail(err)
                             ok(result)
                         })
                     }), new Promise(function(ok, fail) {
-                        db.driver.execQuery("INSERT INTO figure (uuid,var,col,val) VALUES " + own.values.map(a => {
+                        db.driver.execQuery("INSERT INTO figure (uuid,var,col,val) VALUES " + values.map(a => {
                             return "('" + a.join("','") + "')"
                         }).join(','), [], function(err, result) {
                             if (err) fail(err)

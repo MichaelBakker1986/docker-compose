@@ -1,5 +1,5 @@
 var SolutionFacade = require('../../fesjs/SolutionFacade');
-var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices']
+var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original']
 
 function WebExport() {
     this.exportAsObject = true;
@@ -11,7 +11,6 @@ function WebExport() {
 WebExport.prototype.parse = function(webExport) {
     throw new Error('Not yet supported');
 }
-counter = 0;
 
 function LMETree(name, workbook) {
     this.name = name;
@@ -24,8 +23,8 @@ function noChange(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (counter !== c && c < 0) {
-                c = counter;
+            if (workbook.calc_count !== c && c < 0) {
+                c = workbook.calc_count;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
@@ -38,8 +37,8 @@ function changeAble(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (counter !== c) {
-                c = counter;
+            if (workbook.calc_count !== c) {
+                c = workbook.calc_count;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
@@ -52,14 +51,14 @@ function changeAndCache(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (counter !== c) {
-                c = counter;
+            if (workbook.calc_count !== c) {
+                c = workbook.calc_count;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
         },
         set: function(v) {
-            counter++;
+            workbook.calc_count = workbook.calc_count + 1;
             var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
             workbook.set(rowId, value, col, index, 0);
         }
@@ -72,6 +71,7 @@ function changeAndCache(workbook, rowId, col, index) {
  */
 var properties = {
     title: {change: true, prox: changeAndCache},
+    original: {change: true, prox: noChange},
     value: {change: true, prox: changeAndCache},
     visible: {prox: changeAble},
     entered: {prox: changeAble},

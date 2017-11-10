@@ -54,7 +54,7 @@ if (failure.length > 0) {
     throw Error('A test failed', failure);
 }
 else {
-    log.info('All test success')
+    log.info('All test success in ' + totalTestTime + 'ms')
 }
 module.exports = {
     results: testResults

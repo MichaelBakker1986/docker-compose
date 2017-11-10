@@ -34,6 +34,7 @@ var x = FES_LAYOUTNR;
 assert(!Q_MAP01_VRAAG01_MEMO.visible)
 Q_MAP01_VRAAG01.value = 1
 assert(Q_MAP01_VRAAG01_MEMO.visible)
+Q_MAP01_ENTEREDREQUIREDVARS.original;
 MVO.lme.fixProblemsInImportedSolution()
 
 

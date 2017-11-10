@@ -47,12 +47,7 @@ LmeAPI.prototype.importData = function(valueAsJSON) {
     this.lme.importSolution(valueAsJSON, 'jsonvalues')
 }
 
-function correctFileName(name) {
-    return name.replace(/^[^_]+_*([\w]*_\w+)$/gmi, '$1');
-}
-
 /**
- * TODO: refactor, its not that pretty.
  * use modelName from this.lme.modelName
  * use token form this.lme.context.uuid
  */
@@ -73,12 +68,11 @@ LmeAPI.prototype.loadData = function(callBack) {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.id;
             self.importData(returnData)
-            console.info('imported data')
             window.location.href = '#' + self.modelName + '&' + self.saveToken
         }
     }
     http.onload = function() {
-        counter = counter + 1;
+        self.lme.calc_count = self.lme.counter + 1;
         callBack(http.responseText)
     };
     http.send();
@@ -106,7 +100,7 @@ LmeAPI.prototype.persistData = function(callBack) {
         }
     };
     http.onload = function() {
-        counter = counter + 1;
+        self.lme.calc_count = self.lme.calc_count + 1;
         callBack(http.responseText)
     };
     http.send(JSON.stringify({data: self.exportData()}));

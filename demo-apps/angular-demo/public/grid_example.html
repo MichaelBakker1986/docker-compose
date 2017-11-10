@@ -14,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=AM_HTMLorMML-full.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.css"/>
     <link rel="stylesheet" type="text/css" href="grid_example.css"/>
     <script>
@@ -29,6 +30,9 @@
             }
             $scope.changeSearch = function(node) {
                 $scope.search = node.path + '.' + node.id
+                setTimeout(function () {
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                });
             }
 
             function persist() {
@@ -47,7 +51,6 @@
                 $scope.LMEMETA = LMEMETA;
                 $scope.saveData = persist
                 LMEMETA.loadData(function(response) {
-                    console.info('response:' + response)
                     $scope.$digest()//TODO: move into $scope.apply to update the ID hash or something.
                 })
 
@@ -83,6 +86,7 @@
                 Figure {{name}}
                 <small> Preview page</small>
             </a>
+            <script type="math/asciimath">sum_(i=1)^n i^3=((n(n+1))/2)^2</script>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -105,13 +109,21 @@
             <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
             <ul class="list-group" ng-repeat="f in LME_MODEL | pick:'children.length > 1 && path.endsWith(\'Q_ROOT\')'" ng-if="f.visible">
                 <li class="list-group-item" ng-click="changeSearch(f)" ng-bind="f.title"></li>
+
             </ul>
         </div>
         <div class="col-sm-9">
             <div class="row" ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search | first: 200" ng-if="f.visible">
-                <div><i ng-if="f.tuple" class="fa fa-caret-right"></i></div>
-                <div class="txttd" colspan="{{f.colspan==0?5 :1}}"><span contenteditable="true" ng-bind="f.cols.length==0? f.value: f.title" ng-class="'text ' + (f.required?'required':'')"></span> <i
-                        ng-class=" f.hint ? 'fa fa-info' : 'icon' " title="{{f.hint}}"></i></div>
+                <div>
+                    <!--sum_(i=1)^n i^3=((n(n+1))/2)^2-->
+                    <script type="math/asciimath" ng-bind="f.original"></script>
+                </div>
+                <div>
+                    <i ng-if="f.tuple" class="fa fa-caret-right"></i>
+                </div>
+                <div class="txttd" colspan="{{f.colspan==0?5 :1}}">
+                    <span contenteditable="true" ng-bind="f.cols.length==0? f.value: f.title" ng-class="'text ' + (f.required?'required':'')"></span> <i ng-class=" f.hint ? 'fa fa-info' : 'icon' " title="{{f.hint}}"></i>
+                </div>
                 <div ng-repeat="cv in f.cols" colspan="{{f.colspan}}" ng-switch="f.type">
                     <div class="input-group" ng-init="pid = $index" ng-class="cv.entered ? 'isentered' : undefined">
                         <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>

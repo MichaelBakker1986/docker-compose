@@ -1093,9 +1093,8 @@ function updateValues(data, docValues) {
             nodeId = nodeId + '_value'
         }
         let fetch = PropertiesAssembler.fetch(nodeId);
-        if (!fetch) {
-            console.warn(nodeId + " does not exsist");
-        } else {
+        //we don't have to import values for variables we don't use.
+        if (fetch) {
             docValues[fetch.ref][parseInt(nodeColId)] = value.value;
         }
     }
@@ -1241,8 +1240,8 @@ function noChange(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (counter !== c && c < 0) {
-                c = counter;
+            if (workbook.counter !== c && c < 0) {
+                c = workbook.counter;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
@@ -1255,8 +1254,8 @@ function changeAble(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (counter !== c) {
-                c = counter;
+            if (workbook.counter !== c) {
+                c = workbook.counter;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
@@ -1269,14 +1268,14 @@ function changeAndCache(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (counter !== c) {
-                c = counter;
+            if (workbook.counter !== c) {
+                c = workbook.counter;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
         },
         set: function(v) {
-            counter++;
+            workbook.counter = workbook.counter + 1;
             var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
             workbook.set(rowId, value, col, index, 0);
         }
@@ -2706,6 +2705,7 @@ function JSWorkBook(context) {
     this.yaxis = YAxis;
     //time axis, we looking at bookyears at the moment
     this.xaxis = XAxis.bkyr.columns[0]
+    this.calc_count = 0;
 }
 
 JSWorkBook.prototype.importSolution = function(data, parserType) {
@@ -60379,12 +60379,7 @@ LmeAPI.prototype.importData = function(valueAsJSON) {
     this.lme.importSolution(valueAsJSON, 'jsonvalues')
 }
 
-function correctFileName(name) {
-    return name.replace(/^[^_]+_*([\w]*_\w+)$/gmi, '$1');
-}
-
 /**
- * TODO: refactor, its not that pretty.
  * use modelName from this.lme.modelName
  * use token form this.lme.context.uuid
  */
@@ -60405,12 +60400,11 @@ LmeAPI.prototype.loadData = function(callBack) {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.id;
             self.importData(returnData)
-            console.info('imported data')
             window.location.href = '#' + self.modelName + '&' + self.saveToken
         }
     }
     http.onload = function() {
-        counter = counter + 1;
+        self.lme.counter = self.lme.counter + 1;
         callBack(http.responseText)
     };
     http.send();
@@ -60438,7 +60432,7 @@ LmeAPI.prototype.persistData = function(callBack) {
         }
     };
     http.onload = function() {
-        counter = counter + 1;
+        self.lme.counter = self.lme.counter + 1;
         callBack(http.responseText)
     };
     http.send(JSON.stringify({data: self.exportData()}));
