@@ -41,14 +41,18 @@ module.exports.setup = function(app) {
                 values: values
             })
         }).catch((err) => {
-            console.err(err)
+            if (log.DEBUG) log.warn('error while resolving figures:', err)
+            req.json({
+                id: req.params.id,
+                status: 'fail',
+                values: []
+            })
         })
     });
     /**
      * Store entered values supplied by the client
      */
     app.post('/id/:id/data', function(req, res) {
-
         var now = new Date().getTime();
         let newChildId = uuid()
         var parentUuid = req.params.id;
@@ -59,14 +63,14 @@ module.exports.setup = function(app) {
             dbData.push([newChildId, entry.varName, entry.colId, entry.value])
         }
         new Figure.Figures().insertFigures(parentUuid, newChildId, dbData).then(function(data) {
-            // res.json(data)
-            console.info(data)
+            res.json({
+                saveToken: newChildId
+            })
         }).catch((err) => {
-            console.error(err)
-        })
-
-        res.json({
-            saveToken: newChildId
+            if (log.DEBUG) log.warn('error while inserting figures:', err)
+            res.json({
+                status: 'fail'
+            })
         })
     });
 };
