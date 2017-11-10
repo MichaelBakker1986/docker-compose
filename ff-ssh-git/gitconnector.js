@@ -26,7 +26,6 @@ ModelListener.prototype.initializeModels = function() {
                             throw err;
                         }
                         var modelData = "" + new Buffer(data, 'binary').toString('utf-8');
-                        if (log.TRACE) log.debug('Initalizing new model:[' + modelData + ']');
                         modelData = modelData.replace(/amount/gmi, 'Amount');
                         modelData = modelData.replace(/GoodWill/gmi, 'GoodWill');
                         modelData = modelData.replace(/MatrixLookup/gmi, 'MatrixLookup');
@@ -41,7 +40,7 @@ ModelListener.prototype.initializeModels = function() {
                             ffls.push(modelData);
                             modelListener.onNewModel(modelData)
                         } catch (err) {
-                            log.warn("Could not initalize model [path]", file.toLowerCase());
+                            log.warn("Could not initalize model [path] \n", file.toLowerCase(), modelData);
                             if (log.DEBUG) log.error(err)
                         }
                     });
