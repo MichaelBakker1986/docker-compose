@@ -25,19 +25,19 @@ ModelListener.prototype.initializeModels = function() {
                         if (err) {
                             throw err;
                         }
-                        if (log.TRACE) log.debug('Initalizing new model:[' + model + ']');
+                        var modelData = "" + new Buffer(data, 'binary').toString('utf-8');
+                        if (log.TRACE) log.debug('Initalizing new model:[' + modelData + ']');
+                        modelData = modelData.replace(/amount/gmi, 'Amount');
+                        modelData = modelData.replace(/GoodWill/gmi, 'GoodWill');
+                        modelData = modelData.replace(/MatrixLookup/gmi, 'MatrixLookup');
+                        modelData = modelData.replace(/Startdate/gmi, 'StartDate');
+                        modelData = modelData.replace(/Bookvalue/gmi, 'BookValue');
+                        modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses');
+                        modelData = modelData.replace(/DiscountRateTaxShieldBasis/gmi, 'DiscountRateTaxShieldBasis')
+                        modelData = modelData.replace(/krWirtschaftlichesEigenKapitalRating/gmi, 'krWirtschaftlichesEigenKapitalRating')
+                        modelData = modelData.replace(/OtherTransitionalAssets/gmi, 'OtherTransitionalAssets')
+                        modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
                         try {
-                            var modelData = "" + new Buffer(data, 'binary').toString('utf-8');
-                            modelData = modelData.replace(/amount/gmi, 'Amount');
-                            modelData = modelData.replace(/GoodWill/gmi, 'GoodWill');
-                            modelData = modelData.replace(/MatrixLookup/gmi, 'MatrixLookup');
-                            modelData = modelData.replace(/Startdate/gmi, 'StartDate');
-                            modelData = modelData.replace(/Bookvalue/gmi, 'BookValue');
-                            modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses');
-                            modelData = modelData.replace(/DiscountRateTaxShieldBasis/gmi, 'DiscountRateTaxShieldBasis')
-                            modelData = modelData.replace(/krWirtschaftlichesEigenKapitalRating/gmi, 'krWirtschaftlichesEigenKapitalRating')
-                            modelData = modelData.replace(/OtherTransitionalAssets/gmi, 'OtherTransitionalAssets')
-                            modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
                             ffls.push(modelData);
                             modelListener.onNewModel(modelData)
                         } catch (err) {
