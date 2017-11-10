@@ -30,9 +30,8 @@ function clientErrorHandler(err, req, res, next) {
     }
 }
 
-app.listen(80, () => {
+app.listen(port, () => {
     require('dns').lookup(hostname, (err, add, fam) => {
-        let domain = 'http://' + add + ':' + port + '/';
         app.use('*/showcase', proxy({target: 'http://' + add + ':8083', changeOrigin: true}));
         app.post('*/saveFFL_LME', express_proxy('http://' + add + ':8080', {limit: '50mb'}));
         app.post('*/preview', express_proxy('http://' + add + ':8080', {limit: '50mb'}));
