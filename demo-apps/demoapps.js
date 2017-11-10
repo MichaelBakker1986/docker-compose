@@ -8,7 +8,7 @@ var app = require('express')();
 app.use(nofavicon());
 app.use(require('cors')());
 app.use(compression())
-app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/public/"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/"));
 app.use('/', expressStaticGzip(__dirname + "/"));
 
 //showcase proxies
@@ -29,10 +29,10 @@ app.post('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/
 app.use('/id/:id/resources/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
 
 //IDE proxies
-app.get('/id/:id/excelIDE.js', proxy('http://' + require('os').hostname() + ':8080/id/:id/excelIDE.js', {limit: '50mb'}))
-app.get('/id/:id/aceModelIDE.js', proxy('http://' + require('os').hostname() + ':8080/id/:id/aceModelIDE.js', {limit: '50mb'}))
-app.post('/id/:id/saveFFL_LME', proxy('http://' + require('os').hostname() + ':8080/id/:id/saveFFL_LME', {limit: '50mb'}));
-app.post('/id/:id/preview', proxy('http://' + require('os').hostname() + ':8080/id/:id/preview', {limit: '50mb'}));
+app.get('*/excelide.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
+app.get('*/aceide.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
+app.post('*/saveFFL_LME', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}));
+app.post('*/preview', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}));
 app.get('/models', proxy('http://' + require('os').hostname() + ':8080/models'));
 app.get('/branches', proxy('http://' + require('os').hostname() + ':8080/branches'));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/"));
@@ -47,12 +47,12 @@ app.listen(port, function() {
             '<span>DEMO apps: </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/grid_example.html#MVO&DEMO">Angular Grid example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
-            '<a href="http://' + domain + '/id/DEMO/showcase/">Showcase example</a><span> | </span>\n' +
+            '<a href="http://' + domain + '/id/DEMO/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/datagraph.html">Data graph</a>\n' +
             '<br><span>IDE apps: </span>\n' +
-            '<a href="http://' + domain + '/id/DEMO/aceModelIDE.html">IDE DEMO Application</a><span> | </span>\n' +
-            '<a href="http://' + domain + '/id/DEMO/excelIDE.html">ExcelIDE application</a>'
+            '<a href="http://' + domain + '/id/DEMO/aceide.html">IDE DEMO Application</a><span> | </span>\n' +
+            '<a href="http://' + domain + '/id/DEMO/excelide.html">ExcelIDE application</a>'
         )
     })
 });

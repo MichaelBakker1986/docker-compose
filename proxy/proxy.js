@@ -1,30 +1,32 @@
 var port = 80;
 var express = require('express');
+var http = require('http')
 var app = express();
 var hostname = require('os').hostname();
 app.use(require('express-favicon')());
-var expressStaticGzip = require("express-static-gzip");
-var proxy = require('express-http-proxy');
-var httpProxy = require('http-proxy');
+var proxy = require('http-proxy-middleware');
+var express_proxy = require('express-http-proxy');
 var bodyParser = require('body-parser')
-app.use(require('compression')())
 app.use(require('cors')())
 app.set('port', port)
-app.use(bodyParser.json({limit: '50mb'}));       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-    extended: true,
-    limit: '50mb'
-}));
 
-
-app.get('/id/:id', proxy('http://' + hostname + ':8085/id/:id'));
-app.use('/id/:id/transformFFL_LME/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
-app.use('/id/:id/showcase/', proxy('http://' + hostname + ':8083/:id/showcase/'));
-
-
-app.listen(port, () => {
-    require('dns').lookup(require('os').hostname(), (err, add, fam) => {
+app.listen(80, () => {
+    require('dns').lookup(hostname, (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
-        console.info('<span>Proxy: </span><a href="http://' + add + '/id/DEMO/showcase">proxy</a>')
+        app.use('*/showcase', proxy({target: 'http://' + add + ':8083', changeOrigin: true}));
+        app.post('*/saveFFL_LME', express_proxy('http://' + add + ':8080', {limit: '50mb'}));
+        app.post('*/preview', express_proxy('http://' + add + ':8080', {limit: '50mb'}));
+        app.use('*/ide/*', proxy({
+            toProxy: true,
+            target: 'http://' + add + ':8083',
+            changeOrigin: false,
+            pathRewrite: {
+                '/ide/': '/'
+            }
+        }));
+        app.use('*/models', proxy({target: 'http://' + add + ':8080', changeOrigin: true}));
+        app.use('*/branches', proxy({target: 'http://' + add + ':8080', changeOrigin: true}));
+        app.use('*/data', proxy({target: 'http://' + add + ':8085', changeOrigin: true}));
+        app.use('*/resources', proxy({target: 'http://' + add + ':8083', changeOrigin: true}));
     })
 });

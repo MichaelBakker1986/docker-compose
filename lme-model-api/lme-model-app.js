@@ -22,7 +22,7 @@ var stash = require('./src/stash').Stash;
 browserify.settings({
     transform: [require('browserify-fastjson')]
 })
-app.use('/id/:id/excelIDE.js', browserify(__dirname + '/src/excelModelIDE.js', {
+app.use('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
     cache: true,
     gzip: true,
     insertGlobals: true,
@@ -30,12 +30,12 @@ app.use('/id/:id/excelIDE.js', browserify(__dirname + '/src/excelModelIDE.js', {
     minify: true,
     precompile: true
 }));
-app.use('/id/:id/aceModelIDE.js', browserify(__dirname + '/src/aceModelIDE.js', {
+app.use('*/aceide.js', browserify(__dirname + '/src/aceide.js', {
     gzip: true,
     insertGlobals: true,
     debug: false
 }));
-app.post('/id/:id/preview', (req, res) => {
+app.post('*/preview', (req, res) => {
     stash.preview(req.body.model, req.body.data).then((data) => {
         res.json({status: 'ok', link: data});
     }).catch((err) => {
@@ -43,7 +43,7 @@ app.post('/id/:id/preview', (req, res) => {
         res.json({status: 'fail', reason: err.toString()});
     })
 });
-app.post('/id/:id/saveFFL_LME', (req, res) => {
+app.post('*/saveFFL_LME', (req, res) => {
     stash.commit(req.body.model, req.body.data).then((data) => {
         res.json({status: 'ok'});
     }).catch((err) => {

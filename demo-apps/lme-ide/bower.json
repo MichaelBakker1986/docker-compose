@@ -5,7 +5,7 @@
   ],
   "description": "lme ide examples",
   "main": [
-    "aceModelIDE.html",
+    "aceide.html",
     "dist/css/AdminLTE.css",
     "dist/js/app.js",
     "build/less/AdminLTE.less"
