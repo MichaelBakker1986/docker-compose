@@ -3,7 +3,7 @@ const functionMapper = {
         regex: /variable (\w+) is set to (\d+) for document/,
         call: function([$1, $2]) {
             return [function() {
-                console.info('LME.nodes'+ $1 + ".value =" + $2)
+                console.info('LME.nodes.'+ $1 + ".value =" + $2)
             }]
         }
     }
