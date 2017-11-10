@@ -9,7 +9,15 @@ var express_proxy = require('express-http-proxy');
 var bodyParser = require('body-parser')
 app.use(require('cors')())
 app.set('port', port)
+app.use(errorHandler)
 
+function errorHandler(err, req, res, next) {
+    if (res.headersSent) {
+        return next(err)
+    }
+    res.status(500)
+    res.render('error', {error: err})
+}
 app.listen(80, () => {
     require('dns').lookup(hostname, (err, add, fam) => {
         let domain = 'http://' + add + ':' + port + '/';
@@ -29,4 +37,4 @@ app.listen(80, () => {
         app.use('*/data', proxy({target: 'http://' + add + ':8085', changeOrigin: true}));
         app.use('*/resources', proxy({target: 'http://' + add + ':8083', changeOrigin: true}));
     })
-});
+});// Listen for the `error` event on `proxy`.
