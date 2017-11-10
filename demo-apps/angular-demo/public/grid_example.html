@@ -30,7 +30,7 @@
             }
             $scope.changeSearch = function(node) {
                 $scope.search = node.path + '.' + node.id
-                setTimeout(function () {
+                setTimeout(function() {
                     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
                 });
             }
@@ -114,8 +114,7 @@
         <div class="col-sm-9">
             <div class="row" ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search | first: 200" ng-if="f.visible">
                 <div>
-                    <!--sum_(i=1)^n i^3=((n(n+1))/2)^2-->
-                    <script type="math/asciimath" ng-bind="f.original"></script>
+                    <script ng-if="f.original!== 'undefined' " type="math/asciimath" ng-bind="f.original"></script>
                 </div>
                 <div>
                     <i ng-if="f.tuple" class="fa fa-caret-right"></i>
