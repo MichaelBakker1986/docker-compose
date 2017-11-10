@@ -1,4 +1,4 @@
-// model "Maatschappelijk Verantwoord Ondernemen"  //  //  //
+// model "Maatschappelijk Verantwoord Ondernemen"
 // created by FINAN 3.2.57.14
 
 import FinanMath.*;
@@ -14,7 +14,7 @@ model MVO uses BaseModel
     {
       datatype: none;
       frequency: none;
-      title: "General variables for webcli21321312321enth3oi";
+      title: "General variables for webclient";
       top_blanklines: 1;
       display_options: showColumnTitlesAboveSubVars;
       locked: 1;

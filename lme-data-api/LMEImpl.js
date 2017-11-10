@@ -7,6 +7,9 @@ const modelNames = []
 const apidef = require(__dirname + '/api/swaggerDef.json');
 var lastModelName;// = modelNames[0]
 modelService.onNewModel = function(model) {
+    if (log.DEBUG) {
+        log.debug('initalizing new model:[' + model + ']')
+    }
     let modelName = lmeAPI.init(model);
     modelNames.push(modelName);
     lastModelName = modelName;

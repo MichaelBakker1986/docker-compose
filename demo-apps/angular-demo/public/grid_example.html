@@ -38,7 +38,6 @@
             function persist() {
                 Pace.start();
                 LMEMETA.persistData(function(response) {
-                    Pace.stop()
                     $scope.$digest()
                 });
             }
