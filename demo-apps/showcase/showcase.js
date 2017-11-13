@@ -9,7 +9,9 @@ angularApplication.controller('myController', function($scope, $http, $interval)
         //create a tree from current loaded model
         //tell angular to apply model nodes to the controller $scope
         $scope.LME_MODEL = LME.nodes;
-
+        LMEMETA.loadData(function(response) {
+            $scope.$digest()
+        })
         $scope.initChart();
 
     }).catch(function(err) {
