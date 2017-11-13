@@ -1239,8 +1239,8 @@ function noChange(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (workbook.calc_count !== c && c < 0) {
-                c = workbook.calc_count;
+            if (workbook.context.calc_count !== c && c < 0) {
+                c = workbook.context.calc_count;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
@@ -1253,8 +1253,8 @@ function changeAble(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (workbook.calc_count !== c) {
-                c = workbook.calc_count;
+            if (workbook.context.calc_count !== c) {
+                c = workbook.context.calc_count;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
@@ -1267,14 +1267,13 @@ function changeAndCache(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (workbook.calc_count !== c) {
-                c = workbook.calc_count;
+            if (workbook.context.calc_count !== c) {
+                c = workbook.context.calc_count;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
         },
         set: function(v) {
-            workbook.calc_count = workbook.calc_count + 1;
             var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
             workbook.set(rowId, value, col, index, 0);
         }
@@ -1641,6 +1640,7 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
         throw Error('Cannot find variable')
     }
     logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
+    context.calc_count++;
     FunctionMap.apiSet(localFormula, xas, yas, 0, value, context.values);
 };
 /**
@@ -2709,7 +2709,7 @@ function JSWorkBook(context) {
     this.yaxis = YAxis;
     //time axis, we looking at bookyears at the moment
     this.xaxis = XAxis.bkyr.columns[0]
-    this.calc_count = 0;
+    context.calc_count = 0;
 }
 
 JSWorkBook.prototype.importSolution = function(data, parserType) {
@@ -60408,7 +60408,7 @@ LmeAPI.prototype.loadData = function(callBack) {
         }
     }
     http.onload = function() {
-        self.lme.calc_count = self.lme.counter + 1;
+        self.lme.context = self.lme.counter + 1;
         callBack(http.responseText)
     };
     http.send();
@@ -60436,7 +60436,7 @@ LmeAPI.prototype.persistData = function(callBack) {
         }
     };
     http.onload = function() {
-        self.lme.calc_count = self.lme.calc_count + 1;
+        self.lme.context.calc_count++;
         callBack(http.responseText)
     };
     http.send(JSON.stringify({data: self.exportData()}));

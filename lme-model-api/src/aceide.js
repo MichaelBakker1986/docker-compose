@@ -26,6 +26,9 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
     $scope.session = {
         user: {
             name: userID
+        },
+        messages: {
+            data: []
         }
     }
     $scope.runJBehaveTest = function() {
@@ -39,6 +42,11 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
                 type: event.result.status // also warning and information
             })
             editor.session.setAnnotations(annotations);
+        }
+        storyParser.then = function(event) {
+            $scope.session.messages.data.push({
+                text: 'jBehave tests done ' + storyParser.results.rate().toFixed(1) + '% passed'
+            })
         }
         storyParser.start();
         storyParser.call();

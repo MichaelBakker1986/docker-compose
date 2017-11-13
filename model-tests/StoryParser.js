@@ -2,7 +2,8 @@ const functionMapper = {
     //And variable Q_MAP04_VRAAG12 is set to 0 for document
     valueset: {
         regex: /variable (\w+) is set to (\d+) for document/,
-        call: function([$1, $2]) {
+        call: function(args) {
+            var $1 = args[0], $2 = args[1]
             return [function() {
                 LME.nodes[$1].value = $2
                 return {
@@ -15,7 +16,8 @@ const functionMapper = {
     assert: {
         //Then variable Q_MAP01_SUBSCORE01 should have 0 decimals rounded value 14 for document
         regex: /variable (\w+) should have (\d+) decimals rounded value (\d+)/,
-        call: function([$1, $2, $3]) {
+        call: function(args) {
+            var $1 = args[0], $2 = args[1], $3 = args[2]
             return [function() {
                 var result = {};
                 let rawValue = LME.nodes[$1].value;
@@ -36,6 +38,14 @@ const functionMapper = {
 function StoryParser(story) {
     this.lines = story.split('\n')
     this.calls = [];
+    this.results = {
+        passed: 0,
+        failed: 0,
+        total: 0,
+        rate: function() {
+            return (100 / this.total  ) * (this.passed)
+        }
+    };
 }
 
 StoryParser.prototype.start = function() {
@@ -78,10 +88,25 @@ StoryParser.prototype.call = function() {
             this.on(on);
         }
     }
+    this.on({
+        type: 'done',
+        result: {
+            status: 'info'
+        }
+    });
 }
 StoryParser.prototype.on = function(event) {
+    if (event.result.status == 'error') {
+        this.results.failed++;
+    } else {
+        this.results.passed++;
+    }
+    this.results.total++;
     if (event.type == 'call') {
         this.message(event)
+    }
+    else if (event.type == 'done') {
+        this.then(event)
     }
 }
 exports.StoryParser = StoryParser;

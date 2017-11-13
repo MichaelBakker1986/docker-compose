@@ -72,7 +72,7 @@ LmeAPI.prototype.loadData = function(callBack) {
         }
     }
     http.onload = function() {
-        self.lme.calc_count = self.lme.counter + 1;
+        self.lme.context.calc_count++;
         callBack(http.responseText)
     };
     http.send();
@@ -100,7 +100,7 @@ LmeAPI.prototype.persistData = function(callBack) {
         }
     };
     http.onload = function() {
-        self.lme.calc_count = self.lme.calc_count + 1;
+        self.lme.context.calc_count++;
         callBack(http.responseText)
     };
     http.send(JSON.stringify({data: self.exportData()}));

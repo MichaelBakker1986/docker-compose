@@ -22,7 +22,7 @@ function doBatch(batchId) {
         return;
     }
     var promises = [];
-    for (var batchSizeIndex = 0; batchSizeIndex < 5; batchSizeIndex++) {
+    for (var batchSizeIndex = 0; batchSizeIndex < 6; batchSizeIndex++) {
         promises.push(call(batchId + "_" + batchSizeIndex))
     }
     var start = now();

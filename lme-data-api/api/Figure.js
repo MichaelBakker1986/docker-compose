@@ -54,10 +54,13 @@ exports.orm = Promise.all([
                             ok(result)
                         })
                     }), parentUuids(id)]);
-                },
+                }
+                ,
                 insertFigures: function(parent, newChildId, values) {
                     return Promise.all([new Promise(function(ok, fail) {
-                        db.driver.execQuery("INSERT INTO figure_tree (uuid,uuid_parent) VALUES ('" + newChildId + "','" + parent + "'),('" + newChildId + "','" + newChildId + "');", [], function(err, result) {
+                        var sql = "INSERT INTO figure_tree (uuid,uuid_parent)  SELECT '" + newChildId + "' as uuid,uuid_parent as uuid_parent FROM figure_tree where uuid = '" + parent + "' UNION  select '" + newChildId + "','" + newChildId + "';";
+                        var oldSql = "INSERT INTO figure_tree (uuid,uuid_parent) VALUES ('" + newChildId + "','" + parent + "'),('" + newChildId + "','" + newChildId + "');";
+                        db.driver.execQuery(sql, [], function(err, result) {
                             if (err) fail(err)
                             ok(result)
                         })
@@ -86,8 +89,11 @@ exports.orm = Promise.all([
         }, {
             timestamp: true
         });
+
         exports.Figures = Figures;
         exports.FigureTree = FigureTree;
+
+
         return db.sync(async (err) => {
             if (err) throw err;
             return await "";
@@ -98,3 +104,4 @@ exports.orm = Promise.all([
 ]).catch((err) => {
     throw err;
 })
+

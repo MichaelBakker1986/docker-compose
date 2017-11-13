@@ -54,6 +54,7 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
         throw Error('Cannot find variable')
     }
     logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
+    context.calc_count++;
     FunctionMap.apiSet(localFormula, xas, yas, 0, value, context.values);
 };
 /**

@@ -30,7 +30,7 @@ function JSWorkBook(context) {
     this.yaxis = YAxis;
     //time axis, we looking at bookyears at the moment
     this.xaxis = XAxis.bkyr.columns[0]
-    this.calc_count = 0;
+    context.calc_count = 0;
 }
 
 JSWorkBook.prototype.importSolution = function(data, parserType) {

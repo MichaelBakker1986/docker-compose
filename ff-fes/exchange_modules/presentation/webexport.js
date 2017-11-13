@@ -23,8 +23,8 @@ function noChange(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (workbook.calc_count !== c && c < 0) {
-                c = workbook.calc_count;
+            if (workbook.context.calc_count !== c && c < 0) {
+                c = workbook.context.calc_count;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
@@ -37,8 +37,8 @@ function changeAble(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (workbook.calc_count !== c) {
-                c = workbook.calc_count;
+            if (workbook.context.calc_count !== c) {
+                c = workbook.context.calc_count;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
@@ -51,14 +51,13 @@ function changeAndCache(workbook, rowId, col, index) {
     let c = -1;//calculation counter
     return {
         get: function() {
-            if (workbook.calc_count !== c) {
-                c = workbook.calc_count;
+            if (workbook.context.calc_count !== c) {
+                c = workbook.context.calc_count;
                 r = workbook.get(rowId, col, index, 0);
             }
             return r;
         },
         set: function(v) {
-            workbook.calc_count = workbook.calc_count + 1;
             var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
             workbook.set(rowId, value, col, index, 0);
         }

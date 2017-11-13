@@ -5,8 +5,8 @@ function doProxy(workbook, row, column, idx) {
     let rval, vcount;
     var prox = {
         get: function() {
-            if (workbook.calc_count !== vcount) {
-                vcount = workbook.calc_count;
+            if (workbook.context.calc_count !== vcount) {
+                vcount = workbook.context.calc_count;
                 rval = workbook.get(row.id, column, idx, 0);
             }
             return rval;
@@ -16,7 +16,6 @@ function doProxy(workbook, row, column, idx) {
     if (properties[column].change) {
         prox.set = function(v) {
             //only for 'value,formula_trend,...'
-            workbook.calc_count = workbook.calc_count + 1;
             var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
             workbook.set(row.id, value, column, idx, 0);
         }
