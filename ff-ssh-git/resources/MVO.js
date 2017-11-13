@@ -1353,7 +1353,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     var treePath = [];
     var currentDepth = -1;
     workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
-        if (node !== rootNode) {
+        if (node.rowId !== 'root') {
             if (treeDepth > currentDepth) {
                 treePath.push(node.parentrowId)
                 currentDepth = treeDepth;
@@ -26460,6 +26460,9 @@ LmeAPI.prototype.exportPresentation = function() {
 }
 LmeAPI.prototype.exportWebModel = function() {
     return this.lme.export('webexport')
+}
+LmeAPI.prototype.importWebModel = function(webDesign) {
+    return this.lme.importSolution(webDesign, 'webexport')
 }
 LmeAPI.prototype.exportData = function() {
     return this.lme.export('jsonvalues')
