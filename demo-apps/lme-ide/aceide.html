@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script type="application/javascript" src="resources/ai_MVO.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="aceide.js"></script>
     <style>
         .panel-fullscreen {
             display: block;
@@ -26,6 +30,12 @@
             left: 0;
             bottom: 0;
             overflow: auto;
+        }
+
+        .chop {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
         }
 
         .ui-autocomplete {
@@ -42,25 +52,24 @@
 
     <header class="main-header">
         <a href="#" class="logo">
-            <span class="logo-mini"><b>L</b>ME</span>
+            <span class="logo-mini"><b>l</b>me</span>
             <span class="logo-lg"><b>LME</b> IDE</span>
         </a>
         <nav class="navbar navbar-static-top">
-
             <div class="navbar-custom-menu">
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="col-xs-4" style="padding-top: 5px">
-                    <div class="input-group">
+                <div class="col-xs-4">
+                    <a href="#" class="sidebar-toggle col-xs-1" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <div class="input-group" style="padding-top: 5px">
                         <span class="input-group-addon"><i class="fa fa-code-fork"></i></span>
                         <input id="tags" type="email" class="form-control" placeholder="refs/head/master">
                     </div>
                 </div>
-                <div class="col-xs-5" style="padding-top: 5px">
+                <div class="col-xs-4" style="padding-top: 5px;">
                     <div class="input-group">
                         <input id="models" type="text" class="form-control" placeholder="KSP.ffl">
                         <span class="input-group-btn">
@@ -70,94 +79,79 @@
                         </span>
                     </div>
                 </div>
-                <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
+                <div class="col-xs-4">
+                    <ul class="nav navbar-nav" style="float: right">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown messages-menu">
 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Support Team
-                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown notifications-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li>
-                                <ul class="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">View all</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Jenkins user</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
-                            </li>
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="label label-success">1</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 1 message</li>
+                                <li>
+                                    <ul class="menu">
+                                        <li><!-- start message -->
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                </div>
+                                                <h4>
+                                                    LME bot
+                                                    <small><i class="fa fa-clock-o"></i> 1 sec</small>
+                                                </h4>
+                                                <p>Try out jBehave tests</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-warning">10</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 10 notifications</li>
+                                <li>
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs chop" style="max-width: 150px;max-height: 15px; overflow: hidden">{{session.user.name}} user</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="user-header">
+                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <p>
+                                        {{session.user.name}}
+                                        <small>Member since Nov. 2012</small>
+                                    </p>
+                                </li>
+                                <li class="user-footer">
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
-                </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -168,62 +162,19 @@
                     <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p>{{session.user.name}}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>IDE</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                </li>
-                <li class="treeview active">
-                    <a href="#">
-                        <i class="fa fa-files-o"></i>
-                        <span>Layout Options</span>
-                        <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
+                <li class="treeviwe active">
+                    <a href="#" class="data-toggle-ide" data-toggle="tooltip" title="run debug on caret">
+                        <i class="fa fa-subscript"></i> <span>IDE</span>
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-pie-chart"></i>
-                        <span>Charts</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span>UI Elements</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-table"></i> <span>Tables</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                    <a class="data-story" href="#" data-toggle="tooltip" title="jBehave tests">
+                        <i class="fa fa-heartbeat"></i> <span>Tests</span>
                     </a>
             </ul>
         </section>
@@ -233,26 +184,25 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                        <button type="button" class="toggle-debug-btn btn bg-green btn-sm"><i class="fa fa-repeat"></i></button>
+                        <button type="button" class="toggle-debug-btn btn bg-green btn-sm" data-toggle="tooltip" title="run debug on caret"><i class="fa fa-repeat"></i></button>
                     </h3>
                     <h3 class="box-title">
-                        <button type="button" class="toggle-info-btn btn bg-green btn-sm"><i class="fa fa-superpowers"></i></button>
+                        <button type="button" class="toggle-info-btn btn bg-green btn-sm" data-toggle="tooltip" title="switch economic/ffl mode"><i class="fa fa-superpowers"></i></button>
                     </h3>
                     <h3 class="box-title">
-                        <button type="button" class="toggle-properties-btn btn bg-green btn-sm"><i class="fa fa fa-sliders"></i></button>
+                        <button type="button" class="toggle-properties-btn btn bg-green btn-sm" data-toggle="tooltip" title="show visible, locked, required"><i class="fa fa fa-sliders"></i></button>
                     </h3>
                     <h3 class="box-title">
-                        <button type="button" ng-click="saveData()" class="toggle-save-btn btn bg-green btn-sm"><i class="fa fa fa-save"></i></button>
+                        <button type="button" ng-click="saveData()" class="toggle-save-btn btn bg-green btn-sm" data-toggle="tooltip" title="save entered values"><i class="fa fa fa-save"></i></button>
                     </h3>
                     <h3 class="box-title">
-                        <button type="button" class="toggle-temp_preview-btn btn bg-green btn-sm"><i class="fa fa-window-restore"></i></button>
+                        <button type="button" class="toggle-temp_preview-btn btn bg-green btn-sm" data-toggle="tooltip" title="Preview current model"><i class="fa fa-window-restore"></i></button>
+                    </h3>
+                    <h3 class="box-title">
+                        <button ng-click="runJBehaveTest()" type="button" class="toggle-test-btn btn bg-green btn-sm" data-toggle="tooltip" title="run jBehave tests"><i class="fa fa-list"></i></button>
                     </h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="toggle-expand-btn btn bg-yellow btn-sm"><i class="fa fa-expand"></i></button>
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="fa fa-minus"></i></button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                            <i class="fa fa-times"></i></button>
+                        <button type="button" class="toggle-expand-btn btn bg-yellow btn-sm" data-toggle="tooltip" title="Expand"><i class="fa fa-expand"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
@@ -264,7 +214,7 @@
     </div>
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
+            <b>Version</b> 0.0.2
         </div>
         <strong>Copyright &copy; 2014-2017 <a href="#">Michael Bakker</a>.</strong> All rights reserved.
     </footer>
@@ -296,7 +246,6 @@
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -305,8 +254,7 @@
 <script src="dist/js/demo.js"></script>
 <script src="ace-builds/src-min/ace.js"></script>
 <script src="ace-builds/src-min/ext-language_tools.js"></script>
-<script type="application/javascript" src="resources/ai_MVO.js"></script>
-<script src="aceide.js"></script>
+
 <script src="javascripts/fflmode.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
 

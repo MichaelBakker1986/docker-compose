@@ -62,12 +62,16 @@ exports.orm = Promise.all([
                             ok(result)
                         })
                     }), new Promise(function(ok, fail) {
-                        db.driver.execQuery("INSERT INTO figure (uuid,var,col,val) VALUES " + values.map(a => {
-                            return "('" + a.join("','") + "')"
-                        }).join(','), [], function(err, result) {
-                            if (err) fail(err)
-                            ok(result)
-                        })
+                        if (values.length > 0) {
+                            db.driver.execQuery("INSERT INTO figure (uuid,var,col,val) VALUES " + values.map(a => {
+                                return "('" + a.join("','") + "')"
+                            }).join(','), [], function(err, result) {
+                                if (err) fail(err)
+                                ok(result)
+                            })
+                        } else {
+                            ok({status: 'succes', message: 'no values need to be inserted'})
+                        }
                     })])
                 }
             }

@@ -4,20 +4,20 @@
  * formulas containing ":" are not parsed correctly, changes are made within KSP.ffl file
  *
  */
-require('./KSP/KSPImportTest')
-require('./KSP/totalyearlycosttest')
+require('./KSPImportTest')
+require('./totalyearlycosttest')
 global.loglevel = 'debug'
-var FormulaService = require('../ff-fes/fesjs/FormulaService')
-var WorkBook = require('../ff-fes/fesjs/JSWorkBook')
-var FESContext = require('../ff-fes/fesjs/fescontext')
+var FormulaService = require('../../ff-fes/fesjs/FormulaService')
+var WorkBook = require('../../ff-fes/fesjs/JSWorkBook')
+var FESContext = require('../../ff-fes/fesjs/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
-require('../ff-math/ff-math')
-var fesjsApi = require('../ff-fes/ff-fes').fesjs;
+require('../../ff-math/ff-math')
+var fesjsApi = require('../../ff-fes/ff-fes').fesjs;
 var fs = require('fs');
-fesjsApi.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
+fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
-var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
+var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 var wbTest = new WorkBook(new FESContext());
 assert('aIFRS-EUa'.indexOf('IFRS-EU') > 0)
@@ -147,7 +147,7 @@ function modelVariableName(name) {
 }
 
 var wbKSP = new WorkBook(new FESContext());
-wbKSP.importSolution("" + fs.readFileSync(__dirname + '/KSP/KSP.ffl'), 'ffl')
+wbKSP.importSolution("" + fs.readFileSync(__dirname + '/KSP.ffl'), 'ffl')
 var untestedformulas = 0;
 var totalformulas = 0;
 var formulas = {}

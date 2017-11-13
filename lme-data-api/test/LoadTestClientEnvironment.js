@@ -1,0 +1,19 @@
+XMLHttpRequest = require("xhr2").XMLHttpRequest;
+var uuid = require('uuid4')
+var modelName = process.argv[2] || 'MVO';
+var story = process.argv[3] || __dirname + '/../../model-tests/MVO/mvo.story';
+/**
+ * We need to mock a window environment to get end-point information.
+ * TODO: think of a better way to do this.
+ */
+window = {
+    location: {
+        href: "http://10.0.75.1:8083/id/DEMO/grid_example.html#" + modelName + "&" + uuid()
+    }
+}
+let MvoStory = require('../../model-tests/MVO/MVOStoryParserQuickTest').MVOStory;
+new MvoStory(story).startTest()
+LMEMETA.urlPrefix = 'http://localhost:8085'
+LMEMETA.persistData(function(done) {
+    console.info('Done:' + done)
+});

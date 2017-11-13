@@ -133,11 +133,16 @@ section.container table {
     color: #1A3485;
 }
 
-td.txttd {
+.txttd {
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 200px;
     min-width: 200px;
+}
+.chop {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 span.text {

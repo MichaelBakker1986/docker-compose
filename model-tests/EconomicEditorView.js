@@ -1,11 +1,7 @@
-///var MVOffl = require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8');
-
-
-function MVOeditorShow() {
+function EconomicEditorView() {
     this.on = false;
     this.properties = true;
 }
-
 function getdepth(node, depth) {
     if (node && node._parent == undefined) {
         return depth;
@@ -13,10 +9,10 @@ function getdepth(node, depth) {
     return getdepth(node._parent, 1 + depth)
 }
 
-MVOeditorShow.prototype.parse = function(input) {
+EconomicEditorView.prototype.parse = function(input) {
     var props = this.properties;
-    var parser = require('../../ff-fes/exchange_modules/ffl/FflToJsonConverter')
-    var JSVisitor = require('../../ff-fes/fesjs/JSVisitor')
+    var parser = require('../ff-fes/exchange_modules/ffl/FflToJsonConverter')
+    var JSVisitor = require('../ff-fes/fesjs/JSVisitor')
     var result = parser.parseFFL(input)
     var solutionName = findSolutionNameFromFFLFile(result);
     let objectModel = result['model ' + solutionName + ' uses BaseModel'][''];
@@ -113,7 +109,5 @@ function findSolutionNameFromFFLFile(json) {
     }
     return undefined;
 }
-
-//console.info(new MVOeditorShow().parse(require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8')))
-exports.MVOeditorShow = new MVOeditorShow();
+exports.EconomicEditorView = new EconomicEditorView();
 

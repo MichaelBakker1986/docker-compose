@@ -1,6 +1,20 @@
 /**
  * editor variable is set to the window.
  */
+var ConvertEvaluateAsString = require('../../model-tests/plugins/ConvertEvaluateAsString').ConvertEvaluateAsString
+var AmpersandConverter = require('../../model-tests/plugins/AmpersandConverter').AmpersandConverter
+var ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix').ScorecardQCaseFix
+var V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
+var EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
+var StoryParser = require('../../model-tests/StoryParser').StoryParser
+var fflModel = '';
+var params = window.location.href.split('#')
+if (params.length == 1) window.location.href = '#MVO&DEMO'
+var params = window.location.href.split('#')[1].split('&')
+let windowModelName = params[0] || 'MVO';
+let userID = params[1] || 'DEMO'
+var saveToken = userID;
+
 
 angular.module('lmeapp').controller('ideController', function($scope, $http) {
     LMEMETA.loadData(function() {
@@ -9,22 +23,30 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
         LMEMETA.persistData(function(response) {
         })
     }
+    $scope.session = {
+        user: {
+            name: userID
+        }
+    }
+    $scope.runJBehaveTest = function() {
+        var annotations = []
+        let storyParser = new StoryParser(editor.session.getValue());
+        storyParser.message = function(event) {
+            annotations.push({
+                row: event.line,
+                column: 0,
+                text: event.result.message, // Or the Json reply from the parser
+                type: event.result.status // also warning and information
+            })
+            editor.session.setAnnotations(annotations);
+        }
+        storyParser.start();
+        storyParser.call();
+    }
 });
 //LME-Model stuff
 $(document).ready(function() {
-    var ConvertEvaluateAsString = require('../../model-tests/plugins/ConvertEvaluateAsString').ConvertEvaluateAsString
-    var AmpersandConverter = require('../../model-tests/plugins/AmpersandConverter').AmpersandConverter
-    var ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix').ScorecardQCaseFix
-    var V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
-    var MVOeditorShow = require('../../model-tests/MVO/MVOeditorShow').MVOeditorShow
-    var fflModel;
 
-    var params = window.location.href.split('#')
-    if (params.length == 1) window.location.href = '#MVO&DEMO'
-    var params = window.location.href.split('#')[1].split('&')
-    let windowModelName = params[0] || 'MVO';
-    let userID = params[1] || 'DEMO'
-    var saveToken = userID;
 
     $("#models").val(windowModelName)
 
@@ -34,17 +56,27 @@ $(document).ready(function() {
     $(".toggle-expand-btn").click(function(e) {
         $(this).closest('.content .box').toggleClass('panel-fullscreen');
     });
+    $(".data-story").click(function(e) {
+        $.get("resources/MVO.story", function(data, status, xhr) {
+            editor.session.setValue(data)
+        })
+    });
     $(".toggle-info-btn").click(function(e) {
-        MVOeditorShow.on = !MVOeditorShow.on;
+        EconomicEditorView.on = !EconomicEditorView.on;
 
-        editor.setOption("maxLines", MVOeditorShow.on ? Infinity : 58);
+        editor.setOption("maxLines", EconomicEditorView.on ? Infinity : 58);
 
         setValue(fflModel)
         scrollTop()
     });
     $(".toggle-properties-btn").click(function(e) {
-        MVOeditorShow.properties = !MVOeditorShow.properties;
+        EconomicEditorView.properties = !EconomicEditorView.properties;
         setValue(fflModel)
+        scrollTop()
+    });
+
+    $(".data-toggle-ide").click(function(e) {
+        editor.setValue(fflModel);
         scrollTop()
     });
     $(".toggle-debug-btn").click(function(e) {
@@ -88,8 +120,8 @@ $(document).ready(function() {
         if (V05CaseFix.on) {
             fflModel = V05CaseFix.parse(fflModel);
         }
-        if (MVOeditorShow.on) {
-            fflModel = MVOeditorShow.parse(fflModel);
+        if (EconomicEditorView.on) {
+            fflModel = EconomicEditorView.parse(fflModel);
         }
         editor.setValue(fflModel);
     }
@@ -131,9 +163,10 @@ $(document).ready(function() {
         /*   enableSnippets: true,*/
         enableLiveAutocompletion: true,
         showFoldWidgets: true,
-        maxLines: 40
-    });
+        maxLines: 40,
 
+    });
+    editor.$blockScrolling = Infinity
 
     function gotoPreview() {
         window.open('http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + $("#models").val() + '&' + userID)
@@ -156,7 +189,7 @@ $(document).ready(function() {
         });
     });
 
-    function saveDocument() {
+    function savFflModel() {
         Pace.track(function() {
             $.post("saveFFL_LME", {
                 model: $("#models").val(),
@@ -173,12 +206,12 @@ $(document).ready(function() {
             switch (String.fromCharCode(event.which).toLowerCase()) {
                 case 's':
                     event.preventDefault();
-                    saveDocument()
+                    savFflModel()
                     break;
             }
         }
     });
     $('#preview-model').click(gotoPreview);
-    $('#save-model').click(saveDocument);
+    $('#save-model').click(savFflModel);
     $('#preview-model').hide()
 });

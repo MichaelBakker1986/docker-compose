@@ -33,9 +33,7 @@ function clientErrorHandler(err, req, res, next) {
 app.listen(port, () => {
     require('dns').lookup(hostname, (err, add, fam) => {
         app.use('*/showcase', proxy({target: 'http://' + add + ':8083', changeOrigin: true}));
-        app.post('*/saveFFL_LME', express_proxy('http://' + add + ':8080', {limit: '50mb'}));
-        app.post('*/preview', express_proxy('http://' + add + ':8080', {limit: '50mb'}));
-        app.use('*/ide/*', proxy({
+        app.all('*/ide/*', proxy({
             toProxy: true,
             target: 'http://' + add + ':8083',
             changeOrigin: false,
@@ -53,7 +51,7 @@ app.listen(port, () => {
         }));
         app.use('*/models', proxy({target: 'http://' + add + ':8080', changeOrigin: true}));
         app.use('*/branches', proxy({target: 'http://' + add + ':8080', changeOrigin: true}));
-        app.use('*/data', proxy({target: 'http://' + add + ':8085', changeOrigin: true}));
+        app.all('*/data', proxy({target: 'http://' + add + ':8085', changeOrigin: true}));
         app.use('*/resources', proxy({target: 'http://' + add + ':8083', changeOrigin: true}));
     })
 });// Listen for the `error` event on `proxy`.

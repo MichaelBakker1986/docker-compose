@@ -1,6 +1,6 @@
 var modelName = 'PRICING'
 require('../../ff-fes/exchange_modules/lme/javascript');
-const modelAPI = require('../src/lme');
+const modelAPI = require('../../lme-model-api/src/lme');
 const log = require('ff-log');
 const fs = require('fs');
 const newModel = new modelAPI();

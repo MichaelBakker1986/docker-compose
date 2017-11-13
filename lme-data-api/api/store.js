@@ -36,6 +36,7 @@ module.exports.setup = function(app) {
                 parents[obj.uuid_parent] = new Date().getTime()
             }
             res.json({
+                status: 'succes',
                 id: req.params.id,
                 parents: parents,
                 values: values
@@ -45,6 +46,7 @@ module.exports.setup = function(app) {
             req.json({
                 id: req.params.id,
                 status: 'fail',
+                message: err.toString(),
                 values: []
             })
         })
@@ -64,12 +66,14 @@ module.exports.setup = function(app) {
         }
         new Figure.Figures().insertFigures(parentUuid, newChildId, dbData).then(function(data) {
             res.json({
+                status: 'succes',
                 saveToken: newChildId
             })
         }).catch((err) => {
             if (log.DEBUG) log.warn('error while inserting figures:', err)
             res.json({
-                status: 'fail'
+                status: 'fail',
+                message: err.toString()
             })
         })
     });
