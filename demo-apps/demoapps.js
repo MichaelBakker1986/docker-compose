@@ -46,6 +46,8 @@ app.listen(port, function() {
         console.info(
             '<span>DEMO apps: </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/grid_example.html#MVO&DEMO">Angular Grid example</a><span> | </span>\n' +
+            '<a href="http://' + domain + '/id/DEMO/grid_bootstrap.html#MVO&DEMO">Bootstrap Grid example</a><span> | </span>\n' +
+            '<a href="http://' + domain + '/id/DEMO/ui_designer.html#MVO&DEMO">Designer ide</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +

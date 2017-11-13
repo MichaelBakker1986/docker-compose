@@ -15,9 +15,10 @@
     <!-- <link rel="stylesheet" href="/css/AdminLTE.min.css">-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.css"/>
     <link rel="stylesheet" type="text/css" href="grid_example.css"/>
+    <script src="ace-builds/src-min/ace.js"></script>
+    <script src="ace-builds/src-min/ext-language_tools.js"></script>
     <script>
         angular.module('angapp', ['angular.filter']).controller('lmeController', function($scope, $http) {
 
@@ -61,7 +62,20 @@
                     }
                 }
             });
+            editor = ace.edit("editor");
+            var langTools = ace.require("ace/ext/language_tools");
+            editor.setTheme("ace/theme/tomorrow");
+            editor.resize(true)
+            editor.setBehavioursEnabled(true);
+            editor.setOptions({
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true,
+                showFoldWidgets: true,
+                maxLines: 40,
+            });
+            editor.$blockScrolling = Infinity
         })
+
     </script>
 
 </head>
@@ -74,7 +88,7 @@
             </button>
             <a id="brand" class="navbar-brand" href="">
                 Figure {{name}}
-                <small> Preview page</small>
+                <small> Designer ide</small>
             </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
@@ -90,18 +104,16 @@
 </nav><!-- /.navbar -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-1" ng-controller="graphController">
-            <canvas id="gitGraph"></canvas>
-            <script src="dataTreeGraph.js"></script>
+        <div class="col-sm-2" style="height: 100%;">
+            <pre id="editor"></pre>
         </div>
         <div class="col-sm-2">
             <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
             <ul class="list-group" ng-repeat="f in LME_MODEL | pick:'children.length > 1 && path.endsWith(\'Q_ROOT\')'" ng-if="f.visible">
                 <li class="list-group-item" ng-click="changeSearch(f)" ng-bind="f.title"></li>
-
             </ul>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-7">
             <div class="row">
                 <div class="col-sm-12 chop">
                     Titel figure U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.

@@ -19,7 +19,7 @@ let options = {
 };
 let b = browser(options).ignore('escodegen').ignore('esprima');
 b.add(__dirname + '/lmeAPIWrapper.js');
-b.transform('uglifyify', {global: true})
+/*b.transform('uglifyify', {global: true})*/
 b.transform(require('browserify-fastjson'));
 var res = fs.createWriteStream(__dirname + '/../../ff-ssh-git/resources/' + name + '.js')
 b.bundle().pipe(res);

@@ -60408,7 +60408,7 @@ LmeAPI.prototype.loadData = function(callBack) {
         }
     }
     http.onload = function() {
-        self.lme.context = self.lme.counter + 1;
+        self.lme.context.calc_count++;
         callBack(http.responseText)
     };
     http.send();
