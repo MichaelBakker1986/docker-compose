@@ -1,21 +1,20 @@
 var SolutionFacade = require('../../fesjs/SolutionFacade');
+var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
 var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original']
 
 function WebExport() {
     this.exportAsObject = true;
     this.hide = true;
     this.name = 'webexport';
-    this.headername = 'Native Object Web Presentation';
-}
 
-WebExport.prototype.parse = function(webExport) {
-    throw new Error('Not yet supported');
+    this.headername = 'Native Object Web Presentation';
 }
 
 function LMETree(name, workbook) {
     this.name = name;
     this.workbook = workbook;
     this.nodes = {};
+    this.names = {};
 }
 
 function noChange(workbook, rowId, col, index) {
@@ -130,24 +129,56 @@ LMETree.prototype.addWebNode = function(node, treePath) {
     if (parent) parent.children.push(rv);
     this.nodes[rowId] = rv;
 }
+
+var webDesign = {
+    MVO_Q_MAP01: {},
+    MVO_Q_MAP02: {},
+    MVO_Q_MAP03: {},
+    MVO_Q_MAP04: {}
+}
+WebExport.prototype.parseData = function(webExport, workbook) {
+    let nodes = webExport.split('\n');
+    //log.debug(nodes)
+    webDesign = {};
+    for (var i = 0; i < nodes.length; i++) {
+        let nodeName = nodes[i];
+        var rootNode = workbook.fetchSolutionNode(nodeName, 'value');
+        if (rootNode) {
+            webDesign[workbook.modelName + "_" + rootNode.rowId] = true;
+        }
+    }
+    //  console.info(webDesign)
+    ///inherit modelName
+    return SolutionFacade.createSolution(workbook.modelName);
+}
+
 WebExport.prototype.deParse = function(rowId, workbook) {
     var modelName = workbook.getSolutionName();
-    var rootNode = workbook.getRootSolutionProperty(modelName);
+
     var lmeTree = new LMETree(modelName, workbook);
+    PropertiesAssembler.findAllInSolution(modelName, function(node) {
+        lmeTree.names[node.rowId] = true;
+    });
     var treePath = [];
-    var currentDepth = -1;
-    workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
-        if (node !== rootNode) {
-            if (treeDepth > currentDepth) {
-                treePath.push(node.parentrowId)
-                currentDepth = treeDepth;
-            } else if (treeDepth < currentDepth) {
-                treePath.length = treeDepth;
-                currentDepth = treeDepth;
+    var currentDepth = 0;
+
+    //make the walk here,
+    for (var node in webDesign) {
+        var rootNode = workbook.fetchSolutionNode(node, 'value');
+        workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
+            if (rootNode.rowId !== 'root') {
+                if (treeDepth > currentDepth) {
+                    treePath.push(node.parentrowId)
+                    currentDepth = treeDepth;
+                } else if (treeDepth < currentDepth) {
+                    treePath.length = treeDepth;
+                    currentDepth = treeDepth;
+                }
+                lmeTree.addWebNode(node, treePath)
             }
-            lmeTree.addWebNode(node, treePath)
-        }
-    })
+        })
+    }
+
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExport())
