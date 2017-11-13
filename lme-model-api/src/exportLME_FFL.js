@@ -18,6 +18,7 @@ let options = {
     debug: false
 };
 let b = browser(options).ignore('escodegen').ignore('esprima');
+b.add(__dirname + '/../../ff-fes/exchange_modules/presentation/webexport.js');
 b.add(__dirname + '/lmeAPIWrapper.js');
 /*b.transform('uglifyify', {global: true})*/
 b.transform(require('browserify-fastjson'));

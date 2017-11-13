@@ -21,7 +21,9 @@
     <script src="ace-builds/src-min/ext-language_tools.js"></script>
     <script>
         angular.module('angapp', ['angular.filter']).controller('lmeController', function($scope, $http) {
-
+            $scope.uigrammer = {
+                value: ''
+            }
             var params = window.location.href.split('#')
             if (params.length == 1) window.location.href = '#MVO&DEMO'
             var params = window.location.href.split('#')[1].split('&')
@@ -38,7 +40,7 @@
                 });
             }
 
-            $http.get('resources/' + modelName + '.js').then(function(data) {
+            $http.get('tmp_model/' + modelName).then(function(data) {
                 eval(data.data)
                 //after this we can import the user-data....
                 $scope.LME_MODEL = LME.nodes
@@ -65,13 +67,18 @@
             editor = ace.edit("editor");
             var langTools = ace.require("ace/ext/language_tools");
             editor.setTheme("ace/theme/tomorrow");
-            editor.resize(true)
             editor.setBehavioursEnabled(true);
             editor.setOptions({
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true,
                 showFoldWidgets: true,
-                maxLines: 40,
+                maxLines: Infinity,
+                minLines: 20,
+            });
+
+            editor.session.on('change', function() {
+                console.info(editor.session.getValue())
+                $scope.uigrammer.value = editor.session.getValue()
             });
             editor.$blockScrolling = Infinity
         })
@@ -103,59 +110,66 @@
     </div><!-- /.container -->
 </nav><!-- /.navbar -->
 <div class="container-fluid">
+
     <div class="row">
-        <div class="col-sm-2" style="height: 100%;">
-            <pre id="editor"></pre>
+        <div class="row">
+            <div class="col-sm-3">
+                <pre id="editor" class="editor"></pre>
+            </div>
+            <pre class="col-sm-8" ng-model="uigrammer"></pre>
         </div>
-        <div class="col-sm-2">
-            <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
-            <ul class="list-group" ng-repeat="f in LME_MODEL | pick:'children.length > 1 && path.endsWith(\'Q_ROOT\')'" ng-if="f.visible">
-                <li class="list-group-item" ng-click="changeSearch(f)" ng-bind="f.title"></li>
-            </ul>
-        </div>
-        <div class="col-sm-7">
-            <div class="row">
-                <div class="col-sm-12 chop">
-                    Titel figure U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.
-                </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
+                <ul class="list-group" ng-repeat="f in LME_MODEL | pick:'children.length > 1 && path.endsWith(\'Q_ROOT\')'" ng-if="f.visible">
+                    <li class="list-group-item" ng-click="changeSearch(f)" ng-bind="f.title"></li>
+                </ul>
             </div>
-            <div class="row">
-                <div class="col-sm-6 chop">
-                    U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.
+            <div class="col-sm-7">
+                <div class="row">
+                    <div class="col-sm-12 chop">
+                        Titel figure U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    één figure Lorum epsulum which has a long text
+                <div class="row">
+                    <div class="col-sm-6 chop">
+                        U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.
+                    </div>
+                    <div class="col-sm-6">
+                        één figure Lorum epsulum which has a long text
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 chop">
-                    U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.
+                <div class="row">
+                    <div class="col-sm-6 chop">
+                        U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.
+                    </div>
+                    <div class="col-sm-2">
+                        één figure Lorum x
+                    </div>
+                    <div class="col-sm-2">
+                        één figure Lorum epsulum
+                    </div>
+                    <div class="col-sm-2">
+                        één figure Lorum epsulum
+                    </div>
                 </div>
-                <div class="col-sm-2">
-                    één figure Lorum x
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3>{{search.title}}</h3>
+                    </div>
                 </div>
-                <div class="col-sm-2">
-                    één figure Lorum epsulum
-                </div>
-                <div class="col-sm-2">
-                    één figure Lorum epsulum
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <h3>{{search.title}}</h3>
-                </div>
-            </div>
-            <div class="row" ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 200" ng-if="f.visible" ng-switch="f.type">
-                <div class="col-xs-6 ">
-                    {{f.title}}
-                </div>
-                <div ng-repeat="cv in f.cols" class="col-sm-{{2 * (4-(f.cols.length))}} chop">
-                    <input class="form-control" ng-model="cv.value">
+                <div class="row" ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 200" ng-if="f.visible" ng-switch="f.type">
+                    <div class="col-xs-6 ">
+                        {{f.title}}
+                    </div>
+                    <div ng-repeat="cv in f.cols" class="col-sm-{{2 * (4-(f.cols.length))}} chop">
+                        <input class="form-control" ng-model="cv.value">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

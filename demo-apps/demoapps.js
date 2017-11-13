@@ -30,6 +30,7 @@ app.use('/id/:id/resources/', expressStaticGzip(__dirname + "/../ff-ssh-git/reso
 
 //IDE proxies
 app.get('*/excelide.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
+app.get('*/tmp_model/*', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
 app.get('*/aceide.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
 app.post('*/saveFFL_LME', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}));
 app.post('*/preview', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}));

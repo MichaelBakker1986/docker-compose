@@ -67,10 +67,10 @@ app.get('/models', (req, res) => {
     })
 });
 var exportedLME;
-app.get('/tmp_model', (req, res) => {
+app.get('*/tmp_model/:model', (req, res) => {
     var browser = require('browserify');
     var fs = require('fs')
-    var name = 'MVO';
+    var name = req.params.model;
 
     if (!exportedLME) {
         var lmeAPI = require(__dirname + '/src/lme.js')
@@ -91,6 +91,7 @@ app.get('/tmp_model', (req, res) => {
         debug: false
     };
     let b = browser(options).ignore('escodegen').ignore('esprima');
+    b.add(__dirname + '/../ff-fes/exchange_modules/presentation/webexport_with_template.js');
     b.add(__dirname + '/src/lmeAPIWrapper.js');
     //b.transform('uglifyify', {global: true}) (will minify, but takes long)
     b.transform(require('browserify-fastjson'));
