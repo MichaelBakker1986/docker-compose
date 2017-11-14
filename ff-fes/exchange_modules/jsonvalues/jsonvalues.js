@@ -47,7 +47,11 @@ function updateValues(data, docValues) {
         let fetch = PropertiesAssembler.fetch(nodeId);
         //we don't have to import values for variables we don't use.
         if (fetch) {
-            docValues[fetch.ref][parseInt(nodeColId)] = value.value;
+            var enteredValue = value.value;
+            if (fetch.datatype=='number'){
+                enteredValue = Number(enteredValue)
+            }
+            docValues[fetch.ref][parseInt(nodeColId)] = enteredValue;
         }
     }
 }

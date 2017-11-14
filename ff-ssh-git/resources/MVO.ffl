@@ -2779,9 +2779,10 @@ model MVO uses BaseModel
         variable GRAPH01
         {
             datatype: matrix;
-            frequency: none;
+            frequency: document;
             visible: 1;
-            formula: Matrix(Q_MAP01_SCORE01,Q_MAP02_SCORE01, Q_MAP03_SCORE01, Q_MAP04_SCORE01);
+            locked: 1;
+            formula: [[Q_MAP01_SCORE01.title,Q_MAP02_SCORE01.title,Q_MAP03_SCORE01.title,Q_MAP04_SCORE01.title],[Q_MAP01_SCORE01,Q_MAP02_SCORE01,Q_MAP03_SCORE01,Q_MAP04_SCORE01]];
             displaytype: chart;
             title: "Graph scores";
         }

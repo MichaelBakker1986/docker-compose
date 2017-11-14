@@ -139,6 +139,7 @@ section.container table {
     max-width: 200px;
     min-width: 200px;
 }
+
 .chop {
     white-space: nowrap;
     overflow: hidden;
@@ -153,6 +154,11 @@ span.text {
 
 label {
     cursor: default;
+}
+
+.chart {
+    height: 100%;
+    width: 100%;
 }
 
 .required span.title:after, span.required:after, label[required]:not(input):after {

@@ -22,19 +22,13 @@ function initJSMath(jsMath) {
         }
     }
 }
-HSUM = function (fId, func, v, x, y, z, start, end) {
+
+HSUM = function(fId, func, v, x, y, z, start, end) {
     var returnValue = 0;
     for (var i = start || x.first.index; i < end || x.last.index; i++) {
         returnValue += func(fId, x[i], y, z, v);
     }
     return returnValue;
-}
-Matrix = function () {
-    var rv = [];
-    for (var key in arguments){
-        rv[key] = arguments[key]
-    }
-    return rv;
 }
 initJSMath(jsMath);
 exports.mathJs = {
