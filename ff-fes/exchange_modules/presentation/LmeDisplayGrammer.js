@@ -1,7 +1,8 @@
 const log = require('ff-log')
 
-function LmeDisplayGrammer(grammer) {
+function LmeDisplayGrammer(grammer, modelName) {
     this.nodes = []
+    this.modelName = modelName;
     this.lines = grammer.split('\n')
     this.defaults = {
         columns: ['title', 'value']
@@ -9,7 +10,7 @@ function LmeDisplayGrammer(grammer) {
 }
 
 LmeDisplayGrammer.prototype.parseGrammer = function() {
-    let modelPrefix = '';
+    let modelPrefix = this.modelName;
     for (var i = 0; i < this.lines.length; i++) {
         //trim trailing spaces only.
         var grammerLine = this.lines[i].replace(/\s+$/, '');

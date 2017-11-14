@@ -142,11 +142,12 @@ LMETree.prototype.addWebNode = function(node, treePath) {
 
 var webDesign = {
     nodes: [
-        {rowId: 'MVO_Q_ROOT'}
+        {rowId: 'root'}
     ]
 }
 WebExport.prototype.parseData = function(webExport, workbook) {
-    webDesign = new LmeDisplayGrammer(webExport).parseGrammer()
+    webDesign = new LmeDisplayGrammer(webExport, workbook.modelName).parseGrammer()
+    webDesign.nodes[0].rowId = workbook.modelName + '_root'
     return SolutionFacade.createSolution(workbook.modelName);
 }
 
@@ -161,22 +162,23 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     var currentDepth = 0;
 
     //make the walk here,
-    for (var i = 0; i < webDesign.nodes.length; i++) {
-        var node = webDesign.nodes[i];
-        var rootNode = workbook.fetchSolutionNode(node.rowId, 'value');
-        workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
-            if (rootNode && rootNode.rowId !== 'root') {
-                if (treeDepth > currentDepth) {
-                    treePath.push(node.parentrowId)
-                    currentDepth = treeDepth;
-                } else if (treeDepth < currentDepth) {
-                    treePath.length = treeDepth;
-                    currentDepth = treeDepth;
-                }
-                lmeTree.addWebNode(node, treePath)
+    /*    for (var i = 0; i < webDesign.nodes.length; i++) {
+            var node = webDesign.nodes[i];*/
+    var rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName);
+
+    workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
+        if (node && node.rowId !== 'root') {
+            if (treeDepth > currentDepth) {
+                treePath.push(node.parentrowId)
+                currentDepth = treeDepth;
+            } else if (treeDepth < currentDepth) {
+                treePath.length = treeDepth;
+                currentDepth = treeDepth;
             }
-        })
-    }
+            lmeTree.addWebNode(node, treePath)
+        }
+    })
+    /*  }*/
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExport())

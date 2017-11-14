@@ -1,4 +1,4 @@
-require('../../ff-fes/exchange_modules/presentation/webexport');
+require('../../ff-fes/exchange_modules/presentation/webexport_with_template');
 var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');
 const log = require('ff-log');

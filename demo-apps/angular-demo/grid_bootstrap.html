@@ -102,13 +102,13 @@
                 $http.get('resources/' + modelName + '.js').then(function(data) {
                     eval(data.data)
                     //after this we can import the user-data....
-                    LMEMETA.importWebModel('Uses MVO\nQ_ROOT')
+                    LMEMETA.importWebModel('Q_ROOT')
                     LME = LMEMETA.exportWebModel();
                     $scope.LME_MODEL = LME.nodes
                     $scope.name = LME.name
                     $scope.LMEMETA = LMEMETA;
                     $scope.saveData = persist
-                    $scope.search = LME.nodes.Q_ROOT.children[0]
+                    $scope.search = (LME.nodes.Q_ROOT || LME.nodes.root).children[0]
                     LMEMETA.loadData(function(response) {
                         $scope.$digest()
                     })
@@ -175,7 +175,7 @@
                     <div ng-switch-when="title" ng-class="'col-xs-'+(f.cols.length ==1?10:5)">
                         <span contenteditable="true" class="title" ng-bind="f.title"></span>
                         <span><i ng-if="f.hint" class="fa fa-info" title="{{f.hint}}"></i></span>
-                        <span><i ng-if="f.original!== 'undefined'" class="fa fa-info" title="{{f.id + '='+ f.original}}"></i></span>
+                        <span><i ng-if="f.original!=='undefined' && f.original!=='\'\''" class="fa fa-info" title="{{f.id + '='+ f.original}}"></i></span>
                     </div>
                     <div ng-switch-default class="col-xs-5">
                         <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">

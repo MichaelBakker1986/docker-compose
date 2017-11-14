@@ -1226,8 +1226,9 @@ exports.LMEParser = LMEParser.prototype
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 const log = require('ff-log')
 
-function LmeDisplayGrammer(grammer) {
+function LmeDisplayGrammer(grammer, modelName) {
     this.nodes = []
+    this.modelName = modelName;
     this.lines = grammer.split('\n')
     this.defaults = {
         columns: ['title', 'value']
@@ -1235,7 +1236,7 @@ function LmeDisplayGrammer(grammer) {
 }
 
 LmeDisplayGrammer.prototype.parseGrammer = function() {
-    let modelPrefix = '';
+    let modelPrefix = this.modelName;
     for (var i = 0; i < this.lines.length; i++) {
         //trim trailing spaces only.
         var grammerLine = this.lines[i].replace(/\s+$/, '');
@@ -1400,11 +1401,12 @@ LMETree.prototype.addWebNode = function(node, treePath) {
 
 var webDesign = {
     nodes: [
-        {rowId: 'MVO_Q_ROOT'}
+        {rowId: 'root'}
     ]
 }
 WebExport.prototype.parseData = function(webExport, workbook) {
-    webDesign = new LmeDisplayGrammer(webExport).parseGrammer()
+    webDesign = new LmeDisplayGrammer(webExport, workbook.modelName).parseGrammer()
+    webDesign.nodes[0].rowId = workbook.modelName + '_root'
     return SolutionFacade.createSolution(workbook.modelName);
 }
 
@@ -1419,22 +1421,23 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     var currentDepth = 0;
 
     //make the walk here,
-    for (var i = 0; i < webDesign.nodes.length; i++) {
-        var node = webDesign.nodes[i];
-        var rootNode = workbook.fetchSolutionNode(node.rowId, 'value');
-        workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
-            if (rootNode && rootNode.rowId !== 'root') {
-                if (treeDepth > currentDepth) {
-                    treePath.push(node.parentrowId)
-                    currentDepth = treeDepth;
-                } else if (treeDepth < currentDepth) {
-                    treePath.length = treeDepth;
-                    currentDepth = treeDepth;
-                }
-                lmeTree.addWebNode(node, treePath)
+    /*    for (var i = 0; i < webDesign.nodes.length; i++) {
+            var node = webDesign.nodes[i];*/
+    var rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName);
+
+    workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
+        if (node && node.rowId !== 'root') {
+            if (treeDepth > currentDepth) {
+                treePath.push(node.parentrowId)
+                currentDepth = treeDepth;
+            } else if (treeDepth < currentDepth) {
+                treePath.length = treeDepth;
+                currentDepth = treeDepth;
             }
-        })
-    }
+            lmeTree.addWebNode(node, treePath)
+        }
+    })
+    /*  }*/
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExport())
@@ -26532,8 +26535,8 @@ LmeAPI.prototype.exportFFL = function() {
 LmeAPI.prototype.exportPresentation = function() {
     return this.lme.export('presentation')
 }
-LmeAPI.prototype.exportWebModel = function() {
-    return this.lme.export('webexport')
+LmeAPI.prototype.exportWebModel = function(rootNode) {
+    return this.lme.export('webexport', rootNode)
 }
 LmeAPI.prototype.importWebModel = function(webDesign) {
     return this.lme.importSolution(webDesign, 'webexport')

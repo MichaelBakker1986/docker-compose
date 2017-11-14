@@ -60385,8 +60385,8 @@ LmeAPI.prototype.exportFFL = function() {
 LmeAPI.prototype.exportPresentation = function() {
     return this.lme.export('presentation')
 }
-LmeAPI.prototype.exportWebModel = function() {
-    return this.lme.export('webexport')
+LmeAPI.prototype.exportWebModel = function(rootNode) {
+    return this.lme.export('webexport', rootNode)
 }
 LmeAPI.prototype.importWebModel = function(webDesign) {
     return this.lme.importSolution(webDesign, 'webexport')
