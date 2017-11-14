@@ -177,7 +177,7 @@ $(document).ready(function() {
     editor.$blockScrolling = Infinity
 
     function gotoPreview() {
-        window.open('http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + $("#models").val() + '&' + userID)
+        window.open('http://' + window.location.hostname + ':8083/id/' + userID + '/ui_designer.html#' + $("#models").val() + '&' + userID)
     }
 
     function previewModel() {
@@ -186,7 +186,7 @@ $(document).ready(function() {
                 model: $("#models").val(),
                 data: editor.getSession().getValue()
             }, function(data) {
-                window.open('http://' + window.location.hostname + ':8083/id/' + userID + '/grid_example.html#' + data.link + '&' + userID);
+                window.open('http://' + window.location.hostname + ':8083/id/' + userID + '/ui_designer.html#' + data.link + '&' + userID);
             });
         });
     }

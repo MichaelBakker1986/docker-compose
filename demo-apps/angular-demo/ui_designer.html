@@ -80,7 +80,7 @@
                 minLines: 20,
             });
             $scope.ascii = function(f) {
-                return f.original.toUpperCase().replace(/ne/gmi, '"NE"').replace(/(A|G|E|R|M|_)/gmi, '"$1"')
+                return f.original.replace(/(\w+)/gmi, '"$1"')
             }
             editor.session.on('change', function() {
                 console.info(editor.session.getValue())
@@ -128,67 +128,32 @@
 <div class="container-fluid">
 
     <div class="row">
-        <!--    <div class="row">
-                <div class="col-sm-3">
-                    <pre id="editor" class="editor"></pre>
+        <div class="col-sm-2">
+            <pre id="editor" class="editor"></pre>
+        </div>
+        <div class="col-sm-2">
+            <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
+            <ul class="list-group" ng-repeat="f in LME_MODEL | pick:'path==\'\''">
+                <li class="list-group-item" ng-click="changeSearch(f)" ng-bind="f.title"></li>
+            </ul>
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>{{search.title}}</h3>
                 </div>
-                <pre class="col-sm-8" ng-bind="uigrammer.value"></pre>
-            </div>-->
-        <div class="row">
-            <div class="col-sm-2">
-                <pre id="editor" class="editor"></pre>
             </div>
-            <div class="col-sm-2">
-                <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
-                <ul class="list-group" ng-repeat="f in LME_MODEL | pick:'path==\'\''">
-                    <li class="list-group-item" ng-click="changeSearch(f)" ng-bind="f.title"></li>
-                </ul>
-            </div>
-            <div class="col-sm-8">
-                <div class="row">
-                    <div class="col-sm-12 chop">
-                        Titel figure U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 chop">
-                        U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.
-                    </div>
-                    <div class="col-sm-6">
-                        één figure Lorum epsulum which has a long text
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 chop">
-                        U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.
-                    </div>
-                    <div class="col-sm-2">
-                        één figure Lorum x
-                    </div>
-                    <div class="col-sm-2">
-                        één figure Lorum epsulum
-                    </div>
-                    <div class="col-sm-2">
-                        één figure Lorum epsulum
-                    </div>
-                </div>
+            <div class="row" ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 200" ng-switch="f.type" ng-class="f.visible?'background' :''">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h3>{{search.title}}</h3>
+                        <script ng-if="f.original!== 'undefined' " type="math/asciimath" ng-bind="ascii(f)"></script>
                     </div>
                 </div>
-                <div class="row" ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 200" ng-switch="f.type">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <script ng-if="f.original!== 'undefined' " type="math/asciimath" ng-bind="ascii(f)"></script>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <span ng-bind="f.title"></span>
-                    </div>
-                    <div ng-repeat="cv in f.cols" class="col-sm-{{2 * (4-(f.cols.length))}} chop">
-                        <input class="form-control" ng-model="cv.value">
-                    </div>
+                <div class="col-xs-6">
+                    <span ng-bind="f.title"></span>
+                </div>
+                <div ng-repeat="cv in f.cols" class="col-sm-{{2 * (4-(f.cols.length))}} chop">
+                    <input class="form-control" ng-model="cv.value">
                 </div>
             </div>
         </div>
