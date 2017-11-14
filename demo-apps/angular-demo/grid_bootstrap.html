@@ -99,7 +99,7 @@
                     });
                 }
 
-                $http.get('tmp_model/' + modelName).then(function(data) {
+                $http.get('resources/' + modelName + '.js').then(function(data) {
                     eval(data.data)
                     //after this we can import the user-data....
                     LMEMETA.importWebModel('Uses MVO\nQ_ROOT')

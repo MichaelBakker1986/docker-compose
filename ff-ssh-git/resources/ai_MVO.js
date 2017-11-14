@@ -22960,15 +22960,6 @@ HSUM = function(fId, func, v, x, y, z, start, end) {
     }
     return returnValue;
 }
-Matrix = function() {
-    var rv = [];
-    for (var key in arguments) {
-        rv.push(parseFloat(arguments[key]))
-    }
-    return {
-        data: rv
-    };
-}
 initJSMath(jsMath);
 exports.mathJs = {
     name: 'ff-math',
