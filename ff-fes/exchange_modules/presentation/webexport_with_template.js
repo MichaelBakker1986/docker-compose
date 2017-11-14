@@ -104,15 +104,24 @@ LMETree.prototype.addWebNode = function(node, treePath) {
     /**
      * Proxy properties to the column objects
      */
+    var rt = {}
+    Object.defineProperty(rt, 'value', properties.title.prox(workbook, rowId, 'title', 0));
+    rv.cols.push({
+        value: null,
+        entered: null,
+        type: 'title',
+        locked: null
+    });
     for (var index = 0; index < amount; index++) {
         var r = {
+            type: node.displayAs,
             value: null,
             visible: null,
             entered: null,
             required: null,
             locked: null
         }
-        rv.cols[index] = r;
+        rv.cols.push(r);
         Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index));
         Object.defineProperty(r, 'visible', properties.visible.prox(workbook, rowId, 'visible', index));
         Object.defineProperty(r, 'entered', properties.entered.prox(workbook, rowId, 'entered', index));

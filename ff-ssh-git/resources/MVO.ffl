@@ -2776,7 +2776,16 @@ model MVO uses BaseModel
         visible: 1;
         options_title: locked;
         options: locked;
-        variable Q_RESULTSUB1 refers to Q_RESULT
+        variable GRAPH01
+        {
+            datatype: matrix;
+            frequency: none;
+            visible: 1;
+            formula: Matrix(Q_MAP01_SCORE01,Q_MAP02_SCORE01, Q_MAP03_SCORE01, Q_MAP04_SCORE01);
+            displaytype: chart;
+            title: "Graph scores";
+        }
+        variable Q_RESULTXZ
         {
           datatype: string;
           frequency: document;

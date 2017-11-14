@@ -158,8 +158,6 @@ PropertiesAssembler.prototype.visitProperty = function(node, func) {
     var startingNode = node || getRootNode('NEW');
     if (startingNode !== undefined) {
         visitInternal(startingNode, func, 0, undefined)
-        //startingNode._depth = undefined;
-        //startingNode.parentrowId = undefined;
     }
 }
 
@@ -169,10 +167,7 @@ function visitInternal(node, func, depth) {
         for (var i = 0; i < node.nodes.length; i++) {
             var childNode = PropertiesModel[node.nodes[i].name];
             childNode.parentrowId = node.rowId;
-            //childNode._index = i;
             visitInternal(childNode, func, depth + 1);
-            //childNode.parentrowId = undefined;
-            //childNode._index = undefined;
         }
     }
 }

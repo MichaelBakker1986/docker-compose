@@ -108,17 +108,17 @@
                     <h3>{{search.title}}</h3>
                 </div>
             </div>
-            <div ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 200" ng-if="f.visible" ng-switch="f.type" ng-class="'row ' + (f.required?'required':'')">
-                <div class=" ">
-                    <div class="col-xs-{{6*(f.cols.length==0?2:1)}}">
+            <div ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 200" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
+                <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="cv.entered ? 'isentered' : undefined" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
+                    <div ng-switch-when="chart">Highchart..</div>
+                    <div ng-switch-when="title" ng-class="'col-xs-'+(f.cols.length ==1?10:5)">
                         <span contenteditable="true" class="title" ng-bind="f.title"></span>
                         <span><i ng-if="f.hint" class="fa fa-info" title="{{f.hint}}"></i></span>
                         <span><i ng-if="f.original!== 'undefined'" class="fa fa-info" title="{{f.id + '='+ f.original}}"></i></span>
                     </div>
-                </div>
-                <div class=" ">
-                    <div ng-repeat="cv in f.cols" class="col-sm-{{2 * (4-(f.cols.length))}}" ng-required="cv.required" ng-class="cv.entered ? 'isentered' : undefined" ng-readonly="cv.locked" ng-disabled="cv.locked">
-                        <div class="input-group" ng-init="pid = $index">
+                    <div ng-switch-default class="col-xs-5">
+                        <div ng-switch-when="chart">Highchart..</div>
+                        <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">
                             <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
                             <select ng-switch-when="select" class="form-control" ng-model="cv.value" placeholder="Pick value">
                                 <option ng-repeat="choice in f.choices" ng-selected="choice.name == cv.value">{{choice.value}}</option>

@@ -29,7 +29,13 @@ HSUM = function (fId, func, v, x, y, z, start, end) {
     }
     return returnValue;
 }
-
+Matrix = function () {
+    var rv = [];
+    for (var key in arguments){
+        rv[key] = arguments[key]
+    }
+    return rv;
+}
 initJSMath(jsMath);
 exports.mathJs = {
     name: 'ff-math',
