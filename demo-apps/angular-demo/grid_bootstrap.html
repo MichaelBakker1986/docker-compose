@@ -108,7 +108,16 @@
                     $scope.name = LME.name
                     $scope.LMEMETA = LMEMETA;
                     $scope.saveData = persist
-                    $scope.search = (LME.nodes.Q_ROOT || LME.nodes.root).children[0]
+
+                    //TODO: find a way in FFL to make this generic...
+                    if (modelName.indexOf('V05') > -1) {
+                        $scope.nav = LME.nodes.Q_ROOT_VALUATION.children
+                        $scope.search = LME.nodes.Q_ROOT_VALUATION
+                    } else {
+                        $scope.nav = (LME.nodes.Q_ROOT || LME.nodes.root).children
+                        $scope.search = (LME.nodes.Q_ROOT || LME.nodes.root).children[0]
+                    }
+
                     LMEMETA.loadData(function(response) {
                         $scope.$digest()
                     })
@@ -161,13 +170,13 @@
         </div>
         <div class="col-sm-2 page-header">
             <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
-            <ul class="list-group" ng-repeat="f in LME_MODEL | pick:'children.length > 1 && path.endsWith(\'Q_ROOT\')'" ng-if="f.visible">
+            <ul class="list-group" ng-repeat="f in nav | pick:'children.length > 1'" ng-if="f.visible">
                 <li class="list-group-item" ng-click="changeSearch(f)" ng-bind="f.title"></li>
             </ul>
         </div>
         <div class="col-sm-8">
             <h3 class="page-header">{{search.title}}</h3>
-            <div ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 200" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
+            <div ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 100" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
                 <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="cv.entered ? 'isentered' : undefined" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
                     <div ng-switch-when="chart" class="col-xs-10 chart">
                         <highcharts-column class="chart" ng-bind-attrs="{series: cv.value}"></highcharts-column>
