@@ -59,6 +59,9 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
 };
 /**
  * Default values, formatter transformers
+ * TODO: introduce data-masks to keep these checks quick
+ * - every variable has one mask, this one includes display and data types.
+ * delegate doesnt work in compiled JS!
  */
 FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     var colType = col || 'value';
@@ -90,10 +93,15 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     //formatter, for fixed decimals is a part of the UI, frequency is a part of the Formula.
     if (variable) {
         if (colType === 'value') {
-            if (variable.delegate && variable.delegate.fixed_decimals) {
+            if (variable.decimals !== undefined) {
                 if (!isNaN(returnValue)) {
-                    var level = Math.pow(10, parseInt(variable.delegate.fixed_decimals));
+                    var level = Math.pow(10, variable.decimals);
                     returnValue = (Math.round(returnValue * level) / level)
+                }
+            }
+            if (variable.datatype == 'number') {
+                if (returnValue !== 0 && returnValue < 0.00001 && returnValue > -0.00001) {
+                    returnValue = '..'
                 }
             }
         } else if (colType == 'locked') {

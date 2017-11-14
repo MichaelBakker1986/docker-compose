@@ -106,7 +106,7 @@ StoryParser.prototype.on = function(event) {
         this.message(event)
     }
     else if (event.type == 'done') {
-        this.then(event)
+       // this.then(event)
     }
 }
 exports.StoryParser = StoryParser;

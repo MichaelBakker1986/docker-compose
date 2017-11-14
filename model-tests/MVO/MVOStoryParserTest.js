@@ -1,16 +1,7 @@
 var StoryParser = require('../StoryParser').StoryParser
-require('../../ff-fes/exchange_modules/presentation/webexport');
-var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
-const LMEapi = require('../../lme-model-api/src/lme');
-
+var MVO = require('./MVO')
 function MVOStory(story) {
     this.story = story;
-    this.model = __dirname + '/story_MVO.ffl';
-    const MVOapi = new LMEapi();
-    LMEMETA = MVOapi;
-    MVOapi.addFunctions(excelPlugin);
-    MVOapi.importFFL(require('fs').readFileSync(this.model, 'utf8'));
-    LME = MVOapi.exportWebModel();
 }
 
 MVOStory.prototype.startTest = function() {

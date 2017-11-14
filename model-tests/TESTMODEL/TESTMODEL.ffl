@@ -33,6 +33,22 @@ model TESTMODEL uses BaseModel
         frequency: document;
         inputRequired: 1;
 	}
+    variable Q_ROOT
+    {
+        title: "Q_ROOT";
+        datatype: number;
+        formula: 156;
+        frequency: document;
+        inputRequired: 1;
+        variable Q_MAP01
+        {
+            title: "Q_MAP01";
+            datatype: number;
+            formula: 1321;
+            frequency: document;
+            inputRequired: 1;
+        }
+    }
 	variable VariableTwo
 	{
 	    title: "VariableTwo";

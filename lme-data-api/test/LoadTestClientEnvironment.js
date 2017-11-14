@@ -12,7 +12,7 @@ window = {
         href: "http://10.146.2.87:8083/id/DEMO/grid_example.html#" + modelName + "&" + uuid()
     }
 }
-let MvoStory = require('../../model-tests/MVO/MVOStoryParserQuickTest').MVOStory;
+let MvoStory = require('../../model-tests/MVO/MVOStoryParserTest').MVOStory;
 new MvoStory(story).startTest()
 //LMEMETA.urlPrefix = 'http://localhost:8085'
 LMEMETA.urlPrefix = 'http://10.146.2.87:8085'

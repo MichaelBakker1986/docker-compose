@@ -1,5 +1,6 @@
 var SolutionFacade = require('../../fesjs/SolutionFacade');
 var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
+var LmeDisplayGrammer = require('./LmeDisplayGrammer').LmeDisplayGrammer
 var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original']
 
 function WebExport() {
@@ -131,24 +132,12 @@ LMETree.prototype.addWebNode = function(node, treePath) {
 }
 
 var webDesign = {
-    MVO_Q_MAP01: {},
-    MVO_Q_MAP02: {},
-    MVO_Q_MAP03: {},
-    MVO_Q_MAP04: {}
+    nodes: [
+        {rowId: 'MVO_Q_ROOT'}
+    ]
 }
 WebExport.prototype.parseData = function(webExport, workbook) {
-    let nodes = webExport.split('\n');
-    //log.debug(nodes)
-    webDesign = {};
-    for (var i = 0; i < nodes.length; i++) {
-        let nodeName = nodes[i];
-        var rootNode = workbook.fetchSolutionNode(nodeName, 'value');
-        if (rootNode) {
-            webDesign[workbook.modelName + "_" + rootNode.rowId] = true;
-        }
-    }
-    //  console.info(webDesign)
-    ///inherit modelName
+    webDesign = new LmeDisplayGrammer(webExport).parseGrammer()
     return SolutionFacade.createSolution(workbook.modelName);
 }
 
@@ -163,10 +152,11 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     var currentDepth = 0;
 
     //make the walk here,
-    for (var node in webDesign) {
-        var rootNode = workbook.fetchSolutionNode(node, 'value');
+    for (var i = 0; i < webDesign.nodes.length; i++) {
+        var node = webDesign.nodes[i];
+        var rootNode = workbook.fetchSolutionNode(node.rowId, 'value');
         workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
-            if (rootNode.rowId !== 'root') {
+            if (rootNode && rootNode.rowId !== 'root') {
                 if (treeDepth > currentDepth) {
                     treePath.push(node.parentrowId)
                     currentDepth = treeDepth;
@@ -178,7 +168,6 @@ WebExport.prototype.deParse = function(rowId, workbook) {
             }
         })
     }
-
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExport())

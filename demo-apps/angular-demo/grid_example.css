@@ -155,7 +155,7 @@ label {
     cursor: default;
 }
 
-span.required:after, label[required]:not(input):after {
+.required span.title:after, span.required:after, label[required]:not(input):after {
     content: "";
     font-family: fontAwesome;
     font-size: .4rem;

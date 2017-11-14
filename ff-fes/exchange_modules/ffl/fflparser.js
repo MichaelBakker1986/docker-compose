@@ -281,6 +281,12 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         throw Error('Invalid frequency [' + node + ']');
     }
     uiNode.frequency = node.frequency;
+    if (node.datatype !== undefined) {
+        uiNode.datatype = node.datatype;
+    }
+    if (node.fixed_decimals !== undefined) {
+        uiNode.decimals = parseInt(node.fixed_decimals);
+    }
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
 

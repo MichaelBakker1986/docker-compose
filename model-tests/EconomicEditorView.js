@@ -2,11 +2,36 @@ function EconomicEditorView() {
     this.on = false;
     this.properties = true;
 }
+
 function getdepth(node, depth) {
     if (node && node._parent == undefined) {
         return depth;
     }
     return getdepth(node._parent, 1 + depth)
+}
+
+var defaultValue = {
+    visible: {
+        undefined: true,
+        '1.0': true,
+        '1': true,
+        'true': true,
+        'On': true
+    },
+    locked: {
+        '0.0': true,
+        '0': true,
+        'false': true,
+        'Off': true,
+        'No': true
+    },
+    required: {
+        '0.0': true,
+        '0': true,
+        'false': true,
+        'No': true,
+        'Off': true
+    }
 }
 
 EconomicEditorView.prototype.parse = function(input) {
@@ -33,7 +58,7 @@ EconomicEditorView.prototype.parse = function(input) {
                 }
                 var locked = node.locked || false
                 var visible = node.visible || false
-                var required = node.required || false
+                var required = node.inputRequired || false
                 var formula = node.formula || false
                 var hint = node.hint || false
                 if (formula) {
@@ -43,14 +68,39 @@ EconomicEditorView.prototype.parse = function(input) {
                     spaces.length = (80 - total.length) - depth;
                     let prefix = [];
                     prefix.length = depth;
-//"" + depth + " "
-                    output.push( prefix.join(' ') + total + spaces.join(' ') + '=' + node.formula);
-                    //output.push('value:' + spaces.join(' ') + "=" + node.formula)
+                    output.push(prefix.join(' ') + total + spaces.join(' ') + '=' + node.formula);
+
                     if (hint) {
                         // output.push(' hint:' + spaces.join(' ') + "=" + node.hint)
                     }
                 }
-
+                if (props && required && !defaultValue.required[required]) {
+                    var spaces = [];
+                    let depth = getdepth(node, 0);
+                    let total = (node.modifier || '') + nodeName + ".required";
+                    spaces.length = (80 - total.length) - depth;
+                    let prefix = [];
+                    prefix.length = depth;
+                    output.push(prefix.join(' ') + total + spaces.join(' ') + '=' + node.inputRequired);
+                }
+                if (props && visible && !defaultValue.visible[visible]) {
+                    var spaces = [];
+                    let depth = getdepth(node, 0);
+                    let total = (node.modifier || '') + nodeName + ".visible";
+                    spaces.length = (80 - total.length) - depth;
+                    let prefix = [];
+                    prefix.length = depth;
+                    output.push(prefix.join(' ') + total + spaces.join(' ') + '=' + node.visible);
+                }
+                if (props && locked && !defaultValue.locked[locked]) {
+                    var spaces = [];
+                    let depth = getdepth(node, 0);
+                    let total = (node.modifier || '') + nodeName + ".locked";
+                    spaces.length = (80 - total.length) - depth;
+                    let prefix = [];
+                    prefix.length = depth;
+                    output.push(prefix.join(' ') + total + spaces.join(' ') + '=' + node.visible);
+                }
                 // addnode(logVars, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && context.tupleDefinition, context.tupleDefinition, context.nestTupleDepth);
                 if (tupleDefiniton) {
                     context.tupleDefinition = nodeName;
@@ -109,5 +159,6 @@ function findSolutionNameFromFFLFile(json) {
     }
     return undefined;
 }
+
 exports.EconomicEditorView = new EconomicEditorView();
 
