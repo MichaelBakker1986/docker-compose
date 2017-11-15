@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts-ng/1.1.0/highcharts-ng.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
@@ -79,7 +81,42 @@
             <div ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 100" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
                 <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'questions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
                     <div ng-switch-when="chart" class="col-md-12 chart">
-                        <highcharts-column class="chart" ng-bind-attrs="{series: cv.value}"></highcharts-column>
+                        <highchart id="{{$index}}-chart" config="{
+                chart: {
+                    polar: true
+                },
+                pane: {
+                    startAngle: 0,
+                    endAngle: 360
+                },
+                title: {
+                    text: f.title,
+                    x: -80
+                },
+                xAxis: {
+                    categories: cv.value[0],
+                    tickmarkPlacement: 'on',
+                    lineWidth: 0
+                },
+                yAxis: {
+                    gridLineInterpolation: 'polygon',
+                    lineWidth: 0,
+                    min: 0
+                },
+                tooltip: {
+                    shared: true,
+                    pointFormat: '<span style=\'color:{series.color}\'>{series.name}: <b>${point.y:,.0f}</b><br/>'
+                },
+                series: [{
+                    name: f.title,
+                    data: cv.value[1],
+                    pointPlacement: 'on'
+                }, {
+                    name: 'Average',
+                    data: [75, 60, 55, 70],
+                    pointPlacement: 'on'
+                }]
+            }"></highchart>
                     </div>
                     <div ng-switch-when="title" ng-class="'col-md-'+(f.cols.length==1?12:6)">
                         <span contenteditable="true" class="title" ng-bind="f.title"></span>
