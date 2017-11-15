@@ -23,7 +23,7 @@ assert(Q_MAP01.value)
 assert(Q_MAP01_ENTEREDREQUIREDVARS.value == 0)
 assert(Q_MAP01_REQUIREDVARS.value == 0)
 Q_MAP01_ENTEREDREQUIREDVARS.value = 1
-assert(Q_MAP01.value == '..')
+assert(Q_MAP01.value == '')
 //basic model tests.
 assert(FES_COLUMN_VISIBLE.value == 1)
 FES_COLUMN_VISIBLE.value = 20

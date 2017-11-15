@@ -19,9 +19,9 @@ class Stash {
     preview(name, data, lme) {
 
         var tempHash = '_tmp_' + uuid() + "_" + name;
-        return write('../ff-ssh-git/resources/' + tempHash + '.ffl', data)
+        return write(__dirname + '/../../ff-ssh-git/resources/' + tempHash + '.ffl', data)
             .then(function(filename) {
-                return exec('node src/exportLME_FFL.js ' + tempHash).then((result) => {
+                return exec('node ' + __dirname + '/exportLME_FFL.js ' + tempHash).then((result) => {
                     let userID = uuid();
                     console.info('<span>Temporally model update:</span><a href="http://' + host + ':8083/id/' + userID + '/grid_example.html#' + tempHash + '&' + userID + '">' + name + '</a><span></span>');
                     return tempHash;
@@ -35,9 +35,9 @@ class Stash {
 
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
-        return Promise.all([write('../ff-ssh-git/resources/' + name + '.ffl', data)])
+        return Promise.all([write(__dirname + '/../../ff-ssh-git/resources/' + name + '.ffl', data)])
             .then(function(filename) {
-                return Promise.all([exec('node src/exportLME_FFL.js ' + name), exec('node src/exportLME_FFL_angular.js ' + name)]).then((result) => {
+                return Promise.all([exec('node ' + __dirname + '/exportLME_FFL.js ' + name), exec('node ' + __dirname + '/exportLME_FFL_angular.js ' + name)]).then((result) => {
                     let userID = uuid();
                     if (develop) {
                         console.info('<span>ffl model update:</span><a href="http://' + host + ':8083/id/' + userID + '/#' + name + '&' + userID + '">' + name + '</a><span></span>');

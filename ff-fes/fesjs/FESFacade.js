@@ -101,7 +101,7 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
             }
             if (variable.datatype == 'number') {
                 if (returnValue !== 0 && returnValue < 0.00001 && returnValue > -0.00001) {
-                    returnValue = '..'
+                    returnValue = ''
                 }
             }
         } else if (colType == 'locked') {

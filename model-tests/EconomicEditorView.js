@@ -65,7 +65,7 @@ EconomicEditorView.prototype.parse = function(input) {
                     var spaces = [];
                     let depth = getdepth(node, 0);
                     let total = (node.modifier || '') + nodeName + " " + (props ? ((locked ? 'locked ' : ' ') + (visible ? 'visible ' : ' ') + (required ? 'required ' : ' ')) : '');
-                    spaces.length = (80 - total.length) - depth;
+                    spaces.length = Math.max((80 - total.length) - depth, 0);
                     let prefix = [];
                     prefix.length = depth;
                     output.push(prefix.join(' ') + total + spaces.join(' ') + '=' + node.formula);
@@ -77,29 +77,29 @@ EconomicEditorView.prototype.parse = function(input) {
                 if (props && required && !defaultValue.required[required]) {
                     var spaces = [];
                     let depth = getdepth(node, 0);
-                    let total = (node.modifier || '') + nodeName + ".required";
-                    spaces.length = (80 - total.length) - depth;
+                    let total3 = (node.modifier || '') + nodeName + ".required";
+                    spaces.length = Math.max((80 - total3.length) - depth, 0);
                     let prefix = [];
                     prefix.length = depth;
-                    output.push(prefix.join(' ') + total + spaces.join(' ') + '=' + node.inputRequired);
+                    output.push(prefix.join(' ') + total3 + spaces.join(' ') + '=' + node.inputRequired);
                 }
-                if (props && visible && !defaultValue.visible[visible]) {
+                 if (props && visible && !defaultValue.visible[visible]) {
                     var spaces = [];
                     let depth = getdepth(node, 0);
-                    let total = (node.modifier || '') + nodeName + ".visible";
-                    spaces.length = (80 - total.length) - depth;
+                    let total6 = (node.modifier || '') + nodeName + ".visible";
+                    spaces.length = Math.max((80 - total6.length) - depth,0);
                     let prefix = [];
                     prefix.length = depth;
-                    output.push(prefix.join(' ') + total + spaces.join(' ') + '=' + node.visible);
+                    output.push(prefix.join(' ') + total6 + spaces.join(' ') + '=' + node.visible);
                 }
                 if (props && locked && !defaultValue.locked[locked]) {
                     var spaces = [];
                     let depth = getdepth(node, 0);
-                    let total = (node.modifier || '') + nodeName + ".locked";
-                    spaces.length = (80 - total.length) - depth;
+                    let total2 = (node.modifier || '') + nodeName + ".locked";
+                    spaces.length = Math.max((80 - total2.length) - depth, 0);
                     let prefix = [];
                     prefix.length = depth;
-                    output.push(prefix.join(' ') + total + spaces.join(' ') + '=' + node.visible);
+                    output.push(prefix.join(' ') + total2 + spaces.join(' ') + '=' + node.visible);
                 }
                 // addnode(logVars, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && context.tupleDefinition, context.tupleDefinition, context.nestTupleDepth);
                 if (tupleDefiniton) {

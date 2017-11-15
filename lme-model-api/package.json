@@ -4,6 +4,7 @@
   "description": "",
   "license": "ISC",
   "private": true,
+  "main": "lme-model-app.js",
   "author": "Michael Bakker",
   "scripts": {
     "test": "node test/TESTMODEL.js",

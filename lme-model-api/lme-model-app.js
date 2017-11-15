@@ -1,4 +1,5 @@
 var express = require('express');
+const exec = require('child-process-promise').exec;
 var port = 8080;
 var app = express();
 var log = require('ff-log')
@@ -63,39 +64,18 @@ app.get('/models', (req, res) => {
     stash.models('master', 'ffl').then((data) => {
         res.json(data);
     }).catch((err) => {
-        res.json({status: 'fail', reason: err.toString()});
+        //res.json({status: 'fail', reason: err.toString()});
+        res.status(500).send(err.toString());
     })
 });
-var exportedLME;
 app.get('*/tmp_model/:model', (req, res) => {
-    var browser = require('browserify');
-    var fs = require('fs')
     var name = req.params.model;
-
-    if (!exportedLME) {
-        var lmeAPI = require(__dirname + '/src/lme.js')
-        LME = new lmeAPI()
-        LME.importFFL(fs.readFileSync(__dirname + '/../ff-ssh-git/resources/' + name + '.ffl', 'utf8'));
-        exportedLME = LME.exportLME();
-    }
-    let options = {
-        insertGlobals: true,
-        insertGlobalVars: {
-            JSON_MODEL: (file, dir) => {
-                return (file.endsWith('lmeAPIWrapper.js')) ? exportedLME : 'undefined';
-            }
-        },
-        gzip: true,
-        minify: true,
-        insertGlobals: true,
-        debug: false
-    };
-    let b = browser(options).ignore('escodegen').ignore('esprima');
-    b.add(__dirname + '/../ff-fes/exchange_modules/presentation/webexport_with_template.js');
-    b.add(__dirname + '/src/lmeAPIWrapper.js');
-    //b.transform('uglifyify', {global: true}) (will minify, but takes long)
-    b.transform(require('browserify-fastjson'));
-    b.bundle().pipe(res);
+    return exec('node ' + __dirname + '/src/exportLME_FFL.js ' + name).then((result) => {
+        var readStream = require('fs').createReadStream(__dirname + '/../ff-ssh-git/resources/' + name + '.js');
+        readStream.pipe(res);
+    }).catch((err) => {
+        res.status(500).send(err.toString())
+    })
 });
 
 require('./api-def').setup(app)

@@ -5,6 +5,7 @@
     "type": "git",
     "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
   },
+  "main": "lme-data-app.js",
   "version": "0.0.2",
   "scripts": {
     "start": "concurrently \"docker-compose -f db.yml up \" \"npm install --no-optional && node lme-data-app.js \""

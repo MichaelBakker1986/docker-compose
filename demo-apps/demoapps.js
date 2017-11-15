@@ -46,13 +46,12 @@ app.listen(port, function() {
         var domain = add + ':' + port;
         console.info(
             '<span>DEMO apps: </span>\n' +
-            '<a href="http://' + domain + '/id/DEMO/grid_example.html#MVO&DEMO">Angular Grid example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/grid_bootstrap.html#MVO&DEMO">Bootstrap Grid example</a><span> | </span>\n' +
-            '<a href="http://' + domain + '/id/DEMO/ui_designer.html#MVO&DEMO">Designer ide</a><span> | </span>\n' +
+            /*    '<a href="http://' + domain + '/id/DEMO/ui_designer.html#MVO&DEMO">Designer ide</a><span> | </span>\n' +*/
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
-            '<a href="http://' + domain + '/id/DEMO/datagraph.html">Data graph</a>\n' +
+            /*    '<a href="http://' + domain + '/id/DEMO/datagraph.html">Data graph</a>\n' +*/
             '<br><span>IDE apps: </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/aceide.html">IDE DEMO Application</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/excelide.html">ExcelIDE application</a>'

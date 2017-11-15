@@ -743,7 +743,7 @@ model MVO uses BaseModel
             inputRequired: (Q_MAP01_VERPLICHT[1]=1);
             data_options: unscalable;
             displaytype: select;
-            title: "Als er veranderingen in wetten zijn, zorgt u ervoor dat u dit op tijd weet, zodat u actie kunt ondernemen";
+            title: "A4343ls er veranderingen in wetten zijn, zorgt u ervoor dat u dit op tijd weet, zodat u actie kunt ondernemen";
             visible: 1;
             choices: "0:Nee|1:Ja";
             options_title: locked;
@@ -2779,7 +2779,7 @@ model MVO uses BaseModel
         variable GRAPH01
         {
             datatype: matrix;
-            frequency: document;
+            frequency: none;
             visible: 1;
             locked: 1;
             formula: [[Q_MAP01_SCORE01.title,Q_MAP02_SCORE01.title,Q_MAP03_SCORE01.title,Q_MAP04_SCORE01.title],[Q_MAP01_SCORE01,Q_MAP02_SCORE01,Q_MAP03_SCORE01,Q_MAP04_SCORE01]];

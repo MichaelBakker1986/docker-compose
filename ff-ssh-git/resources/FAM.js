@@ -1340,7 +1340,7 @@ var properties = {
 }
 var repeats = {
     undefined: [3, 1],
-    none: [0, 0],
+    none: [1, 1],
     column: [3, 1],
     document: [1, 3],
     timeline: [1, 3]
@@ -1365,12 +1365,14 @@ LMETree.prototype.addWebNode = function(node, treePath) {
      */
     var rt = {}
     Object.defineProperty(rt, 'value', properties.title.prox(workbook, rowId, 'title', 0));
-    rv.cols.push({
-        value: null,
-        entered: null,
-        type: 'title',
-        locked: null
-    });
+    if (node.frequency !== 'none') {
+        rv.cols.push({
+            value: null,
+            entered: null,
+            type: 'title',
+            locked: null
+        });
+    }
     for (var index = 0; index < amount; index++) {
         var r = {
             type: node.displayAs,

@@ -72,8 +72,6 @@ $(document).ready(function() {
     $(".toggle-info-btn").click(function(e) {
         EconomicEditorView.on = !EconomicEditorView.on;
 
-        editor.setOption("maxLines", EconomicEditorView.on ? Infinity : 58);
-
         setValue(fflModel)
         scrollTop()
     });
