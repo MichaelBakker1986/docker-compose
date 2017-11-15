@@ -22,7 +22,19 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.css"/>
     <link rel="stylesheet" type="text/css" href="grid_example.css"/>
     <style>
+        .questions, .questions div {
+            padding: 0px;
+        }
 
+        .input-group .input-group-addon {
+            border-radius: 0;
+            border-color: #d2d6de;
+            background-color: #fff;
+        }
+
+        .input-group-addon:first-child {
+            border-right: 0;
+        }
     </style>
     <script>
 
@@ -57,12 +69,10 @@
                         });
 
                         let listener = function() {
-                            let series = attrs.series[1];
-                            const categories = attrs.series[0];
-                            console.info(categories)
+                            const categories = attrs.series ? attrs.series[0] : [];
+                            let series = attrs.series ? attrs.series[1] : [];
 
                             for (var i = 0; i < series.length; i++) {
-                                console.info(attrs.chart.series[i])
                                 if (attrs.chart.series[i]) {
                                     attrs.chart.series[i].setData([series[i]], true);
                                 } else {
@@ -106,7 +116,7 @@
                     });
                 }
 
-                $http.get('tmp_model/' + modelName).then(function(data) {
+                $http.get('resources/' + modelName + '.js').then(function(data) {
                     eval(data.data)
                     //after this we can import the user-data....
                     LMEMETA.importWebModel('Q_ROOT')
@@ -263,16 +273,18 @@
         <div class="col-xs-8">
             <h3 class="page-header">{{search.title}}</h3>
             <div ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 100" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
-                <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="cv.entered ? 'isentered' : undefined" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
-                    <div ng-switch-when="chart" class="col-xs-10 chart">
+                <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'questions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
+                    <div ng-switch-when="chart" class="col-md-12 chart">
                         <highcharts-column class="chart" ng-bind-attrs="{series: cv.value}"></highcharts-column>
                     </div>
-                    <div ng-switch-when="title" ng-class="'col-xs-'+(f.cols.length ==1?10:6)">
+                    <div ng-switch-when="title" ng-class="'col-md-'+(f.cols.length==1?12:6)">
                         <span contenteditable="true" class="title" ng-bind="f.title"></span>
                         <span><i ng-if="f.hint" class="fa fa-info-circle" data-content="{{f.hint}}" data-trigger="click" data-original-title="{{f.title}}" data-toggle="popover"></i></span>
                         <span><i ng-if="f.original!=='undefined' && f.original!=='\'\''" class="fa fa-question-circle-o" data-trigger="click" data-toggle="popover" data-original-title="{{f.id}}=" data-content="{{f.original}}"></i></span>
                     </div>
-                    <div ng-switch-default class="col-xs-6">
+                    <!--In most cases there are 4 columns, title,value,value,value-->
+                    <!--Calculate the width by 6/length-1-->
+                    <div ng-switch-default ng-class="'questions col-md-'+(6/(f.cols.length-1))">
                         <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">
                             <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
                             <select ng-switch-when="select" class="form-control" ng-model="cv.value" placeholder="Pick value">

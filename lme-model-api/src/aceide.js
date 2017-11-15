@@ -207,12 +207,25 @@ $(document).ready(function() {
         });
     }
 
-    $(window).bind('keydown', function(event) {
-        if (event.ctrlKey || event.metaKey) {
-            switch (String.fromCharCode(event.which).toLowerCase()) {
+    $(window).bind('keydown', function(evt) {
+
+        if (evt.ctrlKey || evt.metaKey) {
+            switch (String.fromCharCode(evt.which).toLowerCase()) {
                 case 's':
-                    event.preventDefault();
+                    evt.preventDefault();
                     savFflModel()
+                    break;
+                case 'p':
+                    evt.preventDefault();
+                    previewModel()
+                    break;
+            }
+        } else {
+            switch (evt.keyCode) {
+                case 117://F6
+                    evt.preventDefault();
+                    $('#models').select()
+                    $('#models').focus()
                     break;
             }
         }
