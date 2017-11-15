@@ -127,7 +127,7 @@ angular
             var parent = data.data.parents[parentIndex];
             timeline_items.push({
                 type: 'event',
-                ago: ((now - parent.create_date) / 1000).toFixed(0) + ' s ago',
+                ago: moment(parent.create_date).fromNow(),
                 eventclass: data.data.id == parent.id ? 'fa fa-file-text-o bg-gray' : 'fa fa-pencil-square-o bg-yellow',
                 sha1: parent.id,
                 data: parent,
