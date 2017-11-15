@@ -1339,7 +1339,7 @@ var properties = {
     choices: {cache: true, prox: noChange}
 }
 var repeats = {
-    undefined: [3, 1],
+    undefined: [1, 1],
     none: [1, 1],
     column: [3, 1],
     document: [1, 3],
