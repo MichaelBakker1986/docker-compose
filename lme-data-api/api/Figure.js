@@ -22,7 +22,7 @@ exports.orm = Promise.all([
     orm.connectAsync(dbConnectString).then(async (db) => {
         function parentUuids(id) {
             return new Promise(function(ok, fail) {
-                db.driver.execQuery("SELECT uuid_parent from figure_tree where uuid=?", [id], function(err, result) {
+                db.driver.execQuery("SELECT uuid_parent from figure_tree where uuid=? order by id", [id], function(err, result) {
                     if (err) fail(err)
                     ok(result)
                 })

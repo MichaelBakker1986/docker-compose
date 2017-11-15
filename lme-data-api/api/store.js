@@ -18,22 +18,24 @@ module.exports.setup = function(app) {
     });
     app.get('/id/:id/data', function(req, res) {
         //TODO: move logic to the matrixStore, not pairing with rest-api now
-        new Figure.Figures().getFigures(req.params.id).then(function(data) {
+        new Figure.Figures().getFigures(req.params.id).then(function(dbData) {
             //TODO: use array.map....
             var values = {}
-            for (var i = 0; i < data[0].length; i++) {
-                var obj = data[0][i];
+            for (var i = 0; i < dbData[0].length; i++) {
+                var obj = dbData[0][i];
                 var hash = obj.var + "#" + obj.col;
                 values[hash] = {
                     value: obj.val
                 }
             }
             //TODO: use array.map....
-            var parents = {}
-            for (var i = 0; i < data[1].length; i++) {
-                var obj = data[1][i];
-                var hash = obj.var + "#" + obj.col;
-                parents[obj.uuid_parent] = new Date().getTime()
+            var parents = []
+            for (var dbParentsIndex = 0; dbParentsIndex < dbData[1].length; dbParentsIndex++) {
+                var dbParentRow = dbData[1][dbParentsIndex];
+                parents.push({
+                    id: dbParentRow.uuid_parent,
+                    create_date: new Date().getTime()
+                })
             }
             res.json({
                 status: 'succes',

@@ -116,78 +116,22 @@ angular
               selector: '[data-toggle="popover"]'
           });*/
     }).controller('timelineController', function($scope, $http, $rootScope) {
-    $scope.timeline_items = [
-        {
-            type: 'label',
-            css: 'time-label',
-            text: '10 Feb. 2014',
-            labelclass: 'bg-red'
-        },
-        {
-            type: 'event',
-            eventclass: 'fa fa-envelope bg-blue',
-            css: ''
-        },
-        {
-            type: 'event',
-            eventclass: 'fa fa-user bg-aqua',
-            css: ''
-        },
-        {
-            type: 'event',
-            eventclass: 'fa fa-comments bg-yellow',
-            css: ''
-        },
-        {
-            type: 'event',
-            eventclass: 'fa fa-camera bg-purple',
-            css: ''
-        },
-        {
-            type: 'event',
-            eventclass: 'fa fa-video-camera bg-maroo',
-            css: ''
-        },
-        {
-            type: 'event',
-            eventclass: 'fa fa-clock-o bg-gray',
-            css: ''
-        },
-        {
-            type: 'label',
-            css: 'time-label',
-            text: '3 Jan. 2014',
-            labelclass: 'bg-green'
-        }]
+    $scope.timeline_items = []
     var params = window.location.href.split('#')[1].split('&')
     var model = params[0] || 'MVO';
     let hash = params[1] || 'DEMO';
     $http.get('/id/' + hash + '/data').then(function(data) {
         var timeline_items = [];
-        /*   timeline_items.push({
-               type: 'label',
-               css: 'time-label',
-               text: '10 Feb. 2014',
-               labelclass: 'bg-red'
-           })*/
-        /*  timeline_items.push({
-              type: 'label',
-              labelclass: 'bg-green',
-              sha1: data.data.id,
-              data: data.data,
-              text: '3 Jan. 2014',
-              css: 'time-label',
-          })*/
-        for (var key in data.data.parents) {
+        for (var parentIndex = 0; parentIndex < data.data.parents.length; parentIndex++) {
+            var parent = data.data.parents[parentIndex];
             timeline_items.push({
                 type: 'event',
-                eventclass: data.data.id == key ? 'fa fa-file-text-o bg-gray' : 'fa fa-pencil-square-o bg-yellow',
-                sha1: key,
-                data: data.data.parents[key],
+                eventclass: data.data.id == parent.id ? 'fa fa-file-text-o bg-gray' : 'fa fa-pencil-square-o bg-yellow',
+                sha1: parent.id,
+                data: parent,
                 css: ''
             })
         }
-        //fa fa-clock-o
         if (timeline_items.length > 0) {
             timeline_items[0].eventclass = 'fa fa-file-o bg-gray'
             timeline_items.reverse();
