@@ -33,8 +33,8 @@ module.exports.setup = function(app) {
             for (var dbParentsIndex = 0; dbParentsIndex < dbData[1].length; dbParentsIndex++) {
                 var dbParentRow = dbData[1][dbParentsIndex];
                 parents.push({
-                    id: dbParentRow.uuid_parent,
-                    create_date: new Date().getTime()
+                    id: dbParentRow.uuid,
+                    create_date: dbParentRow.create_time.getTime()
                 })
             }
             res.json({
@@ -57,16 +57,15 @@ module.exports.setup = function(app) {
      * Store entered values supplied by the client
      */
     app.post('/id/:id/data', function(req, res) {
-        var now = new Date().getTime();
+        var now = new Date();
         let newChildId = uuid()
         var parentUuid = req.params.id;
         var dbData = []
         for (var i = 0; i < req.body.data.length; i++) {
             var entry = req.body.data[i]
-            entry.savetime = now;
             dbData.push([newChildId, entry.varName, entry.colId, entry.value])
         }
-        new Figure.Figures().insertFigures(parentUuid, newChildId, dbData).then(function(data) {
+        new Figure.Figures().insertFigures(parentUuid, newChildId, dbData, now).then(function(data) {
             res.json({
                 status: 'succes',
                 saveToken: newChildId

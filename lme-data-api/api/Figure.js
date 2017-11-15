@@ -22,8 +22,10 @@ exports.orm = Promise.all([
     orm.connectAsync(dbConnectString).then(async (db) => {
         function parentUuids(id) {
             return new Promise(function(ok, fail) {
-                db.driver.execQuery("SELECT uuid_parent from figure_tree where uuid=? order by id", [id], function(err, result) {
-                    if (err) fail(err)
+                //var sql = "SELECT uuid_parent from figure_tree where uuid=? order by id";
+                var sql = "SELECT fc.* from figure_tree as ft join figure_commit as fc on uuid_parent=fc.uuid where ft.uuid=? order by fc.id;";
+                db.driver.execQuery(sql, [id], function(err, result) {
+                    if (err) return fail(err)
                     ok(result)
                 })
             })
@@ -50,16 +52,15 @@ exports.orm = Promise.all([
                     return Promise.all([new Promise(function(ok, fail) {
                         let sql = "SELECT figure.* FROM figure join ( SELECT max(figure.id) as m from figure inner join figure_tree on uuid_parent=figure.uuid where figure_tree.uuid=? group by var,col ) as best on best.m=figure.id";
                         db.driver.execQuery(sql, [id], function(err, result) {
-                            if (err) fail(err)
+                            if (err) return fail(err)
                             ok(result)
                         })
                     }), parentUuids(id)]);
                 }
                 ,
-                insertFigures: function(parent, newChildId, values) {
+                insertFigures: function(parent, newChildId, values, saveTime) {
                     return Promise.all([new Promise(function(ok, fail) {
                         var sql = "INSERT INTO figure_tree (uuid,uuid_parent)  SELECT '" + newChildId + "' as uuid,uuid_parent as uuid_parent FROM figure_tree where uuid = '" + parent + "' UNION  select '" + newChildId + "','" + newChildId + "';";
-                        var oldSql = "INSERT INTO figure_tree (uuid,uuid_parent) VALUES ('" + newChildId + "','" + parent + "'),('" + newChildId + "','" + newChildId + "');";
                         db.driver.execQuery(sql, [], function(err, result) {
                             if (err) fail(err)
                             ok(result)
@@ -69,9 +70,19 @@ exports.orm = Promise.all([
                             db.driver.execQuery("INSERT INTO figure (uuid,var,col,val) VALUES " + values.map(a => {
                                 return "('" + a.join("','") + "')"
                             }).join(','), [], function(err, result) {
-                                if (err) fail(err)
+                                if (err) return fail(err)
                                 ok(result)
                             })
+                        } else {
+                            ok({status: 'succes', message: 'no values need to be inserted'})
+                        }
+                    }), new Promise(function(ok, fail) {
+                        if (values.length > 0) {
+                            db.driver.execQuery("INSERT INTO figure_commit (uuid,create_time) VALUES (?,?)"
+                                , [newChildId, saveTime], function(err, result) {
+                                    if (err) return fail(err)
+                                    ok(result)
+                                })
                         } else {
                             ok({status: 'succes', message: 'no values need to be inserted'})
                         }
@@ -89,8 +100,13 @@ exports.orm = Promise.all([
         }, {
             timestamp: true
         });
+        var FigureCommit = db.define("figure_commit", {
+            uuid: String,
+            create_time: {type: "date", time: true}
+        });
 
         exports.Figures = Figures;
+        exports.FigureCommit = FigureCommit;
         exports.FigureTree = FigureTree;
 
 

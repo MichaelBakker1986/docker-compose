@@ -122,10 +122,12 @@ angular
     let hash = params[1] || 'DEMO';
     $http.get('/id/' + hash + '/data').then(function(data) {
         var timeline_items = [];
+        var now = new Date().getTime();
         for (var parentIndex = 0; parentIndex < data.data.parents.length; parentIndex++) {
             var parent = data.data.parents[parentIndex];
             timeline_items.push({
                 type: 'event',
+                ago: ((now - parent.create_date) / 1000).toFixed(0) + ' s ago',
                 eventclass: data.data.id == parent.id ? 'fa fa-file-text-o bg-gray' : 'fa fa-pencil-square-o bg-yellow',
                 sha1: parent.id,
                 data: parent,

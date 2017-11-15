@@ -57,7 +57,7 @@
                         </span>
                         <i ng-switch-when="event" ng-class="timeline_item.eventclass"></i>
                         <div ng-switch-when="event" class="timeline-item">
-                            <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+                            <span class="time"><i class="fa fa-clock-o"></i> {{timeline_item.ago}}</span>
                             <!--    <h3 class="timeline-header"></h3>-->
                             <div class="timeline-body"></div>
                             <div class="timeline-footer">
