@@ -15,14 +15,6 @@ app.use('/', expressStaticGzip(__dirname + "/"));
 app.use('/id/:id/showcase', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/bower_components/"));
 
-//graph
-app.use('/id/:id/', expressStaticGzip(__dirname + "/data-graph/"));
-app.use('/id/:id/css', expressStaticGzip(__dirname + "/node_modules/gitgraph.js/build/"));
-app.use('/id/:id/dataTreeGraph.js', browserify(__dirname + '/data-graph/dataTreeGraph.js', {
-    gzip: true,
-    insertGlobals: true,
-    debug: false
-}));
 //proxies
 app.get('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));
 app.post('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));

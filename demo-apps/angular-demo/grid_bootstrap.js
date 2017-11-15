@@ -112,9 +112,9 @@ angular
                 }
             }
         });
-        /*  $('body').popover({
-              selector: '[data-toggle="popover"]'
-          });*/
+        $('body').popover({
+            selector: '[data-toggle="popover"]'
+        });
     }).controller('timelineController', function($scope, $http, $rootScope) {
     $scope.timeline_items = []
     var params = window.location.href.split('#')[1].split('&')
