@@ -56,7 +56,7 @@
 </nav><!-- /.navbar -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-2">
+        <div class="col-md-2">
             <div style="margin: 40px 0 20px;"></div>
             <div class="affix" ng-controller="timelineController">
                 <ul class="timeline">
@@ -76,7 +76,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-xs-8">
+        <div class="col-md-8">
             <h3 class="page-header">{{search.title}}</h3>
             <div ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 100" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
                 <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'questions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
@@ -107,6 +107,8 @@
                     shared: true,
                     pointFormat: '<span style=\'color:{series.color}\'>{series.name}: <b>${point.y:,.0f}</b><br/>'
                 },
+                legend:false,
+                credits:false,
                 series: [{
                     name: f.title,
                     data: cv.value[1],
@@ -149,7 +151,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-1">
+        <div class="col-md-1">
             <div style="margin: 40px 0 20px;"></div>
             <ul class="nav list-group affix">
                 <li>
@@ -159,10 +161,53 @@
                     <i ng-class="'fa '+ (f.value?'fa-check':'fa-circle-o')"></i>
                     <span ng-bind="f.title"></span>
                 </li>
+                <li>
+                    <div style="width: 100px;height: 100px;">
+                        <highchart id="polar-chart" config="{
+                chart: {
+                    polar: true
+                },
+                pane: {
+                    startAngle: 0,
+                    endAngle: 360
+                },
+                title: {
+                    text: f.title,
+                    x: -80
+                },
+                xAxis: {
+                    categories: LME_MODEL.GRAPH01.value[0],
+                    tickmarkPlacement: 'on',
+                    lineWidth: 0
+                },
+                yAxis: {
+                    gridLineInterpolation: 'polygon',
+                    lineWidth: 0,
+                    min: 0
+                },
+                tooltip: {
+                    shared: true,
+                    pointFormat: '<span style=\'color:{series.color}\'>{series.name}: <b>${point.y:,.0f}</b><br/>'
+                },
+                  legend:false,
+                credits:false,
+                series: [{
+                    name: LME_MODEL.GRAPH01.title,
+                    data: LME_MODEL.GRAPH01.value[1],
+                    pointPlacement: 'on'
+                }, {
+                    name: 'Average',
+                    data: [75, 60, 55, 70],
+                    pointPlacement: 'on'
+                }]
+            }"></highchart>
+                    </div>
+                </li>
             </ul>
         </div>
-        <div class="col-xs-1"></div>
+        <div class="col-md-1">
+
+        </div>
     </div>
-</div>
 </body>
 </html>
