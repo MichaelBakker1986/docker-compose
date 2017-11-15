@@ -337,9 +337,14 @@ footer {
 }
 
 .list-group-item.active {
+    font-size: large;
     border-left: 2px solid #3c8dbc;
     color: inherit;
     background-color: inherit
+}
+
+span.time i.fa {
+    color: grey;
 }
 
 .btn.active.focus {
@@ -385,4 +390,18 @@ footer {
 
 .timeline i.fa {
     color: white
+}
+
+.questions, .questions div {
+    padding: 0px;
+}
+
+.input-group .input-group-addon {
+    border-radius: 0;
+    border-color: #d2d6de;
+    background-color: #fff;
+}
+
+.input-group-addon:first-child {
+    border-right: 0;
 }
