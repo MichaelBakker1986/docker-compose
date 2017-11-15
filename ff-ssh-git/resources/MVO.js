@@ -1367,7 +1367,7 @@ LMETree.prototype.addWebNode = function(node, treePath) {
     Object.defineProperty(rt, 'value', properties.title.prox(workbook, rowId, 'title', 0));
     if (node.frequency !== 'none') {
         rv.cols.push({
-            value: 'None',
+            value: null,
             entered: null,
             type: 'title',
             locked: null

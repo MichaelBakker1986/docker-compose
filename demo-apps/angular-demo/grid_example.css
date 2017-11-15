@@ -405,3 +405,8 @@ span.time i.fa {
 .input-group-addon:first-child {
     border-right: 0;
 }
+
+.input-group input[readonly="readonly"], *[disabled="disabled"] .input-group span {
+    border: 1px white;
+    background-color: white;
+}

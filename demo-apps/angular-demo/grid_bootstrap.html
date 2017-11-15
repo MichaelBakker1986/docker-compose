@@ -102,7 +102,10 @@
                                 </label>
                             </div>
                             <textarea ng-switch-when="memo" rows="4" class="form-control" ng-model="cv.value" placeholder=".."></textarea>
-                            <input ng-switch-default class="form-control" ng-model="cv.value" placeholder="..">
+
+                            <input ng-switch-default readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
+                            <input ng-switch-default ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
+
                             <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
                         </div>
                     </div>
