@@ -1,4 +1,6 @@
 const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../ModelFacade')
+var PropertiesAssembler = require('../../ff-fes/fesjs/PropertiesAssembler')
+var FormulaService = require('../../ff-fes/fesjs/FormulaService')
 var jslrs = require("js-longest-repeated-substring");
 let PRICINGffl = readFileSync(__dirname + '/PRICING.ffl');
 var escodegen = require('escodegen')
@@ -28,6 +30,67 @@ function addSubFunction(node) {
     subFunction.count = subFunction.count + 1
     return subFunction;
 }
+
+var varnames = [
+    "Borrower_tpClientRaRoRaC",
+    "Borrower_tpClientEconomicProfit",
+    "Borrower_tpClientRegulatoryProfit",
+    "Borrower_tpClientReturnOnEquity",
+    "Borrower_tpRaRoRaC",
+    "Borrower_tpEconomicProfit",
+    "Borrower_tpRegulatoryProfit",
+    "Borrower_tpReturnOnEquity",
+    "Facility",
+    "Facility_tpID",
+    "Facility_tpRequiredCustomerSpread",
+    "Facility_tpRequiredLiquiditySpread",
+    "Facility_tpRequiredMarketSpread",
+    "Facility_tpEconomicProfit",
+    "Facility_tpRegulatoryProfit",
+    "Facility_tpReturnOnEquity",
+    "Facility_tpRiskAdjustedReturn",
+    "Facility_tpEconomicCapital",
+    "Facility_tpRaRoRaC"
+];
+var dependencies = "";
+var allVariables = {};
+var usedvars = {};
+
+function parseDeps(formula) {
+    let formulaName = formula.name.replace(/AABPRICING_(.*)_value/, '$1');
+    if (usedvars[formulaName]) {
+        return;
+    }
+    usedvars[formulaName] = true;
+    dependencies = dependencies + formulaName + '\n';
+    for (var dep in formula.deps) {
+        let fetch = PropertiesAssembler.fetch(dep);
+        let findFormulaByIndex = FormulaService.findFormulaByIndex(fetch.ref);
+        parseDeps(findFormulaByIndex);
+    }
+}
+
+LME.visitFormulas((formula) => {
+    if (formula.name.endsWith('_value')) {
+        allVariables[formula.name.replace(/AABPRICING_(.*)_value/, '$1')] = true
+    }
+    for (var i = 0; i < varnames.length; i++) {
+        var varname = varnames[i];
+        if (varname == formula.name.replace(/AABPRICING_(.*)_value/, '$1')) {
+            parseDeps(formula)
+        }
+    }
+})
+writeFileSync(__dirname + '/pricingoutputUsedVariables.txt', dependencies);
+var output = "";
+for (var key in allVariables) {
+    if (usedvars[key]) {
+    } else {
+        output = output + key + '\n'
+    }
+}
+writeFileSync(__dirname + '/pricingoutputunUsedVariables.txt', output);
+
 
 LME.visitFormulas((formula) => {
     let ast = esprima.parse(formula.original);

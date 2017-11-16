@@ -1,5 +1,12 @@
 angular
     .module('angapp', ['angular.filter', "highcharts-ng"])
+    .filter("filterByPrefix", function() {
+        return function(nodes, search) {
+            return nodes.filter(function(item) {
+                return item.path.contains('.' + search.id);
+            });
+        };
+    })
     .controller('lmeController', function($scope, $http, $timeout) {
         var params = window.location.href.split('#')
         if (params.length == 1) window.location.href = '#MVO&DEMO'
@@ -56,7 +63,8 @@ angular
             selector: '[data-toggle="popover"]'
         });
     }).controller('timelineController', function($scope, $http, $rootScope) {
-    $scope.timeline_items = []
+    $scope.timeline_items = [];
+    var allitems = {}
     var params = window.location.href.split('#')[1].split('&')
     var model = params[0] || 'MVO';
     let hash = params[1] || 'DEMO';
@@ -65,6 +73,7 @@ angular
         var now = new Date().getTime();
         for (var parentIndex = 0; parentIndex < data.data.parents.length; parentIndex++) {
             var parent = data.data.parents[parentIndex];
+            allitems[parent.id] = true;
             timeline_items.push({
                 type: 'event',
                 ago: moment(parent.create_date).fromNow(),
@@ -80,8 +89,15 @@ angular
         }
         $scope.timeline_items = timeline_items;
     });
+
     $scope.clicktimeline = function(timeline_item) {
-        window.location.href = '#' + model + '&' + timeline_item.sha1
+        if (allitems[timeline_item.sha1]) {
+            delete allitems[timeline_item.sha1];
+        } else {
+            allitems[timeline_item.sha1] = true
+        }
+        var requestString = Object.keys(allitems).join(',');
+        window.location.href = '#' + model + '&' + requestString
         LMEMETA.loadData(function(response) {
             $rootScope.$digest()
         })

@@ -254,6 +254,10 @@
       "4": true
     }
   },
+  "String('Imported Data')": {
+    "count": 2,
+    "argumentValues": {}
+  },
   "SubStr(Case(Borrower_tpClientGroupChoice, [\n    1,\n    'PAR - Particulieren/Medici' || 2,\n    'PBN - PBNL' || 3,\n    'PBI - PBI' || 4,\n    'PBF - PBI - France' || 5,\n    'PBD - PBI - Germany' || 6,\n    'PBG - PBI - Guernsey' || 7,\n    'PBH - PBI - Hong Kong' || 8,\n    'PBJ - PBI - Jersey' || 9,\n    'PBL - PBI - Luxembourg' || 10,\n    'PBS - PBI - Singapore' || 11,\n    'PBU - PBI - UAE' || 12,\n    'PBB - PBI - Belgium' || 13,\n    'IDJ - IC-D+J Clients' || 14,\n    'YBB - Retail Banking-YBB' || 15,\n    'BRM - Commercial Clients-REC' || 16,\n    'CR1 - Commercial Clients-RM_A1' || 17,\n    'CR2 - Commercial Clients-RM_A2' || 18,\n    'CR3 - Commercial Clients-RM_A3' || 19,\n    'CCL - Commercial Clients-CC' || 20,\n    'PUB - Commercial Clients-PublicSector' || 21,\n    'DDP - Commercial Clients-Deal Desk Public' || 22,\n    'LMF - IC-FinancialInstitutions' || 23,\n    'LMR - IC-RealEstate' || 24,\n    'LML - IC-LargeCorporates' || 25,\n    'LME - IC-ECT Clients' || 26,\n    'LMD - IC-DebtSolutions' || 27,\n    'LMC - IC-exCC Clients'\n]), '*', 99)": {
     "count": 2,
     "argumentValues": {
@@ -3759,26 +3763,34 @@
       "If(Facility_tpRepaymentChoice == 3 && Facility_tpWithdrawalChoice == 3, (Facility_tpLiquiditySpreadRepaymentScheme - Facility_tpLiquiditySpreadWithdrawalScheme) / (Facility_tpWeightedFundingRepaymentScheme - Facility_tpWeightedFundingWithdrawalScheme), NA)": true
     }
   },
-  "MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', Facility_tpOriginalTenor, 1), Facility_tpFixedInterestPeriod)": {
+  "MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', Facility_tpOriginalTenor, 1), Facility_tpFixedInterestPeriod)": {
     "count": 2,
     "argumentValues": {}
   },
-  "MatrixLookup('*', MatrixLookup('LiquidityPremiumTenorLowerBound', Facility_tpOriginalTenor, 1), Facility_tpFixedInterestPeriod)": {
+  "MatrixLookup('*', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', Facility_tpOriginalTenor, 1), Facility_tpFixedInterestPeriod)": {
+    "count": 10,
+    "argumentValues": {
+      "'AAB_Parameters.xls'": true
+    }
+  },
+  "MatrixLookup('AAB_Parameters.xls', '*', MatrixLookup('LiquidityPremiumTenorLowerBound', Facility_tpOriginalTenor, 1), Facility_tpFixedInterestPeriod)": {
     "count": 10,
     "argumentValues": {
       "If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther')))": true
     }
   },
-  "MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), '*', Facility_tpFixedInterestPeriod)": {
-    "count": 30,
+  "MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), '*', Facility_tpFixedInterestPeriod)": {
+    "count": 45,
     "argumentValues": {
       "MatrixLookup('LiquidityPremiumTenorLowerBound', Facility_tpOriginalTenor, 1)": true,
       "MatrixLookup('LiquidityPremiumTenorUpperBound', Facility_tpOriginalTenor, 1)": true,
       "MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)": true,
-      "MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1)": true
+      "MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1)": true,
+      "MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)": true,
+      "MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1)": true
     }
   },
-  "MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', Facility_tpOriginalTenor, 1), '*')": {
+  "MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', Facility_tpOriginalTenor, 1), '*')": {
     "count": 10,
     "argumentValues": {
       "Facility_tpFixedInterestPeriod": true
@@ -3858,13 +3870,19 @@
       "If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther')": true
     }
   },
-  "MatrixLookup('*', MatrixLookup('LiquidityPremiumTenorUpperBound', Facility_tpOriginalTenor, 1), Facility_tpFixedInterestPeriod)": {
+  "MatrixLookup('*', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', Facility_tpOriginalTenor, 1), Facility_tpFixedInterestPeriod)": {
+    "count": 5,
+    "argumentValues": {
+      "'AAB_Parameters.xls'": true
+    }
+  },
+  "MatrixLookup('AAB_Parameters.xls', '*', MatrixLookup('LiquidityPremiumTenorUpperBound', Facility_tpOriginalTenor, 1), Facility_tpFixedInterestPeriod)": {
     "count": 5,
     "argumentValues": {
       "If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther')))": true
     }
   },
-  "MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', Facility_tpOriginalTenor, 1), '*')": {
+  "MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', Facility_tpOriginalTenor, 1), '*')": {
     "count": 5,
     "argumentValues": {
       "Facility_tpFixedInterestPeriod": true
@@ -3913,46 +3931,52 @@
     "count": 44,
     "argumentValues": {
       "Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread)": true,
-      "Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0))": true,
+      "Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0))": true,
       "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X - Facility_tpGracePeriodInPeriods, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread)": true,
       "PPMT(Facility_tpAnnuityInterestRate / Facility_tpRepaymentFrequency, X - Facility_tpGracePeriodInPeriods, Facility_tpNumberOfPeriods, -Facility_tpPrincipalLimit, Facility_tpBalloon) * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0))": true
     }
   },
-  "SumFor('*', 1 + Facility_tpGracePeriodInPeriods, Facility_tpNumberOfPeriodsNoGrace, 1, Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0)))": {
+  "SumFor('*', 1 + Facility_tpGracePeriodInPeriods, Facility_tpNumberOfPeriodsNoGrace, 1, Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0)))": {
     "count": 20,
     "argumentValues": {
       "X": true
     }
   },
-  "SumFor(X, '*', Facility_tpNumberOfPeriodsNoGrace, 1, Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0)))": {
+  "SumFor(X, '*', Facility_tpNumberOfPeriodsNoGrace, 1, Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0)))": {
     "count": 20,
     "argumentValues": {
       "1 + Facility_tpGracePeriodInPeriods": true
     }
   },
-  "SumFor(X, 1 + Facility_tpGracePeriodInPeriods, '*', 1, Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0)))": {
+  "SumFor(X, 1 + Facility_tpGracePeriodInPeriods, '*', 1, Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0)))": {
     "count": 20,
     "argumentValues": {
       "Facility_tpNumberOfPeriodsNoGrace": true
     }
   },
-  "SumFor(X, 1 + Facility_tpGracePeriodInPeriods, Facility_tpNumberOfPeriodsNoGrace, '*', Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0)))": {
+  "SumFor(X, 1 + Facility_tpGracePeriodInPeriods, Facility_tpNumberOfPeriodsNoGrace, '*', Facility_tpLinear * (X * Facility_tpConvertToMonths / Facility_tpRepaymentFrequencyLiqSpread) * (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) + (MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod) - MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)) * OnER((X * 12 / Facility_tpRepaymentFrequency - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)) / (MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1) - MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)), 0)))": {
     "count": 20,
     "argumentValues": {
       "1": true
     }
   },
-  "MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)": {
+  "MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)": {
     "count": 2,
     "argumentValues": {}
   },
-  "MatrixLookup('*', MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)": {
+  "MatrixLookup('*', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)": {
+    "count": 10,
+    "argumentValues": {
+      "'AAB_Parameters.xls'": true
+    }
+  },
+  "MatrixLookup('AAB_Parameters.xls', '*', MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)": {
     "count": 10,
     "argumentValues": {
       "If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther')))": true
     }
   },
-  "MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), '*')": {
+  "MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), '*')": {
     "count": 10,
     "argumentValues": {
       "Facility_tpFixedInterestPeriod": true
@@ -3981,13 +4005,19 @@
       "0": true
     }
   },
-  "MatrixLookup('*', MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)": {
+  "MatrixLookup('*', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)": {
+    "count": 5,
+    "argumentValues": {
+      "'AAB_Parameters.xls'": true
+    }
+  },
+  "MatrixLookup('AAB_Parameters.xls', '*', MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), Facility_tpFixedInterestPeriod)": {
     "count": 5,
     "argumentValues": {
       "If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther')))": true
     }
   },
-  "MatrixLookup(If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), '*')": {
+  "MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1), '*')": {
     "count": 5,
     "argumentValues": {
       "Facility_tpFixedInterestPeriod": true
@@ -4093,13 +4123,6 @@
     "count": 10,
     "argumentValues": {
       "If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther')))": true
-    }
-  },
-  "MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), '*', Facility_tpFixedInterestPeriod)": {
-    "count": 15,
-    "argumentValues": {
-      "MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1)": true,
-      "MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorUpperBound', X * 12 / Facility_tpRepaymentFrequency, 1)": true
     }
   },
   "MatrixLookup('AAB_Parameters.xls', If(Facility_tpBaseCurrency == 'EUR', 'LiquidityPremiumEUR', If(Facility_tpBaseCurrency == 'GBP', 'LiquidityPremiumGBP', If(Facility_tpBaseCurrency == 'USD', 'LiquidityPremiumUSD', 'LiquidityPremiumOther'))), MatrixLookup('AAB_Parameters.xls', 'LiquidityPremiumTenorLowerBound', X * 12 / Facility_tpRepaymentFrequency, 1), '*')": {

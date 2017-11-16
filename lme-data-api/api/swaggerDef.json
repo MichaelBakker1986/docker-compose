@@ -64,6 +64,32 @@
         }
       }
     },
+    "/scenario/{ids}": {
+      "get": {
+        "summary": "Retrieve all values identified by {ids}.",
+        "operationId": "idScenarios",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ContextIds"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Value"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/id/{id}/figure/{figureName}": {
       "get": {
         "summary": "Get all values traversing down the Figure tree from given {figureName} in context {id}.",
@@ -139,6 +165,12 @@
   "parameters": {
     "ContextId": {
       "name": "id",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "ContextIds": {
+      "name": "ids",
       "in": "path",
       "required": true,
       "type": "string"

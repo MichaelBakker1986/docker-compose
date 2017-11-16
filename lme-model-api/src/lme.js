@@ -49,7 +49,6 @@ LmeAPI.prototype.exportData = function() {
 LmeAPI.prototype.importData = function(valueAsJSON) {
     this.lme.importSolution(valueAsJSON, 'jsonvalues')
 }
-
 /**
  * use modelName from this.lme.modelName
  * use token form this.lme.context.uuid

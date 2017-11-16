@@ -24,7 +24,6 @@
     <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts-ng/1.1.0/highcharts-ng.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
 
     <script src="grid_bootstrap.js"></script>
@@ -78,7 +77,7 @@
         </div>
         <div class="col-md-8">
             <h3 class="page-header">{{search.title}}</h3>
-            <div ng-repeat="f in LME_MODEL | fuzzyBy: 'path': search.id | first: 100" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
+            <div ng-repeat="f in LME_MODEL | toArray | filterByPrefix:search" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
                 <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'questions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
                     <div ng-switch-when="chart" class="col-md-12 chart">
                         <highchart id="{{$index}}-chart" config="{

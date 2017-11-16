@@ -20,16 +20,6 @@ const orm = require("orm");
 
 exports.orm = Promise.all([
     orm.connectAsync(dbConnectString).then(async (db) => {
-        function parentUuids(id) {
-            return new Promise(function(ok, fail) {
-                //var sql = "SELECT uuid_parent from figure_tree where uuid=? order by id";
-                var sql = "SELECT fc.* from figure_tree as ft join figure_commit as fc on uuid_parent=fc.uuid where ft.uuid=? order by fc.id;";
-                db.driver.execQuery(sql, [id], function(err, result) {
-                    if (err) return fail(err)
-                    ok(result)
-                })
-            })
-        }
 
         db.use(require('orm-timestamps'), {
             createdProperty: 'created_at',
@@ -48,6 +38,22 @@ exports.orm = Promise.all([
             val: String
         }, {
             methods: {
+                getScenarioFigures: function(ids) {
+                    return Promise.all([new Promise(function(ok, fail) {
+                        let sql = "SELECT figure.* FROM figure join ( SELECT max(figure.id) as m from figure  where uuid IN ('" + ids.join("','") + "') group by var,col ) as best on best.m=figure.id";
+                        db.driver.execQuery(sql, [], function(err, result) {
+                            if (err) return fail(err)
+                            ok(result)
+                        })
+                    }), new Promise(function(ok, fail) {
+                        //var sql = "SELECT uuid_parent from figure_tree where uuid=? order by id";
+                        var sql = "SELECT * from figure_commit where uuid IN ('" + ids.join("','") + "') order by id;";
+                        db.driver.execQuery(sql, [], function(err, result) {
+                            if (err) return fail(err)
+                            ok(result)
+                        })
+                    })]);
+                },
                 getFigures: function(id) {
                     return Promise.all([new Promise(function(ok, fail) {
                         let sql = "SELECT figure.* FROM figure join ( SELECT max(figure.id) as m from figure inner join figure_tree on uuid_parent=figure.uuid where figure_tree.uuid=? group by var,col ) as best on best.m=figure.id";
@@ -55,9 +61,15 @@ exports.orm = Promise.all([
                             if (err) return fail(err)
                             ok(result)
                         })
-                    }), parentUuids(id)]);
-                }
-                ,
+                    }), new Promise(function(ok, fail) {
+                        //var sql = "SELECT uuid_parent from figure_tree where uuid=? order by id";
+                        var sql = "SELECT fc.* from figure_tree as ft join figure_commit as fc on uuid_parent=fc.uuid where ft.uuid=? order by fc.id;";
+                        db.driver.execQuery(sql, [id], function(err, result) {
+                            if (err) return fail(err)
+                            ok(result)
+                        })
+                    })]);
+                },
                 insertFigures: function(parent, newChildId, values, saveTime) {
                     return Promise.all([new Promise(function(ok, fail) {
                         var sql = "INSERT INTO figure_tree (uuid,uuid_parent)  SELECT '" + newChildId + "' as uuid,uuid_parent as uuid_parent FROM figure_tree where uuid = '" + parent + "' UNION  select '" + newChildId + "','" + newChildId + "';";

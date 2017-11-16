@@ -16,9 +16,11 @@ module.exports.setup = function(app) {
     }).catch((err) => {
         throw Error('Fail db init', err)
     });
-    app.get('/id/:id/data', function(req, res) {
+
+
+    function goDo(promise, req, res) {
         //TODO: move logic to the matrixStore, not pairing with rest-api now
-        new Figure.Figures().getFigures(req.params.id).then(function(dbData) {
+        promise.then(function(dbData) {
             //TODO: use array.map....
             var values = {}
             for (var i = 0; i < dbData[0].length; i++) {
@@ -52,6 +54,17 @@ module.exports.setup = function(app) {
                 values: []
             })
         })
+    }
+
+    app.get('/scenario/:ids', function(req, res) {
+        goDo(new Figure.Figures().getScenarioFigures(req.params.ids.split(',')), req, res);
+    });
+    app.get('/id/:id/data', function(req, res) {
+        if (req.params.id.indexOf(',') > -1) {
+            goDo(new Figure.Figures().getScenarioFigures(req.params.id.split(',')), req, res);
+        } else {
+            goDo(new Figure.Figures().getFigures(req.params.id), req, res)
+        }
     });
     /**
      * Store entered values supplied by the client
