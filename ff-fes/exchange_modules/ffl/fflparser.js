@@ -174,6 +174,7 @@ var displayAsMapping = {
     radio: 'select',//reversed, back to original
     undefined: 'string',
     currency: 'currency',
+    paragraph: 'paragraph',
     date: 'date',//requires a converter to work
     percentage: 'percentage',
     memo: 'memo',
@@ -271,9 +272,11 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
     if (rowId.match(/MAP[0-9]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
         if (defaultValue.visible[node.visible]) {
             node.visible = 'Length(' + rowId + ')'
-            //mappedDisplayType = rowId.replace(/.*_(.*)/,'$1').toLowerCase();
             node.frequency = 'none'
         }
+    } else if (rowId.match(/MAP[0-9]+_PARAGRAAF[0-9]+$/i)) {
+        node.frequency = 'none'
+        mappedDisplayType = 'paragraph'
     }
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', valueFormula ? parseFFLFormula(valueFormula, 'none', rowId) : (mappedDisplayType == 'string' ? AST.STRING('') : AST.UNDEFINED()), mappedDisplayType);
     uiNode.displayAs = mappedDisplayType;

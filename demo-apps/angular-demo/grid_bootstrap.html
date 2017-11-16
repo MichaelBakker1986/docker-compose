@@ -75,9 +75,13 @@
             </div>
         </div>
         <div class="col-md-8">
-            <h3 class="page-header">{{search.title}}</h3>
+          <!--  <h3 class="page-header">{{search.title}}</h3>-->
             <div ng-repeat="f in LME_MODEL | toArray | filterByPrefix:search" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
                 <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'questions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
+                    <div ng-switch-when="paragraph" class="col-md-12">
+                        <h2>{{f.title}}</h2>
+                        {{f.hint}}
+                    </div>
                     <div ng-switch-when="chart" class="col-md-12 chart">
                         <highchart id="{{$index}}-chart" config="{
                 chart: {
@@ -156,8 +160,8 @@
                 <li ng-repeat="f in nav | pick:'children.length > 1'" ng-if="f.visible" class="nav list-group-item" ng-class="f==search?'active':''" ng-click="changeSearch(f)">
                     <div>
                         <span ng-bind="f.title"></span>
+                        <span class="label label-warning">{{LME_MODEL.nodes[f.id + '_REQUIREDVARS'].value + 1}} - {{LME_MODEL.nodes[f.id + '_ENTEREDREQUIREDVARS'].value + 1}}</span>
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
                         <i ng-class="'fa '+ (f.value?'fa-check':'fa-circle-o')"></i>
                     </div>
                 </li>

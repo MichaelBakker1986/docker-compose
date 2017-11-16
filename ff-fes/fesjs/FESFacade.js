@@ -111,6 +111,8 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
             }
         } else if (colType == 'locked') {
             return Boolean(returnValue)
+        } else if (colType == 'visible') {
+            return Boolean(returnValue)
         }
     }
     return returnValue;
