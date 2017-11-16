@@ -53,8 +53,13 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
         //don't give away variable name here.
         throw Error('Cannot find variable')
     }
-    logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
+    if (logger.DEBUG) logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
     context.calc_count++;
+    context.audit.push({
+        saveToken: context.saveToken,
+        hash: xas.hash + yas.hash + 0,
+        formulaId: localFormula.id || localFormula.index
+    })
     FunctionMap.apiSet(localFormula, xas, yas, 0, value, context.values);
 };
 /**
@@ -114,12 +119,16 @@ FESFacade.fetchRootSolutionProperty = PropertiesAssembler.getRootProperty;
 FESFacade.fetchSolutionNode = fetchSolutionNode;
 FESFacade.apiGetValue = FunctionMap.apiGet;
 FESFacade.getAllValues = function(docValues) {
+    return this.getValuesFromFormulaIds(Object.keys(docValues), docValues);
+}
+FESFacade.getValuesFromFormulaIds = function(keys, docValues) {
     //we cannot just return everything here, Because for now all formula's have a user-entered value cache.
     //Also Functions themSelves are bound to this object.
     //So we have to strip them out here.
     //should be part of the apiGet, to query all *_value functions. or *_validation etc.
     var values = [];
-    for (var formulaId in docValues) {
+    for (var i = 0; i < keys.length; i++) {
+        var formulaId = keys[i];
         var cachevalues = docValues[formulaId];
         if (cachevalues) {
             var formula = FormulaService.findFormulaByIndex(formulaId);

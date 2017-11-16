@@ -11,13 +11,15 @@ var newModel = new modelAPI();
 newModel.importLME(require('./TESTMODEL.json'));
 LME = newModel.exportWebModel()
 var uuid = require('uuid')
-var [VariableOne, VariableTwo] = [LME.nodes.VariableOne, LME.nodes.VariableTwo]
+var saveToken = uuid();
+var [VariableOne, VariableTwo, TestNULL] = [LME.nodes.VariableOne, LME.nodes.VariableTwo, LME.nodes.TotalConfusedMore]
 //console.info(newModel.exportLME())
 window = {
     location: {
-        href: "http://10.0.75.1:8083/id/DEMO/grid_example.html#MVO&" + uuid()
+        href: "http://10.0.75.1:8083/id/DEMO/grid_example.html#MVO&" + saveToken
     }
 }
+newModel.lme.context.saveToken = saveToken;
 
 class LmeApiTester {
     constructor() {
@@ -39,25 +41,35 @@ class LmeApiTester {
         var self = this;
         VariableOne.value = 1000;
         VariableTwo.value = 2000;
+        TestNULL.value = 100;
         assert.ok(VariableOne.value == 1000)
         assert.ok(VariableTwo.value == 2000)
+        assert.ok(TestNULL.value == 100)
+        let allChangedValues = newModel.lme.getAllChangedValues();
         newModel.persistData(function(responseText) {
-            VariableOne.value = undefined;
-            VariableTwo.value = undefined;
+            VariableOne.value = null;
+            VariableTwo.value = null;
+            let allChangedValues = newModel.lme.getAllChangedValues();
             newModel.loadData(function() {
                 assert.ok(VariableOne.value == 1000)
                 assert.ok(VariableTwo.value == 2000)
+                assert.ok(TestNULL.value == 100)
                 let data = JSON.parse(responseText);
                 VariableTwo.value = 3000;
+                TestNULL.value = null;
+                let allChangedValues = newModel.lme.getAllChangedValues();
                 newModel.persistData(function(responseText) {
-                    VariableOne.value = undefined;
-                    VariableTwo.value = undefined;
+                    VariableOne.value = null;
+                    VariableTwo.value = null;
                     let data = JSON.parse(responseText);
                     VariableTwo.value = 8000;
                     self.testReceive(data.saveToken)
+                    let allChangedValues = newModel.lme.getAllChangedValues();
                     newModel.loadData(function() {
+                        assert.ok(TestNULL.value == 101)
                         assert.ok(VariableOne.value == 1000)
                         assert.ok(VariableTwo.value == 3000)
+                        let allChangedValues = newModel.lme.getAllChangedValues();
                     });
                 });
             });

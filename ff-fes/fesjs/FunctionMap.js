@@ -23,24 +23,19 @@ fm.prototype.apiGet = function(formula, x, y, z, v) {
 }
 fm.prototype.apiSet = function(formula, x, y, z, value, v) {
     var id = formula.id || formula.index;
+
     if (v[id] !== undefined) {
         var hash = x.hash + y.hash + z;
         var newValue = value;
-        if (value === '' || value === null) {
-            newValue = undefined;
-            delete v[id][hash]
-        } else {
-            v[id][hash] = newValue;
-        }
+        v[id][hash] = newValue;
     }
     else {
-        log.debug('[%s] does not exist', id);
+        if (log.DEBUG) log.debug('[%s] does not exist', id);
     }
 }
 fm.prototype.initializeFormula = function(newFormula) {
     var id = newFormula.id || newFormula.index;
     if (log.DEBUG) log.debug("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
-
     var modelFunction = Function('f, x, y, z, v', 'return ' + newFormula.parsed).bind(global);
     global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 };
@@ -60,16 +55,13 @@ var formulaDecorators = {
         //y,x,z dimensions Tuple,Column,Layer
         //v = enteredValues
         return function(f, x, y, z, v) {
-            var fname = varName;
             if (x.dummy) {
                 return NA;
             }
             var hash = x.hash + y.hash + z;
             //check if user entered a value
-            if (v[f][hash] === undefined) {
-                var valueOfFunction = innerFunction(f, x, y, z, v);
-                //return function value;
-                return valueOfFunction;
+            if (v[f][hash] == null) {
+                return innerFunction(f, x, y, z, v);
             }
             //return entered value
             return v[f][hash];
@@ -80,7 +72,7 @@ var formulaDecorators = {
 fm.prototype.moveFunction = function(oldFormula, newFormula) {
     if (oldFormula.index !== newFormula.id) {
         if (global['a' + newFormula.id]) {
-            log.warn('Formula already taken[' + newFormula.id + ']');
+            if (log.DEBUG) log.warn('Formula already taken[' + newFormula.id + ']');
         }
         else {
             global['a' + newFormula.id] = newFormula;

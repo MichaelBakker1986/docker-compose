@@ -69,7 +69,7 @@ exports.orm = Promise.all([
                         if (values.length > 0) {
                             db.driver.execQuery("INSERT INTO figure (uuid,var,col,val) VALUES " + values.map(a => {
                                 return "('" + a.join("','") + "')"
-                            }).join(','), [], function(err, result) {
+                            }).join(',').replace(/''/gm, 'null'), [], function(err, result) {
                                 if (err) return fail(err)
                                 ok(result)
                             })

@@ -20,6 +20,9 @@ function Context() {
     //reference to the ApplicationContext context
     this.applicationContext = ApplicationContext;
     this.values = {};
+    this.audit = [];
+    this.calc_count = 0;
+    this.saveToken = undefined;//commit hash
 }
 
 Context.prototype.propertyDefaults = propertyDefaults;

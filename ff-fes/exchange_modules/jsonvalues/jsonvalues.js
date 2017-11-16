@@ -13,7 +13,8 @@ var jsonValues = {
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
     deParse: function(rowId, workbook) {
-        let allValues = workbook.getAllValues();
+        let allValues = workbook.getAllChangedValues();
+        //clean up the audit while deparsing.
         allValues.forEach(function(el) {
             if (el.varName.endsWith('_title')) {
                 el.varName = correctPropertyName(el.varName)
@@ -33,6 +34,10 @@ function correctFileName(name) {
     return name.replace(/^([^_]+_[\w]*)_\w+$/gmi, '$1');
 }
 
+/**
+ * values are directly injected into the context, not through the API
+ * They will not be saved in the audit.
+ */
 function updateValues(data, docValues) {
     for (var key in docValues) {
         docValues[key] = {};
@@ -48,8 +53,8 @@ function updateValues(data, docValues) {
         //we don't have to import values for variables we don't use.
         if (fetch) {
             var enteredValue = value.value;
-            if (fetch.datatype=='number'){
-                enteredValue = Number(enteredValue)
+            if (fetch.datatype == 'number') {
+                enteredValue = enteredValue == null ? null : Number(enteredValue)
             }
             docValues[fetch.ref][parseInt(nodeColId)] = enteredValue;
         }

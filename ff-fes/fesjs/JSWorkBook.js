@@ -30,7 +30,6 @@ function JSWorkBook(context) {
     this.yaxis = YAxis;
     //time axis, we looking at bookyears at the moment
     this.xaxis = XAxis.bkyr.columns[0]
-    context.calc_count = 0;
 }
 
 JSWorkBook.prototype.importSolution = function(data, parserType) {
@@ -288,6 +287,16 @@ JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tup
     this.updateValues();
 }
 JSWorkBook.prototype.properties = SolutionFacade.properties;
+JSWorkBook.prototype.getAllChangedValues = function() {
+    var formulaIds = [];
+    for (var i = 0; i < this.context.audit.length; i++) {
+        var audit = this.context.audit[i];
+        if (audit.saveToken == this.context.saveToken) {
+            formulaIds.push(audit.formulaId)
+        }
+    }
+    return FESFacade.getValuesFromFormulaIds(formulaIds, this.context.values);
+}
 JSWorkBook.prototype.getAllValues = function() {
     return FESFacade.getAllValues(this.context.values);
 };

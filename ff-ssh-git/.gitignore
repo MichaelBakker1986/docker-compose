@@ -1,1 +1,89 @@
-**/_tmp_**
+# Directories #
+/build/
+/bin/
+target/
+/test/
+/test-output/
+**/bin/**
+**/k3-flow/**
+DOCKER/liquibase-executor/assets/FF/**
+DOCKER/liquibase-executor/assets/K3/**
+DOCKER/websphere/assets/artifacts/**
+AAB/docker-containers/application-server/assets/artifacts/**
+AAB/docker-containers/oracle-release/releasescripts/**
+FINANONLINE/docker-containers/application-server/assets/artifacts/**
+TRIODOS/docker-containers/application-server/assets/artifacts/**
+logs/
+# OS Files #
+.DS_Store
+*.class
+# Package Files #
+*.war
+*.ear
+*.db
+/.settings
+# JRebel #
+rebel.xml
+*/*/test-output
+######################
+# Windows
+######################
+# Windows image file caches
+Thumbs.db
+# Folder config file
+Desktop.ini
+######################
+# OSX
+######################
+.DS_Store
+.svn
+# Thumbnails
+._*
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+*.scssc
+# IntelliJ #
+*.iml
+.idea
+CONFIG/models/V05/V05.fin
+**/test/classes/**
+test-output.xml
+FES/fes-core/.externalToolBuilders/edu.umd.cs.findbugs.plugin.eclipse.findbugsBuilder.launch
+FES/fes-core/.externalToolBuilders/org.eclipse.wst.common.project.facet.core.builder (1).launch
+FES/fes-core/.externalToolBuilders/org.eclipse.wst.validation.validationbuilder (1).launch
+FINANONLINE/finanonline-ear/.settings/org.jboss.ide.eclipse.as.core.prefs
+FF/currencyconversion-ejb-ws/.project
+FF/ff-questionnaire-js-web/node_modules/*
+FF/ff-questionnaire-js-web/dist/*
+CONFIG/models/V05/MonitoringApp.xls
+FES/fes-core/.externalToolBuilders/*
+.settings/
+node_modules/
+*/*/**/WEB-INF/faces-config.xml
+**/*/node_modules/*
+.metadata/
+*.bak
+**.project
+**.classpath
+**/Fin/*.xls
+
+CODELISTS/AAB_FINIS/NONFINANCIALANALYSIS/jar/
+CODELISTS/AAB_FINIS/NONFINANCIALANALYSIS/tmp/
+CODELISTS/Finan/V05_basis/Fin/V05.fin
+CODELISTS/Finan/_Zip/
+CODELISTS/Finan/V05_FinanOnline/Fin/V05.fin
+CODELISTS/Finan/V05_Projectfinanciering/Fin/V05.fin
+FF/ff-jwt/src/archive/META-INF/keystore.jks
+CODELISTS/Finan/KAM/FFL/KAM.fin
+CODELISTS/Finan/KAM/FFL/KAM_SRA.fin
+CODELISTS/AAB_FINIS/V05/Fin/V05.fin
+CODELISTS/AAB_FINIS/V05/JAR/models.V05.model
+CODELISTS/AAB_FINIS/V05/WebModel/V05-FinanModel.xml
+CODELISTS/Finan/V05/Fin/V05.fin
+CODELISTS/TRIODOS/V05/FIN/V05.fin
+**/.externalToolBuilders/**
+CODELISTS/SBR-Direct/BT11/_Documentatie/
+CODELISTS/**/Reports/output/*.*
+.recommenders/*
+FF/ff-config-cli/dependency-reduced-pom.xml

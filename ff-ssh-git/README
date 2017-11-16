@@ -1,7 +1,8 @@
+#does not work
 git init
-git remote add -f origin ssh://git@stash.topicus.nl:7999/ff/finanfinancials.git
 git config core.sparseCheckout true
-echo "*codelist*" >> .git/info/sparse-checkout
+echo "*CODELISTS/*" >> .git/info/sparse-checkout
+git remote add -f origin ssh://git@stash.topicus.nl:7999/ff/finanfinancials.git
 
 Will be store for
  - FFL

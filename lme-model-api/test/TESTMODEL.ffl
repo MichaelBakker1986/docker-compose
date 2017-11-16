@@ -75,5 +75,12 @@ model TESTMODEL uses BaseModel
         datatype: number;
         frequency: document;
     }
+    variable TestNULL
+    {
+        title: "TestNULL";
+        formula: 18000;
+        datatype: number;
+        frequency: document;
+    }
   }
 }

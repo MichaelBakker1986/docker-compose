@@ -61,7 +61,9 @@ LmeAPI.prototype.loadData = function(callBack) {
     var params = window.location.href.split('#')[1].split('&')
     self.modelName = params[0] || 'MVO';
     let userID = params[1] || 'DEMO'
+    //TODO: remove 'saveToken'
     self.saveToken = userID;
+    self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
     var url = self.urlPrefix + '/id/' + self.saveToken + '/data';
     http.open("GET", url, true);
@@ -70,11 +72,13 @@ LmeAPI.prototype.loadData = function(callBack) {
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.id;
+            self.lme.context.saveToken = returnData.id;
             self.importData(returnData)
             window.location.href = '#' + self.modelName + '&' + self.saveToken
         }
     }
     http.onload = function() {
+        self.lme.context.audit = []
         self.lme.context.calc_count++;
         callBack(http.responseText)
     };
@@ -90,7 +94,9 @@ LmeAPI.prototype.persistData = function(callBack) {
     self.modelName = params[0] || 'MVO';
     let userID = params[1] || 'DEMO'
     let liveUrl = 'transformFFL_LME/' + self.modelName + '.js'
+    //TODO: remove 'saveToken'
     self.saveToken = userID;
+    self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
     var url = self.urlPrefix + '/id/' + self.saveToken + '/data';
     http.open("POST", url, true);
@@ -99,13 +105,16 @@ LmeAPI.prototype.persistData = function(callBack) {
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.saveToken;
+            self.lme.context.saveToken = returnData.saveToken;
             window.location.href = '#' + self.modelName + '&' + self.saveToken
         }
     };
     http.onload = function() {
+        self.lme.context.audit = []
         self.lme.context.calc_count++;
         callBack(http.responseText)
     };
+
     http.send(JSON.stringify({data: self.exportData()}));
     return http;
 }

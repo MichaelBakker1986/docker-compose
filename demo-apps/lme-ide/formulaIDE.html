@@ -2,16 +2,39 @@
 <html>
 <head>
     <title>MathJax MathML Test Page</title>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=AM_HTMLorMML-full.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+ <!--   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=AM_HTMLorMML-full.js"></script>-->
 </head>
 <body>
 <script type="math/asciimath">sum_(i=1)^n i^3=((n(n+1))/2)^2</script>
 <script type="math/asciimath">
     Facility_tpLiquiditySpreadRepaymentAnnuity = SumFor(X,1+Facility_tpGracePeriodInPeriods,Facility_tpNumberOfPeriodsNoGrace,1,PPMT(Facility_tpAnnuityInterestRate/Facility_tpRepaymentFrequency,(X-Facility_tpGracePeriodInPeriods),Facility_tpNumberOfPeriods,-Facility_tpPrincipalLimit,Facility_tpBalloon)*(X*Facility_tpConvertToMonths/Facility_tpRepaymentFrequencyLiqSpread)*(MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1),Facility_tpFixedInterestPeriod)+(MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",X*12/Facility_tpRepaymentFrequency,1),Facility_tpFixedInterestPeriod)-MatrixLookup("AAB_Parameters.xls",&If(&Facility_tpBaseCurrency="EUR","LiquidityPremiumEUR",&If(&Facility_tpBaseCurrency="GBP","LiquidityPremiumGBP",&If(&Facility_tpBaseCurrency="USD","LiquidityPremiumUSD","LiquidityPremiumOther"))),&MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1),Facility_tpFixedInterestPeriod))*OnER(((X*12/Facility_tpRepaymentFrequency-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1))/(MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorUpperBound",X*12/Facility_tpRepaymentFrequency,1)-MatrixLookup("AAB_Parameters.xls","LiquidityPremiumTenorLowerBound",X*12/Facility_tpRepaymentFrequency,1))),0)))
+
+
+
+
+
+
 </script>
 <script type="math/asciimath">If(Pos("IFRS-EU",{FESLAYOUT,1})>0,1,If(Pos("IFRS-PL",FES_LAYOUT[doc])>0,48,If(Pos("IFRS-Intl",FES_LAYOUT[doc])>0,2,0)))</script>
 <div>
     <script type="math/asciimath">sum_(i=1)^n i^3=((n(n+1))/2)^2</script>
+    <a href="#" data-toggle="popover" title="$$If(Pos('IFRS-EU',{FESLAYOUT,1})>0,1))$$">Hover over me</a>
 </div>
+<script>
+    var popOverSettings = {
+        placement: 'bottom',
+    }
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover(popOverSettings);
+        $('[data-toggle="popover"]').on('shown.bs.popover', function() {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        })
+    });
+</script>
 </body>
 </html>

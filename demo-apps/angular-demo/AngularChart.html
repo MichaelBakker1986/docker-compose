@@ -9,24 +9,54 @@
     <script>
         angular.module('app', ["highcharts-ng"])
             .controller('MainController', function($scope) {
-                $scope.chartConfig = {
-                    chart: {
-                        type: 'bar'
-                    },
-                    series: [{
-                        data: [10, 15, 12, 8, 7],
-                        id: 'series1'
-                    }],
-                    title: {
-                        text: 'Hello'
+                    $scope.chartConfig = {
+                        options: {
+                            colors: ['#971a31', '#ffffff'],
+                            backgroundColor: '#f1f1f2'
+                        },
+                        chart: {
+                            type: 'pie',
+                            height: 60,
+                            width: 60
+                        },
+                        plotOptions: {
+                            pie: {
+                                borderColor: '#000000',
+                                dataLabels: {
+                                    enabled: false,
+                                    style: {
+                                        fontWeight: 'bold',
+                                        color: 'white',
+                                        textShadow: '0px 1px 2px black',
+                                    }
+                                },
+                                startAngle: -180,
+                                endAngle: 180
+                            }
+                        }, title: {text: undefined},
+                        credits: undefined,
+                        series: [{
+                            type: 'pie',
+                            name: 'Loan',
+                            innerSize: '30%',
+                            data: [
+                                ['85% paid', 85],
+                                ['15% owed', 15]
+
+                            ]
+                        }],
+                        loading: false
                     }
                 }
-            });
+            );
     </script>
 </head>
 <body>
 <div ng-controller="MainController" ng-init="DATA = [1,2,3,4]; ROWS=[1,2,3,4]">
     <button ng-click="DATA[2]=10"></button>
+    <div>
+        <highchart id="donut-chart" config="chartConfig"></highchart>
+    </div>
     <div ng-repeat="row in ROWS">
         <highchart id="{{$index}}" config="{
                     chart: {
@@ -41,6 +71,7 @@
                     }
                 }"></highchart>
     </div>
+
 </div>
 </body>
 </html>

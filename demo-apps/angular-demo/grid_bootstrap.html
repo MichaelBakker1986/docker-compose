@@ -141,10 +141,8 @@
                                 </label>
                             </div>
                             <textarea ng-switch-when="memo" rows="4" class="form-control" ng-model="cv.value" placeholder=".."></textarea>
-
                             <input ng-switch-default readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
                             <input ng-switch-default ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
-
                             <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
                         </div>
                     </div>
@@ -158,8 +156,12 @@
                     <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
                 </li>
                 <li ng-repeat="f in nav | pick:'children.length > 1'" ng-if="f.visible" class="nav list-group-item" ng-class="f==search?'active':''" ng-click="changeSearch(f)">
-                    <i ng-class="'fa '+ (f.value?'fa-check':'fa-circle-o')"></i>
-                    <span ng-bind="f.title"></span>
+                    <div>
+                        <span ng-bind="f.title"></span>
+                        <i class="fa fa-bell-o"></i>
+                        <span class="label label-warning">10</span>
+                        <i ng-class="'fa '+ (f.value?'fa-check':'fa-circle-o')"></i>
+                    </div>
                 </li>
                 <li>
                     <div style="width: 100px;height: 100px;">

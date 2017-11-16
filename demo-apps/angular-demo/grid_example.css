@@ -152,6 +152,16 @@ span.text {
     display: inline-block;
 }
 
+.label {
+    position: absolute;
+    top: 9px;
+    right: 7px;
+    text-align: center;
+    font-size: 9px;
+    padding: 2px 3px;
+    line-height: .9;
+}
+
 label {
     cursor: default;
 }
@@ -161,9 +171,11 @@ label {
     width: 100%;
     display: block;
 }
+
 .popover {
     min-width: 30em !important;
 }
+
 highchart {
     width: 100%;
     display: block;
@@ -416,5 +428,6 @@ span.time i.fa {
 
 .input-group input[readonly="readonly"], *[disabled="disabled"] .input-group span {
     border: 1px white;
+    box-shadow: none;
     background-color: white;
 }

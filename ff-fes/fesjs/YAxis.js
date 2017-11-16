@@ -32,12 +32,20 @@ TVALUES = function(fIds, func, fId, x, y, z, v) {
 TCOUNT = function(fIds, func, fId, x, y, z, v) {
     return TINSTANCECOUNT(fIds, v);
 }
+
 //return tuplecount, get max tuple index,
 TINSTANCECOUNT = function(fIds, v) {
     var max = -1;
     for (var fid = 0; fid < fIds.length; fid++) {
         var fId = fIds[fid];
         var keys = Object.keys(v[fId]);
+        //quick-fix remove NULL values..
+        for (var i = 0; i < keys.length; i++) {
+            var obj = keys[i];
+            if (v[fId][obj] == null) {
+                keys.splice(i, 1);
+            }
+        }
         if (keys.length == 0) {
             continue;
         }

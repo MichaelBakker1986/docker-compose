@@ -28,8 +28,7 @@ function doBatch(batchId) {
     var start = now();
     Promise.all(promises).then((res) => {
         log.info('batch done in ' + (now() - start).toFixed())
-        sleep(1000).then(data => doBatch(batchId + 1))
+        sleep(200).then(data => doBatch(batchId + 1))
     })
 }
-
 doBatch(1)
