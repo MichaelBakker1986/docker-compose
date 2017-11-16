@@ -63,10 +63,9 @@
                         <span ng-switch-when="label" ng-class="timeline_item.labelclass">
                             {{timeline_item.text}}
                         </span>
-                        <i ng-switch-when="event" ng-class="timeline_item.eventclass"></i>
+                        <i ng-switch-when="event" ng-class="timeline_item.enabled? timeline_item.eventclass:''"></i>
                         <div ng-switch-when="event" class="timeline-item">
                             <span class="time"><i class="fa fa-clock-o"></i> {{timeline_item.ago}}</span>
-                            <!--    <h3 class="timeline-header"></h3>-->
                             <div class="timeline-body"></div>
                             <div class="timeline-footer">
                             </div>

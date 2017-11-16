@@ -2,6 +2,7 @@ angular
     .module('angapp', ['angular.filter', "highcharts-ng"])
     .filter("filterByPrefix", function() {
         return function(nodes, search) {
+            if (!search) return []
             return nodes.filter(function(item) {
                 return item.path.contains('.' + search.id);
             });
@@ -64,7 +65,6 @@ angular
         });
     }).controller('timelineController', function($scope, $http, $rootScope) {
     $scope.timeline_items = [];
-    var allitems = {}
     var params = window.location.href.split('#')[1].split('&')
     var model = params[0] || 'MVO';
     let hash = params[1] || 'DEMO';
@@ -73,8 +73,8 @@ angular
         var now = new Date().getTime();
         for (var parentIndex = 0; parentIndex < data.data.parents.length; parentIndex++) {
             var parent = data.data.parents[parentIndex];
-            allitems[parent.id] = true;
             timeline_items.push({
+                enabled: true,
                 type: 'event',
                 ago: moment(parent.create_date).fromNow(),
                 eventclass: data.data.id == parent.id ? 'fa fa-file-text-o bg-gray' : 'fa fa-pencil-square-o bg-yellow',
@@ -91,12 +91,15 @@ angular
     });
 
     $scope.clicktimeline = function(timeline_item) {
-        if (allitems[timeline_item.sha1]) {
-            delete allitems[timeline_item.sha1];
-        } else {
-            allitems[timeline_item.sha1] = true
+        timeline_item.enabled = !timeline_item.enabled;
+        var allitems = [];
+        for (var i = 0; i < $scope.timeline_items.length; i++) {
+            var ti = $scope.timeline_items[i];
+            if (ti.enabled) {
+                allitems.push(ti.sha1)
+            }
         }
-        var requestString = Object.keys(allitems).join(',');
+        var requestString = allitems.join(',');
         window.location.href = '#' + model + '&' + requestString
         LMEMETA.loadData(function(response) {
             $rootScope.$digest()
