@@ -46,10 +46,12 @@
                     <div class="input-group">
                         <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="KSP.ffl">
                         <span class="input-group-btn">
-                                <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="saveFFLModel()" data-toggle="modal" data-toggle="tooltip" title="Save {{session.fflModelPath}}"
+                                <button id="saveFFLModel" type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="saveFFLModel()" data-toggle="modal" data-toggle="tooltip"
+                                        title="Save {{session.fflModelPath}}"
                                         data-target="#modal-success" class="btn btn-info btn-flat"><i
                                         class="fa fa-save"></i></button>
-                                <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="sneakPreviewModel()" data-toggle="tooltip" title="Preview {{session.fflModelPath}}" class="btn btn-info btn-flat"><i
+                                <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="sneakPreviewModel()" data-toggle="tooltip" title="Preview {{session.fflModelPath}}"
+                                        class="btn btn-info btn-flat"><i
                                         class="fa fa-window-restore"></i></button>
                         </span>
                     </div>
@@ -146,8 +148,8 @@
         </section>
     </aside>
     <div class="content-wrapper">
-        <section class="content">
-            <div class="box">
+        <section class="content" style="max-height: 90vh;">
+            <div class="box" style="max-height: 90vh;">
                 <div class="box-header with-border" ng-switch="currentView">
                     <h3 class="box-title" ng-switch-when="FFLModelEditorView">
                         <button ng-click="toggleAceEditorMode()" type="button" class="toggle-info-btn btn bg-green btn-sm" data-toggle="tooltip" title="Toggle economic / FFL"><i class="fa fa-cubes"></i></button>
@@ -162,7 +164,7 @@
                         <button type="button" class="toggle-expand-btn btn bg-yellow btn-sm" data-toggle="tooltip" title="Expand"><i class="fa fa-expand"></i></button>
                     </div>
                 </div>
-                <div class="box-body">
+                <div class="box-body" style="max-height: 90vh;">
                     <pre id="editor"></pre>
                 </div>
             </div>

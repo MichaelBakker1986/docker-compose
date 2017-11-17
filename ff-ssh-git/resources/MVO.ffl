@@ -3284,6 +3284,26 @@ model MVO uses BaseModel
         displaytype: chart;
         title: "Maatschappelijk Verantwoord Ondernemen";
       }
+      variable PRINCIPES_GRAPH refers to GRAPH01 
+      {
+        datatype: matrix;
+        frequency: none;
+        visible: 1;
+        locked: 1;
+        formula: [[Q_MAP01_SUBSCORE01.title,Q_MAP01_SUBSCORE02.title,Q_MAP01_SUBSCORE03.title,Q_MAP01_SUBSCORE04.title,Q_MAP01_SUBSCORE05.title],[Q_MAP01_SUBSCORE01,Q_MAP01_SUBSCORE02,Q_MAP01_SUBSCORE03,Q_MAP01_SUBSCORE04,Q_MAP01_SUBSCORE05]];
+        displaytype: chart;
+        title: "Principes";
+      }
+      variable THEMAS_GRAPH refers to GRAPH01 
+      {
+        datatype: matrix;
+        frequency: none;
+        visible: 1;
+        locked: 1;
+        formula: [[Q_MAP03_SUBSCORE01.title,Q_MAP03_SUBSCORE02.title,Q_MAP03_SUBSCORE03.title,Q_MAP03_SUBSCORE04.title,Q_MAP03_SUBSCORE05.title],[Q_MAP03_SUBSCORE01,Q_MAP03_SUBSCORE02,Q_MAP03_SUBSCORE03,Q_MAP03_SUBSCORE04,Q_MAP03_SUBSCORE05]];
+        displaytype: chart;
+        title: "Themas";
+      }
     }
     variable HULPVARS
     {
