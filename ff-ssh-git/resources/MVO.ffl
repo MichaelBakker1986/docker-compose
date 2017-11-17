@@ -1356,7 +1356,7 @@ model MVO uses BaseModel
             fixed_decimals: 1;
             title: String(GetTitle(Q_MAP03_PARAGRAAF06));
             top_blanklines: 1;
-            visible: 1;
+            visible: 0;
             options_title: locked;
           }
           variable +Q_MAP03_GEWICHT_VRAAG06_INPUT
@@ -1368,7 +1368,7 @@ model MVO uses BaseModel
             fixed_decimals: 1;
             title: String(GetTitle(Q_MAP03_PARAGRAAF07));
             locked: 1;
-            visible: 1;
+            visible: 0;
             options_title: locked;
             options: locked;
           }
@@ -1383,7 +1383,7 @@ model MVO uses BaseModel
             top_separator: 1;
             display_options: displayAsSummation;
             locked: 1;
-            visible: 1;
+            visible: 0;
             options_title: locked;
             options: locked;
           }

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="angapp">
+<html lang="en" ng-app="angapp" ng-controller="lmeController">
 <head>
     <!--MANY DROP DOWN -->
     <!--https://stackoverflow.com/questions/12934339/single-dropdown-for-many-items-using-twitter-bootstrap-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Angular DEMO</title>
+    <title>{{name}} DEMO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css">
     <link rel="shortcut icon" href="../../favicon_.ico">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.css"/>
     <link rel="stylesheet" type="text/css" href="grid_example.css"/>
 </head>
-<body ng-controller="lmeController">
+<body>
 <nav class="navbar navbar-fixed-top">
     <div id="header-container" class="container navbar-container">
         <div class="navbar-header">
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="col-md-8">
-          <!--  <h3 class="page-header">{{search.title}}</h3>-->
+            <h1 class="page-header">{{search.hint}}</h1>
             <div ng-repeat="f in LME_MODEL | toArray | filterByPrefix:search" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
                 <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'questions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
                     <div ng-switch-when="paragraph" class="col-md-12">
@@ -159,10 +159,12 @@
                 </li>
                 <li ng-repeat="f in nav | pick:'children.length > 1'" ng-if="f.visible" class="nav list-group-item" ng-class="f==search?'active':''" ng-click="changeSearch(f)">
                     <div>
+                        <!--make scorecard converter in IDE-->
                         <span ng-bind="f.title"></span>
-                        <span class="label label-warning">{{LME_MODEL.nodes[f.id + '_REQUIREDVARS'].value + 1}} - {{LME_MODEL.nodes[f.id + '_ENTEREDREQUIREDVARS'].value + 1}}</span>
-                        <i class="fa fa-bell-o"></i>
-                        <i ng-class="'fa '+ (f.value?'fa-check':'fa-circle-o')"></i>
+                        <span class="fa-stack fa-1x has-badge" data-count="{{LME_MODEL.nodes[f.id + '_REQUIREDVARS'].value + 1}}/{{LME_MODEL.nodes[f.id + '_ENTEREDREQUIREDVARS'].value + 1}}">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
+                        </span>
                     </div>
                 </li>
                 <li>

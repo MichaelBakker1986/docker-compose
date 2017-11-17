@@ -879,6 +879,7 @@ var displayAsMapping = {
     radio: 'select',//reversed, back to original
     undefined: 'string',
     currency: 'currency',
+    paragraph: 'paragraph',
     date: 'date',//requires a converter to work
     percentage: 'percentage',
     memo: 'memo',
@@ -976,9 +977,11 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
     if (rowId.match(/MAP[0-9]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
         if (defaultValue.visible[node.visible]) {
             node.visible = 'Length(' + rowId + ')'
-            //mappedDisplayType = rowId.replace(/.*_(.*)/,'$1').toLowerCase();
             node.frequency = 'none'
         }
+    } else if (rowId.match(/MAP[0-9]+_PARAGRAAF[0-9]+$/i)) {
+        node.frequency = 'none'
+        mappedDisplayType = 'paragraph'
     }
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', valueFormula ? parseFFLFormula(valueFormula, 'none', rowId) : (mappedDisplayType == 'string' ? AST.STRING('') : AST.UNDEFINED()), mappedDisplayType);
     uiNode.displayAs = mappedDisplayType;
@@ -1067,7 +1070,8 @@ var jsonValues = {
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
     deParse: function(rowId, workbook) {
-        let allValues = workbook.getAllValues();
+        let allValues = workbook.getAllChangedValues();
+        //clean up the audit while deparsing.
         allValues.forEach(function(el) {
             if (el.varName.endsWith('_title')) {
                 el.varName = correctPropertyName(el.varName)
@@ -1087,6 +1091,10 @@ function correctFileName(name) {
     return name.replace(/^([^_]+_[\w]*)_\w+$/gmi, '$1');
 }
 
+/**
+ * values are directly injected into the context, not through the API
+ * They will not be saved in the audit.
+ */
 function updateValues(data, docValues) {
     for (var key in docValues) {
         docValues[key] = {};
@@ -1102,8 +1110,8 @@ function updateValues(data, docValues) {
         //we don't have to import values for variables we don't use.
         if (fetch) {
             var enteredValue = value.value;
-            if (fetch.datatype=='number'){
-                enteredValue = Number(enteredValue)
+            if (fetch.datatype == 'number') {
+                enteredValue = enteredValue == null ? null : Number(enteredValue)
             }
             docValues[fetch.ref][parseInt(nodeColId)] = enteredValue;
         }
@@ -1714,8 +1722,13 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
         //don't give away variable name here.
         throw Error('Cannot find variable')
     }
-    logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
+    if (logger.DEBUG) logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
     context.calc_count++;
+    context.audit.push({
+        saveToken: context.saveToken,
+        hash: xas.hash + yas.hash + 0,
+        formulaId: localFormula.id || localFormula.index
+    })
     FunctionMap.apiSet(localFormula, xas, yas, 0, value, context.values);
 };
 /**
@@ -1767,6 +1780,8 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
             }
         } else if (colType == 'locked') {
             return Boolean(returnValue)
+        } else if (colType == 'visible') {
+            return Boolean(returnValue)
         }
     }
     return returnValue;
@@ -1775,12 +1790,16 @@ FESFacade.fetchRootSolutionProperty = PropertiesAssembler.getRootProperty;
 FESFacade.fetchSolutionNode = fetchSolutionNode;
 FESFacade.apiGetValue = FunctionMap.apiGet;
 FESFacade.getAllValues = function(docValues) {
+    return this.getValuesFromFormulaIds(Object.keys(docValues), docValues);
+}
+FESFacade.getValuesFromFormulaIds = function(keys, docValues) {
     //we cannot just return everything here, Because for now all formula's have a user-entered value cache.
     //Also Functions themSelves are bound to this object.
     //So we have to strip them out here.
     //should be part of the apiGet, to query all *_value functions. or *_validation etc.
     var values = [];
-    for (var formulaId in docValues) {
+    for (var i = 0; i < keys.length; i++) {
+        var formulaId = keys[i];
         var cachevalues = docValues[formulaId];
         if (cachevalues) {
             var formula = FormulaService.findFormulaByIndex(formulaId);
@@ -2517,24 +2536,19 @@ fm.prototype.apiGet = function(formula, x, y, z, v) {
 }
 fm.prototype.apiSet = function(formula, x, y, z, value, v) {
     var id = formula.id || formula.index;
+
     if (v[id] !== undefined) {
         var hash = x.hash + y.hash + z;
         var newValue = value;
-        if (value === '' || value === null) {
-            newValue = undefined;
-            delete v[id][hash]
-        } else {
-            v[id][hash] = newValue;
-        }
+        v[id][hash] = newValue;
     }
     else {
-        log.debug('[%s] does not exist', id);
+        if (log.DEBUG) log.debug('[%s] does not exist', id);
     }
 }
 fm.prototype.initializeFormula = function(newFormula) {
     var id = newFormula.id || newFormula.index;
     if (log.DEBUG) log.debug("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
-
     var modelFunction = Function('f, x, y, z, v', 'return ' + newFormula.parsed).bind(global);
     global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 };
@@ -2554,16 +2568,13 @@ var formulaDecorators = {
         //y,x,z dimensions Tuple,Column,Layer
         //v = enteredValues
         return function(f, x, y, z, v) {
-            var fname = varName;
             if (x.dummy) {
                 return NA;
             }
             var hash = x.hash + y.hash + z;
             //check if user entered a value
-            if (v[f][hash] === undefined) {
-                var valueOfFunction = innerFunction(f, x, y, z, v);
-                //return function value;
-                return valueOfFunction;
+            if (v[f][hash] == null) {
+                return innerFunction(f, x, y, z, v);
             }
             //return entered value
             return v[f][hash];
@@ -2574,7 +2585,7 @@ var formulaDecorators = {
 fm.prototype.moveFunction = function(oldFormula, newFormula) {
     if (oldFormula.index !== newFormula.id) {
         if (global['a' + newFormula.id]) {
-            log.warn('Formula already taken[' + newFormula.id + ']');
+            if (log.DEBUG) log.warn('Formula already taken[' + newFormula.id + ']');
         }
         else {
             global['a' + newFormula.id] = newFormula;
@@ -2792,7 +2803,6 @@ function JSWorkBook(context) {
     this.yaxis = YAxis;
     //time axis, we looking at bookyears at the moment
     this.xaxis = XAxis.bkyr.columns[0]
-    context.calc_count = 0;
 }
 
 JSWorkBook.prototype.importSolution = function(data, parserType) {
@@ -3050,6 +3060,16 @@ JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tup
     this.updateValues();
 }
 JSWorkBook.prototype.properties = SolutionFacade.properties;
+JSWorkBook.prototype.getAllChangedValues = function() {
+    var formulaIds = [];
+    for (var i = 0; i < this.context.audit.length; i++) {
+        var audit = this.context.audit[i];
+        if (audit.saveToken == this.context.saveToken) {
+            formulaIds.push(audit.formulaId)
+        }
+    }
+    return FESFacade.getValuesFromFormulaIds(formulaIds, this.context.values);
+}
 JSWorkBook.prototype.getAllValues = function() {
     return FESFacade.getAllValues(this.context.values);
 };
@@ -4005,12 +4025,20 @@ TVALUES = function(fIds, func, fId, x, y, z, v) {
 TCOUNT = function(fIds, func, fId, x, y, z, v) {
     return TINSTANCECOUNT(fIds, v);
 }
+
 //return tuplecount, get max tuple index,
 TINSTANCECOUNT = function(fIds, v) {
     var max = -1;
     for (var fid = 0; fid < fIds.length; fid++) {
         var fId = fIds[fid];
         var keys = Object.keys(v[fId]);
+        //quick-fix remove NULL values..
+        for (var i = 0; i < keys.length; i++) {
+            var obj = keys[i];
+            if (v[fId][obj] == null) {
+                keys.splice(i, 1);
+            }
+        }
         if (keys.length == 0) {
             continue;
         }
@@ -4070,6 +4098,9 @@ function Context() {
     //reference to the ApplicationContext context
     this.applicationContext = ApplicationContext;
     this.values = {};
+    this.audit = [];
+    this.calc_count = 0;
+    this.saveToken = undefined;//commit hash
 }
 
 Context.prototype.propertyDefaults = propertyDefaults;
@@ -26549,7 +26580,6 @@ LmeAPI.prototype.exportData = function() {
 LmeAPI.prototype.importData = function(valueAsJSON) {
     this.lme.importSolution(valueAsJSON, 'jsonvalues')
 }
-
 /**
  * use modelName from this.lme.modelName
  * use token form this.lme.context.uuid
@@ -26561,7 +26591,9 @@ LmeAPI.prototype.loadData = function(callBack) {
     var params = window.location.href.split('#')[1].split('&')
     self.modelName = params[0] || 'MVO';
     let userID = params[1] || 'DEMO'
+    //TODO: remove 'saveToken'
     self.saveToken = userID;
+    self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
     var url = self.urlPrefix + '/id/' + self.saveToken + '/data';
     http.open("GET", url, true);
@@ -26570,11 +26602,13 @@ LmeAPI.prototype.loadData = function(callBack) {
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.id;
+            self.lme.context.saveToken = returnData.id;
             self.importData(returnData)
             window.location.href = '#' + self.modelName + '&' + self.saveToken
         }
     }
     http.onload = function() {
+        self.lme.context.audit = []
         self.lme.context.calc_count++;
         callBack(http.responseText)
     };
@@ -26590,7 +26624,9 @@ LmeAPI.prototype.persistData = function(callBack) {
     self.modelName = params[0] || 'MVO';
     let userID = params[1] || 'DEMO'
     let liveUrl = 'transformFFL_LME/' + self.modelName + '.js'
+    //TODO: remove 'saveToken'
     self.saveToken = userID;
+    self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
     var url = self.urlPrefix + '/id/' + self.saveToken + '/data';
     http.open("POST", url, true);
@@ -26599,13 +26635,16 @@ LmeAPI.prototype.persistData = function(callBack) {
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
             self.saveToken = returnData.saveToken;
+            self.lme.context.saveToken = returnData.saveToken;
             window.location.href = '#' + self.modelName + '&' + self.saveToken
         }
     };
     http.onload = function() {
+        self.lme.context.audit = []
         self.lme.context.calc_count++;
         callBack(http.responseText)
     };
+
     http.send(JSON.stringify({data: self.exportData()}));
     return http;
 }

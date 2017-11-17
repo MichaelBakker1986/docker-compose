@@ -28,7 +28,11 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
             name: userID
         },
         messages: {
-            data: []
+            data: [
+                {text: 'Scorecard converter!'},
+                {text: 'Implement refersTo generic!\nrefersTo STEP01\nrefersTo numberVariable</br>Multi dimentional is a Step and a Tuple'},
+                {text: 'Make bigdata analyses from all models to find generics'}
+            ]
         }
     }
     $scope.runJBehaveTest = function() {

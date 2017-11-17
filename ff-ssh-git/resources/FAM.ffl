@@ -9,28 +9,16 @@ model KAM uses BaseModel
 		variable RootSub1 
 		{
 			datatype: none;
-			data_options: unscalable;
 			title: "General variables for webclient";
-			top_blanklines: 1;
 			visible: 0;
-			options_title: locked, invisible;
-			options_notrend: locked, invisible;
-			options_trend: locked, invisible;
 			variable FES_LAYOUTNR 
 			{
 				datatype: number;
-				frequency: document;
 				formula: If(Pos("IFRS-EU" , FES_LAYOUT)>0,1,If(Pos("IFRS-PL" , FES_LAYOUT)>0,48,If(Pos("IFRS-Intl" , FES_LAYOUT)>0,2,0)));
-				data_options: unscalable;
 				title: "Layout1234";
 				displaytype: select;
 				choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
-				top_blanklines: 1;
 				locked: On;
-				visible: 1;
-				options_title: locked;
-				options_notrend: locked;
-				options_trend: locked;
 			}
 			variable FES_EXCHANGE_RATES 
 			{
