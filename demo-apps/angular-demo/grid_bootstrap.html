@@ -50,9 +50,9 @@
                     <a ng-click="saveData()" class="toggle-save-btn btn btn-sm"><i style="font-size: 24px" class="fa fa fa-save"></i></a>
                 </li>
             </ul>
-        </div><!-- /.nav-collapse -->
-    </div><!-- /.container -->
-</nav><!-- /.navbar -->
+        </div>
+    </div>
+</nav>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
@@ -168,10 +168,12 @@
                     </div>
                 </li>
                 <li>
-                    <div style="width: 100px;height: 100px;">
+                    <div ng-repeat="widget in LME_MODEL.WIDGETS.children">
                         <highchart id="polar-chart" config="{
                 chart: {
-                    polar: true
+                    polar: true,
+                    height:100,
+                    width:160
                 },
                 pane: {
                     startAngle: 0,
@@ -182,7 +184,7 @@
                     x: -80
                 },
                 xAxis: {
-                    categories: LME_MODEL.GRAPH01.value[0],
+                    categories: widget.value[0],
                     tickmarkPlacement: 'on',
                     lineWidth: 0
                 },
@@ -195,11 +197,11 @@
                     shared: true,
                     pointFormat: '<span style=\'color:{series.color}\'>{series.name}: <b>${point.y:,.0f}</b><br/>'
                 },
-                  legend:false,
+                legend:false,
                 credits:false,
                 series: [{
-                    name: LME_MODEL.GRAPH01.title,
-                    data: LME_MODEL.GRAPH01.value[1],
+                    name: widget.title,
+                    data: widget.value[1],
                     pointPlacement: 'on'
                 }, {
                     name: 'Average',
@@ -212,8 +214,10 @@
             </ul>
         </div>
         <div class="col-md-1">
-
+            <div>
+            </div>
         </div>
     </div>
+</div>
 </body>
 </html>

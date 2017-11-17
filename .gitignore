@@ -11,3 +11,6 @@ restapi/dbSettings.js
 *.scssc
 
 ff-ssh-git/resources/_tmp_*
+ff-ssh-git/CODELISTS/**.pom
+ff-ssh-git/CODELISTS/*.pom
+ff-ssh-git/CODELISTS/*

@@ -1,0 +1,26 @@
+.panel-fullscreen {
+    display: block;
+    z-index: 9999;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+.chop {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.ui-autocomplete {
+    max-height: 100px;
+    width: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 2000;
+}

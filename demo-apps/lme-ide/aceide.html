@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>IDE</title>
-    <!-- Tell the browser to be responsive to screen width -->
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -16,37 +15,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <script type="application/javascript" src="resources/ai_MVO.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="bootstrap.min.js"></script>
     <script src="aceide.js"></script>
-    <style>
-        .panel-fullscreen {
-            display: block;
-            z-index: 9999;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            overflow: auto;
-        }
-
-        .chop {
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            display: inline-block;
-        }
-
-        .ui-autocomplete {
-            max-height: 100px;
-            width: 500px;
-            overflow-y: auto;
-            overflow-x: hidden;
-            z-index: 2000;
-        }
-    </style>
+    <link rel="stylesheet" href="aceide.css">
 </head>
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini fixed" ng-controller="ideController">
 <div class="wrapper" ng-controller="lmeController">
@@ -72,18 +44,19 @@
                 </div>
                 <div class="col-xs-4" style="padding-top: 5px;">
                     <div class="input-group">
-                        <input id="models" type="text" class="form-control" placeholder="KSP.ffl">
+                        <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="KSP.ffl">
                         <span class="input-group-btn">
-                                <button type="button" id="save-model" class="btn btn-info btn-flat">Save!</button></span>
-                        <span class="input-group-btn">
-                                <button type="button" id="preview-model" class="btn btn-info btn-flat">Preview!</button>
+                                <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="saveFFLModel()" data-toggle="modal" data-toggle="tooltip" title="Save {{session.fflModelPath}}"
+                                        data-target="#modal-success" class="btn btn-info btn-flat"><i
+                                        class="fa fa-save"></i></button>
+                                <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="sneakPreviewModel()" data-toggle="tooltip" title="Preview {{session.fflModelPath}}" class="btn btn-info btn-flat"><i
+                                        class="fa fa-window-restore"></i></button>
                         </span>
                     </div>
                 </div>
                 <div class="col-xs-4">
                     <ul class="nav navbar-nav" style="float: right">
                         <li class="dropdown messages-menu">
-
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-envelope-o"></i>
                                 <span class="label label-success">1</span>
@@ -161,12 +134,12 @@
             </div>
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="treeviwe active">
-                    <a href="#" class="data-toggle-ide" data-toggle="tooltip" title="run debug on caret">
+                    <a ng-click="currentView = 'FFLModelEditorView'" class="data-toggle-ide" data-toggle="tooltip" title="run debug on caret">
                         <i class="fa fa-subscript"></i> <span>IDE</span>
                     </a>
                 </li>
                 <li class="treeview">
-                    <a class="data-story" href="#" data-toggle="tooltip" title="jBehave tests">
+                    <a class="data-story" ng-click="currentView = 'jbehaveView'" data-toggle="tooltip" title="jBehave tests">
                         <i class="fa fa-heartbeat"></i> <span>Tests</span>
                     </a>
             </ul>
@@ -175,24 +148,15 @@
     <div class="content-wrapper">
         <section class="content">
             <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">
-                        <button type="button" class="toggle-debug-btn btn bg-green btn-sm" data-toggle="tooltip" title="run debug on caret"><i class="fa fa-repeat"></i></button>
+                <div class="box-header with-border" ng-switch="currentView">
+                    <h3 class="box-title" ng-switch-when="FFLModelEditorView">
+                        <button ng-click="toggleAceEditorMode()" type="button" class="toggle-info-btn btn bg-green btn-sm" data-toggle="tooltip" title="Toggle economic / FFL"><i class="fa fa-cubes"></i></button>
                     </h3>
-                    <h3 class="box-title">
-                        <button type="button" class="toggle-info-btn btn bg-green btn-sm" data-toggle="tooltip" title="switch economic/ffl mode"><i class="fa fa-superpowers"></i></button>
-                    </h3>
-                    <h3 class="box-title">
+                    <h3 class="box-title" ng-switch-when="FFLModelEditorView" ng-show="!fflmode">
                         <button type="button" class="toggle-properties-btn btn bg-green btn-sm" data-toggle="tooltip" title="show visible, locked, required"><i class="fa fa fa-sliders"></i></button>
                     </h3>
-                    <h3 class="box-title">
-                        <button type="button" ng-click="saveData()" class="toggle-save-btn btn bg-green btn-sm" data-toggle="tooltip" title="save entered values"><i class="fa fa fa-save"></i></button>
-                    </h3>
-                    <h3 class="box-title">
-                        <button type="button" class="toggle-temp_preview-btn btn bg-green btn-sm" data-toggle="tooltip" title="Preview current model"><i class="fa fa-window-restore"></i></button>
-                    </h3>
-                    <h3 class="box-title">
-                        <button ng-click="runJBehaveTest()" type="button" class="toggle-test-btn btn bg-green btn-sm" data-toggle="tooltip" title="run jBehave tests"><i class="fa fa-list"></i></button>
+                    <h3 class="box-title" ng-switch-when="jbehaveView">
+                        <button ng-click="runJBehaveTest()" type="button" class="toggle-test-btn btn bg-green btn-sm" data-toggle="tooltip" title="run jBehave tests"><i class="fa fa-repeat"></i></button>
                     </h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="toggle-expand-btn btn bg-yellow btn-sm" data-toggle="tooltip" title="Expand"><i class="fa fa-expand"></i></button>
@@ -210,7 +174,6 @@
         </div>
         <strong>Copyright &copy; 2014-2017 <a href="#">Michael Bakker</a>.</strong> All rights reserved.
     </footer>
-
     <aside class="control-sidebar control-sidebar-dark">
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
             <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -235,20 +198,33 @@
         </div>
     </aside>
     <div class="control-sidebar-bg"></div>
+    <div class="modal modal-info fade" id="modal-success" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">{{saveFeedbackTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                    <i class="fa fa-spin fa-refresh"></i>
+                    <p>{{saveFeedback}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button ng-disabled="session.disablePreviewButton" ng-click="goToPreviewPage()" type="button" class="btn btn-outline">Preview</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
 <script src="dist/js/demo.js"></script>
 <script src="ace-builds/src-min/ace.js"></script>
 <script src="ace-builds/src-min/ext-language_tools.js"></script>
-
 <script src="javascripts/fflmode.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-
 </body>
 </html>

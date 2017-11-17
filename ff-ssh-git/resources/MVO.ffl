@@ -2786,7 +2786,7 @@ model MVO uses BaseModel
             displaytype: chart;
             title: "Maatschappelijk Verantwoord Ondernemen";
         }
-        variable Q_RESULTXZ
+        variable Q_RESULTXY
         {
           datatype: string;
           frequency: document;
@@ -3265,6 +3265,24 @@ model MVO uses BaseModel
         visible: 1;
         choices: "0:Nee|1:Ja";
         options_title: locked;
+      }
+    }
+    variable WIDGETS
+    {
+      datatype: none;
+      frequency: none;
+      title: "Widgets";
+      locked: 1;
+      visible: 1;
+      variable POLARBENCHMARK refers to GRAPH01 
+      {
+        datatype: matrix;
+        frequency: none;
+        visible: 1;
+        locked: 1;
+        formula: [[Q_MAP01_SCORE01.title,Q_MAP02_SCORE01.title,Q_MAP03_SCORE01.title,Q_MAP04_SCORE01.title],[Q_MAP01_SCORE01,Q_MAP02_SCORE01,Q_MAP03_SCORE01,Q_MAP04_SCORE01]];
+        displaytype: chart;
+        title: "Maatschappelijk Verantwoord Ondernemen";
       }
     }
     variable HULPVARS

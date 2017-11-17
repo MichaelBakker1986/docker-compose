@@ -7,6 +7,8 @@ var ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix')
 var V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
 var EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 var StoryParser = require('../../model-tests/StoryParser').StoryParser
+
+var editor;//ace-ide editor
 var fflModel = '';
 var params = window.location.href.split('#')
 if (params.length == 1) window.location.href = '#MVO&DEMO'
@@ -15,15 +17,52 @@ let windowModelName = params[0] || 'MVO';
 let userID = params[1] || 'DEMO'
 var saveToken = userID;
 
+function savFflModel() {
+    Pace.track(function() {
+        $.post("saveFFL_LME", {
+            model: $("#models").val(),
+            data: editor.getSession().getValue()
+        }, function(data) {
+            alert('Model [' + $("#models").val() + '] is updated');
+            $('#preview-model').show()
+        });
+    });
+}
+
+function setValue(fflModel) {
+    if (ConvertEvaluateAsString.on) {
+        fflModel = ConvertEvaluateAsString.parse(fflModel);
+    }
+    if (AmpersandConverter.on) {
+        fflModel = AmpersandConverter.parse(fflModel);
+    }
+    if (ScorecardQ_caseFix.on) {
+        fflModel = ScorecardQ_caseFix.parse(fflModel);
+    }
+    if (V05CaseFix.on) {
+        fflModel = V05CaseFix.parse(fflModel);
+    }
+    if (EconomicEditorView.on) {
+        fflModel = EconomicEditorView.parse(fflModel);
+    }
+    editor.setValue(fflModel);
+}
+
+function scrollTop() {
+    editor.scrollToLine(1, true, true, function() {
+    });
+    editor.gotoLine(1, 1, true);
+    editor.selection.moveTo(0, 0)
+}
 
 angular.module('lmeapp').controller('ideController', function($scope, $http) {
     LMEMETA.loadData(function() {
     });
-    $scope.saveData = function() {
-        LMEMETA.persistData(function(response) {
-        })
-    }
+    $scope.fflmode = true;
+    $scope.currentView = 'FFLModelEditorView';
     $scope.session = {
+        disablePreviewButton: true,
+        fflModelPath: windowModelName,
         user: {
             name: userID
         },
@@ -55,12 +94,47 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
         storyParser.start();
         storyParser.call();
     }
+    $scope.saveFFLModel = function() {
+        Pace.track(function() {
+            $scope.saveFeedback = "Customizing " + $scope.session.fflModelPath + " …"
+            $scope.saveFeedbackTitle = "Working on it..."
+            $.post("saveFFL_LME", {
+                model: $scope.session.fflModelPath,
+                data: editor.getSession().getValue()
+            }, function(data) {
+                $scope.$apply(function() {
+                    $scope.saveFeedbackTitle = "Finished"
+                    $scope.saveFeedback = 'Done work..'
+                    $scope.session.disablePreviewButton = false;
+                })
+            });
+        });
+    }
+    $scope.goToPreviewPage = function() {
+        $scope.session.disablePreviewButton = true;
+        window.open('/id/' + userID + '/grid_bootstrap.html#' + $scope.session.fflModelPath + '&' + userID)
+    }
+    $scope.sneakPreviewModel = function() {
+        Pace.track(function() {
+            $.post("preview", {
+                model: $scope.session.fflModelPath,
+                data: editor.getSession().getValue()
+            }, function(data) {
+                window.open('/id/' + userID + '/grid_bootstrap.html#' + data.link + '&' + userID);
+            });
+        });
+    }
+
+    $scope.toggleAceEditorMode = function() {
+        $scope.fflmode = !$scope.fflmode;
+        EconomicEditorView.on = !EconomicEditorView.on;
+        setValue(fflModel)
+        scrollTop()
+    }
 });
 //LME-Model stuff
 $(document).ready(function() {
 
-
-    $("#models").val(windowModelName)
 
     $.getJSON("/branches", function(data, status, xhr) {
         $("#tags").autocomplete({source: data});
@@ -73,12 +147,7 @@ $(document).ready(function() {
             editor.session.setValue(data)
         })
     });
-    $(".toggle-info-btn").click(function(e) {
-        EconomicEditorView.on = !EconomicEditorView.on;
 
-        setValue(fflModel)
-        scrollTop()
-    });
     $(".toggle-properties-btn").click(function(e) {
         EconomicEditorView.properties = !EconomicEditorView.properties;
         setValue(fflModel)
@@ -91,7 +160,6 @@ $(document).ready(function() {
     });
     $(".toggle-debug-btn").click(function(e) {
 
-
         var iRowPosition = editor.selection.getCursor().row;
         var wholelinetxt = editor.session.getLine(iRowPosition);
 
@@ -103,38 +171,6 @@ $(document).ready(function() {
         var text = '\t\t\t//*' + LME.nodes[wholelinetxt.replace(/variable (\w)/, '$1').trim()].value + "*//";
         editor.session.insert(customPosition, text);
     });
-
-    Range = ace.require("ace/range").Range;
-    var allLines = [];
-
-    var startFold = 1;
-    var lastFold = 1;
-
-    function scrollTop() {
-        editor.scrollToLine(1, true, true, function() {
-        });
-        editor.gotoLine(1, 1, true);
-        editor.selection.moveTo(0, 0)
-    }
-
-    function setValue(fflModel) {
-        if (ConvertEvaluateAsString.on) {
-            fflModel = ConvertEvaluateAsString.parse(fflModel);
-        }
-        if (AmpersandConverter.on) {
-            fflModel = AmpersandConverter.parse(fflModel);
-        }
-        if (ScorecardQ_caseFix.on) {
-            fflModel = ScorecardQ_caseFix.parse(fflModel);
-        }
-        if (V05CaseFix.on) {
-            fflModel = V05CaseFix.parse(fflModel);
-        }
-        if (EconomicEditorView.on) {
-            fflModel = EconomicEditorView.parse(fflModel);
-        }
-        editor.setValue(fflModel);
-    }
 
     function handleModelChange() {
         Pace.track(function() {
@@ -178,41 +214,7 @@ $(document).ready(function() {
     });
     editor.$blockScrolling = Infinity
 
-    function gotoPreview() {
-        window.open('http://' + window.location.hostname + ':8083/id/' + userID + '/grid_bootstrap.html#' + $("#models").val() + '&' + userID)
-    }
-
-    function previewModel() {
-        Pace.track(function() {
-            $.post("preview", {
-                model: $("#models").val(),
-                data: editor.getSession().getValue()
-            }, function(data) {
-                window.open('http://' + window.location.hostname + ':8083/id/' + userID + '/grid_bootstrap.html#' + data.link + '&' + userID);
-            });
-        });
-    }
-
-    $(".toggle-temp_preview-btn").click(function(e) {
-        Pace.track(function() {
-            previewModel();
-        });
-    });
-
-    function savFflModel() {
-        Pace.track(function() {
-            $.post("saveFFL_LME", {
-                model: $("#models").val(),
-                data: editor.getSession().getValue()
-            }, function(data) {
-                alert('Model [' + $("#models").val() + '] is updated');
-                $('#preview-model').show()
-            });
-        });
-    }
-
     $(window).bind('keydown', function(evt) {
-
         if (evt.ctrlKey || evt.metaKey) {
             switch (String.fromCharCode(evt.which).toLowerCase()) {
                 case 's':
@@ -234,7 +236,4 @@ $(document).ready(function() {
             }
         }
     });
-    $('#preview-model').click(gotoPreview);
-    $('#save-model').click(savFflModel);
-    $('#preview-model').hide()
 });
