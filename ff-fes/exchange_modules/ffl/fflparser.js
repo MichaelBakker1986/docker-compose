@@ -181,6 +181,8 @@ var displayAsMapping = {
     //reversed
     string: "string",
     chart: "chart",
+    polarchart: "polarchart",
+    piechart: "piechart",
     line: "line"
 }
 var formulaMapping = {

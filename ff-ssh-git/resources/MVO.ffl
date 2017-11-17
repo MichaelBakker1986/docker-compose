@@ -2783,7 +2783,7 @@ model MVO uses BaseModel
             visible: 1;
             locked: 1;
             formula: [[Q_MAP01_SCORE01.title,Q_MAP02_SCORE01.title,Q_MAP03_SCORE01.title,Q_MAP04_SCORE01.title],[Q_MAP01_SCORE01,Q_MAP02_SCORE01,Q_MAP03_SCORE01,Q_MAP04_SCORE01]];
-            displaytype: chart;
+            displaytype: polarchart;
             title: "Maatschappelijk Verantwoord Ondernemen";
         }
         variable Q_RESULTXY
@@ -3281,7 +3281,7 @@ model MVO uses BaseModel
         visible: 1;
         locked: 1;
         formula: [[Q_MAP01_SCORE01.title,Q_MAP02_SCORE01.title,Q_MAP03_SCORE01.title,Q_MAP04_SCORE01.title],[Q_MAP01_SCORE01,Q_MAP02_SCORE01,Q_MAP03_SCORE01,Q_MAP04_SCORE01]];
-        displaytype: chart;
+        displaytype: polarchart;
         title: "Maatschappelijk Verantwoord Ondernemen";
       }
       variable PRINCIPES_GRAPH refers to GRAPH01 
@@ -3291,7 +3291,7 @@ model MVO uses BaseModel
         visible: 1;
         locked: 1;
         formula: [[Q_MAP01_SUBSCORE01.title,Q_MAP01_SUBSCORE02.title,Q_MAP01_SUBSCORE03.title,Q_MAP01_SUBSCORE04.title,Q_MAP01_SUBSCORE05.title],[Q_MAP01_SUBSCORE01,Q_MAP01_SUBSCORE02,Q_MAP01_SUBSCORE03,Q_MAP01_SUBSCORE04,Q_MAP01_SUBSCORE05]];
-        displaytype: chart;
+        displaytype: piechart;
         title: "Principes";
       }
       variable THEMAS_GRAPH refers to GRAPH01 
@@ -3301,7 +3301,7 @@ model MVO uses BaseModel
         visible: 1;
         locked: 1;
         formula: [[Q_MAP03_SUBSCORE01.title,Q_MAP03_SUBSCORE02.title,Q_MAP03_SUBSCORE03.title,Q_MAP03_SUBSCORE04.title,Q_MAP03_SUBSCORE05.title],[Q_MAP03_SUBSCORE01,Q_MAP03_SUBSCORE02,Q_MAP03_SUBSCORE03,Q_MAP03_SUBSCORE04,Q_MAP03_SUBSCORE05]];
-        displaytype: chart;
+        displaytype: polarchart;
         title: "Themas";
       }
     }

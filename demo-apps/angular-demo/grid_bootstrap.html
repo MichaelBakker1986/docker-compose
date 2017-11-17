@@ -82,7 +82,7 @@
                         <h2>{{f.title}}</h2>
                         {{f.hint}}
                     </div>
-                    <div ng-switch-when="chart" class="col-md-12 chart">
+                    <div ng-switch-when="polarchart" class="col-md-12 chart">
                         <highchart id="{{$index}}-chart" config="{
                 chart: {
                     polar: true
@@ -168,8 +168,8 @@
                     </div>
                 </li>
                 <li>
-                    <div ng-repeat="widget in LME_MODEL.WIDGETS.children">
-                        <highchart id="polar-chart" config="{
+                    <div ng-repeat="widget in LME_MODEL.WIDGETS.children" ng-switch="widget.type">
+                        <highchart ng-switch-when="polarchart" id="{{$index}}-polar-chart" config="{
                 chart: {
                     polar: true,
                     height:100,
