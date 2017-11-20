@@ -8,6 +8,7 @@ function redefineParaments() {
     modelName = params[0] || 'MVO';
     hash = params[1] || 'DEMO';
 }
+
 redefineParaments()
 
 angular
@@ -39,14 +40,11 @@ angular
             $scope.LME_MODEL = LME.nodes
             $scope.name = LME.name
             $scope.LMEMETA = LMEMETA;
-
-            //TODO: find a way in FFL to make this generic...
-            if (modelName.indexOf('V05') > -1) {
-                $scope.nav = LME.nodes.Q_ROOT_VALUATION.children
-                $scope.search = LME.nodes.Q_ROOT_VALUATION
-            } else {
-                $scope.nav = (LME.nodes.Q_ROOT || LME.nodes.root).children
-                $scope.search = (LME.nodes.Q_ROOT || LME.nodes.root).children[0]
+            for (var name in LME.nodes) {
+                if (LME.nodes[name].type == 'scorecard') {
+                    $scope.nav = LME.nodes[name].children
+                    $scope.search = LME.nodes[name].children[0]
+                }
             }
 
             LMEMETA.loadData(function(response) {
