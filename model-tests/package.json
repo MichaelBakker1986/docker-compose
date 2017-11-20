@@ -4,7 +4,7 @@
   "description": "",
   "main": "lme-model-tests.js",
   "scripts": {
-    "test": "concurrently \"node KSP/KSPIntegrationTest.js\" \"node MVO/MVOtest.js\" \"node MVO/MVOStoryParserTest.js\""
+    "test": "concurrently \"node KSP/KSPIntegrationTest.js\" \"node MVO/MVOtest.js\" \"node MVO/MVOStoryParserTest.js\" \"node MVO/FormatterTest.js\""
   },
   "repository": {
     "type": "git",
