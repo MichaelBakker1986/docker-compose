@@ -116,8 +116,8 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
     $scope.toggleFormatter = function() {
         const row = aceEditor.selection.getCursor().row
         const col = aceEditor.selection.getCursor().column
-
-        setValue(FFLFormatter.parse(aceEditor.session.getValue()));
+        fflModel = FFLFormatter.parse(aceEditor.session.getValue()).toString();
+        setValue(fflModel);
         aceEditor.gotoLine(row + 1, col)
     }
     $scope.toggleAceEditorMode = function() {
