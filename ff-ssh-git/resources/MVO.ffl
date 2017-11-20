@@ -3510,6 +3510,7 @@ model MVO uses BaseModel
      visible: 1;
      locked: 1;
      formula: POLARBENCHMARK;
+     fixed_decimals: 2;
      displaytype: customwidget;
      title: "Scores";
     }
