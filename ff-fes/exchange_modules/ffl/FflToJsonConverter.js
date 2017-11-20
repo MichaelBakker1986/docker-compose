@@ -167,6 +167,7 @@ FflToJsonConverter.prototype.parseFFL = function(contents) {
     // console.info(JSON.stringify(stack.peek(), null, 2));
     var formulaType = {
         formula: true,
+        valid: true,
         formula_trend: true,
         formula_notrend: true,
         visible: true,

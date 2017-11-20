@@ -9,53 +9,10 @@
  * So a line in result can be multiple lines original
  * First milestone could be a formatting tool
  */
-if (!String.prototype.repeat) {
-    String.prototype.repeat = function(count) {
-        'use strict';
-        if (this == null) {
-            throw new TypeError('can\'t convert ' + this + ' to object');
-        }
-        var str = '' + this;
-        count = +count;
-        if (count != count) {
-            count = 0;
-        }
-        if (count < 0) {
-            throw new RangeError('repeat count must be non-negative');
-        }
-        if (count == Infinity) {
-            throw new RangeError('repeat count must be less than infinity');
-        }
-        count = Math.floor(count);
-        if (str.length == 0 || count == 0) {
-            return '';
-        }
-        // Ensuring count is a 31-bit integer allows us to heavily optimize the
-        // main part. But anyway, most current (August 2014) browsers can't handle
-        // strings 1 << 28 chars or longer, so:
-        if (str.length * count >= 1 << 28) {
-            throw new RangeError('repeat count must not overflow maximum string size');
-        }
-        var rpt = '';
-        for (var i = 0; i < count; i++) {
-            rpt += str;
-        }
-        return rpt;
-    }
-}
+var LexialParser = require('./plugins/FFLFormatter').LexialParser
 
 function ScorecardTool() {
     this.on = false;
-}
-
-
-function findSolutionNameFromFFLFile(json) {
-    for (var key in json) {
-        if (key.toLowerCase().startsWith('model ')) {
-            return key.split(' ')[1].toUpperCase();
-        }
-    }
-    return undefined;
 }
 
 var defaultValue = {
@@ -74,6 +31,7 @@ var defaultValue = {
         'No': true
     },
     required: {
+        undefined: true,
         '0.0': true,
         '0': true,
         'false': true,
@@ -81,124 +39,117 @@ var defaultValue = {
         'Off': true
     }
 }
+var variables = {}
 
-function stripVariableOrtuple(name, node) {
-    if (!name) {
-        return undefined;
-    }
-    //this is just a fallback, the FflToJsonConverter sometimes fails variable + variablename refers to othervariable
-    if (name.indexOf('+') > -1) {
-        //something wrong while parsing regex, trying to fix it here,
-        name = name.replace(/(\+|-|\=)\s*/gm, '');
-        node.modifier = '+';
-    }
-    else if (name.indexOf('-') > -1) {
-        name = name.replace(/(\+|-|\=)\s*/gm, '');
-        node.modifier = '-';
-    }
-    else if (name.indexOf('=') > -1) {
-        name = name.replace(/(\+|-|\=)\s*/gm, '');
-        node.modifier = '=';
-    }
-    if (name.split(' ').length < 2) {
-        return undefined;
-    }
-
-    //(Variable NetWorth Implies AnotherVariable) becomes NetWorth
-    var secondWordOfLine = name.split(' ')[1];
-    //Strip Variable Modifiers (+/-/=),
-    var replace = secondWordOfLine.replace(/\W/g, '');
-    if (replace === '') {
-        return undefined;
-    }
-    return replace;
+function Indexer() {
 }
 
-function StartWithVariableOrTuplePredicate(node) {
-    if (node === undefined || !node._parentKey) {
-        return false;
+Indexer.prototype.find = function(key, value) {
+    if (!this[key] || !this[key][value]) return []
+    return this[key][value];
+}
+Indexer.prototype.index = function(key, value, index) {
+    if (key == '') throw Error('Invalid FFL. [' + value + ']');
+    if (!this[key]) this[key] = {}
+    if (!this[key][value]) this[key][value] = []
+    this[key][value].push(index)
+}
+Indexer.prototype.print = function() {
+    for (var key in this) {
+        for (var value in this[key]) {
+            console.info(key + "." + value + ":" + this[key][value].length)
+        }
     }
-    return (node._parentKey.startsWith('variable') || node._parentKey.startsWith('tuple'));
 }
-
-function isStartModel() {
-    let modelRoot = objectModel['model ' + solutionName + ' uses BaseModel'][''];
+var formulaMapping = {
+    inputRequired: 'required'
 }
-const constants = {
-
-}
-
 ScorecardTool.prototype.parse = function(input) {
-    //first extract all "constants" from text
-    input = input.replace(/"(.*?)"/gmi, function($0, $1, $2) {
-        constants['__' + $2] = $0
-        return '__' + $2
+    var indexer = new Indexer();
+    var model = LexialParser.create(input);
+    //index and parse everything
+    model.visit(function(variable, raw_properties, children) {
+        const varChildren = [];
+        for (let i = 0; i < children.length; i++) {
+            varChildren.push(variables[children[i][1]])
+        }
+        const properties = {
+            name: variable[0],
+            index: variable[1],
+            modifier: variable[2],
+            parentId: variable[3],
+            tuple: variable[4],
+            refersto: variable[5],
+            children: varChildren
+        }
+        variables[variable[1]] = properties;
+        for (let i = 0; i < raw_properties.length; i++) {
+            const p = raw_properties[i];
+            const p_seperator_index = p.indexOf(':');//can't use split. some properties use multiple :
+            let key = p.substring(0, p_seperator_index).trim();
+            key = formulaMapping[key] || key
+            const value = p.substring(p_seperator_index + 1).trim();
+            properties[key] = value
+            indexer.index(key, value, variable[1])
+        }
     })
-    var output = input.split('\n');
-    var meta = []
-    for (var i = 0; i < output.length; i++) {
-        var line = output[i];
-        var trim = line.trim();
-        var commentPoint = trim.indexOf('//');
-        var comment = commentPoint == -1 ? '' : trim.substring(commentPoint);
-        const display = trim.substring(0, commentPoint == -1 ? trim.length : commentPoint).trim()
-
-        meta.push({
-            no: i,
-            comment: comment,
-            display: display,
-            into: undefined,
-            trim: trim,
-            raw: line
-        })
+    //find scorecard types
+    const scorecardsIndexes = indexer.find('displaytype', 'scorecard');
+    const scorecards = []
+    for (var i = 0; i < scorecardsIndexes.length; i++) {
+        scorecards.push(variables[scorecardsIndexes[i]]);
     }
-    var stack = [];
-    for (var idx = 0; idx < meta.length; idx++) {
-        var object = meta[idx];
-        if (object.display == '}' || object.display.endsWith('}')) {
-            stack.length = (stack.length - 1)
-        } else if (object.display == '{' || object.display.endsWith('{')) {
-            stack.push(idx)
-        }
-        object.indent = stack.length;
-    }
-    return {
-        constants: constants,
-        data: output,
-        toString: function() {
-            return meta.map(function(el) {
-                return el.raw
-            }).join('\n')
-        },
-        toFormattedFFL: function() {
-            return meta.filter(function(el) {
-                return el.display
-            }).map(function(el) {
-                return ' '.repeat(el.indent) + el.display + el.comment
-            }).join('\n')
-        }
-    }
-}
+    const adjustments = []
+    for (var i = 0; i < scorecards.length; i++) {
+        for (var j = 0; j < scorecards[i].children.length; j++) {
 
-let scorecardTool = new ScorecardTool().parse('a\nb{\nc}');
-var test = scorecardTool.toString()
-var testFFl = scorecardTool.toFormattedFFL()
-console.info(testFFl)
+            const requiredvars = []
 
-exports.ScorecardTool = new ScorecardTool();
-/*JSVisitor.travelOne(modelRoot, null, function(keyArg, node, context) {
-    if (keyArg === null) {
-    }
-    else {
-        var tupleDefiniton = keyArg.startsWith('tuple ');
-        if ((keyArg.startsWith('variable ') || tupleDefiniton)) {
-            var nodeName = stripVariableOrtuple(keyArg, node);
+            const mapVar = scorecards[i].children[j];
+            walkDepthFirst(mapVar, function(node, depth) {
 
-            var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
-            var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
-            if (tupleDefiniton) {
-                context.nestTupleDepth++;
+                if (!defaultValue.required[node.required]) {
+                    requiredvars.push(node)
+                }
+
+            }, 0)
+
+            if (requiredvars.length > 0) {
+                const requiredFormula = requiredvars.map(function(variable) {
+                    return variable.name + '.required'
+                }).join(' and ');
+                const validFormula = '[AMMOUNT(' + requiredvars.map(function(variable) {
+                    return variable.name + '.required and ' + variable.name + '.entered'
+                }).join(',') + '),AMMOUNT(' + requiredvars.map(function(variable) {
+                    return variable.name + '.required'
+                }).join(',') + ')]';
+
+                adjustments.push({
+                    index: mapVar.index,
+                    property: 'inputRequired',
+                    value: requiredFormula
+                })
+                adjustments.push({
+                    index: mapVar.index,
+                    property: 'valid',
+                    value: validFormula
+                })
+                mapVar.required = requiredFormula
+                mapVar.valid = validFormula;
             }
         }
     }
-}, {nestTupleDepth: 0});*/
+    for (var adjindex = 0; adjindex < adjustments.length; adjindex++) {
+        var adjustment = adjustments[adjindex];
+        model.change(adjustment.index, adjustment.property, adjustment.value)
+    }
+    return model.toFFL();
+}
+
+function walkDepthFirst(node, visitor, depth) {
+    for (var i = 0; i < node.children.length; i++) {
+        walkDepthFirst(node.children[i], visitor, depth + 1)
+    }
+    visitor(node, depth)
+}
+exports.ScorecardTool = new ScorecardTool();

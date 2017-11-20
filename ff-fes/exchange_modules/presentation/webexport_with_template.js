@@ -1,7 +1,7 @@
 var SolutionFacade = require('../../fesjs/SolutionFacade');
 var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
 var LmeDisplayGrammer = require('./LmeDisplayGrammer').LmeDisplayGrammer
-var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original']
+var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original', 'valid']
 
 function WebExport() {
     this.exportAsObject = true;
@@ -74,6 +74,7 @@ var properties = {
     value: {change: true, prox: changeAndCache},
     visible: {prox: changeAble},
     entered: {prox: changeAble},
+    valid: {prox: changeAble},
     locked: {prox: changeAble},
     required: {prox: changeAble},
     hint: {cache: true, prox: noChange},

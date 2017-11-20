@@ -25,15 +25,16 @@ function FormulaInfo(data, schema, modelName) {
             var title = forms[modelNamePrefix + name + '_title'] || {original: null};
             var hint = forms[modelNamePrefix + name + '_hint'] || {original: ''};
             var visible = forms[modelNamePrefix + name + '_visible'] || {original: false};
+            var valid = forms[modelNamePrefix + name + '_valid'] || {original: false};
             var value = forms[modelNamePrefix + name + '_value'] || {original: ''};
             var formula_trend = forms[modelNamePrefix + name + '_trend'] || {original: ''};
             var formula_notrend = forms[modelNamePrefix + name + '_notrend'] || {original: ''};
             var locked = forms[modelNamePrefix + name + '_locked'] || {original: false};
             var choices = forms[modelNamePrefix + name + '_choices'] || {original: null};
-            data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original, hint.original])
+            data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original, hint.original, valid.original])
         }
     })
-    var types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint'];
+    var types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint', 'valid'];
     //this.formulas = undefined;
     this.meta = {
         view: {

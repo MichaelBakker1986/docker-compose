@@ -9,6 +9,14 @@ var FESContext = require('../fesjs/fescontext');
 var wb = new WorkBook(new FESContext());
 wb.updateValues();
 
+wb.createFormula('abra', 'abc12a')
+wb.createFormula('abc12a.entered', 'DATAAVAILABLE2')
+assert.equal(wb.get('DATAAVAILABLE2'), false);
+wb.set('abc12a', 'anyValue');
+assert.equal(wb.get('DATAAVAILABLE2'), true);
+
+
+
 wb.createFormula("0", 'caseselect');
 wb.createFormula('Case(caseselect,[0, 576 || 1, 906 || 2, 535 || 3, 535])', 'CaseTestVariable')
 assert(wb.get('CaseTestVariable'), 576);
@@ -93,7 +101,6 @@ wb.createFormula('DataAvailable(abc12)', 'DATAAVAILABLE')
 assert.equal(wb.get('DATAAVAILABLE'), false);
 wb.set('abc12', 'anyValue');
 assert.equal(wb.get('DATAAVAILABLE'), true);
-
 
 /*wb.createFormula("Count(x,String(x),x)", "TestCount")
 log.info(wb.get("TestCount"))*/

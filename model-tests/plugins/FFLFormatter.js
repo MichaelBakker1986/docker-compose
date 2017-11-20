@@ -103,12 +103,48 @@ LexialParser.prototype.buildTree = function() {
     this.removeWhite();
     this.extractVars();
     var firstVar = this.findRootVariable();
-    this.variables['Root'] = ['root', false, 'root', null, null]
-    this.reassembled = this.reassembleFfl(['Root', false], 1, firstVar)
+    this.reassembled = this.prettyFormatFFL(1, firstVar)
     this.insertConstants();
 }
-LexialParser.prototype.reassembleFfl = function(var_desc, depth, index) {
-    const self = this;
+LexialParser.prototype.walk = function(visit) {
+    this.extractHeader();
+    this.extractConstants();
+    this.extractComments();
+    this.removeWhite();
+    this.extractVars();
+    var firstVar = this.findRootVariable();
+    this.walkTree(visit, [firstVar, 'root', null, null, false, null, this.vars[firstVar].trim()], 1, firstVar)
+}
+LexialParser.prototype.walkTree = function(visit, var_desc, depth, index) {
+    var self = this;
+    const parts = this.vars[index].trim().split(';')
+    const children = [];
+    if (parts[parts.length - 1] == '') {
+        parts.length--;
+    } else {
+        var temp = parts[parts.length - 1];
+        parts.length--;
+        temp.replace(/((?!( variable | tuple )).)+/gm, function($1) {
+            //here should go tuple/modifier/refer-to extraction.
+            const refId = $1.indexOf('___');
+            const varDesc = $1.substring(0, refId - 1)
+            const tuple = varDesc.startsWith('tuple');
+            const referIdx = varDesc.toLowerCase().indexOf('refers to')
+            const varname = tuple ? referIdx == -1 ? varDesc.substring(4) : varDesc.substring(4, referIdx) : referIdx == -1 ? varDesc.substring(9) : varDesc.substring(9, referIdx);
+            const modifier = varname.startsWith('+') ? '+' : varname.startsWith('=') ? '=' : varname.startsWith('-') ? '-' : null;
+            let name = varname.substring(modifier ? 1 : 0);
+            let varRef = parseInt($1.substring(refId + 3));
+
+            let variable = [name, varRef, modifier, var_desc[1], tuple, 'referstovariablename', varDesc];
+            children.push(variable)
+            self.walkTree(visit, variable, depth + 1, varRef)
+            return ''
+        });
+    }
+    visit(var_desc, parts, children)
+}
+LexialParser.prototype.prettyFormatFFL = function(depth, index) {
+    var self = this;
     const indent = " ".repeat(depth);
     const variable = this.vars[index].trim()
     const parts = variable.split(';')
@@ -121,14 +157,7 @@ LexialParser.prototype.reassembleFfl = function(var_desc, depth, index) {
         temp.replace(/((?!( variable | tuple )).)+/gm, function($1) {
             //here should go tuple/modifier/refer-to extraction.
             const refId = $1.indexOf('___');
-            const varDesc = $1.substring(0, refId - 1)
-            const tuple = varDesc.startsWith('tuple');
-            const referIdx = varDesc.toLowerCase().indexOf('refers to')
-            const varname = tuple ? referIdx == -1 ? varDesc.substring(4) : varDesc.substring(4, referIdx) : referIdx == -1 ? varDesc.substring(9) : varDesc.substring(9, referIdx);
-            const modifier = varname.startsWith('+') ? '+' : varname.startsWith('=') ? '=' : varname.startsWith('-') ? '-' : null;
-            let name = varname.substring(modifier ? 1 : 0);
-            self.variables[name] = [varDesc, tuple, name, modifier, 'ref']
-            varparts.push(indent + varDesc + "\n" + indent + "{\n" + self.reassembleFfl(name, depth + 1, parseInt($1.substring(refId + 3))) + "\n" + indent + "}")
+            varparts.push(indent + $1.substring(0, refId - 1) + "\n" + indent + "{\n" + self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))) + "\n" + indent + "}")
             return ''
         });
     }
@@ -153,15 +182,37 @@ function Factory() {
     this.on = false;
 }
 
+Factory.prototype.create = function(input) {
+    const lexialParser = new LexialParser(input);
+    return {
+        visit: function(visitor) {
+            return lexialParser.walk(visitor)
+        },
+        change: function(index, property, value) {
+            var variable = lexialParser.vars[index];
+            var startSearchindex = variable.indexOf(property + ':')
+            var endSearchindex = variable.indexOf(';', startSearchindex + (property.length + 1))
+            var result;
+            if (startSearchindex == -1) {
+                result = property + ':' + value + ';' + variable
+            } else {
+                result = variable.substring(0, startSearchindex) + property + ":" + value + variable.substring(endSearchindex)
+            }
+            lexialParser.vars[index] = result
+        },
+        toFFL: function() {
+            lexialParser.reassembled = lexialParser.prettyFormatFFL(1, lexialParser.findRootVariable())
+            lexialParser.insertConstants();
+            return lexialParser.header + '{\n' + lexialParser.reassembled + '\n}'
+        }
+    }
+}
 Factory.prototype.parse = function(input) {
     let lexialParser = new LexialParser(input);
     lexialParser.buildTree();
     return {
         toString: function() {
             return lexialParser.header + '{\n' + lexialParser.reassembled + '\n}'
-        },
-        vars: function() {
-            return lexialParser.variables;
         }
     };
 }

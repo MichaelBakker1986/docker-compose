@@ -272,7 +272,7 @@
                     <div>
                         <!--make scorecard converter in IDE-->
                         <span ng-bind="f.title"></span>
-                        <span class="fa-stack fa-1x has-badge" data-count="{{LME_MODEL.nodes[f.id + '_REQUIREDVARS'].value + 1}}/{{LME_MODEL.nodes[f.id + '_ENTEREDREQUIREDVARS'].value + 1}}">
+                        <span class="fa-stack fa-1x has-badge" data-count="{{f.valid[0]}}/{{f.valid[1]}}">
                           <i class="fa fa-circle fa-stack-2x"></i>
                           <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
                         </span>

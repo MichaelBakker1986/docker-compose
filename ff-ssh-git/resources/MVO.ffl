@@ -366,7 +366,7 @@ model MVO uses BaseModel
    frequency: document;
    formula: If(((Q_MAP01[1]=1) and (Q_MAP02[1]=1) and (Q_MAP03[1]=1) and (Q_MAP04[1]=1)),1,0);
    data_options: unscalable;
-   displaytype: select;
+   displaytype: scorecard;
    title: "Maatschappelijk Verantwoord Ondernemen";
    locked: 1;
    visible: 1;
@@ -3569,7 +3569,7 @@ model MVO uses BaseModel
       formula: OnER(((Q_MAP01_VRAAG01*((1/7)*100))+(Q_MAP01_VRAAG02*((1/7)*100)))/2,NA);
       displaytype: currency;
       title: String("Score "&GetTitle(Q_MAP01_PARAGRAAF01));
-      fixed_decimals 2;
+      fixed_decimals: 2;
       top_blanklines: 1;
       locked: 1;
       visible: 1;

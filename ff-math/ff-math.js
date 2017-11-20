@@ -27,6 +27,13 @@ function initJSMath(jsMath) {
 SOLVER = function(args) {
     return new Solver(args || arguments)
 }
+AMMOUNT = function() {
+    let total = 0;
+    for (var key in arguments) {
+        if (arguments[key]) total++
+    }
+    return total;
+}
 OnNA = function(v, nav) {
     if (v == null || isNaN(v) || (v !== 0 && v < 0.00001 && v > -0.00001)) {
         return nav;

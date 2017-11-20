@@ -8,6 +8,7 @@ var V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
 var EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 var StoryParser = require('../../model-tests/StoryParser').StoryParser
 var FFLFormatter = require('../../model-tests/plugins/FFLFormatter').LexialParser
+var ScorecardTool = require('../../model-tests/ScorecardTool').ScorecardTool
 
 var fflModel = '';
 var params = window.location.href.split('#')
@@ -117,6 +118,13 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
         const row = aceEditor.selection.getCursor().row
         const col = aceEditor.selection.getCursor().column
         fflModel = FFLFormatter.parse(aceEditor.session.getValue()).toString();
+        setValue(fflModel);
+        aceEditor.gotoLine(row + 1, col)
+    }
+    $scope.toggleScorecardTool = function() {
+        const row = aceEditor.selection.getCursor().row
+        const col = aceEditor.selection.getCursor().column
+        fflModel = ScorecardTool.parse(aceEditor.session.getValue());
         setValue(fflModel);
         aceEditor.gotoLine(row + 1, col)
     }

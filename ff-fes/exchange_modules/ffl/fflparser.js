@@ -187,6 +187,7 @@ var displayAsMapping = {
     line: "line"
 }
 var formulaMapping = {
+    valid: 'valid',
     title: 'title',
     hint: 'hint',
     locked: 'locked',
@@ -196,6 +197,7 @@ var formulaMapping = {
 }
 var reversedFormulaMapping = {
     title: 'title',
+    valid: 'valid',
     hint: 'hint',
     locked: 'locked',
     visible: 'visible',

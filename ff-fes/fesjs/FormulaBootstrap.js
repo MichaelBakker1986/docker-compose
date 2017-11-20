@@ -41,7 +41,7 @@ var propertiesArr = [
     'title',
     'validateInput',
     'choices',
-    'g',
+    'valid',
     'h'
 ]
 var IDENTIFIER = 'Identifier';
@@ -62,7 +62,7 @@ simplified.DataAvailable = function(formulaInfo, node) {
     }
     node.type = 'Identifier';
     // looks like being extracted as object, while has to be array
-    node.name = 'v[' + (refFormula.ref) + '][x.hash + y.hash + z]!==undefined';
+    node.name = 'v[' + (refFormula.ref) + '][x.hash + y.hash + z]!=null';
     delete node.refn;
     delete node.arguments;
     delete node.callee;
@@ -165,7 +165,7 @@ var escodegenOptions = {
  */
 function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tupleType) {
     xapendix = xapendix || '';
-    var referenceProperty = addFormulaDependency(formulaInfo, referenceProperty.name, propertiesArr[property]);
+    var referenceProperty = addFormulaDependency(formulaInfo, referenceProperty.name, propertiesArr[property == 4 ? 0 : property]);
     var yAppendix = 'y';
     delete referenceProperty.refn;
     var referenceFormulaId = referenceProperty.ref;
@@ -197,7 +197,11 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
         if (referenceProperty.ref === undefined) {
             node.name = defaultValues[propertiesArr[property]];
         } else {
-            node.name = 'a' + referenceFormulaId + "('" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)";
+            if (property == 4) {
+                node.name = 'v[' + (referenceFormulaId) + '][x.hash + y.hash + z]!=null';
+            } else {
+                node.name = 'a' + referenceFormulaId + "('" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)";
+            }
         }
     }
 }
@@ -326,8 +330,6 @@ var traverseTypes = {
                     //the .choices,.vsible,required.title etc.
                     //works partially
                     node.type = IDENTIFIER;
-                    if (node.property.name === 'title') {
-                    }
                     //this is very stupid to port it triple time. we will fix this later.
                     buildFunc(orId, node, varproperties[node.property.name].f, node.object);
                     delete node.property;
@@ -431,12 +433,12 @@ function buildFormula(formulaInfo, parent, node) {
         else if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
- /*       else if (node.name === 'lastnotrend') {
-            node.name = 'lastnotrend';
-        }
-        else if (node.name === 'lastnotrend') {
-            node.name = 'lastnotrend';
-        }*/
+        /*       else if (node.name === 'lastnotrend') {
+                   node.name = 'lastnotrend';
+               }
+               else if (node.name === 'lastnotrend') {
+                   node.name = 'lastnotrend';
+               }*/
         //should return the x.index.
         else if (node.name === 't') {
             log.warn('invalid t parsing [%s]', formulaInfo)
