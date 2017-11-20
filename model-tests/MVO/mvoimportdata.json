@@ -1,0 +1,85 @@
+{
+  "status": "succes",
+  "id": "daeb0505-d683-4dd1-b363-f1365d9d8e76",
+  "parents": [
+    {
+      "id": "fcadc68f-6159-4feb-b448-d79dbd8614cf",
+      "create_date": 1511000955000
+    },
+    {
+      "id": "daeb0505-d683-4dd1-b363-f1365d9d8e76",
+      "create_date": 1511000983000
+    }
+  ],
+  "values": {
+    "MVO_Q_MAP01_VRAAG01#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP01_VRAAG02#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP01_VRAAG03#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP01_VRAAG04#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP02_VRAAG01#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP02_VRAAG02#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP03_VRAAG01#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP03_VRAAG02#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP03_VRAAG04#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP03_VRAAG07#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP03_VRAAG08#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP03_VRAAG09#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP03_VRAAG10#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP03_VRAAG11#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP04_VRAAG01#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP04_VRAAG02#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP04_VRAAG03#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP04_VRAAG07#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP04_VRAAG08#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP04_VRAAG09#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP04_VRAAG10#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP04_VRAAG11#2": {
+      "value": "1"
+    },
+    "MVO_Q_MAP04_VRAAG12#2": {
+      "value": "1"
+    }
+  }
+}

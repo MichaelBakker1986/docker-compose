@@ -155,7 +155,10 @@
                         <button ng-click="toggleAceEditorMode()" type="button" class="toggle-info-btn btn bg-green btn-sm" data-toggle="tooltip" title="Toggle economic / FFL"><i class="fa fa-cubes"></i></button>
                     </h3>
                     <h3 class="box-title" ng-switch-when="FFLModelEditorView" ng-show="!fflmode">
-                        <button type="button" class="toggle-properties-btn btn bg-green btn-sm" data-toggle="tooltip" title="show visible, locked, required"><i class="fa fa fa-sliders"></i></button>
+                        <button type="button" class="toggle-properties-btn btn bg-green btn-sm" data-toggle="tooltip" title="show visible, locked, required"><i class="fa fa-sliders"></i></button>
+                    </h3>
+                    <h3 class="box-title" ng-switch-when="FFLModelEditorView">
+                        <button ng-click="toggleFormatter()" type="button" class="toggle-formatter-btn btn bg-green btn-sm" data-toggle="tooltip" title="format"><i class="fa fa-indent"></i></button>
                     </h3>
                     <h3 class="box-title" ng-switch-when="jbehaveView">
                         <button ng-click="runJBehaveTest()" type="button" class="toggle-test-btn btn bg-green btn-sm" data-toggle="tooltip" title="run jBehave tests"><i class="fa fa-repeat"></i></button>

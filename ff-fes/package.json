@@ -11,6 +11,7 @@
     "esprima": "^4.0.0",
     "ff-log": "^1.0.21",
     "formulajs": "^1.0.8",
+    "js-solver": "0.0.2",
     "stack-adt": "^0.2.3",
     "tracer": "^0.8.11"
   },

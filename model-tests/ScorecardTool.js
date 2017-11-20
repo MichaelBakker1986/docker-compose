@@ -124,19 +124,21 @@ function StartWithVariableOrTuplePredicate(node) {
 function isStartModel() {
     let modelRoot = objectModel['model ' + solutionName + ' uses BaseModel'][''];
 }
+const constants = {
+
+}
 
 ScorecardTool.prototype.parse = function(input) {
+    //first extract all "constants" from text
+    input = input.replace(/"(.*?)"/gmi, function($0, $1, $2) {
+        constants['__' + $2] = $0
+        return '__' + $2
+    })
     var output = input.split('\n');
     var meta = []
-    const constants = {};
     for (var i = 0; i < output.length; i++) {
         var line = output[i];
         var trim = line.trim();
-        /**
-         * Extract constants from current line.
-         */
-        const strings = trim.match(/"(.*?)"/i);
-
         var commentPoint = trim.indexOf('//');
         var comment = commentPoint == -1 ? '' : trim.substring(commentPoint);
         const display = trim.substring(0, commentPoint == -1 ? trim.length : commentPoint).trim()

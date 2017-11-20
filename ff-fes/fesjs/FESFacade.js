@@ -63,10 +63,9 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
     FunctionMap.apiSet(localFormula, xas, yas, 0, value, context.values);
 };
 /**
- * Default values, formatter transformers
+ * Generic default values, formatter transformers
  * TODO: introduce data-masks to keep these checks quick
  * - every variable has one mask, this one includes display and data types.
- * delegate doesnt work in compiled JS!
  */
 FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     var colType = col || 'value';
@@ -95,19 +94,32 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     else {
         returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values);
     }
-    //formatter, for fixed decimals is a part of the UI, frequency is a part of the Formula.
     if (variable) {
         if (colType === 'value') {
             if (variable.decimals !== undefined) {
-                if (!isNaN(returnValue)) {
+                if (variable.datatype == 'matrix') {
+                    for (var i = 0; i < returnValue.length; i++) {
+                        var innerx = returnValue[i];
+                        if (!isNaN(innerx)) {
+                            var level = Math.pow(10, variable.decimals);
+                            returnValue[i] = (Math.round(innerx * level) / level)
+                        }
+                        for (var y = 0; y < returnValue[i].length; y++) {
+                            var innery = returnValue[i][y];
+                            if (!isNaN(innery)) {
+                                var level = Math.pow(10, variable.decimals);
+                                returnValue[i][y] = (Math.round(innery * level) / level)
+                            }
+                        }
+                    }
+                }
+                else if (!isNaN(returnValue)) {
                     var level = Math.pow(10, variable.decimals);
                     returnValue = (Math.round(returnValue * level) / level)
                 }
             }
             if (variable.datatype == 'number') {
-                if (returnValue !== 0 && returnValue < 0.00001 && returnValue > -0.00001) {
-                    returnValue = ''
-                }
+                returnValue = OnNA(returnValue, '')
             }
         } else if (colType == 'locked') {
             return Boolean(returnValue)

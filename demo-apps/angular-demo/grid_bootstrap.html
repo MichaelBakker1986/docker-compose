@@ -76,14 +76,123 @@
         </div>
         <div class="col-md-8">
             <h1 class="page-header">{{search.hint}}</h1>
-            <div ng-repeat="f in LME_MODEL | toArray | filterByPrefix:search" ng-if="f.visible" ng-class="'row ' + (f.required?'required':'')">
-                <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'questions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
-                    <div ng-switch-when="paragraph" class="col-md-12">
-                        <h2>{{f.title}}</h2>
-                        {{f.hint}}
-                    </div>
-                    <div ng-switch-when="polarchart" class="col-md-12 chart">
-                        <highchart id="{{$index}}-chart" config="{
+            <div class="row">
+                <div ng-repeat="f in LME_MODEL | toArray | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required?'required':'')">
+                    <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'quest    ions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
+                        <div ng-switch-when="paragraph" class="col-md-12">
+                            <h2>{{f.title}}</h2>
+                            {{f.hint}}
+                        </div>
+                        <div ng-switch-when="customwidget">
+                            <div class=" info-box bg-blue col-sm-6">
+                                <span class="info-box-icon"><i class="fa fa-user-o"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{cv.value[0][3]}}</span>
+                                    <span class="info-box-number">{{cv.value[1][3]}}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="{{'width: ' + cv.value[1][3]+'%'}}"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                        {{cv.value[1][3]}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="info-box bg-yellow   col-sm-6  ">
+                                <span class="info-box-icon"><i class="fa fa-tree"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{cv.value[0][1]}}</span>
+                                    <span class="info-box-number">{{cv.value[1][1]}}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="{{'width: ' + cv.value[1][1]+'%'}}"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                        {{cv.value[1][1]}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="info-box bg-green col-md-6">
+                                <span class="info-box-icon"><i class="fa fa-picture-o"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{cv.value[0][2]}}</span>
+                                    <span class="info-box-number">{{cv.value[1][2]}}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="{{'width: ' + cv.value[1][2]+'%'}}"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                        {{cv.value[1][2]}}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="info-box bg-red col-md-6">
+                                <span class="info-box-icon"><i class="fa fa-balance-scale"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{cv.value[0][0]}}</span>
+                                    <span class="info-box-number">{{cv.value[1][0]}}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="{{'width: ' + cv.value[1][0]+'%'}}"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                        {{cv.value[1][0]}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-1">
+                                    <span class="info-box-icon"><i class="fa fa-search"></i></span>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-1">
+                                    <span class="info-box-icon"><i class="fa fa-search"></i></span>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                        <div ng-switch-when="piechart" class="col-md-6">
+                            <highchart config="{
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text:  f.title
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    credits:false,
+                legend:false,
+                    xAxis: {
+                        categories: cv.value[0]
+                    },
+                    series: [{
+                        name: f.title,
+                        data: cv.value[1],
+                    }]
+                }"></highchart>
+                        </div>
+                        <div ng-switch-when="polarchart" class="col-md-6">
+                            <highchart id="{{$index}}-chart" config="{
                 chart: {
                     polar: true
                 },
@@ -121,31 +230,33 @@
                     pointPlacement: 'on'
                 }]
             }"></highchart>
-                    </div>
-                    <div ng-switch-when="title" ng-class="'col-md-'+(f.cols.length==1?12:6)">
-                        <span contenteditable="true" class="title" ng-bind="f.title"></span>
-                        <span><i ng-if="f.hint" class="fa fa-info-circle" data-content="{{f.hint}}" data-trigger="click" data-original-title="{{f.title}}" data-toggle="popover"></i></span>
-                        <span><i ng-if="f.original!=='undefined' && f.original!=='\'\''" class="fa fa-question-circle-o" data-trigger="click" data-toggle="popover" data-original-title="{{f.id}}=" data-content="{{f.original}}"></i></span>
-                    </div>
-                    <!--In most cases there are 4 columns, title,value,value,value-->
-                    <!--Calculate the width by 6/length-1-->
-                    <div ng-switch-default ng-class="'questions col-md-'+(6/(f.cols.length-1))">
-                        <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">
-                            <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
-                            <select ng-switch-when="select" class="form-control" ng-model="cv.value" placeholder="Pick value">
-                                <option ng-repeat="choice in f.choices" ng-selected="choice.name == cv.value">{{choice.value}}</option>
-                            </select>
-                            <div ng-switch-when="radio" class="btn-group" data-toggle="buttons">
-                                <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.name == cv.value?'active':''">
-                                    <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.name">
-                                    <i ng-class="choice.name == cv.value ? 'fa fa-check-circle-o fa-2x' : 'fa fa-circle-o fa-2x'"></i>
-                                    <span>{{choice.value}}</span>
-                                </label>
+                        </div>
+                        <div ng-switch-when="title" ng-class="'col-md-'+(f.cols.length==1?12:6)">
+                            <span contenteditable="true" class="title" ng-bind="f.title"></span>
+                            <span><i ng-if="f.hint" class="fa fa-info-circle" data-content="{{f.hint}}" data-trigger="click" data-original-title="{{f.title}}" data-toggle="popover"></i></span>
+                            <span><i ng-if="f.original!=='undefined' && f.original!=='\'\''" class="fa fa-question-circle-o" data-trigger="click" data-toggle="popover" data-original-title="{{f.id}}="
+                                     data-content="{{f.original}}"></i></span>
+                        </div>
+                        <!--In most cases there are 4 columns, title,value,value,value-->
+                        <!--Calculate the width by 6/length-1-->
+                        <div ng-switch-default ng-class="'questions col-md-'+(6/(f.cols.length-1))">
+                            <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">
+                                <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
+                                <select ng-switch-when="select" class="form-control" ng-model="cv.value" placeholder="Pick value">
+                                    <option ng-repeat="choice in f.choices" ng-selected="choice.name == cv.value">{{choice.value}}</option>
+                                </select>
+                                <div ng-switch-when="radio" class="btn-group" data-toggle="buttons">
+                                    <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.name == cv.value?'active':''">
+                                        <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.name">
+                                        <i ng-class="choice.name == cv.value ? 'fa fa-check-circle-o fa-2x' : 'fa fa-circle-o fa-2x'"></i>
+                                        <span>{{choice.value}}</span>
+                                    </label>
+                                </div>
+                                <textarea ng-switch-when="memo" rows="4" class="form-control" ng-model="cv.value" placeholder=".."></textarea>
+                                <input ng-switch-default readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
+                                <input ng-switch-default ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
+                                <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
                             </div>
-                            <textarea ng-switch-when="memo" rows="4" class="form-control" ng-model="cv.value" placeholder=".."></textarea>
-                            <input ng-switch-default readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
-                            <input ng-switch-default ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
-                            <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
                         </div>
                     </div>
                 </div>
@@ -172,16 +283,15 @@
                         <highchart ng-switch-when="polarchart" id="{{$index}}-polar-chart" config="{
                 chart: {
                     polar: true,
-                    height:100,
-                    width:160
+                    height:120,
+                    width: 200
                 },
                 pane: {
                     startAngle: 0,
                     endAngle: 360
                 },
                 title: {
-                    text: f.title,
-                    x: -80
+                    text: ''
                 },
                 xAxis: {
                     categories: widget.value[0],
@@ -197,16 +307,18 @@
                     shared: true,
                     pointFormat: '<span style=\'color:{series.color}\'>{series.name}: <b>${point.y:,.0f}</b><br/>'
                 },
-                legend:false,
+                legend:true,
                 credits:false,
                 series: [{
-                    name: widget.title,
+                    name: '',
                     data: widget.value[1],
-                    pointPlacement: 'on'
+                    pointPlacement: 'on',
+                    enableMouseTracking: false
                 }, {
                     name: 'Average',
                     data: [75, 60, 55, 70],
-                    pointPlacement: 'on'
+                    pointPlacement: 'on',
+                    enableMouseTracking: false
                 }]
             }"></highchart>
                     </div>

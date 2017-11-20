@@ -1,14 +1,14 @@
 let modelName;
 let hash;
 
-function redifineParaments() {
+function redefineParaments() {
     var params = window.location.href.split('#')
     if (params.length == 1) window.location.href = '#MVO&DEMO'
     var params = window.location.href.split('#')[1].split('&')
     modelName = params[0] || 'MVO';
     hash = params[1] || 'DEMO';
 }
-redifineParaments()
+redefineParaments()
 
 angular
     .module('angapp', ['angular.filter', "highcharts-ng"])
@@ -27,7 +27,6 @@ angular
         $scope.saveData = function() {
             Pace.start();
             LMEMETA.persistData(function(response) {
-                console.info('send update...')
                 $scope.$broadcast('someEvent', [1, 2, 3]);
                 $scope.$digest()
             });

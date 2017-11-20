@@ -1,6 +1,7 @@
-var logger = require('../ff-log')
-var jsMath = require('./jsMath.json')
-var entries = {};
+const logger = require('../ff-log')
+const jsMath = require('./jsMath.json')
+const Solver = require('js-solver')
+const entries = {};
 
 //add functions found in the jsMath to the global scope
 function initJSMath(jsMath) {
@@ -23,6 +24,15 @@ function initJSMath(jsMath) {
     }
 }
 
+SOLVER = function(args) {
+    return new Solver(args || arguments)
+}
+OnNA = function(v, nav) {
+    if (v == null || isNaN(v) || (v !== 0 && v < 0.00001 && v > -0.00001)) {
+        return nav;
+    }
+    return v;
+}
 HSUM = function(fId, func, v, x, y, z, start, end) {
     var returnValue = 0;
     for (var i = start || x.first.index; i < end || x.last.index; i++) {

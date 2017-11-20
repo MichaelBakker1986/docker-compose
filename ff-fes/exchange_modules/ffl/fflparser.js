@@ -182,6 +182,7 @@ var displayAsMapping = {
     string: "string",
     chart: "chart",
     polarchart: "polarchart",
+    customwidget: "customwidget",
     piechart: "piechart",
     line: "line"
 }
@@ -242,7 +243,7 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         log.error('Invalid FFL file detected while parsing. No name declared for node [' + node + ']')
         return;
     }
-    var mappedDisplayType = displayAsMapping[node.displaytype];
+    var mappedDisplayType = displayAsMapping[node.displaytype] || node.displaytype;
     if (mappedDisplayType == 'select') {
         if (!node.choices) {
             if (log.DEBUG) log.warn('Row [' + rowId + '] is type [select], but does not have choices')

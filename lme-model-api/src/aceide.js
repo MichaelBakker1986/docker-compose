@@ -7,6 +7,7 @@ var ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix')
 var V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
 var EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 var StoryParser = require('../../model-tests/StoryParser').StoryParser
+var FFLFormatter = require('../../model-tests/plugins/FFLFormatter').LexialParser
 
 var fflModel = '';
 var params = window.location.href.split('#')
@@ -112,12 +113,17 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
             });
         });
     }
+    $scope.toggleFormatter = function() {
+        const row = aceEditor.selection.getCursor().row
+        const col = aceEditor.selection.getCursor().column
 
+        setValue(FFLFormatter.parse(aceEditor.session.getValue()));
+        aceEditor.gotoLine(row + 1, col)
+    }
     $scope.toggleAceEditorMode = function() {
         $scope.fflmode = !$scope.fflmode;
         EconomicEditorView.on = !EconomicEditorView.on;
         setValue(fflModel)
-        scrollTop()
     }
     $(window).bind('keydown', function(evt) {
         if (evt.ctrlKey || evt.metaKey) {
@@ -126,6 +132,12 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
                     evt.preventDefault();
                     $('#saveFFLModel').click();
                     $scope.saveFFLModel();
+                    break;
+                case 'f':
+                    if (evt.shiftKey) {
+                        evt.preventDefault();
+                        $scope.toggleFormatter()
+                    }
                     break;
                 case 'p':
                     evt.preventDefault();

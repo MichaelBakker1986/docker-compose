@@ -81,26 +81,44 @@
     </script>
 </head>
 <body>
-<div ng-controller="MainController" ng-init="DATA = [1,2,3,4]; ROWS=[1,2,3,4]">
+<div ng-controller="MainController">
     <button ng-click="DATA[2]=10"></button>
-    <div>
-        <highchart id="donut-chart" config="chartConfig"></highchart>
-    </div>
-    <div ng-repeat="row in ROWS">
-        <highchart id="{{$index}}" config="{
+    <div ng-repeat="widget in LME_MODEL.WIDGETS.children" ng-switch="widget.type">
+{{widget.title}}
+     <!--   <highchart ng-switch-when="polarchart" id="{{$index}}-polar-chart" config="chartConfig"></highchart>-->
+        <highchart ng-switch-when="piechart" id="{{$index}}-pie-chart" config="{
                     chart: {
-                        type: 'bar'
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text:  widget.title
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    xAxis: {
+                        categories: widget.value[0]
                     },
                     series: [{
-                        data: DATA,
-                        id: 'series1'
-                    }],
-                    title: {
-                        text: 'Hello'
-                    }
+                        name: widget.title,
+                        data: widget.value[1],
+                    }]
                 }"></highchart>
-    </div>
 
+    </div>
 </div>
 </body>
 </html>

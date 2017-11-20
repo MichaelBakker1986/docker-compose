@@ -4,7 +4,10 @@
   "private": true,
   "description": "finan math",
   "main": "ff-math.js",
-  "dependencies": {},
+  "dependencies": {
+    "algebra.js": "^0.2.6",
+    "js-solver": "0.0.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

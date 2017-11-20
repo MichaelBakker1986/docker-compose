@@ -19,10 +19,6 @@
     "args": "o,v1,v2",
     "body": "{ if (o) { return v1; } else { return v2; }}"
   },
-  "OnNA": {
-    "args": "v,onnav",
-    "body": "{ if (v == undefined || isNaN(v)) { return onnav; } return v;}"
-  },
   "SUM": {
     "args": "values",
     "body": "{ var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue; }"

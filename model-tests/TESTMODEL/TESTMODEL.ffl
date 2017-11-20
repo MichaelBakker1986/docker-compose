@@ -25,6 +25,17 @@ model TESTMODEL uses BaseModel
             inputRequired: 1;
         }
     }
+    variable TestContainer
+    {
+        variable TestContainerChild
+        {
+            title: "TotalConfusedMoreChild";
+            formula: 123;
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+        }
+    }
 	variable VariableOne
 	{
 	    title: "VariableOne";
