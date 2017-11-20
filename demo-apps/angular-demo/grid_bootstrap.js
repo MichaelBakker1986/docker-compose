@@ -122,7 +122,7 @@ angular
             })
         }
         $scope.$on('someEvent', function(event, mass) {
-            redifineParaments();
+            redefineParaments();
             $scope.rebuildTimeline();
         });
         $scope.rebuildTimeline();
