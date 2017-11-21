@@ -2271,7 +2271,7 @@ model MVO uses BaseModel
      datatype: number;
      frequency: document;
      displaytype: currency;
-     title: "Score Principes";
+     title: "Principes";
      hint: "Een totaalscore van 100 punten betekent dat u het 100% eens bent met de stellingen over de 7 principes van de ISO 26000 MVO richtlijn";
      visible: 0;
      options_title: locked;
@@ -2281,7 +2281,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP01_VRAAG01*((1/7)*100))+(Q_MAP01_VRAAG02*((1/7)*100)))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP01_PARAGRAAF01));
+      title: String(GetTitle(Q_MAP01_PARAGRAAF01));
       top_blanklines: 1;
       locked: 1;
       visible: 1;
@@ -2294,7 +2294,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP01_VRAAG03*((1/7)*100))+(Q_MAP01_VRAAG04*((1/7)*100)))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP01_PARAGRAAF02));
+      title: String(GetTitle(Q_MAP01_PARAGRAAF02));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2306,7 +2306,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP01_VRAAG05*((1/7)*100))+(Q_MAP01_VRAAG06*((1/7)*100)))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP01_PARAGRAAF03));
+      title: String(GetTitle(Q_MAP01_PARAGRAAF03));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2318,7 +2318,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP01_VRAAG07*((1/7)*100))+(Q_MAP01_VRAAG08*((1/7)*100)))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP01_PARAGRAAF04));
+      title: String(GetTitle(Q_MAP01_PARAGRAAF04));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2330,7 +2330,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP01_VRAAG09*((1/7)*100))+(Q_MAP01_VRAAG10*((1/7)*100)))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP01_PARAGRAAF05));
+      title: String(GetTitle(Q_MAP01_PARAGRAAF05));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2342,7 +2342,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP01_VRAAG11*((1/7)*100))+(Q_MAP01_VRAAG12*((1/7)*100)))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP01_PARAGRAAF06));
+      title: String(GetTitle(Q_MAP01_PARAGRAAF06));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2354,7 +2354,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP01_VRAAG13*((1/7)*100))+(Q_MAP01_VRAAG14*((1/7)*100)))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP01_PARAGRAAF07));
+      title: String(GetTitle(Q_MAP01_PARAGRAAF07));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2366,7 +2366,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: Q_MAP01_SUBSCORE01+Q_MAP01_SUBSCORE02+Q_MAP01_SUBSCORE03+Q_MAP01_SUBSCORE04+Q_MAP01_SUBSCORE05+Q_MAP01_SUBSCORE06+Q_MAP01_SUBSCORE07;
       displaytype: currency;
-      title: "Totaalscore Principes";
+      title: "Principes";
       top_separator: 1;
       display_options: displayAsSummation;
       locked: 1;
@@ -2380,7 +2380,7 @@ model MVO uses BaseModel
      datatype: number;
      frequency: document;
      displaytype: currency;
-     title: "Score Omgeving";
+     title: "Een totaalscore van 100 punten betekent dat u voor 100% de stakeholders relevant vindt en bij veranderingen betrekt";
      hint: "Een totaalscore van 100 punten betekent dat u voor 100% de stakeholders relevant vindt en bij veranderingen betrekt";
      visible: 0;
      options_title: locked;
@@ -2390,7 +2390,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER((((Q_MAP02_VRAAG01+Q_MAP02_VRAAG02)/2)*100),NA);
       displaytype: currency;
-      title: "Totaalscore Omgeving";
+      title: "Omgeving";
       top_blanklines: 1;
       locked: 1;
       visible: 1;
@@ -2403,7 +2403,7 @@ model MVO uses BaseModel
      datatype: number;
      frequency: document;
      displaytype: currency;
-     title: "Score Thema's";
+     title: "Thema's";
      hint: "Een totaalscore van 100 punten betekent dat u het 100% eens bent met de stellingen over de 7 thema's van de ISO 26000 MVO richtlijn";
      visible: 0;
      options_title: locked;
@@ -2413,7 +2413,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP03_VRAAG01*Q_MAP03_GEWICHT_VRAAG01)+(Q_MAP03_VRAAG02*Q_MAP03_GEWICHT_VRAAG01))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP03_GEWICHT_VRAAG01));
+      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG01));
       top_blanklines: 1;
       locked: 1;
       visible: 1;
@@ -2426,7 +2426,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP03_VRAAG03*Q_MAP03_GEWICHT_VRAAG02)+(Q_MAP03_VRAAG04*Q_MAP03_GEWICHT_VRAAG02))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP03_GEWICHT_VRAAG02));
+      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG02));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2438,7 +2438,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP03_VRAAG05*Q_MAP03_GEWICHT_VRAAG03)+(Q_MAP03_VRAAG06*Q_MAP03_GEWICHT_VRAAG03))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP03_GEWICHT_VRAAG03));
+      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG03));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2450,7 +2450,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP03_VRAAG07*Q_MAP03_GEWICHT_VRAAG04)+(Q_MAP03_VRAAG08*Q_MAP03_GEWICHT_VRAAG04))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP03_GEWICHT_VRAAG04));
+      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG04));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2462,7 +2462,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP03_VRAAG09*Q_MAP03_GEWICHT_VRAAG05)+(Q_MAP03_VRAAG10*Q_MAP03_GEWICHT_VRAAG05))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP03_GEWICHT_VRAAG05));
+      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG05));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2474,7 +2474,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP03_VRAAG11*Q_MAP03_GEWICHT_VRAAG06)+(Q_MAP03_VRAAG12*Q_MAP03_GEWICHT_VRAAG06))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP03_GEWICHT_VRAAG06));
+      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG06));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2486,7 +2486,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP03_VRAAG13*Q_MAP03_GEWICHT_VRAAG07)+(Q_MAP03_VRAAG14*Q_MAP03_GEWICHT_VRAAG07))/2,NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP03_GEWICHT_VRAAG07));
+      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG07));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2498,7 +2498,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: Q_MAP03_SUBSCORE01+Q_MAP03_SUBSCORE02+Q_MAP03_SUBSCORE03+Q_MAP03_SUBSCORE04+Q_MAP03_SUBSCORE05+Q_MAP03_SUBSCORE06+Q_MAP03_SUBSCORE07;
       displaytype: currency;
-      title: "Totaalscore Thema's";
+      title: "Thema's";
       top_separator: 1;
       display_options: displayAsSummation;
       locked: 1;
@@ -2512,7 +2512,7 @@ model MVO uses BaseModel
      datatype: number;
      frequency: document;
      displaytype: currency;
-     title: "Score Werknemers";
+     title: "Werknemers";
      hint: "Deze totaalscore geeft een indicatie in hoeverre u handelt volgens de richtlijnen van drie van de vijf subthema's van het thema Werknemers (100 is de maximale score voor het totaal en per subthema)";
      visible: 0;
      options_title: locked;
@@ -2522,7 +2522,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP04_GEWICHT_VRAAG01*Q_MAP04_VRAAG01)+(Q_MAP04_GEWICHT_VRAAG02*Q_MAP04_VRAAG02)+(Q_MAP04_GEWICHT_VRAAG03*Q_MAP04_VRAAG03)+(Q_MAP04_GEWICHT_VRAAG04*Q_MAP04_VRAAG04)),NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP04_PARAGRAAF01));
+      title: String(GetTitle(Q_MAP04_PARAGRAAF01));
       top_blanklines: 1;
       locked: 1;
       visible: 1;
@@ -2535,7 +2535,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP04_GEWICHT_VRAAG05*Q_MAP04_VRAAG05)+(Q_MAP04_GEWICHT_VRAAG06*Q_MAP04_VRAAG06)+(Q_MAP04_GEWICHT_VRAAG07*Q_MAP04_VRAAG07)+(Q_MAP04_GEWICHT_VRAAG08*Q_MAP04_VRAAG08)),NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP04_PARAGRAAF02));
+      title: String(GetTitle(Q_MAP04_PARAGRAAF02));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2547,7 +2547,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP04_GEWICHT_VRAAG09*Q_MAP04_VRAAG09)+(Q_MAP04_GEWICHT_VRAAG10*Q_MAP04_VRAAG10)+(Q_MAP04_GEWICHT_VRAAG11*Q_MAP04_VRAAG11)+(Q_MAP04_GEWICHT_VRAAG12*Q_MAP04_VRAAG12)),NA);
       displaytype: currency;
-      title: String("Score "&GetTitle(Q_MAP04_PARAGRAAF03));
+      title: String(GetTitle(Q_MAP04_PARAGRAAF03));
       locked: 1;
       visible: 1;
       options_title: locked;
@@ -2559,7 +2559,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER((Q_MAP04_SUBSCORE01+Q_MAP04_SUBSCORE02+Q_MAP04_SUBSCORE03)/3,NA);
       displaytype: currency;
-      title: "Totaalscore Werknemers";
+      title: "Werknemers";
       top_separator: 1;
       display_options: displayAsSummation;
       locked: 1;
