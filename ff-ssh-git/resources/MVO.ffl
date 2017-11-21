@@ -2250,6 +2250,7 @@ model MVO uses BaseModel
      frequency: none;
      visible: 1;
      locked: 1;
+     fixed_decimals: 0;
      formula: PRINCIPES_GRAPH;
      displaytype: piechart;
      title: "Principes";
