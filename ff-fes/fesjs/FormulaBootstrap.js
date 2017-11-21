@@ -198,7 +198,7 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
             node.name = defaultValues[propertiesArr[property]];
         } else {
             if (property == 4) {
-                node.name = 'v[' + (referenceFormulaId) + '][x.hash + y.hash + z]!=null';
+                node.name = 'v[' + (referenceFormulaId) + '][x.hash + y.hash + z] !=null';
             } else {
                 node.name = 'a' + referenceFormulaId + "('" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)";
             }

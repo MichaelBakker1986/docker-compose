@@ -58,7 +58,7 @@ function changeAndCache(workbook, rowId, col, index) {
             return r;
         },
         set: function(v) {
-            var value = v === null ? v : (isNaN(v) ? v : parseFloat(v))
+            var value = (v == null || v == '') ? null : (isNaN(v) ? v : parseFloat(v))
             workbook.set(rowId, value, col, index, 0);
         }
     }
