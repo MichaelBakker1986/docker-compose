@@ -1,6 +1,10 @@
 /*
  * There is no way to clear State, every doImport will contribute to static state
  */
+var x2 = [[1, 2, 3], [5, 5, 5]];
+var x = x2.map(function(el, idx) {
+    return x2[0][idx]
+})
 process.alltest = true;
 var log = require('ff-log')
 var performceTestStartTime = new Date().getTime();

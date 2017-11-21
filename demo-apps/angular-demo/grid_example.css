@@ -380,7 +380,7 @@ span.time i.fa {
 }
 
 .bg-blue {
-    background-color: #0073b7 !important;
+    background-color: #3c8dbc !important;
 }
 
 .bg-red {
@@ -431,6 +431,12 @@ span.time i.fa {
     box-shadow: none;
     background-color: white;
 }
+.yellow.fa-stack[data-count]:after{
+    background:rgba(243,156,18,1);
+}
+.green.fa-stack[data-count]:after{
+    background:rgba(0,221,90,0.9);
+}
 .fa-stack[data-count]:after{
     position:absolute;
     right:0%;
@@ -441,7 +447,6 @@ span.time i.fa {
     border-radius:999px;
     line-height:.75em;
     color: white;
-    background:rgba(243,156,18,1);
     text-align:center;
     min-width:2em;
     font-weight:bold;
@@ -454,9 +459,11 @@ span.time i.fa {
     display: block;
     min-height: 90px;
     background: #fff;
+    height: 107px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     margin-bottom: 15px;
+    padding-left: 0px;
 }
 .info-box small {
     font-size: 14px;
@@ -480,7 +487,7 @@ span.time i.fa {
     border-bottom-left-radius: 2px;
     display: block;
     float: left;
-    height: 90px;
+    height: 107px;
     width: 90px;
     text-align: center;
     font-size: 45px;
@@ -489,6 +496,9 @@ span.time i.fa {
 }
 .info-box-icon > img {
     max-width: 100%;
+}
+.info-box-search {
+   font-size: 80px;
 }
 .info-box-content {
     padding: 5px 10px;
@@ -503,7 +513,6 @@ span.time i.fa {
 .info-box-text {
     display: block;
     font-size: 14px;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }

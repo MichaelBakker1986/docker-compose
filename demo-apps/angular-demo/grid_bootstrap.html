@@ -83,113 +83,146 @@
                             <h2>{{f.title}}</h2>
                             {{f.hint}}
                         </div>
-                        <div ng-switch-when="customwidget">
-                            <div class=" info-box bg-blue col-sm-6">
-                                <span class="info-box-icon"><i class="fa fa-user-o"></i></span>
+                        <div ng-switch-when="customwidget" style="margin: 15px;">
+                            <div class=" col-sm-6">
+                                <div class="info-box bg-aqua">
+                                    <span class="info-box-icon"><i class="fa fa-user-o"></i></span>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{cv.value[0][3]}}</span>
-                                    <span class="info-box-number">{{cv.value[1][3]}}</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="{{'width: ' + cv.value[1][3]+'%'}}"></div>
-                                    </div>
-                                    <span class="progress-description">
-                                        {{cv.value[1][3]}}
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">{{cv.value[0][3]}}</span>
+                                        <span class="info-box-number">{{cv.value[1][3]}}</span>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="{{'width: ' + cv.value[1][3]+'%'}}"></div>
+                                        </div>
+                                        <span class="progress-description">
+                                        Een score van 100 punten betekent dat u voor 100% de stakeholders revevant vindt en bij veranderingen betrekt.
                                     </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="info-box bg-yellow">
+                                    <span class="info-box-icon"><i class="fa fa-tree"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">{{cv.value[0][1]}}</span>
+                                        <span class="info-box-number">{{cv.value[1][1]}}</span>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="{{'width: ' + cv.value[1][1]+'%'}}"></div>
+                                        </div>
+                                        <span class="progress-description">
+                                        Deze score geeft een indicatie in hoeverre u handelt volgens de richtlijnen van drie van de vijf subthema's van dit thema
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-md-6">
+                                <div class="info-box bg-green">
+                                    <span class="info-box-icon"><i class="fa fa-picture-o"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">{{cv.value[0][2]}}</span>
+                                        <span class="info-box-number">{{cv.value[1][2]}}</span>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="{{'width: ' + cv.value[1][2]+'%'}}"></div>
+                                        </div>
+                                        <span class="progress-description">
+                                        Een score can 100punten beteknt dat u het 100% eens bent met de stellingen over de 7 principes van de ISO 26000 MVO richtlijn
+                                    </span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="info-box bg-yellow   col-sm-6  ">
-                                <span class="info-box-icon"><i class="fa fa-tree"></i></span>
+                            <div class="col-md-6">
+                                <div class="info-box bg-red">
+                                    <span class="info-box-icon"><i class="fa fa-balance-scale"></i></span>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{cv.value[0][1]}}</span>
-                                    <span class="info-box-number">{{cv.value[1][1]}}</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="{{'width: ' + cv.value[1][1]+'%'}}"></div>
-                                    </div>
-                                    <span class="progress-description">
-                                        {{cv.value[1][1]}}
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">{{cv.value[0][0]}}</span>
+                                        <span class="info-box-number">{{cv.value[1][0]}}</span>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="{{'width: ' + cv.value[1][0]+'%'}}"></div>
+                                        </div>
+                                        <span class="progress-description">
+                                        Een score can 100punten betekent dat u het 100% eens bent met de stellingne over de 7 thema's van de ISO 26000 MVO richtlijn
                                     </span>
-                                </div>
-                            </div>
-                            <div class="info-box bg-green col-md-6">
-                                <span class="info-box-icon"><i class="fa fa-picture-o"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{cv.value[0][2]}}</span>
-                                    <span class="info-box-number">{{cv.value[1][2]}}</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="{{'width: ' + cv.value[1][2]+'%'}}"></div>
                                     </div>
-                                    <span class="progress-description">
-                                        {{cv.value[1][2]}}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="info-box bg-red col-md-6">
-                                <span class="info-box-icon"><i class="fa fa-balance-scale"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{cv.value[0][0]}}</span>
-                                    <span class="info-box-number">{{cv.value[1][0]}}</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="{{'width: ' + cv.value[1][0]+'%'}}"></div>
-                                    </div>
-                                    <span class="progress-description">
-                                        {{cv.value[1][0]}}
-                                    </span>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2"></div>
+                                <div class="col-md-3"></div>
                                 <div class="col-md-1">
-                                    <span class="info-box-icon"><i class="fa fa-search"></i></span>
+                                    <span class="info-box-search"><i class="fa fa-search"></i></span>
                                 </div>
                                 <div class="col-md-2">
                                 </div>
                                 <div class="col-md-2"></div>
                                 <div class="col-md-1">
-                                    <span class="info-box-icon"><i class="fa fa-search"></i></span>
+                                    <span class="info-box-search"><i class="fa fa-search"></i></span>
                                 </div>
                                 <div class="col-md-2"></div>
                             </div>
                         </div>
                         <div ng-switch-when="piechart" class="col-md-6">
-                            <highchart config="{
+                            <div>
+                                <div class="box box-default">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">{{f.title}}</h3>
+
+                                        <div class="box-tools pull-right">
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="chart-responsive">
+                                                    <highchart config="{
                     chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false,
-                        type: 'pie'
+                     type: 'pie'
                     },
-                    title: {
-                        text:  f.title
-                    },
+                    title: false,
                     plotOptions: {
                         pie: {
                             allowPointSelect: true,
                             cursor: 'pointer',
                             dataLabels: {
                                 enabled: true,
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                distance: 1,
+                                format: '<b></b>: {point.percentage:.1f} %',
                                 style: {
                                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                                 }
-                            }
+                            },
+                             showInLegend: true
                         }
                     },
                     credits:false,
-                legend:false,
                     xAxis: {
                         categories: cv.value[0]
                     },
                     series: [{
-                        name: f.title,
-                        data: cv.value[1],
+                        name : f.title,
+                        data : cv.value
                     }]
                 }"></highchart>
+                                                </div>
+                                                <!-- ./chart-responsive -->
+                                            </div>
+                                            <!-- /.col -->
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.row -->
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer no-padding">
+                                        Dit zijn de scores per onderdeel van {{f.title}}
+                                    </div>
+                                    <!-- /.footer -->
+                                </div>
+
+
+                            </div>
                         </div>
                         <div ng-switch-when="polarchart" class="col-md-6">
                             <highchart id="{{$index}}-chart" config="{
@@ -272,7 +305,7 @@
                     <div>
                         <!--make scorecard converter in IDE-->
                         <span ng-bind="f.title"></span>
-                        <span ng-if="f.valid[0] != f.valid[1]" class="fa-stack fa-1x has-badge" data-count="{{f.valid[0]}}/{{f.valid[1]}}">
+                        <span ng-class="f.valid[0] != f.valid[1] ? 'yellow': 'green'" class="fa-stack fa-1x has-badge" data-count="{{f.valid[0]}}/{{f.valid[1]}}">
                           <i class="fa fa-circle fa-stack-2x"></i>
                           <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
                         </span>

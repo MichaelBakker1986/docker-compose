@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.src.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts-ng/1.1.0/highcharts-ng.min.js"></script>
+    <script>
+        angular.module('app', ["highcharts-ng"])
+            .controller('MainController', function($scope, $http) {
+
+                $http.get('http://10.0.75.1:8083/id/DEMO/resources/MVO.js').then(function(data) {
+                    eval(data.data)
+                    //after this we can import the user-data....
+                    LMEMETA.importWebModel('Q_ROOT')
+                    LME = LMEMETA.exportWebModel();
+                    $scope.LME_MODEL = LME.nodes
+                    $scope.name = LME.name
+                    $scope.LMEMETA = LMEMETA;
+                    $scope.nav = (LME.nodes.Q_ROOT || LME.nodes.root).children
+                    $scope.search = (LME.nodes.Q_ROOT || LME.nodes.root).children[0]
+                }).catch(function(err) {
+                    console.error("failed loading " + err);
+                });
+
+
+                $scope.chartConfig = {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Browser market shares January, 2015 to May, 2015'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Brands',
+                        colorByPoint: true,
+                        data: [{
+                            name: 'IE',
+                            y: 56.33
+                        }, {
+                            name: 'Chrome',
+                            y: 24.03,
+                            sliced: true,
+                            selected: true
+                        }, {
+                            name: 'Firefox',
+                            y: 10.38
+                        }, {
+                            name: 'Safari',
+                            y: 4.77
+                        }, {
+                            name: 'Opera',
+                            y: 0.91
+                        }, {
+                            name: 'Other',
+                            y: 0.2
+                        }]
+                    }]
+                }
+            });
+    </script>
+</head>
+<body>
+<div ng-controller="MainController">
+    {{LME_MODEL.Q_THEMAS_GRAPH.value}}
+</div>
+</body>
+</html>

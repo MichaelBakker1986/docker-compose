@@ -4052,7 +4052,7 @@ model MVO uses BaseModel
     visible: 1;
     locked: 1;
     fixed_decimals: 2;
-    formula: [[Q_MAP03_SUBSCORE01.title,Q_MAP03_SUBSCORE02.title,Q_MAP03_SUBSCORE03.title,Q_MAP03_SUBSCORE04.title,Q_MAP03_SUBSCORE05.title],[Q_MAP03_SUBSCORE01,Q_MAP03_SUBSCORE02,Q_MAP03_SUBSCORE03,Q_MAP03_SUBSCORE04,Q_MAP03_SUBSCORE05]];
+    formula: [[Q_MAP03_SUBSCORE01.title,Q_MAP03_SUBSCORE01.value],[Q_MAP03_SUBSCORE02.title,Q_MAP03_SUBSCORE02.value],[Q_MAP03_SUBSCORE03.title,Q_MAP03_SUBSCORE03.value],[Q_MAP03_SUBSCORE04.title,Q_MAP03_SUBSCORE04.value],[Q_MAP03_SUBSCORE05.title,Q_MAP03_SUBSCORE05.value]];
     displaytype: piechart;
     title: "Themas";
    }

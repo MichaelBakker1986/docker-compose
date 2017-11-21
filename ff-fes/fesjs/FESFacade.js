@@ -79,7 +79,7 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         }
         var id = localFormula.id || localFormula.index;
         var hash = xas.hash + yas.hash + 0;
-        return context.values[id][hash]!=null;
+        return context.values[id][hash] != null;
     } else if (colType === 'original') {
         var variable = fetchSolutionNode(row, 'value');
         var localFormula = findFormula(variable);
@@ -120,6 +120,9 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
             }
             if (variable.datatype == 'number') {
                 returnValue = OnNA(returnValue, '')
+            }
+            if (variable.displayAs == 'piechart') {
+                returnValue = PIECHART(returnValue)
             }
         } else if (colType == 'locked') {
             return Boolean(returnValue)

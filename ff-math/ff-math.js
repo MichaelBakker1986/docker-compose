@@ -40,6 +40,20 @@ OnNA = function(v, nav) {
     }
     return v;
 }
+PIECHART = function(points) {
+    var result = [];
+    for (var i = 0; i < arguments.length; i++) {
+        var points = arguments[i];
+        for (var index = 0; index < points.length; index++) {
+            var point = points[index];
+            result.push({
+                name: point[0],
+                y: point[1]
+            })
+        }
+    }
+    return result;
+}
 HSUM = function(fId, func, v, x, y, z, start, end) {
     var returnValue = 0;
     for (var i = start || x.first.index; i < end || x.last.index; i++) {
