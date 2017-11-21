@@ -18,6 +18,9 @@ function LmeAPI() {
     this.urlPrefix = '';
 }
 
+LmeAPI.prototype.hasChanges = function() {
+    return this.lme.context.hasChanges();
+}
 LmeAPI.prototype.addFunctions = fesjsApi.addFunctions;
 LmeAPI.prototype.exportLME = function() {
     return this.lme.export('lme')

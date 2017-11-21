@@ -29,4 +29,7 @@ Context.prototype.propertyDefaults = propertyDefaults;
 Context.prototype.getValues = function() {
     return this.values;
 }
+Context.prototype.hasChanges = function() {
+    return this.audit.length > 0;
+}
 module.exports = Context

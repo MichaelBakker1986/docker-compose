@@ -788,6 +788,7 @@ span.time i.fa {
 
 .box-header.with-border {
     border-bottom: 1px solid #f4f4f4;
+    text-align: center;
 }
 
 .collapsed-box .box-header.with-border {
@@ -954,4 +955,7 @@ span.time i.fa {
 .box-comments .text-muted {
     font-weight: 400;
     font-size: 12px;
+}
+.toggle-save-btn.btn.btn-sm.active {
+    background-color: #eee;
 }

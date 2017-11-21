@@ -25,6 +25,7 @@ angular
         $scope.changeSearch = function(node) {
             $scope.search = node
         }
+
         $scope.saveData = function() {
             Pace.start();
             LMEMETA.persistData(function(response) {
@@ -47,7 +48,9 @@ angular
                     $scope.search = LME.nodes[name].children[0]
                 }
             }
-
+            $scope.hasChanges = function() {
+                return LMEMETA.hasChanges()
+            }
             LMEMETA.loadData(function(response) {
                 $scope.$digest()
             })

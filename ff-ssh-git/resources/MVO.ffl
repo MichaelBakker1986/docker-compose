@@ -90,7 +90,7 @@ model MVO uses BaseModel
      frequency: document;
      displaytype: currency;
      title: "Uitleg MVO";
-     hint: "Maatschappelijk verantwoord ondernemen betekent dat je als bedrijf actief probeert om een positieve bijdrage te leveren aan de maatschappij. De gedachte achter MVO is dat je je allereerst bewust bent van het effect dat je hebt op je omgeving. Vandaaruit probeert u om een duidelijke visie te ontwikkelen om stap voor stap uzelf te verbeteren. Hiermee zorg je voor een positieve impact op je omgeving en verbeter je tegelijkertijd je competitiviteit en reputatie en - misschien nog wel belangrijker - hoe stakeholders, zoals je huidige medewerkers, potentiele medewerkers, donors, sponsoren, leveranciers tegen jou als bedrijf aankijken. MVO kan ook onderdeel zijn van de identiteit van uw bedrijf, bijvoorbeeld Baabaazuzu heeft als bedrijfsmodel om sjaals en wanten van oude sweaters te maken. Op grote schaal kunt u denken aan Google Green, waarin Google werknemers stimuleert om zuinig om te gaan met resources. De ISO 26000 richtlijn maakt MVO concreet. In deze richtlijn is MVO opgedeeld in Principes, Omgeving, Thema's en Implementatie. Deze MVO Scan geeft u op een toegankelijke wijze inzicht in uw scores op al de aspecten van deze ISO 26000 richtlijn. Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn.";
+     hint: "Maatschappelijk verantwoord ondernemen betekent dat je als bedrijf actief probeert om een positieve bijdrage te leveren aan de maatschappij. De gedachte achter MVO is dat je je allereerst bewust bent van het effect dat je hebt op je omgeving. Vandaaruit probeert u om een duidelijke visie te ontwikkelen om stap voor stap uzelf te verbeteren. Hiermee zorg je voor een positieve impact op je omgeving en verbeter je tegelijkertijd je competitiviteit en reputatie en - misschien nog wel belangrijker - hoe stakeholders, zoals je huidige medewerkers, potentiele medewerkers, donors, sponsoren, leveranciers tegen jou als bedrijf aankijken. MVO kan ook onderdeel zijn van de identiteit van uw bedrijf, bijvoorbeeld Baabaazuzu heeft als bedrijfsmodel om sjaals en wanten van oude sweaters te maken. Op grote schaal kunt u denken aan Google Green, waarin Google werknemers stimuleert om zuinig om te gaan met resources. De ISO 26000 richtlijn maakt MVO concreet. In deze richtlijn is MVO opgedeeld in Principes, Omgeving, Thema's en Implementatie. Deze MVO Scan geeft u op een toegankelijke wijze inzicht in uw scores op al de aspecten van deze ISO 26000 richtlijn. Op www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn.";
      visible: 1;
      options_title: locked;
      variable Q_MAP01_VERBORGEN
@@ -112,7 +112,7 @@ model MVO uses BaseModel
      frequency: document;
      displaytype: currency;
      title: "Toelichting principes";
-     hint: "Op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 4 van de ISO 26000 richtlijn. Het MVO-beleid van de organisatie is gebaseerd op onder andere deze zeven principes. Alle ja / nee vragen op deze stap zijn verplicht en bij 'ja' als antwoord wordt u gevraagd om een (verplichte) toelichting.";
+     hint: "Op www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 4 van de ISO 26000 richtlijn. Het MVO-beleid van de organisatie is gebaseerd op onder andere deze zeven principes. Alle ja / nee vragen op deze stap zijn verplicht en bij 'ja' als antwoord wordt u gevraagd om een (verplichte) toelichting.";
      visible: 1;
      options_title: locked;
      variable Q_MAP01_VERBORGEN_1
@@ -661,7 +661,7 @@ model MVO uses BaseModel
      frequency: document;
      displaytype: currency;
      title: "Toelichting omgeving";
-     hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 5 van de ISO 26000 richtlijn. Dit hoofdstuk gaat in op het erkennen en betrekken van stakeholders bij het MVO-beleid. Alle ja / nee vragen op deze stap zijn verplicht en bij 'ja' als antwoord wordt u gevraagd om een (verplichte) toelichting.";
+     hint: "Op www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 5 van de ISO 26000 richtlijn. Dit hoofdstuk gaat in op het erkennen en betrekken van stakeholders bij het MVO-beleid. Alle ja / nee vragen op deze stap zijn verplicht en bij 'ja' als antwoord wordt u gevraagd om een (verplichte) toelichting.";
      visible: 1;
      options_title: locked;
      variable Q_MAP02_VERBORGEN
@@ -1087,7 +1087,7 @@ model MVO uses BaseModel
      frequency: document;
      displaytype: currency;
      title: "Toelichting thema's";
-     hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 6 van de ISO 26000 richtlijn. Hoofdstuk 4 (principes) en hoofdstuk 6 (thema's) zijn een gezamenlijke basis voor het MVO-beleid. Alle ja / nee vragen op deze stap zijn verplicht en bij 'ja' als antwoord wordt u gevraagd om een (verplichte) toelichting.";
+     hint: "Op www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 6 van de ISO 26000 richtlijn. Hoofdstuk 4 (principes) en hoofdstuk 6 (thema's) zijn een gezamenlijke basis voor het MVO-beleid. Alle ja / nee vragen op deze stap zijn verplicht en bij 'ja' als antwoord wordt u gevraagd om een (verplichte) toelichting.";
      visible: 1;
      options_title: locked;
      variable Q_MAP03_VERBORGEN
@@ -1634,7 +1634,7 @@ model MVO uses BaseModel
      frequency: document;
      displaytype: currency;
      title: "Toelichting implementatie";
-     hint: "Op https://www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op https://www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Hoofdstuk 7 van de ISO 26000 richtlijn gaat in op de implementatie van het MVO-beleid. In deze stap van de MVO Scan worden voor het thema Werknemers stelling en vragen gepresenteerd die in een indicatie geven van de daadwerkelijke implementatie van dit thema. Alle ja / nee vragen op deze stap zijn verplicht en bij 'ja' als antwoord wordt u gevraagd om een (verplichte) toelichting. En bij vraag 4 wordt zowel bij ja als nee gevraagd om een (verplichte) toelichting.";
+     hint: "Op www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Hoofdstuk 7 van de ISO 26000 richtlijn gaat in op de implementatie van het MVO-beleid. In deze stap van de MVO Scan worden voor het thema Werknemers stelling en vragen gepresenteerd die in een indicatie geven van de daadwerkelijke implementatie van dit thema. Alle ja / nee vragen op deze stap zijn verplicht en bij 'ja' als antwoord wordt u gevraagd om een (verplichte) toelichting. En bij vraag 4 wordt zowel bij ja als nee gevraagd om een (verplichte) toelichting.";
      visible: 1;
      options_title: locked;
      variable Q_MAP04_VERBORGEN
@@ -2814,7 +2814,7 @@ model MVO uses BaseModel
      displaytype: piechart;
      title: "Themas";
     }
-    variable PRINCIPES_GRAPH 
+    variable PRINCIPES_GRAPH
     {
      datatype: matrix;
      frequency: none;
