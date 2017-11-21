@@ -13,8 +13,9 @@ let mvoFLLFile = fs.readFileSync(__dirname + '/MVO.ffl', 'utf8');
 
 require('../EconomicEditorView').EconomicEditorView.parse(mvoFLLFile)
 MVO.importFFL(mvoFLLFile);
+MVO.lme.fixProblemsInImportedSolution()
 //i wan test-set = daeb0505-d683-4dd1-b363-f1365d9d8e76
-fs.writeFileSync(__dirname + '/MVO.json', MVO.exportLME());
+//fs.writeFileSync(__dirname + '/MVO.json', MVO.exportLME());
 const nodes = MVO.exportWebModel().nodes;
 
 //MVO.importData()

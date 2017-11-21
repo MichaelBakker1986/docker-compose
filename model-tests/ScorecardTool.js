@@ -115,9 +115,6 @@ ScorecardTool.prototype.parse = function(input) {
             }, 0)
 
             if (requiredvars.length > 0) {
-                const requiredFormula = requiredvars.map(function(variable) {
-                    return variable.name + '.required'
-                }).join(' and ');
                 const validFormula = '[AMMOUNT(' + requiredvars.map(function(variable) {
                     return variable.name + '.required and ' + variable.name + '.entered'
                 }).join(',') + '),AMMOUNT(' + requiredvars.map(function(variable) {
@@ -126,15 +123,9 @@ ScorecardTool.prototype.parse = function(input) {
 
                 adjustments.push({
                     index: mapVar.index,
-                    property: 'inputRequired',
-                    value: requiredFormula
-                })
-                adjustments.push({
-                    index: mapVar.index,
                     property: 'valid',
                     value: validFormula
                 })
-                mapVar.required = requiredFormula
                 mapVar.valid = validFormula;
             }
         }

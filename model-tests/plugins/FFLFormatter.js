@@ -143,6 +143,13 @@ LexialParser.prototype.walkTree = function(visit, var_desc, depth, index) {
     }
     visit(var_desc, parts, children)
 }
+String.prototype.format = function() {
+    var formatted = this;
+    for (arg in arguments) {
+        formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+    }
+    return formatted;
+};
 LexialParser.prototype.prettyFormatFFL = function(depth, index) {
     var self = this;
     const indent = " ".repeat(depth);
@@ -154,13 +161,23 @@ LexialParser.prototype.prettyFormatFFL = function(depth, index) {
     } else {
         var temp = parts[parts.length - 1];
         parts.length--
+
         temp.replace(/((?!( variable | tuple )).)+/gm, function($1) {
             //here should go tuple/modifier/refer-to extraction.
             const refId = $1.indexOf('___');
-            varparts.push(indent + $1.substring(0, refId - 1) + "\n" + indent + "{\n" + self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))) + "\n" + indent + "}")
+            //var format = '{1}{2}\n{3}{\n{4}\n{5}}'.format(null, indent, $1.substring(0, refId - 1), indent, self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))), indent)
+            var format = '{1}{2}{3}{{4}{5}}';
+            if (self.props) {
+                format = '{1}{2}{3}{{4}{5}}';
+            } else {
+                format = '{1}{2}\n{3}{\n{4}\n{5}}'.format(null, indent, $1.substring(0, refId - 1), indent, self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))), indent)
+            }
+            varparts.push(format.format(null, indent, $1.substring(0, refId - 1), indent, self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))), indent))
+            //varparts.push(indent + $1.substring(0, refId - 1) + "\n" + indent + "{\n" + self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))) + "\n" + indent + "}")
             return ''
         });
     }
+    var lb = self.props ? ';' : ';\n'
     var r;
     if (parts.length == 0) {
         if (varparts.length == 0) {
@@ -170,9 +187,9 @@ LexialParser.prototype.prettyFormatFFL = function(depth, index) {
         }
     } else {
         if (varparts.length == 0) {
-            r = indent + parts.join(';\n' + indent) + ';'
+            r = indent + parts.join(lb + indent) + ';'
         } else {
-            r = indent + parts.join(';\n' + indent) + ";\n" + (varparts.length > 0 ? varparts.join('\n') : ';')
+            r = indent + parts.join(lb + indent) + ";\n" + (varparts.length > 0 ? varparts.join('\n') : ';')
         }
     }
     return r;
@@ -180,10 +197,12 @@ LexialParser.prototype.prettyFormatFFL = function(depth, index) {
 
 function Factory() {
     this.on = false;
+    this.props = true;
 }
 
 Factory.prototype.create = function(input) {
     const lexialParser = new LexialParser(input);
+    //lexialParser.props = this.props;
     return {
         visit: function(visitor) {
             return lexialParser.walk(visitor)
@@ -209,6 +228,7 @@ Factory.prototype.create = function(input) {
 }
 Factory.prototype.parse = function(input) {
     let lexialParser = new LexialParser(input);
+    //lexialParser.props = this.props;
     lexialParser.buildTree();
     return {
         toString: function() {

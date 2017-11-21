@@ -115,6 +115,7 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
         });
     }
     $scope.toggleFormatter = function() {
+        FFLFormatter.props = !FFLFormatter.props
         const row = aceEditor.selection.getCursor().row
         const col = aceEditor.selection.getCursor().column
         fflModel = FFLFormatter.parse(aceEditor.session.getValue()).toString();
@@ -122,6 +123,7 @@ angular.module('lmeapp').controller('ideController', function($scope, $http) {
         aceEditor.gotoLine(row + 1, col)
     }
     $scope.toggleScorecardTool = function() {
+        ScorecardTool.props = !ScorecardTool.props
         const row = aceEditor.selection.getCursor().row
         const col = aceEditor.selection.getCursor().column
         fflModel = ScorecardTool.parse(aceEditor.session.getValue());

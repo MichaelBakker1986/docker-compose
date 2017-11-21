@@ -40,6 +40,7 @@ angular
             $scope.LME_MODEL = LME.nodes
             $scope.name = LME.name
             $scope.LMEMETA = LMEMETA;
+
             for (var name in LME.nodes) {
                 if (LME.nodes[name].type == 'scorecard') {
                     $scope.nav = LME.nodes[name].children
