@@ -23,7 +23,9 @@ angular
     })
     .controller('lmeController', function($scope, $http, $rootScope) {
         $scope.changeSearch = function(node) {
-            $scope.search = node
+            if (node.visible && node.children.length > 1) {
+                $scope.search = node
+            }
         }
 
         $scope.saveData = function() {

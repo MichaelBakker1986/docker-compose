@@ -13,12 +13,11 @@ let mvoFLLFile = fs.readFileSync(__dirname + '/MVO.ffl', 'utf8');
 
 require('../EconomicEditorView').EconomicEditorView.parse(mvoFLLFile)
 MVO.importFFL(mvoFLLFile);
-MVO.lme.fixProblemsInImportedSolution()
+//MVO.lme.fixProblemsInImportedSolution()
 //i wan test-set = daeb0505-d683-4dd1-b363-f1365d9d8e76
 //fs.writeFileSync(__dirname + '/MVO.json', MVO.exportLME());
 const nodes = MVO.exportWebModel().nodes;
 //MVO.importData()
-
 const [Q_MAP01_VRAAG01_MEMO, FES_LAYOUTNR, RootSub1, FES_COLUMN_VISIBLE] = [nodes.Q_MAP01_VRAAG01_MEMO, nodes.FES_LAYOUTNR, nodes.RootSub1, nodes.FES_COLUMN_VISIBLE];
 const [Q_MAP01, Q_MAP01_ENTEREDREQUIREDVARS, Q_MAP01_REQUIREDVARS, Q_MAP01_PARAGRAAF00, Q_MAP01_VRAAG01] = [nodes.Q_MAP01, nodes.Q_MAP01_ENTEREDREQUIREDVARS, nodes.Q_MAP01_REQUIREDVARS, nodes.Q_MAP01_PARAGRAAF00, nodes.Q_MAP01_VRAAG01];
 

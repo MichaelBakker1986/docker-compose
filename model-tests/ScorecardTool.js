@@ -101,11 +101,13 @@ ScorecardTool.prototype.parse = function(input) {
     }
     const adjustments = []
     for (var i = 0; i < scorecards.length; i++) {
-        for (var j = 0; j < scorecards[i].children.length; j++) {
+        let completeFilledIn = [];
+        const scorecard = scorecards[i];
+        for (var j = 0; j < scorecard.children.length; j++) {
 
             const requiredvars = []
 
-            const mapVar = scorecards[i].children[j];
+            const mapVar = scorecard.children[j];
             walkDepthFirst(mapVar, function(node, depth) {
 
                 if (!defaultValue.required[node.required]) {
@@ -127,7 +129,22 @@ ScorecardTool.prototype.parse = function(input) {
                     value: validFormula
                 })
                 mapVar.valid = validFormula;
+                completeFilledIn = completeFilledIn.concat(requiredvars)
             }
+        }
+        if (completeFilledIn.length > 0) {
+            const validFormula = 'AMMOUNT(' + completeFilledIn.map(function(variable) {
+                return variable.name + '.required and ' + variable.name + '.entered'
+            }).join(',') + ')  = AMMOUNT(' + completeFilledIn.map(function(variable) {
+                return variable.name + '.required'
+            }).join(',') + ')';
+
+            adjustments.push({
+                index: scorecard.index,
+                property: 'formula',
+                value: validFormula
+            })
+            scorecard.formula = validFormula;
         }
     }
     for (var adjindex = 0; adjindex < adjustments.length; adjindex++) {
@@ -143,4 +160,5 @@ function walkDepthFirst(node, visitor, depth) {
     }
     visitor(node, depth)
 }
+
 exports.ScorecardTool = new ScorecardTool();

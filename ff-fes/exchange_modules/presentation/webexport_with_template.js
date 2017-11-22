@@ -88,13 +88,14 @@ var repeats = {
     timeline: [1, 3]
 }
 
-LMETree.prototype.addWebNode = function(node, treePath) {
+LMETree.prototype.addWebNode = function(node, treePath, index) {
     var workbook = this.workbook;
     var rowId = node.rowId;
     var amount = repeats[node.frequency][0]
     var colspan = repeats[node.frequency][1];
     var rv = {
         id: rowId,
+        index: index,
         type: node.displayAs,
         path: treePath.join('.'),
         ammount: amount,
@@ -163,22 +164,24 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     });
     var treePath = [];
     var currentDepth = 0;
-
+    var indexPath = [];
     //make the walk here,
-    /*    for (var i = 0; i < webDesign.nodes.length; i++) {
-            var node = webDesign.nodes[i];*/
     var rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName);
 
     workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
         if (node && node.rowId !== 'root') {
             if (treeDepth > currentDepth) {
                 treePath.push(node.parentrowId)
+                indexPath.push(-1)
                 currentDepth = treeDepth;
             } else if (treeDepth < currentDepth) {
                 treePath.length = treeDepth;
+                indexPath.length = treeDepth;
                 currentDepth = treeDepth;
             }
-            lmeTree.addWebNode(node, treePath)
+            var index = indexPath[indexPath.length - 1] + 1
+            indexPath[indexPath.length - 1] = index
+            lmeTree.addWebNode(node, treePath, index)
         }
     })
     /*  }*/

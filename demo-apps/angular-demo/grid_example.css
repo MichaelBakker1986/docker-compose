@@ -184,7 +184,7 @@ highchart {
 .required span.title:after, span.required:after, label[required]:not(input):after {
     content: "";
     font-family: fontAwesome;
-    font-size: .4rem;
+    font-size: .7rem;
     vertical-align: super;
     margin: 0 .2rem;
     color: #dd3333;

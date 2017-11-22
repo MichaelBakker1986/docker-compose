@@ -40,6 +40,11 @@ OnNA = function(v, nav) {
     }
     return v;
 }
+FILLEDIN = function(required, entered) {
+    console.info(required)
+    console.info(entered)
+    return true;
+}
 PIECHART = function(points) {
     var result = [];
     for (var i = 0; i < arguments.length; i++) {
