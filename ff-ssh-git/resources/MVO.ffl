@@ -302,7 +302,7 @@ model MVO uses BaseModel
      datatype: number;
      frequency: document;
      displaytype: currency;
-     title: "Respect voor belangen van stakeholders";
+     title: "Belangen van stakeholders";
      hint: "Stakeholders zijn personen of organisaties die (positief of negatief) kunnen worden beinvloed door uw activiteiten. De meest bekende voorbeelden van stakeholders zijn aandeelhouders, werknemers, leveranciers, banken / kredietgevers, vakbonden, beroepsorganisaties, milieuorganisaties en omwonenden.";
      visible: 1;
      options_title: locked;
@@ -2282,7 +2282,7 @@ model MVO uses BaseModel
       frequency: document;
       formula: OnER(((Q_MAP01_VRAAG01*((1/7)*100))+(Q_MAP01_VRAAG02*((1/7)*100)))/2,NA);
       displaytype: currency;
-      title: String(GetTitle(Q_MAP01_PARAGRAAF01));
+      title: "Verantwoordelijkheid";
       top_blanklines: 1;
       locked: 1;
       visible: 1;
