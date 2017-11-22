@@ -1,0 +1,20 @@
+model HALLOHALLO uses BaseModel
+{
+ root
+ {
+  variable Q_ROOT
+  {
+   displaytype: scorecard;
+   variable Q_MAP0
+   {
+    title: "test";
+    formula: 2;
+    variable Question
+    {
+     title: "test";
+     formula: 2;
+    }
+   }
+  }
+ }
+}

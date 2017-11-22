@@ -77,11 +77,11 @@
         <div class="col-md-8">
             <h1 class="page-header">{{search.hint}}</h1>
             <div class="row">
-                <div ng-repeat="f in LME_MODEL | toArray | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required?'required':'')">
+                <div ng-repeat="f in LME_MODEL | toArray | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required&&!f.entered?'required':'')">
                     <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'quest    ions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
                         <div ng-switch-when="paragraph" class="col-md-12">
                             <h2>{{f.title}}</h2>
-                            {{f.hint}}
+                            <span ng-if="f.hint">{{f.hint}}<p></p><br></span>
                         </div>
                         <div ng-switch-when="customwidget" style="margin: 15px;">
                             <div class=" col-sm-6">
@@ -226,7 +226,7 @@
                             <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">
                                 <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
                                 <select ng-switch-when="select" class="form-control" ng-model="cv.value" placeholder="Pick value">
-                                    <option ng-repeat="choice in f.choices" ng-selected="choice.name == cv.value">{{choice.value}}</option>
+                                    <option ng-repeat="choice in f.choices" value="{{choice.name}}" ng-selected="choice.name == cv.value">{{choice.value}}</option>
                                 </select>
                                 <div ng-switch-when="radio" class="btn-group" data-toggle="buttons">
                                     <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.name == cv.value?'active':''">

@@ -120,10 +120,9 @@ angular
                 }
             }
             var requestString = allitems.join(',');
-            window.location.href = '#' + modelName + '&' + requestString
             LMEMETA.loadData(function(response) {
                 $rootScope.$digest()
-            })
+            }, requestString)
         }
         $scope.$on('someEvent', function(event, mass) {
             redefineParaments();

@@ -66,12 +66,12 @@ class Stash {
         //log.info("Do command: [" + command + "]");
         return exec(command)
             .then(function(result) {
-                return result.stdout.split('\n');
+                return result.stdout.replace(/.*\/(.*)\.ffl/gmi, '$1').split('\n');
             }).catch(function(err) {
                 if (err.code === 1) {
                     log.debug('while requesting ffl-models, cannot connect to remote git, falling back to local')
                     return exec("git ls-files-root *." + path).then((result) => {
-                        return result.stdout.split('\n');
+                        return result.stdout.replace(/\/(.*)\.ffl/gmi, '$1').split('\n');
                     }).catch((err) => {
                         throw Error('Cannot list files at all', err)
                     })

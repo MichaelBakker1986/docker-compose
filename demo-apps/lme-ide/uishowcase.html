@@ -6,13 +6,28 @@
     <title>LME | Showcase</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <style>
+        .required label:after, div .required:after, label[required]:not(input):after {
+            content: "";
+            font-family: fontAwesome;
+            font-size: .7rem;
+            vertical-align: super;
+            margin: 0 .2rem;
+            color: #dd3333;
+        }
+    </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts-ng/1.1.0/highcharts-ng.min.js"></script>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -29,84 +44,103 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="box box-info">
+                    <div ng-repeat="demo in demos" class="box box-info">
                         <div class="box-header with-border">
-                            <a class="btn btn-success btn-sm ad-click-event" ng-click="loadFFL(formulaExample)">load ffl</a>
-                            <h3 class="box-title">Formula example</h3>
+                            <h3 class="box-title">{{demo.name}}</h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
                         </div>
+                        <style>
+                            .input-group-addon {
+                                vertical-align: top;
+                            }
+                        </style>
                         <div class="box-body">
                             <div class="box-body no-padding">
-                                <div class="row">
+                                <div class="row" ng-switch="demo.name">
                                     <div class="col-md-5 col-sm-5">
-                                        <div class="pad">
-                                            <pre ng-model="memoFFL">{{formulaExample}}</pre>
+                                        <div class="input-group">
+                                            <div class="input-group-addon btn" ng-click="loadFFL(demo.ffl)"><span class="glyphicon glyphicon-align-left"></span></div>
+                                            <textarea class="form-control" rows="{{demo.ffl.split('\n').length }}" ng-model="demo.ffl">{{demo.ffl}}</textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-5 col-sm-5">
+                                    <div ng-switch-when="Formula example" class="col-md-5 col-sm-5">
                                         <label>{{LEASE_CALCULATOR.title}}</label>
                                         <input ng-model="LEASE_CALCULATOR.value" class="form-control" placeholder=".."/>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <a class="btn btn-success btn-sm ad-click-event" ng-click="loadFFL(memoFFL)">load ffl</a>
-                            <h3 class="box-title">Memo</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <div class="box-body no-padding">
-                                <div class="row">
-                                    <div class="col-md-5 col-sm-5">
-                                        <div class="pad">
-                                            <pre ng-model="memoFFL">{{memoFFL}}</pre>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 col-sm-5">
+                                    <div ng-switch-when="Memo" class="col-md-5 col-sm-5">
                                         <label ng-bind="LEASE_DETAILS.title">Lease information</label>
                                         <textarea rows=6 class="form-control" ng-model="LEASE_DETAILS.value" placeholder=".."></textarea>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-footer clearfix"></div>
-                    </div>
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <a class="btn btn-success btn-sm ad-click-event" ng-click="loadFFL(calculateExample)">load ffl</a>
-                            <h3 class="box-title">Calculate example</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <div class="box-body no-padding">
-                                <div class="row">
-                                    <div class="col-md-5 col-sm-5">
-                                        <div class="pad">
-                                            <textarea class="form-control" rows="12" ng-model="calculateExample"></textarea>
-                                        </div>
+                                    <div ng-switch-when="Dropdown" class="col-md-5 col-sm-5">
+                                        <label ng-bind="LEASE_PRIVATE.title"></label>
+                                        <select class="form-control" ng-model="LEASE_PRIVATE.value" placeholder="Pick value">
+                                            <option ng-repeat="choice in LEASE_PRIVATE.choices" value="{{choice.name}}" ng-selected="choice.name == LEASE_PRIVATE.value">{{choice.value}}</option>
+                                        </select>
                                     </div>
-                                    <div class="col-md-5 col-sm-5">
+                                    <div ng-switch-when="Behaviors" class="col-md-5 col-sm-5">
+                                        <label ng-required="BEHAVIORS.required && !BEHAVIORS.entered" class="control-label" for="inputRequired"><i ng-if="BEHAVIORS.required && !BEHAVIORS.entered" class="fa fa-bell-o"></i> {{BEHAVIORS.title}}</label>
+                                        <textarea class="form-control" rows=6 id="inputRequired" ng-disabled="BEHAVIORS.locked" ng-readonly="BEHAVIORS.locked" ng-if="BEHAVIORS.visible" ng-model="BEHAVIORS.value"  placeholder=".."></textarea>
+                                    </div>
+                                    <div ng-switch-when="Radio" class="btn-group" data-toggle="buttons">
+                                        <div>
+                                            <label ng-bind="LEASE_PRIVATE.title"></label>
+                                        </div>
+                                        <label class="btn" ng-repeat="choice in LEASE_PRIVATE.choices" ng-class="choice.name == LEASE_PRIVATE.value?'active':''">
+                                            <input type="radio" name='group1' ng-click="LEASE_PRIVATE.value = choice.name">
+                                            <i ng-class="choice.name == LEASE_PRIVATE.value ? 'fa fa-check-circle-o fa-2x' : 'fa fa-circle-o fa-2x'"></i>
+                                            <span>{{choice.value}}</span>
+                                        </label>
+                                    </div>
+                                    <div ng-switch-when="Calculate" class="col-md-5 col-sm-5">
                                         <label ng-bind="LEASE_AMMOUNT.title"></label>
                                         <input ng-model="LEASE_AMMOUNT.value" class="form-control" placeholder=".."/>
+                                        <label ng-bind="LEASE_COST.title"></label>
+                                        <input ng-model="LEASE_COST.value" class="form-control" placeholder=".."/>
                                         <label ng-bind="LEASE_TOTAL.title"></label>
                                         <span class="form-control" ng-bind="LEASE_TOTAL.value">..</span>
                                     </div>
+                                    <div ng-switch-when="Piechart" class="col-md-5 col-sm-5">
+                                        <label ng-bind="LEASE_RATIO.title"></label>
+                                        <div class="chart-responsive">
+                                            <highchart config="{
+                                            chart: {
+                                             type: 'pie'
+                                            },
+                                            title: false,
+                                            tooltip: {
+                                                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                            },
+                                            plotOptions: {
+                                                pie: {
+                                                    allowPointSelect: true,
+                                                    cursor: 'pointer',
+                                                    dataLabels: {
+                                                        enabled: true,
+                                                        format: '{point.name}',
+                                                        style: {
+                                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                        }
+                                                    },
+                                                    showInLegend: true
+                                                }
+                                            },
+                                            credits:false,
+                                            xAxis: {
+                                                categories: LEASE_RATIO.value[0]
+                                            },
+                                            series: [{
+                                                name : 'Quantity',
+                                                data : LEASE_RATIO.value
+                                            }]
+                                          }"></highchart>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="box-footer clearfix"></div>
                     </div>
                 </div>
             </div>
@@ -119,8 +153,8 @@
         <strong>Credits &copy; 2017 <a>Michael Bakker</a>.</strong>
     </footer>
 </div>
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="bootstrap.min.js"></script>
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
 <script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>

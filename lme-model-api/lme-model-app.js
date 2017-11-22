@@ -23,7 +23,7 @@ var stash = require('./src/stash').Stash;
 browserify.settings({
     transform: [require('browserify-fastjson')]
 })
-app.use('*/engineonly.js', browserify(__dirname + '/src/LME_FFL_FrontendModelEngine.js', {
+    app.use('*/engineonly.js', browserify(__dirname + '/src/LME_FFL_FrontendModelEngine.js', {
     gzip: true,
     insertGlobals: true,
     debug: false

@@ -13,7 +13,6 @@ function LmeAPI() {
     let FESContext = require('../../ff-fes/fesjs/fescontext');
     let WorkBook = require('../../ff-fes/fesjs/JSWorkBook');
     this.lme = new WorkBook(new FESContext());
-    this.saveToken = undefined;
     this.modelName = undefined;
     this.urlPrefix = '';
 }
@@ -56,27 +55,27 @@ LmeAPI.prototype.importData = function(valueAsJSON) {
  * use modelName from this.lme.modelName
  * use token form this.lme.context.uuid
  */
-LmeAPI.prototype.loadData = function(callBack) {
+LmeAPI.prototype.loadData = function(callBack, id) {
+    var gottenId = id;
     var self = this;
     var params = window.location.href.split('#')
     if (params.length == 1) window.location.href = '#MVO&DEMO'
     var params = window.location.href.split('#')[1].split('&')
     self.modelName = params[0] || 'MVO';
-    let userID = params[1] || 'DEMO'
-    //TODO: remove 'saveToken'
-    self.saveToken = userID;
+    let userID = (params[1] || 'DEMO')
+
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
-    var url = self.urlPrefix + '/id/' + self.saveToken + '/data';
+    var url = self.urlPrefix + '/id/' + (id || userID) + '/data';
     http.open("GET", url, true);
     http.setRequestHeader("Content-type", "application/json");
     http.onreadystatechange = function() {//Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
-            self.saveToken = returnData.id;
-            self.lme.context.saveToken = returnData.id;
+            self.lme.context.saveToken = returnData.id.indexOf(',') > 0 ? userID : returnData.id;
+            console.info(self.lme.context.saveToken + ":" + gottenId)
             self.importData(returnData)
-            window.location.href = '#' + self.modelName + '&' + self.saveToken
+            window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken
         }
     }
     http.onload = function() {
@@ -96,19 +95,16 @@ LmeAPI.prototype.persistData = function(callBack) {
     self.modelName = params[0] || 'MVO';
     let userID = params[1] || 'DEMO'
     let liveUrl = 'transformFFL_LME/' + self.modelName + '.js'
-    //TODO: remove 'saveToken'
-    self.saveToken = userID;
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
-    var url = self.urlPrefix + '/id/' + self.saveToken + '/data';
+    var url = self.urlPrefix + '/id/' + self.lme.context.saveToken + '/data';
     http.open("POST", url, true);
     http.setRequestHeader("Content-type", "application/json");
     http.onreadystatechange = function() {//Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
-            self.saveToken = returnData.saveToken;
             self.lme.context.saveToken = returnData.saveToken;
-            window.location.href = '#' + self.modelName + '&' + self.saveToken
+            window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken
         }
     };
     http.onload = function() {

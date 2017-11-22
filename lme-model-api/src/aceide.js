@@ -16,7 +16,6 @@ if (params.length == 1) window.location.href = '#MVO&DEMO'
 var params = window.location.href.split('#')[1].split('&')
 let windowModelName = params[0] || 'MVO';
 let userID = params[1] || 'DEMO'
-var saveToken = userID;
 
 function setValue(fflModel) {
     if (ConvertEvaluateAsString.on) {
@@ -44,8 +43,19 @@ function scrollTop() {
     aceEditor.selection.moveTo(0, 0)
 }
 
-angular.module('lmeapp').controller('ideController', function($scope, $http) {
-    LMEMETA.loadData(function() {
+angular.module('lmeapp', []).controller('ideController', function($scope, $http) {
+    $http.get('resources/' + windowModelName + '.js').then(function(data) {
+        eval(data.data)
+        LME = LMEMETA.exportWebModel();
+        $scope.LME_MODEL = LME.nodes
+        $scope.name = LME.name
+        $scope.LMEMETA = LMEMETA;
+
+        LMEMETA.loadData(function(response) {
+            $scope.$digest()
+        })
+    }).catch(function(err) {
+        console.error("failed loading " + err);
     });
     $scope.fflmode = true;
     $scope.currentView = 'FFLModelEditorView';
