@@ -365,7 +365,7 @@ model SCORECARDTESTMODEL  uses BaseModel
    variable Q_MAP01
    {
     valid:[AMMOUNT(Q_MAP01_VRAAG11.required and Q_MAP01_VRAAG11.entered,Q_MAP01_VRAAG12.required and Q_MAP01_VRAAG12.entered,Q_MAP01_VRAAG13.required and Q_MAP01_VRAAG13.entered,Q_MAP01_VRAAG14.required and Q_MAP01_VRAAG14.entered,Q_MAP01_VRAAG15.required and Q_MAP01_VRAAG15.entered,Q_MAP01_VRAAG16.required and Q_MAP01_VRAAG16.entered,Q_MAP01_VRAAG17.required and Q_MAP01_VRAAG17.entered,Q_MAP01_VRAAG18.required and Q_MAP01_VRAAG18.entered,Q_MAP01_VRAAG21.required and Q_MAP01_VRAAG21.entered,Q_MAP01_VRAAG22.required and Q_MAP01_VRAAG22.entered,Q_MAP01_VRAAG23.required and Q_MAP01_VRAAG23.entered,Q_MAP01_VRAAG24.required and Q_MAP01_VRAAG24.entered,Q_MAP01_VRAAG25.required and Q_MAP01_VRAAG25.entered,Q_MAP01_VRAAG26.required and Q_MAP01_VRAAG26.entered,Q_MAP01_VRAAG27.required and Q_MAP01_VRAAG27.entered,Q_MAP01_VRAAG28.required and Q_MAP01_VRAAG28.entered),AMMOUNT(Q_MAP01_VRAAG11.required,Q_MAP01_VRAAG12.required,Q_MAP01_VRAAG13.required,Q_MAP01_VRAAG14.required,Q_MAP01_VRAAG15.required,Q_MAP01_VRAAG16.required,Q_MAP01_VRAAG17.required,Q_MAP01_VRAAG18.required,Q_MAP01_VRAAG21.required,Q_MAP01_VRAAG22.required,Q_MAP01_VRAAG23.required,Q_MAP01_VRAAG24.required,Q_MAP01_VRAAG25.required,Q_MAP01_VRAAG26.required,Q_MAP01_VRAAG27.required,Q_MAP01_VRAAG28.required)];
-     datatype: number;
+    datatype: number;
     frequency: document;
     formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
     data_options: unscalable;
@@ -2447,7 +2447,7 @@ model SCORECARDTESTMODEL  uses BaseModel
    variable Q_MAP05
    {
     valid:[AMMOUNT(Q_MAP05_VRAAG01.required and Q_MAP05_VRAAG01.entered),AMMOUNT(Q_MAP05_VRAAG01.required)];
-     datatype: number;
+    datatype: number;
     frequency: document;
     formula: (Q_MAP05_ENTEREDREQUIREDVARS=Q_MAP05_REQUIREDVARS);
     data_options: unscalable;
@@ -4096,7 +4096,7 @@ model SCORECARDTESTMODEL  uses BaseModel
    variable Q_MAP06
    {
     valid:[AMMOUNT(Q_MAP06_P02VRAAG01.required and Q_MAP06_P02VRAAG01.entered,Q_MAP06_P02VRAAG02.required and Q_MAP06_P02VRAAG02.entered,Q_MAP06_P02VRAAG03.required and Q_MAP06_P02VRAAG03.entered,Q_MAP06_P02VRAAG04.required and Q_MAP06_P02VRAAG04.entered,Q_MAP06_P02VRAAG05.required and Q_MAP06_P02VRAAG05.entered),AMMOUNT(Q_MAP06_P02VRAAG01.required,Q_MAP06_P02VRAAG02.required,Q_MAP06_P02VRAAG03.required,Q_MAP06_P02VRAAG04.required,Q_MAP06_P02VRAAG05.required)];
-     datatype: number;
+    datatype: number;
     frequency: document;
     formula: (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS);
     data_options: unscalable;
