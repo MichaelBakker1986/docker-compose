@@ -338,7 +338,7 @@ model MVO uses BaseModel
       data_options: unscalable;
       displaytype: select;
       title: "U heeft uw stakeholders in een document in kaart gebracht";
-      visible: 1;
+      visible: Q_MAP01_VRAAG07=1;
       choices: "0:Nee|1:Ja";
       options_title: locked;
      }
