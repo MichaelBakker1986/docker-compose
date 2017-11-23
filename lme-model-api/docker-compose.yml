@@ -1,4 +1,28 @@
-version: '3'
+# Use postgres/example user/password credentials
+version: '3.1'
+
 services:
-  lme:
-    image: 'michaelbakker1986/bcme:latest'
+    db:
+        image: postgres
+        restart: always
+        network_mode: host
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: lme
+        ports:
+            - 5432:5432
+        expose:
+            - 5432
+    lme:
+        links:
+            - db
+        environment:
+                FIGURE_DB_STRING: postgresql://postgres:postgres@db:5432/lme
+        build: .
+        image: lme:1.0.0
+        restart: always
+        ports:
+            - 8080:8080
+        expose:
+            - 8080

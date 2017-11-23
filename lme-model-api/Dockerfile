@@ -1,12 +1,11 @@
-# use a node base image
 FROM node:9.2.0
+USER root
+WORKDIR ../
+ADD / /
 
-# set maintainer
-LABEL maintainer = "michael.bakker@topicus.nl"
-# Install app dependencies
-COPY package.json .
+RUN npm install -g concurrently
+RUN npm install -g bower
 RUN npm install
-COPY . .
-CMD [ "npm", "start" ]
-# tell docker what port to expose
-EXPOSE 10080
+
+CMD [ "node", "lme-model-app.js" ]
+EXPOSE 8080

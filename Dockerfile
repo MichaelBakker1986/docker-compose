@@ -8,5 +8,6 @@ RUN npm install -g concurrently
 RUN npm install
 
 EXPOSE 8080
+EXPOSE 8083
 
-CMD ["npm", "test"]
+CMD ["node", "run.js"]
