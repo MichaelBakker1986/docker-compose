@@ -12,7 +12,7 @@
   "repository": {},
   "dependencies": {
     "exceljs": "^0.6.2",
-    "ff-log": "^1.0.21",
+    "ff-log": "^1.0.22",
     "promise": "^8.0.1",
     "tracer": "^0.8.11"
   }

@@ -88,15 +88,13 @@ var simplified = {
         //look into delete and undefined, we better use undefined since its quicker.
         node.callee = undefined;
         node.arguments = undefined;
-        if (log.DEBUG) {
-            log.debug('[%s] CASE parsed into: [%s]', formulaInfo.name, escodegen.generate(node));
-        }
+        if (log.TRACE) log.trace('[%s] CASE parsed into: [%s]', formulaInfo.name, escodegen.generate(node));
     },
     //convert traditional If(q,a,b) into q?a:b, skip the entire Callee
     If: function(formulaInfo, node) {
         //could be replaced with the default property value..
         if (node.arguments.length === 2) {
-            log.debug('Strange formuala setup IF(q,a,b) without b) Using NA as b. [' + formulaInfo.original + ']')
+            if (log.TRACE) log.trace('Strange formuala setup IF(q,a,b) without b) Using NA as b. [' + formulaInfo.original + ']')
             node.arguments.push(AST.IDENTIFIER('NA'));
         }
         assert.equal(node.arguments.length, 3, formulaInfo.original);

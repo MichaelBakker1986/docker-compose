@@ -4,7 +4,7 @@ var logLevel = process.env.ENV || 'info';
 var levels = {
     debug: {
         DEBUG: true,
-        TRACE: true,
+        TRACE: false,
         INFO: false
     },
     info: {

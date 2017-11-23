@@ -5,8 +5,8 @@ services:
     db:
         image: postgres
         restart: always
-        network_mode: host
         environment:
+            DB_HOST: 127.0.0.1
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
             POSTGRES_DB: lme
@@ -21,15 +21,17 @@ services:
                 ENV: debug
                 FIGURE_DB_STRING: postgresql://postgres:postgres@db:5432/lme
         build: .
-        image: lme:1.0.16
+        image: lme:1.0.23
         restart: always
         ports:
             - 8080:8080
             - 8082:8082
             - 8083:8083
             - 8084:8084
+            - 8085:8085
         expose:
             - 8080
             - 8082
             - 8083
             - 8084
+            - 8085

@@ -20,7 +20,7 @@
     "esprima-walk": "^0.1.0",
     "excel-formula": "^1.4.2",
     "exceljs": "^0.6.2",
-    "ff-log": "^1.0.21",
+    "ff-log": "^1.0.22",
     "formulajs": "^1.0.8",
     "js-longest-repeated-substring": "^1.0.3",
     "performance-now": "^2.1.0",

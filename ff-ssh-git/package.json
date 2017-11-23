@@ -5,7 +5,7 @@
   "private": true,
   "main": "gitconnector.js",
   "dependencies": {
-    "ff-log": "^1.0.21",
+    "ff-log": "^1.0.22",
     "glob": "^7.1.2"
   },
   "scripts": {

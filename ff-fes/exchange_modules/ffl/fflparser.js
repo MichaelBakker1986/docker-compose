@@ -248,11 +248,11 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
     var mappedDisplayType = displayAsMapping[node.displaytype] || node.displaytype;
     if (mappedDisplayType == 'select') {
         if (!node.choices) {
-            if (log.DEBUG) log.warn('Row [' + rowId + '] is type [select], but does not have choices')
+            if (log.debug) log.warn('Row [' + rowId + '] is type [select], but does not have choices')
         } else if (JSON.parse(node.choices).length == 2) {
             mappedDisplayType = 'radio'
         } else {
-            if (log.DEBUG) log.debug('[' + rowId + '] ' + node.choices)
+            if (log.TRACE) log.trace('[' + rowId + '] ' + node.choices)
         }
     }
     /*if (parentId && parentId.match(/Q_MAP[0-9]{2}/)) {
@@ -309,7 +309,7 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         uiNode.tupleDefinition = true;
     }
     else if (tupleProperty) {
-        log.debug('Found tupleProperty [%s]', rowId)
+        if (log.TRACE) log.trace('Found tupleProperty [%s]', rowId)
         uiNode.tupleProperty = true;
     }
     /**
