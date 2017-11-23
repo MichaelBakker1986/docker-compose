@@ -3,11 +3,7 @@ FROM node:9.2.0
 USER root
 
 ADD / /
-RUN npm install -g bower
-RUN npm install -g concurrently
-RUN npm install
 
 EXPOSE 8080
 EXPOSE 8083
-
-CMD ["node", "run.js"]
+CMD ["npm", "start"]

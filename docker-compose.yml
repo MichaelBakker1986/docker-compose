@@ -20,9 +20,15 @@ services:
         environment:
                 FIGURE_DB_STRING: postgresql://postgres:postgres@db:5432/lme
         build: .
-        image: lme:1.0.0
+        image: lme:1.0.1
         restart: always
         ports:
             - 8080:8080
+            - 8082:8082
+            - 8083:8083
+            - 8084:8084
         expose:
             - 8080
+            - 8082
+            - 8083
+            - 8084

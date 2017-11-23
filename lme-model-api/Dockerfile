@@ -3,6 +3,7 @@ USER root
 WORKDIR ../
 ADD / /
 
+
 RUN npm install -g concurrently
 RUN npm install -g bower
 RUN npm install
