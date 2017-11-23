@@ -13,7 +13,7 @@ app.use('/', expressStaticGzip(__dirname + "/"));
 
 //showcase proxies
 app.use('/id/:id/showcase', expressStaticGzip(__dirname + "/showcase/"));
-app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/bower_components/"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/bower_components/"));
 
 //proxies
 app.get('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));
