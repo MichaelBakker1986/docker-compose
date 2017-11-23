@@ -35,7 +35,7 @@ fm.prototype.apiSet = function(formula, x, y, z, value, v) {
 }
 fm.prototype.initializeFormula = function(newFormula) {
     var id = newFormula.id || newFormula.index;
-    if (log.DEBUG) log.debug("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
+    if (log.TRACE) log.trace("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
     var modelFunction = Function('f, x, y, z, v', 'return ' + newFormula.parsed).bind(global);
     global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 };
