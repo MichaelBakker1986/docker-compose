@@ -17,6 +17,7 @@
  */
 const dbConnectString = process.env.FIGURE_DB_STRING;
 const orm = require("orm");
+const log = require('ff-log')
 
 exports.orm = Promise.all([
     orm.connectAsync(dbConnectString).then(async (db) => {
@@ -121,10 +122,11 @@ exports.orm = Promise.all([
         exports.FigureCommit = FigureCommit;
         exports.FigureTree = FigureTree;
 
-
         return db.sync(async (err) => {
             if (err) throw err;
             return await "";
+        }).catch((err) => {
+            log.error(err)
         })
     }).catch((err) => {
         throw err;
