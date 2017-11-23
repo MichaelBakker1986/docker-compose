@@ -23,7 +23,7 @@
   "main": "demoapps.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "bower install"
+    "install": "bower install --allow-root"
   },
   "repository": {},
   "author": "michael.bakker",
