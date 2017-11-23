@@ -2,7 +2,7 @@
   "name": "model-tests",
   "version": "1.0.0",
   "description": "",
-  "main": "lme-model-tests.js",
+  "main": "/MVO/MVOtest.js",
   "scripts": {
     "test": "concurrently \"node KSP/KSPIntegrationTest.js\" \"node MVO/MVOtest.js\" \"node MVO/MVOStoryParserTest.js\" \"node MVO/FormatterTest.js\""
   },
