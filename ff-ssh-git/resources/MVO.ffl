@@ -149,6 +149,14 @@ model MVO uses BaseModel
       choices: "0:Nee|1:Ja";
       options_title: locked;
      }
+     variable JOOST_TEST
+     {
+      datatype: string;
+      frequency: document;
+      formula: "test model variable";
+      title: "test model variable";
+      visible: 1;
+     }
      variable Q_MAP01_VRAAG01_MEMO
      {
       datatype: string;
