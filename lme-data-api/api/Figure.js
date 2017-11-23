@@ -129,9 +129,9 @@ exports.orm = Promise.all([
             log.error(err)
         })
     }).catch((err) => {
-        throw err;
+        log.error(err)
     })
 ]).catch((err) => {
-    throw err;
+    log.error(err)
 })
 
