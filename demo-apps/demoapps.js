@@ -32,7 +32,6 @@ app.get('/models', proxy('http://' + require('os').hostname() + ':8080/models'))
 app.get('/branches', proxy('http://' + require('os').hostname() + ':8080/branches'));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/dist/"));
-app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/bower_components/"));
 
 
 app.listen(port, function() {

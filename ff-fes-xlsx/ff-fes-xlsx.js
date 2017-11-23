@@ -1,5 +1,5 @@
 /**
- * Bridge between excel files and FESJS
+ * Bridge between excel files and LME
  */
 //TODO: find out if this is the best xlsx tool to find the tables..
 var Excel = require('exceljs');
@@ -9,7 +9,6 @@ var matrix = {};
 var workbook = new Excel.Workbook();
 var fileName = __dirname + '/resources/ScorecardKSP1.xlsx';
 var fileName2 = __dirname + '/resources/AAB_Parameters.xlsx';
-var succes;
 var initComplete = new Promise(function(succesArg) {
     succes = succesArg;
 }, function() {
@@ -120,8 +119,6 @@ function findXasValues(range, yasNames, bounds) {
     return xAsValues;
 }
 
-var sync = true;
-
 function readFunction(wb) {
     var definedNames = getDefinedNames(wb);
     for (definedName in definedNames) {
@@ -136,24 +133,16 @@ function readFunction(wb) {
             yasNames: yasNames,
             xasValues: xasValues
         };
-        //log.debug(matrix[definedName])
-        //log.debug('found named range:[%s]', range.name)
-        //printValues(range)
     }
     // use workbook
     succes(matrix);
 }
 
 Promise.all([workbook.xlsx.readFile(fileName).then(readFunction), workbook.xlsx.readFile(fileName2).then(readFunction)]).then(function(ok) {
-    sync = false;
 }).catch(function(err) {
-        log.info(err);
-        sync = false;
+        log.error(err);
     }
 );
-while (sync) {
-    require('deasync').sleep(100);
-}
 var entries = {
     'MatrixLookup': function(xlsfileName, tableName, row, col) {
         if (!matrix[tableName]) {
