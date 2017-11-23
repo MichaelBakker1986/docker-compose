@@ -60566,7 +60566,6 @@ LmeAPI.prototype.importData = function(valueAsJSON) {
  * use token form this.lme.context.uuid
  */
 LmeAPI.prototype.loadData = function(callBack, id) {
-    var gottenId = id;
     var self = this;
     var params = window.location.href.split('#')
     if (params.length == 1) window.location.href = '#MVO&DEMO'
@@ -60583,7 +60582,6 @@ LmeAPI.prototype.loadData = function(callBack, id) {
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
             self.lme.context.saveToken = returnData.id.indexOf(',') > 0 ? userID : returnData.id;
-            console.info(self.lme.context.saveToken + ":" + gottenId)
             self.importData(returnData)
             window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken
         }
