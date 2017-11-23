@@ -22,6 +22,7 @@ app.use('/id/:id/resources/', expressStaticGzip(__dirname + "/../ff-ssh-git/reso
 
 //IDE proxies
 app.get('*/excelide.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
+app.get('*/ui_showcase.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
 app.get('*/engineonly.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
 app.get('*/tmp_model/*', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
 app.get('*/aceide.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
@@ -43,6 +44,7 @@ app.listen(port, function() {
             /*    '<a href="http://' + domain + '/id/DEMO/ui_designer.html#MVO&DEMO">Designer ide</a><span> | </span>\n' +*/
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
+            '<a href="http://' + domain + '/id/DEMO/uishowcase.html">UI Showcase example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
             /*    '<a href="http://' + domain + '/id/DEMO/datagraph.html">Data graph</a>\n' +*/
             '<br><span>IDE apps: </span>\n' +

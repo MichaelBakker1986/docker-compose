@@ -41,6 +41,11 @@ app.use('*/aceide.js', browserify(__dirname + '/src/aceide.js', {
     insertGlobals: true,
     debug: false
 }));
+app.use('*/ui_showcase.js', browserify(__dirname + '/src/uishowcase.js', {
+    gzip: true,
+    insertGlobals: true,
+    debug: false
+}));
 app.post('*/preview', (req, res) => {
     stash.preview(req.body.model, req.body.data).then((data) => {
         res.json({status: 'ok', link: data});

@@ -1,6 +1,10 @@
 var params = window.location.href.split('#')
 if (params.length == 1) window.location.href = '#DEMO&DEMO'
 
+
+const FFLFormatter = require('../../model-tests/plugins/FFLFormatter').LexialParser
+const ScorecardTool = require('../../model-tests/ScorecardTool').ScorecardTool
+
 angular
     .module('angapp', ["highcharts-ng"])
     .controller('lmeController', function($scope, $http, $rootScope) {
