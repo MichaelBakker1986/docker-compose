@@ -125,8 +125,6 @@ exports.orm = Promise.all([
         return db.sync(async (err) => {
             if (err) throw err;
             return await "";
-        }).catch((err) => {
-            log.error(err)
         })
     }).catch((err) => {
         log.error(err)
