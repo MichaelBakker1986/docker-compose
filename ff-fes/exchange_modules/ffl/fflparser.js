@@ -248,7 +248,7 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
     var mappedDisplayType = displayAsMapping[node.displaytype] || node.displaytype;
     if (mappedDisplayType == 'select') {
         if (!node.choices) {
-            if (log.debug) log.warn('Row [' + rowId + '] is type [select], but does not have choices')
+            if (log.debug) log.debug('Row [' + rowId + '] is type [select], but does not have choices')
         } else if (JSON.parse(node.choices).length == 2) {
             mappedDisplayType = 'radio'
         } else {
