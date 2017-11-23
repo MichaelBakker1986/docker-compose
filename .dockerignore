@@ -1,0 +1,16 @@
+ff-questionnaire-js-web/bower_components/
+ff-questionnaire-js-web/node_modules/
+ff-questionnaire-js-web/.idea/
+**/bower_components/
+**/node_modules/
+**/.idea/
+package-lock.json
+restapi/dbSettings.js
+
+*package-lock.json
+*.scssc
+
+ff-ssh-git/resources/_tmp_*
+ff-ssh-git/CODELISTS/**.pom
+ff-ssh-git/CODELISTS/*.pom
+ff-ssh-git/CODELISTS/*

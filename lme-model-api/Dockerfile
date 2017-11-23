@@ -1,5 +1,6 @@
 # use a node base image
-FROM node:8.7.0
+FROM node:9.2.0
+
 # set maintainer
 LABEL maintainer = "michael.bakker@topicus.nl"
 # Install app dependencies
