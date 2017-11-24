@@ -1,8 +1,15 @@
+#create SSH to repository
 mkdir .ssh
 vim id_rsa = {SSH key for Stash}
 vim id_rsa.pub = {Public SSH key for Stash}
 //git preinstalled
-#"install": "cd ff-log && npm install --no-optional && cd .. && cd lme-data-api && npm install --no-optional && cd .. cd ff-fes-xlsx && npm install --no-optional && cd .. && cd ff-fes && npm install --no-optional && cd .. && cd lme-model-api && npm install --no-optional && cd .. && cd ff-formulajs && npm install --no-optional && cd .. && cd demo-apps && npm install --no-optional && cd .. && cd ff-ssh-git && npm install --no-optional && cd .. && cd ff-math && npm install --no-optional && cd .. && cd model-tests && npm install --no-optional",
+
+#----- VIA DOCKER
+git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
+cd fesjs
+docker-compose up
+
+#----- VIA NODEJS
 #expose ports
 sudo firewall-cmd --zone=public --add-port=8085/tcp -permanent
 sudo firewall-cmd --zone=public --add-port=8084/tcp -permanent
@@ -11,7 +18,6 @@ sudo firewall-cmd --zone=public --add-port=8082/tcp -permanent
 sudo firewall-cmd --zone=public --add-port=8081/tcp -permanent
 sudo firewall-cmd --zone=public --add-port=8080/tcp -permanent
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
-git pull
 
 cd fesjs
 npm install -g bower, concurrently
