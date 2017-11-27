@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "description": "angular-demo",
   "dependencies": {
+    "ace-builds": "^1.2.9",
     "body-parser": "~1.17.1",
     "browserify-middleware": "^8.0.0",
     "compression": "^1.7.1",
@@ -22,8 +23,7 @@
   "devDependencies": {},
   "main": "demoapps.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "bower install --allow-root"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {},
   "author": "michael.bakker",

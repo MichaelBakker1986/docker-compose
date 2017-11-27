@@ -4,4 +4,4 @@ USER root
 
 ADD / /
 
-CMD npm install -g bower && npm install -g concurrently && npm install --unsafe-perm --allow-root && npm start
+CMD npm install -g concurrently && npm install --unsafe-perm --allow-root && npm start

@@ -52,6 +52,11 @@ FFLParser.prototype.parseData = function(data, workbook) {
     //iterate all Elements, containing Variables and properties(Generic), just Walk trough JSON
     JSVisitor.travelOne(json, null, function(keyArg, node, context) {
         if (keyArg === null) {
+            for (var key in node) {
+                if (!key.startsWith("_") && !key.startsWith('model ') && !key.startsWith("/")) {
+                    SolutionFacade.addFunction(solution, key, parseFFLFormula(node[key], node, key))
+                }
+            }
         }
         else {
             var tupleDefiniton = keyArg.startsWith('tuple ');

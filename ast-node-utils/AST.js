@@ -24,12 +24,12 @@ function fallBackToIdentifier(value)
 {
     return (typeof value === 'object') ? value : IDENTIFIER(value);
 }
-function FUNCTION(name, arguments)
+function FUNCTION(name, args)
 {
     return {
         "type": "CallExpression",
         "callee": fallBackToIdentifier(name),
-        "arguments": arguments
+        "arguments": args
     }
 }
 function EQUALS(left, right)

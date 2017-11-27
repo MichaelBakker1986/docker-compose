@@ -11,7 +11,8 @@ var fileName = __dirname + '/resources/ScorecardKSP1.xlsx';
 var fileName2 = __dirname + '/resources/AAB_Parameters.xlsx';
 var initComplete = new Promise(function(succesArg) {
     succes = succesArg;
-}, function() {
+}, function(err) {
+    log.error(err)
 });
 
 function getDefinedNames(wb) {

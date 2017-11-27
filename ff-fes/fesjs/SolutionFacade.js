@@ -123,6 +123,9 @@ SolutionFacade.prototype.addFormulaDependency = function(formulaInfo, name, prop
     FormulaService.addFormulaDependency(formulaInfo, property.ref, property.name);
     return property;
 }
+SolutionFacade.prototype.getFunctions = function() {
+    return this.functions;
+}
 SolutionFacade.prototype.visitParsers = ParserService.visitParsers;
 SolutionFacade.prototype.addParser = ParserService.addParser;
 SolutionFacade.prototype.getOrCreateProperty = PropertiesAssembler.getOrCreateProperty;
@@ -141,6 +144,13 @@ SolutionFacade.prototype.properties = {
     _testg: 9,
     _testh: 10
 };
+SolutionFacade.prototype.functions = {}
+SolutionFacade.prototype.addFunction = function(solution, functionName, functionBody) {
+    console.info('function ' + functionName + "=" + functionBody)
+    var node = this.createUIFormulaLink(solution, functionName, 'function', functionBody, 'number');
+    const findFormulaByIndex = FormulaService.findFormulaByIndex(node.ref);
+    findFormulaByIndex.params = "$1,$2"
+}
 SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex;
 FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
 module.exports = SolutionFacade.prototype;

@@ -45,6 +45,7 @@ FILLEDIN = function(required, entered) {
     console.info(entered)
     return true;
 }
+//should be:  arguments => { name: $1, y: $2 }
 PIECHART = function(points) {
     var result = [];
     for (var i = 0; i < arguments.length; i++) {

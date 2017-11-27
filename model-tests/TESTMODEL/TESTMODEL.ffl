@@ -1,8 +1,8 @@
-// model "Scorecard Test Model"
-// created by FINAN 3.2.56.19 (user Ronald van Aalderen) on 20-01-2017 20:57
-
 import FinanMath.*;
 import BaseModel.*;
+
+WRAP:$1+$2;
+TESTMETHOD2:$1+$2;
 
 model TESTMODEL uses BaseModel
 {
@@ -25,17 +25,14 @@ model TESTMODEL uses BaseModel
             inputRequired: 1;
         }
     }
-    variable TestContainer
-    {
         variable TestContainerChild
         {
             title: "TotalConfusedMoreChild";
-            formula: 123;
+            formula: WRAP(123,2);
             datatype: number;
             frequency: document;
             inputRequired: 1;
         }
-    }
 	variable VariableOne
 	{
 	    title: "VariableOne";
@@ -103,7 +100,7 @@ model TESTMODEL uses BaseModel
         locked: 1;
         inputRequired: 1;
     }
-    variable DataEntered
+    variable DataEntered2
     {
         title: "DataEntered";
         formula: DataEntered(Total);

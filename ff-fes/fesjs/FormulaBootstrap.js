@@ -28,6 +28,7 @@ var esprima = require('esprima')
 var escodegen = require('escodegen')
 var simplified = require('./ASTPreparser')
 var variables;
+let functions;
 var getOrCreateProperty;
 var addFormulaDependency;
 var properties;
@@ -387,6 +388,8 @@ function buildFormula(formulaInfo, parent, node) {
     // Simplified is only Top down
     // its only lookAhead
     if (node.type === 'CallExpression') {
+        //register function
+        functions[node.callee.name] = true;
         if (log.TRACE) {
             log.trace('Use function [' + node.callee.name + "]")
         }
@@ -394,8 +397,15 @@ function buildFormula(formulaInfo, parent, node) {
             simplified[node.callee.name](formulaInfo, node);
         } else {
             //be aware since Simplified modifies the Max into Math.max this will be seen as the function Math.max etc..
-            if (global[node.callee.name.split('.')[0]] == undefined) {
-                throw Error('invalid call [' + node.callee.name + ']')
+            const globalFunction = node.callee.name.split('.')[0];
+            if (global[globalFunction] == undefined) {
+                var groupName = formulaInfo.name.split('_')[0];
+                var referenceProperty = getOrCreateProperty(groupName, globalFunction, 'function');
+                if (referenceProperty.ref !== undefined) {
+                    node.callee.name = 'a' + referenceProperty.ref
+                } else {
+                    throw Error('invalid call [' + node.callee.name + ']')
+                }
             }
         }
     }
@@ -494,6 +504,7 @@ FormulaBootstrap.prototype.parseAsFormula = function(formulaInfo) {
     formulaInfo.tempnaaam = undefined;
 }
 FormulaBootstrap.prototype.initStateBootstrap = function(configs) {
+    functions = configs.functions;
     variables = configs.contains;//to distinct FesVariable from references
     properties = configs.properties;//to check if we use this property from the model language
     getOrCreateProperty = configs.getOrCreateProperty;//getOrCreateProperty a PropertyAssembler, to do a variable lookup.  We must have knowledge from the PropertyAssembler. To find corresponding referenceId
