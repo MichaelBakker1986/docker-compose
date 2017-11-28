@@ -1,4 +1,4 @@
-var SolutionFacade = require('../../fesjs/SolutionFacade');
+var SolutionFacade = require('../../src/SolutionFacade');
 var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original']
 
 function WebExport() {

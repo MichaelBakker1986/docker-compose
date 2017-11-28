@@ -1,6 +1,6 @@
 global.debuglevel = 'debug'
 var log = require('ff-log')
-var time = require('../fesjs/XAxis')
+var time = require('../src/XAxis')
 require('../../math/ff-math')
 var currentTime = time.bkyr.columns[0][0]
 while (currentTime) {

@@ -1,12 +1,12 @@
-var WorkBook = require('../../lme-core/fesjs/JSWorkBook')
-var FESContext = require('../../lme-core/fesjs/fescontext')
+var WorkBook = require('../../lme-core/src/JSWorkBook')
+var FESContext = require('../../lme-core/src/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
 require('../../math/ff-math')
-var fesjsApi = require('../../lme-core/ff-fes').fesjs;
+var fesjsApi = require('../../lme-core').fesjs;
 fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
 //add excel-lookup, MatrixLookup
-var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
+var excelPlugin = require('../../excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 
 var wbKSP = new WorkBook(new FESContext());

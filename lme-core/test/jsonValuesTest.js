@@ -1,7 +1,7 @@
 require('../exchange_modules/jsonvalues/jsonvalues');//just let it inject into the FESFacade
 var assert = require('assert');
-var JSWorkBook = require('../fesjs/JSWorkBook');
-var FESContext = require('../fesjs/fescontext');
+var JSWorkBook = require('../src/JSWorkBook');
+var FESContext = require('../src/fescontext');
 var wb = new JSWorkBook(new FESContext());
 //wb.modelName = 'HIGHCHART'//FIX...
 wb.createFormula('1+1', 'AB');

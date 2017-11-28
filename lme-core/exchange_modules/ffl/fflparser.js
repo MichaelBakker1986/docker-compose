@@ -1,5 +1,5 @@
-var JSVisitor = require('../../fesjs/JSVisitor');
-var SolutionFacade = require('../../fesjs/SolutionFacade.js')
+var JSVisitor = require('../../src/JSVisitor');
+var SolutionFacade = require('../../src/SolutionFacade.js')
 var AST = require('../../../ast-node-utils/index').ast;
 var FflToJsonConverter = require('./FflToJsonConverter');
 var FinFormula = require('./FinFormula.js');

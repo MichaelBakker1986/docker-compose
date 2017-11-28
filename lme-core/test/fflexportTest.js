@@ -1,9 +1,9 @@
 var assert = require('assert');
 var log = require('ff-log')
 var parser = require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
-var WorkBook = require('../fesjs/JSWorkBook');
+var WorkBook = require('../src/JSWorkBook');
 var JUNIT = require('./JUNIT');
-var FESContext = require('../fesjs/fescontext')
+var FESContext = require('../src/fescontext')
 var fflTestModels = ['hierarchyTest', 'hierarchyTest'];
 
 for (var i = 0; i < fflTestModels.length; i++) {

@@ -1,5 +1,5 @@
 const assert = require('assert')
-var TupleIndexConverter = require('../fesjs/TupleIndexConverter')
+var TupleIndexConverter = require('../src/TupleIndexConverter')
 var ctx = {};
 //reuse context
 assert.equal(0, TupleIndexConverter.getIndexNumber(ctx, 'Bob'));

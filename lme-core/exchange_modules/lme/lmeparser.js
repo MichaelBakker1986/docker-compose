@@ -1,7 +1,7 @@
-var SolutionFacade = require('../../fesjs/SolutionFacade')
-var FormulaService = require('../../fesjs/FormulaService')
-var PropertiesAssembler = require('../../fesjs/PropertiesAssembler')
-var FunctionMap = require('../../fesjs/FunctionMap')
+var SolutionFacade = require('../../src/SolutionFacade')
+var FormulaService = require('../../src/FormulaService')
+var PropertiesAssembler = require('../../src/PropertiesAssembler')
+var FunctionMap = require('../../src/FunctionMap')
 var log = require('ff-log');
 
 function FormulaInfo(data, schema, modelName) {

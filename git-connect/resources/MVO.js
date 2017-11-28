@@ -308,6 +308,1293 @@ exports.astWalk = require('./ASTVisitor')
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ast-node-utils\\index.js","/ast-node-utils",undefined)
 },{"./AST":1,"./ASTVisitor":2,"_process":79,"buffer":76}],4:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+var tracer = require('tracer');
+var format = "HH.MM.ssl";
+var logLevel = process.env.ENV || 'info';
+var levels = {
+    debug: {
+        DEBUG: true,
+        TRACE: false,
+        INFO: false
+    },
+    info: {
+        DEBUG: false,
+        TRACE: false,
+        INFO: true
+    },
+    error: {
+        DEBUG: false,
+        TRACE: false,
+        INFO: false,
+        WARN: false
+    },
+    trace: {
+        DEBUG: true,
+        TRACE: true,
+        INFO: true
+    }
+}
+var console = tracer.colorConsole({
+    format: "{{timestamp}} ({{file}}:{{line}}) \t- {{message}}",
+    dateformat: format,
+    level: logLevel
+});
+console.DEBUG = levels[logLevel].DEBUG;
+console.INFO = levels[logLevel].INFO;
+console.TRACE = levels[logLevel].TRACE;
+module.exports = console;
+exports = console;
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\ff-log.js","/ff-log",undefined)
+},{"_process":79,"buffer":76,"tracer":21}],5:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*
+
+The MIT License (MIT)
+
+Original Library 
+  - Copyright (c) Marak Squires
+
+Additional functionality
+ - Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+*/
+
+var colors = {};
+module['exports'] = colors;
+
+colors.themes = {};
+
+var ansiStyles = colors.styles = require('./styles');
+var defineProps = Object.defineProperties;
+
+colors.supportsColor = require('./system/supports-colors');
+
+if (typeof colors.enabled === "undefined") {
+  colors.enabled = colors.supportsColor;
+}
+
+colors.stripColors = colors.strip = function(str){
+  return ("" + str).replace(/\x1B\[\d+m/g, '');
+};
+
+
+var stylize = colors.stylize = function stylize (str, style) {
+  if (!colors.enabled) {
+    return str+'';
+  }
+
+  return ansiStyles[style].open + str + ansiStyles[style].close;
+}
+
+var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
+var escapeStringRegexp = function (str) {
+  if (typeof str !== 'string') {
+    throw new TypeError('Expected a string');
+  }
+  return str.replace(matchOperatorsRe,  '\\$&');
+}
+
+function build(_styles) {
+  var builder = function builder() {
+    return applyStyle.apply(builder, arguments);
+  };
+  builder._styles = _styles;
+  // __proto__ is used because we must return a function, but there is
+  // no way to create a function with a different prototype.
+  builder.__proto__ = proto;
+  return builder;
+}
+
+var styles = (function () {
+  var ret = {};
+  ansiStyles.grey = ansiStyles.gray;
+  Object.keys(ansiStyles).forEach(function (key) {
+    ansiStyles[key].closeRe = new RegExp(escapeStringRegexp(ansiStyles[key].close), 'g');
+    ret[key] = {
+      get: function () {
+        return build(this._styles.concat(key));
+      }
+    };
+  });
+  return ret;
+})();
+
+var proto = defineProps(function colors() {}, styles);
+
+function applyStyle() {
+  var args = arguments;
+  var argsLen = args.length;
+  var str = argsLen !== 0 && String(arguments[0]);
+  if (argsLen > 1) {
+    for (var a = 1; a < argsLen; a++) {
+      str += ' ' + args[a];
+    }
+  }
+
+  if (!colors.enabled || !str) {
+    return str;
+  }
+
+  var nestedStyles = this._styles;
+
+  var i = nestedStyles.length;
+  while (i--) {
+    var code = ansiStyles[nestedStyles[i]];
+    str = code.open + str.replace(code.closeRe, code.open) + code.close;
+  }
+
+  return str;
+}
+
+function applyTheme (theme) {
+  for (var style in theme) {
+    (function(style){
+      colors[style] = function(str){
+        if (typeof theme[style] === 'object'){
+          var out = str;
+          for (var i in theme[style]){
+            out = colors[theme[style][i]](out);
+          }
+          return out;
+        }
+        return colors[theme[style]](str);
+      };
+    })(style)
+  }
+}
+
+colors.setTheme = function (theme) {
+  if (typeof theme === 'string') {
+    try {
+      colors.themes[theme] = require(theme);
+      applyTheme(colors.themes[theme]);
+      return colors.themes[theme];
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  } else {
+    applyTheme(theme);
+  }
+};
+
+function init() {
+  var ret = {};
+  Object.keys(styles).forEach(function (name) {
+    ret[name] = {
+      get: function () {
+        return build([name]);
+      }
+    };
+  });
+  return ret;
+}
+
+var sequencer = function sequencer (map, str) {
+  var exploded = str.split(""), i = 0;
+  exploded = exploded.map(map);
+  return exploded.join("");
+};
+
+// custom formatter methods
+colors.trap = require('./custom/trap');
+colors.zalgo = require('./custom/zalgo');
+
+// maps
+colors.maps = {};
+colors.maps.america = require('./maps/america');
+colors.maps.zebra = require('./maps/zebra');
+colors.maps.rainbow = require('./maps/rainbow');
+colors.maps.random = require('./maps/random')
+
+for (var map in colors.maps) {
+  (function(map){
+    colors[map] = function (str) {
+      return sequencer(colors.maps[map], str);
+    }
+  })(map)
+}
+
+defineProps(colors, init());
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\colors.js","/ff-log\\node_modules\\colors\\lib",undefined)
+},{"./custom/trap":6,"./custom/zalgo":7,"./maps/america":8,"./maps/rainbow":9,"./maps/random":10,"./maps/zebra":11,"./styles":12,"./system/supports-colors":13,"_process":79,"buffer":76}],6:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+module['exports'] = function runTheTrap (text, options) {
+  var result = "";
+  text = text || "Run the trap, drop the bass";
+  text = text.split('');
+  var trap = {
+    a: ["\u0040", "\u0104", "\u023a", "\u0245", "\u0394", "\u039b", "\u0414"],
+    b: ["\u00df", "\u0181", "\u0243", "\u026e", "\u03b2", "\u0e3f"],
+    c: ["\u00a9", "\u023b", "\u03fe"],
+    d: ["\u00d0", "\u018a", "\u0500" , "\u0501" ,"\u0502", "\u0503"],
+    e: ["\u00cb", "\u0115", "\u018e", "\u0258", "\u03a3", "\u03be", "\u04bc", "\u0a6c"],
+    f: ["\u04fa"],
+    g: ["\u0262"],
+    h: ["\u0126", "\u0195", "\u04a2", "\u04ba", "\u04c7", "\u050a"],
+    i: ["\u0f0f"],
+    j: ["\u0134"],
+    k: ["\u0138", "\u04a0", "\u04c3", "\u051e"],
+    l: ["\u0139"],
+    m: ["\u028d", "\u04cd", "\u04ce", "\u0520", "\u0521", "\u0d69"],
+    n: ["\u00d1", "\u014b", "\u019d", "\u0376", "\u03a0", "\u048a"],
+    o: ["\u00d8", "\u00f5", "\u00f8", "\u01fe", "\u0298", "\u047a", "\u05dd", "\u06dd", "\u0e4f"],
+    p: ["\u01f7", "\u048e"],
+    q: ["\u09cd"],
+    r: ["\u00ae", "\u01a6", "\u0210", "\u024c", "\u0280", "\u042f"],
+    s: ["\u00a7", "\u03de", "\u03df", "\u03e8"],
+    t: ["\u0141", "\u0166", "\u0373"],
+    u: ["\u01b1", "\u054d"],
+    v: ["\u05d8"],
+    w: ["\u0428", "\u0460", "\u047c", "\u0d70"],
+    x: ["\u04b2", "\u04fe", "\u04fc", "\u04fd"],
+    y: ["\u00a5", "\u04b0", "\u04cb"],
+    z: ["\u01b5", "\u0240"]
+  }
+  text.forEach(function(c){
+    c = c.toLowerCase();
+    var chars = trap[c] || [" "];
+    var rand = Math.floor(Math.random() * chars.length);
+    if (typeof trap[c] !== "undefined") {
+      result += trap[c][rand];
+    } else {
+      result += c;
+    }
+  });
+  return result;
+
+}
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\custom\\trap.js","/ff-log\\node_modules\\colors\\lib\\custom",undefined)
+},{"_process":79,"buffer":76}],7:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+// please no
+module['exports'] = function zalgo(text, options) {
+  text = text || "   he is here   ";
+  var soul = {
+    "up" : [
+      '̍', '̎', '̄', '̅',
+      '̿', '̑', '̆', '̐',
+      '͒', '͗', '͑', '̇',
+      '̈', '̊', '͂', '̓',
+      '̈', '͊', '͋', '͌',
+      '̃', '̂', '̌', '͐',
+      '̀', '́', '̋', '̏',
+      '̒', '̓', '̔', '̽',
+      '̉', 'ͣ', 'ͤ', 'ͥ',
+      'ͦ', 'ͧ', 'ͨ', 'ͩ',
+      'ͪ', 'ͫ', 'ͬ', 'ͭ',
+      'ͮ', 'ͯ', '̾', '͛',
+      '͆', '̚'
+    ],
+    "down" : [
+      '̖', '̗', '̘', '̙',
+      '̜', '̝', '̞', '̟',
+      '̠', '̤', '̥', '̦',
+      '̩', '̪', '̫', '̬',
+      '̭', '̮', '̯', '̰',
+      '̱', '̲', '̳', '̹',
+      '̺', '̻', '̼', 'ͅ',
+      '͇', '͈', '͉', '͍',
+      '͎', '͓', '͔', '͕',
+      '͖', '͙', '͚', '̣'
+    ],
+    "mid" : [
+      '̕', '̛', '̀', '́',
+      '͘', '̡', '̢', '̧',
+      '̨', '̴', '̵', '̶',
+      '͜', '͝', '͞',
+      '͟', '͠', '͢', '̸',
+      '̷', '͡', ' ҉'
+    ]
+  },
+  all = [].concat(soul.up, soul.down, soul.mid),
+  zalgo = {};
+
+  function randomNumber(range) {
+    var r = Math.floor(Math.random() * range);
+    return r;
+  }
+
+  function is_char(character) {
+    var bool = false;
+    all.filter(function (i) {
+      bool = (i === character);
+    });
+    return bool;
+  }
+  
+
+  function heComes(text, options) {
+    var result = '', counts, l;
+    options = options || {};
+    options["up"] =   typeof options["up"]   !== 'undefined' ? options["up"]   : true;
+    options["mid"] =  typeof options["mid"]  !== 'undefined' ? options["mid"]  : true;
+    options["down"] = typeof options["down"] !== 'undefined' ? options["down"] : true;
+    options["size"] = typeof options["size"] !== 'undefined' ? options["size"] : "maxi";
+    text = text.split('');
+    for (l in text) {
+      if (is_char(l)) {
+        continue;
+      }
+      result = result + text[l];
+      counts = {"up" : 0, "down" : 0, "mid" : 0};
+      switch (options.size) {
+      case 'mini':
+        counts.up = randomNumber(8);
+        counts.mid = randomNumber(2);
+        counts.down = randomNumber(8);
+        break;
+      case 'maxi':
+        counts.up = randomNumber(16) + 3;
+        counts.mid = randomNumber(4) + 1;
+        counts.down = randomNumber(64) + 3;
+        break;
+      default:
+        counts.up = randomNumber(8) + 1;
+        counts.mid = randomNumber(6) / 2;
+        counts.down = randomNumber(8) + 1;
+        break;
+      }
+
+      var arr = ["up", "mid", "down"];
+      for (var d in arr) {
+        var index = arr[d];
+        for (var i = 0 ; i <= counts[index]; i++) {
+          if (options[index]) {
+            result = result + soul[index][randomNumber(soul[index].length)];
+          }
+        }
+      }
+    }
+    return result;
+  }
+  // don't summon him
+  return heComes(text, options);
+}
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\custom\\zalgo.js","/ff-log\\node_modules\\colors\\lib\\custom",undefined)
+},{"_process":79,"buffer":76}],8:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+var colors = require('../colors');
+
+module['exports'] = (function() {
+  return function (letter, i, exploded) {
+    if(letter === " ") return letter;
+    switch(i%3) {
+      case 0: return colors.red(letter);
+      case 1: return colors.white(letter)
+      case 2: return colors.blue(letter)
+    }
+  }
+})();
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\maps\\america.js","/ff-log\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":5,"_process":79,"buffer":76}],9:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+var colors = require('../colors');
+
+module['exports'] = (function () {
+  var rainbowColors = ['red', 'yellow', 'green', 'blue', 'magenta']; //RoY G BiV
+  return function (letter, i, exploded) {
+    if (letter === " ") {
+      return letter;
+    } else {
+      return colors[rainbowColors[i++ % rainbowColors.length]](letter);
+    }
+  };
+})();
+
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\maps\\rainbow.js","/ff-log\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":5,"_process":79,"buffer":76}],10:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+var colors = require('../colors');
+
+module['exports'] = (function () {
+  var available = ['underline', 'inverse', 'grey', 'yellow', 'red', 'green', 'blue', 'white', 'cyan', 'magenta'];
+  return function(letter, i, exploded) {
+    return letter === " " ? letter : colors[available[Math.round(Math.random() * (available.length - 1))]](letter);
+  };
+})();
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\maps\\random.js","/ff-log\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":5,"_process":79,"buffer":76}],11:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+var colors = require('../colors');
+
+module['exports'] = function (letter, i, exploded) {
+  return i % 2 === 0 ? letter : colors.inverse(letter);
+};
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\maps\\zebra.js","/ff-log\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":5,"_process":79,"buffer":76}],12:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*
+The MIT License (MIT)
+
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+*/
+
+var styles = {};
+module['exports'] = styles;
+
+var codes = {
+  reset: [0, 0],
+
+  bold: [1, 22],
+  dim: [2, 22],
+  italic: [3, 23],
+  underline: [4, 24],
+  inverse: [7, 27],
+  hidden: [8, 28],
+  strikethrough: [9, 29],
+
+  black: [30, 39],
+  red: [31, 39],
+  green: [32, 39],
+  yellow: [33, 39],
+  blue: [34, 39],
+  magenta: [35, 39],
+  cyan: [36, 39],
+  white: [37, 39],
+  gray: [90, 39],
+  grey: [90, 39],
+
+  bgBlack: [40, 49],
+  bgRed: [41, 49],
+  bgGreen: [42, 49],
+  bgYellow: [43, 49],
+  bgBlue: [44, 49],
+  bgMagenta: [45, 49],
+  bgCyan: [46, 49],
+  bgWhite: [47, 49],
+
+  // legacy styles for colors pre v1.0.0
+  blackBG: [40, 49],
+  redBG: [41, 49],
+  greenBG: [42, 49],
+  yellowBG: [43, 49],
+  blueBG: [44, 49],
+  magentaBG: [45, 49],
+  cyanBG: [46, 49],
+  whiteBG: [47, 49]
+
+};
+
+Object.keys(codes).forEach(function (key) {
+  var val = codes[key];
+  var style = styles[key] = [];
+  style.open = '\u001b[' + val[0] + 'm';
+  style.close = '\u001b[' + val[1] + 'm';
+});
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\styles.js","/ff-log\\node_modules\\colors\\lib",undefined)
+},{"_process":79,"buffer":76}],13:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*
+The MIT License (MIT)
+
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+*/
+
+var argv = process.argv;
+
+module.exports = (function () {
+  if (argv.indexOf('--no-color') !== -1 ||
+    argv.indexOf('--color=false') !== -1) {
+    return false;
+  }
+
+  if (argv.indexOf('--color') !== -1 ||
+    argv.indexOf('--color=true') !== -1 ||
+    argv.indexOf('--color=always') !== -1) {
+    return true;
+  }
+
+  if (process.stdout && !process.stdout.isTTY) {
+    return false;
+  }
+
+  if (process.platform === 'win32') {
+    return true;
+  }
+
+  if ('COLORTERM' in process.env) {
+    return true;
+  }
+
+  if (process.env.TERM === 'dumb') {
+    return false;
+  }
+
+  if (/^screen|^xterm|^vt100|color|ansi|cygwin|linux/i.test(process.env.TERM)) {
+    return true;
+  }
+
+  return false;
+})();
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\system\\supports-colors.js","/ff-log\\node_modules\\colors\\lib\\system",undefined)
+},{"_process":79,"buffer":76}],14:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+//
+// Remark: Requiring this file will use the "safe" colors API which will not touch String.prototype
+//
+//   var colors = require('colors/safe);
+//   colors.red("foo")
+//
+//
+var colors = require('./lib/colors');
+module['exports'] = colors;
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\safe.js","/ff-log\\node_modules\\colors",undefined)
+},{"./lib/colors":5,"_process":79,"buffer":76}],15:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*
+ * Date Format 1.2.3
+ * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
+ * MIT license
+ *
+ * Includes enhancements by Scott Trenda <scott.trenda.net>
+ * and Kris Kowal <cixar.com/~kris.kowal/>
+ *
+ * Accepts a date, a mask, or a date and a mask.
+ * Returns a formatted version of the given date.
+ * The date defaults to the current date/time.
+ * The mask defaults to dateFormat.masks.default.
+ */
+
+(function(global) {
+  'use strict';
+
+  var dateFormat = (function() {
+      var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZWN]|'[^']*'|'[^']*'/g;
+      var timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g;
+      var timezoneClip = /[^-+\dA-Z]/g;
+  
+      // Regexes and supporting functions are cached through closure
+      return function (date, mask, utc, gmt) {
+  
+        // You can't provide utc if you skip other args (use the 'UTC:' mask prefix)
+        if (arguments.length === 1 && kindOf(date) === 'string' && !/\d/.test(date)) {
+          mask = date;
+          date = undefined;
+        }
+  
+        date = date || new Date;
+  
+        if(!(date instanceof Date)) {
+          date = new Date(date);
+        }
+  
+        if (isNaN(date)) {
+          throw TypeError('Invalid date');
+        }
+  
+        mask = String(dateFormat.masks[mask] || mask || dateFormat.masks['default']);
+  
+        // Allow setting the utc/gmt argument via the mask
+        var maskSlice = mask.slice(0, 4);
+        if (maskSlice === 'UTC:' || maskSlice === 'GMT:') {
+          mask = mask.slice(4);
+          utc = true;
+          if (maskSlice === 'GMT:') {
+            gmt = true;
+          }
+        }
+  
+        var _ = utc ? 'getUTC' : 'get';
+        var d = date[_ + 'Date']();
+        var D = date[_ + 'Day']();
+        var m = date[_ + 'Month']();
+        var y = date[_ + 'FullYear']();
+        var H = date[_ + 'Hours']();
+        var M = date[_ + 'Minutes']();
+        var s = date[_ + 'Seconds']();
+        var L = date[_ + 'Milliseconds']();
+        var o = utc ? 0 : date.getTimezoneOffset();
+        var W = getWeek(date);
+        var N = getDayOfWeek(date);
+        var flags = {
+          d:    d,
+          dd:   pad(d),
+          ddd:  dateFormat.i18n.dayNames[D],
+          dddd: dateFormat.i18n.dayNames[D + 7],
+          m:    m + 1,
+          mm:   pad(m + 1),
+          mmm:  dateFormat.i18n.monthNames[m],
+          mmmm: dateFormat.i18n.monthNames[m + 12],
+          yy:   String(y).slice(2),
+          yyyy: y,
+          h:    H % 12 || 12,
+          hh:   pad(H % 12 || 12),
+          H:    H,
+          HH:   pad(H),
+          M:    M,
+          MM:   pad(M),
+          s:    s,
+          ss:   pad(s),
+          l:    pad(L, 3),
+          L:    pad(Math.round(L / 10)),
+          t:    H < 12 ? 'a'  : 'p',
+          tt:   H < 12 ? 'am' : 'pm',
+          T:    H < 12 ? 'A'  : 'P',
+          TT:   H < 12 ? 'AM' : 'PM',
+          Z:    gmt ? 'GMT' : utc ? 'UTC' : (String(date).match(timezone) || ['']).pop().replace(timezoneClip, ''),
+          o:    (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
+          S:    ['th', 'st', 'nd', 'rd'][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10],
+          W:    W,
+          N:    N
+        };
+  
+        return mask.replace(token, function (match) {
+          if (match in flags) {
+            return flags[match];
+          }
+          return match.slice(1, match.length - 1);
+        });
+      };
+    })();
+
+  dateFormat.masks = {
+    'default':               'ddd mmm dd yyyy HH:MM:ss',
+    'shortDate':             'm/d/yy',
+    'mediumDate':            'mmm d, yyyy',
+    'longDate':              'mmmm d, yyyy',
+    'fullDate':              'dddd, mmmm d, yyyy',
+    'shortTime':             'h:MM TT',
+    'mediumTime':            'h:MM:ss TT',
+    'longTime':              'h:MM:ss TT Z',
+    'isoDate':               'yyyy-mm-dd',
+    'isoTime':               'HH:MM:ss',
+    'isoDateTime':           'yyyy-mm-dd\'T\'HH:MM:sso',
+    'isoUtcDateTime':        'UTC:yyyy-mm-dd\'T\'HH:MM:ss\'Z\'',
+    'expiresHeaderFormat':   'ddd, dd mmm yyyy HH:MM:ss Z'
+  };
+
+  // Internationalization strings
+  dateFormat.i18n = {
+    dayNames: [
+      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+      'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+    ],
+    monthNames: [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+    ]
+  };
+
+function pad(val, len) {
+  val = String(val);
+  len = len || 2;
+  while (val.length < len) {
+    val = '0' + val;
+  }
+  return val;
+}
+
+/**
+ * Get the ISO 8601 week number
+ * Based on comments from
+ * http://techblog.procurios.nl/k/n618/news/view/33796/14863/Calculate-ISO-8601-week-and-year-in-javascript.html
+ *
+ * @param  {Object} `date`
+ * @return {Number}
+ */
+function getWeek(date) {
+  // Remove time components of date
+  var targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+  // Change date to Thursday same week
+  targetThursday.setDate(targetThursday.getDate() - ((targetThursday.getDay() + 6) % 7) + 3);
+
+  // Take January 4th as it is always in week 1 (see ISO 8601)
+  var firstThursday = new Date(targetThursday.getFullYear(), 0, 4);
+
+  // Change date to Thursday same week
+  firstThursday.setDate(firstThursday.getDate() - ((firstThursday.getDay() + 6) % 7) + 3);
+
+  // Check if daylight-saving-time-switch occured and correct for it
+  var ds = targetThursday.getTimezoneOffset() - firstThursday.getTimezoneOffset();
+  targetThursday.setHours(targetThursday.getHours() - ds);
+
+  // Number of weeks between target Thursday and first Thursday
+  var weekDiff = (targetThursday - firstThursday) / (86400000*7);
+  return 1 + Math.floor(weekDiff);
+}
+
+/**
+ * Get ISO-8601 numeric representation of the day of the week
+ * 1 (for Monday) through 7 (for Sunday)
+ * 
+ * @param  {Object} `date`
+ * @return {Number}
+ */
+function getDayOfWeek(date) {
+  var dow = date.getDay();
+  if(dow === 0) {
+    dow = 7;
+  }
+  return dow;
+}
+
+/**
+ * kind-of shortcut
+ * @param  {*} val
+ * @return {String}
+ */
+function kindOf(val) {
+  if (val === null) {
+    return 'null';
+  }
+
+  if (val === undefined) {
+    return 'undefined';
+  }
+
+  if (typeof val !== 'object') {
+    return typeof val;
+  }
+
+  if (Array.isArray(val)) {
+    return 'array';
+  }
+
+  return {}.toString.call(val)
+    .slice(8, -1).toLowerCase();
+};
+
+
+
+  if (typeof define === 'function' && define.amd) {
+    define(function () {
+      return dateFormat;
+    });
+  } else if (typeof exports === 'object') {
+    module.exports = dateFormat;
+  } else {
+    global.dateFormat = dateFormat;
+  }
+})(this);
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\dateformat\\lib\\dateformat.js","/ff-log\\node_modules\\dateformat\\lib",undefined)
+},{"_process":79,"buffer":76}],16:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+module.exports = require('./tinytim');
+
+/**
+ * Intermediate js cache.
+ * 
+ * @type Object
+ */
+
+var cache = {};
+
+/**
+ * Clear intermediate js cache.
+ * 
+ * @api public
+ */
+
+module.exports.clearCache = function() {
+	cache = {};
+};
+
+/**
+ * Render the given `str` of tim.
+ * 
+ * @param {String}
+ *            str
+ * @param {Object}
+ *            vars
+ * @return {String}
+ * @api public
+ */
+
+module.exports.render = module.exports.tim;
+
+
+/**
+ * Render an tim file at the given `path`.
+ * 
+ * @param {String}
+ *            path
+ * @param {Vars}
+ *            vars
+ * @param {Bool}
+ *            use cache or not
+ * @api public
+ */
+
+module.exports.renderFile = function(path, vars, useCache) {
+	var fs = require('fs');
+	var key = path + ':string';
+	var str = useCache ? cache[key]
+			|| (cache[key] = fs.readFileSync(path, 'utf8')) : fs
+			.readFileSync(path, 'utf8');
+
+	return module.exports.render(str, vars);
+};
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tinytim\\lib\\index.js","/ff-log\\node_modules\\tinytim\\lib",undefined)
+},{"./tinytim":17,"_process":79,"buffer":76,"fs":75}],17:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*!
+ tinytim.js
+   github.com/premasagar/tim
+    A tiny, secure JavaScript micro-templating script.
+    by Premasagar Rose
+        dharmafly.com
+    license
+        opensource.org/licenses/mit-license.php
+    creates global object
+        tim
+    v0.3.0
+        
+	ported and modified by LI Long <lilong@gmail.com> 3/13/2012
+ */
+var start = exports.start  = "{{";
+var end = exports.end	 = "}}";
+        
+var tim = exports.tim = (function(){
+    "use strict";
+
+    var 
+        path    = "[a-z0-9_][\\.a-z0-9_]*", // e.g. config.person.name
+        undef;
+    
+    return function(template, data){
+        var pattern = new RegExp(exports.start + "\\s*("+ path +")\\s*" + exports.end, "gi");
+
+        // Merge data into the template string
+        return template.replace(pattern, function(tag, token){
+            var path = token.split("."),
+                len = path.length,
+                lookup = data,
+                i = 0;
+
+            for (; i < len; i++){
+                lookup = lookup[path[i]];
+                
+                // Property not found
+                if (lookup === undef){
+                    throw new Error("tim: '" + path[i] + "' not found in " + tag);
+                }
+                
+                // Return the required value
+                if (i === len - 1){
+                    return lookup;
+                }
+            }
+        });
+    };
+}());
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tinytim\\lib\\tinytim.js","/ff-log\\node_modules\\tinytim\\lib",undefined)
+},{"_process":79,"buffer":76}],18:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+var colors = require('colors/safe');
+module.exports = function(conf) {
+	return require('./console')({
+		filters : {
+			//log : do nothing
+			trace : colors.magenta,
+			debug : colors.cyan,
+			info : colors.green,
+			warn : colors.yellow,
+			error : colors.red.bold
+		}
+	}, conf);
+};
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\color_console.js","/ff-log\\node_modules\\tracer\\lib",undefined)
+},{"./console":19,"_process":79,"buffer":76,"colors/safe":14}],19:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+var tinytim = require('tinytim'), dateFormat = require('dateformat'), utils = require('./utils'), path = require('path'), settings = require('./settings').settings;
+
+var noop = function(){};
+
+var fwrap = function(fn){
+	return function(str){ return fn(str) };
+};
+
+// Stack trace format :
+// https://github.com/v8/v8/wiki/Stack%20Trace%20API
+var stackReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/i;
+var stackReg2 = /at\s+()(.*):(\d*):(\d*)/i;
+
+// main log method
+function logMain(config, level, title, format, filters, needstack, args) {
+	//check level of global settings
+	var gLevel = settings.level;
+	if (typeof (gLevel) == 'string')
+		gLevel = config.methods.indexOf(gLevel);
+	if (level < gLevel) { return; }
+
+	var data = {
+		timestamp : dateFormat(new Date(), config.dateformat),
+		message : "",
+		title : title,
+		level : level,
+		args : args
+	};
+	data.method = data.path = data.line = data.pos = data.file = '';
+
+	if (needstack) {
+		// get call stack, and analyze it
+		// get all file,method and line number
+		var stacklist = (new Error()).stack.split('\n').slice(3);
+		var s = stacklist[config.stackIndex] || stacklist[0],
+			sp = stackReg.exec(s) || stackReg2.exec(s);
+		if (sp && sp.length === 5) {
+			data.method = sp[1];
+			data.path = sp[2];
+			data.line = sp[3];
+			data.pos = sp[4];
+			data.file = path.basename(data.path);
+			data.stack = stacklist.join('\n');
+		}
+	}
+
+	config.preprocess(data);
+	var msg = utils.format.apply(config, data.args);
+	data.message = msg;
+
+	// call micro-template to ouput
+	data.output = tinytim.tim(format, data);
+
+	// process every filter method
+	var len = filters.length;
+	for ( var i = 0; i < len; i += 1) {
+		data.output = fwrap(filters[i])(data.output);
+		if (!data.output)
+			return data;
+		// cancel next process if return a false(include null, undefined)
+	}
+	// trans the final result
+	config.transport.forEach(function(tras) {
+		tras(data);
+	});
+	return data;
+}
+
+module.exports = (function() {
+	// default config
+	var _config = {
+		format : "{{timestamp}} <{{title}}> {{file}}:{{line}} ({{method}}) {{message}}",
+		dateformat : "isoDateTime",
+		preprocess : function(data) {
+		},
+		transport : function(data) {
+			if (data.level >= 4) { // warn and more critical
+				console.error(data.output);
+			} else {
+				console.log(data.output);
+			}
+		},
+		filters : [],
+		level : 'log',
+		methods : [ 'log', 'trace', 'debug', 'info', 'warn', 'error', 'fatal' ],
+		stackIndex : 0,		// get the specified index of stack as file information. It is userful for development package.
+		inspectOpt : {
+			showHidden : false, //if true then the object's non-enumerable properties will be shown too. Defaults to false
+			depth : 2 //tells inspect how many times to recurse while formatting the object. This is useful for inspecting large complicated objects. Defaults to 2. To make it recurse indefinitely pass null.
+		}
+	};
+
+	// union user's config and default
+	_config = utils.union(_config, arguments);
+
+	var _self = {};
+
+	_config.format = Array.isArray(_config.format) ? _config.format
+		: [ _config.format ];
+
+	_config.filters = Array.isArray(_config.filters) ? _config.filters
+		: [ _config.filters ];
+
+	_config.transport = Array.isArray(_config.transport) ? _config.transport : [_config.transport];
+
+	var fLen = _config.filters.length, lastFilter;
+	if (fLen > 0)
+		if (Object.prototype.toString.call(_config.filters[--fLen]) != '[object Function]') {
+			lastFilter = _config.filters[fLen];
+			_config.filters = _config.filters.slice(0, fLen);
+		}
+
+	if (typeof (_config.level) == 'string')
+		_config.level = _config.methods.indexOf(_config.level);
+
+	_config.methods.forEach(function(title, i) {
+		if (i < _config.level)
+			_self[title] = noop;
+		else {
+			var format = _config.format[0];
+			if (_config.format.length === 2 && _config.format[1][title])
+				format = _config.format[1][title];
+			var needstack = /{{(method|path|line|pos|file|stack)}}/i.test(format);
+
+			var filters;
+			if (lastFilter && lastFilter[title])
+				filters = Array.isArray(lastFilter[title]) ? lastFilter[title]
+					: [ lastFilter[title] ];
+			else
+				filters = _config.filters;
+
+			// interface
+			_self[title] = function() {
+				return logMain(_config, i, title, format, filters, needstack, arguments);
+			};
+		}
+	});
+
+	return _self;
+});
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\console.js","/ff-log\\node_modules\\tracer\\lib",undefined)
+},{"./settings":22,"./utils":23,"_process":79,"buffer":76,"dateformat":15,"path":78,"tinytim":16}],20:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+var fs = require('fs'), dateFormat = require('dateformat'), tinytim = require('tinytim'), utils = require('./utils'), spawn = require('child_process').spawn, spawnSync = require('child_process').spawnSync;
+var path = require('path');
+
+module.exports = function (conf) {
+    var _conf = {
+        root: '.',
+        logPathFormat: '{{root}}/{{prefix}}.{{date}}.log',
+        splitFormat: 'yyyymmdd',
+        allLogsFileName: false,
+        maxLogFiles: 10
+    };
+
+    _conf = utils.union(_conf, [conf]);
+
+    function LogFile(prefix, date) {
+        this.date = date;
+        this.path = tinytim.tim(_conf.logPathFormat, {root: _conf.root, prefix: prefix, date: date});
+        spawnSync('mkdir', ['-p', _conf.root]);
+        this.stream = fs.createWriteStream(this.path, {
+            flags: "a",
+            encoding: "utf8",
+            mode: parseInt('0644', 8)
+            // When engines node >= 4.0.0, following notation will be better:
+            //mode: 0o644
+        });
+    }
+
+    LogFile.prototype.write = function (str) {
+        this.stream.write(str + "\n");
+    };
+
+    LogFile.prototype.destroy = function () {
+        if (this.stream) {
+            this.stream.end();
+            this.stream.destroySoon();
+            this.stream = null;
+        }
+    };
+
+    var _logMap = {};
+
+    function _push2File(str, title) {
+        if (_conf.allLogsFileName) {
+            var allLogFile = _logMap.allLogFile, now = dateFormat(new Date(), _conf.splitFormat);
+            if (allLogFile && allLogFile.date != now) {
+                allLogFile.destroy();
+                allLogFile = null;
+            }
+            if (!allLogFile) {
+                allLogFile = _logMap.allLogFile = new LogFile(_conf.allLogsFileName, now);
+                spawn('find', ['./', '-type', 'f', '-name', '*.log', '-mtime', '+' + _conf.maxLogFiles, '-exec', 'rm', '{}', '\;']);
+            }
+            allLogFile.write(str);
+        } else {
+            var logFile = _logMap[title], now = dateFormat(new Date(), _conf.splitFormat);
+            if (logFile && logFile.date != now) {
+                logFile.destroy();
+                logFile = null;
+            }
+            if (!logFile) {
+                logFile = _logMap[title] = new LogFile(title, now);
+                spawn('find', [_conf.root, '-type', 'f', '-name', '*.log', '-mtime', '+' + _conf.maxLogFiles, '-exec', 'rm', '{}', '\;']);
+            }
+            logFile.write(str);
+        }
+    }
+
+    function dailyFileTransport(data) {
+        _push2File(data.output, data.title);
+    }
+
+    if (conf.transport) {
+        conf.transport = Array.isArray(conf.transport) ? conf.transport : [conf.transport];
+        conf.transport.push(dailyFileTransport)
+    } else {
+        conf.transport = [dailyFileTransport];
+    }
+    return require('./console')(conf);
+};
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\dailyfile.js","/ff-log\\node_modules\\tracer\\lib",undefined)
+},{"./console":19,"./utils":23,"_process":79,"buffer":76,"child_process":75,"dateformat":15,"fs":75,"path":78,"tinytim":16}],21:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+exports.console = require('./console');
+exports.colorConsole = require('./color_console');
+exports.dailyfile = require('./dailyfile');
+
+//global settings
+var settings = require('./settings');
+exports.close = settings.close;
+exports.setLevel = settings.setLevel;
+exports.getLevel = settings.getLevel;
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\index.js","/ff-log\\node_modules\\tracer\\lib",undefined)
+},{"./color_console":18,"./console":19,"./dailyfile":20,"./settings":22,"_process":79,"buffer":76}],22:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+var settings = {
+	level : undefined
+}
+
+//end all of output
+var close = function(){
+	settings.level = Number.MAX_VALUE;
+}
+
+//dynamically change the log level, all of output
+var setLevel = function(level){
+	settings.level = level;
+}
+
+//get the current log level
+var getLevel = function(){
+	return settings.level;
+}
+
+
+exports.settings = settings;
+exports.close = close;
+exports.setLevel = setLevel;
+exports.getLevel = getLevel;
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\settings.js","/ff-log\\node_modules\\tracer\\lib",undefined)
+},{"_process":79,"buffer":76}],23:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+exports.union = function(obj, args) {
+	for (var i = 0, len = args.length; i < len; i += 1) {
+		var source = args[i];
+		for ( var prop in source) {
+			obj[prop] = source[prop];
+		}
+	}
+	return obj;
+};
+
+var formatRegExp = /%[sdjt]/g;
+var util = require('util');
+exports.format = function(f) {
+	var inspectOpt = this.inspectOpt;
+	var args = arguments;
+	var i = 0;
+
+	if (typeof f !== 'string') {
+		var objects = [];
+		for (; i < args.length; i++) {
+			objects.push(util.inspect(args[i], inspectOpt));
+		}
+		return objects.join(' ');
+	}
+
+	i = 1;
+	var str = String(f).replace(formatRegExp, function(x) {
+		switch (x) {
+		case '%s':
+			return String(args[i++]);
+		case '%d':
+			return Number(args[i++]);
+		case '%j':
+			try {
+			    if (args[i] instanceof Error) {
+				return JSON.stringify(args[i++], ['message', 'stack', 'type', 'name']);
+        		    } else {
+            			return JSON.stringify(args[i++]);
+        		    }
+			} catch(e) {
+				return '[Circular]';
+			}
+		case '%t':
+			return util.inspect(args[i++], inspectOpt);
+		default:
+			return x;
+		}
+	});
+	for ( var len = args.length, x = args[i]; i < len; x = args[++i]) {
+		if (x === null || typeof x !== 'object') {
+			str += ' ' + x;
+		} else {
+			str += ' ' + util.inspect(x, inspectOpt);
+		}
+	}
+	return str;
+};
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\utils.js","/ff-log\\node_modules\\tracer\\lib",undefined)
+},{"_process":79,"buffer":76,"util":82}],24:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * bridge between formulajs and fesjs
  */
@@ -326,8 +1613,8 @@ exports.formulajs = {
     name: 'formulaJs',
     entries: entries
 }
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-formulajs\\ff-formulajs.js","/ff-formulajs",undefined)
-},{"_process":79,"buffer":76,"ff-log":9,"formulajs":5}],5:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/formulajs-connect\\formulajs.js","/formulajs-connect",undefined)
+},{"_process":79,"buffer":76,"ff-log":4,"formulajs":25}],25:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -8038,8 +9325,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-formulajs\\node_modules\\formulajs\\dist\\formula.js","/ff-formulajs\\node_modules\\formulajs\\dist",undefined)
-},{"_process":79,"buffer":76,"jStat":6,"numeral":7,"numeric":8}],6:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/formulajs-connect\\node_modules\\formulajs\\dist\\formula.js","/formulajs-connect\\node_modules\\formulajs\\dist",undefined)
+},{"_process":79,"buffer":76,"jStat":26,"numeral":27,"numeric":28}],26:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 this.j$ = this.jStat = (function(Math, undefined) {
 
@@ -11296,8 +12583,8 @@ jStat.extend(jStat.fn, {
 
 }(this.jStat, Math));
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-formulajs\\node_modules\\jStat\\dist\\jstat.js","/ff-formulajs\\node_modules\\jStat\\dist",undefined)
-},{"_process":79,"buffer":76}],7:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/formulajs-connect\\node_modules\\jStat\\dist\\jstat.js","/formulajs-connect\\node_modules\\jStat\\dist",undefined)
+},{"_process":79,"buffer":76}],27:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
  * numeral.js
@@ -11979,8 +13266,8 @@ jStat.extend(jStat.fn, {
     }
 }).call(this);
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-formulajs\\node_modules\\numeral\\numeral.js","/ff-formulajs\\node_modules\\numeral",undefined)
-},{"_process":79,"buffer":76}],8:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/formulajs-connect\\node_modules\\numeral\\numeral.js","/formulajs-connect\\node_modules\\numeral",undefined)
+},{"_process":79,"buffer":76}],28:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
 
@@ -16407,1300 +17694,13 @@ numeric.svd= function svd(A) {
 };
 
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-formulajs\\node_modules\\numeric\\numeric-1.2.6.js","/ff-formulajs\\node_modules\\numeric",undefined)
-},{"_process":79,"buffer":76}],9:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var tracer = require('tracer');
-var format = "HH.MM.ssl";
-var logLevel = process.env.ENV || 'info';
-var levels = {
-    debug: {
-        DEBUG: true,
-        TRACE: false,
-        INFO: false
-    },
-    info: {
-        DEBUG: false,
-        TRACE: false,
-        INFO: true
-    },
-    error: {
-        DEBUG: false,
-        TRACE: false,
-        INFO: false,
-        WARN: false
-    },
-    trace: {
-        DEBUG: true,
-        TRACE: true,
-        INFO: true
-    }
-}
-var console = tracer.colorConsole({
-    format: "{{timestamp}} ({{file}}:{{line}}) \t- {{message}}",
-    dateformat: format,
-    level: logLevel
-});
-console.DEBUG = levels[logLevel].DEBUG;
-console.INFO = levels[logLevel].INFO;
-console.TRACE = levels[logLevel].TRACE;
-module.exports = console;
-exports = console;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-formulajs\\node_modules\\ff-log\\ff-log.js","/ff-formulajs\\node_modules\\ff-log",undefined)
-},{"_process":79,"buffer":76,"tracer":26}],10:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*
-
-The MIT License (MIT)
-
-Original Library 
-  - Copyright (c) Marak Squires
-
-Additional functionality
- - Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*/
-
-var colors = {};
-module['exports'] = colors;
-
-colors.themes = {};
-
-var ansiStyles = colors.styles = require('./styles');
-var defineProps = Object.defineProperties;
-
-colors.supportsColor = require('./system/supports-colors');
-
-if (typeof colors.enabled === "undefined") {
-  colors.enabled = colors.supportsColor;
-}
-
-colors.stripColors = colors.strip = function(str){
-  return ("" + str).replace(/\x1B\[\d+m/g, '');
-};
-
-
-var stylize = colors.stylize = function stylize (str, style) {
-  if (!colors.enabled) {
-    return str+'';
-  }
-
-  return ansiStyles[style].open + str + ansiStyles[style].close;
-}
-
-var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
-var escapeStringRegexp = function (str) {
-  if (typeof str !== 'string') {
-    throw new TypeError('Expected a string');
-  }
-  return str.replace(matchOperatorsRe,  '\\$&');
-}
-
-function build(_styles) {
-  var builder = function builder() {
-    return applyStyle.apply(builder, arguments);
-  };
-  builder._styles = _styles;
-  // __proto__ is used because we must return a function, but there is
-  // no way to create a function with a different prototype.
-  builder.__proto__ = proto;
-  return builder;
-}
-
-var styles = (function () {
-  var ret = {};
-  ansiStyles.grey = ansiStyles.gray;
-  Object.keys(ansiStyles).forEach(function (key) {
-    ansiStyles[key].closeRe = new RegExp(escapeStringRegexp(ansiStyles[key].close), 'g');
-    ret[key] = {
-      get: function () {
-        return build(this._styles.concat(key));
-      }
-    };
-  });
-  return ret;
-})();
-
-var proto = defineProps(function colors() {}, styles);
-
-function applyStyle() {
-  var args = arguments;
-  var argsLen = args.length;
-  var str = argsLen !== 0 && String(arguments[0]);
-  if (argsLen > 1) {
-    for (var a = 1; a < argsLen; a++) {
-      str += ' ' + args[a];
-    }
-  }
-
-  if (!colors.enabled || !str) {
-    return str;
-  }
-
-  var nestedStyles = this._styles;
-
-  var i = nestedStyles.length;
-  while (i--) {
-    var code = ansiStyles[nestedStyles[i]];
-    str = code.open + str.replace(code.closeRe, code.open) + code.close;
-  }
-
-  return str;
-}
-
-function applyTheme (theme) {
-  for (var style in theme) {
-    (function(style){
-      colors[style] = function(str){
-        if (typeof theme[style] === 'object'){
-          var out = str;
-          for (var i in theme[style]){
-            out = colors[theme[style][i]](out);
-          }
-          return out;
-        }
-        return colors[theme[style]](str);
-      };
-    })(style)
-  }
-}
-
-colors.setTheme = function (theme) {
-  if (typeof theme === 'string') {
-    try {
-      colors.themes[theme] = require(theme);
-      applyTheme(colors.themes[theme]);
-      return colors.themes[theme];
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  } else {
-    applyTheme(theme);
-  }
-};
-
-function init() {
-  var ret = {};
-  Object.keys(styles).forEach(function (name) {
-    ret[name] = {
-      get: function () {
-        return build([name]);
-      }
-    };
-  });
-  return ret;
-}
-
-var sequencer = function sequencer (map, str) {
-  var exploded = str.split(""), i = 0;
-  exploded = exploded.map(map);
-  return exploded.join("");
-};
-
-// custom formatter methods
-colors.trap = require('./custom/trap');
-colors.zalgo = require('./custom/zalgo');
-
-// maps
-colors.maps = {};
-colors.maps.america = require('./maps/america');
-colors.maps.zebra = require('./maps/zebra');
-colors.maps.rainbow = require('./maps/rainbow');
-colors.maps.random = require('./maps/random')
-
-for (var map in colors.maps) {
-  (function(map){
-    colors[map] = function (str) {
-      return sequencer(colors.maps[map], str);
-    }
-  })(map)
-}
-
-defineProps(colors, init());
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\colors.js","/ff-log\\node_modules\\colors\\lib",undefined)
-},{"./custom/trap":11,"./custom/zalgo":12,"./maps/america":13,"./maps/rainbow":14,"./maps/random":15,"./maps/zebra":16,"./styles":17,"./system/supports-colors":18,"_process":79,"buffer":76}],11:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-module['exports'] = function runTheTrap (text, options) {
-  var result = "";
-  text = text || "Run the trap, drop the bass";
-  text = text.split('');
-  var trap = {
-    a: ["\u0040", "\u0104", "\u023a", "\u0245", "\u0394", "\u039b", "\u0414"],
-    b: ["\u00df", "\u0181", "\u0243", "\u026e", "\u03b2", "\u0e3f"],
-    c: ["\u00a9", "\u023b", "\u03fe"],
-    d: ["\u00d0", "\u018a", "\u0500" , "\u0501" ,"\u0502", "\u0503"],
-    e: ["\u00cb", "\u0115", "\u018e", "\u0258", "\u03a3", "\u03be", "\u04bc", "\u0a6c"],
-    f: ["\u04fa"],
-    g: ["\u0262"],
-    h: ["\u0126", "\u0195", "\u04a2", "\u04ba", "\u04c7", "\u050a"],
-    i: ["\u0f0f"],
-    j: ["\u0134"],
-    k: ["\u0138", "\u04a0", "\u04c3", "\u051e"],
-    l: ["\u0139"],
-    m: ["\u028d", "\u04cd", "\u04ce", "\u0520", "\u0521", "\u0d69"],
-    n: ["\u00d1", "\u014b", "\u019d", "\u0376", "\u03a0", "\u048a"],
-    o: ["\u00d8", "\u00f5", "\u00f8", "\u01fe", "\u0298", "\u047a", "\u05dd", "\u06dd", "\u0e4f"],
-    p: ["\u01f7", "\u048e"],
-    q: ["\u09cd"],
-    r: ["\u00ae", "\u01a6", "\u0210", "\u024c", "\u0280", "\u042f"],
-    s: ["\u00a7", "\u03de", "\u03df", "\u03e8"],
-    t: ["\u0141", "\u0166", "\u0373"],
-    u: ["\u01b1", "\u054d"],
-    v: ["\u05d8"],
-    w: ["\u0428", "\u0460", "\u047c", "\u0d70"],
-    x: ["\u04b2", "\u04fe", "\u04fc", "\u04fd"],
-    y: ["\u00a5", "\u04b0", "\u04cb"],
-    z: ["\u01b5", "\u0240"]
-  }
-  text.forEach(function(c){
-    c = c.toLowerCase();
-    var chars = trap[c] || [" "];
-    var rand = Math.floor(Math.random() * chars.length);
-    if (typeof trap[c] !== "undefined") {
-      result += trap[c][rand];
-    } else {
-      result += c;
-    }
-  });
-  return result;
-
-}
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\custom\\trap.js","/ff-log\\node_modules\\colors\\lib\\custom",undefined)
-},{"_process":79,"buffer":76}],12:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-// please no
-module['exports'] = function zalgo(text, options) {
-  text = text || "   he is here   ";
-  var soul = {
-    "up" : [
-      '̍', '̎', '̄', '̅',
-      '̿', '̑', '̆', '̐',
-      '͒', '͗', '͑', '̇',
-      '̈', '̊', '͂', '̓',
-      '̈', '͊', '͋', '͌',
-      '̃', '̂', '̌', '͐',
-      '̀', '́', '̋', '̏',
-      '̒', '̓', '̔', '̽',
-      '̉', 'ͣ', 'ͤ', 'ͥ',
-      'ͦ', 'ͧ', 'ͨ', 'ͩ',
-      'ͪ', 'ͫ', 'ͬ', 'ͭ',
-      'ͮ', 'ͯ', '̾', '͛',
-      '͆', '̚'
-    ],
-    "down" : [
-      '̖', '̗', '̘', '̙',
-      '̜', '̝', '̞', '̟',
-      '̠', '̤', '̥', '̦',
-      '̩', '̪', '̫', '̬',
-      '̭', '̮', '̯', '̰',
-      '̱', '̲', '̳', '̹',
-      '̺', '̻', '̼', 'ͅ',
-      '͇', '͈', '͉', '͍',
-      '͎', '͓', '͔', '͕',
-      '͖', '͙', '͚', '̣'
-    ],
-    "mid" : [
-      '̕', '̛', '̀', '́',
-      '͘', '̡', '̢', '̧',
-      '̨', '̴', '̵', '̶',
-      '͜', '͝', '͞',
-      '͟', '͠', '͢', '̸',
-      '̷', '͡', ' ҉'
-    ]
-  },
-  all = [].concat(soul.up, soul.down, soul.mid),
-  zalgo = {};
-
-  function randomNumber(range) {
-    var r = Math.floor(Math.random() * range);
-    return r;
-  }
-
-  function is_char(character) {
-    var bool = false;
-    all.filter(function (i) {
-      bool = (i === character);
-    });
-    return bool;
-  }
-  
-
-  function heComes(text, options) {
-    var result = '', counts, l;
-    options = options || {};
-    options["up"] =   typeof options["up"]   !== 'undefined' ? options["up"]   : true;
-    options["mid"] =  typeof options["mid"]  !== 'undefined' ? options["mid"]  : true;
-    options["down"] = typeof options["down"] !== 'undefined' ? options["down"] : true;
-    options["size"] = typeof options["size"] !== 'undefined' ? options["size"] : "maxi";
-    text = text.split('');
-    for (l in text) {
-      if (is_char(l)) {
-        continue;
-      }
-      result = result + text[l];
-      counts = {"up" : 0, "down" : 0, "mid" : 0};
-      switch (options.size) {
-      case 'mini':
-        counts.up = randomNumber(8);
-        counts.mid = randomNumber(2);
-        counts.down = randomNumber(8);
-        break;
-      case 'maxi':
-        counts.up = randomNumber(16) + 3;
-        counts.mid = randomNumber(4) + 1;
-        counts.down = randomNumber(64) + 3;
-        break;
-      default:
-        counts.up = randomNumber(8) + 1;
-        counts.mid = randomNumber(6) / 2;
-        counts.down = randomNumber(8) + 1;
-        break;
-      }
-
-      var arr = ["up", "mid", "down"];
-      for (var d in arr) {
-        var index = arr[d];
-        for (var i = 0 ; i <= counts[index]; i++) {
-          if (options[index]) {
-            result = result + soul[index][randomNumber(soul[index].length)];
-          }
-        }
-      }
-    }
-    return result;
-  }
-  // don't summon him
-  return heComes(text, options);
-}
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\custom\\zalgo.js","/ff-log\\node_modules\\colors\\lib\\custom",undefined)
-},{"_process":79,"buffer":76}],13:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var colors = require('../colors');
-
-module['exports'] = (function() {
-  return function (letter, i, exploded) {
-    if(letter === " ") return letter;
-    switch(i%3) {
-      case 0: return colors.red(letter);
-      case 1: return colors.white(letter)
-      case 2: return colors.blue(letter)
-    }
-  }
-})();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\maps\\america.js","/ff-log\\node_modules\\colors\\lib\\maps",undefined)
-},{"../colors":10,"_process":79,"buffer":76}],14:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var colors = require('../colors');
-
-module['exports'] = (function () {
-  var rainbowColors = ['red', 'yellow', 'green', 'blue', 'magenta']; //RoY G BiV
-  return function (letter, i, exploded) {
-    if (letter === " ") {
-      return letter;
-    } else {
-      return colors[rainbowColors[i++ % rainbowColors.length]](letter);
-    }
-  };
-})();
-
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\maps\\rainbow.js","/ff-log\\node_modules\\colors\\lib\\maps",undefined)
-},{"../colors":10,"_process":79,"buffer":76}],15:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var colors = require('../colors');
-
-module['exports'] = (function () {
-  var available = ['underline', 'inverse', 'grey', 'yellow', 'red', 'green', 'blue', 'white', 'cyan', 'magenta'];
-  return function(letter, i, exploded) {
-    return letter === " " ? letter : colors[available[Math.round(Math.random() * (available.length - 1))]](letter);
-  };
-})();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\maps\\random.js","/ff-log\\node_modules\\colors\\lib\\maps",undefined)
-},{"../colors":10,"_process":79,"buffer":76}],16:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var colors = require('../colors');
-
-module['exports'] = function (letter, i, exploded) {
-  return i % 2 === 0 ? letter : colors.inverse(letter);
-};
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\maps\\zebra.js","/ff-log\\node_modules\\colors\\lib\\maps",undefined)
-},{"../colors":10,"_process":79,"buffer":76}],17:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*
-The MIT License (MIT)
-
-Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*/
-
-var styles = {};
-module['exports'] = styles;
-
-var codes = {
-  reset: [0, 0],
-
-  bold: [1, 22],
-  dim: [2, 22],
-  italic: [3, 23],
-  underline: [4, 24],
-  inverse: [7, 27],
-  hidden: [8, 28],
-  strikethrough: [9, 29],
-
-  black: [30, 39],
-  red: [31, 39],
-  green: [32, 39],
-  yellow: [33, 39],
-  blue: [34, 39],
-  magenta: [35, 39],
-  cyan: [36, 39],
-  white: [37, 39],
-  gray: [90, 39],
-  grey: [90, 39],
-
-  bgBlack: [40, 49],
-  bgRed: [41, 49],
-  bgGreen: [42, 49],
-  bgYellow: [43, 49],
-  bgBlue: [44, 49],
-  bgMagenta: [45, 49],
-  bgCyan: [46, 49],
-  bgWhite: [47, 49],
-
-  // legacy styles for colors pre v1.0.0
-  blackBG: [40, 49],
-  redBG: [41, 49],
-  greenBG: [42, 49],
-  yellowBG: [43, 49],
-  blueBG: [44, 49],
-  magentaBG: [45, 49],
-  cyanBG: [46, 49],
-  whiteBG: [47, 49]
-
-};
-
-Object.keys(codes).forEach(function (key) {
-  var val = codes[key];
-  var style = styles[key] = [];
-  style.open = '\u001b[' + val[0] + 'm';
-  style.close = '\u001b[' + val[1] + 'm';
-});
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\styles.js","/ff-log\\node_modules\\colors\\lib",undefined)
-},{"_process":79,"buffer":76}],18:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*
-The MIT License (MIT)
-
-Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*/
-
-var argv = process.argv;
-
-module.exports = (function () {
-  if (argv.indexOf('--no-color') !== -1 ||
-    argv.indexOf('--color=false') !== -1) {
-    return false;
-  }
-
-  if (argv.indexOf('--color') !== -1 ||
-    argv.indexOf('--color=true') !== -1 ||
-    argv.indexOf('--color=always') !== -1) {
-    return true;
-  }
-
-  if (process.stdout && !process.stdout.isTTY) {
-    return false;
-  }
-
-  if (process.platform === 'win32') {
-    return true;
-  }
-
-  if ('COLORTERM' in process.env) {
-    return true;
-  }
-
-  if (process.env.TERM === 'dumb') {
-    return false;
-  }
-
-  if (/^screen|^xterm|^vt100|color|ansi|cygwin|linux/i.test(process.env.TERM)) {
-    return true;
-  }
-
-  return false;
-})();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\lib\\system\\supports-colors.js","/ff-log\\node_modules\\colors\\lib\\system",undefined)
-},{"_process":79,"buffer":76}],19:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-//
-// Remark: Requiring this file will use the "safe" colors API which will not touch String.prototype
-//
-//   var colors = require('colors/safe);
-//   colors.red("foo")
-//
-//
-var colors = require('./lib/colors');
-module['exports'] = colors;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\colors\\safe.js","/ff-log\\node_modules\\colors",undefined)
-},{"./lib/colors":10,"_process":79,"buffer":76}],20:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*
- * Date Format 1.2.3
- * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
- * MIT license
- *
- * Includes enhancements by Scott Trenda <scott.trenda.net>
- * and Kris Kowal <cixar.com/~kris.kowal/>
- *
- * Accepts a date, a mask, or a date and a mask.
- * Returns a formatted version of the given date.
- * The date defaults to the current date/time.
- * The mask defaults to dateFormat.masks.default.
- */
-
-(function(global) {
-  'use strict';
-
-  var dateFormat = (function() {
-      var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZWN]|'[^']*'|'[^']*'/g;
-      var timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g;
-      var timezoneClip = /[^-+\dA-Z]/g;
-  
-      // Regexes and supporting functions are cached through closure
-      return function (date, mask, utc, gmt) {
-  
-        // You can't provide utc if you skip other args (use the 'UTC:' mask prefix)
-        if (arguments.length === 1 && kindOf(date) === 'string' && !/\d/.test(date)) {
-          mask = date;
-          date = undefined;
-        }
-  
-        date = date || new Date;
-  
-        if(!(date instanceof Date)) {
-          date = new Date(date);
-        }
-  
-        if (isNaN(date)) {
-          throw TypeError('Invalid date');
-        }
-  
-        mask = String(dateFormat.masks[mask] || mask || dateFormat.masks['default']);
-  
-        // Allow setting the utc/gmt argument via the mask
-        var maskSlice = mask.slice(0, 4);
-        if (maskSlice === 'UTC:' || maskSlice === 'GMT:') {
-          mask = mask.slice(4);
-          utc = true;
-          if (maskSlice === 'GMT:') {
-            gmt = true;
-          }
-        }
-  
-        var _ = utc ? 'getUTC' : 'get';
-        var d = date[_ + 'Date']();
-        var D = date[_ + 'Day']();
-        var m = date[_ + 'Month']();
-        var y = date[_ + 'FullYear']();
-        var H = date[_ + 'Hours']();
-        var M = date[_ + 'Minutes']();
-        var s = date[_ + 'Seconds']();
-        var L = date[_ + 'Milliseconds']();
-        var o = utc ? 0 : date.getTimezoneOffset();
-        var W = getWeek(date);
-        var N = getDayOfWeek(date);
-        var flags = {
-          d:    d,
-          dd:   pad(d),
-          ddd:  dateFormat.i18n.dayNames[D],
-          dddd: dateFormat.i18n.dayNames[D + 7],
-          m:    m + 1,
-          mm:   pad(m + 1),
-          mmm:  dateFormat.i18n.monthNames[m],
-          mmmm: dateFormat.i18n.monthNames[m + 12],
-          yy:   String(y).slice(2),
-          yyyy: y,
-          h:    H % 12 || 12,
-          hh:   pad(H % 12 || 12),
-          H:    H,
-          HH:   pad(H),
-          M:    M,
-          MM:   pad(M),
-          s:    s,
-          ss:   pad(s),
-          l:    pad(L, 3),
-          L:    pad(Math.round(L / 10)),
-          t:    H < 12 ? 'a'  : 'p',
-          tt:   H < 12 ? 'am' : 'pm',
-          T:    H < 12 ? 'A'  : 'P',
-          TT:   H < 12 ? 'AM' : 'PM',
-          Z:    gmt ? 'GMT' : utc ? 'UTC' : (String(date).match(timezone) || ['']).pop().replace(timezoneClip, ''),
-          o:    (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
-          S:    ['th', 'st', 'nd', 'rd'][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10],
-          W:    W,
-          N:    N
-        };
-  
-        return mask.replace(token, function (match) {
-          if (match in flags) {
-            return flags[match];
-          }
-          return match.slice(1, match.length - 1);
-        });
-      };
-    })();
-
-  dateFormat.masks = {
-    'default':               'ddd mmm dd yyyy HH:MM:ss',
-    'shortDate':             'm/d/yy',
-    'mediumDate':            'mmm d, yyyy',
-    'longDate':              'mmmm d, yyyy',
-    'fullDate':              'dddd, mmmm d, yyyy',
-    'shortTime':             'h:MM TT',
-    'mediumTime':            'h:MM:ss TT',
-    'longTime':              'h:MM:ss TT Z',
-    'isoDate':               'yyyy-mm-dd',
-    'isoTime':               'HH:MM:ss',
-    'isoDateTime':           'yyyy-mm-dd\'T\'HH:MM:sso',
-    'isoUtcDateTime':        'UTC:yyyy-mm-dd\'T\'HH:MM:ss\'Z\'',
-    'expiresHeaderFormat':   'ddd, dd mmm yyyy HH:MM:ss Z'
-  };
-
-  // Internationalization strings
-  dateFormat.i18n = {
-    dayNames: [
-      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
-      'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-    ],
-    monthNames: [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-    ]
-  };
-
-function pad(val, len) {
-  val = String(val);
-  len = len || 2;
-  while (val.length < len) {
-    val = '0' + val;
-  }
-  return val;
-}
-
-/**
- * Get the ISO 8601 week number
- * Based on comments from
- * http://techblog.procurios.nl/k/n618/news/view/33796/14863/Calculate-ISO-8601-week-and-year-in-javascript.html
- *
- * @param  {Object} `date`
- * @return {Number}
- */
-function getWeek(date) {
-  // Remove time components of date
-  var targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
-  // Change date to Thursday same week
-  targetThursday.setDate(targetThursday.getDate() - ((targetThursday.getDay() + 6) % 7) + 3);
-
-  // Take January 4th as it is always in week 1 (see ISO 8601)
-  var firstThursday = new Date(targetThursday.getFullYear(), 0, 4);
-
-  // Change date to Thursday same week
-  firstThursday.setDate(firstThursday.getDate() - ((firstThursday.getDay() + 6) % 7) + 3);
-
-  // Check if daylight-saving-time-switch occured and correct for it
-  var ds = targetThursday.getTimezoneOffset() - firstThursday.getTimezoneOffset();
-  targetThursday.setHours(targetThursday.getHours() - ds);
-
-  // Number of weeks between target Thursday and first Thursday
-  var weekDiff = (targetThursday - firstThursday) / (86400000*7);
-  return 1 + Math.floor(weekDiff);
-}
-
-/**
- * Get ISO-8601 numeric representation of the day of the week
- * 1 (for Monday) through 7 (for Sunday)
- * 
- * @param  {Object} `date`
- * @return {Number}
- */
-function getDayOfWeek(date) {
-  var dow = date.getDay();
-  if(dow === 0) {
-    dow = 7;
-  }
-  return dow;
-}
-
-/**
- * kind-of shortcut
- * @param  {*} val
- * @return {String}
- */
-function kindOf(val) {
-  if (val === null) {
-    return 'null';
-  }
-
-  if (val === undefined) {
-    return 'undefined';
-  }
-
-  if (typeof val !== 'object') {
-    return typeof val;
-  }
-
-  if (Array.isArray(val)) {
-    return 'array';
-  }
-
-  return {}.toString.call(val)
-    .slice(8, -1).toLowerCase();
-};
-
-
-
-  if (typeof define === 'function' && define.amd) {
-    define(function () {
-      return dateFormat;
-    });
-  } else if (typeof exports === 'object') {
-    module.exports = dateFormat;
-  } else {
-    global.dateFormat = dateFormat;
-  }
-})(this);
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\dateformat\\lib\\dateformat.js","/ff-log\\node_modules\\dateformat\\lib",undefined)
-},{"_process":79,"buffer":76}],21:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-module.exports = require('./tinytim');
-
-/**
- * Intermediate js cache.
- * 
- * @type Object
- */
-
-var cache = {};
-
-/**
- * Clear intermediate js cache.
- * 
- * @api public
- */
-
-module.exports.clearCache = function() {
-	cache = {};
-};
-
-/**
- * Render the given `str` of tim.
- * 
- * @param {String}
- *            str
- * @param {Object}
- *            vars
- * @return {String}
- * @api public
- */
-
-module.exports.render = module.exports.tim;
-
-
-/**
- * Render an tim file at the given `path`.
- * 
- * @param {String}
- *            path
- * @param {Vars}
- *            vars
- * @param {Bool}
- *            use cache or not
- * @api public
- */
-
-module.exports.renderFile = function(path, vars, useCache) {
-	var fs = require('fs');
-	var key = path + ':string';
-	var str = useCache ? cache[key]
-			|| (cache[key] = fs.readFileSync(path, 'utf8')) : fs
-			.readFileSync(path, 'utf8');
-
-	return module.exports.render(str, vars);
-};
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tinytim\\lib\\index.js","/ff-log\\node_modules\\tinytim\\lib",undefined)
-},{"./tinytim":22,"_process":79,"buffer":76,"fs":75}],22:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*!
- tinytim.js
-   github.com/premasagar/tim
-    A tiny, secure JavaScript micro-templating script.
-    by Premasagar Rose
-        dharmafly.com
-    license
-        opensource.org/licenses/mit-license.php
-    creates global object
-        tim
-    v0.3.0
-        
-	ported and modified by LI Long <lilong@gmail.com> 3/13/2012
- */
-var start = exports.start  = "{{";
-var end = exports.end	 = "}}";
-        
-var tim = exports.tim = (function(){
-    "use strict";
-
-    var 
-        path    = "[a-z0-9_][\\.a-z0-9_]*", // e.g. config.person.name
-        undef;
-    
-    return function(template, data){
-        var pattern = new RegExp(exports.start + "\\s*("+ path +")\\s*" + exports.end, "gi");
-
-        // Merge data into the template string
-        return template.replace(pattern, function(tag, token){
-            var path = token.split("."),
-                len = path.length,
-                lookup = data,
-                i = 0;
-
-            for (; i < len; i++){
-                lookup = lookup[path[i]];
-                
-                // Property not found
-                if (lookup === undef){
-                    throw new Error("tim: '" + path[i] + "' not found in " + tag);
-                }
-                
-                // Return the required value
-                if (i === len - 1){
-                    return lookup;
-                }
-            }
-        });
-    };
-}());
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tinytim\\lib\\tinytim.js","/ff-log\\node_modules\\tinytim\\lib",undefined)
-},{"_process":79,"buffer":76}],23:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-var colors = require('colors/safe');
-module.exports = function(conf) {
-	return require('./console')({
-		filters : {
-			//log : do nothing
-			trace : colors.magenta,
-			debug : colors.cyan,
-			info : colors.green,
-			warn : colors.yellow,
-			error : colors.red.bold
-		}
-	}, conf);
-};
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\color_console.js","/ff-log\\node_modules\\tracer\\lib",undefined)
-},{"./console":24,"_process":79,"buffer":76,"colors/safe":19}],24:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-var tinytim = require('tinytim'), dateFormat = require('dateformat'), utils = require('./utils'), path = require('path'), settings = require('./settings').settings;
-
-var noop = function(){};
-
-var fwrap = function(fn){
-	return function(str){ return fn(str) };
-};
-
-// Stack trace format :
-// https://github.com/v8/v8/wiki/Stack%20Trace%20API
-var stackReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/i;
-var stackReg2 = /at\s+()(.*):(\d*):(\d*)/i;
-
-// main log method
-function logMain(config, level, title, format, filters, needstack, args) {
-	//check level of global settings
-	var gLevel = settings.level;
-	if (typeof (gLevel) == 'string')
-		gLevel = config.methods.indexOf(gLevel);
-	if (level < gLevel) { return; }
-
-	var data = {
-		timestamp : dateFormat(new Date(), config.dateformat),
-		message : "",
-		title : title,
-		level : level,
-		args : args
-	};
-	data.method = data.path = data.line = data.pos = data.file = '';
-
-	if (needstack) {
-		// get call stack, and analyze it
-		// get all file,method and line number
-		var stacklist = (new Error()).stack.split('\n').slice(3);
-		var s = stacklist[config.stackIndex] || stacklist[0],
-			sp = stackReg.exec(s) || stackReg2.exec(s);
-		if (sp && sp.length === 5) {
-			data.method = sp[1];
-			data.path = sp[2];
-			data.line = sp[3];
-			data.pos = sp[4];
-			data.file = path.basename(data.path);
-			data.stack = stacklist.join('\n');
-		}
-	}
-
-	config.preprocess(data);
-	var msg = utils.format.apply(config, data.args);
-	data.message = msg;
-
-	// call micro-template to ouput
-	data.output = tinytim.tim(format, data);
-
-	// process every filter method
-	var len = filters.length;
-	for ( var i = 0; i < len; i += 1) {
-		data.output = fwrap(filters[i])(data.output);
-		if (!data.output)
-			return data;
-		// cancel next process if return a false(include null, undefined)
-	}
-	// trans the final result
-	config.transport.forEach(function(tras) {
-		tras(data);
-	});
-	return data;
-}
-
-module.exports = (function() {
-	// default config
-	var _config = {
-		format : "{{timestamp}} <{{title}}> {{file}}:{{line}} ({{method}}) {{message}}",
-		dateformat : "isoDateTime",
-		preprocess : function(data) {
-		},
-		transport : function(data) {
-			if (data.level >= 4) { // warn and more critical
-				console.error(data.output);
-			} else {
-				console.log(data.output);
-			}
-		},
-		filters : [],
-		level : 'log',
-		methods : [ 'log', 'trace', 'debug', 'info', 'warn', 'error', 'fatal' ],
-		stackIndex : 0,		// get the specified index of stack as file information. It is userful for development package.
-		inspectOpt : {
-			showHidden : false, //if true then the object's non-enumerable properties will be shown too. Defaults to false
-			depth : 2 //tells inspect how many times to recurse while formatting the object. This is useful for inspecting large complicated objects. Defaults to 2. To make it recurse indefinitely pass null.
-		}
-	};
-
-	// union user's config and default
-	_config = utils.union(_config, arguments);
-
-	var _self = {};
-
-	_config.format = Array.isArray(_config.format) ? _config.format
-		: [ _config.format ];
-
-	_config.filters = Array.isArray(_config.filters) ? _config.filters
-		: [ _config.filters ];
-
-	_config.transport = Array.isArray(_config.transport) ? _config.transport : [_config.transport];
-
-	var fLen = _config.filters.length, lastFilter;
-	if (fLen > 0)
-		if (Object.prototype.toString.call(_config.filters[--fLen]) != '[object Function]') {
-			lastFilter = _config.filters[fLen];
-			_config.filters = _config.filters.slice(0, fLen);
-		}
-
-	if (typeof (_config.level) == 'string')
-		_config.level = _config.methods.indexOf(_config.level);
-
-	_config.methods.forEach(function(title, i) {
-		if (i < _config.level)
-			_self[title] = noop;
-		else {
-			var format = _config.format[0];
-			if (_config.format.length === 2 && _config.format[1][title])
-				format = _config.format[1][title];
-			var needstack = /{{(method|path|line|pos|file|stack)}}/i.test(format);
-
-			var filters;
-			if (lastFilter && lastFilter[title])
-				filters = Array.isArray(lastFilter[title]) ? lastFilter[title]
-					: [ lastFilter[title] ];
-			else
-				filters = _config.filters;
-
-			// interface
-			_self[title] = function() {
-				return logMain(_config, i, title, format, filters, needstack, arguments);
-			};
-		}
-	});
-
-	return _self;
-});
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\console.js","/ff-log\\node_modules\\tracer\\lib",undefined)
-},{"./settings":27,"./utils":28,"_process":79,"buffer":76,"dateformat":20,"path":78,"tinytim":21}],25:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-var fs = require('fs'), dateFormat = require('dateformat'), tinytim = require('tinytim'), utils = require('./utils'), spawn = require('child_process').spawn, spawnSync = require('child_process').spawnSync;
-var path = require('path');
-
-module.exports = function (conf) {
-    var _conf = {
-        root: '.',
-        logPathFormat: '{{root}}/{{prefix}}.{{date}}.log',
-        splitFormat: 'yyyymmdd',
-        allLogsFileName: false,
-        maxLogFiles: 10
-    };
-
-    _conf = utils.union(_conf, [conf]);
-
-    function LogFile(prefix, date) {
-        this.date = date;
-        this.path = tinytim.tim(_conf.logPathFormat, {root: _conf.root, prefix: prefix, date: date});
-        spawnSync('mkdir', ['-p', _conf.root]);
-        this.stream = fs.createWriteStream(this.path, {
-            flags: "a",
-            encoding: "utf8",
-            mode: parseInt('0644', 8)
-            // When engines node >= 4.0.0, following notation will be better:
-            //mode: 0o644
-        });
-    }
-
-    LogFile.prototype.write = function (str) {
-        this.stream.write(str + "\n");
-    };
-
-    LogFile.prototype.destroy = function () {
-        if (this.stream) {
-            this.stream.end();
-            this.stream.destroySoon();
-            this.stream = null;
-        }
-    };
-
-    var _logMap = {};
-
-    function _push2File(str, title) {
-        if (_conf.allLogsFileName) {
-            var allLogFile = _logMap.allLogFile, now = dateFormat(new Date(), _conf.splitFormat);
-            if (allLogFile && allLogFile.date != now) {
-                allLogFile.destroy();
-                allLogFile = null;
-            }
-            if (!allLogFile) {
-                allLogFile = _logMap.allLogFile = new LogFile(_conf.allLogsFileName, now);
-                spawn('find', ['./', '-type', 'f', '-name', '*.log', '-mtime', '+' + _conf.maxLogFiles, '-exec', 'rm', '{}', '\;']);
-            }
-            allLogFile.write(str);
-        } else {
-            var logFile = _logMap[title], now = dateFormat(new Date(), _conf.splitFormat);
-            if (logFile && logFile.date != now) {
-                logFile.destroy();
-                logFile = null;
-            }
-            if (!logFile) {
-                logFile = _logMap[title] = new LogFile(title, now);
-                spawn('find', [_conf.root, '-type', 'f', '-name', '*.log', '-mtime', '+' + _conf.maxLogFiles, '-exec', 'rm', '{}', '\;']);
-            }
-            logFile.write(str);
-        }
-    }
-
-    function dailyFileTransport(data) {
-        _push2File(data.output, data.title);
-    }
-
-    if (conf.transport) {
-        conf.transport = Array.isArray(conf.transport) ? conf.transport : [conf.transport];
-        conf.transport.push(dailyFileTransport)
-    } else {
-        conf.transport = [dailyFileTransport];
-    }
-    return require('./console')(conf);
-};
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\dailyfile.js","/ff-log\\node_modules\\tracer\\lib",undefined)
-},{"./console":24,"./utils":28,"_process":79,"buffer":76,"child_process":75,"dateformat":20,"fs":75,"path":78,"tinytim":21}],26:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-exports.console = require('./console');
-exports.colorConsole = require('./color_console');
-exports.dailyfile = require('./dailyfile');
-
-//global settings
-var settings = require('./settings');
-exports.close = settings.close;
-exports.setLevel = settings.setLevel;
-exports.getLevel = settings.getLevel;
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\index.js","/ff-log\\node_modules\\tracer\\lib",undefined)
-},{"./color_console":23,"./console":24,"./dailyfile":25,"./settings":27,"_process":79,"buffer":76}],27:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-var settings = {
-	level : undefined
-}
-
-//end all of output
-var close = function(){
-	settings.level = Number.MAX_VALUE;
-}
-
-//dynamically change the log level, all of output
-var setLevel = function(level){
-	settings.level = level;
-}
-
-//get the current log level
-var getLevel = function(){
-	return settings.level;
-}
-
-
-exports.settings = settings;
-exports.close = close;
-exports.setLevel = setLevel;
-exports.getLevel = getLevel;
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\settings.js","/ff-log\\node_modules\\tracer\\lib",undefined)
-},{"_process":79,"buffer":76}],28:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-exports.union = function(obj, args) {
-	for (var i = 0, len = args.length; i < len; i += 1) {
-		var source = args[i];
-		for ( var prop in source) {
-			obj[prop] = source[prop];
-		}
-	}
-	return obj;
-};
-
-var formatRegExp = /%[sdjt]/g;
-var util = require('util');
-exports.format = function(f) {
-	var inspectOpt = this.inspectOpt;
-	var args = arguments;
-	var i = 0;
-
-	if (typeof f !== 'string') {
-		var objects = [];
-		for (; i < args.length; i++) {
-			objects.push(util.inspect(args[i], inspectOpt));
-		}
-		return objects.join(' ');
-	}
-
-	i = 1;
-	var str = String(f).replace(formatRegExp, function(x) {
-		switch (x) {
-		case '%s':
-			return String(args[i++]);
-		case '%d':
-			return Number(args[i++]);
-		case '%j':
-			try {
-			    if (args[i] instanceof Error) {
-				return JSON.stringify(args[i++], ['message', 'stack', 'type', 'name']);
-        		    } else {
-            			return JSON.stringify(args[i++]);
-        		    }
-			} catch(e) {
-				return '[Circular]';
-			}
-		case '%t':
-			return util.inspect(args[i++], inspectOpt);
-		default:
-			return x;
-		}
-	});
-	for ( var len = args.length, x = args[i]; i < len; x = args[++i]) {
-		if (x === null || typeof x !== 'object') {
-			str += ' ' + x;
-		} else {
-			str += ' ' + util.inspect(x, inspectOpt);
-		}
-	}
-	return str;
-};
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ff-log\\node_modules\\tracer\\lib\\utils.js","/ff-log\\node_modules\\tracer\\lib",undefined)
-},{"_process":79,"buffer":76,"util":82}],29:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/formulajs-connect\\node_modules\\numeric\\numeric-1.2.6.js","/formulajs-connect\\node_modules\\numeric",undefined)
+},{"_process":79,"buffer":76}],29:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var assert = require('assert');
 var FinFormula = require('./FinFormula');
 var Stack = require('stack-adt');
-var visitor = require('../../fesjs/JSVisitor');
+var visitor = require('../../src/JSVisitor');
 var log = require('ff-log');
 /*
  The purpose of these methods is:
@@ -17941,7 +17941,7 @@ FflToJsonConverter.prototype.deparseRegex = function(input) {
 FflToJsonConverter.prototype.parseRegex = FinFormula.parseFormula;
 module.exports = FflToJsonConverter.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\FflToJsonConverter.js","/lme-core\\exchange_modules\\ffl",undefined)
-},{"../../fesjs/JSVisitor":41,"./FinFormula":30,"_process":79,"assert":73,"buffer":76,"ff-log":63,"stack-adt":64}],30:[function(require,module,exports){
+},{"../../src/JSVisitor":63,"./FinFormula":30,"_process":79,"assert":73,"buffer":76,"ff-log":48,"stack-adt":49}],30:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //http://excelformulabeautifier.com/
 function finFormulaGeneric(buf) {
@@ -18092,8 +18092,8 @@ module.exports = FinFormula.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\FinFormula.js","/lme-core\\exchange_modules\\ffl",undefined)
 },{"_process":79,"buffer":76}],31:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var JSVisitor = require('../../fesjs/JSVisitor');
-var SolutionFacade = require('../../fesjs/SolutionFacade.js')
+var JSVisitor = require('../../src/JSVisitor');
+var SolutionFacade = require('../../src/SolutionFacade.js')
 var AST = require('../../../ast-node-utils/index').ast;
 var FflToJsonConverter = require('./FflToJsonConverter');
 var FinFormula = require('./FinFormula.js');
@@ -18452,14 +18452,14 @@ function parseFFLFormula(formula, node, row) {
 
 SolutionFacade.addParser(FFLParser.prototype);
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\fflparser.js","/lme-core\\exchange_modules\\ffl",undefined)
-},{"../../../ast-node-utils/index":3,"../../fesjs/JSVisitor":41,"../../fesjs/SolutionFacade.js":46,"./FflToJsonConverter":29,"./FinFormula.js":30,"_process":79,"buffer":76,"esprima":75,"ff-log":63}],32:[function(require,module,exports){
+},{"../../../ast-node-utils/index":3,"../../src/JSVisitor":63,"../../src/SolutionFacade.js":68,"./FflToJsonConverter":29,"./FinFormula.js":30,"_process":79,"buffer":76,"esprima":75,"ff-log":48}],32:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  First, most basic export of values
  Just calling getAllValues() internally to export
  */
-var SolutionFacade = require('../../fesjs/SolutionFacade');
-var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
+var SolutionFacade = require('../../src/SolutionFacade');
+var PropertiesAssembler = require('../../src/PropertiesAssembler');
 var jsonValues = {
     name: 'jsonvalues',
     extension: 'json',
@@ -18519,12 +18519,12 @@ function updateValues(data, docValues) {
 
 SolutionFacade.addParser(jsonValues)
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\jsonvalues\\jsonvalues.js","/lme-core\\exchange_modules\\jsonvalues",undefined)
-},{"../../fesjs/PropertiesAssembler":44,"../../fesjs/SolutionFacade":46,"_process":79,"buffer":76}],33:[function(require,module,exports){
+},{"../../src/PropertiesAssembler":66,"../../src/SolutionFacade":68,"_process":79,"buffer":76}],33:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var SolutionFacade = require('../../fesjs/SolutionFacade')
-var FormulaService = require('../../fesjs/FormulaService')
-var PropertiesAssembler = require('../../fesjs/PropertiesAssembler')
-var FunctionMap = require('../../fesjs/FunctionMap')
+var SolutionFacade = require('../../src/SolutionFacade')
+var FormulaService = require('../../src/FormulaService')
+var PropertiesAssembler = require('../../src/PropertiesAssembler')
+var FunctionMap = require('../../src/FunctionMap')
 var log = require('ff-log');
 
 function FormulaInfo(data, schema, modelName) {
@@ -18635,7 +18635,7 @@ LMEParser.prototype.deParse = function(rowId, workbook) {
 SolutionFacade.addParser(LMEParser.prototype);
 exports.LMEParser = LMEParser.prototype
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\lme\\lmeparser.js","/lme-core\\exchange_modules\\lme",undefined)
-},{"../../fesjs/FormulaService":39,"../../fesjs/FunctionMap":40,"../../fesjs/PropertiesAssembler":44,"../../fesjs/SolutionFacade":46,"_process":79,"buffer":76,"ff-log":63}],34:[function(require,module,exports){
+},{"../../src/FormulaService":61,"../../src/FunctionMap":62,"../../src/PropertiesAssembler":66,"../../src/SolutionFacade":68,"_process":79,"buffer":76,"ff-log":48}],34:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 const log = require('ff-log')
 
@@ -18668,10 +18668,10 @@ LmeDisplayGrammer.prototype.parseGrammer = function() {
 }
 exports.LmeDisplayGrammer = LmeDisplayGrammer
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\presentation\\LmeDisplayGrammer.js","/lme-core\\exchange_modules\\presentation",undefined)
-},{"_process":79,"buffer":76,"ff-log":63}],35:[function(require,module,exports){
+},{"_process":79,"buffer":76,"ff-log":48}],35:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var SolutionFacade = require('../../fesjs/SolutionFacade');
-var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
+var SolutionFacade = require('../../src/SolutionFacade');
+var PropertiesAssembler = require('../../src/PropertiesAssembler');
 var LmeDisplayGrammer = require('./LmeDisplayGrammer').LmeDisplayGrammer
 var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original', 'valid']
 
@@ -18861,7 +18861,1531 @@ WebExport.prototype.deParse = function(rowId, workbook) {
 }
 SolutionFacade.addParser(new WebExport())
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\presentation\\webexport_with_template.js","/lme-core\\exchange_modules\\presentation",undefined)
-},{"../../fesjs/PropertiesAssembler":44,"../../fesjs/SolutionFacade":46,"./LmeDisplayGrammer":34,"_process":79,"buffer":76}],36:[function(require,module,exports){
+},{"../../src/PropertiesAssembler":66,"../../src/SolutionFacade":68,"./LmeDisplayGrammer":34,"_process":79,"buffer":76}],36:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/* jshint node: true */
+/**
+ * user friendly API
+ */
+require("./exchange_modules/ffl/fflparser");//just let it inject into the FESFacade
+//require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
+var log = require("ff-log");
+var WorkBook = require("./src/JSWorkBook");
+var FESContext = require("./src/fescontext");
+var TupleIndexConverter = require("./src/TupleIndexConverter");
+
+function FESApi() {
+}
+
+FESApi.prototype.init = function(data) {
+    var JSWorkBook = new WorkBook(new FESContext());
+    JSWorkBook.importSolution(data, "ffl");
+    var validate = JSWorkBook.validateImportedSolution();
+    JSWorkBook.fixProblemsInImportedSolution();
+    var validateFeedback = JSWorkBook.validateImportedSolution();
+    if (validateFeedback.valid) {
+        //valid
+        log.debug("Initialized model [" + JSWorkBook.getSolutionName() + "]");
+    } else {
+        log.error(validateFeedback);
+        throw Error("unable to initialize");
+    }
+    return JSWorkBook.getRootSolutionProperty().solutionName;
+};
+FESApi.prototype.addFunctions = function(plugin) {
+    var functions = [];
+    for (var functionName in plugin.entries) {
+        functions.push(functionName);
+        global[functionName] = plugin.entries[functionName];
+    }
+    log.debug('Added fes-plugin [%s] functions [%s]', plugin.name, functions);
+};
+/**
+ * rowId - VariableName
+ * @Optional value - new value
+ * TODO: move to tupleDefinition to support multiple tuple definition/tuple in tuple
+ */
+// Convert tuple index to tuple number
+FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tupleindex) {
+    columncontext = columncontext || 0;
+    if (tupleindex !== undefined) {
+        tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
+    }
+    var fesContext = new FESContext();
+    fesContext.values = context.values;
+    var JSWorkBook = new WorkBook(fesContext);
+    JSWorkBook.columns = context.columns || 2;
+    JSWorkBook.properties = context.properties || JSWorkBook.properties;
+    //prepare the workbook and context to match current appscope
+    JSWorkBook.updateValues();
+    //setvalue
+    if (value !== undefined) {
+        //choice(select) requests
+        if (JSWorkBook.fetchSolutionNode(rowId, 'choices')) {
+            var choices = JSWorkBook.getSolutionPropertyValue(rowId, 'choices');
+            var choiceValue = choices.lookup('value', value);
+            if (choiceValue === undefined) {
+                log.debug('Could not find [%s] choice [%s] in %s. using [%s] to be value', rowId, value, JSON.stringify(choices), value);
+            } else {
+                value = isNaN(choiceValue.name) ? choiceValue.name : parseInt(choiceValue.name);
+            }
+        }
+        JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, tupleindex);
+
+        var values = [];
+        var rootNode = JSWorkBook.getSolutionNode(rowId);
+
+        JSWorkBook.visitProperties(rootNode, function(node, yax, treeDepth) {
+            values = values.concat(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
+        }, 0);
+        return values;
+    } else {
+        //getValue
+        var values = [];
+        var rootNode = JSWorkBook.getSolutionNode(rowId);
+        if (rootNode) {
+            JSWorkBook.visitProperties(rootNode, function(node, yax) {
+                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
+            });
+        } else {
+            values.push({
+                variable: rowId
+            });
+        }
+        return values;
+    }
+};
+
+/**
+ * Given properties in workbook return all values for given columns
+ * @param workbook
+ * @param rowId
+ * @param columncontext
+ * @returns {Array}
+ */
+function getEntry(workbook, rowId, columncontext, yAxis) {
+    var outputData = [];
+    var columnStart = columncontext;
+    var columnEnd = workbook.columns;
+    var variable = workbook.getSolutionNode(rowId, 'value');
+
+    if (variable && variable.frequency === 'document') {
+        columnEnd = columnStart;
+    }
+    var tupleStart = 0;
+    var tupleEnd = 0;
+
+    // If frequency = column: return multiple columns
+    for (var xAxisCounter = columnStart; xAxisCounter <= columnEnd; xAxisCounter++) {
+        var dataEnty = {};
+        outputData.push(dataEnty);
+
+        // For properties of the variable
+        for (var type in workbook.properties) {
+            dataEnty[type] = workbook.getSolutionPropertyValue(rowId, type, xAxisCounter, yAxis);
+
+            if (columnStart !== columnEnd || columnStart > 0) {
+                dataEnty.column = xAxisCounter;
+            }
+            dataEnty.variable = variable.rowId;
+            if (variable.tuple) {
+                dataEnty.tupleIndex = yAxis.index;
+            }
+            dataEnty.hash = yAxis.hash + xAxisCounter + 0;
+        }
+    }
+    //if there is only one column, the exported value is not presented to be an array
+    if (columnStart == columnEnd) {
+        outputData = outputData[0];
+    }
+    return outputData;
+}
+
+exports.JSWorkbook = WorkBook;
+exports.LMEContext = WorkBook;
+exports.fesjs = FESApi.prototype;
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\ff-fes.js","/lme-core",undefined)
+},{"./exchange_modules/ffl/fflparser":31,"./src/JSWorkBook":64,"./src/TupleIndexConverter":69,"./src/fescontext":72,"_process":79,"buffer":76,"ff-log":48}],37:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*
+
+The MIT License (MIT)
+
+Original Library 
+  - Copyright (c) Marak Squires
+
+Additional functionality
+ - Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+*/
+
+var colors = {};
+module['exports'] = colors;
+
+colors.themes = {};
+
+var ansiStyles = colors.styles = require('./styles');
+var defineProps = Object.defineProperties;
+
+colors.supportsColor = require('./system/supports-colors');
+
+if (typeof colors.enabled === "undefined") {
+  colors.enabled = colors.supportsColor;
+}
+
+colors.stripColors = colors.strip = function(str){
+  return ("" + str).replace(/\x1B\[\d+m/g, '');
+};
+
+
+var stylize = colors.stylize = function stylize (str, style) {
+  if (!colors.enabled) {
+    return str+'';
+  }
+
+  return ansiStyles[style].open + str + ansiStyles[style].close;
+}
+
+var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
+var escapeStringRegexp = function (str) {
+  if (typeof str !== 'string') {
+    throw new TypeError('Expected a string');
+  }
+  return str.replace(matchOperatorsRe,  '\\$&');
+}
+
+function build(_styles) {
+  var builder = function builder() {
+    return applyStyle.apply(builder, arguments);
+  };
+  builder._styles = _styles;
+  // __proto__ is used because we must return a function, but there is
+  // no way to create a function with a different prototype.
+  builder.__proto__ = proto;
+  return builder;
+}
+
+var styles = (function () {
+  var ret = {};
+  ansiStyles.grey = ansiStyles.gray;
+  Object.keys(ansiStyles).forEach(function (key) {
+    ansiStyles[key].closeRe = new RegExp(escapeStringRegexp(ansiStyles[key].close), 'g');
+    ret[key] = {
+      get: function () {
+        return build(this._styles.concat(key));
+      }
+    };
+  });
+  return ret;
+})();
+
+var proto = defineProps(function colors() {}, styles);
+
+function applyStyle() {
+  var args = arguments;
+  var argsLen = args.length;
+  var str = argsLen !== 0 && String(arguments[0]);
+  if (argsLen > 1) {
+    for (var a = 1; a < argsLen; a++) {
+      str += ' ' + args[a];
+    }
+  }
+
+  if (!colors.enabled || !str) {
+    return str;
+  }
+
+  var nestedStyles = this._styles;
+
+  var i = nestedStyles.length;
+  while (i--) {
+    var code = ansiStyles[nestedStyles[i]];
+    str = code.open + str.replace(code.closeRe, code.open) + code.close;
+  }
+
+  return str;
+}
+
+function applyTheme (theme) {
+  for (var style in theme) {
+    (function(style){
+      colors[style] = function(str){
+        if (typeof theme[style] === 'object'){
+          var out = str;
+          for (var i in theme[style]){
+            out = colors[theme[style][i]](out);
+          }
+          return out;
+        }
+        return colors[theme[style]](str);
+      };
+    })(style)
+  }
+}
+
+colors.setTheme = function (theme) {
+  if (typeof theme === 'string') {
+    try {
+      colors.themes[theme] = require(theme);
+      applyTheme(colors.themes[theme]);
+      return colors.themes[theme];
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  } else {
+    applyTheme(theme);
+  }
+};
+
+function init() {
+  var ret = {};
+  Object.keys(styles).forEach(function (name) {
+    ret[name] = {
+      get: function () {
+        return build([name]);
+      }
+    };
+  });
+  return ret;
+}
+
+var sequencer = function sequencer (map, str) {
+  var exploded = str.split(""), i = 0;
+  exploded = exploded.map(map);
+  return exploded.join("");
+};
+
+// custom formatter methods
+colors.trap = require('./custom/trap');
+colors.zalgo = require('./custom/zalgo');
+
+// maps
+colors.maps = {};
+colors.maps.america = require('./maps/america');
+colors.maps.zebra = require('./maps/zebra');
+colors.maps.rainbow = require('./maps/rainbow');
+colors.maps.random = require('./maps/random')
+
+for (var map in colors.maps) {
+  (function(map){
+    colors[map] = function (str) {
+      return sequencer(colors.maps[map], str);
+    }
+  })(map)
+}
+
+defineProps(colors, init());
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\colors.js","/lme-core\\node_modules\\colors\\lib",undefined)
+},{"./custom/trap":38,"./custom/zalgo":39,"./maps/america":40,"./maps/rainbow":41,"./maps/random":42,"./maps/zebra":43,"./styles":44,"./system/supports-colors":45,"_process":79,"buffer":76}],38:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+module['exports'] = function runTheTrap (text, options) {
+  var result = "";
+  text = text || "Run the trap, drop the bass";
+  text = text.split('');
+  var trap = {
+    a: ["\u0040", "\u0104", "\u023a", "\u0245", "\u0394", "\u039b", "\u0414"],
+    b: ["\u00df", "\u0181", "\u0243", "\u026e", "\u03b2", "\u0e3f"],
+    c: ["\u00a9", "\u023b", "\u03fe"],
+    d: ["\u00d0", "\u018a", "\u0500" , "\u0501" ,"\u0502", "\u0503"],
+    e: ["\u00cb", "\u0115", "\u018e", "\u0258", "\u03a3", "\u03be", "\u04bc", "\u0a6c"],
+    f: ["\u04fa"],
+    g: ["\u0262"],
+    h: ["\u0126", "\u0195", "\u04a2", "\u04ba", "\u04c7", "\u050a"],
+    i: ["\u0f0f"],
+    j: ["\u0134"],
+    k: ["\u0138", "\u04a0", "\u04c3", "\u051e"],
+    l: ["\u0139"],
+    m: ["\u028d", "\u04cd", "\u04ce", "\u0520", "\u0521", "\u0d69"],
+    n: ["\u00d1", "\u014b", "\u019d", "\u0376", "\u03a0", "\u048a"],
+    o: ["\u00d8", "\u00f5", "\u00f8", "\u01fe", "\u0298", "\u047a", "\u05dd", "\u06dd", "\u0e4f"],
+    p: ["\u01f7", "\u048e"],
+    q: ["\u09cd"],
+    r: ["\u00ae", "\u01a6", "\u0210", "\u024c", "\u0280", "\u042f"],
+    s: ["\u00a7", "\u03de", "\u03df", "\u03e8"],
+    t: ["\u0141", "\u0166", "\u0373"],
+    u: ["\u01b1", "\u054d"],
+    v: ["\u05d8"],
+    w: ["\u0428", "\u0460", "\u047c", "\u0d70"],
+    x: ["\u04b2", "\u04fe", "\u04fc", "\u04fd"],
+    y: ["\u00a5", "\u04b0", "\u04cb"],
+    z: ["\u01b5", "\u0240"]
+  }
+  text.forEach(function(c){
+    c = c.toLowerCase();
+    var chars = trap[c] || [" "];
+    var rand = Math.floor(Math.random() * chars.length);
+    if (typeof trap[c] !== "undefined") {
+      result += trap[c][rand];
+    } else {
+      result += c;
+    }
+  });
+  return result;
+
+}
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\custom\\trap.js","/lme-core\\node_modules\\colors\\lib\\custom",undefined)
+},{"_process":79,"buffer":76}],39:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+// please no
+module['exports'] = function zalgo(text, options) {
+  text = text || "   he is here   ";
+  var soul = {
+    "up" : [
+      '̍', '̎', '̄', '̅',
+      '̿', '̑', '̆', '̐',
+      '͒', '͗', '͑', '̇',
+      '̈', '̊', '͂', '̓',
+      '̈', '͊', '͋', '͌',
+      '̃', '̂', '̌', '͐',
+      '̀', '́', '̋', '̏',
+      '̒', '̓', '̔', '̽',
+      '̉', 'ͣ', 'ͤ', 'ͥ',
+      'ͦ', 'ͧ', 'ͨ', 'ͩ',
+      'ͪ', 'ͫ', 'ͬ', 'ͭ',
+      'ͮ', 'ͯ', '̾', '͛',
+      '͆', '̚'
+    ],
+    "down" : [
+      '̖', '̗', '̘', '̙',
+      '̜', '̝', '̞', '̟',
+      '̠', '̤', '̥', '̦',
+      '̩', '̪', '̫', '̬',
+      '̭', '̮', '̯', '̰',
+      '̱', '̲', '̳', '̹',
+      '̺', '̻', '̼', 'ͅ',
+      '͇', '͈', '͉', '͍',
+      '͎', '͓', '͔', '͕',
+      '͖', '͙', '͚', '̣'
+    ],
+    "mid" : [
+      '̕', '̛', '̀', '́',
+      '͘', '̡', '̢', '̧',
+      '̨', '̴', '̵', '̶',
+      '͜', '͝', '͞',
+      '͟', '͠', '͢', '̸',
+      '̷', '͡', ' ҉'
+    ]
+  },
+  all = [].concat(soul.up, soul.down, soul.mid),
+  zalgo = {};
+
+  function randomNumber(range) {
+    var r = Math.floor(Math.random() * range);
+    return r;
+  }
+
+  function is_char(character) {
+    var bool = false;
+    all.filter(function (i) {
+      bool = (i === character);
+    });
+    return bool;
+  }
+  
+
+  function heComes(text, options) {
+    var result = '', counts, l;
+    options = options || {};
+    options["up"] =   typeof options["up"]   !== 'undefined' ? options["up"]   : true;
+    options["mid"] =  typeof options["mid"]  !== 'undefined' ? options["mid"]  : true;
+    options["down"] = typeof options["down"] !== 'undefined' ? options["down"] : true;
+    options["size"] = typeof options["size"] !== 'undefined' ? options["size"] : "maxi";
+    text = text.split('');
+    for (l in text) {
+      if (is_char(l)) {
+        continue;
+      }
+      result = result + text[l];
+      counts = {"up" : 0, "down" : 0, "mid" : 0};
+      switch (options.size) {
+      case 'mini':
+        counts.up = randomNumber(8);
+        counts.mid = randomNumber(2);
+        counts.down = randomNumber(8);
+        break;
+      case 'maxi':
+        counts.up = randomNumber(16) + 3;
+        counts.mid = randomNumber(4) + 1;
+        counts.down = randomNumber(64) + 3;
+        break;
+      default:
+        counts.up = randomNumber(8) + 1;
+        counts.mid = randomNumber(6) / 2;
+        counts.down = randomNumber(8) + 1;
+        break;
+      }
+
+      var arr = ["up", "mid", "down"];
+      for (var d in arr) {
+        var index = arr[d];
+        for (var i = 0 ; i <= counts[index]; i++) {
+          if (options[index]) {
+            result = result + soul[index][randomNumber(soul[index].length)];
+          }
+        }
+      }
+    }
+    return result;
+  }
+  // don't summon him
+  return heComes(text, options);
+}
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\custom\\zalgo.js","/lme-core\\node_modules\\colors\\lib\\custom",undefined)
+},{"_process":79,"buffer":76}],40:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+var colors = require('../colors');
+
+module['exports'] = (function() {
+  return function (letter, i, exploded) {
+    if(letter === " ") return letter;
+    switch(i%3) {
+      case 0: return colors.red(letter);
+      case 1: return colors.white(letter)
+      case 2: return colors.blue(letter)
+    }
+  }
+})();
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\maps\\america.js","/lme-core\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":37,"_process":79,"buffer":76}],41:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+var colors = require('../colors');
+
+module['exports'] = (function () {
+  var rainbowColors = ['red', 'yellow', 'green', 'blue', 'magenta']; //RoY G BiV
+  return function (letter, i, exploded) {
+    if (letter === " ") {
+      return letter;
+    } else {
+      return colors[rainbowColors[i++ % rainbowColors.length]](letter);
+    }
+  };
+})();
+
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\maps\\rainbow.js","/lme-core\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":37,"_process":79,"buffer":76}],42:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+var colors = require('../colors');
+
+module['exports'] = (function () {
+  var available = ['underline', 'inverse', 'grey', 'yellow', 'red', 'green', 'blue', 'white', 'cyan', 'magenta'];
+  return function(letter, i, exploded) {
+    return letter === " " ? letter : colors[available[Math.round(Math.random() * (available.length - 1))]](letter);
+  };
+})();
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\maps\\random.js","/lme-core\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":37,"_process":79,"buffer":76}],43:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+var colors = require('../colors');
+
+module['exports'] = function (letter, i, exploded) {
+  return i % 2 === 0 ? letter : colors.inverse(letter);
+};
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\maps\\zebra.js","/lme-core\\node_modules\\colors\\lib\\maps",undefined)
+},{"../colors":37,"_process":79,"buffer":76}],44:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*
+The MIT License (MIT)
+
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+*/
+
+var styles = {};
+module['exports'] = styles;
+
+var codes = {
+  reset: [0, 0],
+
+  bold: [1, 22],
+  dim: [2, 22],
+  italic: [3, 23],
+  underline: [4, 24],
+  inverse: [7, 27],
+  hidden: [8, 28],
+  strikethrough: [9, 29],
+
+  black: [30, 39],
+  red: [31, 39],
+  green: [32, 39],
+  yellow: [33, 39],
+  blue: [34, 39],
+  magenta: [35, 39],
+  cyan: [36, 39],
+  white: [37, 39],
+  gray: [90, 39],
+  grey: [90, 39],
+
+  bgBlack: [40, 49],
+  bgRed: [41, 49],
+  bgGreen: [42, 49],
+  bgYellow: [43, 49],
+  bgBlue: [44, 49],
+  bgMagenta: [45, 49],
+  bgCyan: [46, 49],
+  bgWhite: [47, 49],
+
+  // legacy styles for colors pre v1.0.0
+  blackBG: [40, 49],
+  redBG: [41, 49],
+  greenBG: [42, 49],
+  yellowBG: [43, 49],
+  blueBG: [44, 49],
+  magentaBG: [45, 49],
+  cyanBG: [46, 49],
+  whiteBG: [47, 49]
+
+};
+
+Object.keys(codes).forEach(function (key) {
+  var val = codes[key];
+  var style = styles[key] = [];
+  style.open = '\u001b[' + val[0] + 'm';
+  style.close = '\u001b[' + val[1] + 'm';
+});
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\styles.js","/lme-core\\node_modules\\colors\\lib",undefined)
+},{"_process":79,"buffer":76}],45:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*
+The MIT License (MIT)
+
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+*/
+
+var argv = process.argv;
+
+module.exports = (function () {
+  if (argv.indexOf('--no-color') !== -1 ||
+    argv.indexOf('--color=false') !== -1) {
+    return false;
+  }
+
+  if (argv.indexOf('--color') !== -1 ||
+    argv.indexOf('--color=true') !== -1 ||
+    argv.indexOf('--color=always') !== -1) {
+    return true;
+  }
+
+  if (process.stdout && !process.stdout.isTTY) {
+    return false;
+  }
+
+  if (process.platform === 'win32') {
+    return true;
+  }
+
+  if ('COLORTERM' in process.env) {
+    return true;
+  }
+
+  if (process.env.TERM === 'dumb') {
+    return false;
+  }
+
+  if (/^screen|^xterm|^vt100|color|ansi|cygwin|linux/i.test(process.env.TERM)) {
+    return true;
+  }
+
+  return false;
+})();
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\system\\supports-colors.js","/lme-core\\node_modules\\colors\\lib\\system",undefined)
+},{"_process":79,"buffer":76}],46:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+//
+// Remark: Requiring this file will use the "safe" colors API which will not touch String.prototype
+//
+//   var colors = require('colors/safe);
+//   colors.red("foo")
+//
+//
+var colors = require('./lib/colors');
+module['exports'] = colors;
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\safe.js","/lme-core\\node_modules\\colors",undefined)
+},{"./lib/colors":37,"_process":79,"buffer":76}],47:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*
+ * Date Format 1.2.3
+ * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
+ * MIT license
+ *
+ * Includes enhancements by Scott Trenda <scott.trenda.net>
+ * and Kris Kowal <cixar.com/~kris.kowal/>
+ *
+ * Accepts a date, a mask, or a date and a mask.
+ * Returns a formatted version of the given date.
+ * The date defaults to the current date/time.
+ * The mask defaults to dateFormat.masks.default.
+ */
+
+(function(global) {
+  'use strict';
+
+  var dateFormat = (function() {
+      var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZWN]|'[^']*'|'[^']*'/g;
+      var timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g;
+      var timezoneClip = /[^-+\dA-Z]/g;
+  
+      // Regexes and supporting functions are cached through closure
+      return function (date, mask, utc, gmt) {
+  
+        // You can't provide utc if you skip other args (use the 'UTC:' mask prefix)
+        if (arguments.length === 1 && kindOf(date) === 'string' && !/\d/.test(date)) {
+          mask = date;
+          date = undefined;
+        }
+  
+        date = date || new Date;
+  
+        if(!(date instanceof Date)) {
+          date = new Date(date);
+        }
+  
+        if (isNaN(date)) {
+          throw TypeError('Invalid date');
+        }
+  
+        mask = String(dateFormat.masks[mask] || mask || dateFormat.masks['default']);
+  
+        // Allow setting the utc/gmt argument via the mask
+        var maskSlice = mask.slice(0, 4);
+        if (maskSlice === 'UTC:' || maskSlice === 'GMT:') {
+          mask = mask.slice(4);
+          utc = true;
+          if (maskSlice === 'GMT:') {
+            gmt = true;
+          }
+        }
+  
+        var _ = utc ? 'getUTC' : 'get';
+        var d = date[_ + 'Date']();
+        var D = date[_ + 'Day']();
+        var m = date[_ + 'Month']();
+        var y = date[_ + 'FullYear']();
+        var H = date[_ + 'Hours']();
+        var M = date[_ + 'Minutes']();
+        var s = date[_ + 'Seconds']();
+        var L = date[_ + 'Milliseconds']();
+        var o = utc ? 0 : date.getTimezoneOffset();
+        var W = getWeek(date);
+        var N = getDayOfWeek(date);
+        var flags = {
+          d:    d,
+          dd:   pad(d),
+          ddd:  dateFormat.i18n.dayNames[D],
+          dddd: dateFormat.i18n.dayNames[D + 7],
+          m:    m + 1,
+          mm:   pad(m + 1),
+          mmm:  dateFormat.i18n.monthNames[m],
+          mmmm: dateFormat.i18n.monthNames[m + 12],
+          yy:   String(y).slice(2),
+          yyyy: y,
+          h:    H % 12 || 12,
+          hh:   pad(H % 12 || 12),
+          H:    H,
+          HH:   pad(H),
+          M:    M,
+          MM:   pad(M),
+          s:    s,
+          ss:   pad(s),
+          l:    pad(L, 3),
+          L:    pad(Math.round(L / 10)),
+          t:    H < 12 ? 'a'  : 'p',
+          tt:   H < 12 ? 'am' : 'pm',
+          T:    H < 12 ? 'A'  : 'P',
+          TT:   H < 12 ? 'AM' : 'PM',
+          Z:    gmt ? 'GMT' : utc ? 'UTC' : (String(date).match(timezone) || ['']).pop().replace(timezoneClip, ''),
+          o:    (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
+          S:    ['th', 'st', 'nd', 'rd'][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10],
+          W:    W,
+          N:    N
+        };
+  
+        return mask.replace(token, function (match) {
+          if (match in flags) {
+            return flags[match];
+          }
+          return match.slice(1, match.length - 1);
+        });
+      };
+    })();
+
+  dateFormat.masks = {
+    'default':               'ddd mmm dd yyyy HH:MM:ss',
+    'shortDate':             'm/d/yy',
+    'mediumDate':            'mmm d, yyyy',
+    'longDate':              'mmmm d, yyyy',
+    'fullDate':              'dddd, mmmm d, yyyy',
+    'shortTime':             'h:MM TT',
+    'mediumTime':            'h:MM:ss TT',
+    'longTime':              'h:MM:ss TT Z',
+    'isoDate':               'yyyy-mm-dd',
+    'isoTime':               'HH:MM:ss',
+    'isoDateTime':           'yyyy-mm-dd\'T\'HH:MM:sso',
+    'isoUtcDateTime':        'UTC:yyyy-mm-dd\'T\'HH:MM:ss\'Z\'',
+    'expiresHeaderFormat':   'ddd, dd mmm yyyy HH:MM:ss Z'
+  };
+
+  // Internationalization strings
+  dateFormat.i18n = {
+    dayNames: [
+      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+      'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+    ],
+    monthNames: [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+    ]
+  };
+
+function pad(val, len) {
+  val = String(val);
+  len = len || 2;
+  while (val.length < len) {
+    val = '0' + val;
+  }
+  return val;
+}
+
+/**
+ * Get the ISO 8601 week number
+ * Based on comments from
+ * http://techblog.procurios.nl/k/n618/news/view/33796/14863/Calculate-ISO-8601-week-and-year-in-javascript.html
+ *
+ * @param  {Object} `date`
+ * @return {Number}
+ */
+function getWeek(date) {
+  // Remove time components of date
+  var targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+  // Change date to Thursday same week
+  targetThursday.setDate(targetThursday.getDate() - ((targetThursday.getDay() + 6) % 7) + 3);
+
+  // Take January 4th as it is always in week 1 (see ISO 8601)
+  var firstThursday = new Date(targetThursday.getFullYear(), 0, 4);
+
+  // Change date to Thursday same week
+  firstThursday.setDate(firstThursday.getDate() - ((firstThursday.getDay() + 6) % 7) + 3);
+
+  // Check if daylight-saving-time-switch occured and correct for it
+  var ds = targetThursday.getTimezoneOffset() - firstThursday.getTimezoneOffset();
+  targetThursday.setHours(targetThursday.getHours() - ds);
+
+  // Number of weeks between target Thursday and first Thursday
+  var weekDiff = (targetThursday - firstThursday) / (86400000*7);
+  return 1 + Math.floor(weekDiff);
+}
+
+/**
+ * Get ISO-8601 numeric representation of the day of the week
+ * 1 (for Monday) through 7 (for Sunday)
+ * 
+ * @param  {Object} `date`
+ * @return {Number}
+ */
+function getDayOfWeek(date) {
+  var dow = date.getDay();
+  if(dow === 0) {
+    dow = 7;
+  }
+  return dow;
+}
+
+/**
+ * kind-of shortcut
+ * @param  {*} val
+ * @return {String}
+ */
+function kindOf(val) {
+  if (val === null) {
+    return 'null';
+  }
+
+  if (val === undefined) {
+    return 'undefined';
+  }
+
+  if (typeof val !== 'object') {
+    return typeof val;
+  }
+
+  if (Array.isArray(val)) {
+    return 'array';
+  }
+
+  return {}.toString.call(val)
+    .slice(8, -1).toLowerCase();
+};
+
+
+
+  if (typeof define === 'function' && define.amd) {
+    define(function () {
+      return dateFormat;
+    });
+  } else if (typeof exports === 'object') {
+    module.exports = dateFormat;
+  } else {
+    global.dateFormat = dateFormat;
+  }
+})(this);
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\dateformat\\lib\\dateformat.js","/lme-core\\node_modules\\dateformat\\lib",undefined)
+},{"_process":79,"buffer":76}],48:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+var tracer = require('tracer');
+var format = "HH.MM.ssl";
+var logLevel = process.env.ENV || 'info';
+var levels = {
+    debug: {
+        DEBUG: true,
+        TRACE: false,
+        INFO: false
+    },
+    info: {
+        DEBUG: false,
+        TRACE: false,
+        INFO: true
+    },
+    error: {
+        DEBUG: false,
+        TRACE: false,
+        INFO: false,
+        WARN: false
+    },
+    trace: {
+        DEBUG: true,
+        TRACE: true,
+        INFO: true
+    }
+}
+var console = tracer.colorConsole({
+    format: "{{timestamp}} ({{file}}:{{line}}) \t- {{message}}",
+    dateformat: format,
+    level: logLevel
+});
+console.DEBUG = levels[logLevel].DEBUG;
+console.INFO = levels[logLevel].INFO;
+console.TRACE = levels[logLevel].TRACE;
+module.exports = console;
+exports = console;
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\ff-log\\ff-log.js","/lme-core\\node_modules\\ff-log",undefined)
+},{"_process":79,"buffer":76,"tracer":55}],49:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*!
+* stack-adt
+* v0.2.3 - 2014-08-03
+* https://github.com/pasangsherpa/stack-adt
+* (c) Pasang Sherpa <pgyalzen@gmail.com> (https://github.com/pasangsherpa)
+* MIT License
+*/
+(function() {
+    'use strict';
+    var Stack = function(initialCapacity) {
+        var _initialCapacity = initialCapacity || Infinity;
+        var _elements = [];
+
+        function push(element) {
+            if (size() === _initialCapacity) {
+                throw new Error('push(): Stack is full.');
+            }
+            return _elements.push(element);
+        }
+
+        function pop() {
+            if (isEmpty()) {
+                throw new Error('pop(): Stack is empty.');
+            }
+            return _elements.pop();
+        }
+
+        function peek() {
+            if (isEmpty()) {
+                throw new Error('peek(): Stack is empty.');
+            }
+            return _elements[_elements.length - 1];
+        }
+
+        function isEmpty() {
+            return size() === 0;
+        }
+
+        function size() {
+            return _elements.length;
+        }
+
+        function empty() {
+            while (_elements.length) {
+                _elements.pop();
+            }
+        }
+
+        function Iterator() {
+            var counter = 0;
+
+            function hasNext() {
+                return _elements.length !== counter;
+            }
+
+            function next() {
+                if (!hasNext()) {
+                    throw new Error('next(): No such element.');
+                }
+                return _elements[_elements.length - 1 - counter++];
+            }
+            return {
+                hasNext: hasNext,
+                next: next
+            };
+        }
+
+        return {
+            push: push,
+            pop: pop,
+            peek: peek,
+            isEmpty: isEmpty,
+            size: size,
+            empty: empty,
+            iterator: new Iterator()
+        };
+    };
+
+    if (typeof define === 'function' && define.amd) {
+        define(function() {
+            return Stack;
+        });
+    } else if (typeof module !== 'undefined' && module.exports) {
+        module.exports = Stack;
+    } else {
+        window.Stack = Stack;
+    }
+})();
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\stack-adt\\dist\\stack-adt.js","/lme-core\\node_modules\\stack-adt\\dist",undefined)
+},{"_process":79,"buffer":76}],50:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+module.exports = require('./tinytim');
+
+/**
+ * Intermediate js cache.
+ * 
+ * @type Object
+ */
+
+var cache = {};
+
+/**
+ * Clear intermediate js cache.
+ * 
+ * @api public
+ */
+
+module.exports.clearCache = function() {
+	cache = {};
+};
+
+/**
+ * Render the given `str` of tim.
+ * 
+ * @param {String}
+ *            str
+ * @param {Object}
+ *            vars
+ * @return {String}
+ * @api public
+ */
+
+module.exports.render = module.exports.tim;
+
+
+/**
+ * Render an tim file at the given `path`.
+ * 
+ * @param {String}
+ *            path
+ * @param {Vars}
+ *            vars
+ * @param {Bool}
+ *            use cache or not
+ * @api public
+ */
+
+module.exports.renderFile = function(path, vars, useCache) {
+	var fs = require('fs');
+	var key = path + ':string';
+	var str = useCache ? cache[key]
+			|| (cache[key] = fs.readFileSync(path, 'utf8')) : fs
+			.readFileSync(path, 'utf8');
+
+	return module.exports.render(str, vars);
+};
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tinytim\\lib\\index.js","/lme-core\\node_modules\\tinytim\\lib",undefined)
+},{"./tinytim":51,"_process":79,"buffer":76,"fs":75}],51:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/*!
+ tinytim.js
+   github.com/premasagar/tim
+    A tiny, secure JavaScript micro-templating script.
+    by Premasagar Rose
+        dharmafly.com
+    license
+        opensource.org/licenses/mit-license.php
+    creates global object
+        tim
+    v0.3.0
+        
+	ported and modified by LI Long <lilong@gmail.com> 3/13/2012
+ */
+var start = exports.start  = "{{";
+var end = exports.end	 = "}}";
+        
+var tim = exports.tim = (function(){
+    "use strict";
+
+    var 
+        path    = "[a-z0-9_][\\.a-z0-9_]*", // e.g. config.person.name
+        undef;
+    
+    return function(template, data){
+        var pattern = new RegExp(exports.start + "\\s*("+ path +")\\s*" + exports.end, "gi");
+
+        // Merge data into the template string
+        return template.replace(pattern, function(tag, token){
+            var path = token.split("."),
+                len = path.length,
+                lookup = data,
+                i = 0;
+
+            for (; i < len; i++){
+                lookup = lookup[path[i]];
+                
+                // Property not found
+                if (lookup === undef){
+                    throw new Error("tim: '" + path[i] + "' not found in " + tag);
+                }
+                
+                // Return the required value
+                if (i === len - 1){
+                    return lookup;
+                }
+            }
+        });
+    };
+}());
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tinytim\\lib\\tinytim.js","/lme-core\\node_modules\\tinytim\\lib",undefined)
+},{"_process":79,"buffer":76}],52:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+var colors = require('colors/safe');
+module.exports = function(conf) {
+	return require('./console')({
+		filters : {
+			//log : do nothing
+			trace : colors.magenta,
+			debug : colors.cyan,
+			info : colors.green,
+			warn : colors.yellow,
+			error : colors.red.bold
+		}
+	}, conf);
+};
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\color_console.js","/lme-core\\node_modules\\tracer\\lib",undefined)
+},{"./console":53,"_process":79,"buffer":76,"colors/safe":46}],53:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+var tinytim = require('tinytim'), dateFormat = require('dateformat'), utils = require('./utils'), path = require('path'), settings = require('./settings').settings;
+
+var noop = function(){};
+
+var fwrap = function(fn){
+	return function(str){ return fn(str) };
+};
+
+// Stack trace format :
+// https://github.com/v8/v8/wiki/Stack%20Trace%20API
+var stackReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/i;
+var stackReg2 = /at\s+()(.*):(\d*):(\d*)/i;
+
+// main log method
+function logMain(config, level, title, format, filters, needstack, args) {
+	//check level of global settings
+	var gLevel = settings.level;
+	if (typeof (gLevel) == 'string')
+		gLevel = config.methods.indexOf(gLevel);
+	if (level < gLevel) { return; }
+
+	var data = {
+		timestamp : dateFormat(new Date(), config.dateformat),
+		message : "",
+		title : title,
+		level : level,
+		args : args
+	};
+	data.method = data.path = data.line = data.pos = data.file = '';
+
+	if (needstack) {
+		// get call stack, and analyze it
+		// get all file,method and line number
+		var stacklist = (new Error()).stack.split('\n').slice(3);
+		var s = stacklist[config.stackIndex] || stacklist[0],
+			sp = stackReg.exec(s) || stackReg2.exec(s);
+		if (sp && sp.length === 5) {
+			data.method = sp[1];
+			data.path = sp[2];
+			data.line = sp[3];
+			data.pos = sp[4];
+			data.file = path.basename(data.path);
+			data.stack = stacklist.join('\n');
+		}
+	}
+
+	config.preprocess(data);
+	var msg = utils.format.apply(config, data.args);
+	data.message = msg;
+
+	// call micro-template to ouput
+	data.output = tinytim.tim(format, data);
+
+	// process every filter method
+	var len = filters.length;
+	for ( var i = 0; i < len; i += 1) {
+		data.output = fwrap(filters[i])(data.output);
+		if (!data.output)
+			return data;
+		// cancel next process if return a false(include null, undefined)
+	}
+	// trans the final result
+	config.transport.forEach(function(tras) {
+		tras(data);
+	});
+	return data;
+}
+
+module.exports = (function() {
+	// default config
+	var _config = {
+		format : "{{timestamp}} <{{title}}> {{file}}:{{line}} ({{method}}) {{message}}",
+		dateformat : "isoDateTime",
+		preprocess : function(data) {
+		},
+		transport : function(data) {
+			if (data.level >= 4) { // warn and more critical
+				console.error(data.output);
+			} else {
+				console.log(data.output);
+			}
+		},
+		filters : [],
+		level : 'log',
+		methods : [ 'log', 'trace', 'debug', 'info', 'warn', 'error', 'fatal' ],
+		stackIndex : 0,		// get the specified index of stack as file information. It is userful for development package.
+		inspectOpt : {
+			showHidden : false, //if true then the object's non-enumerable properties will be shown too. Defaults to false
+			depth : 2 //tells inspect how many times to recurse while formatting the object. This is useful for inspecting large complicated objects. Defaults to 2. To make it recurse indefinitely pass null.
+		}
+	};
+
+	// union user's config and default
+	_config = utils.union(_config, arguments);
+
+	var _self = {};
+
+	_config.format = Array.isArray(_config.format) ? _config.format
+		: [ _config.format ];
+
+	_config.filters = Array.isArray(_config.filters) ? _config.filters
+		: [ _config.filters ];
+
+	_config.transport = Array.isArray(_config.transport) ? _config.transport : [_config.transport];
+
+	var fLen = _config.filters.length, lastFilter;
+	if (fLen > 0)
+		if (Object.prototype.toString.call(_config.filters[--fLen]) != '[object Function]') {
+			lastFilter = _config.filters[fLen];
+			_config.filters = _config.filters.slice(0, fLen);
+		}
+
+	if (typeof (_config.level) == 'string')
+		_config.level = _config.methods.indexOf(_config.level);
+
+	_config.methods.forEach(function(title, i) {
+		if (i < _config.level)
+			_self[title] = noop;
+		else {
+			var format = _config.format[0];
+			if (_config.format.length === 2 && _config.format[1][title])
+				format = _config.format[1][title];
+			var needstack = /{{(method|path|line|pos|file|stack)}}/i.test(format);
+
+			var filters;
+			if (lastFilter && lastFilter[title])
+				filters = Array.isArray(lastFilter[title]) ? lastFilter[title]
+					: [ lastFilter[title] ];
+			else
+				filters = _config.filters;
+
+			// interface
+			_self[title] = function() {
+				return logMain(_config, i, title, format, filters, needstack, arguments);
+			};
+		}
+	});
+
+	return _self;
+});
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\console.js","/lme-core\\node_modules\\tracer\\lib",undefined)
+},{"./settings":56,"./utils":57,"_process":79,"buffer":76,"dateformat":47,"path":78,"tinytim":50}],54:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+var fs = require('fs'), dateFormat = require('dateformat'), tinytim = require('tinytim'), utils = require('./utils'), spawn = require('child_process').spawn, spawnSync = require('child_process').spawnSync;
+var path = require('path');
+
+module.exports = function (conf) {
+    var _conf = {
+        root: '.',
+        logPathFormat: '{{root}}/{{prefix}}.{{date}}.log',
+        splitFormat: 'yyyymmdd',
+        allLogsFileName: false,
+        maxLogFiles: 10
+    };
+
+    _conf = utils.union(_conf, [conf]);
+
+    function LogFile(prefix, date) {
+        this.date = date;
+        this.path = tinytim.tim(_conf.logPathFormat, {root: _conf.root, prefix: prefix, date: date});
+        spawnSync('mkdir', ['-p', _conf.root]);
+        this.stream = fs.createWriteStream(this.path, {
+            flags: "a",
+            encoding: "utf8",
+            mode: parseInt('0644', 8)
+            // When engines node >= 4.0.0, following notation will be better:
+            //mode: 0o644
+        });
+    }
+
+    LogFile.prototype.write = function (str) {
+        this.stream.write(str + "\n");
+    };
+
+    LogFile.prototype.destroy = function () {
+        if (this.stream) {
+            this.stream.end();
+            this.stream.destroySoon();
+            this.stream = null;
+        }
+    };
+
+    var _logMap = {};
+
+    function _push2File(str, title) {
+        if (_conf.allLogsFileName) {
+            var allLogFile = _logMap.allLogFile, now = dateFormat(new Date(), _conf.splitFormat);
+            if (allLogFile && allLogFile.date != now) {
+                allLogFile.destroy();
+                allLogFile = null;
+            }
+            if (!allLogFile) {
+                allLogFile = _logMap.allLogFile = new LogFile(_conf.allLogsFileName, now);
+                spawn('find', ['./', '-type', 'f', '-name', '*.log', '-mtime', '+' + _conf.maxLogFiles, '-exec', 'rm', '{}', '\;']);
+            }
+            allLogFile.write(str);
+        } else {
+            var logFile = _logMap[title], now = dateFormat(new Date(), _conf.splitFormat);
+            if (logFile && logFile.date != now) {
+                logFile.destroy();
+                logFile = null;
+            }
+            if (!logFile) {
+                logFile = _logMap[title] = new LogFile(title, now);
+                spawn('find', [_conf.root, '-type', 'f', '-name', '*.log', '-mtime', '+' + _conf.maxLogFiles, '-exec', 'rm', '{}', '\;']);
+            }
+            logFile.write(str);
+        }
+    }
+
+    function dailyFileTransport(data) {
+        _push2File(data.output, data.title);
+    }
+
+    if (conf.transport) {
+        conf.transport = Array.isArray(conf.transport) ? conf.transport : [conf.transport];
+        conf.transport.push(dailyFileTransport)
+    } else {
+        conf.transport = [dailyFileTransport];
+    }
+    return require('./console')(conf);
+};
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\dailyfile.js","/lme-core\\node_modules\\tracer\\lib",undefined)
+},{"./console":53,"./utils":57,"_process":79,"buffer":76,"child_process":75,"dateformat":47,"fs":75,"path":78,"tinytim":50}],55:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+exports.console = require('./console');
+exports.colorConsole = require('./color_console');
+exports.dailyfile = require('./dailyfile');
+
+//global settings
+var settings = require('./settings');
+exports.close = settings.close;
+exports.setLevel = settings.setLevel;
+exports.getLevel = settings.getLevel;
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\index.js","/lme-core\\node_modules\\tracer\\lib",undefined)
+},{"./color_console":52,"./console":53,"./dailyfile":54,"./settings":56,"_process":79,"buffer":76}],56:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+var settings = {
+	level : undefined
+}
+
+//end all of output
+var close = function(){
+	settings.level = Number.MAX_VALUE;
+}
+
+//dynamically change the log level, all of output
+var setLevel = function(level){
+	settings.level = level;
+}
+
+//get the current log level
+var getLevel = function(){
+	return settings.level;
+}
+
+
+exports.settings = settings;
+exports.close = close;
+exports.setLevel = setLevel;
+exports.getLevel = getLevel;
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\settings.js","/lme-core\\node_modules\\tracer\\lib",undefined)
+},{"_process":79,"buffer":76}],57:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+"use strict";
+exports.union = function(obj, args) {
+	for (var i = 0, len = args.length; i < len; i += 1) {
+		var source = args[i];
+		for ( var prop in source) {
+			obj[prop] = source[prop];
+		}
+	}
+	return obj;
+};
+
+var formatRegExp = /%[sdjt]/g;
+var util = require('util');
+exports.format = function(f) {
+	var inspectOpt = this.inspectOpt;
+	var args = arguments;
+	var i = 0;
+
+	if (typeof f !== 'string') {
+		var objects = [];
+		for (; i < args.length; i++) {
+			objects.push(util.inspect(args[i], inspectOpt));
+		}
+		return objects.join(' ');
+	}
+
+	i = 1;
+	var str = String(f).replace(formatRegExp, function(x) {
+		switch (x) {
+		case '%s':
+			return String(args[i++]);
+		case '%d':
+			return Number(args[i++]);
+		case '%j':
+			try {
+			    if (args[i] instanceof Error) {
+				return JSON.stringify(args[i++], ['message', 'stack', 'type', 'name']);
+        		    } else {
+            			return JSON.stringify(args[i++]);
+        		    }
+			} catch(e) {
+				return '[Circular]';
+			}
+		case '%t':
+			return util.inspect(args[i++], inspectOpt);
+		default:
+			return x;
+		}
+	});
+	for ( var len = args.length, x = args[i]; i < len; x = args[++i]) {
+		if (x === null || typeof x !== 'object') {
+			str += ' ' + x;
+		} else {
+			str += ' ' + util.inspect(x, inspectOpt);
+		}
+	}
+	return str;
+};
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\utils.js","/lme-core\\node_modules\\tracer\\lib",undefined)
+},{"_process":79,"buffer":76,"util":82}],58:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var assert = require("assert")
 var log = require('ff-log')
@@ -19075,8 +20599,8 @@ simplified.min = simplified.Min;
 simplified.max = simplified.Max;
 simplified.ABS = simplified.Abs;
 module.exports = simplified;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\ASTPreparser.js","/lme-core\\fesjs",undefined)
-},{"../../ast-node-utils/index":3,"_process":79,"assert":73,"buffer":76,"escodegen":75,"ff-log":63}],37:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\ASTPreparser.js","/lme-core\\src",undefined)
+},{"../../ast-node-utils/index":3,"_process":79,"assert":73,"buffer":76,"escodegen":75,"ff-log":48}],59:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Bridge between FormulaService,PropertiesAssembler and FunctionMap
@@ -19267,8 +20791,8 @@ FESFacade.updateValueMap = function(values) {
 FESFacade.visit = PropertiesAssembler.visitProperty;
 FESFacade.findAllInSolution = PropertiesAssembler.findAllInSolution;
 module.exports = FESFacade;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\FESFacade.js","/lme-core\\fesjs",undefined)
-},{"./FormulaService":39,"./FunctionMap":40,"./PropertiesAssembler":44,"_process":79,"buffer":76,"ff-log":63}],38:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\FESFacade.js","/lme-core\\src",undefined)
+},{"./FormulaService":61,"./FunctionMap":62,"./PropertiesAssembler":66,"_process":79,"buffer":76,"ff-log":48}],60:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Bootstrap formula's
@@ -19792,8 +21316,8 @@ FormulaBootstrap.prototype.initStateBootstrap = function(configs) {
     }
 };
 module.exports = FormulaBootstrap.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\FormulaBootstrap.js","/lme-core\\fesjs",undefined)
-},{"../../ast-node-utils/index":3,"./ASTPreparser":36,"_process":79,"assert":73,"buffer":76,"escodegen":75,"esprima":75,"ff-log":63}],39:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\FormulaBootstrap.js","/lme-core\\src",undefined)
+},{"../../ast-node-utils/index":3,"./ASTPreparser":58,"_process":79,"assert":73,"buffer":76,"escodegen":75,"esprima":75,"ff-log":48}],61:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var log = require('ff-log');
 var AST = require('../../ast-node-utils/index').ast;
@@ -19985,8 +21509,8 @@ FormulaService.prototype.initVariables = function(variables) {
     }
 }
 module.exports = FormulaService.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\FormulaService.js","/lme-core\\fesjs",undefined)
-},{"../../ast-node-utils/index":3,"_process":79,"assert":73,"buffer":76,"escodegen":75,"ff-log":63}],40:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\FormulaService.js","/lme-core\\src",undefined)
+},{"../../ast-node-utils/index":3,"_process":79,"assert":73,"buffer":76,"escodegen":75,"ff-log":48}],62:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var log = require('ff-log')
 
@@ -20071,8 +21595,8 @@ fm.prototype.moveFunction = function(oldFormula, newFormula) {
     }
 };
 module.exports = fm.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\FunctionMap.js","/lme-core\\fesjs",undefined)
-},{"_process":79,"buffer":76,"ff-log":63}],41:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\FunctionMap.js","/lme-core\\src",undefined)
+},{"_process":79,"buffer":76,"ff-log":48}],63:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Just a Javascript Native Object visitor
@@ -20245,8 +21769,8 @@ module.exports = {
     find: find,
     findPredicate: findPredicate
 };
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\JSVisitor.js","/lme-core\\fesjs",undefined)
-},{"_process":79,"buffer":76}],42:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\JSVisitor.js","/lme-core\\src",undefined)
+},{"_process":79,"buffer":76}],64:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  This class should have less business logic,
@@ -20551,8 +22075,8 @@ JSWorkBook.prototype.getAllValues = function() {
     return FESFacade.getAllValues(this.context.values);
 };
 module.exports = JSWorkBook;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\JSWorkBook.js","/lme-core\\fesjs",undefined)
-},{"../../ast-node-utils/index":3,"./FESFacade":37,"./SolutionFacade":46,"./XAxis":48,"./YAxis":49,"_process":79,"buffer":76,"ff-log":63}],43:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\JSWorkBook.js","/lme-core\\src",undefined)
+},{"../../ast-node-utils/index":3,"./FESFacade":59,"./SolutionFacade":68,"./XAxis":70,"./YAxis":71,"_process":79,"buffer":76,"ff-log":48}],65:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  register/resolve echange modules e.g. ffl,screendefinition,presentation
@@ -20581,8 +22105,8 @@ ParserService.prototype.findParser = function (parserName) {
     return parsers[parserName];
 }
 module.exports = ParserService.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\ParserService.js","/lme-core\\fesjs",undefined)
-},{"_process":79,"buffer":76}],44:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\ParserService.js","/lme-core\\src",undefined)
+},{"_process":79,"buffer":76}],66:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 function PropertiesAssembler() {
 }
@@ -20761,8 +22285,8 @@ function visitInternal(node, func, depth) {
 PropertiesAssembler.prototype.getRootProperty = getRootNode;
 PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 module.exports = PropertiesAssembler.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\PropertiesAssembler.js","/lme-core\\fesjs",undefined)
-},{"_process":79,"buffer":76}],45:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\PropertiesAssembler.js","/lme-core\\src",undefined)
+},{"_process":79,"buffer":76}],67:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Parsers/Exchange modules create Solution objects filled with generic metadata (formula's,properties concerning a variable)
@@ -20893,8 +22417,8 @@ Solution.prototype.size = function () {
     return this.nodes.length;
 }
 module.exports = Solution;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\Solution.js","/lme-core\\fesjs",undefined)
-},{"_process":79,"buffer":76}],46:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\Solution.js","/lme-core\\src",undefined)
+},{"_process":79,"buffer":76}],68:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Solution encapsulation
@@ -21052,8 +22576,8 @@ SolutionFacade.prototype.addVariables = FormulaService.addVariables
 SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex;
 FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
 module.exports = SolutionFacade.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\SolutionFacade.js","/lme-core\\fesjs",undefined)
-},{"./FormulaBootstrap":38,"./FormulaService":39,"./FunctionMap":40,"./ParserService":43,"./PropertiesAssembler":44,"./Solution":45,"_process":79,"buffer":76,"esprima":75,"ff-log":63}],47:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\SolutionFacade.js","/lme-core\\src",undefined)
+},{"./FormulaBootstrap":60,"./FormulaService":61,"./FunctionMap":62,"./ParserService":65,"./PropertiesAssembler":66,"./Solution":67,"_process":79,"buffer":76,"esprima":75,"ff-log":48}],69:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 function TupleIndexConverter() {
 }
@@ -21069,8 +22593,8 @@ TupleIndexConverter.prototype.getIndexNumber = function (context, tupleindex, va
 };
 module.exports = TupleIndexConverter.prototype;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\TupleIndexConverter.js","/lme-core\\fesjs",undefined)
-},{"_process":79,"buffer":76}],48:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\TupleIndexConverter.js","/lme-core\\src",undefined)
+},{"_process":79,"buffer":76}],70:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* 
  *  Here we will do column/timeline ordering, referencing previous and adjacent columns
@@ -21475,8 +22999,8 @@ CalculationDocument.prototype = calculateCalculationDocument(importData);
 // tricks here.. but possible from here only prevbkyear, might consider removing *[agg*], only keep the *[top*]
 // currently we have max7 year 10timelines
 module.exports = CalculationDocument.prototype;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\XAxis.js","/lme-core\\fesjs",undefined)
-},{"_process":79,"buffer":76,"ff-log":63}],49:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\XAxis.js","/lme-core\\src",undefined)
+},{"_process":79,"buffer":76,"ff-log":48}],71:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Tuple concept
@@ -21560,8 +23084,8 @@ TINSTANCEBYNAME = function(v, fId, y, name) {
 //17bit for tuples, 8*8*8*8 (16bit)
 //when entering tuple in tuple y.children should be called.
 module.exports = all;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\YAxis.js","/lme-core\\fesjs",undefined)
-},{"_process":79,"buffer":76}],50:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\YAxis.js","/lme-core\\src",undefined)
+},{"_process":79,"buffer":76}],72:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //app scope context
 var ApplicationContext = {
@@ -21599,1532 +23123,8 @@ Context.prototype.hasChanges = function() {
 }
 module.exports = Context
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\fesjs\\fescontext.js","/lme-core\\fesjs",undefined)
-},{"_process":79,"buffer":76}],51:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/* jshint node: true */
-/**
- * user friendly API
- */
-require("./exchange_modules/ffl/fflparser");//just let it inject into the FESFacade
-//require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
-var log = require("ff-log");
-var WorkBook = require("./fesjs/JSWorkBook");
-var FESContext = require("./fesjs/fescontext");
-var TupleIndexConverter = require("./fesjs/TupleIndexConverter");
-
-function FESApi() {
-}
-
-FESApi.prototype.init = function(data) {
-    var JSWorkBook = new WorkBook(new FESContext());
-    JSWorkBook.importSolution(data, "ffl");
-    var validate = JSWorkBook.validateImportedSolution();
-    JSWorkBook.fixProblemsInImportedSolution();
-    var validateFeedback = JSWorkBook.validateImportedSolution();
-    if (validateFeedback.valid) {
-        //valid
-        log.debug("Initialized model [" + JSWorkBook.getSolutionName() + "]");
-    } else {
-        log.error(validateFeedback);
-        throw Error("unable to initialize");
-    }
-    return JSWorkBook.getRootSolutionProperty().solutionName;
-};
-FESApi.prototype.addFunctions = function(plugin) {
-    var functions = [];
-    for (var functionName in plugin.entries) {
-        functions.push(functionName);
-        global[functionName] = plugin.entries[functionName];
-    }
-    log.debug('Added fes-plugin [%s] functions [%s]', plugin.name, functions);
-};
-/**
- * rowId - VariableName
- * @Optional value - new value
- * TODO: move to tupleDefinition to support multiple tuple definition/tuple in tuple
- */
-// Convert tuple index to tuple number
-FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tupleindex) {
-    columncontext = columncontext || 0;
-    if (tupleindex !== undefined) {
-        tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
-    }
-    var fesContext = new FESContext();
-    fesContext.values = context.values;
-    var JSWorkBook = new WorkBook(fesContext);
-    JSWorkBook.columns = context.columns || 2;
-    JSWorkBook.properties = context.properties || JSWorkBook.properties;
-    //prepare the workbook and context to match current appscope
-    JSWorkBook.updateValues();
-    //setvalue
-    if (value !== undefined) {
-        //choice(select) requests
-        if (JSWorkBook.fetchSolutionNode(rowId, 'choices')) {
-            var choices = JSWorkBook.getSolutionPropertyValue(rowId, 'choices');
-            var choiceValue = choices.lookup('value', value);
-            if (choiceValue === undefined) {
-                log.debug('Could not find [%s] choice [%s] in %s. using [%s] to be value', rowId, value, JSON.stringify(choices), value);
-            } else {
-                value = isNaN(choiceValue.name) ? choiceValue.name : parseInt(choiceValue.name);
-            }
-        }
-        JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, tupleindex);
-
-        var values = [];
-        var rootNode = JSWorkBook.getSolutionNode(rowId);
-
-        JSWorkBook.visitProperties(rootNode, function(node, yax, treeDepth) {
-            values = values.concat(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
-        }, 0);
-        return values;
-    } else {
-        //getValue
-        var values = [];
-        var rootNode = JSWorkBook.getSolutionNode(rowId);
-        if (rootNode) {
-            JSWorkBook.visitProperties(rootNode, function(node, yax) {
-                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
-            });
-        } else {
-            values.push({
-                variable: rowId
-            });
-        }
-        return values;
-    }
-};
-
-/**
- * Given properties in workbook return all values for given columns
- * @param workbook
- * @param rowId
- * @param columncontext
- * @returns {Array}
- */
-function getEntry(workbook, rowId, columncontext, yAxis) {
-    var outputData = [];
-    var columnStart = columncontext;
-    var columnEnd = workbook.columns;
-    var variable = workbook.getSolutionNode(rowId, 'value');
-
-    if (variable && variable.frequency === 'document') {
-        columnEnd = columnStart;
-    }
-    var tupleStart = 0;
-    var tupleEnd = 0;
-
-    // If frequency = column: return multiple columns
-    for (var xAxisCounter = columnStart; xAxisCounter <= columnEnd; xAxisCounter++) {
-        var dataEnty = {};
-        outputData.push(dataEnty);
-
-        // For properties of the variable
-        for (var type in workbook.properties) {
-            dataEnty[type] = workbook.getSolutionPropertyValue(rowId, type, xAxisCounter, yAxis);
-
-            if (columnStart !== columnEnd || columnStart > 0) {
-                dataEnty.column = xAxisCounter;
-            }
-            dataEnty.variable = variable.rowId;
-            if (variable.tuple) {
-                dataEnty.tupleIndex = yAxis.index;
-            }
-            dataEnty.hash = yAxis.hash + xAxisCounter + 0;
-        }
-    }
-    //if there is only one column, the exported value is not presented to be an array
-    if (columnStart == columnEnd) {
-        outputData = outputData[0];
-    }
-    return outputData;
-}
-
-exports.JSWorkbook = WorkBook;
-exports.LMEContext = WorkBook;
-exports.fesjs = FESApi.prototype;
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\ff-fes.js","/lme-core",undefined)
-},{"./exchange_modules/ffl/fflparser":31,"./fesjs/JSWorkBook":42,"./fesjs/TupleIndexConverter":47,"./fesjs/fescontext":50,"_process":79,"buffer":76,"ff-log":63}],52:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*
-
-The MIT License (MIT)
-
-Original Library 
-  - Copyright (c) Marak Squires
-
-Additional functionality
- - Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*/
-
-var colors = {};
-module['exports'] = colors;
-
-colors.themes = {};
-
-var ansiStyles = colors.styles = require('./styles');
-var defineProps = Object.defineProperties;
-
-colors.supportsColor = require('./system/supports-colors');
-
-if (typeof colors.enabled === "undefined") {
-  colors.enabled = colors.supportsColor;
-}
-
-colors.stripColors = colors.strip = function(str){
-  return ("" + str).replace(/\x1B\[\d+m/g, '');
-};
-
-
-var stylize = colors.stylize = function stylize (str, style) {
-  if (!colors.enabled) {
-    return str+'';
-  }
-
-  return ansiStyles[style].open + str + ansiStyles[style].close;
-}
-
-var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
-var escapeStringRegexp = function (str) {
-  if (typeof str !== 'string') {
-    throw new TypeError('Expected a string');
-  }
-  return str.replace(matchOperatorsRe,  '\\$&');
-}
-
-function build(_styles) {
-  var builder = function builder() {
-    return applyStyle.apply(builder, arguments);
-  };
-  builder._styles = _styles;
-  // __proto__ is used because we must return a function, but there is
-  // no way to create a function with a different prototype.
-  builder.__proto__ = proto;
-  return builder;
-}
-
-var styles = (function () {
-  var ret = {};
-  ansiStyles.grey = ansiStyles.gray;
-  Object.keys(ansiStyles).forEach(function (key) {
-    ansiStyles[key].closeRe = new RegExp(escapeStringRegexp(ansiStyles[key].close), 'g');
-    ret[key] = {
-      get: function () {
-        return build(this._styles.concat(key));
-      }
-    };
-  });
-  return ret;
-})();
-
-var proto = defineProps(function colors() {}, styles);
-
-function applyStyle() {
-  var args = arguments;
-  var argsLen = args.length;
-  var str = argsLen !== 0 && String(arguments[0]);
-  if (argsLen > 1) {
-    for (var a = 1; a < argsLen; a++) {
-      str += ' ' + args[a];
-    }
-  }
-
-  if (!colors.enabled || !str) {
-    return str;
-  }
-
-  var nestedStyles = this._styles;
-
-  var i = nestedStyles.length;
-  while (i--) {
-    var code = ansiStyles[nestedStyles[i]];
-    str = code.open + str.replace(code.closeRe, code.open) + code.close;
-  }
-
-  return str;
-}
-
-function applyTheme (theme) {
-  for (var style in theme) {
-    (function(style){
-      colors[style] = function(str){
-        if (typeof theme[style] === 'object'){
-          var out = str;
-          for (var i in theme[style]){
-            out = colors[theme[style][i]](out);
-          }
-          return out;
-        }
-        return colors[theme[style]](str);
-      };
-    })(style)
-  }
-}
-
-colors.setTheme = function (theme) {
-  if (typeof theme === 'string') {
-    try {
-      colors.themes[theme] = require(theme);
-      applyTheme(colors.themes[theme]);
-      return colors.themes[theme];
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  } else {
-    applyTheme(theme);
-  }
-};
-
-function init() {
-  var ret = {};
-  Object.keys(styles).forEach(function (name) {
-    ret[name] = {
-      get: function () {
-        return build([name]);
-      }
-    };
-  });
-  return ret;
-}
-
-var sequencer = function sequencer (map, str) {
-  var exploded = str.split(""), i = 0;
-  exploded = exploded.map(map);
-  return exploded.join("");
-};
-
-// custom formatter methods
-colors.trap = require('./custom/trap');
-colors.zalgo = require('./custom/zalgo');
-
-// maps
-colors.maps = {};
-colors.maps.america = require('./maps/america');
-colors.maps.zebra = require('./maps/zebra');
-colors.maps.rainbow = require('./maps/rainbow');
-colors.maps.random = require('./maps/random')
-
-for (var map in colors.maps) {
-  (function(map){
-    colors[map] = function (str) {
-      return sequencer(colors.maps[map], str);
-    }
-  })(map)
-}
-
-defineProps(colors, init());
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\colors.js","/lme-core\\node_modules\\colors\\lib",undefined)
-},{"./custom/trap":53,"./custom/zalgo":54,"./maps/america":55,"./maps/rainbow":56,"./maps/random":57,"./maps/zebra":58,"./styles":59,"./system/supports-colors":60,"_process":79,"buffer":76}],53:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-module['exports'] = function runTheTrap (text, options) {
-  var result = "";
-  text = text || "Run the trap, drop the bass";
-  text = text.split('');
-  var trap = {
-    a: ["\u0040", "\u0104", "\u023a", "\u0245", "\u0394", "\u039b", "\u0414"],
-    b: ["\u00df", "\u0181", "\u0243", "\u026e", "\u03b2", "\u0e3f"],
-    c: ["\u00a9", "\u023b", "\u03fe"],
-    d: ["\u00d0", "\u018a", "\u0500" , "\u0501" ,"\u0502", "\u0503"],
-    e: ["\u00cb", "\u0115", "\u018e", "\u0258", "\u03a3", "\u03be", "\u04bc", "\u0a6c"],
-    f: ["\u04fa"],
-    g: ["\u0262"],
-    h: ["\u0126", "\u0195", "\u04a2", "\u04ba", "\u04c7", "\u050a"],
-    i: ["\u0f0f"],
-    j: ["\u0134"],
-    k: ["\u0138", "\u04a0", "\u04c3", "\u051e"],
-    l: ["\u0139"],
-    m: ["\u028d", "\u04cd", "\u04ce", "\u0520", "\u0521", "\u0d69"],
-    n: ["\u00d1", "\u014b", "\u019d", "\u0376", "\u03a0", "\u048a"],
-    o: ["\u00d8", "\u00f5", "\u00f8", "\u01fe", "\u0298", "\u047a", "\u05dd", "\u06dd", "\u0e4f"],
-    p: ["\u01f7", "\u048e"],
-    q: ["\u09cd"],
-    r: ["\u00ae", "\u01a6", "\u0210", "\u024c", "\u0280", "\u042f"],
-    s: ["\u00a7", "\u03de", "\u03df", "\u03e8"],
-    t: ["\u0141", "\u0166", "\u0373"],
-    u: ["\u01b1", "\u054d"],
-    v: ["\u05d8"],
-    w: ["\u0428", "\u0460", "\u047c", "\u0d70"],
-    x: ["\u04b2", "\u04fe", "\u04fc", "\u04fd"],
-    y: ["\u00a5", "\u04b0", "\u04cb"],
-    z: ["\u01b5", "\u0240"]
-  }
-  text.forEach(function(c){
-    c = c.toLowerCase();
-    var chars = trap[c] || [" "];
-    var rand = Math.floor(Math.random() * chars.length);
-    if (typeof trap[c] !== "undefined") {
-      result += trap[c][rand];
-    } else {
-      result += c;
-    }
-  });
-  return result;
-
-}
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\custom\\trap.js","/lme-core\\node_modules\\colors\\lib\\custom",undefined)
-},{"_process":79,"buffer":76}],54:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-// please no
-module['exports'] = function zalgo(text, options) {
-  text = text || "   he is here   ";
-  var soul = {
-    "up" : [
-      '̍', '̎', '̄', '̅',
-      '̿', '̑', '̆', '̐',
-      '͒', '͗', '͑', '̇',
-      '̈', '̊', '͂', '̓',
-      '̈', '͊', '͋', '͌',
-      '̃', '̂', '̌', '͐',
-      '̀', '́', '̋', '̏',
-      '̒', '̓', '̔', '̽',
-      '̉', 'ͣ', 'ͤ', 'ͥ',
-      'ͦ', 'ͧ', 'ͨ', 'ͩ',
-      'ͪ', 'ͫ', 'ͬ', 'ͭ',
-      'ͮ', 'ͯ', '̾', '͛',
-      '͆', '̚'
-    ],
-    "down" : [
-      '̖', '̗', '̘', '̙',
-      '̜', '̝', '̞', '̟',
-      '̠', '̤', '̥', '̦',
-      '̩', '̪', '̫', '̬',
-      '̭', '̮', '̯', '̰',
-      '̱', '̲', '̳', '̹',
-      '̺', '̻', '̼', 'ͅ',
-      '͇', '͈', '͉', '͍',
-      '͎', '͓', '͔', '͕',
-      '͖', '͙', '͚', '̣'
-    ],
-    "mid" : [
-      '̕', '̛', '̀', '́',
-      '͘', '̡', '̢', '̧',
-      '̨', '̴', '̵', '̶',
-      '͜', '͝', '͞',
-      '͟', '͠', '͢', '̸',
-      '̷', '͡', ' ҉'
-    ]
-  },
-  all = [].concat(soul.up, soul.down, soul.mid),
-  zalgo = {};
-
-  function randomNumber(range) {
-    var r = Math.floor(Math.random() * range);
-    return r;
-  }
-
-  function is_char(character) {
-    var bool = false;
-    all.filter(function (i) {
-      bool = (i === character);
-    });
-    return bool;
-  }
-  
-
-  function heComes(text, options) {
-    var result = '', counts, l;
-    options = options || {};
-    options["up"] =   typeof options["up"]   !== 'undefined' ? options["up"]   : true;
-    options["mid"] =  typeof options["mid"]  !== 'undefined' ? options["mid"]  : true;
-    options["down"] = typeof options["down"] !== 'undefined' ? options["down"] : true;
-    options["size"] = typeof options["size"] !== 'undefined' ? options["size"] : "maxi";
-    text = text.split('');
-    for (l in text) {
-      if (is_char(l)) {
-        continue;
-      }
-      result = result + text[l];
-      counts = {"up" : 0, "down" : 0, "mid" : 0};
-      switch (options.size) {
-      case 'mini':
-        counts.up = randomNumber(8);
-        counts.mid = randomNumber(2);
-        counts.down = randomNumber(8);
-        break;
-      case 'maxi':
-        counts.up = randomNumber(16) + 3;
-        counts.mid = randomNumber(4) + 1;
-        counts.down = randomNumber(64) + 3;
-        break;
-      default:
-        counts.up = randomNumber(8) + 1;
-        counts.mid = randomNumber(6) / 2;
-        counts.down = randomNumber(8) + 1;
-        break;
-      }
-
-      var arr = ["up", "mid", "down"];
-      for (var d in arr) {
-        var index = arr[d];
-        for (var i = 0 ; i <= counts[index]; i++) {
-          if (options[index]) {
-            result = result + soul[index][randomNumber(soul[index].length)];
-          }
-        }
-      }
-    }
-    return result;
-  }
-  // don't summon him
-  return heComes(text, options);
-}
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\custom\\zalgo.js","/lme-core\\node_modules\\colors\\lib\\custom",undefined)
-},{"_process":79,"buffer":76}],55:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var colors = require('../colors');
-
-module['exports'] = (function() {
-  return function (letter, i, exploded) {
-    if(letter === " ") return letter;
-    switch(i%3) {
-      case 0: return colors.red(letter);
-      case 1: return colors.white(letter)
-      case 2: return colors.blue(letter)
-    }
-  }
-})();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\maps\\america.js","/lme-core\\node_modules\\colors\\lib\\maps",undefined)
-},{"../colors":52,"_process":79,"buffer":76}],56:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var colors = require('../colors');
-
-module['exports'] = (function () {
-  var rainbowColors = ['red', 'yellow', 'green', 'blue', 'magenta']; //RoY G BiV
-  return function (letter, i, exploded) {
-    if (letter === " ") {
-      return letter;
-    } else {
-      return colors[rainbowColors[i++ % rainbowColors.length]](letter);
-    }
-  };
-})();
-
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\maps\\rainbow.js","/lme-core\\node_modules\\colors\\lib\\maps",undefined)
-},{"../colors":52,"_process":79,"buffer":76}],57:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var colors = require('../colors');
-
-module['exports'] = (function () {
-  var available = ['underline', 'inverse', 'grey', 'yellow', 'red', 'green', 'blue', 'white', 'cyan', 'magenta'];
-  return function(letter, i, exploded) {
-    return letter === " " ? letter : colors[available[Math.round(Math.random() * (available.length - 1))]](letter);
-  };
-})();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\maps\\random.js","/lme-core\\node_modules\\colors\\lib\\maps",undefined)
-},{"../colors":52,"_process":79,"buffer":76}],58:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var colors = require('../colors');
-
-module['exports'] = function (letter, i, exploded) {
-  return i % 2 === 0 ? letter : colors.inverse(letter);
-};
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\maps\\zebra.js","/lme-core\\node_modules\\colors\\lib\\maps",undefined)
-},{"../colors":52,"_process":79,"buffer":76}],59:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*
-The MIT License (MIT)
-
-Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*/
-
-var styles = {};
-module['exports'] = styles;
-
-var codes = {
-  reset: [0, 0],
-
-  bold: [1, 22],
-  dim: [2, 22],
-  italic: [3, 23],
-  underline: [4, 24],
-  inverse: [7, 27],
-  hidden: [8, 28],
-  strikethrough: [9, 29],
-
-  black: [30, 39],
-  red: [31, 39],
-  green: [32, 39],
-  yellow: [33, 39],
-  blue: [34, 39],
-  magenta: [35, 39],
-  cyan: [36, 39],
-  white: [37, 39],
-  gray: [90, 39],
-  grey: [90, 39],
-
-  bgBlack: [40, 49],
-  bgRed: [41, 49],
-  bgGreen: [42, 49],
-  bgYellow: [43, 49],
-  bgBlue: [44, 49],
-  bgMagenta: [45, 49],
-  bgCyan: [46, 49],
-  bgWhite: [47, 49],
-
-  // legacy styles for colors pre v1.0.0
-  blackBG: [40, 49],
-  redBG: [41, 49],
-  greenBG: [42, 49],
-  yellowBG: [43, 49],
-  blueBG: [44, 49],
-  magentaBG: [45, 49],
-  cyanBG: [46, 49],
-  whiteBG: [47, 49]
-
-};
-
-Object.keys(codes).forEach(function (key) {
-  var val = codes[key];
-  var style = styles[key] = [];
-  style.open = '\u001b[' + val[0] + 'm';
-  style.close = '\u001b[' + val[1] + 'm';
-});
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\styles.js","/lme-core\\node_modules\\colors\\lib",undefined)
-},{"_process":79,"buffer":76}],60:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*
-The MIT License (MIT)
-
-Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-*/
-
-var argv = process.argv;
-
-module.exports = (function () {
-  if (argv.indexOf('--no-color') !== -1 ||
-    argv.indexOf('--color=false') !== -1) {
-    return false;
-  }
-
-  if (argv.indexOf('--color') !== -1 ||
-    argv.indexOf('--color=true') !== -1 ||
-    argv.indexOf('--color=always') !== -1) {
-    return true;
-  }
-
-  if (process.stdout && !process.stdout.isTTY) {
-    return false;
-  }
-
-  if (process.platform === 'win32') {
-    return true;
-  }
-
-  if ('COLORTERM' in process.env) {
-    return true;
-  }
-
-  if (process.env.TERM === 'dumb') {
-    return false;
-  }
-
-  if (/^screen|^xterm|^vt100|color|ansi|cygwin|linux/i.test(process.env.TERM)) {
-    return true;
-  }
-
-  return false;
-})();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\lib\\system\\supports-colors.js","/lme-core\\node_modules\\colors\\lib\\system",undefined)
-},{"_process":79,"buffer":76}],61:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-//
-// Remark: Requiring this file will use the "safe" colors API which will not touch String.prototype
-//
-//   var colors = require('colors/safe);
-//   colors.red("foo")
-//
-//
-var colors = require('./lib/colors');
-module['exports'] = colors;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\colors\\safe.js","/lme-core\\node_modules\\colors",undefined)
-},{"./lib/colors":52,"_process":79,"buffer":76}],62:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*
- * Date Format 1.2.3
- * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
- * MIT license
- *
- * Includes enhancements by Scott Trenda <scott.trenda.net>
- * and Kris Kowal <cixar.com/~kris.kowal/>
- *
- * Accepts a date, a mask, or a date and a mask.
- * Returns a formatted version of the given date.
- * The date defaults to the current date/time.
- * The mask defaults to dateFormat.masks.default.
- */
-
-(function(global) {
-  'use strict';
-
-  var dateFormat = (function() {
-      var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZWN]|'[^']*'|'[^']*'/g;
-      var timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g;
-      var timezoneClip = /[^-+\dA-Z]/g;
-  
-      // Regexes and supporting functions are cached through closure
-      return function (date, mask, utc, gmt) {
-  
-        // You can't provide utc if you skip other args (use the 'UTC:' mask prefix)
-        if (arguments.length === 1 && kindOf(date) === 'string' && !/\d/.test(date)) {
-          mask = date;
-          date = undefined;
-        }
-  
-        date = date || new Date;
-  
-        if(!(date instanceof Date)) {
-          date = new Date(date);
-        }
-  
-        if (isNaN(date)) {
-          throw TypeError('Invalid date');
-        }
-  
-        mask = String(dateFormat.masks[mask] || mask || dateFormat.masks['default']);
-  
-        // Allow setting the utc/gmt argument via the mask
-        var maskSlice = mask.slice(0, 4);
-        if (maskSlice === 'UTC:' || maskSlice === 'GMT:') {
-          mask = mask.slice(4);
-          utc = true;
-          if (maskSlice === 'GMT:') {
-            gmt = true;
-          }
-        }
-  
-        var _ = utc ? 'getUTC' : 'get';
-        var d = date[_ + 'Date']();
-        var D = date[_ + 'Day']();
-        var m = date[_ + 'Month']();
-        var y = date[_ + 'FullYear']();
-        var H = date[_ + 'Hours']();
-        var M = date[_ + 'Minutes']();
-        var s = date[_ + 'Seconds']();
-        var L = date[_ + 'Milliseconds']();
-        var o = utc ? 0 : date.getTimezoneOffset();
-        var W = getWeek(date);
-        var N = getDayOfWeek(date);
-        var flags = {
-          d:    d,
-          dd:   pad(d),
-          ddd:  dateFormat.i18n.dayNames[D],
-          dddd: dateFormat.i18n.dayNames[D + 7],
-          m:    m + 1,
-          mm:   pad(m + 1),
-          mmm:  dateFormat.i18n.monthNames[m],
-          mmmm: dateFormat.i18n.monthNames[m + 12],
-          yy:   String(y).slice(2),
-          yyyy: y,
-          h:    H % 12 || 12,
-          hh:   pad(H % 12 || 12),
-          H:    H,
-          HH:   pad(H),
-          M:    M,
-          MM:   pad(M),
-          s:    s,
-          ss:   pad(s),
-          l:    pad(L, 3),
-          L:    pad(Math.round(L / 10)),
-          t:    H < 12 ? 'a'  : 'p',
-          tt:   H < 12 ? 'am' : 'pm',
-          T:    H < 12 ? 'A'  : 'P',
-          TT:   H < 12 ? 'AM' : 'PM',
-          Z:    gmt ? 'GMT' : utc ? 'UTC' : (String(date).match(timezone) || ['']).pop().replace(timezoneClip, ''),
-          o:    (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
-          S:    ['th', 'st', 'nd', 'rd'][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10],
-          W:    W,
-          N:    N
-        };
-  
-        return mask.replace(token, function (match) {
-          if (match in flags) {
-            return flags[match];
-          }
-          return match.slice(1, match.length - 1);
-        });
-      };
-    })();
-
-  dateFormat.masks = {
-    'default':               'ddd mmm dd yyyy HH:MM:ss',
-    'shortDate':             'm/d/yy',
-    'mediumDate':            'mmm d, yyyy',
-    'longDate':              'mmmm d, yyyy',
-    'fullDate':              'dddd, mmmm d, yyyy',
-    'shortTime':             'h:MM TT',
-    'mediumTime':            'h:MM:ss TT',
-    'longTime':              'h:MM:ss TT Z',
-    'isoDate':               'yyyy-mm-dd',
-    'isoTime':               'HH:MM:ss',
-    'isoDateTime':           'yyyy-mm-dd\'T\'HH:MM:sso',
-    'isoUtcDateTime':        'UTC:yyyy-mm-dd\'T\'HH:MM:ss\'Z\'',
-    'expiresHeaderFormat':   'ddd, dd mmm yyyy HH:MM:ss Z'
-  };
-
-  // Internationalization strings
-  dateFormat.i18n = {
-    dayNames: [
-      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
-      'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-    ],
-    monthNames: [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-    ]
-  };
-
-function pad(val, len) {
-  val = String(val);
-  len = len || 2;
-  while (val.length < len) {
-    val = '0' + val;
-  }
-  return val;
-}
-
-/**
- * Get the ISO 8601 week number
- * Based on comments from
- * http://techblog.procurios.nl/k/n618/news/view/33796/14863/Calculate-ISO-8601-week-and-year-in-javascript.html
- *
- * @param  {Object} `date`
- * @return {Number}
- */
-function getWeek(date) {
-  // Remove time components of date
-  var targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
-  // Change date to Thursday same week
-  targetThursday.setDate(targetThursday.getDate() - ((targetThursday.getDay() + 6) % 7) + 3);
-
-  // Take January 4th as it is always in week 1 (see ISO 8601)
-  var firstThursday = new Date(targetThursday.getFullYear(), 0, 4);
-
-  // Change date to Thursday same week
-  firstThursday.setDate(firstThursday.getDate() - ((firstThursday.getDay() + 6) % 7) + 3);
-
-  // Check if daylight-saving-time-switch occured and correct for it
-  var ds = targetThursday.getTimezoneOffset() - firstThursday.getTimezoneOffset();
-  targetThursday.setHours(targetThursday.getHours() - ds);
-
-  // Number of weeks between target Thursday and first Thursday
-  var weekDiff = (targetThursday - firstThursday) / (86400000*7);
-  return 1 + Math.floor(weekDiff);
-}
-
-/**
- * Get ISO-8601 numeric representation of the day of the week
- * 1 (for Monday) through 7 (for Sunday)
- * 
- * @param  {Object} `date`
- * @return {Number}
- */
-function getDayOfWeek(date) {
-  var dow = date.getDay();
-  if(dow === 0) {
-    dow = 7;
-  }
-  return dow;
-}
-
-/**
- * kind-of shortcut
- * @param  {*} val
- * @return {String}
- */
-function kindOf(val) {
-  if (val === null) {
-    return 'null';
-  }
-
-  if (val === undefined) {
-    return 'undefined';
-  }
-
-  if (typeof val !== 'object') {
-    return typeof val;
-  }
-
-  if (Array.isArray(val)) {
-    return 'array';
-  }
-
-  return {}.toString.call(val)
-    .slice(8, -1).toLowerCase();
-};
-
-
-
-  if (typeof define === 'function' && define.amd) {
-    define(function () {
-      return dateFormat;
-    });
-  } else if (typeof exports === 'object') {
-    module.exports = dateFormat;
-  } else {
-    global.dateFormat = dateFormat;
-  }
-})(this);
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\dateformat\\lib\\dateformat.js","/lme-core\\node_modules\\dateformat\\lib",undefined)
-},{"_process":79,"buffer":76}],63:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var tracer = require('tracer');
-var format = "HH.MM.ssl";
-var logLevel = process.env.ENV || 'info';
-var levels = {
-    debug: {
-        DEBUG: true,
-        TRACE: false,
-        INFO: false
-    },
-    info: {
-        DEBUG: false,
-        TRACE: false,
-        INFO: true
-    },
-    error: {
-        DEBUG: false,
-        TRACE: false,
-        INFO: false,
-        WARN: false
-    },
-    trace: {
-        DEBUG: true,
-        TRACE: true,
-        INFO: true
-    }
-}
-var console = tracer.colorConsole({
-    format: "{{timestamp}} ({{file}}:{{line}}) \t- {{message}}",
-    dateformat: format,
-    level: logLevel
-});
-console.DEBUG = levels[logLevel].DEBUG;
-console.INFO = levels[logLevel].INFO;
-console.TRACE = levels[logLevel].TRACE;
-module.exports = console;
-exports = console;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\ff-log\\ff-log.js","/lme-core\\node_modules\\ff-log",undefined)
-},{"_process":79,"buffer":76,"tracer":70}],64:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*!
-* stack-adt
-* v0.2.3 - 2014-08-03
-* https://github.com/pasangsherpa/stack-adt
-* (c) Pasang Sherpa <pgyalzen@gmail.com> (https://github.com/pasangsherpa)
-* MIT License
-*/
-(function() {
-    'use strict';
-    var Stack = function(initialCapacity) {
-        var _initialCapacity = initialCapacity || Infinity;
-        var _elements = [];
-
-        function push(element) {
-            if (size() === _initialCapacity) {
-                throw new Error('push(): Stack is full.');
-            }
-            return _elements.push(element);
-        }
-
-        function pop() {
-            if (isEmpty()) {
-                throw new Error('pop(): Stack is empty.');
-            }
-            return _elements.pop();
-        }
-
-        function peek() {
-            if (isEmpty()) {
-                throw new Error('peek(): Stack is empty.');
-            }
-            return _elements[_elements.length - 1];
-        }
-
-        function isEmpty() {
-            return size() === 0;
-        }
-
-        function size() {
-            return _elements.length;
-        }
-
-        function empty() {
-            while (_elements.length) {
-                _elements.pop();
-            }
-        }
-
-        function Iterator() {
-            var counter = 0;
-
-            function hasNext() {
-                return _elements.length !== counter;
-            }
-
-            function next() {
-                if (!hasNext()) {
-                    throw new Error('next(): No such element.');
-                }
-                return _elements[_elements.length - 1 - counter++];
-            }
-            return {
-                hasNext: hasNext,
-                next: next
-            };
-        }
-
-        return {
-            push: push,
-            pop: pop,
-            peek: peek,
-            isEmpty: isEmpty,
-            size: size,
-            empty: empty,
-            iterator: new Iterator()
-        };
-    };
-
-    if (typeof define === 'function' && define.amd) {
-        define(function() {
-            return Stack;
-        });
-    } else if (typeof module !== 'undefined' && module.exports) {
-        module.exports = Stack;
-    } else {
-        window.Stack = Stack;
-    }
-})();
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\stack-adt\\dist\\stack-adt.js","/lme-core\\node_modules\\stack-adt\\dist",undefined)
-},{"_process":79,"buffer":76}],65:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-module.exports = require('./tinytim');
-
-/**
- * Intermediate js cache.
- * 
- * @type Object
- */
-
-var cache = {};
-
-/**
- * Clear intermediate js cache.
- * 
- * @api public
- */
-
-module.exports.clearCache = function() {
-	cache = {};
-};
-
-/**
- * Render the given `str` of tim.
- * 
- * @param {String}
- *            str
- * @param {Object}
- *            vars
- * @return {String}
- * @api public
- */
-
-module.exports.render = module.exports.tim;
-
-
-/**
- * Render an tim file at the given `path`.
- * 
- * @param {String}
- *            path
- * @param {Vars}
- *            vars
- * @param {Bool}
- *            use cache or not
- * @api public
- */
-
-module.exports.renderFile = function(path, vars, useCache) {
-	var fs = require('fs');
-	var key = path + ':string';
-	var str = useCache ? cache[key]
-			|| (cache[key] = fs.readFileSync(path, 'utf8')) : fs
-			.readFileSync(path, 'utf8');
-
-	return module.exports.render(str, vars);
-};
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tinytim\\lib\\index.js","/lme-core\\node_modules\\tinytim\\lib",undefined)
-},{"./tinytim":66,"_process":79,"buffer":76,"fs":75}],66:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/*!
- tinytim.js
-   github.com/premasagar/tim
-    A tiny, secure JavaScript micro-templating script.
-    by Premasagar Rose
-        dharmafly.com
-    license
-        opensource.org/licenses/mit-license.php
-    creates global object
-        tim
-    v0.3.0
-        
-	ported and modified by LI Long <lilong@gmail.com> 3/13/2012
- */
-var start = exports.start  = "{{";
-var end = exports.end	 = "}}";
-        
-var tim = exports.tim = (function(){
-    "use strict";
-
-    var 
-        path    = "[a-z0-9_][\\.a-z0-9_]*", // e.g. config.person.name
-        undef;
-    
-    return function(template, data){
-        var pattern = new RegExp(exports.start + "\\s*("+ path +")\\s*" + exports.end, "gi");
-
-        // Merge data into the template string
-        return template.replace(pattern, function(tag, token){
-            var path = token.split("."),
-                len = path.length,
-                lookup = data,
-                i = 0;
-
-            for (; i < len; i++){
-                lookup = lookup[path[i]];
-                
-                // Property not found
-                if (lookup === undef){
-                    throw new Error("tim: '" + path[i] + "' not found in " + tag);
-                }
-                
-                // Return the required value
-                if (i === len - 1){
-                    return lookup;
-                }
-            }
-        });
-    };
-}());
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tinytim\\lib\\tinytim.js","/lme-core\\node_modules\\tinytim\\lib",undefined)
-},{"_process":79,"buffer":76}],67:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-var colors = require('colors/safe');
-module.exports = function(conf) {
-	return require('./console')({
-		filters : {
-			//log : do nothing
-			trace : colors.magenta,
-			debug : colors.cyan,
-			info : colors.green,
-			warn : colors.yellow,
-			error : colors.red.bold
-		}
-	}, conf);
-};
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\color_console.js","/lme-core\\node_modules\\tracer\\lib",undefined)
-},{"./console":68,"_process":79,"buffer":76,"colors/safe":61}],68:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-var tinytim = require('tinytim'), dateFormat = require('dateformat'), utils = require('./utils'), path = require('path'), settings = require('./settings').settings;
-
-var noop = function(){};
-
-var fwrap = function(fn){
-	return function(str){ return fn(str) };
-};
-
-// Stack trace format :
-// https://github.com/v8/v8/wiki/Stack%20Trace%20API
-var stackReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/i;
-var stackReg2 = /at\s+()(.*):(\d*):(\d*)/i;
-
-// main log method
-function logMain(config, level, title, format, filters, needstack, args) {
-	//check level of global settings
-	var gLevel = settings.level;
-	if (typeof (gLevel) == 'string')
-		gLevel = config.methods.indexOf(gLevel);
-	if (level < gLevel) { return; }
-
-	var data = {
-		timestamp : dateFormat(new Date(), config.dateformat),
-		message : "",
-		title : title,
-		level : level,
-		args : args
-	};
-	data.method = data.path = data.line = data.pos = data.file = '';
-
-	if (needstack) {
-		// get call stack, and analyze it
-		// get all file,method and line number
-		var stacklist = (new Error()).stack.split('\n').slice(3);
-		var s = stacklist[config.stackIndex] || stacklist[0],
-			sp = stackReg.exec(s) || stackReg2.exec(s);
-		if (sp && sp.length === 5) {
-			data.method = sp[1];
-			data.path = sp[2];
-			data.line = sp[3];
-			data.pos = sp[4];
-			data.file = path.basename(data.path);
-			data.stack = stacklist.join('\n');
-		}
-	}
-
-	config.preprocess(data);
-	var msg = utils.format.apply(config, data.args);
-	data.message = msg;
-
-	// call micro-template to ouput
-	data.output = tinytim.tim(format, data);
-
-	// process every filter method
-	var len = filters.length;
-	for ( var i = 0; i < len; i += 1) {
-		data.output = fwrap(filters[i])(data.output);
-		if (!data.output)
-			return data;
-		// cancel next process if return a false(include null, undefined)
-	}
-	// trans the final result
-	config.transport.forEach(function(tras) {
-		tras(data);
-	});
-	return data;
-}
-
-module.exports = (function() {
-	// default config
-	var _config = {
-		format : "{{timestamp}} <{{title}}> {{file}}:{{line}} ({{method}}) {{message}}",
-		dateformat : "isoDateTime",
-		preprocess : function(data) {
-		},
-		transport : function(data) {
-			if (data.level >= 4) { // warn and more critical
-				console.error(data.output);
-			} else {
-				console.log(data.output);
-			}
-		},
-		filters : [],
-		level : 'log',
-		methods : [ 'log', 'trace', 'debug', 'info', 'warn', 'error', 'fatal' ],
-		stackIndex : 0,		// get the specified index of stack as file information. It is userful for development package.
-		inspectOpt : {
-			showHidden : false, //if true then the object's non-enumerable properties will be shown too. Defaults to false
-			depth : 2 //tells inspect how many times to recurse while formatting the object. This is useful for inspecting large complicated objects. Defaults to 2. To make it recurse indefinitely pass null.
-		}
-	};
-
-	// union user's config and default
-	_config = utils.union(_config, arguments);
-
-	var _self = {};
-
-	_config.format = Array.isArray(_config.format) ? _config.format
-		: [ _config.format ];
-
-	_config.filters = Array.isArray(_config.filters) ? _config.filters
-		: [ _config.filters ];
-
-	_config.transport = Array.isArray(_config.transport) ? _config.transport : [_config.transport];
-
-	var fLen = _config.filters.length, lastFilter;
-	if (fLen > 0)
-		if (Object.prototype.toString.call(_config.filters[--fLen]) != '[object Function]') {
-			lastFilter = _config.filters[fLen];
-			_config.filters = _config.filters.slice(0, fLen);
-		}
-
-	if (typeof (_config.level) == 'string')
-		_config.level = _config.methods.indexOf(_config.level);
-
-	_config.methods.forEach(function(title, i) {
-		if (i < _config.level)
-			_self[title] = noop;
-		else {
-			var format = _config.format[0];
-			if (_config.format.length === 2 && _config.format[1][title])
-				format = _config.format[1][title];
-			var needstack = /{{(method|path|line|pos|file|stack)}}/i.test(format);
-
-			var filters;
-			if (lastFilter && lastFilter[title])
-				filters = Array.isArray(lastFilter[title]) ? lastFilter[title]
-					: [ lastFilter[title] ];
-			else
-				filters = _config.filters;
-
-			// interface
-			_self[title] = function() {
-				return logMain(_config, i, title, format, filters, needstack, arguments);
-			};
-		}
-	});
-
-	return _self;
-});
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\console.js","/lme-core\\node_modules\\tracer\\lib",undefined)
-},{"./settings":71,"./utils":72,"_process":79,"buffer":76,"dateformat":62,"path":78,"tinytim":65}],69:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-var fs = require('fs'), dateFormat = require('dateformat'), tinytim = require('tinytim'), utils = require('./utils'), spawn = require('child_process').spawn, spawnSync = require('child_process').spawnSync;
-var path = require('path');
-
-module.exports = function (conf) {
-    var _conf = {
-        root: '.',
-        logPathFormat: '{{root}}/{{prefix}}.{{date}}.log',
-        splitFormat: 'yyyymmdd',
-        allLogsFileName: false,
-        maxLogFiles: 10
-    };
-
-    _conf = utils.union(_conf, [conf]);
-
-    function LogFile(prefix, date) {
-        this.date = date;
-        this.path = tinytim.tim(_conf.logPathFormat, {root: _conf.root, prefix: prefix, date: date});
-        spawnSync('mkdir', ['-p', _conf.root]);
-        this.stream = fs.createWriteStream(this.path, {
-            flags: "a",
-            encoding: "utf8",
-            mode: parseInt('0644', 8)
-            // When engines node >= 4.0.0, following notation will be better:
-            //mode: 0o644
-        });
-    }
-
-    LogFile.prototype.write = function (str) {
-        this.stream.write(str + "\n");
-    };
-
-    LogFile.prototype.destroy = function () {
-        if (this.stream) {
-            this.stream.end();
-            this.stream.destroySoon();
-            this.stream = null;
-        }
-    };
-
-    var _logMap = {};
-
-    function _push2File(str, title) {
-        if (_conf.allLogsFileName) {
-            var allLogFile = _logMap.allLogFile, now = dateFormat(new Date(), _conf.splitFormat);
-            if (allLogFile && allLogFile.date != now) {
-                allLogFile.destroy();
-                allLogFile = null;
-            }
-            if (!allLogFile) {
-                allLogFile = _logMap.allLogFile = new LogFile(_conf.allLogsFileName, now);
-                spawn('find', ['./', '-type', 'f', '-name', '*.log', '-mtime', '+' + _conf.maxLogFiles, '-exec', 'rm', '{}', '\;']);
-            }
-            allLogFile.write(str);
-        } else {
-            var logFile = _logMap[title], now = dateFormat(new Date(), _conf.splitFormat);
-            if (logFile && logFile.date != now) {
-                logFile.destroy();
-                logFile = null;
-            }
-            if (!logFile) {
-                logFile = _logMap[title] = new LogFile(title, now);
-                spawn('find', [_conf.root, '-type', 'f', '-name', '*.log', '-mtime', '+' + _conf.maxLogFiles, '-exec', 'rm', '{}', '\;']);
-            }
-            logFile.write(str);
-        }
-    }
-
-    function dailyFileTransport(data) {
-        _push2File(data.output, data.title);
-    }
-
-    if (conf.transport) {
-        conf.transport = Array.isArray(conf.transport) ? conf.transport : [conf.transport];
-        conf.transport.push(dailyFileTransport)
-    } else {
-        conf.transport = [dailyFileTransport];
-    }
-    return require('./console')(conf);
-};
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\dailyfile.js","/lme-core\\node_modules\\tracer\\lib",undefined)
-},{"./console":68,"./utils":72,"_process":79,"buffer":76,"child_process":75,"dateformat":62,"fs":75,"path":78,"tinytim":65}],70:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-exports.console = require('./console');
-exports.colorConsole = require('./color_console');
-exports.dailyfile = require('./dailyfile');
-
-//global settings
-var settings = require('./settings');
-exports.close = settings.close;
-exports.setLevel = settings.setLevel;
-exports.getLevel = settings.getLevel;
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\index.js","/lme-core\\node_modules\\tracer\\lib",undefined)
-},{"./color_console":67,"./console":68,"./dailyfile":69,"./settings":71,"_process":79,"buffer":76}],71:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-var settings = {
-	level : undefined
-}
-
-//end all of output
-var close = function(){
-	settings.level = Number.MAX_VALUE;
-}
-
-//dynamically change the log level, all of output
-var setLevel = function(level){
-	settings.level = level;
-}
-
-//get the current log level
-var getLevel = function(){
-	return settings.level;
-}
-
-
-exports.settings = settings;
-exports.close = close;
-exports.setLevel = setLevel;
-exports.getLevel = getLevel;
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\settings.js","/lme-core\\node_modules\\tracer\\lib",undefined)
-},{"_process":79,"buffer":76}],72:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-"use strict";
-exports.union = function(obj, args) {
-	for (var i = 0, len = args.length; i < len; i += 1) {
-		var source = args[i];
-		for ( var prop in source) {
-			obj[prop] = source[prop];
-		}
-	}
-	return obj;
-};
-
-var formatRegExp = /%[sdjt]/g;
-var util = require('util');
-exports.format = function(f) {
-	var inspectOpt = this.inspectOpt;
-	var args = arguments;
-	var i = 0;
-
-	if (typeof f !== 'string') {
-		var objects = [];
-		for (; i < args.length; i++) {
-			objects.push(util.inspect(args[i], inspectOpt));
-		}
-		return objects.join(' ');
-	}
-
-	i = 1;
-	var str = String(f).replace(formatRegExp, function(x) {
-		switch (x) {
-		case '%s':
-			return String(args[i++]);
-		case '%d':
-			return Number(args[i++]);
-		case '%j':
-			try {
-			    if (args[i] instanceof Error) {
-				return JSON.stringify(args[i++], ['message', 'stack', 'type', 'name']);
-        		    } else {
-            			return JSON.stringify(args[i++]);
-        		    }
-			} catch(e) {
-				return '[Circular]';
-			}
-		case '%t':
-			return util.inspect(args[i++], inspectOpt);
-		default:
-			return x;
-		}
-	});
-	for ( var len = args.length, x = args[i]; i < len; x = args[++i]) {
-		if (x === null || typeof x !== 'object') {
-			str += ' ' + x;
-		} else {
-			str += ' ' + util.inspect(x, inspectOpt);
-		}
-	}
-	return str;
-};
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\node_modules\\tracer\\lib\\utils.js","/lme-core\\node_modules\\tracer\\lib",undefined)
-},{"_process":79,"buffer":76,"util":82}],73:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\fescontext.js","/lme-core\\src",undefined)
+},{"_process":79,"buffer":76}],73:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 'use strict';
 
@@ -26604,11 +26604,11 @@ require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../math');
 
 var fesjsApi = require('../../lme-core').fesjs;
-fesjsApi.addFunctions(require("../../formulajs-connect/ff-formulajs").formulajs);
+fesjsApi.addFunctions(require("../../formulajs-connect").formulajs);
 
 function LmeAPI() {
-    let FESContext = require('../../lme-core/fesjs/fescontext');
-    let WorkBook = require('../../lme-core/fesjs/JSWorkBook');
+    let FESContext = require('../../lme-core/src/fescontext');
+    let WorkBook = require('../../lme-core/src/JSWorkBook');
     this.lme = new WorkBook(new FESContext());
     this.modelName = undefined;
     this.urlPrefix = '';
@@ -26716,7 +26716,7 @@ LmeAPI.prototype.persistData = function(callBack) {
 }
 module.exports = LmeAPI;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\src\\lme.js","/lme-model-api\\src",undefined)
-},{"../../ff-formulajs/ff-formulajs":4,"../../lme-core":51,"../../lme-core/exchange_modules/jsonvalues/jsonvalues":32,"../../lme-core/exchange_modules/lme/lmeparser":33,"../../lme-core/fesjs/JSWorkBook":42,"../../lme-core/fesjs/fescontext":50,"../../math":85,"_process":79,"buffer":76}],84:[function(require,module,exports){
+},{"../../formulajs-connect":24,"../../lme-core":36,"../../lme-core/exchange_modules/jsonvalues/jsonvalues":32,"../../lme-core/exchange_modules/lme/lmeparser":33,"../../lme-core/src/JSWorkBook":64,"../../lme-core/src/fescontext":72,"../../math":85,"_process":79,"buffer":76}],84:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var model = require('./lme')
 LMEMETA = new model()
@@ -26800,7 +26800,7 @@ exports.mathJs = {
     entries: entries
 }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/math\\ff-math.js","/math",undefined)
-},{"../ff-log":9,"_process":79,"buffer":76,"js-solver":86}],86:[function(require,module,exports){
+},{"../ff-log":4,"_process":79,"buffer":76,"js-solver":86}],86:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var Solver = (function () {
 

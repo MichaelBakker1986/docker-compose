@@ -1,17 +1,17 @@
 require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
 require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
 require('../../math/ff-math');//just let it inject into the FESFacade
-var JSWorkBook = require('../fesjs/JSWorkBook');
+var JSWorkBook = require('../src/JSWorkBook');
 var JUNIT = require('./JUNIT');
-var FESFacade = require('../fesjs/FESFacade');
-var PropertiesAssembler = require('../fesjs/PropertiesAssembler');
-var FormulaService = require('../fesjs/FormulaService');
-var FormulaBootstrap = require('../fesjs/FormulaBootstrap');
+var FESFacade = require('../src/FESFacade');
+var PropertiesAssembler = require('../src/PropertiesAssembler');
+var FormulaService = require('../src/FormulaService');
+var FormulaBootstrap = require('../src/FormulaBootstrap');
 var assert = require('assert');
 var esprima = require('esprima');
 //test basic functionality for an import
 var data = JUNIT.getFile('hierarchyTest.ffl');
-var FESContext = require('../fesjs/fescontext')
+var FESContext = require('../src/fescontext')
 var wb = new JSWorkBook(new FESContext());
 //wb.importSolution(data, 'ffl');
 var singleVariable = JUNIT.getFile('testFFLVariable.ffl');

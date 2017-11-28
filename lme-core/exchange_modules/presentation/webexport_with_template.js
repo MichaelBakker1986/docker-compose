@@ -1,5 +1,5 @@
-var SolutionFacade = require('../../fesjs/SolutionFacade');
-var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
+var SolutionFacade = require('../../src/SolutionFacade');
+var PropertiesAssembler = require('../../src/PropertiesAssembler');
 var LmeDisplayGrammer = require('./LmeDisplayGrammer').LmeDisplayGrammer
 var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original', 'valid']
 

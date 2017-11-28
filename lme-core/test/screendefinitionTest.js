@@ -2,12 +2,12 @@ var JUNIT = require('./JUNIT.js');
 var log = require('ff-log')
 require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
 require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
-var JSWorkBook = require('../fesjs/JSWorkBook');
+var JSWorkBook = require('../src/JSWorkBook');
 var assert = require('assert');
 //var data = JUNIT.getFile('scorecardtemplate.json');
 var data = require('../resources/scorecardtemplate.json');
 JUNIT.print(data)
-var FESContext = require('../fesjs/fescontext')
+var FESContext = require('../src/fescontext')
 var wb = new JSWorkBook(new FESContext());
 
 wb.importSolution(JSON.stringify(data, null, 2), 'screendefinition');

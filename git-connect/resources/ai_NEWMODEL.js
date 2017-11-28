@@ -60549,8 +60549,8 @@ var fesjsApi = require('../../lme-core').fesjs;
 fesjsApi.addFunctions(require("../../formulajs-connect/ff-formulajs").formulajs);
 
 function LmeAPI() {
-    let FESContext = require('../../lme-core/fesjs/fescontext');
-    let WorkBook = require('../../lme-core/fesjs/JSWorkBook');
+    let FESContext = require('../../lme-core/src/fescontext');
+    let WorkBook = require('../../lme-core/src/JSWorkBook');
     this.lme = new WorkBook(new FESContext());
     this.modelName = undefined;
     this.urlPrefix = '';

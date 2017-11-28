@@ -4,7 +4,7 @@
   "main": "formulajs.js",
   "description": "binding between core and formulajs",
   "scripts": {
-    "test": "node ff-formulasjs-test.js"
+    "test": "node test/NPVTest.js"
   },
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",

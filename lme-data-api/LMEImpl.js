@@ -1,6 +1,6 @@
 const log = require('ff-log')
 const lmeAPI = require('../lme-core').fesjs;
-const LMEFacade = require('../lme-core/fesjs/FESFacade');
+const LMEFacade = require('../lme-core/src/FESFacade');
 const ModelListener = require('../git-connect').ModelListener;
 const modelService = new ModelListener();
 const modelNames = []
@@ -34,9 +34,9 @@ modelService.onNewModel = function(model, path) {
  *    - FormulaJS
  *    - Lme-Math
  */
-lmeAPI.addFunctions(require('../math/ff-math').mathJs);
-lmeAPI.addFunctions(require('../formulajs-connect/ff-formulajs').formulajs);
-var excelPlugin = require('../excel-connect/excel-connect').xlsxLookup;
+lmeAPI.addFunctions(require('../math').mathJs);
+lmeAPI.addFunctions(require('../formulajs-connect').formulajs);
+var excelPlugin = require('../excel-connect').xlsxLookup;
 excelPlugin.initComplete.then(function() {
     modelService.initializeModels();
 })

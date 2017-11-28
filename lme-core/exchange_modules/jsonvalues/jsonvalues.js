@@ -2,8 +2,8 @@
  First, most basic export of values
  Just calling getAllValues() internally to export
  */
-var SolutionFacade = require('../../fesjs/SolutionFacade');
-var PropertiesAssembler = require('../../fesjs/PropertiesAssembler');
+var SolutionFacade = require('../../src/SolutionFacade');
+var PropertiesAssembler = require('../../src/PropertiesAssembler');
 var jsonValues = {
     name: 'jsonvalues',
     extension: 'json',

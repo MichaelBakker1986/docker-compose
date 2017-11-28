@@ -1,6 +1,6 @@
 require('../../lme-core/exchange_modules/presentation/webexport_with_template');
 XMLHttpRequest = require("xhr2").XMLHttpRequest;
-var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
+var excelPlugin = require('../../excel-connect').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');
 const log = require('ff-log');
 const fs = require('fs');

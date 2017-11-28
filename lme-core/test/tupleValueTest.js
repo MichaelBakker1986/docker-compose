@@ -1,7 +1,7 @@
 var assert = require('assert')
 
-var WorkBook = require('../fesjs/JSWorkBook')
-var FESContext = require('../fesjs/fescontext')
+var WorkBook = require('../src/JSWorkBook')
+var FESContext = require('../src/fescontext')
 require('../../math/ff-math')
 var fesjsApi = require('../').fesjs;
 var JUNIT = require('./JUNIT')

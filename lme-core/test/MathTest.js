@@ -1,11 +1,11 @@
 global.loglevel = 'debug'
 var assert = require('assert')
 var parser = require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
-var WorkBook = require('../fesjs/JSWorkBook');
+var WorkBook = require('../src/JSWorkBook');
 var JSMATH = require('../../math')
 var JUNIT = require('./JUNIT');
 var log = require('ff-log');
-var FESContext = require('../fesjs/fescontext');
+var FESContext = require('../src/fescontext');
 var wb = new WorkBook(new FESContext());
 wb.updateValues();
 

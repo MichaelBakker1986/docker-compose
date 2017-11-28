@@ -2,8 +2,8 @@ var DEFAULT = 'value';
 var TUPLEVALUETEST = "TestTupleValues";
 
 //test for calls within tuples using same tuple, and calls outside tuples use base tuple
-var WorkBook = require('../fesjs/JSWorkBook');
-var FESContext = require('../fesjs/fescontext');
+var WorkBook = require('../src/JSWorkBook');
+var FESContext = require('../src/fescontext');
 require('../../math');
 var assert = require('assert');
 /*var ARGUMENT_NAMES = /([^\s,]+)/g;

@@ -1,7 +1,7 @@
 var fesjsApi = require('../').fesjs;
 var log = require('ff-log')
-var WorkBook = require('../fesjs/JSWorkBook')
-var FESContext = require('../fesjs/fescontext')
+var WorkBook = require('../src/JSWorkBook')
+var FESContext = require('../src/fescontext')
 var wb = new WorkBook(new FESContext());
 wb.modelName = 'APITEST'
 //choices require value functions..

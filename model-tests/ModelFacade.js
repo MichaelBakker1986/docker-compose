@@ -3,10 +3,10 @@
  * lme.js is the front-end opponent
  */
 require('../lme-core/exchange_modules/presentation/webexport');
-const FormulaService = require('../lme-core/fesjs/FormulaService');
+const FormulaService = require('../lme-core/src/FormulaService');
 var esprima = require('esprima')
 var escodegen = require('escodegen')
-var excelPlugin = require('../excel-connect/excel-connect').xlsxLookup;
+var excelPlugin = require('../excel-connect').xlsxLookup;
 const LME = require('../lme-model-api/src/lme');
 const log = require('ff-log');
 const fs = require('fs');

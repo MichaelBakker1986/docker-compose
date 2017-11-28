@@ -1,6 +1,6 @@
 const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../ModelFacade')
-var PropertiesAssembler = require('../../lme-core/fesjs/PropertiesAssembler')
-var FormulaService = require('../../lme-core/fesjs/FormulaService')
+var PropertiesAssembler = require('../../lme-core/src/PropertiesAssembler')
+var FormulaService = require('../../lme-core/src/FormulaService')
 var jslrs = require("js-longest-repeated-substring");
 let PRICINGffl = readFileSync(__dirname + '/PRICING.ffl');
 var escodegen = require('escodegen')

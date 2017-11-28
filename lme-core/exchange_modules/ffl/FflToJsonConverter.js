@@ -1,7 +1,7 @@
 var assert = require('assert');
 var FinFormula = require('./FinFormula');
 var Stack = require('stack-adt');
-var visitor = require('../../fesjs/JSVisitor');
+var visitor = require('../../src/JSVisitor');
 var log = require('ff-log');
 /*
  The purpose of these methods is:

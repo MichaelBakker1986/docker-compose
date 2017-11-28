@@ -5,9 +5,9 @@
 require("./exchange_modules/ffl/fflparser");//just let it inject into the FESFacade
 //require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 var log = require("ff-log");
-var WorkBook = require("./fesjs/JSWorkBook");
-var FESContext = require("./fesjs/fescontext");
-var TupleIndexConverter = require("./fesjs/TupleIndexConverter");
+var WorkBook = require("./src/JSWorkBook");
+var FESContext = require("./src/fescontext");
+var TupleIndexConverter = require("./src/TupleIndexConverter");
 
 function FESApi() {
 }

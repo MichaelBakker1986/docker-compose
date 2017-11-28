@@ -1,5 +1,5 @@
-var WorkBook = require('../fesjs/JSWorkBook')
-var FESContext = require('../fesjs/fescontext')
+var WorkBook = require('../src/JSWorkBook')
+var FESContext = require('../src/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
 require('../../math/ff-math')
