@@ -1,7 +1,7 @@
 {
-  "name": "ff-ssh-git",
+  "name": "git-connect",
   "version": "0.0.1",
-  "description": "ff-ssh-git",
+  "description": "git-connect",
   "private": true,
   "main": "gitconnector.js",
   "dependencies": {

@@ -1,7 +1,7 @@
 {
-  "name": "ff-fes",
-  "version": "1.0.7",
-  "description": "ff-fes",
+  "name": "lme-core",
+  "version": "1.0.8",
+  "description": "lme-core",
   "devDependencies": {},
   "main": "ff-fes.js",
   "dependencies": {
