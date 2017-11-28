@@ -60493,7 +60493,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":84,"_process":82,"buffer":79,"inherits":83}],86:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var angular = require('angular')
-require('../../ff-fes/exchange_modules/presentation/webexport');
+require('../../lme-core/exchange_modules/presentation/webexport');
 var LmeModel = require('./lme')
 LMEMETA = new LmeModel()
 LMEMETA.importLME(JSON_MODEL);
@@ -60512,16 +60512,16 @@ Error.prototype.stack = Error.prototype.stack || "";
 MatrixLookup = function() {
     return 1;
 }
-require('../../ff-fes/exchange_modules/lme/lmeparser');
-require('../../ff-fes/exchange_modules/jsonvalues/jsonvalues');
+require('../../lme-core/exchange_modules/lme/lmeparser');
+require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../ff-math');
 
-var fesjsApi = require('../../ff-fes').fesjs;
+var fesjsApi = require('../../lme-core').fesjs;
 fesjsApi.addFunctions(require("../../ff-formulajs/ff-formulajs").formulajs);
 
 function LmeAPI() {
-    let FESContext = require('../../ff-fes/fesjs/fescontext');
-    let WorkBook = require('../../ff-fes/fesjs/JSWorkBook');
+    let FESContext = require('../../lme-core/fesjs/fescontext');
+    let WorkBook = require('../../lme-core/fesjs/JSWorkBook');
     this.lme = new WorkBook(new FESContext());
     this.modelName = undefined;
     this.urlPrefix = '';

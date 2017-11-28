@@ -5,13 +5,13 @@
  *
  */
 const fs = require('fs')
-var FormulaService = require('../../ff-fes/fesjs/FormulaService')
-var WorkBook = require('../../ff-fes/fesjs/JSWorkBook')
-var FESContext = require('../../ff-fes/fesjs/fescontext')
+var FormulaService = require('../../lme-core/fesjs/FormulaService')
+var WorkBook = require('../../lme-core/fesjs/JSWorkBook')
+var FESContext = require('../../lme-core/fesjs/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
 require('../../ff-math/ff-math')
-var fesjsApi = require('../../ff-fes/ff-fes').fesjs;
+var fesjsApi = require('../../lme-core/ff-fes').fesjs;
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;

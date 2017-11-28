@@ -7,7 +7,7 @@ var assert = require('assert');
 var parser = require('../exchange_modules/ffl/fflparser.js');
 require('../exchange_modules/presentation/presentation.js');
 require('../../ff-math/ff-math')
-var fesjsApi = require('../ff-fes').fesjs;
+var fesjsApi = require('../').fesjs;
 var FESContext = require('../fesjs/fescontext');
 var FormulaService = require('../fesjs/FormulaService');
 var SolutionFacade = require('../fesjs/SolutionFacade');

@@ -8,8 +8,8 @@ var name = process.argv[2];
 
 
 var lmeAPI = require('./lme')
-const SolutionFacade = require('../../ff-fes/fesjs/SolutionFacade')
-var fesjsApi = require('../../ff-fes/ff-fes').fesjs;
+const SolutionFacade = require('../../lme-core/fesjs/SolutionFacade')
+var fesjsApi = require('../../lme-core/ff-fes').fesjs;
 
 const xlsx = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 fesjsApi.addFunctions(xlsx)

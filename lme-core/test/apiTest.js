@@ -1,4 +1,4 @@
-var fesjsApi = require('../ff-fes').fesjs;
+var fesjsApi = require('../').fesjs;
 var log = require('ff-log')
 var WorkBook = require('../fesjs/JSWorkBook')
 var FESContext = require('../fesjs/fescontext')

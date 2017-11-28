@@ -1,6 +1,6 @@
 const log = require('ff-log')
-const lmeAPI = require('../ff-fes').fesjs;
-const LMEFacade = require('../ff-fes/fesjs/FESFacade');
+const lmeAPI = require('../lme-core').fesjs;
+const LMEFacade = require('../lme-core/fesjs/FESFacade');
 const ModelListener = require('../ff-ssh-git').ModelListener;
 const modelService = new ModelListener();
 const modelNames = []

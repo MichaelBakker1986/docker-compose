@@ -1,9 +1,9 @@
-var WorkBook = require('../ff-fes/fesjs/JSWorkBook')
-var SolutionFacade = require('../ff-fes/fesjs/SolutionFacade')
-var FESContext = require('../ff-fes/fesjs/fescontext')
+var WorkBook = require('../lme-core/fesjs/JSWorkBook')
+var SolutionFacade = require('../lme-core/fesjs/SolutionFacade')
+var FESContext = require('../lme-core/fesjs/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
-var fesjsApi = require('../ff-fes/ff-fes').fesjs;
+var fesjsApi = require('../lme-core/ff-fes').fesjs;
 var excelPlugin = require('./ff-fes-xlsx').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 excelPlugin.initComplete.then(function(matrix) {

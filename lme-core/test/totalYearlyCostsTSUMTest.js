@@ -3,7 +3,7 @@ var FESContext = require('../fesjs/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
 require('../../ff-math/ff-math')
-var fesjsApi = require('../ff-fes').fesjs;
+var fesjsApi = require('../').fesjs;
 var JUNIT = require('./JUNIT');
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup

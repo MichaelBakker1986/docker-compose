@@ -1,5 +1,5 @@
 var angular = require('angular')
-require('../../ff-fes/exchange_modules/presentation/webexport');
+require('../../lme-core/exchange_modules/presentation/webexport');
 var LmeModel = require('./lme')
 
 angular.module('lmeapp', []).controller('lmeController', function($scope) {

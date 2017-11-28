@@ -1,4 +1,4 @@
-require('../../ff-fes/exchange_modules/presentation/webexport_with_template');
+require('../../lme-core/exchange_modules/presentation/webexport_with_template');
 XMLHttpRequest = require("xhr2").XMLHttpRequest;
 var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');

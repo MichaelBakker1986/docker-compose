@@ -2,8 +2,8 @@
  * Never include this in frond-end-dist for evaluation purpose
  * lme.js is the front-end opponent
  */
-require('../ff-fes/exchange_modules/presentation/webexport');
-const FormulaService = require('../ff-fes/fesjs/FormulaService');
+require('../lme-core/exchange_modules/presentation/webexport');
+const FormulaService = require('../lme-core/fesjs/FormulaService');
 var esprima = require('esprima')
 var escodegen = require('escodegen')
 var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;

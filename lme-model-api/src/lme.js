@@ -7,16 +7,16 @@ if (!global.MatrixLookup) {
 if (!global.MATRIX_VALUES) {
     MATRIX_VALUES = {}
 }
-require('../../ff-fes/exchange_modules/lme/lmeparser');
-require('../../ff-fes/exchange_modules/jsonvalues/jsonvalues');
+require('../../lme-core/exchange_modules/lme/lmeparser');
+require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../ff-math');
 
-var fesjsApi = require('../../ff-fes').fesjs;
+var fesjsApi = require('../../lme-core').fesjs;
 fesjsApi.addFunctions(require("../../ff-formulajs/ff-formulajs").formulajs);
 
 function LmeAPI() {
-    let FESContext = require('../../ff-fes/fesjs/fescontext');
-    let WorkBook = require('../../ff-fes/fesjs/JSWorkBook');
+    let FESContext = require('../../lme-core/fesjs/fescontext');
+    let WorkBook = require('../../lme-core/fesjs/JSWorkBook');
     this.lme = new WorkBook(new FESContext());
     this.modelName = undefined;
     this.urlPrefix = '';

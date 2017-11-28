@@ -36,8 +36,8 @@ var defaultValue = {
 
 EconomicEditorView.prototype.parse = function(input) {
     var props = this.properties;
-    var parser = require('../ff-fes/exchange_modules/ffl/FflToJsonConverter')
-    var JSVisitor = require('../ff-fes/fesjs/JSVisitor')
+    var parser = require('../lme-core/exchange_modules/ffl/FflToJsonConverter')
+    var JSVisitor = require('../lme-core/fesjs/JSVisitor')
     var result = parser.parseFFL(input)
     var solutionName = findSolutionNameFromFFLFile(result);
     let objectModel = result['model ' + solutionName + ' uses BaseModel'][''];

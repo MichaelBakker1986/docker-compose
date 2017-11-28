@@ -1,6 +1,6 @@
-require('../../ff-fes/exchange_modules/presentation/webexport_with_template');
+require('../../lme-core/exchange_modules/presentation/webexport_with_template');
 const LME = require('../../lme-model-api/src/lme');
-const LmeDisplayGrammer = require('../../ff-fes/exchange_modules/presentation/LmeDisplayGrammer').LmeDisplayGrammer
+const LmeDisplayGrammer = require('../../lme-core/exchange_modules/presentation/LmeDisplayGrammer').LmeDisplayGrammer
 
 const fs = require('fs');
 const assert = require('assert');
