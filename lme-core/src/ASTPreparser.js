@@ -108,7 +108,7 @@ var simplified = {
     },
     OnER: function(formulaInfo, node) {
         assert.equal(node.arguments.length, 2, formulaInfo.original);
-        //TODO: for now we fix in ff-math. but its better to compile this in the JS code
+        //TODO: for now we fix in math. but its better to compile this in the JS code
     },
     //wants horizontale aggregation from values in between two given columns
     Hsum: function(formulaInfo, node) {

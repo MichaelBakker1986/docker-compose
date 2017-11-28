@@ -2,7 +2,7 @@ var assert = require('assert')
 
 var WorkBook = require('../src/JSWorkBook')
 var FESContext = require('../src/fescontext')
-require('../../math/ff-math')
+require('../../math')
 var fesjsApi = require('../').fesjs;
 var JUNIT = require('./JUNIT')
 fesjsApi.addFunctions(require('../../formulajs-connect/ff-formulajs').formulajs);

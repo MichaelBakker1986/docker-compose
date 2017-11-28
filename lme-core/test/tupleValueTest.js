@@ -6,10 +6,8 @@ require('../../math')
 var fesjsApi = require('../').fesjs;
 var JUNIT = require('./JUNIT')
 fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
-//add excel-lookup, MatrixLookup
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
-
 var wb = new WorkBook(new FESContext());
 wb.importSolution(JUNIT.getFile('../../lme-model-tests/resources/KSP.ffl'), 'ffl');
 

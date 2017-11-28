@@ -1,6 +1,6 @@
 {
-  "name": "ff-math",
-  "version": "1.0.3",
+  "name": "math",
+  "version": "1.0.4",
   "private": true,
   "description": "finan math",
   "main": "ff-math.js",

@@ -12,7 +12,7 @@ var WorkBook = require('../../lme-core/src/JSWorkBook')
 var FESContext = require('../../lme-core/src/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
-require('../../math/ff-math')
+require('../../math')
 var fesjsApi = require('../../lme-core').fesjs;
 var fs = require('fs');
 fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
