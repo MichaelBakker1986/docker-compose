@@ -1,16 +1,37 @@
 import FinanMath.*;
 import BaseModel.*;
 
+EDUCATION_DURATION:48;
+EDUCATION_COST:70000;
+
 model KSP uses BaseModel
 {
  version: "1.37";
  root
  {
+  variable Education
+  {
+   variable MonthlyIncome
+   {
+    datatype: number;
+    formula: 1;
+   }
+   variable MonthlyEducationLoan
+   {
+    datatype: number;
+    formula:1;
+   }
+   variable AgeChild
+   {
+    datatype: number;
+    formula:1;
+   }
+  }
   variable Q_ROOT
   {
    datatype: number;
    frequency: document;
-   formula:AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered)  = AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required);
+   formula:AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered) = AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required);
    data_options: unscalable;
    displaytype: scorecard;
    title: "Costs of child raising (v1.27)";
