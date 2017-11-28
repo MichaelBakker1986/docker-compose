@@ -6,7 +6,7 @@
 
 var SolutionFacade = require('./SolutionFacade');
 var FESFacade = require('./FESFacade');
-var AST = require('../../ast-node-utils/index').ast;
+var AST = require('../../ast-node-utils').ast;
 var log = require('ff-log')
 var XAxis = require('./XAxis')
 var YAxis = require('./YAxis')

@@ -1,6 +1,6 @@
-var SolutionFacade = require('../../src/SolutionFacade.js')
-var FormulaService = require('../../src/FormulaService.js')
-var PropertiesAssembler = require('../../src/PropertiesAssembler.js')
+var SolutionFacade = require('../../src/SolutionFacade')
+var FormulaService = require('../../src/FormulaService')
+var PropertiesAssembler = require('../../src/PropertiesAssembler')
 
 function FormulaInfo(data, schema, modelName) {
     this.formulas = [];

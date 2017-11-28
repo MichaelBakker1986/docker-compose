@@ -14,9 +14,12 @@ const assert = require('assert');
 const model = new LME();
 model.addFunctions(excelPlugin);
 
+function readFileSync(name) {
+    return fs.readFileSync(name, 'utf8')
+}
 
 function importModel(name) {
-    model.importFFL(fs.readFileSync(__dirname + '/' + name + '.ffl', "utf8"));
+    model.importFFL(readFileSync(__dirname + '/' + name + '.ffl'));
 }
 
 LME.prototype.visitFormulas = FormulaService.visitFormulas
@@ -34,8 +37,5 @@ LME.prototype.maxDependencies = function() {
     return bestMatchingDependency;
 }
 
-function readFileSync(name) {
-    return fs.readFileSync(name, 'utf8')
-}
 
 module.exports = [assert, importModel, model, log, readFileSync, fs.writeFileSync];

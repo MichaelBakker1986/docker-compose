@@ -4,19 +4,19 @@
  * @type {ok}
  */
 var assert = require('assert');
-var parser = require('../exchange_modules/ffl/fflparser.js');
-require('../exchange_modules/lme/lmeparser.js');
-require('../exchange_modules/presentation/presentation.js');
-require('../../math/ff-math')
+var parser = require('../exchange_modules/ffl/fflparser');
+require('../exchange_modules/lme/lmeparser');
+require('../exchange_modules/presentation/presentation');
+require('../../math')
 var fesjsApi = require('../').fesjs;
 var FESContext = require('../src/fescontext');
 var FormulaService = require('../src/FormulaService');
 var SolutionFacade = require('../src/SolutionFacade');
 var JUNIT = require('../test/JUNIT');
-fesjsApi.addFunctions(require('../../formulajs-connect/ff-formulajs').formulajs);
-fesjsApi.addFunctions(require('../../excel-connect/excel-connect').xlsxLookup);
+fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
+fesjsApi.addFunctions(require('../../excel-connect').xlsxLookup);
 var log = require('ff-log');
-var WorkBook = require('../src/JSWorkBook.js');
+var WorkBook = require('../src/JSWorkBook');
 var JUNIT = require('./JUNIT.js');
 var fs = require('fs');
 

@@ -2,12 +2,12 @@ var assert = require('assert')
 
 var WorkBook = require('../src/JSWorkBook')
 var FESContext = require('../src/fescontext')
-require('../../math/ff-math')
+require('../../math')
 var fesjsApi = require('../').fesjs;
 var JUNIT = require('./JUNIT')
-fesjsApi.addFunctions(require('../../formulajs-connect/ff-formulajs').formulajs);
+fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
 //add excel-lookup, MatrixLookup
-var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
+var excelPlugin = require('../../excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 
 var wb = new WorkBook(new FESContext());

@@ -4,7 +4,7 @@
   "description": "excel-connect",
   "main": "excel-connect.js",
   "scripts": {
-    "test": "node xlsxTest.js"
+    "test": "node tests/MatrixLookupTest.js"
   },
   "author": "michael.bakker@topicus.nl",
   "license": "ISC",

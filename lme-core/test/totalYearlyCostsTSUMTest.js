@@ -2,10 +2,10 @@ var WorkBook = require('../src/JSWorkBook')
 var FESContext = require('../src/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
-require('../../math/ff-math')
+require('../../math')
 var fesjsApi = require('../').fesjs;
 fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
-var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
+var excelPlugin = require('../../excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 excelPlugin.initComplete.then(function() {
     var wb = new WorkBook(new FESContext());

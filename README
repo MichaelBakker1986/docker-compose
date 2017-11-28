@@ -11,16 +11,10 @@ docker-compose up
 
 #----- VIA NODEJS
 #expose ports
-sudo firewall-cmd --zone=public --add-port=8085/tcp -permanent
-sudo firewall-cmd --zone=public --add-port=8084/tcp -permanent
-sudo firewall-cmd --zone=public --add-port=8083/tcp -permanent
-sudo firewall-cmd --zone=public --add-port=8082/tcp -permanent
-sudo firewall-cmd --zone=public --add-port=8081/tcp -permanent
-sudo firewall-cmd --zone=public --add-port=8080/tcp -permanent
+sudo firewall-cmd --zone=public --add-port=7080/tcp -permanent
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
-
 cd fesjs
-npm install -g bower, concurrently
+npm install -g concurrently
 npm install
 docker run --name postgres -e POSTGRES_PASSWORD=postgres -d postgres
 npm start

@@ -23,7 +23,7 @@ function FormulaBootstrap() {
 
 var log = require('ff-log');
 var assert = require('assert');
-var AST = require('../../ast-node-utils/index').ast;
+var AST = require('../../ast-node-utils').ast;
 var esprima = require('esprima')
 var escodegen = require('escodegen')
 var simplified = require('./ASTPreparser')
