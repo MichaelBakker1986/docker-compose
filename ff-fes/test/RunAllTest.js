@@ -17,6 +17,7 @@ var tests = [
     './jsonValuesTest',
     './tupleTest',
     './apiTest',
+    './FinChoiceTest',
     './TupleIndexConverterTest',
     './totalYearlyCostsTSUMTest'
 ];

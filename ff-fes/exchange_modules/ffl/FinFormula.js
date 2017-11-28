@@ -115,7 +115,6 @@ function finChoice(formula) {
         return "[{ \"name\" : \"" + choices + "\" }]";
     }
 }
-
 function FinFormula() {
 }
 

@@ -5,7 +5,7 @@ var Excel = require('exceljs');
 var log = require('ff-log');
 var Promise = require('promise')
 var workbook = new Excel.Workbook();
-var fileName = __dirname + '/resources/ScorecardKSP1.xlsx';
+var fileName = __dirname + '/resources/KSPParams.xlsx';
 let succes;
 var initComplete = new Promise(function(succesArg) {
     succes = succesArg;

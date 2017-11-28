@@ -54,6 +54,7 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
         throw Error('Cannot find variable')
     }
     if (logger.DEBUG) logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
+    logger.info('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
     context.calc_count++;
     context.audit.push({
         saveToken: context.saveToken,
@@ -69,6 +70,7 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
  */
 FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     var colType = col || 'value';
+
     if (colType === 'entered') {
         //kinda copy-paste, find way to refactor. there is no real enteredValue formula.
         //retrieve the 'value' formula, check if there is an entered value
@@ -96,6 +98,15 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     }
     if (variable) {
         if (colType === 'value') {
+            /* TODO: return real-name instead of internal value if (FESFacade.fetchSolutionNode(row, 'choices')) {
+                  const choices = FESFacade.fetchSolutionPropertyValue(context, row, 'choices');
+                  var choiceValue = choices.lookup('value', returnValue);
+                  if (choiceValue === undefined) {
+                      logger.debug('Could not find [%s] choice [%s] in %s. using [%s] to be value', row, returnValue, JSON.stringify(choices), returnValue);
+                  } else {
+                      returnValue = isNaN(choiceValue.name) ? choiceValue.name : parseInt(choiceValue.name);
+                  }
+              }*/
             if (variable.decimals !== undefined) {
                 if (variable.datatype == 'matrix') {
                     for (var i = 0; i < returnValue.length; i++) {

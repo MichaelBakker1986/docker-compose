@@ -203,7 +203,7 @@ FflToJsonConverter.prototype.parseFFL = function(contents) {
                 var foundValue = split[1].trim();
                 if (firstWord.startsWith('choices')) {
                     validate(node, firstWord);
-                    node[firstWord] = FinFormula.finChoice(obj.substring(obj.indexOf(':') + 1, obj.length));
+                    node[firstWord] = FinFormula.finChoice(obj.substring(obj.indexOf(':') + 1));
                 }
                 else if (split.length == 2) {
                     var secondPart = split[1].trim();

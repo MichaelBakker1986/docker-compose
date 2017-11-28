@@ -14,6 +14,7 @@ app.use('/', expressStaticGzip(__dirname + "/"));
 //showcase proxies
 app.use('/id/:id/showcase', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/node_modules/ace-builds/src-min/"));
+app.use('/', expressStaticGzip(__dirname + "/angular-demo/"));
 
 //proxies
 app.get('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));
@@ -44,11 +45,11 @@ app.listen(port, function() {
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/uishowcase.html">UI Showcase example</a><span> | </span>\n' +
+            '<a href="http://' + domain + '/id/SlimmeOuder/monli.html">UI Showcase example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
             /*    '<a href="http://' + domain + '/id/DEMO/datagraph.html">Data graph</a>\n' +*/
             '<br><span>IDE apps: </span>\n' +
-            '<a href="http://' + domain + '/id/DEMO/aceide.html">IDE DEMO Application</a><span> | </span>\n' +
-            '<a href="http://' + domain + '/id/DEMO/excelide.html">ExcelIDE application</a>'
+            '<a href="http://' + domain + '/id/DEMO/aceide.html">IDE DEMO Application</a><span> | </span>\n'
         )
     })
 });

@@ -1,6 +1,3 @@
-// model "Scorecard Test Model"
-// created by FINAN 3.2.56.19 (user Ronald van Aalderen) on 20-01-2017 20:57
-
 import FinanMath.*;
 import BaseModel.*;
 
@@ -9,324 +6,11 @@ model KSP uses BaseModel
  version: "1.37";
  root
  {
-  variable RootSub1
-  {
-   datatype: none;
-   title: "General variables for webclient123";
-   top_blanklines: 1;
-   locked: 1;
-   visible: 0;
-   options_title: locked, invisible;
-   options: locked, invisible;
-   variable FES_LAYOUTNR
-   {
-    datatype: number;
-    frequency: document;
-    formula: If(Pos("IFRS-EU" , FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL" , FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl" , FES_LAYOUT[1])>0,2,0)));
-    data_options: unscalable;
-    displaytype: select;
-    title: "Layout";
-    top_blanklines: 1;
-    locked: 1;
-    choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
-    options_title: locked;
-    options: locked;
-   }
-   variable FES_EXCHANGE_RATES
-   {
-    datatype: string;
-    frequency: column;
-    aggregation: balance;
-    data_options: unscalable;
-    title: "Exchange Rates";
-    top_separator: 1;
-    bottom_separator: 1;
-    options_title: locked;
-   }
-   variable FES_LAYOUT
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Layout name";
-    options_title: locked;
-   }
-   variable FES_FLATINPUT
-   {
-    datatype: number;
-    frequency: document;
-    data_options: unscalable;
-    fixed_decimals: 0;
-    title: "Is flat input used? (1=yes)";
-    options_title: locked;
-   }
-   variable FES_PROJECTION_PROFILE
-   {
-    datatype: number;
-    frequency: document;
-    data_options: unscalable;
-    fixed_decimals: 0;
-    title: "Projection Profile";
-    options_title: locked;
-   }
-   variable FES_COLUMN_ORDER
-   {
-    datatype: number;
-    frequency: document;
-    data_options: unscalable;
-    fixed_decimals: 0;
-    title: "Column order";
-    options_title: locked;
-   }
-   variable FES_COLUMN_VISIBLE
-   {
-    datatype: number;
-    frequency: column;
-    aggregation: balance;
-    formula: 1;
-    data_options: unscalable;
-    fixed_decimals: 0;
-    title: "Column visible";
-    top_separator: 1;
-    options_title: locked;
-   }
-   variable FES_StartDatePERIOD
-   {
-    datatype: number;
-    frequency: column;
-    aggregation: balance;
-    data_options: unscalable;
-    fixed_decimals: 0;
-    title: "Start Date Period";
-    options_title: locked;
-   }
-   variable FES_ENDDATEPERIOD
-   {
-    datatype: number;
-    frequency: column;
-    aggregation: balance;
-    data_options: unscalable;
-    fixed_decimals: 0;
-    title: "End Date Period";
-    options_title: locked;
-   }
-   variable FES_BASECURRENCYPERIOD
-   {
-    datatype: number;
-    frequency: column;
-    aggregation: balance;
-    data_options: unscalable;
-    fixed_decimals: 0;
-    title: "Base Currency Period";
-    options_title: locked;
-   }
-   variable FES_VIEWCURRENCYPERIOD
-   {
-    datatype: number;
-    frequency: column;
-    aggregation: balance;
-    data_options: unscalable;
-    fixed_decimals: 0;
-    title: "View Currency Period";
-    options_title: locked;
-   }
-   variable FES_COLUMNTYPE
-   {
-    datatype: number;
-    frequency: column;
-    aggregation: balance;
-    data_options: unscalable;
-    displaytype: select;
-    fixed_decimals: 0;
-    title: "Column Type";
-    choices: "0:History|1:Projection";
-    options_title: locked;
-   }
-  }
-  variable RootSub2
-  {
-   datatype: none;
-   title: "General variables for FPS database";
-   locked: 1;
-   visible: 0;
-   options_title: locked, invisible;
-   options: locked, invisible;
-   variable FPS_VAR_Naam
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "NAME";
-    top_blanklines: 1;
-    options_title: locked;
-   }
-   variable FPS_VAR_Relatienummer
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "CUSTOMERNUMBER";
-    options_title: locked;
-   }
-   variable FPS_VAR_KVKnr
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "CHAMBEROFCOMMERCENUMBER";
-    options_title: locked;
-   }
-   variable FPS_VAR_Rechtsvorm_nr
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "LEGALSTATUSCODE";
-    options_title: locked;
-   }
-   variable FPS_VAR_Rechtsvorm_omschr
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "LEGALSTATUSDESCRIPTION";
-    options_title: locked;
-   }
-   variable FPS_VAR_BIK_CODE
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "SECTOROFINDUSTRYCODE";
-    options_title: locked;
-   }
-   variable FPS_VAR_BIK_Omschr
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "SECTOROFINDUSTRYDESCRIPTION";
-    options_title: locked;
-   }
-   variable FPS_VAR_GridId
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "GRIDID";
-    options_title: locked;
-   }
-   variable FPS_VAR_Accountmanager
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "ACCOUNTMANAGER";
-    options_title: locked;
-   }
-   variable FPS_VAR_Kantoor
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "OFFICENUMBER";
-    options_title: locked;
-   }
-   variable FPS_VAR_Straat
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "STREET";
-    options_title: locked;
-   }
-   variable FPS_VAR_Housenumber
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "HOUSENUMBER";
-    options_title: locked;
-   }
-   variable FPS_VAR_Postcode
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "ZIPCODE";
-    options_title: locked;
-   }
-   variable FPS_VAR_Woonplaats
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "CITY";
-    options_title: locked;
-   }
-   variable FPS_VAR_Provincie
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "STATEORPROVINCE";
-    options_title: locked;
-   }
-   variable FPS_VAR_Land
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "COUNTRY";
-    options_title: locked;
-   }
-   variable FPS_VAR_BvDID
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Bureau van Dijk ID";
-    options_title: locked;
-   }
-   variable FPS_VAR_Telefoon
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Telefoonnummer";
-    options_title: locked;
-   }
-   variable FPS_VAR_Emailadres
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Emailadres";
-    options_title: locked;
-    variable FPS_FINAN_USER_ROLES
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "FPS_FINAN_USER_ROLES";
-     top_blanklines: 1;
-     options_title: locked;
-    }
-    variable FPS_FINAN_USER
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "FPS_FINAN_USER";
-     options_title: locked;
-    }
-   }
-  }
   variable Q_ROOT
   {
    datatype: number;
    frequency: document;
-   formula: If( (Q_MAP01[1]=1) Or (Length ( Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
+   formula:AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered)  = AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required);
    data_options: unscalable;
    displaytype: scorecard;
    title: "Costs of child raising (v1.27)";
@@ -413,11 +97,10 @@ model KSP uses BaseModel
    }
    variable Q_MAP01
    {
-    valid:[AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered),AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required)];
+    valid:[AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered),AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required)];
     inputRequired:IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and ChildGender.required and NrOfDaysChildcareWeek.required and NrOfDaysOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
-     datatype: number;
+    datatype: number;
     frequency: document;
-    formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
     data_options: unscalable;
     displaytype: select;
     title: "Basic Information";
@@ -452,7 +135,6 @@ model KSP uses BaseModel
     {
      datatype: string;
      frequency: document;
-     formula: String(If(Q_MAP01[1]=0 , "Er zijn "&Str(Q_MAP01_ENTEREDREQUIREDVARS,0,0)&" van de "&Str(Q_MAP01_REQUIREDVARS,0,0)&" verplichte vragen in deze stap ingevuld." , ""));
      data_options: unscalable;
      title: "Validatie stap 1";
      locked: 1;
@@ -542,7 +224,7 @@ model KSP uses BaseModel
       hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
       options_title: locked;
      }
-     tuple Child
+     variable Child
      {
       datatype: number;
       frequency: document;
@@ -681,7 +363,7 @@ model KSP uses BaseModel
      {
       datatype: number;
       frequency: document;
-      formula: TSUM(NrOfDaysChildcareWeek);
+      formula: NrOfDaysChildcareWeek;
      }
      variable Memo1
      {
@@ -747,28 +429,6 @@ model KSP uses BaseModel
       options_title: locked;
       options: locked;
      }
-     variable Q_MAP01_PARAGRAAF09SUB5 refers to Q_MAP01_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP01_PARAGRAAF09SUB6 refers to Q_MAP01_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
     }
     variable Q_MAP01_HULPVARIABELEN
     {
@@ -780,31 +440,6 @@ model KSP uses BaseModel
      visible: 0;
      options_title: locked, invisible;
      options: locked, invisible;
-     variable Q_MAP01_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      top_blanklines: 1;
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP01_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
      variable DEBUG
      {
       datatype: number;
@@ -823,7 +458,6 @@ model KSP uses BaseModel
    {
     datatype: number;
     frequency: document;
-    formula: (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS);
     data_options: unscalable;
     displaytype: select;
     title: "Calculations Care";
@@ -1227,7 +861,7 @@ model KSP uses BaseModel
      {
       datatype: number;
       frequency: document;
-      formula: MatrixLookup("ScorecardKSP.xls","Opvangtoeslaginkomenstabel",TotalIncome,1);
+      formula: MatrixLookup(null,"Opvangtoeslaginkomenstabel",TotalIncome,1);
       data_options: unscalable;
       displaytype: percentage;
       fixed_decimals: 2;
@@ -1458,28 +1092,6 @@ model KSP uses BaseModel
       options_title: locked;
       options: locked;
      }
-     variable Q_MAP02_PARAGRAAF09SUB5 refers to Q_MAP02_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP02_PARAGRAAF09SUB6 refers to Q_MAP02_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
     }
     variable Q_MAP02_HULPVARIABELEN
     {
@@ -1491,38 +1103,12 @@ model KSP uses BaseModel
      visible: 0;
      options_title: locked, invisible;
      options: locked, invisible;
-     variable Q_MAP02_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      top_blanklines: 1;
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP02_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
     }
    }
    variable Q_MAP06
    {
     datatype: number;
     frequency: document;
-    formula: (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS);
     data_options: unscalable;
     displaytype: select;
     title: "Your Personal situation";
@@ -1675,7 +1261,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Diapers";
@@ -1686,7 +1272,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula:If(ChildGender=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
+       formula:If(ChildGender=0,MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Food";
@@ -1697,7 +1283,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Clothing";
@@ -1708,7 +1294,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Personal care";
@@ -1719,7 +1305,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Hairdresser";
@@ -1730,7 +1316,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Inventory";
@@ -1741,7 +1327,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Allowance";
@@ -1752,7 +1338,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Contributions";
@@ -1763,7 +1349,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Transport";
@@ -1774,7 +1360,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "MobilePhone";
@@ -1785,7 +1371,7 @@ model KSP uses BaseModel
        datatype: number;
        frequency: column;
        aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
        data_options: unscalable;
        fixed_decimals: 2;
        title: "DrivingLicense";
@@ -1855,7 +1441,7 @@ model KSP uses BaseModel
       }
       variable TotalYearlyCostTSUM
       {
-       formula: TSUM(TotalYearlyCosts);
+       formula: TotalYearlyCosts;
       }
      }
      variable Q_MAP06SUB5SUB3 refers to TotalYearlyIncome
@@ -2038,28 +1624,6 @@ model KSP uses BaseModel
       options_title: locked;
       options: locked;
      }
-     variable Q_MAP06_PARAGRAAF09SUB5 refers to Q_MAP06_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP06_PARAGRAAF09SUB6 refers to Q_MAP06_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
     }
     variable Q_MAP06_HULPVARIABELEN
     {
@@ -2071,31 +1635,6 @@ model KSP uses BaseModel
      visible: 0;
      options_title: locked, invisible;
      options: locked, invisible;
-     variable Q_MAP06_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      top_blanklines: 1;
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP06_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
     }
    }
    variable Q_RESULT
