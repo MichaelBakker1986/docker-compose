@@ -224,7 +224,7 @@ model KSP uses BaseModel
       hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
       options_title: locked;
      }
-     tuple Child
+     variable Child
      {
       datatype: number;
       frequency: document;
@@ -363,7 +363,7 @@ model KSP uses BaseModel
      {
       datatype: number;
       frequency: document;
-      formula: TSUM(NrOfDaysChildcareWeek);
+      formula: NrOfDaysChildcareWeek;
      }
      variable Memo1
      {
@@ -1441,7 +1441,7 @@ model KSP uses BaseModel
       }
       variable TotalYearlyCostTSUM
       {
-       formula: TSUM(TotalYearlyCosts);
+       formula: TotalYearlyCosts;
       }
      }
      variable Q_MAP06SUB5SUB3 refers to TotalYearlyIncome
