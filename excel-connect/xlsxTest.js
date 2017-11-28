@@ -4,7 +4,7 @@ var FESContext = require('../lme-core/fesjs/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
 var fesjsApi = require('../lme-core/ff-fes').fesjs;
-var excelPlugin = require('./ff-fes-xlsx').xlsxLookup;
+var excelPlugin = require('./').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 excelPlugin.initComplete.then(function(matrix) {
     SolutionFacade.addVariables([{name: 'MATRIX_VALUES', expression: matrix}])

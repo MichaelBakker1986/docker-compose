@@ -17,7 +17,7 @@ var fesjsApi = require('../../lme-core/ff-fes').fesjs;
 var fs = require('fs');
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
-var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
+var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 var wbTest = new WorkBook(new FESContext());
 assert('aIFRS-EUa'.indexOf('IFRS-EU') > 0)

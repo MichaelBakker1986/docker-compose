@@ -6,7 +6,7 @@ require('../../math/ff-math')
 var fesjsApi = require('../').fesjs;
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
-var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
+var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 var wb = new WorkBook(new FESContext());
 wb.importSolution(fs.readFileSync(__dirname + '/../../lme-model-tests/KSP/KSP.ffl', 'utf8'), 'ffl');

@@ -1,8 +1,8 @@
 {
-  "name": "ff-fes-xlsx",
-  "version": "1.0.2",
-  "description": "ff-fes-xlsx",
-  "main": "ff-fes-xlsx.js",
+  "name": "excel-connect",
+  "version": "1.0.3",
+  "description": "excel-connect",
+  "main": "excel-connect.js",
   "scripts": {
     "test": "node xlsxTest.js"
   },

@@ -7,7 +7,7 @@ var fesjsApi = require('../').fesjs;
 var JUNIT = require('./JUNIT');
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
-var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
+var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 excelPlugin.initComplete.then(function() {
     var wb = new WorkBook(new FESContext());

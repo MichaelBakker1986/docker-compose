@@ -11,7 +11,7 @@ var lmeAPI = require('./lme')
 const SolutionFacade = require('../../lme-core/fesjs/SolutionFacade')
 var fesjsApi = require('../../lme-core/ff-fes').fesjs;
 
-const xlsx = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
+const xlsx = require('../../excel-connect/excel-connect').xlsxLookup;
 fesjsApi.addFunctions(xlsx)
 xlsx.initComplete.then(function(matrix) {
     SolutionFacade.addVariables([{name: 'MATRIX_VALUES', expression: matrix}])

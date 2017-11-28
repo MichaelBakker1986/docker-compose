@@ -6,7 +6,7 @@ require('../../math/ff-math')
 var fesjsApi = require('../../lme-core/ff-fes').fesjs;
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
-var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
+var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 
 var wbKSP = new WorkBook(new FESContext());

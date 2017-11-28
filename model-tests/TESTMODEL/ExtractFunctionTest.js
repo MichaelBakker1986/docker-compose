@@ -1,5 +1,5 @@
 require('../../lme-core/exchange_modules/presentation/webexport_with_template');
-const excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
+const excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');
 const SolutionFacade = require('../../lme-core/fesjs/SolutionFacade');
 const MVO = new LME();
