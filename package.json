@@ -15,7 +15,7 @@
     "test"
   ],
   "scripts": {
-    "install": "concurrently \"cd ff-log && npm install --no-optional \" \"cd lme-data-api && npm install --no-optional \" \"cd ff-fes-xlsx && npm install --no-optional \" \"cd ff-fes && npm install --no-optional \" \"cd lme-model-api && npm install --no-optional\" \"cd ff-formulajs && npm install --no-optional\" \"cd demo-apps && npm install --no-optional --allow-root\" \"cd ff-ssh-git && npm install --no-optional\" \"cd ff-math && npm install --no-optional\" \"cd model-tests && npm install --no-optional\"",
+    "install": "concurrently \"cd ff-log && npm install --no-optional \" \"cd lme-data-api && npm install --no-optional \" \"cd ff-fes-xlsx && npm install --no-optional \" \"cd ff-fes && npm install --no-optional \" \"cd lme-model-api && npm install --no-optional\" \"cd ff-formulajs && npm install --no-optional\" \"cd demo-apps && npm install --no-optional --allow-root\" \"cd ff-ssh-git && npm install --no-optional\" \"cd ff-math && npm install --no-optional\" \"cd model-tests && npm install --no-optional\" \"cd proxy && npm install --no-optional\"",
     "test": "concurrently \"cd ff-fes-xlsx && npm test\" \"cd ff-fes && npm test\" \"cd model-tests && npm test\" \"cd lme-model-api && npm test\" \"cd ff-log && npm test\"",
     "start": "node run.js"
   },
