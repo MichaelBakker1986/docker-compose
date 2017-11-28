@@ -104,7 +104,6 @@ model KSP uses BaseModel
     inputRequired:IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and ChildGender.required and NrOfDaysChildcareWeek.required and NrOfDaysOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     datatype: number;
     frequency: document;
-    formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
     data_options: unscalable;
     displaytype: select;
     title: "Basic Information";
@@ -139,7 +138,6 @@ model KSP uses BaseModel
     {
      datatype: string;
      frequency: document;
-     formula: String(If(Q_MAP01[1]=0 , "Er zijn "&Str(Q_MAP01_ENTEREDREQUIREDVARS,0,0)&" van de "&Str(Q_MAP01_REQUIREDVARS,0,0)&" verplichte vragen in deze stap ingevuld." , ""));
      data_options: unscalable;
      title: "Validatie stap 1";
      locked: 1;
@@ -434,28 +432,6 @@ model KSP uses BaseModel
       options_title: locked;
       options: locked;
      }
-     variable Q_MAP01_PARAGRAAF09SUB5 refers to Q_MAP01_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP01_PARAGRAAF09SUB6 refers to Q_MAP01_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
     }
     variable Q_MAP01_HULPVARIABELEN
     {
@@ -467,31 +443,6 @@ model KSP uses BaseModel
      visible: 0;
      options_title: locked, invisible;
      options: locked, invisible;
-     variable Q_MAP01_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      top_blanklines: 1;
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP01_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
      variable DEBUG
      {
       datatype: number;
@@ -510,7 +461,6 @@ model KSP uses BaseModel
    {
     datatype: number;
     frequency: document;
-    formula: (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS);
     data_options: unscalable;
     displaytype: select;
     title: "Calculations Care";
@@ -1145,28 +1095,6 @@ model KSP uses BaseModel
       options_title: locked;
       options: locked;
      }
-     variable Q_MAP02_PARAGRAAF09SUB5 refers to Q_MAP02_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP02_PARAGRAAF09SUB6 refers to Q_MAP02_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
     }
     variable Q_MAP02_HULPVARIABELEN
     {
@@ -1178,38 +1106,12 @@ model KSP uses BaseModel
      visible: 0;
      options_title: locked, invisible;
      options: locked, invisible;
-     variable Q_MAP02_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      top_blanklines: 1;
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP02_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
     }
    }
    variable Q_MAP06
    {
     datatype: number;
     frequency: document;
-    formula: (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS);
     data_options: unscalable;
     displaytype: select;
     title: "Your Personal situation";
@@ -1725,28 +1627,6 @@ model KSP uses BaseModel
       options_title: locked;
       options: locked;
      }
-     variable Q_MAP06_PARAGRAAF09SUB5 refers to Q_MAP06_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP06_PARAGRAAF09SUB6 refers to Q_MAP06_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
     }
     variable Q_MAP06_HULPVARIABELEN
     {
@@ -1758,31 +1638,6 @@ model KSP uses BaseModel
      visible: 0;
      options_title: locked, invisible;
      options: locked, invisible;
-     variable Q_MAP06_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      top_blanklines: 1;
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP06_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
     }
    }
    variable Q_RESULT
